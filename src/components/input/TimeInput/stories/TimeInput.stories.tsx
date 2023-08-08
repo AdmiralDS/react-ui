@@ -9,21 +9,18 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 
-import {
-  TimeInputIconAlternativeTemplate,
-  TimeInputRangeDisabledTemplate,
-  TimeInputRangeTemplate,
-  TimeInputSimpleDisabledTemplate,
-  TimeInputSimpleTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TimeInputIconAlternativeTemplate } from './TimeInputIconAlternative.template';
+import { TimeInputRangeTemplate } from './TimeInputRange.template';
+import { TimeInputRangeDisabledTemplate } from './TimeInputRangeDisabled.template';
+import { TimeInputSimpleTemplate } from './TimeInputSimple.template';
+import { TimeInputSimpleDisabledTemplate } from './TimeInputSimpleDisabled.template';
 
 // Imports of text sources
-import TimeInputIconAlternativeRaw from './Templates/TimeInputIconAlternative?raw';
-import TimeInputRangeRaw from './Templates/TimeInputRange?raw';
-import TimeInputRangeDisabledRaw from './Templates/TimeInputRangeDisabled?raw';
-import TimeInputSimpleRaw from './Templates/TimeInputSimple?raw';
-import TimeInputSimpleDisabledRaw from './Templates/TimeInputSimpleDisabled?raw';
+import TimeInputIconAlternativeRaw from './TimeInputIconAlternative.template?raw';
+import TimeInputRangeRaw from './TimeInputRange.template?raw';
+import TimeInputRangeDisabledRaw from './TimeInputRangeDisabled.template?raw';
+import TimeInputSimpleRaw from './TimeInputSimple.template?raw';
+import TimeInputSimpleDisabledRaw from './TimeInputSimpleDisabled.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -142,7 +139,7 @@ export default {
 } as Meta<typeof TimeInput>;
 
 //<editor-fold desc="Базовый компонент">
-const TimeInputSimpleStory: StoryFn<typeof TimeInput> = (props) => <TimeInputSimpleTemplate {...cleanUpProps(props)} />;
+const TimeInputSimpleStory: StoryFn<typeof TimeInput> = (props) => <TimeInputSimpleTemplate {...props} />;
 
 export const TimeInputSimple = {
   render: TimeInputSimpleStory,
@@ -162,7 +159,7 @@ export const TimeInputSimple = {
 
 //<editor-fold desc="Компонент с дополнительной иконкой и альтернативной иконкой компонента">
 const TimeInputIconAlternativeStory: StoryFn<typeof TimeInput> = (props) => (
-  <TimeInputIconAlternativeTemplate {...cleanUpProps(props)} />
+  <TimeInputIconAlternativeTemplate {...props} />
 );
 
 export const TimeInputIconAlternative = {
@@ -182,7 +179,7 @@ export const TimeInputIconAlternative = {
 //</editor-fold>
 
 //<editor-fold desc="C диапазоном времени">
-const TimeInputRangeStory: StoryFn<typeof TimeInput> = (props) => <TimeInputRangeTemplate {...cleanUpProps(props)} />;
+const TimeInputRangeStory: StoryFn<typeof TimeInput> = (props) => <TimeInputRangeTemplate {...props} />;
 
 export const TimeInputRange = {
   render: TimeInputRangeStory,
@@ -201,9 +198,7 @@ export const TimeInputRange = {
 //</editor-fold>
 
 //<editor-fold desc="C диапазоном времени и задизейбленными значениями">
-const TimeInputRangeDisabledStory: StoryFn<typeof TimeInput> = (props) => (
-  <TimeInputRangeDisabledTemplate {...cleanUpProps(props)} />
-);
+const TimeInputRangeDisabledStory: StoryFn<typeof TimeInput> = (props) => <TimeInputRangeDisabledTemplate {...props} />;
 
 export const TimeInputRangeDisabled = {
   render: TimeInputRangeDisabledStory,
@@ -223,7 +218,7 @@ export const TimeInputRangeDisabled = {
 
 //<editor-fold desc="Базовый с задизейбленными значениями">
 const TimeInputSimpleDisabledStory: StoryFn<typeof TimeInput> = (props) => (
-  <TimeInputSimpleDisabledTemplate {...cleanUpProps(props)} />
+  <TimeInputSimpleDisabledTemplate {...props} />
 );
 
 export const TimeInputSimpleDisabled = {
