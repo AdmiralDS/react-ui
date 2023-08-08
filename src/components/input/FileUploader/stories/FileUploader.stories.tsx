@@ -4,21 +4,18 @@ import styled from 'styled-components';
 
 import { FileUploader, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  FileUploaderXLTemplate,
-  FileUploaderMTemplate,
-  FileUploaderWithStatusTemplate,
-  FileUploaderCustomFilesTemplate,
-  FileUploaderCustomTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FileUploaderCustomTemplate } from './FileUploaderCustom.template';
+import { FileUploaderXLTemplate } from './FileUploaderXL.template';
+import { FileUploaderCustomFilesTemplate } from './FileUploaderCustomFiles.template';
+import { FileUploaderMTemplate } from './FileUploaderM.template';
+import { FileUploaderWithStatusTemplate } from './FileUploaderWithStatus.template';
 
 // Imports of text sources
-import FileUploaderCustomRaw from './Templates/FileUploaderCustom?raw';
-import FileUploaderXLRaw from './Templates/FileUploaderXL?raw';
-import FileUploaderCustomFilesRaw from './Templates/FileUploaderCustomFiles?raw';
-import FileUploaderMRaw from './Templates/FileUploaderM?raw';
-import FileUploaderWithStatusRaw from './Templates/FileUploaderWithStatus?raw';
+import FileUploaderCustomRaw from './FileUploaderCustom.template?raw';
+import FileUploaderXLRaw from './FileUploaderXL.template?raw';
+import FileUploaderCustomFilesRaw from './FileUploaderCustomFiles.template?raw';
+import FileUploaderMRaw from './FileUploaderM.template?raw';
+import FileUploaderWithStatusRaw from './FileUploaderWithStatus.template?raw';
 
 const Separator = styled.div`
   height: 40px;
@@ -107,9 +104,7 @@ export default {
 } as Meta<typeof FileUploader>;
 
 //<editor-fold desc="File Uploader. XL">
-const FileUploaderXLStory: StoryFn<typeof FileUploader> = (props) => (
-  <FileUploaderXLTemplate {...cleanUpProps(props)} />
-);
+const FileUploaderXLStory: StoryFn<typeof FileUploader> = (props) => <FileUploaderXLTemplate {...props} />;
 
 export const FileUploaderXL = {
   render: FileUploaderXLStory,
@@ -128,7 +123,7 @@ export const FileUploaderXL = {
 //</editor-fold>
 
 //<editor-fold desc="File Uploader. M">
-const FileUploaderMStory: StoryFn<typeof FileUploader> = (props) => <FileUploaderMTemplate {...cleanUpProps(props)} />;
+const FileUploaderMStory: StoryFn<typeof FileUploader> = (props) => <FileUploaderMTemplate {...props} />;
 
 export const FileUploaderM = {
   render: FileUploaderMStory,
@@ -152,7 +147,7 @@ export const FileUploaderM = {
 
 //<editor-fold desc="File Uploader со статусом загрузки">
 const FileUploaderWithStatusStory: StoryFn<typeof FileUploader> = (props) => (
-  <FileUploaderWithStatusTemplate {...cleanUpProps(props)} />
+  <FileUploaderWithStatusTemplate {...props} />
 );
 
 export const FileUploaderWithStatus = {
@@ -175,7 +170,7 @@ export const FileUploaderWithStatus = {
 
 //<editor-fold desc="'File Uploader. Кастомизированный список файлов">
 const FileUploaderCustomFilesStory: StoryFn<typeof FileUploader> = (props) => (
-  <FileUploaderCustomFilesTemplate {...cleanUpProps(props)} />
+  <FileUploaderCustomFilesTemplate {...props} />
 );
 
 export const FileUploaderCustomFiles = {
@@ -197,9 +192,7 @@ export const FileUploaderCustomFiles = {
 //</editor-fold>
 
 //<editor-fold desc="Другой визуальный компонент с функционалом FileUploader">
-const FileUploaderCustomStory: StoryFn<typeof FileUploader> = (props) => (
-  <FileUploaderCustomTemplate {...cleanUpProps(props)} />
-);
+const FileUploaderCustomStory: StoryFn<typeof FileUploader> = (props) => <FileUploaderCustomTemplate {...props} />;
 
 export const FileUploaderCustom = {
   render: FileUploaderCustomStory,
