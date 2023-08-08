@@ -3,19 +3,16 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { EditMode, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  EditModePlaygroundTemplate,
-  EditModeDimensionTemplate,
-  EditModeDisabledTemplate,
-  EditModeCssMixinTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { EditModePlaygroundTemplate } from './EditModePlayground.template';
+import { EditModeDimensionTemplate } from './EditModeDimension.template';
+import { EditModeDisabledTemplate } from './EditModeDisabled.template';
+import { EditModeCssMixinTemplate } from './EditModeCssMixin.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/EditModePlayground?raw';
-import DimensionRaw from './Templates/EditModeDimension?raw';
-import DisabledRaw from './Templates/EditModeDisabled?raw';
-import CssMixinRaw from './Templates/EditModeCssMixin?raw';
+import EditModePlaygroundRaw from './EditModePlayground.template?raw';
+import EditModeDimensionRaw from './EditModeDimension.template?raw';
+import EditModeDisabledRaw from './EditModeDisabled.template?raw';
+import EditModeCssMixinRaw from './EditModeCssMixin.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -109,9 +106,7 @@ export default {
 } as Meta<typeof EditMode>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
-  <EditModePlaygroundTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof EditMode> = (props) => <EditModePlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -119,7 +114,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: EditModePlaygroundRaw,
       },
     },
   },
@@ -128,9 +123,7 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Варианты размеров и начертания компонента">
-const DimensionStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
-  <EditModeDimensionTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
-);
+const DimensionStory: StoryFn<typeof EditMode> = (props) => <EditModeDimensionTemplate {...props} />;
 
 export const DimensionExample = {
   render: DimensionStory,
@@ -138,7 +131,7 @@ export const DimensionExample = {
   parameters: {
     docs: {
       source: {
-        code: DimensionRaw,
+        code: EditModeDimensionRaw,
       },
       description: {
         story: `Компонент разработан в 4 размерах: S, M (имеют написание Regular и Bold) и XL, XXL (только Bold). 
@@ -154,9 +147,7 @@ export const DimensionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Компонент в состоянии disabled">
-const DisabledStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
-  <EditModeDisabledTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
-);
+const DisabledStory: StoryFn<typeof EditMode> = (props) => <EditModeDisabledTemplate {...props} />;
 
 export const DisabledExample = {
   render: DisabledStory,
@@ -164,7 +155,7 @@ export const DisabledExample = {
   parameters: {
     docs: {
       source: {
-        code: DisabledRaw,
+        code: EditModeDisabledRaw,
       },
     },
   },
@@ -175,9 +166,7 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="Стилизация компонента">
-const CssMixinStory: StoryFn<typeof EditMode> = ({ value, onChange, ...props }) => (
-  <EditModeCssMixinTemplate value={value} onChange={onChange} {...cleanUpProps(props)} />
-);
+const CssMixinStory: StoryFn<typeof EditMode> = (props) => <EditModeCssMixinTemplate {...props} />;
 
 export const CssMixinExample = {
   render: CssMixinStory,
@@ -185,7 +174,7 @@ export const CssMixinExample = {
   parameters: {
     docs: {
       source: {
-        code: CssMixinRaw,
+        code: EditModeCssMixinRaw,
       },
       description: {
         story: `Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.`,
@@ -195,3 +184,5 @@ export const CssMixinExample = {
 
   name: 'Стилизация компонента',
 };
+
+//</editor-fold>
