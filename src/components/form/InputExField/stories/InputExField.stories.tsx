@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import {
   InputExField,
   INPUT_DIMENSIONS_VALUES,
@@ -7,12 +8,11 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 
-import { InputExFieldInputTemplate } from '#src/components/form/InputExField/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { InputExFieldInputTemplate } from './InputExFieldInput.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import InputExFieldInputRaw from './Templates/InputExFieldInput?raw';
+import InputExFieldInputRaw from './InputExFieldInput.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/InputExField',
@@ -120,9 +120,7 @@ export default {
 } as Meta<typeof InputExField>;
 
 //<editor-fold desc="InputEx field example">
-const InputExFieldInputStory: StoryFn<typeof InputExField> = (props) => (
-  <InputExFieldInputTemplate {...cleanUpProps(props)} />
-);
+const InputExFieldInputStory: StoryFn<typeof InputExField> = (props) => <InputExFieldInputTemplate {...props} />;
 
 export const InputExFieldInput = {
   render: InputExFieldInputStory,
