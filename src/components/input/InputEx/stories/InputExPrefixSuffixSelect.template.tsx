@@ -1,9 +1,9 @@
-import * as React from 'react';
-import type { ChangeEvent } from 'react';
+import { useRef, useState } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { InputEx } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, InputExProps, Theme, ValueType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, InputExProps, Theme } from '@admiral-ds/react-ui';
 
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
@@ -13,7 +13,7 @@ export const InputExPrefixSuffixSelectTemplate = ({
   placeholder = 'Placeholder',
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
@@ -26,10 +26,10 @@ export const InputExPrefixSuffixSelectTemplate = ({
     return theme;
   }
 
-  const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
-  const [suffixValue, setSuffixValue] = React.useState<ValueType>('One');
+  const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
+  const [suffixValue, setSuffixValue] = useState<ReactNode>('One');
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <ThemeProvider theme={swapBorder}>
       <InputEx

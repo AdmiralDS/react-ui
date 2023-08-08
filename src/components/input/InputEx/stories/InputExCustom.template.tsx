@@ -1,12 +1,11 @@
-import * as React from 'react';
-import type { ChangeEvent } from 'react';
+import { useRef, useState } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { InputEx, MenuItem } from '@admiral-ds/react-ui';
 import type {
   InputExProps,
   Theme,
-  ValueType,
   MenuItemProps,
   RenderProps,
   RenderPropsType,
@@ -32,7 +31,7 @@ const CustomMenuItem = styled(MenuItem)`
 function customValueRender({ value }: RenderProps) {
   return <CustomValueStyle>{String(value)}</CustomValueStyle>;
 }
-function customOptionRender({ value, ...props }: RenderPropsType<ValueType> & MenuItemProps) {
+function customOptionRender({ value, ...props }: RenderPropsType<ReactNode> & MenuItemProps) {
   return <CustomMenuItem {...props}>{String(value)}</CustomMenuItem>;
 }
 
@@ -45,7 +44,7 @@ export const InputExCustomTemplate = ({
   placeholder = 'Placeholder',
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
@@ -58,10 +57,10 @@ export const InputExCustomTemplate = ({
     return theme;
   }
 
-  const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
-  const [suffixValue, setSuffixValue] = React.useState<ValueType>('One');
+  const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
+  const [suffixValue, setSuffixValue] = useState<ReactNode>('One');
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
     <ThemeProvider theme={swapBorder}>
       <InputEx

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { InputEx, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -13,13 +13,9 @@ export const InputExBaseTemplate = ({
   placeholder = 'Placeholder',
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValueOne, setValueOne] = React.useState<string>(
-    props.value ? String(props.value) : 'Вариант с префиксом',
-  );
-  const [localValueTwo, setValueTwo] = React.useState<string>(
-    props.value ? String(props.value) : 'Вариант с суффиксом',
-  );
-  const [localValueThree, setValueThree] = React.useState<string>(
+  const [localValueOne, setValueOne] = useState<string>(props.value ? String(props.value) : 'Вариант с префиксом');
+  const [localValueTwo, setValueTwo] = useState<string>(props.value ? String(props.value) : 'Вариант с суффиксом');
+  const [localValueThree, setValueThree] = useState<string>(
     props.value ? String(props.value) : 'Вариант с префиксом и суффиксом',
   );
 

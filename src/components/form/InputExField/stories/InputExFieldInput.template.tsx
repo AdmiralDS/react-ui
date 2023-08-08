@@ -1,8 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { InputExField, Spinner } from '@admiral-ds/react-ui';
-import type { InputExFieldProps, Theme, ValueType, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { InputExFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
 const DisplayContainer = styled.div`
   > * {
@@ -18,9 +19,9 @@ export const InputExFieldInputTemplate = ({
   label = 'Label',
   ...props
 }: InputExFieldProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
     props.onChange?.(e);
@@ -31,8 +32,8 @@ export const InputExFieldInputTemplate = ({
     return theme;
   }
 
-  const [prefixValue, setPrefixValue] = React.useState<ValueType>('prefix One');
-  const [suffixValue, setSuffixValue] = React.useState<ValueType>('suffix One');
+  const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
+  const [suffixValue, setSuffixValue] = useState<ReactNode>('suffix One');
   return (
     <ThemeProvider theme={swapBorder}>
       <DisplayContainer>
