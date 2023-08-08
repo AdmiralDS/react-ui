@@ -7,12 +7,11 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 
-import { SuggestFieldExampleTemplate } from './Templates';
+import { SuggestFieldExampleTemplate } from './/SuggestFieldExample.template';
 import { DataAttributesDescription } from '#src/components/form/common';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
-import SuggestFieldExampleRaw from './Templates/SuggestFieldExample?raw';
+import SuggestFieldExampleRaw from './SuggestFieldExample.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SuggestField',
@@ -123,9 +122,7 @@ export default {
 } as Meta<typeof SuggestField>;
 
 //<editor-fold desc="SuggestField example">
-const SuggestFieldExampleStory: StoryFn<typeof SuggestField> = (props) => (
-  <SuggestFieldExampleTemplate {...cleanUpProps(props)} />
-);
+const SuggestFieldExampleStory: StoryFn<typeof SuggestField> = (props) => <SuggestFieldExampleTemplate {...props} />;
 
 export const SuggestFieldExample = {
   render: SuggestFieldExampleStory,
