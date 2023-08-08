@@ -3,13 +3,14 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { SliderRange, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { SliderRangePlaygroundTemplate, SliderRangeCustomTemplate, SliderRangeControlledTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SliderRangePlaygroundTemplate } from './SliderRangePlayground.template';
+import { SliderRangeCustomTemplate } from './SliderRangeCustom.template';
+import { SliderRangeControlledTemplate } from './SliderRangeControlled.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/SliderRangePlayground?raw';
-import CustomRaw from './Templates/SliderRangeCustom?raw';
-import ControlledRaw from './Templates/SliderRangeControlled?raw';
+import SliderRangePlaygroundRaw from './SliderRangePlayground.template?raw';
+import SliderRangeCustomRaw from './SliderRangeCustom.template?raw';
+import SliderRangeControlledRaw from './SliderRangeControlled.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -109,14 +110,12 @@ export default {
 } as Meta<typeof SliderRange>;
 
 //<editor-fold desc="SliderRange. Playground">
-const PlaygroundStory: StoryFn<typeof SliderRange> = (props) => (
-  <SliderRangePlaygroundTemplate {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof SliderRange> = (props) => <SliderRangePlaygroundTemplate {...props} />;
 export const PlaygroundExample = PlaygroundStory.bind({});
 PlaygroundExample.parameters = {
   docs: {
     source: {
-      code: PlaygroundRaw,
+      code: SliderRangePlaygroundRaw,
     },
   },
 };
@@ -129,7 +128,7 @@ export const CustomExample = CustomStory.bind({});
 CustomExample.parameters = {
   docs: {
     source: {
-      code: CustomRaw,
+      code: SliderRangeCustomRaw,
     },
   },
 };
@@ -142,7 +141,7 @@ export const ControlledExample = ControlledStory.bind({});
 ControlledExample.parameters = {
   docs: {
     source: {
-      code: ControlledRaw,
+      code: SliderRangeControlledRaw,
     },
   },
 };
