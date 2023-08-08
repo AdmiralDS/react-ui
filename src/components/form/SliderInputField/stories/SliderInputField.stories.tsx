@@ -2,12 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { SliderInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { SliderInputFieldPlaygroundTemplate } from '#src/components/form/SliderInputField/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SliderInputFieldPlaygroundTemplate } from './SliderInputFieldPlayground.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SliderInputFieldPlaygroundRaw from './Templates/SliderInputFieldPlayground?raw';
+import SliderInputFieldPlaygroundRaw from './SliderInputFieldPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderInputField',
@@ -115,7 +114,7 @@ export default {
 
 //<editor-fold desc="SliderInputField example">
 const SliderInputFieldPlaygroundStory: StoryFn<typeof SliderInputField> = (props) => (
-  <SliderInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
+  <SliderInputFieldPlaygroundTemplate {...props} />
 );
 
 export const SliderInputFieldPlayground = {
