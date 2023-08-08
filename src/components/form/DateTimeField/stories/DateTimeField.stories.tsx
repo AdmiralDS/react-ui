@@ -1,22 +1,20 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { FieldProps, ComponentDimension } from '@admiral-ds/react-ui';
 
-import {
-  DateTimeFieldBaseTemplate,
-  DateTimeFieldDisabledTemplate,
-  DateTimeFieldReadOnlyTemplate,
-  DateTimeFieldStatusTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { DateTimeFieldBaseTemplate } from './DateTimeFieldBase.template';
+import { DateTimeFieldDisabledTemplate } from './DateTimeFieldDisabled.template';
+import { DateTimeFieldReadOnlyTemplate } from './DateTimeFieldReadOnly.template';
+import { DateTimeFieldStatusTemplate } from './DateTimeFieldStatus.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import DateTimeFieldBaseRaw from './Templates/DateTimeFieldBase?raw';
-import DateTimeFieldDisabledRaw from './Templates/DateTimeFieldDisabled?raw';
-import DateTimeFieldReadOnlyRaw from './Templates/DateTimeFieldReadOnly?raw';
-import DateTimeFieldStatusRaw from './Templates/DateTimeFieldStatus?raw';
+import DateTimeFieldBaseRaw from './DateTimeFieldBase.template?raw';
+import DateTimeFieldDisabledRaw from './DateTimeFieldDisabled.template?raw';
+import DateTimeFieldReadOnlyRaw from './DateTimeFieldReadOnly.template?raw';
+import DateTimeFieldStatusRaw from './DateTimeFieldStatus.template?raw';
 
 interface DateTimeFieldProps extends FieldProps {
   dimension?: ComponentDimension;
@@ -114,7 +112,7 @@ export default {
 } as Meta<typeof Field>;
 
 //<editor-fold desc="DateTimeField example">
-const DateTimeFieldBaseStory: StoryFn<typeof Field> = (props) => <DateTimeFieldBaseTemplate {...cleanUpProps(props)} />;
+const DateTimeFieldBaseStory: StoryFn<typeof Field> = (props) => <DateTimeFieldBaseTemplate {...props} />;
 
 export const DateTimeFieldBase = {
   render: DateTimeFieldBaseStory,
@@ -133,9 +131,7 @@ export const DateTimeFieldBase = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField disabled example">
-const DateTimeFieldDisabledStory: StoryFn<typeof Field> = (props) => (
-  <DateTimeFieldDisabledTemplate {...cleanUpProps(props)} />
-);
+const DateTimeFieldDisabledStory: StoryFn<typeof Field> = (props) => <DateTimeFieldDisabledTemplate {...props} />;
 
 export const DateTimeFieldDisabled = {
   render: DateTimeFieldDisabledStory,
@@ -154,9 +150,7 @@ export const DateTimeFieldDisabled = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField read only example">
-const DateTimeFieldReadOnlyStory: StoryFn<typeof Field> = (props) => (
-  <DateTimeFieldReadOnlyTemplate {...cleanUpProps(props)} />
-);
+const DateTimeFieldReadOnlyStory: StoryFn<typeof Field> = (props) => <DateTimeFieldReadOnlyTemplate {...props} />;
 
 export const DateTimeFieldReadOnly = {
   render: DateTimeFieldReadOnlyStory,
@@ -175,9 +169,7 @@ export const DateTimeFieldReadOnly = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField status example">
-const DateTimeFieldStatusStory: StoryFn<typeof Field> = (props: DateTimeFieldProps) => (
-  <DateTimeFieldStatusTemplate {...cleanUpProps(props)} />
-);
+const DateTimeFieldStatusStory: StoryFn<typeof Field> = (props) => <DateTimeFieldStatusTemplate {...props} />;
 
 export const DateTimeFieldStatus = {
   render: DateTimeFieldStatusStory,
