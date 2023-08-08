@@ -1,6 +1,5 @@
 export * from './RenderProps';
 export * from './LoadingOnScroll';
-export * from './VirtualScroll';
 export * from './SelectWithAsyncLoading';
 export * from './SearchSelectWithFilter';
 export * from './CustomOption';
@@ -14,3 +13,4 @@ export * from './ExpandedHeightMultiSearchSelect';
 export * from './CustomOptionMultiSearchSelect';
 export * from './CustomChipMultiSearchSelect';
 export * from './ExternalFilter';
+export * from './VirtualScroll';
