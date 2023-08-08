@@ -3,12 +3,12 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { FileInputField, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
-import { FileInputFieldBaseTemplate, FileInputFieldRequiredTemplate } from './Templates/';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FileInputFieldBaseTemplate } from './FileInputFieldBase.template';
+import { FileInputFieldRequiredTemplate } from './FileInputFieldRequired.template';
 
 // Imports of text sources
-import FileInputFieldBaseRaw from './Templates/FileInputFieldBase?raw';
-import FileInputFieldRequiredRaw from './Templates/FileInputFieldRequired?raw';
+import FileInputFieldBaseRaw from './FileInputFieldBase.template?raw';
+import FileInputFieldRequiredRaw from './FileInputFieldRequired.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/FileInputField',
@@ -81,7 +81,7 @@ export default {
 
 //<editor-fold desc="FileInputField. Example">
 const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldBaseTemplate dimension={'xl'} {...cleanUpProps(props)} />
+  <FileInputFieldBaseTemplate {...props} dimension={'xl'} />
 );
 
 export const FileInputFieldBase = {
@@ -102,7 +102,7 @@ export const FileInputFieldBase = {
 
 //<editor-fold desc="FileInputField. Required">
 const FileInputFieldRequiredStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldRequiredTemplate dimension={'xl'} {...cleanUpProps(props)} />
+  <FileInputFieldRequiredTemplate {...props} dimension={'xl'} />
 );
 
 export const FileInputFieldRequired = {
