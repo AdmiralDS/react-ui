@@ -3,7 +3,6 @@ import { TextField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@a
 
 import { DataAttributesDescription } from '#src/components/form/common';
 import { TextFieldInputTemplate } from './TextFieldInput.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import TextFieldInputRaw from './TextFieldInput.template?raw';
@@ -99,7 +98,7 @@ export default {
 } as Meta<typeof TextField>;
 
 //<editor-fold desc="Text field example">
-const TextFieldInputStory: StoryFn<typeof TextField> = (props) => <TextFieldInputTemplate {...cleanUpProps(props)} />;
+const TextFieldInputStory: StoryFn<typeof TextField> = (props) => <TextFieldInputTemplate {...props} />;
 
 export const TextFieldInput = {
   render: TextFieldInputStory,
