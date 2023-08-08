@@ -2,12 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Field, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { ReadOnlyMaskedFieldTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { ReadOnlyMaskedFieldTemplate } from './ReadOnlyMaskedField.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import ReadOnlyMaskedFieldRaw from './Templates/ReadOnlyMaskedField?raw';
+import ReadOnlyMaskedFieldRaw from './ReadOnlyMaskedField.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/ReadOnlyMaskedField',
@@ -59,7 +58,7 @@ export default {
 
 //<editor-fold desc="ReadOnly masked field">
 const ReadOnlyMaskedFieldStory: StoryFn<typeof Field> = (props) => {
-  return <ReadOnlyMaskedFieldTemplate {...cleanUpProps(props)} />;
+  return <ReadOnlyMaskedFieldTemplate {...props} />;
 };
 
 export const ReadOnlyMaskedField = {
