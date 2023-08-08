@@ -84,9 +84,7 @@ export default {
 } as Meta<typeof Accordion>;
 
 //<editor-fold desc="Размеры">
-const AccordionPlaygroundStory: StoryFn<typeof Accordion> = (props) => (
-  <AccordionPlaygroundTemplate {...props} />
-);
+const AccordionPlaygroundStory: StoryFn<typeof Accordion> = (props) => <AccordionPlaygroundTemplate {...props} />;
 
 export const AccordionPlayground = {
   render: AccordionPlaygroundStory,

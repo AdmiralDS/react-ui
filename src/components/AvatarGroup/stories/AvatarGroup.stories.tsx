@@ -88,9 +88,7 @@ export const AvatarGroupPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограниченной шириной">
-const AvatarGroupWidthStory: StoryFn<typeof AvatarGroup> = (props) => (
-  <AvatarGroupWidthTemplate {...props} />
-);
+const AvatarGroupWidthStory: StoryFn<typeof AvatarGroup> = (props) => <AvatarGroupWidthTemplate {...props} />;
 
 export const AvatarGroupWidth = {
   render: AvatarGroupWidthStory,
