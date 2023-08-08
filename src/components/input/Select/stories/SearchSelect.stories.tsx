@@ -3,38 +3,40 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { SearchSelectRenderPropsTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectRenderProps.template';
-import { LoadOnScrollTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectLoadingOnScroll.template';
-import { SearchSelectWithAsyncLoadingTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectWithAsyncLoading.template';
-import { SearchSelectWithFilterTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectWithFilter.template';
-import { SearchSelectCustomOptionTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomOption.template';
-import { SearchSelectRenderValueTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectRenderValue.template';
-import { SearchSelectWithAddButtonTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectWithAddButton.template';
-import { SearchSelectOptionGroupTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectOptionGroup.template';
-import { SearchSelectUncontrolledTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectUncontrolled.template';
-import { SearchSelectMultipleWithAddOptionTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectMultipleWithAddOption.template';
-import { SearchSelectMultipleWithApplyTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectMultipleWithApply.template';
-import { SearchSelectExpandedHeightMultiTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectExpandedHeightMulti.template';
-import { SearchSelectCustomOptionMultiTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomOptionMulti.template';
-import { SearchSelectCustomChipMultiTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomChipMulti.template';
-import { SearchSelectExternalFilterTemplate } from '#src/components/input/Select/stories/searchSelect/SearchSelectExternalFilter.template';
+import { SearchSelectRenderPropsTemplate } from './searchSelect/SearchSelectRenderProps.template';
+import { LoadOnScrollTemplate } from './searchSelect/SearchSelectLoadingOnScroll.template';
+import { SearchSelectWithAsyncLoadingTemplate } from './searchSelect/SearchSelectWithAsyncLoading.template';
+import { SearchSelectWithFilterTemplate } from './searchSelect/SearchSelectWithFilter.template';
+import { SearchSelectCustomOptionTemplate } from './searchSelect/SearchSelectCustomOption.template';
+import { SearchSelectRenderValueTemplate } from './searchSelect/SearchSelectRenderValue.template';
+import { SearchSelectWithAddButtonTemplate } from './searchSelect/SearchSelectWithAddButton.template';
+import { SearchSelectOptionGroupTemplate } from './searchSelect/SearchSelectOptionGroup.template';
+import { SearchSelectUncontrolledTemplate } from './searchSelect/SearchSelectUncontrolled.template';
+import { SearchSelectMultipleWithAddOptionTemplate } from './searchSelect/SearchSelectMultipleWithAddOption.template';
+import { SearchSelectMultipleWithApplyTemplate } from './searchSelect/SearchSelectMultipleWithApply.template';
+import { SearchSelectExpandedHeightMultiTemplate } from './searchSelect/SearchSelectExpandedHeightMulti.template';
+import { SearchSelectCustomOptionMultiTemplate } from './searchSelect/SearchSelectCustomOptionMulti.template';
+import { SearchSelectCustomChipMultiTemplate } from './searchSelect/SearchSelectCustomChipMulti.template';
+import { SearchSelectExternalFilterTemplate } from './searchSelect/SearchSelectExternalFilter.template';
+import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVirtualScroll.template';
 
 // Imports of text sources
-import SearchSelectRenderPropsRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectRenderProps.template?raw';
-import SearchSelectLoadOnScrollRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectLoadingOnScroll.template?raw';
-import SearchSelectWithAsyncLoadingRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectWithAsyncLoading.template?raw';
-import SearchSelectWithFilterRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectWithFilter.template?raw';
-import SearchSelectCustomOptionRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomOption.template?raw';
-import SearchSelectRenderValueRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectRenderValue.template?raw';
-import SearchSelectWithAddButtonRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectWithAddButton.template?raw';
-import SearchSelectOptionGroupRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectOptionGroup.template?raw';
-import SearchSelectUncontrolledRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectUncontrolled.template?raw';
-import SearchSelectMultipleWithAddOptionRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectMultipleWithAddOption.template?raw';
-import SearchSelectMultipleWithApplyRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectMultipleWithApply.template?raw';
-import SearchSelectExpandedHeightMultiRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectExpandedHeightMulti.template?raw';
-import SearchSelectCustomOptionMultiRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomOptionMulti.template?raw';
-import SearchSelectCustomChipMultiRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectCustomChipMulti.template?raw';
-import SearchSelectExternalFilterRaw from '#src/components/input/Select/stories/searchSelect/SearchSelectExternalFilter.template?raw';
+import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
+import SearchSelectLoadOnScrollRaw from './searchSelect/SearchSelectLoadingOnScroll.template?raw';
+import SearchSelectWithAsyncLoadingRaw from './searchSelect/SearchSelectWithAsyncLoading.template?raw';
+import SearchSelectWithFilterRaw from './searchSelect/SearchSelectWithFilter.template?raw';
+import SearchSelectCustomOptionRaw from './searchSelect/SearchSelectCustomOption.template?raw';
+import SearchSelectRenderValueRaw from './searchSelect/SearchSelectRenderValue.template?raw';
+import SearchSelectWithAddButtonRaw from './searchSelect/SearchSelectWithAddButton.template?raw';
+import SearchSelectOptionGroupRaw from './searchSelect/SearchSelectOptionGroup.template?raw';
+import SearchSelectUncontrolledRaw from './searchSelect/SearchSelectUncontrolled.template?raw';
+import SearchSelectMultipleWithAddOptionRaw from './searchSelect/SearchSelectMultipleWithAddOption.template?raw';
+import SearchSelectMultipleWithApplyRaw from './searchSelect/SearchSelectMultipleWithApply.template?raw';
+import SearchSelectExpandedHeightMultiRaw from './searchSelect/SearchSelectExpandedHeightMulti.template?raw';
+import SearchSelectCustomOptionMultiRaw from './searchSelect/SearchSelectCustomOptionMulti.template?raw';
+import SearchSelectCustomChipMultiRaw from './searchSelect/SearchSelectCustomChipMulti.template?raw';
+import SearchSelectExternalFilterRaw from './searchSelect/SearchSelectExternalFilter.template?raw';
+import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScroll.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -337,7 +339,9 @@ export const UncontrolledSearchSelect = {
 //</editor-fold>
 
 //<editor-fold desc="Multiple с добавлением опций">
-const MultipleWithAddOptionStory: StoryFn<typeof Select> = (props) => <SearchSelectMultipleWithAddOptionTemplate {...props} />;
+const MultipleWithAddOptionStory: StoryFn<typeof Select> = (props) => (
+  <SearchSelectMultipleWithAddOptionTemplate {...props} />
+);
 
 export const MultipleWithAddOption = {
   render: MultipleWithAddOptionStory,
@@ -451,5 +455,23 @@ export const ExternalFilter = {
   },
 
   name: 'Внешняя фильтрация',
+};
+//</editor-fold>
+
+// <editor-fold desc="Внешняя фильтрация">
+const VirtualScrollStory: StoryFn<typeof Select> = (props) => <SearchSelectVirtualScrollTemplate {...props} />;
+
+export const VirtualScroll = {
+  render: VirtualScrollStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectVirtualScrollRaw,
+      },
+    },
+  },
+
+  name: 'VirtualScroll',
 };
 //</editor-fold>
