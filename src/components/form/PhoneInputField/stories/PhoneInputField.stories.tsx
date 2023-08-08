@@ -2,12 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { PhoneInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { PhoneInputFieldExampleTemplate } from '#src/components/form/PhoneInputField/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PhoneInputFieldExampleTemplate } from './PhoneInputFieldExample.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import PhoneInputFieldExampleRaw from './Templates/PhoneInputFieldExample?raw';
+import PhoneInputFieldExampleRaw from './PhoneInputFieldExample.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/PhoneInputField',
@@ -76,7 +75,7 @@ export default {
 
 //<editor-fold desc="PhoneInputField example">
 const PhoneInputFieldExampleStory: StoryFn<typeof PhoneInputField> = (props) => (
-  <PhoneInputFieldExampleTemplate {...cleanUpProps(props)} />
+  <PhoneInputFieldExampleTemplate {...props} />
 );
 
 export const PhoneInputFieldExample = {
