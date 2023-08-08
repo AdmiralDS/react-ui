@@ -2,12 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { SliderRangeField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { SliderRangeFieldPlaygroundTemplate } from '#src/components/form/SliderRangeField/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SliderRangeFieldPlaygroundTemplate } from './SliderRangeFieldPlayground.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import SliderRangeFieldPlaygroundRaw from './Templates/SliderRangeFieldPlayground?raw';
+import SliderRangeFieldPlaygroundRaw from './SliderRangeFieldPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SliderRangeField',
@@ -112,7 +111,7 @@ export default {
 
 //<editor-fold desc="SliderRangeField example">
 const SliderRangeFieldPlaygroundStory: StoryFn<typeof SliderRangeField> = (props) => (
-  <SliderRangeFieldPlaygroundTemplate {...cleanUpProps(props)} />
+  <SliderRangeFieldPlaygroundTemplate {...props} />
 );
 
 export const SliderRangeFieldPlayground = {
