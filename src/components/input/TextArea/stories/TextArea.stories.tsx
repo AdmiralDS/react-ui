@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+
 import { TextAreaPlaygroundTemplate } from './TextAreaPlayground.template';
 import { TextAreaAsyncTemplate } from './TextAreaAsync.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import TextAreaPlaygroundRaw from './TextAreaPlayground.template?raw';
@@ -91,9 +91,7 @@ export default {
   },
 } as Meta<typeof TextArea>;
 
-const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => (
-  <TextAreaPlaygroundTemplate {...cleanUpProps(props)} />
-);
+const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => <TextAreaPlaygroundTemplate {...props} />;
 
 export const TextAreaPlayground = {
   render: TextAreaPlaygroundStory,
@@ -110,7 +108,7 @@ export const TextAreaPlayground = {
 };
 
 export const TextAreaAsync = {
-  render: ((props) => <TextAreaAsyncTemplate {...cleanUpProps(props)} />) as StoryFn<typeof TextArea>,
+  render: ((props) => <TextAreaAsyncTemplate {...props} />) as StoryFn<typeof TextArea>,
 
   parameters: {
     docs: {
