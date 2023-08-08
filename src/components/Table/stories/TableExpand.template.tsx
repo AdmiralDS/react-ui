@@ -13,6 +13,36 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
+  padding: 16px;
+`;
+const Content = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding-left: 16px;
+  background: ${({ theme }) => theme.color['Special/Elevated BG']};
+  & > div {
+    margin-bottom: 8px;
+  }
+`;
+
+const expandedRowRender = (row: RowData) => {
+  return (
+    <Wrapper>
+      <Content>
+        <div>Тип сделки: {row.transfer_type}</div>
+        <div>Дата сделки: {row.transfer_date}</div>
+        <div>Валюта: {row.currency}</div>
+        <div>Ставка: {row.rate}</div>
+      </Content>
+    </Wrapper>
+  );
+};
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -26,6 +56,18 @@ type RowData = TableRow & {
 
 const rowList: RowData[] = [
   {
+    id: '0001',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
     id: '0002',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
@@ -36,6 +78,8 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expanded: true,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0003',
@@ -48,6 +92,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0004',
@@ -60,28 +105,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-  },
-  {
-    id: '0001',
-    transfer_type: 'Group name',
-    expanded: false,
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-    groupTitle: 'Группа',
-    renderGroupTitle(row: RowData): React.ReactNode {
-      return (
-        <div style={{ fontSize: '36px' }}>
-          {row.transfer_type} - {row.transfer_date}
-        </div>
-      );
-    },
-    groupRows: ['0007', '0008'],
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0005',
@@ -94,6 +118,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
+    expandedRowRender: expandedRowRender,
   },
   {
     id: '0006',
@@ -102,30 +127,6 @@ const rowList: RowData[] = [
     transfer_amount: (
       <AmountCell>
         <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0007',
-    transfer_type: 'GR1',
-    transfer_date: new Date('2020-07-18').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0008',
-    transfer_type: 'GR1',
-    transfer_date: new Date('2020-08-25').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(100)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -158,18 +159,18 @@ const columnList: Column[] = [
   },
 ];
 
-export const RenderGroupTitleTemplate = (props: TableProps) => {
+export const TableExpandTemplate = (props: TableProps) => {
   const [rows, setRows] = React.useState(rowList);
   const [cols, setCols] = React.useState(columnList);
-
-  const handleResize = ({ name, width }: { name: string; width: string }) => {
-    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
-    setCols(newCols);
-  };
 
   const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
     setRows(updRows);
+  };
+
+  const handleResize = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols(newCols);
   };
 
   return (
@@ -177,9 +178,9 @@ export const RenderGroupTitleTemplate = (props: TableProps) => {
       {...props}
       rowList={rows}
       columnList={cols}
-      onColumnResize={handleResize}
-      onRowExpansionChange={handleExpansionChange}
       displayRowExpansionColumn
+      onRowExpansionChange={handleExpansionChange}
+      onColumnResize={handleResize}
     />
   );
 };

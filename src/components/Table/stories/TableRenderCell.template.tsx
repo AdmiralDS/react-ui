@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, Badge } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -175,33 +175,33 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 150,
+    width: '20%',
+    renderCell(data, _row, idx): React.ReactNode {
+      return (
+        <div style={{ border: '1px solid #aaa', padding: '3px' }}>
+          {data} <Badge>{idx}</Badge>
+        </div>
+      );
+    },
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    extraText: 'Не позднее марта текущего года',
-  },
-  {
-    name: 'transfer_amount',
-    title: 'Сумма',
-    cellAlign: 'right',
-    width: 150,
-    extraText: 'Сумма с учетом налогов',
-  },
-  {
-    name: 'currency',
-    title: 'Валюта',
-    extraText: 'Some additional text',
+    width: '250px',
+    renderCell(date: string): React.ReactNode {
+      return <div>Дата - {date}</div>;
+    },
   },
   {
     name: 'rate',
     title: 'Ставка',
-    cellAlign: 'right',
+    renderCell(data: string): React.ReactNode {
+      return <i>{data}$</i>;
+    },
   },
 ];
 
-export const ExtraTextTemplate = (props: TableProps) => {
+export const TableRenderCellTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -209,7 +209,5 @@ export const ExtraTextTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return (
-    <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
-  );
+  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
 };

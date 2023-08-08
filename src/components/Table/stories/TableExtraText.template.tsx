@@ -175,28 +175,33 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
+    width: 150,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: 150,
+    extraText: 'Не позднее марта текущего года',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 170,
+    cellAlign: 'right',
+    width: 150,
+    extraText: 'Сумма с учетом налогов',
   },
   {
     name: 'currency',
     title: 'Валюта',
+    extraText: 'Some additional text',
   },
   {
     name: 'rate',
     title: 'Ставка',
+    cellAlign: 'right',
   },
 ];
 
-export const ZebraTemplate = (props: TableProps) => {
+export const TableExtraTextTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -205,6 +210,6 @@ export const ZebraTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table {...props} rowList={rowList} columnList={cols} greyHeader greyZebraRows onColumnResize={handleResize} />
+    <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
   );
 };

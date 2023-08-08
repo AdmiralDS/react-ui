@@ -175,17 +175,19 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 150,
+    width: '20%',
+    sticky: true,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
+    width: 150,
+    sticky: true,
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    cellAlign: 'right',
-    width: 150,
+    width: 300,
   },
   {
     name: 'currency',
@@ -194,11 +196,10 @@ const columnList: Column[] = [
   {
     name: 'rate',
     title: 'Ставка',
-    cellAlign: 'right',
   },
 ];
 
-export const OrientationTemplate = (props: TableProps) => {
+export const TableStickyTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -206,5 +207,13 @@ export const OrientationTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <Table
+      {...props}
+      rowList={rowList}
+      columnList={cols}
+      style={{ maxHeight: '300px', maxWidth: '700px' }}
+      onColumnResize={handleResize}
+    />
+  );
 };

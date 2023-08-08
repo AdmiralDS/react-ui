@@ -151,7 +151,7 @@ const columnList: Column[] = [
   },
 ];
 
-export const OverflowMenuTemplate = (props: TableProps) => {
+export const TableOverflowMenuTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState([...columnList]);
   const [cols2, setCols2] = React.useState([...columnList]);
 

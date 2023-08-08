@@ -1,32 +1,31 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Table } from '@admiral-ds/react-ui';
 
-import { PlaygroundTemplate } from './Playground.template';
-import { ColumnWidthTemplate } from './TableColumnWidth.template';
-import { CheckboxTemplate } from './TableCheckbox.template';
-import { StyleTemplate } from './TableStyle.template';
-import { OrientationTemplate } from './TableOrientation.template';
-import { SortTemplate } from './TableSort.template';
-import { FilterTemplate } from './TableFilter.template';
-import { MultilineTemplate } from './TableMultiline.template';
-import { StickyTemplate } from './TableSticky.template';
-import { RowStateTemplate } from './TableRowState.template';
-import { ZebraTemplate } from './TableZebra.template';
-import { ExpandTemplate } from './TableExpand.template';
-import { ExtraTextTemplate } from './TableExtraText.template';
-import { OverflowMenuTemplate } from './TableOverflowMenu.template';
-import { VirtualScrollTemplate } from './TableVirtualScroll.template';
-import { LoadOnScrollTemplate } from './TableLoadOnScroll.template';
-import { GroupTemplate } from './TableGroup.template';
-import { CustomTitleTemplate } from './TableCustomTitle.template';
-import { RenderCellTemplate } from './TableRenderCell.template';
-import { RenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
-import { ColumnDragDropTemplate } from './TableColumnDragDrop.template';
+import { TablePlaygroundTemplate } from './TablePlayground.template';
+import { TableColumnWidthTemplate } from './TableColumnWidth.template';
+import { TableCheckboxTemplate } from './TableCheckbox.template';
+import { TableStyleTemplate } from './TableStyle.template';
+import { TableOrientationTemplate } from './TableOrientation.template';
+import { TableSortTemplate } from './TableSort.template';
+import { TableFilterTemplate } from './TableFilter.template';
+import { TableMultilineTemplate } from './TableMultiline.template';
+import { TableStickyTemplate } from './TableSticky.template';
+import { TableRowStateTemplate } from './TableRowState.template';
+import { TableZebraTemplate } from './TableZebra.template';
+import { TableExpandTemplate } from './TableExpand.template';
+import { TableExtraTextTemplate } from './TableExtraText.template';
+import { TableOverflowMenuTemplate } from './TableOverflowMenu.template';
+import { TableVirtualScrollTemplate } from './TableVirtualScroll.template';
+import { TableLoadOnScrollTemplate } from './TableLoadOnScroll.template';
+import { TableGroupTemplate } from './TableGroup.template';
+import { TableCustomTitleTemplate } from './TableCustomTitle.template';
+import { TableRenderCellTemplate } from './TableRenderCell.template';
+import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
+import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
 
 // Imports of text sources
-import TablePlaygroundRaw from './Playground.template?raw';
+import TablePlaygroundRaw from './TablePlayground.template?raw';
 import TableColumnWidthRaw from './TableColumnWidth.template?raw';
 import TableCheckboxRaw from './TableCheckbox.template?raw';
 import TableStyleRaw from './TableStyle.template?raw';
@@ -163,7 +162,7 @@ export default {
 } as Meta<typeof Table>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Table> = (props) => <PlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof Table> = (props) => <TablePlaygroundTemplate {...props} />;
 export const Playground = {
   render: PlaygroundStory,
   parameters: {
@@ -177,7 +176,7 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с шириной столбцов">
-const ColumnWidthStory: StoryFn<typeof Table> = (props) => <ColumnWidthTemplate {...props} />;
+const ColumnWidthStory: StoryFn<typeof Table> = (props) => <TableColumnWidthTemplate {...props} />;
 export const ColumnWidthExample = {
   render: ColumnWidthStory,
   parameters: {
@@ -207,7 +206,7 @@ export const ColumnWidthExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с чекбоксами">
-const CheckboxStory: StoryFn<typeof Table> = (props) => <CheckboxTemplate {...props} />;
+const CheckboxStory: StoryFn<typeof Table> = (props) => <TableCheckboxTemplate {...props} />;
 export const CheckboxExample = {
   render: CheckboxStory,
   parameters: {
@@ -230,7 +229,7 @@ export const CheckboxExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример стилизации">
-const StyleStory: StoryFn<typeof Table> = (props) => <StyleTemplate {...props} />;
+const StyleStory: StoryFn<typeof Table> = (props) => <TableStyleTemplate {...props} />;
 export const StyleExample = {
   render: StyleStory,
   parameters: {
@@ -264,7 +263,7 @@ export const StyleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выравниванием контента">
-const OrientationStory: StoryFn<typeof Table> = (props) => <OrientationTemplate {...props} />;
+const OrientationStory: StoryFn<typeof Table> = (props) => <TableOrientationTemplate {...props} />;
 export const OrientationExample = {
   render: OrientationStory,
   parameters: {
@@ -283,7 +282,7 @@ export const OrientationExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример сортировки">
-const SortStory: StoryFn<typeof Table> = (props) => <SortTemplate {...props} />;
+const SortStory: StoryFn<typeof Table> = (props) => <TableSortTemplate {...props} />;
 export const SortExample = {
   render: SortStory,
   parameters: {
@@ -314,7 +313,7 @@ export const SortExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример фильтрации">
-const FilterStory: StoryFn<typeof Table> = (props) => <FilterTemplate {...props} />;
+const FilterStory: StoryFn<typeof Table> = (props) => <TableFilterTemplate {...props} />;
 export const FilterExample = {
   render: FilterStory,
   parameters: {
@@ -355,7 +354,7 @@ export const FilterExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c многострочностью заголовков">
-const MultilineStory: StoryFn<typeof Table> = (props) => <MultilineTemplate {...props} />;
+const MultilineStory: StoryFn<typeof Table> = (props) => <TableMultilineTemplate {...props} />;
 export const MultilineExample = {
   render: MultilineStory,
   parameters: {
@@ -377,7 +376,7 @@ export const MultilineExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c фиксированными столбцами">
-const StickyStory: StoryFn<typeof Table> = (props) => <StickyTemplate {...props} />;
+const StickyStory: StoryFn<typeof Table> = (props) => <TableStickyTemplate {...props} />;
 export const StickyExample = {
   render: StickyStory,
   parameters: {
@@ -396,7 +395,7 @@ export const StickyExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c различными состояниями строк">
-const RowStateStory: StoryFn<typeof Table> = (props) => <RowStateTemplate {...props} />;
+const RowStateStory: StoryFn<typeof Table> = (props) => <TableRowStateTemplate {...props} />;
 export const RowStateExample = {
   render: RowStateStory,
   parameters: {
@@ -430,7 +429,7 @@ export const RowStateExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c окрашиванием строк через одну">
-const ZebraStory: StoryFn<typeof Table> = (props) => <ZebraTemplate {...props} />;
+const ZebraStory: StoryFn<typeof Table> = (props) => <TableZebraTemplate {...props} />;
 export const ZebraExample = {
   render: ZebraStory,
   parameters: {
@@ -450,7 +449,7 @@ export const ZebraExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c детализацией строки">
-const ExpandStory: StoryFn<typeof Table> = (props) => <ExpandTemplate {...props} />;
+const ExpandStory: StoryFn<typeof Table> = (props) => <TableExpandTemplate {...props} />;
 export const ExpandExample = {
   render: ExpandStory,
   parameters: {
@@ -471,7 +470,7 @@ export const ExpandExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c дополнительным текстом в заголовке">
-const ExtraTextStory: StoryFn<typeof Table> = (props) => <ExtraTextTemplate {...props} />;
+const ExtraTextStory: StoryFn<typeof Table> = (props) => <TableExtraTextTemplate {...props} />;
 export const ExtraTextExample = {
   render: ExtraTextStory,
   parameters: {
@@ -492,7 +491,7 @@ export const ExtraTextExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с оверфлоу меню и одиночными действиями над строкой">
-const OverflowMenuStory: StoryFn<typeof Table> = (props) => <OverflowMenuTemplate {...props} />;
+const OverflowMenuStory: StoryFn<typeof Table> = (props) => <TableOverflowMenuTemplate {...props} />;
 export const OverflowMenuExample = {
   render: OverflowMenuStory,
   parameters: {
@@ -527,7 +526,7 @@ export const OverflowMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с виртуальным скроллом">
-const VirtualScrollStory: StoryFn<typeof Table> = (props) => <VirtualScrollTemplate {...props} />;
+const VirtualScrollStory: StoryFn<typeof Table> = (props) => <TableVirtualScrollTemplate {...props} />;
 export const VirtualScrollExample = {
   render: VirtualScrollStory,
   parameters: {
@@ -552,7 +551,7 @@ export const VirtualScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Table. Подгрузка данных при скролле.">
-const LoadScrollStory: StoryFn<typeof Table> = (props) => <LoadOnScrollTemplate {...props} />;
+const LoadScrollStory: StoryFn<typeof Table> = (props) => <TableLoadOnScrollTemplate {...props} />;
 export const LoadScrollExample = {
   render: LoadScrollStory,
   parameters: {
@@ -573,7 +572,7 @@ export const LoadScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с группировкой строк">
-const GroupStory: StoryFn<typeof Table> = (props) => <GroupTemplate {...props} />;
+const GroupStory: StoryFn<typeof Table> = (props) => <TableGroupTemplate {...props} />;
 export const GroupExample = {
   render: GroupStory,
   parameters: {
@@ -594,7 +593,7 @@ export const GroupExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с кастомными заголовками">
-const CustomTitleStory: StoryFn<typeof Table> = (props) => <CustomTitleTemplate {...props} />;
+const CustomTitleStory: StoryFn<typeof Table> = (props) => <TableCustomTitleTemplate {...props} />;
 export const CustomTitleExample = {
   render: CustomTitleStory,
   parameters: {
@@ -613,7 +612,7 @@ export const CustomTitleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример кастомизации ячейки">
-const RenderCellStory: StoryFn<typeof Table> = (props) => <RenderCellTemplate {...props} />;
+const RenderCellStory: StoryFn<typeof Table> = (props) => <TableRenderCellTemplate {...props} />;
 export const RenderCellExample = {
   render: RenderCellStory,
   parameters: {
@@ -633,7 +632,7 @@ export const RenderCellExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример кастомизации заголовка группы">
-const RenderGroupTitleStory: StoryFn<typeof Table> = (props) => <RenderGroupTitleTemplate {...props} />;
+const RenderGroupTitleStory: StoryFn<typeof Table> = (props) => <TableRenderGroupTitleTemplate {...props} />;
 export const RenderGroupTitleExample = {
   render: RenderGroupTitleStory,
   parameters: {
@@ -654,7 +653,7 @@ export const RenderGroupTitleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с drag and drop столбцов">
-const ColumnDragDropStory: StoryFn<typeof Table> = (props) => <ColumnDragDropTemplate {...props} />;
+const ColumnDragDropStory: StoryFn<typeof Table> = (props) => <TableColumnDragDropTemplate {...props} />;
 export const DraggableColumnsExample = {
   render: ColumnDragDropStory,
   parameters: {

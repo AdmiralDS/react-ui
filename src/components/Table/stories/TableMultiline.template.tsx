@@ -124,7 +124,7 @@ const columnList: Column[] = [
   },
 ];
 
-export const MultilineTemplate = (props: TableProps) => {
+export const TableMultilineTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {

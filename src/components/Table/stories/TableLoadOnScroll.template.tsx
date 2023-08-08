@@ -57,7 +57,7 @@ const LastRowWrapper = ({ containerRef, onVisible, rowNode }: LastRowProps) => {
   return <div ref={ref}>{rowNode}</div>;
 };
 
-export const LoadOnScrollTemplate = (props: TableProps) => {
+export const TableLoadOnScrollTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
   const [rowsAmount, setRowsAmount] = React.useState(10);
   const tableRef = React.useRef<HTMLDivElement>(null);

@@ -175,30 +175,30 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 'calc(20% - 40px)',
+    width: 150,
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: '250px',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 200,
+    cellAlign: 'right',
+    width: 150,
   },
   {
     name: 'currency',
     title: 'Валюта',
-    width: '20%',
   },
   {
     name: 'rate',
     title: 'Ставка',
+    cellAlign: 'right',
   },
 ];
 
-export const ColumnWidthTemplate = (props: TableProps) => {
+export const TableOrientationTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {

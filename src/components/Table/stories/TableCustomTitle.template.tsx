@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, Badge } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -13,36 +13,6 @@ const AmountCell = styled.div`
     }
   }
 `;
-const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
-  padding: 16px;
-`;
-const Content = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  padding-left: 16px;
-  background: ${({ theme }) => theme.color['Special/Elevated BG']};
-  & > div {
-    margin-bottom: 8px;
-  }
-`;
-
-const expandedRowRender = (row: RowData) => {
-  return (
-    <Wrapper>
-      <Content>
-        <div>Тип сделки: {row.transfer_type}</div>
-        <div>Дата сделки: {row.transfer_date}</div>
-        <div>Валюта: {row.currency}</div>
-        <div>Ставка: {row.rate}</div>
-      </Content>
-    </Wrapper>
-  );
-};
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -78,8 +48,6 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expanded: true,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0003',
@@ -92,36 +60,9 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
   },
   {
     id: '0004',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-    expandedRowRender: expandedRowRender,
-  },
-  {
-    id: '0005',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-    expandedRowRender: expandedRowRender,
-  },
-  {
-    id: '0006',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
@@ -137,21 +78,27 @@ const rowList: RowData[] = [
 const columnList: Column[] = [
   {
     name: 'transfer_type',
-    title: 'Тип сделки',
+    title: (
+      <>
+        Тип сделки <Badge>5</Badge>
+      </>
+    ),
+    width: '20%',
   },
   {
     name: 'transfer_date',
-    title: 'Дата сделки',
-    width: 150,
+    title: <b>Дата сделки</b>,
+    width: '250px',
   },
   {
     name: 'transfer_amount',
-    title: 'Сумма',
-    width: 170,
+    title: <span style={{ color: 'red', fontWeight: 'bold' }}>Сумма</span>,
+    width: 200,
   },
   {
     name: 'currency',
-    title: 'Валюта',
+    title: <i>Валюта</i>,
+    extraText: <b>доллары</b>,
   },
   {
     name: 'rate',
@@ -159,28 +106,13 @@ const columnList: Column[] = [
   },
 ];
 
-export const ExpandTemplate = (props: TableProps) => {
-  const [rows, setRows] = React.useState(rowList);
+export const TableCustomTitleTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
-
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
-    const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
-    setRows(updRows);
-  };
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
   };
 
-  return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      displayRowExpansionColumn
-      onRowExpansionChange={handleExpansionChange}
-      onColumnResize={handleResize}
-    />
-  );
+  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
 };

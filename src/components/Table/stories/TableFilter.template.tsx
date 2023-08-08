@@ -112,7 +112,7 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-export const FilterTemplate = (props: TableProps) => {
+export const TableFilterTemplate = (props: TableProps) => {
   const [selected, setSelected] = React.useState<string>('');
   const [selectedDate, setSelectedDate] = React.useState<string>('');
   const [rows, setRows] = React.useState([...rowList]);

@@ -175,20 +175,22 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
+    width: 'calc(20% - 40px)',
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: 150,
+    width: '250px',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 170,
+    width: 200,
   },
   {
     name: 'currency',
     title: 'Валюта',
+    width: '20%',
   },
   {
     name: 'rate',
@@ -196,7 +198,7 @@ const columnList: Column[] = [
   },
 ];
 
-export const PlaygroundTemplate = (props: TableProps) => {
+export const TableColumnWidthTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {

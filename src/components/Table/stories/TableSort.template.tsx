@@ -109,7 +109,7 @@ const MAX_SORT_LEVEL = 2;
 
 type SortColumn = { [key: string]: 'asc' | 'desc' };
 
-export const SortTemplate = (props: TableProps) => {
+export const TableSortTemplate = (props: TableProps) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
   const [sortLevel, setSortLevel] = React.useState<number>(0);

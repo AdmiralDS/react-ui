@@ -26,7 +26,7 @@ const columnList: Column[] = [
   },
 ];
 
-export const VirtualScrollTemplate = (props: TableProps) => {
+export const TableVirtualScrollTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {

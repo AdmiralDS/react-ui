@@ -148,7 +148,7 @@ const columnList: Column[] = [
   },
 ];
 
-export const RowStateTemplate = (props: TableProps) => {
+export const TableRowStateTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {

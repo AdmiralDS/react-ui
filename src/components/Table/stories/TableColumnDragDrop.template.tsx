@@ -236,7 +236,7 @@ const columnList2: Column[] = [
   },
 ];
 
-export const ColumnDragDropTemplate = (props: TableProps) => {
+export const TableColumnDragDropTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList1);
   const [cols2, setCols2] = React.useState(columnList2);
 
