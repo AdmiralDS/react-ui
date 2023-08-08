@@ -3,21 +3,18 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { NumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  NumberInputPlaygroundTemplate,
-  NumberInputDisabledTemplate,
-  NumberInputMinMaxTemplate,
-  NumberInputCustomisedTemplate,
-  NumberInputControlledTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { NumberInputPlaygroundTemplate } from './NumberInputPlayground.template';
+import { NumberInputDisabledTemplate } from './NumberInputDisabled.template';
+import { NumberInputMinMaxTemplate } from './NumberInputMinMax.template';
+import { NumberInputCustomisedTemplate } from './NumberInputCustomised.template';
+import { NumberInputControlledTemplate } from './NumberInputControlled.template';
 
 // Imports of text sources
-import PlaygroundRaw from './Templates/NumberInputPlayground?raw';
-import DisabledRaw from './Templates/NumberInputDisabled?raw';
-import MinMaxRaw from './Templates/NumberInputMinMax?raw';
-import CustomRaw from './Templates/NumberInputCustomised?raw';
-import ControlledRaw from './Templates/NumberInputControlled?raw';
+import NumberInputPlaygroundRaw from './NumberInputPlayground.template?raw';
+import NumberInputDisabledRaw from './NumberInputDisabled.template?raw';
+import NumberInputMinMaxRaw from './NumberInputMinMax.template?raw';
+import NumberInputCustomisedRaw from './NumberInputCustomised.template?raw';
+import NumberInputControlledRaw from './NumberInputControlled.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -121,15 +118,13 @@ export default {
 } as Meta<typeof NumberInput>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => (
-  <NumberInputPlaygroundTemplate {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => <NumberInputPlaygroundTemplate {...props} />;
 export const Playground = {
   render: PlaygroundStory,
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: NumberInputPlaygroundRaw,
       },
     },
   },
@@ -137,13 +132,13 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Задизейбленный.">
-const DisabledStory: StoryFn<typeof NumberInput> = (props) => <NumberInputDisabledTemplate {...cleanUpProps(props)} />;
+const DisabledStory: StoryFn<typeof NumberInput> = (props) => <NumberInputDisabledTemplate {...props} />;
 export const DisabledExample = {
   render: DisabledStory,
   parameters: {
     docs: {
       source: {
-        code: DisabledRaw,
+        code: NumberInputDisabledRaw,
       },
     },
   },
@@ -152,13 +147,13 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример с minValue, maxValue.">
-const MinMaxStory: StoryFn<typeof NumberInput> = (props) => <NumberInputMinMaxTemplate {...cleanUpProps(props)} />;
+const MinMaxStory: StoryFn<typeof NumberInput> = (props) => <NumberInputMinMaxTemplate {...props} />;
 export const MinMaxExample = {
   render: MinMaxStory,
   parameters: {
     docs: {
       source: {
-        code: MinMaxRaw,
+        code: NumberInputMinMaxRaw,
       },
       description: {
         story: `Параметры максимальное (maxValue) и минимальное (minValue) значение применяются для того, чтобы обозначить 
@@ -175,13 +170,13 @@ export const MinMaxExample = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: StoryFn<typeof NumberInput> = (props) => <NumberInputCustomisedTemplate {...cleanUpProps(props)} />;
+const CustomStory: StoryFn<typeof NumberInput> = (props) => <NumberInputCustomisedTemplate {...props} />;
 export const CustomExample = {
   render: CustomStory,
   parameters: {
     docs: {
       source: {
-        code: CustomRaw,
+        code: NumberInputCustomisedRaw,
       },
       description: {
         story: `Пользователь может указать с помощью параметра precision (по умолчанию равен 2), 
@@ -202,7 +197,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: ControlledRaw,
+        code: NumberInputControlledRaw,
       },
       description: {
         story: `В качестве значений параметров value и defaultValue в NumberInput необходимо передавать уже
