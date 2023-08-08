@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 import { FileInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { FileInputBaseTemplate, FileInputCustomTemplate, FileInputWithStatusTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { FileInputBaseTemplate } from './FileInputBase.template';
+import { FileInputWithStatusTemplate } from './FileInputWithStatus.template';
+import { FileInputCustomTemplate } from './FileInputCustom.template';
 
 // Imports of text sources
-import FileInputBaseRaw from './Templates/FileInputBase?raw';
-import FileInputWithStatusRaw from './Templates/FileInputWithStatus?raw';
-import FileInputCustomRaw from './Templates/FileInputCustom?raw';
+import FileInputBaseRaw from './FileInputBase.template?raw';
+import FileInputWithStatusRaw from './FileInputWithStatus.template?raw';
+import FileInputCustomRaw from './FileInputCustom.template?raw';
 
 const Separator = styled.div`
   height: 40px;
@@ -98,7 +99,7 @@ export default {
 
 //<editor-fold desc="FileInput XL">
 const FileInputDimensionXLStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputBaseTemplate {...cleanUpProps(props)} dimension={'xl'} width={'480px'} />
+  <FileInputBaseTemplate {...props} dimension={'xl'} width={'480px'} />
 );
 
 export const FileInputDimensionXL = {
@@ -123,7 +124,7 @@ export const FileInputDimensionXL = {
 
 //<editor-fold desc="FileInput M">
 const FileInputDimensionMStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputBaseTemplate {...cleanUpProps(props)} dimension={'m'} width={'350px'} />
+  <FileInputBaseTemplate {...props} dimension={'m'} width={'350px'} />
 );
 
 export const FileInputDimensionM = {
@@ -143,7 +144,7 @@ export const FileInputDimensionM = {
 
 //<editor-fold desc="FileInput со статусом загрузки">
 const FileInputWithStatusStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputWithStatusTemplate dimension={'xl'} {...cleanUpProps(props)} />
+  <FileInputWithStatusTemplate {...props} dimension={'xl'} />
 );
 
 export const FileInputWithStatus = {
@@ -166,7 +167,7 @@ export const FileInputWithStatus = {
 
 //<editor-fold desc="File Input. Кастомизация">
 const FileInputCustomStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputCustomTemplate dimension={'m'} {...cleanUpProps(props)} />
+  <FileInputCustomTemplate {...props} dimension={'m'} />
 );
 
 export const FileInputCustom = {
