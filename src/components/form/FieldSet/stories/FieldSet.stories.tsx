@@ -3,7 +3,6 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { FieldSet, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { PropsType as FieldSetPropsType } from '@admiral-ds/react-ui';
 
 import { FieldSetCheckboxTemplate } from './FieldSetCheckbox.template';
 import { FieldSetRadioButtonTemplate } from './FieldSetRadioButton.template';

@@ -1,8 +1,6 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 
 import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
-import type { FieldProps, ComponentDimension } from '@admiral-ds/react-ui';
 
 import { DateTimeFieldBaseTemplate } from './DateTimeFieldBase.template';
 import { DateTimeFieldDisabledTemplate } from './DateTimeFieldDisabled.template';
@@ -15,10 +13,6 @@ import DateTimeFieldBaseRaw from './DateTimeFieldBase.template?raw';
 import DateTimeFieldDisabledRaw from './DateTimeFieldDisabled.template?raw';
 import DateTimeFieldReadOnlyRaw from './DateTimeFieldReadOnly.template?raw';
 import DateTimeFieldStatusRaw from './DateTimeFieldStatus.template?raw';
-
-interface DateTimeFieldProps extends FieldProps {
-  dimension?: ComponentDimension;
-}
 
 export default {
   title: 'Admiral-2.1/Form Field/DateTimeField',
