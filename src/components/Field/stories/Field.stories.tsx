@@ -57,9 +57,7 @@ export default {
 } as Meta<typeof Field>;
 
 //<editor-fold desc="Пример обертывания компонента TextInput">
-const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => (
-  <FieldWithTextInputTemplate {...props} />
-);
+const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => <FieldWithTextInputTemplate {...props} />;
 
 export const FieldWithTextInput = {
   render: FieldWithTextInputStory,

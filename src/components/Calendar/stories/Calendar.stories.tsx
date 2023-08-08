@@ -278,9 +278,7 @@ export const SimpleWithSetActiveViewWithoutDay = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
-const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (props) => (
-  <SimpleWithSpecialDatesTemplate {...props} />
-);
+const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (props) => <SimpleWithSpecialDatesTemplate {...props} />;
 
 export const SimpleWithSpecialDates = {
   render: SimpleWithSpecialDatesStory,
