@@ -3,19 +3,16 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { SliderInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import {
-  SliderInputControlledTemplate,
-  SliderInputTickMarksTemplate,
-  SliderInputCustomisedTemplate,
-  SliderInputCustomMarkTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SliderInputControlledTemplate } from './SliderInputControlled.template';
+import { SliderInputTickMarksTemplate } from './SliderInputTickMarks.template';
+import { SliderInputCustomisedTemplate } from './SliderInputCustomised.template';
+import { SliderInputCustomMarkTemplate } from './SliderInputCustomMark.template';
 
 // Imports of text sources
-import ControlledRaw from './Templates/SliderInputControlled?raw';
-import TickMarksRaw from './Templates/SliderInputTickMarks?raw';
-import CustomRaw from './Templates/SliderInputCustomised?raw';
-import CustomMarkRaw from './Templates/SliderInputCustomMark?raw';
+import SliderInputControlledRaw from './SliderInputControlled.template?raw';
+import SliderInputTickMarksRaw from './SliderInputTickMarks.template?raw';
+import SliderInputCustomisedRaw from './SliderInputCustomised.template?raw';
+import SliderInputCustomMarkRaw from './SliderInputCustomMark.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -130,9 +127,7 @@ export default {
 } as Meta<typeof SliderInput>;
 
 //<editor-fold desc="SliderInput. Пример контролируемого инпута.">
-const ControlledStory: StoryFn<typeof SliderInput> = (props) => (
-  <SliderInputControlledTemplate {...cleanUpProps(props)} />
-);
+const ControlledStory: StoryFn<typeof SliderInput> = (props) => <SliderInputControlledTemplate {...props} />;
 
 export const ControlledExample = {
   render: ControlledStory,
@@ -140,7 +135,7 @@ export const ControlledExample = {
   parameters: {
     docs: {
       source: {
-        code: ControlledRaw,
+        code: SliderInputControlledRaw,
       },
     },
     description: {
@@ -162,9 +157,7 @@ export const ControlledExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. С промежуточными отметками.">
-const TickMarksStory: StoryFn<typeof SliderInput> = (props) => (
-  <SliderInputTickMarksTemplate {...cleanUpProps(props)} />
-);
+const TickMarksStory: StoryFn<typeof SliderInput> = (props) => <SliderInputTickMarksTemplate {...props} />;
 
 export const TickmarksExample = {
   render: TickMarksStory,
@@ -172,7 +165,7 @@ export const TickmarksExample = {
   parameters: {
     docs: {
       source: {
-        code: TickMarksRaw,
+        code: SliderInputTickMarksRaw,
       },
     },
   },
@@ -183,7 +176,7 @@ export const TickmarksExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomisedTemplate {...cleanUpProps(props)} />;
+const CustomStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomisedTemplate {...props} />;
 
 export const CustomExample = {
   render: CustomStory,
@@ -191,7 +184,7 @@ export const CustomExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomRaw,
+        code: SliderInputCustomisedRaw,
       },
     },
   },
@@ -202,9 +195,7 @@ export const CustomExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.">
-const CustomMarkStory: StoryFn<typeof SliderInput> = (props) => (
-  <SliderInputCustomMarkTemplate {...cleanUpProps(props)} />
-);
+const CustomMarkStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomMarkTemplate {...props} />;
 
 export const CustomMarkExample = {
   render: CustomMarkStory,
@@ -212,7 +203,7 @@ export const CustomMarkExample = {
   parameters: {
     docs: {
       source: {
-        code: CustomMarkRaw,
+        code: SliderInputCustomMarkRaw,
       },
     },
   },
