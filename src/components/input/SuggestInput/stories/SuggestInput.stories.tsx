@@ -8,19 +8,16 @@ import {
 } from '@admiral-ds/react-ui';
 import { ReactComponent as SearchSolidSVG } from '@admiral-ds/icons/build/system/SearchSolid.svg';
 
-import {
-  SuggestInputFilterTemplate,
-  SuggestInputNoMatchTemplate,
-  SuggestInputUncontrolledTemplate,
-  SuggestInputPlaygroundTemplate,
-} from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { SuggestInputPlaygroundTemplate } from './SuggestInputPlayground.template';
+import { SuggestInputUncontrolledTemplate } from './SuggestInputUncontrolled.template';
+import { SuggestInputFilterTemplate } from './SuggestInputFilter.template';
+import { SuggestInputNoMatchTemplate } from './SuggestInputNoMatch.template';
 
 // Imports of text sources
-import SuggestInputPlaygroundRaw from './Templates/SuggestInputPlayground?raw';
-import SuggestInputUncontrolledRaw from './Templates/SuggestInputUncontrolled?raw';
-import SuggestInputFilterRaw from './Templates/SuggestInputFilter?raw';
-import SuggestInputNoMatchRaw from './Templates/SuggestInputNoMatch?raw';
+import SuggestInputPlaygroundRaw from './SuggestInputPlayground.template?raw';
+import SuggestInputUncontrolledRaw from './SuggestInputUncontrolled.template?raw';
+import SuggestInputFilterRaw from './SuggestInputFilter.template?raw';
+import SuggestInputNoMatchRaw from './SuggestInputNoMatch.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/SuggestInput',
@@ -135,7 +132,7 @@ export default {
 
 //<editor-fold desc="Suggest Input компонент">
 const SuggestInputPlaygroundStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputPlaygroundTemplate {...cleanUpProps(props)} />
+  <SuggestInputPlaygroundTemplate {...props} />
 );
 
 export const SuggestInputPlayground = {
@@ -156,7 +153,7 @@ export const SuggestInputPlayground = {
 
 //<editor-fold desc="Suggest Input альтернативная иконка">
 const SuggestInputCustomIconStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputPlaygroundTemplate {...cleanUpProps(props)} icon={SearchSolidSVG} />
+  <SuggestInputPlaygroundTemplate {...props} icon={SearchSolidSVG} />
 );
 
 export const SuggestInputCustomIcon = {
@@ -177,7 +174,7 @@ export const SuggestInputCustomIcon = {
 
 //<editor-fold desc="Suggest Input неконтроллируемый">
 const SuggestInputUncontrolledStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputUncontrolledTemplate {...cleanUpProps(props)} />
+  <SuggestInputUncontrolledTemplate {...props} />
 );
 
 export const SuggestInputUncontrolled = {
@@ -197,9 +194,7 @@ export const SuggestInputUncontrolled = {
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input "Нет совпадений"">
-const SuggestInputNoMatchStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputNoMatchTemplate {...cleanUpProps(props)} />
-);
+const SuggestInputNoMatchStory: StoryFn<typeof SuggestInput> = (props) => <SuggestInputNoMatchTemplate {...props} />;
 
 export const SuggestInputNoMatch = {
   render: SuggestInputNoMatchStory,
@@ -218,9 +213,7 @@ export const SuggestInputNoMatch = {
 //</editor-fold>
 
 //<editor-fold desc="Suggest Input с фильтрацией">
-const SuggestInputFilterStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputFilterTemplate {...cleanUpProps(props)} />
-);
+const SuggestInputFilterStory: StoryFn<typeof SuggestInput> = (props) => <SuggestInputFilterTemplate {...props} />;
 
 export const SuggestInputFilter = {
   render: SuggestInputFilterStory,
