@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import {
   TimeField,
   INPUT_DIMENSIONS_VALUES,
@@ -7,12 +8,11 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 
-import { TimeFieldInputTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TimeFieldInputTemplate } from './TimeFieldInput.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import TimeFieldInputRaw from './Templates/TimeFieldInput?raw';
+import TimeFieldInputRaw from './TimeFieldInput.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/TimeField',
@@ -120,7 +120,7 @@ export default {
 } as Meta<typeof TimeField>;
 
 //<editor-fold desc="TimeField example">
-const TimeFieldInputStory: StoryFn<typeof TimeField> = (props) => <TimeFieldInputTemplate {...cleanUpProps(props)} />;
+const TimeFieldInputStory: StoryFn<typeof TimeField> = (props) => <TimeFieldInputTemplate {...props} />;
 
 export const TimeFieldInput = {
   render: TimeFieldInputStory,
