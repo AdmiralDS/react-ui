@@ -406,7 +406,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const body = scrollBodyRef.current;
 
       function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {}
-      function handleDragStart() {}
+      function handleDragStart() {
+        if (rowMirrorRef.current?.lastElementChild) {
+          rowMirrorRef.current.lastElementChild.scrollLeft = (scrollBodyRef.current?.scrollLeft || 0);
+        }
+      }
       function handleDragEnd() {}
 
       if (body && rowsDraggable) {
@@ -758,7 +762,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           )}
         {rowsDraggable &&
           createPortal(
-            <MirrorRow dimension={dimension} style={{ minWidth: tableWidth + 'px' }} ref={rowMirrorRef}>
+            <MirrorRow dimension={dimension} style={{ minWidth: tableWidth + 'px', maxWidth: tableWidth +'px', overflow: 'hidden' }} ref={rowMirrorRef}>
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />
             </MirrorRow>,
