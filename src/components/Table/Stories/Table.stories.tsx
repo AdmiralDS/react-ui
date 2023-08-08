@@ -3,53 +3,50 @@ import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 import { Table } from '@admiral-ds/react-ui';
 
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PlaygroundTemplate } from './Playground.template';
+import { ColumnWidthTemplate } from './TableColumnWidth.template';
+import { CheckboxTemplate } from './TableCheckbox.template';
+import { StyleTemplate } from './TableStyle.template';
+import { OrientationTemplate } from './TableOrientation.template';
+import { SortTemplate } from './TableSort.template';
+import { FilterTemplate } from './TableFilter.template';
+import { MultilineTemplate } from './TableMultiline.template';
+import { StickyTemplate } from './TableSticky.template';
+import { RowStateTemplate } from './TableRowState.template';
+import { ZebraTemplate } from './TableZebra.template';
+import { ExpandTemplate } from './TableExpand.template';
+import { ExtraTextTemplate } from './TableExtraText.template';
+import { OverflowMenuTemplate } from './TableOverflowMenu.template';
+import { VirtualScrollTemplate } from './TableVirtualScroll.template';
+import { LoadOnScrollTemplate } from './TableLoadOnScroll.template';
+import { GroupTemplate } from './TableGroup.template';
+import { CustomTitleTemplate } from './TableCustomTitle.template';
+import { RenderCellTemplate } from './TableRenderCell.template';
+import { RenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
+import { ColumnDragDropTemplate } from './TableColumnDragDrop.template';
 
-import {
-  VirtualScrollTemplate,
-  OverflowMenuTemplate,
-  GroupTemplate,
-  ExtraTextTemplate,
-  ExpandTemplate,
-  ZebraTemplate,
-  ColumnDragDropTemplate,
-  RowStateTemplate,
-  StickyTemplate,
-  MultilineTemplate,
-  FilterTemplate,
-  SortTemplate,
-  OrientationTemplate,
-  CheckboxTemplate,
-  ColumnWidthTemplate,
-  StyleTemplate,
-  CustomTitleTemplate,
-  RenderCellTemplate,
-  RenderGroupTitleTemplate,
-  PlaygroundTemplate,
-  LoadOnScrollTemplate,
-} from './Templates';
 // Imports of text sources
-import VirtualScrollRaw from './Templates/TableVirtualScroll?raw';
-import OverflowMenuRaw from './Templates/TableOverflowMenu?raw';
-import GroupRaw from './Templates/TableGroup?raw';
-import ExtraTextRaw from './Templates/TableExtraText?raw';
-import ExpandRaw from './Templates/TableExpand?raw';
-import ZebraRaw from './Templates/TableZebra?raw';
-import ColumnDragDropRaw from './Templates/TableColumnDragDrop?raw';
-import RowStateRaw from './Templates/TableRowState?raw';
-import StickyRaw from './Templates/TableSticky?raw';
-import MultilineRaw from './Templates/TableMultiline?raw';
-import FilterRaw from './Templates/TableFilter?raw';
-import SortRaw from './Templates/TableSort?raw';
-import OrientationRaw from './Templates/TableOrientation?raw';
-import CheckboxRaw from './Templates/TableCheckbox?raw';
-import ColumnWidthRaw from './Templates/TableColumnWidth?raw';
-import StyleRaw from './Templates/TableStyle?raw';
-import CustomTitleRaw from './Templates/TableCustomTitle?raw';
-import RenderCellRaw from './Templates/TableRenderCell?raw';
-import RenderGroupTitleRaw from './Templates/TableRenderGroupTitle?raw';
-import PlaygroundRaw from './Templates/Playground?raw';
-import LoadScrollRaw from './Templates/TableLoadOnScroll?raw';
+import TablePlaygroundRaw from './Playground.template?raw';
+import TableColumnWidthRaw from './TableColumnWidth.template?raw';
+import TableCheckboxRaw from './TableCheckbox.template?raw';
+import TableStyleRaw from './TableStyle.template?raw';
+import TableOrientationRaw from './TableOrientation.template?raw';
+import TableSortRaw from './TableSort.template?raw';
+import TableFilterRaw from './TableFilter.template?raw';
+import TableMultilineRaw from './TableMultiline.template?raw';
+import TableStickyRaw from './TableSticky.template?raw';
+import TableRowStateRaw from './TableRowState.template?raw';
+import TableZebraRaw from './TableZebra.template?raw';
+import TableExpandRaw from './TableExpand.template?raw';
+import TableExtraTextRaw from './TableExtraText.template?raw';
+import TableOverflowMenuRaw from './TableOverflowMenu.template?raw';
+import TableVirtualScrollRaw from './TableVirtualScroll.template?raw';
+import TableLoadScrollRaw from './TableLoadOnScroll.template?raw';
+import TableGroupRaw from './TableGroup.template?raw';
+import TableCustomTitleRaw from './TableCustomTitle.template?raw';
+import TableRenderCellRaw from './TableRenderCell.template?raw';
+import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
+import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -166,15 +163,13 @@ export default {
 } as Meta<typeof Table>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Table> = (props) => (
-  <PlaygroundTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const PlaygroundStory: StoryFn<typeof Table> = (props) => <PlaygroundTemplate {...props} />;
 export const Playground = {
   render: PlaygroundStory,
   parameters: {
     docs: {
       source: {
-        code: PlaygroundRaw,
+        code: TablePlaygroundRaw,
       },
     },
   },
@@ -182,15 +177,13 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с шириной столбцов">
-const ColumnWidthStory: StoryFn<typeof Table> = (props) => (
-  <ColumnWidthTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const ColumnWidthStory: StoryFn<typeof Table> = (props) => <ColumnWidthTemplate {...props} />;
 export const ColumnWidthExample = {
   render: ColumnWidthStory,
   parameters: {
     docs: {
       source: {
-        code: ColumnWidthRaw,
+        code: TableColumnWidthRaw,
       },
       description: {
         story: `По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот 
@@ -214,15 +207,13 @@ export const ColumnWidthExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с чекбоксами">
-const CheckboxStory: StoryFn<typeof Table> = (props) => (
-  <CheckboxTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const CheckboxStory: StoryFn<typeof Table> = (props) => <CheckboxTemplate {...props} />;
 export const CheckboxExample = {
   render: CheckboxStory,
   parameters: {
     docs: {
       source: {
-        code: CheckboxRaw,
+        code: TableCheckboxRaw,
       },
       description: {
         story: `Отображение столбца с чекбоксами регулируется параметром displayRowSelectionColumn. 
@@ -239,15 +230,13 @@ export const CheckboxExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример стилизации">
-const StyleStory: StoryFn<typeof Table> = (props) => (
-  <StyleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const StyleStory: StoryFn<typeof Table> = (props) => <StyleTemplate {...props} />;
 export const StyleExample = {
   render: StyleStory,
   parameters: {
     docs: {
       source: {
-        code: StyleRaw,
+        code: TableStyleRaw,
       },
       description: {
         story: `Существует ряд возможностей изменить дефолтные стили таблицы. Для таблицы можно задать атрибут style, который применится к корневому элементу таблицы. 
@@ -275,15 +264,13 @@ export const StyleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с выравниванием контента">
-const OrientationStory: StoryFn<typeof Table> = (props) => (
-  <OrientationTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const OrientationStory: StoryFn<typeof Table> = (props) => <OrientationTemplate {...props} />;
 export const OrientationExample = {
   render: OrientationStory,
   parameters: {
     docs: {
       source: {
-        code: OrientationRaw,
+        code: TableOrientationRaw,
       },
       description: {
         story: `По умолчанию контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому краю, 
@@ -296,15 +283,13 @@ export const OrientationExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример сортировки">
-const SortStory: StoryFn<typeof Table> = (props) => (
-  <SortTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const SortStory: StoryFn<typeof Table> = (props) => <SortTemplate {...props} />;
 export const SortExample = {
   render: SortStory,
   parameters: {
     docs: {
       source: {
-        code: SortRaw,
+        code: TableSortRaw,
       },
       description: {
         story: `По умолчанию возможность сортировки столбца отключена.
@@ -329,15 +314,13 @@ export const SortExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример фильтрации">
-const FilterStory: StoryFn<typeof Table> = (props) => (
-  <FilterTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const FilterStory: StoryFn<typeof Table> = (props) => <FilterTemplate {...props} />;
 export const FilterExample = {
   render: FilterStory,
   parameters: {
     docs: {
       source: {
-        code: FilterRaw,
+        code: TableFilterRaw,
       },
       description: {
         story: `Опционально в заголовках можно включать фильтрацию столбцов. 
@@ -372,15 +355,13 @@ export const FilterExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c многострочностью заголовков">
-const MultilineStory: StoryFn<typeof Table> = (props) => (
-  <MultilineTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const MultilineStory: StoryFn<typeof Table> = (props) => <MultilineTemplate {...props} />;
 export const MultilineExample = {
   render: MultilineStory,
   parameters: {
     docs: {
       source: {
-        code: MultilineRaw,
+        code: TableMultilineRaw,
       },
       description: {
         story: `Заголовки таблицы по умолчанию выводятся в одну строку и при нехватке места сокращаются с помощью троеточия. Увеличить высоту 
@@ -396,15 +377,13 @@ export const MultilineExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c фиксированными столбцами">
-const StickyStory: StoryFn<typeof Table> = (props) => (
-  <StickyTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const StickyStory: StoryFn<typeof Table> = (props) => <StickyTemplate {...props} />;
 export const StickyExample = {
   render: StickyStory,
   parameters: {
     docs: {
       source: {
-        code: StickyRaw,
+        code: TableStickyRaw,
       },
       description: {
         story: `При необходимости можно “закреплять” столбцы таблицы. Фиксированные столбцы располагаются по левому краю таблицы и идут друг за другом.
@@ -417,15 +396,13 @@ export const StickyExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c различными состояниями строк">
-const RowStateStory: StoryFn<typeof Table> = (props) => (
-  <RowStateTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const RowStateStory: StoryFn<typeof Table> = (props) => <RowStateTemplate {...props} />;
 export const RowStateExample = {
   render: RowStateStory,
   parameters: {
     docs: {
       source: {
-        code: RowStateRaw,
+        code: TableRowStateRaw,
       },
       description: {
         story: `Для каждой строки помимо содержимого ячеек, id и className, можно задать следующие 
@@ -453,15 +430,13 @@ export const RowStateExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c окрашиванием строк через одну">
-const ZebraStory: StoryFn<typeof Table> = (props) => (
-  <ZebraTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const ZebraStory: StoryFn<typeof Table> = (props) => <ZebraTemplate {...props} />;
 export const ZebraExample = {
   render: ZebraStory,
   parameters: {
     docs: {
       source: {
-        code: ZebraRaw,
+        code: TableZebraRaw,
       },
       description: {
         story: `Опционально, для лучшей визуальной сепарации строк, их можно окрашивать через одну в цвет вторичного фона (Neutral 05). Используйте для этого параметр greyZebraRows.
@@ -475,15 +450,13 @@ export const ZebraExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c детализацией строки">
-const ExpandStory: StoryFn<typeof Table> = (props) => (
-  <ExpandTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const ExpandStory: StoryFn<typeof Table> = (props) => <ExpandTemplate {...props} />;
 export const ExpandExample = {
   render: ExpandStory,
   parameters: {
     docs: {
       source: {
-        code: ExpandRaw,
+        code: TableExpandRaw,
       },
       description: {
         story: `Отображение столбца детализации (столбец со стрелками) регулируется параметром displayRowExpansionColumn. 
@@ -498,15 +471,13 @@ export const ExpandExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c дополнительным текстом в заголовке">
-const ExtraTextStory: StoryFn<typeof Table> = (props) => (
-  <ExtraTextTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const ExtraTextStory: StoryFn<typeof Table> = (props) => <ExtraTextTemplate {...props} />;
 export const ExtraTextExample = {
   render: ExtraTextStory,
   parameters: {
     docs: {
       source: {
-        code: ExtraTextRaw,
+        code: TableExtraTextRaw,
       },
       description: {
         story: `При необходимости в заголовке таблицы можно включать дополнительный текст с помощью параметра extraText. 
@@ -521,15 +492,13 @@ export const ExtraTextExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с оверфлоу меню и одиночными действиями над строкой">
-const OverflowMenuStory: StoryFn<typeof Table> = (props) => (
-  <OverflowMenuTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const OverflowMenuStory: StoryFn<typeof Table> = (props) => <OverflowMenuTemplate {...props} />;
 export const OverflowMenuExample = {
   render: OverflowMenuStory,
   parameters: {
     docs: {
       source: {
-        code: OverflowMenuRaw,
+        code: TableOverflowMenuRaw,
       },
       description: {
         story: `Опционально со строками можно производить набор действий через Overflow Menu, 
@@ -558,15 +527,13 @@ export const OverflowMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с виртуальным скроллом">
-const VirtualScrollStory: StoryFn<typeof Table> = (props) => (
-  <VirtualScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const VirtualScrollStory: StoryFn<typeof Table> = (props) => <VirtualScrollTemplate {...props} />;
 export const VirtualScrollExample = {
   render: VirtualScrollStory,
   parameters: {
     docs: {
       source: {
-        code: VirtualScrollRaw,
+        code: TableVirtualScrollRaw,
       },
       description: {
         story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
@@ -585,15 +552,13 @@ export const VirtualScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Table. Подгрузка данных при скролле.">
-const LoadScrollStory: StoryFn<typeof Table> = (props) => (
-  <LoadOnScrollTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const LoadScrollStory: StoryFn<typeof Table> = (props) => <LoadOnScrollTemplate {...props} />;
 export const LoadScrollExample = {
   render: LoadScrollStory,
   parameters: {
     docs: {
       source: {
-        code: LoadScrollRaw,
+        code: TableLoadScrollRaw,
       },
       description: {
         story: `Пользователь может реализовать подгрузку новых строк по мере скролла тела таблицы, например, следующим образом. С
@@ -608,15 +573,13 @@ export const LoadScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с группировкой строк">
-const GroupStory: StoryFn<typeof Table> = (props) => (
-  <GroupTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const GroupStory: StoryFn<typeof Table> = (props) => <GroupTemplate {...props} />;
 export const GroupExample = {
   render: GroupStory,
   parameters: {
     docs: {
       source: {
-        code: GroupRaw,
+        code: TableGroupRaw,
       },
       description: {
         story: `Строки в таблице можно группировать под общим заголовком. При группировке допускается только один уровень 
@@ -631,15 +594,13 @@ export const GroupExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с кастомными заголовками">
-const CustomTitleStory: StoryFn<typeof Table> = (props) => (
-  <CustomTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const CustomTitleStory: StoryFn<typeof Table> = (props) => <CustomTitleTemplate {...props} />;
 export const CustomTitleExample = {
   render: CustomTitleStory,
   parameters: {
     docs: {
       source: {
-        code: CustomTitleRaw,
+        code: TableCustomTitleRaw,
       },
       description: {
         story: `Пользователь может кастомизировать часть заголовка столбца, а именно область с текстом заголовка (параметр title) и 
@@ -652,15 +613,13 @@ export const CustomTitleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример кастомизации ячейки">
-const RenderCellStory: StoryFn<typeof Table> = (props) => (
-  <RenderCellTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const RenderCellStory: StoryFn<typeof Table> = (props) => <RenderCellTemplate {...props} />;
 export const RenderCellExample = {
   render: RenderCellStory,
   parameters: {
     docs: {
       source: {
-        code: RenderCellRaw,
+        code: TableRenderCellRaw,
       },
       description: {
         story: `Для формирования контента ячейки пользователь может использовать рендер-колбек renderCell. 
@@ -674,15 +633,13 @@ export const RenderCellExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример кастомизации заголовка группы">
-const RenderGroupTitleStory: StoryFn<typeof Table> = (props) => (
-  <RenderGroupTitleTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const RenderGroupTitleStory: StoryFn<typeof Table> = (props) => <RenderGroupTitleTemplate {...props} />;
 export const RenderGroupTitleExample = {
   render: RenderGroupTitleStory,
   parameters: {
     docs: {
       source: {
-        code: RenderGroupTitleRaw,
+        code: TableRenderGroupTitleRaw,
       },
       description: {
         story: `Пользователь может кастомизировать заголовок группы строк с помощью рендер-колбека renderGroupTitle.
@@ -697,15 +654,13 @@ export const RenderGroupTitleExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с drag and drop столбцов">
-const ColumnDragDropStory: StoryFn<typeof Table> = (props) => (
-  <ColumnDragDropTemplate columnList={[]} rowList={[]} {...cleanUpProps(props)} />
-);
+const ColumnDragDropStory: StoryFn<typeof Table> = (props) => <ColumnDragDropTemplate {...props} />;
 export const DraggableColumnsExample = {
   render: ColumnDragDropStory,
   parameters: {
     docs: {
       source: {
-        code: ColumnDragDropRaw,
+        code: TableColumnDragDropRaw,
       },
       description: {
         story: `Функция изменения порядка (перемещения) столбцов является опциональной. По умолчанию столбцы таблицы не подлежат перемещению.
