@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 import { INPUT_STATUS_VALUES, PhoneNumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { PhoneNumberInputMTemplate, PhoneNumberInputSTemplate, PhoneNumberInputXLTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { PhoneNumberInputXLTemplate } from './PhoneNumberInputXL.template';
+import { PhoneNumberInputMTemplate } from './PhoneNumberInputM.template';
+import { PhoneNumberInputSTemplate } from './PhoneNumberInputS.template';
 
 // Imports of text sources
-import PhoneNumberInputXLRaw from './Templates/PhoneNumberInputXL?raw';
-import PhoneNumberInputMRaw from './Templates/PhoneNumberInputM?raw';
-import PhoneNumberInputSRaw from './Templates/PhoneNumberInputS?raw';
+import PhoneNumberInputXLRaw from './PhoneNumberInputXL.template?raw';
+import PhoneNumberInputMRaw from './PhoneNumberInputM.template?raw';
+import PhoneNumberInputSRaw from './PhoneNumberInputS.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -120,9 +121,7 @@ export default {
 } as Meta<typeof PhoneNumberInput>;
 
 //<editor-fold desc="Phone Number Input. Размер XL">
-const PhoneNumberInputXLStory: StoryFn<typeof PhoneNumberInput> = (props) => (
-  <PhoneNumberInputXLTemplate {...cleanUpProps(props)} />
-);
+const PhoneNumberInputXLStory: StoryFn<typeof PhoneNumberInput> = (props) => <PhoneNumberInputXLTemplate {...props} />;
 
 export const PhoneNumberInputXL = {
   render: PhoneNumberInputXLStory,
@@ -141,9 +140,7 @@ export const PhoneNumberInputXL = {
 //</editor-fold>
 
 //<editor-fold desc="Phone Number Input. Размер M c фильтрацией списка">
-const PhoneNumberInputMStory: StoryFn<typeof PhoneNumberInput> = (props) => (
-  <PhoneNumberInputMTemplate {...cleanUpProps(props)} />
-);
+const PhoneNumberInputMStory: StoryFn<typeof PhoneNumberInput> = (props) => <PhoneNumberInputMTemplate {...props} />;
 
 export const PhoneNumberInputM = {
   render: PhoneNumberInputMStory,
@@ -162,9 +159,7 @@ export const PhoneNumberInputM = {
 //</editor-fold>
 
 //<editor-fold desc="Phone Number Input. Размер S с заданной страной по умолчанию">
-const PhoneNumberInputSStory: StoryFn<typeof PhoneNumberInput> = (props) => (
-  <PhoneNumberInputSTemplate {...cleanUpProps(props)} />
-);
+const PhoneNumberInputSStory: StoryFn<typeof PhoneNumberInput> = (props) => <PhoneNumberInputSTemplate {...props} />;
 
 export const PhoneNumberInputS = {
   render: PhoneNumberInputSStory,
