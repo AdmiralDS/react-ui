@@ -1,18 +1,18 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+
 import {
   DateField,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
-
-import { DateFieldBaseTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 import { DataAttributesDescription } from '#src/components/form/common';
 
+import { DateFieldBaseTemplate } from './DateFieldBase.template';
+
 // Imports of text sources
-import DateFieldBaseRaw from './Templates/DateFieldBase?raw';
+import DateFieldBaseRaw from './DateFieldBase.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
@@ -151,7 +151,7 @@ export default {
 } as Meta<typeof DateField>;
 
 //<editor-fold desc="DateField example">
-const DateFieldBaseStory: StoryFn<typeof DateField> = (props) => <DateFieldBaseTemplate {...cleanUpProps(props)} />;
+const DateFieldBaseStory: StoryFn<typeof DateField> = (props) => <DateFieldBaseTemplate {...props} />;
 
 export const DateFieldBase = {
   render: DateFieldBaseStory,
