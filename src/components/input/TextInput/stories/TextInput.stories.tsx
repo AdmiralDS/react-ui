@@ -7,11 +7,10 @@ import {
   ALL_BORDER_RADIUS_VALUES,
 } from '@admiral-ds/react-ui';
 
-import { TextInputPlaygroundTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { TextInputPlaygroundTemplate } from './TextInputPlayground.template';
 
 // Imports of text sources
-import TextInputPlaygroundRaw from './Templates/TextInputPlayground?raw';
+import TextInputPlaygroundRaw from './TextInputPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextInput',
@@ -100,9 +99,7 @@ export default {
 } as Meta<typeof TextInput>;
 
 //<editor-fold desc="Базовый input компонент">
-const TextInputPlaygroundStory: StoryFn<typeof TextInput> = (props) => (
-  <TextInputPlaygroundTemplate {...cleanUpProps(props)} />
-);
+const TextInputPlaygroundStory: StoryFn<typeof TextInput> = (props) => <TextInputPlaygroundTemplate {...props} />;
 
 export const TextInputPlayground = {
   render: TextInputPlaygroundStory,
