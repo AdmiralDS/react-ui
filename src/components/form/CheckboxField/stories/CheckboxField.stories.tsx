@@ -2,11 +2,10 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { CheckboxField, ALL_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { CheckboxFieldBaseTemplate } from '#src/components/form/CheckboxField/Stories/Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { CheckboxFieldBaseTemplate } from './CheckboxFieldBase.template';
 
 // Imports of text sources
-import CheckboxFieldBaseRaw from './Templates/CheckboxFieldBase?raw';
+import CheckboxFieldBaseRaw from './CheckboxFieldBase.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/CheckboxField',
@@ -66,9 +65,7 @@ export default {
 } as Meta<typeof CheckboxField>;
 
 //<editor-fold desc="CheckboxField example">
-const CheckboxFieldBaseStory: StoryFn<typeof CheckboxField> = (props) => (
-  <CheckboxFieldBaseTemplate {...cleanUpProps(props)} />
-);
+const CheckboxFieldBaseStory: StoryFn<typeof CheckboxField> = (props) => <CheckboxFieldBaseTemplate {...props} />;
 
 export const CheckboxFieldBase = {
   render: CheckboxFieldBaseStory,
