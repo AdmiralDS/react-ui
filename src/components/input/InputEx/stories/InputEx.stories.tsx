@@ -2,13 +2,14 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { InputEx, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { InputExBaseTemplate, InputExCustomTemplate, InputExPrefixSuffixSelectTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { InputExBaseTemplate } from './InputExBase.template';
+import { InputExPrefixSuffixSelectTemplate } from './InputExPrefixSuffixSelect.template';
+import { InputExCustomTemplate } from './InputExCustom.template';
 
 // Imports of text sources
-import InputExBaseRaw from './Templates/InputExBase?raw';
-import InputExPrefixSuffixSelectRaw from './Templates/InputExPrefixSuffixSelect?raw';
-import InputExCustomRaw from './Templates/InputExCustom?raw';
+import InputExBaseRaw from './InputExBase.template?raw';
+import InputExPrefixSuffixSelectRaw from './InputExPrefixSuffixSelect.template?raw';
+import InputExCustomRaw from './InputExCustom.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',
@@ -111,7 +112,7 @@ export default {
 } as Meta<typeof InputEx>;
 
 //<editor-fold desc="Базовый InputExtended">
-const InputExBaseStory: StoryFn<typeof InputEx> = (props) => <InputExBaseTemplate {...cleanUpProps(props)} />;
+const InputExBaseStory: StoryFn<typeof InputEx> = (props) => <InputExBaseTemplate {...props} />;
 
 export const InputExBase = {
   render: InputExBaseStory,
@@ -131,7 +132,7 @@ export const InputExBase = {
 
 //<editor-fold desc="InputExtended с выбором префикса и суффикса">
 const InputExPrefixSuffixSelectStory: StoryFn<typeof InputEx> = (props) => (
-  <InputExPrefixSuffixSelectTemplate {...cleanUpProps(props)} />
+  <InputExPrefixSuffixSelectTemplate {...props} />
 );
 
 export const InputExPrefixSuffixSelect = {
@@ -151,7 +152,7 @@ export const InputExPrefixSuffixSelect = {
 //</editor-fold>
 
 //<editor-fold desc="InputExtended. Кастомизация">
-const InputExCustomStory: StoryFn<typeof InputEx> = (props) => <InputExCustomTemplate {...cleanUpProps(props)} />;
+const InputExCustomStory: StoryFn<typeof InputEx> = (props) => <InputExCustomTemplate {...props} />;
 
 export const InputExCustom = {
   render: InputExCustomStory,
