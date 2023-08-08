@@ -2,12 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { NumberInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { NumberInputFieldPlaygroundTemplate } from './Templates';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
+import { NumberInputFieldPlaygroundTemplate } from './NumberInputFieldPlayground.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import NumberInputFieldPlaygroundRaw from './Templates/NumberInputFieldPlayground?raw';
+import NumberInputFieldPlaygroundRaw from './NumberInputFieldPlayground.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/NumberInputField',
@@ -115,7 +114,7 @@ export default {
 
 //<editor-fold desc="NumberInputField example">
 const NumberInputFieldStory: StoryFn<typeof NumberInputField> = (props) => (
-  <NumberInputFieldPlaygroundTemplate {...cleanUpProps(props)} />
+  <NumberInputFieldPlaygroundTemplate {...props} />
 );
 
 export const NumberInputFieldPlayground = {
