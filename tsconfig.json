@@ -27,6 +27,6 @@
       }
     ]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", ".storybook"],
   "exclude": ["dist", "**/node_modules/*", "**/__snapshots__/*"]
 }
