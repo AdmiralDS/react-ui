@@ -1,0 +1,6 @@
+.eslintrc.cjs
+scripts/**
+*.svg
+dist/**
+node_modules/**
+jest.config.cjs

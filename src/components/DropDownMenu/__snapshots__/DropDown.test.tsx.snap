@@ -1,0 +1,1361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropDown should render component 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c7.c7 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c7.c7 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c7:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c7.c7[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0 {
+  pointer-events: none;
+  position: fixed;
+  overflow: visible;
+  z-index: 97;
+}
+
+.c3 {
+  pointer-events: initial;
+  margin: 8px 0;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  opacity: 0;
+  -webkit-transition-delay: 200ms;
+  transition-delay: 200ms;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+
+.c2 {
+  pointer-events: none;
+  height: 100%;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.c5 {
+  padding: unset;
+  margin: unset;
+}
+
+.c4 {
+  padding: 8px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 288px;
+  cursor: pointer;
+  outline: none;
+  margin: 8px 0;
+}
+
+<body>
+    <div />
+    <div
+      class="c0 c1"
+    >
+      <div
+        class="c2"
+      />
+      <div
+        class="c3 c4 dropdown-container"
+        style="opacity: 1;"
+      >
+        <ul
+          class="c5"
+        >
+          <li
+            class="c6 c7"
+            tabindex="0"
+            value="1"
+          >
+            Option
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DropDown should render group components 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c7.c7 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c7.c7 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c7:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c7.c7[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c8.c8 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c8.c8 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="2"] .c8.c8 {
+  background: #00000017;
+}
+
+.c8:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c8.c8[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c8.c8[data-disabled='true'].c8.c8[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c9.c9 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c9.c9 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="3"] .c9.c9 {
+  background: #00000017;
+}
+
+.c9:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c9.c9[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c9.c9[data-disabled='true'].c9.c9[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c10.c10 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c10.c10 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="4"] .c10.c10 {
+  background: #00000017;
+}
+
+.c10:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c10.c10[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c10.c10[data-disabled='true'].c10.c10[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c11.c11 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c11.c11 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="5"] .c11.c11 {
+  background: #00000017;
+}
+
+.c11:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c11.c11[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c11.c11[data-disabled='true'].c11.c11[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c12.c12 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c12.c12 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="10"] .c12.c12 {
+  background: #00000017;
+}
+
+.c12:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c12.c12[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c12.c12[data-disabled='true'].c12.c12[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c13.c13 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c13.c13 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="11"] .c13.c13 {
+  background: #00000017;
+}
+
+.c13:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c13.c13[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c13.c13[data-disabled='true'].c13.c13[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c14.c14 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c14.c14 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="12"] .c14.c14 {
+  background: #00000017;
+}
+
+.c14:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c14.c14[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c14.c14[data-disabled='true'].c14.c14[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c15.c15 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c15.c15 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="13"] .c15.c15 {
+  background: #00000017;
+}
+
+.c15:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c15.c15[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c15.c15[data-disabled='true'].c15.c15[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0 {
+  pointer-events: none;
+  position: fixed;
+  overflow: visible;
+  z-index: 97;
+}
+
+.c3 {
+  pointer-events: initial;
+  margin: 8px 0;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  opacity: 0;
+  -webkit-transition-delay: 200ms;
+  transition-delay: 200ms;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+
+.c2 {
+  pointer-events: none;
+  height: 100%;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.c5 {
+  padding: unset;
+  margin: unset;
+}
+
+.c4 {
+  padding: 8px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 288px;
+  cursor: pointer;
+  outline: none;
+  margin: 8px 0;
+}
+
+<body>
+    <div>
+      ,
+    </div>
+    <div
+      class="c0 c1"
+    >
+      <div
+        class="c2"
+      />
+      <div
+        class="c3 c4 dropdown-container"
+        style="opacity: 1;"
+        tabindex="-1"
+      >
+        <ul
+          class="c5"
+        >
+          <li
+            class="c6 c7"
+            data-disabled="true"
+          >
+            Категория 1
+          </li>
+          <li
+            class="c6 c8"
+            id="2"
+            tabindex="0"
+          >
+            Номер Карты /****45
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c9"
+            id="3"
+            tabindex="0"
+          >
+            Номер Карты /****75
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c10"
+            id="4"
+            tabindex="0"
+          >
+            Номер Карты /****22
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c11"
+            id="5"
+            tabindex="0"
+          >
+            Номер Карты /****33
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c7"
+            data-disabled="true"
+          >
+            Категория 2
+          </li>
+          <li
+            class="c6 c12"
+            id="10"
+            tabindex="0"
+          >
+            Номер Карты /****21
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c13"
+            id="11"
+            tabindex="0"
+          >
+            Номер Карты /****35
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c14"
+            id="12"
+            tabindex="0"
+          >
+            Номер Карты /****39
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+          <li
+            class="c6 c15"
+            id="13"
+            tabindex="0"
+          >
+            Номер Карты /****41
+             
+            <div
+              height="24"
+              width="24"
+            />
+            <div>
+              Дополнительный текст
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    ,
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`DropDown should render small components 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-flex-flow: wrap;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  position: relative;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 6px 12px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c7.c7 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c7.c7 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c7:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c7.c7[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c0 {
+  pointer-events: none;
+  position: fixed;
+  overflow: visible;
+  z-index: 97;
+}
+
+.c3 {
+  pointer-events: initial;
+  margin: 8px 0;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  opacity: 0;
+  -webkit-transition-delay: 200ms;
+  transition-delay: 200ms;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+
+.c2 {
+  pointer-events: none;
+  height: 100%;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.c5 {
+  padding: unset;
+  margin: unset;
+}
+
+.c4 {
+  padding: 8px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 192px;
+  cursor: pointer;
+  outline: none;
+  margin: 8px 0;
+}
+
+<body>
+    <div />
+    <div
+      class="c0 c1"
+    >
+      <div
+        class="c2"
+      />
+      <div
+        class="c3 c4 dropdown-container"
+        style="opacity: 1;"
+      >
+        <ul
+          class="c5"
+        >
+          <li
+            class="c6 c7"
+            tabindex="0"
+          >
+            Option
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>,
+  "container": <div />,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

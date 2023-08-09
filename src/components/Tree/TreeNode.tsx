@@ -1,0 +1,220 @@
+import type { HTMLAttributes } from 'react';
+import React, { useRef, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { typography } from '#src/components/Typography';
+import { Checkbox } from '#src/components/Checkbox';
+import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import { IconPlacement } from '#src/components/IconPlacement';
+
+export interface TreeNodeRenderOptionProps {
+  /** Размер компонента */
+  dimension?: Dimension;
+  /** Активная секция Tree */
+  selected?: boolean;
+  /** Акцентная секция Tree */
+  hovered?: boolean;
+  /** Признак отображения checkbox-а */
+  checkboxVisible?: boolean;
+  /** Отключение секции */
+  disabled?: boolean;
+  /** Значение checkbox-а */
+  checked?: boolean;
+  /** Неопределенное состояние checkbox-а */
+  indeterminate?: boolean;
+  /** Уровень дерева item-а */
+  level?: number;
+  /** Отступ item-а */
+  indent?: number;
+  /** Наличие дочерних элемнтов у item-а */
+  hasChildren?: boolean;
+  /** Признак развернутого состояния item-а */
+  expanded?: boolean;
+  /** Обработчик клика мыши на item */
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+
+  /** Обработчик наведения мыши на item */
+  onHover?: () => void;
+  /** обработчик изменения состояния открытости узла */
+  onToggleExpand?: () => void;
+}
+
+export interface TreeItemProps {
+  id: string;
+  render: (options: TreeNodeRenderOptionProps) => React.ReactNode;
+  disabled?: boolean;
+  checked?: boolean;
+  children?: Array<TreeItemProps>;
+  expanded?: boolean;
+}
+
+const ICON_SIZE_M = 24;
+const ICON_SIZE_S = 20;
+
+export type Dimension = 'm' | 's';
+
+export interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  label?: React.ReactNode;
+  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  onChange?: (value: boolean) => void;
+}
+
+export interface TreeNodeProps extends NodeProps, TreeNodeRenderOptionProps {}
+
+const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: Dimension }>`
+  transition: all 0.3s;
+  & path {
+    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  }
+  width: 100%;
+  height: 100%;
+  transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+`;
+
+const StyledIconPlacement = styled(IconPlacement)`
+  flex-shrink: 0;
+  margin: 0 16px 0 0;
+`;
+
+export const backgroundColor = css<{ selected?: boolean; hovered?: boolean }>`
+  background: ${({ theme, selected, hovered }) =>
+    hovered
+      ? theme.color['Opacity/Hover']
+      : selected
+      ? theme.color['Opacity/Focus']
+      : theme.color['Special/Elevated BG']};
+`;
+
+const RowWrapper = styled.div<{
+  dimension?: Dimension;
+  indent?: number;
+  selected?: boolean;
+  hovered?: boolean;
+  disabled?: boolean;
+}>`
+  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  min-height: ${({ dimension }) => (dimension === 'm' ? '40px' : '32px')};
+  ${backgroundColor};
+  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
+  padding: ${(p) =>
+    p.dimension === 'm'
+      ? `8px 16px 8px ${16 + (p.indent || 0) * 40}px`
+      : `6px 16px 6px ${16 + (p.indent || 0) * 36}px`};
+`;
+
+const IconWrapper = styled.div<{ dimension?: Dimension }>`
+  margin-right: 8px;
+  flex-shrink: 0;
+  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  > svg {
+    width: 100%;
+    height: 100%;
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+`;
+
+const StyledCheckbox = styled(Checkbox)`
+  margin: 2px 10px 2px 2px;
+  flex-shrink: 0;
+`;
+
+const TitleContent = styled.div`
+  padding-top: 2px;
+`;
+
+export const TreeNode = ({
+  dimension = 'm',
+  label,
+  icon,
+  checkboxVisible,
+  hasChildren,
+  selected,
+  hovered,
+  disabled,
+  expanded,
+  checked,
+  indeterminate,
+  indent,
+  onChange,
+  onHover,
+  onClick,
+  onToggleExpand,
+  children,
+  className,
+  style,
+  ...props
+}: TreeNodeProps) => {
+  const Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null = icon || null;
+  const [mouseOnChevron, setMouseOnChevron] = useState<boolean>(false);
+  const chevronRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleMouseMove = () => {
+    onHover?.();
+  };
+
+  const handleChevronMouseMove = () => {
+    if (!mouseOnChevron && hasChildren) setMouseOnChevron(true);
+  };
+
+  const handleChevronMouseLeave = () => {
+    if (hasChildren) setMouseOnChevron(false);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === chevronRef.current) return;
+    if (!disabled) onClick?.(e);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.checked);
+  };
+
+  return (
+    <RowWrapper
+      className={className}
+      style={style}
+      dimension={dimension}
+      indent={indent}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+      selected={selected}
+      hovered={hovered}
+      disabled={disabled}
+    >
+      {hasChildren && (
+        <StyledIconPlacement
+          ref={chevronRef}
+          dimension={dimension === 'm' ? 'lBig' : 'mBig'}
+          highlightFocus={false}
+          onClick={onToggleExpand}
+          onMouseMove={handleChevronMouseMove}
+          onMouseLeave={handleChevronMouseLeave}
+        >
+          <Chevron $isOpened={expanded} dimension={dimension} aria-hidden />
+        </StyledIconPlacement>
+      )}
+      {checkboxVisible && (
+        <StyledCheckbox
+          {...props}
+          hovered={!mouseOnChevron && hovered}
+          dimension={dimension}
+          disabled={disabled}
+          checked={checked}
+          indeterminate={indeterminate}
+          onChange={handleCheckboxChange}
+        />
+      )}
+      {Icon && (
+        <IconWrapper dimension={dimension}>
+          <Icon />
+        </IconWrapper>
+      )}
+      {label && <TitleContent>{label}</TitleContent>}
+      {children}
+    </RowWrapper>
+  );
+};
