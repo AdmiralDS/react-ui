@@ -11,10 +11,17 @@ import { DropdownContext } from '../DropdownProvider';
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
-  /** Ref на элемент, относительно которого позиционируется тултип */
-  // targetRef: React.RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется портал */
-  targetElement: Element | null;
+  // TODO: Удалить в 8.x.x версии, сделать targetElement обязательным параметром
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement
+   *
+   * Ref на элемент, относительно которого позиционируется портал
+   **/
+  targetRef?: React.RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется портал.
+   * В качестве значения можно передать конкретный элемент или значение ref.current */
+  targetElement?: Element | null;
   /**
    * @deprecated Используйте rootRef пропсу на DropdownProvider
    * Контейнер, в котором будет отрисован тултип через React.createPortal.
@@ -28,7 +35,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 export const TOOLTIP_DELAY = 1500;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
-  ({ renderContent, targetElement, tooltipPosition, ...props }, ref) => {
+  ({ renderContent, targetRef, targetElement, tooltipPosition, ...props }, ref) => {
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
     const tooltipHeight = React.useRef(0);
     const { rootRef } = React.useContext(DropdownContext);
@@ -41,9 +48,10 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     const [recalculation, startRecalculation] = React.useState({});
 
     const manageTooltip = (scrollbarSize: number) => {
-      if (targetElement && tooltipElementRef.current) {
+      const target = targetElement ?? targetRef?.current;
+      if (target && tooltipElementRef.current) {
         const direction: InternalTooltipPositionType = getTooltipDirection(
-          targetElement as HTMLElement,
+          target as HTMLElement,
           tooltipElementRef.current,
           scrollbarSize,
           tooltipPosition,
@@ -95,7 +103,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
     React.useEffect(() => {
       const scrollbarSize = getScrollbarSize();
       manageTooltip(scrollbarSize);
-    }, [renderContent(), targetElement, tooltipPosition, recalculation]);
+    }, [renderContent(), targetRef, targetElement, tooltipPosition, recalculation]);
 
     // During fonts loading tooltip size can be changed and tooltip direction should be recalculated
     React.useLayoutEffect(() => {
@@ -127,8 +135,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
 
     return emptyContent ? null : (
       <Portal
-        // targetRef={targetRef}
-        targetElement={targetElement}
+        targetElement={targetElement ?? targetRef?.current}
         rootRef={rootRef}
         flexDirection={portalFlexDirection}
         fullContainerWidth={portalFullWidth}
