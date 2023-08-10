@@ -291,7 +291,9 @@ export const FileInfo = ({
               ))}
             <Content fileDimension={fileDimension}>
               <Title ref={titleRef}>{fileName}</Title>
-              {tooltipVisible && titleOverflow && <Tooltip targetRef={titleRef} renderContent={() => `${fileName}`} />}
+              {tooltipVisible && titleOverflow && (
+                <Tooltip targetElement={titleRef.current} renderContent={() => `${fileName}`} />
+              )}
               <Size fileDimension={fileDimension} status={status}>
                 {fileInfo}
               </Size>

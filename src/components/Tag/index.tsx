@@ -129,7 +129,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
         </Wrapper>
-        {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => children} />}
+        {tooltipVisible && overflow && <Tooltip targetElement={wrapperRef.current} renderContent={() => children} />}
       </>
     );
   },

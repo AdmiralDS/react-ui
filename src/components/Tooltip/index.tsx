@@ -11,7 +11,7 @@ import { DropdownContext } from '../DropdownProvider';
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
-  // TODO: Удалить в 8.x.x версии, сделать targetElement обязательным параметром
+  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Будет удалено в 8.x.x версии.
    * Взамен используйте параметр targetElement

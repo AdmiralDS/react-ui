@@ -49,7 +49,7 @@ export const DisplayValue = ({
   return (
     <>
       <StringValueWrapper ref={valueRef}>{visibleValue}</StringValueWrapper>
-      {showTooltip && <Tooltip renderContent={() => visibleValue} targetRef={targetRef} />}
+      {showTooltip && <Tooltip renderContent={() => visibleValue} targetElement={targetRef.current} />}
     </>
   );
 };

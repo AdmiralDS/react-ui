@@ -49,7 +49,7 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
         </Content>
       </ContentWrapper>
       {tooltipVisible && overflow && (
-        <Tooltip targetRef={wrapperRef} renderContent={() => children} {...tooltipProps} />
+        <Tooltip targetElement={wrapperRef.current} renderContent={() => children} {...tooltipProps} />
       )}
     </>
   );

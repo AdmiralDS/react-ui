@@ -428,7 +428,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
           {children}
         </Container>
         {showTooltip && tooltipVisible && overflowActive && (
-          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={innerContainerRef} />
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetElement={innerContainerRef.current} />
         )}
       </>
     );

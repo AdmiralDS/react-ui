@@ -47,7 +47,6 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
       </Button>
       {visible && (
         <Tooltip
-          // targetRef={btnRef}
           targetElement={btnRef.current}
           renderContent={() => 'Delete file'}
           ref={tooltipRef}

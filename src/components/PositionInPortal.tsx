@@ -11,7 +11,7 @@ export const PositionedPortalContainer = styled.div`
 `;
 
 export interface PositionInPortalProps {
-  // TODO: Удалить в 8.x.x версии, сделать targetElement обязательным параметром
+  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Будет удалено в 8.x.x версии.
    * Взамен используйте параметр targetElement
