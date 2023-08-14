@@ -95,7 +95,7 @@ export const HeaderCellComponent = ({
           )}
         </HeaderCellTitle>
         <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
-        {renderFilter && <Filter column={column} dimension={dimension} targetRef={cellRef} />}
+        {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellRef.current} />}
       </HeaderCellContent>
       {index < columnsAmount - 1 && (
         <RowWidthResizer

@@ -238,7 +238,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
           <SuggestDropdownContainer
-            targetRef={portalTargetRef || inputRef}
+            targetElement={portalTargetRef?.current || inputRef.current}
             alignSelf={alignDropdown}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}

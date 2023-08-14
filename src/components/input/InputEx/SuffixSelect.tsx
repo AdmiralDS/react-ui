@@ -153,7 +153,7 @@ export const SuffixSelect = <T extends ReactNode>({
         <StyledDropdownContainer
           role="listbox"
           alignSelf={dropAlign}
-          targetRef={alignContainerRef}
+          targetElement={alignContainerRef.current}
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
           className={dropContainerClassName}

@@ -188,7 +188,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
         </IconButton>
         {opened && (
           <StyledDropdownContainer
-            targetRef={buttonRef}
+            targetElement={buttonRef.current}
             alignSelf={'flex-end'}
             onClickOutside={handleClickOutside}
             dropContainerCssMixin={dropContainerCssMixin}

@@ -663,7 +663,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <DropdownContainer
             ref={dropDownRef}
             tabIndex={-1}
-            targetRef={portalTargetRef || containerRef}
+            targetElement={portalTargetRef?.current || containerRef.current}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}

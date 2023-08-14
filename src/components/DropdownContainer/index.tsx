@@ -51,8 +51,16 @@ export interface DropContainerStyles {
 }
 
 export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  targetRef: React.RefObject<HTMLElement>;
-  targetElement?: Element;
+  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref на элемент, относительно которого позиционируется выпадающее меню
+   **/
+  targetRef?: React.RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню */
+  targetElement?: Element | null;
 
   /**
    *  Позволяет обработать событие при клике вне компонента
@@ -90,7 +98,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
-      const targetNode = targetRef.current;
+      const targetNode = targetElement ?? targetRef?.current;
       if (node && targetNode) {
         const rect = node.getBoundingClientRect();
         const targetRect = targetNode.getBoundingClientRect();
@@ -133,7 +141,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
           }
         }
       }
-    }, [displayUpward]);
+    }, [displayUpward, targetRef, targetElement]);
 
     useInterval(checkDropdownPosition, 100);
 
@@ -154,7 +162,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     return (
       <>
-        <Portal targetRef={targetRef} targetElement={targetElement} reverse={displayUpward} rootRef={rootRef}>
+        <Portal targetElement={targetElement ?? targetRef?.current} reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
           <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
         </Portal>

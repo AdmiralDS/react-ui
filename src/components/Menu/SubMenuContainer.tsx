@@ -64,7 +64,6 @@ export const SubMenuContainer = ({
   const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
-  const targetRef: any = target || anchorElementRef;
   const targetElement: any = target?.current || anchorElementRef.current;
 
   const [recalculation, startRecalculation] = React.useState<any>(null);
@@ -134,7 +133,12 @@ export const SubMenuContainer = ({
 
   return (
     <AnchorWrapper ref={anchorElementRef}>
-      <Portal targetRef={targetRef} rootRef={rootRef} flexDirection={portalFlexDirection} fullContainerWidth={false}>
+      <Portal
+        targetElement={targetElement}
+        rootRef={rootRef}
+        flexDirection={portalFlexDirection}
+        fullContainerWidth={false}
+      >
         <FakeTarget />
         <SubMenuWrapper ref={wrapperRef} {...props}>
           <InnerContainer>{children}</InnerContainer>

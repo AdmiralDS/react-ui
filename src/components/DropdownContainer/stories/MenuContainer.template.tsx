@@ -78,7 +78,7 @@ export const MenuContainerTemplate = (props: DropdownContainerProps) => {
   const [active, setActive] = React.useState<string | undefined>(undefined);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
-  const { targetRef, ...other } = props;
+  const { targetElement, ...other } = props;
 
   const handleSelectItem = (value?: string) => {
     setSelected(value);
@@ -101,7 +101,7 @@ export const MenuContainerTemplate = (props: DropdownContainerProps) => {
         {open && (
           <DropdownContainer
             alignSelf="flex-start"
-            targetRef={targetRef || buttonRef}
+            targetElement={targetElement || buttonRef.current}
             onClickOutside={clickOutside}
             {...other}
             dropContainerCssMixin={containerContrastBorder}

@@ -23,7 +23,7 @@ export const SimpleContainerTemplate = (props: DropdownContainerProps & { themeB
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
-  const { targetRef, ...other } = props;
+  const { targetElement, ...other } = props;
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
@@ -46,7 +46,7 @@ export const SimpleContainerTemplate = (props: DropdownContainerProps & { themeB
         {open && (
           <DropdownContainer
             alignSelf="flex-end"
-            targetRef={targetRef || buttonRef}
+            targetElement={targetElement || buttonRef.current}
             onClickOutside={clickOutside}
             className="dropContainerClass"
             {...other}

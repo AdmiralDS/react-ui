@@ -309,7 +309,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         >
           {isOpened && !disabled && !skeleton && (
             <PhoneInputDropContainer
-              targetRef={inputRef}
+              targetElement={inputRef.current}
               onClickOutside={clickOutside}
               alignSelf="stretch"
               dropContainerCssMixin={dropContainerCssMixin}
