@@ -1,3 +1,5 @@
+import type { MenuModelItemProps } from '@admiral-ds/react-ui';
+
 export type RenderDirection = 'left' | 'right';
 export type SubMenuAlign = 'left' | 'leftBottom' | 'right' | 'rightBottom';
 export type SubMenuPosition = {
@@ -42,3 +44,24 @@ export function getPosition(
     return { position: side, bottomOffset: offset };
   }
 }
+
+export const findModelItem = (items: Array<MenuModelItemProps>, id: string): MenuModelItemProps | undefined => {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+
+    if (item.id === id) return item;
+    if (item.subItems && item.subItems.length > 0) {
+      return findModelItem(item.subItems, id);
+    }
+  }
+};
+
+export const hasSelectedChildren = (item: MenuModelItemProps, selected: Array<string>): boolean => {
+  return item.subItems
+    ? item.subItems.some((item) => selected.includes(item.id) || hasSelectedChildren(item, selected))
+    : false;
+};
+
+export const valueToArray = (value: string | string[]) => {
+  return Array.isArray(value) ? [...value] : [value];
+};

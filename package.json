@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "5.4.0",
+  "version": "6.0.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -34,12 +34,11 @@
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
-    "build-storybook": "npm run generate-svg-icon-exports && storybook build",
-    "preview-storybook": "npx http-server ./storybook-static",
+    "build-storybook": "npm run generate-svg-icon-exports && storybook build --disable-telemetry --output-dir docs",
+    "preview-storybook": "npx http-server ./docs",
     "release": "standard-version",
     "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
-    "prepublishOnly": "npm run build",
-    "deploy-storybook": "storybook-to-ghpages"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@admiral-ds/fonts": "^2.0.0",
@@ -71,7 +70,6 @@
     "@storybook/blocks": "^7.0.8",
     "@storybook/react": "^7.0.8",
     "@storybook/react-webpack5": "^7.0.8",
-    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/testing-library": "^0.2.0",
     "@styled/typescript-styled-plugin": "^1.0.0",
     "@svgr/rollup": "^8.0.1",

@@ -10,6 +10,7 @@ import type { MenuDimensions } from '#src/components/Menu/types';
 import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
 import { useDropdown } from '#src/components/DropdownProvider';
 import type { RenderDirection } from '#src/components/Menu/utils';
+import { findModelItem, hasSelectedChildren, valueToArray } from '#src/components/Menu/utils';
 
 export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -85,7 +86,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   active?: string;
   /** выбранная секция Menu */
   selected?: string | Array<string>;
-  /** выбранная по умолчаниию секция Menu */
+  /** выбранная по умолчанию секция Menu */
   defaultSelected?: string | Array<string>;
   /** Обработчик активации (hover) item в меню */
   onActivateItem?: (id?: string) => void;
@@ -214,7 +215,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
     const [selectedState, setSelectedState] = React.useState<Array<string>>(
-      defaultSelected ? [...defaultSelected] : [],
+      defaultSelected ? valueToArray(defaultSelected) : [],
     );
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
@@ -223,24 +224,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const activeItemRef = React.useRef<HTMLDivElement | null>(null);
     const [submenuVisible, setSubmenuVisible] = React.useState<boolean>(false);
 
-    const innerSelected = disableSelectedOptionHighlight ? [] : selected === undefined ? selectedState : selected;
+    const innerSelected = disableSelectedOptionHighlight
+      ? []
+      : selected === undefined
+      ? selectedState
+      : valueToArray(selected);
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
 
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
-
-    const findModelItem = (items: Array<MenuModelItemProps>, id: string): MenuModelItemProps | undefined => {
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-
-        if (item.id === id) return item;
-        if (item.subItems && item.subItems.length > 0) {
-          return findModelItem(item.subItems, id);
-        }
-      }
-    };
 
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
@@ -262,8 +256,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         } else {
           if (selectedIndex === -1) {
             setSelectedState([id]);
-            onSelectItem?.(id);
           }
+          onSelectItem?.(id);
         }
       }
     };
@@ -333,18 +327,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       activateMenu?.(wrapperRef);
     };
 
-    const hasSelectedChildren = (item: MenuModelItemProps): boolean => {
-      return item.subItems
-        ? item.subItems.some((item) => innerSelected.includes(item.id) || hasSelectedChildren(item))
-        : false;
-    };
-
     const renderChildren = () => {
       return model.map((item, index) => {
         const { id, subItems, ...itemProps } = item;
         const hasSubmenu = !!subItems && subItems.length > 0;
         const hovered = activeId === id;
-        const selected = innerSelected.includes(id) || hasSelectedChildren(item);
+        const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
         const renderProps = {
           hovered,
           selected,
@@ -386,7 +374,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           model={model}
           rowCount={rowCount}
           activeId={activeId}
-          // selectedId={innerSelected}
+          selected={innerSelected}
           onActivateItem={activateItem}
           onSelectItem={handleClickItem}
           preventFocusSteal={preventFocusSteal}

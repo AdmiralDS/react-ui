@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/AdmiralDS/react-ui/compare/v5.4.0...v6.0.0) (2023-08-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **NumberInput:** значение инпута, выходящее за пределы диапазона minValue-maxValue, теперь не подлежит автокоррекции при потере полем фокуса, необходимая валидация и корректировка значения должны выполняться на стороне пользователя
+
+### Features
+
+* **EditMode:** добавлен проп onCancel вместо onClose ([35507ed](https://github.com/AdmiralDS/react-ui/commit/35507edb4dbe94c9490ceb9048f9bda5b8c0c650))
+* **EditMode:** обновлен API ([5ae2b1d](https://github.com/AdmiralDS/react-ui/commit/5ae2b1d55175f2861a7d1800ed4c8977723e9b58))
+* **Modal:** добавлена статусная иконка ([461cd57](https://github.com/AdmiralDS/react-ui/commit/461cd57d01a3b27f90ad232ba22b63073e80acdc))
+* **Table:** добавлена возможность создания кастомных статусов строк с помощью параметра строки status и параметра таблицы rowBackgroundColorByStatusMap, параметры строки error и success помечены как deprecated ([5bcf28e](https://github.com/AdmiralDS/react-ui/commit/5bcf28e74e7f1cb87075f8ea252d997742ac3579))
+
+
+### Bug Fixes
+
+* **Calendar:** set pointer cursor for Month and Year panel buttons ([e3a0e67](https://github.com/AdmiralDS/react-ui/commit/e3a0e676d6785d0ee6ec21471e3718ae254778de))
+* **DateInput:** remove debug console logging ([e0d0578](https://github.com/AdmiralDS/react-ui/commit/e0d0578bbb332796c17a079ee2ff15eaf874bcd6))
+* **DateInput:** прокинуты недостающие props ([ee1c9aa](https://github.com/AdmiralDS/react-ui/commit/ee1c9aa8d9066b8ed1407e5a9f545fa69f2ff5ef))
+* **EditMode:** исправлен баг при начальном пустом значении ([30ef11b](https://github.com/AdmiralDS/react-ui/commit/30ef11bec00baca3b4de0f904a5c34b87c0b413a))
+* **InputEx:** исправлено отображение prefixValue/suffixValue ([a13bb20](https://github.com/AdmiralDS/react-ui/commit/a13bb20782eac9e77e457a934d67097b5eb6d7d3))
+* **InputEx:** размер компонента также влияет на размер выпадающего меню ([c9e1ba0](https://github.com/AdmiralDS/react-ui/commit/c9e1ba091818bcc707fa04249ba4ef1b0d13ff05))
+* **Menu:** Исправлена ошибка вызова onSelect при повторном клике на item ([d73ab8d](https://github.com/AdmiralDS/react-ui/commit/d73ab8d2cd0e43131d9a40628958f464c9fee31c)), closes [#1045](https://github.com/AdmiralDS/react-ui/issues/1045) [#1074](https://github.com/AdmiralDS/react-ui/issues/1074)
+* **MultiButton:** fix rerender while pressing button ([a685ddf](https://github.com/AdmiralDS/react-ui/commit/a685ddfb38ac754671b0f9a6b57784f1afea52a1))
+* **MultiButton:** remove unneeded interface MultiButtonItem ([aa2507b](https://github.com/AdmiralDS/react-ui/commit/aa2507b2fd6f034af2f3e0495d2e97ac6cdc39aa))
+* **NumberInput:** исправлен баг в работе контролируемого инпута в react 18 ([7272d43](https://github.com/AdmiralDS/react-ui/commit/7272d433619528876b83feb5cedc89cb486f11a0))
+* **PhoneNumberInput:** Убрана иконка очистки выбранного значения, добавлена дефолтная иконка при отсутствии совпадений с кодами стран ([91ab4e1](https://github.com/AdmiralDS/react-ui/commit/91ab4e1acb81bdc820fde468a9557451f474f517)), closes [#971](https://github.com/AdmiralDS/react-ui/issues/971)
+* **rollup:** fix alias resolve in generated typings ([696ad8b](https://github.com/AdmiralDS/react-ui/commit/696ad8b5cce9f377e6fe987fb97782c8d3a840b7))
+* **Select:** Исправлена ошибка изменения порядка options при изменении списка options ([f4e80f4](https://github.com/AdmiralDS/react-ui/commit/f4e80f444fe6439f8104c182242c40ebfa3ae30d)), closes [#873](https://github.com/AdmiralDS/react-ui/issues/873)
+* **Select:** Исправлена ошибка отображения иконки очистки выбранного значения в режиме mode='select' multiple displayClearIcon ([1b6f826](https://github.com/AdmiralDS/react-ui/commit/1b6f826d722ef06342a4cde0ee5be340c8e0325e)), closes [#1002](https://github.com/AdmiralDS/react-ui/issues/1002)
+* **Select:** Исправлена ошибка удаления выбранных значений в режиме search multiple при помощи backspace ([586d7da](https://github.com/AdmiralDS/react-ui/commit/586d7da1824c52b168ba403df3b47b6544120b29)), closes [#984](https://github.com/AdmiralDS/react-ui/issues/984)
+* **Table:** исправлен warning - can`t perform a React state update on unmounted component, связанный с работой observeRect утилиты ([dcb7aa1](https://github.com/AdmiralDS/react-ui/commit/dcb7aa11eb5aba5922857e7cb86943d5f88c3120))
+* **Table:** исправлен баг с высотой подложки для OverflowMenu и для одиночных действий над строкой ([885a354](https://github.com/AdmiralDS/react-ui/commit/885a354346187ba8d5a5d553f40bc69311a3d1fe))
+* **Table:** исправлен баг с одновременным ресайзингом колонки и её перетаскиванием (drag&drop) ([cafafad](https://github.com/AdmiralDS/react-ui/commit/cafafad73084cae154ef173abdbb1d079f1399dc))
+* **Table:** исправлен баг со срабатыванием колбека onRowClick при клике на стрелку в строке с названием группы ([2200e71](https://github.com/AdmiralDS/react-ui/commit/2200e71baa0ee1546447f654da431223dd5b79ad))
+* **TextArea:** при использовании maxRows с autoHeight должен появляться скролл текста ([4acd6e9](https://github.com/AdmiralDS/react-ui/commit/4acd6e9339eb20855ced23e4ae0c508cd6e58fdd))
+* **Tree:** Изменены отступы уровней дерева в соответствии с дизайном. ([c538049](https://github.com/AdmiralDS/react-ui/commit/c5380490e6c9bf5fb754083d3e404fe0eeb11329)), closes [#961](https://github.com/AdmiralDS/react-ui/issues/961)
+* **Tree:** Исправлена ошибка обработки узлов с пустым массивом дочерних элементов ([623f602](https://github.com/AdmiralDS/react-ui/commit/623f6020b9c81c88ae8122ef15c4657e647b54ed)), closes [#1032](https://github.com/AdmiralDS/react-ui/issues/1032)
+* **Tree:** Убран рудиментарный атрибут width ([6d94c8a](https://github.com/AdmiralDS/react-ui/commit/6d94c8a3010aff29638f608f5d7897f1c28da9ec)), closes [#1024](https://github.com/AdmiralDS/react-ui/issues/1024)
+
+
+* **NumberInput:** значение инпута, выходящее за пределы диапазона minValue-maxValue, теперь не подлежит автокоррекции при потере полем фокуса, необходимая валидация и корректировка значения должны выполняться на стороне пользователя ([73e258f](https://github.com/AdmiralDS/react-ui/commit/73e258f204ccf7e4123dc1e3c8e99e85aa34af71))
+
 ## [5.4.0](https://github.com/AdmiralDS/react-ui/compare/v5.3.0...v5.4.0) (2023-07-05)
 
 
