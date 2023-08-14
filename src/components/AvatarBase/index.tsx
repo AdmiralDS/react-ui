@@ -144,7 +144,7 @@ type Appearance = 'white' | 'light' | 'grey' | 'dark';
 export type AvatarAppearance = 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4' | Appearance;
 type Status = 'success' | 'danger' | 'warn' | 'inactive';
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface AvatarBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
   /** Имя пользователя, будет использовано внутри тултипа и для генерации инициалов (в случае если не задан параметр userInitials) */
   userName: string;
   /** Инициалы пользователя. По умолчанию вычисляются на основании userName - берутся первые буквы первых
@@ -175,14 +175,14 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   showActivityRing?: boolean;
 }
 
-export interface AvatarInternalProps {
+export interface AvatarBaseInternalProps {
   /** Для внутреннего использования! Отображение аватара в составе группы (когда правый край аватара усечен) */
   group?: boolean;
   /** Для внутреннего использования! Используется ли аватар в качестве меню. Если да - то userName выводится без изменений */
   isMenuAvatar?: boolean;
 }
 
-export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarInternalProps>(
+export const AvatarBase = React.forwardRef<HTMLButtonElement, AvatarBaseProps & AvatarBaseInternalProps>(
   (
     {
       userName,
@@ -199,7 +199,7 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
       withActivityRing = false,
       showActivityRing = false,
       ...props
-    }: AvatarProps & AvatarInternalProps,
+    }: AvatarBaseProps & AvatarBaseInternalProps,
     ref,
   ) => {
     const loaded = useLoaded(href);
@@ -246,6 +246,8 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
           appearance={appearance}
           group={group}
           svgMaskId={svgMaskId}
+          withActivityRing={withActivityRing}
+          showActivityRing={showActivityRing}
         />
         {hasAbbr && (
           <Text dimension={dimension} appearance={appearance}>
@@ -271,4 +273,4 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
   },
 );
 
-Avatar.displayName = 'Avatar';
+AvatarBase.displayName = 'Avatar';

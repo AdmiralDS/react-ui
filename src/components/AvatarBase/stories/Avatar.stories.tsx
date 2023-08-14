@@ -2,14 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Avatar } from '@admiral-ds/react-ui';
-
-import { SingleAvatarTemplate } from './SingleAvatar.template';
-import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
+import { AvatarBase } from '#src/components/AvatarBase';
+import { AvatarActivityTemplate } from './AvatarActivity.template';
 
 // Imports of text sources
-import SingleAvatarRaw from './SingleAvatar.template?raw';
-import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
+import AvatarActivityRaw from './AvatarActivity.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,9 +15,9 @@ const Desc = styled.div`
 `;
 
 export default {
-  title: 'Admiral-2.1/Avatar',
+  title: 'Admiral-2.1/AvatarBase',
   decorators: undefined,
-  component: Avatar,
+  component: AvatarBase,
   parameters: {
     docs: {
       source: {
@@ -79,52 +76,23 @@ export default {
       control: false,
     },
   },
-} as Meta<typeof Avatar>;
+} as Meta<typeof AvatarBase>;
 
-//<editor-fold desc="Avatar Playground">
-const AvatarPlaygroundStory: StoryFn<typeof Avatar> = ({ userName, ...props }) => (
-  <AvatarPlaygroundTemplate userName={userName} {...props} />
-);
+//<editor-fold desc="Avatar Base">
+const AvatarActivityStory: StoryFn<typeof AvatarBase> = (props) => <AvatarActivityTemplate {...props} />;
 
-export const AvatarPlayground = {
-  render: AvatarPlaygroundStory,
+export const AvatarActivity = {
+  render: AvatarActivityStory,
 
   parameters: {
     docs: {
       source: {
-        code: AvatarPlaygroundRaw,
+        code: AvatarActivityRaw,
       },
     },
   },
 
-  name: 'Playground',
+  name: 'Activity',
 };
 
-//</editor-fold>
-
-//<editor-fold desc="Single Avatar">
-const SingleAvatarStory: StoryFn<typeof Avatar> = () => <SingleAvatarTemplate />;
-
-export const SingleAvatar = {
-  render: SingleAvatarStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: SingleAvatarRaw,
-      },
-      description: {
-        story: `Компонент имеет разные цветовые схемы, которые можно выбрать в панели вариантов компонента Property.
-        Присутствует пять размеров компонента. Допускается использование одной или двух букв для обозначения 
-        пользователя (в размере XS только одна буква).\n\nМожет использоваться как в варианте с буквами 
-        (инициалами пользователя), так и с иконкой User (либо другой подходящей по смыслу). 
-        Компоненту и символам в нем можно присваивать любые цвета из палитры.\n\nКомпонент может быть кликабельным, 
-        например, вести в личный кабинет или показывать выпадающее меню с опциями пользователя.\n\nПри ховере над 
-        аватаром показывается Tooltip с именем пользователя.`,
-      },
-    },
-  },
-
-  name: 'Avatar',
-};
 //</editor-fold>

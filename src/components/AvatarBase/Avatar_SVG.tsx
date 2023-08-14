@@ -13,6 +13,16 @@ type AvatarSVGProps = {
   appearance?: AvatarProps['appearance'];
   group?: boolean;
   svgMaskId?: string;
+  withActivityRing?: boolean;
+  showActivityRing?: boolean;
+};
+
+const IMAGE_SIZE = {
+  xs: '24px',
+  s: '32px',
+  m: '40px',
+  l: '48px',
+  xl: '56px',
 };
 
 const VIEWBOX = {
@@ -23,6 +33,14 @@ const VIEWBOX = {
   xl: '0 0 56 56',
 };
 
+const ACTIVITY_VIEWBOX = {
+  xs: '0 0 32 32',
+  s: '0 0 40 40',
+  m: '0 0 48 48',
+  l: '0 0 56 56',
+  xl: '0 0 64 64',
+};
+
 const CIRCLE = {
   xs: '12',
   s: '16',
@@ -31,12 +49,28 @@ const CIRCLE = {
   xl: '28',
 };
 
+const ACTIVITY_CIRCLE = {
+  xs: '16',
+  s: '20',
+  m: '24',
+  l: '28',
+  xl: '32',
+};
+
 const ELLIPSE = {
   xs: { c: '21', r: '3', r2: '5' },
   s: { c: '27', r: '5', r2: '7' },
   m: { c: '34', r: '6', r2: '8' },
   l: { c: '41', r: '7', r2: '9' },
   xl: { c: '47', r: '9', r2: '11' },
+};
+
+const ACTIVITY_ELLIPSE = {
+  xs: { c: '25', r: '3', r2: '5' },
+  s: { c: '31', r: '5', r2: '7' },
+  m: { c: '38', r: '6', r2: '8' },
+  l: { c: '45', r: '7', r2: '9' },
+  xl: { c: '51', r: '9', r2: '11' },
 };
 
 export const AvatarSVG: React.FC<AvatarSVGProps> = ({
@@ -48,10 +82,15 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   appearance: appearanceProp,
   group = false,
   svgMaskId,
+  withActivityRing = false,
+  showActivityRing = false,
 }) => {
   const theme = useTheme() || LIGHT_THEME;
   const id = svgMaskId || uid();
   const useId = `url(#${id})`;
+  const circleCenter = withActivityRing ? ACTIVITY_CIRCLE[dimension] : CIRCLE[dimension];
+  const ellipseCenter = withActivityRing ? ACTIVITY_ELLIPSE[dimension].c : ELLIPSE[dimension].c;
+  const imageCoordinate = withActivityRing ? '4px' : '0';
 
   const getBackgroundColor = (appearance: AvatarProps['appearance']) => {
     switch (appearance) {
@@ -90,7 +129,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
 
   return (
     <svg
-      viewBox={VIEWBOX[dimension]}
+      viewBox={withActivityRing ? ACTIVITY_VIEWBOX[dimension] : VIEWBOX[dimension]}
       width={size}
       height={size}
       style={{ transform: 'rotate(.00001deg)' }} /* hack to force anti-aliasing in IE */
@@ -99,8 +138,8 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
         <mask id={id}>
           <circle
             id="outer"
-            cx={CIRCLE[dimension]}
-            cy={CIRCLE[dimension]}
+            cx={circleCenter}
+            cy={circleCenter}
             r={CIRCLE[dimension]}
             strokeWidth="0"
             stroke="white"
@@ -110,8 +149,8 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
             <ellipse
               id="inner"
               vectorEffect="non-scaling-stroke"
-              cx={ELLIPSE[dimension].c}
-              cy={ELLIPSE[dimension].c}
+              cx={ellipseCenter}
+              cy={ellipseCenter}
               rx={ELLIPSE[dimension].r2}
               ry={ELLIPSE[dimension].r2}
               fill="black"
@@ -130,13 +169,21 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
         </mask>
       </defs>
       {hasImage && (
-        <image width="100%" height="100%" preserveAspectRatio="xMidYMid slice" mask={useId} xlinkHref={href} />
+        <image
+          width={IMAGE_SIZE[dimension]}
+          height={IMAGE_SIZE[dimension]}
+          preserveAspectRatio="xMidYMid slice"
+          mask={useId}
+          xlinkHref={href}
+          x={imageCoordinate}
+          y={imageCoordinate}
+        />
       )}
       {!hasImage && (
         <circle
           id="outer"
-          cx={CIRCLE[dimension]}
-          cy={CIRCLE[dimension]}
+          cx={circleCenter}
+          cy={circleCenter}
           r={CIRCLE[dimension]}
           strokeWidth="0"
           stroke={backgroundColor}
@@ -148,8 +195,8 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
         <ellipse
           style={{ fill: getStatusColor(status), strokeWidth: 0, strokeOpacity: 0 }}
           vectorEffect="non-scaling-stroke"
-          cx={ELLIPSE[dimension].c}
-          cy={ELLIPSE[dimension].c}
+          cx={ellipseCenter}
+          cy={ellipseCenter}
           rx={ELLIPSE[dimension].r}
           ry={ELLIPSE[dimension].r}
         />
