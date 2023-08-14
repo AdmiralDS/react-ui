@@ -14,7 +14,7 @@ export interface PositionInPortalProps {
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement
+   * Взамен используйте параметр targetElement.
    *
    * Ref на элемент, относительно которого позиционируется портал
    **/

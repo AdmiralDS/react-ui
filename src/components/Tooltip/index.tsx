@@ -14,7 +14,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement
+   * Взамен используйте параметр targetElement.
    *
    * Ref на элемент, относительно которого позиционируется портал
    **/
@@ -23,7 +23,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
    * В качестве значения можно передать конкретный элемент или значение ref.current */
   targetElement?: Element | null;
   /**
-   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * @deprecated Используйте rootRef пропсу на DropdownProvider.
    * Контейнер, в котором будет отрисован тултип через React.createPortal.
    * По умолчанию тултип отрисовывается в document.body
    * */
