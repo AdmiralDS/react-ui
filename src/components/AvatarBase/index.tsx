@@ -169,6 +169,10 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   svgMaskId?: string;
   /** Отображение тултипа */
   showTooltip?: boolean;
+  /** Аватар с опцией activity ring */
+  withActivityRing?: boolean;
+  /** Отображение activity ring */
+  showActivityRing?: boolean;
 }
 
 export interface AvatarInternalProps {
@@ -192,6 +196,8 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
       showTooltip = true,
       isMenuAvatar = false,
       svgMaskId,
+      withActivityRing = false,
+      showActivityRing = false,
       ...props
     }: AvatarProps & AvatarInternalProps,
     ref,
@@ -210,26 +216,30 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
     const initials = userInitials ? userInitials : defaultUserInitials;
     const abbr = isMenuAvatar ? userName : initials;
 
-    const getSize = () => {
+    const getSize = (withActivityRing: boolean) => {
+      let additionalPadding = 0;
+      if (withActivityRing) {
+        additionalPadding = 4;
+      }
       switch (dimension) {
         case 'xs':
-          return '24px';
+          return `${24 + additionalPadding * 2}px`;
         case 's':
-          return '32px';
+          return `${32 + additionalPadding * 2}px`;
         case 'm':
-          return '40px';
+          return `${40 + additionalPadding * 2}px`;
         case 'l':
-          return '48px';
+          return `${48 + additionalPadding * 2}px`;
         case 'xl':
         default:
-          return '56px';
+          return `${56 + additionalPadding * 2}px`;
       }
     };
     const renderAvatarContent = () => (
       <>
         <AvatarSVG
           dimension={dimension}
-          size={getSize()}
+          size={getSize(withActivityRing)}
           hasImage={hasImage}
           href={href}
           status={status}
@@ -250,11 +260,11 @@ export const Avatar = React.forwardRef<HTMLButtonElement, AvatarProps & AvatarIn
       </>
     );
     return showTooltip ? (
-      <WrapperWithTooltip ref={ref} size={getSize()} renderContent={() => userName} {...props}>
+      <WrapperWithTooltip ref={ref} size={getSize(withActivityRing)} renderContent={() => userName} {...props}>
         {renderAvatarContent()}
       </WrapperWithTooltip>
     ) : (
-      <Wrapper ref={ref} size={getSize()} {...props}>
+      <Wrapper ref={ref} size={getSize(withActivityRing)} {...props}>
         {renderAvatarContent()}
       </Wrapper>
     );
