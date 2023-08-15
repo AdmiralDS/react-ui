@@ -178,6 +178,8 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   };
   /** Признак принудительного скрытия тултипа, показываемого при переполнении */
   forceHideOverflowTooltip?: boolean;
+  /** Событие, которое вызывается при изменении выбранных опций/опции */
+  onSelectedChange?: (value: string | Array<string>) => void;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -230,6 +232,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       virtualScroll,
       title,
       forceHideOverflowTooltip = false,
+      onSelectedChange,
       ...props
     },
     ref,
@@ -262,15 +265,31 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const fixedHeight = calcRowCount !== 'none';
 
+    const externalValue = value ?? defaultValue;
+    const [selectedArray, setSelectedArray] = React.useState<Array<string>>(
+      Array.isArray(externalValue) ? externalValue : [],
+    );
+
+    React.useEffect(() => {
+      if (Array.isArray(value)) setSelectedArray(value);
+    }, [value]);
+
     const selectedOption = React.useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
     );
 
-    const selectedOptions = React.useMemo(
-      () => (multiple ? constantOptions.filter((option) => selectedValue?.includes(option.value)) : []),
-      [constantOptions, selectedValue, multiple],
-    );
+    const selectedOptions = React.useMemo(() => {
+      if (multiple && Array.isArray(selectedValue)) {
+        return selectedValue.reduce((acc: Array<IConstantOption>, item: string) => {
+          const option = constantOptions.find((option) => option.value === item);
+          if (option) acc.push(option);
+          return acc;
+        }, []);
+      } else {
+        return [];
+      }
+    }, [constantOptions, selectedValue, multiple]);
 
     const dropDownModel = React.useMemo<Array<MenuModelItemProps>>(() => {
       const filteredItems = dropDownItems.filter((item) => {
@@ -520,12 +539,29 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value;
+
+      let newSelectedArray: Array<string> = [];
+      if (multiple && Array.isArray(value)) {
+        const addedValues = value.filter((item) => !selectedArray.includes(item));
+        const deletedVales = selectedArray.filter((item) => !value.includes(item));
+        newSelectedArray = [...selectedArray, ...addedValues];
+
+        deletedVales.forEach((deletedItem) => {
+          const index = newSelectedArray.findIndex((item) => deletedItem === item);
+          if (index > -1) {
+            newSelectedArray.splice(index, 1);
+          }
+        });
+
+        setSelectedArray(newSelectedArray);
+      }
+
       if (selectIsUncontrolled) {
-        setSelectedValue(
-          multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value,
-        );
+        setSelectedValue(multiple ? newSelectedArray : value);
       }
       props.onChange?.(evt);
+      onSelectedChange?.(multiple ? newSelectedArray : value);
     };
 
     React.useEffect(() => {
