@@ -54,6 +54,7 @@ export * from './components/Dropdown';
 export * from './components/OpenStatusButton';
 export * from './components/PaginationTwo';
 export * from './components/Avatar';
+export * from './components/AvatarActivity';
 export * from './components/AvatarGroup';
 export * from './components/Breadcrumbs';
 export * from './components/StatusIndicator';
