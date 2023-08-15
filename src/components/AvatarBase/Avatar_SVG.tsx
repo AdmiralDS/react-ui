@@ -41,6 +41,14 @@ const ACTIVITY_VIEWBOX = {
   xl: '0 0 64 64',
 };
 
+const ACTIVITY_RING = {
+  xs: '15',
+  s: '19',
+  m: '23',
+  l: '27',
+  xl: '31',
+};
+
 const CIRCLE = {
   xs: '12',
   s: '16',
@@ -136,6 +144,18 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
     >
       <defs>
         <mask id={id}>
+          {withActivityRing && showActivityRing && (
+            <circle
+              id="ring"
+              cx={circleCenter}
+              cy={circleCenter}
+              r={ACTIVITY_RING[dimension]}
+              strokeWidth="2"
+              //stroke={theme.color['Primary/Primary 60 Main']}
+              stroke="white"
+              fill="white"
+            />
+          )}
           <circle
             id="outer"
             cx={circleCenter}
@@ -168,6 +188,18 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           )}
         </mask>
       </defs>
+      {withActivityRing && showActivityRing && (
+        <circle
+          id="ring"
+          cx={circleCenter}
+          cy={circleCenter}
+          r={ACTIVITY_RING[dimension]}
+          strokeWidth="2"
+          stroke={theme.color['Primary/Primary 60 Main']}
+          fill="none"
+          mask={useId}
+        />
+      )}
       {hasImage && (
         <image
           width={IMAGE_SIZE[dimension]}
