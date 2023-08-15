@@ -10,7 +10,7 @@ export const SelectMultiTemplate = (props: SelectProps) => {
       .slice(0, 10),
   );
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
 
@@ -20,7 +20,7 @@ export const SelectMultiTemplate = (props: SelectProps) => {
         {...props}
         defaultValue={selectValue}
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"

@@ -11,7 +11,7 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
   const [searchValue, setSearchValue] = React.useState('');
   const [options, setOptions] = React.useState(createOptions(20));
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
 
@@ -51,7 +51,7 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
         value={selectValue}
         inputValue={searchValue}
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"

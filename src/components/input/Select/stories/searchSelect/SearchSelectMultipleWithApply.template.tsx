@@ -11,7 +11,7 @@ export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [forcedOpen, setForcedOpen] = React.useState(false);
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
 
@@ -38,7 +38,7 @@ export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
         forcedOpen={forcedOpen}
         value={selectValue}
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"

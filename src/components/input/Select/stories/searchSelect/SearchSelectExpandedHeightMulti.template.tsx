@@ -8,7 +8,7 @@ export const SearchSelectExpandedHeightMultiTemplate = (props: SelectProps) => {
     Array.from({ length: 20 }).map((_, ind) => String(ind)),
   );
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
 
@@ -19,7 +19,7 @@ export const SearchSelectExpandedHeightMultiTemplate = (props: SelectProps) => {
         value={selectValue}
         mode="searchSelect"
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         maxRowCount={3}
       >
         {Array.from({ length: 20 }).map((_option, ind) => (

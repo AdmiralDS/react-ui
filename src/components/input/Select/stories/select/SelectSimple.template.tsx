@@ -18,7 +18,7 @@ export const SelectSimpleTemplate = ({
     return theme;
   }
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     // eslint-disable-next-line no-console
     console.log(value);
   };
@@ -29,7 +29,7 @@ export const SelectSimpleTemplate = ({
         {...props}
         value={selectValue}
         onChange={onChange}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         placeholder={placeholder}
         dropContainerClassName="dropContainerClass"
       >

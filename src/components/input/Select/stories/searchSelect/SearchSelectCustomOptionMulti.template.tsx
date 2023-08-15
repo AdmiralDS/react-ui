@@ -10,7 +10,7 @@ export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
 
@@ -20,7 +20,7 @@ export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
         {...props}
         value={selectValue}
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         mode="searchSelect"
       >
         {Array.from({ length: 20 }).map((_option, ind) => (

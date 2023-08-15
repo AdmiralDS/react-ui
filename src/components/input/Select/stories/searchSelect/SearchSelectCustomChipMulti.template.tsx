@@ -10,7 +10,7 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   const [modalOpened, setModalOpened] = React.useState(false);
   const [valueToDelete, setValueToDelete] = React.useState<string | null>(null);
 
-  const handleChangeSelected = (value: string | Array<string>) => {
+  const handleSelectedChange = (value: string | Array<string>) => {
     if (Array.isArray(value)) setSelectValue(value);
   };
   const deleteValue = (value: string) => setSelectValue((prev) => prev.filter((prevValue) => prevValue !== value));
@@ -39,7 +39,7 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
         {...props}
         value={selectValue}
         multiple={true}
-        onChangeSelected={handleChangeSelected}
+        onSelectedChange={handleSelectedChange}
         mode="searchSelect"
       >
         {Array.from({ length: 20 }).map((_option, ind) => (

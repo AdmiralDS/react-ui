@@ -179,7 +179,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Признак принудительного скрытия тултипа, показываемого при переполнении */
   forceHideOverflowTooltip?: boolean;
   /** Событие, которое вызывается при изменении выбранных опций/опции */
-  onChangeSelected?: (value: string | Array<string>) => void;
+  onSelectedChange?: (value: string | Array<string>) => void;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -232,7 +232,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       virtualScroll,
       title,
       forceHideOverflowTooltip = false,
-      onChangeSelected,
+      onSelectedChange,
       ...props
     },
     ref,
@@ -561,7 +561,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         setSelectedValue(multiple ? newSelectedArray : value);
       }
       props.onChange?.(evt);
-      onChangeSelected?.(multiple ? newSelectedArray : value);
+      onSelectedChange?.(multiple ? newSelectedArray : value);
     };
 
     React.useEffect(() => {
