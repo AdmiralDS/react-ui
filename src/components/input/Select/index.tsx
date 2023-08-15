@@ -86,6 +86,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Максимальное количество строк поля в режиме multiple */
   maxRowCount?: number | 'none';
 
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 

@@ -88,8 +88,10 @@ export interface DropMenuProps
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
   alignMenuRef?: React.RefObject<HTMLElement>;
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Элемент, относительно которого позиционируется портал */
   targetElement?: Element;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
