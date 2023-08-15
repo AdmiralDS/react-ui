@@ -23,7 +23,7 @@ const Container = styled.div`
   margin-bottom: 40px;
 `;
 
-export const SingleAvatarTemplate = () => (
+export const AvatarSingleTemplate = () => (
   <>
     <Text>Размеры компонента</Text>
     <Container>
@@ -58,11 +58,11 @@ export const SingleAvatarTemplate = () => (
     </Container>
     <Text>Статусы компонента</Text>
     <Container>
-      <Avatar userName="Status Danger" icon={<PersonSolid />} status="danger" />
-      <Avatar userName="Status Warning" icon={<PersonSolid />} status="warn" />
-      <Avatar userName="Status Success" icon={<PersonSolid />} status="success" />
-      <Avatar userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
-      <Avatar userName="Example Name" href={imageURL} status="#3F7DFE" />
+      <Avatar dimension="xs" userName="Status Danger" icon={<PersonSolid />} status="danger" />
+      <Avatar dimension="s" userName="Status Warning" icon={<PersonSolid />} status="warn" />
+      <Avatar dimension="m" userName="Status Success" icon={<PersonSolid />} status="success" />
+      <Avatar dimension="l" userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
+      <Avatar dimension="xl" userName="Example Name" href={imageURL} status="#3F7DFE" />
     </Container>
   </>
 );

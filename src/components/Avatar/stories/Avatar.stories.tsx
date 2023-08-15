@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import { Avatar } from '@admiral-ds/react-ui';
 
-import { SingleAvatarTemplate } from './SingleAvatar.template';
+import { AvatarSingleTemplate } from './AvatarSingle.template';
 import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
 
 // Imports of text sources
-import SingleAvatarRaw from './SingleAvatar.template?raw';
+import AvatarSingleRaw from './AvatarSingle.template?raw';
 import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
 
 const Desc = styled.div`
@@ -103,7 +103,7 @@ export const AvatarPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="Single Avatar">
-const SingleAvatarStory: StoryFn<typeof Avatar> = () => <SingleAvatarTemplate />;
+const SingleAvatarStory: StoryFn<typeof Avatar> = () => <AvatarSingleTemplate />;
 
 export const SingleAvatar = {
   render: SingleAvatarStory,
@@ -111,7 +111,7 @@ export const SingleAvatar = {
   parameters: {
     docs: {
       source: {
-        code: SingleAvatarRaw,
+        code: AvatarSingleRaw,
       },
       description: {
         story: `Компонент имеет разные цветовые схемы, которые можно выбрать в панели вариантов компонента Property.
