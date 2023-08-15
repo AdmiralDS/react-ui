@@ -84,7 +84,7 @@ const getIconSize = css<{ dimension: Dimension }>`
       case 'xs':
         return '16px';
       case 's':
-        return '20px';
+        return '16px';
       case 'm':
         return '24px';
       case 'l':
