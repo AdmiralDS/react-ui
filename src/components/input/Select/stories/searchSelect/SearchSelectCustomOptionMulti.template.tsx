@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
 
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
@@ -11,13 +10,19 @@ export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
     Array.from({ length: 15 }).map((_, ind) => String(ind)),
   );
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
+  const handleChangeSelected = (value: string | Array<string>) => {
+    if (Array.isArray(value)) setSelectValue(value);
   };
 
   return (
     <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select
+        {...props}
+        value={selectValue}
+        multiple={true}
+        onChangeSelected={handleChangeSelected}
+        mode="searchSelect"
+      >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
             <TextWrapper>

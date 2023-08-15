@@ -18,12 +18,18 @@ export const SelectSimpleTemplate = ({
     return theme;
   }
 
+  const handleChangeSelected = (value: string | Array<string>) => {
+    // eslint-disable-next-line no-console
+    console.log(value);
+  };
+
   return (
     <ThemeProvider theme={swapBorder}>
       <Select
         {...props}
         value={selectValue}
         onChange={onChange}
+        onChangeSelected={handleChangeSelected}
         placeholder={placeholder}
         dropContainerClassName="dropContainerClass"
       >

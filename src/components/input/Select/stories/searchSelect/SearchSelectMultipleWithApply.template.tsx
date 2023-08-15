@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
 
 import { Button, MenuActionsPanel, Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
@@ -12,10 +11,8 @@ export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(['big', '1', '3']);
   const [forcedOpen, setForcedOpen] = React.useState(false);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
+  const handleChangeSelected = (value: string | Array<string>) => {
+    if (Array.isArray(value)) setSelectValue(value);
   };
 
   const renderOptions = () => {
@@ -41,7 +38,7 @@ export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
         forcedOpen={forcedOpen}
         value={selectValue}
         multiple={true}
-        onChange={onChange}
+        onChangeSelected={handleChangeSelected}
         displayClearIcon={true}
         placeholder="Placeholder"
         mode="searchSelect"
