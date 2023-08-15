@@ -93,7 +93,7 @@ export const Hint: React.FC<HintProps> = ({
   const content = renderContent();
   const anchorId = anchorIdProp || uid();
 
-  const targetElement: any = userTargetElement || target?.current || anchorElementRef.current;
+  const targetElement = userTargetElement || target?.current || anchorElementRef.current;
 
   const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
@@ -136,7 +136,7 @@ export const Hint: React.FC<HintProps> = ({
         hint.style.alignSelf = 'center';
         hint.style.margin = '0';
       } else {
-        const direction: InternalHintPositionType = getHintDirection(targetElement, hint, hintPosition);
+        const direction: InternalHintPositionType = getHintDirection(targetElement as HTMLElement, hint, hintPosition);
         switch (direction) {
           case 'topPageCenter':
             setPortalFlexDirection('column-reverse');

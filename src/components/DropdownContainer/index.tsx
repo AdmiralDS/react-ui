@@ -82,6 +82,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
 
+    const targetNode = targetElement ?? targetRef?.current;
+
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
     const { rootRef } = React.useContext(DropdownContext);
 
@@ -98,7 +100,6 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     const checkDropdownPosition = React.useCallback(() => {
       const node = containerRef.current;
-      const targetNode = targetElement ?? targetRef?.current;
       if (node && targetNode) {
         const rect = node.getBoundingClientRect();
         const targetRect = targetNode.getBoundingClientRect();
@@ -162,7 +163,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     return (
       <>
-        <Portal targetElement={targetElement ?? targetRef?.current} reverse={displayUpward} rootRef={rootRef}>
+        <Portal targetElement={targetNode} reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
           <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
         </Portal>
