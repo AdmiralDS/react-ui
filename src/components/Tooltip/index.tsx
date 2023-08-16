@@ -19,7 +19,9 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
    * Ref на элемент, относительно которого позиционируется портал
    **/
   targetRef?: React.RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется портал */
+  /** Элемент, относительно которого позиционируется портал
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
+   */
   targetElement?: Element | null;
   /**
    * @deprecated Используйте rootRef пропсу на DropdownProvider.

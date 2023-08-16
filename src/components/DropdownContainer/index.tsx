@@ -59,7 +59,9 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
    * Ref на элемент, относительно которого позиционируется выпадающее меню
    **/
   targetRef?: React.RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню */
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
+   */
   targetElement?: Element | null;
 
   /**
