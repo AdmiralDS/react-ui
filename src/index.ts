@@ -56,6 +56,7 @@ export * from './components/PaginationTwo';
 export * from './components/Avatar';
 export * from './components/AvatarActivity';
 export * from './components/AvatarGroup';
+export * from './components/AvatarActivityGroup';
 export * from './components/Breadcrumbs';
 export * from './components/StatusIndicator';
 export * from './components/TextButton';
