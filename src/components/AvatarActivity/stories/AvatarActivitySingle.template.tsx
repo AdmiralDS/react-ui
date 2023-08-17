@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AvatarActivity, DefaultFontColorName } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://github.com/DrUNE.png?size=100';
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const Text = styled.div`
   font-family: 'VTB Group UI';
@@ -79,7 +79,7 @@ export const AvatarActivitySingleTemplate = () => (
         icon={<PersonSolid />}
         status="inactive"
       />
-      <AvatarActivity showActivityRing dimension="xl" userName="Example Name" href={imageURL} status="#3F7DFE" />
+      <AvatarActivity showActivityRing dimension="xl" userName="Custom Status" href={imageURL} status="#3F7DFE" />
     </Container>
   </>
 );
