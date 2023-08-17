@@ -156,7 +156,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
 
   return (
     <AvatarsBaseWrapper ref={wrapperRef} {...props} $withActivityRing={withActivityRing}>
-      {items.length === 1 && <AvatarBase {...items[0]} dimension={dimension} />}
+      {items.length === 1 && <AvatarBase {...items[0]} dimension={dimension} withActivityRing={withActivityRing} />}
       {items.length > 1 &&
         visible.map((item, index) => {
           const id = item.id || uid();
@@ -184,6 +184,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
               appearance={item.appearance || appearance}
               group={!last}
               status={undefined}
+              withActivityRing={withActivityRing}
             />
           );
         })}

@@ -151,7 +151,6 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
               cy={circleCenter}
               r={ACTIVITY_RING[dimension]}
               strokeWidth="2"
-              //stroke={theme.color['Primary/Primary 60 Main']}
               stroke="white"
               fill="white"
             />
@@ -178,9 +177,11 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           )}
           {group && (
             <circle
-              cx={String(Number(CIRCLE[dimension]) * 3 - 2)}
-              cy={CIRCLE[dimension]}
-              r={String(Number(CIRCLE[dimension]) + 2)}
+              cx={String(
+                withActivityRing ? Number(ACTIVITY_RING[dimension]) * 3 - 4 : Number(CIRCLE[dimension]) * 3 - 2,
+              )}
+              cy={circleCenter}
+              r={String(Number(withActivityRing ? ACTIVITY_RING[dimension] : CIRCLE[dimension]) + 2)}
               strokeWidth="0"
               stroke="black"
               fill="black"
