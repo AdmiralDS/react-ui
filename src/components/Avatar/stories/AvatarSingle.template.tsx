@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Avatar, DefaultFontColorName } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://github.com/DrUNE.png?size=100';
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const Text = styled.div`
   font-family: 'VTB Group UI';
@@ -62,7 +62,7 @@ export const AvatarSingleTemplate = () => (
       <Avatar dimension="s" userName="Status Warning" icon={<PersonSolid />} status="warn" />
       <Avatar dimension="m" userName="Status Success" icon={<PersonSolid />} status="success" />
       <Avatar dimension="l" userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
-      <Avatar dimension="xl" userName="Example Name" href={imageURL} status="#3F7DFE" />
+      <Avatar dimension="xl" userName="Custom Status" href={imageURL} status="#3F7DFE" />
     </Container>
   </>
 );
