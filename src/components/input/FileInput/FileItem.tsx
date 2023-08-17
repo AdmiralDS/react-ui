@@ -331,7 +331,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             <Content dimension={dimension}>
               <FileName ref={titleRef}>{fileName}</FileName>
               {tooltipVisible && fileNameOverflow && (
-                <Tooltip targetRef={previewWrapperRef} renderContent={() => `${fileName}`} />
+                <Tooltip targetElement={previewWrapperRef.current} renderContent={() => `${fileName}`} />
               )}
               <FileInfo dimension={dimension} status={status}>
                 {fileInfo}

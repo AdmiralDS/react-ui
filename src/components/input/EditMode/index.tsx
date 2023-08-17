@@ -377,7 +377,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
               {value}
             </Text>
             {showTooltip && tooltipVisible && overflowActive && (
-              <Tooltip renderContent={() => value} targetRef={textRef} />
+              <Tooltip renderContent={() => value} targetElement={textRef.current} />
             )}
             {!props.readOnly && (
               <EditIcon $multiline={multilineView} height={iconSize} width={iconSize} onClick={enableEdit} />

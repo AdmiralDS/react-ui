@@ -28,7 +28,7 @@ export const HintTargetTemplate = (args: HintProps) => {
             visible={visible}
             onVisibilityChange={handleVisibilityChange}
             renderContent={() => text}
-            target={btnRef}
+            targetElement={btnRef.current}
             anchorId="hint_target"
           >
             <HelpOutline tabIndex={0} height={24} width={24} aria-label="Help Icon" aria-describedby="hint_target" />

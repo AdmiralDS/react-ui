@@ -263,7 +263,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       >
         {availableSlots && isOpened && !disabled && !skeleton && (
           <StyledDropdownContainer
-            targetRef={inputRef}
+            targetElement={inputRef.current}
             alignSelf={alignDropdown}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}

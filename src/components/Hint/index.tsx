@@ -39,8 +39,16 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию тултип отрисовывается в document.body
    * */
   container?: never;
-  /** Элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит */
+  // TODO: Удалить target в 8.x.x версии
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref на элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит
+   **/
   target?: React.MutableRefObject<Element | null | undefined>;
+  /** Элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит */
+  targetElement?: Element | null;
   /** Триггер появления компонента (событие, которое вызывает появление хинта) */
   visibilityTrigger?: Trigger;
   /** Размер компонента */
@@ -68,6 +76,7 @@ export const Hint: React.FC<HintProps> = ({
   renderContent,
   hintPosition,
   target,
+  targetElement: userTargetElement,
   visibilityTrigger = 'hover',
   dimension = 'l',
   hintRef,
@@ -84,8 +93,7 @@ export const Hint: React.FC<HintProps> = ({
   const content = renderContent();
   const anchorId = anchorIdProp || uid();
 
-  const targetRef: any = target || anchorElementRef;
-  const targetElement: any = target?.current || anchorElementRef.current;
+  const targetElement = userTargetElement || target?.current || anchorElementRef.current;
 
   const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
@@ -128,7 +136,7 @@ export const Hint: React.FC<HintProps> = ({
         hint.style.alignSelf = 'center';
         hint.style.margin = '0';
       } else {
-        const direction: InternalHintPositionType = getHintDirection(targetElement, hint, hintPosition);
+        const direction: InternalHintPositionType = getHintDirection(targetElement as HTMLElement, hint, hintPosition);
         switch (direction) {
           case 'topPageCenter':
             setPortalFlexDirection('column-reverse');
@@ -217,7 +225,7 @@ export const Hint: React.FC<HintProps> = ({
         }
       }
     }
-  }, [target, hintPosition, visible, recalculation, dimension, content, isMobile]);
+  }, [target, userTargetElement, hintPosition, visible, recalculation, dimension, content, isMobile]);
 
   const attachRef = (node: HTMLDivElement) => handleRef(node, hintRef, hintElementRef);
   const scrollableParents = React.useMemo(
@@ -257,7 +265,7 @@ export const Hint: React.FC<HintProps> = ({
       {children}
       {visible && (
         <Portal
-          targetRef={targetRef}
+          targetElement={targetElement}
           rootRef={rootRef}
           flexDirection={portalFlexDirection}
           fullContainerWidth={portalFullWidth}

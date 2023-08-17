@@ -64,7 +64,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
         <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef, setNode)} />
         {visible && !emptyContent && (
           <Tooltip
-            targetRef={anchorElementRef}
+            targetElement={anchorElementRef.current}
             renderContent={renderContent}
             container={container}
             tooltipPosition={tooltipPosition}

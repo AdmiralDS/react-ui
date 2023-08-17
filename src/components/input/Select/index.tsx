@@ -86,6 +86,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Максимальное количество строк поля в режиме multiple */
   maxRowCount?: number | 'none';
 
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 
@@ -699,7 +700,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <DropdownContainer
             ref={dropDownRef}
             tabIndex={-1}
-            targetRef={portalTargetRef || containerRef}
+            targetElement={portalTargetRef?.current || containerRef.current}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
