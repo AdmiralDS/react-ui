@@ -189,18 +189,6 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           )}
         </mask>
       </defs>
-      {withActivityRing && showActivityRing && (
-        <circle
-          id="ring"
-          cx={circleCenter}
-          cy={circleCenter}
-          r={ACTIVITY_RING[dimension]}
-          strokeWidth="2"
-          stroke={theme.color['Primary/Primary 60 Main']}
-          fill="none"
-          mask={useId}
-        />
-      )}
       {hasImage && (
         <image
           width={IMAGE_SIZE[dimension]}
@@ -210,6 +198,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           xlinkHref={href}
           x={imageCoordinate}
           y={imageCoordinate}
+          style={{ clipPath: 'circle()' }}
         />
       )}
       {!hasImage && (
@@ -221,6 +210,18 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           strokeWidth="0"
           stroke={backgroundColor}
           fill={backgroundColor}
+          mask={useId}
+        />
+      )}
+      {withActivityRing && showActivityRing && (
+        <circle
+          id="ring"
+          cx={circleCenter}
+          cy={circleCenter}
+          r={ACTIVITY_RING[dimension]}
+          strokeWidth="2"
+          stroke={theme.color['Primary/Primary 60 Main']}
+          fill="none"
           mask={useId}
         />
       )}
