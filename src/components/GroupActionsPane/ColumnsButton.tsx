@@ -109,7 +109,7 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
         }}
       />
       <TextWrapper ref={textRef}>{title}</TextWrapper>
-      {tooltipVisible && overflow && <Tooltip targetRef={itemRef} renderContent={() => title} />}
+      {tooltipVisible && overflow && <Tooltip targetElement={itemRef.current} renderContent={() => title} />}
     </ColumnsMenuItem>
   );
 };
@@ -188,7 +188,7 @@ export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonPr
         </IconButton>
         {opened && (
           <StyledDropdownContainer
-            targetRef={buttonRef}
+            targetElement={buttonRef.current}
             alignSelf={'flex-end'}
             onClickOutside={handleClickOutside}
             dropContainerCssMixin={dropContainerCssMixin}

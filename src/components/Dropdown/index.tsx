@@ -227,7 +227,7 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     }, []);
 
     return (
-      <Portal targetRef={targetRef} reverse={displayUpward} rootRef={rootRef}>
+      <Portal targetElement={targetRef.current} reverse={displayUpward} rootRef={rootRef}>
         <FakeTarget />
         <Container
           ref={refSetter(ref, containerRef)}

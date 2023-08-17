@@ -182,7 +182,7 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
             )}
           </ChipContentWrapperStyled>
         </ChipComponentStyled>
-        {tooltipVisible && overflow && <Tooltip targetRef={chipRef} renderContent={renderContentTooltip} />}
+        {tooltipVisible && overflow && <Tooltip targetElement={chipRef.current} renderContent={renderContentTooltip} />}
       </>
     );
   },

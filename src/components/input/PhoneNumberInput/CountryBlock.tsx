@@ -85,7 +85,7 @@ export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>(
         <StyledCountryName ref={textRef}>{value}</StyledCountryName>
         <CountryCode>{code}</CountryCode>
       </StyledCountryBlock>
-      {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => value} />}
+      {tooltipVisible && overflow && <Tooltip targetElement={wrapperRef.current} renderContent={() => value} />}
     </>
   );
 });

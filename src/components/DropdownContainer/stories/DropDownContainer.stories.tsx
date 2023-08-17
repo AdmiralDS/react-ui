@@ -62,9 +62,7 @@ export default {
 } as Meta<typeof DropdownContainer>;
 
 //<editor-fold desc="Простой контейнер">
-const SimpleContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
-  <SimpleContainerTemplate targetRef={targetRef} {...props} />
-);
+const SimpleContainerStory: StoryFn<typeof DropdownContainer> = (props) => <SimpleContainerTemplate {...props} />;
 
 export const SimpleContainer = {
   render: SimpleContainerStory,
@@ -83,9 +81,7 @@ export const SimpleContainer = {
 //</editor-fold>
 
 //<editor-fold desc="Контейнер с меню">
-const MenuContainerStory: StoryFn<typeof DropdownContainer> = ({ targetRef, ...props }) => (
-  <MenuContainerTemplate targetRef={targetRef} {...props} />
-);
+const MenuContainerStory: StoryFn<typeof DropdownContainer> = (props) => <MenuContainerTemplate {...props} />;
 
 export const MenuContainer = {
   render: MenuContainerStory,

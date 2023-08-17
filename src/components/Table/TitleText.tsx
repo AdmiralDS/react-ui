@@ -53,7 +53,9 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
           {title}
         </Title>
       )}
-      {overflow && tooltipVisible && titleNotCustom && <Tooltip targetRef={textRef} renderContent={() => title} />}
+      {overflow && tooltipVisible && titleNotCustom && (
+        <Tooltip targetElement={textRef.current} renderContent={() => title} />
+      )}
     </>
   );
 };
