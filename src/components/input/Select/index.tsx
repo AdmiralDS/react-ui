@@ -267,12 +267,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const fixedHeight = calcRowCount !== 'none';
 
     const externalValue = value ?? defaultValue;
-    const [selectedArray, setSelectedArray] = React.useState<Array<string>>(
-      Array.isArray(externalValue) ? externalValue : [],
-    );
+    const selectedArray = React.useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
+
+    const unmountedSelectedOptions = React.useRef<Array<string>>([]);
 
     React.useEffect(() => {
-      if (Array.isArray(value)) setSelectedArray(value);
+      if (Array.isArray(value)) selectedArray.current = value;
     }, [value]);
 
     const selectedOption = React.useMemo(
@@ -317,16 +317,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       shouldExtendInputValue: false,
     });
 
-    const onConstantOptionMount = React.useCallback(
-      (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
-      [],
-    );
+    const onConstantOptionMount = (option: IConstantOption) => {
+      setConstantOptions((prev) => [...prev, option]);
+      if (unmountedSelectedOptions.current.includes(option.value)) {
+        unmountedSelectedOptions.current = unmountedSelectedOptions.current.filter(
+          (unmountedOption) => unmountedOption !== option.value,
+        );
+      }
+    };
 
-    const onConstantOptionUnMount = React.useCallback(
-      (option: IConstantOption) =>
-        setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value)),
-      [],
-    );
+    const onConstantOptionUnMount = (option: IConstantOption) => {
+      if (selectedArray.current.includes(option.value)) {
+        unmountedSelectedOptions.current = [...unmountedSelectedOptions.current, option.value];
+      }
+      setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value));
+    };
 
     const handleDropDownOptionMount = React.useCallback((option: SelectItemProps) => {
       setDropItems((prev) => [...prev, option]);
@@ -544,18 +549,31 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
       let newSelectedArray: Array<string> = [];
       if (multiple && Array.isArray(value)) {
-        const addedValues = value.filter((item) => !selectedArray.includes(item));
-        const deletedVales = selectedArray.filter((item) => !value.includes(item));
-        newSelectedArray = [...selectedArray, ...addedValues];
+        const addedValues = value.filter(
+          (item) => !selectedArray.current.includes(item) && !unmountedSelectedOptions.current.includes(item),
+        );
+
+        const deletedVales = selectedArray.current.filter(
+          (item) => !value.includes(item) && !unmountedSelectedOptions.current.includes(item),
+        );
+
+        newSelectedArray = [...selectedArray.current, ...addedValues];
+        const newUnmounted = [...unmountedSelectedOptions.current];
 
         deletedVales.forEach((deletedItem) => {
-          const index = newSelectedArray.findIndex((item) => deletedItem === item);
-          if (index > -1) {
-            newSelectedArray.splice(index, 1);
+          const selectedIndex = newSelectedArray.findIndex((item) => deletedItem === item);
+          if (selectedIndex > -1) {
+            newSelectedArray.splice(selectedIndex, 1);
+          }
+
+          const unmountedIndex = newUnmounted.findIndex((item) => deletedItem === item);
+          if (unmountedIndex > -1) {
+            newUnmounted.splice(unmountedIndex, 1);
           }
         });
 
-        setSelectedArray(newSelectedArray);
+        selectedArray.current = newSelectedArray;
+        unmountedSelectedOptions.current = newUnmounted;
       }
 
       if (selectIsUncontrolled) {
