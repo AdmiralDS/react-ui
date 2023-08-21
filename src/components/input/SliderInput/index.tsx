@@ -105,7 +105,9 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     React.useEffect(() => {
       if (typeof value !== 'undefined') {
         setControlled(true);
-        setInputValue(fitToCurrency(String(value), precision, decimal, thousand, true));
+        // setInputValue(fitToCurrency(String(value), precision, decimal, thousand, true));
+        //problem with undefined
+        setInputValue(String(value));
         setSliderValue(+clearValue(String(value), precision, decimal));
       } else {
         setControlled(false);
