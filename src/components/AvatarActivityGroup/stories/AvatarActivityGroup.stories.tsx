@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
@@ -29,9 +28,9 @@ export default {
     },
     componentSubtitle: (
       <Desc>
-        Avatar - компонент отображающий аватарку пользователя и его статус. При необходимости компоненты Avatar можно
-        группировать. В этом случае они выстраиваются по горизонтали с отрицательным отступом -2px и внешней обводкой
-        2px в цвет фона страницы. При группировке статусы не отображаются.
+        При необходимости компоненты AvatarActivity можно группировать. В этом случае они выстраиваются по горизонтали с
+        отрицательным отступом -10 px и внешней обводкой 2px в цвет фона страницы. При группировке статусы не
+        отображаются.
       </Desc>
     ),
     design: {
@@ -88,7 +87,9 @@ export const AvatarGroupPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с ограниченной шириной">
-const AvatarGroupWidthStory: StoryFn<typeof AvatarActivityGroup> = (props) => <AvatarActivityGroupWidthTemplate {...props} />;
+const AvatarGroupWidthStory: StoryFn<typeof AvatarActivityGroup> = (props) => (
+  <AvatarActivityGroupWidthTemplate {...props} />
+);
 
 export const AvatarGroupWidth = {
   render: AvatarGroupWidthStory,
@@ -99,12 +100,13 @@ export const AvatarGroupWidth = {
         code: AvatarActivityGroupWidthRaw,
       },
       description: {
-        story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
-      скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью параметра appearance, переданного в 
-      компонент AvatarGroup.\n\nЧтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать 
-      для компонента AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров 
-      нужно задать отличный от остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
-      appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.`,
+        story: `При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением 
+        количества скрытых элементов. Внешний вид такого аватара (цвет заливки и текста) контролируется с помощью 
+        параметра appearance, переданного в компонент AvatarActivityGroup.\n\nЧтобы задать для всех аватаров, 
+        входящих в группу, единый внешний вид, достаточно задать для компонента AvatarActivityGroup соответствующее 
+        значение параметра appearance. Если для каких-то аватаров нужно задать отличный от остальных внешний вид, 
+        необходимо задать параметр appearance непосредственно для компонента AvatarActivity. Параметр appearance, 
+        заданный для AvatarActivity, имеет больший приоритет, чем параметр appearance, заданный для AvatarActivityGroup.`,
       },
     },
   },

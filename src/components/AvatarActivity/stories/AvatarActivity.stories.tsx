@@ -1,8 +1,7 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
-import { AvatarActivity } from '#src/components/AvatarActivity';
+import { AvatarActivity } from '@admiral-ds/react-ui';
 
 import { AvatarActivitySingleTemplate } from './AvatarActivitySingle.template';
 import { AvatarActivityPlaygroundTemplate } from './AvatarActivityPlayground.template';
@@ -28,7 +27,12 @@ export default {
       },
     },
     componentSubtitle: (
-      <Desc>Компонент используется для отображения фотографии пользователя, его инициалов или иконки.</Desc>
+      <Desc>
+        Вариант аватара с Activity Ring. В этом случае появляется пустое пространство вокруг компонента под круг
+        фокусировки, что бы он (круг) при включении входил в общий размер компонента и не обрезался во фреймах. Таким
+        образом, в AvatarActivity добавляется по 4 px с каждой стороны компонента. Используйте только один тип Аватаров
+        одновременно.
+      </Desc>
     ),
     design: {
       type: 'figma',
@@ -82,8 +86,8 @@ export default {
 } as Meta<typeof AvatarActivity>;
 
 //<editor-fold desc="AvatarActivity Playground">
-const AvatarActivityPlaygroundStory: StoryFn<typeof AvatarActivity> = ({ userName, ...props }) => (
-  <AvatarActivityPlaygroundTemplate userName={userName} {...props} />
+const AvatarActivityPlaygroundStory: StoryFn<typeof AvatarActivity> = (props) => (
+  <AvatarActivityPlaygroundTemplate {...props} />
 );
 
 export const AvatarPlayground = {
@@ -97,15 +101,14 @@ export const AvatarPlayground = {
       description: {
         story: `Вариант аватара с Activity Ring.  В этом случае появляется пустое пространство вокруг компонента 
         под круг фокусировки, что бы он (круг) при включении входил в общий размер компонента и не обрезался во 
-        фреймах.\n\nИспользуйте только один тип Аватаров одновременно.\n\nТаким образом, в AvatarActivity добавляется 
-        по 4 px с каждой стороны компонента.`,
+        фреймах.\n\nТаким образом, в AvatarActivity добавляется по 4 px с каждой стороны компонента.\n\nИспользуйте 
+        только один тип Аватаров одновременно.`,
       },
     },
   },
 
   name: 'Playground',
 };
-
 //</editor-fold>
 
 //<editor-fold desc="Single AvatarActivity">

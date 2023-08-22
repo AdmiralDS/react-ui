@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { AvatarActivity } from '@admiral-ds/react-ui';
 import type { AvatarActivityProps } from '@admiral-ds/react-ui';
 

@@ -1,11 +1,10 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import { AvatarGroup, DefaultFontColorName } from '@admiral-ds/react-ui';
 import type { AvatarGroupProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://github.com/DrUNE.png?size=100';
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const Text = styled.div`
   font-family: 'VTB Group UI';
@@ -20,20 +19,20 @@ const onSelectAvatar = (id: string) => {
   console.log('Select item with id: ', id);
 };
 
-const items2: AvatarGroupProps['items'] = [
+const items1: AvatarGroupProps['items'] = [
   { userName: 'Lena Ivanova', icon: <PersonSolid />, id: '1' },
   { userName: 'Petr Lesov', icon: <PersonSolid />, id: '2' },
   { userName: 'Agata Petrova', icon: <PersonSolid />, id: '3' },
   { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
   { userName: 'Rita', appearance: 'neutral4', id: '5' },
-  { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+  { userName: 'Важный Кот', icon: <PersonSolid />, href: imageURL, id: '6' },
   { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
   { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
   { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
   { userName: 'Tom Hidlton', appearance: 'neutral4', id: '10' },
 ];
 
-const items3: AvatarGroupProps['items'] = [
+const items2: AvatarGroupProps['items'] = [
   {
     userName: 'Lena Ivanova',
     icon: <PersonSolid />,
@@ -44,7 +43,7 @@ const items3: AvatarGroupProps['items'] = [
   { userName: 'Agata Petrova', id: '3', appearance: { background: '#D92020', text: '#FFFFFF' } },
   { userName: 'Arina Leskova', icon: <PersonSolid />, id: '4' },
   { userName: 'Rita', appearance: 'neutral2', id: '5' },
-  { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+  { userName: 'Важный Кот', icon: <PersonSolid />, href: imageURL, id: '6' },
   { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
   { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
   { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
@@ -58,7 +57,7 @@ export const AvatarGroupWidthTemplate = (props: AvatarGroupProps) => {
       <AvatarGroup
         {...props}
         style={{ width: '300px' }}
-        items={items2}
+        items={items1}
         onAvatarSelect={onSelectAvatar}
         dropContainerClassName="dropContainerClass"
       />
@@ -67,7 +66,7 @@ export const AvatarGroupWidthTemplate = (props: AvatarGroupProps) => {
       <AvatarGroup
         {...props}
         style={{ width: '300px' }}
-        items={items3}
+        items={items2}
         onAvatarSelect={onSelectAvatar}
         appearance="neutral4"
         dropContainerClassName="dropContainerClass"

@@ -1,10 +1,8 @@
-import * as React from 'react';
-
 import { AvatarActivityGroup } from '@admiral-ds/react-ui';
 import type { AvatarActivityGroupProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://github.com/DrUNE.png?size=100';
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const onSelectAvatar = (id: string) => {
   // eslint-disable-next-line no-console
@@ -17,7 +15,7 @@ const items: AvatarActivityGroupProps['items'] = [
   { userName: 'Agata Petrova', icon: <PersonSolid />, id: '3' },
   { userName: 'Arina Leskova', appearance: 'neutral3', id: '4', showActivityRing: true },
   { userName: 'Rita', appearance: 'neutral4', id: '5' },
-  { userName: 'Drune', icon: <PersonSolid />, href: imageURL, id: '6' },
+  { userName: 'Важный Кот', icon: <PersonSolid />, href: imageURL, id: '6' },
   { userName: 'Lisa Kotova', icon: <PersonSolid />, id: '7' },
   { userName: 'Ирина Глушко', icon: <PersonSolid />, id: '8' },
   { userName: 'Rosa Farrel', icon: <PersonSolid />, id: '9' },
