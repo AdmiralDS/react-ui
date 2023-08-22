@@ -106,7 +106,6 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
 
   const correctValues = (value: [string, string]) => {
     const [defaultInput1, defaultInput2] = value;
-    // do not correct values in controlled mode
     const newInput1 = getFull(defaultInput1);
     const newInput2 = getFull(defaultInput2);
     const newSlider1 = Number(clearValue(newInput1, precision));
