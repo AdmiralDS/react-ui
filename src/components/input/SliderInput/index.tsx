@@ -97,24 +97,15 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const sliderDimension = dimension === 'xl' ? dimension : 'm';
     // десятичный разделитель
     const decimal = '.';
-    const [inputValue, setInputValue] = React.useState<string>('');
-    const [sliderValue, setSliderValue] = React.useState<number>(minValue);
-    const [controlled, setControlled] = React.useState(false);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
+    const [sliderValue, setSliderValue] = React.useState<number>(minValue);
+    const [innerValueState, setInnerValueState] = React.useState(defaultValue || '');
+    const innerValue = value ?? innerValueState;
+
     React.useEffect(() => {
-      if (typeof value !== 'undefined') {
-        setControlled(true);
-        // setInputValue(fitToCurrency(String(value), precision, decimal, thousand, true));
-        //problem with undefined
-        setInputValue(String(value));
-        setSliderValue(+clearValue(String(value), precision, decimal));
-      } else {
-        setControlled(false);
-        setInputValue(fitToCurrency(String(defaultValue || ''), precision, decimal, thousand, true));
-        setSliderValue(+clearValue(String(defaultValue || ''), precision, decimal));
-      }
-    }, [defaultValue, value]);
+      setSliderValue(+clearValue(String(innerValue), precision, decimal));
+    }, [innerValue]);
 
     const handleSliderChange = (e: any, value: number) => {
       const newValue = fitToCurrency(value, precision, decimal, thousand, true);
@@ -129,10 +120,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       const full = prefixPart + event.target.value + suffixPart;
       const short = clearValue(event.target.value, precision, decimal, minValue);
 
-      if (!controlled) {
-        setInputValue(event.target.value);
-        setSliderValue(+short);
-      }
+      setInnerValueState(event.target.value);
       onChange?.(full, short, event);
     };
     return (
@@ -140,7 +128,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
         <Input
           {...props}
           ref={refSetter(ref, inputRef)}
-          value={inputValue}
+          value={innerValue}
           onChange={handleInputChange}
           onBlur={props.onBlur}
           dimension={dimension}
