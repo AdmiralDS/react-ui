@@ -1,18 +1,18 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties, FC, Ref, MouseEvent, KeyboardEvent, HTMLAttributes } from 'react';
 import styled from 'styled-components';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 import { uid } from '#src/components/common/uid';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
-import { keyboardKey } from '../common/keyboardKey';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { AvatarBaseProps } from '#src/components/AvatarBase';
 import { AvatarBase } from '#src/components/AvatarBase';
 
-export interface AvatarBaseGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AvatarBaseGroupProps extends HTMLAttributes<HTMLDivElement> {
   items: Array<AvatarBaseProps>;
   /** Размер компонента */
   dimension?: AvatarBaseProps['dimension'];
@@ -60,7 +60,7 @@ const MenuAvatarBase = styled(AvatarBase)`
   cursor: pointer;
 `;
 
-export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
+export const AvatarBaseGroup: FC<AvatarBaseGroupProps> = ({
   items,
   dimension = 'xl',
   appearance = 'neutral2',
@@ -75,10 +75,10 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
 }) => {
   const dropMenuProps = passDropdownDataAttributes(props);
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null);
-  const [visibleItems, setVisibleItems] = React.useState(items.length);
-  const [hiddenItems, setHiddenItems] = React.useState(0);
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [visibleItems, setVisibleItems] = useState(items.length);
+  const [hiddenItems, setHiddenItems] = useState(0);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   const WIDTH = {
     xs: 24,
@@ -88,7 +88,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
     xl: 56,
   };
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (wrapperRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
@@ -120,7 +120,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);
   // Ставим стандартный размер М для меню и опций списка и XS для аватара
-  const modelHidden = React.useMemo(() => {
+  const modelHidden = useMemo(() => {
     return hidden.map(({ id: idProp, ...item }) => {
       const id = idProp || uid();
 
@@ -149,7 +149,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
     onAvatarSelect?.(id);
     setSelected(id);
   };
-  const containsActiveAvatar: boolean = React.useMemo(
+  const containsActiveAvatar: boolean = useMemo(
     () => modelHidden.findIndex((item) => item.id === selected) != -1,
     [modelHidden, selected],
   );
@@ -161,11 +161,11 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
         visible.map((item, index) => {
           const id = item.id || uid();
           const last = index === items.length - 1;
-          const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+          const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
             item.onClick && item.onClick(e);
             handleSelectAvatar(e.currentTarget.id);
           };
-          const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+          const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
             const code = keyboardKey.getCode(e);
             if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
               item.onKeyDown && item.onKeyDown(e);
@@ -205,7 +205,7 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
           renderContentProp={({ buttonRef, handleKeyDown, handleClick }) => {
             return (
               <MenuAvatarBase
-                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                ref={buttonRef as Ref<HTMLButtonElement>}
                 userName={'+' + modelHidden.length}
                 isMenuAvatar
                 appearance={appearance}
@@ -224,4 +224,4 @@ export const AvatarBaseGroup: React.FC<AvatarBaseGroupProps> = ({
   );
 };
 
-AvatarBaseGroup.displayName = 'AvatarGroup';
+AvatarBaseGroup.displayName = 'AvatarBaseGroup';

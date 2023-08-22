@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { FC } from 'react';
 
 import type { AvatarProps } from '#src/components/Avatar';
 import type { AvatarBaseGroupProps } from '#src/components/AvatarBaseGroup';
@@ -9,13 +9,13 @@ export interface AvatarGroupProps extends Omit<AvatarBaseGroupProps, 'withActivi
   items: Array<AvatarProps>;
 }
 
-export const AvatarGroup: React.FC<AvatarGroupProps> = ({ items, ...props }) => {
+export const AvatarGroup: FC<AvatarGroupProps> = ({ items, ...props }) => {
   const itemsBase: Array<AvatarBaseProps> = items.map((item) => ({
     ...item,
     withActivityRing: false,
     showActivityRing: false,
   }));
-  return <AvatarBaseGroup items={itemsBase} {...props} />;
+  return <AvatarBaseGroup {...props} items={itemsBase} withActivityRing={false} />;
 };
 
 AvatarGroup.displayName = 'AvatarGroup';

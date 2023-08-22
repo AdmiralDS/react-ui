@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { uid } from '#src/components/common/uid';
+import styled, { useTheme } from 'styled-components';
+
+import type { AvatarBaseProps } from '#src/components/AvatarBase';
 import { LIGHT_THEME } from '#src/components/themes';
-import { useTheme } from 'styled-components';
-import type { AvatarProps } from '#src/components/Avatar';
+import { uid } from '#src/components/common/uid';
 
 type AvatarSVGProps = {
-  dimension: AvatarProps['dimension'];
+  dimension: AvatarBaseProps['dimension'];
   size: string;
   hasImage?: boolean;
   href?: string;
-  status?: AvatarProps['status'];
-  appearance?: AvatarProps['appearance'];
+  status?: AvatarBaseProps['status'];
+  appearance?: AvatarBaseProps['appearance'];
   group?: boolean;
   svgMaskId?: string;
   withActivityRing?: boolean;
@@ -81,6 +82,10 @@ const ACTIVITY_ELLIPSE = {
   xl: { c: '51', r: '9', r2: '11' },
 };
 
+const RoundedImage = styled.image`
+  clip-path: circle();
+`;
+
 export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   dimension = 'xl',
   hasImage,
@@ -100,7 +105,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
   const ellipseCenter = withActivityRing ? ACTIVITY_ELLIPSE[dimension].c : ELLIPSE[dimension].c;
   const imageCoordinate = withActivityRing ? '4px' : '0';
 
-  const getBackgroundColor = (appearance: AvatarProps['appearance']) => {
+  const getBackgroundColor = (appearance: AvatarBaseProps['appearance']) => {
     switch (appearance) {
       case 'neutral1':
       case 'white':
@@ -118,7 +123,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
         return appearance?.background || theme.color['Neutral/Neutral 10'];
     }
   };
-  const getStatusColor = (status: AvatarProps['status']) => {
+  const getStatusColor = (status: AvatarBaseProps['status']) => {
     switch (status) {
       case 'success':
         return theme.color['Success/Success 50 Main'];
@@ -190,7 +195,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
         </mask>
       </defs>
       {hasImage && (
-        <image
+        <RoundedImage
           width={IMAGE_SIZE[dimension]}
           height={IMAGE_SIZE[dimension]}
           preserveAspectRatio="xMidYMid slice"
@@ -198,7 +203,6 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           xlinkHref={href}
           x={imageCoordinate}
           y={imageCoordinate}
-          style={{ clipPath: 'circle()' }}
         />
       )}
       {!hasImage && (

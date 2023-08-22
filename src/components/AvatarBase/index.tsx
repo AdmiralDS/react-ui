@@ -1,12 +1,13 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
+
 import { typography } from '#src/components/Typography';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { DefaultFontColorName } from '#src/components/themes/common';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 import { useLoaded } from './useLoaded';
 import { AvatarSVG } from './Avatar_SVG';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Wrapper = styled.button<{ size: string }>`
   position: relative;
@@ -182,7 +183,7 @@ export interface AvatarBaseInternalProps {
   isMenuAvatar?: boolean;
 }
 
-export const AvatarBase = React.forwardRef<HTMLButtonElement, AvatarBaseProps & AvatarBaseInternalProps>(
+export const AvatarBase = forwardRef<HTMLButtonElement, AvatarBaseProps & AvatarBaseInternalProps>(
   (
     {
       userName,
@@ -273,4 +274,4 @@ export const AvatarBase = React.forwardRef<HTMLButtonElement, AvatarBaseProps & 
   },
 );
 
-AvatarBase.displayName = 'Avatar';
+AvatarBase.displayName = 'AvatarBase';
