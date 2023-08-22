@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../common/keyboardKey';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { DropMenu } from '#src/components/DropMenu';
