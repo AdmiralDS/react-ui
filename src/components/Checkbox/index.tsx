@@ -17,9 +17,9 @@ export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: never;
 }
 
-const width = css<{ dimension: CheckboxDimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+const width = css<{ $dimension: CheckboxDimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -34,9 +34,9 @@ const width = css<{ dimension: CheckboxDimension }>`
   }
 `;
 
-const height = css<{ dimension: CheckboxDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const height = css<{ $dimension: CheckboxDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -62,7 +62,7 @@ const Indeterminate = styled(IndeterminateSVG)`
 `;
 
 const Container = styled.div<{
-  dimension: CheckboxDimension;
+  $dimension: CheckboxDimension;
 }>`
   position: relative;
   box-sizing: border-box;
@@ -202,7 +202,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
     };
 
     return (
-      <Container dimension={dimension} className={className}>
+      <Container $dimension={dimension} className={className}>
         <Input
           ref={ref}
           disabled={disabled}
