@@ -116,13 +116,13 @@ type Dimension = 'l' | 'm';
 export const AccordionWrapper = styled.div<{
   $hideTopDivider: boolean;
   $hideBottomDivider: boolean;
-  dimension?: Dimension;
+  $dimension?: Dimension;
 }>`
   position: relative;
 
   & > ${ItemWrapper}:first-child {
     & ${ItemTitleContent} {
-      padding: ${({ dimension }) => (dimension === 'l' ? '15px 16px' : '9px 16px')};
+      padding: ${({ $dimension }) => ($dimension === 'l' ? '15px 16px' : '9px 16px')};
     }
     border-top: 1px solid
       ${({ theme, $hideTopDivider }) => ($hideTopDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};

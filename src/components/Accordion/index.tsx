@@ -66,7 +66,7 @@ export const Accordion: React.FC<AccordionProps> = ({
       data-icon={iconPosition}
       $hideTopDivider={hideTopDivider}
       $hideBottomDivider={hideBottomDivider}
-      dimension={dimension}
+      $dimension={dimension}
       onKeyDown={handleKeyDown}
       {...props}
     >
