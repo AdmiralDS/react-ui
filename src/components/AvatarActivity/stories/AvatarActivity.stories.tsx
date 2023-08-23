@@ -1,14 +1,14 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Avatar } from '@admiral-ds/react-ui';
+import { AvatarActivity } from '@admiral-ds/react-ui';
 
-import { AvatarSingleTemplate } from './AvatarSingle.template';
-import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
+import { AvatarActivitySingleTemplate } from './AvatarActivitySingle.template';
+import { AvatarActivityPlaygroundTemplate } from './AvatarActivityPlayground.template';
 
 // Imports of text sources
-import AvatarSingleRaw from './AvatarSingle.template?raw';
-import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
+import AvatarActivitySingleRaw from './AvatarActivitySingle.template?raw';
+import AvatarActivityPlaygroundRaw from './AvatarActivityPlayground.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -17,9 +17,9 @@ const Desc = styled.div`
 `;
 
 export default {
-  title: 'Admiral-2.1/Avatar',
+  title: 'Admiral-2.1/AvatarActivity',
   decorators: undefined,
-  component: Avatar,
+  component: AvatarActivity,
   parameters: {
     docs: {
       source: {
@@ -27,7 +27,12 @@ export default {
       },
     },
     componentSubtitle: (
-      <Desc>Компонент используется для отображения фотографии пользователя, его инициалов или иконки.</Desc>
+      <Desc>
+        Вариант аватара с Activity Ring. В этом случае появляется пустое пространство вокруг компонента под круг
+        фокусировки, что бы он (круг) при включении входил в общий размер компонента и не обрезался во фреймах. Таким
+        образом, в AvatarActivity добавляется по 4 px с каждой стороны компонента. Используйте только один тип Аватаров
+        одновременно.
+      </Desc>
     ),
     design: {
       type: 'figma',
@@ -78,39 +83,44 @@ export default {
       control: false,
     },
   },
-} as Meta<typeof Avatar>;
+} as Meta<typeof AvatarActivity>;
 
-//<editor-fold desc="Avatar Playground">
-const AvatarPlaygroundStory: StoryFn<typeof Avatar> = ({ userName, ...props }) => (
-  <AvatarPlaygroundTemplate userName={userName} {...props} />
+//<editor-fold desc="AvatarActivity Playground">
+const AvatarActivityPlaygroundStory: StoryFn<typeof AvatarActivity> = (props) => (
+  <AvatarActivityPlaygroundTemplate {...props} />
 );
 
 export const AvatarPlayground = {
-  render: AvatarPlaygroundStory,
+  render: AvatarActivityPlaygroundStory,
 
   parameters: {
     docs: {
       source: {
-        code: AvatarPlaygroundRaw,
+        code: AvatarActivityPlaygroundRaw,
+      },
+      description: {
+        story: `Вариант аватара с Activity Ring.  В этом случае появляется пустое пространство вокруг компонента 
+        под круг фокусировки, что бы он (круг) при включении входил в общий размер компонента и не обрезался во 
+        фреймах.\n\nТаким образом, в AvatarActivity добавляется по 4 px с каждой стороны компонента.\n\nИспользуйте 
+        только один тип Аватаров одновременно.`,
       },
     },
   },
 
   name: 'Playground',
 };
-
 //</editor-fold>
 
-//<editor-fold desc="Single Avatar">
-const SingleAvatarStory: StoryFn<typeof Avatar> = () => <AvatarSingleTemplate />;
+//<editor-fold desc="Single AvatarActivity">
+const AvatarActivitySingleStory: StoryFn<typeof AvatarActivity> = () => <AvatarActivitySingleTemplate />;
 
 export const SingleAvatar = {
-  render: SingleAvatarStory,
+  render: AvatarActivitySingleStory,
 
   parameters: {
     docs: {
       source: {
-        code: AvatarSingleRaw,
+        code: AvatarActivitySingleRaw,
       },
       description: {
         story: `Компонент используется для отображения фотографии пользователя, его инициалов или иконки. Присутствует 
@@ -123,6 +133,6 @@ export const SingleAvatar = {
     },
   },
 
-  name: 'Avatar',
+  name: 'AvatarActivity',
 };
 //</editor-fold>
