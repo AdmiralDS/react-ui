@@ -5,6 +5,7 @@ import { Range } from '#src/components/Range';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { skeletonMixin } from '#src/components/input/Container';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 const Wrapper = styled.div<{ skeleton?: boolean }>`
   position: relative;
@@ -104,32 +105,8 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   const [innerInput2State, setInnerInput2State] = React.useState(defaultValue?.[1] || '');
   const input1 = value?.[0] || innerInput1State;
   const input2 = value?.[1] || innerInput2State;
-  // const [input1, setInput1] = React.useState('');
-  // const [input2, setInput2] = React.useState('');
 
   const getFull = (str: string | number) => fitToCurrency(String(str), precision, '.', thousand, true);
-
-  // const correctValues = (value: [string, string]) => {
-  //   const newInput1 = value[0];
-  //   const newInput2 = value[1];
-  //   const newSlider1 = Number(clearValue(newInput1, precision));
-  //   const newSlider2 = Number(clearValue(newInput2, precision));
-
-  //   setInput1(newInput1);
-  //   setInput2(newInput2);
-  //   setSlider1(newInput1 === '' ? minValue : newSlider1);
-  //   setSlider2(newInput2 === '' ? maxValue : newSlider2);
-  // };
-
-  // React.useEffect(() => {
-  //   if (typeof value !== 'undefined') {
-  //     setControlled(true);
-  //     correctValues(value);
-  //   } else {
-  //     setControlled(false);
-  //     correctValues(defaultValue || [String(minValue), String(maxValue)]);
-  //   }
-  // }, [defaultValue, value]);
 
   React.useEffect(() => {
     if (typeof value !== 'undefined') {
@@ -140,13 +117,21 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   }, [value]);
 
   React.useEffect(() => {
-    const newSlider1 = Number(clearValue(input1, precision));
-    setSlider1(input1 === '' ? minValue : newSlider1);
+    if (input1 === '') {
+      setSlider1(minValue);
+    } else {
+      const newSlider1 = Number(clearValue(input1, precision));
+      setSlider1(newSlider1);
+    }
   }, [input1, minValue]);
 
   React.useEffect(() => {
-    const newSlider2 = Number(clearValue(input2, precision));
-    setSlider2(input2 === '' ? maxValue : newSlider2);
+    if (input2 === '') {
+      setSlider2(maxValue);
+    } else {
+      const newSlider2 = Number(clearValue(input2, precision));
+      setSlider2(newSlider2);
+    }
   }, [input2, maxValue]);
 
   const handleRangeChange = (event: any, value: [number, number]) => {
@@ -154,45 +139,23 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const newSlider1 = newSld1 < minValue ? minValue : newSld1;
     const newSlider2 = newSld2 > maxValue ? maxValue : newSld2;
 
-    const newInput1 = getFull(newSlider1);
-    const newInput2 = getFull(newSlider2);
-
-    const slider1Changed = newSlider1 !== slider1;
-    const slider2Changed = newSlider2 !== slider2;
-
-    if (!controlled) {
-      slider1Changed && setInnerInput1State(newInput1);
-      slider2Changed && setInnerInput2State(newInput2);
-      // slider1Changed && setSlider1(newSlider1);
-      // slider2Changed && setSlider2(newSlider2);
+    if (input1Ref.current) {
+      changeInputData(input1Ref.current, { value: getFull(newSlider1) });
     }
-    if (slider1Changed || slider2Changed) {
-      onChange?.([
-        { str: slider1Changed ? newInput1 : input1, num: slider1Changed ? newSlider1 : slider1 },
-        { str: slider2Changed ? newInput2 : input2, num: slider2Changed ? newSlider2 : slider2 },
-      ]);
+    if (input2Ref.current) {
+      changeInputData(input2Ref.current, { value: getFull(newSlider2) });
     }
   };
 
   const handleRangeMouseUp = () => {
     if (slider1 == slider2 && slider1 + step <= maxValue) {
-      if (!controlled) {
-        setInnerInput2State(getFull(slider2 + step));
-        // setSlider2(slider2 + step);
+      if (input2Ref.current) {
+        changeInputData(input2Ref.current, { value: getFull(slider2 + step) });
       }
-      onChange?.([
-        { str: input1, num: slider1 },
-        { str: getFull(slider2 + step), num: slider2 + step },
-      ]);
     } else if (slider1 == slider2 && slider1 + step > maxValue) {
-      if (!controlled) {
-        setInnerInput1State(getFull(slider1 - step));
-        // setSlider1(slider1 - step);
+      if (input1Ref.current) {
+        changeInputData(input1Ref.current, { value: getFull(slider1 - step) });
       }
-      onChange?.([
-        { str: getFull(slider1 - step), num: slider1 - step },
-        { str: input2, num: slider2 },
-      ]);
     }
   };
 
@@ -270,27 +233,27 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     const newSlider1 = Number(clearValue(event.target.value, precision) || minValue);
     if (!controlled) {
       setInnerInput1State(event.target.value);
-      // setSlider1(newSlider1);
     }
-    if (slider1 !== newSlider1) {
-      onChange?.([
-        { str: event.target.value, num: newSlider1 },
-        { str: input2, num: slider2 },
-      ]);
-    }
+    // если значение инпута было 2.0 и мы попытались стереть ноль, то
+    // в контролируемом режиме будет проблема, так как onChange не сработает
+    // if (slider1 !== newSlider1) {
+    onChange?.([
+      { str: event.target.value, num: newSlider1 },
+      { str: input2, num: slider2 },
+    ]);
+    // }
   };
   const handleInput2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSlider2 = Number(clearValue(event.target.value, precision) || maxValue);
     if (!controlled) {
       setInnerInput2State(event.target.value);
-      // setSlider2(newSlider2);
     }
-    if (newSlider2 !== slider2) {
-      onChange?.([
-        { str: input1, num: slider1 },
-        { str: event.target.value, num: newSlider2 },
-      ]);
-    }
+    // if (newSlider2 !== slider2) {
+    onChange?.([
+      { str: input1, num: slider1 },
+      { str: event.target.value, num: newSlider2 },
+    ]);
+    // }
   };
 
   const inputProps = {
