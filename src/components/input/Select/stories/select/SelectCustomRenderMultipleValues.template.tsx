@@ -39,7 +39,7 @@ export const SelectCustomRenderMultipleValuesTemplate = (props: SelectProps) => 
       return value.map((item) => {
         const Flag = getFlag(item);
         return (
-          <RenderingValue>
+          <RenderingValue key={item}>
             <Flag height={24} />
             {item}
           </RenderingValue>

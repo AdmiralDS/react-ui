@@ -3,12 +3,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="pragma" content="no-cache" />
-
-    <title>Admiral DS Storybook</title>
+    <title>@storybook/cli - Storybook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
@@ -55,6 +50,9 @@
     <div id="root"></div>
 
     <script>
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+
       window['FEATURES'] = {
         warnOnLegacyHierarchySeparator: true,
         buildStoriesJson: false,

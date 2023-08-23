@@ -60,7 +60,7 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
         </StyledIconButton>
         {opened && (
           <StyledDrop
-            targetRef={buttonRef}
+            targetElement={buttonRef.current}
             alignSelf={'flex-end'}
             onClickOutside={handleClickOutside}
             dropContainerCssMixin={dropContainerCssMixin}

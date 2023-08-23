@@ -63,8 +63,9 @@ export const HeaderCellComponent = ({
   const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
   const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
   const spacer = spacingBetweenItems || defaultSpacer;
-  const cellRef = React.createRef<HTMLDivElement>();
   const colWidth = typeof width === 'number' ? width + 'px' : width;
+
+  const cellRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <HeaderCell
@@ -95,7 +96,7 @@ export const HeaderCellComponent = ({
           )}
         </HeaderCellTitle>
         <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
-        {renderFilter && <Filter column={column} dimension={dimension} targetRef={cellRef} />}
+        {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellRef.current} />}
       </HeaderCellContent>
       {index < columnsAmount - 1 && (
         <RowWidthResizer

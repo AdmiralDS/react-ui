@@ -24,7 +24,7 @@ export const CounterChip = ({ children, count, disabled, onClick }: React.PropsW
         visible={visibleHint}
         onVisibilityChange={handleHintVisibilityChange}
         renderContent={renderContent}
-        target={ref}
+        targetElement={ref.current}
         dimension="s"
       >
         <StyledCounterChip

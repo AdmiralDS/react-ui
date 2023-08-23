@@ -451,6 +451,11 @@ export const ExternalFilter = {
       source: {
         code: SearchSelectExternalFilterRaw,
       },
+      description: {
+        story:
+          'Так как компонент построен на нативном select, в выбранных значениях могут отображаться только те элементы, ' +
+          'которые переданы в качестве списка option',
+      },
     },
   },
 

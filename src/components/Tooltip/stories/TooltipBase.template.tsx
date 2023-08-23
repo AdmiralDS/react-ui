@@ -10,7 +10,7 @@ export const TooltipBaseTemplate = (args: ITooltipProps) => {
     return theme;
   }
 
-  const btnRef = React.useRef<any>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -46,7 +46,7 @@ export const TooltipBaseTemplate = (args: ITooltipProps) => {
       </Button>
       {visible && (
         <Tooltip
-          targetRef={btnRef}
+          targetElement={btnRef.current}
           renderContent={() =>
             `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
               literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney

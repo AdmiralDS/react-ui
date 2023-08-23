@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
 
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
@@ -11,19 +10,17 @@ export const SelectMultiTemplate = (props: SelectProps) => {
       .slice(0, 10),
   );
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
-    setSelectValue(newValues);
-    props.onChange?.(e);
+  const handleSelectedChange = (value: string | Array<string>) => {
+    if (Array.isArray(value)) setSelectValue(value);
   };
 
   return (
     <>
       <Select
         {...props}
-        value={selectValue}
+        defaultValue={selectValue}
         multiple={true}
-        onChange={onChange}
+        onSelectedChange={handleSelectedChange}
         dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"

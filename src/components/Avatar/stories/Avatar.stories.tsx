@@ -1,14 +1,13 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Avatar } from '@admiral-ds/react-ui';
 
-import { SingleAvatarTemplate } from './SingleAvatar.template';
+import { AvatarSingleTemplate } from './AvatarSingle.template';
 import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
 
 // Imports of text sources
-import SingleAvatarRaw from './SingleAvatar.template?raw';
+import AvatarSingleRaw from './AvatarSingle.template?raw';
 import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
 
 const Desc = styled.div`
@@ -103,7 +102,7 @@ export const AvatarPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="Single Avatar">
-const SingleAvatarStory: StoryFn<typeof Avatar> = () => <SingleAvatarTemplate />;
+const SingleAvatarStory: StoryFn<typeof Avatar> = () => <AvatarSingleTemplate />;
 
 export const SingleAvatar = {
   render: SingleAvatarStory,
@@ -111,16 +110,15 @@ export const SingleAvatar = {
   parameters: {
     docs: {
       source: {
-        code: SingleAvatarRaw,
+        code: AvatarSingleRaw,
       },
       description: {
-        story: `Компонент имеет разные цветовые схемы, которые можно выбрать в панели вариантов компонента Property.
-        Присутствует пять размеров компонента. Допускается использование одной или двух букв для обозначения 
-        пользователя (в размере XS только одна буква).\n\nМожет использоваться как в варианте с буквами 
-        (инициалами пользователя), так и с иконкой User (либо другой подходящей по смыслу). 
-        Компоненту и символам в нем можно присваивать любые цвета из палитры.\n\nКомпонент может быть кликабельным, 
-        например, вести в личный кабинет или показывать выпадающее меню с опциями пользователя.\n\nПри ховере над 
-        аватаром показывается Tooltip с именем пользователя.`,
+        story: `Компонент используется для отображения фотографии пользователя, его инициалов или иконки. Присутствует 
+        пять размеров компонента.\n\nДопускается использование одной или двух букв для обозначения пользователя (в размере XS 
+        только одна буква). Компоненту и символам в нем можно присваивать любые цвета из палитры.\n\nКомпонент может быть 
+        кликабельным, например, вести в личный кабинет или показывать выпадающее меню с опциями пользователя. При ховере 
+        над аватаром показывается Tooltip с именем пользователя (опционально можно отключить).\n\nМожет отображать статус 
+        пользователя с помощью статусного Бейджа.`,
       },
     },
   },

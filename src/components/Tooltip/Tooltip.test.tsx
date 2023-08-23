@@ -13,10 +13,7 @@ describe('Tooltip', () => {
     jest.clearAllTimers();
   });
 
-  const WrappedComponentWithTooltip = ({
-    renderContent,
-    withDelay,
-  }: Omit<ITooltipProps, 'targetRef'> & { withDelay?: boolean }) => {
+  const WrappedComponentWithTooltip = ({ renderContent, withDelay }: ITooltipProps & { withDelay?: boolean }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const [visible, setVisible] = React.useState(false);
     const [timer, setTimer] = React.useState<number>();
@@ -47,7 +44,7 @@ describe('Tooltip', () => {
 
     return (
       <ThemeProvider theme={LIGHT_THEME}>
-        {visible && <Tooltip targetRef={divRef} renderContent={renderContent} />}
+        {visible && <Tooltip targetElement={divRef.current} renderContent={renderContent} />}
         <div ref={divRef} data-testid="wrapped-component">
           Wrapped component
         </div>

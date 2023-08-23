@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { ChangeEvent } from 'react';
 
 import { Button, Modal, ModalButtonPanel, ModalContent, ModalTitle, Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
@@ -11,8 +10,8 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   const [modalOpened, setModalOpened] = React.useState(false);
   const [valueToDelete, setValueToDelete] = React.useState<string | null>(null);
 
-  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectValue(Array.from(e.target.selectedOptions).map((option) => option.value));
+  const handleSelectedChange = (value: string | Array<string>) => {
+    if (Array.isArray(value)) setSelectValue(value);
   };
   const deleteValue = (value: string) => setSelectValue((prev) => prev.filter((prevValue) => prevValue !== value));
 
@@ -36,7 +35,13 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
 
   return (
     <>
-      <Select {...props} value={selectValue} multiple={true} onChange={onChange} mode="searchSelect">
+      <Select
+        {...props}
+        value={selectValue}
+        multiple={true}
+        onSelectedChange={handleSelectedChange}
+        mode="searchSelect"
+      >
         {Array.from({ length: 20 }).map((_option, ind) => (
           <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
             {ind}

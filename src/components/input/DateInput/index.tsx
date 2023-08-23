@@ -190,7 +190,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       >
         {isCalendarOpen && !skeleton && (
           <StyledDropdownContainer
-            targetRef={inputRef}
+            targetElement={inputRef.current}
             alignSelf={alignDropdown}
             onClickOutside={handleBlurCalendarContainer}
             dropContainerCssMixin={dropContainerCssMixin}

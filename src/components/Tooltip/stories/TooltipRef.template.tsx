@@ -11,7 +11,7 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
   }
 
   const tooltipRef = React.useRef(null);
-  const btnRef = React.useRef<any>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -47,7 +47,7 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
       </Button>
       {visible && (
         <Tooltip
-          targetRef={btnRef}
+          targetElement={btnRef.current}
           renderContent={() => 'Delete file'}
           ref={tooltipRef}
           tooltipPosition={args.tooltipPosition}

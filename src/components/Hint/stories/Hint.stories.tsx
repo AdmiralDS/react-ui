@@ -220,7 +220,7 @@ export const HintTextButtonExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="Позиционирование относительно target">
+//<editor-fold desc="Позиционирование относительно targetElement">
 const HintTargetStory: StoryFn<typeof Hint> = (props) => <HintTargetTemplate {...props} />;
 
 export const HintTargetExample = {
@@ -234,7 +234,7 @@ export const HintTargetExample = {
     },
   },
 
-  name: 'Hint. Позиционирование относительно target.',
+  name: 'Hint. Позиционирование относительно targetElement.',
 };
 
 //</editor-fold>

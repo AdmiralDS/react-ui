@@ -78,7 +78,7 @@ export const PillWithTooltipTemplate = () => {
       <StyledPill ref={wrapperRef} style={{ width: '253px' }}>
         <LabelWrapper ref={textRef}>{pillLabel}</LabelWrapper>
       </StyledPill>
-      {tooltipVisible && overflow && <Tooltip targetRef={wrapperRef} renderContent={() => pillLabel} />}
+      {tooltipVisible && overflow && <Tooltip targetElement={wrapperRef.current} renderContent={() => pillLabel} />}
       <Desc>Вариант Pill с ограничением по количеству символов и с использованием TooltipHoc:</Desc>
       <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
         {pillLabel.slice(0, 40) + '...'}
