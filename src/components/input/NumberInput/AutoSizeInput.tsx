@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, forwardRef } from 'react';
+import React, { useState, useRef, useLayoutEffect, forwardRef, useEffect } from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -184,6 +184,8 @@ export interface InputProps extends TextInputProps {
   iconCount?: number;
   /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
   align?: 'left' | 'right';
+  /** Внутреннее значение инпута */
+  innerValue: TextInputProps['value'];
 }
 
 export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
@@ -201,6 +203,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       iconCount,
       align,
       onChange,
+      innerValue,
       ...props
     },
     ref,
@@ -252,7 +255,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
 
-      updateHiddenContent(newValue);
+      // updateHiddenContent(newValue);
 
       if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
@@ -309,12 +312,18 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       }
     }, [inputRef.current, placeholder, precision, decimal, thousand, minValue]);
 
+    // useLayoutEffect(() => {
+    //   if (inputRef.current) {
+    //     updateHiddenContent(inputRef.current.value);
+    //     updatePrefixSuffixState(inputRef.current.value);
+    //   }
+    // }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
+
     useLayoutEffect(() => {
-      if (inputRef.current) {
-        updateHiddenContent(inputRef.current.value);
-        updatePrefixSuffixState(inputRef.current.value);
-      }
-    }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
+      console.log(innerValue);
+      updateHiddenContent(innerValue);
+      updatePrefixSuffixState(innerValue);
+    }, [innerValue, placeholder, inputRef.current, sizerRef.current]);
 
     useLayoutEffect(
       () => updateInputLeftPadding(),
@@ -354,10 +363,11 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       }
     }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      updatePrefixSuffixState(e.target.value);
-      onChange?.(e);
-    };
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //   // updateHiddenContent(e.target.value);
+    //   // updatePrefixSuffixState(e.target.value);
+    //   onChange?.(e);
+    // };
 
     return (
       <>
@@ -367,7 +377,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
               {prefix}&nbsp;
             </Prefix>
           )}
-          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
+          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} data-value={props.value} />
           {suffix && showPrefixSuffix && (
             <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
               &nbsp;{suffix}
@@ -376,7 +386,8 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         </HiddenContent>
         <Input
           {...props}
-          onChange={handleChange}
+          // onChange={handleChange}
+          onChange={onChange}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}
           type="text"
