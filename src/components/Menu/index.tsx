@@ -29,22 +29,22 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
   return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number; rowCount: number }>`
-  max-height: ${({ dimension, maxHeight, rowCount }) => {
-    if (maxHeight) return maxHeight;
-    return `min(calc(100vh - 16px), ${getHeight(rowCount, dimension)}px)`;
+const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string | number; $rowCount: number }>`
+  max-height: ${({ $dimension, $maxHeight, $rowCount }) => {
+    if ($maxHeight) return $maxHeight;
+    return `min(calc(100vh - 16px), ${getHeight($rowCount, $dimension)}px)`;
   }};
 `;
 
 const Wrapper = styled.div<{
-  dimension?: MenuDimensions;
-  hasTopPanel: boolean;
-  hasBottomPanel: boolean;
-  rowCount: number;
+  $dimension?: MenuDimensions;
+  $hasTopPanel: boolean;
+  $hasBottomPanel: boolean;
+  $rowCount: number;
 }>`
   padding: 0;
-  ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
-  ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+  ${(p) => (p.$hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   box-sizing: border-box;
   display: flex;
   overflow: hidden;
@@ -61,9 +61,9 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
-  ${(p) => (!p.hasTopPanel ? 'padding-top: 8px' : '')};
-  ${(p) => (!p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+const StyledDiv = styled.div<{ $hasTopPanel: boolean; $hasBottomPanel: boolean }>`
+  ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
   appearance: none;
   flex: 1 1 auto;
@@ -329,7 +329,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const renderChildren = () => {
       return model.map((item, index) => {
-        const { id, subItems, ...itemProps } = item;
+        const { id, subItems, render, ...itemProps } = item;
         const hasSubmenu = !!subItems && subItems.length > 0;
         const hovered = activeId === id;
         const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
@@ -352,11 +352,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           containerRef,
           ...itemProps,
         };
-        if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
+        if (typeof render === 'function') return render(renderProps);
 
         return (
           <MenuItem key={`${item.id}-${index}`} {...renderProps}>
-            {itemProps.render}
+            {render}
           </MenuItem>
         );
       });
@@ -442,17 +442,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
-        dimension={dimension}
-        hasTopPanel={hasTopPanel}
-        hasBottomPanel={hasBottomPanel}
-        rowCount={rowCount}
+        $dimension={dimension}
+        $hasTopPanel={hasTopPanel}
+        $hasBottomPanel={hasBottomPanel}
+        $rowCount={rowCount}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
+        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (

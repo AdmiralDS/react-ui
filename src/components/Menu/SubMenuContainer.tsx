@@ -13,10 +13,10 @@ export const AnchorWrapper = styled.div`
   position: relative;
   cursor: pointer;
 `;
-export const Portal = styled(PositionInPortal)<{ flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
-  ${({ flexDirection }) => (flexDirection ? `flex-direction: ${flexDirection};` : 'flex-direction: column;')}
+  ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
 `;
 
 export const FakeTarget = styled.div`
@@ -136,7 +136,7 @@ export const SubMenuContainer = ({
       <Portal
         targetElement={targetElement}
         rootRef={rootRef}
-        flexDirection={portalFlexDirection}
+        $flexDirection={portalFlexDirection}
         fullContainerWidth={false}
       >
         <FakeTarget />
