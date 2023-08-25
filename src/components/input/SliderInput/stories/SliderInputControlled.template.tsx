@@ -17,7 +17,7 @@ export const SliderInputControlledTemplate = (args: SliderInputProps) => {
         value={slider1}
         onChange={(full, short, event) => {
           console.log({ full, short, event });
-          // setSlider1(event.target.value);
+          setSlider1(event.target.value);
         }}
       />
     </ThemeProvider>

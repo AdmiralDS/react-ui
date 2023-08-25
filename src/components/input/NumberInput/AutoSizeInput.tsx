@@ -320,7 +320,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
     // }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
 
     useLayoutEffect(() => {
-      console.log(innerValue);
       updateHiddenContent(innerValue);
       updatePrefixSuffixState(innerValue);
     }, [innerValue, placeholder, inputRef.current, sizerRef.current]);

@@ -8,7 +8,7 @@ export const SliderRangeControlledTemplate = () => {
       value={value}
       onChange={(value: any) => {
         console.log(value);
-        // setValue([value[0].str, value[1].str]);
+        setValue([value[0].str, value[1].str]);
       }}
       prefix={['From', 'To']}
       suffix="$"
