@@ -183,7 +183,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <Navigation aria-label="Breadcrumb" {...props}>
-      <Wrapper ref={wrapperRef} mobile={mobile} role="list">
+      <Wrapper ref={wrapperRef} $mobile={mobile} role="list">
         {mobile ? (
           <>
             {renderFirstItem()}
@@ -194,7 +194,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
           <>
             {renderFirstItem()}
             {renderHiddenItems()}
-            <OverflowContentWrapper dimension={dimension} data-overflow>
+            <OverflowContentWrapper $dimension={dimension} data-overflow>
               <OverflowContent ref={overflowRef}>
                 {renderVisibleItems()}
                 {renderLastItem()}

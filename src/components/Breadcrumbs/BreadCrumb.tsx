@@ -4,9 +4,9 @@ import { typography } from '#src/components/Typography';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
-const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
-  ${({ dimension }) => {
-    switch (dimension) {
+const getTypography = css<{ $dimension: BreadcrumbsProps['dimension'] }>`
+  ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return typography['Caption/Caption 1'];
       case 'm':
@@ -18,7 +18,7 @@ const getTypography = css<{ dimension: BreadcrumbsProps['dimension'] }>`
   }}
 `;
 
-export const Crumb = styled.li<{ dimension: BreadcrumbsProps['dimension'] }>`
+export const Crumb = styled.li<{ $dimension: BreadcrumbsProps['dimension'] }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -103,7 +103,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & Inte
     const tooltip = text.length > 40;
 
     return (
-      <Crumb ref={ref} dimension={dimension} {...props}>
+      <Crumb ref={ref} $dimension={dimension} {...props}>
         <CrumbAnchor
           {...(active ? { href: url } : {})}
           as={active ? linkAs : 'span'}

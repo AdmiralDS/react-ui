@@ -22,7 +22,7 @@ export const Navigation = styled.nav`
   max-width: 800px;
 `;
 
-export const Wrapper = styled.ol<{ mobile?: boolean }>`
+export const Wrapper = styled.ol<{ $mobile?: boolean }>`
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -34,7 +34,7 @@ export const Wrapper = styled.ol<{ mobile?: boolean }>`
   padding: 0;
   margin: 0;
   flex-wrap: nowrap;
-  overflow-x: ${({ mobile }) => (mobile ? 'scroll' : 'visible')};
+  overflow-x: ${({ $mobile }) => ($mobile ? 'scroll' : 'visible')};
   overflow-y: visible;
   &::-webkit-scrollbar {
     width: 0 !important;
@@ -54,11 +54,11 @@ export const Wrapper = styled.ol<{ mobile?: boolean }>`
   }
 `;
 
-export const OverflowContentWrapper = styled.li<{ dimension: BreadcrumbsProps['dimension'] }>`
+export const OverflowContentWrapper = styled.li<{ $dimension: BreadcrumbsProps['dimension'] }>`
   display: flex;
   overflow: hidden;
-  height: ${({ dimension }) => (dimension === 'l' ? 28 : 24)}px;
-  max-height: ${({ dimension }) => (dimension === 'l' ? 28 : 24)}px;
+  height: ${({ $dimension }) => ($dimension === 'l' ? 28 : 24)}px;
+  max-height: ${({ $dimension }) => ($dimension === 'l' ? 28 : 24)}px;
   width: 100%;
 `;
 
