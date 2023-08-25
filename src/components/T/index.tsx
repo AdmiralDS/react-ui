@@ -1,5 +1,7 @@
+import type { FC } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
+
 import { typography } from '#src/components/Typography';
 import type { ColorName } from '#src/components/themes';
 import { DefaultFontColorName } from '#src/components/themes';
@@ -23,18 +25,27 @@ const skeletonMixin = css`
   pointer-events: none;
 `;
 
-export const T = styled.span<TProps>`
-  color: ${({ color, theme, skeleton }) =>
-    skeleton
+const Tspan = styled.span<{
+  $font: FontName;
+  $color?: ColorName;
+  $cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $skeleton?: boolean;
+}>`
+  color: ${({ $color, theme, $skeleton }) =>
+    $skeleton
       ? 'transparent'
-      : color
-      ? theme.color[color]
-        ? theme.color[color]
-        : color
+      : $color
+      ? theme.color[$color]
+        ? theme.color[$color]
+        : $color
       : theme.color[DefaultFontColorName]};
-  ${(p) => typography[p.font]};
-  ${(p) => (p.cssMixin ? p.cssMixin : '')}
-  ${(p) => p.skeleton && skeletonMixin}
+  ${(p) => typography[p.$font]};
+  ${(p) => (p.$cssMixin ? p.$cssMixin : '')}
+  ${(p) => p.$skeleton && skeletonMixin}
 `;
+
+export const T: FC<TProps> = ({ font, color, cssMixin, skeleton, ...props }) => {
+  return <Tspan {...props} $font={font} $color={color} $cssMixin={cssMixin} $skeleton={skeleton} />;
+};
 
 T.displayName = 'T';
