@@ -10,13 +10,13 @@ import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/com
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{
-  alignSelf?: string;
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $alignSelf?: string;
+  $dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
   flex: 0 0 auto;
-  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf};` : '')};
+  ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf};` : '')};
   max-width: calc(100vw - 32px);
   opacity: 0;
   transition-delay: 200ms;
@@ -26,7 +26,7 @@ const Container = styled.div<{
     border: 2px solid blue;
   }
 
-  ${(p) => p.dropContainerCssMixin}
+  ${(p) => p.$dropContainerCssMixin}
 `;
 
 const FakeTarget = styled.div`
@@ -35,9 +35,9 @@ const FakeTarget = styled.div`
   flex: 0 0 auto;
 `;
 
-const Portal = styled(PositionInPortal)<{ reverse: boolean }>`
+const Portal = styled(PositionInPortal)<{ $reverse: boolean }>`
   display: flex;
-  flex-direction: ${(p) => (p.reverse ? 'column-reverse' : 'column')};
+  flex-direction: ${(p) => (p.$reverse ? 'column-reverse' : 'column')};
   flex-wrap: nowrap;
 `;
 
@@ -80,7 +80,18 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
 }
 
 export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(
-  ({ targetRef, targetElement, onClickOutside = () => null, className = '', ...props }, ref) => {
+  (
+    {
+      targetRef,
+      targetElement,
+      onClickOutside = () => null,
+      className = '',
+      alignSelf,
+      dropContainerCssMixin,
+      ...props
+    },
+    ref,
+  ) => {
     const containerRef = React.useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = React.useState(false);
 
@@ -116,7 +127,7 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
           if (displayUpward) setDisplayUpward(false);
         }
 
-        if (props.alignSelf && props.alignSelf !== 'auto') return;
+        if (alignSelf && alignSelf !== 'auto') return;
 
         const rectWidth = rect.right - rect.left;
 
@@ -165,9 +176,15 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     return (
       <>
-        <Portal targetElement={targetNode} reverse={displayUpward} rootRef={rootRef}>
+        <Portal targetElement={targetNode} $reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
-          <Container ref={refSetter(ref, containerRef)} {...props} className={className + ' dropdown-container'} />
+          <Container
+            ref={refSetter(ref, containerRef)}
+            {...props}
+            className={className + ' dropdown-container'}
+            $alignSelf={alignSelf}
+            $dropContainerCssMixin={dropContainerCssMixin}
+          />
         </Portal>
       </>
     );
