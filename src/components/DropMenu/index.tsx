@@ -10,13 +10,13 @@ import { Menu } from '#src/components/Menu';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 
-const StyledMenu = styled(Menu)<{ width?: string }>`
-  width: ${({ width }) => (width ? width : 'auto')};
+const StyledMenu = styled(Menu)<{ $width?: string }>`
+  width: ${({ $width }) => ($width ? $width : 'auto')};
 `;
 const DropMenuContainer = styled(StyledDropdownContainer)<{
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
-  ${(p) => p.dropContainerCssMixin || ''}
+  ${(p) => p.$dropContainerCssMixin || ''}
 `;
 
 export interface RenderContentProps {
@@ -228,14 +228,14 @@ export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
             alignSelf={alignSelf}
             targetElement={targetElement || alignMenuRef?.current || btnRef.current}
             onClickOutside={clickOutside}
-            dropContainerCssMixin={dropContainerCssMixin}
+            $dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
             {...props}
           >
             <StyledMenu
               maxHeight={menuMaxHeight}
-              width={menuWidth}
+              $width={menuWidth}
               model={items}
               selected={selected}
               onSelectItem={handleSelectItem}
