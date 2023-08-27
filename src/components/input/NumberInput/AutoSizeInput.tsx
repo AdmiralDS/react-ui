@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, forwardRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect, forwardRef, useEffect } from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -202,7 +202,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       minValue,
       iconCount,
       align,
-      onChange,
       innerValue,
       ...props
     },
@@ -254,8 +253,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       const cursor = selectionStart || 0;
       const init_value = value || '';
       const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
-
-      // updateHiddenContent(newValue);
 
       if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
         // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
@@ -312,13 +309,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       }
     }, [inputRef.current, placeholder, precision, decimal, thousand, minValue]);
 
-    // useLayoutEffect(() => {
-    //   if (inputRef.current) {
-    //     updateHiddenContent(inputRef.current.value);
-    //     updatePrefixSuffixState(inputRef.current.value);
-    //   }
-    // }, [props.value, props.defaultValue, placeholder, inputRef.current, sizerRef.current]);
-
     useLayoutEffect(() => {
       updateHiddenContent(innerValue);
       updatePrefixSuffixState(innerValue);
@@ -362,12 +352,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       }
     }, [suffixRef.current, inputRef.current, showPrefixSuffix, suffix, align]);
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //   // updateHiddenContent(e.target.value);
-    //   // updatePrefixSuffixState(e.target.value);
-    //   onChange?.(e);
-    // };
-
     return (
       <>
         <HiddenContent iconCount={iconCount} dimension={props.dimension}>
@@ -376,7 +360,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
               {prefix}&nbsp;
             </Prefix>
           )}
-          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} data-value={props.value} />
+          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
           {suffix && showPrefixSuffix && (
             <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
               &nbsp;{suffix}
@@ -385,8 +369,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         </HiddenContent>
         <Input
           {...props}
-          // onChange={handleChange}
-          onChange={onChange}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}
           type="text"
