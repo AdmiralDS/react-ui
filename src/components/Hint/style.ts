@@ -5,11 +5,11 @@ import { PositionInPortal } from '#src/components/PositionInPortal';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-export const AnchorWrapper = styled.div<{ anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
+export const AnchorWrapper = styled.div<{ $anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
   display: inline-block;
   position: relative;
   cursor: pointer;
-  ${(p) => (p.anchorCssMixin ? p.anchorCssMixin : '')}
+  ${(p) => (p.$anchorCssMixin ? p.$anchorCssMixin : '')}
 `;
 
 const CLOSE_BUTTON_SIZE = 20;
@@ -28,11 +28,11 @@ const HINT_WIDTH_M = '384px';
 const HINT_WIDTH_L = '488px';
 const HINT_WIDTH_MOBILE = 'calc(100vw - 32px)';
 
-const sizes = css<{ dimension: Dimension; isMobile: boolean }>`
-  width: ${({ dimension, isMobile }) => {
-    if (isMobile) return HINT_WIDTH_MOBILE;
-    if (dimension === 's') return HINT_WIDTH_S;
-    if (dimension === 'm') return HINT_WIDTH_M;
+const sizes = css<{ $dimension: Dimension; $isMobile: boolean }>`
+  width: ${({ $dimension, $isMobile }) => {
+    if ($isMobile) return HINT_WIDTH_MOBILE;
+    if ($dimension === 's') return HINT_WIDTH_S;
+    if ($dimension === 'm') return HINT_WIDTH_M;
     return HINT_WIDTH_L;
   }};
 `;
@@ -53,8 +53,8 @@ export const HintWrapper = styled.div`
 `;
 
 export const HintDialog = styled.div<{
-  dimension: Dimension;
-  isMobile: boolean;
+  $dimension: Dimension;
+  $isMobile: boolean;
 }>`
   display: flex;
   padding: 4px 0;
@@ -79,10 +79,10 @@ export const HintContent = styled.div`
   }
 `;
 
-export const Portal = styled(PositionInPortal)<{ flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
-  ${({ flexDirection }) => (flexDirection ? `flex-direction: ${flexDirection};` : 'flex-direction: column;')}
+  ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
   z-index: ${({ theme }) => theme.zIndex.hint};
 `;
 

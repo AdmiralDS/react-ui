@@ -260,14 +260,14 @@ export const Hint: React.FC<HintProps> = ({
       ref={anchorElementRef}
       className={anchorClassName}
       id={anchorId}
-      anchorCssMixin={anchorCssMixin}
+      $anchorCssMixin={anchorCssMixin}
     >
       {children}
       {visible && (
         <Portal
           targetElement={targetElement}
           rootRef={rootRef}
-          flexDirection={portalFlexDirection}
+          $flexDirection={portalFlexDirection}
           fullContainerWidth={portalFullWidth}
         >
           <FakeTarget />
