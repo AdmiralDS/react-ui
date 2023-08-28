@@ -1,5 +1,4 @@
-import * as React from 'react';
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled from 'styled-components';
 import type { MenuDimensions } from '#src/components/Menu/index';
@@ -21,10 +20,10 @@ const MenuActionsPanelDiv = styled.div<{
 export interface MenuActionsPanelProps {
   dimension: MenuDimensions;
   menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const MenuActionsPanel: FC<MenuActionsPanelProps> = ({ dimension, menuActionsPanelCssMixin, ...props }) => {
+export const MenuActionsPanel = ({ dimension, menuActionsPanelCssMixin, ...props }: MenuActionsPanelProps) => {
   return <MenuActionsPanelDiv {...props} $dimension={dimension} $menuActionsPanelCssMixin={menuActionsPanelCssMixin} />;
 };
 

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ReactNode } from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
 
@@ -10,6 +10,7 @@ import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 export type FontName = keyof typeof typography;
 
 export interface TProps {
+  children: ReactNode;
   /**  Имя шрифта из списка дизайн системы */
   font: FontName;
   /** Имя цвета шрифта из палитры темы **/
@@ -44,7 +45,7 @@ const Tspan = styled.span<{
   ${(p) => p.$skeleton && skeletonMixin}
 `;
 
-export const T: FC<TProps> = ({ font, color, cssMixin, skeleton, ...props }) => {
+export const T = ({ font, color, cssMixin, skeleton, ...props }: TProps) => {
   return <Tspan {...props} $font={font} $color={color} $cssMixin={cssMixin} $skeleton={skeleton} />;
 };
 
