@@ -8,10 +8,10 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -26,7 +26,7 @@ export const ChipsSelectTemplate = (props: ChipsProps) => {
   const [selectedS, setSelectedS] = React.useState('');
   return (
     <>
-      <WrapperChip dimension={props.dimension}>
+      <WrapperChip $dimension={props.dimension}>
         {listData.map((item) => (
           <Chips
             {...props}
@@ -39,7 +39,7 @@ export const ChipsSelectTemplate = (props: ChipsProps) => {
         ))}
       </WrapperChip>
       <Separator />
-      <WrapperChip dimension="s">
+      <WrapperChip $dimension="s">
         {listData.map((item) => (
           <Chips
             {...props}

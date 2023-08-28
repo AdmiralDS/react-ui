@@ -14,10 +14,10 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -53,7 +53,7 @@ export const ChipsMultiSelectTemplate = (props: ChipsProps) => {
 
   return (
     <>
-      <WrapperChip dimension={props.dimension}>
+      <WrapperChip $dimension={props.dimension}>
         {listM.map((item) => (
           <Chips
             {...props}
@@ -66,7 +66,7 @@ export const ChipsMultiSelectTemplate = (props: ChipsProps) => {
         ))}
       </WrapperChip>
       <Separator />
-      <WrapperChip dimension="s">
+      <WrapperChip $dimension="s">
         {listS.map((item) => (
           <Chips
             {...props}
