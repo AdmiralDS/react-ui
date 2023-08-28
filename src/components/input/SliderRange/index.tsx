@@ -99,22 +99,12 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
 
   const [slider1, setSlider1] = React.useState(minValue);
   const [slider2, setSlider2] = React.useState(maxValue);
-  const [controlled, setControlled] = React.useState(false);
-
   const [innerInput1State, setInnerInput1State] = React.useState(defaultValue?.[0] || '');
   const [innerInput2State, setInnerInput2State] = React.useState(defaultValue?.[1] || '');
   const input1 = value?.[0] || innerInput1State;
   const input2 = value?.[1] || innerInput2State;
 
   const getFull = (str: string | number) => fitToCurrency(String(str), precision, '.', thousand, true);
-
-  React.useEffect(() => {
-    if (typeof value !== 'undefined') {
-      setControlled(true);
-    } else {
-      setControlled(false);
-    }
-  }, [value]);
 
   React.useEffect(() => {
     if (input1 === '') {
@@ -187,9 +177,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   };
   const handleInput1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSlider1 = Number(clearValue(event.target.value, precision) || minValue);
-    if (!controlled) {
-      setInnerInput1State(event.target.value);
-    }
+    setInnerInput1State(event.target.value);
     onChange?.([
       { str: event.target.value, num: newSlider1 },
       { str: input2, num: slider2 },
@@ -197,9 +185,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   };
   const handleInput2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSlider2 = Number(clearValue(event.target.value, precision) || maxValue);
-    if (!controlled) {
-      setInnerInput2State(event.target.value);
-    }
+    setInnerInput2State(event.target.value);
     onChange?.([
       { str: input1, num: slider1 },
       { str: event.target.value, num: newSlider2 },
