@@ -185,8 +185,6 @@ const columnList1: Column[] = [
     title: 'Дата сделки',
     width: 150,
     draggable: true,
-    renderFilter: () => <div>Пример кастомизации иконки фильтра с помощью функции renderFilterIcon</div>,
-    onFilterMenuClickOutside: ({ closeMenu }: any) => closeMenu(),
   },
   {
     name: 'transfer_amount',
