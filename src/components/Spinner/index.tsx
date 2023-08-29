@@ -36,9 +36,9 @@ const getIcon = (dimension: Dimension) => {
   }
 };
 
-const sizes = css<{ dimension: Dimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+const sizes = css<{ $dimension: Dimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '16px';
       case 'ms':
@@ -52,8 +52,8 @@ const sizes = css<{ dimension: Dimension }>`
         return '48px';
     }
   }};
-  height: ${({ dimension }) => {
-    switch (dimension) {
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '16px';
       case 'ms':
@@ -79,28 +79,35 @@ const spin = keyframes`
 `;
 
 const SpinnerWrapper = styled.div<{
-  inverse: boolean;
-  dimension: Dimension;
-  svgMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $inverse: boolean;
+  $dimension: Dimension;
+  $svgMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }>`
   position: relative;
 
   ${sizes};
 
   & svg {
-    ${(p) => p.svgMixin || ''}
+    ${(p) => p.$svgMixin || ''}
     animation: ${spin} 1s linear infinite;
     path {
-      fill: ${({ inverse, theme }) =>
-        inverse ? theme.color['Special/Static White'] : theme.color['Primary/Primary 60 Main']};
+      fill: ${({ $inverse, theme }) =>
+        $inverse ? theme.color['Special/Static White'] : theme.color['Primary/Primary 60 Main']};
     }
   }
 `;
 
-export const Spinner = ({ dimension = 'm', inverse = false, ...props }: SpinnerProps) => {
+export const Spinner = ({ dimension = 'm', inverse = false, svgMixin, ...props }: SpinnerProps) => {
   const SpinnerIcon = getIcon(dimension);
   return (
-    <SpinnerWrapper inverse={inverse} dimension={dimension} role="alert" aria-live="assertive" {...props}>
+    <SpinnerWrapper
+      $inverse={inverse}
+      $dimension={dimension}
+      $svgMixin={svgMixin}
+      role="alert"
+      aria-live="assertive"
+      {...props}
+    >
       <SpinnerIcon />
     </SpinnerWrapper>
   );
