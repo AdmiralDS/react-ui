@@ -61,33 +61,33 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
   height: 16px;
 `;
 
-const stylesByStatusCssMixin = css<{ status?: Status }>`
-  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.status)]};
-  color: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+const stylesByStatusCssMixin = css<{ $status?: Status }>`
+  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.$status)]};
+  color: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
 `;
 
-const StatusPill = styled(Pill).attrs<{ status?: Status }>((p) => ({
-  'data-status': p.status,
-}))<{ status?: Status }>`
+const StatusPill = styled(Pill).attrs<{ $status?: Status }>((p) => ({
+  'data-status': p.$status,
+}))<{ $status?: Status }>`
   ${stylesByStatusCssMixin}
 
   > ${HeartOutlinePillIcon} *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
   }
 `;
 
-const StyledPillIcon = styled.div<{ status?: Status }>`
+const StyledPillIcon = styled.div<{ $status?: Status }>`
   display: inline;
   width: 16px;
   height: 16px;
 
   *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
   }
 
   &:hover {
     & *[fill^='#'] {
-      fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+      fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
     }
   }
 `;
@@ -128,13 +128,13 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
           <StatusPill
             {...props}
             ref={refSetter(ref, buttonRef as React.Ref<HTMLDivElement>)}
-            status={selectedPill?.status}
+            $status={selectedPill?.status}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
           >
-            {selectedPill?.icon && <StyledPillIcon status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>}
+            {selectedPill?.icon && <StyledPillIcon $status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>}
             {selectedPill?.label}
-            <StyledPillIcon status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
+            <StyledPillIcon $status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
           </StatusPill>
         );
       }}

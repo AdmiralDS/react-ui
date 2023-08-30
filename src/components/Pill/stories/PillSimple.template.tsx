@@ -58,18 +58,18 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
   height: 16px;
 `;
 
-const stylesByStatusCssMixin = css<{ status?: Status }>`
-  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.status)]};
-  color: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+const stylesByStatusCssMixin = css<{ $status?: Status }>`
+  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.$status)]};
+  color: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
 `;
 
-const StatusPill = styled(Pill).attrs<{ status?: Status }>((p) => ({
-  'data-status': p.status,
-}))<{ status?: Status }>`
+const StatusPill = styled(Pill).attrs<{ $status?: Status }>((p) => ({
+  'data-status': p.$status,
+}))<{ $status?: Status }>`
   ${stylesByStatusCssMixin}
 
   > ${HeartOutlinePillIcon} *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
   }
 `;
 
@@ -99,14 +99,14 @@ export const PillSimpleTemplate = (props: any) => {
             они использованы для создания Pill с дропдауном и Nested Pills.
           </Desc>
           <Pills>
-            <StatusPill status="Success">
+            <StatusPill $status="Success">
               <HeartOutlinePillIcon />
               <span>Playground</span>
             </StatusPill>
-            <StatusPill status="Error">Playground</StatusPill>
-            <StatusPill status="Warning">Playground</StatusPill>
-            <StatusPill status="Special">Playground</StatusPill>
-            <StatusPill status="Attention">Playground</StatusPill>
+            <StatusPill $status="Error">Playground</StatusPill>
+            <StatusPill $status="Warning">Playground</StatusPill>
+            <StatusPill $status="Special">Playground</StatusPill>
+            <StatusPill $status="Attention">Playground</StatusPill>
             <StatusPill>Playground</StatusPill>
           </Pills>
         </WrapperVertical>
