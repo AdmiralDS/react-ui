@@ -83,56 +83,56 @@ export const StepContentWrapper = styled.span`
   }
 `;
 
-const clickableCss = css<{ error?: boolean; warning?: boolean }>`
+const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover svg {
     path {
-      fill: ${({ error, warning, theme }) => {
-        if (error) return theme.color['Error/Error 70'];
-        if (warning) return theme.color['Warning/Warning 70'];
+      fill: ${({ $error, $warning, theme }) => {
+        if ($error) return theme.color['Error/Error 70'];
+        if ($warning) return theme.color['Warning/Warning 70'];
         return theme.color['Primary/Primary 70'];
       }};
     }
   }
 `;
 
-const clickableNotActiveCss = css<{ error?: boolean; warning?: boolean }>`
+const clickableNotActiveCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover ${StepRail} {
-    background-color: ${({ error, warning, theme }) => {
-      if (error) return theme.color['Error/Error 70'];
-      if (warning) return theme.color['Warning/Warning 70'];
+    background-color: ${({ $error, $warning, theme }) => {
+      if ($error) return theme.color['Error/Error 70'];
+      if ($warning) return theme.color['Warning/Warning 70'];
       return theme.color['Primary/Primary 70'];
     }};
   }
 `;
 
 export const StepWrapper = styled.li<{
-  orientation: Orientation;
-  clickable: boolean;
-  error?: boolean;
-  warning?: boolean;
-  active?: boolean;
-  stepWidth?: number | string;
-  stepsAmount: number;
-  mobile?: boolean;
+  $orientation: Orientation;
+  $clickable: boolean;
+  $error?: boolean;
+  $warning?: boolean;
+  $active?: boolean;
+  $stepWidth?: number | string;
+  $stepsAmount: number;
+  $mobile?: boolean;
 }>`
   display: flex;
   position: relative;
   box-sizing: border-box;
-  width: ${({ orientation, stepWidth, stepsAmount, mobile }) => {
-    if (stepWidth) return `${typeof stepWidth === 'number' ? `${stepWidth}px` : stepWidth}`;
-    if (mobile) return orientation === 'horizontal' ? '188px' : '224px';
-    return orientation === 'horizontal' ? `${100 / stepsAmount}%` : '100%';
+  width: ${({ $orientation, $stepWidth, $stepsAmount, $mobile }) => {
+    if ($stepWidth) return `${typeof $stepWidth === 'number' ? `${$stepWidth}px` : $stepWidth}`;
+    if ($mobile) return $orientation === 'horizontal' ? '188px' : '224px';
+    return $orientation === 'horizontal' ? `${100 / $stepsAmount}%` : '100%';
   }};
-  ${({ mobile }) => mobile && 'flex-shrink: 0;'}
+  ${({ $mobile }) => $mobile && 'flex-shrink: 0;'}
   background: none;
   padding: 0;
   margin: 0;
   text-align: left;
   border: none;
   text-decoration: none;
-  ${({ clickable }) => clickable && 'cursor: pointer;'}
-  ${({ clickable }) => clickable && clickableCss}
-  ${({ clickable, active }) => clickable && !active && clickableNotActiveCss}
+  ${({ $clickable }) => $clickable && 'cursor: pointer;'}
+  ${({ $clickable }) => $clickable && clickableCss}
+  ${({ $clickable, $active }) => $clickable && !$active && clickableNotActiveCss}
 
     &:focus {
     outline: none;
@@ -153,21 +153,21 @@ export const StepWrapper = styled.li<{
   }
 `;
 
-export const ContentWrapper = styled.div<{ withTooltip: boolean }>`
+export const ContentWrapper = styled.div<{ $withTooltip: boolean }>`
   display: flex;
   width: 100%;
-  ${({ withTooltip }) => withTooltip && 'cursor: pointer;'}
+  ${({ $withTooltip }) => $withTooltip && 'cursor: pointer;'}
   [data-orientation='vertical'] & {
     margin: 0 0 20px 0;
   }
 `;
 
-export const Content = styled.div<{ lineClamp: 1 | 2 | 3 }>`
+export const Content = styled.div<{ $lineClamp: 1 | 2 | 3 }>`
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: ${({ lineClamp }) => {
-    if (lineClamp === 1) return 1;
-    if (lineClamp === 2) return 2;
+  -webkit-line-clamp: ${({ $lineClamp }) => {
+    if ($lineClamp === 1) return 1;
+    if ($lineClamp === 2) return 2;
     return 3;
   }};
   overflow: hidden;
@@ -179,14 +179,14 @@ export const Content = styled.div<{ lineClamp: 1 | 2 | 3 }>`
   margin: 0 12px 0 0;
 `;
 
-export const List = styled.ul<{ orientation?: Orientation }>`
+export const List = styled.ul<{ $orientation?: Orientation }>`
   position: relative;
   display: flex;
   box-sizing: border-box;
   scroll-behavior: smooth;
   padding: 0;
-  ${({ orientation }) =>
-    orientation === 'horizontal'
+  ${({ $orientation }) =>
+    $orientation === 'horizontal'
       ? `
 flex-direction: row;
 overflow-x: scroll;
