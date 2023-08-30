@@ -24,10 +24,10 @@ import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
 } from '#src/components/TabMenu/constants';
 
-export const IconWrapper = styled.div<{ dimension: Dimension }>`
-  ${({ dimension }) => `
-    width: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;
-    height: ${dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;`}
+export const IconWrapper = styled.div<{ $dimension: Dimension }>`
+  ${({ $dimension }) => `
+    width: ${$dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;
+    height: ${$dimension === 'l' ? ICON_SIZE_L : ICON_SIZE_M}px;`}
   margin-right: 8px;
 `;
 
@@ -44,19 +44,19 @@ export const MenuItemWrapper = styled.div`
   align-items: center;
 `;
 
-export const Wrapper = styled.div<{ underline?: boolean; mobile?: boolean; dimension?: Dimension }>`
+export const Wrapper = styled.div<{ $underline?: boolean; $mobile?: boolean; $dimension?: Dimension }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: ${({ mobile }) => (mobile ? 'nowrap' : 'wrap')};
+  flex-wrap: ${({ $mobile }) => ($mobile ? 'nowrap' : 'wrap')};
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, underline }) => (underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
-  overflow: ${({ mobile }) => (mobile ? 'scroll' : 'hidden')};
+  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, $underline }) => ($underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
+  overflow: ${({ $mobile }) => ($mobile ? 'scroll' : 'hidden')};
 
-  height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
-  max-height: ${({ dimension }) => (dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  height: ${({ $dimension }) => ($dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
+  max-height: ${({ $dimension }) => ($dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
 
   &::-webkit-scrollbar {
     width: 0 !important;
@@ -86,27 +86,27 @@ export const TabContent = styled.div`
   white-space: nowrap;
 `;
 
-export const TabContentWrapper = styled.span<{ dimension: Dimension }>`
+export const TabContentWrapper = styled.span<{ $dimension: Dimension }>`
   position: relative;
   display: inline-flex;
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: ${({ dimension }) => (dimension === 'l' ? TAB_PADDING_L : TAB_PADDING_M)};
+  padding: ${({ $dimension }) => ($dimension === 'l' ? TAB_PADDING_L : TAB_PADDING_M)};
 `;
 
-export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
+export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  height: ${({ dimension }) => (dimension === 'm' ? TAB_HEIGHT_M : TAB_HEIGHT_L)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? TAB_HEIGHT_M : TAB_HEIGHT_L)}px;
   padding: 0;
   background: transparent;
   appearance: none;
   border: none;
-  color: ${(p) => (p.selected ? p.theme.color['Neutral/Neutral 90'] : p.theme.color['Neutral/Neutral 50'])};
-  ${({ dimension }) => (dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  color: ${(p) => (p.$selected ? p.theme.color['Neutral/Neutral 90'] : p.theme.color['Neutral/Neutral 50'])};
+  ${({ $dimension }) => ($dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -133,8 +133,8 @@ export const Tab = styled.button<{ dimension: Dimension; selected: boolean }>`
     & *[fill^='#'] {
       fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
     }
-    width: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
-    height: ${({ dimension }) => (dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
+    width: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
+    height: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
     margin-right: ${ICON_MARGIN};
   }
   & [data-badge] {
@@ -160,21 +160,21 @@ const getOffset = (dimension: Dimension) => {
   return dimension === 'l' ? TAB_LEFT_OFFSET_L : TAB_LEFT_OFFSET_M;
 };
 
-export const TabWrapper = styled.div<{ $needsOffset: boolean; dimension: Dimension }>`
+export const TabWrapper = styled.div<{ $needsOffset: boolean; $dimension: Dimension }>`
   display: flex;
   align-items: center;
 
-  margin-left: ${({ $needsOffset, dimension }) => ($needsOffset ? getOffset(dimension) : 0)}px;
+  margin-left: ${({ $needsOffset, $dimension }) => ($needsOffset ? getOffset($dimension) : 0)}px;
 `;
 
-export const OverflowMenuContainer = styled.div<{ isHidden?: boolean; dimension?: Dimension }>`
-  visibility: ${({ isHidden }) => (isHidden ? 'hidden' : 'visible')};
-  ${({ dimension }) => `
-    width: ${dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
-    height: ${dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
+export const OverflowMenuContainer = styled.div<{ $isHidden?: boolean; $dimension?: Dimension }>`
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  ${({ $dimension }) => `
+    width: ${$dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
+    height: ${$dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M};
   `}
 `;
-export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; dimension?: Dimension }>`
+export const StyledOverflowMenu = styled(OverflowMenu)<{ $isActive: boolean; dimension?: Dimension }>`
   margin: ${(p) => (p.dimension === 'l' ? OVERFLOW_MENU_MARGIN_L : OVERFLOW_MENU_MARGIN_M)};
   &:focus-visible {
     outline-offset: ${(p) => (p.dimension === 'l' ? FOCUS_BORDER_OFFSET_L : FOCUS_BORDER_OFFSET_M)};
@@ -183,8 +183,8 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{ isActive: boolean; dime
 
   & svg {
     & *[fill^='#'] {
-      fill: ${({ theme, isActive: isActive }) =>
-        isActive ? theme.color['Primary/Primary 60 Main'] : theme.color['Neutral/Neutral 50']};
+      fill: ${({ theme, $isActive }) =>
+        $isActive ? theme.color['Primary/Primary 60 Main'] : theme.color['Neutral/Neutral 50']};
     }
   }
 `;

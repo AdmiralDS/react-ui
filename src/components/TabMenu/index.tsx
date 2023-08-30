@@ -1,5 +1,7 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
+import { createRef, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties, FC, HTMLAttributes, ReactNode, RefObject, MouseEvent, KeyboardEvent } from 'react';
+import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+
 import { keyboardKey } from '../common/keyboardKey';
 import { Badge } from '#src/components/Badge';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
@@ -19,28 +21,27 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 
-export interface TabProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'content'> {
+export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Контент вкладки */
-  content: React.ReactNode;
+  content: ReactNode;
   /** Id вкладки */
   id: string;
   /** Иконка, располагается слева от content */
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   /** Число, которое будет отображено в компоненте Badge справа от content */
   badge?: number;
   /** Отключение вкладки */
   disabled?: boolean;
 }
 
-type TabWithRefProps = TabProps & { ref: React.RefObject<HTMLButtonElement> };
+type TabWithRefProps = TabProps & { ref: RefObject<HTMLButtonElement> };
 type OverflowMenuRefProps = {
-  ref: React.RefObject<HTMLButtonElement>;
+  ref: RefObject<HTMLButtonElement>;
   isVisible: boolean;
 };
 
-export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Список вкладок */
   tabs: Array<TabProps>;
   /** Id активной вкладки */
@@ -63,7 +64,7 @@ export interface TabMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   dropContainerStyle?: CSSProperties;
 }
 
-export const TabMenu: React.FC<TabMenuProps> = ({
+export const TabMenu: FC<TabMenuProps> = ({
   tabs,
   dimension = 'l',
   underline = false,
@@ -76,9 +77,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   dropContainerStyle,
   ...props
 }) => {
-  const [openedMenu, setOpenedMenu] = React.useState(false);
+  const [openedMenu, setOpenedMenu] = useState(false);
   // state for visible tabs in !mobile mode
-  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>(
+  const [visibilityMap, setVisibilityMap] = useState<{ [index: number | string]: boolean }>(
     tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
       initialMap[index] = true;
       return initialMap;
@@ -86,27 +87,27 @@ export const TabMenu: React.FC<TabMenuProps> = ({
   );
 
   // add refs to tabs
-  const tabsWithRef: Array<TabWithRefProps> = React.useMemo(() => {
-    return tabs.map((tab) => ({ ...tab, ref: React.createRef<HTMLButtonElement>() }));
+  const tabsWithRef: Array<TabWithRefProps> = useMemo(() => {
+    return tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   }, [tabs]);
 
   // add refs to OverflowMenus
-  const overflowMenuRefs: Array<OverflowMenuRefProps> = React.useMemo(() => {
+  const overflowMenuRefs: Array<OverflowMenuRefProps> = useMemo(() => {
     return tabs.slice(0, tabs.length - 1).map((_, index) => ({
-      ref: React.createRef<HTMLButtonElement>(),
+      ref: createRef<HTMLButtonElement>(),
       isVisible: visibilityMap[index] && !visibilityMap[index + 1],
     }));
   }, [tabs, visibilityMap]);
 
   // ref to visible OverflowMenu
-  const currentOverflowMenuRef = React.useMemo(() => {
+  const currentOverflowMenuRef = useMemo(() => {
     const visibleMenu = overflowMenuRefs.find((item) => item.isVisible);
     return visibleMenu ? visibleMenu.ref : null;
   }, [overflowMenuRefs, visibilityMap]);
 
   // collection of visible elements for handleKeyDown
-  const visibleRefsMap = React.useMemo(() => {
-    let refsMap: Array<React.RefObject<HTMLButtonElement>> = [];
+  const visibleRefsMap = useMemo(() => {
+    let refsMap: Array<RefObject<HTMLButtonElement>> = [];
     if (!mobile) {
       tabsWithRef.forEach((item, index) => {
         if (visibilityMap[index]) {
@@ -122,24 +123,24 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return refsMap;
   }, [visibilityMap, tabsWithRef, currentOverflowMenuRef, overflowMenuRefs, mobile]);
 
-  const tablistRef = React.useRef<HTMLDivElement | null>(null);
-  const underlineRef = React.useRef<HTMLDivElement | null>(null);
+  const tablistRef = useRef<HTMLDivElement | null>(null);
+  const underlineRef = useRef<HTMLDivElement | null>(null);
 
   // defines if activeTab is visible or is in OverflowMenu in !mobile mode
-  const activeTabIsVisible: boolean = React.useMemo(() => {
+  const activeTabIsVisible: boolean = useMemo(() => {
     const activeTabIndex = tabsWithRef.findIndex((item) => item.id === activeTab);
     return visibilityMap[activeTabIndex];
   }, [tabsWithRef, activeTab, visibilityMap]);
 
   // model of all tabs for OverflowMenus
-  const modelAllTabs = React.useMemo(() => {
+  const modelAllTabs = useMemo(() => {
     return tabsWithRef.map((item) => {
       return {
         id: item.id,
         render: (options: RenderOptionProps) => (
           <MenuItem dimension={dimension} {...options} key={item.id}>
             <MenuItemWrapper>
-              {item.icon && <IconWrapper dimension={dimension}>{item.icon}</IconWrapper>}
+              {item.icon && <IconWrapper $dimension={dimension}>{item.icon}</IconWrapper>}
               {item.content}
               {typeof item.badge !== 'undefined' && (
                 <BadgeWrapper>
@@ -234,10 +235,10 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }
   };
 
-  React.useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, dimension, visibilityMap]);
+  useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, dimension, visibilityMap]);
 
   // recalculation on resize. For example, it happens after fonts loading
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (tablistRef.current?.firstElementChild) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach(() => {
@@ -268,7 +269,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     }));
   };
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, {
       root: tablistRef.current,
       threshold: [0, 1.0],
@@ -282,20 +283,20 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     return () => observer.disconnect();
   }, [tabsWithRef, mobile, setVisibilityMap]);
 
-  const handleTabClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleTabClick = (event: MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     onChange(event.currentTarget.id);
     event.currentTarget.blur();
   };
 
-  const handleTabKeyUp = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+  const handleTabKeyUp = (event: KeyboardEvent<HTMLButtonElement>) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
       onChange(event.currentTarget.id);
     }
   };
 
-  const handleTabsWrapperKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleTabsWrapperKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const { target } = event;
     let newFocusTarget;
 
@@ -337,7 +338,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     const overflowRef = overflowMenuRefs[tabNumber] ? overflowMenuRefs[tabNumber].ref : null;
 
     return (
-      <OverflowMenuContainer dimension={dimension} isHidden={overflowMenuHidden}>
+      <OverflowMenuContainer $dimension={dimension} $isHidden={overflowMenuHidden}>
         <StyledOverflowMenu
           ref={overflowRef}
           onOpen={() => setOpenedMenu(true)}
@@ -346,7 +347,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
           items={overflowMenuHidden ? [] : tabsForMenu}
           selected={containsActiveTab(tabsForMenu) ? activeTab : undefined}
           dimension={dimension}
-          isActive={containsActiveTab(tabsForMenu)}
+          $isActive={containsActiveTab(tabsForMenu)}
           disabled={tabsForMenu.every((tab) => tab.disabled)}
           onChange={(id: string) => {
             onChange(id);
@@ -372,15 +373,15 @@ export const TabMenu: React.FC<TabMenuProps> = ({
         role="tab"
         type="button"
         aria-selected={id === activeTab}
-        selected={id === activeTab}
+        $selected={id === activeTab}
         tabIndex={id === activeTab ? 0 : -1}
-        dimension={dimension}
+        $dimension={dimension}
         disabled={disabled}
         onClick={handleTabClick}
         onKeyUp={handleTabKeyUp}
         {...props}
       >
-        <TabContentWrapper dimension={dimension} tabIndex={-1}>
+        <TabContentWrapper $dimension={dimension} tabIndex={-1}>
           {icon && icon}
           <TabContent>{content}</TabContent>
           {typeof badge !== 'undefined' && (
@@ -404,7 +405,7 @@ export const TabMenu: React.FC<TabMenuProps> = ({
       const needsOffset = !mobile && tabNumber !== 0 && visibilityMap[tabNumber - 1];
 
       return (
-        <TabWrapper key={id} data-number={index} $needsOffset={needsOffset} dimension={dimension}>
+        <TabWrapper key={id} data-number={index} $needsOffset={needsOffset} $dimension={dimension}>
           {renderTab(item)}
           {mobile || tabNumber === tabsWithRef.length - 1 ? null : renderOverflowMenu(id)}
         </TabWrapper>
@@ -416,9 +417,9 @@ export const TabMenu: React.FC<TabMenuProps> = ({
     <Wrapper
       role="tablist"
       ref={tablistRef}
-      underline={underline}
-      mobile={mobile}
-      dimension={dimension}
+      $underline={underline}
+      $mobile={mobile}
+      $dimension={dimension}
       onKeyDown={handleTabsWrapperKeyDown}
       {...props}
     >
