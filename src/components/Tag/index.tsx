@@ -1,4 +1,6 @@
-import * as React from 'react';
+import type { ElementType, HTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+
 import { refSetter } from '../common/utils/refSetter';
 import { checkOverflow } from '../common/utils/checkOverflow';
 import { Tooltip } from '#src/components/Tooltip';
@@ -26,7 +28,7 @@ export interface TagVisualProps {
    */
   statusViaBackground?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
 export interface TagSizeProps {
@@ -38,17 +40,17 @@ export interface TagSizeProps {
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
-  as?: React.ElementType;
+  as?: ElementType;
 }
 
-export interface TagProps extends React.HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
+export interface TagProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
 
 export interface TagInternalProps {
   /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
-  statusIcon?: React.ReactNode;
+  statusIcon?: ReactNode;
 }
 
-export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
+export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
   (
     {
       children,
@@ -63,10 +65,10 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
     },
     ref,
   ) => {
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
-    const textRef = React.useRef<HTMLElement>(null);
-    const [overflow, setOverflow] = React.useState(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState(false);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const textRef = useRef<HTMLElement>(null);
+    const [overflow, setOverflow] = useState(false);
+    const [tooltipVisible, setTooltipVisible] = useState(false);
     const background: TagKind | string =
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
     const border: TagKind | string =
@@ -80,14 +82,14 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
           : 'neutral'
         : (kind as TagKind);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       const element = textRef.current;
       if (element && checkOverflow(element) !== overflow) {
         setOverflow(checkOverflow(element));
       }
     }, [tooltipVisible, setOverflow]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         setTooltipVisible(true);
       }
@@ -113,18 +115,18 @@ export const Tag = React.forwardRef<HTMLElement, TagProps & TagInternalProps>(
       <>
         <Wrapper
           ref={refSetter(ref, wrapperRef)}
-          width={width}
+          $width={width}
           onClick={onClick}
-          clickable={!!onClick}
-          statusViaBackground={statusViaBackground}
-          border={border}
-          background={background}
-          backgroundHover={backgroundHover}
-          dimension={dimension}
+          $clickable={!!onClick}
+          $statusViaBackground={statusViaBackground}
+          $border={border}
+          $background={background}
+          $backgroundHover={backgroundHover}
+          $dimension={dimension}
           type="button"
           {...props}
         >
-          {background !== 'neutral' && !statusViaBackground && <TagCircle background={background} />}
+          {background !== 'neutral' && !statusViaBackground && <TagCircle $background={background} />}
           {statusViaBackground && icon && <Icon>{icon}</Icon>}
           {children && <Text ref={textRef}>{children}</Text>}
           {statusIcon && <StatusIcon>{statusIcon}</StatusIcon>}
