@@ -1,12 +1,10 @@
 import * as React from 'react';
-import packageJson from '../package.json';
 import { useEffect, useState } from 'react';
 import { addons } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
 import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider } from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import LogoSvg from './Logo.svg';
 
 import { initializeRTL } from 'storybook-addon-rtl';
 
@@ -20,11 +18,6 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 initializeRTL();
-
-const customTheme = {
-  brandImage: LogoSvg,
-  brandTitle: `version ${packageJson.version}`,
-};
 
 export const parameters = {
   options: {

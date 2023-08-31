@@ -192,6 +192,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
 
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
    */
@@ -428,7 +429,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
           {children}
         </Container>
         {showTooltip && tooltipVisible && overflowActive && (
-          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetRef={innerContainerRef} />
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetElement={innerContainerRef.current} />
         )}
       </>
     );

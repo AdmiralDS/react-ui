@@ -86,6 +86,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Максимальное количество строк поля в режиме multiple */
   maxRowCount?: number | 'none';
 
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
 
@@ -178,6 +179,8 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   };
   /** Признак принудительного скрытия тултипа, показываемого при переполнении */
   forceHideOverflowTooltip?: boolean;
+  /** Событие, которое вызывается при изменении выбранных опций/опции */
+  onSelectedChange?: (value: string | Array<string>) => void;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -230,6 +233,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       virtualScroll,
       title,
       forceHideOverflowTooltip = false,
+      onSelectedChange,
       ...props
     },
     ref,
@@ -262,15 +266,31 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const fixedHeight = calcRowCount !== 'none';
 
+    const externalValue = value ?? defaultValue;
+    const selectedArray = React.useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
+
+    const unmountedSelectedOptions = React.useRef<Array<string>>([]);
+
+    React.useEffect(() => {
+      if (Array.isArray(value)) selectedArray.current = value;
+    }, [value]);
+
     const selectedOption = React.useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
     );
 
-    const selectedOptions = React.useMemo(
-      () => (multiple ? constantOptions.filter((option) => selectedValue?.includes(option.value)) : []),
-      [constantOptions, selectedValue, multiple],
-    );
+    const selectedOptions = React.useMemo(() => {
+      if (multiple && Array.isArray(selectedValue)) {
+        return selectedValue.reduce((acc: Array<IConstantOption>, item: string) => {
+          const option = constantOptions.find((option) => option.value === item);
+          if (option) acc.push(option);
+          return acc;
+        }, []);
+      } else {
+        return [];
+      }
+    }, [constantOptions, selectedValue, multiple]);
 
     const dropDownModel = React.useMemo<Array<MenuModelItemProps>>(() => {
       const filteredItems = dropDownItems.filter((item) => {
@@ -297,16 +317,21 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       shouldExtendInputValue: false,
     });
 
-    const onConstantOptionMount = React.useCallback(
-      (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
-      [],
-    );
+    const onConstantOptionMount = (option: IConstantOption) => {
+      setConstantOptions((prev) => [...prev, option]);
+      if (unmountedSelectedOptions.current.includes(option.value)) {
+        unmountedSelectedOptions.current = unmountedSelectedOptions.current.filter(
+          (unmountedOption) => unmountedOption !== option.value,
+        );
+      }
+    };
 
-    const onConstantOptionUnMount = React.useCallback(
-      (option: IConstantOption) =>
-        setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value)),
-      [],
-    );
+    const onConstantOptionUnMount = (option: IConstantOption) => {
+      if (selectedArray.current.includes(option.value)) {
+        unmountedSelectedOptions.current = [...unmountedSelectedOptions.current, option.value];
+      }
+      setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value));
+    };
 
     const handleDropDownOptionMount = React.useCallback((option: SelectItemProps) => {
       setDropItems((prev) => [...prev, option]);
@@ -520,12 +545,42 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-      if (selectIsUncontrolled) {
-        setSelectedValue(
-          multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value,
+      const value = multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value;
+
+      let newSelectedArray: Array<string> = [];
+      if (multiple && Array.isArray(value)) {
+        const addedValues = value.filter(
+          (item) => !selectedArray.current.includes(item) && !unmountedSelectedOptions.current.includes(item),
         );
+
+        const deletedVales = selectedArray.current.filter(
+          (item) => !value.includes(item) && !unmountedSelectedOptions.current.includes(item),
+        );
+
+        newSelectedArray = [...selectedArray.current, ...addedValues];
+        const newUnmounted = [...unmountedSelectedOptions.current];
+
+        deletedVales.forEach((deletedItem) => {
+          const selectedIndex = newSelectedArray.findIndex((item) => deletedItem === item);
+          if (selectedIndex > -1) {
+            newSelectedArray.splice(selectedIndex, 1);
+          }
+
+          const unmountedIndex = newUnmounted.findIndex((item) => deletedItem === item);
+          if (unmountedIndex > -1) {
+            newUnmounted.splice(unmountedIndex, 1);
+          }
+        });
+
+        selectedArray.current = newSelectedArray;
+        unmountedSelectedOptions.current = newUnmounted;
+      }
+
+      if (selectIsUncontrolled) {
+        setSelectedValue(multiple ? newSelectedArray : value);
       }
       props.onChange?.(evt);
+      onSelectedChange?.(multiple ? newSelectedArray : value);
     };
 
     React.useEffect(() => {
@@ -663,7 +718,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <DropdownContainer
             ref={dropDownRef}
             tabIndex={-1}
-            targetRef={portalTargetRef || containerRef}
+            targetElement={portalTargetRef?.current || containerRef.current}
             data-dimension={dimension}
             onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}

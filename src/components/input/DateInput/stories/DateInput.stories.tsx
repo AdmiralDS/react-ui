@@ -10,7 +10,6 @@ import { DateInputPlaygroundTemplate } from './DateInputPlayground.template';
 import { DateInputPickMonthTemplate } from './DateInputPickMonth.template';
 import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.template';
 import { DateInputSpecialDatesTemplate } from './DateInputSpecialDates.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
@@ -202,9 +201,7 @@ export const DateInputCustomIcon = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Выбор месяца">
-const DateInputPickMonthStory: StoryFn<typeof DateInput> = (props) => (
-  <DateInputPickMonthTemplate {...cleanUpProps(props)} />
-);
+const DateInputPickMonthStory: StoryFn<typeof DateInput> = (props) => <DateInputPickMonthTemplate {...props} />;
 
 export const DateInputPickMonth = {
   render: DateInputPickMonthStory,
@@ -223,9 +220,7 @@ export const DateInputPickMonth = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Выделение определенных дат">
-const DateInputSpecialDatesStory: StoryFn<typeof DateInput> = (props) => (
-  <DateInputSpecialDatesTemplate {...cleanUpProps(props)} />
-);
+const DateInputSpecialDatesStory: StoryFn<typeof DateInput> = (props) => <DateInputSpecialDatesTemplate {...props} />;
 
 export const DateInputSpecialDates = {
   render: DateInputSpecialDatesStory,

@@ -11,7 +11,6 @@ import { HintTextButtonTemplate } from './HintTextButton.template';
 import { HintTargetTemplate } from './HintTarget.template';
 import { HintAnchorCssTemplate } from './HintAnchorCss.template';
 import { HintWithHeaderTemplate } from './HintWithHeader.template';
-import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 // Imports of text sources
 import HintBaseRaw from './HintBase.template?raw';
@@ -120,9 +119,7 @@ export default {
 } as Meta<typeof Hint>;
 
 //<editor-fold desc="Базовый пример">
-const HintBaseStory: StoryFn<typeof Hint> = (props) => (
-  <HintBaseTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintBaseStory: StoryFn<typeof Hint> = (props) => <HintBaseTemplate {...props} />;
 
 export const HintBaseExample = {
   render: HintBaseStory,
@@ -141,9 +138,7 @@ export const HintBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="Позиционирование">
-const HintPositionStory: StoryFn<typeof Hint> = (props) => (
-  <HintPositionTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintPositionStory: StoryFn<typeof Hint> = (props) => <HintPositionTemplate {...props} />;
 
 export const HintPositionExample = {
   render: HintPositionStory,
@@ -183,9 +178,7 @@ export const HintPositionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Появление по клику">
-const HintClickStory: StoryFn<typeof Hint> = (props) => (
-  <HintClickTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintClickStory: StoryFn<typeof Hint> = (props) => <HintClickTemplate {...props} />;
 
 export const HintClickExample = {
   render: HintClickStory,
@@ -204,9 +197,7 @@ export const HintClickExample = {
 //</editor-fold>
 
 //<editor-fold desc="С кнопкой">
-const HintTextButtonStory: StoryFn<typeof Hint> = (props) => (
-  <HintTextButtonTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintTextButtonStory: StoryFn<typeof Hint> = (props) => <HintTextButtonTemplate {...props} />;
 
 export const HintTextButtonExample = {
   render: HintTextButtonStory,
@@ -229,10 +220,8 @@ export const HintTextButtonExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="Позиционирование относительно target">
-const HintTargetStory: StoryFn<typeof Hint> = (props) => (
-  <HintTargetTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+//<editor-fold desc="Позиционирование относительно targetElement">
+const HintTargetStory: StoryFn<typeof Hint> = (props) => <HintTargetTemplate {...props} />;
 
 export const HintTargetExample = {
   render: HintTargetStory,
@@ -245,15 +234,13 @@ export const HintTargetExample = {
     },
   },
 
-  name: 'Hint. Позиционирование относительно target.',
+  name: 'Hint. Позиционирование относительно targetElement.',
 };
 
 //</editor-fold>
 
 //<editor-fold desc="ClassName">
-const HintClassNameStory: StoryFn<typeof Hint> = (props) => (
-  <HintClassNameTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintClassNameStory: StoryFn<typeof Hint> = (props) => <HintClassNameTemplate {...props} />;
 
 export const HintClassNameExample = {
   render: HintClassNameStory,
@@ -275,9 +262,7 @@ export const HintClassNameExample = {
 //</editor-fold>
 
 //<editor-fold desc="Стилизация внешнего контейнера">
-const HintAnchorCssStory: StoryFn<typeof Hint> = (props) => (
-  <HintAnchorCssTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintAnchorCssStory: StoryFn<typeof Hint> = (props) => <HintAnchorCssTemplate {...props} />;
 
 export const HintAnchorCssExample = {
   render: HintAnchorCssStory,
@@ -296,9 +281,7 @@ export const HintAnchorCssExample = {
 //</editor-fold>
 
 //<editor-fold desc="Hint с заголовком">
-const HintWithHeaderStory: StoryFn<typeof Hint> = (props) => (
-  <HintWithHeaderTemplate visible renderContent={() => ''} {...cleanUpProps(props)} />
-);
+const HintWithHeaderStory: StoryFn<typeof Hint> = (props) => <HintWithHeaderTemplate {...props} />;
 
 export const HintWithHeaderExample = {
   render: HintWithHeaderStory,
