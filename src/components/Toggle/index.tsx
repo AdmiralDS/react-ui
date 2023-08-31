@@ -1,5 +1,5 @@
-import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
-import * as React from 'react';
+import type { ChangeEventHandler, InputHTMLAttributes, ReactNode, KeyboardEvent } from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
@@ -34,14 +34,14 @@ const SLIDER_INDENT = 2;
 const HOVER_INDENT_X = '-12px';
 const HOVER_INDENT = '-8px';
 
-const hoverInputStyles = css<{ dimension: Dimension }>`
+const hoverInputStyles = css<{ $dimension: Dimension }>`
   & + div > div {
-    ${({ dimension }) =>
-      `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${SLIDER_INDENT * 2}px);`}
+    ${({ $dimension }) =>
+      `left: calc(${$dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${HOVER_INDENT_X} + ${SLIDER_INDENT * 2}px);`}
   }
 `;
 
-const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
+const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   position: absolute;
   width: 0;
   height: 0;
@@ -50,7 +50,7 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   &:checked {
     & + div > span {
       &:before {
-        ${({ dimension }) => `left: calc(${dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${SLIDER_INDENT}px);`}
+        ${({ $dimension }) => `left: calc(${$dimension === 'm' ? SLIDER_SIZE_M : SLIDER_SIZE_S} + ${SLIDER_INDENT}px);`}
       }
 
       background: ${({ theme, readOnly }) =>
@@ -81,29 +81,29 @@ const Input = styled.input<{ dimension: Dimension; checked?: boolean }>`
   }
 `;
 const Label = styled.div<{
-  dimension: Dimension;
+  $dimension: Dimension;
   disabled: boolean;
-  position: LabelPosition;
+  $position: LabelPosition;
 }>`
   display: flex;
   flex-direction: column;
-  ${({ position }) => (position === 'right' ? `margin-left: ${LABEL_MARGIN};` : `margin-right: ${LABEL_MARGIN};`)}
-  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  ${({ $position }) => ($position === 'right' ? `margin-left: ${LABEL_MARGIN};` : `margin-right: ${LABEL_MARGIN};`)}
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
 `;
 
 const Hint = styled.div<{
-  dimension: Dimension;
+  $dimension: Dimension;
   disabled: boolean;
 }>`
   margin-top: 4px;
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
 `;
 
 const Slider = styled.span<{
-  dimension: Dimension;
-  faded?: boolean;
+  $dimension: Dimension;
+  $faded?: boolean;
 }>`
   position: absolute;
   border-radius: ${BORDER_RADIUS};
@@ -120,10 +120,11 @@ const Slider = styled.span<{
     ${sliderSizes}
   }
 
-  background: ${({ theme, faded }) => (faded ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  background: ${({ theme, $faded }) =>
+    $faded ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
 `;
 
-const Hover = styled.div<{ dimension: Dimension }>`
+const Hover = styled.div<{ $dimension: Dimension }>`
   visibility: hidden;
   pointer-events: none;
   position: absolute;
@@ -133,7 +134,7 @@ const Hover = styled.div<{ dimension: Dimension }>`
   ${hoverSizes}
 `;
 
-const SliderWrapper = styled.div<{ dimension: Dimension }>`
+const SliderWrapper = styled.div<{ $dimension: Dimension }>`
   position: relative;
   flex-shrink: 0;
   ${sizes}
@@ -143,10 +144,10 @@ const Wrapper = styled.label<{
   width?: number | string;
   disabled?: boolean;
   readOnly?: boolean;
-  labelPosition: LabelPosition;
+  $labelPosition: LabelPosition;
 }>`
   display: flex;
-  flex-direction: ${({ labelPosition }) => (labelPosition === 'right' ? 'row' : 'row-reverse')};
+  flex-direction: ${({ $labelPosition }) => ($labelPosition === 'right' ? 'row' : 'row-reverse')};
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
@@ -157,7 +158,7 @@ const Wrapper = styled.label<{
   ${({ readOnly }) => readOnly && `pointer-events: none`};
 `;
 
-export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
+export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
   (
     {
       dimension = 'm',
@@ -172,7 +173,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
     },
     ref,
   ) => {
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
         if (code === keyboardKey[' ']) {
@@ -187,7 +188,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
       <Wrapper
         className={className}
         width={labelPosition === 'left' ? width : undefined}
-        labelPosition={labelPosition}
+        $labelPosition={labelPosition}
         disabled={disabled}
         readOnly={readOnly}
         role="switch"
@@ -196,21 +197,21 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         <Input
           ref={ref}
           type="checkbox"
-          dimension={dimension}
+          $dimension={dimension}
           disabled={disabled}
           readOnly={readOnly}
           {...props}
           onKeyDown={handleKeyDown}
         />
-        <SliderWrapper dimension={dimension}>
-          <Hover dimension={dimension} />
-          <Slider dimension={dimension} faded={disabled || readOnly} aria-hidden />
+        <SliderWrapper $dimension={dimension}>
+          <Hover $dimension={dimension} />
+          <Slider $dimension={dimension} $faded={disabled || readOnly} aria-hidden />
         </SliderWrapper>
         {children && (
-          <Label dimension={dimension} disabled={disabled} position={labelPosition}>
+          <Label $dimension={dimension} disabled={disabled} $position={labelPosition}>
             {children}
             {extraText && (
-              <Hint dimension={dimension} disabled={disabled}>
+              <Hint $dimension={dimension} disabled={disabled}>
                 {extraText}
               </Hint>
             )}
