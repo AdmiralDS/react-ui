@@ -15,8 +15,8 @@ import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -25,8 +25,8 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
-const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 's':
@@ -37,7 +37,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
 const disabledColors = css`
@@ -126,7 +126,7 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
@@ -170,7 +170,7 @@ const Input = styled.input<ExtraProps>`
   ${ieFixes}
 `;
 
-const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -249,6 +249,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
+      dimension,
       type,
       displayClearIcon,
       isLoading,
@@ -340,7 +341,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<Spinner key="loading-icon" dimension={props.dimension === 's' ? 'ms' : 'm'} />);
+      iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
     }
 
     const iconCount = iconArray.length;
@@ -388,7 +389,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <StyledContainer
           className={className}
           style={style}
-          dimension={props.dimension}
+          $dimension={dimension}
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
@@ -396,7 +397,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
-          skeleton={skeleton}
+          $skeleton={skeleton}
           data-disable-copying={props.disableCopying ? true : undefined}
           {...(props.disableCopying && {
             onMouseDown: stopEvent,
@@ -407,12 +408,13 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...props}
             onChange={handleChange}
             placeholder={placeholder}
-            iconCount={iconCount}
+            $dimension={dimension}
+            $iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
           <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
-            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+            <IconPanel disabled={props.disabled} $dimension={dimension}>
               {iconArray}
             </IconPanel>
           )}

@@ -9,32 +9,32 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
-const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
+const Prefix = styled.div<{ disabled?: boolean; $align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
   user-select: none;
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
-  ${({ align }) => align === 'right' && 'margin-left: auto;'}
+  ${({ $align }) => $align === 'right' && 'margin-left: auto;'}
 `;
 
 const Suffix = styled(Prefix)`
   min-width: 0;
-  ${({ align }) =>
-    align === 'right' &&
+  ${({ $align }) =>
+    $align === 'right' &&
     css`
       flex: 0 1 auto;
       margin-left: 0;
     `}
 `;
 
-const Sizer = styled.div<{ hasPrefix?: boolean; align?: 'left' | 'right' }>`
+const Sizer = styled.div<{ $hasPrefix?: boolean; $align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   visibility: hidden;
   white-space: pre;
   box-sizing: border-box;
-  ${({ hasPrefix, align }) => !hasPrefix && align === 'right' && 'margin-left: auto;'}
+  ${({ $hasPrefix, $align }) => !$hasPrefix && $align === 'right' && 'margin-left: auto;'}
 `;
 
 export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
@@ -99,7 +99,7 @@ const ieFixes = css`
   }
 `;
 
-const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
+const Input = styled.input<ExtraProps & { $align?: 'left' | 'right' }>`
   outline: none;
   appearance: none;
   border: none;
@@ -112,9 +112,9 @@ const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
 
   background: transparent;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
-  text-align: ${({ align }) => (align === 'left' ? 'left' : 'right')};
+  text-align: ${({ $align }) => ($align === 'left' ? 'left' : 'right')};
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -132,8 +132,8 @@ const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
   ${ieFixes}
 `;
 
-export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+export const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 's':
@@ -143,8 +143,8 @@ export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }
   }
 };
 
-export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+export const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -154,7 +154,7 @@ export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   }
 };
 
-const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: number }>`
+const HiddenContent = styled.div<{ $dimension?: ComponentDimension; $iconCount?: number }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -164,7 +164,7 @@ const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: n
   display: flex;
   align-items: center;
   left: ${horizontalPaddingValue}px;
-  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
 export interface InputProps extends TextInputProps {
@@ -361,15 +361,15 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <HiddenContent iconCount={iconCount} dimension={props.dimension}>
+        <HiddenContent $iconCount={iconCount} $dimension={props.dimension}>
           {prefix && showPrefixSuffix && (
-            <Prefix ref={prefixRef} disabled={props.disabled} align={align}>
+            <Prefix ref={prefixRef} disabled={props.disabled} $align={align}>
               {prefix}&nbsp;
             </Prefix>
           )}
-          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
+          <Sizer ref={sizerRef} $hasPrefix={!!prefix} $align={align} />
           {suffix && showPrefixSuffix && (
-            <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
+            <Suffix ref={suffixRef} disabled={props.disabled} $align={align}>
               &nbsp;{suffix}
             </Suffix>
           )}
@@ -381,7 +381,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
           placeholder={placeholder}
           type="text"
           data-status={status}
-          align={align}
+          $align={align}
         />
         <BorderedDiv status={status} />
       </>
