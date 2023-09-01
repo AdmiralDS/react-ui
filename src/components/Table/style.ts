@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+import { ReactComponent as DragOutline } from './icons/dragIcon.svg';
 import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
@@ -204,6 +205,15 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
+export const DragIcon = styled(DragOutline)<{ disabled?: boolean }>`
+  display: flex;
+  flex-shrink: 0;
+  & *[fill^='#'] {
+    fill: ${({ theme, disabled }) =>
+      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
+  }
+`;
+
 export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: flex-start;
@@ -263,6 +273,25 @@ export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
         return '10px 12px 9px 12px';
     }
   }};
+`;
+
+// padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
+export const DragCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
+  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 36 : 48)}px;
+  padding: ${({ dimension }) => {
+    switch (dimension) {
+      case 's':
+        return '6px 8px 5px 8px';
+      case 'l':
+        return '12px 12px 11px 12px';
+      case 'xl':
+        return '16px 12px 15px 12px';
+      case 'm':
+      default:
+        return '10px 8px 9px 8px';
+    }
+  }};
+  cursor: pointer;
 `;
 
 export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`

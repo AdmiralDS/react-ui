@@ -34,6 +34,7 @@ import {
   MirrorRow,
   MirrorText,
   ActionBG,
+  DragCell,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
@@ -408,7 +409,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {}
       function handleDragStart() {
         if (rowMirrorRef.current?.lastElementChild) {
-          rowMirrorRef.current.lastElementChild.scrollLeft = (scrollBodyRef.current?.scrollLeft || 0);
+          rowMirrorRef.current.lastElementChild.scrollLeft = scrollBodyRef.current?.scrollLeft || 0;
         }
       }
       function handleDragEnd() {}
@@ -582,6 +583,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           checkboxDimension={checkboxDimension}
           displayRowExpansionColumn={displayRowExpansionColumn}
           displayRowSelectionColumn={displayRowSelectionColumn}
+          rowsDraggable={rowsDraggable}
           onRowExpansionChange={handleExpansionChange}
           onRowSelectionChange={handleCheckboxChange}
           renderCell={renderCell}
@@ -600,6 +602,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         stickyColumns={stickyColumns}
         displayRowExpansionColumn={displayRowExpansionColumn}
         displayRowSelectionColumn={displayRowSelectionColumn}
+        rowsDraggable={rowsDraggable}
         renderBodyCell={renderBodyCell(idx)}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleCheckboxChange}
@@ -687,8 +690,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderHiddenHeader = () => {
       return (
         <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
-          {(displayRowSelectionColumn || displayRowExpansionColumn) && (
+          {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
+              {rowsDraggable && <DragCell dimension={dimension} />}
               {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
               {displayRowSelectionColumn && (
                 <CheckboxCell dimension={dimension}>
@@ -719,8 +723,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {renderHiddenHeader()}
         <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
           <Header dimension={dimension} ref={headerRef} className="tr">
-            {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+            {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
+                {rowsDraggable && <DragCell dimension={dimension} data-draggable={false} data-droppable={false} />}
                 {displayRowExpansionColumn && (
                   <ExpandCell dimension={dimension} data-draggable={false} data-droppable={false} />
                 )}
@@ -762,7 +767,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           )}
         {rowsDraggable &&
           createPortal(
-            <MirrorRow dimension={dimension} style={{ minWidth: tableWidth + 'px', maxWidth: tableWidth +'px', overflow: 'hidden' }} ref={rowMirrorRef}>
+            <MirrorRow
+              dimension={dimension}
+              style={{ minWidth: tableWidth + 'px', maxWidth: tableWidth + 'px', overflow: 'hidden' }}
+              ref={rowMirrorRef}
+            >
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />
             </MirrorRow>,

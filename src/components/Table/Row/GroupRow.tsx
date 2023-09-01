@@ -7,6 +7,7 @@ import {
   GroupTextContent,
   StickyGroupRow,
   Filler,
+  DragCell,
 } from '#src/components/Table/style';
 import * as React from 'react';
 import type { TableRow } from '#src/components/Table';
@@ -26,6 +27,7 @@ export const GroupRow = ({
   row,
   dimension,
   displayRowSelectionColumn,
+  rowsDraggable,
   checkboxDimension,
   renderCell,
   onRowExpansionChange,
@@ -61,6 +63,7 @@ export const GroupRow = ({
   return (
     <>
       <StickyGroupRow>
+        {rowsDraggable && <DragCell dimension={dimension} />}
         <ExpandCell dimension={dimension}>
           <ExpandIconPlacement
             dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
