@@ -1,10 +1,9 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import { Avatar, DefaultFontColorName } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://github.com/DrUNE.png?size=100';
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const Text = styled.div`
   font-family: 'VTB Group UI';
@@ -23,7 +22,7 @@ const Container = styled.div`
   margin-bottom: 40px;
 `;
 
-export const SingleAvatarTemplate = () => (
+export const AvatarSingleTemplate = () => (
   <>
     <Text>Размеры компонента</Text>
     <Container>
@@ -58,11 +57,11 @@ export const SingleAvatarTemplate = () => (
     </Container>
     <Text>Статусы компонента</Text>
     <Container>
-      <Avatar userName="Status Danger" icon={<PersonSolid />} status="danger" />
-      <Avatar userName="Status Warning" icon={<PersonSolid />} status="warn" />
-      <Avatar userName="Status Success" icon={<PersonSolid />} status="success" />
-      <Avatar userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
-      <Avatar userName="Example Name" href={imageURL} status="#3F7DFE" />
+      <Avatar dimension="xs" userName="Status Danger" icon={<PersonSolid />} status="danger" />
+      <Avatar dimension="s" userName="Status Warning" icon={<PersonSolid />} status="warn" />
+      <Avatar dimension="m" userName="Status Success" icon={<PersonSolid />} status="success" />
+      <Avatar dimension="l" userName="Status Inactive" icon={<PersonSolid />} status="inactive" />
+      <Avatar dimension="xl" userName="Custom Status" href={imageURL} status="#3F7DFE" />
     </Container>
   </>
 );

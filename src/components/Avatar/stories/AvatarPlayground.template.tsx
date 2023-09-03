@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Avatar } from '@admiral-ds/react-ui';
 import type { AvatarProps } from '@admiral-ds/react-ui';
 
