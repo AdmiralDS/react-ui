@@ -385,7 +385,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
         selectRef.current?.focus();
       }
-    }, [isSearchPanelOpen]);
+    }, [isSearchPanelOpen, isFocused]);
 
     const handleOnClear = onClearIconClick || resetOptions;
 
@@ -525,8 +525,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
     const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      setIsFocused(true);
-      onFocusFromProps?.(evt);
+      if (!isFocused) {
+        setIsFocused(true);
+        onFocusFromProps?.(evt);
+      }
     };
 
     const handleWrapperBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
@@ -589,8 +591,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (!selectIsUncontrolled) setSelectedValue(value);
     }, [value, selectIsUncontrolled]);
 
-    useClickOutside([containerRef, dropDownRef], onCloseSelect);
-
     const handleWrapperClick = (e: React.MouseEvent) => {
       if (e.target && dropDownRef.current?.contains(e.target as Node)) return;
 
@@ -602,8 +602,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       if (e.target && containerRef.current?.contains(e.target as Node)) {
         return;
       }
+      setIsFocused(false);
       onCloseSelect();
     };
+
+    useClickOutside([containerRef, dropDownRef], handleClickOutside);
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
@@ -702,7 +705,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             tabIndex={-1}
             targetElement={portalTargetRef?.current || containerRef.current}
             data-dimension={dimension}
-            onClickOutside={handleClickOutside}
             alignSelf={alignDropdown}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
