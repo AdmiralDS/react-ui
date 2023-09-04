@@ -1,7 +1,8 @@
-import * as React from 'react';
+import type { FC, FieldsetHTMLAttributes, ReactNode } from 'react';
+import styled from 'styled-components';
+
 import { ExtraTextContainer } from '#src/components/Field';
 import type { InputStatus } from '#src/components/input';
-import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
@@ -9,8 +10,8 @@ export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 /** Размеры компонента относительно начального */
 export type FieldSetDimension = (typeof ALL_FIELDSET_DIMENSIONS_VALUES)[number];
 
-const Legend = styled.legend<{ dimension?: FieldSetDimension }>`
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+const Legend = styled.legend<{ $dimension?: FieldSetDimension }>`
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
   fieldset:disabled & {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
@@ -34,18 +35,18 @@ const FieldSetExtrasContainer = styled.div`
 `;
 
 const FieldSetContainer = styled.fieldset<{
-  dimension?: FieldSetDimension;
-  flexDirection?: 'column' | 'row';
+  $dimension?: FieldSetDimension;
+  $flexDirection?: 'column' | 'row';
 }>`
   border: none;
   padding: 0;
 
   display: flex;
   flex-wrap: wrap;
-  flex-direction: ${({ flexDirection }) => flexDirection || 'column'};
+  flex-direction: ${({ $flexDirection }) => $flexDirection || 'column'};
 
   && > *:not(${FieldSetExtrasContainer}) {
-    margin-top: ${(props) => (props.dimension === 's' ? 12 : 16)}px;
+    margin-top: ${(props) => (props.$dimension === 's' ? 12 : 16)}px;
     margin-right: 16px;
   }
 
@@ -54,12 +55,12 @@ const FieldSetContainer = styled.fieldset<{
   }
 `;
 
-export interface PropsType extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  legend?: React.ReactNode;
+export interface PropsType extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  legend?: ReactNode;
   dimension?: FieldSetDimension;
 
   /** Текст будет виден ниже компонента */
-  extraText?: React.ReactNode;
+  extraText?: ReactNode;
 
   /** Установка статуса поля */
   status?: InputStatus;
@@ -74,18 +75,20 @@ export interface PropsType extends React.FieldsetHTMLAttributes<HTMLFieldSetElem
   flexDirection?: 'column' | 'row';
 }
 
-export const FieldSet: React.FC<PropsType> = (props) => {
-  const { legend, children, extraText, ...fieldsetProps } = props;
+export const FieldSet: FC<PropsType> = (props) => {
+  const { legend, children, extraText, dimension, flexDirection, ...fieldsetProps } = props;
   return (
     <FieldSetContainer
       {...fieldsetProps}
-      data-dimension={fieldsetProps.dimension}
+      $dimension={dimension}
+      $flexDirection={flexDirection}
+      data-dimension={dimension}
       aria-required={props.required}
       data-status={props.status}
       data-required-within={props.required ? '' : undefined}
       data-disabled={props.disabled ? '' : undefined}
     >
-      {legend && <Legend dimension={props.dimension} children={legend} />}
+      {legend && <Legend $dimension={dimension} children={legend} />}
       {children}
       {extraText && (
         <FieldSetExtrasContainer>
