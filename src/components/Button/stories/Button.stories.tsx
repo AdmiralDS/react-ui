@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 

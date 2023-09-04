@@ -6,10 +6,11 @@ export type Appearance = ButtonAppearance;
 export type Dimension = 'xl' | 'l' | 'm' | 's';
 
 export interface StyledButtonProps {
-  appearance?: ButtonAppearance;
-  dimension?: Dimension;
-  displayAsDisabled?: boolean;
+  $appearance?: ButtonAppearance;
+  $dimension?: Dimension;
+  $displayAsDisabled?: boolean;
+  $displayAsSquare?: boolean;
   $loading?: boolean;
-  skeleton?: boolean;
-  buttonCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $skeleton?: boolean;
+  $buttonCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
 }
