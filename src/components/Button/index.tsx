@@ -135,7 +135,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
-        {!loading && !props.displayAsSquare && !hasIconStart && <AdditionalPadding />}
+        {!props.displayAsSquare && !hasIconStart && <AdditionalPadding />}
         <ButtonContent>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {React.Children.toArray(children).map((child, index) =>
@@ -143,7 +143,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           )}
           {hasIconEnd ? <ButtonIconContainer>{iconEnd || icon}</ButtonIconContainer> : null}
         </ButtonContent>
-        {!loading && !props.displayAsSquare && !hasIconEnd && <AdditionalPadding />}
+        {!props.displayAsSquare && !hasIconEnd && <AdditionalPadding />}
       </StyledButton>
     );
   },

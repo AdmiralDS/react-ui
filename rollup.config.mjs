@@ -16,6 +16,16 @@ export default [
     output: [
       {
         dir: 'dist',
+        entryFileNames: '[name].cjs.js',
+        format: 'cjs',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        sourcemap: true,
+        interop: 'auto',
+      },
+      {
+        dir: 'dist',
+        entryFileNames: '[name].es.js',
         format: 'es',
         preserveModules: true,
         preserveModulesRoot: 'src',
