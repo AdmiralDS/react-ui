@@ -91,18 +91,18 @@ export const ItemTitle = styled.button`
   }
 `;
 
-export const ItemWrapper = styled.div<{ opened?: boolean; disabled?: boolean }>`
+export const ItemWrapper = styled.div<{ $opened?: boolean; disabled?: boolean }>`
   border-bottom: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
   & > ${ItemTitle} ${Chevron} {
-    transform: ${(p) => (p.opened ? 'rotate(180deg)' : 'rotate(0deg)')};
+    transform: ${(p) => (p.$opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
   ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
-export const ItemContent = styled.div<{ contentMaxHeight: number | string }>`
+export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`
   color: ${(p) => p.theme.color[DefaultFontColorName]};
   overflow-y: auto;
-  max-height: ${(p) => p.contentMaxHeight};
+  max-height: ${(p) => p.$contentMaxHeight};
   padding: 4px 16px 16px 16px;
   ${typography['Body/Body 1 Long']}
   [data-dimension='m'] & {

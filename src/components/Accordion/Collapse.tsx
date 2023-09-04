@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export interface CollapseProps {
-  opened?: boolean;
+  $opened?: boolean;
 
   /**  Устанавливает максимальную высоту на которую открывается контент до появления вертикального скрола */
-  contentMaxHeight?: number | string;
+  $contentMaxHeight?: number | string;
 }
 
 export const Collapse = styled.div<CollapseProps>`
@@ -12,6 +12,6 @@ export const Collapse = styled.div<CollapseProps>`
   transition:
     max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),
     visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
-  visibility: ${(p) => (!p.opened ? 'hidden' : 'visible')};
+  max-height: ${(p) => (!p.$opened ? 0 : p.$contentMaxHeight)};
+  visibility: ${(p) => (!p.$opened ? 'hidden' : 'visible')};
 `;
