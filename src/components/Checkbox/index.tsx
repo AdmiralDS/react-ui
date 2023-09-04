@@ -72,7 +72,7 @@ const Container = styled.div<{
   ${height};
 `;
 
-export const Background = styled.div<{ error?: boolean }>`
+export const Background = styled.div<{ $error?: boolean }>`
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -89,7 +89,7 @@ export const Background = styled.div<{ error?: boolean }>`
   line-height: initial;
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   border: 1px solid
-    ${({ error, theme }) => (error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
+    ${({ $error, theme }) => ($error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Special/Static White']};
   }
@@ -189,7 +189,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, error, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -214,7 +214,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
           data-hovered={hovered}
           $hovered={hovered}
         />
-        <Background error={props.error}>
+        <Background $error={error}>
           {indeterminate ? (
             <Indeterminate aria-hidden="true" focusable="false" />
           ) : (
