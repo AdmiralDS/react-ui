@@ -95,12 +95,12 @@ export const Background = styled.div<{ error?: boolean }>`
   }
 `;
 
-const indeterminate = css<{ indeterminate?: boolean }>`
+const indeterminateCss = css<{ $indeterminate?: boolean }>`
   &:not(:checked) + ${Background} {
-    background-color: ${({ theme, indeterminate }) => indeterminate && theme.color['Primary/Primary 60 Main']};
-    border: ${({ indeterminate }) => indeterminate && 'none'};
+    background-color: ${({ theme, $indeterminate }) => $indeterminate && theme.color['Primary/Primary 60 Main']};
+    border: ${({ $indeterminate }) => $indeterminate && 'none'};
     > * {
-      display: ${(p) => (p.indeterminate ? 'block' : 'none')};
+      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
     }
   }
 `;
@@ -142,7 +142,7 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
-const Input = styled.input<{ indeterminate?: boolean; $hovered?: boolean }>`
+const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -173,7 +173,7 @@ const Input = styled.input<{ indeterminate?: boolean; $hovered?: boolean }>`
 
   ${(props) => !props.readOnly && props.$hovered && hoveredCss}
 
-  ${indeterminate}
+  ${indeterminateCss}
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
@@ -189,7 +189,7 @@ const Input = styled.input<{ indeterminate?: boolean; $hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, hovered, ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -209,13 +209,13 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
           readOnly={readOnly}
           {...props}
           type="checkbox"
-          indeterminate={props.indeterminate}
+          $indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
           data-hovered={hovered}
           $hovered={hovered}
         />
         <Background error={props.error}>
-          {props.indeterminate ? (
+          {indeterminate ? (
             <Indeterminate aria-hidden="true" focusable="false" />
           ) : (
             <Check aria-hidden="true" focusable="false" />
