@@ -767,11 +767,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           )}
         {rowsDraggable &&
           createPortal(
-            <MirrorRow
-              dimension={dimension}
-              style={{ minWidth: tableWidth + 'px', maxWidth: tableWidth + 'px', overflow: 'hidden' }}
-              ref={rowMirrorRef}
-            >
+            <MirrorRow dimension={dimension} ref={rowMirrorRef}>
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />
             </MirrorRow>,

@@ -527,11 +527,9 @@ export const MirrorRow = styled.div<{ dimension: TableProps['dimension'] }>`
   z-index: 6;
   visibility: hidden;
   display: flex;
+  max-width: 288px;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  & > :last-child {
-    flex-grow: 1;
-  }
   && {
     cursor: none;
     svg {

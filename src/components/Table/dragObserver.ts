@@ -143,7 +143,8 @@ export function dragObserver(
     }
 
     return {
-      item: item,
+      // при перетаскивании колонок захватываем весь заголовок целиком, при перетаскивании строк, только первую ячейку строки
+      item: o.direction === 'horizontal' ? item : item.getElementsByClassName('td')[0],
       source: source,
     };
   }
@@ -295,7 +296,6 @@ export function dragObserver(
     if (_mirror && !mirrorElement) {
       return;
     }
-    // TODO: add realization for vertical direction
     if (mirrorElement && o.direction === 'horizontal') {
       const mirrorParent = mirrorElement.parentElement;
       const title = (_item as HTMLElement).dataset.thTitle ?? '';
