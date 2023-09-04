@@ -142,7 +142,7 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
-const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
+const Input = styled.input<{ indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -171,7 +171,7 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
     ${disabledCss};
   }
 
-  ${(props) => !props.readOnly && props.hovered && hoveredCss}
+  ${(props) => !props.readOnly && props.$hovered && hoveredCss}
 
   ${indeterminate}
 
@@ -189,7 +189,7 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, hovered, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -211,7 +211,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
           type="checkbox"
           indeterminate={props.indeterminate}
           onKeyDown={handleKeyDown}
-          data-hovered={props.hovered}
+          data-hovered={hovered}
+          $hovered={hovered}
         />
         <Background error={props.error}>
           {props.indeterminate ? (
