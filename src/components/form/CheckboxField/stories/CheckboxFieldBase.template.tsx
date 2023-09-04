@@ -14,9 +14,9 @@ const Container = styled.div`
   }
 `;
 
-const InfoSolid = styled(InfoSolidSVG)<{ dimension: CheckboxDimension }>`
+const InfoSolid = styled(InfoSolidSVG)<{ $dimension: CheckboxDimension }>`
   margin-left: 5px;
-  width: ${(props) => (props.dimension === 'm' ? '24px' : '20px')};
+  width: ${(props) => (props.$dimension === 'm' ? '24px' : '20px')};
 
   & *[fill^='#'] {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
@@ -126,7 +126,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
           >
-            <InfoSolid dimension="m" aria-hidden />
+            <InfoSolid $dimension="m" aria-hidden />
           </Hint>
         </CheckboxWithInformer>
         <CheckboxWithInformer>
@@ -141,7 +141,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
           >
-            <InfoSolid dimension="s" aria-hidden />
+            <InfoSolid $dimension="s" aria-hidden />
           </Hint>
         </CheckboxWithInformer>
       </Container>
