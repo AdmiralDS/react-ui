@@ -311,6 +311,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             minValue={minValue}
             iconCount={iconCount}
             align={align}
+            innerValue={innerValue}
             {...props}
           />
         </Content>
