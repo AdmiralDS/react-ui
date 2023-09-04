@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 const activeFilter = css`
   & *[fill^='#'] {
@@ -60,8 +61,29 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ dimension, renderFilterIcon, isFilterActive, ...props }, ref) => {
     const iconSize = dimension === 's' || dimension === 'm' ? '16px' : '20px';
+    const btnRef = React.useRef<HTMLButtonElement>(null);
+
+    React.useEffect(() => {
+      const button = btnRef.current;
+      function handleMove(e: any) {
+        // block column drag when mouse moves above filter icon
+        e.stopPropagation();
+      }
+
+      if (button) {
+        // use native event listeners instead of react handlers due to event delegation work in react 16
+        button.addEventListener('mousemove', handleMove);
+        button.addEventListener('touchmove', handleMove);
+
+        return () => {
+          button.removeEventListener('mousemove', handleMove);
+          button.removeEventListener('touchmove', handleMove);
+        };
+      }
+    }, []);
+
     return (
-      <ButtonComponent ref={ref} type="button" {...props}>
+      <ButtonComponent ref={refSetter(ref, btnRef)} type="button" {...props}>
         <ButtonContent isFilterActive={isFilterActive} iconSize={iconSize}>
           {renderFilterIcon ? renderFilterIcon() : <MoreHorizontalOutline aria-hidden />}
         </ButtonContent>

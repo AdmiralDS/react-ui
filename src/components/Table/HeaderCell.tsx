@@ -1,18 +1,10 @@
 import * as React from 'react';
 
-import {
-  HeaderCell,
-  HeaderCellContent,
-  HeaderCellTitle,
-  HeaderCellSpacer,
-  TitleContent,
-  SortIconWrapper,
-  SortIcon,
-  SortOrder,
-} from './style';
+import { HeaderCell, HeaderCellContent, HeaderCellTitle, HeaderCellSpacer, TitleContent } from './style';
 import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
 import { TitleText } from './TitleText';
+import { SortIcon } from './SortIcon';
 
 const DEFAULT_COLUMN_WIDTH = 100;
 
@@ -88,12 +80,7 @@ export const HeaderCellComponent = ({
               <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />
             )}
           </TitleContent>
-          {sortable && (
-            <SortIconWrapper>
-              <SortIcon sort={sort || 'initial'} width={iconSize} height={iconSize} />
-              {multipleSort && sort && sortOrder && <SortOrder>{sortOrder}</SortOrder>}
-            </SortIconWrapper>
-          )}
+          {sortable && <SortIcon sort={sort} sortOrder={sortOrder} multipleSort={multipleSort} iconSize={iconSize} />}
         </HeaderCellTitle>
         <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
         {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellRef.current} />}
