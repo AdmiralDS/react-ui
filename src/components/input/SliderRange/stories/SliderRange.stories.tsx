@@ -143,7 +143,16 @@ ControlledExample.parameters = {
     source: {
       code: SliderRangeControlledRaw,
     },
+    description: {
+      story: `В качестве значений параметров value и defaultValue в SliderRange необходимо передавать уже
+      отформатированные строки с разделителями тысяч (суффикс/префикс в value/defaultValue вносить не нужно).\n\nКроме того, библиотека 
+      предоставляет утилиту fitToCurrency, которая возвращает строку отформатированную в денежном формате. В качестве параметров 
+      данная утилита принимает value - значение, которое надо отформатировать, а также параметры precision, decimal, thousand. 
+      Также библиотека предоставляет утилиту clearValue, которая возвращает входную строку, из которой удалены все символы кроме 
+      цифр, символа decimal и минуса.`,
+    },
   },
 };
 ControlledExample.storyName = 'SliderRange. Пример контролируемого компонента.';
+
 //</editor-fold>
