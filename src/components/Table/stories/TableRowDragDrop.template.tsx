@@ -196,13 +196,33 @@ const columnList: Column[] = [
   },
 ];
 
-export const TablePlaygroundTemplate = (props: TableProps) => {
+export const TableRowDragDropTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
+  const [rows, setRows] = React.useState(rowList);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  const handleRowDrag = (rowId: string, nextRowId: string | null) => {
+    const tableRows = [...rows];
+    const movedIndex = tableRows.findIndex((row) => row.id === rowId);
+    const movedRow = tableRows.splice(movedIndex, 1)[0];
+    const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
+    tableRows.splice(beforeIndex, 0, movedRow);
+
+    setRows(tableRows);
+  };
+
+  return (
+    <Table
+      {...props}
+      rowList={rows}
+      columnList={cols}
+      onColumnResize={handleResize}
+      rowsDraggable
+      onRowDrag={handleRowDrag}
+    />
+  );
 };

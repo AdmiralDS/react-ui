@@ -403,6 +403,11 @@ export const Row = styled.div<{
    &:hover:is(.hoverable) {
     ${({ hover }) => hover && rowHoverMixin}
   }
+
+  &[data-dragover='true'] > * {
+    opacity: 0.4;
+  }
+  transition: opacity 0.3 ease;
 `;
 
 export const SimpleRow = styled.div<{

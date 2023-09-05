@@ -23,6 +23,7 @@ import { TableCustomTitleTemplate } from './TableCustomTitle.template';
 import { TableRenderCellTemplate } from './TableRenderCell.template';
 import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
+import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
 
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
@@ -46,6 +47,7 @@ import TableCustomTitleRaw from './TableCustomTitle.template?raw';
 import TableRenderCellRaw from './TableRenderCell.template?raw';
 import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
+import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -683,5 +685,20 @@ export const DraggableColumnsExample = {
     },
   },
   name: 'Table. Drag and Drop столбцов',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с drag and drop строк">
+const RowDragDropStory: StoryFn<typeof Table> = (props) => <TableRowDragDropTemplate {...props} />;
+export const DraggableRowsExample = {
+  render: RowDragDropStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TableRowDragDropRaw,
+      },
+    },
+  },
+  name: 'Table. Drag and Drop строк',
 };
 //</editor-fold>

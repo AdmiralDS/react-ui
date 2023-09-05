@@ -139,6 +139,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const rowMirrorRef = React.useRef<HTMLDivElement>(null);
     // save callback via useRef to not update dragObserver on each callback change
     const columnDragCallback = React.useRef(onColumnDrag);
+    const rowDragCallback = React.useRef(onRowDrag);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -404,14 +405,18 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
     React.useEffect(() => {
+      rowDragCallback.current = onRowDrag;
+    }, [onRowDrag]);
+
+    React.useEffect(() => {
       const body = scrollBodyRef.current;
 
-      function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {}
-      function handleDragStart() {
-        if (rowMirrorRef.current?.lastElementChild) {
-          rowMirrorRef.current.lastElementChild.scrollLeft = scrollBodyRef.current?.scrollLeft || 0;
+      function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
+        if (item?.dataset?.rowid) {
+          rowDragCallback.current?.(item.dataset.rowid, before?.dataset?.rowid ?? null);
         }
       }
+      function handleDragStart() {}
       function handleDragEnd() {}
 
       if (body && rowsDraggable) {

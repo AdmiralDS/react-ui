@@ -111,7 +111,9 @@ export function dragObserver(
       _offsetX = getCoord('pageX', e) - offset.left;
       _offsetY = getCoord('pageY', e) - offset.top;
 
-      _item.dataset.dragover = 'true';
+      if (o.direction === 'vertical') {
+        _item.dataset.dragover = 'true';
+      }
       renderMirrorImage();
       drag(e);
     }
@@ -142,11 +144,7 @@ export function dragObserver(
       return;
     }
 
-    return {
-      // при перетаскивании колонок захватываем весь заголовок целиком, при перетаскивании строк, только первую ячейку строки
-      item: o.direction === 'horizontal' ? item : item.getElementsByClassName('td')[0],
-      source: source,
-    };
+    return { item, source };
   }
 
   function start(context: any) {
@@ -197,7 +195,7 @@ export function dragObserver(
   function cleanup() {
     ungrab();
     removeMirrorImage();
-    if (_item) {
+    if (_item && o.direction === 'vertical') {
       delete _item.dataset.dragover;
     }
     drake.dragging = false;
@@ -313,7 +311,9 @@ export function dragObserver(
     }
     if (mirrorElement && o.direction === 'vertical') {
       const mirrorParent = mirrorElement.parentElement;
-      if (_item) mirrorElement.appendChild(_item.cloneNode(true));
+      const firstCell = _item?.getElementsByClassName('td')[0];
+
+      if (firstCell) mirrorElement.appendChild(firstCell.cloneNode(true));
       mirrorElement.style.visibility = 'visible';
       _mirror = o.mirrorRef.current;
 
