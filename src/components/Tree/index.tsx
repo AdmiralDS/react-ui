@@ -3,6 +3,7 @@ import React, { forwardRef, useEffect, useMemo, useState } from 'react';
 import type { Dimension, TreeItemProps } from './TreeNode';
 import styled from 'styled-components';
 
+// todo: Разделить контролируемое и неконтролируемое состояние в версии 7
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -19,7 +20,9 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   /** Обработчик изменения данных дерева */
   onChange?: (model: Array<TreeItemProps>) => void;
   /** Модель данных, с рендер-пропсами*/
-  model: Array<TreeItemProps>;
+  model?: Array<TreeItemProps>;
+  /** Модель данных, с рендер-пропсами по-умолчанию для неконтролируемого состояния*/
+  defaultModel?: Array<TreeItemProps>;
   /** Признак того, что дерево содержит checkbox-ы */
   withCheckbox?: boolean;
 }
@@ -76,6 +79,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     {
       dimension = 'm',
       model,
+      defaultModel,
       withCheckbox = true,
       selected,
       defaultSelected,
@@ -88,10 +92,13 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     },
     ref,
   ) => {
-    const [internalModel, setInternalModel] = useState<Array<TreeItemProps>>([...model]);
+    const isControlled = model !== undefined;
+
+    const [internalModel, setInternalModel] = useState<Array<TreeItemProps>>([...(defaultModel ?? [])]);
     const [selectedState, setSelectedState] = useState<string | undefined>(defaultSelected);
     const [activeState, setActiveState] = useState<string | undefined>(undefined);
 
+    const modelObject = model === undefined ? internalModel : model;
     const selectedId = selected === undefined ? selectedState : selected;
     const activeId = active === undefined ? activeState : active;
 
@@ -110,12 +117,12 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     useEffect(() => {
-      setInternalModel([...model]);
+      if (model) setInternalModel([...model]);
     }, [model]);
 
     const map = useMemo(() => {
-      return treeToMap(model);
-    }, [model]);
+      return treeToMap(isControlled ? model : internalModel);
+    }, [modelObject]);
 
     const toggleExpand = (id: string) => {
       map[id].node.expanded = !map[id].node.expanded;
@@ -204,7 +211,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
     return (
       <Wrapper ref={ref} {...props} onMouseLeave={handleMouseLeave}>
-        {renderChildren(model)}
+        {renderChildren(modelObject)}
       </Wrapper>
     );
   },
