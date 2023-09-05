@@ -1,6 +1,7 @@
 **/node_modules
 **/storybook-static
 **/dist
+**/docs
 **/package.json
 **/yarn.lock
 **/package-lock.json
