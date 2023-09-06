@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, forwardRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect, forwardRef } from 'react';
 import type { InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';

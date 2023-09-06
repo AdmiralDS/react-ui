@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/AdmiralDS/react-ui/compare/v6.0.0...v6.1.0) (2023-09-05)
+
+
+### Features
+
+* **AvatarActivity:** add new component ([1607ab0](https://github.com/AdmiralDS/react-ui/commit/1607ab0334bed041a88794e9e3594821a442d768))
+* **AvatarActivityGroup:** add new component AvatarActivityGroup ([12a117b](https://github.com/AdmiralDS/react-ui/commit/12a117b8c7081e4db8f9ec3dde8da6d70deea628))
+* **Select:** Изменен порядок появления опций в поле в режиме multiple - опции появляются в порядке выбора пользователем(последнее выбранное появляется последним в группе чипсов). ([5de5ef9](https://github.com/AdmiralDS/react-ui/commit/5de5ef9b9b8eb8755b0c78cc5d58d2910fe72521)), closes [#826](https://github.com/AdmiralDS/react-ui/issues/826)
+* **Tree:** Добавлено свойство defaultModel для использования в неконтролируемом состоянии ([f83ce72](https://github.com/AdmiralDS/react-ui/commit/f83ce7216dd583bf8b0289ca54e21b3967973df1)), closes [#997](https://github.com/AdmiralDS/react-ui/issues/997)
+
+
+### Bug Fixes
+
+* **Avatar:** fix icon size for dimension S ([a4d26a0](https://github.com/AdmiralDS/react-ui/commit/a4d26a0d50c7c8139309a3424216ad018956e3f5))
+* **Button:** исправлен баг с изменением ширины кнопки при переходе от обычного состояния в состояние loading ([e357e9b](https://github.com/AdmiralDS/react-ui/commit/e357e9b4774f07b9c8738f7fcc0375a0a2b4704c))
+* clean install must succseed ([049d9f7](https://github.com/AdmiralDS/react-ui/commit/049d9f707283f39d5af87266ea93163972b6f706))
+* **Select:** Исправлена ошибка срабатывания события onFocus при blur, убраны лишние срабатывания onFocus ([cafca77](https://github.com/AdmiralDS/react-ui/commit/cafca773d41ad1e7966ccbb0328acf36a7b042c1)), closes [#1044](https://github.com/AdmiralDS/react-ui/issues/1044)
+* **Select:** Исправлена ошибка стирания из стейта выбранных опций при внешней фильтрации значений в режиме multiple, доработан пример внешней фильтрации в storybook ([26f1ffa](https://github.com/AdmiralDS/react-ui/commit/26f1ffa903bd757a29e49c12b4a720e59f6e9582)), closes [#1086](https://github.com/AdmiralDS/react-ui/issues/1086)
+* **SliderInput:** исправлены ошибки в работе компонента в контролируемом режиме ([80262e8](https://github.com/AdmiralDS/react-ui/commit/80262e8238a73aa9b0b4edb6ff1475285701ea37))
+* **SliderRange:** исправлена работа компонента в контролируемом режиме ([c473082](https://github.com/AdmiralDS/react-ui/commit/c473082796ab28f54e6f2794ba1318f6e9efbb6a))
+* **Table:** движение мыши в зоне иконок фильтров и сортировки не вызывает drag&drop колонок ([56b62af](https://github.com/AdmiralDS/react-ui/commit/56b62afcfa4c84e8128775a51cc9163e1921a2d1))
+
 ## [6.0.0](https://github.com/AdmiralDS/react-ui/compare/v5.4.0...v6.0.0) (2023-08-08)
 
 
