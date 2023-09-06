@@ -2,5 +2,5 @@
 scripts/**
 *.svg
 dist/**
+docs/**
 node_modules/**
-jest.config.cjs

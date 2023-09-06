@@ -28,5 +28,5 @@
     ]
   },
   "include": ["src/**/*", ".storybook"],
-  "exclude": ["dist", "**/node_modules/*", "**/__snapshots__/*"]
+  "exclude": ["dist", "**/node_modules/*", "docs", "**/__snapshots__/*"]
 }

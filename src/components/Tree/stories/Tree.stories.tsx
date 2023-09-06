@@ -6,10 +6,12 @@ import { Tree } from '@admiral-ds/react-ui';
 
 import { TreeWithCheckboxesTemplate } from './TreeWithCheckboxes.template';
 import { TreeSimpleTemplate } from './TreeSimple.template';
+import { TreeUncontrolledTemplate } from '#src/components/Tree/stories/TreeUncontrolled.template';
 
 // Imports of text sources
 import TreeWithCheckboxesRaw from './TreeWithCheckboxes.template?raw';
 import TreeSimpleRaw from './TreeSimple.template?raw';
+import TreeUncontrolledRaw from './TreeUncontrolled.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -82,12 +84,12 @@ export const Demo1_Tree = {
         code: TreeWithCheckboxesRaw,
       },
       description: {
-        story: 'Контроллируемое дерево с checkbox',
+        story: 'Контролируемое дерево с checkbox',
       },
     },
   },
 
-  name: 'Контроллируемое дерево с checkbox',
+  name: 'Контролируемое дерево с checkbox',
 };
 
 const SimpleTreeStory: StoryFn<typeof Tree> = (props) => <TreeSimpleTemplate {...props} />;
@@ -107,4 +109,23 @@ export const Demo2_Tree = {
   },
 
   name: 'Дерево без checkbox',
+};
+
+const TreeUncontrolledStory: StoryFn<typeof Tree> = (props) => <TreeUncontrolledTemplate {...props} />;
+
+export const TreeUncontrolledExample = {
+  render: TreeUncontrolledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TreeUncontrolledRaw,
+      },
+      description: {
+        story: 'Неконтролируемое дерево',
+      },
+    },
+  },
+
+  name: 'Неконтролируемое дерево',
 };
