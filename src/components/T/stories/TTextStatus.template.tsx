@@ -1,13 +1,13 @@
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 import { MainPrimaryColorName, T } from '@admiral-ds/react-ui';
 import type { TProps } from '@admiral-ds/react-ui';
 
-const BlueText = styled(T)`
+const BlueText = css`
   color: ${(p) => p.theme.color[MainPrimaryColorName]};
 `;
 
-const CustomParagraph = styled(T)`
+const CustomParagraph = css`
   color: ${(p) => p.theme.color['Neutral/Neutral 70']};
 `;
 
@@ -18,9 +18,9 @@ const OrangeColor = css`
 export const TTextStatusTemplate = ({ ...props }: TProps) => {
   return (
     <>
-      <BlueText font={'Body/Body 1 Short'} as={'a'} href={'https://'}>
+      <T font={'Body/Body 1 Short'} as={'a'} href={'https://'} cssMixin={BlueText}>
         Это ссылка со стилем Body/Body 1 Short, цветом шрифта Primary.
-      </BlueText>
+      </T>
       <br />
       <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
         Это заголовок третьего уровня и стилем Body/Body 1 Long.
@@ -34,9 +34,9 @@ export const TTextStatusTemplate = ({ ...props }: TProps) => {
       <T font="Body/Body 2 Long" as="h2" skeleton={props.skeleton}>
         Для отображения в состоянии skeleton должен быть указан текст.
       </T>
-      <CustomParagraph font="Header/H5" as="p">
+      <T font="Header/H5" as="p" cssMixin={CustomParagraph}>
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
-      </CustomParagraph>
+      </T>
 
       <T font="Header/H3" as="h3">
         Выбор конфигурации
