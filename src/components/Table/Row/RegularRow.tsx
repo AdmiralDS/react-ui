@@ -71,7 +71,7 @@ export const RegularRow = ({
         <StickyWrapper>
           {rowsDraggable && (
             <DragCell dimension={dimension}>
-              <DragIcon width={iconSize} height={iconSize} disabled={row.disabled} />
+              <DragIcon data-dragicon width={iconSize} height={iconSize} disabled={row.disabled} />
             </DragCell>
           )}
           {displayRowExpansionColumn && (

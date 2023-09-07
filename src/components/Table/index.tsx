@@ -37,8 +37,6 @@ import {
   DragCell,
 } from './style';
 import { VirtualBody } from './VirtualBody';
-import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
-import { ReactComponent as CursorNotAllowed } from './icons/cursorNotAllowed.svg';
 import type {
   Column,
   TableRow,
@@ -426,6 +424,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             mirrorRef: rowMirrorRef,
             dimension,
             direction: 'vertical',
+            invalid: (el: HTMLElement, initEl: HTMLElement) => {
+              const validDrag =
+                initEl.getAttribute('data-dragicon') || initEl.parentElement?.getAttribute('data-dragicon');
+              return !validDrag;
+            },
           },
           handleDrop,
           handleDragStart,
@@ -764,20 +767,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
           createPortal(
             <Mirror dimension={dimension} ref={columnMirrorRef}>
-              <CursorGrabbing className="icon-grabbing" />
-              <CursorNotAllowed className="icon-not-allowed" />
               <MirrorText />
             </Mirror>,
             rootRef?.current || document.body,
           )}
         {rowsDraggable &&
-          createPortal(
-            <MirrorRow dimension={dimension} ref={rowMirrorRef}>
-              <CursorGrabbing className="icon-grabbing" />
-              <CursorNotAllowed className="icon-not-allowed" />
-            </MirrorRow>,
-            rootRef?.current || document.body,
-          )}
+          createPortal(<MirrorRow dimension={dimension} ref={rowMirrorRef} />, rootRef?.current || document.body)}
       </TableContainer>
     );
   },

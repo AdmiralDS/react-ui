@@ -248,8 +248,10 @@ export function dragObserver(
     const clientY = getCoord('clientY', e) || 0;
     let x, y;
     if (o.direction === 'vertical') {
-      x = clientX - _offsetX;
-      y = clientY - _offsetY;
+      // x = clientX - _offsetX;
+      x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 18 : 24);
+      // y = clientY - _offsetY;
+      y = clientY - _mirror.getBoundingClientRect().height / 2;
     } else if (o.direction === 'horizontal') {
       x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 18 : 20);
       y = clientY - _mirror.getBoundingClientRect().height / 2;

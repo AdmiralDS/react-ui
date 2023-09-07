@@ -27,7 +27,7 @@ type RowData = TableRow & {
 const rowList: RowData[] = [
   {
     id: '0001',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО1',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -39,7 +39,7 @@ const rowList: RowData[] = [
   },
   {
     id: '0002',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО2',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -51,11 +51,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0003',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО3',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(12_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -63,11 +63,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0004',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО4',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(55_500_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -75,11 +75,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0005',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО5',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(180_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -87,11 +87,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0006',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО6',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(500_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -99,11 +99,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0007',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО7',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(189_000_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -111,11 +111,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0008',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО8',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(6_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',
@@ -123,47 +123,11 @@ const rowList: RowData[] = [
   },
   {
     id: '0009',
-    transfer_type: 'МНО',
+    transfer_type: 'МНО9',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0010',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0011',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0012',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+        <T font="Body/Body 2 Short">{numberFormatter.format(10_000)}</T>
       </AmountCell>
     ),
     currency: 'RUB',

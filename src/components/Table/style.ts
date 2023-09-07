@@ -208,6 +208,7 @@ export const SortOrder = styled.div`
 export const DragIcon = styled(DragOutline)<{ disabled?: boolean }>`
   display: flex;
   flex-shrink: 0;
+  cursor: pointer;
   & *[fill^='#'] {
     fill: ${({ theme, disabled }) =>
       disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
@@ -291,7 +292,6 @@ export const DragCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
         return '10px 8px 9px 8px';
     }
   }};
-  cursor: pointer;
 `;
 
 export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
@@ -503,27 +503,13 @@ export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ dimension }) =>
     dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
-  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 8 : 10)}px;
-  && {
-    cursor: none;
-    svg {
-      display: none;
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      flex-shrink: 0;
-    }
-  }
+  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 36 : 40)}px;
 
   &[data-cursor='normal'] {
-    & .icon-grabbing {
-      display: block;
-    }
+    cursor: grabbing;
   }
   &[data-cursor='error'] {
-    & .icon-not-allowed {
-      display: block;
-    }
+    cursor: not-allowed;
   }
 `;
 
@@ -532,29 +518,18 @@ export const MirrorRow = styled.div<{ dimension: TableProps['dimension'] }>`
   z-index: 6;
   visibility: hidden;
   display: flex;
+  align-items: center;
   max-width: 288px;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  && {
-    cursor: none;
-    svg {
-      display: none;
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      flex-shrink: 0;
-    }
-  }
+  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 36 : 48)}px;
+  ${rowStyle}
 
   &[data-cursor='normal'] {
-    & .icon-grabbing {
-      display: block;
-    }
+    cursor: grabbing;
   }
   &[data-cursor='error'] {
-    & .icon-not-allowed {
-      display: block;
-    }
+    cursor: not-allowed;
   }
 `;
 
