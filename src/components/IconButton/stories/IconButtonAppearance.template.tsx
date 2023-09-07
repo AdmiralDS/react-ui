@@ -27,7 +27,7 @@ export const IconButtonAppearanceTemplate = (props: IconButtonProps) => (
   <>
     <WrapperIconButton>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Primary
         </T>
         <IconButton {...props} appearance="primary">
@@ -35,7 +35,7 @@ export const IconButtonAppearanceTemplate = (props: IconButtonProps) => (
         </IconButton>
       </WrapperVertical>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Secondary
         </T>
         <IconButton {...props} appearance="secondary">

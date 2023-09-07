@@ -1,13 +1,13 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { MainPrimaryColorName, T } from '@admiral-ds/react-ui';
 import type { TProps } from '@admiral-ds/react-ui';
 
-const BlueText = css`
+const BlueText = styled(T)`
   color: ${(p) => p.theme.color[MainPrimaryColorName]};
 `;
 
-const CustomParagraph = css`
+const CustomParagraph = styled(T)`
   color: ${(p) => p.theme.color['Neutral/Neutral 70']};
 `;
 
@@ -18,27 +18,26 @@ const OrangeColor = css`
 export const TTextStatusTemplate = ({ ...props }: TProps) => {
   return (
     <>
-      <T font={'Body/Body 1 Short'} as={'a'} href={'https://'} cssMixin={BlueText}>
+      <BlueText font={'Body/Body 1 Short'} forwardedAs="a" href={'https://'}>
         Это ссылка со стилем Body/Body 1 Short, цветом шрифта Primary.
-      </T>
+      </BlueText>
       <br />
-      <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
+      <T font="Body/Body 1 Long" forwardedAs="h3" cssMixin={OrangeColor}>
         Это заголовок третьего уровня и стилем Body/Body 1 Long.
       </T>
-      <T font="Body/Body 2 Long" as="h3" color="Purple/Purple 60 Main">
+      <T font="Body/Body 2 Long" forwardedAs="h3" color="Purple/Purple 60 Main">
         Это заголовок третьего уровня и стилем Body/Body 2 Long цвета Purple/Purple 60 Main.
       </T>
-      <T font="Body/Body 2 Long" as="h2" skeleton={props.skeleton}>
+      <T font="Body/Body 2 Long" forwardedAs="h2" skeleton={props.skeleton}>
         Это заголовок второго уровня. Для активации состояния skeleton необходимо сменить состяние.
       </T>
-      <T font="Body/Body 2 Long" as="h2" skeleton={props.skeleton}>
+      <T font="Body/Body 2 Long" forwardedAs="h2" skeleton={props.skeleton}>
         Для отображения в состоянии skeleton должен быть указан текст.
       </T>
-      <T font="Header/H5" as="p" cssMixin={CustomParagraph}>
+      <CustomParagraph font="Header/H5" forwardedAs="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
-      </T>
-
-      <T font="Header/H3" as="h3">
+      </CustomParagraph>
+      <T font="Header/H3" forwardedAs="h3">
         Выбор конфигурации
       </T>
     </>

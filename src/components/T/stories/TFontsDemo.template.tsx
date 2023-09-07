@@ -114,7 +114,7 @@ export const TFontsDemoTemplate = () => {
             return (
               <tr key={index}>
                 <td data-label="Style">
-                  <T font={item.name} as="div">
+                  <T font={item.name} forwardedAs="div">
                     {item.name}
                   </T>
                   <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
@@ -142,7 +142,7 @@ export const TFontsDemoTemplate = () => {
         </tbody>
       </Table>
       <Separator />
-      <T font="Header/H1" as="p">
+      <T font="Header/H1" forwardedAs="p">
         Old version
       </T>
       <Table>
@@ -176,7 +176,7 @@ export const TFontsDemoTemplate = () => {
             return (
               <tr key={index}>
                 <td data-label="Style">
-                  <T font={item.name} as="div">
+                  <T font={item.name} forwardedAs="div">
                     {item.name}
                   </T>
                   <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />

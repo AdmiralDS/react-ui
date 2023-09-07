@@ -33,7 +33,7 @@ export const ButtonLoaderTemplate = () => {
     <>
       <Wrapper>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Size XL
           </T>
           <Button dimension="xl" onClick={handleClick}>
@@ -62,7 +62,7 @@ export const ButtonLoaderTemplate = () => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Size L
           </T>
           <Button dimension="l">Button 48</Button>
@@ -89,7 +89,7 @@ export const ButtonLoaderTemplate = () => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Size M
           </T>
           <Button dimension="m">Button 40</Button>
@@ -116,7 +116,7 @@ export const ButtonLoaderTemplate = () => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Size S
           </T>
           <Button dimension="s">Button 32</Button>
@@ -144,7 +144,7 @@ export const ButtonLoaderTemplate = () => {
       </Wrapper>
       <Separator />
       <div>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Button with loader stretch
         </T>
         <Separator />

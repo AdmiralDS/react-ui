@@ -15,7 +15,7 @@ const Divider = styled.div`
 export const LinkWithIconTemplate = () => {
   return (
     <>
-      <T font="Body/Body 1 Long" as="div">
+      <T font="Body/Body 1 Long" forwardedAs="div">
         Link with icon. Dimension - m
       </T>
       <Separator />
@@ -25,7 +25,7 @@ export const LinkWithIconTemplate = () => {
         Link
       </Link>
       <Separator />
-      <T font="Body/Body 1 Long" as="div">
+      <T font="Body/Body 1 Long" forwardedAs="div">
         Link with icon. Dimension - s
       </T>
       <Separator />

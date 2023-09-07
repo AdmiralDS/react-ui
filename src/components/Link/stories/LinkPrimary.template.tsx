@@ -9,14 +9,14 @@ const Separator = styled.div`
 export const LinkPrimaryTemplate = () => {
   return (
     <>
-      <T font="Body/Body 1 Long" as="div">
+      <T font="Body/Body 1 Long" forwardedAs="div">
         Dimension - M
       </T>
       <Link appearance="primary" href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
-      <T font="Body/Body 1 Long" as="div">
+      <T font="Body/Body 1 Long" forwardedAs="div">
         Dimension - S
       </T>
       <Link appearance="primary" dimension="s" href="" onClick={(e: any) => e.preventDefault()}>

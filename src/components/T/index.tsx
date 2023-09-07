@@ -24,7 +24,7 @@ export interface TProps {
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
-  as?: ElementType;
+  forwardedAs?: ElementType;
   /** Текст ссылки при необходимости использования компонента как ссылку <a> */
   href?: string;
 }
@@ -54,8 +54,18 @@ const Tspan = styled.span<{
   ${(p) => p.$skeleton && skeletonMixin}
 `;
 
-export const T = forwardRef<typeof Tspan, TProps>(({ font, color, cssMixin, skeleton, ...props }, ref) => {
-  return <Tspan ref={ref} {...props} $font={font} $color={color} $cssMixin={cssMixin} $skeleton={skeleton} />;
+export const T = forwardRef<typeof Tspan, TProps>(({ font, color, cssMixin, skeleton, forwardedAs, ...props }, ref) => {
+  return (
+    <Tspan
+      ref={ref}
+      {...props}
+      as={forwardedAs}
+      $font={font}
+      $color={color}
+      $cssMixin={cssMixin}
+      $skeleton={skeleton}
+    />
+  );
 });
 
 T.displayName = 'T';

@@ -48,7 +48,7 @@ export const ContentSwitcherIconOnlyTemplate = () => {
   return (
     <>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Dimension - L
         </T>
         <ContentSwitcher dimension={'l'} appearance="primary">
@@ -75,7 +75,7 @@ export const ContentSwitcherIconOnlyTemplate = () => {
             </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Dimension - M
         </T>
         <ContentSwitcher dimension={'m'} appearance="primary">
@@ -102,7 +102,7 @@ export const ContentSwitcherIconOnlyTemplate = () => {
             </ContentSwitcherItemWithTooltip>
           ))}
         </ContentSwitcher>
-        <T font="Body/Body 1 Long" as="div">
+        <T font="Body/Body 1 Long" forwardedAs="div">
           Dimension - S
         </T>
         <ContentSwitcher dimension={'s'} appearance="primary">

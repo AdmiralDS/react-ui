@@ -33,7 +33,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
     <ThemeProvider theme={swapBorder}>
       <WrapperButton>
         <div>
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - M
           </StyledText>
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} />
@@ -41,7 +41,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} loading />
           <Separator />
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} skeleton />
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
           <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} />
@@ -52,7 +52,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <Separator />
         </div>
         <div>
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - M
           </StyledText>
           <TextButton dimension="m" text="Text Button" />
@@ -60,7 +60,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <TextButton dimension="m" text="Text Button" loading />
           <Separator />
           <TextButton dimension="m" text="Text Button" skeleton />
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
           <TextButton dimension="s" text="Text Button" />

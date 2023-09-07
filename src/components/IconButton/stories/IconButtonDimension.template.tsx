@@ -33,7 +33,7 @@ export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBord
     <ThemeProvider theme={swapBorder}>
       <WrapperIconButton>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Dimension - xl
           </T>
           <IconButton {...props} dimension="xl">
@@ -41,7 +41,7 @@ export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBord
           </IconButton>
         </WrapperVertical>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Dimension - l
           </T>
           <IconButton {...props} dimension="l">
@@ -49,7 +49,7 @@ export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBord
           </IconButton>
         </WrapperVertical>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Dimension - m
           </T>
           <IconButton {...props} dimension="m">
@@ -57,7 +57,7 @@ export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBord
           </IconButton>
         </WrapperVertical>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" as="div">
+          <T font="Body/Body 1 Long" forwardedAs="div">
             Dimension - s
           </T>
           <IconButton {...props} dimension="s">

@@ -24,7 +24,7 @@ export const ButtonPlaygroundTemplate = (props: ButtonProps & { themeBorderKind?
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Long" as="div">
+      <T font="Body/Body 1 Long" forwardedAs="div">
         Кнопки представлены в четырех размерностях XL, L, M и S. Для дополнительных акцентов и более прозрачных действий
         могут применяться кнопки с иконками и текстом. Иконка может быть как перед надписью, так и после
         (iconStart/iconEnd). В некоторых случаях могут использоваться кнопки только с иконками. Как правило, это иконки,

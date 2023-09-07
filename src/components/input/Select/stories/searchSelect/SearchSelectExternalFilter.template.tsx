@@ -79,12 +79,12 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
 
   return (
     <>
-      <T font="Body/Body 2 Long" as="div">
+      <T font="Body/Body 2 Long" forwardedAs="div">
         Внешняя фильтрация элементов по значению
       </T>
       <Container>
         <div>
-          <T font="Body/Body 2 Long" as="div">
+          <T font="Body/Body 2 Long" forwardedAs="div">
             Пример с одиночным выбором
           </T>
           <Select
@@ -101,7 +101,7 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
           </Select>
         </div>
         <div>
-          <T font="Body/Body 2 Long" as="div">
+          <T font="Body/Body 2 Long" forwardedAs="div">
             Пример с множественным выбором
           </T>
           <Select

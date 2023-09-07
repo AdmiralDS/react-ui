@@ -39,7 +39,7 @@ export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: 
     <>
       <ThemeProvider theme={swapBorder}>
         <Container>
-          <T font="Header/H6" as="div">
+          <T font="Header/H6" forwardedAs="div">
             Состояния
           </T>
           <Row>
@@ -51,49 +51,49 @@ export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: 
               }}
             />
             <Checkbox dimension="s" />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Default
             </T>
           </Row>
           <Row>
             <Checkbox indeterminate />
             <Checkbox dimension="s" indeterminate />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Частично выбранный
             </T>
           </Row>
           <Row>
             <Checkbox disabled />
             <Checkbox dimension="s" disabled />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Disable
             </T>
           </Row>
           <Row>
             <Checkbox disabled defaultChecked />
             <Checkbox dimension="s" disabled defaultChecked />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Disable active
             </T>
           </Row>
           <Row>
             <Checkbox error />
             <Checkbox dimension="s" error />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Состояние ошибки
             </T>
           </Row>
           <Row>
             <Checkbox readOnly />
             <Checkbox dimension="s" readOnly />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Readonly
             </T>
           </Row>
           <Row>
             <Checkbox readOnly defaultChecked />
             <Checkbox dimension="s" readOnly defaultChecked />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Readonly active
             </T>
           </Row>

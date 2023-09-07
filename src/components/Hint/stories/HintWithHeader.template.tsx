@@ -10,7 +10,7 @@ of mini units map to fluid grid column widths and row heights.`;
 const renderHintContent = () => {
   return (
     <div>
-      <T font="Subtitle/Subtitle 3" as="div" style={{ marginBottom: '4px' }}>
+      <T font="Subtitle/Subtitle 3" forwardedAs="div" style={{ marginBottom: '4px' }}>
         Hint header
       </T>
       {text}

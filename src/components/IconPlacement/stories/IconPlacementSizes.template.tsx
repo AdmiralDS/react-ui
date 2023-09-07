@@ -35,7 +35,7 @@ export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBo
       <WrapperVertical>
         <Wrapper>
           <WrapperVertical>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Dimension - L Small
             </T>
             <IconPlacement dimension="lSmall" onClick={handleClick}>
@@ -44,7 +44,7 @@ export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBo
             <IconPlacement dimension="lSmall" onClick={handleClick} disabled={true}>
               <CloseOutline />
             </IconPlacement>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Dimension - L Big
             </T>
             <IconPlacement dimension="lBig" onClick={handleClick}>
@@ -55,7 +55,7 @@ export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBo
             </IconPlacement>
           </WrapperVertical>
           <WrapperVertical>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Dimension - M Small
             </T>
             <IconPlacement dimension="mSmall" onClick={handleClick}>
@@ -64,7 +64,7 @@ export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBo
             <IconPlacement dimension="mSmall" onClick={handleClick} disabled={true}>
               <CloseOutline />
             </IconPlacement>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Dimension - M Big
             </T>
             <IconPlacement dimension="mBig" onClick={handleClick}>
@@ -75,7 +75,7 @@ export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBo
             </IconPlacement>
           </WrapperVertical>
           <WrapperVertical>
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Dimension - S
             </T>
             <IconPlacement dimension="s" onClick={handleClick}>

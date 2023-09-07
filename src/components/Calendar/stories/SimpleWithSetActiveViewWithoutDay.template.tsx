@@ -9,10 +9,10 @@ export const SimpleWithSetActiveViewWithoutDayTemplate = ({ ...props }: Calendar
 
   return (
     <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
+      <T font="Body/Body 1 Long" forwardedAs="div" style={{ marginBottom: '25px' }}>
         Показываем только экраны выбора месяца и года
       </T>
-      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
+      <T font="Body/Body 2 Long" forwardedAs="div" style={{ marginBottom: '25px' }}>
         Если выставлен currentActiveViewImportant, то необходимо самому управлять открытием экранов
       </T>
       <div>
