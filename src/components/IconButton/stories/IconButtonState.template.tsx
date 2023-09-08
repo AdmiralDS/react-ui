@@ -27,13 +27,13 @@ export const IconButtonStateTemplate = (props: IconButtonProps) => (
   <>
     <WrapperIconButton>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" forwardedAs="div">
+        <T font="Body/Body 1 Long" as="div">
           Loading
         </T>
         <IconButton loading dimension={props.dimension} />
       </WrapperVertical>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" forwardedAs="div">
+        <T font="Body/Body 1 Long" as="div">
           Disabled
         </T>
         <IconButton disabled dimension={props.dimension}>
@@ -41,7 +41,7 @@ export const IconButtonStateTemplate = (props: IconButtonProps) => (
         </IconButton>
       </WrapperVertical>
       {/*<div>*/}
-      {/*  <T font="Body/Body 1 Long" forwardedAs="div">*/}
+      {/*  <T font="Body/Body 1 Long" as="div">*/}
       {/*    Skeleton*/}
       {/*  </T>*/}
       {/*  <IconButton skeleton dimension="xl" />*/}

@@ -39,7 +39,7 @@ export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: 
     <>
       <ThemeProvider theme={swapBorder}>
         <Container>
-          <T font="Header/H6" forwardedAs="div">
+          <T font="Header/H6" as="div">
             Состояния
           </T>
           <Row>
@@ -51,28 +51,28 @@ export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: 
               }}
             />
             <Checkbox dimension="s" />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Default
             </T>
           </Row>
           <Row>
             <Checkbox indeterminate />
             <Checkbox dimension="s" indeterminate />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Частично выбранный
             </T>
           </Row>
           <Row>
             <Checkbox disabled />
             <Checkbox dimension="s" disabled />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Disable
             </T>
           </Row>
           <Row>
             <Checkbox disabled defaultChecked />
             <Checkbox dimension="s" disabled defaultChecked />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Disable active
             </T>
           </Row>

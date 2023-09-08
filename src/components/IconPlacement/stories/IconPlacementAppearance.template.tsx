@@ -35,19 +35,19 @@ export const IconPlacementAppearanceTemplate = (props: IconPlacementProps & { th
       <WrapperVertical>
         <Wrapper>
           <WrapperVertical>
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Appearance - Primary
             </T>
             <IconPlacement onClick={handleClick} {...props} appearance={'primary'}>
               <CloseOutline />
             </IconPlacement>
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Appearance - Secondary
             </T>
             <IconPlacement onClick={handleClick} {...props} appearance={'secondary'}>
               <CloseOutline />
             </IconPlacement>
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Appearance - Custom icon color
             </T>
             <IconPlacement onClick={handleClick} {...props} appearance={{ iconColor: '#E052BD' }}>

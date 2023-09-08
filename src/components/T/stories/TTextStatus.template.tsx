@@ -22,22 +22,22 @@ export const TTextStatusTemplate = ({ ...props }: TProps) => {
         Это ссылка со стилем Body/Body 1 Short, цветом шрифта Primary.
       </BlueText>
       <br />
-      <T font="Body/Body 1 Long" forwardedAs="h3" cssMixin={OrangeColor}>
+      <T font="Body/Body 1 Long" as="h3" cssMixin={OrangeColor}>
         Это заголовок третьего уровня и стилем Body/Body 1 Long.
       </T>
-      <T font="Body/Body 2 Long" forwardedAs="h3" color="Purple/Purple 60 Main">
+      <T font="Body/Body 2 Long" as="h3" color="Purple/Purple 60 Main">
         Это заголовок третьего уровня и стилем Body/Body 2 Long цвета Purple/Purple 60 Main.
       </T>
-      <T font="Body/Body 2 Long" forwardedAs="h2" skeleton={props.skeleton}>
+      <T font="Body/Body 2 Long" as="h2" skeleton={props.skeleton}>
         Это заголовок второго уровня. Для активации состояния skeleton необходимо сменить состяние.
       </T>
-      <T font="Body/Body 2 Long" forwardedAs="h2" skeleton={props.skeleton}>
+      <T font="Body/Body 2 Long" as="h2" skeleton={props.skeleton}>
         Для отображения в состоянии skeleton должен быть указан текст.
       </T>
       <CustomParagraph font="Header/H5" forwardedAs="p">
         Это параграф со стилем Header/H5 и цветом шрифта Tertiary.
       </CustomParagraph>
-      <T font="Header/H3" forwardedAs="h3">
+      <T font="Header/H3" as="h3">
         Выбор конфигурации
       </T>
     </>

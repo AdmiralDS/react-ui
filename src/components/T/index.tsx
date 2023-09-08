@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
-import type { ReactNode, ElementType } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { PolymorphicComponentProps, RuleSet, WebTarget } from 'styled-components';
 import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
@@ -10,8 +9,7 @@ import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 export type FontName = keyof typeof typography;
 
-export interface TProps {
-  children: ReactNode;
+export type TBaseProps = {
   /**  Имя шрифта из списка дизайн системы */
   font: FontName;
   /** Имя цвета шрифта из палитры темы **/
@@ -20,14 +18,9 @@ export interface TProps {
   cssMixin?: RuleSet<object>;
   /** Состояние skeleton */
   skeleton?: boolean;
-  /**
-   * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
-   * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
-   */
-  forwardedAs?: ElementType;
-  /** Текст ссылки при необходимости использования компонента как ссылку <a> */
-  href?: string;
-}
+};
+
+export type TProps = PolymorphicComponentProps<'web', TBaseProps, WebTarget, WebTarget>;
 
 const skeletonMixin = css`
   ${skeletonAnimationMixin};
@@ -54,12 +47,11 @@ const Tspan = styled.span<{
   ${(p) => p.$skeleton && skeletonMixin}
 `;
 
-export const T = forwardRef<typeof Tspan, TProps>(({ font, color, cssMixin, skeleton, forwardedAs, ...props }, ref) => {
+export const T = forwardRef<typeof Tspan, TProps>(({ font, color, cssMixin, skeleton, ...props }, ref) => {
   return (
     <Tspan
       ref={ref}
       {...props}
-      as={forwardedAs}
       $font={font}
       $color={color}
       $cssMixin={cssMixin}

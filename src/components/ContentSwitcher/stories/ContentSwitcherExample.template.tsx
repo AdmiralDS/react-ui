@@ -40,7 +40,7 @@ const list = [
 export const ContentSwitcherExampleTemplate = () => {
   return (
     <>
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - l
       </T>
       <Separator />
@@ -64,7 +64,7 @@ export const ContentSwitcherExampleTemplate = () => {
         })}
       </ContentSwitcher>
       <Separator />
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - m
       </T>
       <Separator />
@@ -78,7 +78,7 @@ export const ContentSwitcherExampleTemplate = () => {
         })}
       </ContentSwitcher>
       <Separator />
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - s
       </T>
       <Separator />
@@ -92,7 +92,7 @@ export const ContentSwitcherExampleTemplate = () => {
         })}
       </ContentSwitcher>
       <Separator />
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Mobile Adaptive
       </T>
       <MobileWrapper>

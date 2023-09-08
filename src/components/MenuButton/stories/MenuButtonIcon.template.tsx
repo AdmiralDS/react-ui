@@ -105,7 +105,7 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
     <>
       <Wrapper>
         <WrapperVertical>
-          <T font="Body/Body 1 Long" forwardedAs="div">
+          <T font="Body/Body 1 Long" as="div">
             Size XL
           </T>
           <MenuButton
@@ -173,7 +173,7 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" forwardedAs="div">
+          <T font="Body/Body 1 Long" as="div">
             Size L
           </T>
           <MenuButton
@@ -241,7 +241,7 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" forwardedAs="div">
+          <T font="Body/Body 1 Long" as="div">
             Size M
           </T>
           <MenuButton
@@ -309,7 +309,7 @@ export const MenuButtonIconTemplate = (props: MenuButtonProps) => {
         </WrapperVertical>
         <Separator />
         <WrapperVertical>
-          <T font="Body/Body 1 Long" forwardedAs="div">
+          <T font="Body/Body 1 Long" as="div">
             Size S
           </T>
           <MenuButton

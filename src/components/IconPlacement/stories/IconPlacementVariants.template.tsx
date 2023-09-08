@@ -22,10 +22,10 @@ export const IconPlacementVariantsTemplate = (props: IconPlacementProps & { them
   return (
     <ThemeProvider theme={swapBorder}>
       <WrapperVertical>
-        <T font="Body/Body 1 Long" forwardedAs="div">
+        <T font="Body/Body 1 Long" as="div">
           Примеры использования:
         </T>
-        <T font="Body/Body 1 Long" forwardedAs="div">
+        <T font="Body/Body 1 Long" as="div">
           иконка Close в компонентах Modal, Toast, Hint и др.
         </T>
         <CloseIconPlacementButton {...props} />

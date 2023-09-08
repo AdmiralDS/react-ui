@@ -16,10 +16,10 @@ export const LinkPlaygroundTemplate = (args: LinkProps) => {
 
   return (
     <ThemeProvider theme={swapBorder}>
-      <T font="Body/Body 1 Short" forwardedAs="div">
+      <T font="Body/Body 1 Short" as="div">
         Компонент Link используется для навигации. Может применяться отдельно или внутри текста, с иконкой или без.
       </T>
-      <T font="Body/Body 1 Short" forwardedAs="div">
+      <T font="Body/Body 1 Short" as="div">
         Ссылки бывают двух типов — Primary и Secondary, и двух размеров — M (24px) и S (20px).
       </T>
       <Divider />

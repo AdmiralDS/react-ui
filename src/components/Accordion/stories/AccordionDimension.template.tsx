@@ -10,7 +10,7 @@ const Separator = styled.div`
 export const AccordionDimensionTemplate = () => {
   return (
     <>
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Размер l
       </T>
       <Separator />
@@ -28,7 +28,7 @@ export const AccordionDimensionTemplate = () => {
         </AccordionItem>
       </Accordion>
       <Separator />
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Размер m
       </T>
       <Separator />

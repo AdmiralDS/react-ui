@@ -27,7 +27,7 @@ export const SearchSelectCustomOptionTemplate = (props: SelectProps) => {
 
   return (
     <>
-      <T font="Body/Body 2 Long" forwardedAs="div">
+      <T font="Body/Body 2 Long" as="div">
         Фильтрация элементов значению, тексту и дополнительному тексту
       </T>
       <Separator />

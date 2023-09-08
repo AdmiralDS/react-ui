@@ -8,7 +8,7 @@ const demo2_TreeModel: Array<TreeItemProps> = [
   {
     render: (options: TreeNodeRenderOptionProps) => (
       <TreeNode key={'1'} {...options}>
-        <T forwardedAs="div" style={{ paddingTop: 2 }} font="Subtitle/Subtitle 2">
+        <T as="div" style={{ paddingTop: 2 }} font="Subtitle/Subtitle 2">
           Элемент дерева с кастомным заголовком
         </T>
       </TreeNode>

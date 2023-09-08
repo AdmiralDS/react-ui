@@ -9,14 +9,14 @@ const Separator = styled.div`
 export const LinkSecondaryTemplate = () => {
   return (
     <>
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
       <Link appearance="secondary" href="" onClick={(e: any) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
-      <T font="Body/Body 1 Long" forwardedAs="div">
+      <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
       <Link appearance="secondary" dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
