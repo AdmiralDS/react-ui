@@ -17,7 +17,7 @@ export interface TProps {
   /** Имя цвета шрифта из палитры темы **/
   color?: ColorName;
   /** Позволяет добавлять  миксин созданный с помощью styled css  */
-  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  cssMixin?: RuleSet<object>;
   /** Состояние skeleton */
   skeleton?: boolean;
   /**
@@ -37,7 +37,7 @@ const skeletonMixin = css`
 const Tspan = styled.span<{
   $font: FontName;
   $color?: ColorName;
-  $cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $cssMixin?: RuleSet<object>;
   $skeleton?: boolean;
 }>`
   color: ${({ $color, theme, $skeleton }) => {
