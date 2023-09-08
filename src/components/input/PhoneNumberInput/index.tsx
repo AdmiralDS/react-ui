@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -103,7 +103,7 @@ export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value | dis
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

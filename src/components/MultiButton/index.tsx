@@ -1,6 +1,6 @@
 import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
 import type { Shape } from '#src/components/themes/common';
@@ -108,7 +108,7 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

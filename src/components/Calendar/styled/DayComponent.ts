@@ -1,4 +1,4 @@
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -13,7 +13,7 @@ type DayComponentProps = {
   disabled?: boolean;
   inSelectingRange: boolean;
   outsideMonth?: boolean;
-  highlightSpecialDayMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  highlightSpecialDayMixin?: RuleSet<object>;
 };
 
 const DAY_SIZE = '36px';

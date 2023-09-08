@@ -7,7 +7,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import type { ButtonProps } from '#src/components/Button';
 import { Button } from '#src/components/Button';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
@@ -48,7 +48,7 @@ export interface MenuButtonProps
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

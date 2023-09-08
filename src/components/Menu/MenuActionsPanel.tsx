@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 import type { MenuDimensions } from '#src/components/Menu/index';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
@@ -10,7 +10,7 @@ import { uid } from '#src/components/common/uid';
 
 const MenuActionsPanelDiv = styled.div<{
   $dimension: MenuDimensions;
-  $menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $menuActionsPanelCssMixin?: RuleSet<object>;
 }>`
   padding: ${(p) => (p.$dimension === 's' ? '10px 12px' : '12px 16px')};
 
@@ -19,7 +19,7 @@ const MenuActionsPanelDiv = styled.div<{
 
 export interface MenuActionsPanelProps {
   dimension: MenuDimensions;
-  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuActionsPanelCssMixin?: RuleSet<object>;
   children: ReactNode;
 }
 

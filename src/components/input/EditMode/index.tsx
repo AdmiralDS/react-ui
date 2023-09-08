@@ -1,6 +1,6 @@
 import type { ChangeEventHandler, MouseEvent } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 
 import { Button } from '#src/components/Button';
@@ -114,7 +114,7 @@ const CancelIcon = styled(CloseOutline)`
   ${iconStyle}
 `;
 
-const Wrapper = styled.div<{ $cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
+const Wrapper = styled.div<{ $cssMixin?: RuleSet<object> }>`
   display: flex;
   align-items: center;
   ${({ $cssMixin }) => $cssMixin || ''};
@@ -232,7 +232,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
-  containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  containerCssMixin?: RuleSet<object>;
   /** Функция обработчика события нажатия кнопки начала редактирования
    * @param value - значение поля ввода для редактирования */
   onEdit?: (value: string | number) => void;

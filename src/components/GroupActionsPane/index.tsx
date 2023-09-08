@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 import React, { useState } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 import type { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
@@ -96,7 +96,7 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
 
   /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   columnsButtonDropContainerStyle?: DropContainerStyles;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */

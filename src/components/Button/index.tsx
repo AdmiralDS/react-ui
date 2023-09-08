@@ -1,6 +1,6 @@
 import { Children, forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 
 import type { ButtonAppearance, Dimension, StyledButtonProps } from './types';
@@ -53,7 +53,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconPlace?: IconPlace;
 
   /** Позволяет добавлять миксин для кнопок, созданный с помощью styled css  */
-  buttonCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  buttonCssMixin?: RuleSet<object>;
 }
 
 const ButtonContent = styled.div<{ $dimension?: Dimension; $loading?: boolean }>`

@@ -3,7 +3,7 @@ import type { ForwardedRef, InputHTMLAttributes, ReactNode } from 'react';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -236,7 +236,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 
   /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   prefixDropContainerStyle?: DropContainerStyles;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */

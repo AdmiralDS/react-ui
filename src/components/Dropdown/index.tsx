@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -12,7 +12,7 @@ import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/com
 
 const Container = styled.div<{
   alignSelf?: string;
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
@@ -68,7 +68,7 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   setMenuFocus?: React.Dispatch<React.SetStateAction<'firstOption' | 'lastOption' | 'activeOption'>>;
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
 }
 
 /**

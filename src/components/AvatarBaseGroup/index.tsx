@@ -1,7 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, FC, Ref, MouseEvent, KeyboardEvent, HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '../common/keyboardKey';
@@ -25,7 +25,7 @@ export interface AvatarBaseGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

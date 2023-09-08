@@ -1,7 +1,7 @@
 import type { HTMLAttributes, KeyboardEvent, FunctionComponent, SVGProps } from 'react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import type { FileInputDimension } from '#src/components/input/FileInput';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -33,7 +33,7 @@ const disabledStyles = css`
 
 const Container = styled.div<{
   $dimension?: FileInputDimension;
-  $filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $filesLayoutCssMixin?: RuleSet<object>;
 }>`
   display: flex;
   flex-direction: column;
@@ -225,7 +225,7 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
   /** Размер FileItem */
   dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css */
-  filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  filesLayoutCssMixin?: RuleSet<object>;
   /** Позволяет выводить размер файла в требуемом формате */
   formatFileSizeInfo?: (sizeInBytes: number) => string;
   /** Позволяет назначать формат файла */

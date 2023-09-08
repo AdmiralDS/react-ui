@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
@@ -60,7 +60,7 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Id для внешнего контейнера (AnchorWrapper) */
   anchorId?: string;
   /** Позволяет добавлять миксин созданный с помощью styled css для внешнего контейнера (AnchorWrapper) */
-  anchorCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  anchorCssMixin?: RuleSet<object>;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/

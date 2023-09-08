@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
@@ -76,7 +76,7 @@ export interface RenderPanelProps {
   /** Размер компонента */
   dimension: MenuDimensions;
   /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
-  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuActionsPanelCssMixin?: RuleSet<object>;
 }
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {

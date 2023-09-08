@@ -1,6 +1,6 @@
 import { createRef, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, FC, HTMLAttributes, ReactNode, RefObject, MouseEvent, KeyboardEvent } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 
 import { keyboardKey } from '../common/keyboardKey';
 import { Badge } from '#src/components/Badge';
@@ -57,7 +57,7 @@ export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCh
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
