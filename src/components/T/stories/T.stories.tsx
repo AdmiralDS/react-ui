@@ -18,8 +18,11 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом и стилем
-    шрифта.
+    Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом
+    (https://styled-components.com/docs/api#as-polymorphic-prop) и стилем шрифта.
+    <br />
+    Важно: при использовании компонента T без стилизации необходимо использовать prop "as". Если необходимо
+    кастомизировать компонент (с помощью styled(T)), следует использовать prop forwardedAs.
   </Desc>
 );
 
@@ -47,7 +50,7 @@ export default {
 } as Meta<typeof T>;
 
 //<editor-fold desc="Text">
-const TextStatusStory: StoryFn<typeof T> = (props) => <TTextStatusTemplate font={'Main/XXL'} {...props} />;
+const TextStatusStory: StoryFn<typeof T> = (props) => <TTextStatusTemplate {...props} />;
 
 export const TextStatus = {
   render: TextStatusStory,
@@ -57,10 +60,16 @@ export const TextStatus = {
       source: {
         code: TTextStatusRaw,
       },
+      description: {
+        story: `Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом 
+        (https://styled-components.com/docs/api#as-polymorphic-prop) и стилем шрифта. \n\nВажно: при использовании компонента 
+        T без стилизации необходимо использовать prop "as". Если необходимо кастомизировать компонент (с помощью styled(T)), 
+        следует использовать prop forwardedAs.`,
+      },
     },
   },
 
-  name: 'Text',
+  name: 'Варианты использования',
 };
 
 //</editor-fold>
