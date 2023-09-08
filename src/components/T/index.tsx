@@ -48,16 +48,7 @@ const Tspan = styled.span<{
 `;
 
 export const T = forwardRef<typeof Tspan, TProps>(({ font, color, cssMixin, skeleton, ...props }, ref) => {
-  return (
-    <Tspan
-      ref={ref}
-      {...props}
-      $font={font}
-      $color={color}
-      $cssMixin={cssMixin}
-      $skeleton={skeleton}
-    />
-  );
+  return <Tspan ref={ref} {...props} $font={font} $color={color} $cssMixin={cssMixin} $skeleton={skeleton} />;
 });
 
 T.displayName = 'T';
