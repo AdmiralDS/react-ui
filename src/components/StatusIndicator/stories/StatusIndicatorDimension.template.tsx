@@ -16,7 +16,7 @@ export const StatusIndicatorDimensionTemplate = () => {
         Dimension - M
       </StyledText>
       <StatusIndicator dimension="m" text="P 16px/24 book" icon={<CheckOutline />} />
-      <StyledText font="Body/Body 1 Long" as="div">
+      <StyledText font="Body/Body 1 Long" forwardedAs="div">
         Dimension - S
       </StyledText>
       <StatusIndicator dimension="s" text="P 14px/20 book" icon={<InfoSolid />} />

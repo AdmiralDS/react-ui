@@ -79,7 +79,7 @@ export const TextButtonMenuDimensionTemplate = (props: TextButtonMenuProps) => {
   return (
     <WrapperButton>
       <div>
-        <StyledText font="Header/H6" as="div">
+        <StyledText font="Header/H6" forwardedAs="div">
           Dimension - M
         </StyledText>
         <TextButtonMenu
@@ -139,7 +139,7 @@ export const TextButtonMenuDimensionTemplate = (props: TextButtonMenuProps) => {
           loading
         />
         <Separator />
-        <StyledText font="Header/H6" as="div">
+        <StyledText font="Header/H6" forwardedAs="div">
           Dimension - S
         </StyledText>
         <TextButtonMenu
@@ -198,7 +198,7 @@ export const TextButtonMenuDimensionTemplate = (props: TextButtonMenuProps) => {
         />
       </div>
       <div>
-        <StyledText font="Header/H6" as="div">
+        <StyledText font="Header/H6" forwardedAs="div">
           Dimension - M
         </StyledText>
         <TextButtonMenu
@@ -262,7 +262,7 @@ export const TextButtonMenuDimensionTemplate = (props: TextButtonMenuProps) => {
           loading
         />
         <Separator />
-        <StyledText font="Header/H6" as="div">
+        <StyledText font="Header/H6" forwardedAs="div">
           Dimension - S
         </StyledText>
         <TextButtonMenu
