@@ -25,6 +25,8 @@ export interface RenderOptionProps {
 
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
+  /** обработчик выхода мыши за пределы item */
+  onLeave?: () => void;
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
@@ -63,12 +65,24 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       selected = false,
       selfRef,
       onMouseDown,
+      onLeave,
       ...props
     },
     ref,
   ) => {
-    const handleMouseMove = () => {
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       onHover?.();
+      props.onMouseMove?.(e);
+    };
+
+    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+      onHover?.();
+      props.onMouseEnter?.(e);
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+      onLeave?.();
+      props.onMouseLeave?.(e);
     };
 
     const handleMouseDown = !disabled ? onMouseDown : stopEventHandler;
@@ -84,6 +98,8 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         data-hovered={hovered}
         data-disabled={disabled}
         data-dimension={dimension}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
         {...props}

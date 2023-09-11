@@ -336,6 +336,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         const renderProps = {
           hovered,
           selected,
+          onLeave: () => {
+            setSubmenuVisible(false);
+          },
           onHover: () => {
             activateItem(itemProps.disabled ? undefined : id);
             setSubmenuVisible(hasSubmenu);
