@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import type { CheckboxDimension } from '../Checkbox/CheckboxDimension';
+import type { CheckboxDimension } from '@admiral-ds/react-ui';
 import { CheckboxGroupWrapper } from '../CheckboxGroup/CheckboxWrapper';
 import { styleTextMixin } from '../CheckboxGroup/mixins';
 
