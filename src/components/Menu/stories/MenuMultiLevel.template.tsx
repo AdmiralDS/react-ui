@@ -17,11 +17,45 @@ const STORY_ITEMS: Array<StoryItem> = [
     id: '1',
     label: 'Option one',
     value: 1,
+    children: [
+      {
+        id: '1-1',
+        label: 'SubOption with long text 1-1',
+        value: 11,
+      },
+      {
+        id: '1-2',
+        label: 'SubOption 1-2',
+        value: 12,
+      },
+      {
+        id: '1-3',
+        label: 'SubOption 1-3',
+        value: 13,
+      },
+    ],
   },
   {
     id: '2',
     label: 'Option two',
     value: 2,
+    children: [
+      {
+        id: '2-1',
+        label: 'SubOption with long text 2-1',
+        value: 21,
+      },
+      {
+        id: '2-2',
+        label: 'SubOption 2-2',
+        value: 22,
+      },
+      {
+        id: '2-3',
+        label: 'SubOption 2-3',
+        value: 23,
+      },
+    ],
   },
   {
     id: '3',
@@ -111,6 +145,26 @@ const STORY_ITEMS: Array<StoryItem> = [
     id: '7',
     label: 'Option seven',
     value: 6,
+  },
+  {
+    id: '8',
+    label: 'Option eight',
+    value: 8,
+  },
+  {
+    id: '9',
+    label: 'Option nine',
+    value: 9,
+  },
+  {
+    id: '10',
+    label: 'Option ten',
+    value: 10,
+  },
+  {
+    id: '11',
+    label: 'Option eleven',
+    value: 11,
   },
 ];
 
