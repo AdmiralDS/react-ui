@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Table } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 
-const numberFormatter = new Intl.NumberFormat();
+const numberFormatter = new Intl.NumberFormat('ru-RU');
 
 type RowData = TableRow & {
   transfer_type: string;
   transfer_date: string;
   transfer_amount: React.ReactNode;
   currency: string;
-  rate: number;
+  rate: string;
 };
 
 const rowList: RowData[] = [
@@ -17,57 +17,57 @@ const rowList: RowData[] = [
     id: '0001',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(500_000),
+    transfer_amount: numberFormatter.format(500000),
     currency: 'RUB',
-    rate: 2.5,
+    rate: numberFormatter.format(2.5),
   },
   {
     id: '0002',
     transfer_type: 'МНО',
     transfer_date: new Date('2021-04-05').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(32_500_000_000),
+    transfer_amount: numberFormatter.format(32500000000),
     currency: 'RUB',
-    rate: 5.5,
+    rate: numberFormatter.format(5.5),
   },
   {
     id: '0003',
     transfer_type: 'МНО',
     transfer_date: new Date('2020-11-06').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(189_000_000),
+    transfer_amount: numberFormatter.format(189000000),
     currency: 'RUB',
-    rate: 6,
+    rate: numberFormatter.format(6),
   },
   {
     id: '0004',
     transfer_type: 'МНО',
     transfer_date: new Date('2010-12-09').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(350_000_000),
+    transfer_amount: numberFormatter.format(350000000),
     currency: 'RUB',
-    rate: 1,
+    rate: numberFormatter.format(1),
   },
   {
     id: '0005',
     transfer_type: 'МНО',
     transfer_date: new Date('2019-08-06').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(60_000),
+    transfer_amount: numberFormatter.format(60000),
     currency: 'RUB',
-    rate: 4,
+    rate: numberFormatter.format(4),
   },
   {
     id: '0006',
     transfer_type: 'МНО',
     transfer_date: new Date('2021-04-05').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(700_000),
+    transfer_amount: numberFormatter.format(700000),
     currency: 'RUB',
-    rate: 1,
+    rate: numberFormatter.format(1),
   },
   {
     id: '0007',
     transfer_type: 'МНО',
     transfer_date: new Date('2019-12-01').toLocaleDateString(),
-    transfer_amount: numberFormatter.format(500_000),
+    transfer_amount: numberFormatter.format(500000),
     currency: 'RUB',
-    rate: 4,
+    rate: numberFormatter.format(8.5),
   },
 ];
 
@@ -82,12 +82,14 @@ const columnList: Column[] = [
     title: 'Дата сделки',
     width: 150,
     sortable: true,
+    type: 'date',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
     width: 170,
     sortable: true,
+    type: 'number',
   },
   {
     name: 'currency',
@@ -97,6 +99,7 @@ const columnList: Column[] = [
     name: 'rate',
     title: 'Ставка',
     sortable: true,
+    type: 'number',
   },
 ];
 
@@ -107,13 +110,14 @@ const StrToTime = (str: string) => {
 
 const MAX_SORT_LEVEL = 2;
 
-type SortColumn = { [key: string]: 'asc' | 'desc' };
+type SortColumn = { [key: string]: { sort: 'asc' | 'desc'; type?: string } };
 
 export const TableSortTemplate = (props: TableProps) => {
   const [rows, setRows] = React.useState([...rowList]);
   const [cols, setCols] = React.useState([...columnList]);
   const [sortLevel, setSortLevel] = React.useState<number>(0);
 
+  // обновляет sortOrder у колонок и возвращает обновленный массив, устанавливает текущий уровень сортировки (0,1,2)
   const calcSortOrder = (columns: Array<Column>): Array<Column> => {
     const newCols = [...columns];
 
@@ -143,8 +147,8 @@ export const TableSortTemplate = (props: TableProps) => {
         return (a.sortOrder || 0) - (b.sortOrder || 0);
       });
 
-    return sortColumns.reduce((acc: SortColumn, currentValue: Column) => {
-      if (currentValue.sort) acc[currentValue.name] = currentValue.sort;
+    return sortColumns.reduce((acc: SortColumn, { name, sort, type }: Column) => {
+      if (sort) acc[name] = { sort, type };
       return acc;
     }, {});
   };
@@ -182,26 +186,22 @@ export const TableSortTemplate = (props: TableProps) => {
     }
   };
 
-  const compare = (a: any, b: any, colName: string, sort: 'asc' | 'desc') => {
+  const compare = (a: any, b: any, colName: string, sort: 'asc' | 'desc', colType?: string) => {
     if (sort === 'asc') {
-      switch (colName) {
-        case 'transfer_date':
+      switch (colType) {
+        case 'date':
           return StrToTime(a[colName]) - StrToTime(b[colName]);
-        case 'transfer_amount':
-          return Number(a[colName].replace(/\D/g, '')) - Number(b[colName].replace(/\D/g, ''));
-        case 'rate':
+        case 'number':
         default:
-          return a[colName] - b[colName];
+          return Number(a[colName].replace(/\D/g, '')) - Number(b[colName].replace(/\D/g, ''));
       }
     } else {
-      switch (colName) {
-        case 'transfer_date':
+      switch (colType) {
+        case 'date':
           return StrToTime(b[colName]) - StrToTime(a[colName]);
-        case 'transfer_amount':
-          return Number(b[colName].replace(/\D/g, '')) - Number(a[colName].replace(/\D/g, ''));
-        case 'rate':
+        case 'number':
         default:
-          return b[colName] - a[colName];
+          return Number(b[colName].replace(/\D/g, '')) - Number(a[colName].replace(/\D/g, ''));
       }
     }
   };
@@ -214,10 +214,10 @@ export const TableSortTemplate = (props: TableProps) => {
     } else {
       const names = Object.keys(sortColumns);
       const newRows = [...rows].sort((a: any, b: any) => {
-        const result = compare(a, b, names[0], sortColumns[names[0]]);
+        const result = compare(a, b, names[0], sortColumns[names[0]].sort, sortColumns[names[0]].type);
 
         if (!result && names.length > 1) {
-          return compare(a, b, names[1], sortColumns[names[1]]);
+          return compare(a, b, names[1], sortColumns[names[1]].sort, sortColumns[names[0]].type);
         } else {
           return result;
         }
