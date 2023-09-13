@@ -19,7 +19,7 @@ const rowList: RowData[] = [
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: numberFormatter.format(500000),
     currency: 'RUB',
-    rate: numberFormatter.format(2.5),
+    rate: numberFormatter.format(2),
   },
   {
     id: '0002',
@@ -27,7 +27,7 @@ const rowList: RowData[] = [
     transfer_date: new Date('2021-04-05').toLocaleDateString(),
     transfer_amount: numberFormatter.format(32500000000),
     currency: 'RUB',
-    rate: numberFormatter.format(5.5),
+    rate: numberFormatter.format(5),
   },
   {
     id: '0003',
@@ -67,7 +67,7 @@ const rowList: RowData[] = [
     transfer_date: new Date('2019-12-01').toLocaleDateString(),
     transfer_amount: numberFormatter.format(500000),
     currency: 'RUB',
-    rate: numberFormatter.format(8.5),
+    rate: numberFormatter.format(8),
   },
 ];
 
@@ -117,7 +117,6 @@ export const TableSortTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState([...columnList]);
   const [sortLevel, setSortLevel] = React.useState<number>(0);
 
-  // обновляет sortOrder у колонок и возвращает обновленный массив, устанавливает текущий уровень сортировки (0,1,2)
   const calcSortOrder = (columns: Array<Column>): Array<Column> => {
     const newCols = [...columns];
 
@@ -217,7 +216,7 @@ export const TableSortTemplate = (props: TableProps) => {
         const result = compare(a, b, names[0], sortColumns[names[0]].sort, sortColumns[names[0]].type);
 
         if (!result && names.length > 1) {
-          return compare(a, b, names[1], sortColumns[names[1]].sort, sortColumns[names[0]].type);
+          return compare(a, b, names[1], sortColumns[names[1]].sort, sortColumns[names[1]].type);
         } else {
           return result;
         }
