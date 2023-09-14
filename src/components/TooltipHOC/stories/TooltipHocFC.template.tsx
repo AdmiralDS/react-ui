@@ -1,13 +1,17 @@
 import * as React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import { TooltipHoc } from '@admiral-ds/react-ui';
 import type { TooltipHocProps, Theme } from '@admiral-ds/react-ui';
-import { ThemeProvider } from 'styled-components';
+
+const StyledH2 = styled.h2`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+`;
 
 const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
   return (
-    <h2 ref={ref} {...props}>
+    <StyledH2 ref={ref} {...props}>
       Наведи на меня мышью и увидишь тултип
-    </h2>
+    </StyledH2>
   );
 });
 const TooltipedHeading = TooltipHoc(H2);
