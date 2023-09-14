@@ -17,16 +17,13 @@ export interface RenderOptionProps {
   selected?: boolean;
   /** Акцентная секция MenuItems */
   hovered?: boolean;
-
   /** Обработчик клика по item */
-  //onClickItem?: () => void;
-
   onClick?: React.MouseEventHandler<HTMLElement>;
-
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
   /** обработчик выхода мыши за пределы item */
-  onLeave?: () => void;
+  onLeave?: React.MouseEventHandler<HTMLElement>;
+  onMouseDown?: React.MouseEventHandler<HTMLElement>;
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
@@ -81,7 +78,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      onLeave?.();
+      onLeave?.(e);
       props.onMouseLeave?.(e);
     };
 
