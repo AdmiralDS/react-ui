@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import {
@@ -44,12 +44,12 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
-  const [titleValue, setTitleValue] = React.useState('Toast title');
-  const [contentValue, setContentValue] = React.useState('Toast content');
-  const [textButton1Value, setTextButton1Value] = React.useState('TextButton1');
-  const [textButton2Value, setTextButton2Value] = React.useState('TextButton2');
-  const [toastStatus, setToastStatus] = React.useState(0);
+  const [toastIdStack, setToastIdStack] = useState<Array<ToastItemProps>>([]);
+  const [titleValue, setTitleValue] = useState('Toast title');
+  const [contentValue, setContentValue] = useState('Toast content');
+  const [textButton1Value, setTextButton1Value] = useState('TextButton1');
+  const [textButton2Value, setTextButton2Value] = useState('TextButton2');
+  const [toastStatus, setToastStatus] = useState(0);
 
   const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 

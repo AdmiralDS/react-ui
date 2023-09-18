@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import {
@@ -51,7 +51,7 @@ const items: IdentifyToast[] = [
 ];
 
 const NotificationEmitter = () => {
-  const [toastStack, setToastStack] = React.useState<Array<ToastItemProps>>([]);
+  const [toastStack, setToastStack] = useState<Array<ToastItemProps>>([]);
 
   const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import {
@@ -34,8 +34,8 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
-  const [inputValue, setInputValue] = React.useState('Notification message');
+  const [toastIdStack, setToastIdStack] = useState<Array<ToastItemProps>>([]);
+  const [inputValue, setInputValue] = useState('Notification message');
 
   const { addToastItem, removeToastItem } = useToast();
 

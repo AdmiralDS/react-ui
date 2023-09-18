@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Button, Toast, ToastProvider, useToast } from '@admiral-ds/react-ui';
@@ -42,7 +42,7 @@ const items: IdentifyToast[] = [
 ];
 
 const NotificationEmitter = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<string>>([]);
+  const [toastIdStack, setToastIdStack] = useState<Array<string>>([]);
 
   const { addToast, removeById } = useToast();
 
