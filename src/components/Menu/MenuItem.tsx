@@ -63,6 +63,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       selfRef,
       onMouseDown,
       onLeave,
+      containerRef,
       ...props
     },
     ref,
