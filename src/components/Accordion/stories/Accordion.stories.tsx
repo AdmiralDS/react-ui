@@ -42,7 +42,6 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/Accordion',
   component: Accordion,
-  subcomponents: { AccordionItem },
   parameters: {
     docs: {
       source: {
