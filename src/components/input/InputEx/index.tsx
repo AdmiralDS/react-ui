@@ -20,8 +20,8 @@ import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextI
 
 export type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -30,8 +30,8 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
-const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 's':
@@ -67,7 +67,7 @@ const Input = styled.input<ExtraProps>`
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -96,29 +96,29 @@ const Input = styled.input<ExtraProps>`
   ${ieFixes}
 `;
 
-const PrefixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
   border-right: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
   padding-right: 8px;
   margin-right: 8px;
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
   white-space: nowrap;
 `;
 
-const SuffixContainer = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const SuffixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
   border-left: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
   padding-left: 8px;
   margin-left: 8px;
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
   white-space: nowrap;
 `;
 
-const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -147,9 +147,9 @@ const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 
 const Container = styled.div<{
   disabled?: boolean;
-  dimension?: ComponentDimension;
-  skeleton?: boolean;
-  status?: InputStatus;
+  $dimension?: ComponentDimension;
+  $skeleton?: boolean;
+  $status?: InputStatus;
   readOnly?: boolean;
 }>`
   position: relative;
@@ -157,7 +157,7 @@ const Container = styled.div<{
   align-items: stretch;
   overflow: hidden;
   border: none;
-  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   padding: 0 ${horizontalPaddingValue}px;
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
@@ -167,7 +167,7 @@ const Container = styled.div<{
   }
 
   ${containerHeights}
-  ${({ skeleton }) => skeleton && skeletonMixin};
+  ${({ $skeleton }) => $skeleton && skeletonMixin};
   ${BorderedDivStyles}
 `;
 
@@ -179,6 +179,9 @@ export interface RenderProps {
 export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
+
+  /**  Ширина меню */
+  menuWidth?: string;
 
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
@@ -249,6 +252,8 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
   (
     {
+      dimension,
+      menuWidth,
       displayClearIcon,
       status,
       containerRef = () => null,
@@ -282,12 +287,13 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
   ) => {
     const innerContainerRef = useRef<HTMLDivElement | null>(null);
     const alignRef = alignDropRef || innerContainerRef;
-    const menuDimension = props.dimension === 'xl' ? 'l' : props.dimension;
+    const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
           <SuffixSelect
             dropAlign="flex-start"
             dimension={menuDimension}
+            menuWidth={menuWidth}
             alignRef={alignRef}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
@@ -310,6 +316,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
           <SuffixSelect
             dropAlign="flex-end"
             dimension={menuDimension}
+            menuWidth={menuWidth}
             alignRef={alignRef}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
@@ -391,19 +398,19 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
           className={className}
           style={style}
           data-disabled={props.disabled ? true : undefined}
-          dimension={props.dimension}
+          $dimension={dimension}
           ref={refSetter(innerContainerRef, containerRef)}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
           data-disable-copying={props.disableCopying ? true : undefined}
           onMouseDown={props.disableCopying ? preventDefault : undefined}
-          skeleton={skeleton}
-          status={status}
+          $skeleton={skeleton}
+          $status={status}
           disabled={props.disabled}
           readOnly={props.readOnly}
         >
           {!!prefix && (
-            <PrefixContainer dimension={props.dimension} disabled={props.disabled}>
+            <PrefixContainer $dimension={dimension} disabled={props.disabled}>
               {prefix}
             </PrefixContainer>
           )}
@@ -412,16 +419,17 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             {...props}
             onChange={handleChange}
             placeholder={placeholder}
-            iconCount={iconCount}
+            $iconCount={iconCount}
+            $dimension={dimension}
           />
           <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
-            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+            <IconPanel disabled={props.disabled} $dimension={dimension}>
               {iconArray}
             </IconPanel>
           )}
           {!!suffix && (
-            <SuffixContainer dimension={props.dimension} disabled={props.disabled}>
+            <SuffixContainer $dimension={dimension} disabled={props.disabled}>
               {suffix}
             </SuffixContainer>
           )}

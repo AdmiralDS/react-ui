@@ -8,10 +8,10 @@ import { MenuItem } from '#src/components/Menu/MenuItem';
 
 export type MenuDimensions = 'l' | 'm' | 's';
 
-const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number }>`
-  max-height: ${({ dimension, maxHeight }) => {
-    if (maxHeight) return maxHeight;
-    switch (dimension) {
+const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string | number }>`
+  max-height: ${({ $dimension, $maxHeight }) => {
+    if ($maxHeight) return $maxHeight;
+    switch ($dimension) {
       case 'l':
         return `${48 * 6 + 16}px`;
       case 'm':
@@ -24,7 +24,7 @@ const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | n
   }};
 `;
 
-const Wrapper = styled.div<{ dimension?: MenuDimensions }>`
+const Wrapper = styled.div<{ $dimension?: MenuDimensions; $maxHeight?: string | number }>`
   pointer-events: initial;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -73,7 +73,16 @@ export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps<ReactNode>>(
   (
-    { options, selected, renderOption = defaultOptionRender, onSelect, dimension, preventFocusSteal, ...props },
+    {
+      options,
+      selected,
+      renderOption = defaultOptionRender,
+      onSelect,
+      dimension,
+      maxHeight,
+      preventFocusSteal,
+      ...props
+    },
     ref,
   ) => {
     const [activeOption, setActiveOption] = useState<null | ReactNode>(null);
@@ -144,7 +153,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps<ReactNode>>(
     }, [activeOption]);
 
     return (
-      <Wrapper ref={ref} dimension={dimension} {...props}>
+      <Wrapper ref={ref} $dimension={dimension} $maxHeight={maxHeight} {...props}>
         <StyledDiv ref={menuRef}>{renderChildren()}</StyledDiv>
       </Wrapper>
     );

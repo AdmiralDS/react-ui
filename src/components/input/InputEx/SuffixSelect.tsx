@@ -8,8 +8,8 @@ import type { MenuDimensions } from '#src/components/input/InputEx/Menu';
 import { Menu } from '#src/components/input/InputEx/Menu';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 
-const StyledMenu = styled(Menu)<{ width?: string }>`
-  width: ${({ width }) => (width ? width : 'auto')};
+const StyledMenu = styled(Menu)<{ $width?: string }>`
+  width: ${({ $width }) => ($width ? $width : 'auto')};
 `;
 
 const disableEventMixin = css`
@@ -17,7 +17,7 @@ const disableEventMixin = css`
   cursor: default;
 `;
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
-const Container = styled.div<{ iconSizeValue?: string; disabled?: boolean }>`
+const Container = styled.div<{ $iconSizeValue?: string; disabled?: boolean }>`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -28,7 +28,7 @@ const Container = styled.div<{ iconSizeValue?: string; disabled?: boolean }>`
 
   & > svg {
     display: block;
-    width: ${(p) => p.iconSizeValue || '24px'};
+    width: ${(p) => p.$iconSizeValue || '24px'};
 
     &:focus {
       outline: none;
@@ -64,6 +64,9 @@ export type SuffixSelectProps<T> = {
 
   /** Размер Меню */
   dimension?: MenuDimensions;
+
+  /**  Ширина меню */
+  menuWidth?: string;
 
   /** Задает максимальную высоту дроп контейнера */
   dropMaxHeight?: string | number;
@@ -101,6 +104,7 @@ export type SuffixSelectProps<T> = {
 export const SuffixSelect = <T extends ReactNode>({
   dropAlign,
   dimension,
+  menuWidth,
   dropMaxHeight,
   onChange,
   options,
@@ -160,6 +164,7 @@ export const SuffixSelect = <T extends ReactNode>({
           style={dropContainerStyle}
         >
           <StyledMenu
+            $width={menuWidth}
             maxHeight={dropMaxHeight}
             options={options}
             selected={value}
