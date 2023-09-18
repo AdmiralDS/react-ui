@@ -25,6 +25,7 @@ const String = styled.div<{ $appearance?: BadgeProps['appearance'] }>`
     margin-right: 40px;
   }
   ${typography['Body/Body 2 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 export const BadgeVariantsTemplate = () => {

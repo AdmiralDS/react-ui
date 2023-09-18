@@ -20,8 +20,8 @@ const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 
 const CustomValueStyle = styled.div`
-  color: darkblue;
-  border: darkblue 1px dashed;
+  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  border: ${({ theme }) => theme.color['Primary/Primary 60 Main']} 1px dashed;
 `;
 
 const CustomMenuItem = styled(MenuItem)`

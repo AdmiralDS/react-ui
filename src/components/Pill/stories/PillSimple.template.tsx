@@ -17,6 +17,7 @@ const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 type Status = 'Error' | 'Success' | 'Special' | 'Warning' | 'Attention';
