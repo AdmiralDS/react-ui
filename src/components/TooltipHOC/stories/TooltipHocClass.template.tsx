@@ -1,16 +1,21 @@
 import * as React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import { TooltipHoc } from '@admiral-ds/react-ui';
 import type { TooltipHocProps, Theme } from '@admiral-ds/react-ui';
-import { ThemeProvider } from 'styled-components';
 
 type TestType = {
   innerRef: React.ForwardedRef<HTMLHeadingElement>;
   label: string;
 };
+
+const StyledH2 = styled.h2`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+`;
+
 class Test extends React.Component<TestType> {
   render() {
     const { innerRef, label } = this.props;
-    return <h2 ref={innerRef}>{label}</h2>;
+    return <StyledH2 ref={innerRef}>{label}</StyledH2>;
   }
 }
 
