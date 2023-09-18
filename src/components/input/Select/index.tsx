@@ -659,17 +659,17 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       <SelectWrapper
         className={className}
         style={style}
-        focused={isFocused}
-        multiple={multiple}
+        $focused={isFocused}
+        $multiple={multiple}
         disabled={disabled}
         data-disabled={disabled}
         readonly={readOnly}
-        dimension={dimension}
+        $dimension={dimension}
         ref={containerRef}
         data-status={status}
         onClick={handleWrapperClick}
         onFocus={onFocus}
-        skeleton={skeleton}
+        $skeleton={skeleton}
         onBlur={handleWrapperBlur}
         title={title}
       >
@@ -689,12 +689,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           tabIndex={-1}
           ref={valueWrapperRef}
           id="selectValueWrapper"
-          dimension={dimension}
-          multiple={multiple}
-          minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
-          maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
-          opened={isSearchPanelOpen}
-          isEmpty={isEmpty}
+          $dimension={dimension}
+          $multiple={multiple}
+          $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
+          $maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
+          $opened={isSearchPanelOpen}
+          $isEmpty={isEmpty}
         >
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
@@ -707,8 +707,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               readOnly={readOnly || modeIsSelect}
               value={searchValue}
               defaultValue={defaultInputValue}
-              isMultiple={multiple}
-              dimension={dimension}
+              $isMultiple={multiple}
+              $dimension={dimension}
               onChange={onLocalInputChange}
               onKeyDown={onInputKeyDown}
               onKeyUp={onInputKeyUp}
@@ -746,8 +746,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           </DropdownContainer>
         )}
         <IconPanel
-          multiple={multiple}
-          dimension={dimension}
+          $multiple={multiple}
+          $dimension={dimension}
           onClick={stopPropagation}
           onMouseDown={(e) => e.preventDefault()}
         >
