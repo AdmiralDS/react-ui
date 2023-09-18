@@ -97,10 +97,8 @@ export default {
       action: 'onChange',
     },
     themeBorderKind: {
-      control: {
-        type: 'radio',
-        options: ALL_BORDER_RADIUS_VALUES,
-      },
+      control: { type: 'radio' },
+      options: ALL_BORDER_RADIUS_VALUES,
     },
     skeleton: {
       control: { type: 'boolean' },
