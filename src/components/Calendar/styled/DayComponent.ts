@@ -5,15 +5,15 @@ import { typography } from '#src/components/Typography';
 import type { CornerKeys, Corners } from '../constants';
 
 type DayComponentProps = {
-  inRange?: boolean;
-  corners?: Corners;
-  selected?: boolean;
-  isActiveDate: boolean;
-  today?: boolean;
+  $inRange?: boolean;
+  $corners?: Corners;
+  $selected?: boolean;
+  $isActiveDate: boolean;
+  $today?: boolean;
   disabled?: boolean;
-  inSelectingRange: boolean;
-  outsideMonth?: boolean;
-  highlightSpecialDayMixin?: RuleSet<object>;
+  $inSelectingRange: boolean;
+  $outsideMonth?: boolean;
+  $highlightSpecialDayMixin?: RuleSet<object>;
 };
 
 const DAY_SIZE = '36px';
@@ -49,7 +49,7 @@ export const DayComponent = styled.div<DayComponentProps>`
     top: 0;
     bottom: 0;
     border: 1px solid
-      ${({ theme, today, selected }) => (today && !selected ? theme.color['Neutral/Neutral 90'] : 'transparent')};
+      ${({ theme, $today, $selected }) => ($today && !$selected ? theme.color['Neutral/Neutral 90'] : 'transparent')};
     border-radius: 50%;
   }
 
@@ -59,32 +59,32 @@ export const DayComponent = styled.div<DayComponentProps>`
       color: ${theme.color['Neutral/Neutral 30']};
     `}
 
-  ${({ theme, outsideMonth }) =>
-    outsideMonth &&
+  ${({ theme, $outsideMonth }) =>
+    $outsideMonth &&
     `
       color: ${theme.color['Neutral/Neutral 30']};
       opacity: 0;
       pointer-events: none;
     `}
 
-  ${(p) => p.highlightSpecialDayMixin}
+  ${(p) => p.$highlightSpecialDayMixin}
   ${(p) => (p.disabled ? '' : hoverMixin)}
 
-  ${({ disabled, theme, selected, inSelectingRange }) =>
+  ${({ disabled, theme, $selected, $inSelectingRange }) =>
     !disabled &&
-    selected &&
+    $selected &&
     `
       color: ${theme.color['Special/Static White']};
-      background: ${inSelectingRange ? theme.color['Primary/Primary 70'] : theme.color['Primary/Primary 60 Main']};
+      background: ${$inSelectingRange ? theme.color['Primary/Primary 70'] : theme.color['Primary/Primary 60 Main']};
       border-radius: 50%;
       &:hover {
         background: ${theme.color['Primary/Primary 70']};
       }
     `}
 
-  ${({ disabled, inRange, theme, corners, selected, isActiveDate }) =>
+  ${({ disabled, $inRange, theme, $corners, $selected, $isActiveDate }) =>
     !disabled &&
-    inRange &&
+    $inRange &&
     `
       &:before {
         z-index: -1;
@@ -97,11 +97,11 @@ export const DayComponent = styled.div<DayComponentProps>`
         bottom: 0;
         background: ${theme.color['Opacity/Hover']};
         ${
-          corners &&
-          Object.keys(corners)
+          $corners &&
+          Object.keys($corners)
             .map((key) =>
-              corners[key as CornerKeys]
-                ? selected || isActiveDate
+              $corners[key as CornerKeys]
+                ? $selected || $isActiveDate
                   ? `border-${key}-radius: 50%;`
                   : `border-${key}-radius: 4px;`
                 : '',

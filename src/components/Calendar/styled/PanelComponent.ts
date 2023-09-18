@@ -6,8 +6,8 @@ const PANEL_MARGIN_BOTTOM = {
 };
 
 export const PanelComponent = styled.div<{
-  monthsView: boolean;
-  yearsView: boolean;
+  $monthsView: boolean;
+  $yearsView: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -15,8 +15,8 @@ export const PanelComponent = styled.div<{
   border: 0 none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-bottom: ${({ monthsView, yearsView }) => {
-    if (monthsView || yearsView) return PANEL_MARGIN_BOTTOM.months_years;
+  margin-bottom: ${({ $monthsView, $yearsView }) => {
+    if ($monthsView || $yearsView) return PANEL_MARGIN_BOTTOM.months_years;
     return PANEL_MARGIN_BOTTOM.days;
   }};
 `;
