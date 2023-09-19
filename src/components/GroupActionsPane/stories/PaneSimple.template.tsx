@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GroupActionsPane, PaneSeparator, typography, TextButton } from '@admiral-ds/react-ui';
-import type { GroupActionsPaneProps, PaneColumn, Theme } from '@admiral-ds/react-ui';
+import type { GroupActionsPaneProps, PaneColumn, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
@@ -30,13 +30,16 @@ const columns: PaneColumn[] = [
   { id: 'status', title: 'Статус', visible: true },
 ];
 
-export const PaneSimpleTemplate = (args: GroupActionsPaneProps) => {
-  const dimension = ['s', 'm'].includes(args.dimension || 'm') ? 's' : 'm';
+export const PaneSimpleTemplate = ({
+  themeBorderKind,
+  ...props
+}: GroupActionsPaneProps & { themeBorderKind?: BorderRadiusType }) => {
+  const dimension = ['s', 'm'].includes(props.dimension || 'm') ? 's' : 'm';
   const [columnsVisibility, setColumnsVisibility] = React.useState(columns);
   const [searchValue, setSearchValue] = React.useState<string>('');
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -56,7 +59,7 @@ export const PaneSimpleTemplate = (args: GroupActionsPaneProps) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper>
         <GroupActionsPane
-          {...args}
+          {...props}
           searchValue={searchValue}
           onChangeSearchValue={handleChangeSearchValue}
           columns={columnsVisibility}

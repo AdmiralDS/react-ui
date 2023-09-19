@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Hint, Button } from '@admiral-ds/react-ui';
-import type { HintProps, Theme } from '@admiral-ds/react-ui';
+import type { HintProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
@@ -10,9 +10,12 @@ const StyledButton = styled(Button)`
   padding: 4px;
 `;
 
-export const HintPositionTemplate = (args: HintProps) => {
+export const HintPositionTemplate = ({
+  themeBorderKind,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const [visible1, setVisible1] = React.useState(false);
@@ -28,7 +31,7 @@ export const HintPositionTemplate = (args: HintProps) => {
     <ThemeProvider theme={swapBorder}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Hint
-          {...args}
+          {...props}
           visible={visible1}
           onVisibilityChange={handleVisibilityChange1}
           renderContent={() => text}
@@ -40,7 +43,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible2}
           onVisibilityChange={handleVisibilityChange2}
           renderContent={() => text}
@@ -52,7 +55,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible3}
           onVisibilityChange={handleVisibilityChange3}
           renderContent={() => text}
@@ -64,7 +67,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible4}
           onVisibilityChange={handleVisibilityChange4}
           renderContent={() => text}

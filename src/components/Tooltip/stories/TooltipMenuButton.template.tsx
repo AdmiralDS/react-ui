@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tooltip, MenuButton, MenuItem } from '@admiral-ds/react-ui';
-import type { Theme, ITooltipProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { Theme, BorderRadiusType, ITooltipProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
 const menuItems = [
@@ -9,9 +9,9 @@ const menuItems = [
   { id: 3, label: 'item-3' },
 ];
 
-export const TooltipMenuButtonTemplate = (args: ITooltipProps) => {
+export const TooltipMenuButtonTemplate = ({ themeBorderKind, ...props }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -76,7 +76,7 @@ export const TooltipMenuButtonTemplate = (args: ITooltipProps) => {
         <Tooltip
           targetElement={btnRef.current}
           renderContent={renderTooltipContent}
-          tooltipPosition={args.tooltipPosition}
+          tooltipPosition={props.tooltipPosition}
           style={{ minWidth: '200px', maxWidth: '300px' }}
           id="test1"
         />

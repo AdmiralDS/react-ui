@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { Hint, Button } from '@admiral-ds/react-ui';
-import type { HintProps, Theme } from '@admiral-ds/react-ui';
+import type { HintProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
 
-export const HintTargetTemplate = (args: HintProps) => {
+export const HintTargetTemplate = ({
+  themeBorderKind,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const btnRef = React.useRef<HTMLButtonElement>(null);
@@ -24,7 +27,7 @@ export const HintTargetTemplate = (args: HintProps) => {
         appearance="primary"
         iconEnd={
           <Hint
-            {...args}
+            {...props}
             visible={visible}
             onVisibilityChange={handleVisibilityChange}
             renderContent={() => text}

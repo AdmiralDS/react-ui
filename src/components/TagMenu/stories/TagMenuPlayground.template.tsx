@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TagMenu, MenuItem } from '@admiral-ds/react-ui';
-import type { TagMenuProps, TagOptionProps, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { TagMenuProps, TagOptionProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
@@ -57,10 +57,10 @@ const itemsDemo: Array<TagOptionProps> = [
   },
 ];
 
-export const TagMenuPlaygroundTemplate = (args: TagMenuProps) => {
+export const TagMenuPlaygroundTemplate = ({ themeBorderKind, ...props }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<TagOptionProps | undefined>(itemsDemo[0]);
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -86,7 +86,7 @@ export const TagMenuPlaygroundTemplate = (args: TagMenuProps) => {
             setSelected(itemsDemo.find((item) => item.id === id));
           }}
           onVisibilityChange={handleVisibilityChange}
-          {...args}
+          {...props}
           data-dropdown-container-id="tag-menu-with-dropdown"
           className="tag-menu-class"
           dropContainerClassName="dropContainerClass"

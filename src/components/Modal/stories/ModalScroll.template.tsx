@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Modal, ModalTitle, ModalContent, ModalButtonPanel, Button } from '@admiral-ds/react-ui';
-import type { ModalProps, Theme } from '@admiral-ds/react-ui';
+import type { ModalProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const ModalScrollTemplate = (args: ModalProps) => {
+export const ModalScrollTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -16,7 +16,7 @@ export const ModalScrollTemplate = (args: ModalProps) => {
       <Button onClick={() => setOpened(true)}>Open modal with scrollable content</Button>
       {opened && (
         <Modal
-          {...args}
+          {...props}
           onClose={() => {
             setOpened(false);
           }}

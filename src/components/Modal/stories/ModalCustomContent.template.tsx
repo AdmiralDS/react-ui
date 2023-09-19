@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Modal, Button } from '@admiral-ds/react-ui';
-import type { ModalProps, Theme } from '@admiral-ds/react-ui';
+import type { ModalProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const ModalCustomContentTemplate = (args: ModalProps) => {
+export const ModalCustomContentTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -16,7 +16,7 @@ export const ModalCustomContentTemplate = (args: ModalProps) => {
       <Button onClick={() => setOpened(true)}>Open modal with custom content</Button>
       {opened && (
         <Modal
-          {...args}
+          {...props}
           dimension="l"
           onClose={() => {
             setOpened(false);

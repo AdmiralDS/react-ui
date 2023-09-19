@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Hint, Button, TextButton } from '@admiral-ds/react-ui';
-import type { HintProps, Theme } from '@admiral-ds/react-ui';
+import type { HintProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -11,9 +11,9 @@ const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
 `;
 
-export const HintTextButtonTemplate = (args: HintProps) => {
+export const HintTextButtonTemplate = ({ themeBorderKind, ...props }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const [visible, setVisible] = React.useState(false);
@@ -22,7 +22,7 @@ export const HintTextButtonTemplate = (args: HintProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Hint
-        {...args}
+        {...props}
         visible={visible}
         onVisibilityChange={handleVisibilityChange}
         visibilityTrigger="click"

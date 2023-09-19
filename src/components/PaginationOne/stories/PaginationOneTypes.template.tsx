@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PaginationOne, Field } from '@admiral-ds/react-ui';
-import type { PaginationOneProps, Theme } from '@admiral-ds/react-ui';
+import type { PaginationOneProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const Separator = styled.div`
@@ -8,7 +8,7 @@ const Separator = styled.div`
   height: 40px;
 `;
 
-export const PaginationOneTypesTemplate = (args: PaginationOneProps) => {
+export const PaginationOneTypesTemplate = ({ themeBorderKind, ...props }: PaginationOneProps & { themeBorderKind?: BorderRadiusType }) => {
   const [pageSize1, setPageSize1] = React.useState(8);
   const [page1, setPage1] = React.useState(1);
   const [pageSize2, setPageSize2] = React.useState(8);
@@ -17,7 +17,7 @@ export const PaginationOneTypesTemplate = (args: PaginationOneProps) => {
   const totalElements = 100;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { Tag, Tags } from '@admiral-ds/react-ui';
-import type { TagsProps, Theme } from '@admiral-ds/react-ui';
+import type { TagsProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const TagsKindTemplate = ({ kind = 'success', ...args }: TagsProps) => {
+export const TagsKindTemplate = ({
+  kind = 'success',
+  themeBorderKind,
+  ...props
+}: TagsProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -13,7 +17,7 @@ export const TagsKindTemplate = ({ kind = 'success', ...args }: TagsProps) => {
     <>
       <ThemeProvider theme={swapBorder}>
         <Tags
-          dimension={args.dimension}
+          dimension={props.dimension}
           width={50}
           kind={kind}
           onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}

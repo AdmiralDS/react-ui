@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TagMenu, MenuItem, TagCircle } from '@admiral-ds/react-ui';
-import type { TagMenuProps, TagOptionProps, TagKind, RenderOptionProps, Theme } from '@admiral-ds/react-ui';
+import type { TagMenuProps, TagOptionProps, TagKind, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -61,9 +61,9 @@ const itemsDemoSizes: Array<TagOptionProps> = [
   },
 ];
 
-export const TagMenuSizesTemplate = (args: TagMenuProps) => {
+export const TagMenuSizesTemplate = ({ themeBorderKind, ...props }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -110,7 +110,7 @@ export const TagMenuSizesTemplate = (args: TagMenuProps) => {
           setSelectedM(itemsDemoSizes.find((item) => item.id === id));
         }}
         onVisibilityChange={handleVisibilityChange}
-        {...args}
+        {...props}
       />
       <Separator />
       <TagMenu
@@ -124,7 +124,7 @@ export const TagMenuSizesTemplate = (args: TagMenuProps) => {
           setSelectedS(itemsDemoSizes.find((item) => item.id === id));
         }}
         onVisibilityChange={handleVisibilityChange}
-        {...args}
+        {...props}
       />
     </ThemeProvider>
   );

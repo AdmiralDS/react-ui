@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TabMenu } from '@admiral-ds/react-ui';
-import type { TabMenuProps, Theme } from '@admiral-ds/react-ui';
+import type { TabMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -56,9 +56,9 @@ const Wrapper = styled.div`
   height: 200px;
 `;
 
-export const TabMenuBaseTemplate = (args: TabMenuProps) => {
+export const TabMenuBaseTemplate = ({ themeBorderKind, ...props }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const [selected, setSelected] = React.useState<string>('3');
@@ -67,7 +67,7 @@ export const TabMenuBaseTemplate = (args: TabMenuProps) => {
     <ThemeProvider theme={swapBorder}>
       <Wrapper>
         <TabMenu
-          {...args}
+          {...props}
           activeTab={selected}
           onChange={(id) => {
             onChangeTab(id);

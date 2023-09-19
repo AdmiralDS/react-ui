@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Tooltip, Button } from '@admiral-ds/react-ui';
-import type { ITooltipProps, Theme } from '@admiral-ds/react-ui';
+import type { ITooltipProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
-export const TooltipRefTemplate = (args: ITooltipProps) => {
+export const TooltipRefTemplate = ({ themeBorderKind, ...props }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -50,7 +50,7 @@ export const TooltipRefTemplate = (args: ITooltipProps) => {
           targetElement={btnRef.current}
           renderContent={() => 'Delete file'}
           ref={tooltipRef}
-          tooltipPosition={args.tooltipPosition}
+          tooltipPosition={props.tooltipPosition}
           id="test3"
         />
       )}

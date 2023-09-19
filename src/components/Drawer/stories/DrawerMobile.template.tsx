@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button } from '@admiral-ds/react-ui';
-import type { DrawerProps, Theme } from '@admiral-ds/react-ui';
+import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const ContentArea = styled.div`
@@ -9,11 +9,14 @@ const ContentArea = styled.div`
   background: ${({ theme }) => theme.color['Success/Success 20']};
 `;
 
-export const DrawerMobileTemplate = (args: DrawerProps) => {
+export const DrawerMobileTemplate = ({
+  themeBorderKind,
+  ...props
+}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -21,7 +24,7 @@ export const DrawerMobileTemplate = (args: DrawerProps) => {
     <ThemeProvider theme={swapBorder}>
       <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
       <Drawer
-        {...args}
+        {...props}
         isOpen={opened}
         onClose={() => setOpened(false)}
         mobile

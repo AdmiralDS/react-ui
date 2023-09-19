@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { Drawer, Button } from '@admiral-ds/react-ui';
-import type { DrawerProps, Theme } from '@admiral-ds/react-ui';
+import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const DrawerCustomContentTemplate = (args: DrawerProps) => {
+export const DrawerCustomContentTemplate = ({ themeBorderKind, ...props }: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <ThemeProvider theme={swapBorder}>
       <Button onClick={() => setOpened(true)}>Open drawer with custom content</Button>
-      <Drawer {...args} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
+      <Drawer {...props} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
         <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>
           <strong>Drawer title</strong>
         </h1>

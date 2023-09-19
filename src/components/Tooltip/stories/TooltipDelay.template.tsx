@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Tooltip, TOOLTIP_DELAY, Button } from '@admiral-ds/react-ui';
-import type { ITooltipProps, Theme } from '@admiral-ds/react-ui';
+import type { ITooltipProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
-export const TooltipDelayTemplate = (args: ITooltipProps) => {
+export const TooltipDelayTemplate = ({ themeBorderKind, ...props }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -57,7 +57,7 @@ export const TooltipDelayTemplate = (args: ITooltipProps) => {
           and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
           Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
           }
-          tooltipPosition={args.tooltipPosition}
+          tooltipPosition={props.tooltipPosition}
           style={{ minWidth: '200px', maxWidth: '300px' }}
           id="test1"
         />

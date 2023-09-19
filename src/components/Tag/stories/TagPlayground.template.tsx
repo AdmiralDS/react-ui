@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Tag } from '@admiral-ds/react-ui';
-import type { TagProps, Theme } from '@admiral-ds/react-ui';
+import type { TagProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const TagPlaygroundTemplate = (args: TagProps) => {
+export const TagPlaygroundTemplate = ({ themeBorderKind, ...props }: TagProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
   return (
     <>
       <ThemeProvider theme={swapBorder}>
-        <Tag {...args}>Playground</Tag>
+        <Tag {...props}>Playground</Tag>
       </ThemeProvider>
     </>
   );

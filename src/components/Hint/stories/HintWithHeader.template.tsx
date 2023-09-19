@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Hint, Button, T } from '@admiral-ds/react-ui';
-import type { HintProps, Theme } from '@admiral-ds/react-ui';
+import type { HintProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
@@ -18,9 +18,9 @@ const renderHintContent = () => {
   );
 };
 
-export const HintWithHeaderTemplate = (args: HintProps) => {
+export const HintWithHeaderTemplate = ({ themeBorderKind, ...props }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
   const [visible, setVisible] = React.useState(false);
@@ -29,7 +29,7 @@ export const HintWithHeaderTemplate = (args: HintProps) => {
   return (
     <ThemeProvider theme={swapBorder}>
       <Hint
-        {...args}
+        {...props}
         renderContent={renderHintContent}
         anchorId="hint_click"
         visibilityTrigger="click"

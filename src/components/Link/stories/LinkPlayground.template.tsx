@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, T } from '@admiral-ds/react-ui';
-import type { LinkProps, Theme } from '@admiral-ds/react-ui';
+import type { LinkProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
 const Divider = styled.div`
@@ -8,9 +8,9 @@ const Divider = styled.div`
   height: 12px;
 `;
 
-export const LinkPlaygroundTemplate = (args: LinkProps) => {
+export const LinkPlaygroundTemplate = ({ themeBorderKind, ...props }: LinkProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -23,8 +23,8 @@ export const LinkPlaygroundTemplate = (args: LinkProps) => {
         Ссылки бывают двух типов — Primary и Secondary, и двух размеров — M (24px) и S (20px).
       </T>
       <Divider />
-      <Link {...args} href="http://localhost:6006/?path=/story/example-link--playground">
-        {args.children || 'Link'}
+      <Link {...props} href="http://localhost:6006/?path=/story/example-link--playground">
+        {props.children || 'Link'}
       </Link>
     </ThemeProvider>
   );
