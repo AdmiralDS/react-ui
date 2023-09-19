@@ -82,6 +82,7 @@ export const RowWrapper = ({
       disabled={!!row.disabled}
       dimension={dimension}
       className={`tr ${row.className || ''} hoverable`}
+      data-row={row.id}
       isGroup={isGroup}
       rowWidth={rowWidth}
       hover={!!row.hover}
