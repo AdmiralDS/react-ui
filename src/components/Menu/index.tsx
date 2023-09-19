@@ -12,6 +12,7 @@ import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
 import { useDropdown } from '#src/components/DropdownProvider';
 import type { RenderDirection } from '#src/components/Menu/utils';
 import { findModelItem, hasSelectedChildren, valueToArray } from '#src/components/Menu/utils';
+import { passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -445,6 +446,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       props.onBlur?.(e);
     };
 
+    const menuProps = passMenuDataAttributes(props);
+
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
@@ -458,7 +461,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel}>
+        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel} {...menuProps}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (

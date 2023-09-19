@@ -53,6 +53,7 @@ export const SearchSelectWithAddButtonTemplate = (props: SelectProps) => {
         mode="searchSelect"
         value={selectValue}
         onChange={onChange}
+        data-menu-id="test-menu"
         renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
