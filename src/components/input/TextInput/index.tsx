@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { HeightLimitedContainer as Container } from '#src/components/input/Container';
+import { HeightLimitedContainer } from '#src/components/input/Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -55,7 +55,7 @@ function getBorderColor(status?: InputStatus) {
   }
 }
 
-export const InputBorderedDiv = styled.div<{ disabled?: boolean; status?: InputStatus }>`
+export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -69,7 +69,7 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; status?: InputS
   background: none;
   border-radius: inherit;
 
-  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.status)]};
+  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.$status)]};
   ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
@@ -93,17 +93,17 @@ function getFocusBorderColor(status?: InputStatus) {
   }
 }
 
-export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
     ${(p) =>
       p.disabled || p.readOnly
         ? 'border-color: transparent'
-        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.status)]}`}
+        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.$status)]}`}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
     border-color: ${(props) =>
-      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.status)]};
+      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.$status)]};
   }
 `;
 
@@ -201,7 +201,12 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   }
 `;
 
-const StyledContainer = styled(Container)<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+const StyledContainer = styled(HeightLimitedContainer)<{
+  disabled?: boolean;
+  readOnly?: boolean;
+  $status?: InputStatus;
+  $dimension?: ComponentDimension;
+}>`
   ${BorderedDivStyles}
 `;
 
@@ -393,7 +398,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
-          status={status}
+          $status={status}
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
@@ -412,7 +417,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             $iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
-          <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
+          <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} $dimension={dimension}>
               {iconArray}
