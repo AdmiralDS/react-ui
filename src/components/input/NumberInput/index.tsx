@@ -73,10 +73,10 @@ const Content = styled.div<ExtraProps>`
 
 const Wrapper = styled(HeightLimitedContainer)<{
   disabled?: boolean;
-  dimension?: ComponentDimension;
+  $dimension?: ComponentDimension;
   readOnly?: boolean;
   $skeleton?: boolean;
-  status?: TextInputProps['status'];
+  $status?: TextInputProps['status'];
 }>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
@@ -84,15 +84,15 @@ const Wrapper = styled(HeightLimitedContainer)<{
   }};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
 
   &:hover:not(:focus-within) ${BorderedDiv} {
     border: 1px solid
       ${(props) => {
         if (props.disabled || props.readOnly) return 'transparent';
-        if (props.status === 'error') return props.theme.color['Error/Error 70'];
-        if (props.status === 'success') return props.theme.color['Success/Success 60'];
+        if (props.$status === 'error') return props.theme.color['Error/Error 70'];
+        if (props.$status === 'success') return props.theme.color['Success/Success 60'];
         return props.theme.color['Neutral/Neutral 60'];
       }};
   }
@@ -288,13 +288,13 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         className={className}
         style={style}
         disabled={props.disabled}
-        dimension={props.dimension}
+        $dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
         data-disable-copying={props.disableCopying ? true : undefined}
         onMouseDown={props.disableCopying ? preventDefault : undefined}
         $skeleton={skeleton}
-        status={status}
+        $status={status}
       >
         <Content $dimension={props.dimension} $iconCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput

@@ -37,7 +37,7 @@ const Sizer = styled.div<{ $hasPrefix?: boolean; $align?: 'left' | 'right' }>`
   ${({ $hasPrefix, $align }) => !$hasPrefix && $align === 'right' && 'margin-left: auto;'}
 `;
 
-export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
+export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -50,9 +50,9 @@ export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
 
   background: none;
   border: 1px solid
-    ${({ theme, status }) => {
-      if (status === 'error') return theme.color['Error/Error 60 Main'];
-      if (status === 'success') return theme.color['Success/Success 50 Main'];
+    ${({ theme, $status }) => {
+      if ($status === 'error') return theme.color['Error/Error 60 Main'];
+      if ($status === 'success') return theme.color['Success/Success 50 Main'];
       return theme.color['Neutral/Neutral 40'];
     }};
   border-radius: inherit;
@@ -191,6 +191,7 @@ export interface InputProps extends TextInputProps {
 export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      dimension,
       placeholder,
       type,
       precision = 2,
@@ -316,12 +317,12 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
 
     useLayoutEffect(
       () => updateInputLeftPadding(),
-      [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
+      [prefix, dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
     );
 
     useLayoutEffect(
       () => updateInputRightPadding(),
-      [suffix, props.dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
+      [suffix, dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
     );
 
     useLayoutEffect(() => {
@@ -354,7 +355,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <HiddenContent $iconCount={iconCount} $dimension={props.dimension}>
+        <HiddenContent $iconCount={iconCount} $dimension={dimension}>
           {prefix && showPrefixSuffix && (
             <Prefix ref={prefixRef} disabled={props.disabled} $align={align}>
               {prefix}&nbsp;
@@ -369,13 +370,14 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         </HiddenContent>
         <Input
           {...props}
+          $dimension={dimension}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}
           type="text"
           data-status={status}
           $align={align}
         />
-        <BorderedDiv status={status} />
+        <BorderedDiv $status={status} />
       </>
     );
   },
