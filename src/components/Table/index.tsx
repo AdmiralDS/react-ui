@@ -684,7 +684,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         className={`table ${props.className || ''}`}
       >
         {renderHiddenHeader()}
-        <HeaderWrapper scrollbar={scrollbar} greyHeader={greyHeader} data-verticalscroll={verticalScroll}>
+        <HeaderWrapper
+          scrollbar={scrollbar}
+          greyHeader={greyHeader}
+          data-verticalscroll={verticalScroll}
+          className="thead"
+        >
           <Header dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
@@ -695,6 +700,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
                   <CheckboxCell
                     dimension={dimension}
                     className="th_checkbox"
+                    data-th-column="checkbox"
                     data-draggable={false}
                     data-droppable={false}
                   >
