@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { TagMenu, MenuItem, TagCircle } from '@admiral-ds/react-ui';
-import type { TagMenuProps, TagOptionProps, TagKind, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type {
+  TagMenuProps,
+  TagOptionProps,
+  TagKind,
+  RenderOptionProps,
+  Theme,
+  BorderRadiusType,
+} from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -61,7 +68,10 @@ const itemsDemoSizes: Array<TagOptionProps> = [
   },
 ];
 
-export const TagMenuSizesTemplate = ({ themeBorderKind, ...props }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TagMenuSizesTemplate = ({
+  themeBorderKind,
+  ...props
+}: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

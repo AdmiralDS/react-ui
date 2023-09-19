@@ -47,7 +47,10 @@ const tabs = [
   },
 ];
 
-export const TabMenuUnderlineTemplate = ({ themeBorderKind, ...props }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TabMenuUnderlineTemplate = ({
+  themeBorderKind,
+  ...props
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

@@ -77,7 +77,10 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
   );
 };
 
-export const ModalTwoButtonsTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ModalTwoButtonsTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {

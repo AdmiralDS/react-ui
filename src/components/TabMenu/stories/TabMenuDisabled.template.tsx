@@ -40,7 +40,10 @@ const disabledTabs = [
   },
 ];
 
-export const TabMenuDisabledTemplate = ({ themeBorderKind, ...props }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TabMenuDisabledTemplate = ({
+  themeBorderKind,
+  ...props
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

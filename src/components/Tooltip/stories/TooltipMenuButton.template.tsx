@@ -9,7 +9,10 @@ const menuItems = [
   { id: 3, label: 'item-3' },
 ];
 
-export const TooltipMenuButtonTemplate = ({ themeBorderKind, ...props }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipMenuButtonTemplate = ({
+  themeBorderKind,
+  ...props
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

@@ -5,7 +5,10 @@ import { ThemeProvider } from 'styled-components';
 
 const TooltipedInput = TooltipHoc(InputField);
 
-export const TooltipHocBaseTemplate = ({ themeBorderKind, ...props }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipHocBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

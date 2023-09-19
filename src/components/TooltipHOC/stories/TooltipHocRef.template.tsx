@@ -9,7 +9,10 @@ const Separator = styled.div<{ height?: number }>`
 
 const TooltipedInput = TooltipHoc(InputField);
 
-export const TooltipHocRefTemplate = ({ themeBorderKind, ...props }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipHocRefTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

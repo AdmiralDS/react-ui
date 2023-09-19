@@ -22,7 +22,10 @@ const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, re
 });
 const TooltipedComponent = TooltipHoc(Component);
 
-export const TooltipHocRefSetterTemplate = ({ themeBorderKind, ...props }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipHocRefSetterTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

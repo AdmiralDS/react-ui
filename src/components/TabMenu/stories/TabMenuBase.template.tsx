@@ -56,7 +56,10 @@ const Wrapper = styled.div`
   height: 200px;
 `;
 
-export const TabMenuBaseTemplate = ({ themeBorderKind, ...props }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TabMenuBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

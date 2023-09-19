@@ -3,7 +3,10 @@ import { Modal, ModalTitle, ModalContent, Button } from '@admiral-ds/react-ui';
 import type { ModalProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const ModalWithoutButtonsTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ModalWithoutButtonsTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {

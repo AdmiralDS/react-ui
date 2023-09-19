@@ -8,7 +8,10 @@ const Divider = styled.div`
   height: 12px;
 `;
 
-export const LinkPlaygroundTemplate = ({ themeBorderKind, ...props }: LinkProps & { themeBorderKind?: BorderRadiusType }) => {
+export const LinkPlaygroundTemplate = ({
+  themeBorderKind,
+  ...props
+}: LinkProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

@@ -18,7 +18,10 @@ const renderHintContent = () => {
   );
 };
 
-export const HintWithHeaderTemplate = ({ themeBorderKind, ...props }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+export const HintWithHeaderTemplate = ({
+  themeBorderKind,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

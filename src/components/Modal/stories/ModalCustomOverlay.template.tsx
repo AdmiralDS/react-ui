@@ -7,7 +7,10 @@ const overlayStyles = css`
   background-color: ${({ theme }) => `${theme.color['Error/Error 20']}66`};
 `;
 
-export const ModalCustomOverlayTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ModalCustomOverlayTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {

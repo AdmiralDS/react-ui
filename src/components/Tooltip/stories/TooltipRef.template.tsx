@@ -4,7 +4,10 @@ import type { ITooltipProps, Theme, BorderRadiusType } from '@admiral-ds/react-u
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ThemeProvider } from 'styled-components';
 
-export const TooltipRefTemplate = ({ themeBorderKind, ...props }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipRefTemplate = ({
+  themeBorderKind,
+  ...props
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

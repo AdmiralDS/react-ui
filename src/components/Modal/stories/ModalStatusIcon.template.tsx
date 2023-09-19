@@ -18,7 +18,10 @@ import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/
 
 const TooltipedButton = TooltipHoc(Button);
 
-export const ModalStatusIconTemplate = ({ themeBorderKind, ...props }: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ModalStatusIconTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
   const [iconStatus, setIconStatus] = React.useState<ModalStatusIconType>('information');
 

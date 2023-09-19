@@ -24,7 +24,10 @@ const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'i
 ));
 const TooltipedTest = TooltipHoc(TestForwardingRef);
 
-export const TooltipHocClassTemplate = ({ themeBorderKind, ...props }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipHocClassTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

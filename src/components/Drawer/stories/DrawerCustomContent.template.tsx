@@ -3,7 +3,10 @@ import { Drawer, Button } from '@admiral-ds/react-ui';
 import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const DrawerCustomContentTemplate = ({ themeBorderKind, ...props }: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DrawerCustomContentTemplate = ({
+  themeBorderKind,
+  ...props
+}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {

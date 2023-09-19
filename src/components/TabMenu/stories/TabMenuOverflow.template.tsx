@@ -47,7 +47,10 @@ const overflowTabs = [
   },
 ];
 
-export const TabMenuOverflowTemplate = ({ themeBorderKind, ...props }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TabMenuOverflowTemplate = ({
+  themeBorderKind,
+  ...props
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

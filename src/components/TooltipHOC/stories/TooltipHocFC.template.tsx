@@ -16,7 +16,10 @@ const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement
 });
 const TooltipedHeading = TooltipHoc(H2);
 
-export const TooltipHocFCTemplate = ({ themeBorderKind, ...props }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TooltipHocFCTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

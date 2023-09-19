@@ -11,7 +11,10 @@ const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
 `;
 
-export const HintTextButtonTemplate = ({ themeBorderKind, ...props }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+export const HintTextButtonTemplate = ({
+  themeBorderKind,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;

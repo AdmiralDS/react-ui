@@ -57,7 +57,10 @@ const itemsDemo: Array<TagOptionProps> = [
   },
 ];
 
-export const TagMenuPlaygroundTemplate = ({ themeBorderKind, ...props }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TagMenuPlaygroundTemplate = ({
+  themeBorderKind,
+  ...props
+}: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<TagOptionProps | undefined>(itemsDemo[0]);
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;

@@ -3,7 +3,10 @@ import { SliderInput } from '@admiral-ds/react-ui';
 import type { SliderInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 
-export const SliderInputTickMarksTemplate = ({ themeBorderKind, ...props }: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
+export const SliderInputTickMarksTemplate = ({
+  themeBorderKind,
+  ...props
+}: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
