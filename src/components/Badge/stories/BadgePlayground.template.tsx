@@ -1,7 +1,7 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Badge, typography } from '@admiral-ds/react-ui';
 import type { BadgeProps } from '@admiral-ds/react-ui';
-import styled from 'styled-components';
 
 const Layout = styled.div`
   display: flex;
@@ -21,6 +21,7 @@ const String = styled.div<{ appearance?: BadgeProps['appearance'] }>`
     margin-right: 16px;
   }
   ${typography['Body/Body 2 Long']}
+  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 `;
 
 export const BadgePlaygroundTemplate = (props: BadgeProps) => {

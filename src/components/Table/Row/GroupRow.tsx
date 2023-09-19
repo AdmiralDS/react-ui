@@ -64,7 +64,7 @@ export const GroupRow = ({
     <>
       <StickyGroupRow>
         {rowsDraggable && <DragCell dimension={dimension} />}
-        <ExpandCell dimension={dimension}>
+        <ExpandCell dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
           <ExpandIconPlacement
             dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}
             disabled={row.disabled || row.groupRows?.length === 0 ? true : undefined}
@@ -75,7 +75,7 @@ export const GroupRow = ({
           </ExpandIconPlacement>
         </ExpandCell>
         {displayRowSelectionColumn && (
-          <CheckboxCell dimension={dimension} className="td_checkbox">
+          <CheckboxCell dimension={dimension} className="td_checkbox" data-column="checkbox" data-row={row.id}>
             <Checkbox
               disabled={row.disabled || row.checkboxDisabled || row.groupRows?.length === 0}
               dimension={checkboxDimension}

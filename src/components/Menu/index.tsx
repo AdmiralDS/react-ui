@@ -2,7 +2,8 @@ import type { HTMLAttributes } from 'react';
 import * as React from 'react';
 import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
 import styled, { css } from 'styled-components';
-import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -11,6 +12,7 @@ import { SubMenuContainer } from '#src/components/Menu/SubMenuContainer';
 import { useDropdown } from '#src/components/DropdownProvider';
 import type { RenderDirection } from '#src/components/Menu/utils';
 import { findModelItem, hasSelectedChildren, valueToArray } from '#src/components/Menu/utils';
+import { passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export const getItemHeight = (dimension?: MenuDimensions) => {
   switch (dimension) {
@@ -333,9 +335,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         const hasSubmenu = !!subItems && subItems.length > 0;
         const hovered = activeId === id;
         const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
-        const renderProps = {
+        const renderProps: RenderOptionProps = {
           hovered,
           selected,
+          onLeave: (e: React.MouseEvent<HTMLDivElement>) => {
+            if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
+              setSubmenuVisible(false);
+            }
+          },
           onHover: () => {
             activateItem(itemProps.disabled ? undefined : id);
             setSubmenuVisible(hasSubmenu);
@@ -439,6 +446,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       props.onBlur?.(e);
     };
 
+    const menuProps = passMenuDataAttributes(props);
+
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
@@ -452,7 +461,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel}>
+        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...menuProps}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (

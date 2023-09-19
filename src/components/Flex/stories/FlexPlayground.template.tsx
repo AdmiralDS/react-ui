@@ -6,7 +6,7 @@ import type { FlexContainerProps, FlexCellSizes } from '@admiral-ds/react-ui';
 
 export const FlexPlaygroundTemplate = ({ rowGap = 20, columnGap = 10, ...props }: FlexContainerProps) => {
   return (
-    <ThemeProvider theme={LIGHT_THEME}>
+    <>
       <Flex.Container {...props} rowGap={rowGap} columnGap={columnGap}>
         <Flex.Row {...props} rowGap={rowGap} columnGap={columnGap}>
           {Array.from({ length: FLEX_CELL_MAX_SIZE }, (_, i) => (
@@ -34,6 +34,6 @@ export const FlexPlaygroundTemplate = ({ rowGap = 20, columnGap = 10, ...props }
           </Flex.Cell>
         </Flex.Row>
       </Flex.Container>
-    </ThemeProvider>
+    </>
   );
 };
