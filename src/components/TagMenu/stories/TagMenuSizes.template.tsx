@@ -76,7 +76,7 @@ export const TagMenuSizesTemplate = ({ themeBorderKind, ...props }: TagMenuProps
       render: (options: RenderOptionProps) => (
         <StyledMenuItem dimension="m" {...options} key={item.id}>
           {item.kind && item.kind !== 'neutral' && !item.statusViaBackground && (
-            <TagCircle background={item.kind as TagKind} />
+            <TagCircle $background={item.kind as TagKind} />
           )}
           {item.tagText}
         </StyledMenuItem>
@@ -90,7 +90,7 @@ export const TagMenuSizesTemplate = ({ themeBorderKind, ...props }: TagMenuProps
       render: (options: RenderOptionProps) => (
         <StyledMenuItem dimension="s" {...options} key={item.id}>
           {item.kind && item.kind !== 'neutral' && !item.statusViaBackground && (
-            <TagCircle background={item.kind as TagKind} />
+            <TagCircle $background={item.kind as TagKind} />
           )}
           {item.tagText}
         </StyledMenuItem>
