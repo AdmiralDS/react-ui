@@ -39,7 +39,10 @@ const items = [
   },
 ];
 
-export const BaseDropDownTemplate = (props: DropDownMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const BaseDropDownTemplate = ({
+  themeBorderKind,
+  ...props
+}: DropDownMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<number | string>('');
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef(null);
@@ -60,7 +63,7 @@ export const BaseDropDownTemplate = (props: DropDownMenuProps & { themeBorderKin
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

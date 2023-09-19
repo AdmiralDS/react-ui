@@ -25,9 +25,12 @@ const Row = styled.div`
   }
 `;
 
-export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
+export const CheckboxDemoTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -15,6 +15,7 @@ const DisplayContainer = styled.div`
 export const TimeFieldInputTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода времени',
+  themeBorderKind,
   ...props
 }: TimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
@@ -31,7 +32,7 @@ export const TimeFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

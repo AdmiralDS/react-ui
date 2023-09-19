@@ -84,9 +84,12 @@ const MessageForm = () => {
   );
 };
 
-export const ToastCustomComponentTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ToastCustomComponentTemplate = ({
+  themeBorderKind,
+  ...props
+}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

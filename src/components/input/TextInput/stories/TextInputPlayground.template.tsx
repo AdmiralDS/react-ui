@@ -8,6 +8,7 @@ import type { TextInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-
 export const TextInputPlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: TextInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
@@ -19,7 +20,7 @@ export const TextInputPlaygroundTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

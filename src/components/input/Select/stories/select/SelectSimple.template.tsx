@@ -7,6 +7,7 @@ import type { SelectProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui'
 
 export const SelectSimpleTemplate = ({
   placeholder = 'Select option',
+  themeBorderKind,
   ...props
 }: SelectProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selectValue, setSelectValue] = React.useState('');
@@ -14,7 +15,7 @@ export const SelectSimpleTemplate = ({
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

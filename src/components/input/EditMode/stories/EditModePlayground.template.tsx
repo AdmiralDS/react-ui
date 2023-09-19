@@ -7,10 +7,11 @@ import { ThemeProvider } from 'styled-components';
 export const EditModePlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

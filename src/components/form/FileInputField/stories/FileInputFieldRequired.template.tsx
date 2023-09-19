@@ -16,10 +16,11 @@ export const FileInputFieldRequiredTemplate = ({
   dimension = 'xl',
   label = 'Обязательно для заполнения',
   required = true,
+  themeBorderKind,
   ...props
 }: FileInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

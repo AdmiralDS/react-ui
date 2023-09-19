@@ -6,10 +6,11 @@ import { ThemeProvider } from 'styled-components';
 
 export const EditModeDisabledTemplate = ({
   value = 'Привет!',
+  themeBorderKind,
   ...props
 }: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

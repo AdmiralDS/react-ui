@@ -20,6 +20,7 @@ export const TextFieldInputTemplate = ({
     'heights.At breakpoint boundaries, mini units divide the screen into a fixed master ' +
     'grid, and multiples of mini units map to fluid grid column widths and row heights.',
   label = 'Label',
+  themeBorderKind,
   ...props
 }: TextFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
@@ -31,7 +32,7 @@ export const TextFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

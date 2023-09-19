@@ -23,9 +23,12 @@ const WrapperButton = styled.div`
   }
 `;
 
-export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TextButtonStatusTemplate = ({
+  themeBorderKind,
+  ...props
+}: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

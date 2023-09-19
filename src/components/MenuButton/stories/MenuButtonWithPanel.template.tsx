@@ -47,9 +47,12 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
   },
 ];
 
-export const MenuButtonWithPanelTemplate = (props: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuButtonWithPanelTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

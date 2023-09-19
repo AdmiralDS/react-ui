@@ -6,10 +6,11 @@ import type { SliderRangeFieldProps, Theme, BorderRadiusType } from '@admiral-ds
 
 export const SliderRangeFieldPlaygroundTemplate = ({
   label = 'Введите диапазон',
+  themeBorderKind,
   ...props
 }: SliderRangeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -8,6 +8,7 @@ import type { Theme, PhoneNumberInputProps, BorderRadiusType } from '@admiral-ds
 export const PhoneNumberInputXLTemplate = ({
   defaultCountry = 'RUS',
   value = '+7 123 456 78 90',
+  themeBorderKind,
   ...props
 }: PhoneNumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(value ?? '');
@@ -25,7 +26,7 @@ export const PhoneNumberInputXLTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

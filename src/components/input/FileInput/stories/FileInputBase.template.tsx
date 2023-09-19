@@ -9,10 +9,11 @@ import { uid } from '#src/components/common/uid';
 export const FileInputBaseTemplate = ({
   dimension = 'xl',
   width = '480px',
+  themeBorderKind,
   ...props
 }: FileInputProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

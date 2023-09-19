@@ -15,7 +15,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuWithLockCycleScrollTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuWithLockCycleScrollTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS_WITH_DISABLED_ITEMS.map((item) => ({
       id: item.id,
@@ -29,7 +32,7 @@ export const MenuWithLockCycleScrollTemplate = (props: MenuProps & { themeBorder
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

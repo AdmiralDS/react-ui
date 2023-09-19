@@ -9,7 +9,10 @@ const weekendMixin = css<{ disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
 `;
 
-export const DateInputSpecialDatesTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DateInputSpecialDatesTemplate = ({
+  themeBorderKind,
+  ...props
+}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(props.value) ?? '');
   useEffect(() => {
     if (props.value !== undefined) {
@@ -23,7 +26,7 @@ export const DateInputSpecialDatesTemplate = (props: DateInputProps & { themeBor
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

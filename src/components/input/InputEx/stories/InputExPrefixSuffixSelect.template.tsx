@@ -11,6 +11,7 @@ const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 export const InputExPrefixSuffixSelectTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
@@ -22,7 +23,7 @@ export const InputExPrefixSuffixSelectTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

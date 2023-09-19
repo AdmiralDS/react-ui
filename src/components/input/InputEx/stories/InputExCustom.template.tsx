@@ -42,6 +42,7 @@ const containerContrastBorder = css`
 export const InputExCustomTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
@@ -53,7 +54,7 @@ export const InputExCustomTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

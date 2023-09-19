@@ -23,6 +23,7 @@ const OPTIONS = [
 export const SuggestFieldExampleTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода с вариантами подстановки значений',
+  themeBorderKind,
   ...props
 }: SuggestFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
@@ -69,7 +70,7 @@ export const SuggestFieldExampleTemplate = ({
   }, [isLoading]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -66,7 +66,10 @@ const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
   }
 };
 
-export const DropMenuSimpleTemplate = (props: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DropMenuSimpleTemplate = ({
+  themeBorderKind,
+  ...props
+}: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
@@ -81,7 +84,7 @@ export const DropMenuSimpleTemplate = (props: DropMenuProps & { themeBorderKind?
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

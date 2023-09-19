@@ -56,7 +56,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuRadioButtonTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuRadioButtonTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -71,7 +74,7 @@ export const MenuRadioButtonTemplate = (props: MenuProps & { themeBorderKind?: B
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

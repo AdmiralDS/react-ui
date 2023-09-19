@@ -48,11 +48,14 @@ const items = [
   },
 ];
 
-export const MenuButtonBaseTemplate = (props: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuButtonBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

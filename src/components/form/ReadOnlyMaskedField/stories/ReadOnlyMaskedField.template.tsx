@@ -31,11 +31,12 @@ const maskedSurname = 'С••••••а';
 const initialPhoneNumber = '+7 095 364 83 75';
 const maskedPhoneNumber = '+7 095 ••• •• 75';
 
-export const ReadOnlyMaskedFieldTemplate = (
-  props: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType },
-) => {
+export const ReadOnlyMaskedFieldTemplate = ({
+  themeBorderKind,
+  ...props
+}: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

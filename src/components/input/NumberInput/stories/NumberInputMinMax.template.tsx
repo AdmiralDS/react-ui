@@ -8,10 +8,11 @@ export const NumberInputMinMaxTemplate = ({
   maxValue = 2000,
   precision = 2,
   decimal,
-  ...args
+  themeBorderKind,
+  ...props
 }: NumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = args.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
@@ -33,7 +34,7 @@ export const NumberInputMinMaxTemplate = ({
         состояние ошибки.
       </T>
       <NumberInput
-        {...args}
+        {...props}
         onChange={handleChange}
         minValue={minValue}
         maxValue={maxValue}

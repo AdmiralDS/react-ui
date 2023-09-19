@@ -5,7 +5,10 @@ import { ThemeProvider } from 'styled-components';
 import { DateInput } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, DateInputProps, Theme } from '@admiral-ds/react-ui';
 
-export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DateInputPlaygroundTemplate = ({
+  themeBorderKind,
+  ...props
+}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(props.value) ?? '');
   useEffect(() => {
     if (props.value !== undefined) {
@@ -19,7 +22,7 @@ export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorde
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

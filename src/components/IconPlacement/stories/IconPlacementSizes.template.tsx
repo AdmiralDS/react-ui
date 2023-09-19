@@ -23,9 +23,12 @@ const WrapperVertical = styled.div`
 
 const handleClick = () => console.log('IconPlacement clicked');
 
-export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
+export const IconPlacementSizesTemplate = ({
+  themeBorderKind,
+  ...props
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     console.log(`Current border ${theme.shape.borderRadiusKind}`);
     return theme;
   }

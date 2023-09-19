@@ -101,9 +101,12 @@ const NotificationEmitter = () => {
   );
 };
 
-export const ToastNotificationBaseTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ToastNotificationBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

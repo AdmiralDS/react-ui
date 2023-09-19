@@ -10,9 +10,12 @@ const Container = styled.div`
   }
 `;
 
-export const FieldSetCheckboxTemplate = (props: FieldSetPropsType & { themeBorderKind?: BorderRadiusType }) => {
+export const FieldSetCheckboxTemplate = ({
+  themeBorderKind,
+  ...props
+}: FieldSetPropsType & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 export const EditModeFieldPlaygroundTemplate = ({
   value = 'Admin',
+  themeBorderKind,
   ...props
 }: EditModeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
@@ -17,7 +18,7 @@ export const EditModeFieldPlaygroundTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

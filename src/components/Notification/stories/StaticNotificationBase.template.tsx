@@ -16,10 +16,11 @@ export const StaticNotificationBaseTemplate = ({
   href = hrefDefault,
   displayStatusIcon = true,
   isClosable = true,
+  themeBorderKind,
   ...props
 }: NotificationProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

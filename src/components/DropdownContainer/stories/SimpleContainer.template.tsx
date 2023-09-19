@@ -19,14 +19,17 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const SimpleContainerTemplate = (props: DropdownContainerProps & { themeBorderKind?: BorderRadiusType }) => {
+export const SimpleContainerTemplate = ({
+  themeBorderKind,
+  ...props
+}: DropdownContainerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   const { targetElement, ...other } = props;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

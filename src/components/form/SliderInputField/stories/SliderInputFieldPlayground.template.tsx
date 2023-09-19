@@ -7,10 +7,11 @@ import type { SliderInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds
 export const SliderInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
+  themeBorderKind,
   ...props
 }: SliderInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

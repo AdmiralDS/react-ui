@@ -16,9 +16,12 @@ const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
 `;
 
-export const ButtonPlaygroundTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ButtonPlaygroundTemplate = ({
+  themeBorderKind,
+  ...props
+}: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

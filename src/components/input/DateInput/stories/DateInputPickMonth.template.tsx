@@ -5,9 +5,12 @@ import { ThemeProvider } from 'styled-components';
 import { DateInput } from '@admiral-ds/react-ui';
 import type { DateInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
 
-export const DateInputPickMonthTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DateInputPickMonthTemplate = ({
+  themeBorderKind,
+  ...props
+}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

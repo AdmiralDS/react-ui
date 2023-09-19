@@ -34,7 +34,10 @@ const CheckboxWithInformer = styled.div`
   align-items: flex-start;
 `;
 
-export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+export const CheckboxFieldBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
   const [visible1, setVisible1] = React.useState(false);
@@ -47,7 +50,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
   }, [props.checked]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -10,10 +10,11 @@ export const NumberInputFieldPlaygroundTemplate = ({
   precision = 0,
   maxValue = 10000,
   decimal,
+  themeBorderKind,
   ...props
 }: NumberInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

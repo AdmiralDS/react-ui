@@ -56,12 +56,15 @@ const itemsDemo = [
   },
 ];
 
-export const MultiButtonAppearanceTemplate = (props: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MultiButtonAppearanceTemplate = ({
+  themeBorderKind,
+  ...props
+}: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

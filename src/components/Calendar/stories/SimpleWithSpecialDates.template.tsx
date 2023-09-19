@@ -274,12 +274,15 @@ const holidayDates = new Map(
   }),
 );
 
-export const SimpleWithSpecialDatesTemplate = (props: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
+export const SimpleWithSpecialDatesTemplate = ({
+  themeBorderKind,
+  ...props
+}: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

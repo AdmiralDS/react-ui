@@ -182,7 +182,10 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const MenuMultiLevelTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuMultiLevelTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const convertStoryItem = (storyItem: StoryItem): MenuModelItemProps => {
     const item: MenuModelItemProps = {
       id: storyItem.id,
@@ -205,7 +208,7 @@ export const MenuMultiLevelTemplate = (props: MenuProps & { themeBorderKind?: Bo
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

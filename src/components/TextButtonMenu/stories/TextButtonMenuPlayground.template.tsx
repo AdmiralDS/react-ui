@@ -54,6 +54,7 @@ const items = [
 
 export const TextButtonMenuPlaygroundTemplate = ({
   text = 'Text Button',
+  themeBorderKind,
   ...props
 }: TextButtonMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
@@ -70,7 +71,7 @@ export const TextButtonMenuPlaygroundTemplate = ({
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

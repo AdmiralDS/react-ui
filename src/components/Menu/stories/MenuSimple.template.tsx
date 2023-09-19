@@ -62,7 +62,10 @@ const Container = styled.div`
   column-gap: 50px;
 `;
 
-export const MenuSimpleTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuSimpleTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -75,7 +78,7 @@ export const MenuSimpleTemplate = (props: MenuProps & { themeBorderKind?: Border
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

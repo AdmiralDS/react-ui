@@ -13,10 +13,11 @@ const Container = styled.div`
 export const FieldWithTextInputTemplate = ({
   label = 'some label of wrapped component',
   id = 'props_id',
+  themeBorderKind,
   ...props
 }: FieldProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

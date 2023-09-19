@@ -13,6 +13,7 @@ const DisplayContainer = styled.div`
 export const InputFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
+  themeBorderKind,
   ...props
 }: InputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
@@ -31,7 +32,7 @@ export const InputFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

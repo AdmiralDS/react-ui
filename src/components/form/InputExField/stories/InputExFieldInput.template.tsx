@@ -17,6 +17,7 @@ const SUFFIX_OPTIONS = ['suffix One', 'suffix Two', 'suffix Three'];
 export const InputExFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
+  themeBorderKind,
   ...props
 }: InputExFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
@@ -28,7 +29,7 @@ export const InputExFieldInputTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

@@ -68,7 +68,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuActionsAddUserValueTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuActionsAddUserValueTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const initialButtonText = 'Добавить';
   const theme = useTheme() || LIGHT_THEME;
 
@@ -123,7 +126,7 @@ export const MenuActionsAddUserValueTemplate = (props: MenuProps & { themeBorder
   const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

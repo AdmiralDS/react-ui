@@ -23,9 +23,12 @@ const WrapperVertical = styled.div`
   gap: 10px;
 `;
 
-export const IconButtonDimensionTemplate = (props: IconButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const IconButtonDimensionTemplate = ({
+  themeBorderKind,
+  ...props
+}: IconButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

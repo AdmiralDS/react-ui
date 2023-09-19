@@ -27,9 +27,12 @@ const DarkDiv = styled.div`
   padding: 2px;
 `;
 
-export const ButtonWithIconTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ButtonWithIconTemplate = ({
+  themeBorderKind,
+  ...props
+}: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

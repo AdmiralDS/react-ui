@@ -7,6 +7,7 @@ import type { PhoneInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/
 
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
+  themeBorderKind,
   ...props
 }: PhoneInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
@@ -33,7 +34,7 @@ export const PhoneInputFieldExampleTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

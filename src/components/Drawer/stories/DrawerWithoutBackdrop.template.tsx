@@ -41,11 +41,14 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
   );
 };
 
-export const DrawerWithoutBackdropTemplate = (props: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+export const DrawerWithoutBackdropTemplate = ({
+  themeBorderKind,
+  ...props
+}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

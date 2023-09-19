@@ -58,7 +58,10 @@ const Wrapper = styled.div`
 
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
-export const MenuTooltipTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuTooltipTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       const tooltip = item.label.length > 20;
@@ -85,7 +88,7 @@ export const MenuTooltipTemplate = (props: MenuProps & { themeBorderKind?: Borde
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

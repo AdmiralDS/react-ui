@@ -13,7 +13,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuLargeNumberOfItemsTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuLargeNumberOfItemsTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS.map((item) => ({
       id: item.id,
@@ -26,7 +29,7 @@ export const MenuLargeNumberOfItemsTemplate = (props: MenuProps & { themeBorderK
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

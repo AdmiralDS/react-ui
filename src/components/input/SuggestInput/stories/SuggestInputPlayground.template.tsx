@@ -22,6 +22,7 @@ const OPTIONS = [
 
 export const SuggestInputPlaygroundTemplate = ({
   placeholder = 'Начните набирать text',
+  themeBorderKind,
   ...props
 }: SuggestInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
@@ -59,7 +60,7 @@ export const SuggestInputPlaygroundTemplate = ({
   }, [isLoading]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

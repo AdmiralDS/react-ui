@@ -12,6 +12,7 @@ const FormContainer = styled.form`
 
 export const DateFieldBaseTemplate = ({
   label = 'Label',
+  themeBorderKind,
   ...props
 }: DateFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>('');
@@ -39,7 +40,7 @@ export const DateFieldBaseTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

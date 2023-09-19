@@ -17,11 +17,12 @@ const initialValue: Array<ItemValue> = [
   { label: 'Омск', id: '4', checked: false },
 ];
 
-export const CheckboxCompositeGroupExampleTemplate = (
-  props: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType },
-) => {
+export const CheckboxCompositeGroupExampleTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType }) => {
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

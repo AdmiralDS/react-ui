@@ -18,6 +18,7 @@ const OPTIONS = [
 ];
 export const SelectFieldSimpleTemplate = ({
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: SearchSelectFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selectValue, setSelectValue] = React.useState('');
@@ -36,7 +37,7 @@ export const SelectFieldSimpleTemplate = ({
   };
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 

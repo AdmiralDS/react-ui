@@ -60,7 +60,10 @@ const MultiLineMenuItem = styled(MenuItem)`
   white-space: pre-wrap;
 `;
 
-export const MenuMultiLineTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuMultiLineTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       return {
@@ -75,7 +78,7 @@ export const MenuMultiLineTemplate = (props: MenuProps & { themeBorderKind?: Bor
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
+    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
   }
 
