@@ -32,6 +32,7 @@ import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
+import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 export type { SearchFormat } from './types';
 
@@ -655,6 +656,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [children],
     );
 
+    const dropContainerProps = passDropdownDataAttributes(props);
+    const menuProps = passMenuDataAttributes(props);
+
     return (
       <SelectWrapper
         className={className}
@@ -727,6 +731,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
+            {...dropContainerProps}
           >
             <StyledMenu
               dimension={dimension === 'xl' ? 'l' : dimension}
@@ -742,6 +747,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               containerRef={dropDownRef}
               virtualScroll={virtualScroll}
               preventFocusSteal
+              {...menuProps}
             />
           </DropdownContainer>
         )}
