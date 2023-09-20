@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/AdmiralDS/react-ui/compare/v6.1.1...v6.2.0) (2023-09-20)
+
+
+### Features
+
+* **Select:** добавлена возможность передавать data-attribute для dropDownContainer и Menu ([cc8f242](https://github.com/AdmiralDS/react-ui/commit/cc8f242d2557cb72f331f51794fe8f6d794da4cd)), closes [#1117](https://github.com/AdmiralDS/react-ui/issues/1117)
+* **Table:** добавлен параметр type для колонки таблицы ([a26be32](https://github.com/AdmiralDS/react-ui/commit/a26be32621393a2980babfefb698db1f9fa056ad))
+* **Table:** добавлены новые data-атрибуты и класснеймы для ячеек с чекбоксами и иконками стрелок ([42ef538](https://github.com/AdmiralDS/react-ui/commit/42ef538022ea487f26cac02fd2262475dadd33f8))
+
+
+### Bug Fixes
+
+* **Menu:** Исправлена ошибка с "подвисанием" подменю при скролле ([0b574e4](https://github.com/AdmiralDS/react-ui/commit/0b574e48100db0e6c2a4793dccb0e889b79884ab)), closes [#1095](https://github.com/AdmiralDS/react-ui/issues/1095)
+
 ### [6.1.1](https://github.com/AdmiralDS/react-ui/compare/v6.1.0...v6.1.1) (2023-09-07)
 
 ## [6.1.0](https://github.com/AdmiralDS/react-ui/compare/v6.0.0...v6.1.0) (2023-09-05)
