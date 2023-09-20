@@ -409,16 +409,21 @@ export const SimpleRow = styled.div<{
 `;
 
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
-  display: inline-flex;
-  overflow: hidden;
-  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
+  display: flex;
 `;
+// display: inline-flex;
+// overflow: hidden;
+// transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
 
-export const ExpandedRowContent = styled.div`
+export const ExpandedRowContent = styled.div<{ opened?: boolean }>`
   display: flex;
   flex: 1 1 auto;
   padding: 0 12px 11px 12px;
+
+  height: ${(p) => (!p.opened ? 0 : '100%')};
+  overflow: hidden;
+  transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 export const EmptyMessage = styled(Cell)`

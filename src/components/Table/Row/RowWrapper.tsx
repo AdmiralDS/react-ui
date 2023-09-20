@@ -119,7 +119,9 @@ export const RowWrapper = ({
           onMouseEnter={handleExpandedMouseEnter}
           onMouseLeave={handleExpandedMouseLeave}
         >
-          <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
+          <div>
+            <ExpandedRowContent opened={row.expanded}>{row.expandedRowRender(row)}</ExpandedRowContent>
+          </div>
         </ExpandedRow>
       )}
     </Row>
