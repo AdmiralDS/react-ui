@@ -8,7 +8,7 @@ export const SliderInputControlledTemplate = ({
   themeBorderKind,
   ...props
 }: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [slider1, setSlider1] = React.useState(String(args.value ?? ''));
+  const [slider1, setSlider1] = React.useState(String(props.value ?? ''));
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>

@@ -310,11 +310,10 @@ export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
       fill: ${({ theme, sort }) =>
         sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
-    
+
     ${SortOrder} {
       color: ${({ theme, sort }) =>
         sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
-    };
     }
   }
 `;
