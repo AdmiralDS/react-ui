@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, Pills, refSetter, smallGroupBorderRadius } from '@admiral-ds/react-ui';
 import type { Shape, Color, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type Status = 'Error' | 'Success' | 'Special' | 'Warning' | 'Attention';
 
@@ -217,52 +218,54 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
   );
 });
 
-export const PillNestedTemplate = () => {
+export const PillNestedTemplate = (props: any) => {
   return (
-    <WrapperVertical>
-      <Desc>
-        Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного компонента.
-        Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню, напротив,
-        можно назначать избирательно.
-      </Desc>
-      <Desc>
-        Для объединения двух StatusPill используется NestedPill, который стилизует правый и левый края StatusPill так,
-        чтобы они "слились" в единую форму.
-      </Desc>
-      <Pills>
-        <NestedPill>
-          <StatusPill $status="Special" onClick={leftPillClicked}>
-            LeftNested
-          </StatusPill>
-          <StatusPill $status="Warning" onClick={rightPillClicked}>
-            RightNested
-          </StatusPill>
-        </NestedPill>
-        <NestedPill>
-          <StatusPill $status="Special" onClick={leftPillClicked}>
-            <StyledPillIcon $status="Special">
-              <HeartOutline />
-            </StyledPillIcon>
-            LeftNested
-          </StatusPill>
-          <StatusPill $status="Warning" onClick={rightPillClicked}>
-            <StyledPillIcon $status="Warning">
-              <BurnSolid />
-            </StyledPillIcon>
-            RightNested
-          </StatusPill>
-        </NestedPill>
-        <NestedPill>
-          <PillMenu options={itemsLeft} />
-          <PillMenu options={itemsRight} />
-        </NestedPill>
-        <NestedPill>
-          <StatusPill $status="Special" onClick={leftPillClicked}>
-            LeftNested
-          </StatusPill>
-          <PillMenu options={itemsRight} />
-        </NestedPill>
-      </Pills>
-    </WrapperVertical>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.borderRadiusKind)}>
+      <WrapperVertical>
+        <Desc>
+          Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного
+          компонента. Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню,
+          напротив, можно назначать избирательно.
+        </Desc>
+        <Desc>
+          Для объединения двух StatusPill используется NestedPill, который стилизует правый и левый края StatusPill так,
+          чтобы они "слились" в единую форму.
+        </Desc>
+        <Pills>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              LeftNested
+            </StatusPill>
+            <StatusPill $status="Warning" onClick={rightPillClicked}>
+              RightNested
+            </StatusPill>
+          </NestedPill>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              <StyledPillIcon $status="Special">
+                <HeartOutline />
+              </StyledPillIcon>
+              LeftNested
+            </StatusPill>
+            <StatusPill $status="Warning" onClick={rightPillClicked}>
+              <StyledPillIcon $status="Warning">
+                <BurnSolid />
+              </StyledPillIcon>
+              RightNested
+            </StatusPill>
+          </NestedPill>
+          <NestedPill>
+            <PillMenu options={itemsLeft} />
+            <PillMenu options={itemsRight} />
+          </NestedPill>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              LeftNested
+            </StatusPill>
+            <PillMenu options={itemsRight} />
+          </NestedPill>
+        </Pills>
+      </WrapperVertical>
+    </ThemeProvider>
   );
 };

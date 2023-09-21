@@ -10,10 +10,11 @@ import {
   TextInput,
   TextButton,
 } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import type { ChangeEvent } from 'react';
 import { uid } from '#src/components/common/uid';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type StoryItem = {
   id: string;
@@ -125,13 +126,8 @@ export const MenuActionsAddUserValueTemplate = ({
 
   const menuPanelContentDimension = props.dimension === undefined || props.dimension === 'l' ? 'm' : props.dimension;
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

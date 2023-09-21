@@ -1,20 +1,17 @@
 import * as React from 'react';
 import { SliderInput } from '@admiral-ds/react-ui';
-import type { SliderInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SliderInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const SliderInputControlledTemplate = ({
   themeBorderKind,
   ...props
 }: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
   const [slider1, setSlider1] = React.useState(String(args.value ?? ''));
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <SliderInput
         {...props}
         value={slider1}

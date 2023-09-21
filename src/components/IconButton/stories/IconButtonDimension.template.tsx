@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { IconButton, T } from '@admiral-ds/react-ui';
-import type { IconButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { IconButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const WrapperIconButton = styled.div`
   display: flex;
@@ -27,13 +28,8 @@ export const IconButtonDimensionTemplate = ({
   themeBorderKind,
   ...props
 }: IconButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperIconButton>
         <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">

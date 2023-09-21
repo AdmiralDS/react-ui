@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Hint, Button } from '@admiral-ds/react-ui';
-import type { HintProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { HintProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
@@ -14,10 +15,6 @@ export const HintPositionTemplate = ({
   themeBorderKind,
   ...props
 }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
   const [visible1, setVisible1] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
   const [visible3, setVisible3] = React.useState(false);
@@ -28,7 +25,7 @@ export const HintPositionTemplate = ({
   const handleVisibilityChange4 = (visible: boolean) => setVisible4(visible);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Hint
           {...props}

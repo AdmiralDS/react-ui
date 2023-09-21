@@ -2,13 +2,13 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, mediumGroupBorderRadius, checkboxTreeToMap, MenuItemWithCheckbox } from '@admiral-ds/react-ui';
 import type {
-  Theme,
   MenuProps,
   RenderOptionProps,
   CheckboxGroupItemProps,
   MenuModelItemProps,
   BorderRadiusType,
 } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const STORY_ITEMS: Array<CheckboxGroupItemProps> = [
   {
@@ -154,13 +154,8 @@ export const MenuCheckboxGroupTemplate = ({
     setActiveOption(id);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

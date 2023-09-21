@@ -2,11 +2,12 @@ import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, refSetter } from '@admiral-ds/react-ui';
-import type { Theme, RenderOptionProps, Color } from '@admiral-ds/react-ui';
+import type { RenderOptionProps, Color } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as BonusOutline } from '@admiral-ds/icons/build/category/BonusOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -175,14 +176,9 @@ const items: Array<PillOptionProps> = [
 ];
 
 export const PillMenuTemplate = (props: any) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(props.borderRadiusKind)}>
         <WrapperVertical>
           <Desc>Компонент может быть с выпадающим меню. Позволяет выбирать различные статусы (цвета) индикатора.</Desc>
           <Desc>Для добавления выпадающего меню к кастомному StatusPill используется компонент DropMenu.</Desc>

@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { NumberInputField, clearValue } from '@admiral-ds/react-ui';
-import type { NumberInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { NumberInputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const NumberInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
@@ -13,11 +14,6 @@ export const NumberInputFieldPlaygroundTemplate = ({
   themeBorderKind,
   ...props
 }: NumberInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [status, setStatus] = React.useState<NumberInputFieldProps['status'] | undefined>(undefined);
   const [extraText, setExtraText] = React.useState('');
 
@@ -33,7 +29,7 @@ export const NumberInputFieldPlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <NumberInputField
         data-container-id="numberInputFieldIdOne"
         {...props}

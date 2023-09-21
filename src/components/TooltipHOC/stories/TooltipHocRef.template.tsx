@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { TooltipHoc, InputField, Button } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
-import type { TooltipHocProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TooltipHocProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -13,17 +14,12 @@ export const TooltipHocRefTemplate = ({
   themeBorderKind,
   ...props
 }: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const handleBtnClick = () => {
     inputRef.current?.focus();
   };
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TooltipedInput
         {...props}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}

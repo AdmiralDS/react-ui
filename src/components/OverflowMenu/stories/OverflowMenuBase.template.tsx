@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
-import type { OverflowMenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { OverflowMenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
@@ -64,13 +65,8 @@ export const OverflowMenuBaseTemplate = ({
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <OverflowMenu
         {...props}
         items={model}

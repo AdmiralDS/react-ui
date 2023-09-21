@@ -3,7 +3,8 @@ import type { KeyboardEventHandler, MouseEventHandler } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Button, DropDownItem, DropDownMenu } from '@admiral-ds/react-ui';
-import type { DropDownMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DropDownMenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const items = [
   {
@@ -62,13 +63,8 @@ export const BaseDropDownTemplate = ({
     setOpen(false);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ width: 'fit-content' }}>
         <Button ref={buttonRef} onClick={() => setOpen(!open)} style={{ margin: 'auto' }}>
           Нажми

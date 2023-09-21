@@ -14,16 +14,10 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type {
-  ID,
-  Theme,
-  ToastItemProps,
-  ToastProps,
-  NotificationItemStatus,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import type { ID, ToastItemProps, ToastProps, NotificationItemStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -122,13 +116,8 @@ export const ToastProgressComponentTemplate = ({
   themeBorderKind,
   ...props
 }: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ToastProvider autoDeleteTime={5000}>
         <MessageForm />
         <Toast position={props.position} />

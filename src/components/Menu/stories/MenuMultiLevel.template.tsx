@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type StoryItem = {
   id: string;
@@ -207,13 +208,8 @@ export const MenuMultiLevelTemplate = ({
     return STORY_ITEMS.map((item) => convertStoryItem(item));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Container>
         <Wrapper style={{ width: 'fit-content' }}>
           <Menu tabIndex={1} {...props} defaultIsActive={false} model={model} />

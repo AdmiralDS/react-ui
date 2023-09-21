@@ -9,9 +9,10 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type { Theme, ToastProps, ID, IdentifyToast, ToastItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ToastProps, ID, IdentifyToast, ToastItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const random = (min: number, max: number) => min + Number(Math.round(Math.random() * (max - min)));
 
@@ -105,13 +106,8 @@ export const ToastLineNotificationTemplate = ({
   themeBorderKind,
   ...props
 }: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
         <Toast style={{ top: 128, left: 64, width: 'initial' }} />

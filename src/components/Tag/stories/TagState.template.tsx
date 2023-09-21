@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { Tag, Tags } from '@admiral-ds/react-ui';
-import type { TagProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TagProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const clickHandler = () => console.log('click active tag');
 
 export const TagStateTemplate = ({ themeBorderKind, ...props }: TagProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Tags>
         <Tag {...props} onClick={clickHandler}>
           Active

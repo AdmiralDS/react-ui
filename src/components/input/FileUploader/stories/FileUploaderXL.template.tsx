@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import { FileUploader } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, FileUploaderProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, FileUploaderProps } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const FileUploaderXLTemplate = ({
   themeBorderKind,
@@ -8,13 +9,8 @@ export const FileUploaderXLTemplate = ({
 }: FileUploaderProps & { themeBorderKind?: BorderRadiusType }) => {
   const accept = ['image/*', '.pdf', 'application/json'];
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <FileUploader
         {...props}
         accept={accept.join(', ')}

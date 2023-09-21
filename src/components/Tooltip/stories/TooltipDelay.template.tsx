@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { Tooltip, TOOLTIP_DELAY, Button } from '@admiral-ds/react-ui';
-import type { ITooltipProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ITooltipProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const TooltipDelayTemplate = ({
   themeBorderKind,
   ...props
 }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const btnRef = React.useRef<HTMLButtonElement | null>(null);
   const [visible, setVisible] = React.useState(false);
   const [timer, setTimer] = React.useState<number>();
@@ -46,7 +42,7 @@ export const TooltipDelayTemplate = ({
   }, [setTimer, setVisible, timer]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
         <DeleteOutline aria-hidden />
       </Button>

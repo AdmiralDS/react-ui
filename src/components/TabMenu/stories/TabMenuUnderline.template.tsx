@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { TabMenu } from '@admiral-ds/react-ui';
-import type { TabMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TabMenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const tabs = [
   {
@@ -51,13 +52,9 @@ export const TabMenuUnderlineTemplate = ({
   themeBorderKind,
   ...props
 }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TabMenu
         {...props}
         activeTab={selected}

@@ -3,7 +3,8 @@ import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { SuggestField } from '@admiral-ds/react-ui';
-import type { SuggestFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SuggestFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -69,13 +70,8 @@ export const SuggestFieldExampleTemplate = ({
     }
   }, [isLoading]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DisplayContainer>
         <SuggestField
           data-container-id="suggestFieldIdOne"

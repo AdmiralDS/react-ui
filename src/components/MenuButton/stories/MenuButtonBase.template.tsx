@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuButton, MenuItem } from '@admiral-ds/react-ui';
-import type { MenuButtonProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuButtonProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
@@ -54,11 +55,6 @@ export const MenuButtonBaseTemplate = ({
 }: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const model = React.useMemo(() => {
     return items.map((item) => ({
       id: item.id,
@@ -72,7 +68,7 @@ export const MenuButtonBaseTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <MenuButton
         {...props}
         selected={selected}

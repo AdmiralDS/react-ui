@@ -1,21 +1,17 @@
 import * as React from 'react';
 import { Tag, Tags } from '@admiral-ds/react-ui';
-import type { TagsProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TagsProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const TagsKindTemplate = ({
   kind = 'success',
   themeBorderKind,
   ...props
 }: TagsProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
         <Tags
           dimension={props.dimension}
           width={50}

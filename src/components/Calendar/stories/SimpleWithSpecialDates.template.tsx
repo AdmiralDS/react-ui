@@ -2,7 +2,8 @@ import * as React from 'react';
 import { css, ThemeProvider } from 'styled-components';
 
 import { Calendar, weekendMixin } from '@admiral-ds/react-ui';
-import type { CalendarPropType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CalendarPropType, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const startOfDay = (date: Date): Date => {
   date.setHours(0, 0, 0, 0);
@@ -281,11 +282,6 @@ export const SimpleWithSpecialDatesTemplate = ({
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const highlightHolidays = (day: Date) => {
     const key = startOfDay(day).getTime();
     const check = holidayDates.get(key);
@@ -302,7 +298,7 @@ export const SimpleWithSpecialDatesTemplate = ({
   };
 
   return props.range ? (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Calendar
         {...props}
         range
@@ -316,7 +312,7 @@ export const SimpleWithSpecialDatesTemplate = ({
       />
     </ThemeProvider>
   ) : (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Calendar
         {...props}
         selected={selected}

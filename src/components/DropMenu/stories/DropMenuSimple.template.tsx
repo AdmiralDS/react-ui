@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Button, DropMenu, MenuItem } from '@admiral-ds/react-ui';
-import type { DropMenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DropMenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const STORY_ITEMS = [
   {
@@ -83,13 +84,8 @@ export const DropMenuSimpleTemplate = ({
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperVertical>
         <Desc>
           Неконтроллируемое состояние видимости меню:

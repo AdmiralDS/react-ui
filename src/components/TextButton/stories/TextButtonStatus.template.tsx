@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TextButton, T } from '@admiral-ds/react-ui';
-import type { TextButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TextButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -27,13 +28,8 @@ export const TextButtonStatusTemplate = ({
   themeBorderKind,
   ...props
 }: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperButton>
         <div>
           <StyledText font="Body/Body 1 Long" forwardedAs="div">

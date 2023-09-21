@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { IconPlacement, T } from '@admiral-ds/react-ui';
-import type { IconPlacementProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { IconPlacementProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,14 +28,8 @@ export const IconPlacementSizesTemplate = ({
   themeBorderKind,
   ...props
 }: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    console.log(`Current border ${theme.shape.borderRadiusKind}`);
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperVertical>
         <Wrapper>
           <WrapperVertical>

@@ -3,7 +3,8 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { PhoneInputField } from '@admiral-ds/react-ui';
-import type { PhoneInputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { PhoneInputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
@@ -33,13 +34,8 @@ export const PhoneInputFieldExampleTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <PhoneInputField
         data-container-id="phoneInputFieldIdOne"
         {...cleanProps}

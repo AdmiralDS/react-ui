@@ -1,8 +1,9 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { EditMode, T } from '@admiral-ds/react-ui';
-import type { EditModeProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { EditModeProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   height: 20px;
@@ -13,11 +14,6 @@ export const EditModeDimensionTemplate = ({
   themeBorderKind,
   ...props
 }: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +22,7 @@ export const EditModeDimensionTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <T font="Body/Body 1 Long" as="div">
         Dimension - s
       </T>

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { TagMenu, MenuItem } from '@admiral-ds/react-ui';
-import type { TagMenuProps, TagOptionProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TagMenuProps, TagOptionProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
@@ -62,10 +63,6 @@ export const TagMenuPlaygroundTemplate = ({
   ...props
 }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<TagOptionProps | undefined>(itemsDemo[0]);
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
 
   const model = React.useMemo(() => {
     return itemsDemo.map((item) => ({
@@ -80,7 +77,7 @@ export const TagMenuPlaygroundTemplate = ({
 
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
         <TagMenu
           items={model}
           selected={selected}

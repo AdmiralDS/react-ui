@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Checkbox, T } from '@admiral-ds/react-ui';
-import type { CheckBoxProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CheckBoxProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Container = styled.div`
   display: flex;
@@ -29,18 +30,13 @@ export const CheckboxDemoTemplate = ({
   themeBorderKind,
   ...props
 }: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
   React.useEffect(() => {
     setChecked(Boolean(props.checked));
   }, [props.checked]);
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
         <Container>
           <T font="Header/H6" as="div">
             Состояния

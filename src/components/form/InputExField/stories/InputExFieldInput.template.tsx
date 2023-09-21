@@ -3,7 +3,8 @@ import type { ChangeEvent, ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { InputExField, Spinner } from '@admiral-ds/react-ui';
-import type { InputExFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { InputExFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -28,15 +29,10 @@ export const InputExFieldInputTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
   const [suffixValue, setSuffixValue] = useState<ReactNode>('suffix One');
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DisplayContainer>
         <InputExField
           data-container-id="InputExFieldIdOne"

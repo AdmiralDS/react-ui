@@ -1,8 +1,9 @@
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button, T } from '@admiral-ds/react-ui';
-import type { ButtonProps, ButtonAppearance, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ButtonProps, ButtonAppearance, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
@@ -20,13 +21,8 @@ export const ButtonPlaygroundTemplate = ({
   themeBorderKind,
   ...props
 }: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <T font="Body/Body 1 Long" as="div">
         Кнопки представлены в четырех размерностях XL, L, M и S. Для дополнительных акцентов и более прозрачных действий
         могут применяться кнопки с иконками и текстом. Иконка может быть как перед надписью, так и после

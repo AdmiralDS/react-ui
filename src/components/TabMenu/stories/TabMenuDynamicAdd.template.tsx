@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { TabMenu, Button } from '@admiral-ds/react-ui';
-import type { TabMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TabMenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const TabMenuDynamicAddTemplate = ({
   themeBorderKind,
   ...props
 }: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
   const [tabs, setTabs] = React.useState([
     {
       id: '1',
@@ -28,7 +25,7 @@ export const TabMenuDynamicAddTemplate = ({
   const [activeTab, setActiveTav] = React.useState('1');
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div>
         <TabMenu {...props} activeTab={activeTab} onChange={(id) => setActiveTav(id)} tabs={tabs} underline />
         <div style={{ height: '20px' }} />

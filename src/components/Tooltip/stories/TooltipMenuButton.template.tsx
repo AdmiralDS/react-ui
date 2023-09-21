@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Tooltip, MenuButton, MenuItem } from '@admiral-ds/react-ui';
-import type { Theme, BorderRadiusType, ITooltipProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, ITooltipProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const menuItems = [
   { id: 1, label: 'item-1' },
@@ -13,11 +14,6 @@ export const TooltipMenuButtonTemplate = ({
   themeBorderKind,
   ...props
 }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const menuModel = React.useMemo(() => {
     return menuItems.map((item) => ({
       id: String(item.id),
@@ -68,7 +64,7 @@ export const TooltipMenuButtonTemplate = ({
     [],
   );
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <MenuButton dimension="m" items={menuModel} style={{ marginRight: 20 }}>
         TEST
       </MenuButton>

@@ -2,9 +2,10 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { FileInput, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
-import type { FileAttributeProps, FileInputProps, InputStatus, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { FileAttributeProps, FileInputProps, InputStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const FileInputBaseTemplate = ({
   dimension = 'xl',
@@ -12,11 +13,6 @@ export const FileInputBaseTemplate = ({
   themeBorderKind,
   ...props
 }: FileInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
@@ -108,7 +104,7 @@ export const FileInputBaseTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <FileInput
         dimension={dimension}
         disabled={props.disabled}

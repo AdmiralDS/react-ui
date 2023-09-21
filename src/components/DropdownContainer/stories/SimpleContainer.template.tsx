@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button, DropdownContainer, mediumGroupBorderRadius, typography } from '@admiral-ds/react-ui';
-import type { DropdownContainerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DropdownContainerProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const StyledText = styled.div`
   ${typography['Body/Body 1 Short']}
@@ -28,11 +29,6 @@ export const SimpleContainerTemplate = ({
 
   const { targetElement, ...other } = props;
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const clickOutside = (e: Event) => {
     if (e.target && buttonRef.current?.contains(e.target as Node)) {
       return;
@@ -41,7 +37,7 @@ export const SimpleContainerTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <Button ref={buttonRef} onClick={() => setOpen(!open)}>
           Текст

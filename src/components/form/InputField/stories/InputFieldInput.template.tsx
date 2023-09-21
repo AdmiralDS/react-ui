@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { InputField } from '@admiral-ds/react-ui';
-import type { InputFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { InputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -31,13 +32,8 @@ export const InputFieldInputTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DisplayContainer>
         <InputField
           data-container-id="inputFieldIdOne"

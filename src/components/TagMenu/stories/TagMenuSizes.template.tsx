@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { TagMenu, MenuItem, TagCircle } from '@admiral-ds/react-ui';
-import type {
-  TagMenuProps,
-  TagOptionProps,
-  TagKind,
-  RenderOptionProps,
-  Theme,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import type { TagMenuProps, TagOptionProps, TagKind, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const StyledMenuItem = styled(MenuItem)`
   flex-wrap: nowrap;
@@ -72,11 +66,6 @@ export const TagMenuSizesTemplate = ({
   themeBorderKind,
   ...props
 }: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [selectedM, setSelectedM] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
   const [selectedS, setSelectedS] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
 
@@ -109,7 +98,7 @@ export const TagMenuSizesTemplate = ({
   }, [itemsDemoSizes]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TagMenu
         dimension="m"
         items={modelM}

@@ -1,19 +1,15 @@
 import * as React from 'react';
 import { SliderInput } from '@admiral-ds/react-ui';
-import type { SliderInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SliderInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const SliderInputTickMarksTemplate = ({
   themeBorderKind,
   ...props
 }: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <SliderInput
         {...props}
         defaultValue="15"

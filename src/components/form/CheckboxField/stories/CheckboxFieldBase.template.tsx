@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CheckboxField, Hint } from '@admiral-ds/react-ui';
-import type { CheckboxFieldProps, Theme, CheckboxDimension, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CheckboxFieldProps, CheckboxDimension, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const Container = styled.div`
   display: flex;
@@ -49,13 +50,8 @@ export const CheckboxFieldBaseTemplate = ({
     setChecked(Boolean(props.checked));
   }, [props.checked]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Container>
         <CheckboxField
           {...props}

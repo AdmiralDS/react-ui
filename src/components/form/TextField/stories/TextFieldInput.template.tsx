@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TextField } from '@admiral-ds/react-ui';
-import type { TextFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TextFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -31,13 +32,8 @@ export const TextFieldInputTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DisplayContainer>
         <TextField
           data-container-id="textFieldIdOne"

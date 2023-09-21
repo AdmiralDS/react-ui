@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button } from '@admiral-ds/react-ui';
-import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ContentArea = styled.div`
   display: flex;
@@ -15,13 +16,8 @@ export const DrawerMobileTemplate = ({
 }: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
       <Drawer
         {...props}

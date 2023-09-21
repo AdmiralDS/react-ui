@@ -3,14 +3,8 @@ import type { ChangeEvent, ReactNode } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { InputEx, MenuItem } from '@admiral-ds/react-ui';
-import type {
-  InputExProps,
-  Theme,
-  MenuItemProps,
-  RenderProps,
-  RenderPropsType,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import type { InputExProps, MenuItemProps, RenderProps, RenderPropsType, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   height: 20px;
@@ -53,17 +47,12 @@ export const InputExCustomTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
   const [suffixValue, setSuffixValue] = useState<ReactNode>('One');
 
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <InputEx
         {...props}
         containerRef={inputRef}

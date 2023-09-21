@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Drawer, Button } from '@admiral-ds/react-ui';
-import type { DrawerProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const DrawerCustomContentTemplate = ({
   themeBorderKind,
@@ -9,13 +10,8 @@ export const DrawerCustomContentTemplate = ({
 }: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button onClick={() => setOpened(true)}>Open drawer with custom content</Button>
       <Drawer {...props} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
         <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>

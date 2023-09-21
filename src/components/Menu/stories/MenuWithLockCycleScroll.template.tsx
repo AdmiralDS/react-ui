@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
 import { STORY_ITEMS } from './data';
-import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ITEMS_WITH_DISABLED_ITEMS = [...STORY_ITEMS];
 ITEMS_WITH_DISABLED_ITEMS[0].disabled = true;
@@ -31,13 +32,8 @@ export const MenuWithLockCycleScrollTemplate = ({
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

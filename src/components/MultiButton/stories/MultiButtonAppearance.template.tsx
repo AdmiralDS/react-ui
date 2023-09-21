@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MultiButton } from '@admiral-ds/react-ui';
-import type { MultiButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MultiButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   width: 20px;
@@ -63,17 +64,12 @@ export const MultiButtonAppearanceTemplate = ({
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const model = React.useMemo(() => {
     return itemsDemo.slice(1, itemsDemo.length);
   }, [props.dimension, itemsDemo]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <MultiButton
           {...props}

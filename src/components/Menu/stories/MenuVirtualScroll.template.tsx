@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createItems } from './utils';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ITEMS = createItems(40);
 
@@ -28,13 +29,8 @@ export const MenuVirtualScrollTemplate = ({
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} virtualScroll={{ itemHeight: 'auto' }} model={model} />
       </Wrapper>

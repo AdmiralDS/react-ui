@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { Pill, Pills } from '@admiral-ds/react-ui';
-import type { Color, Theme } from '@admiral-ds/react-ui';
+import type { Color } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const WrapperVertical = styled.div`
   display: flex;
@@ -75,14 +76,9 @@ const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status
 `;
 
 export const PillSimpleTemplate = (props: any) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(props.borderRadiusKind)}>
         <WrapperVertical>
           <Desc>
             Компонент Pills - визуальный индикатор для обозначения статуса какого-либо элемента для быстрой

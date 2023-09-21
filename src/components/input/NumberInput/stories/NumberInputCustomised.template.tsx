@@ -1,18 +1,14 @@
 import { NumberInput } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, NumberInputProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, NumberInputProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const NumberInputCustomisedTemplate = ({
   themeBorderKind,
   ...props
 }: NumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <NumberInput
         {...props}
         onChange={(event) => {

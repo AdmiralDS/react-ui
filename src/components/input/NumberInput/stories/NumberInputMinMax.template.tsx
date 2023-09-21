@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { NumberInput, T, clearValue } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, NumberInputProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, NumberInputProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const NumberInputMinMaxTemplate = ({
   minValue = -1000,
@@ -11,11 +12,6 @@ export const NumberInputMinMaxTemplate = ({
   themeBorderKind,
   ...props
 }: NumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [status, setStatus] = useState<NumberInputProps['status'] | undefined>(undefined);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +24,7 @@ export const NumberInputMinMaxTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '24px' }}>
         В данном примере, если введенное значение выходит за границы диапазона minValue-maxValue, компонент переходит в
         состояние ошибки.

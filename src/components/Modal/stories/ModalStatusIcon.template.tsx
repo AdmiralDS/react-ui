@@ -10,11 +10,12 @@ import {
   ModalStatusIcon,
   TooltipHoc,
 } from '@admiral-ds/react-ui';
-import type { ModalProps, Theme, BorderRadiusType, ModalStatusIconType } from '@admiral-ds/react-ui';
+import type { ModalProps, BorderRadiusType, ModalStatusIconType } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const TooltipedButton = TooltipHoc(Button);
 
@@ -25,13 +26,8 @@ export const ModalStatusIconTemplate = ({
   const [opened, setOpened] = React.useState(false);
   const [iconStatus, setIconStatus] = React.useState<ModalStatusIconType>('information');
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ display: 'flex', gap: '5px' }}>
         <TooltipedButton
           onClick={() => {

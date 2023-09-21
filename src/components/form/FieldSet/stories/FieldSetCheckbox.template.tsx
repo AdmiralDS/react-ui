@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CheckboxField, FieldSet } from '@admiral-ds/react-ui';
-import type { PropsType as FieldSetPropsType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { PropsType as FieldSetPropsType, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const Container = styled.div`
   > * {
@@ -14,13 +15,8 @@ export const FieldSetCheckboxTemplate = ({
   themeBorderKind,
   ...props
 }: FieldSetPropsType & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Container>
         <FieldSet data-container-id="fieldSetIdOne" {...props} legend={'Группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>

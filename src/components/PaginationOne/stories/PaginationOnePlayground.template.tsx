@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { PaginationOne } from '@admiral-ds/react-ui';
-import type { PaginationOneProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { PaginationOneProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const PaginationOnePlaygroundTemplate = ({
   themeBorderKind,
@@ -12,13 +13,8 @@ export const PaginationOnePlaygroundTemplate = ({
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = props.totalItems || 100;
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <PaginationOne
         {...props}
         onChange={({ page, pageSize }) => {

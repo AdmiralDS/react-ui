@@ -3,7 +3,8 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { SelectField, Option } from '@admiral-ds/react-ui';
-import type { SearchSelectFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SearchSelectFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const OPTIONS = [
   'teeext 1',
@@ -36,13 +37,8 @@ export const SelectFieldSimpleTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <SelectField
         data-container-id="selectFieldIdOne"
         {...props}
