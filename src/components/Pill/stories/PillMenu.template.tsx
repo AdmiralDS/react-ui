@@ -67,7 +67,7 @@ const stylesByStatusCssMixin = css<{ $status?: Status }>`
   color: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
 `;
 
-const StatusPill = styled(Pill).attrs<{ $status?: Status }>((p) => ({
+const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status }>((p) => ({
   'data-status': p.$status,
 }))<{ $status?: Status }>`
   ${stylesByStatusCssMixin}
