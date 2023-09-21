@@ -155,8 +155,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 const StyledButton = styled.button.attrs<
-  StyledButtonProps,
-  { 'data-dimension'?: Dimension; 'data-appearance'?: string }
+  StyledButtonProps & {
+    'data-dimension'?: Dimension;
+    'data-appearance'?: string;
+  }
 >((props) => ({
   'data-dimension': props.$dimension,
   'data-appearance': [props.$appearance, props.$displayAsDisabled ? 'disabled' : undefined]
@@ -176,7 +178,7 @@ const StyledButton = styled.button.attrs<
   ${appearanceMixin};
   ${dimensionMixin};
   ${(p) => p.$buttonCssMixin};
-  ${({ $skeleton }) => $skeleton && skeletonAnimationMixin}};
+  ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};
 
   ${ButtonContent} {
     ${(p) => (p.$loading || p.$skeleton ? 'visibility: hidden;' : '')}
@@ -186,4 +188,5 @@ const StyledButton = styled.button.attrs<
     cursor: pointer;
   }
 `;
+
 Button.displayName = 'Button';
