@@ -24,12 +24,9 @@ const WrapperVertical = styled.div`
 
 const handleClick = () => console.log('IconPlacement clicked');
 
-export const IconPlacementSizesTemplate = ({
-  themeBorderKind,
-  ...props
-}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
+export const IconPlacementSizesTemplate = (props: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
       <WrapperVertical>
         <Wrapper>
           <WrapperVertical>
