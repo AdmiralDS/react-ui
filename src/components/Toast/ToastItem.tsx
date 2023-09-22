@@ -71,7 +71,7 @@ export const ToastItemWithAutoDelete = ({
   return <>{children}</>;
 };
 
-const Progress = styled.div.attrs((props: { $percent: number }) => ({
+const Progress = styled.div.attrs<{ $percent: number }>((props) => ({
   style: { width: `${props.$percent}%` },
 }))<{ $percent: number; $status?: NotificationStatus; $duration: number }>`
   position: absolute;
