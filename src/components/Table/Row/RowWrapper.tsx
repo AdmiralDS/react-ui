@@ -51,6 +51,24 @@ export const RowWrapper = ({
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
+  const expandedContentRef = React.useRef<HTMLDivElement>(null);
+
+  const [expandedContentHeight, setExpandedContentHeight] = React.useState('auto');
+
+  React.useLayoutEffect(() => {
+    if (expandedContentRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
+          setExpandedContentHeight(height);
+        });
+      });
+      resizeObserver.observe(expandedContentRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [row.expandedRowRender]);
 
   const handleRowClick = (rowId: RowId) => {
     onRowClick?.(rowId);
@@ -114,14 +132,13 @@ export const RowWrapper = ({
       {row.expandedRowRender && (
         <ExpandedRow
           opened={row.expanded}
-          contentMaxHeight="90vh"
+          // contentMaxHeight="90vh"
+          contentMaxHeight={row.expanded ? expandedContentHeight : 0}
           className="tr-expanded"
           onMouseEnter={handleExpandedMouseEnter}
           onMouseLeave={handleExpandedMouseLeave}
         >
-          <div>
-            <ExpandedRowContent opened={row.expanded}>{row.expandedRowRender(row)}</ExpandedRowContent>
-          </div>
+          <ExpandedRowContent ref={expandedContentRef}>{row.expandedRowRender(row)}</ExpandedRowContent>
         </ExpandedRow>
       )}
     </Row>
