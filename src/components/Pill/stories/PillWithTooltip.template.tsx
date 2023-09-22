@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
+import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { checkOverflow, Pill, Tooltip, TooltipHoc } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -32,7 +33,7 @@ const LabelWrapper = styled.div`
   white-space: nowrap;
 `;
 
-export const PillWithTooltipTemplate = (props: any) => {
+export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -69,9 +70,9 @@ export const PillWithTooltipTemplate = (props: any) => {
       };
     }
   }, [setTooltipVisible]);
-
+  //debugger;
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.borderRadiusKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
       <WrapperVertical>
         <Desc>
           В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при
