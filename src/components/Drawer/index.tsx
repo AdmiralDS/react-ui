@@ -16,7 +16,7 @@ type Position = 'right' | 'left';
 
 const transitionTimingFunc = 'cubic-bezier(0, 0, 0.2, 1)';
 const transitionDuration = '0.3s';
-const transitionMixin = css`
+const transitionMixin = `
   ${transitionDuration} ${transitionTimingFunc} 0ms
 `;
 
