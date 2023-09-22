@@ -84,6 +84,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
   (
     {
+      options,
       isLoading,
       onOptionSelect,
       alignDropdown = 'stretch',
@@ -105,7 +106,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
-    const { options, portalTargetRef } = props;
+    const { portalTargetRef } = props;
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
