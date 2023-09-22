@@ -15,10 +15,7 @@ const StyledSpinner = styled(Spinner)`
   transform: translate(-50%, -50%);
 `;
 
-const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
-  'data-dimension': props.$dimension,
-  'data-appearance': props.$appearance,
-}))<StyledButtonProps>`
+const StyledButton = styled.button<StyledButtonProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -95,6 +92,8 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
     return (
       <StyledButton
         {...props}
+        data-dimension={dimension}
+        data-appearance={appearance}
         ref={ref}
         $appearance={appearance}
         $dimension={dimension}
