@@ -517,7 +517,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           return renderCell(row, col.name);
         }
 
-        return <CellTextContent cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
+        return <CellTextContent $cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
       };
 
       return (

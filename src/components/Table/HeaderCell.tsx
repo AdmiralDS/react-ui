@@ -69,7 +69,7 @@ export const HeaderCellComponent = ({
       data-th-title={title}
       ref={cellRef}
     >
-      <HeaderCellContent cellAlign={cellAlign}>
+      <HeaderCellContent $cellAlign={cellAlign}>
         <HeaderCellTitle
           sort={sort || 'initial'}
           onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}

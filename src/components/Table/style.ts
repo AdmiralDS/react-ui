@@ -213,12 +213,12 @@ export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
   overflow: hidden;
 `;
 
-export const CellTextContent = styled.div<{ cellAlign?: 'left' | 'right' }>`
+export const CellTextContent = styled.div<{ $cellAlign?: 'left' | 'right' }>`
   display: block;
   align-items: center;
   width: 100%;
   margin: 2px 0;
-  ${({ cellAlign }) => cellAlign === 'right' && 'text-align: right;'}
+  ${({ $cellAlign }) => $cellAlign === 'right' && 'text-align: right;'}
   overflow: hidden;
 `;
 
@@ -277,13 +277,13 @@ export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
   align-items: flex-start;
 `;
 
-export const HeaderCellContent = styled.div<{ cellAlign: 'left' | 'right' }>`
+export const HeaderCellContent = styled.div<{ $cellAlign: 'left' | 'right' }>`
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   width: 100%;
-  ${({ cellAlign }) =>
-    cellAlign === 'right' &&
+  ${({ $cellAlign }) =>
+    $cellAlign === 'right' &&
     css`
       flex-direction: row-reverse;
       & > ${HeaderCellTitle} {
