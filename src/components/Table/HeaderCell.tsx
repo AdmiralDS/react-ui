@@ -74,7 +74,7 @@ export const HeaderCellComponent = ({
           $sort={sort || 'initial'}
           onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
         >
-          <TitleContent dimension={dimension} sortable={sortable}>
+          <TitleContent $dimension={dimension} $sortable={sortable}>
             <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
             {extraText && (
               <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />

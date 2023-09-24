@@ -318,13 +318,13 @@ export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>
   }
 `;
 
-export const TitleContent = styled.div<{ dimension: TableProps['dimension']; sortable?: boolean }>`
+export const TitleContent = styled.div<{ $dimension: TableProps['dimension']; $sortable?: boolean }>`
   display: flex;
   flex-direction: column;
 
   // leave 20px/16px for SortIcon
-  max-width: ${({ sortable, dimension }) =>
-    sortable ? `calc(100% - ${dimension === 's' || dimension === 'm' ? 16 : 20}px)` : '100%'};
+  max-width: ${({ $sortable, $dimension }) =>
+    $sortable ? `calc(100% - ${$dimension === 's' || $dimension === 'm' ? 16 : 20}px)` : '100%'};
 `;
 
 export const Title = styled.div<{ lineClamp: number }>`
