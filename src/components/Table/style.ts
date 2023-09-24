@@ -434,13 +434,13 @@ const getTechColumnsWidth = (
   (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
-  dimension: TableProps['dimension'];
-  selectionColumn?: boolean;
-  expansionColumn?: boolean;
+  $dimension: TableProps['dimension'];
+  $selectionColumn?: boolean;
+  $expansionColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.dimension, p.selectionColumn, p.expansionColumn) + 'px'});
+  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
 `;
 
 export const HiddenHeader = styled.div`

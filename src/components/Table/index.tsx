@@ -665,9 +665,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </StickyWrapper>
           )}
           <HeaderCellsWrapper
-            expansionColumn={displayRowExpansionColumn}
-            selectionColumn={displayRowSelectionColumn}
-            dimension={dimension}
+            $expansionColumn={displayRowExpansionColumn}
+            $selectionColumn={displayRowSelectionColumn}
+            $dimension={dimension}
           >
             {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
