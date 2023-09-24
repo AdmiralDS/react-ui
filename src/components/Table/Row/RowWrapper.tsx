@@ -113,8 +113,8 @@ export const RowWrapper = ({
       )}
       {row.expandedRowRender && (
         <ExpandedRow
-          opened={row.expanded}
-          contentMaxHeight="90vh"
+          $opened={row.expanded}
+          $contentMaxHeight="90vh"
           className="tr-expanded"
           onMouseEnter={handleExpandedMouseEnter}
           onMouseLeave={handleExpandedMouseLeave}
