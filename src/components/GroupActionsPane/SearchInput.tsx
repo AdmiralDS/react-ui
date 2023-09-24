@@ -18,8 +18,8 @@ export interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> 
   };
 }
 
-const collapsedMixin = css<{ dimension?: InputDimension; collapsed?: boolean }>`
-  max-width: ${({ dimension }) => (dimension === 's' ? '240px' : '276px')};
+const collapsedMixin = css<{ $dimension?: InputDimension }>`
+  max-width: ${({ $dimension }) => ($dimension === 's' ? '240px' : '276px')};
   overflow: hidden;
   white-space: nowrap;
   z-index: 1;
@@ -28,10 +28,10 @@ const collapsedMixin = css<{ dimension?: InputDimension; collapsed?: boolean }>`
   }
 `;
 
-const InputWrapper = styled.div<{ dimension?: InputDimension; collapsed?: boolean; visibleInput?: boolean }>`
+const InputWrapper = styled.div<{ $dimension?: InputDimension; $collapsed?: boolean; $visibleInput?: boolean }>`
   display: flex;
   flex: 1 0 auto;
-  flex: ${({ visibleInput }) => (visibleInput ? '1 0 auto' : '0 0 auto')};
+  flex: ${({ $visibleInput }) => ($visibleInput ? '1 0 auto' : '0 0 auto')};
   height: 100%;
   position: relative;
   background-color: transparent;
@@ -44,25 +44,26 @@ const InputWrapper = styled.div<{ dimension?: InputDimension; collapsed?: boolea
     left: 0;
     width: calc(100% - 4px);
     height: 2px;
-    background-color: ${({ theme, visibleInput }) => (visibleInput ? theme.color['Primary/Primary 60 Main'] : 'none')};
+    background-color: ${({ theme, $visibleInput }) =>
+      $visibleInput ? theme.color['Primary/Primary 60 Main'] : 'none'};
   }
 
-  ${({ collapsed }) => collapsed && collapsedMixin}
+  ${({ $collapsed }) => $collapsed && collapsedMixin}
 `;
 
-const StyledInput = styled.input<{ dimension?: InputDimension; visible?: boolean }>`
+const StyledInput = styled.input<{ $dimension?: InputDimension; $visible?: boolean }>`
   flex-grow: 1;
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  display: ${({ $visible }) => ($visible ? 'block' : 'none')};
   outline: none;
   appearance: none;
   border: none;
   background-color: transparent;
-  padding: ${({ dimension }) => (dimension === 's' ? '0 12px' : '0 16px')};
+  padding: ${({ $dimension }) => ($dimension === 's' ? '0 12px' : '0 16px')};
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
   box-sizing: border-box;
   width: 100%;
   text-overflow: ellipsis;
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
 
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
@@ -70,16 +71,16 @@ const StyledInput = styled.input<{ dimension?: InputDimension; visible?: boolean
 `;
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ dimension = 'l', opened, children, value, locale, ...props }, ref) => {
+  ({ dimension = 'l', opened, children, value, locale, collapsed, ...props }, ref) => {
     const theme = useTheme() || LIGHT_THEME;
     const placeholder =
       locale?.inputPlaceholder || theme.locales[theme.currentLocale].groupActionsPane.inputPlaceholder;
 
     const inputRef = useRef<HTMLInputElement>(null);
-    const [collapsed, setCollapsed] = useState<boolean>(false);
+    const [collapsedState, setCollapsedState] = useState<boolean>(false);
 
     useEffect(() => {
-      setCollapsed(!opened && !!value);
+      setCollapsedState(!opened && !!value);
     }, [opened, value]);
 
     useEffect(() => {
@@ -89,13 +90,13 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     const visible = opened || !!value;
 
     return (
-      <InputWrapper collapsed={collapsed} visibleInput={visible} dimension={dimension}>
+      <InputWrapper $collapsed={collapsedState} $visibleInput={visible} $dimension={dimension}>
         <StyledInput
           ref={refSetter(ref, inputRef)}
           {...props}
-          visible={visible}
+          $visible={visible}
           value={value}
-          dimension={dimension}
+          $dimension={dimension}
           placeholder={placeholder}
         />
         {children}
