@@ -100,13 +100,13 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       highlightFormat,
       locale,
       dimension = TextInput.defaultProps?.dimension ?? 'xl',
+      portalTargetRef,
       ...props
     },
     ref,
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
-    const { portalTargetRef } = props;
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
