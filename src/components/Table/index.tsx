@@ -690,7 +690,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           data-verticalscroll={verticalScroll}
           className="thead"
         >
-          <Header dimension={dimension} ref={headerRef} className="tr">
+          <Header $dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                 {displayRowExpansionColumn && (

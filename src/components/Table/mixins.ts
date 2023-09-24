@@ -32,10 +32,10 @@ export const groupRowStyle = css<{ $dimension: TableProps['dimension'] }>`
     $dimension === 'l' || $dimension === 'xl' ? typography['Subtitle/Subtitle 2'] : typography['Subtitle/Subtitle 3']}
 `;
 
-export const headerStyle = css<{ dimension: TableProps['dimension'] }>`
+export const headerStyle = css<{ $dimension: TableProps['dimension'] }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  ${({ dimension }) =>
-    dimension === 'l' || dimension === 'xl' ? typography['Subtitle/Subtitle 2'] : typography['Subtitle/Subtitle 3']}
+  ${({ $dimension }) =>
+    $dimension === 'l' || $dimension === 'xl' ? typography['Subtitle/Subtitle 2'] : typography['Subtitle/Subtitle 3']}
 `;
 
 export const extraTextStyle = css<{ dimension: TableProps['dimension'] }>`

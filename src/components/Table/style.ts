@@ -121,7 +121,7 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
     `}
 `;
 
-export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
+export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
   flex: 0 0 auto;
