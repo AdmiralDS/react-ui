@@ -84,7 +84,7 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: boolean }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -99,21 +99,21 @@ export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolea
       top: 0;
       right: 0;
       height: 100%;
-      background: ${({ theme, greyHeader }) =>
-        greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
-      width: ${({ scrollbar }) => scrollbar}px;
+      background: ${({ theme, $greyHeader }) =>
+        $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+      width: ${({ $scrollbar }) => $scrollbar}px;
       border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
     }
     & > div.tr {
       overflow-y: scroll;
     }
     & > [data-overflowmenu='true'] {
-      margin-right: ${({ scrollbar }) => scrollbar}px;
+      margin-right: ${({ $scrollbar }) => $scrollbar}px;
     }
   }
 
-  ${({ greyHeader }) =>
-    greyHeader &&
+  ${({ $greyHeader }) =>
+    $greyHeader &&
     css`
       & > div.tr {
         background: ${({ theme }) => theme.color['Neutral/Neutral 05']};

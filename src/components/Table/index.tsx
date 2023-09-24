@@ -685,8 +685,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       >
         {renderHiddenHeader()}
         <HeaderWrapper
-          scrollbar={scrollbar}
-          greyHeader={greyHeader}
+          $scrollbar={scrollbar}
+          $greyHeader={greyHeader}
           data-verticalscroll={verticalScroll}
           className="thead"
         >
