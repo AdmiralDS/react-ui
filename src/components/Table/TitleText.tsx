@@ -45,11 +45,11 @@ export const TitleText: React.FC<TitleTextProps> = ({ lineClamp, dimension, extr
   return (
     <>
       {extraText ? (
-        <ExtraText ref={textRef} dimension={dimension} lineClamp={lineClamp}>
+        <ExtraText ref={textRef} dimension={dimension} $lineClamp={lineClamp}>
           {title}
         </ExtraText>
       ) : (
-        <Title ref={textRef} lineClamp={lineClamp}>
+        <Title ref={textRef} $lineClamp={lineClamp}>
           {title}
         </Title>
       )}

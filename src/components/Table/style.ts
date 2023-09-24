@@ -327,18 +327,18 @@ export const TitleContent = styled.div<{ $dimension: TableProps['dimension']; $s
     $sortable ? `calc(100% - ${$dimension === 's' || $dimension === 'm' ? 16 : 20}px)` : '100%'};
 `;
 
-export const Title = styled.div<{ lineClamp: number }>`
+export const Title = styled.div<{ $lineClamp: number }>`
   position: relative;
   width: 100%;
-  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+  ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineClamp: number }>`
+export const ExtraText = styled.div<{ dimension: TableProps['dimension']; $lineClamp: number }>`
   position: relative;
   width: 100%;
   margin: 2px 0;
   ${extraTextStyle}
-  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+  ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
 const rowWidthStyle = css<{ rowWidth?: number }>`

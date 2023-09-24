@@ -51,10 +51,10 @@ export const singleLineTitle = css`
   white-space: nowrap;
 `;
 
-export const multiLineTitle = css<{ lineClamp: number }>`
+export const multiLineTitle = css<{ $lineClamp: number }>`
   display: -webkit-inline-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: ${({ lineClamp }) => lineClamp};
+  -webkit-line-clamp: ${({ $lineClamp }) => $lineClamp};
   overflow: hidden;
 `;
 
