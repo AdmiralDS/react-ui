@@ -625,10 +625,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         return (
           <ScrollTableBody ref={scrollBodyRef} className="tbody">
             <Row
-              underline={showLastRowUnderline}
-              dimension={dimension}
+              $underline={showLastRowUnderline}
+              $dimension={dimension}
               className="tr"
-              rowWidth={headerRef.current?.scrollWidth}
+              $rowWidth={headerRef.current?.scrollWidth}
             >
               <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
             </Row>

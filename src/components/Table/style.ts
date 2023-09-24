@@ -341,8 +341,8 @@ export const ExtraText = styled.div<{ dimension: TableProps['dimension']; $lineC
   ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-const rowWidthStyle = css<{ rowWidth?: number }>`
-  width: ${(p) => `${p.rowWidth}px`};
+const rowWidthStyle = css<{ $rowWidth?: number }>`
+  width: ${(p) => `${p.$rowWidth}px`};
 `;
 
 const rowHoverMixin = css`
@@ -354,24 +354,24 @@ const rowHoverMixin = css`
 `;
 
 export const Row = styled.div<{
-  dimension: TableProps['dimension'];
-  underline: boolean;
+  $dimension: TableProps['dimension'];
+  $underline: boolean;
   disabled?: boolean;
-  isGroup?: boolean;
-  rowWidth?: number;
-  hover?: boolean;
+  $isGroup?: boolean;
+  $rowWidth?: number;
+  $hover?: boolean;
 }>`
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: fit-content;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
+  ${(p) => (p.$isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
-  ${({ underline }) => underline && underlineRow}
-  ${({ rowWidth }) => rowWidth && rowWidthStyle}
+  ${({ $underline }) => $underline && underlineRow}
+  ${({ $rowWidth }) => $rowWidth && rowWidthStyle}
    &:hover:is(.hoverable) {
-    ${({ hover }) => hover && rowHoverMixin}
+    ${({ $hover }) => $hover && rowHoverMixin}
   }
 `;
 
