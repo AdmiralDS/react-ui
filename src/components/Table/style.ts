@@ -49,27 +49,27 @@ export const NormalWrapper = styled.div`
 `;
 
 export const ActionBG = styled.div<{
-  dimension: TableProps['dimension'];
-  greyHeader?: boolean;
+  $dimension: TableProps['dimension'];
+  $greyHeader?: boolean;
 }>`
   ${actionsBGStyle};
   right: 0;
   bottom: 1px;
-  background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+  background: ${({ theme, $greyHeader }) =>
+    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
 `;
 
 export const OverflowMenuWrapper = styled.div<{
   $offset: number;
-  dimension: TableProps['dimension'];
-  showRowsActions?: boolean;
+  $dimension: TableProps['dimension'];
+  $showRowsActions?: boolean;
 }>`
   will-change: margin-left;
   transform: translate3d(0, 0, 0);
   ${overflowMenuStyle};
 
-  ${({ showRowsActions }) =>
-    !showRowsActions &&
+  ${({ $showRowsActions }) =>
+    !$showRowsActions &&
     css`
       visibility: hidden;
       &:hover {
@@ -376,14 +376,14 @@ export const Row = styled.div<{
 `;
 
 export const SimpleRow = styled.div<{
-  showRowsActions: boolean;
+  $showRowsActions: boolean;
   selected?: boolean;
   disabled?: boolean;
-  error?: boolean;
-  success?: boolean;
-  grey?: boolean;
-  status?: TableRow['status'];
-  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
+  $error?: boolean;
+  $success?: boolean;
+  $grey?: boolean;
+  $status?: TableRow['status'];
+  $rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
   display: inline-flex;
   min-width: max-content;
@@ -393,8 +393,8 @@ export const SimpleRow = styled.div<{
     background: ${rowBackground};
   }
 
-  ${({ showRowsActions }) =>
-    !showRowsActions &&
+  ${({ $showRowsActions }) =>
+    !$showRowsActions &&
     css`
       &:hover {
         & + ${OverflowMenuWrapper} {

@@ -71,22 +71,22 @@ export const underlineRow = css`
 export const rowBackground = css<{
   selected?: boolean;
   disabled?: boolean;
-  error?: boolean;
-  success?: boolean;
-  grey?: boolean;
-  status?: TableRow['status'];
-  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
+  $error?: boolean;
+  $success?: boolean;
+  $grey?: boolean;
+  $status?: TableRow['status'];
+  $rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
-  ${({ theme, selected, error, success, disabled, grey, status, rowStatusMap }) => {
+  ${({ theme, selected, $error, $success, disabled, $grey, $status, $rowStatusMap }) => {
     if (disabled) return theme.color['Neutral/Neutral 00'];
     if (selected) return theme.color['Primary/Primary 20'];
-    if (status && rowStatusMap?.[status])
-      return typeof rowStatusMap[status] === 'string'
-        ? rowStatusMap[status]
-        : (rowStatusMap[status] as any)(theme.color);
-    if (error) return theme.color['Error/Error 20'];
-    if (success) return theme.color['Success/Success 20'];
-    if (grey) return theme.color['Neutral/Neutral 05'];
+    if ($status && $rowStatusMap?.[$status])
+      return typeof $rowStatusMap[$status] === 'string'
+        ? $rowStatusMap[$status]
+        : ($rowStatusMap[$status] as any)(theme.color);
+    if ($error) return theme.color['Error/Error 20'];
+    if ($success) return theme.color['Success/Success 20'];
+    if ($grey) return theme.color['Neutral/Neutral 05'];
     return theme.color['Neutral/Neutral 00'];
   }}
 `;
@@ -105,7 +105,7 @@ const getActionSize = (dimension: TableProps['dimension']) => {
   }
 };
 
-export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
+export const actionsBGStyle = css<{ $dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
@@ -114,9 +114,9 @@ export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
   top: 0;
   bottom: 0;
   z-index: 5;
-  width: ${({ dimension }) => getActionSize(dimension)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+  width: ${({ $dimension }) => getActionSize($dimension)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '0px';
       case 'l':
@@ -130,7 +130,7 @@ export const actionsBGStyle = css<{ dimension: TableProps['dimension'] }>`
   }};
 `;
 
-export const overflowMenuStyle = css<{ $offset: number; dimension: TableProps['dimension'] }>`
-  ${actionsBGStyle}
-  left: ${({ dimension, $offset }) => $offset - getActionSize(dimension)}px;
+export const overflowMenuStyle = css<{ $offset: number; $dimension: TableProps['dimension'] }>`
+  ${actionsBGStyle};
+  left: ${({ $dimension, $offset }) => $offset - getActionSize($dimension)}px;
 `;

@@ -89,14 +89,14 @@ export const RowWrapper = ({
     >
       <SimpleRow
         className="tr-simple"
-        showRowsActions={showRowsActions}
+        $showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
-        status={row.status}
-        rowStatusMap={rowStatusMap}
-        error={!!row.error}
-        success={!!row.success}
-        grey={!!grey}
+        $status={row.status}
+        $rowStatusMap={rowStatusMap}
+        $error={!!row.error}
+        $success={!!row.success}
+        $grey={!!grey}
       >
         {children}
       </SimpleRow>

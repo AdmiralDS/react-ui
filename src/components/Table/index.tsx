@@ -721,7 +721,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </NormalWrapper>
             <Filler />
           </Header>
-          {showRowsActions && <ActionBG data-overflowmenu dimension={dimension} greyHeader={greyHeader} />}
+          {showRowsActions && <ActionBG data-overflowmenu $dimension={dimension} $greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
