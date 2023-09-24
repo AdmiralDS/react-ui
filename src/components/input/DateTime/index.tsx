@@ -1,9 +1,13 @@
+import { forwardRef } from 'react';
+import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
 import styled from 'styled-components';
 
 import { DateInput } from '../DateInput';
 import { TimeInput } from '../TimeInput';
 import { InputBorderedDiv } from '../TextInput';
 import type { InputStatus } from '#src/components/input';
+
+export type DateTimeBaseProps = { disabled?: boolean; readOnly?: boolean; status?: InputStatus };
 
 function getFocusBorderColor(status?: InputStatus) {
   if (!status) return 'Primary/Primary 60 Main';
@@ -47,6 +51,8 @@ export const DateTimeTimeInput = styled(TimeInput)<{ disabled?: boolean; readOnl
 
 DateTimeTimeInput.displayName = 'DateTimeTimeInput';
 
+export type DateTimeSeparatorProps = PolymorphicComponentProps<'web', DateTimeBaseProps, WebTarget, WebTarget>;
+
 function getSeparatorColor(disabled?: boolean, readOnly?: boolean, status?: InputStatus) {
   if (disabled) return 'Neutral/Neutral 30';
   if (readOnly || !status) return 'Neutral/Neutral 40';
@@ -79,22 +85,36 @@ function getFocusSeparatorColor(status?: InputStatus) {
   }
 }
 
-export const DateTimeSeparator = styled.div<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
-  border-left: 1px solid ${(p) => p.theme.color[getSeparatorColor(p.disabled, p.readOnly, p.status)]};
+const DateTimeSeparatorDiv = styled.div<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
+  border-left: 1px solid ${(p) => p.theme.color[getSeparatorColor(p.disabled, p.readOnly, p.$status)]};
 `;
+
+export const DateTimeSeparator = forwardRef<typeof DateTimeSeparatorDiv, DateTimeSeparatorProps>(
+  ({ status, ...props }, ref) => {
+    return <DateTimeSeparatorDiv ref={ref} $status={status} {...props} />;
+  },
+);
 
 DateTimeSeparator.displayName = 'DateTimeSeparator';
 
-export const DateTimeContainer = styled.div<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+export type DateTimeContainerProps = PolymorphicComponentProps<'web', DateTimeBaseProps, WebTarget, WebTarget>;
+
+const DateTimeContainerDiv = styled.div<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   display: flex;
   min-width: 288px;
 
-  &:hover ${DateTimeSeparator} {
-    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${p.theme.color[getHoverSeparatorColor(p.status)]}`};
+  &:hover ${DateTimeSeparatorDiv} {
+    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${p.theme.color[getHoverSeparatorColor(p.$status)]}`};
   }
-  &:focus-within ${DateTimeSeparator} {
-    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${p.theme.color[getFocusSeparatorColor(p.status)]}`};
+  &:focus-within ${DateTimeSeparatorDiv} {
+    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${p.theme.color[getFocusSeparatorColor(p.$status)]}`};
   }
 `;
+
+export const DateTimeContainer = forwardRef<typeof DateTimeContainerDiv, DateTimeContainerProps>(
+  ({ status, ...props }, ref) => {
+    return <DateTimeContainerDiv ref={ref} $status={status} {...props} />;
+  },
+);
 
 DateTimeContainer.displayName = 'DateTimeContainer';
