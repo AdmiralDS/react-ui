@@ -422,7 +422,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             $iconCount={iconCount}
             $dimension={dimension}
           />
-          <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
+          <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
             <IconPanel disabled={props.disabled} $dimension={dimension}>
               {iconArray}
