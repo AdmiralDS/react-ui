@@ -204,7 +204,7 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
-export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
+export const Cell = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: flex-start;
   flex: 0 0 auto;
@@ -230,10 +230,10 @@ export const GroupTextContent = styled.div`
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 44 : 56)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '8px 14px 7px 14px';
       case 'l':
@@ -248,10 +248,10 @@ export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 44 : 56)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '6px 12px 5px 12px';
       case 'l':
@@ -265,7 +265,7 @@ export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   }};
 `;
 
-export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
+export const HeaderCell = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
@@ -457,7 +457,7 @@ export const HiddenHeader = styled.div`
   }
 `;
 
-export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>`
+export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
@@ -466,9 +466,9 @@ export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  ${({ dimension }) =>
-    dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
-  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 8 : 10)}px;
+  ${({ $dimension }) =>
+    $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
+  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 8 : 10)}px;
   && {
     cursor: none;
     svg {

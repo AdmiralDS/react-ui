@@ -4,9 +4,9 @@ import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
 // padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
-export const cellStyle = css<{ dimension: TableProps['dimension'] }>`
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '6px 13px 5px 12px';
       case 'l':

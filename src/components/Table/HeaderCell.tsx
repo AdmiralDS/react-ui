@@ -61,7 +61,7 @@ export const HeaderCellComponent = ({
 
   return (
     <HeaderCell
-      dimension={dimension}
+      $dimension={dimension}
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-draggable={draggable}
