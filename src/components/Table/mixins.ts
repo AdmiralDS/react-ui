@@ -38,10 +38,10 @@ export const headerStyle = css<{ $dimension: TableProps['dimension'] }>`
     $dimension === 'l' || $dimension === 'xl' ? typography['Subtitle/Subtitle 2'] : typography['Subtitle/Subtitle 3']}
 `;
 
-export const extraTextStyle = css<{ dimension: TableProps['dimension'] }>`
+export const extraTextStyle = css<{ $dimension: TableProps['dimension'] }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  ${({ dimension }) =>
-    dimension === 'l' || dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Caption/Caption 1']}
+  ${({ $dimension }) =>
+    $dimension === 'l' || $dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Caption/Caption 1']}
 `;
 
 export const singleLineTitle = css`

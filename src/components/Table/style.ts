@@ -333,7 +333,7 @@ export const Title = styled.div<{ $lineClamp: number }>`
   ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const ExtraText = styled.div<{ dimension: TableProps['dimension']; $lineClamp: number }>`
+export const ExtraText = styled.div<{ $dimension: TableProps['dimension']; $lineClamp: number }>`
   position: relative;
   width: 100%;
   margin: 2px 0;
