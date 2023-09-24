@@ -176,7 +176,7 @@ export const SortIconWrapper = styled.div`
   position: relative;
 `;
 
-export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial' }>`
+export const SortIcon = styled(ArrowUpOutline)<{ $sort: 'asc' | 'desc' | 'initial' }>`
   display: flex;
   flex-shrink: 0;
   transition: transform 0.3s ease-in-out;
@@ -184,9 +184,9 @@ export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial
   margin: 2px 0;
 
   & *[fill^='#'] {
-    fill: ${({ theme, sort }) => (sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
+    fill: ${({ theme, $sort }) => ($sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
   }
-  ${({ sort }) => (sort === 'desc' ? 'transform: rotate(180deg);' : '')}
+  ${({ $sort }) => ($sort === 'desc' ? 'transform: rotate(180deg);' : '')}
 `;
 
 export const SortOrder = styled.div`
@@ -300,20 +300,20 @@ export const HeaderCellSpacer = styled.div<{ width?: string }>`
   flex-shrink: 0;
 `;
 
-export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
+export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>`
   display: inline-flex;
   align-items: flex-start;
   width: 100%;
   overflow: hidden;
   &:hover {
     *[fill^='#'] {
-      fill: ${({ theme, sort }) =>
-        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+      fill: ${({ theme, $sort }) =>
+        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
 
     ${SortOrder} {
-      color: ${({ theme, sort }) =>
-        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+      color: ${({ theme, $sort }) =>
+        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
   }
 `;
