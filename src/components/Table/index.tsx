@@ -692,7 +692,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         >
           <Header dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-              <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
+              <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                 {displayRowExpansionColumn && (
                   <ExpandCell dimension={dimension} data-draggable={false} data-droppable={false} />
                 )}

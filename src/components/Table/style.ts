@@ -35,9 +35,9 @@ export const StickyGroupRow = styled.div`
   z-index: 5;
 `;
 
-export const StickyWrapper = styled(StickyGroupRow)<{ greyHeader?: boolean }>`
-  background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
+  background: ${({ theme, $greyHeader }) =>
+    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
