@@ -412,10 +412,6 @@ export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: num
   display: inline-flex;
   overflow: hidden;
   transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  ${({ contentMaxHeight }) => {
-    console.log(contentMaxHeight);
-    return '';
-  }}
   max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
 `;
 

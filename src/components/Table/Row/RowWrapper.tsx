@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'react';
 import { ExpandedRow, ExpandedRowContent, Row, SimpleRow } from '#src/components/Table/style';
 import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
+import { Transition } from '../Transition';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер таблицы */
@@ -51,6 +52,7 @@ export const RowWrapper = ({
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
+  const nodeRef = React.useRef<HTMLDivElement>(null);
   const expandedContentRef = React.useRef<HTMLDivElement>(null);
 
   const [expandedContentHeight, setExpandedContentHeight] = React.useState('auto');
@@ -130,16 +132,29 @@ export const RowWrapper = ({
         />
       )}
       {row.expandedRowRender && (
-        <ExpandedRow
-          opened={row.expanded}
-          // contentMaxHeight="90vh"
-          contentMaxHeight={row.expanded ? expandedContentHeight : 0}
-          className="tr-expanded"
-          onMouseEnter={handleExpandedMouseEnter}
-          onMouseLeave={handleExpandedMouseLeave}
+        <Transition
+          in={!!row.expanded}
+          nodeRef={nodeRef}
+          timeout={250}
+          onEnter={() => console.log('enter')}
+          onEntered={() => console.log('entered')}
+          onEntering={() => console.log('entering')}
+          onExit={() => console.log('exit')}
+          onExited={() => console.log('exited')}
+          onExiting={() => console.log('exiting')}
         >
-          <ExpandedRowContent ref={expandedContentRef}>{row.expandedRowRender(row)}</ExpandedRowContent>
-        </ExpandedRow>
+          <ExpandedRow
+            ref={nodeRef}
+            opened={row.expanded}
+            // contentMaxHeight="90vh"
+            contentMaxHeight={row.expanded ? expandedContentHeight : 0}
+            className="tr-expanded"
+            onMouseEnter={handleExpandedMouseEnter}
+            onMouseLeave={handleExpandedMouseLeave}
+          >
+            <ExpandedRowContent ref={expandedContentRef}>{row.expandedRowRender(row)}</ExpandedRowContent>
+          </ExpandedRow>
+        </Transition>
       )}
     </Row>
   );
