@@ -10,7 +10,6 @@ exports[`Spinner should render component with inverse color 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
@@ -36,7 +35,6 @@ exports[`Spinner should render component with inverse color 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
@@ -117,7 +115,6 @@ exports[`Spinner should render component with small dimension 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
@@ -143,7 +140,6 @@ exports[`Spinner should render component with small dimension 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
@@ -224,7 +220,6 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 
@@ -250,7 +245,6 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0 svg {
-  -webkit-animation: cilQsd 1s linear infinite;
   animation: cilQsd 1s linear infinite;
 }
 

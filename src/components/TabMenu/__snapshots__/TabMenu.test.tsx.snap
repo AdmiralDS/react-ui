@@ -10,7 +10,7 @@ exports[`TabMenu should render default component 1`] = `
   height: 100%;
 }
 
-.c11 > svg {
+.c11>svg {
   height: 24px;
   width: 24px;
 }
@@ -24,9 +24,7 @@ exports[`TabMenu should render default component 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c7 {
@@ -36,11 +34,7 @@ exports[`TabMenu should render default component 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
@@ -49,7 +43,7 @@ exports[`TabMenu should render default component 1`] = `
   cursor: pointer;
 }
 
-.c7 > * {
+.c7 >* {
   pointer-events: none;
 }
 
@@ -67,37 +61,27 @@ exports[`TabMenu should render default component 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c7:focus > .c9 {
+.c7:focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover > .c9 {
+.c7:hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active > .c9 {
+.c7:active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible > .c9 {
+.c7:focus-visible >.c9 {
   background-color: transparent;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
@@ -107,60 +91,35 @@ exports[`TabMenu should render default component 1`] = `
   max-height: 48px;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
   scrollbar-height: none;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 .c14 {
   position: absolute;
   bottom: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   background-color: #0062FF;
   height: 2px;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .c5 {
   height: 100%;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   white-space: nowrap;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -170,19 +129,11 @@ exports[`TabMenu should render default component 1`] = `
 .c2 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 48px;
   padding: 0;
   background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border: none;
   color: #23262D;
@@ -191,11 +142,8 @@ exports[`TabMenu should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -212,14 +160,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:focus,
-.c2 > .c3 {
+.c2>.c3 {
   outline: none;
 }
 
 .c2 svg {
   display: inline-block;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width: 24px;
   height: 24px;
@@ -254,19 +200,11 @@ exports[`TabMenu should render default component 1`] = `
 .c13 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 48px;
   padding: 0;
   background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border: none;
   color: #717681;
@@ -275,11 +213,8 @@ exports[`TabMenu should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -296,14 +231,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:focus,
-.c13 > .c3 {
+.c13>.c3 {
   outline: none;
 }
 
 .c13 svg {
   display: inline-block;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width: 24px;
   height: 24px;
@@ -336,25 +269,13 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin-left: 0px;
 }
 
 .c12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin-left: -48px;
 }
@@ -516,7 +437,7 @@ exports[`TabMenu should render default component 1`] = `
   height: 100%;
 }
 
-.c11 > svg {
+.c11>svg {
   height: 24px;
   width: 24px;
 }
@@ -530,9 +451,7 @@ exports[`TabMenu should render default component 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c7 {
@@ -542,11 +461,7 @@ exports[`TabMenu should render default component 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
@@ -555,7 +470,7 @@ exports[`TabMenu should render default component 1`] = `
   cursor: pointer;
 }
 
-.c7 > * {
+.c7 >* {
   pointer-events: none;
 }
 
@@ -573,37 +488,27 @@ exports[`TabMenu should render default component 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c7:focus > .c9 {
+.c7:focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover > .c9 {
+.c7:hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active > .c9 {
+.c7:active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible > .c9 {
+.c7:focus-visible >.c9 {
   background-color: transparent;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   box-sizing: border-box;
@@ -613,60 +518,35 @@ exports[`TabMenu should render default component 1`] = `
   max-height: 48px;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
   scrollbar-height: none;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 .c14 {
   position: absolute;
   bottom: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   background-color: #0062FF;
   height: 2px;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
 .c5 {
   height: 100%;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   white-space: nowrap;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -676,19 +556,11 @@ exports[`TabMenu should render default component 1`] = `
 .c2 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 48px;
   padding: 0;
   background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border: none;
   color: #23262D;
@@ -697,11 +569,8 @@ exports[`TabMenu should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -718,14 +587,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:focus,
-.c2 > .c3 {
+.c2>.c3 {
   outline: none;
 }
 
 .c2 svg {
   display: inline-block;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width: 24px;
   height: 24px;
@@ -760,19 +627,11 @@ exports[`TabMenu should render default component 1`] = `
 .c13 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   height: 48px;
   padding: 0;
   background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   border: none;
   color: #717681;
@@ -781,11 +640,8 @@ exports[`TabMenu should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -802,14 +658,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:focus,
-.c13 > .c3 {
+.c13>.c3 {
   outline: none;
 }
 
 .c13 svg {
   display: inline-block;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width: 24px;
   height: 24px;
@@ -842,25 +696,13 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin-left: 0px;
 }
 
 .c12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   margin-left: -48px;
 }

@@ -13,13 +13,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: default;
 }
@@ -41,9 +35,6 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
 
 .c2 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,17 +44,12 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -77,7 +63,6 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
       <button
         class="c0"
         type="button"
-        width="60px"
       >
         <div
           class="c1"
@@ -100,13 +85,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: default;
 }
@@ -128,9 +107,6 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
 
 .c2 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -140,17 +116,12 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -163,7 +134,6 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
     <button
       class="c0"
       type="button"
-      width="60px"
     >
       <div
         class="c1"
@@ -241,13 +211,7 @@ exports[`Tag should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: default;
 }
@@ -269,9 +233,6 @@ exports[`Tag should render default component 1`] = `
 
 .c1 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -281,7 +242,7 @@ exports[`Tag should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -308,13 +269,7 @@ exports[`Tag should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: default;
 }
@@ -336,9 +291,6 @@ exports[`Tag should render default component 1`] = `
 
 .c1 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -348,7 +300,7 @@ exports[`Tag should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 

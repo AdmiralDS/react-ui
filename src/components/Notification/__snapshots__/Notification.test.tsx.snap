@@ -5,19 +5,10 @@ exports[`Notification should render error components with all properties 1`] = `
   "asFragment": [Function],
   "baseElement": .c5 {
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   pointer-events: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
   border-radius: 4px;
@@ -27,7 +18,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -72,7 +63,7 @@ exports[`Notification should render error components with all properties 1`] = `
   height: 100%;
 }
 
-.c11 > svg {
+.c11>svg {
   height: 20px;
   width: 20px;
 }
@@ -86,9 +77,7 @@ exports[`Notification should render error components with all properties 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c7 {
@@ -98,11 +87,7 @@ exports[`Notification should render error components with all properties 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 20px;
   width: 20px;
@@ -111,7 +96,7 @@ exports[`Notification should render error components with all properties 1`] = `
   cursor: pointer;
 }
 
-.c7 > * {
+.c7 >* {
   pointer-events: none;
 }
 
@@ -129,19 +114,19 @@ exports[`Notification should render error components with all properties 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c7:focus > .c9 {
+.c7:focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover > .c9 {
+.c7:hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active > .c9 {
+.c7:active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible > .c9 {
+.c7:focus-visible >.c9 {
   background-color: transparent;
 }
 
@@ -158,12 +143,7 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   padding: 2px 0;
 }
@@ -174,7 +154,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
@@ -186,7 +166,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -221,7 +201,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -231,9 +211,11 @@ exports[`Notification should render error components with all properties 1`] = `
         aria-live="polite"
         class="c0"
         role="status"
+        status="info"
       >
         <div
           class="c1"
+          status="info"
         >
           <div />
         </div>
@@ -279,19 +261,10 @@ exports[`Notification should render error components with all properties 1`] = `
   </body>,
   "container": .c5 {
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   pointer-events: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
   border-radius: 4px;
@@ -301,7 +274,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -346,7 +319,7 @@ exports[`Notification should render error components with all properties 1`] = `
   height: 100%;
 }
 
-.c11 > svg {
+.c11>svg {
   height: 20px;
   width: 20px;
 }
@@ -360,9 +333,7 @@ exports[`Notification should render error components with all properties 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c7 {
@@ -372,11 +343,7 @@ exports[`Notification should render error components with all properties 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 20px;
   width: 20px;
@@ -385,7 +352,7 @@ exports[`Notification should render error components with all properties 1`] = `
   cursor: pointer;
 }
 
-.c7 > * {
+.c7 >* {
   pointer-events: none;
 }
 
@@ -403,19 +370,19 @@ exports[`Notification should render error components with all properties 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c7:focus > .c9 {
+.c7:focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover > .c9 {
+.c7:hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active > .c9 {
+.c7:active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible > .c9 {
+.c7:focus-visible >.c9 {
   background-color: transparent;
 }
 
@@ -432,12 +399,7 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   padding: 2px 0;
 }
@@ -448,7 +410,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   margin-bottom: 4px;
@@ -460,7 +422,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -495,7 +457,7 @@ exports[`Notification should render error components with all properties 1`] = `
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -504,9 +466,11 @@ exports[`Notification should render error components with all properties 1`] = `
       aria-live="polite"
       class="c0"
       role="status"
+      status="info"
     >
       <div
         class="c1"
+        status="info"
       >
         <div />
       </div>
