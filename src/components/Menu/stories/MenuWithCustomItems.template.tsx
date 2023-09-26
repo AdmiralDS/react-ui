@@ -67,7 +67,7 @@ const MyItem = styled.div<{
   selected?: boolean;
   hovered?: boolean;
   width?: number;
-  success?: boolean;
+  $success?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -95,12 +95,12 @@ const MyItem = styled.div<{
 
   &&[data-hovered='true'] {
     background-color: ${(p) => p.theme.color['Opacity/Hover']};
-    color: ${({ theme, success }) =>
-      success ? theme.color['Success/Success 70'] : theme.color['Magenta/Magenta 60 Main']};
+    color: ${({ theme, $success }) =>
+      $success ? theme.color['Success/Success 70'] : theme.color['Magenta/Magenta 60 Main']};
   }
 
-  color: ${({ theme, success }) =>
-    success ? theme.color['Success/Success 50 Main'] : theme.color['Purple/Purple 60 Main']};
+  color: ${({ theme, $success }) =>
+    $success ? theme.color['Success/Success 50 Main'] : theme.color['Purple/Purple 60 Main']};
 `;
 
 const MyMenuItem = ({
@@ -111,6 +111,8 @@ const MyMenuItem = ({
   hovered,
   selected = false,
   success = false,
+  selfRef = undefined,
+  hasSubmenu = false,
   ...props
 }: MyMenuItemProps) => {
   const handleMouseMove = () => {
@@ -126,7 +128,7 @@ const MyMenuItem = ({
       selected={selected}
       data-disabled={disabled}
       data-hovered={hovered}
-      success={success}
+      $success={success}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       {...props}
