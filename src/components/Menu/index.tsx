@@ -332,7 +332,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const renderItem = (item: MenuModelItemProps, index: number) => {
-      const { id, subItems, ...itemProps } = item;
+      const { id, subItems, render, ...itemProps } = item;
       const hasSubmenu = !!subItems && subItems.length > 0;
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
@@ -360,11 +360,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         containerRef,
         ...itemProps,
       };
-      if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
+      if (typeof render === 'function') return render(renderProps);
 
       return (
         <MenuItem key={`${item.id}-${index}`} {...renderProps}>
-          {itemProps.render}
+          {render}
         </MenuItem>
       );
     };
