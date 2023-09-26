@@ -43,6 +43,7 @@ const Wrapper = styled.div<{
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
   $rowCount: number;
+  $maxHeight?: string | number;
 }>`
   padding: 0;
   ${(p) => (p.$hasTopPanel ? 'padding-top: 8px' : '')};
@@ -173,6 +174,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       defaultIsActive = true,
       subMenuRenderDirection,
       preventFocusSteal,
+      maxHeight,
       ...props
     },
     ref,
@@ -455,6 +457,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
         $rowCount={rowCount}
+        $maxHeight={maxHeight}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
         onBlur={handleBlur}
