@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { hasSelectedChildren } from '#src/components/Menu/utils';
-import { MenuItem, type MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import { type MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 const Spacer = styled.div`
   display: flex;
@@ -17,18 +16,14 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   rowCount?: number;
   /** Количество отображаемых строк в начале и в конце виртуального списка */
   aheadItemsCount?: number;
-  /** Обработчик активации (hover) item в меню */
-  onActivateItem: (id?: string) => void;
-  /** Обработчик выбора item в меню */
-  onSelectItem: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<MenuModelItemProps>;
   /** Id активного элемента */
   activeId?: string;
   /** Id выбранных элементов */
   selected: Array<string>;
-  /** Клик по меню не преводит к перемещению фокуса */
-  preventFocusSteal?: boolean;
+  /** render-метод для отрисовки пункта меню */
+  onRenderItem?: (item: MenuModelItemProps, index: number) => React.ReactNode;
 }
 
 interface PreviousValues {
@@ -61,9 +56,7 @@ export const VirtualBody = ({
   model,
   activeId,
   selected,
-  onActivateItem,
-  onSelectItem,
-  preventFocusSteal,
+  onRenderItem,
 }: VirtualBodyProps) => {
   const [scrollTop, setScrollTop] = React.useState(0);
   const [partition, setPartition] = React.useState<PartitionExt>({
@@ -143,31 +136,9 @@ export const VirtualBody = ({
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
     return visibleItems.map((item, index) => {
-      const { id, subItems, render, ...itemProps } = item;
-      const hasSubmenu = !!subItems && subItems.length > 0;
-      const hovered = activeId === id;
-      const isSelected = selected.includes(id) || hasSelectedChildren(item, selected);
-
-      const renderProps = {
-        hovered,
-        selected: isSelected,
-        onHover: () => {
-          onActivateItem(itemProps.disabled ? undefined : id);
-        },
-        onClick: () => onSelectItem(id),
-        onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
-        containerRef: scrollContainerRef,
-        hasSubmenu,
-        ...itemProps,
-      };
-      if (typeof render === 'function') return render(renderProps);
-      return (
-        <MenuItem key={`${id}-${index}`} {...renderProps}>
-          {render}
-        </MenuItem>
-      );
+      return onRenderItem?.(item, index);
     });
-  }, [model, activeId, onActivateItem, selected, onSelectItem, scrollContainerRef, partition]);
+  }, [model, activeId, selected, partition]);
 
   return (
     <>

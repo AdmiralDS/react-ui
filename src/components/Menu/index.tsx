@@ -329,43 +329,47 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       activateMenu?.(wrapperRef);
     };
 
+    const renderItem = (item: MenuModelItemProps, index: number) => {
+      const { id, subItems, ...itemProps } = item;
+      const hasSubmenu = !!subItems && subItems.length > 0;
+      const hovered = activeId === id;
+      const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
+      const renderProps: RenderOptionProps = {
+        hovered,
+        selected,
+        onLeave: (e: React.MouseEvent<HTMLDivElement>) => {
+          if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
+            setSubmenuVisible(false);
+          }
+        },
+        onHover: () => {
+          activateItem(itemProps.disabled ? undefined : id);
+          setSubmenuVisible(hasSubmenu);
+        },
+        onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
+        onClick: () => handleClickItem(id),
+        hasSubmenu,
+        selfRef: (ref: HTMLDivElement | null) => {
+          if (activeId === id && hasSubmenu) {
+            activeItemRef.current = ref;
+          }
+        },
+        disabled: itemProps.disabled,
+        containerRef,
+        ...itemProps,
+      };
+      if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
+
+      return (
+        <MenuItem key={`${item.id}-${index}`} {...renderProps}>
+          {itemProps.render}
+        </MenuItem>
+      );
+    };
+
     const renderChildren = () => {
       return model.map((item, index) => {
-        const { id, subItems, ...itemProps } = item;
-        const hasSubmenu = !!subItems && subItems.length > 0;
-        const hovered = activeId === id;
-        const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
-        const renderProps: RenderOptionProps = {
-          hovered,
-          selected,
-          onLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-            if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
-              setSubmenuVisible(false);
-            }
-          },
-          onHover: () => {
-            activateItem(itemProps.disabled ? undefined : id);
-            setSubmenuVisible(hasSubmenu);
-          },
-          onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
-          onClick: () => handleClickItem(id),
-          hasSubmenu,
-          selfRef: (ref: HTMLDivElement | null) => {
-            if (activeId === id && hasSubmenu) {
-              activeItemRef.current = ref;
-            }
-          },
-          disabled: itemProps.disabled,
-          containerRef,
-          ...itemProps,
-        };
-        if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
-
-        return (
-          <MenuItem key={`${item.id}-${index}`} {...renderProps}>
-            {itemProps.render}
-          </MenuItem>
-        );
+        return renderItem(item, index);
       });
     };
 
@@ -382,9 +386,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           rowCount={rowCount}
           activeId={activeId}
           selected={innerSelected}
-          onActivateItem={activateItem}
-          onSelectItem={handleClickItem}
-          preventFocusSteal={preventFocusSteal}
+          onRenderItem={renderItem}
         />
       );
     };
@@ -421,6 +423,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             onCloseQuery={handleSubMenuClose}
             selected={innerSelected}
             onSelectItem={(id) => handleClickItem(id)}
+            virtualScroll={virtualScroll}
             preventFocusSteal
           />
         )

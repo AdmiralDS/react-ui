@@ -1,10 +1,21 @@
 import * as React from 'react';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType, MenuModelItemProps } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
-import { createItems } from './utils';
 
-const ITEMS = createItems(40);
+export const createItems = (length: number, level: number = 1) => {
+  const title = level > 1 ? 'SubItem' : 'Item';
+  return Array.from({ length }).map((option, index) => ({ label: `${title} ${index}0000`, id: `${level}-${index}` }));
+};
+
+type ModelItems = { label: string; id: string; subItems?: Array<ModelItems> };
+
+const ITEMS: Array<ModelItems> = createItems(40);
+ITEMS.forEach((item) => {
+  if (Math.random() > 0.5) {
+    item.subItems = createItems(Math.round(40 * Math.random()), 2);
+  }
+});
 
 const Wrapper = styled.div`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -15,14 +26,31 @@ const Wrapper = styled.div`
 
 export const MenuVirtualScrollTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
-    return ITEMS.map((item) => ({
-      id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MenuItem dimension={props.dimension} {...options} key={item.id}>
-          {item.label}
-        </MenuItem>
-      ),
-    }));
+    return ITEMS.map((item) => {
+      const modelItem = {
+        id: item.id,
+        render: (options: RenderOptionProps) => (
+          <MenuItem dimension={props.dimension} {...options} key={item.id}>
+            {item.label}
+          </MenuItem>
+        ),
+      };
+
+      if (item.subItems) {
+        (modelItem as MenuModelItemProps).subItems = item.subItems.map((subItem) => {
+          return {
+            id: subItem.id,
+            render: (options: RenderOptionProps) => (
+              <MenuItem dimension={props.dimension} {...options} key={subItem.id}>
+                {subItem.label}
+              </MenuItem>
+            ),
+          };
+        });
+      }
+
+      return modelItem;
+    });
   }, [props.dimension]);
 
   function swapBorder(theme: Theme): Theme {
