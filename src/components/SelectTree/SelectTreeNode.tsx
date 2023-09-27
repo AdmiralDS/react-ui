@@ -35,7 +35,7 @@ export interface SelectTreeBranchProps {
   onKeyDown?: (event: KeyboardEvent<HTMLLIElement>) => void;
 }
 
-const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: Dimension }>`
+const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean }>`
   transition: all 0.3s;
   & path {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
@@ -45,18 +45,15 @@ const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: D
   transform: ${(p) => (p.$isOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
 `;
 
-const ChevronWrapper = styled.div<{
-  isOpened?: boolean;
-  dimension?: Dimension;
-}>`
+const ChevronWrapper = styled.div<{ $dimension?: Dimension }>`
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
 
-  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
-  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  width: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
 
   &:hover {
     &::after {
@@ -73,29 +70,29 @@ const ChevronWrapper = styled.div<{
   }
 `;
 
-const TreeItem = styled.ul<{ dimension?: Dimension }>`
+const TreeItem = styled.ul<{ $dimension?: Dimension }>`
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-left: ${(p) => (p.dimension === 'm' ? `${PADDING_LEFT_M}px` : `${PADDING_LEFT_S}px`)};
+  padding-left: ${(p) => (p.$dimension === 'm' ? `${PADDING_LEFT_M}px` : `${PADDING_LEFT_S}px`)};
 `;
 
-const Wrapper = styled.li<{ isOpened?: boolean; dimension?: Dimension; level: number }>`
+const Wrapper = styled.li<{ $dimension?: Dimension; $level: number }>`
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
   padding: ${(p) =>
-    p.dimension === 'm'
-      ? `${PADDING_VERTICAL_M / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_M / 2}px ${p.level * PADDING_LEFT_M}px`
-      : `${PADDING_VERTICAL_S / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_S / 2}px ${p.level * PADDING_LEFT_S}px`};
+    p.$dimension === 'm'
+      ? `${PADDING_VERTICAL_M / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_M / 2}px ${p.$level * PADDING_LEFT_M}px`
+      : `${PADDING_VERTICAL_S / 2}px ${PADDING_RIGHT}px ${PADDING_VERTICAL_S / 2}px ${p.$level * PADDING_LEFT_S}px`};
 `;
 
-const IconWrapper = styled.div<{ dimension?: Dimension }>`
+const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   margin-right: 8px;
   flex-shrink: 0;
-  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
-  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  width: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
   > svg {
     width: 100%;
     height: 100%;
@@ -123,10 +120,10 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
 }) => {
   return (
     <>
-      <Wrapper isOpened={node.expanded} dimension={dimension} level={level} onKeyDown={onKeyDown}>
+      <Wrapper $dimension={dimension} $level={level} onKeyDown={onKeyDown}>
         {node.children && (
-          <ChevronWrapper data-key={node.id} isOpened={node.expanded} dimension={dimension} onClick={onButtonClick}>
-            <Chevron $isOpened={node.expanded} dimension={dimension} />
+          <ChevronWrapper data-key={node.id} $dimension={dimension} onClick={onButtonClick}>
+            <Chevron $isOpened={node.expanded} />
           </ChevronWrapper>
         )}
         {'status' in node && (
@@ -139,14 +136,14 @@ export const SelectTreeNode: FC<SelectTreeBranchProps> = ({
             onChange={onChange}
           />
         )}
-        {node.icon && <IconWrapper dimension={dimension}>{node.icon}</IconWrapper>}
+        {node.icon && <IconWrapper $dimension={dimension}>{node.icon}</IconWrapper>}
         <TitleContent>{node.label}</TitleContent>
       </Wrapper>
       {node.expanded &&
         node.children &&
         node.children.map((child, i) => {
           return (
-            <TreeItem key={[node.id, i].join('/')} dimension={dimension}>
+            <TreeItem key={[node.id, i].join('/')} $dimension={dimension}>
               <SelectTreeNode
                 key={node.id}
                 dimension={dimension}
