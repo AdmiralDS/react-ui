@@ -437,14 +437,14 @@ const Group = styled(Cell)`
   ${typography['Subtitle/Subtitle 3']};
 `;
 
-export const ColorCircle = styled.div<{ $color: keyof Color; $size?: number; border?: boolean }>`
+export const ColorCircle = styled.div<{ $color: keyof Color; $size?: number; $border?: boolean }>`
   display: flex;
   flex: 0 0 auto;
   width: ${({ $size = 16 }) => $size}px;
   height: ${({ $size = 16 }) => $size}px;
   border-radius: 50%;
   background: ${({ theme, $color }) => theme.color[$color]};
-  ${({ border, theme }) => border && `border: 1px solid ${theme.color['Neutral/Neutral 20']};`}
+  ${({ $border, theme }) => $border && `border: 1px solid ${theme.color['Neutral/Neutral 20']};`}
   box-sizing: border-box;
 `;
 
@@ -460,7 +460,7 @@ export const VERSION_COLUMNS = [
         {data !== 'Нет сопоставлений' && (
           <ColorCircle
             $color={data}
-            border={data == 'Special/Elevated BG' || data == 'Neutral/Neutral 00' || data == 'Special/Static White'}
+            $border={data == 'Special/Elevated BG' || data == 'Neutral/Neutral 00' || data == 'Special/Static White'}
           />
         )}
       </Cell>
