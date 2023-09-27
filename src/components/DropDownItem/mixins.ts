@@ -18,7 +18,7 @@ export const colorTextMixin = css<{ disabled?: boolean }>`
 export const backgroundColor = css<{ selected?: boolean; id?: string }>`
   background: ${({ theme, selected }) =>
     selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-  ${({ id, theme }) => id && `ul[data-selectedid="${id}"] && {background: ${theme.color['Opacity/Focus']};}`}}
+  ${({ id, theme }) => id && `ul[data-selectedid="${id}"] && {background: ${theme.color['Opacity/Focus']};}`}
 `;
 
 export const paddings = css<{ dimension?: DropDownItemDimension }>`
