@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.3.0](https://github.com/AdmiralDS/react-ui/compare/v6.2.0...v6.3.0) (2023-09-27)
+
+
+### Features
+
+* **Menu:** добавлена возможность использовать виртуальный скролл в многоуровневом меню ([4085af3](https://github.com/AdmiralDS/react-ui/commit/4085af3c94c81eed0ddcb8e28ec64733a9745048)), closes [#1073](https://github.com/AdmiralDS/react-ui/issues/1073)
+
 ## [6.2.0](https://github.com/AdmiralDS/react-ui/compare/v6.1.1...v6.2.0) (2023-09-20)
 
 

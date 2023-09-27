@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -39,11 +39,10 @@
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
-    "storybook": "npm run generate-svg-icon-exports && storybook dev -p 6006",
-    "build-storybook": "npm run generate-svg-icon-exports && storybook build --disable-telemetry --output-dir docs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build --disable-telemetry --output-dir docs",
     "preview-storybook": "npx http-server ./docs",
     "release": "standard-version",
-    "generate-svg-icon-exports": "node scripts/generate-svg-icon-exports.cjs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
