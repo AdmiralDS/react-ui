@@ -27,7 +27,7 @@ export const OptionGroup = ({ label, disabled, children, ...props }: React.Props
         value={label}
         readOnly={true}
         renderOption={() => (
-          <Category {...props} dimension={selectContext?.dimension} key={label}>
+          <Category {...props} $dimension={selectContext?.dimension} key={label}>
             {label}
           </Category>
         )}
