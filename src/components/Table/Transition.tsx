@@ -10,11 +10,11 @@ type TransitionProps = {
   nodeRef: React.RefObject<HTMLElement>;
   children: React.ReactNode | ((state: any, props: any) => React.ReactNode);
   in: boolean;
-  timeout?: number | { enter?: number; exit?: number; appear?: number };
+  timeout?: number | { enter?: number; exit?: number };
   addEndListener?: (node?: any, done?: boolean) => void;
-  onEnter?: (isAppearing?: boolean) => void;
-  onEntering?: (isAppearing?: boolean) => void;
-  onEntered?: (isAppearing?: boolean) => void;
+  onEnter?: () => void;
+  onEntering?: () => void;
+  onEntered?: () => void;
   onExit?: () => void;
   onExiting?: () => void;
   onExited?: () => void;
@@ -36,8 +36,8 @@ export const Transition = ({
   ...childProps
 }: TransitionProps) => {
   const [status, setStatus] = React.useState<any>(_in ? ENTERED : EXITED);
+  const timer = React.useRef(0);
   const nextCallbackRef = React.useRef<any>(() => {});
-  const cancelRef = React.useRef<any>(() => {});
 
   React.useEffect(() => {
     return () => {
@@ -57,20 +57,18 @@ export const Transition = ({
       }
     }
     updateStatus(nextStatus);
-  });
+  }, [_in, status]);
 
   const getTimeouts = () => {
-    let exit, enter, appear;
+    let exit, enter;
 
-    exit = enter = appear = timeout;
+    exit = enter = timeout;
 
     if (timeout != null && typeof timeout !== 'number') {
       exit = timeout.exit;
       enter = timeout.enter;
-      // TODO: remove fallback for next major
-      appear = timeout.appear !== undefined ? timeout.appear : enter;
     }
-    return { exit, enter, appear };
+    return { exit, enter };
   };
 
   const updateStatus = (nextStatus: any) => {
@@ -87,98 +85,58 @@ export const Transition = ({
   };
 
   const performEnter = () => {
-    let mounting = false;
-    const appearing = mounting;
-    const [maybeAppearing] = nodeRef ? [appearing] : [appearing];
-
-    const timeouts = getTimeouts();
-    const enterTimeout = timeouts.enter;
-
-    onEnter?.(maybeAppearing);
-
-    safeSetState({ status: ENTERING }, () => {
-      onEntering?.(maybeAppearing);
-
-      onTransitionEnd(enterTimeout, () => {
-        safeSetState({ status: ENTERED }, () => {
-          onEntered?.(maybeAppearing);
-        });
-      });
-    });
+    onEnter?.();
+    setStatus(ENTERING);
   };
 
   const performExit = () => {
-    const timeouts = getTimeouts();
-
     onExit?.();
-
-    safeSetState({ status: EXITING }, () => {
-      onExiting?.();
-
-      onTransitionEnd(timeouts.exit, () => {
-        safeSetState({ status: EXITED }, () => {
-          onExited?.();
-        });
-      });
-    });
-  };
-
-  const cancelNextCallback = () => {
-    if (nextCallbackRef.current !== null && cancelRef.current !== null) {
-      cancelRef.current();
-      nextCallbackRef.current = null;
-    }
-  };
-
-  const safeSetState = (nextState: any, callback: any) => {
-    // This shouldn't be necessary, but there are weird race conditions with
-    // setState callbacks and unmounting in testing, so always make sure that
-    // we can cancel any pending setState callbacks after we unmount.
-    callback = setNextCallback(callback);
-    setStatus(nextState.status);
-    // this.setState(nextState, callback);
+    setStatus(EXITING);
   };
 
   React.useEffect(() => {
-    nextCallbackRef.current();
+    const timeouts = getTimeouts();
+    const enterTimeout = timeouts.enter;
+    const exitTimeout = timeouts.exit;
+
+    if (status == ENTERING) {
+      onEntering?.();
+      onTransitionEnd(enterTimeout, () => {
+        setStatus(ENTERED);
+      });
+    } else if (status == EXITING) {
+      onExiting?.();
+
+      onTransitionEnd(exitTimeout, () => {
+        setStatus(EXITED);
+      });
+    } else if (status == ENTERED) {
+      onEntered?.();
+    } else if (status == EXITED) {
+      onExited?.();
+    }
   }, [status]);
 
-  const setNextCallback = (callback: any) => {
-    let active = true;
-
-    nextCallbackRef.current = (event: any) => {
-      if (active) {
-        active = false;
-        nextCallbackRef.current = null;
-
-        callback(event);
-      }
-    };
-
-    cancelRef.current = () => {
-      active = false;
-    };
-
-    return nextCallbackRef.current;
+  const cancelNextCallback = () => {
+    window.clearTimeout(timer.current);
   };
 
   const onTransitionEnd = (timeout: any, handler: any) => {
-    setNextCallback(handler);
     const node = nodeRef.current;
 
     const doesNotHaveTimeoutOrListener = timeout == null && !addEndListener;
     if (!node || doesNotHaveTimeoutOrListener) {
-      setTimeout(nextCallbackRef.current, 0);
+      timer.current = window.setTimeout(handler, 0);
       return;
     }
 
     if (addEndListener) {
-      const [maybeNode, maybeNextCallback] = nodeRef ? [nextCallbackRef.current] : [node, nextCallbackRef.current];
+      const [maybeNode, maybeNextCallback] = [node, nextCallbackRef.current];
       addEndListener(maybeNode, maybeNextCallback);
     }
 
     if (timeout != null) {
-      setTimeout(nextCallbackRef.current, timeout);
+      timer.current = window.setTimeout(handler, timeout);
     }
   };
 

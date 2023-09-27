@@ -136,18 +136,37 @@ export const RowWrapper = ({
           in={!!row.expanded}
           nodeRef={nodeRef}
           timeout={250}
-          onEnter={() => console.log('enter')}
-          onEntered={() => console.log('entered')}
-          onEntering={() => console.log('entering')}
-          onExit={() => console.log('exit')}
-          onExited={() => console.log('exited')}
-          onExiting={() => console.log('exiting')}
+          onEnter={() => {
+            console.log('enter');
+            if (nodeRef.current) nodeRef.current.style.height = '0px';
+          }}
+          onEntered={() => {
+            console.log('entered');
+            if (nodeRef.current) nodeRef.current.style.height = 'auto';
+          }}
+          onEntering={() => {
+            console.log('entering');
+            const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
+            if (nodeRef.current) nodeRef.current.style.height = height;
+          }}
+          onExit={() => {
+            console.log('exit');
+            const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
+            if (nodeRef.current) nodeRef.current.style.height = height;
+          }}
+          onExited={() => {
+            console.log('exited');
+          }}
+          onExiting={() => {
+            console.log('exiting');
+            if (nodeRef.current) nodeRef.current.style.height = '0px';
+          }}
         >
           <ExpandedRow
             ref={nodeRef}
             opened={row.expanded}
             // contentMaxHeight="90vh"
-            contentMaxHeight={row.expanded ? expandedContentHeight : 0}
+            // contentMaxHeight={row.expanded ? expandedContentHeight : 0}
             className="tr-expanded"
             onMouseEnter={handleExpandedMouseEnter}
             onMouseLeave={handleExpandedMouseLeave}

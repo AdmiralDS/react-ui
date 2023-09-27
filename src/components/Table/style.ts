@@ -411,9 +411,11 @@ export const SimpleRow = styled.div<{
 export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
   display: inline-flex;
   overflow: hidden;
-  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
+  transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  height: ${(p) => (!p.opened ? 0 : 'auto')};
 `;
+// transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
 
 export const ExpandedRowContent = styled.div`
   display: flex;
