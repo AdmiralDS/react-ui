@@ -28,7 +28,7 @@ export default {
 
 const Template: StoryFn = () => (
   <Title style={{ fontWeight: 400 }}>
-    Сторибук по иконкам преехал сюда:{' '}
+    Сторибук по иконкам переехал сюда:{' '}
     <Link href="https://admiralds.github.io/icons/">https://admiralds.github.io/icons/</Link>
   </Title>
 );
