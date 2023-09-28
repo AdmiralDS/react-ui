@@ -158,7 +158,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -479,7 +478,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -855,7 +853,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -1176,7 +1173,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -1552,7 +1548,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -1873,7 +1868,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -2249,7 +2243,6 @@ exports[`Spinner should render default component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -2570,7 +2563,6 @@ exports[`Spinner should render default component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -2945,7 +2937,6 @@ exports[`Spinner should render vertical component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {
@@ -3265,7 +3256,6 @@ exports[`Spinner should render vertical component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0>* {

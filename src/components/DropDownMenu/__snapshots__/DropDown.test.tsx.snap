@@ -3,26 +3,12 @@
 exports[`DropDown should render component 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  "baseElement": .c6 {
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -33,18 +19,18 @@ exports[`DropDown should render component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
 }
 
-ul[data-dimension='m'] .c7.c7 {
+ul[data-dimension='m'] .c6.c6 {
   padding: 8px 16px;
 }
 
-ul[data-dimension='s'] .c7.c7 {
+ul[data-dimension='s'] .c6.c6 {
   padding: 6px 12px;
 }
 
@@ -54,22 +40,22 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c6:hover {
   background-color: #0000000D;
   cursor: pointer;
 }
 
-.c7.c7[data-disabled='true'] {
+.c6.c6[data-disabled='true'] {
   cursor: not-allowed;
   background-color: #FFFFFF;
   color: #B0B5BD;
 }
 
-.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+.c6.c6[data-disabled='true'].c6.c6[data-disabled='true'] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -85,35 +71,22 @@ ul[data-dimension='s'] .c6 {
   margin: 8px 0;
   background-color: #FFFFFF;
   border-radius: 4px;
-  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
+  box-shadow: 0px -1.5px 6px rgba(0, 0, 0, 0.06),0px 0.6px 1.8px rgba(0, 0, 0, 0.1),0px 3.2px 9px rgba(0, 0, 0, 0.16);
   flex: 0 0 auto;
   opacity: 0;
-  -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
-  -webkit-transition-property: opacity;
   transition-property: opacity;
 }
 
 .c2 {
   pointer-events: none;
   height: 100%;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 
@@ -148,7 +121,7 @@ ul[data-dimension='s'] .c6 {
           class="c5"
         >
           <li
-            class="c6 c7"
+            class="c6"
             tabindex="0"
             value="1"
           >
@@ -216,26 +189,12 @@ ul[data-dimension='s'] .c6 {
 exports[`DropDown should render group components 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  "baseElement": .c6 {
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -246,7 +205,63 @@ exports[`DropDown should render group components 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  text-overflow: ellipsis;
+  color: #23262D;
+  background: #FFFFFF;
+}
+
+ul[data-dimension='m'] .c6.c6 {
+  padding: 8px 16px;
+}
+
+ul[data-dimension='s'] .c6.c6 {
+  padding: 6px 12px;
+}
+
+ul[data-dimension='s'] .c6 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c6:hover {
+  background-color: #0000000D;
+  cursor: pointer;
+}
+
+.c6.c6[data-disabled='true'] {
+  cursor: not-allowed;
+  background-color: #FFFFFF;
+  color: #B0B5BD;
+}
+
+.c6.c6[data-disabled='true'].c6.c6[data-disabled='true'] *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c7 {
+  display: flex;
+  align-items: center;
+  user-select: none;
+  flex-flow: wrap;
+  position: relative;
+  justify-content: space-between;
+  outline: none;
+  white-space: pre;
+  margin: 0;
+  padding: 12px 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -261,14 +276,18 @@ ul[data-dimension='s'] .c7.c7 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c7 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+ul[data-selectedid="2"] .c7.c7 {
+  background: #00000017;
 }
 
 .c7:hover {
@@ -287,25 +306,11 @@ ul[data-dimension='s'] .c6 {
 }
 
 .c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -316,7 +321,7 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -331,17 +336,17 @@ ul[data-dimension='s'] .c8.c8 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c8 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="2"] .c8.c8 {
+ul[data-selectedid="3"] .c8.c8 {
   background: #00000017;
 }
 
@@ -361,25 +366,11 @@ ul[data-selectedid="2"] .c8.c8 {
 }
 
 .c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -390,7 +381,7 @@ ul[data-selectedid="2"] .c8.c8 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -405,17 +396,17 @@ ul[data-dimension='s'] .c9.c9 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c9 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="3"] .c9.c9 {
+ul[data-selectedid="4"] .c9.c9 {
   background: #00000017;
 }
 
@@ -435,25 +426,11 @@ ul[data-selectedid="3"] .c9.c9 {
 }
 
 .c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -464,7 +441,7 @@ ul[data-selectedid="3"] .c9.c9 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -479,17 +456,17 @@ ul[data-dimension='s'] .c10.c10 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c10 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="4"] .c10.c10 {
+ul[data-selectedid="5"] .c10.c10 {
   background: #00000017;
 }
 
@@ -509,25 +486,11 @@ ul[data-selectedid="4"] .c10.c10 {
 }
 
 .c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -538,7 +501,7 @@ ul[data-selectedid="4"] .c10.c10 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -553,17 +516,17 @@ ul[data-dimension='s'] .c11.c11 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c11 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="5"] .c11.c11 {
+ul[data-selectedid="10"] .c11.c11 {
   background: #00000017;
 }
 
@@ -583,25 +546,11 @@ ul[data-selectedid="5"] .c11.c11 {
 }
 
 .c12 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -612,7 +561,7 @@ ul[data-selectedid="5"] .c11.c11 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -627,17 +576,17 @@ ul[data-dimension='s'] .c12.c12 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c12 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="10"] .c12.c12 {
+ul[data-selectedid="11"] .c12.c12 {
   background: #00000017;
 }
 
@@ -657,25 +606,11 @@ ul[data-selectedid="10"] .c12.c12 {
 }
 
 .c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -686,7 +621,7 @@ ul[data-selectedid="10"] .c12.c12 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -701,17 +636,17 @@ ul[data-dimension='s'] .c13.c13 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c13 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="11"] .c13.c13 {
+ul[data-selectedid="12"] .c13.c13 {
   background: #00000017;
 }
 
@@ -731,25 +666,11 @@ ul[data-selectedid="11"] .c13.c13 {
 }
 
 .c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -760,7 +681,7 @@ ul[data-selectedid="11"] .c13.c13 {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
@@ -775,17 +696,17 @@ ul[data-dimension='s'] .c14.c14 {
   padding: 6px 12px;
 }
 
-ul[data-dimension='s'] .c6 {
+ul[data-dimension='s'] .c14 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-ul[data-selectedid="12"] .c14.c14 {
+ul[data-selectedid="13"] .c14.c14 {
   background: #00000017;
 }
 
@@ -804,80 +725,6 @@ ul[data-selectedid="12"] .c14.c14 {
   fill: #B0B5BD;
 }
 
-.c15 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
-  flex-flow: wrap;
-  position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  outline: none;
-  white-space: pre;
-  margin: 0;
-  padding: 12px 16px;
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
-  text-rendering: geometricPrecision;
-  text-overflow: ellipsis;
-  color: #23262D;
-  background: #FFFFFF;
-}
-
-ul[data-dimension='m'] .c15.c15 {
-  padding: 8px 16px;
-}
-
-ul[data-dimension='s'] .c15.c15 {
-  padding: 6px 12px;
-}
-
-ul[data-dimension='s'] .c6 {
-  font-family: 'VTB Group UI',sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
-  text-rendering: geometricPrecision;
-}
-
-ul[data-selectedid="13"] .c15.c15 {
-  background: #00000017;
-}
-
-.c15:hover {
-  background-color: #0000000D;
-  cursor: pointer;
-}
-
-.c15.c15[data-disabled='true'] {
-  cursor: not-allowed;
-  background-color: #FFFFFF;
-  color: #B0B5BD;
-}
-
-.c15.c15[data-disabled='true'].c15.c15[data-disabled='true'] *[fill^='#'] {
-  fill: #B0B5BD;
-}
-
 .c0 {
   pointer-events: none;
   position: fixed;
@@ -890,35 +737,22 @@ ul[data-selectedid="13"] .c15.c15 {
   margin: 8px 0;
   background-color: #FFFFFF;
   border-radius: 4px;
-  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
+  box-shadow: 0px -1.5px 6px rgba(0, 0, 0, 0.06),0px 0.6px 1.8px rgba(0, 0, 0, 0.1),0px 3.2px 9px rgba(0, 0, 0, 0.16);
   flex: 0 0 auto;
   opacity: 0;
-  -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
-  -webkit-transition-property: opacity;
   transition-property: opacity;
 }
 
 .c2 {
   pointer-events: none;
   height: 100%;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 
@@ -956,13 +790,13 @@ ul[data-selectedid="13"] .c15.c15 {
           class="c5"
         >
           <li
-            class="c6 c7"
+            class="c6"
             data-disabled="true"
           >
             Категория 1
           </li>
           <li
-            class="c6 c8"
+            class="c7"
             id="2"
             tabindex="0"
           >
@@ -977,7 +811,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c9"
+            class="c8"
             id="3"
             tabindex="0"
           >
@@ -992,7 +826,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c10"
+            class="c9"
             id="4"
             tabindex="0"
           >
@@ -1007,7 +841,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c11"
+            class="c10"
             id="5"
             tabindex="0"
           >
@@ -1022,13 +856,13 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c7"
+            class="c6"
             data-disabled="true"
           >
             Категория 2
           </li>
           <li
-            class="c6 c12"
+            class="c11"
             id="10"
             tabindex="0"
           >
@@ -1043,7 +877,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c13"
+            class="c12"
             id="11"
             tabindex="0"
           >
@@ -1058,7 +892,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c14"
+            class="c13"
             id="12"
             tabindex="0"
           >
@@ -1073,7 +907,7 @@ ul[data-selectedid="13"] .c15.c15 {
             </div>
           </li>
           <li
-            class="c6 c15"
+            class="c14"
             id="13"
             tabindex="0"
           >
@@ -1151,26 +985,12 @@ ul[data-selectedid="13"] .c15.c15 {
 exports[`DropDown should render small components 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  "baseElement": .c6 {
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   position: relative;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   outline: none;
   white-space: pre;
@@ -1181,18 +1001,18 @@ exports[`DropDown should render small components 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   text-overflow: ellipsis;
   color: #23262D;
   background: #FFFFFF;
 }
 
-ul[data-dimension='m'] .c7.c7 {
+ul[data-dimension='m'] .c6.c6 {
   padding: 8px 16px;
 }
 
-ul[data-dimension='s'] .c7.c7 {
+ul[data-dimension='s'] .c6.c6 {
   padding: 6px 12px;
 }
 
@@ -1202,22 +1022,22 @@ ul[data-dimension='s'] .c6 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
-.c7:hover {
+.c6:hover {
   background-color: #0000000D;
   cursor: pointer;
 }
 
-.c7.c7[data-disabled='true'] {
+.c6.c6[data-disabled='true'] {
   cursor: not-allowed;
   background-color: #FFFFFF;
   color: #B0B5BD;
 }
 
-.c7.c7[data-disabled='true'].c7.c7[data-disabled='true'] *[fill^='#'] {
+.c6.c6[data-disabled='true'].c6.c6[data-disabled='true'] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -1233,35 +1053,22 @@ ul[data-dimension='s'] .c6 {
   margin: 8px 0;
   background-color: #FFFFFF;
   border-radius: 4px;
-  box-shadow: 0px -1.5px 6px rgba(0,0,0,0.06),0px 0.6px 1.8px rgba(0,0,0,0.1),0px 3.2px 9px rgba(0,0,0,0.16);
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
+  box-shadow: 0px -1.5px 6px rgba(0, 0, 0, 0.06),0px 0.6px 1.8px rgba(0, 0, 0, 0.1),0px 3.2px 9px rgba(0, 0, 0, 0.16);
   flex: 0 0 auto;
   opacity: 0;
-  -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
-  -webkit-transition-property: opacity;
   transition-property: opacity;
 }
 
 .c2 {
   pointer-events: none;
   height: 100%;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 
@@ -1296,7 +1103,7 @@ ul[data-dimension='s'] .c6 {
           class="c5"
         >
           <li
-            class="c6 c7"
+            class="c6"
             tabindex="0"
           >
             Option

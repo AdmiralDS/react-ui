@@ -92,7 +92,6 @@ exports[`TabMenu should render default component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0::-webkit-scrollbar {
@@ -519,7 +518,6 @@ exports[`TabMenu should render default component 1`] = `
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 }
 
 .c0::-webkit-scrollbar {

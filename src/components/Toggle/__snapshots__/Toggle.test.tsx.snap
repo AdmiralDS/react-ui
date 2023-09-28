@@ -10,42 +10,37 @@ exports[`Toggle should render component with disabled state 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -53,7 +48,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
@@ -61,8 +56,6 @@ exports[`Toggle should render component with disabled state 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -75,7 +68,6 @@ exports[`Toggle should render component with disabled state 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -96,38 +88,20 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -171,42 +145,37 @@ exports[`Toggle should render component with disabled state 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -214,7 +183,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
@@ -222,8 +191,6 @@ exports[`Toggle should render component with disabled state 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -236,7 +203,6 @@ exports[`Toggle should render component with disabled state 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -257,38 +223,20 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -387,42 +335,37 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-right: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -430,7 +373,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -438,8 +381,6 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -452,7 +393,6 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -473,38 +413,20 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -545,42 +467,37 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-right: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -588,7 +505,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -596,8 +513,6 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -610,7 +525,6 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -631,38 +545,20 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -758,42 +654,37 @@ exports[`Toggle should render component with required properties 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -801,7 +692,7 @@ exports[`Toggle should render component with required properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -809,8 +700,6 @@ exports[`Toggle should render component with required properties 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -823,7 +712,6 @@ exports[`Toggle should render component with required properties 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -844,38 +732,20 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -916,42 +786,37 @@ exports[`Toggle should render component with required properties 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(16px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(16px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -959,7 +824,7 @@ exports[`Toggle should render component with required properties 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -967,8 +832,6 @@ exports[`Toggle should render component with required properties 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
@@ -981,7 +844,6 @@ exports[`Toggle should render component with required properties 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -1002,38 +864,20 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 36px;
   height: 20px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -1129,42 +973,37 @@ exports[`Toggle should render component with small dimension 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(12px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(12px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -1172,7 +1011,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1180,8 +1019,6 @@ exports[`Toggle should render component with small dimension 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 28px;
   height: 16px;
@@ -1194,7 +1031,6 @@ exports[`Toggle should render component with small dimension 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 12px;
   height: 12px;
@@ -1215,38 +1051,20 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 28px;
   height: 16px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -1287,42 +1105,37 @@ exports[`Toggle should render component with small dimension 1`] = `
   opacity: 0;
 }
 
-.c1:checked + div > span {
+.c1:checked+div>span {
   background: #0062FF;
 }
 
-.c1:checked + div > span:before {
+.c1:checked+div>span:before {
   left: calc(12px + 2px);
 }
 
-.c1:checked:disabled + div > span {
+.c1:checked:disabled+div>span {
   background: #A7C7FF;
 }
 
-.c1:checked + div > div {
+.c1:checked+div>div {
   left: calc(12px + -12px + 4px);
 }
 
-.c1:not(:disabled):focus-visible + div > span {
+.c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c1:not(:disabled):hover + div > div {
+.c1:not(:disabled):hover+div>div {
   visibility: visible;
 }
 
-.c1:not(:disabled):hover:focus-visible + div > span {
+.c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-left: 8px;
   font-family: 'VTB Group UI',sans-serif;
@@ -1330,7 +1143,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
@@ -1338,8 +1151,6 @@ exports[`Toggle should render component with small dimension 1`] = `
 .c4 {
   position: absolute;
   border-radius: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 28px;
   height: 16px;
@@ -1352,7 +1163,6 @@ exports[`Toggle should render component with small dimension 1`] = `
   top: 2px;
   left: 2px;
   background: #FFFFFF;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 12px;
   height: 12px;
@@ -1373,38 +1183,20 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c2 {
   position: relative;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 28px;
   height: 16px;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 

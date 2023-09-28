@@ -55,7 +55,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -161,7 +161,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -322,7 +322,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -428,7 +428,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -814,7 +814,7 @@ exports[`Spinner should render default component 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -920,7 +920,7 @@ exports[`Spinner should render default component 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1080,7 +1080,7 @@ exports[`Spinner should render mobile component 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1185,7 +1185,7 @@ exports[`Spinner should render mobile component 1`] = `
 
 .c6 {
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;

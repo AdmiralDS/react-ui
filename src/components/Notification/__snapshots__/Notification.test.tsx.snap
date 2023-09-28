@@ -211,11 +211,9 @@ exports[`Notification should render error components with all properties 1`] = `
         aria-live="polite"
         class="c0"
         role="status"
-        status="info"
       >
         <div
           class="c1"
-          status="info"
         >
           <div />
         </div>
@@ -466,11 +464,9 @@ exports[`Notification should render error components with all properties 1`] = `
       aria-live="polite"
       class="c0"
       role="status"
-      status="info"
     >
       <div
         class="c1"
-        status="info"
       >
         <div />
       </div>
