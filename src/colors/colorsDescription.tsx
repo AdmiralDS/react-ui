@@ -3,7 +3,21 @@ import type { TableRow } from '#src/components/Table';
 import { typography } from '#src/components/Typography';
 import type { Color } from '#src/components/themes';
 
-export const COLORS = {
+type CategoryProps = Record<
+  string,
+  {
+    name: string;
+    description: string;
+    contrast: { light: string; dark: string };
+    opacity?: string;
+    bold?: boolean;
+    contrast_light?: string;
+  }
+>;
+
+type ColorsProps = Record<string, CategoryProps>;
+
+export const COLORS: ColorsProps = {
   Neutral: {
     'Neutral/Neutral 00': {
       name: 'Neutral 00',
@@ -408,9 +422,9 @@ export const COLORS = {
     'Teal/Teal 70': { name: 'Teal 70', contrast: { light: '-', dark: '-' }, description: '-' },
     'Teal/Teal 80': { name: 'Teal 80', contrast: { light: '-', dark: '-' }, description: '-' },
   },
-};
+} as const;
 
-export const COLORS_DESC = {
+export const COLORS_DESC: Record<string, string> = {
   Neutral: `Набор динамичных (изменяемых в темной теме) оттенков серого цвета для построения основных элементов интерфейса.`,
   Primary: `Набор динамичных (изменяемых в темной теме) оттенков интерактивного цвета для построения элементов интерфейса.`,
   Special: `Набор статичных (неизменяемых в темной теме) оттенков цвета. Цвета используются для работы в Light Theme 
