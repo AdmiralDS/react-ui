@@ -66,7 +66,6 @@ export const Wrapper = styled.div<{ $underline?: boolean; $mobile?: boolean; $di
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 `;
 
 export const Underline = styled.div`

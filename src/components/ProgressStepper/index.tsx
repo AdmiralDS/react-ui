@@ -46,7 +46,7 @@ const ProgressText = styled.div`
 
 const NextStep = styled.div`
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   ${typography['Caption/Caption 1']}

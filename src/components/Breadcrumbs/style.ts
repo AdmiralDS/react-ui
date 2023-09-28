@@ -43,7 +43,6 @@ export const Wrapper = styled.ol<{ $mobile?: boolean }>`
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scrollbar-height: none;
 
   & > li {
     margin-left: 4px;
