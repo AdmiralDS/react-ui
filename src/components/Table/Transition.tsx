@@ -1,43 +1,48 @@
 import * as React from 'react';
 import { ReactElement } from 'react';
 
-export const EXITED = 'exited';
-export const ENTERING = 'entering';
-export const ENTERED = 'entered';
-export const EXITING = 'exiting';
+type Status = 'entering' | 'entered' | 'exiting' | 'exited';
+
+const EXITED = 'exited';
+const ENTERING = 'entering';
+const ENTERED = 'entered';
+const EXITING = 'exiting';
 
 type TransitionProps = {
-  nodeRef: React.RefObject<HTMLElement>;
-  children: React.ReactNode | ((state: any, props: any) => React.ReactNode);
+  children: React.ReactNode | ((status: Status, props: any) => React.ReactNode);
+  /** Show the component; triggers the enter or exit states */
   in: boolean;
-  timeout?: number | { enter?: number; exit?: number };
-  addEndListener?: (node?: any, done?: boolean) => void;
+  /** The duration of the transition, in milliseconds */
+  timeout?: number | { enter: number; exit: number };
+  /** Callback fired before the "entering" status is applied */
   onEnter?: () => void;
+  /** Callback fired after the "entering" status is applied */
   onEntering?: () => void;
+  /** Callback fired after the "entered" status is applied */
   onEntered?: () => void;
+  /** Callback fired before the "exiting" status is applied */
   onExit?: () => void;
+  /** Callback fired after the "exiting" status is applied */
   onExiting?: () => void;
+  /** Callback fired after the "exited" status is applied */
   onExited?: () => void;
 };
 
 export const Transition = ({
   children,
-  // filter props for `Transition`
   in: _in = false,
-  timeout,
-  addEndListener,
+  timeout = 300,
   onEnter,
   onEntering,
   onEntered,
   onExit,
   onExiting,
   onExited,
-  nodeRef,
   ...childProps
 }: TransitionProps) => {
-  const [status, setStatus] = React.useState<any>(_in ? ENTERED : EXITED);
+  const [status, setStatus] = React.useState<Status>(_in ? ENTERED : EXITED);
+  const _inRef = React.useRef(_in);
   const timer = React.useRef(0);
-  const nextCallbackRef = React.useRef<any>(() => {});
 
   React.useEffect(() => {
     return () => {
@@ -45,29 +50,57 @@ export const Transition = ({
     };
   }, []);
 
+  // нужно, чтобы при первом рендере не срабатывало (пропускало первую установку in) и реагировало только на изменение in
   React.useEffect(() => {
-    let nextStatus = null;
-    if (_in) {
-      if (status !== ENTERING && status !== ENTERED) {
-        nextStatus = ENTERING;
+    if (_inRef.current !== _in) {
+      _inRef.current = _in;
+
+      let nextStatus;
+
+      if (_in) {
+        if (status !== ENTERING && status !== ENTERED) {
+          nextStatus = ENTERING;
+        }
+      } else {
+        if (status === ENTERING || status === ENTERED) {
+          nextStatus = EXITING;
+        }
       }
-    } else {
-      if (status === ENTERING || status === ENTERED) {
-        nextStatus = EXITING;
-      }
+      updateStatus(nextStatus);
     }
-    updateStatus(nextStatus);
   }, [_in, status]);
+
+  React.useEffect(() => {
+    const { enter: enterTimeout, exit: exitTimeout } = getTimeouts();
+
+    if (status == ENTERING) {
+      onEntering?.();
+      onTransitionEnd(enterTimeout, () => {
+        setStatus(ENTERED);
+      });
+    } else if (status == EXITING) {
+      onExiting?.();
+
+      onTransitionEnd(exitTimeout, () => {
+        setStatus(EXITED);
+      });
+    } else if (status == ENTERED) {
+      onEntered?.();
+    } else if (status == EXITED) {
+      onExited?.();
+    }
+  }, [status]);
 
   const getTimeouts = () => {
     let exit, enter;
 
-    exit = enter = timeout;
-
-    if (timeout != null && typeof timeout !== 'number') {
+    if (typeof timeout === 'number') {
+      exit = enter = timeout;
+    } else {
       exit = timeout.exit;
       enter = timeout.enter;
     }
+
     return { exit, enter };
   };
 
@@ -94,50 +127,12 @@ export const Transition = ({
     setStatus(EXITING);
   };
 
-  React.useEffect(() => {
-    const timeouts = getTimeouts();
-    const enterTimeout = timeouts.enter;
-    const exitTimeout = timeouts.exit;
-
-    if (status == ENTERING) {
-      onEntering?.();
-      onTransitionEnd(enterTimeout, () => {
-        setStatus(ENTERED);
-      });
-    } else if (status == EXITING) {
-      onExiting?.();
-
-      onTransitionEnd(exitTimeout, () => {
-        setStatus(EXITED);
-      });
-    } else if (status == ENTERED) {
-      onEntered?.();
-    } else if (status == EXITED) {
-      onExited?.();
-    }
-  }, [status]);
-
   const cancelNextCallback = () => {
     window.clearTimeout(timer.current);
   };
 
   const onTransitionEnd = (timeout: any, handler: any) => {
-    const node = nodeRef.current;
-
-    const doesNotHaveTimeoutOrListener = timeout == null && !addEndListener;
-    if (!node || doesNotHaveTimeoutOrListener) {
-      timer.current = window.setTimeout(handler, 0);
-      return;
-    }
-
-    if (addEndListener) {
-      const [maybeNode, maybeNextCallback] = [node, nextCallbackRef.current];
-      addEndListener(maybeNode, maybeNextCallback);
-    }
-
-    if (timeout != null) {
-      timer.current = window.setTimeout(handler, timeout);
-    }
+    timer.current = window.setTimeout(handler, timeout);
   };
 
   return (
@@ -145,6 +140,23 @@ export const Transition = ({
       {typeof children === 'function'
         ? children(status, childProps)
         : React.cloneElement(React.Children.only(children) as ReactElement, childProps)}
+      {/* <Test _in /> */}
     </>
   );
+};
+
+const Test = ({ _in }: any) => {
+  const [status, setStatus] = React.useState<Status>(_in ? ENTERED : EXITED);
+  const statusRef = React.useRef(_in ? ENTERED : EXITED);
+  const hasMounted = React.useRef(false);
+  const _inRef = React.useRef(_in);
+
+  React.useEffect(() => {
+    if (_inRef.current !== _in) {
+      console.log(_in);
+      _inRef.current = _in;
+    }
+  }, [_in]);
+
+  return <div>test</div>;
 };

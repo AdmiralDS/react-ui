@@ -92,7 +92,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
+    // expandedRowRender: expandedRowRender,
   },
   {
     id: '0004',
@@ -105,7 +105,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
+    // expandedRowRender: expandedRowRender,
   },
   {
     id: '0005',
@@ -118,7 +118,7 @@ const rowList: RowData[] = [
     ),
     currency: 'RUB',
     rate: 2.5,
-    expandedRowRender: expandedRowRender,
+    // expandedRowRender: expandedRowRender,
   },
   {
     id: '0006',
