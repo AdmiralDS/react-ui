@@ -66,7 +66,7 @@ const Separator = styled.div<SeparatorProps>`
       disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 
-  ${({ skeleton }) => skeleton && skeletonAnimationMixin};
+  ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};
 `;
 
 const Wrapper = styled.div`
@@ -78,7 +78,7 @@ type Appearance = 'primary' | 'secondary';
 
 interface SeparatorProps {
   disabled?: boolean;
-  skeleton?: boolean;
+  $skeleton?: boolean;
 }
 
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
@@ -204,7 +204,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                   typeof child === 'string' ? <span key={`${child}-${index}`}>{child}</span> : child,
                 )}
               </MainButton>
-              <Separator disabled={disabled} skeleton={skeleton} data-appearance={appearance} aria-hidden />
+              <Separator disabled={disabled} $skeleton={skeleton} data-appearance={appearance} aria-hidden />
               <MenuButton
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
                 skeleton={skeleton}
