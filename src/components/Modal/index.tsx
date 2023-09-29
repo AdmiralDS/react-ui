@@ -24,7 +24,7 @@ export interface ModalStatusIconProps {
   status: ModalStatusIconType;
 }
 
-const Overlay = styled.div<{ overlayStyledCss: RuleSet<object> }>`
+const Overlay = styled.div<{ $overlayStyledCss: RuleSet<object> }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,15 +36,15 @@ const Overlay = styled.div<{ overlayStyledCss: RuleSet<object> }>`
   background-color: ${({ theme }) => theme.color['Opacity/Modal']};
   transition: opacity 0.3s ease 0s;
   z-index: ${({ theme }) => theme.zIndex.modal};
-  ${(p) => p.overlayStyledCss}
+  ${(p) => p.$overlayStyledCss}
   outline: none;
 `;
 
-const width = css<{ dimension: Dimension; mobile?: boolean }>`
-  width: ${({ dimension, mobile }) => {
+const width = css<{ $dimension: Dimension; $mobile?: boolean }>`
+  width: ${({ $dimension, $mobile }) => {
     // 16px on left and right side
-    if (mobile) return 'calc(100% - 32px)';
-    switch (dimension) {
+    if ($mobile) return 'calc(100% - 32px)';
+    switch ($dimension) {
       case 's':
         return '384px';
       case 'm':
@@ -58,32 +58,32 @@ const width = css<{ dimension: Dimension; mobile?: boolean }>`
   }};
 `;
 
-const Title = styled.h5<{ mobile: boolean; displayCloseIcon: boolean }>`
-  ${({ mobile }) => (mobile ? typography['Header/H6'] : typography['Header/H5'])};
+const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
+  ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   margin: 0;
-  padding: ${({ mobile, displayCloseIcon }) => {
-    if (mobile) {
-      return displayCloseIcon ? '0 46px 8px 16px' : '0 16px 8px';
+  padding: ${({ $mobile, $displayCloseIcon }) => {
+    if ($mobile) {
+      return $displayCloseIcon ? '0 46px 8px 16px' : '0 16px 8px';
     }
-    return displayCloseIcon ? '0 56px 8px 24px' : '0 24px 8px';
+    return $displayCloseIcon ? '0 56px 8px 24px' : '0 24px 8px';
   }};
 `;
 
-const Content = styled.div<{ scrollbar: number; mobile: boolean }>`
+const Content = styled.div<{ $scrollbar: number; $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ scrollbar, mobile }) => `8px ${(mobile ? 16 : 24) - scrollbar}px 8px ${mobile ? 16 : 24}px`};
+  padding: ${({ $scrollbar, $mobile }) => `8px ${($mobile ? 16 : 24) - $scrollbar}px 8px ${$mobile ? 16 : 24}px`};
 `;
 
-const ButtonPanel = styled.div<{ mobile: boolean }>`
+const ButtonPanel = styled.div<{ $mobile: boolean }>`
   display: flex;
-  flex-direction: ${({ mobile }) => (mobile ? 'column-reverse' : 'row-reverse')};
-  padding: ${({ mobile }) => (mobile ? '16px 16px 0' : '16px 24px 0')};
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column-reverse' : 'row-reverse')};
+  padding: ${({ $mobile }) => ($mobile ? '16px 16px 0' : '16px 24px 0')};
 
   & > button {
-    margin: ${({ mobile }) => (mobile ? '0 0 16px 0' : '0 16px 0 0')};
-    ${({ mobile }) => mobile && 'width: 100%;'}
+    margin: ${({ $mobile }) => ($mobile ? '0 0 16px 0' : '0 16px 0 0')};
+    ${({ $mobile }) => $mobile && 'width: 100%;'}
   }
 
   & > button:first-child {
@@ -119,18 +119,18 @@ function getModalIconColor(status: ModalStatusIconType) {
   }
 }
 
-const ModalStatusIconWrapper = styled.div<{ status: ModalStatusIconType; mobile: boolean }>`
-  margin-left: ${({ mobile }) => (mobile ? 16 : 24)}px;
-  margin-bottom: ${({ mobile }) => (mobile ? 6 : 8)}px;
+const ModalStatusIconWrapper = styled.div<{ $status: ModalStatusIconType; $mobile: boolean }>`
+  margin-left: ${({ $mobile }) => ($mobile ? 16 : 24)}px;
+  margin-bottom: ${({ $mobile }) => ($mobile ? 6 : 8)}px;
   width: 40px;
   height: 40px;
 
   & *[fill^='#'] {
-    fill: ${({ theme, status }) => theme.color[getModalIconColor(status)]};
+    fill: ${({ theme, $status }) => theme.color[getModalIconColor($status)]};
   }
 `;
 
-const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
+const ModalComponent = styled.div<{ $dimension: Dimension; $mobile?: boolean }>`
   position: absolute;
   box-sizing: border-box;
   top: 50%;
@@ -141,19 +141,19 @@ const ModalComponent = styled.div<{ dimension: Dimension; mobile?: boolean }>`
   overflow: hidden;
   padding: 20px 0 24px;
   ${width};
-  max-height: ${({ mobile }) => (mobile ? '84vh' : '90vh')};
+  max-height: ${({ $mobile }) => ($mobile ? '84vh' : '90vh')};
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
-  ${({ mobile }) => (mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${({ $mobile }) => ($mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   outline: none;
 `;
 
-const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
+const CloseButton = styled(CloseIconPlacementButton)<{ $mobile?: boolean }>`
   position: absolute;
   top: 16px;
-  right: ${({ mobile }) => (mobile ? 12 : 20)}px;
+  right: ${({ $mobile }) => ($mobile ? 12 : 20)}px;
 `;
 
 export const emptyOverlayStyledCss = css``;
@@ -294,7 +294,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         tabIndex={-1}
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
-        overlayStyledCss={overlayStyledCss}
+        $overlayStyledCss={overlayStyledCss}
         className={overlayClassName}
         style={overlayStyle}
       >
@@ -303,8 +303,8 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           tabIndex={-1}
           role="dialog"
           aria-modal
-          dimension={dimension}
-          mobile={mobile}
+          $dimension={dimension}
+          $mobile={mobile}
           {...props}
         >
           <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
@@ -312,7 +312,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
             <CloseButton
               dimension="lSmall"
               aria-label={closeBtnAriaLabel}
-              mobile={mobile}
+              $mobile={mobile}
               onClick={handleCloseBtnClick}
             />
           )}
@@ -329,7 +329,7 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   const { mobile, displayCloseIcon } = React.useContext(ModalContext);
   const asProp = mobile ? 'h6' : 'h5';
   return (
-    <Title mobile={mobile} displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
+    <Title $mobile={mobile} $displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
       {children}
     </Title>
   );
@@ -364,7 +364,7 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   }, [overflow, setOverflow]);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} scrollbar={overflow ? scrollbarSize : 0} mobile={mobile} {...props}>
+    <Content tabIndex={-1} ref={contentRef} $scrollbar={overflow ? scrollbarSize : 0} $mobile={mobile} {...props}>
       {children}
     </Content>
   );
@@ -373,7 +373,7 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
 export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const mobile = React.useContext(ModalContext).mobile;
   return (
-    <ButtonPanel mobile={mobile} {...props}>
+    <ButtonPanel $mobile={mobile} {...props}>
       {children}
     </ButtonPanel>
   );
@@ -382,7 +382,7 @@ export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = 
 export const ModalStatusIcon: FC<ModalStatusIconProps> = ({ status }) => {
   const mobile = React.useContext(ModalContext).mobile;
   return (
-    <ModalStatusIconWrapper status={status} mobile={mobile}>
+    <ModalStatusIconWrapper $status={status} $mobile={mobile}>
       {getModalIcon(status)}
     </ModalStatusIconWrapper>
   );
