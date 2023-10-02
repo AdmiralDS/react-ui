@@ -8,7 +8,7 @@ const config: StorybookConfig = {
     '@storybook/addon-designs',
     '@storybook/addon-interactions',
     'storybook-dark-mode',
-    // 'storybook-addon-rtl', // Временно убран по причине требования зависимости styled-components v5
+    'storybook-addon-dir',
   ],
   framework: {
     name: '@storybook/react-webpack5',
