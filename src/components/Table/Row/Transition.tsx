@@ -37,7 +37,7 @@ export const Transition = ({
 }: TransitionProps) => {
   const [status, setStatus] = useState<Status>(_in ? 'entered' : 'exited');
   const statusRef = useRef(_in ? 'entered' : 'exited');
-  const timer = useRef(0);
+  const timer = useRef<any>(0);
 
   useEffect(() => {
     return () => {
@@ -122,11 +122,11 @@ export const Transition = ({
   };
 
   const cancelCallback = () => {
-    window.clearTimeout(timer.current);
+    clearTimeout(timer.current);
   };
 
   const onTransitionEnd = (timeout: number, handler: () => void) => {
-    timer.current = window.setTimeout(handler, timeout);
+    timer.current = setTimeout(handler, timeout);
   };
 
   return (
