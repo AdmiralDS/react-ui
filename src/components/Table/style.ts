@@ -408,20 +408,17 @@ export const SimpleRow = styled.div<{
     `}
 `;
 
-export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
+export const ExpandedRowWrapper = styled.div`
   display: inline-flex;
   overflow: hidden;
   transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  height: ${(p) => (!p.opened ? 0 : 'auto')};
 `;
-// transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-// max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
 
 export const ExpandedRowContent = styled.div`
   display: flex;
+  flex: 1 0 auto;
   height: fit-content;
   box-sizing: border-box;
-  flex: 1 0 auto;
   padding: 0 12px 11px 12px;
 `;
 

@@ -1,11 +1,21 @@
-import * as React from 'react';
+import { useEffect, useRef } from 'react';
 
-import { Transition } from '../Transition';
-import { ExpandedRow, ExpandedRowContent } from '#src/components/Table/style';
+import { Transition } from '#src/components/Table/Row/Transition';
+import { ExpandedRowWrapper, ExpandedRowContent } from '#src/components/Table/style';
+import type { TableRow } from '#src/components/Table/types';
 
-export const ExpandedRowComp = ({ row, rowRef }: any) => {
-  const nodeRef = React.useRef<HTMLDivElement>(null);
-  const expandedContentRef = React.useRef<HTMLDivElement>(null);
+type ExpandedRowProps = {
+  row: TableRow;
+  rowRef: React.RefObject<HTMLElement>;
+};
+
+export const ExpandedRow = ({ row, rowRef }: ExpandedRowProps) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setWrapperHeight(row.expanded ? 'auto' : '0px');
+  }, []);
 
   const handleExpandedMouseEnter = () => {
     rowRef.current?.classList.remove('hoverable');
@@ -14,47 +24,47 @@ export const ExpandedRowComp = ({ row, rowRef }: any) => {
     rowRef.current?.classList.add('hoverable');
   };
 
+  const setWrapperHeight = (height?: string) => {
+    let wrapperHeight = height ?? (contentRef.current?.clientHeight || 0) + 'px';
+    if (wrapperRef.current) {
+      wrapperRef.current.style.height = wrapperHeight;
+    }
+  };
+
+  const handleTransitionEnter = () => {
+    setWrapperHeight('0px');
+  };
+  const handleTransitionEntering = () => {
+    setWrapperHeight();
+  };
+  const handleTransitionEntered = () => {
+    setWrapperHeight('auto');
+  };
+  const handleTransitionExit = () => {
+    setWrapperHeight();
+  };
+  const handleTransitionExiting = () => {
+    setWrapperHeight('0px');
+  };
+
   return (
     <Transition
       in={!!row.expanded}
       timeout={250}
-      onEnter={() => {
-        console.log('enter');
-        // if (nodeRef.current) nodeRef.current.style.height = '0px';
-      }}
-      onEntered={() => {
-        console.log('entered');
-        // if (nodeRef.current) nodeRef.current.style.height = 'auto';
-      }}
-      onEntering={() => {
-        console.log('entering');
-        const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
-        // if (nodeRef.current) nodeRef.current.style.height = height;
-      }}
-      onExit={() => {
-        console.log('exit');
-        const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
-        // if (nodeRef.current) nodeRef.current.style.height = height;
-      }}
-      onExited={() => {
-        console.log('exited');
-      }}
-      onExiting={() => {
-        console.log('exiting');
-        // if (nodeRef.current) nodeRef.current.style.height = '0px';
-      }}
+      onEnter={handleTransitionEnter}
+      onEntered={handleTransitionEntered}
+      onEntering={handleTransitionEntering}
+      onExit={handleTransitionExit}
+      onExiting={handleTransitionExiting}
     >
-      <ExpandedRow
-        ref={nodeRef}
-        opened={row.expanded}
-        // contentMaxHeight="90vh"
-        // contentMaxHeight={row.expanded ? expandedContentHeight : 0}
+      <ExpandedRowWrapper
+        ref={wrapperRef}
         className="tr-expanded"
         onMouseEnter={handleExpandedMouseEnter}
         onMouseLeave={handleExpandedMouseLeave}
       >
-        <ExpandedRowContent ref={expandedContentRef}>{row.expandedRowRender(row)}</ExpandedRowContent>
-      </ExpandedRow>
+        <ExpandedRowContent ref={contentRef}>{row.expandedRowRender?.(row)}</ExpandedRowContent>
+      </ExpandedRowWrapper>
     </Transition>
   );
 };

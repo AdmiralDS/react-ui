@@ -1,10 +1,9 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
-import { ExpandedRow, ExpandedRowContent, Row, SimpleRow } from '#src/components/Table/style';
+import { Row, SimpleRow } from '#src/components/Table/style';
 import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
-import { Transition } from '../Transition';
-import { ExpandedRowComp } from './ExpandedRow';
+import { ExpandedRow } from '#src/components/Table/Row/ExpandedRow';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер таблицы */
@@ -53,25 +52,6 @@ export const RowWrapper = ({
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
-  // const nodeRef = React.useRef<HTMLDivElement>(null);
-  // const expandedContentRef = React.useRef<HTMLDivElement>(null);
-
-  // const [expandedContentHeight, setExpandedContentHeight] = React.useState('auto');
-
-  // React.useLayoutEffect(() => {
-  //   if (expandedContentRef.current) {
-  //     const resizeObserver = new ResizeObserver((entries) => {
-  //       entries.forEach((entry) => {
-  //         const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
-  //         setExpandedContentHeight(height);
-  //       });
-  //     });
-  //     resizeObserver.observe(expandedContentRef.current);
-  //     return () => {
-  //       resizeObserver.disconnect();
-  //     };
-  //   }
-  // }, [row.expandedRowRender]);
 
   const handleRowClick = (rowId: RowId) => {
     onRowClick?.(rowId);
@@ -85,13 +65,6 @@ export const RowWrapper = ({
     // клик по меню не должен вызывать событие клика по строке
     e.stopPropagation();
   };
-
-  // const handleExpandedMouseEnter = () => {
-  //   rowRef.current?.classList.remove('hoverable');
-  // };
-  // const handleExpandedMouseLeave = () => {
-  //   rowRef.current?.classList.add('hoverable');
-  // };
 
   return (
     <Row
@@ -132,50 +105,7 @@ export const RowWrapper = ({
           showRowsActions={showRowsActions}
         />
       )}
-      {row.expandedRowRender && (
-        // <Transition
-        //   in={!!row.expanded}
-        //   timeout={250}
-        //   onEnter={() => {
-        //     console.log('enter');
-        //     if (nodeRef.current) nodeRef.current.style.height = '0px';
-        //   }}
-        //   onEntered={() => {
-        //     console.log('entered');
-        //     if (nodeRef.current) nodeRef.current.style.height = 'auto';
-        //   }}
-        //   onEntering={() => {
-        //     console.log('entering');
-        //     const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
-        //     if (nodeRef.current) nodeRef.current.style.height = height;
-        //   }}
-        //   onExit={() => {
-        //     console.log('exit');
-        //     const height = (expandedContentRef.current?.clientHeight || 0) + 'px';
-        //     if (nodeRef.current) nodeRef.current.style.height = height;
-        //   }}
-        //   onExited={() => {
-        //     console.log('exited');
-        //   }}
-        //   onExiting={() => {
-        //     console.log('exiting');
-        //     if (nodeRef.current) nodeRef.current.style.height = '0px';
-        //   }}
-        // >
-        //   <ExpandedRow
-        //     ref={nodeRef}
-        //     opened={row.expanded}
-        //     // contentMaxHeight="90vh"
-        //     // contentMaxHeight={row.expanded ? expandedContentHeight : 0}
-        //     className="tr-expanded"
-        //     onMouseEnter={handleExpandedMouseEnter}
-        //     onMouseLeave={handleExpandedMouseLeave}
-        //   >
-        //     <ExpandedRowContent ref={expandedContentRef}>{row.expandedRowRender(row)}</ExpandedRowContent>
-        //   </ExpandedRow>
-        // </Transition>
-        <ExpandedRowComp row={row} rowRef={rowRef} />
-      )}
+      {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
     </Row>
   );
 };
