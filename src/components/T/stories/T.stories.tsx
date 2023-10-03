@@ -18,11 +18,19 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом
-    (https://styled-components.com/docs/api#as-polymorphic-prop) и стилем шрифта.
+    Text — компонент для работы с Typography. Компонент отображает текст{' '}
+    <a target="_blank" href="https://styled-components.com/docs/api#as-polymorphic-prop" rel="noopener noreferrer">
+      в соответствии с заданными HTML-тегом
+    </a>{' '}
+    и стилем шрифта.
     <br />
-    Важно: при использовании компонента T без стилизации необходимо использовать prop "as". Если необходимо
-    кастомизировать компонент (с помощью styled(T)), следует использовать prop forwardedAs.
+    <br />
+    <strong>!!!ВАЖНО:</strong> при использовании компонента T без стилизации необходимо использовать prop "as". Если
+    необходимо кастомизировать компонент (с помощью styled(T)),{' '}
+    <a target="_blank" href="https://styled-components.com/docs/api#forwardedas-prop" rel="noopener noreferrer">
+      следует использовать prop forwardedAs
+    </a>
+    .
   </Desc>
 );
 
