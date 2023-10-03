@@ -5,18 +5,30 @@ import { ThemeProvider } from 'styled-components';
 import { DateInput } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, DateInputProps, Theme } from '@admiral-ds/react-ui';
 
-export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+export const DateInputPlaygroundTemplate = ({
+  placeholder,
+  ...props
+}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+  const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
+  const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
+
   useEffect(() => {
     if (props.value !== undefined) {
       setValue(String(props.value));
     }
   }, [props.value]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  useEffect(() => {
+    if (placeholder) {
+      setPlaceholderValue(placeholder);
+    }
+  }, [placeholder]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
@@ -29,7 +41,7 @@ export const DateInputPlaygroundTemplate = (props: DateInputProps & { themeBorde
         {...props}
         value={localValue}
         onChange={handleChange}
-        placeholder={'Some placeholder'}
+        placeholder={placeholderValue}
         style={{ maxWidth: 300 }}
         dropContainerClassName="dropContainerClass"
       />

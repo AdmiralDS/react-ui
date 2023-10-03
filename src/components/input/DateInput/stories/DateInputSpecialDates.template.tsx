@@ -9,8 +9,13 @@ const weekendMixin = css<{ disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
 `;
 
-export const DateInputSpecialDatesTemplate = (props: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+export const DateInputSpecialDatesTemplate = ({
+  placeholder,
+  ...props
+}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+  const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
+  const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
+
   useEffect(() => {
     if (props.value !== undefined) {
       setValue(String(props.value));
@@ -21,6 +26,12 @@ export const DateInputSpecialDatesTemplate = (props: DateInputProps & { themeBor
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  useEffect(() => {
+    if (placeholder) {
+      setPlaceholderValue(placeholder);
+    }
+  }, [placeholder]);
 
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
@@ -40,7 +51,7 @@ export const DateInputSpecialDatesTemplate = (props: DateInputProps & { themeBor
         {...props}
         value={localValue}
         onChange={handleChange}
-        placeholder={'Some placeholder'}
+        placeholder={placeholderValue}
         style={{ maxWidth: 300 }}
         dropContainerClassName="dropContainerClass"
         highlightSpecialDay={highlightWeekend}

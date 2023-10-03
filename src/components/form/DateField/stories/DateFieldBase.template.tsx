@@ -12,8 +12,10 @@ const FormContainer = styled.form`
 
 export const DateFieldBaseTemplate = ({
   label = 'Label',
+  placeholder,
   ...props
 }: DateFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+  const [placeholderValue, setPlaceholderValue] = React.useState<string>(placeholder || 'Это placeholder');
   const [localValue, setValue] = React.useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +40,12 @@ export const DateFieldBaseTemplate = ({
     `);
   };
 
+  React.useEffect(() => {
+    if (placeholder) {
+      setPlaceholderValue(placeholder);
+    }
+  }, [placeholder]);
+
   function swapBorder(theme: Theme): Theme {
     theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
     return theme;
@@ -52,7 +60,7 @@ export const DateFieldBaseTemplate = ({
           value={localValue}
           onChange={handleChange}
           id={'date 1'}
-          placeholder="Это placeholder"
+          placeholder={placeholderValue}
           dropContainerClassName="dropContainerClass"
           label={label}
         />
