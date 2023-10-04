@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Checkbox, T } from '@admiral-ds/react-ui';
-import type { CheckBoxProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CheckBoxProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Container = styled.div`
   display: flex;
@@ -25,19 +26,17 @@ const Row = styled.div`
   }
 `;
 
-export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const CheckboxDemoTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
   React.useEffect(() => {
     setChecked(Boolean(props.checked));
   }, [props.checked]);
   return (
     <>
-      <ThemeProvider theme={swapBorder}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
         <Container>
           <T font="Header/H6" as="div">
             Состояния
@@ -79,21 +78,21 @@ export const CheckboxDemoTemplate = (props: CheckBoxProps & { themeBorderKind?: 
           <Row>
             <Checkbox error />
             <Checkbox dimension="s" error />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Состояние ошибки
             </T>
           </Row>
           <Row>
             <Checkbox readOnly />
             <Checkbox dimension="s" readOnly />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Readonly
             </T>
           </Row>
           <Row>
             <Checkbox readOnly defaultChecked />
             <Checkbox dimension="s" readOnly defaultChecked />
-            <T font="Body/Body 1 Long" as="div">
+            <T font="Body/Body 1 Long" forwardedAs="div">
               Readonly active
             </T>
           </Row>

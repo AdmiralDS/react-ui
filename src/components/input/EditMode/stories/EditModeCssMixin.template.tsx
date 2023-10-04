@@ -1,8 +1,9 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { EditMode } from '@admiral-ds/react-ui';
-import type { EditModeProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { EditModeProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { css, ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const cssMixin = css`
   width: 300px;
@@ -10,13 +11,9 @@ const cssMixin = css`
 
 export const EditModeCssMixinTemplate = ({
   value = 'Привет!',
+  themeBorderKind,
   ...props
 }: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +22,7 @@ export const EditModeCssMixinTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <EditMode {...props} value={localValue} onChange={handleChange} containerCssMixin={cssMixin} />
     </ThemeProvider>
   );

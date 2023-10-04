@@ -3,11 +3,11 @@
 exports[`CheckboxField should render component with disabled state 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c8 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -15,15 +15,15 @@ exports[`CheckboxField should render component with disabled state 1`] = `
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -34,29 +34,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -64,64 +59,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -133,7 +126,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -146,7 +139,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -158,26 +151,26 @@ fieldset:disabled .c0 {
 <body>
     <div>
       <label
-        class="c0 c1"
+        class="c0"
         data-field-id="checkboxField"
         disabled=""
       >
         <div
-          class="c2 c3 c4"
+          class="c1 c2"
         >
           <input
-            class="c5"
+            class="c3"
             data-testid="element"
             disabled=""
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c6 c7"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c6"
               focusable="false"
             />
           </div>
@@ -186,11 +179,11 @@ fieldset:disabled .c0 {
       </label>
     </div>
   </body>,
-  "container": .c8 {
+  "container": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -198,15 +191,15 @@ fieldset:disabled .c0 {
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -217,29 +210,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -247,64 +235,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -316,7 +302,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -329,7 +315,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -340,26 +326,26 @@ fieldset:disabled .c0 {
 
 <div>
     <label
-      class="c0 c1"
+      class="c0"
       data-field-id="checkboxField"
       disabled=""
     >
       <div
-        class="c2 c3 c4"
+        class="c1 c2"
       >
         <input
-          class="c5"
+          class="c3"
           data-testid="element"
           disabled=""
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c6 c7"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c6"
             focusable="false"
           />
         </div>
@@ -424,11 +410,11 @@ fieldset:disabled .c0 {
 exports[`CheckboxField should render component with required properties 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c8 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -436,15 +422,15 @@ exports[`CheckboxField should render component with required properties 1`] = `
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -455,29 +441,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -485,64 +466,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -554,7 +533,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -567,7 +546,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -579,24 +558,24 @@ fieldset:disabled .c0 {
 <body>
     <div>
       <label
-        class="c0 c1"
+        class="c0"
         data-field-id="checkboxField"
       >
         <div
-          class="c2 c3 c4"
+          class="c1 c2"
         >
           <input
-            class="c5"
+            class="c3"
             data-testid="element"
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c6 c7"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c6"
               focusable="false"
             />
           </div>
@@ -605,11 +584,11 @@ fieldset:disabled .c0 {
       </label>
     </div>
   </body>,
-  "container": .c8 {
+  "container": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -617,15 +596,15 @@ fieldset:disabled .c0 {
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -636,29 +615,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -666,64 +640,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -735,7 +707,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -748,7 +720,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -759,24 +731,24 @@ fieldset:disabled .c0 {
 
 <div>
     <label
-      class="c0 c1"
+      class="c0"
       data-field-id="checkboxField"
     >
       <div
-        class="c2 c3 c4"
+        class="c1 c2"
       >
         <input
-          class="c5"
+          class="c3"
           data-testid="element"
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c6 c7"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c6"
             focusable="false"
           />
         </div>
@@ -841,11 +813,11 @@ fieldset:disabled .c0 {
 exports[`CheckboxField should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c8 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -853,15 +825,15 @@ exports[`CheckboxField should render component with small dimension 1`] = `
   height: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -872,29 +844,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -902,64 +869,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -971,7 +936,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -984,7 +949,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -996,24 +961,24 @@ fieldset:disabled .c0 {
 <body>
     <div>
       <label
-        class="c0 c1"
+        class="c0"
         data-field-id="checkboxField"
       >
         <div
-          class="c2 c3 c4"
+          class="c1 c2"
         >
           <input
-            class="c5"
+            class="c3"
             data-testid="element"
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c6 c7"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c6"
               focusable="false"
             />
           </div>
@@ -1022,11 +987,11 @@ fieldset:disabled .c0 {
       </label>
     </div>
   </body>,
-  "container": .c8 {
+  "container": .c6 {
   pointer-events: none;
 }
 
-.c3 {
+.c1 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1034,15 +999,15 @@ fieldset:disabled .c0 {
   height: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c2 {
+fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c7 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1053,29 +1018,24 @@ fieldset[data-dimension='s'] .c2 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c7 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1083,64 +1043,62 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c5::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c5:checked + .c6 {
+.c3:checked+.c4 {
   background-color: #0062FF;
   border: none;
 }
 
-.c5:disabled {
+.c3:disabled {
   pointer-events: none;
 }
 
-.c5:disabled + .c6 {
+.c3:disabled+.c4 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c5:not(:checked) + .c6 > * {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c5:hover:not(:disabled)::after,
-.c5:focus:not(:disabled) + .c5:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c5:checked:disabled + .c6 {
+.c3:checked:disabled+.c4 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c5:checked:disabled + .c6 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c5:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c4 {
+.c2 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c1 {
+.c0 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -1152,7 +1110,7 @@ fieldset[data-dimension='s'] .c2 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1165,7 +1123,7 @@ fieldset[data-dimension='s'] .c0 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1176,24 +1134,24 @@ fieldset:disabled .c0 {
 
 <div>
     <label
-      class="c0 c1"
+      class="c0"
       data-field-id="checkboxField"
     >
       <div
-        class="c2 c3 c4"
+        class="c1 c2"
       >
         <input
-          class="c5"
+          class="c3"
           data-testid="element"
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c6 c7"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c6"
             focusable="false"
           />
         </div>

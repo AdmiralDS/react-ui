@@ -1,5 +1,7 @@
+import type { ChangeEvent, MouseEvent, FocusEvent, KeyboardEvent } from 'react';
 import { useState, useRef, useEffect, forwardRef, Children } from 'react';
 import styled, { css } from 'styled-components';
+
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
@@ -17,9 +19,9 @@ import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } fro
 import { clearValue, fitToCurrency, validateThousand } from './utils';
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
-const preventDefault = (e: React.MouseEvent) => e.preventDefault();
+const preventDefault = (e: MouseEvent) => e.preventDefault();
 
 const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
   -webkit-touch-callout: none;
@@ -39,7 +41,7 @@ const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
       : ''}
 `;
 
-const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -71,10 +73,10 @@ const Content = styled.div<ExtraProps>`
 
 const Wrapper = styled(HeightLimitedContainer)<{
   disabled?: boolean;
-  dimension?: ComponentDimension;
+  $dimension?: ComponentDimension;
   readOnly?: boolean;
-  skeleton?: boolean;
-  status?: TextInputProps['status'];
+  $skeleton?: boolean;
+  $status?: TextInputProps['status'];
 }>`
   background-color: ${(props) => {
     if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
@@ -82,15 +84,15 @@ const Wrapper = styled(HeightLimitedContainer)<{
   }};
   color: ${(props) =>
     props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
 
   &:hover:not(:focus-within) ${BorderedDiv} {
     border: 1px solid
       ${(props) => {
         if (props.disabled || props.readOnly) return 'transparent';
-        if (props.status === 'error') return props.theme.color['Error/Error 70'];
-        if (props.status === 'success') return props.theme.color['Success/Success 60'];
+        if (props.$status === 'error') return props.theme.color['Error/Error 70'];
+        if (props.$status === 'success') return props.theme.color['Success/Success 60'];
         return props.theme.color['Neutral/Neutral 60'];
       }};
   }
@@ -251,7 +253,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
      * если precision > 0, количество цифр после разделителя decimal должно быть равно precision.
      * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
      */
-    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
       const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);
       if (inputRef.current && newValue !== event.target.value) {
         changeInputData(inputRef.current, { value: newValue });
@@ -259,12 +261,12 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       onBlur?.(event);
     };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
       setInnerValueState(event.currentTarget.value);
       onChange?.(event);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
       switch (code) {
         case keyboardKey.ArrowUp: {
@@ -286,15 +288,15 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         className={className}
         style={style}
         disabled={props.disabled}
-        dimension={props.dimension}
+        $dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
         data-disable-copying={props.disableCopying ? true : undefined}
         onMouseDown={props.disableCopying ? preventDefault : undefined}
-        skeleton={skeleton}
-        status={status}
+        $skeleton={skeleton}
+        $status={status}
       >
-        <Content dimension={props.dimension} iconCount={iconCount} onKeyDown={handleKeyDown}>
+        <Content $dimension={props.dimension} $iconCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}
@@ -314,7 +316,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           />
         </Content>
         {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={props.dimension}>
+          <IconPanel disabled={props.disabled} $dimension={props.dimension}>
             {iconArray}
           </IconPanel>
         )}

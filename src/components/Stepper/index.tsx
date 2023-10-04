@@ -1,5 +1,5 @@
+import { Children, cloneElement, isValidElement, useRef, useMemo, useEffect } from 'react';
 import type { FC, HTMLAttributes } from 'react';
-import * as React from 'react';
 
 import { StepperContext } from './StepperContext';
 import { List } from './style';
@@ -45,28 +45,28 @@ export const Stepper: FC<StepperProps> = ({
   children,
   ...props
 }) => {
-  const listRef = React.useRef<HTMLUListElement>(null);
-  const steps = React.Children.toArray(children).map((step, index) => {
-    if (!React.isValidElement(step)) {
+  const listRef = useRef<HTMLUListElement>(null);
+  const steps = Children.toArray(children).map((step, index) => {
+    if (!isValidElement(step)) {
       return null;
     }
     return activeStep === index
-      ? React.cloneElement(step, {
+      ? cloneElement(step, {
           index,
           role: 'listitem',
           'aria-current': 'step',
-          hideLine: index === React.Children.toArray(children).length - 1 && hideLastStepLine,
+          hideLine: index === Children.toArray(children).length - 1 && hideLastStepLine,
           ...step.props,
         })
-      : React.cloneElement(step, {
+      : cloneElement(step, {
           index,
           role: 'listitem',
-          hideLine: index === React.Children.toArray(children).length - 1 && hideLastStepLine,
+          hideLine: index === Children.toArray(children).length - 1 && hideLastStepLine,
           ...step.props,
         });
   });
   const stepsAmount = steps.length;
-  const contextValue = React.useMemo(
+  const contextValue = useMemo(
     () => ({
       activeStep,
       orientation,
@@ -78,7 +78,7 @@ export const Stepper: FC<StepperProps> = ({
     [activeStep, orientation, lineClamp, stepWidth, stepsAmount, mobile],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (listRef.current && mobile && orientation === 'horizontal') {
       const activeNode = (listRef.current.childNodes[activeStep] || listRef.current.firstChild) as HTMLElement;
       listRef.current.scrollLeft = activeStep === 0 ? activeNode.offsetLeft : activeNode.offsetLeft - 16;
@@ -87,7 +87,7 @@ export const Stepper: FC<StepperProps> = ({
 
   return (
     <StepperContext.Provider value={contextValue}>
-      <List ref={listRef} role="list" orientation={orientation} {...props}>
+      <List ref={listRef} role="list" $orientation={orientation} {...props}>
         {steps}
       </List>
     </StepperContext.Provider>

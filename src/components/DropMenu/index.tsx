@@ -7,16 +7,16 @@ import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 
-const StyledMenu = styled(Menu)<{ width?: string }>`
-  width: ${({ width }) => (width ? width : 'auto')};
+const StyledMenu = styled(Menu)<{ $width?: string }>`
+  width: ${({ $width }) => ($width ? $width : 'auto')};
 `;
 const DropMenuContainer = styled(StyledDropdownContainer)<{
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $dropContainerCssMixin?: RuleSet<object>;
 }>`
-  ${(p) => p.dropContainerCssMixin || ''}
+  ${(p) => p.$dropContainerCssMixin || ''}
 `;
 
 export interface RenderContentProps {
@@ -99,7 +99,7 @@ export interface DropMenuProps
   /** Компонент, для которого необходимо Menu */
   renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -228,14 +228,14 @@ export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
             alignSelf={alignSelf}
             targetElement={targetElement || alignMenuRef?.current || btnRef.current}
             onClickOutside={clickOutside}
-            dropContainerCssMixin={dropContainerCssMixin}
+            $dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
             {...props}
           >
             <StyledMenu
               maxHeight={menuMaxHeight}
-              width={menuWidth}
+              $width={menuWidth}
               model={items}
               selected={selected}
               onSelectItem={handleSelectItem}

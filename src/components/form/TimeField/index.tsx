@@ -53,7 +53,6 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     disabled,
     skeleton,
     ...restProps,
-    portalTargetRef: fieldRef,
   };
   return (
     <Field {...fieldContainerProps}>

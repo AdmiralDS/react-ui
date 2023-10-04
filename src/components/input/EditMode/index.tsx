@@ -1,7 +1,8 @@
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, MouseEvent } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
+
 import { Button } from '#src/components/Button';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { TextInput } from '#src/components/input/TextInput';
@@ -113,10 +114,10 @@ const CancelIcon = styled(CloseOutline)`
   ${iconStyle}
 `;
 
-const Wrapper = styled.div<{ cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>> }>`
+const Wrapper = styled.div<{ $cssMixin?: RuleSet<object> }>`
   display: flex;
   align-items: center;
-  ${({ cssMixin }) => cssMixin || ''};
+  ${({ $cssMixin }) => $cssMixin || ''};
 `;
 
 const MultilineMixin = css`
@@ -217,7 +218,7 @@ const Text = styled.div<{ $multiline?: boolean }>`
   }
 `;
 
-const stopEvent = (e: React.MouseEvent) => e.preventDefault();
+const stopEvent = (e: MouseEvent) => e.preventDefault();
 
 type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
@@ -231,7 +232,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
   bold?: boolean;
   /** Позволяет добавлять миксин на контейнер компонента, созданный с помощью styled css. */
-  containerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  containerCssMixin?: RuleSet<object>;
   /** Функция обработчика события нажатия кнопки начала редактирования
    * @param value - значение поля ввода для редактирования */
   onEdit?: (value: string | number) => void;
@@ -330,7 +331,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
         data-disabled={disabled}
-        cssMixin={containerCssMixin}
+        $cssMixin={containerCssMixin}
         ref={wrapperRef}
         data-disable-copying={props.disableCopying ? true : undefined}
         {...(props.disableCopying && {

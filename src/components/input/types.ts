@@ -7,10 +7,10 @@ export type InputStatus = (typeof INPUT_STATUS_VALUES)[number];
 
 export interface ExtraProps {
   /** Делает высоту компонента больше или меньше обычной */
-  dimension?: ComponentDimension;
+  $dimension?: ComponentDimension;
 
   /** Количество иконок отображаемых справа */
-  iconCount?: number;
+  $iconCount?: number;
 
-  autoHeight?: boolean;
+  $autoHeight?: boolean;
 }

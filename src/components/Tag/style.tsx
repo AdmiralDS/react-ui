@@ -10,9 +10,9 @@ const TAG_PADDING_TOP_M = 3;
 const TAG_PADDING_LEFT_S = 5;
 const TAG_PADDING_LEFT_M = 7;
 
-const circleBackground = css<{ background: TagKind | string }>`
-  background: ${({ background, theme }) => {
-    switch (background) {
+const circleBackground = css<{ $background: TagKind | string }>`
+  background: ${({ $background, theme }) => {
+    switch ($background) {
       case 'success':
       case 'green':
         return theme.color['Success/Success 50 Main'];
@@ -26,14 +26,14 @@ const circleBackground = css<{ background: TagKind | string }>`
       case 'orange':
         return theme.color['Warning/Warning 50 Main'];
       default:
-        return background;
+        return $background;
     }
   }};
 `;
 
-const wrapperBackground = css<{ background: TagKind | string }>`
-  background: ${({ background, theme }) => {
-    switch (background) {
+const wrapperBackground = css<{ $background: TagKind | string }>`
+  background: ${({ $background, theme }) => {
+    switch ($background) {
       case 'success':
       case 'green':
         return theme.color['Success/Success 10'];
@@ -49,15 +49,15 @@ const wrapperBackground = css<{ background: TagKind | string }>`
       case 'neutral':
         return theme.color['Neutral/Neutral 10'];
       default:
-        return background || theme.color['Neutral/Neutral 10'];
+        return $background || theme.color['Neutral/Neutral 10'];
     }
   }};
 `;
 
-const wrapperBorder = css<{ border: TagKind | string }>`
+const wrapperBorder = css<{ $border: TagKind | string }>`
   border: 1px solid
-    ${({ border, theme }) => {
-      switch (border) {
+    ${({ $border, theme }) => {
+      switch ($border) {
         case 'success':
         case 'green':
           return theme.color['Success/Success 40'];
@@ -73,14 +73,14 @@ const wrapperBorder = css<{ border: TagKind | string }>`
         case 'neutral':
           return theme.color['Neutral/Neutral 40'];
         default:
-          return border || theme.color['Neutral/Neutral 40'];
+          return $border || theme.color['Neutral/Neutral 40'];
       }
     }};
 `;
 
-const wrapperHover = css<{ backgroundHover: TagKind | string }>`
-  background: ${({ backgroundHover, theme }) => {
-    switch (backgroundHover) {
+const wrapperHover = css<{ $backgroundHover: TagKind | string }>`
+  background: ${({ $backgroundHover, theme }) => {
+    switch ($backgroundHover) {
       case 'success':
       case 'green':
         return theme.color['Success/Success 20'];
@@ -96,49 +96,48 @@ const wrapperHover = css<{ backgroundHover: TagKind | string }>`
       case 'neutral':
         return theme.color['Neutral/Neutral 20'];
       default:
-        return backgroundHover || theme.color['Neutral/Neutral 20'];
+        return $backgroundHover || theme.color['Neutral/Neutral 20'];
     }
   }};
 `;
 
 export const Wrapper = styled.button<{
-  dimension?: TagDimension;
-  width?: number | string;
-  clickable: boolean;
-  as?: React.ElementType;
-  statusViaBackground?: boolean;
-  border: TagKind | string;
-  background: TagKind | string;
-  backgroundHover: TagKind | string;
+  $dimension?: TagDimension;
+  $width?: number | string;
+  $clickable: boolean;
+  $statusViaBackground?: boolean;
+  $border: TagKind | string;
+  $background: TagKind | string;
+  $backgroundHover: TagKind | string;
 }>`
   position: relative;
   box-sizing: border-box;
   max-width: 100%;
 
-  ${({ dimension }) => `
-    height: ${dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
-    padding: ${dimension === 's' ? TAG_PADDING_TOP_S : TAG_PADDING_TOP_M}px ${
-      dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
+  ${({ $dimension }) => `
+    height: ${$dimension === 's' ? TAG_HEIGHT_S : TAG_HEIGHT_M}px;
+    padding: ${$dimension === 's' ? TAG_PADDING_TOP_S : TAG_PADDING_TOP_M}px ${
+      $dimension === 's' ? TAG_PADDING_LEFT_S : TAG_PADDING_LEFT_M
     }px;
   `}
 
-  ${({ width }) => width && `width: ${typeof width === 'number' ? `${width}px` : width};`}
+  ${({ $width }) => $width && `width: ${typeof $width === 'number' ? `${$width}px` : $width};`}
   border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
-  ${({ statusViaBackground, theme }) =>
-    statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
-  ${({ statusViaBackground, theme }) =>
-    statusViaBackground ? wrapperBorder : `border: 1px solid ${theme.color['Neutral/Neutral 10']};`}
+  ${({ $statusViaBackground, theme }) =>
+    $statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
+  ${({ $statusViaBackground, theme }) =>
+    $statusViaBackground ? wrapperBorder : `border: 1px solid ${theme.color['Neutral/Neutral 10']};`}
 
   display: inline-flex;
   align-items: center;
-  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
 
   &:hover,
   &:active {
-    ${({ statusViaBackground, theme, clickable }) =>
-      clickable && !statusViaBackground ? `border: 1px solid ${theme.color['Neutral/Neutral 20']};` : ''}
-    ${({ statusViaBackground, theme, clickable }) =>
-      clickable ? (statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
+    ${({ $statusViaBackground, theme, $clickable }) =>
+      $clickable && !$statusViaBackground ? `border: 1px solid ${theme.color['Neutral/Neutral 20']};` : ''}
+    ${({ $statusViaBackground, theme, $clickable }) =>
+      $clickable ? ($statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
   }
 
   &:focus-visible {
@@ -167,7 +166,7 @@ export const Text = styled.span`
   ${typography['Caption/Caption 1']}
 `;
 
-export const TagCircle = styled.div<{ background: TagKind | string }>`
+export const TagCircle = styled.div<{ $background: TagKind | string }>`
   display: flex;
   flex-shrink: 0;
   width: 8px;

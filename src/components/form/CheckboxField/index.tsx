@@ -1,5 +1,7 @@
-import * as React from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
+
 import { typography } from '#src/components/Typography';
 import type { CheckBoxProps } from '#src/components/Checkbox';
 import { Checkbox } from '#src/components/Checkbox';
@@ -9,14 +11,14 @@ import { uid } from '#src/components/common/uid';
 
 export interface CheckboxFieldProps extends Omit<CheckBoxProps, 'children'> {
   /** Текст будет виден ниже компонента */
-  extraText?: React.ReactNode;
+  extraText?: ReactNode;
   /** Текст или компонент для рендеринга лейбла */
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
-export const width = css<{ dimension: CheckboxDimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+export const width = css<{ $dimension: CheckboxDimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -31,9 +33,9 @@ export const width = css<{ dimension: CheckboxDimension }>`
   }
 `;
 
-export const height = css<{ dimension: CheckboxDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+export const height = css<{ $dimension: CheckboxDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -55,7 +57,7 @@ const PositionedCheckbox = styled(Checkbox)`
 `;
 
 const Label = styled.label<{
-  dimension: CheckboxDimension;
+  $dimension: CheckboxDimension;
   disabled?: boolean;
   readOnly?: boolean;
 }>`
@@ -66,9 +68,9 @@ const Label = styled.label<{
 
   pointer-events: ${(props) => (props.disabled || props.readOnly ? 'none' : 'auto')};
 
-  padding-left: ${(props) => (props.dimension === 's' ? 28 : 32)}px;
+  padding-left: ${(props) => (props.$dimension === 's' ? 28 : 32)}px;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   fieldset[data-dimension='s'] & {
     padding-left: 28px;
     ${typography['Body/Body 2 Short']}
@@ -85,11 +87,11 @@ const Label = styled.label<{
 `;
 
 const ExtrasContainer = styled.div<{
-  dimension: CheckboxDimension;
+  $dimension: CheckboxDimension;
 }>`
   padding-top: 4px;
 
-  ${(props) => (props.dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${(props) => (props.$dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   fieldset[data-dimension='s'] & {
     ${typography['Caption/Caption 1']}
   }
@@ -101,7 +103,7 @@ const ExtrasContainer = styled.div<{
   }
 `;
 
-export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldProps>(
+export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
   ({ extraText, className, children, dimension = 'm', id = uid(), name, ...props }, ref) => {
     const fieldContainerProps = {
       'data-field-id': id,
@@ -113,14 +115,14 @@ export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxFieldPro
     return (
       <Label
         className={className}
-        dimension={dimension}
+        $dimension={dimension}
         disabled={props.disabled}
         readOnly={props.readOnly}
         {...fieldContainerProps}
       >
         <PositionedCheckbox dimension={dimension} ref={ref} id={id} name={name} {...props} />
         {children}
-        {extraText && <ExtrasContainer dimension={dimension} children={extraText} />}
+        {extraText && <ExtrasContainer $dimension={dimension} children={extraText} />}
       </Label>
     );
   },

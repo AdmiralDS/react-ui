@@ -1,25 +1,26 @@
-import React from 'react';
-import { uid } from '#src/components/common/uid';
+import type { HTMLAttributes, ReactNode, MouseEvent, FC } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
+import { uid } from '#src/components/common/uid';
 import { Collapse } from './Collapse';
 import { ItemWrapper, ItemTitle, ItemTitleContent, ItemContent, TitleContent, Chevron } from './style';
 
-export interface AccordionItemProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onClick' | 'title'> {
+export interface AccordionItemProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'title'> {
   /** Заголовок компонента */
-  title: React.ReactNode;
+  title: ReactNode;
   /** дефолтное (изначальное) состояние компонента (раскрыт/свернут) при неконтролируемом режиме работы */
   defaultExpanded?: boolean;
   /** состояние компонента (раскрыт/свернут) при контролируемом режиме работы */
   expanded?: boolean;
   /** Колбек на клик по компоненту */
-  onClick?: (title: React.ReactNode, expanded: boolean, event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (title: ReactNode, expanded: boolean, event: MouseEvent<HTMLButtonElement>) => void;
   /**  Устанавливает максимальную высоту, на которую открывается контент до появления вертикального скрола */
   contentMaxHeight?: number | string;
   /** Отключение компонента */
   disabled?: boolean;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
+export const AccordionItem: FC<AccordionItemProps> = ({
   children,
   title,
   id,
@@ -30,15 +31,15 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   disabled,
   ...props
 }) => {
-  const [expanded, setExpanded] = React.useState(defaultExpanded);
+  const [expanded, setExpanded] = useState(defaultExpanded);
   const collapseOpened = userExpanded === undefined ? expanded : userExpanded;
 
-  const itemId = React.useMemo(() => id || uid(), [id]);
+  const itemId = useMemo(() => id || uid(), [id]);
   const ITEM_TITLE_ID = `accordion_title_${itemId}`;
   const ITEM_CONTENT_ID = `accordion_content_${itemId}`;
 
-  const handleClick = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
       if (userExpanded === undefined) {
         onClick?.(title, !expanded, event);
         setExpanded(!expanded);
@@ -49,7 +50,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     [expanded, userExpanded, onClick, title],
   );
   return (
-    <ItemWrapper opened={collapseOpened} data-disabled={disabled} disabled={disabled}>
+    <ItemWrapper $opened={collapseOpened} data-disabled={disabled} disabled={disabled}>
       <ItemTitle
         onClick={handleClick}
         role="button"
@@ -64,9 +65,9 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
           <Chevron aria-hidden />
         </ItemTitleContent>
       </ItemTitle>
-      <Collapse opened={collapseOpened} contentMaxHeight={contentMaxHeight}>
+      <Collapse $opened={collapseOpened} $contentMaxHeight={contentMaxHeight}>
         <ItemContent
-          contentMaxHeight={contentMaxHeight}
+          $contentMaxHeight={contentMaxHeight}
           role="region"
           aria-labelledby={ITEM_TITLE_ID}
           id={ITEM_CONTENT_ID}

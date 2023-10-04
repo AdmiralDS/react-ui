@@ -8,7 +8,8 @@ import {
   NotificationItemTitle,
   TextButton,
 } from '@admiral-ds/react-ui';
-import type { NotificationItemProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { NotificationItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const title = 'Заголовок оповещения';
 const body = 'Тут находится текст короткого оповещения';
@@ -18,15 +19,11 @@ export const NotificationItemBaseTemplate = ({
   status = 'info',
   displayStatusIcon = true,
   isClosable = true,
+  themeBorderKind,
   ...props
 }: NotificationItemProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <NotificationItem {...props} status={status} displayStatusIcon={displayStatusIcon} isClosable={isClosable}>
         <NotificationItemTitle>{title}</NotificationItemTitle>
         <NotificationItemContent>{body}</NotificationItemContent>

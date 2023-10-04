@@ -20,7 +20,7 @@ const CustomOptionWrapper = styled(MenuItem)`
 
 const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
   <CustomOptionWrapper {...props}>
-    <Icon shouldAnimate={shouldAnimate} />
+    <Icon $shouldAnimate={shouldAnimate} />
     <TextWrapper>{text}</TextWrapper>
   </CustomOptionWrapper>
 );

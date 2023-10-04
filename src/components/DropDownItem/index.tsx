@@ -23,11 +23,12 @@ const hoverStyle = css`
 `;
 
 const Item = styled.li<{
-  dimension: DropDownItemDimension;
+  $dimension: DropDownItemDimension;
   selected?: boolean;
-  hovered?: boolean;
-  width?: number;
+  $hovered?: boolean;
+  $width?: number;
   id?: string;
+  disabled?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -42,7 +43,7 @@ const Item = styled.li<{
   ${styleTextMixin}
   ${colorTextMixin}
   ${backgroundColor}
-  ${(p) => p.hovered && hoverStyle};
+  ${(p) => p.$hovered && hoverStyle};
 
   &:hover {
     ${hoverStyle}
@@ -63,10 +64,10 @@ export const DropDownItem = React.forwardRef<HTMLLIElement, DropDownItemProps>(
     return (
       <Item
         ref={ref}
-        dimension={dimension}
+        $dimension={dimension}
         tabIndex={!disabled ? props.tabIndex || 0 : undefined}
         selected={selected}
-        hovered={hovered}
+        $hovered={hovered}
         id={id}
         data-disabled={disabled}
         {...props}

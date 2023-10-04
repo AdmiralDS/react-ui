@@ -9,11 +9,11 @@ import { Button as SecondaryButton } from '#src/components/Button';
 import { Ellipsis, PaginationItem } from '#src/components/PaginationTwo/Items';
 import { getListOfPages, range } from '#src/components/PaginationTwo/utils';
 
-const Wrapper = styled.div<{ mobile?: boolean }>`
+const Wrapper = styled.div<{ $mobile?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
-  flex-direction: ${({ mobile }) => (mobile ? 'column' : 'row')};
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')};
   flex: 1 1 auto;
   list-style: none;
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
@@ -179,7 +179,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const handleBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => onChange?.(event, getNextPage());
 
   return (
-    <Wrapper mobile={mobile} {...props}>
+    <Wrapper $mobile={mobile} {...props}>
       {mobile && showNextBtnMobile && (
         <Button dimension="m" appearance="secondary" disabled={disableNextBtn} onClick={handleBtnClick}>
           Дальше

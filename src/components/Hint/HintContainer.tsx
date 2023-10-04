@@ -130,8 +130,8 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
         <HintDialog
           role="dialog"
           aria-labelledby={anchorId}
-          dimension={dimension}
-          isMobile={isMobile}
+          $dimension={dimension}
+          $isMobile={isMobile}
           data-trigger={visibilityTrigger}
         >
           <HintContent>{content}</HintContent>

@@ -3,7 +3,8 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { SuggestInput } from '@admiral-ds/react-ui';
-import type { SuggestInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SuggestInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const OPTIONS = [
   'text 1',
@@ -22,6 +23,7 @@ const OPTIONS = [
 
 export const SuggestInputPlaygroundTemplate = ({
   placeholder = 'Начните набирать text',
+  themeBorderKind,
   ...props
 }: SuggestInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
@@ -58,13 +60,8 @@ export const SuggestInputPlaygroundTemplate = ({
     }
   }, [isLoading]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <SuggestInput
         className="suggest"
         {...props}

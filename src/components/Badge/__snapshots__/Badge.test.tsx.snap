@@ -6,17 +6,8 @@ exports[`Badge should render component with small dimension 1`] = `
   "baseElement": .c0 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   padding: 0 5px;
   height: 16px;
@@ -26,13 +17,10 @@ exports[`Badge should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -49,17 +37,8 @@ exports[`Badge should render component with small dimension 1`] = `
   "container": .c0 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   padding: 0 5px;
   height: 16px;
@@ -69,13 +48,10 @@ exports[`Badge should render component with small dimension 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -147,17 +123,8 @@ exports[`Badge should render default component 1`] = `
   "baseElement": .c0 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   padding: 0 7px;
   height: 20px;
@@ -167,13 +134,10 @@ exports[`Badge should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -190,17 +154,8 @@ exports[`Badge should render default component 1`] = `
   "container": .c0 {
   position: relative;
   box-sizing: border-box;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
   padding: 0 7px;
   height: 20px;
@@ -210,13 +165,10 @@ exports[`Badge should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   background: #E5E7EB;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 

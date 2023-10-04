@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Calendar, Label, ProgressStepper, Button } from '@admiral-ds/react-ui';
+import { Calendar, Label, ProgressStepper, Button, LIGHT_THEME } from '@admiral-ds/react-ui';
 import type { Locale, Theme } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
@@ -59,9 +59,12 @@ const Wrapper = styled.div`
 `;
 
 const Template1: StoryFn<any> = () => {
-  function setUSALocale(theme: Theme): Theme {
-    const newTheme = { ...theme, currentLocale: 'en-US' };
-    return newTheme;
+  function setUSALocale(theme?: Theme): Theme {
+    if (theme) {
+      return { ...theme, currentLocale: 'en-US' };
+    }
+    LIGHT_THEME.currentLocale = 'en-US';
+    return LIGHT_THEME;
   }
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [selected2, setSelected2] = React.useState<Date | null>(null);
@@ -89,7 +92,7 @@ const Template1: StoryFn<any> = () => {
 };
 
 const Template2: StoryFn<any> = () => {
-  function setDeLocale(theme: Theme): Theme {
+  function setDeLocale(theme?: Theme): Theme {
     const deLocale: Locale = {
       /** Число от 0 до 6, где 0 - это воскресенье */
       firstDayOfWeek: 1,
@@ -146,8 +149,11 @@ const Template2: StoryFn<any> = () => {
         emptyMessage: 'Keine Zufälle',
       },
     };
-    const newTheme = { ...theme, currentLocale: 'de', locales: { ...theme.locales, de: deLocale } };
-    return newTheme;
+    if (theme) {
+      return { ...theme, currentLocale: 'de', locales: { ...theme.locales, de: deLocale } };
+    }
+    LIGHT_THEME.currentLocale = 'de';
+    return LIGHT_THEME;
   }
   const [selected, setSelected] = React.useState<Date | null>(null);
 

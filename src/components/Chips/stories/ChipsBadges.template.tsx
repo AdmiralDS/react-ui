@@ -29,10 +29,10 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -42,7 +42,7 @@ export const ChipsBadgesTemplate = (props: ChipsProps) => {
 
   return (
     <>
-      <WrapperChip dimension="m">
+      <WrapperChip $dimension="m">
         {listDataIcon.map((item) => (
           <Chips
             {...props}
@@ -59,7 +59,7 @@ export const ChipsBadgesTemplate = (props: ChipsProps) => {
         ))}
       </WrapperChip>
       <Separator />
-      <WrapperChip dimension="s">
+      <WrapperChip $dimension="s">
         {listDataIcon.map((item) => (
           <Chips
             {...props}

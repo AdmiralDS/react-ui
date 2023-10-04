@@ -19,24 +19,24 @@ const Container = styled.div`
   right: 0;
 `;
 
-const Wrapper = styled.div<{ appearance?: AppearanceHeaderBar }>`
+const Wrapper = styled.div`
   background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   min-width: 140px;
   min-height: 4px;
   display: flex;
 `;
-const Progress = styled.div<{ percent: number; appearance?: AppearanceHeaderBar }>`
-  background: ${({ theme, appearance }) =>
-    appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
-  width: ${({ percent }) => percent}%;
+const Progress = styled.div<{ $percent: number; $appearance?: AppearanceHeaderBar }>`
+  background: ${({ theme, $appearance }) =>
+    $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
+  width: ${({ $percent }) => $percent}%;
   transition: all 0.3s linear;
 `;
 
 export const ProgressHeader: FC<ProgressHeaderProps> = ({ percent = 0, appearance = 'primary', ...props }) => {
   return (
     <Container {...props}>
-      <Wrapper appearance={appearance}>
-        <Progress appearance={appearance} percent={percent} />
+      <Wrapper>
+        <Progress $appearance={appearance} $percent={percent} />
       </Wrapper>
     </Container>
   );

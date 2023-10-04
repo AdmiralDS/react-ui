@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { useTheme } from 'styled-components';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -74,7 +74,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   };
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -84,6 +84,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
 export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
   (
     {
+      options,
       isLoading,
       onOptionSelect,
       alignDropdown = 'stretch',
@@ -99,13 +100,13 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       highlightFormat,
       locale,
       dimension = TextInput.defaultProps?.dimension ?? 'xl',
+      portalTargetRef,
       ...props
     },
     ref,
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
-    const { options, portalTargetRef } = props;
 
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);

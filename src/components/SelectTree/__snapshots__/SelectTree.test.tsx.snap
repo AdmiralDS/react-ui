@@ -3,11 +3,11 @@
 exports[`SelectTree should render component 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c10 {
+  "baseElement": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -23,7 +23,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -34,29 +34,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -64,64 +59,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -130,8 +120,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -146,9 +134,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -162,28 +148,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 8px 16px 8px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -210,26 +188,26 @@ fieldset[data-dimension='s'] .c4 {
             />
           </div>
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -238,26 +216,26 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -266,7 +244,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -275,7 +253,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -283,11 +261,11 @@ fieldset[data-dimension='s'] .c4 {
       </ul>
     </div>
   </body>,
-  "container": .c10 {
+  "container": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -303,7 +281,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -314,29 +292,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -344,64 +317,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -410,8 +378,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -426,9 +392,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -442,28 +406,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 8px 16px 8px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -489,26 +445,26 @@ fieldset[data-dimension='s'] .c4 {
           />
         </div>
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="1"
             id="1"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -517,26 +473,26 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="2"
             id="2"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -545,7 +501,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -554,7 +510,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -618,11 +574,11 @@ fieldset[data-dimension='s'] .c4 {
 exports[`SelectTree should render component with expanded lists 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c10 {
+  "baseElement": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -638,7 +594,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -649,29 +605,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -679,64 +630,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -745,8 +691,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -761,9 +705,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -777,28 +719,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 8px 16px 8px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -825,26 +759,26 @@ fieldset[data-dimension='s'] .c4 {
             />
           </div>
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -853,26 +787,26 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -881,7 +815,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -890,7 +824,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -898,11 +832,11 @@ fieldset[data-dimension='s'] .c4 {
       </ul>
     </div>
   </body>,
-  "container": .c10 {
+  "container": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -918,7 +852,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -929,29 +863,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -959,64 +888,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -1025,8 +949,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -1041,9 +963,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -1057,28 +977,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 8px 16px 8px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -1104,26 +1016,26 @@ fieldset[data-dimension='s'] .c4 {
           />
         </div>
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="1"
             id="1"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1132,26 +1044,26 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="2"
             id="2"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1160,7 +1072,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1169,7 +1081,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -1233,11 +1145,11 @@ fieldset[data-dimension='s'] .c4 {
 exports[`SelectTree should render small components 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c10 {
+  "baseElement": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1253,7 +1165,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1264,29 +1176,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1294,64 +1201,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -1360,8 +1262,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -1376,9 +1276,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -1392,28 +1290,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 6px 16px 6px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -1440,26 +1330,26 @@ fieldset[data-dimension='s'] .c4 {
             />
           </div>
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -1468,26 +1358,26 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c4 c5 c6"
+            class="c4 c5"
           >
             <input
-              class="c7"
+              class="c6"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c7 c8"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c9"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -1496,7 +1386,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -1505,7 +1395,7 @@ fieldset[data-dimension='s'] .c4 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c10"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -1513,11 +1403,11 @@ fieldset[data-dimension='s'] .c4 {
       </ul>
     </div>
   </body>,
-  "container": .c10 {
+  "container": .c9 {
   pointer-events: none;
 }
 
-.c5 {
+.c4 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1533,7 +1423,7 @@ fieldset[data-dimension='s'] .c4 {
   height: 16px;
 }
 
-.c9 {
+.c8 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1544,29 +1434,24 @@ fieldset[data-dimension='s'] .c4 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c9 *[fill^='#'] {
+.c8 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c6 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1574,64 +1459,59 @@ fieldset[data-dimension='s'] .c4 {
   padding: 0;
 }
 
-.c7::-ms-check {
+.c6 ::-ms-check {
   display: none;
 }
 
-.c7:checked + .c8 {
+.c6:checked+.c7 {
   background-color: #0062FF;
   border: none;
 }
 
-.c7:disabled {
+.c6:disabled {
   pointer-events: none;
 }
 
-.c7:disabled + .c8 {
+.c6:disabled+.c7 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c7:not(:checked) + .c8 > * {
+.c6:not(:checked)+.c7 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled) + .c7:not(:disabled)::after {
+.c6:hover:not(:disabled)::after,
+.c6:focus:not(:disabled)+.c6:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c7:checked:disabled + .c8 {
+.c6:checked:disabled+.c7 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c7:checked:disabled + .c8 *[fill^='#'] {
+.c6:checked:disabled+.c7 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c7:focus-visible {
+.c6:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
 .c3 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   width: 100%;
   height: 100%;
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
   transform: rotate(0deg);
 }
 
@@ -1640,8 +1520,6 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 .c2 {
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   margin-right: 16px;
   box-sizing: border-box;
@@ -1656,9 +1534,7 @@ fieldset[data-dimension='s'] .c4 {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 12px);
   height: calc(100% + 12px);
@@ -1672,28 +1548,20 @@ fieldset[data-dimension='s'] .c4 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 6px 16px 6px 0px;
 }
 
-.c6 {
+.c5 {
   margin: 2px;
   margin-right: 10px;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-.c11 {
+.c10 {
   padding-top: 2px;
 }
 
@@ -1719,26 +1587,26 @@ fieldset[data-dimension='s'] .c4 {
           />
         </div>
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="1"
             id="1"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1747,26 +1615,26 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c4 c5 c6"
+          class="c4 c5"
         >
           <input
-            class="c7"
+            class="c6"
             data-key="2"
             id="2"
             type="checkbox"
           />
           <div
-            class="c8 c9"
+            class="c7 c8"
           >
             <div
               aria-hidden="true"
-              class="c10"
+              class="c9"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1775,7 +1643,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1784,7 +1652,7 @@ fieldset[data-dimension='s'] .c4 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c10"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>

@@ -1,7 +1,7 @@
-import type { DefaultTheme, ThemeProps } from 'styled-components';
+import type { ExecutionContext } from 'styled-components';
 import { css, keyframes } from 'styled-components';
 
-export const skeletonAnimation = (props: ThemeProps<DefaultTheme>) => keyframes`
+export const skeletonAnimation = (props: ExecutionContext & object) => keyframes`
   0% {
     background-color: ${props.theme.color['Neutral/Neutral 10']};
     border-color: ${props.theme.color['Neutral/Neutral 10']};

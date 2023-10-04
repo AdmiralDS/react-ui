@@ -20,15 +20,15 @@ const ProgressWrapper = styled.div`
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
 `;
 
-const Progress = styled.div<{ percent: number }>`
-  width: ${({ percent }) => percent}%;
+const Progress = styled.div<{ $percent: number }>`
+  width: ${({ $percent }) => $percent}%;
   background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
 `;
 
-const Header = styled.div<{ mobile?: boolean }>`
+const Header = styled.div<{ $mobile?: boolean }>`
   display: flex;
-  flex-direction: ${({ mobile }) => (mobile ? 'column' : 'row')};
-  ${({ mobile }) => !mobile && '  justify-content: space-between;'}
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')};
+  ${({ $mobile }) => !$mobile && '  justify-content: space-between;'}
   margin-bottom: 8px;
 `;
 
@@ -46,7 +46,7 @@ const ProgressText = styled.div`
 
 const NextStep = styled.div`
   width: 100%;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   ${typography['Caption/Caption 1']}
@@ -99,7 +99,7 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
 
   return (
     <Wrapper {...props}>
-      <Header mobile={mobile} aria-hidden>
+      <Header $mobile={mobile} aria-hidden>
         <ActiveStep>{setFirstLetterToUpperCase(steps[activeStep])}</ActiveStep>
         <ProgressText>{progressText(activeStepNumber, stepsAmount, fixedStepNamePlural?.toLowerCase())}</ProgressText>
       </Header>
@@ -111,7 +111,7 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
           aria-valuemax={stepsAmount}
           aria-valuenow={activeStepNumber}
           aria-valuetext={`${fixedStepName} ${activeStepNumber}: ${steps[activeStep]}`}
-          percent={convertNumberToIntegerPercent(activeStepNumber, stepsAmount)}
+          $percent={convertNumberToIntegerPercent(activeStepNumber, stepsAmount)}
         />
       </ProgressWrapper>
       {displayNextStepName && steps[nextStep] && <NextStep aria-hidden>{nextStepContent}</NextStep>}

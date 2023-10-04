@@ -28,7 +28,7 @@ const PaginationWrapper = styled.div`
 const Text = styled(T).attrs(() => ({
   font: 'Body/Body 1 Long',
   color: 'Neutral/Neutral 70',
-  as: 'div',
+  forwardedAs: 'div',
 }))`
   margin-bottom: 8px;
 `;

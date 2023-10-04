@@ -13,7 +13,7 @@ export const animation = css`
   animation: ${jump} 0.35s ease-in-out;
 `;
 
-export const Icon = styled.div<{ shouldAnimate?: boolean }>`
+export const Icon = styled.div<{ $shouldAnimate?: boolean }>`
   width: 20px;
   height: 20px;
   border: 1px solid #8a96a8;
@@ -21,7 +21,7 @@ export const Icon = styled.div<{ shouldAnimate?: boolean }>`
   box-sizing: border-box;
   margin-right: 10px;
   transform-origin: bottom center;
-  ${({ shouldAnimate }) => (shouldAnimate ? animation : '')}
+  ${({ $shouldAnimate }) => ($shouldAnimate ? animation : '')}
 `;
 
 export const TextWrapper = styled.div`

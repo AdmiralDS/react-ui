@@ -11,12 +11,12 @@ export const styleDisabledMixin = css`
   user-select: none;
 `;
 
-export const styleColorMixin = css<{ appearance?: AppearanceLink }>`
-  color: ${({ theme, appearance }) =>
-    appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
+export const styleColorMixin = css<{ $appearance?: AppearanceLink }>`
+  color: ${({ theme, $appearance }) =>
+    $appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
   & *[fill^='#'] {
-    fill: ${({ theme, appearance }) =>
-      appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
+    fill: ${({ theme, $appearance }) =>
+      $appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
   }
 `;
 
@@ -49,6 +49,6 @@ export const styleMixin = css`
   }
 `;
 
-export const styleTextMixin = css<{ dimension?: Dimension }>`
-  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+export const styleTextMixin = css<{ $dimension?: Dimension }>`
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 `;

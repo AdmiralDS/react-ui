@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -11,8 +11,8 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 
 const Container = styled.div<{
-  alignSelf?: string;
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $alignSelf?: string;
+  $dropContainerCssMixin?: RuleSet<object>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
@@ -20,11 +20,11 @@ const Container = styled.div<{
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
-  ${(p) => (p.alignSelf ? `align-self: ${p.alignSelf}` : '')};
+  ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf}` : '')};
   opacity: 0;
   transition-delay: 200ms;
   transition-property: opacity;
-  ${(p) => p.dropContainerCssMixin}
+  ${(p) => p.$dropContainerCssMixin}
 `;
 
 const FakeTarget = styled.div`
@@ -33,9 +33,9 @@ const FakeTarget = styled.div`
   flex: 0 0 auto;
 `;
 
-const Portal = styled(PositionInPortal)<{ reverse: boolean }>`
+const Portal = styled(PositionInPortal)<{ $reverse: boolean }>`
   display: flex;
-  flex-direction: ${(p) => (p.reverse ? 'column-reverse' : 'column')};
+  flex-direction: ${(p) => (p.$reverse ? 'column-reverse' : 'column')};
   flex-wrap: nowrap;
 `;
 
@@ -68,7 +68,7 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   setMenuFocus?: React.Dispatch<React.SetStateAction<'firstOption' | 'lastOption' | 'activeOption'>>;
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
 }
 
 /**
@@ -84,6 +84,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       onMenuReachBottom,
       onMenuReachTop,
       menuFocus,
+      alignSelf,
+      dropContainerCssMixin,
       ...props
     },
     ref,
@@ -227,13 +229,15 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
     }, []);
 
     return (
-      <Portal targetElement={targetRef.current} reverse={displayUpward} rootRef={rootRef}>
+      <Portal targetElement={targetRef.current} $reverse={displayUpward} rootRef={rootRef}>
         <FakeTarget />
         <Container
           ref={refSetter(ref, containerRef)}
           {...props}
           onKeyDown={handleKeyDown}
           className={className + ' dropdown-container'}
+          $alignSelf={alignSelf}
+          $dropContainerCssMixin={dropContainerCssMixin}
         />
       </Portal>
     );

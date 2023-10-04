@@ -3,13 +3,13 @@ import { DefaultBackgroundColorName, MainPrimaryColorName, Spinner } from '@admi
 import type { SpinnerProps } from '@admiral-ds/react-ui';
 
 const Layout = styled.div<{
-  inverse?: boolean;
+  $inverse?: boolean;
 }>`
   display: flex;
   flex-wrap: wrap;
   padding: 50px;
-  background: ${({ theme, inverse }) =>
-    inverse ? theme.color[MainPrimaryColorName] : theme.color[DefaultBackgroundColorName]};
+  background: ${({ theme, $inverse }) =>
+    $inverse ? theme.color[MainPrimaryColorName] : theme.color[DefaultBackgroundColorName]};
 
   > * {
     flex: 0 0 auto;
@@ -20,7 +20,7 @@ const Layout = styled.div<{
 export const SpinnerDarkTemplate = ({ inverse = true }: SpinnerProps) => {
   return (
     <>
-      <Layout inverse={inverse}>
+      <Layout $inverse={inverse}>
         <Spinner dimension="xl" inverse={inverse} />
         <Spinner dimension="l" inverse={inverse} />
         <Spinner dimension="m" inverse={inverse} />

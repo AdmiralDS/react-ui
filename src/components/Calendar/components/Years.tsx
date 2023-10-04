@@ -23,8 +23,8 @@ export const Years: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, 
         return (
           <YearComponent
             key={year}
-            today={year === new Date().getFullYear()}
-            selected={!!(selected || startDate) && year === ((selected || startDate) as Date).getFullYear()}
+            $today={year === new Date().getFullYear()}
+            $selected={!!(selected || startDate) && year === ((selected || startDate) as Date).getFullYear()}
             disabled={disabled}
             onMouseDown={handleClick}
           >

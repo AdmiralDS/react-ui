@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import {
@@ -13,9 +13,10 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type { ID, Theme, ToastItemProps, ToastProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ID, ToastItemProps, ToastProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,8 +35,8 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
-  const [inputValue, setInputValue] = React.useState('Notification message');
+  const [toastIdStack, setToastIdStack] = useState<Array<ToastItemProps>>([]);
+  const [inputValue, setInputValue] = useState('Notification message');
 
   const { addToastItem, removeToastItem } = useToast();
 
@@ -84,14 +85,12 @@ const MessageForm = () => {
   );
 };
 
-export const ToastCustomComponentTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const ToastCustomComponentTemplate = ({
+  themeBorderKind,
+  ...props
+}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ToastProvider>
         <MessageForm />
         <Toast position={props.position} />

@@ -1,5 +1,5 @@
+import { useRef, useContext, useState, useLayoutEffect } from 'react';
 import type { FC } from 'react';
-import * as React from 'react';
 import type { ITooltipProps } from '#src/components/Tooltip';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
@@ -11,19 +11,19 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
   children,
   tooltipProps,
 }) => {
-  const { lineClamp } = React.useContext(StepperContext);
-  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const { lineClamp } = useContext(StepperContext);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [overflow, setOverflow] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
       setOverflow(checkOverflow(contentRef.current));
     }
   }, [tooltipVisible, setOverflow]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     function show() {
       setTooltipVisible(true);
     }
@@ -43,8 +43,8 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
 
   return (
     <>
-      <ContentWrapper ref={wrapperRef} withTooltip={overflow}>
-        <Content ref={contentRef} lineClamp={lineClamp}>
+      <ContentWrapper ref={wrapperRef} $withTooltip={overflow}>
+        <Content ref={contentRef} $lineClamp={lineClamp}>
           {children}
         </Content>
       </ContentWrapper>

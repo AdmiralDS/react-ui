@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
@@ -31,22 +31,23 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
   return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ dimension?: MenuDimensions; maxHeight?: string | number; rowCount: number }>`
-  max-height: ${({ dimension, maxHeight, rowCount }) => {
-    if (maxHeight) return maxHeight;
-    return `min(calc(100vh - 16px), ${getHeight(rowCount, dimension)}px)`;
+const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string | number; $rowCount: number }>`
+  max-height: ${({ $dimension, $maxHeight, $rowCount }) => {
+    if ($maxHeight) return $maxHeight;
+    return `min(calc(100vh - 16px), ${getHeight($rowCount, $dimension)}px)`;
   }};
 `;
 
 const Wrapper = styled.div<{
-  dimension?: MenuDimensions;
-  hasTopPanel: boolean;
-  hasBottomPanel: boolean;
-  rowCount: number;
+  $dimension?: MenuDimensions;
+  $hasTopPanel: boolean;
+  $hasBottomPanel: boolean;
+  $rowCount: number;
+  $maxHeight?: string | number;
 }>`
   padding: 0;
-  ${(p) => (p.hasTopPanel ? 'padding-top: 8px' : '')};
-  ${(p) => (p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+  ${(p) => (p.$hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   box-sizing: border-box;
   display: flex;
   overflow: hidden;
@@ -63,9 +64,9 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled.div<{ hasTopPanel: boolean; hasBottomPanel: boolean }>`
-  ${(p) => (!p.hasTopPanel ? 'padding-top: 8px' : '')};
-  ${(p) => (!p.hasBottomPanel ? 'padding-bottom: 8px' : '')};
+const StyledDiv = styled.div<{ $hasTopPanel: boolean; $hasBottomPanel: boolean }>`
+  ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
+  ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
   appearance: none;
   flex: 1 1 auto;
@@ -78,7 +79,7 @@ export interface RenderPanelProps {
   /** Размер компонента */
   dimension: MenuDimensions;
   /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
-  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  menuActionsPanelCssMixin?: RuleSet<object>;
 }
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
@@ -173,6 +174,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       defaultIsActive = true,
       subMenuRenderDirection,
       preventFocusSteal,
+      maxHeight,
       ...props
     },
     ref,
@@ -330,7 +332,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const renderItem = (item: MenuModelItemProps, index: number) => {
-      const { id, subItems, ...itemProps } = item;
+      const { id, subItems, render, ...itemProps } = item;
       const hasSubmenu = !!subItems && subItems.length > 0;
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
@@ -358,11 +360,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         containerRef,
         ...itemProps,
       };
-      if (typeof itemProps.render === 'function') return itemProps.render(renderProps);
+      if (typeof render === 'function') return render(renderProps);
 
       return (
         <MenuItem key={`${item.id}-${index}`} {...renderProps}>
-          {itemProps.render}
+          {render}
         </MenuItem>
       );
     };
@@ -454,17 +456,18 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
-        dimension={dimension}
-        hasTopPanel={hasTopPanel}
-        hasBottomPanel={hasBottomPanel}
-        rowCount={rowCount}
+        $dimension={dimension}
+        $hasTopPanel={hasTopPanel}
+        $hasBottomPanel={hasBottomPanel}
+        $rowCount={rowCount}
+        $maxHeight={maxHeight}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} hasTopPanel={hasTopPanel} hasBottomPanel={hasBottomPanel} {...menuProps}>
+        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel} {...menuProps}>
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (

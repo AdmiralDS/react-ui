@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, TooltipHoc, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type StoryItem = {
   id: string;
@@ -58,7 +59,10 @@ const Wrapper = styled.div`
 
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
-export const MenuTooltipTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuTooltipTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       const tooltip = item.label.length > 20;
@@ -84,13 +88,8 @@ export const MenuTooltipTemplate = (props: MenuProps & { themeBorderKind?: Borde
     });
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

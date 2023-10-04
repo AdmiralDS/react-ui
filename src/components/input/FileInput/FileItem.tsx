@@ -1,9 +1,9 @@
-import * as React from 'react';
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, KeyboardEvent, FunctionComponent, SVGProps } from 'react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import type { FileInputDimension } from '#src/components/input/FileInput';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
+
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { formatFileSize, formatFileType, getFileTypeIcon } from '#src/components/input/FileInput/utils';
@@ -32,28 +32,28 @@ const disabledStyles = css`
 `;
 
 const Container = styled.div<{
-  dimension?: FileInputDimension;
-  filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $dimension?: FileInputDimension;
+  $filesLayoutCssMixin?: RuleSet<object>;
 }>`
   display: flex;
   flex-direction: column;
   margin-top: 16px;
   overflow: hidden;
-  ${(p) => p.filesLayoutCssMixin}
+  ${(p) => p.$filesLayoutCssMixin}
 `;
 
-const statusMixin = css<{ status?: Status }>`
+const statusMixin = css<{ $status?: Status }>`
   border-color: ${(p) => {
-    if (p.status === 'Error') return p.theme.color['Error/Error 60 Main'];
-    if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
+    if (p.$status === 'Error') return p.theme.color['Error/Error 60 Main'];
+    if (p.$status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
     return p.theme.color['Neutral/Neutral 40'];
   }};
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
 `;
 
 const PreviewWrapper = styled.div<{
-  dimension?: FileInputDimension;
-  status?: Status;
+  $dimension?: FileInputDimension;
+  $status?: Status;
 }>`
   padding: 0;
   box-sizing: border-box;
@@ -116,7 +116,7 @@ const ImagePreview = styled.div`
   }
 `;
 
-const IconWrapper = styled.div<{ status?: Status; showHover: boolean }>`
+const IconWrapper = styled.div<{ $status?: Status; $showHover: boolean }>`
   position: relative;
   margin-right: 8px;
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -124,10 +124,10 @@ const IconWrapper = styled.div<{ status?: Status; showHover: boolean }>`
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getColor(p.status)]};
+    fill: ${(p) => p.theme.color[getColor(p.$status)]};
   }
 
-  ${(p) => (p.status === 'Queue' || !p.showHover ? disabledStyles : hoveredFileTypeIconCss)};
+  ${(p) => (p.$status === 'Queue' || !p.$showHover ? disabledStyles : hoveredFileTypeIconCss)};
 
   &:focus-visible {
     outline-offset: 2px;
@@ -149,22 +149,22 @@ const StyledEyeOutline = styled(EyeOutline)`
   }
 `;
 
-const Content = styled.div<{ dimension?: FileInputDimension }>`
-  ${(p) => p.dimension === 'm' && sizeMixin};
+const Content = styled.div<{ $dimension?: FileInputDimension }>`
+  ${(p) => p.$dimension === 'm' && sizeMixin};
   display: flex;
-  flex-direction: ${(p) => (p.dimension === 'm' ? 'row' : 'column')};
+  flex-direction: ${(p) => (p.$dimension === 'm' ? 'row' : 'column')};
   min-width: 0;
   overflow: hidden;
 `;
 
-const FileInfoBlock = styled.div<{ dimension?: FileInputDimension }>`
-  display: ${(p) => (p.dimension === 'm' ? 'block' : 'flex')};
+const FileInfoBlock = styled.div<{ $dimension?: FileInputDimension }>`
+  display: ${(p) => (p.$dimension === 'm' ? 'block' : 'flex')};
   box-sizing: border-box;
   align-items: center;
   overflow: hidden;
-  height: ${(p) => (p.dimension === 'xl' ? '40px' : '20px')};
-  padding: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_PADDING_XL : FILE_ITEM_WRAPPER_PADDING_M)};
-  height: ${(p) => (p.dimension === 'xl' ? FILE_ITEM_WRAPPER_HEIGHT_XL : FILE_ITEM_WRAPPER_HEIGHT_M)};
+  height: ${(p) => (p.$dimension === 'xl' ? '40px' : '20px')};
+  padding: ${(p) => (p.$dimension === 'xl' ? FILE_ITEM_WRAPPER_PADDING_XL : FILE_ITEM_WRAPPER_PADDING_M)};
+  height: ${(p) => (p.$dimension === 'xl' ? FILE_ITEM_WRAPPER_HEIGHT_XL : FILE_ITEM_WRAPPER_HEIGHT_M)};
 `;
 
 const FileName = styled.div`
@@ -173,9 +173,9 @@ const FileName = styled.div`
   white-space: nowrap;
 `;
 
-const FileInfo = styled.span<{ dimension?: FileInputDimension; status?: Status }>`
-  color: ${(p) => p.theme.color[getColor(p.status)]};
-  margin-left: ${(p) => (p.dimension === 'xl' ? '0' : '4px')};
+const FileInfo = styled.span<{ $dimension?: FileInputDimension; $status?: Status }>`
+  color: ${(p) => p.theme.color[getColor(p.$status)]};
+  margin-left: ${(p) => (p.$dimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
 
@@ -190,11 +190,11 @@ const StyledSpinner = styled(Spinner)`
   margin-right: 8px;
 `;
 
-export const ErrorBlock = styled.div<{ status?: Status; dimension?: FileInputDimension }>`
+export const ErrorBlock = styled.div<{ $status?: Status; $dimension?: FileInputDimension }>`
   margin-top: 8px;
   color: ${(p) => p.theme.color['Error/Error 60 Main']};
   ${typography['Body/Body 2 Short']};
-  height: ${(p) => (p.dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
+  height: ${(p) => (p.$dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)<{ dimension?: IconPlacementDimension }>`
@@ -225,13 +225,13 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
   /** Размер FileItem */
   dimension?: FileInputDimension;
   /** Позволяет добавлять миксин для компоновки загруженных файлов, созданный с помощью styled css */
-  filesLayoutCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  filesLayoutCssMixin?: RuleSet<object>;
   /** Позволяет выводить размер файла в требуемом формате */
   formatFileSizeInfo?: (sizeInBytes: number) => string;
   /** Позволяет назначать формат файла */
   formatFileTypeInfo?: (type: string) => string;
   /** Позволяет назначать иконку файла */
-  formatFileTypeIcon?: (type: string) => React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  formatFileTypeIcon?: (type: string) => FunctionComponent<SVGProps<SVGSVGElement>>;
   children?: never;
 }
 
@@ -265,7 +265,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     const titleRef = useRef<HTMLDivElement | null>(null);
 
     const [tooltipVisible, setTooltipVisible] = useState(false);
-    const [fileNameOverflow, setFileNameOverflow] = React.useState(false);
+    const [fileNameOverflow, setFileNameOverflow] = useState(false);
 
     useEffect(() => {
       const element = titleRef.current;
@@ -299,7 +299,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       onPreviewIconClick?.(fileId);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
       const code = keyboardKey.getCode(e);
       if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
         onPreviewIconClick?.(fileId);
@@ -307,13 +307,13 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     };
 
     return (
-      <Container ref={ref} dimension={dimension} filesLayoutCssMixin={filesLayoutCssMixin}>
-        <PreviewWrapper {...props} ref={previewWrapperRef} status={status} dimension={dimension}>
-          <FileInfoBlock dimension={dimension}>
+      <Container ref={ref} $dimension={dimension} $filesLayoutCssMixin={filesLayoutCssMixin}>
+        <PreviewWrapper {...props} ref={previewWrapperRef} $status={status} $dimension={dimension}>
+          <FileInfoBlock $dimension={dimension}>
             {dimension === 'xl' && (
               <IconWrapper
-                status={status}
-                showHover={!!onPreviewIconClick}
+                $status={status}
+                $showHover={!!onPreviewIconClick}
                 onClick={handlePreviewIconClick}
                 onKeyDown={handleKeyDown}
                 tabIndex={onPreviewIconClick ? 0 : -1}
@@ -328,12 +328,12 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
                 <StyledEyeOutline />
               </IconWrapper>
             )}
-            <Content dimension={dimension}>
+            <Content $dimension={dimension}>
               <FileName ref={titleRef}>{fileName}</FileName>
               {tooltipVisible && fileNameOverflow && (
                 <Tooltip targetElement={previewWrapperRef.current} renderContent={() => `${fileName}`} />
               )}
-              <FileInfo dimension={dimension} status={status}>
+              <FileInfo $dimension={dimension} $status={status}>
                 {fileInfo}
               </FileInfo>
             </Content>
@@ -349,7 +349,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             )}
           </FunctionalBlock>
         </PreviewWrapper>
-        {errorMessage && status === 'Error' && <ErrorBlock status={status}>{errorMessage}</ErrorBlock>}
+        {errorMessage && status === 'Error' && <ErrorBlock $status={status}>{errorMessage}</ErrorBlock>}
       </Container>
     );
   },

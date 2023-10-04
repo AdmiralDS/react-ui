@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MenuItem, TextButtonMenu } from '@admiral-ds/react-ui';
-import type { RenderOptionProps, TextButtonMenuProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { RenderOptionProps, TextButtonMenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const items = [
 
 export const TextButtonMenuWithIconTemplate = ({
   text = 'Text Button',
+  themeBorderKind,
   ...props
 }: TextButtonMenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
@@ -70,13 +72,8 @@ export const TextButtonMenuWithIconTemplate = ({
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <TextButtonMenu
           {...props}

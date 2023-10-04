@@ -8,8 +8,8 @@ const MONTHS_VIEW_PADDING = '20px 16px 4px';
 const DAYS_VIEW_PADDING = '20px 12px 12px';
 
 type CalendarComponentProps = {
-  yearsView: boolean;
-  monthsView: boolean;
+  $yearsView: boolean;
+  $monthsView: boolean;
 };
 
 export const CalendarComponent = styled.div<CalendarComponentProps>`
@@ -19,9 +19,9 @@ export const CalendarComponent = styled.div<CalendarComponentProps>`
   border: 0 none;
   z-index: 0; /* to fix range rounded corners fill */
 
-  padding: ${({ yearsView, monthsView }) => {
-    if (yearsView) return YEARS_VIEW_PADDING;
-    if (monthsView) return MONTHS_VIEW_PADDING;
+  padding: ${({ $yearsView, $monthsView }) => {
+    if ($yearsView) return YEARS_VIEW_PADDING;
+    if ($monthsView) return MONTHS_VIEW_PADDING;
     return DAYS_VIEW_PADDING;
   }};
 

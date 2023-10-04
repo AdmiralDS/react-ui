@@ -30,9 +30,9 @@ const Wrapper = styled.button<{ size: string }>`
 
 const WrapperWithTooltip = TooltipHoc(Wrapper);
 
-const getTextColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
-  ${({ theme, appearance }) => {
-    switch (appearance) {
+const getTextColor = css<{ $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
+  ${({ theme, $appearance }) => {
+    switch ($appearance) {
       case 'neutral1':
       case 'white':
       case 'neutral2':
@@ -45,14 +45,14 @@ const getTextColor = css<{ appearance: AvatarAppearance | { background?: string;
       case 'dark':
         return theme.color['Neutral/Neutral 00'];
       default:
-        return appearance?.text || theme.color[DefaultFontColorName];
+        return $appearance?.text || theme.color[DefaultFontColorName];
     }
   }}
 `;
 
-const getTypography = css<{ dimension: Dimension }>`
-  ${({ dimension }) => {
-    switch (dimension) {
+const getTypography = css<{ $dimension: Dimension }>`
+  ${({ $dimension }) => {
+    switch ($dimension) {
       case 'xs':
       case 's':
         return typography['Caption/Caption 1'];
@@ -67,8 +67,8 @@ const getTypography = css<{ dimension: Dimension }>`
 `;
 
 const Text = styled.span<{
-  appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
-  dimension: Dimension;
+  $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
+  $dimension: Dimension;
 }>`
   position: absolute;
   top: 50%;
@@ -79,9 +79,9 @@ const Text = styled.span<{
   ${getTypography}
 `;
 
-const getIconSize = css<{ dimension: Dimension }>`
-  ${({ dimension }) => {
-    switch (dimension) {
+const getIconSize = css<{ $dimension: Dimension }>`
+  ${({ $dimension }) => {
+    switch ($dimension) {
       case 'xs':
         return '16px';
       case 's':
@@ -97,9 +97,9 @@ const getIconSize = css<{ dimension: Dimension }>`
   }}
 `;
 
-const getIconColor = css<{ appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
-  ${({ theme, appearance }) => {
-    switch (appearance) {
+const getIconColor = css<{ $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string } }>`
+  ${({ theme, $appearance }) => {
+    switch ($appearance) {
       case 'neutral1':
       case 'white':
       case 'neutral2':
@@ -112,14 +112,14 @@ const getIconColor = css<{ appearance: AvatarAppearance | { background?: string;
       case 'dark':
         return theme.color['Neutral/Neutral 00'];
       default:
-        return appearance?.icon || theme.color['Neutral/Neutral 50'];
+        return $appearance?.icon || theme.color['Neutral/Neutral 50'];
     }
   }}
 `;
 
 const IconWrapper = styled.div<{
-  dimension: Dimension;
-  appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
+  $dimension: Dimension;
+  $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
 }>`
   position: absolute;
   top: 50%;
@@ -251,12 +251,12 @@ export const AvatarBase = forwardRef<HTMLButtonElement, AvatarBaseProps & Avatar
           showActivityRing={showActivityRing}
         />
         {hasAbbr && (
-          <Text dimension={dimension} appearance={appearance}>
+          <Text $dimension={dimension} $appearance={appearance}>
             {abbr}
           </Text>
         )}
         {hasIcon && (
-          <IconWrapper dimension={dimension} appearance={appearance}>
+          <IconWrapper $dimension={dimension} $appearance={appearance}>
             {Icon}
           </IconWrapper>
         )}

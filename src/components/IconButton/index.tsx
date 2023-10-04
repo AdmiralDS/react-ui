@@ -22,23 +22,21 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   skeleton?: boolean;
 }
 
-const StyledButton = styled.button.attrs<
-  IconButtonProps,
-  { 'data-dimension'?: Dimension; appearance?: IconButtonAppearance }
->((props) => ({
-  'data-dimension': props.dimension,
-}))<IconButtonProps>`
+const StyledButton = styled.button<{
+  $skeleton?: boolean;
+  $appearance?: IconButtonAppearance;
+}>`
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
-  background: ${({ skeleton }) => (skeleton ? 'red' : 'transparent')};
+  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  background: ${({ $skeleton }) => ($skeleton ? 'red' : 'transparent')};
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   vertical-align: middle;
 
-  pointer-events: ${(p) => (p.disabled || p.skeleton ? 'none' : 'all')};
-  
+  pointer-events: ${(p) => (p.disabled || p.$skeleton ? 'none' : 'all')};
+
   &[data-dimension='xl'] {
     padding: 0;
     height: 56px;
@@ -65,14 +63,14 @@ const StyledButton = styled.button.attrs<
     background: ${({ theme }) => theme.color['Opacity/Hover']};
     & *[fill^='#'] {
       fill: ${(p) =>
-        p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+        p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
     }
   }
   &:active {
     background: ${({ theme }) => theme.color['Opacity/Press']};
     & *[fill^='#'] {
       fill: ${(p) =>
-        p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+        p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
     }
   }
 
@@ -89,10 +87,10 @@ const StyledButton = styled.button.attrs<
     outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
   }
 
-  ${({ skeleton }) => skeleton && skeletonAnimationMixin}};
+  ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};
 `;
 
-const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: IconButtonAppearance }>`
+const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: IconButtonAppearance }>`
   vertical-align: top;
   display: inline-flex;
   flex-direction: row;
@@ -100,8 +98,8 @@ const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: Icon
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-  height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+  width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+  height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
 
   > * {
     display: inline-block;
@@ -115,12 +113,12 @@ const IconButtonContent = styled.span<{ dimension?: Dimension; appearance?: Icon
 
   & *[fill^='#'] {
     fill: ${(p) =>
-      p.appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+      p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
   }
 
   & > svg {
-    width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-    height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+    width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+    height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
   }
 `;
 
@@ -142,7 +140,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     const renderContent = () => {
       if (loading) {
         return (
-          <IconButtonContent dimension={dimension}>
+          <IconButtonContent $dimension={dimension}>
             <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />
           </IconButtonContent>
         );
@@ -151,7 +149,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         return <IconButtonContent />;
       }
       return (
-        <IconButtonContent dimension={dimension} appearance={appearance}>
+        <IconButtonContent $dimension={dimension} $appearance={appearance}>
           {children}
         </IconButtonContent>
       );
@@ -160,11 +158,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     return (
       <StyledButton
         ref={ref}
-        dimension={dimension}
+        data-dimension={dimension}
         disabled={disabledOptions}
         type={type}
-        skeleton={skeleton}
-        appearance={appearance}
+        $skeleton={skeleton}
+        $appearance={appearance}
         {...props}
       >
         {renderContent()}

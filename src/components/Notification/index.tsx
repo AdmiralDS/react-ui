@@ -45,36 +45,36 @@ const getIcon = (status: NotificationStatus) => {
   }
 };
 
-const backGroundColorMixin = css<{ status?: NotificationStatus }>`
-  background-color: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color['Warning/Warning 10'];
-    if (status === 'error') return theme.color['Error/Error 10'];
-    if (status === 'success') return theme.color['Success/Success 10'];
+const backGroundColorMixin = css<{ $status?: NotificationStatus }>`
+  background-color: ${({ theme, $status }) => {
+    if ($status === 'warning') return theme.color['Warning/Warning 10'];
+    if ($status === 'error') return theme.color['Error/Error 10'];
+    if ($status === 'success') return theme.color['Success/Success 10'];
     return theme.color['Primary/Primary 10'];
   }};
 `;
 
-const borderColorMixin = css<{ status?: NotificationStatus }>`
-  border-color: ${({ theme, status }) => {
-    if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if (status === 'error') return theme.color['Error/Error 60 Main'];
-    if (status === 'success') return theme.color['Success/Success 50 Main'];
+const borderColorMixin = css<{ $status?: NotificationStatus }>`
+  border-color: ${({ theme, $status }) => {
+    if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
+    if ($status === 'error') return theme.color['Error/Error 60 Main'];
+    if ($status === 'success') return theme.color['Success/Success 50 Main'];
     return theme.color['Primary/Primary 60 Main'];
   }};
 `;
 
 const NotificationWrapper = styled.div<{
-  status?: NotificationStatus;
-  displayStatusIcon: boolean;
-  isClosable: boolean;
+  $status?: NotificationStatus;
+  $displayStatusIcon: boolean;
+  $isClosable: boolean;
 }>`
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   padding: 12px 44px 12px 52px;
-  ${(p) => (p.displayStatusIcon ? '' : 'padding-left: 16px;')}
-  ${(p) => (p.isClosable ? '' : 'padding-right: 16px;')}
+  ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 16px;')}
+  ${(p) => (p.$isClosable ? '' : 'padding-right: 16px;')}
   border-width: 1px;
   border-style: solid;
   ${borderColorMixin};
@@ -104,7 +104,7 @@ const CloseButton = styled(CloseIconPlacementButton)`
   right: 8px;
 `;
 
-const IconWrapper = styled.div<{ status?: NotificationStatus }>`
+const IconWrapper = styled.div<{ $status?: NotificationStatus }>`
   position: absolute;
   top: 12px;
   left: 16px;
@@ -114,10 +114,10 @@ const IconWrapper = styled.div<{ status?: NotificationStatus }>`
     width: 24px;
     height: 24px;
     & *[fill^='#'] {
-      fill: ${({ theme, status }) => {
-        if (status === 'warning') return theme.color['Warning/Warning 50 Main'];
-        if (status === 'error') return theme.color['Error/Error 60 Main'];
-        if (status === 'success') return theme.color['Success/Success 50 Main'];
+      fill: ${({ theme, $status }) => {
+        if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
+        if ($status === 'error') return theme.color['Error/Error 60 Main'];
+        if ($status === 'success') return theme.color['Success/Success 50 Main'];
         return theme.color['Primary/Primary 60 Main'];
       }};
     }
@@ -155,13 +155,13 @@ export const Notification = ({
     <NotificationWrapper
       role={isAlert ? 'alert' : 'status'}
       aria-live={isAlert ? 'assertive' : 'polite'}
-      status={status}
-      displayStatusIcon={displayStatusIcon}
-      isClosable={isClosable}
+      $status={status}
+      $displayStatusIcon={displayStatusIcon}
+      $isClosable={isClosable}
       {...props}
     >
       {displayStatusIcon && (
-        <IconWrapper status={status}>
+        <IconWrapper $status={status}>
           <NotificationIcon />
         </IconWrapper>
       )}

@@ -26,7 +26,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
       });
     };
     return (
-      <CheckboxGroupWrapper disabled={disabled} dimension={dimension} ref={ref} {...props}>
+      <CheckboxGroupWrapper disabled={disabled} $dimension={dimension} ref={ref} {...props}>
         {label && label}
         {renderGroup()}
       </CheckboxGroupWrapper>

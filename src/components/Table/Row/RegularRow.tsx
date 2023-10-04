@@ -63,7 +63,7 @@ export const RegularRow = ({
       {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
         <StickyWrapper>
           {displayRowExpansionColumn && (
-            <ExpandCell dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
+            <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
               {row.expandedRowRender && (
                 <ExpandIconPlacement
                   style={{ margin: 0, flexShrink: 0 }}
@@ -78,7 +78,7 @@ export const RegularRow = ({
             </ExpandCell>
           )}
           {displayRowSelectionColumn && (
-            <CheckboxCell dimension={dimension} className="td_checkbox" data-column="checkbox" data-row={row.id}>
+            <CheckboxCell $dimension={dimension} className="td_checkbox" data-column="checkbox" data-row={row.id}>
               <Checkbox
                 disabled={row.disabled || row.checkboxDisabled}
                 dimension={checkboxDimension}

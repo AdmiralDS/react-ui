@@ -7,9 +7,9 @@ import { keyboardKey } from '../common/keyboardKey';
 
 export type DropDownDimensions = 'l' | 'm' | 's';
 
-const menuListHeights = css<{ dimension: DropDownDimensions }>`
-  max-height: ${({ dimension }) => {
-    switch (dimension) {
+const menuListHeights = css<{ $dimension: DropDownDimensions }>`
+  max-height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'l':
         return `${48 * 6}px`;
       case 'm':
@@ -27,7 +27,7 @@ const UnstyledUL = styled.ul`
   margin: unset;
 `;
 
-const StyledDropdown = styled(Dropdown)<{ dimension: DropDownDimensions }>`
+const StyledDropdown = styled(Dropdown)<{ $dimension: DropDownDimensions }>`
   padding: 8px 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -99,7 +99,7 @@ export const DropDownMenu = React.forwardRef<HTMLDivElement, DropDownMenuProps>(
     return (
       <StyledDropdown
         ref={ref}
-        dimension={dimension}
+        $dimension={dimension}
         targetRef={targetRef}
         alignSelf={alignSelf}
         onClickOutside={onClickOutside}

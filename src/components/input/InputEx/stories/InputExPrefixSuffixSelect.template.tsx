@@ -3,7 +3,8 @@ import type { ChangeEvent, ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { InputEx } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, InputExProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, InputExProps } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
@@ -11,6 +12,7 @@ const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 export const InputExPrefixSuffixSelectTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
+  themeBorderKind,
   ...props
 }: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
@@ -21,17 +23,12 @@ export const InputExPrefixSuffixSelectTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
   const [suffixValue, setSuffixValue] = useState<ReactNode>('One');
 
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <InputEx
         {...props}
         containerRef={inputRef}

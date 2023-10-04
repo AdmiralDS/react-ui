@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { CheckboxCompositeGroup, CheckboxField, CheckboxGroup } from '@admiral-ds/react-ui';
-import type { CheckboxCompositeGroupProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CheckboxCompositeGroupProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 interface ItemValue {
   label: string;
@@ -17,14 +18,10 @@ const initialValue: Array<ItemValue> = [
   { label: 'Омск', id: '4', checked: false },
 ];
 
-export const CheckboxCompositeGroupExampleTemplate = (
-  props: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType },
-) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const CheckboxCompositeGroupExampleTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType }) => {
   const [list, setValue] = React.useState<Array<ItemValue>>(initialValue);
 
   const someItemChecked = () => list.some((item) => item.checked);
@@ -39,7 +36,7 @@ export const CheckboxCompositeGroupExampleTemplate = (
   const getIndeterminateStatus = () => !list.every((item) => item.checked) && someItemChecked();
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <CheckboxCompositeGroup {...props}>
         <CheckboxField
           indeterminate={getIndeterminateStatus()}

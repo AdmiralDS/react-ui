@@ -10,10 +10,10 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -41,7 +41,7 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
   const [selectedS, setSelectedS] = React.useState('');
   return (
     <>
-      <WrapperChip dimension={props.dimension}>
+      <WrapperChip $dimension={props.dimension}>
         {listDataIcon.map((d) => (
           <Chips
             {...props}
@@ -56,7 +56,7 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
         ))}
       </WrapperChip>
       <Separator />
-      <WrapperChip dimension="s">
+      <WrapperChip $dimension="s">
         {listDataIcon.map((d) => (
           <Chips
             {...props}

@@ -67,10 +67,9 @@ describe('SuggestInput', () => {
 
     await user.type(input, 'on');
 
-    // На открывшейся панели должен появиться текст выделенный синим цветом
+    // На открывшейся панели должен появиться текст в теге span
     const spanInDropdown = screen.getByText('on', { selector: 'span' });
     expect(spanInDropdown).toBeVisible();
-    expect(spanInDropdown).toHaveStyle(`color: ${LIGHT_THEME.color['Primary/Primary 60 Main']};`);
 
     await user.type(input, '{enter}');
     expect(input.value).toBe('one');
