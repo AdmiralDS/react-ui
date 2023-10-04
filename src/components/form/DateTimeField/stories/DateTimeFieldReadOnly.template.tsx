@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
+import type { BorderRadiusType, ComponentDimension, FieldProps } from '@admiral-ds/react-ui';
 import {
   DateTimeContainer,
   DateTimeDateInput,
@@ -7,6 +8,7 @@ import {
   DateTimeTimeInput,
   Field,
 } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -14,16 +16,50 @@ const DisplayContainer = styled.div`
   }
 `;
 
-export const DateTimeFieldReadOnlyTemplate = () => {
+interface DateTimeFieldProps extends FieldProps {
+  dimension?: ComponentDimension;
+}
+
+export const DateTimeFieldReadOnlyTemplate = ({
+  label = 'Read only control',
+  dimension,
+  status,
+  disabled,
+  readOnly = true,
+  skeleton,
+  themeBorderKind,
+  ...props
+}: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+  const fieldProps = {
+    label,
+    status,
+    disabled,
+    readOnly,
+    skeleton,
+    ...props,
+  } as Record<string, any>;
+  const baseDateTimeProps = {
+    status,
+    disabled,
+    readOnly,
+  } as Record<string, any>;
+  const dateTimeProps = {
+    dimension,
+    skeleton,
+    ...baseDateTimeProps,
+  } as Record<string, any>;
+
   return (
-    <DisplayContainer>
-      <Field label="read only control" readOnly>
-        <DateTimeContainer readOnly>
-          <DateTimeDateInput defaultValue="12.10.2022" readOnly />
-          <DateTimeSeparator readOnly />
-          <DateTimeTimeInput defaultValue="12:10" readOnly />
-        </DateTimeContainer>
-      </Field>
-    </DisplayContainer>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <DisplayContainer>
+        <Field {...fieldProps}>
+          <DateTimeContainer {...baseDateTimeProps} disabled={disabled || skeleton}>
+            <DateTimeDateInput {...dateTimeProps} defaultValue="12.10.2022" />
+            <DateTimeSeparator {...baseDateTimeProps} disabled={disabled || skeleton} />
+            <DateTimeTimeInput {...dateTimeProps} defaultValue="12:10" />
+          </DateTimeContainer>
+        </Field>
+      </DisplayContainer>
+    </ThemeProvider>
   );
 };
