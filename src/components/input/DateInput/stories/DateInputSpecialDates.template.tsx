@@ -11,10 +11,13 @@ const weekendMixin = css<{ disabled?: boolean }>`
 `;
 
 export const DateInputSpecialDatesTemplate = ({
+  placeholder,
   themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = useState<string>(String(props.value) ?? '');
+  const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
+  const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
+
   useEffect(() => {
     if (props.value !== undefined) {
       setValue(String(props.value));
@@ -25,6 +28,12 @@ export const DateInputSpecialDatesTemplate = ({
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  useEffect(() => {
+    if (placeholder) {
+      setPlaceholderValue(placeholder);
+    }
+  }, [placeholder]);
 
   const highlightWeekend = (date: Date) => {
     const dayNumber = date.getDay();
@@ -39,7 +48,7 @@ export const DateInputSpecialDatesTemplate = ({
         {...props}
         value={localValue}
         onChange={handleChange}
-        placeholder={'Some placeholder'}
+        placeholder={placeholderValue}
         style={{ maxWidth: 300 }}
         dropContainerClassName="dropContainerClass"
         highlightSpecialDay={highlightWeekend}

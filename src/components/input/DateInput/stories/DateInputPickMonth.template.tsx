@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
@@ -7,11 +8,13 @@ import type { DateInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const DateInputPickMonthTemplate = ({
+  placeholder,
   themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
+  const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   React.useEffect(() => {
     if (props.value !== undefined) {
@@ -23,6 +26,12 @@ export const DateInputPickMonthTemplate = ({
     setValue(inputValue);
     props.onChange?.(e);
   };
+
+  useEffect(() => {
+    if (placeholder) {
+      setPlaceholderValue(placeholder);
+    }
+  }, [placeholder]);
 
   const handleVisibilityChange = (newIsVisible: boolean) => {
     setIsVisible(newIsVisible);
@@ -42,7 +51,7 @@ export const DateInputPickMonthTemplate = ({
         onVisibilityChange={handleVisibilityChange}
         value={localValue}
         onChange={handleChange}
-        placeholder={'Some placeholder'}
+        placeholder={placeholderValue}
         style={{ maxWidth: 300 }}
         onMonthSelect={handleMonthClick}
         currentActiveViewImportant
