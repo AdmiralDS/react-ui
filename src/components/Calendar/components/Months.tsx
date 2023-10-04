@@ -23,8 +23,8 @@ export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected,
         return (
           <MonthComponent
             key={month}
-            today={index === new Date().getMonth()}
-            selected={!!(selected || startDate) && index === ((selected || startDate) as Date).getMonth()}
+            $today={index === new Date().getMonth()}
+            $selected={!!(selected || startDate) && index === ((selected || startDate) as Date).getMonth()}
             disabled={disabled}
             onMouseDown={handleClick}
           >

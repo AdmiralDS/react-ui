@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MultiButton } from '@admiral-ds/react-ui';
-import type { MultiButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MultiButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as BonusSolid } from '@admiral-ds/icons/build/category/BonusSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   width: 20px;
@@ -57,17 +58,15 @@ const itemsDemo = [
   },
 ];
 
-export const MultiButtonIconTemplate = (props: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MultiButtonIconTemplate = ({
+  themeBorderKind,
+  ...props
+}: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ display: 'flex' }}>
         <MultiButton
           {...props}

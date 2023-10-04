@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createItems } from './utils';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ITEMS = createItems(200);
 
@@ -13,7 +14,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuLargeNumberOfItemsTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuLargeNumberOfItemsTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS.map((item) => ({
       id: item.id,
@@ -25,13 +29,8 @@ export const MenuLargeNumberOfItemsTemplate = (props: MenuProps & { themeBorderK
     }));
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

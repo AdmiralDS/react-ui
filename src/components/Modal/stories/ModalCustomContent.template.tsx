@@ -1,22 +1,21 @@
 import * as React from 'react';
 import { Modal, Button } from '@admiral-ds/react-ui';
-import type { ModalProps, Theme } from '@admiral-ds/react-ui';
+import type { ModalProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-export const ModalCustomContentTemplate = (args: ModalProps) => {
+export const ModalCustomContentTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button onClick={() => setOpened(true)}>Open modal with custom content</Button>
       {opened && (
         <Modal
-          {...args}
+          {...props}
           dimension="l"
           onClose={() => {
             setOpened(false);

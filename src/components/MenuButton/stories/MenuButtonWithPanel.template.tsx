@@ -7,9 +7,9 @@ import type {
   ItemWithCheckbox,
   RenderOptionProps,
   RenderPanelProps,
-  Theme,
   BorderRadiusType,
 } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const ActionPanelFlex = css`
   display: flex;
@@ -47,12 +47,10 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
   },
 ];
 
-export const MenuButtonWithPanelTemplate = (props: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const MenuButtonWithPanelTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
   const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
   const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
@@ -90,7 +88,7 @@ export const MenuButtonWithPanelTemplate = (props: MenuButtonProps & { themeBord
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <MenuButton
         dimension="s"
         appearance="ghost"

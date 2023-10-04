@@ -1,21 +1,31 @@
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { ReactNode } from 'react';
+import type { RuleSet } from 'styled-components';
 import styled from 'styled-components';
 import type { MenuDimensions } from '#src/components/Menu/index';
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import * as React from 'react';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { uid } from '#src/components/common/uid';
 
-export const MenuActionsPanel = styled.div<{
-  dimension: MenuDimensions;
-  menuActionsPanelCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+const MenuActionsPanelDiv = styled.div<{
+  $dimension: MenuDimensions;
+  $menuActionsPanelCssMixin?: RuleSet<object>;
 }>`
-  padding: ${(p) => (p.dimension === 's' ? '10px 12px' : '12px 16px')};
+  padding: ${(p) => (p.$dimension === 's' ? '10px 12px' : '12px 16px')};
 
-  ${(p) => p.menuActionsPanelCssMixin}
+  ${(p) => p.$menuActionsPanelCssMixin}
 `;
+
+export interface MenuActionsPanelProps {
+  dimension: MenuDimensions;
+  menuActionsPanelCssMixin?: RuleSet<object>;
+  children: ReactNode;
+}
+
+export const MenuActionsPanel = ({ dimension, menuActionsPanelCssMixin, ...props }: MenuActionsPanelProps) => {
+  return <MenuActionsPanelDiv {...props} $dimension={dimension} $menuActionsPanelCssMixin={menuActionsPanelCssMixin} />;
+};
 
 const HighlightText = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};

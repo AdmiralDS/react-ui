@@ -39,8 +39,8 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
       data-overflowmenu
       data-opened={showRowsActions}
       $offset={tableWidth - (verticalScroll ? scrollbar : 0)}
-      dimension={dimension}
-      showRowsActions={showRowsActions}
+      $dimension={dimension}
+      $showRowsActions={showRowsActions}
       {...props}
     >
       {row.actionRender ? row.actionRender(row) : row.overflowMenuRender?.(row, handleVisibilityChange)}

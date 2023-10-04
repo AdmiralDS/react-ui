@@ -24,7 +24,7 @@ const ButtonComponent = styled.button`
   margin: 2px 0;
 `;
 
-export const ButtonContent = styled.span<{ isFilterActive?: boolean; iconSize: string }>`
+export const ButtonContent = styled.span<{ $isFilterActive?: boolean; $iconSize: string }>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -33,8 +33,8 @@ export const ButtonContent = styled.span<{ isFilterActive?: boolean; iconSize: s
 
   & svg {
     flex-shrink: 0;
-    width: ${({ iconSize }) => iconSize};
-    height: ${({ iconSize }) => iconSize};
+    width: ${({ $iconSize }) => $iconSize};
+    height: ${({ $iconSize }) => $iconSize};
   }
 
   & *[fill^='#'] {
@@ -47,7 +47,7 @@ export const ButtonContent = styled.span<{ isFilterActive?: boolean; iconSize: s
     }
   }
 
-  ${({ isFilterActive }) => isFilterActive && activeFilter}
+  ${({ $isFilterActive }) => $isFilterActive && activeFilter}
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -84,7 +84,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <ButtonComponent ref={refSetter(ref, btnRef)} type="button" {...props}>
-        <ButtonContent isFilterActive={isFilterActive} iconSize={iconSize}>
+        <ButtonContent $isFilterActive={isFilterActive} $iconSize={iconSize}>
           {renderFilterIcon ? renderFilterIcon() : <MoreHorizontalOutline aria-hidden />}
         </ButtonContent>
       </ButtonComponent>

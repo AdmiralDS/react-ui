@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Chips } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -20,7 +20,7 @@ const listData = [
 export const ChipsTagsTemplate = (props: ChipsProps) => {
   return (
     <>
-      <WrapperChip dimension={props.dimension}>
+      <WrapperChip $dimension={props.dimension}>
         {listData.map((item) => (
           <Chips {...props} key={item.id}>
             {item.label}

@@ -3,19 +3,10 @@
 exports[`Link should render component 1`] = `
 .c0 {
   cursor: pointer;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   pointer-events: auto;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
-  -webkit-text-decoration: none;
   text-decoration: none;
   position: relative;
   border-radius: 4px;
@@ -25,7 +16,7 @@ exports[`Link should render component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 

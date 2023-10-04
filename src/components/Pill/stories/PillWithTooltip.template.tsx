@@ -1,7 +1,9 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
+import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { checkOverflow, Pill, Tooltip, TooltipHoc } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -31,7 +33,7 @@ const LabelWrapper = styled.div`
   white-space: nowrap;
 `;
 
-export const PillWithTooltipTemplate = () => {
+export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -68,22 +70,24 @@ export const PillWithTooltipTemplate = () => {
       };
     }
   }, [setTooltipVisible]);
-
+  //debugger;
   return (
-    <WrapperVertical>
-      <Desc>
-        В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при
-        наведении.
-      </Desc>
-      <Desc>Вариант Pill ограниченной ширины с использованием Tooltip при переполнении:</Desc>
-      <StyledPill ref={wrapperRef} style={{ width: '253px' }}>
-        <LabelWrapper ref={textRef}>{pillLabel}</LabelWrapper>
-      </StyledPill>
-      {tooltipVisible && overflow && <Tooltip targetElement={wrapperRef.current} renderContent={() => pillLabel} />}
-      <Desc>Вариант Pill с ограничением по количеству символов и с использованием TooltipHoc:</Desc>
-      <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
-        {pillLabel.slice(0, 40) + '...'}
-      </StyledPillWithTooltipHoc>
-    </WrapperVertical>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+      <WrapperVertical>
+        <Desc>
+          В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при
+          наведении.
+        </Desc>
+        <Desc>Вариант Pill ограниченной ширины с использованием Tooltip при переполнении:</Desc>
+        <StyledPill ref={wrapperRef} style={{ width: '253px' }}>
+          <LabelWrapper ref={textRef}>{pillLabel}</LabelWrapper>
+        </StyledPill>
+        {tooltipVisible && overflow && <Tooltip targetElement={wrapperRef.current} renderContent={() => pillLabel} />}
+        <Desc>Вариант Pill с ограничением по количеству символов и с использованием TooltipHoc:</Desc>
+        <StyledPillWithTooltipHoc renderContent={() => pillLabel}>
+          {pillLabel.slice(0, 40) + '...'}
+        </StyledPillWithTooltipHoc>
+      </WrapperVertical>
+    </ThemeProvider>
   );
 };

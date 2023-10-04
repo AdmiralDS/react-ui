@@ -9,8 +9,9 @@ import {
   InputField,
   Option,
 } from '@admiral-ds/react-ui';
-import type { ModalProps, Theme } from '@admiral-ds/react-ui';
+import type { ModalProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   height: 20px;
@@ -77,20 +78,18 @@ const ModalForm = ({ onYesClick, onNoClick }: Props) => {
   );
 };
 
-export const ModalTwoButtonsTemplate = (args: ModalProps) => {
+export const ModalTwoButtonsTemplate = ({
+  themeBorderKind,
+  ...props
+}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
   const [opened, setOpened] = React.useState(false);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button onClick={() => setOpened(true)}>Open modal with 2 buttons</Button>
       {opened && (
         <Modal
-          {...args}
+          {...props}
           onClose={() => {
             setOpened(false);
           }}

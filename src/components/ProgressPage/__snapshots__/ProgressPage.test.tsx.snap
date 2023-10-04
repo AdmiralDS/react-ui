@@ -6,9 +6,6 @@ exports[`ProgressBar should render component 1`] = `
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -16,20 +13,13 @@ exports[`ProgressBar should render component 1`] = `
   background: #0062FF;
   width: 0%;
   border-radius: 2px;
-  -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   width: 100%;
   line-height: 16px;
@@ -65,9 +55,6 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -75,20 +62,13 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
   background: #D92020;
   width: 0%;
   border-radius: 2px;
-  -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   width: 100%;
   line-height: 16px;
@@ -124,9 +104,6 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -134,20 +111,13 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   background: #0062FF;
   width: 50%;
   border-radius: 2px;
-  -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   width: 100%;
   line-height: 16px;

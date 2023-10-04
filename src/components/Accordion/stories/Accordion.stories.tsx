@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 
-import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
+import { Accordion } from '@admiral-ds/react-ui';
 
 import { AccordionDividerTemplate } from './AccordionDivider.template';
 import { AccordionIconTemplate } from './AccordionIcon.template';
@@ -42,7 +42,6 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/Accordion',
   component: Accordion,
-  subcomponents: { AccordionItem },
   parameters: {
     docs: {
       source: {

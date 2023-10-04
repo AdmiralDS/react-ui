@@ -10,7 +10,7 @@ exports[`OverflowMenu should render component 1`] = `
   height: 100%;
 }
 
-.c3 > svg {
+.c3>svg {
   height: 24px;
   width: 24px;
 }
@@ -24,9 +24,7 @@ exports[`OverflowMenu should render component 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c0 {
@@ -36,11 +34,7 @@ exports[`OverflowMenu should render component 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
@@ -49,7 +43,7 @@ exports[`OverflowMenu should render component 1`] = `
   cursor: pointer;
 }
 
-.c0 > * {
+.c0 >* {
   pointer-events: none;
 }
 
@@ -67,19 +61,19 @@ exports[`OverflowMenu should render component 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c0:focus > .c1 {
+.c0:focus >.c1 {
   background-color: transparent;
 }
 
-.c0:hover > .c1 {
+.c0:hover >.c1 {
   background-color: #0000000D;
 }
 
-.c0:active > .c1 {
+.c0:active >.c1 {
   background-color: #0000001F;
 }
 
-.c0:focus-visible > .c1 {
+.c0:focus-visible >.c1 {
   background-color: transparent;
 }
 
@@ -112,7 +106,7 @@ exports[`OverflowMenu should render component 1`] = `
   height: 100%;
 }
 
-.c3 > svg {
+.c3>svg {
   height: 24px;
   width: 24px;
 }
@@ -126,9 +120,7 @@ exports[`OverflowMenu should render component 1`] = `
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .c0 {
@@ -138,11 +130,7 @@ exports[`OverflowMenu should render component 1`] = `
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
@@ -151,7 +139,7 @@ exports[`OverflowMenu should render component 1`] = `
   cursor: pointer;
 }
 
-.c0 > * {
+.c0 >* {
   pointer-events: none;
 }
 
@@ -169,19 +157,19 @@ exports[`OverflowMenu should render component 1`] = `
   outline: #0062FF solid 2px;
 }
 
-.c0:focus > .c1 {
+.c0:focus >.c1 {
   background-color: transparent;
 }
 
-.c0:hover > .c1 {
+.c0:hover >.c1 {
   background-color: #0000000D;
 }
 
-.c0:active > .c1 {
+.c0:active >.c1 {
   background-color: #0000001F;
 }
 
-.c0:focus-visible > .c1 {
+.c0:focus-visible >.c1 {
   background-color: transparent;
 }
 

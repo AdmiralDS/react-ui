@@ -544,11 +544,6 @@ describe('SearchSelect', () => {
   });
 
   describe('hover onOption', () => {
-    const hoverStyle = `background-color: ${LIGHT_THEME.color['Opacity/Hover']};`;
-    const selectedStyle = `background-color: ${LIGHT_THEME.color['Opacity/Focus']};`;
-    const basicStyle = `background-color: ${LIGHT_THEME.color['Special/Elevated BG']};`;
-    // const basicStyle = `background-color: transparent;`;
-
     test('basic hoveres with keyboard', async () => {
       const user = userEvent.setup();
       render(<SelectComponent value={options[1]} />);
@@ -562,15 +557,16 @@ describe('SearchSelect', () => {
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((option, ind) => {
-        if (ind === 1) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).toHaveStyle(basicStyle);
+        if (ind === 1) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
       await user.type(inputELem, '{arrowdown}');
       dropDownOptions.forEach((option, optionInd) => {
-        if (optionInd === 1) expect(option).toHaveStyle(selectedStyle);
-        else if (optionInd === 2) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).toHaveStyle(basicStyle);
+        //Выбрана должна быть вторая опция
+        if (optionInd === 1) expect(option).toHaveAttribute('value', 'two');
+        else if (optionInd === 2) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).toHaveAttribute('data-hovered', 'false');
       });
     });
 
@@ -587,12 +583,12 @@ describe('SearchSelect', () => {
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((option, ind) => {
-        if (ind === 0) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).toHaveStyle(basicStyle);
+        if (ind === 0) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
       await user.type(inputELem, '{arrowup}');
-      expect(dropDownOptions[dropDownOptions.length - 1]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[dropDownOptions.length - 1]).toHaveAttribute('data-hovered', 'true');
     });
 
     test('first hovered option should be first one when arrowDown on empty select', async () => {
@@ -608,12 +604,12 @@ describe('SearchSelect', () => {
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((option, ind) => {
-        if (ind === 0) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).toHaveStyle(basicStyle);
+        if (ind === 0) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
       await user.type(inputELem, '{arrowdown}');
-      expect(dropDownOptions[1]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[1]).toHaveAttribute('data-hovered', 'true');
     });
 
     test('skips disabled option when hover', async () => {
@@ -649,8 +645,8 @@ describe('SearchSelect', () => {
       await user.type(inputELem, '{arrowdown}');
       await user.type(inputELem, '{arrowdown}');
       dropDownOptions.forEach((option, optionInd) => {
-        if (optionInd === 3) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).not.toHaveStyle(hoverStyle);
+        if (optionInd === 3) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).not.toHaveAttribute('data-hovered', 'true');
       });
     });
 
@@ -684,7 +680,7 @@ describe('SearchSelect', () => {
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       await user.type(inputELem, '{arrowup}');
-      expect(dropDownOptions[3]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[3]).toHaveAttribute('data-hovered', 'true');
     });
 
     test('skips disabled option in the end when hover', async () => {
@@ -718,7 +714,7 @@ describe('SearchSelect', () => {
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       await user.type(inputELem, '{arrowdown}');
-      expect(dropDownOptions[1]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[1]).toHaveAttribute('data-hovered', 'true');
     });
 
     test('correct hover on option when its amount changes', async () => {
@@ -747,18 +743,18 @@ describe('SearchSelect', () => {
 
       const dropDownContainer = baseElement.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
-      expect(dropDownOptions[2]).toHaveStyle(hoverStyle);
+      expect(dropDownOptions[2]).toHaveAttribute('data-hovered', 'true');
 
       await user.type(inputELem, '1');
 
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
       expect(dropDownOptionsAfterInput.length).toBe(1);
       dropDownOptionsAfterInput.forEach((option, ind) => {
-        if (ind === 2) expect(option).toHaveStyle(hoverStyle);
-        else expect(option).not.toHaveStyle(hoverStyle);
+        if (ind === 2) expect(option).toHaveAttribute('data-hovered', 'true');
+        else expect(option).not.toHaveAttribute('data-hovered', 'true');
       });
       await user.type(inputELem, '{arrowdown}');
-      expect(dropDownOptionsAfterInput[0]).toHaveStyle(hoverStyle);
+      expect(dropDownOptionsAfterInput[0]).toHaveAttribute('data-hovered', 'true');
     });
   });
 

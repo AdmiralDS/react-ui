@@ -10,10 +10,10 @@ const listDataIconTooltip = [
   { id: '3', label: 'Ограниченное пространство', disabled: false },
 ];
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 

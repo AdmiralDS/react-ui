@@ -1,5 +1,5 @@
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import type { Dimension } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { ContentSwitcherComponent } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { moveFocus, nextItem, previousItem } from '#src/components/ContentSwitcher/utils';
@@ -41,7 +41,7 @@ export const ContentSwitcher = ({
     <ContentSwitcherComponent
       ref={localRef}
       onKeyDown={handleKeyDown}
-      dimension={dimension}
+      $dimension={dimension}
       tabIndex={tabIndex}
       data-appearance={appearance}
       {...props}

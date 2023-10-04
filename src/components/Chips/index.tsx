@@ -131,36 +131,36 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
         <ChipComponentStyled
           {...props}
           ref={refSetter(ref, chipRef)}
-          dimension={dimension}
-          disabled={disabled}
-          appearance={appearance}
-          selected={selected}
-          defaultChip={defaultChip}
-          withCloseIcon={withCloseIcon}
-          withTooltip={overflow}
-          withBadge={withBadge}
+          $dimension={dimension}
+          $disabled={disabled}
+          $appearance={appearance}
+          $selected={selected}
+          $defaultChip={defaultChip}
+          $withCloseIcon={withCloseIcon}
+          $withTooltip={overflow}
+          $withBadge={withBadge}
           onKeyDown={handleKeyDown}
           tabIndex={props.tabIndex ?? 0}
-          clickable={!!props.onClick}
+          $clickable={!!props.onClick}
         >
           <ChipContentWrapperStyled
-            dimension={dimension}
-            disabled={disabled}
-            appearance={appearance}
-            selected={selected}
-            withCloseIcon={withCloseIcon}
+            $dimension={dimension}
+            $disabled={disabled}
+            $appearance={appearance}
+            $selected={selected}
+            $withCloseIcon={withCloseIcon}
           >
             {iconBefore && (
               <IconBeforeWrapperStyled>
-                <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
                   {iconBefore}
                 </IconWrapperStyled>
               </IconBeforeWrapperStyled>
             )}
             <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
             {!onClose && iconAfter && (
-              <IconAfterWrapperStyled dimension={dimension}>
-                <IconWrapperStyled dimension={dimension} withCloseIcon={withCloseIcon}>
+              <IconAfterWrapperStyled $dimension={dimension}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
                   {iconAfter}
                 </IconWrapperStyled>
               </IconAfterWrapperStyled>

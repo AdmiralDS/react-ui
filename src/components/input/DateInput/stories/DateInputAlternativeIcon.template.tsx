@@ -3,11 +3,13 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { DateInputProps, BorderRadiusType, Theme } from '@admiral-ds/react-ui';
+import type { DateInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as CalendarSolidSVG } from '@admiral-ds/icons/build/system/CalendarSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const DateInputAlternativeIconTemplate = ({
   placeholder,
+  themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Другая иконка ->');
@@ -24,13 +26,8 @@ export const DateInputAlternativeIconTemplate = ({
     }
   }, [placeholder]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DateInput
         {...props}
         value={value}

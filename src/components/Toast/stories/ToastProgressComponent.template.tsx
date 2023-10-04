@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import {
@@ -14,16 +14,10 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type {
-  ID,
-  Theme,
-  ToastItemProps,
-  ToastProps,
-  NotificationItemStatus,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import type { ID, ToastItemProps, ToastProps, NotificationItemStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,12 +38,12 @@ const handleTextButtonClick = () => {
 };
 
 const MessageForm = () => {
-  const [toastIdStack, setToastIdStack] = React.useState<Array<ToastItemProps>>([]);
-  const [titleValue, setTitleValue] = React.useState('Toast title');
-  const [contentValue, setContentValue] = React.useState('Toast content');
-  const [textButton1Value, setTextButton1Value] = React.useState('TextButton1');
-  const [textButton2Value, setTextButton2Value] = React.useState('TextButton2');
-  const [toastStatus, setToastStatus] = React.useState(0);
+  const [toastIdStack, setToastIdStack] = useState<Array<ToastItemProps>>([]);
+  const [titleValue, setTitleValue] = useState('Toast title');
+  const [contentValue, setContentValue] = useState('Toast content');
+  const [textButton1Value, setTextButton1Value] = useState('TextButton1');
+  const [textButton2Value, setTextButton2Value] = useState('TextButton2');
+  const [toastStatus, setToastStatus] = useState(0);
 
   const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 
@@ -118,14 +112,12 @@ const MessageForm = () => {
   );
 };
 
-export const ToastProgressComponentTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const ToastProgressComponentTemplate = ({
+  themeBorderKind,
+  ...props
+}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ToastProvider autoDeleteTime={5000}>
         <MessageForm />
         <Toast position={props.position} />

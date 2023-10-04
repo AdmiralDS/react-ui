@@ -1,6 +1,6 @@
 import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
 import type { Shape } from '#src/components/themes/common';
@@ -66,7 +66,7 @@ const Separator = styled.div<SeparatorProps>`
       disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 
-  ${({ skeleton }) => skeleton && skeletonAnimationMixin};
+  ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};
 `;
 
 const Wrapper = styled.div`
@@ -78,7 +78,7 @@ type Appearance = 'primary' | 'secondary';
 
 interface SeparatorProps {
   disabled?: boolean;
-  skeleton?: boolean;
+  $skeleton?: boolean;
 }
 
 export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
@@ -108,7 +108,7 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -204,7 +204,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                   typeof child === 'string' ? <span key={`${child}-${index}`}>{child}</span> : child,
                 )}
               </MainButton>
-              <Separator disabled={disabled} skeleton={skeleton} data-appearance={appearance} aria-hidden />
+              <Separator disabled={disabled} $skeleton={skeleton} data-appearance={appearance} aria-hidden />
               <MenuButton
                 ref={buttonRef as React.Ref<HTMLButtonElement>}
                 skeleton={skeleton}

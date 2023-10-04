@@ -6,8 +6,8 @@ export type Dimension = 'm' | 's';
 
 export type LinkComponent = {
   disabled?: boolean;
-  appearance?: AppearanceLink;
-  dimension?: Dimension;
+  $appearance?: AppearanceLink;
+  $dimension?: Dimension;
 };
 
 export const LinkComponentCssMixin = css<LinkComponent>`

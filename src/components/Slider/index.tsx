@@ -1,4 +1,5 @@
-import * as React from 'react';
+import type { HTMLAttributes, ReactNode, KeyboardEvent } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 
@@ -6,7 +7,7 @@ import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
 
-export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: number;
   /** Коллбек на изменение состояния */
@@ -28,7 +29,7 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /** Массив отметок */
   tickMarks?: number[];
   /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
-  renderTickMark?: (mark: string) => React.ReactNode;
+  renderTickMark?: (mark: string) => ReactNode;
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -56,15 +57,15 @@ export const Slider = ({
   const tickMarks = Array.isArray(points) ? points : undefined;
   const step = (typeof userStep === 'number' && userStep > 0) || userStep === 'any' ? userStep : 1;
 
-  const [isDraging, setDrag] = React.useState(false);
-  const [animation, setAnimation] = React.useState(true);
-  const [rangeWidth, setRangeWidth] = React.useState(0);
+  const [isDraging, setDrag] = useState(false);
+  const [animation, setAnimation] = useState(true);
+  const [rangeWidth, setRangeWidth] = useState(0);
 
-  const filledRef = React.useRef<HTMLDivElement | null>(null);
-  const trackRef = React.useRef<HTMLDivElement | null>(null);
-  const sliderRef = React.useRef<HTMLDivElement | null>(null);
+  const filledRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     function correctSliderPosition(value: number) {
       const onePxValue = rangeWidth ? rangeWidth / (maxValue - minValue) : 0;
       const correctValue = value >= 0 ? value - minValue : -minValue + value;
@@ -100,7 +101,7 @@ export const Slider = ({
     correctSliderPosition(newValue);
   }, [value, minValue, maxValue, step, rangeWidth]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (trackRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => setRangeWidth(entry.contentRect.width || 0));
@@ -122,7 +123,7 @@ export const Slider = ({
 
   const [handleMouseMove, freeResources] = throttle(updateSlider, 50);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isDraging && !disabled) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
@@ -174,7 +175,7 @@ export const Slider = ({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const code = keyboardKey.getCode(e);
     switch (code) {
       case keyboardKey.ArrowLeft:
@@ -198,9 +199,9 @@ export const Slider = ({
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
-      <TrackWrapper dimension={dimension} skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+      <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
-          <FilledTrack ref={filledRef} animation={animation} />
+          <FilledTrack ref={filledRef} $animation={animation} />
           <DefaultTrack ref={trackRef}>
             {
               <TickMarks
@@ -216,8 +217,8 @@ export const Slider = ({
             }
             <Thumb
               ref={sliderRef}
-              animation={animation}
-              dimension={dimension}
+              $animation={animation}
+              $dimension={dimension}
               role="slider"
               tabIndex={disabled ? -1 : 0}
               aria-valuenow={value}
@@ -225,7 +226,7 @@ export const Slider = ({
               aria-valuemax={maxValue}
               onKeyDown={handleKeyDown}
             >
-              <ThumbCircle dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
+              <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
           </DefaultTrack>
         </Track>

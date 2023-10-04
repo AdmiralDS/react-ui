@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import {
@@ -9,9 +9,10 @@ import {
   ToastProvider,
   useToast,
 } from '@admiral-ds/react-ui';
-import type { Theme, ToastProps, ID, IdentifyToast, ToastItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ToastProps, ID, IdentifyToast, ToastItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const random = (min: number, max: number) => min + Number(Math.round(Math.random() * (max - min)));
 
@@ -51,7 +52,7 @@ const items: IdentifyToast[] = [
 ];
 
 const NotificationEmitter = () => {
-  const [toastStack, setToastStack] = React.useState<Array<ToastItemProps>>([]);
+  const [toastStack, setToastStack] = useState<Array<ToastItemProps>>([]);
 
   const { addToastItem, removeToastItem, autoDeleteTime } = useToast();
 
@@ -101,14 +102,12 @@ const NotificationEmitter = () => {
   );
 };
 
-export const ToastLineNotificationTemplate = (props: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const ToastLineNotificationTemplate = ({
+  themeBorderKind,
+  ...props
+}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
         <Toast style={{ top: 128, left: 64, width: 'initial' }} />

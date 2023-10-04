@@ -34,22 +34,22 @@ export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
     };
 
     return (
-      <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className} dimension={dimension}>
-        <InputContainer dimension={dimension}>
+      <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className} $dimension={dimension}>
+        <InputContainer $dimension={dimension}>
           <Input
             ref={ref}
             type="radio"
             disabled={disabled}
             readOnly={readOnly}
-            dimension={dimension}
+            $dimension={dimension}
             {...props}
             onKeyDown={handleKeyDown}
           />
-          <Span disabled={disabled || readOnly} dimension={dimension} error={error} />
+          <Span disabled={disabled || readOnly} $dimension={dimension} $error={error} />
         </InputContainer>
         {children}
         {extraText && (
-          <Hint disabled={disabled} dimension={dimension}>
+          <Hint disabled={disabled} $dimension={dimension}>
             {extraText}
           </Hint>
         )}

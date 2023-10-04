@@ -4,20 +4,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -31,16 +23,8 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -51,15 +35,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -67,15 +49,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -83,7 +63,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -130,20 +110,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -157,16 +129,8 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -177,15 +141,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -193,15 +155,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -209,7 +169,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -311,20 +271,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -338,16 +290,8 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -358,15 +302,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -374,15 +316,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -390,7 +330,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -437,20 +377,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -464,16 +396,8 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -484,15 +408,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -500,15 +422,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -516,7 +436,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -618,20 +538,12 @@ exports[`Spinner should render component without nextStepName 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -645,12 +557,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 8px;
 }
@@ -661,15 +568,13 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -677,7 +582,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -718,20 +623,12 @@ exports[`Spinner should render component without nextStepName 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -745,12 +642,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 8px;
 }
@@ -761,15 +653,13 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -777,7 +667,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -873,20 +763,12 @@ exports[`Spinner should render default component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -900,16 +782,8 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -920,15 +794,13 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -936,15 +808,13 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -952,7 +822,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -999,20 +869,12 @@ exports[`Spinner should render default component 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -1026,16 +888,8 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 8px;
 }
@@ -1046,15 +900,13 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1062,15 +914,13 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1078,7 +928,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1180,20 +1030,12 @@ exports[`Spinner should render mobile component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -1207,12 +1049,7 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 8px;
 }
@@ -1223,15 +1060,13 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1239,15 +1074,13 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1255,7 +1088,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1302,20 +1135,12 @@ exports[`Spinner should render mobile component 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 388px;
 }
 
 .c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   overflow: hidden;
   height: 4px;
@@ -1329,12 +1154,7 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 8px;
 }
@@ -1345,15 +1165,13 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 .c3 {
   white-space: nowrap;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1361,15 +1179,13 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c6 {
   width: 100%;
-  -webkit-align-text: left;
-  -ms-flex-line-packalign-text: left;
-  align-text: left;
+  text-align: left;
   margin-top: 8px;
   color: #717681;
   font-family: 'VTB Group UI',sans-serif;
@@ -1377,7 +1193,7 @@ exports[`Spinner should render mobile component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 

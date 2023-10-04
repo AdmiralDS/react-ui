@@ -35,9 +35,9 @@ export const StickyGroupRow = styled.div`
   z-index: 5;
 `;
 
-export const StickyWrapper = styled(StickyGroupRow)<{ greyHeader?: boolean }>`
-  background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
+  background: ${({ theme, $greyHeader }) =>
+    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
@@ -49,27 +49,27 @@ export const NormalWrapper = styled.div`
 `;
 
 export const ActionBG = styled.div<{
-  dimension: TableProps['dimension'];
-  greyHeader?: boolean;
+  $dimension: TableProps['dimension'];
+  $greyHeader?: boolean;
 }>`
   ${actionsBGStyle};
   right: 0;
   bottom: 1px;
-  background: ${({ theme, greyHeader }) =>
-    greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+  background: ${({ theme, $greyHeader }) =>
+    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
 `;
 
 export const OverflowMenuWrapper = styled.div<{
   $offset: number;
-  dimension: TableProps['dimension'];
-  showRowsActions?: boolean;
+  $dimension: TableProps['dimension'];
+  $showRowsActions?: boolean;
 }>`
   will-change: margin-left;
   transform: translate3d(0, 0, 0);
   ${overflowMenuStyle};
 
-  ${({ showRowsActions }) =>
-    !showRowsActions &&
+  ${({ $showRowsActions }) =>
+    !$showRowsActions &&
     css`
       visibility: hidden;
       &:hover {
@@ -84,7 +84,7 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: boolean }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -99,21 +99,21 @@ export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolea
       top: 0;
       right: 0;
       height: 100%;
-      background: ${({ theme, greyHeader }) =>
-        greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
-      width: ${({ scrollbar }) => scrollbar}px;
+      background: ${({ theme, $greyHeader }) =>
+        $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+      width: ${({ $scrollbar }) => $scrollbar}px;
       border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
     }
     & > div.tr {
       overflow-y: scroll;
     }
     & > [data-overflowmenu='true'] {
-      margin-right: ${({ scrollbar }) => scrollbar}px;
+      margin-right: ${({ $scrollbar }) => $scrollbar}px;
     }
   }
 
-  ${({ greyHeader }) =>
-    greyHeader &&
+  ${({ $greyHeader }) =>
+    $greyHeader &&
     css`
       & > div.tr {
         background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
@@ -121,7 +121,7 @@ export const HeaderWrapper = styled.div<{ scrollbar: number; greyHeader?: boolea
     `}
 `;
 
-export const Header = styled.div<{ dimension: TableProps['dimension'] }>`
+export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
   flex: 0 0 auto;
@@ -176,7 +176,7 @@ export const SortIconWrapper = styled.div`
   position: relative;
 `;
 
-export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial' }>`
+export const SortIcon = styled(ArrowUpOutline)<{ $sort: 'asc' | 'desc' | 'initial' }>`
   display: flex;
   flex-shrink: 0;
   transition: transform 0.3s ease-in-out;
@@ -184,9 +184,9 @@ export const SortIcon = styled(ArrowUpOutline)<{ sort: 'asc' | 'desc' | 'initial
   margin: 2px 0;
 
   & *[fill^='#'] {
-    fill: ${({ theme, sort }) => (sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
+    fill: ${({ theme, $sort }) => ($sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
   }
-  ${({ sort }) => (sort === 'desc' ? 'transform: rotate(180deg);' : '')}
+  ${({ $sort }) => ($sort === 'desc' ? 'transform: rotate(180deg);' : '')}
 `;
 
 export const SortOrder = styled.div`
@@ -204,7 +204,7 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
-export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
+export const Cell = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: flex-start;
   flex: 0 0 auto;
@@ -213,12 +213,12 @@ export const Cell = styled.div<{ dimension: TableProps['dimension'] }>`
   overflow: hidden;
 `;
 
-export const CellTextContent = styled.div<{ cellAlign?: 'left' | 'right' }>`
+export const CellTextContent = styled.div<{ $cellAlign?: 'left' | 'right' }>`
   display: block;
   align-items: center;
   width: 100%;
   margin: 2px 0;
-  ${({ cellAlign }) => cellAlign === 'right' && 'text-align: right;'}
+  ${({ $cellAlign }) => $cellAlign === 'right' && 'text-align: right;'}
   overflow: hidden;
 `;
 
@@ -230,10 +230,10 @@ export const GroupTextContent = styled.div`
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 44 : 56)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '8px 14px 7px 14px';
       case 'l':
@@ -248,10 +248,10 @@ export const CheckboxCell = styled(Cell)<{ dimension: TableProps['dimension'] }>
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 44 : 56)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 44 : 56)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '6px 12px 5px 12px';
       case 'l':
@@ -265,7 +265,7 @@ export const ExpandCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
   }};
 `;
 
-export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
+export const HeaderCell = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
@@ -277,13 +277,13 @@ export const HeaderCell = styled.div<{ dimension: TableProps['dimension'] }>`
   align-items: flex-start;
 `;
 
-export const HeaderCellContent = styled.div<{ cellAlign: 'left' | 'right' }>`
+export const HeaderCellContent = styled.div<{ $cellAlign: 'left' | 'right' }>`
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   width: 100%;
-  ${({ cellAlign }) =>
-    cellAlign === 'right' &&
+  ${({ $cellAlign }) =>
+    $cellAlign === 'right' &&
     css`
       flex-direction: row-reverse;
       & > ${HeaderCellTitle} {
@@ -300,50 +300,49 @@ export const HeaderCellSpacer = styled.div<{ width?: string }>`
   flex-shrink: 0;
 `;
 
-export const HeaderCellTitle = styled.div<{ sort: 'asc' | 'desc' | 'initial' }>`
+export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>`
   display: inline-flex;
   align-items: flex-start;
   width: 100%;
   overflow: hidden;
   &:hover {
     *[fill^='#'] {
-      fill: ${({ theme, sort }) =>
-        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+      fill: ${({ theme, $sort }) =>
+        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
-    
+
     ${SortOrder} {
-      color: ${({ theme, sort }) =>
-        sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
-    };
+      color: ${({ theme, $sort }) =>
+        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
   }
 `;
 
-export const TitleContent = styled.div<{ dimension: TableProps['dimension']; sortable?: boolean }>`
+export const TitleContent = styled.div<{ $dimension: TableProps['dimension']; $sortable?: boolean }>`
   display: flex;
   flex-direction: column;
 
   // leave 20px/16px for SortIcon
-  max-width: ${({ sortable, dimension }) =>
-    sortable ? `calc(100% - ${dimension === 's' || dimension === 'm' ? 16 : 20}px)` : '100%'};
+  max-width: ${({ $sortable, $dimension }) =>
+    $sortable ? `calc(100% - ${$dimension === 's' || $dimension === 'm' ? 16 : 20}px)` : '100%'};
 `;
 
-export const Title = styled.div<{ lineClamp: number }>`
+export const Title = styled.div<{ $lineClamp: number }>`
   position: relative;
   width: 100%;
-  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+  ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-export const ExtraText = styled.div<{ dimension: TableProps['dimension']; lineClamp: number }>`
+export const ExtraText = styled.div<{ $dimension: TableProps['dimension']; $lineClamp: number }>`
   position: relative;
   width: 100%;
   margin: 2px 0;
   ${extraTextStyle}
-  ${({ lineClamp }) => (lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+  ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
-const rowWidthStyle = css<{ rowWidth?: number }>`
-  width: ${(p) => `${p.rowWidth}px`};
+const rowWidthStyle = css<{ $rowWidth?: number }>`
+  width: ${(p) => `${p.$rowWidth}px`};
 `;
 
 const rowHoverMixin = css`
@@ -355,36 +354,36 @@ const rowHoverMixin = css`
 `;
 
 export const Row = styled.div<{
-  dimension: TableProps['dimension'];
-  underline: boolean;
+  $dimension: TableProps['dimension'];
+  $underline: boolean;
   disabled?: boolean;
-  isGroup?: boolean;
-  rowWidth?: number;
-  hover?: boolean;
+  $isGroup?: boolean;
+  $rowWidth?: number;
+  $hover?: boolean;
 }>`
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: fit-content;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  ${(p) => (p.isGroup ? groupRowStyle : rowStyle)}
+  ${(p) => (p.$isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
-  ${({ underline }) => underline && underlineRow}
-  ${({ rowWidth }) => rowWidth && rowWidthStyle}
+  ${({ $underline }) => $underline && underlineRow}
+  ${({ $rowWidth }) => $rowWidth && rowWidthStyle}
    &:hover:is(.hoverable) {
-    ${({ hover }) => hover && rowHoverMixin}
+    ${({ $hover }) => $hover && rowHoverMixin}
   }
 `;
 
 export const SimpleRow = styled.div<{
-  showRowsActions: boolean;
+  $showRowsActions: boolean;
   selected?: boolean;
   disabled?: boolean;
-  error?: boolean;
-  success?: boolean;
-  grey?: boolean;
-  status?: TableRow['status'];
-  rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
+  $error?: boolean;
+  $success?: boolean;
+  $grey?: boolean;
+  $status?: TableRow['status'];
+  $rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
   display: inline-flex;
   min-width: max-content;
@@ -394,8 +393,8 @@ export const SimpleRow = styled.div<{
     background: ${rowBackground};
   }
 
-  ${({ showRowsActions }) =>
-    !showRowsActions &&
+  ${({ $showRowsActions }) =>
+    !$showRowsActions &&
     css`
       &:hover {
         & + ${OverflowMenuWrapper} {
@@ -408,11 +407,11 @@ export const SimpleRow = styled.div<{
     `}
 `;
 
-export const ExpandedRow = styled.div<{ opened?: boolean; contentMaxHeight?: number | string }>`
+export const ExpandedRow = styled.div<{ $opened?: boolean; $contentMaxHeight?: number | string }>`
   display: inline-flex;
   overflow: hidden;
   transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: ${(p) => (!p.opened ? 0 : p.contentMaxHeight)};
+  max-height: ${(p) => (!p.$opened ? 0 : p.$contentMaxHeight)};
 `;
 
 export const ExpandedRowContent = styled.div`
@@ -435,13 +434,13 @@ const getTechColumnsWidth = (
   (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
-  dimension: TableProps['dimension'];
-  selectionColumn?: boolean;
-  expansionColumn?: boolean;
+  $dimension: TableProps['dimension'];
+  $selectionColumn?: boolean;
+  $expansionColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.dimension, p.selectionColumn, p.expansionColumn) + 'px'});
+  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
 `;
 
 export const HiddenHeader = styled.div`
@@ -458,7 +457,7 @@ export const HiddenHeader = styled.div`
   }
 `;
 
-export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>`
+export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
@@ -467,9 +466,9 @@ export const Mirror = styled(HeaderCell)<{ dimension: TableProps['dimension'] }>
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
-  ${({ dimension }) =>
-    dimension === 's' || dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
-  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 8 : 10)}px;
+  ${({ $dimension }) =>
+    $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
+  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 8 : 10)}px;
   && {
     cursor: none;
     svg {

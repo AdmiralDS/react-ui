@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CloseIconPlacementButton, T } from '@admiral-ds/react-ui';
-import type { IconPlacementProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { IconPlacementProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const WrapperVertical = styled.div`
   display: flex;
@@ -12,15 +13,12 @@ const WrapperVertical = styled.div`
   gap: 20px;
 `;
 
-export const IconPlacementVariantsTemplate = (props: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    console.log(`Current border ${theme.shape.borderRadiusKind}`);
-    return theme;
-  }
-
+export const IconPlacementVariantsTemplate = ({
+  themeBorderKind,
+  ...props
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
           Примеры использования:

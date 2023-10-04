@@ -104,7 +104,7 @@ const Category = ({ categoryName }: { categoryName: string }) => {
                 <ColorCircle
                   $size={56}
                   $color={colorName}
-                  border={theme.color[colorName] === '#FFFFFF' || theme.color[colorName] === '#121316'}
+                  $border={theme.color[colorName] === '#FFFFFF' || theme.color[colorName] === '#121316'}
                   style={{ marginRight: '48px' }}
                 />
                 <ColorDescription>{COLORS[categoryName][colorName].description}</ColorDescription>

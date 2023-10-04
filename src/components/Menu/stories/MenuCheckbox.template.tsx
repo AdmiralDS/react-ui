@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { mediumGroupBorderRadius, Menu, MenuItemWithCheckbox } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 interface StoryItem {
   id: string;
@@ -50,7 +51,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuCheckboxTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuCheckboxTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<string | undefined>();
   const [checkedOptions, setCheckedOptions] = React.useState<Array<string>>([]);
 
@@ -78,13 +82,8 @@ export const MenuCheckboxTemplate = (props: MenuProps & { themeBorderKind?: Bord
     setCheckedOptions([...checkedOptions]);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

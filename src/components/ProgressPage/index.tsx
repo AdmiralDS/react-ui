@@ -13,22 +13,22 @@ export interface ProgressPageProps extends HTMLAttributes<HTMLDivElement> {
   appearance?: AppearanceProgressPage;
 }
 
-const Wrapper = styled.div<{ appearance?: AppearanceProgressPage }>`
+const Wrapper = styled.div`
   background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
   display: flex;
 `;
-const Progress = styled.div<{ percent: number; appearance?: AppearanceProgressPage }>`
-  background: ${({ theme, appearance }) =>
-    appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
-  width: ${({ percent }) => percent}%;
+const Progress = styled.div<{ $percent: number; $appearance?: AppearanceProgressPage }>`
+  background: ${({ theme, $appearance }) =>
+    $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
+  width: ${({ $percent }) => $percent}%;
   border-radius: 2px;
   transition: all 0.3s linear;
 `;
 
-const Label = styled.div<{ appearance?: AppearanceProgressPage }>`
+const Label = styled.div<{ $appearance?: AppearanceProgressPage }>`
   display: flex;
   padding-bottom: 8px;
   font-size: 12px;
@@ -38,8 +38,8 @@ const Label = styled.div<{ appearance?: AppearanceProgressPage }>`
   font-style: normal;
   font-weight: normal;
   font-family: ${TYPOGRAPHY.fontFamily};
-  color: ${({ theme, appearance }) =>
-    appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 90']};
+  color: ${({ theme, $appearance }) =>
+    $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 90']};
 `;
 
 const Container = styled.div``;
@@ -47,9 +47,9 @@ const Container = styled.div``;
 export const ProgressPage: FC<ProgressPageProps> = ({ percent = 0, label, appearance = 'primary', ...props }) => {
   return (
     <Container {...props}>
-      <Label appearance={appearance}>{label}</Label>
-      <Wrapper appearance={appearance}>
-        <Progress appearance={appearance} percent={percent} />
+      <Label $appearance={appearance}>{label}</Label>
+      <Wrapper>
+        <Progress $appearance={appearance} $percent={percent} />
       </Wrapper>
     </Container>
   );

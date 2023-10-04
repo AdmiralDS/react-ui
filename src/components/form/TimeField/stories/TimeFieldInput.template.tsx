@@ -3,7 +3,8 @@ import type { ChangeEvent } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TimeField } from '@admiral-ds/react-ui';
-import type { Theme, TimeFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TimeFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   max-width: 320px;
@@ -15,6 +16,7 @@ const DisplayContainer = styled.div`
 export const TimeFieldInputTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода времени',
+  themeBorderKind,
   ...props
 }: TimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
@@ -30,13 +32,8 @@ export const TimeFieldInputTemplate = ({
     props.onChange?.(e);
   };
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DisplayContainer>
         <TimeField
           data-container-id="timeFieldIdOne"

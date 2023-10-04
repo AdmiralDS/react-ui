@@ -6,8 +6,6 @@ import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider } from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { initializeRTL } from 'storybook-addon-rtl';
-
 const GlobalStyles = createGlobalStyle`
     body {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -16,8 +14,6 @@ const GlobalStyles = createGlobalStyle`
       background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
     }
 `;
-
-initializeRTL();
 
 export const parameters = {
   options: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { FC, HTMLAttributes, ReactNode } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -24,28 +24,28 @@ const cssDefault = css`
 `;
 
 const StatusContainer = styled.div<{
-  dimension: Dimension;
-  displayRight?: boolean;
-  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  $dimension: Dimension;
+  $displayRight?: boolean;
+  $cssMixin?: RuleSet<object>;
 }>`
   display: inline-flex;
   align-items: center;
-  flex-direction: ${(p) => (p.displayRight ? 'row' : 'row-reverse')};
-  height: ${(p) => (p.dimension === 'm' ? '24px' : '20px')};
-  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
+  flex-direction: ${(p) => (p.$displayRight ? 'row' : 'row-reverse')};
+  height: ${(p) => (p.$dimension === 'm' ? '24px' : '20px')};
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
   > ${Circle} {
-    width: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
-    height: ${(p) => (p.dimension === 'm' ? '20px' : '16px')};
-    margin: ${(p) => (p.displayRight ? '0 10px 0 0' : '0 0 0 10px')};
+    width: ${(p) => (p.$dimension === 'm' ? '20px' : '16px')};
+    height: ${(p) => (p.$dimension === 'm' ? '20px' : '16px')};
+    margin: ${(p) => (p.$displayRight ? '0 10px 0 0' : '0 0 0 10px')};
   }
-  ${(p) => p.cssMixin || cssDefault}
+  ${(p) => p.$cssMixin || cssDefault}
 `;
 
 export interface StatusIndicatorProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Позволяет добавлять миксин, созданный с помощью styled css  */
-  cssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  cssMixin?: RuleSet<object>;
   /** Иконка индикатора статуса */
   icon?: ReactNode;
   /** Позиционирование иконки статуса. По умолчанию - слева */
@@ -62,7 +62,7 @@ export const StatusIndicator: FC<StatusIndicatorProps> = ({
   text,
 }) => {
   return (
-    <StatusContainer dimension={dimension} displayRight={displayRight} cssMixin={cssMixin}>
+    <StatusContainer $dimension={dimension} $displayRight={displayRight} $cssMixin={cssMixin}>
       {icon && <Circle>{icon}</Circle>}
       <Text>{text}</Text>
     </StatusContainer>

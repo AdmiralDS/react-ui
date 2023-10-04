@@ -53,7 +53,6 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     disabled,
     skeleton,
     ...restProps,
-    portalTargetRef: inputRef,
   };
 
   return (

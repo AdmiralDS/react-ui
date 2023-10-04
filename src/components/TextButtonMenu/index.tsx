@@ -1,28 +1,29 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
-import * as React from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode, Ref } from 'react';
+import { forwardRef } from 'react';
+import type { RuleSet } from 'styled-components';
+import styled from 'styled-components';
+
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled from 'styled-components';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { refSetter } from '../common/utils/refSetter';
 
-const StyledTextButton = styled(TextButton)<{ menuOpened?: boolean; appearance?: Appearance }>`
+const StyledTextButton = styled(TextButton)<{ $menuOpened?: boolean; appearance?: Appearance }>`
   &:focus {
-    color: ${({ theme, appearance, menuOpened }) =>
-      menuOpened
+    color: ${({ theme, appearance, $menuOpened }) =>
+      $menuOpened
         ? appearance === 'primary'
           ? theme.color['Primary/Primary 60 Main']
           : theme.color['Neutral/Neutral 90']
         : 'inherited'};
     ${IconContainer} {
       & *[fill^='#'] {
-        fill: ${({ theme, appearance, menuOpened }) =>
-          menuOpened
+        fill: ${({ theme, appearance, $menuOpened }) =>
+          $menuOpened
             ? appearance === 'primary'
               ? theme.color['Primary/Primary 60 Main']
               : theme.color['Neutral/Neutral 50']
@@ -67,7 +68,7 @@ export interface TextButtonMenuProps
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -76,7 +77,7 @@ export interface TextButtonMenuProps
   skeleton?: boolean;
 }
 
-export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenuProps>(
+export const TextButtonMenu = forwardRef<HTMLButtonElement, TextButtonMenuProps>(
   (
     {
       text,
@@ -143,7 +144,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               iconStart={iconStart}
               iconEnd={statusIcon}
               skeleton={skeleton}
-              ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
+              ref={refSetter(ref, buttonRef as Ref<HTMLButtonElement>)}
               dimension={dimension}
               appearance={appearance === 'primary' ? 'primary' : 'secondary'}
               displayRight
@@ -152,7 +153,7 @@ export const TextButtonMenu = React.forwardRef<HTMLButtonElement, TextButtonMenu
               onKeyDown={handleKeyDown}
               onClick={handleClick}
               aria-expanded={menuState}
-              menuOpened={menuState}
+              $menuOpened={menuState}
               className={className + ' text-button-with-dropdown'}
             />
           );

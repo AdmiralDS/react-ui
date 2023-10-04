@@ -271,7 +271,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       />
     );
     return (
-      <CalendarComponent yearsView={yearsView} monthsView={monthsView} {...props} ref={ref}>
+      <CalendarComponent $yearsView={yearsView} $monthsView={monthsView} {...props} ref={ref}>
         {renderPanel()}
         {yearsView && renderYears()}
         {monthsView && renderMonths()}

@@ -61,7 +61,7 @@ export const HeaderCellComponent = ({
 
   return (
     <HeaderCell
-      dimension={dimension}
+      $dimension={dimension}
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-draggable={draggable}
@@ -69,12 +69,12 @@ export const HeaderCellComponent = ({
       data-th-title={title}
       ref={cellRef}
     >
-      <HeaderCellContent cellAlign={cellAlign}>
+      <HeaderCellContent $cellAlign={cellAlign}>
         <HeaderCellTitle
-          sort={sort || 'initial'}
+          $sort={sort || 'initial'}
           onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
         >
-          <TitleContent dimension={dimension} sortable={sortable}>
+          <TitleContent $dimension={dimension} $sortable={sortable}>
             <TitleText dimension={dimension} lineClamp={headerLineClamp} title={title} />
             {extraText && (
               <TitleText extraText dimension={dimension} lineClamp={headerExtraLineClamp} title={extraText} />

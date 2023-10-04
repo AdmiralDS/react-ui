@@ -1,19 +1,20 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
-import React, { useState } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled from 'styled-components';
+import React, { forwardRef, useState } from "react";
+import type { RuleSet } from 'styled-components';
+import styled, { PolymorphicComponentProps, WebTarget } from "styled-components";
 import type { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
 import { ColumnsButton } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
 import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import { TProps } from "#src/components/T";
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
-const Pane = styled.div<{ dimension?: PaneDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const Pane = styled.div<{ $dimension?: PaneDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '32px';
       case 'm':
@@ -38,7 +39,7 @@ const Actions = styled.div`
   margin-right: 16px;
 `;
 
-const IconsBlock = styled.div<{ dimension?: PaneDimension }>`
+const IconsBlock = styled.div`
   display: flex;
   flex: 1 0 auto;
   align-items: center;
@@ -96,7 +97,7 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
 
   /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   columnsButtonDropContainerStyle?: DropContainerStyles;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
@@ -137,7 +138,7 @@ export const GroupActionsPane = ({
   };
 
   return (
-    <Pane dimension={dimension} {...props}>
+    <Pane $dimension={dimension} {...props}>
       {!searchOpened && <Actions>{children}</Actions>}
       <IconsBlock>
         {searchValue !== undefined && onChangeSearchValue && (
@@ -180,9 +181,20 @@ export const GroupActionsPane = ({
 
 GroupActionsPane.displayName = 'GroupActionsPane';
 
-export const PaneSeparator = styled.div<{ dimension?: 's' | 'm' }>`
+const PaneSeparatorDiv = styled.div<{ $dimension?: 's' | 'm' }>`
   width: 1px;
-  height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
+  height: ${({ $dimension }) => ($dimension === 's' ? '16px' : '20px')};
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   align-self: center;
 `;
+
+export type PaneSeparatorBaseProps = {
+  dimension?: 's' | 'm';
+};
+export type PaneSeparatorProps = PolymorphicComponentProps<'web', PaneSeparatorBaseProps, WebTarget, WebTarget>;
+
+export const PaneSeparator = forwardRef<typeof PaneSeparatorDiv, PaneSeparatorProps>(({ dimension, ...props }, ref) => {
+  return <PaneSeparatorDiv ref={ref} $dimension={dimension} {...props} />;
+});
+
+PaneSeparator.displayName = 'GroupActionsPaneSeparator';

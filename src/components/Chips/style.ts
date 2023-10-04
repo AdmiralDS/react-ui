@@ -5,9 +5,9 @@ import { Badge } from '#src/components/Badge';
 import type { IconPlacementAppearance, IconPlacementDimension } from '#src/components/IconPlacement';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-const heights = css<{ dimension: ChipDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const heights = css<{ $dimension: ChipDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '32px';
       case 's':
@@ -18,9 +18,9 @@ const heights = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const widths = css<{ dimension: ChipDimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+const widths = css<{ $dimension: ChipDimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '32px';
       case 's':
@@ -31,9 +31,9 @@ const widths = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const heightIcons = css<{ dimension: ChipDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const heightIcons = css<{ $dimension: ChipDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -44,9 +44,9 @@ const heightIcons = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const heightText = css<{ dimension: ChipDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const heightText = css<{ $dimension: ChipDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -57,9 +57,9 @@ const heightText = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const widthIcons = css<{ dimension: ChipDimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+const widthIcons = css<{ $dimension: ChipDimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -70,9 +70,9 @@ const widthIcons = css<{ dimension: ChipDimension }>`
   }};
 `;
 
-const paddings = css<{ dimension: ChipDimension }>`
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+const paddings = css<{ $dimension: ChipDimension }>`
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '6px 12px';
       case 's':
@@ -84,41 +84,42 @@ const paddings = css<{ dimension: ChipDimension }>`
 `;
 
 const chipTypography = css<{
-  dimension: ChipDimension;
-  disabled?: boolean;
-  selected?: boolean;
-  appearance?: ChipAppearance;
+  $dimension: ChipDimension;
+  $disabled?: boolean;
+  $selected?: boolean;
+  $appearance?: ChipAppearance;
 }>`
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
-  color: ${({ theme, appearance, disabled, selected }) => {
-    if (disabled && !selected) return theme.color['Neutral/Neutral 30'];
+  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
+  color: ${({ theme, $appearance, $disabled, $selected }) => {
+    if ($disabled && !$selected) return theme.color['Neutral/Neutral 30'];
 
-    if (selected || (selected && disabled)) return theme.color['Special/Static White'];
+    if ($selected || ($selected && $disabled)) return theme.color['Special/Static White'];
 
-    return appearance === 'filled' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main'];
+    return $appearance === 'filled' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main'];
   }};
 
   &:hover {
-    color: ${({ theme, appearance, selected }) => {
-      if (selected) return theme.color['Special/Static White'];
-      if (appearance === 'filled' && !selected) return theme.color['Neutral/Neutral 90'];
+    color: ${({ theme, $appearance, $selected }) => {
+      if ($selected) return theme.color['Special/Static White'];
+      if ($appearance === 'filled' && !$selected) return theme.color['Neutral/Neutral 90'];
       else return theme.color['Primary/Primary 60 Main'];
-    }}
+    }};
+  }
 `;
 
 const hoverMixin = css<{
-  selected?: boolean;
-  appearance?: ChipAppearance;
-  withCloseIcon?: boolean;
+  $selected?: boolean;
+  $appearance?: ChipAppearance;
+  $withCloseIcon?: boolean;
 }>`
   &:hover {
-    background-color: ${({ theme, appearance, selected, withCloseIcon }) => {
-      if (selected) return theme.color['Primary/Primary 70'];
-      if (appearance === 'filled') return theme.color['Neutral/Neutral 20'];
-      else if (!withCloseIcon) return theme.color['Opacity/Hover'];
+    background-color: ${({ theme, $appearance, $selected, $withCloseIcon }) => {
+      if ($selected) return theme.color['Primary/Primary 70'];
+      if ($appearance === 'filled') return theme.color['Neutral/Neutral 20'];
+      else if (!$withCloseIcon) return theme.color['Opacity/Hover'];
     }};
     ${(p) =>
-      p.selected &&
+      p.$selected &&
       `
       border-color: ${p.theme.color['Primary/Primary 70']};
     `}
@@ -126,30 +127,30 @@ const hoverMixin = css<{
 `;
 
 const colorsBorderAndBackground = css<{
-  dimension: ChipDimension;
-  disabled?: boolean;
-  selected?: boolean;
-  appearance?: ChipAppearance;
-  withCloseIcon?: boolean;
-  clickable: boolean;
+  $dimension: ChipDimension;
+  $disabled?: boolean;
+  $selected?: boolean;
+  $appearance?: ChipAppearance;
+  $withCloseIcon?: boolean;
+  $clickable: boolean;
 }>`
-  background-color: ${({ theme, appearance, selected, disabled }) => {
-    if (selected && !disabled) {
+  background-color: ${({ theme, $appearance, $selected, $disabled }) => {
+    if ($selected && !$disabled) {
       return theme.color['Primary/Primary 60 Main'];
     }
-    if (selected && disabled) return theme.color['Neutral/Neutral 30'];
-    return appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
+    if ($selected && $disabled) return theme.color['Neutral/Neutral 30'];
+    return $appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
   }};
 
-  border: ${({ theme, appearance, disabled }) => {
-    if (appearance === 'filled') return 'none';
-    if (disabled) return `1px solid ${theme.color['Neutral/Neutral 30']};`;
+  border: ${({ theme, $appearance, $disabled }) => {
+    if ($appearance === 'filled') return 'none';
+    if ($disabled) return `1px solid ${theme.color['Neutral/Neutral 30']};`;
     else return `1px solid ${theme.color['Primary/Primary 60 Main']};`;
   }};
 
   border-radius: 16px;
 
-  ${(p) => p.clickable && hoverMixin}
+  ${(p) => p.$clickable && hoverMixin}
 
   &:focus-visible {
     outline: 0;
@@ -169,15 +170,15 @@ const colorsBorderAndBackground = css<{
   }
 `;
 export const ChipComponentStyled = styled.div<{
-  disabled?: boolean;
-  dimension: ChipDimension;
-  appearance?: ChipAppearance;
-  selected?: boolean;
-  defaultChip?: boolean;
-  withCloseIcon?: boolean;
-  withBadge?: boolean;
-  withTooltip?: boolean;
-  clickable: boolean;
+  $disabled?: boolean;
+  $dimension: ChipDimension;
+  $appearance?: ChipAppearance;
+  $selected?: boolean;
+  $defaultChip?: boolean;
+  $withCloseIcon?: boolean;
+  $withBadge?: boolean;
+  $withTooltip?: boolean;
+  $clickable: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -185,16 +186,16 @@ export const ChipComponentStyled = styled.div<{
   position: relative;
   max-width: 190px;
   user-select: none;
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  cursor: ${({ defaultChip, disabled, withTooltip }) =>
-    (defaultChip || withTooltip) && !disabled ? 'pointer' : 'default'};
+  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
+  cursor: ${({ $defaultChip, $disabled, $withTooltip }) =>
+    ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.withCloseIcon ? `padding-left: ${p.dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) => (p.$withCloseIcon ? `padding-left: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}
   ${(p) =>
-    p.withBadge && !p.withCloseIcon
-      ? `padding-right: ${p.dimension === 's' ? 4 : 6}px;
-         padding-left: ${p.dimension === 's' ? 8 : 12}px;`
+    p.$withBadge && !p.$withCloseIcon
+      ? `padding-right: ${p.$dimension === 's' ? 4 : 6}px;
+         padding-left: ${p.$dimension === 's' ? 8 : 12}px;`
       : ''}
   ${chipTypography}
 `;
@@ -206,30 +207,30 @@ const closeIconWrapperStyle = css`
 `;
 
 export const ChipContentWrapperStyled = styled.div<{
-  appearance?: ChipAppearance;
-  disabled?: boolean;
-  selected?: boolean;
-  dimension: ChipDimension;
-  withCloseIcon?: boolean;
+  $appearance?: ChipAppearance;
+  $disabled?: boolean;
+  $selected?: boolean;
+  $dimension: ChipDimension;
+  $withCloseIcon?: boolean;
 }>`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   display: inline-flex;
 
-  ${(p) => p.withCloseIcon && closeIconWrapperStyle}
-  ${(p) => (p.withCloseIcon ? heights : heightText)}
+  ${(p) => p.$withCloseIcon && closeIconWrapperStyle}
+  ${(p) => (p.$withCloseIcon ? heights : heightText)}
   & svg {
     ${heightIcons}
     ${widthIcons}
     & *[fill^='#'] {
-      fill: ${({ theme, appearance, disabled, selected }) => {
-        if (selected) {
+      fill: ${({ theme, $appearance, $disabled, $selected }) => {
+        if ($selected) {
           return theme.color['Special/Static White'];
         }
-        return disabled
+        return $disabled
           ? theme.color['Neutral/Neutral 30']
-          : appearance === 'filled'
+          : $appearance === 'filled'
           ? theme.color['Neutral/Neutral 50']
           : theme.color['Primary/Primary 60 Main'];
       }};
@@ -246,17 +247,17 @@ export const IconBeforeWrapperStyled = styled.div`
   display: inline-block;
   margin-right: 8px;
 `;
-export const IconAfterWrapperStyled = styled.div<{ dimension: ChipDimension; withCloseIcon?: boolean }>`
+export const IconAfterWrapperStyled = styled.div<{ $dimension: ChipDimension; $withCloseIcon?: boolean }>`
   display: inline-block;
-  margin-left: ${(p) => (p.withCloseIcon ? '2px' : '8px')};
+  margin-left: ${(p) => (p.$withCloseIcon ? '2px' : '8px')};
 `;
 export const IconWrapperStyled = styled.div<{
-  dimension: ChipDimension;
-  withCloseIcon?: boolean;
+  $dimension: ChipDimension;
+  $withCloseIcon?: boolean;
 }>`
-  ${(p) => p.withCloseIcon && closeIconWrapperStyle}
-  ${(p) => (p.withCloseIcon ? heights : heightIcons)}
-  ${(p) => (p.withCloseIcon ? widths : widthIcons)}
+  ${(p) => p.$withCloseIcon && closeIconWrapperStyle}
+  ${(p) => (p.$withCloseIcon ? heights : heightIcons)}
+  ${(p) => (p.$withCloseIcon ? widths : widthIcons)}
   & > svg {
     ${heightIcons}
     ${widthIcons}

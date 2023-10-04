@@ -9,35 +9,35 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { fitToCurrency } from './utils';
 
-const Prefix = styled.div<{ disabled?: boolean; align?: 'left' | 'right' }>`
+const Prefix = styled.div<{ disabled?: boolean; $align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   align-items: center;
   user-select: none;
   color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
-  ${({ align }) => align === 'right' && 'margin-left: auto;'}
+  ${({ $align }) => $align === 'right' && 'margin-left: auto;'}
 `;
 
 const Suffix = styled(Prefix)`
   min-width: 0;
-  ${({ align }) =>
-    align === 'right' &&
+  ${({ $align }) =>
+    $align === 'right' &&
     css`
       flex: 0 1 auto;
       margin-left: 0;
     `}
 `;
 
-const Sizer = styled.div<{ hasPrefix?: boolean; align?: 'left' | 'right' }>`
+const Sizer = styled.div<{ $hasPrefix?: boolean; $align?: 'left' | 'right' }>`
   display: flex;
   flex-shrink: 0;
   visibility: hidden;
   white-space: pre;
   box-sizing: border-box;
-  ${({ hasPrefix, align }) => !hasPrefix && align === 'right' && 'margin-left: auto;'}
+  ${({ $hasPrefix, $align }) => !$hasPrefix && $align === 'right' && 'margin-left: auto;'}
 `;
 
-export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
+export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -50,9 +50,9 @@ export const BorderedDiv = styled.div<{ status?: TextInputProps['status'] }>`
 
   background: none;
   border: 1px solid
-    ${({ theme, status }) => {
-      if (status === 'error') return theme.color['Error/Error 60 Main'];
-      if (status === 'success') return theme.color['Success/Success 50 Main'];
+    ${({ theme, $status }) => {
+      if ($status === 'error') return theme.color['Error/Error 60 Main'];
+      if ($status === 'success') return theme.color['Success/Success 50 Main'];
       return theme.color['Neutral/Neutral 40'];
     }};
   border-radius: inherit;
@@ -99,7 +99,7 @@ const ieFixes = css`
   }
 `;
 
-const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
+const Input = styled.input<ExtraProps & { $align?: 'left' | 'right' }>`
   outline: none;
   appearance: none;
   border: none;
@@ -112,9 +112,9 @@ const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
 
   background: transparent;
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
-  text-align: ${({ align }) => (align === 'left' ? 'left' : 'right')};
+  text-align: ${({ $align }) => ($align === 'left' ? 'left' : 'right')};
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -132,8 +132,8 @@ const Input = styled.input<ExtraProps & { align?: 'left' | 'right' }>`
   ${ieFixes}
 `;
 
-export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+export const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 's':
@@ -143,8 +143,8 @@ export const horizontalPaddingValue = (props: { dimension?: ComponentDimension }
   }
 };
 
-export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+export const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -154,7 +154,7 @@ export const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
   }
 };
 
-const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: number }>`
+const HiddenContent = styled.div<{ $dimension?: ComponentDimension; $iconCount?: number }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -164,7 +164,7 @@ const HiddenContent = styled.div<{ dimension?: ComponentDimension; iconCount?: n
   display: flex;
   align-items: center;
   left: ${horizontalPaddingValue}px;
-  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+  right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
 export interface InputProps extends TextInputProps {
@@ -191,6 +191,7 @@ export interface InputProps extends TextInputProps {
 export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      dimension,
       placeholder,
       type,
       precision = 2,
@@ -316,12 +317,12 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
 
     useLayoutEffect(
       () => updateInputLeftPadding(),
-      [prefix, props.dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
+      [prefix, dimension, prefixRef.current, inputRef.current, showPrefixSuffix],
     );
 
     useLayoutEffect(
       () => updateInputRightPadding(),
-      [suffix, props.dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
+      [suffix, dimension, suffixRef.current, inputRef.current, showPrefixSuffix, align],
     );
 
     useLayoutEffect(() => {
@@ -354,28 +355,29 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <HiddenContent iconCount={iconCount} dimension={props.dimension}>
+        <HiddenContent $iconCount={iconCount} $dimension={dimension}>
           {prefix && showPrefixSuffix && (
-            <Prefix ref={prefixRef} disabled={props.disabled} align={align}>
+            <Prefix ref={prefixRef} disabled={props.disabled} $align={align}>
               {prefix}&nbsp;
             </Prefix>
           )}
-          <Sizer ref={sizerRef} hasPrefix={!!prefix} align={align} />
+          <Sizer ref={sizerRef} $hasPrefix={!!prefix} $align={align} />
           {suffix && showPrefixSuffix && (
-            <Suffix ref={suffixRef} disabled={props.disabled} align={align}>
+            <Suffix ref={suffixRef} disabled={props.disabled} $align={align}>
               &nbsp;{suffix}
             </Suffix>
           )}
         </HiddenContent>
         <Input
           {...props}
+          $dimension={dimension}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}
           type="text"
           data-status={status}
-          align={align}
+          $align={align}
         />
-        <BorderedDiv status={status} />
+        <BorderedDiv $status={status} />
       </>
     );
   },

@@ -3,10 +3,12 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, DateInputProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, DateInputProps } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const DateInputPlaygroundTemplate = ({
   placeholder,
+  themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
@@ -30,13 +32,8 @@ export const DateInputPlaygroundTemplate = ({
     }
   }, [placeholder]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DateInput
         {...props}
         value={localValue}

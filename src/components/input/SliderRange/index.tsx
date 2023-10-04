@@ -12,7 +12,7 @@ const Wrapper = styled.div<{ skeleton?: boolean }>`
   
 
   pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  ${({ skeleton }) => skeleton && skeletonMixin};
 `;
 
 const InputsWrapper = styled.div`

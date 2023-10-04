@@ -1,3 +1,5 @@
+import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
+
 export type FlexCellSizes =
   | 1
   | 2
@@ -24,25 +26,32 @@ export type FlexCellSizes =
   | 23
   | 24;
 export type FlexGapSizes = 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 24 | 32;
+export type FlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+export type FlexWrap = 'wrap' | 'nowrap';
+export type FlexAlignItems = 'normal' | 'flex-end';
 
-export interface FlexContainerProps {
+export interface FlexContainerBaseProps {
   rowGap?: FlexGapSizes;
   columnGap?: FlexGapSizes;
 }
+export type FlexContainerProps = PolymorphicComponentProps<'web', FlexContainerBaseProps, WebTarget, WebTarget>;
 
-export interface FlexRowProps extends FlexContainerProps {
-  wrap?: 'wrap' | 'nowrap';
-  direction?: 'column' | 'column-reverse' | 'row' | 'row-reverse';
-  alignItems?: 'normal' | 'flex-end';
+export interface FlexRowBaseProps extends FlexContainerBaseProps {
+  wrap?: FlexWrap;
+  direction?: FlexDirection;
+  alignItems?: FlexAlignItems;
 }
+export type FlexRowProps = PolymorphicComponentProps<'web', FlexRowBaseProps, WebTarget, WebTarget>;
 
-export interface FlexCellProps {
+export interface FlexCellBaseProps {
   col?: FlexCellSizes;
   columnGap?: FlexGapSizes;
 }
+export type FlexCellProps = PolymorphicComponentProps<'web', FlexCellBaseProps, WebTarget, WebTarget>;
 
-export interface FlexGrowCellProps {
+export interface FlexGrowCellBaseProps {
   grow?: number;
 }
+export type FlexGrowCellProps = PolymorphicComponentProps<'web', FlexGrowCellBaseProps, WebTarget, WebTarget>;
 
 export const FLEX_CELL_MAX_SIZE: FlexCellSizes = 24;

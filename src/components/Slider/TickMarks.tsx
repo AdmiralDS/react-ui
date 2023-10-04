@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { fitToCurrency } from '#src/components/input/NumberInput';
 
-const Wrapper = styled.div<{ position: number }>`
+const Wrapper = styled.div<{ $position: number }>`
   position: absolute;
-  left: ${({ position }) => position}%;
+  left: ${({ $position }) => $position}%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +69,7 @@ export const TickMarks = ({
         return (
           <Wrapper
             key={key}
-            position={position}
+            $position={position}
             onMouseDown={(e: any) => {
               onPointClick(e, value);
             }}

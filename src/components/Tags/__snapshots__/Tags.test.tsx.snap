@@ -4,12 +4,7 @@ exports[`Tags should render default component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   gap: 8px;
 }
@@ -24,13 +19,7 @@ exports[`Tags should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
 }
@@ -66,13 +55,7 @@ exports[`Tags should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
 }
@@ -100,9 +83,6 @@ exports[`Tags should render default component 1`] = `
 
 .c3 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,17 +92,12 @@ exports[`Tags should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -132,12 +107,7 @@ exports[`Tags should render default component 1`] = `
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -155,7 +125,6 @@ exports[`Tags should render default component 1`] = `
           class="c1"
           data-testid="1"
           type="button"
-          width="50"
         >
           <div
             class="c2"
@@ -170,7 +139,6 @@ exports[`Tags should render default component 1`] = `
           class="c4"
           data-testid="2"
           type="button"
-          width="auto"
         >
           <div
             class="c5"
@@ -185,7 +153,6 @@ exports[`Tags should render default component 1`] = `
           class="c1"
           data-testid="3"
           type="button"
-          width="50"
         >
           <div
             class="c2"
@@ -200,12 +167,7 @@ exports[`Tags should render default component 1`] = `
     </div>
   </body>,
   "container": .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-flow: wrap;
-  -ms-flex-flow: wrap;
   flex-flow: wrap;
   gap: 8px;
 }
@@ -220,13 +182,7 @@ exports[`Tags should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
 }
@@ -262,13 +218,7 @@ exports[`Tags should render default component 1`] = `
   border-radius: 4px;
   background: #E5E7EB;
   border: 1px solid #E5E7EB;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   cursor: pointer;
 }
@@ -296,9 +246,6 @@ exports[`Tags should render default component 1`] = `
 
 .c3 {
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -308,17 +255,12 @@ exports[`Tags should render default component 1`] = `
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -328,12 +270,7 @@ exports[`Tags should render default component 1`] = `
 }
 
 .c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 8px;
   height: 8px;
@@ -350,7 +287,6 @@ exports[`Tags should render default component 1`] = `
         class="c1"
         data-testid="1"
         type="button"
-        width="50"
       >
         <div
           class="c2"
@@ -365,7 +301,6 @@ exports[`Tags should render default component 1`] = `
         class="c4"
         data-testid="2"
         type="button"
-        width="auto"
       >
         <div
           class="c5"
@@ -380,7 +315,6 @@ exports[`Tags should render default component 1`] = `
         class="c1"
         data-testid="3"
         type="button"
-        width="50"
       >
         <div
           class="c2"

@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
-export const containerHeights = css<{ dimension?: ComponentDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+export const containerHeights = css<{ $dimension?: ComponentDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'xl':
         return '56px';
       case 's':
@@ -23,17 +23,17 @@ export const skeletonMixin = css`
   }
 `;
 
-export const Container = styled.div<{ skeleton?: boolean }>`
+export const Container = styled.div<{ $skeleton?: boolean }>`
   position: relative;
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
-  pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  pointer-events: ${(p) => (p.$skeleton ? 'none' : 'all')};
+  ${({ $skeleton }) => $skeleton && skeletonMixin};
 `;
 
-export const HeightLimitedContainer = styled(Container)<{ dimension?: ComponentDimension }>`
+export const HeightLimitedContainer = styled(Container)<{ $dimension?: ComponentDimension }>`
   ${containerHeights};
 `;

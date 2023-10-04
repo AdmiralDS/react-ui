@@ -5,14 +5,14 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const defaultAppearanceMixin = css<StyledButtonProps>`
   ${IconContainer} {
-    ${({ skeleton }) => skeleton && skeletonMixin};
-    border-radius: ${({ skeleton }) => (skeleton ? '50%' : '')};
+    ${({ $skeleton }) => $skeleton && skeletonMixin};
+    border-radius: ${({ $skeleton }) => ($skeleton ? '50%' : '')};
     svg {
-      visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
+      visibility: ${(p) => (p.$skeleton || p.$loading ? 'hidden' : 'visible')};
     }
   }
 
-  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
   &:focus-visible {
     outline-offset: 2px;

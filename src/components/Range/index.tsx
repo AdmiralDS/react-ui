@@ -1,11 +1,12 @@
-import * as React from 'react';
+import type { HTMLAttributes } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { throttle } from '#src/components/common/utils/throttle';
 
 import type { NumberRange } from './utils';
 import { sortNum, calcValue, calcSliderCoords, arraysEqual } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 
-export interface RangeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface RangeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: NumberRange;
   /** Коллбек на изменение состояния */
@@ -48,16 +49,16 @@ export const Range = ({
       ? sortNum(userValue)
       : [minValue, maxValue];
 
-  const [isDraging, setDrag] = React.useState(false);
-  const [isDraging2, setDrag2] = React.useState(false);
-  const [animation, setAnimation] = React.useState(true);
-  const [rangeWidth, setRangeWidth] = React.useState(0);
-  const filledRef = React.useRef<HTMLDivElement | null>(null);
-  const trackRef = React.useRef<HTMLDivElement | null>(null);
-  const sliderRef = React.useRef<HTMLDivElement | null>(null);
-  const slider2Ref = React.useRef<HTMLDivElement | null>(null);
+  const [isDraging, setDrag] = useState(false);
+  const [isDraging2, setDrag2] = useState(false);
+  const [animation, setAnimation] = useState(true);
+  const [rangeWidth, setRangeWidth] = useState(0);
+  const filledRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const slider2Ref = useRef<HTMLDivElement | null>(null);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     function correctSliderPosition(value: NumberRange) {
       const slider1Coords = calcSliderCoords(value[0], minValue, maxValue, rangeWidth);
       const slider2Coords = calcSliderCoords(value[1], minValue, maxValue, rangeWidth);
@@ -86,7 +87,7 @@ export const Range = ({
     correctSliderPosition(value);
   }, [value, rangeWidth, minValue, maxValue, step]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (trackRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => setRangeWidth(entry.contentRect.width || 0));
@@ -102,7 +103,7 @@ export const Range = ({
     updateSlider(e);
   }, 50);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if ((isDraging || isDraging2) && !disabled) {
       document.addEventListener('mousemove', moveListener);
       document.addEventListener('mouseup', handleSliderMouseUp);
@@ -206,13 +207,13 @@ export const Range = ({
 
   return (
     <Wrapper data-disabled={disabled} {...props}>
-      <TrackWrapper dimension={dimension} skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
+      <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
-          <FilledTrack ref={filledRef} animation={animation} />
+          <FilledTrack ref={filledRef} $animation={animation} />
           <DefaultTrack ref={trackRef}>
-            <Thumb ref={sliderRef} animation={animation} dimension={dimension}>
+            <Thumb ref={sliderRef} $animation={animation} $dimension={dimension}>
               <ThumbCircle
-                dimension={dimension}
+                $dimension={dimension}
                 onTouchStart={(e) => {
                   e.stopPropagation();
                   props.onTouchStart?.(e);
@@ -223,12 +224,12 @@ export const Range = ({
                   props.onMouseDown?.(e);
                   onSliderClick(e, 'first');
                 }}
-                active={isDraging}
+                $active={isDraging}
               />
             </Thumb>
-            <Thumb ref={slider2Ref} animation={animation} dimension={dimension}>
+            <Thumb ref={slider2Ref} $animation={animation} $dimension={dimension}>
               <ThumbCircle
-                dimension={dimension}
+                $dimension={dimension}
                 onTouchStart={(e) => {
                   e.stopPropagation();
                   props.onTouchStart?.(e);
@@ -239,7 +240,7 @@ export const Range = ({
                   props.onMouseDown?.(e);
                   onSliderClick(e, 'second');
                 }}
-                active={isDraging2}
+                $active={isDraging2}
               />
             </Thumb>
           </DefaultTrack>

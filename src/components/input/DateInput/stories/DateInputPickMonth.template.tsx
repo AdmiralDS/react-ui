@@ -4,16 +4,14 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { DateInputProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DateInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const DateInputPickMonthTemplate = ({
   placeholder,
+  themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
   const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -46,7 +44,7 @@ export const DateInputPickMonthTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DateInput
         {...props}
         isVisible={isVisible}

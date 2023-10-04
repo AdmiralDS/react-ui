@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DateField } from '@admiral-ds/react-ui';
-import type { DateFieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { DateFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const FormContainer = styled.form`
   > * {
@@ -13,6 +14,7 @@ const FormContainer = styled.form`
 export const DateFieldBaseTemplate = ({
   label = 'Label',
   placeholder,
+  themeBorderKind,
   ...props
 }: DateFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [placeholderValue, setPlaceholderValue] = React.useState<string>(placeholder || 'Это placeholder');
@@ -46,13 +48,8 @@ export const DateFieldBaseTemplate = ({
     }
   }, [placeholder]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
         <DateField
           data-container-id="dateFieldIdOne"

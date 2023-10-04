@@ -19,11 +19,11 @@ export const LinkMixinTemplate = () => {
       <Router>
         <StyledRouterLink to="">Styled RouterLink - dimension m</StyledRouterLink>
         <Divider />
-        <StyledRouterLink to="" dimension="s">
+        <StyledRouterLink to="" $dimension="s">
           Styled RouterLink - dimension s
         </StyledRouterLink>
         <Divider />
-        <StyledRouterLink to="" appearance="secondary">
+        <StyledRouterLink to="" $appearance="secondary">
           Styled RouterLink - appearance secondary
         </StyledRouterLink>
       </Router>

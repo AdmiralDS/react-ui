@@ -17,7 +17,7 @@ const FOCUS_BORDER_WIDTH = 2;
 const HOVER_BORDER_WIDTH_M = 8;
 const HOVER_BORDER_WIDTH_S = 7;
 
-export const Span = styled.span<{ dimension: Dimension; disabled?: boolean; error?: boolean }>`
+export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $error?: boolean }>`
   display: inline-block;
   position: absolute;
   margin: 0;
@@ -29,20 +29,20 @@ export const Span = styled.span<{ dimension: Dimension; disabled?: boolean; erro
   box-sizing: border-box;
   pointer-events: none;
 
-  ${({ theme, dimension }) => `
+  ${({ theme, $dimension }) => `
     background-color: ${theme.color['Neutral/Neutral 00']};
-    width: ${dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
-    height: ${dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+    width: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+    height: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
   `}
   fieldset[data-dimension='s'] & {
     width: ${DIMENSION_S}px;
     height: ${DIMENSION_S}px;
   }
   border: ${BORDER_WIDTH_DEFAULT}px solid
-    ${({ disabled, error, theme }) =>
+    ${({ disabled, $error, theme }) =>
       disabled
         ? theme.color['Neutral/Neutral 30']
-        : error
+        : $error
         ? theme.color['Error/Error 60 Main']
         : theme.color['Neutral/Neutral 50']};
   fieldset:disabled & {
@@ -52,14 +52,14 @@ export const Span = styled.span<{ dimension: Dimension; disabled?: boolean; erro
   transition: all 0.25s ease-in-out;
 `;
 
-export const InputContainer = styled.div<{ dimension: Dimension }>`
+export const InputContainer = styled.div<{ $dimension: Dimension }>`
   position: absolute;
-  top: ${(p) => (p.dimension === 's' ? 1 : INPUT_OFFSET)}px;
-  left: ${(p) => (p.dimension === 's' ? 1 : INPUT_OFFSET)}px;
+  top: ${(p) => (p.$dimension === 's' ? 1 : INPUT_OFFSET)}px;
+  left: ${(p) => (p.$dimension === 's' ? 1 : INPUT_OFFSET)}px;
   display: inline-block;
-  ${({ dimension }) => `
-    min-width: ${dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
-    height: ${dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+  ${({ $dimension }) => `
+    min-width: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+    height: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
   `}
   fieldset[data-dimension='s'] & {
     min-width: ${DIMENSION_S}px;
@@ -75,7 +75,7 @@ const readOnlyCss = css`
   }
 `;
 
-export const Input = styled.input<{ dimension: Dimension }>`
+export const Input = styled.input<{ $dimension: Dimension }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -119,9 +119,9 @@ export const Input = styled.input<{ dimension: Dimension }>`
       top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      ${({ dimension }) => `
-        width: calc(100% + ${dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
-        height: calc(100% + ${dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+      ${({ $dimension }) => `
+        width: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+        height: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
       `}
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
     }
@@ -133,9 +133,9 @@ export const Input = styled.input<{ dimension: Dimension }>`
   }
 `;
 
-export const Hint = styled.div<{ dimension: Dimension; disabled?: boolean }>`
+export const Hint = styled.div<{ $dimension: Dimension; disabled?: boolean }>`
   margin-top: 6px;
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
 
   fieldset[data-dimension='s'] && {
@@ -146,15 +146,15 @@ export const Hint = styled.div<{ dimension: Dimension; disabled?: boolean }>`
 `;
 
 export const RadioButtonComponent = styled.label<{
-  dimension: Dimension;
+  $dimension: Dimension;
   disabled?: boolean;
   readOnly?: boolean;
 }>`
   margin: 0;
-  ${({ dimension }) => `
-    padding-top: ${dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
-    padding-bottom: ${dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
-    padding-left: ${dimension === 's' ? DIMENSION_S + TEXT_PADDING_S : DIMENSION_M + TEXT_PADDING_M}px;
+  ${({ $dimension }) => `
+    padding-top: ${$dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
+    padding-bottom: ${$dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
+    padding-left: ${$dimension === 's' ? DIMENSION_S + TEXT_PADDING_S : DIMENSION_M + TEXT_PADDING_M}px;
   `}
   display: inline-block;
   position: relative;
@@ -162,7 +162,7 @@ export const RadioButtonComponent = styled.label<{
 
   cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
 
-  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
 
   fieldset[data-dimension='s'] && {

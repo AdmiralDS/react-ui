@@ -83,7 +83,7 @@ export const Panel: FC<IPanelProps> = ({
     yearsView ? onYearsViewHide(event) : onYearsViewShow(event);
   };
   return (
-    <PanelComponent yearsView={yearsView} monthsView={monthsView} className="ui-kit-calendar-panel-component">
+    <PanelComponent $yearsView={yearsView} $monthsView={monthsView} className="ui-kit-calendar-panel-component">
       {!monthsView && !previousDisabled ? (
         <ButtonWithTooltip
           renderContent={() =>
@@ -105,7 +105,7 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectMonthText || theme.locales[theme.currentLocale].calendar.selectMonthText
           }
-          view={monthsView}
+          $view={monthsView}
           onMouseDown={monthMouseDownHandle}
         >
           {capitalizeFirstLetter(getFormattedValue(viewDate, { month: 'long' }, theme.currentLocale || 'ru'))}
@@ -116,7 +116,7 @@ export const Panel: FC<IPanelProps> = ({
               ? locale?.returnText || theme.locales[theme.currentLocale].calendar.returnText
               : locale?.selectYearText || theme.locales[theme.currentLocale].calendar.selectYearText
           }
-          view={yearsView}
+          $view={yearsView}
           onMouseDown={yearMouseDownHandle}
         >
           {viewDate.getFullYear()}

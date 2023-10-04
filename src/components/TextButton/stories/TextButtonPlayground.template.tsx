@@ -2,22 +2,21 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TextButton } from '@admiral-ds/react-ui';
-import type { TextButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TextButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div`
   height: 20px;
   width: 8px;
 `;
 
-export const TextButtonPlaygroundTemplate = (props: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const TextButtonPlaygroundTemplate = ({
+  themeBorderKind,
+  ...props
+}: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TextButton text="Text Button" iconStart={<AttachFileOutline />} {...props} />
       <Separator />
       <TextButton text="Text Button" iconEnd={<AttachFileOutline />} {...props} />

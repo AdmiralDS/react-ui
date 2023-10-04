@@ -28,7 +28,7 @@ export const CheckboxCompositeGroup: FC<CheckboxCompositeGroupProps> = ({
     });
   };
   return (
-    <CompositeWrapper dimension={dimension} disabled={disabled} {...props}>
+    <CompositeWrapper $dimension={dimension} disabled={disabled} {...props}>
       {renderCheckboxGroup()}
     </CompositeWrapper>
   );

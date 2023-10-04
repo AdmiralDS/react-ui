@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { css, ThemeProvider } from 'styled-components';
 
 import { DateInput } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, DateInputProps, Theme } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, DateInputProps } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const weekendMixin = css<{ disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
@@ -11,6 +12,7 @@ const weekendMixin = css<{ disabled?: boolean }>`
 
 export const DateInputSpecialDatesTemplate = ({
   placeholder,
+  themeBorderKind,
   ...props
 }: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
@@ -33,11 +35,6 @@ export const DateInputSpecialDatesTemplate = ({
     }
   }, [placeholder]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const highlightWeekend = (date: Date) => {
     const dayNumber = date.getDay();
     if (dayNumber === 0 || dayNumber === 6) {
@@ -46,7 +43,7 @@ export const DateInputSpecialDatesTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <DateInput
         {...props}
         value={localValue}

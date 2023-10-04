@@ -78,25 +78,25 @@ export const RowWrapper = ({
       ref={rowRef}
       onClick={() => handleRowClick(row.id)}
       onDoubleClick={() => handleRowDoubleClick(row.id)}
-      underline={underline}
+      $underline={underline}
       disabled={!!row.disabled}
-      dimension={dimension}
+      $dimension={dimension}
       className={`tr ${row.className || ''} hoverable`}
       data-row={row.id}
-      isGroup={isGroup}
-      rowWidth={rowWidth}
-      hover={!!row.hover}
+      $isGroup={isGroup}
+      $rowWidth={rowWidth}
+      $hover={!!row.hover}
     >
       <SimpleRow
         className="tr-simple"
-        showRowsActions={showRowsActions}
+        $showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
-        status={row.status}
-        rowStatusMap={rowStatusMap}
-        error={!!row.error}
-        success={!!row.success}
-        grey={!!grey}
+        $status={row.status}
+        $rowStatusMap={rowStatusMap}
+        $error={!!row.error}
+        $success={!!row.success}
+        $grey={!!grey}
       >
         {children}
       </SimpleRow>
@@ -113,8 +113,8 @@ export const RowWrapper = ({
       )}
       {row.expandedRowRender && (
         <ExpandedRow
-          opened={row.expanded}
-          contentMaxHeight="90vh"
+          $opened={row.expanded}
+          $contentMaxHeight="90vh"
           className="tr-expanded"
           onMouseEnter={handleExpandedMouseEnter}
           onMouseLeave={handleExpandedMouseLeave}

@@ -13,7 +13,7 @@ import {
   Separator,
   Wrapper,
 } from './style';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
 
@@ -27,7 +27,7 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /** Является ли последняя хлебная крошка активной */
   lastBreadcrumbActive?: boolean;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -183,7 +183,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <Navigation aria-label="Breadcrumb" {...props}>
-      <Wrapper ref={wrapperRef} mobile={mobile} role="list">
+      <Wrapper ref={wrapperRef} $mobile={mobile} role="list">
         {mobile ? (
           <>
             {renderFirstItem()}
@@ -194,7 +194,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
           <>
             {renderFirstItem()}
             {renderHiddenItems()}
-            <OverflowContentWrapper dimension={dimension} data-overflow>
+            <OverflowContentWrapper $dimension={dimension} data-overflow>
               <OverflowContent ref={overflowRef}>
                 {renderVisibleItems()}
                 {renderLastItem()}

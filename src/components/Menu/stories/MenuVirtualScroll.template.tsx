@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps, Theme, BorderRadiusType, MenuModelItemProps } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType, MenuModelItemProps } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 export const createItems = (length: number, level: number = 1) => {
   const title = level > 1 ? 'SubItem' : 'Item';
@@ -24,7 +25,10 @@ const Wrapper = styled.div`
   ${(p) => p.theme.shadow['Shadow 08']}
 `;
 
-export const MenuVirtualScrollTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuVirtualScrollTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return ITEMS.map((item) => {
       const modelItem = {
@@ -53,13 +57,8 @@ export const MenuVirtualScrollTemplate = (props: MenuProps & { themeBorderKind?:
     });
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} virtualScroll={{ itemHeight: 'auto' }} model={model} />
       </Wrapper>

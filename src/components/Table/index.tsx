@@ -517,13 +517,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           return renderCell(row, col.name);
         }
 
-        return <CellTextContent cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
+        return <CellTextContent $cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
       };
 
       return (
         <Cell
           key={`${row.id}_${col.name}`}
-          dimension={dimension}
+          $dimension={dimension}
           style={{ width: headerCellWidth || '100px' }}
           className="td"
           data-column={col.name}
@@ -625,12 +625,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         return (
           <ScrollTableBody ref={scrollBodyRef} className="tbody">
             <Row
-              underline={showLastRowUnderline}
-              dimension={dimension}
+              $underline={showLastRowUnderline}
+              $dimension={dimension}
               className="tr"
-              rowWidth={headerRef.current?.scrollWidth}
+              $rowWidth={headerRef.current?.scrollWidth}
             >
-              <EmptyMessage dimension={dimension}>{emptyMessage}</EmptyMessage>
+              <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
             </Row>
           </ScrollTableBody>
         );
@@ -656,18 +656,18 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
           {(displayRowSelectionColumn || displayRowExpansionColumn) && (
             <StickyWrapper>
-              {displayRowExpansionColumn && <ExpandCell dimension={dimension} />}
+              {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
               {displayRowSelectionColumn && (
-                <CheckboxCell dimension={dimension}>
+                <CheckboxCell $dimension={dimension}>
                   <Checkbox dimension={checkboxDimension} />
                 </CheckboxCell>
               )}
             </StickyWrapper>
           )}
           <HeaderCellsWrapper
-            expansionColumn={displayRowExpansionColumn}
-            selectionColumn={displayRowSelectionColumn}
-            dimension={dimension}
+            $expansionColumn={displayRowExpansionColumn}
+            $selectionColumn={displayRowSelectionColumn}
+            $dimension={dimension}
           >
             {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
             {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
@@ -685,20 +685,20 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       >
         {renderHiddenHeader()}
         <HeaderWrapper
-          scrollbar={scrollbar}
-          greyHeader={greyHeader}
+          $scrollbar={scrollbar}
+          $greyHeader={greyHeader}
           data-verticalscroll={verticalScroll}
           className="thead"
         >
-          <Header dimension={dimension} ref={headerRef} className="tr">
+          <Header $dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
-              <StickyWrapper ref={stickyColumnsWrapperRef} greyHeader={greyHeader}>
+              <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                 {displayRowExpansionColumn && (
-                  <ExpandCell dimension={dimension} data-draggable={false} data-droppable={false} />
+                  <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
                 )}
                 {displayRowSelectionColumn && (
                   <CheckboxCell
-                    dimension={dimension}
+                    $dimension={dimension}
                     className="th_checkbox"
                     data-th-column="checkbox"
                     data-draggable={false}
@@ -721,12 +721,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </NormalWrapper>
             <Filler />
           </Header>
-          {showRowsActions && <ActionBG data-overflowmenu dimension={dimension} greyHeader={greyHeader} />}
+          {showRowsActions && <ActionBG data-overflowmenu $dimension={dimension} $greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
         {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
           createPortal(
-            <Mirror dimension={dimension} ref={mirrorRef}>
+            <Mirror $dimension={dimension} ref={mirrorRef}>
               <CursorGrabbing className="icon-grabbing" />
               <CursorNotAllowed className="icon-not-allowed" />
               <MirrorText />

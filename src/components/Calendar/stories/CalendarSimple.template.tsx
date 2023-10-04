@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import type { CalendarPropType, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CalendarPropType, BorderRadiusType } from '@admiral-ds/react-ui';
 import { Calendar } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-export const CalendarSimpleTemplate = (props: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
+export const CalendarSimpleTemplate = ({
+  themeBorderKind,
+  ...props
+}: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return props.range ? (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Calendar
         {...props}
         range
@@ -27,7 +26,7 @@ export const CalendarSimpleTemplate = (props: CalendarPropType & { themeBorderKi
       />
     </ThemeProvider>
   ) : (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Calendar
         {...props}
         selected={selected}

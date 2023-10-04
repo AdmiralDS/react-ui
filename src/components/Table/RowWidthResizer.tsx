@@ -5,7 +5,7 @@ import { throttle } from '#src/components/common/utils/throttle';
 
 const RESIZER_WIDTH = '17px';
 
-export const ResizerWrapper = styled.div<{ disabled: boolean; dimension: TableProps['dimension'] }>`
+export const ResizerWrapper = styled.div<{ disabled: boolean; $dimension: TableProps['dimension'] }>`
   position: absolute;
   right: -8px;
   z-index: 1;
@@ -18,8 +18,8 @@ export const ResizerWrapper = styled.div<{ disabled: boolean; dimension: TablePr
   box-sizing: border-box;
   cursor: ${({ disabled }) => (disabled ? 'pointer' : 'col-resize')};
 
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '8px 0 7px 0';
       case 'l':
@@ -119,7 +119,7 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   }, [disabled]);
 
   return (
-    <ResizerWrapper ref={node} disabled={disabled} dimension={dimension}>
+    <ResizerWrapper ref={node} disabled={disabled} $dimension={dimension}>
       <Resizer />
     </ResizerWrapper>
   );

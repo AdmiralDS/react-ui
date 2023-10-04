@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Hint, Button } from '@admiral-ds/react-ui';
-import type { HintProps, Theme } from '@admiral-ds/react-ui';
+import type { HintProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
@@ -10,11 +11,10 @@ const StyledButton = styled(Button)`
   padding: 4px;
 `;
 
-export const HintPositionTemplate = (args: HintProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
+export const HintPositionTemplate = ({
+  themeBorderKind,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   const [visible1, setVisible1] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
   const [visible3, setVisible3] = React.useState(false);
@@ -25,10 +25,10 @@ export const HintPositionTemplate = (args: HintProps) => {
   const handleVisibilityChange4 = (visible: boolean) => setVisible4(visible);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Hint
-          {...args}
+          {...props}
           visible={visible1}
           onVisibilityChange={handleVisibilityChange1}
           renderContent={() => text}
@@ -40,7 +40,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible2}
           onVisibilityChange={handleVisibilityChange2}
           renderContent={() => text}
@@ -52,7 +52,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible3}
           onVisibilityChange={handleVisibilityChange3}
           renderContent={() => text}
@@ -64,7 +64,7 @@ export const HintPositionTemplate = (args: HintProps) => {
           </StyledButton>
         </Hint>
         <Hint
-          {...args}
+          {...props}
           visible={visible4}
           onVisibilityChange={handleVisibilityChange4}
           renderContent={() => text}
