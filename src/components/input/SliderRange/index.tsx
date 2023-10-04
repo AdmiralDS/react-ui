@@ -9,7 +9,6 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 const Wrapper = styled.div<{ skeleton?: boolean }>`
   position: relative;
-  
 
   pointer-events: ${(p) => (p.skeleton ? 'none' : 'all')};
   ${({ skeleton }) => skeleton && skeletonMixin};

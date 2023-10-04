@@ -1,14 +1,14 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
-import React, { forwardRef, useState } from "react";
-import type { RuleSet } from 'styled-components';
-import styled, { PolymorphicComponentProps, WebTarget } from "styled-components";
+import React, { forwardRef, useState } from 'react';
+import type { RuleSet, PolymorphicComponentProps, WebTarget } from 'styled-components';
+import styled from 'styled-components';
 import type { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
 import { ColumnsButton } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
 import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
-import { TProps } from "#src/components/T";
+import { TProps } from '#src/components/T';
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
