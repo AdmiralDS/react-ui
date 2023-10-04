@@ -25,7 +25,11 @@ export const ExpandedRow = ({ row, rowRef }: ExpandedRowProps) => {
   };
 
   const setWrapperHeight = (height?: string) => {
-    let wrapperHeight = height ?? (contentRef.current?.clientHeight || 0) + 'px';
+    // reading clientHeight will cause the browser to recalculate (reflow),
+    // which will let animations work
+    const contentHeight = (contentRef.current?.clientHeight || 0) + 'px';
+    let wrapperHeight = height ?? contentHeight;
+
     if (wrapperRef.current) {
       wrapperRef.current.style.height = wrapperHeight;
     }
