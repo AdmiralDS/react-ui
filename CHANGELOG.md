@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/AdmiralDS/react-ui/compare/v6.3.0...v7.0.0) (2023-10-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* https://github.com/styled-components/styled-components/releases/tag/v6.0.0
+
+### Features
+
+* поддержка styled-components v6 ([6795cff](https://github.com/AdmiralDS/react-ui/commit/6795cff59a93d100ed6e71aebf1ad81660c72466))
+
+
+### Bug Fixes
+
+* **Table:** исправлен баг с ограничением максимальной высоты строки детализации (expandedRowRender) ([6cf7bf1](https://github.com/AdmiralDS/react-ui/commit/6cf7bf1cbc561abb34164c6e90720603d90c3fdd))
+
 ## [6.3.0](https://github.com/AdmiralDS/react-ui/compare/v6.2.0...v6.3.0) (2023-09-27)
 
 ### Features
