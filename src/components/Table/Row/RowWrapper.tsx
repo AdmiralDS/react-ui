@@ -1,8 +1,9 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
-import { ExpandedRow, ExpandedRowContent, Row, SimpleRow } from '#src/components/Table/style';
+import { Row, SimpleRow } from '#src/components/Table/style';
 import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
+import { ExpandedRow } from '#src/components/Table/Row/ExpandedRow';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер таблицы */
@@ -65,13 +66,6 @@ export const RowWrapper = ({
     e.stopPropagation();
   };
 
-  const handleExpandedMouseEnter = () => {
-    rowRef.current?.classList.remove('hoverable');
-  };
-  const handleExpandedMouseLeave = () => {
-    rowRef.current?.classList.add('hoverable');
-  };
-
   return (
     <Row
       {...props}
@@ -111,17 +105,7 @@ export const RowWrapper = ({
           showRowsActions={showRowsActions}
         />
       )}
-      {row.expandedRowRender && (
-        <ExpandedRow
-          $opened={row.expanded}
-          $contentMaxHeight="90vh"
-          className="tr-expanded"
-          onMouseEnter={handleExpandedMouseEnter}
-          onMouseLeave={handleExpandedMouseLeave}
-        >
-          <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
-        </ExpandedRow>
-      )}
+      {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
     </Row>
   );
 };
