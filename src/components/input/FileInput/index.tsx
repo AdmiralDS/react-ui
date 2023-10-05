@@ -146,7 +146,8 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   /** @deprecated Используйте взамен компонент FileInputField и его проп extraText
    * Текст будет виден ниже компонента */
   extraText?: ReactNode;
-  /** Установка статуса поля */
+  /** @deprecated Используйте взамен компонент FileInputField и его проп status
+   * Установка статуса поля */
   status?: InputStatus;
 }
 
@@ -172,7 +173,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     const titleWithDescription = dimension === 'm' && title && description;
     const titleWithoutDescription = (title && !description) || (title && description && dimension === 'xl');
 
-    // TODO: удалить description, renderLabel, renderDescription, extraText при поднятии версии до новой мажорной
+    // TODO: удалить description, renderLabel, renderDescription, extraText, status при поднятии версии до новой мажорной
     const renderLabel = () => <LabelM disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
