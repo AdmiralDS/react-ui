@@ -37,44 +37,11 @@ export default {
       options: INPUT_DIMENSIONS_VALUES,
       control: { type: 'radio' },
     },
-    maxLength: {
-      control: { type: { name: 'number', required: false } },
-    },
     extraText: {
       control: { type: 'text' },
     },
-    prefixValue: {
-      control: { type: 'text' },
-    },
-    suffixValue: {
-      control: { type: 'text' },
-    },
-    displayClearIcon: {
-      control: { type: 'boolean' },
-    },
-    disableCopying: {
-      control: { type: 'boolean' },
-    },
-    displayCharacterCounter: {
-      control: { type: 'boolean' },
-    },
     displayInline: {
       control: { type: 'boolean' },
-    },
-    icons: {
-      control: false,
-    },
-    theme: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
-    ref: {
-      control: false,
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -92,15 +59,6 @@ export default {
     status: {
       options: INPUT_STATUS_VALUES,
       control: { type: 'radio' },
-    },
-    dropContainerCssMixin: {
-      control: false,
-    },
-    dropContainerClassName: {
-      control: false,
-    },
-    dropContainerStyle: {
-      control: false,
     },
   },
 } as Meta<typeof Field>;
