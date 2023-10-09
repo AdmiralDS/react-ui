@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { LIGHT_THEME, Label, Calendar } from '@admiral-ds/react-ui';
 import type { Theme, Locale } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
@@ -79,7 +79,7 @@ export const LocaleThemeNewLocaleTemplate = () => {
     LIGHT_THEME.locales = { ...LIGHT_THEME.locales, de: deLocale };
     return LIGHT_THEME;
   }
-  const [selected, setSelected] = React.useState<Date | null>(null);
+  const [selected, setSelected] = useState<Date | null>(null);
 
   return (
     <Wrapper>

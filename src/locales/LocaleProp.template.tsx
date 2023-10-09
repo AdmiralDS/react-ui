@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { ProgressStepper, Button } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -23,7 +23,7 @@ export const LocalePropTemplate = () => {
     'Внедрение',
     'Техническая поддержка',
   ];
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   return (
     <Wrapper>
       <ProgressStepper
