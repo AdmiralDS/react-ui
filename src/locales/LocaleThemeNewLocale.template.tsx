@@ -76,6 +76,7 @@ export const LocaleThemeNewLocaleTemplate = () => {
       return { ...theme, currentLocale: 'de', locales: { ...theme.locales, de: deLocale } };
     }
     LIGHT_THEME.currentLocale = 'de';
+    LIGHT_THEME.locales = { ...LIGHT_THEME.locales, de: deLocale };
     return LIGHT_THEME;
   }
   const [selected, setSelected] = React.useState<Date | null>(null);
