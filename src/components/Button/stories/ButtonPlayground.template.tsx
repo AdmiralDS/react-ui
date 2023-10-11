@@ -17,6 +17,12 @@ const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
 `;
 
+const Ellipsis = styled.div`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
 export const ButtonPlaygroundTemplate = ({
   themeBorderKind,
   ...props
@@ -30,13 +36,19 @@ export const ButtonPlaygroundTemplate = ({
         значения которых общепонятны и не вызывают сомнений.
       </T>
       <ButtonContainer appearance={props.appearance}>
-        <Button {...props}>Button 56</Button>
-
-        <Button {...props} iconStart={<StarSolid />}>
-          Button 56
+        <Button {...props} style={{ width: '200px' }}>
+          <Ellipsis>Button 56578567686578576875867857687857856</Ellipsis>
         </Button>
 
-        <Button {...props} iconEnd={<StarSolid />}>
+        <Button {...props} style={{ width: '200px' }}>
+          <Ellipsis>Button 56Button 56578567686578576875867857687857856</Ellipsis>
+        </Button>
+
+        <Button {...props} iconStart={<StarSolid />} style={{ width: '200px' }} iconEnd={<StarSolid />}>
+          <Ellipsis>Button 56Button 56578567686578576875867857687857856</Ellipsis>
+        </Button>
+
+        <Button {...props} iconEnd={<StarSolid />} style={{ width: '500px' }}>
           Button 56
         </Button>
 

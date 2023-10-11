@@ -56,7 +56,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonCssMixin?: RuleSet<object>;
 }
 
-const ButtonContent = styled.div<{ $dimension?: Dimension; $loading?: boolean }>`
+const ButtonContent = styled.div`
   vertical-align: top;
 
   display: inline-flex;
@@ -64,14 +64,19 @@ const ButtonContent = styled.div<{ $dimension?: Dimension; $loading?: boolean }>
   flex-direction: row;
   overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: 100%;
 
   > * {
     display: inline-block;
     flex: 0 1 auto;
     white-space: nowrap;
+  }
+  > ${ButtonIconContainer} {
+    flex: 0 0 auto;
   }
 
   & > svg {
