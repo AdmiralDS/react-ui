@@ -56,19 +56,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonCssMixin?: RuleSet<object>;
 }
 
-const ButtonContent = styled.div`
+const ButtonContent = styled.div<{ $padding: number }>`
   vertical-align: top;
 
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
+  overflow-y: hidden;
   flex-wrap: nowrap;
   // justify-content: center;
   justify-content: flex-start;
   align-items: center;
   height: 24px;
-  max-width: 100%;
+  max-width: calc(100% - ${(p) => p.$padding}px);
 
   > * {
     display: inline-block;
@@ -130,6 +130,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
     const hasIconStart = !!iconStart || (!!icon && iconPlace === 'left');
     const hasIconEnd = !!iconEnd || (!!icon && iconPlace === 'right');
+    const additionalPadding = (!displayAsSquare && !hasIconStart ? 2 : 0) + (!displayAsSquare && !hasIconEnd ? 2 : 0);
 
     return (
       <StyledButton
@@ -146,7 +147,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         {!displayAsSquare && !hasIconStart && <AdditionalPadding />}
-        <ButtonContent>
+        <ButtonContent $padding={additionalPadding}>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {Children.toArray(children).map((child, index) =>
             typeof child === 'string' ? <div key={child + index}>{child}</div> : child,

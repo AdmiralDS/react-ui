@@ -8,7 +8,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
-  display: block;
+  display: inline-grid;
 
   > * {
     margin: 8px 16px 0 0;
@@ -36,23 +36,41 @@ export const ButtonPlaygroundTemplate = ({
         значения которых общепонятны и не вызывают сомнений.
       </T>
       <ButtonContainer appearance={props.appearance}>
-        <Button {...props} style={{ width: '200px' }}>
-          <Ellipsis>Button 56578567686578576875867857687857856</Ellipsis>
+        <Button {...props}>Button 56</Button>
+
+        <Button {...props} iconStart={<StarSolid />}>
+          Button 56
         </Button>
 
-        <Button {...props} style={{ width: '200px' }}>
-          <Ellipsis>Button 56Button 56578567686578576875867857687857856</Ellipsis>
-        </Button>
-
-        <Button {...props} iconStart={<StarSolid />} style={{ width: '200px' }} iconEnd={<StarSolid />}>
-          <Ellipsis>Button 56Button 56578567686578576875867857687857856</Ellipsis>
-        </Button>
-
-        <Button {...props} iconEnd={<StarSolid />} style={{ width: '500px' }}>
+        <Button {...props} iconEnd={<StarSolid />}>
           Button 56
         </Button>
 
         <Button {...props} iconStart={<StarSolid />} displayAsSquare />
+
+        <Button {...props} style={{ width: '200px' }}>
+          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
+        </Button>
+
+        <Button {...props} style={{ width: '200px' }}>
+          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
+        </Button>
+
+        <Button {...props} style={{ width: '200px' }} iconStart={<StarSolid />}>
+          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
+        </Button>
+
+        <Button {...props} style={{ width: '200px' }} iconStart={<StarSolid />}>
+          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
+        </Button>
+
+        <Button {...props} style={{ width: '200px' }} iconEnd={<StarSolid />}>
+          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
+        </Button>
+
+        <Button {...props} style={{ width: '200px' }} iconEnd={<StarSolid />}>
+          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
+        </Button>
       </ButtonContainer>
     </ThemeProvider>
   );
