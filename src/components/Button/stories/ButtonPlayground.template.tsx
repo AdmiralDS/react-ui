@@ -8,19 +8,12 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
-  display: inline-grid;
 
   > * {
     margin: 8px 16px 0 0;
   }
 
   ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
-`;
-
-const Ellipsis = styled.div`
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 `;
 
 export const ButtonPlaygroundTemplate = ({
@@ -47,30 +40,6 @@ export const ButtonPlaygroundTemplate = ({
         </Button>
 
         <Button {...props} iconStart={<StarSolid />} displayAsSquare />
-
-        <Button {...props} style={{ width: '200px' }}>
-          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
-        </Button>
-
-        <Button {...props} style={{ width: '200px' }}>
-          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
-        </Button>
-
-        <Button {...props} style={{ width: '200px' }} iconStart={<StarSolid />}>
-          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
-        </Button>
-
-        <Button {...props} style={{ width: '200px' }} iconStart={<StarSolid />}>
-          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
-        </Button>
-
-        <Button {...props} style={{ width: '200px' }} iconEnd={<StarSolid />}>
-          Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb
-        </Button>
-
-        <Button {...props} style={{ width: '200px' }} iconEnd={<StarSolid />}>
-          <Ellipsis>Button 56656547654 78578485 fbfbbfhb bcvbfbfbvbfyuf vfbrvfb</Ellipsis>
-        </Button>
       </ButtonContainer>
     </ThemeProvider>
   );
