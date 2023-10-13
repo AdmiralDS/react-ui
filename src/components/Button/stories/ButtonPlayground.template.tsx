@@ -8,6 +8,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
+  display: block;
 
   > * {
     margin: 8px 16px 0 0;
