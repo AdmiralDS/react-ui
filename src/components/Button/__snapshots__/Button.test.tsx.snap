@@ -6,17 +6,21 @@ exports[`Button should render component 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c2 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c2 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c2>svg {
@@ -351,17 +355,21 @@ exports[`Button should render component with text 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c2 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c2 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c2>svg {
