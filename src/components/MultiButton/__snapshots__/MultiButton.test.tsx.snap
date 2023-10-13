@@ -8,17 +8,21 @@ exports[`MultiButton should render component with disabled state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -31,6 +35,42 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -614,24 +654,24 @@ exports[`MultiButton should render component with disabled state 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -732,11 +772,11 @@ exports[`MultiButton should render component with disabled state 1`] = `
           type="button"
         >
           <div
-            class="c4"
+            class="c8"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c9"
             />
           </div>
         </button>
@@ -748,17 +788,21 @@ exports[`MultiButton should render component with disabled state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -771,6 +815,42 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -1354,24 +1434,24 @@ exports[`MultiButton should render component with disabled state 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -1471,11 +1551,11 @@ exports[`MultiButton should render component with disabled state 1`] = `
         type="button"
       >
         <div
-          class="c4"
+          class="c8"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c9"
           />
         </div>
       </button>
@@ -1543,17 +1623,21 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -1566,6 +1650,42 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -2149,24 +2269,24 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -2264,11 +2384,11 @@ exports[`MultiButton should render component with primary appearance 1`] = `
           type="button"
         >
           <div
-            class="c4"
+            class="c8"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c9"
             />
           </div>
         </button>
@@ -2280,17 +2400,21 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -2303,6 +2427,42 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -2886,24 +3046,24 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -3000,11 +3160,11 @@ exports[`MultiButton should render component with primary appearance 1`] = `
         type="button"
       >
         <div
-          class="c4"
+          class="c8"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c9"
           />
         </div>
       </button>
@@ -3072,17 +3232,21 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -3095,6 +3259,42 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -3678,24 +3878,24 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -3793,11 +3993,11 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
           type="button"
         >
           <div
-            class="c4"
+            class="c8"
           >
             <div
               aria-hidden="true"
-              class="c8"
+              class="c9"
             />
           </div>
         </button>
@@ -3809,17 +4009,21 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 4px);
 }
 
 .c4 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c4 >.sc-guDMob {
+  flex: 0 0 auto;
 }
 
 .c4>svg {
@@ -3832,6 +4036,42 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 [data-dimension='s'] .c4>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c8 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 24px;
+  max-width: calc(100% - 0px);
+}
+
+.c8 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c8 >.sc-guDMob {
+  flex: 0 0 auto;
+}
+
+.c8>svg {
+  width: 24px;
+  height: 24px;
+}
+
+[data-dimension='s'] .c8 {
+  height: 20px;
+}
+
+[data-dimension='s'] .c8>svg {
   width: 20px;
   height: 20px;
 }
@@ -4415,24 +4655,24 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c8 *[fill^='#'] {
+.c9 *[fill^='#'] {
   fill: #717681;
 }
 
-.c8:hover *[fill^='#'] {
+.c9:hover *[fill^='#'] {
   fill: #0046E2;
 }
 
-.c8[data-disabled] {
+.c9[data-disabled] {
   pointer-events: none;
 }
 
-.c8[data-disabled] *[fill^='#'] {
+.c9[data-disabled] *[fill^='#'] {
   fill: #B0B5BD;
 }
 
@@ -4529,11 +4769,11 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
         type="button"
       >
         <div
-          class="c4"
+          class="c8"
         >
           <div
             aria-hidden="true"
-            class="c8"
+            class="c9"
           />
         </div>
       </button>
