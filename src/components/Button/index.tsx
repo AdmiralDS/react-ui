@@ -56,22 +56,25 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonCssMixin?: RuleSet<object>;
 }
 
-const ButtonContent = styled.div<{ $dimension?: Dimension; $loading?: boolean }>`
+const ButtonContent = styled.div<{ $addPadding: number }>`
   vertical-align: top;
 
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - ${(p) => p.$addPadding}px);
 
   > * {
     display: inline-block;
     flex: 0 1 auto;
     white-space: nowrap;
+  }
+  > ${ButtonIconContainer} {
+    flex: 0 0 auto;
   }
 
   & > svg {
@@ -125,6 +128,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
     const hasIconStart = !!iconStart || (!!icon && iconPlace === 'left');
     const hasIconEnd = !!iconEnd || (!!icon && iconPlace === 'right');
+    const additionalPadding = (!displayAsSquare && !hasIconStart ? 2 : 0) + (!displayAsSquare && !hasIconEnd ? 2 : 0);
 
     return (
       <StyledButton
@@ -141,7 +145,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
         {!displayAsSquare && !hasIconStart && <AdditionalPadding />}
-        <ButtonContent>
+        <ButtonContent $addPadding={additionalPadding}>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}
           {Children.toArray(children).map((child, index) =>
             typeof child === 'string' ? <div key={child + index}>{child}</div> : child,

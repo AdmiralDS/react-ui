@@ -29,17 +29,21 @@ exports[`MenuButton should render component 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c2 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c2 >.{
+  flex: 0 0 auto;
 }
 
 .c2>svg {
@@ -405,17 +409,21 @@ exports[`MenuButton should render component 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c2 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c2 >.{
+  flex: 0 0 auto;
 }
 
 .c2>svg {
@@ -850,17 +858,21 @@ exports[`MenuButton should render component with loading state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c5 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c5 >.{
+  flex: 0 0 auto;
 }
 
 .c5>svg {
@@ -1258,17 +1270,21 @@ exports[`MenuButton should render component with loading state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c5 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c5 >.{
+  flex: 0 0 auto;
 }
 
 .c5>svg {
@@ -1707,17 +1723,21 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c3 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c3 >.{
+  flex: 0 0 auto;
 }
 
 .c3>svg {
@@ -2089,17 +2109,21 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   display: inline-flex;
   gap: 8px;
   flex-direction: row;
-  overflow: hidden;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 24px;
+  max-width: calc(100% - 2px);
 }
 
 .c3 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
+}
+
+.c3 >.{
+  flex: 0 0 auto;
 }
 
 .c3>svg {
