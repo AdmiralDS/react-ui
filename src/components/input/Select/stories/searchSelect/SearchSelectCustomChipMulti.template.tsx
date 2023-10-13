@@ -21,8 +21,9 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   };
   const onOpenModal = () => setModalOpened(true);
 
-  const onChipClose = ({ value }: { value: string }) => {
-    setValueToDelete(value);
+  const onChipClose = (data: any) => {
+    console.log(data);
+    setValueToDelete(data.value);
     onOpenModal();
   };
 
@@ -43,7 +44,14 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
         mode="searchSelect"
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={renderChip(ind)} disabled={[0, 2].includes(ind)}>
+          <Option
+            key={ind}
+            data-id={`Id-${ind}`}
+            data-value={`My Value ${ind}`}
+            value={String(ind)}
+            renderChip={renderChip(ind)}
+            disabled={[0, 2].includes(ind)}
+          >
             {ind}
           </Option>
         ))}

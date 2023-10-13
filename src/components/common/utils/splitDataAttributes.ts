@@ -23,7 +23,12 @@ export function passMenuDataAttributes(initialProps: any) {
   return menuProps;
 }
 
-function passDataAttributes(sourceProps: any, destinationProps: any, dataAttributesStart: string, deleteProp: boolean) {
+export function passDataAttributes(
+  sourceProps: any,
+  destinationProps: any,
+  dataAttributesStart: string,
+  deleteProp: boolean,
+) {
   (Object.keys(sourceProps) as Array<keyof typeof sourceProps>).forEach((key) => {
     if (typeof key === 'string' && key.startsWith(dataAttributesStart)) {
       destinationProps[key] = sourceProps[key];
