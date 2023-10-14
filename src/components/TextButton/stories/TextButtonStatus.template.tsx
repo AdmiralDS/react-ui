@@ -26,7 +26,6 @@ const WrapperButton = styled.div`
 
 export const TextButtonStatusTemplate = ({
   themeBorderKind,
-  ...props
 }: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>

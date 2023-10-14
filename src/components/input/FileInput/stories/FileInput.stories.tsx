@@ -143,9 +143,7 @@ export const FileInputDimensionM = {
 //</editor-fold>
 
 //<editor-fold desc="FileInput со статусом загрузки">
-const FileInputWithStatusStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputWithStatusTemplate {...props} />
-);
+const FileInputWithStatusStory: StoryFn<typeof FileInput> = (props) => <FileInputWithStatusTemplate {...props} />;
 
 export const FileInputWithStatus = {
   render: FileInputWithStatusStory,

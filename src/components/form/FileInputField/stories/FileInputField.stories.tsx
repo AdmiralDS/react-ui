@@ -80,9 +80,7 @@ export default {
 } as Meta<typeof FileInputField>;
 
 //<editor-fold desc="FileInputField. Example">
-const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldBaseTemplate {...props} />
-);
+const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => <FileInputFieldBaseTemplate {...props} />;
 
 export const FileInputFieldBase = {
   render: FileInputFieldBaseStory,

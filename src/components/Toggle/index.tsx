@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, InputHTMLAttributes, ReactNode, KeyboardEvent } from 'react';
+import type { InputHTMLAttributes, ReactNode, KeyboardEvent } from 'react';
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -9,10 +9,10 @@ import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#s
 import { keyboardKey } from '../common/keyboardKey';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
-  /** Состояние компонента */
-  checked?: boolean;
-  /** Колбек на изменение состояния компонента */
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  // /** Состояние компонента */
+  // checked?: boolean;
+  // /** Колбек на изменение состояния компонента */
+  // onChange?: ChangeEventHandler<HTMLInputElement>;
   /** Расположение подписи */
   labelPosition?: LabelPosition;
   /** Размер компонента */
@@ -43,8 +43,13 @@ const hoverInputStyles = css<{ $dimension: Dimension }>`
 
 const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 
   &:checked {
@@ -135,6 +140,7 @@ const Hover = styled.div<{ $dimension: Dimension }>`
 `;
 
 const SliderWrapper = styled.div<{ $dimension: Dimension }>`
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   ${sizes}

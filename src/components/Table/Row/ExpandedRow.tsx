@@ -28,7 +28,7 @@ export const ExpandedRow = ({ row, rowRef }: ExpandedRowProps) => {
     // reading clientHeight will cause the browser to recalculate (reflow),
     // which will let animations work
     const contentHeight = (contentRef.current?.clientHeight || 0) + 'px';
-    let wrapperHeight = height ?? contentHeight;
+    const wrapperHeight = height ?? contentHeight;
 
     if (wrapperRef.current) {
       wrapperRef.current.style.height = wrapperHeight;
