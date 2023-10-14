@@ -5,8 +5,13 @@ exports[`Toggle should render component with disabled state 1`] = `
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -87,6 +92,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -140,8 +146,13 @@ exports[`Toggle should render component with disabled state 1`] = `
   </body>,
   "container": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -222,6 +233,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -330,8 +342,13 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -412,6 +429,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -462,8 +480,13 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   </body>,
   "container": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -544,6 +567,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -649,8 +673,13 @@ exports[`Toggle should render component with required properties 1`] = `
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -731,6 +760,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -781,8 +811,13 @@ exports[`Toggle should render component with required properties 1`] = `
   </body>,
   "container": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -863,6 +898,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 36px;
@@ -968,8 +1004,13 @@ exports[`Toggle should render component with small dimension 1`] = `
   "asFragment": [Function],
   "baseElement": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -1050,6 +1091,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 28px;
@@ -1100,8 +1142,13 @@ exports[`Toggle should render component with small dimension 1`] = `
   </body>,
   "container": .c1 {
   position: absolute;
-  width: 0;
-  height: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
 }
 
@@ -1182,6 +1229,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c2 {
+  pointer-events: none;
   position: relative;
   flex-shrink: 0;
   width: 28px;

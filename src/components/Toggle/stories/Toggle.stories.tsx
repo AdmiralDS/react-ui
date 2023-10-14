@@ -61,7 +61,7 @@ export default {
     ],
     componentSubtitle: <Description />,
     actions: {
-      argTypesRegex: 'onChange',
+      argTypesRegex: '^on[A-Z].*',
     },
     layout: 'centered',
   },
