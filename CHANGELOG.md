@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.1.0](https://github.com/AdmiralDS/react-ui/compare/v7.0.0...v7.1.0) (2023-10-14)
+
+
+### Features
+
+* **FileInputField:** stop passing deprecated props to FileInput ([7d825dd](https://github.com/AdmiralDS/react-ui/commit/7d825dd7793bdf6f0c387e8931a3a220a6b8ac62))
+* **FileInput:** mark status props as deprecated ([d6d77e9](https://github.com/AdmiralDS/react-ui/commit/d6d77e97c06659d911a4f245f9e18c29180f926f))
+* **PseudoIcon, PseudoText:** поддержка styled-components v6 ([dae95d6](https://github.com/AdmiralDS/react-ui/commit/dae95d6ded03cb87774340756da947ba793c6f7f))
+* **Select:** добавлена возможность получения дата атрибутов опции при попытке удаления чипса ([fd93e4d](https://github.com/AdmiralDS/react-ui/commit/fd93e4dcc495c45a0def492f9a3f28fc87e1c47a)), closes [#1144](https://github.com/AdmiralDS/react-ui/issues/1144)
+
+
+### Bug Fixes
+
+* **Button:** добавлено свойство max-width для контента кнопки ([57bb44a](https://github.com/AdmiralDS/react-ui/commit/57bb44a21bdf687e9bb8a4da1c3d9aa2631c0521))
+* **Toggle:** События клика должны обрабатываться через компонет чекбокса ([e6e7b1d](https://github.com/AdmiralDS/react-ui/commit/e6e7b1d2e891d6bd802e23d5bcaf1136e8815ae7))
+
 ## [7.0.0](https://github.com/AdmiralDS/react-ui/compare/v6.3.0...v7.0.0) (2023-10-04)
 
 
