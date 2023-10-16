@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button, DropMenu, MenuItem, typography } from '@admiral-ds/react-ui';
+import { Button, CategoryMenuItem, DropMenu, MenuItem, typography } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import type { DropMenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
@@ -35,6 +35,12 @@ const StyledAdditionalText = styled.div`
 `;
 
 const StyledMenuItem = styled(MenuItem)`
+  padding: 0;
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  width: 100%;
   padding: 6px 8px;
   margin: 0 8px 0 24px;
   border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
@@ -99,11 +105,10 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
-          <MenuItem dimension={props.dimension} key={item.id} {...options}>
+          <CategoryMenuItem dimension={props.dimension} key={item.id} {...options}>
             {item.name}
-          </MenuItem>
+          </CategoryMenuItem>
         ),
-        disabled: true,
       });
       return acc.concat(
         item.content.map((subitem: any) => {
@@ -111,10 +116,12 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
             id: subitem.id,
             render: (options: RenderOptionProps) => (
               <StyledMenuItem dimension={props.dimension} key={subitem.id} {...options}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  {subitem.label} <CardSolid width={24} height={24} />
-                </div>
-                <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+                <InnerContainer>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    {subitem.label} <CardSolid width={24} height={24} />
+                  </div>
+                  <StyledAdditionalText>Дополнительный текст</StyledAdditionalText>
+                </InnerContainer>
               </StyledMenuItem>
             ),
           };
