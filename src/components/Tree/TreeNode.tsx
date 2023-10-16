@@ -8,7 +8,7 @@ import type {
   SVGProps,
 } from 'react';
 import { useRef, useState } from 'react';
-import { styled, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';

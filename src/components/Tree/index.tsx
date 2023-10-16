@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import React, { forwardRef, useEffect, useMemo, useState } from 'react';
 import type { Dimension, TreeItemProps } from './TreeNode';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 // todo: Разделить контролируемое и неконтролируемое состояние в версии 7
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
