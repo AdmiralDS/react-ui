@@ -31,6 +31,7 @@ export * from './components/TooltipHOC';
 export * from './components/Menu';
 export * from './components/MenuButton';
 export * from './components/Menu/MenuItem';
+export * from './components/Menu/CategoryMenuItem';
 export * from './components/Menu/MenuActionsPanel';
 export * from './components/Menu/MenuItemWithCheckbox';
 export * from './components/OverflowMenu';
