@@ -8,7 +8,7 @@ import type {
   SVGProps,
 } from 'react';
 import { useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { styled, css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';
@@ -164,9 +164,21 @@ export const TreeNode = ({
   const Icon: FunctionComponent<SVGProps<SVGSVGElement>> | null = icon || null;
   const [mouseOnChevron, setMouseOnChevron] = useState<boolean>(false);
   const chevronRef = useRef<HTMLButtonElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredState, setHoveredState] = useState<boolean>(false);
 
-  const handleMouseMove = () => {
+  const hoveredValue = hovered ?? hoveredState;
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     onHover?.();
+    if (!hoveredState) setHoveredState(true);
+    props.onMouseMove?.(e);
+  };
+
+  const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+    setHoveredState(false);
+    props.onMouseLeave?.(e);
+    // }
   };
 
   const handleChevronMouseMove = () => {
@@ -188,14 +200,16 @@ export const TreeNode = ({
 
   return (
     <RowWrapper
+      ref={rowRef}
       className={className}
       style={style}
       $dimension={dimension}
       $indent={indent}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       $selected={selected}
-      $hovered={hovered}
+      $hovered={hoveredValue}
       disabled={disabled}
     >
       {hasChildren && (

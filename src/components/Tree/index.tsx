@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import React, { forwardRef, useEffect, useMemo, useState } from 'react';
 import type { Dimension, TreeItemProps } from './TreeNode';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 // todo: Разделить контролируемое и неконтролируемое состояние в версии 7
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
@@ -96,16 +96,9 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
     const [internalModel, setInternalModel] = useState<Array<TreeItemProps>>([...(defaultModel ?? [])]);
     const [selectedState, setSelectedState] = useState<string | undefined>(defaultSelected);
-    const [activeState, setActiveState] = useState<string | undefined>(undefined);
 
     const modelObject = model === undefined ? internalModel : model;
     const selectedId = selected === undefined ? selectedState : selected;
-    const activeId = active === undefined ? activeState : active;
-
-    const activateItem = (id?: string) => {
-      if (activeId !== id) setActiveState(id);
-      onActivateItem?.(id || null);
-    };
 
     const selectItem = (id: string) => {
       if (withCheckbox) {
@@ -189,10 +182,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               dimension: dimension,
               expanded: item.expanded,
               checkboxVisible: withCheckbox,
-              hovered: activeId === item.id,
+              hovered: active !== undefined ? active === item.id : undefined,
               selected: selectedId === item.id,
               onHover: () => {
-                activateItem(item.disabled ? undefined : item.id);
+                onActivateItem?.(item.disabled ? null : item.id);
               },
               onClick: () => selectItem(item.id),
               onToggleExpand: () => toggleExpand(item.id),
@@ -204,7 +197,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-      setActiveState(undefined);
       onActivateItem?.(null);
       onMouseLeave?.(e);
     };
