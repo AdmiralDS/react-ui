@@ -47,16 +47,11 @@ export const ContentTooltip = styled.div`
   }
 `;
 
-// К сожалению, пришлось переопределить стили disabled чипса, так как при pointer-events: none
-// чипс с числом оставшихся опций "заезжает" на disabled чип
 const disabledChipStyle = css`
+  // оставлено, чтоб обрабатывался onClick
   pointer-events: auto;
-  :hover {
+  &:hover {
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-  }
-  & > * {
-    pointer-events: none;
   }
 `;
 
@@ -64,10 +59,16 @@ export const StyledChip = styled(Chips)`
   margin-right: 4px;
   // Убирает пробел от inline-flex
   display: flex;
-  ${({ disabled }) => (disabled ? disabledChipStyle : '')};
+  ${({ disabled }) => disabled && disabledChipStyle};
 
   min-width: ${COUNTER_WIDTH}px;
   @media (max-width: 768px) {
     max-width: 140px;
+  }
+
+  // По дизайну при наведении цвет чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
+  // то чипс получается clickable и при ховере меняет цвет
+  &:hover {
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
 `;
