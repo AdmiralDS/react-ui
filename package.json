@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@admiral-ds/flags": "^3.0.0",
-    "@admiral-ds/icons": "^3.0.1",
+    "@admiral-ds/icons": "^4.0.0",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.5",
@@ -79,7 +79,7 @@
     "@styled/typescript-styled-plugin": "^1.0.0",
     "@svgr/rollup": "^8.0.1",
     "@svgr/webpack": "^8.0.1",
-    "@tanstack/react-query": "^4.29.5",
+    "@tanstack/react-query": "^5.0.0",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",

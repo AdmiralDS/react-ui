@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.2.0](https://github.com/AdmiralDS/react-ui/compare/v7.1.0...v7.2.0) (2023-10-19)
+
+
+### Features
+
+* **Menu:** Добавлен компонент для заголовка категории CategoryMenuItem, примеры с категориями приведены в соответствие с требованиями ДС ([8e8fb30](https://github.com/AdmiralDS/react-ui/commit/8e8fb3053edb14ff18b373e3f7bdf3950a55b247))
+
+
+### Bug Fixes
+
+* **Select:** Внешний вид и поведение чипсов в режиме multiple приведены в соответствие дизайну ([3a985ea](https://github.com/AdmiralDS/react-ui/commit/3a985ea7315df95a4b88a2027d47591fef926f6c)), closes [#1149](https://github.com/AdmiralDS/react-ui/issues/1149)
+* **Tree:** убраны лишние ререндеры при наведении на элементы ([352aaac](https://github.com/AdmiralDS/react-ui/commit/352aaac053de759bde6584d5aa53a4a2bcacaeec)), closes [#1130](https://github.com/AdmiralDS/react-ui/issues/1130)
+
 ## [7.1.0](https://github.com/AdmiralDS/react-ui/compare/v7.0.0...v7.1.0) (2023-10-14)
 
 
