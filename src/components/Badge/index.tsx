@@ -82,7 +82,7 @@ export const BadgeComponent = styled.div<{ $dimension: Dimension; $appearance: B
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ $dimension }) => ($dimension === 's' ? '0 5px' : '0 7px')};
+  padding: ${({ $dimension }) => ($dimension === 's' ? '0 5px' : '0 6px')};
   height: ${({ $dimension }) => ($dimension === 's' ? '16px' : '20px')};
   border-radius: ${({ $dimension }) => ($dimension === 's' ? '8px' : '10px')};
   ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
