@@ -63,7 +63,7 @@ export const GroupRow = ({
   return (
     <>
       <StickyGroupRow>
-        {rowsDraggable && <DragCell dimension={dimension} />}
+        {rowsDraggable && <DragCell $dimension={dimension} />}
         <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
           <ExpandIconPlacement
             dimension={dimension === 's' || dimension === 'm' ? 'mBig' : 'lBig'}

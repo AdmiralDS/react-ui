@@ -123,7 +123,7 @@ export const ColumnDrag = ({
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
     ? createPortal(
-        <Mirror dimension={dimension} ref={columnMirrorRef}>
+        <Mirror $dimension={dimension} ref={columnMirrorRef}>
           <MirrorText />
         </Mirror>,
         rootRef?.current || document.body,

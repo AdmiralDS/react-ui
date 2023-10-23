@@ -277,10 +277,10 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-export const DragCell = styled(Cell)<{ dimension: TableProps['dimension'] }>`
-  width: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 36 : 48)}px;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 's':
         return '6px 8px 5px 8px';
       case 'l':
@@ -513,7 +513,7 @@ export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }
   }
 `;
 
-export const MirrorRow = styled.div<{ dimension: TableProps['dimension'] }>`
+export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
@@ -522,7 +522,7 @@ export const MirrorRow = styled.div<{ dimension: TableProps['dimension'] }>`
   max-width: 288px;
   ${({ theme }) => theme.shadow['Shadow 08']}
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  padding-left: ${({ dimension }) => (dimension === 's' || dimension === 'm' ? 36 : 48)}px;
+  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
   ${rowStyle}
 
   &[data-cursor='normal'] {

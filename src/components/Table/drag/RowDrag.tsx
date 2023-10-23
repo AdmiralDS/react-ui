@@ -92,6 +92,6 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
   }, [rowsDraggable]);
 
   return rowsDraggable
-    ? createPortal(<MirrorRow dimension={dimension} ref={rowMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(<MirrorRow $dimension={dimension} ref={rowMirrorRef} />, rootRef?.current || document.body)
     : null;
 };

@@ -566,7 +566,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
-              {rowsDraggable && <DragCell dimension={dimension} />}
+              {rowsDraggable && <DragCell $dimension={dimension} />}
               {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
               {displayRowSelectionColumn && (
                 <CheckboxCell $dimension={dimension}>
@@ -604,7 +604,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           <Header $dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
-                {rowsDraggable && <DragCell dimension={dimension} data-draggable={false} data-droppable={false} />}
+                {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
                 {displayRowExpansionColumn && (
                   <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
                 )}
