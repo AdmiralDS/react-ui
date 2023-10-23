@@ -82,28 +82,28 @@ const getFormat = (type: string) => {
   }
 };
 
-const Container = styled.div<{ dimension?: Dimension }>`
+const Container = styled.div<{ $dimension?: Dimension }>`
   display: flex;
   flex-direction: column;
-  flex: ${(p) => (p.dimension === 'xl' ? '1 1 36%' : '1 1 auto')};
+  flex: ${(p) => (p.$dimension === 'xl' ? '1 1 36%' : '1 1 auto')};
   margin-top: 16px;
   overflow: hidden;
 
   &:nth-of-type(even) {
-    margin-left: ${(p) => (p.dimension === 'xl' ? '16px' : '0')};
+    margin-left: ${(p) => (p.$dimension === 'xl' ? '16px' : '0')};
   }
 `;
 
-const statusMixin = css<{ status?: FileUploadStatus }>`
+const statusMixin = css<{ $status?: FileUploadStatus }>`
   border-color: ${(p) => {
-    if (p.status === 'Error') return p.theme.color['Error/Error 60 Main'];
+    if (p.$status === 'Error') return p.theme.color['Error/Error 60 Main'];
     return p.theme.color['Neutral/Neutral 40'];
   }};
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   background: ${(p) => p.theme.color['Special/Static White']};
 `;
 
-const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimension; status?: FileUploadStatus }>`
+const PreviewWrapper = styled.div<{ $dimension?: Dimension; $fileDimension?: Dimension; $status?: FileUploadStatus }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -111,12 +111,12 @@ const PreviewWrapper = styled.div<{ dimension?: Dimension; fileDimension?: Dimen
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   border-width: 1px;
   border-style: solid;
-  padding: ${(p) => (p.fileDimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};
+  padding: ${(p) => (p.$fileDimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};
   ${statusMixin};
 `;
 
-const InfoBlock = styled.div<{ dimension?: Dimension }>`
-  display: ${(p) => (p.dimension === 'm' ? 'block' : 'flex')};
+const InfoBlock = styled.div<{ $dimension?: Dimension }>`
+  display: ${(p) => (p.$dimension === 'm' ? 'block' : 'flex')};
   align-items: center;
   overflow: hidden;
 `;
@@ -135,7 +135,7 @@ const ImagePreview = styled.div`
   }
 `;
 
-const IconWrapper = styled.div<{ status?: FileUploadStatus }>`
+const IconWrapper = styled.div<{ $status?: FileUploadStatus }>`
   margin-right: 8px;
   border-radius: 4px;
 
@@ -143,7 +143,7 @@ const IconWrapper = styled.div<{ status?: FileUploadStatus }>`
     width: 40px;
     height: 40px;
     fill: ${(p) => {
-      if (p.status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
+      if (p.$status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
       return p.theme.color['Neutral/Neutral 50'];
     }};
   }
@@ -154,10 +154,10 @@ const sizeMixin = css`
   justify-content: space-between;
 `;
 
-const Content = styled.div<{ fileDimension?: Dimension }>`
-  ${(p) => p.fileDimension === 'm' && sizeMixin};
+const Content = styled.div<{ $fileDimension?: Dimension }>`
+  ${(p) => p.$fileDimension === 'm' && sizeMixin};
   display: flex;
-  flex-direction: ${(p) => (p.fileDimension === 'm' ? 'row' : 'column')};
+  flex-direction: ${(p) => (p.$fileDimension === 'm' ? 'row' : 'column')};
   min-width: 0;
 `;
 
@@ -167,9 +167,9 @@ const Title = styled.div`
   white-space: nowrap;
 `;
 
-const Size = styled.span<{ fileDimension?: Dimension; status?: FileUploadStatus }>`
-  color: ${(p) => (p.status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
-  margin-left: ${(p) => (p.fileDimension === 'xl' ? '0' : '4px')};
+const Size = styled.span<{ $fileDimension?: Dimension; $status?: FileUploadStatus }>`
+  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
+  margin-left: ${(p) => (p.$fileDimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
 
@@ -273,28 +273,28 @@ export const FileInfo = ({
   }, [file]);
 
   return (
-    <Container dimension={dimension}>
-      <PreviewWrapper {...props} dimension={dimension} fileDimension={fileDimension} status={status}>
+    <Container $dimension={dimension}>
+      <PreviewWrapper {...props} $dimension={dimension} $fileDimension={fileDimension} $status={status}>
         {children ? (
           children
         ) : (
-          <InfoBlock dimension={dimension}>
+          <InfoBlock $dimension={dimension}>
             {fileDimension === 'xl' &&
               (imageFile ? (
                 <ImagePreview>
                   <img src={imageSrc} alt={''} />
                 </ImagePreview>
               ) : (
-                <IconWrapper status={status}>
+                <IconWrapper $status={status}>
                   <PreviewIcon />
                 </IconWrapper>
               ))}
-            <Content fileDimension={fileDimension}>
+            <Content $fileDimension={fileDimension}>
               <Title ref={titleRef}>{fileName}</Title>
               {tooltipVisible && titleOverflow && (
                 <Tooltip targetElement={titleRef.current} renderContent={() => `${fileName}`} />
               )}
-              <Size fileDimension={fileDimension} status={status}>
+              <Size $fileDimension={fileDimension} $status={status}>
                 {fileInfo}
               </Size>
             </Content>
@@ -309,7 +309,7 @@ export const FileInfo = ({
           )}
         </FunctionalWrapper>
       </PreviewWrapper>
-      {error && status === 'Error' && <ErrorBlock status={status}>{error}</ErrorBlock>}
+      {error && status === 'Error' && <ErrorBlock $status={status}>{error}</ErrorBlock>}
     </Container>
   );
 };

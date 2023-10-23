@@ -3,115 +3,89 @@
 exports[`Spinner should render component with lineClamp equal 1 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -121,7 +95,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -141,23 +114,20 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -168,57 +138,41 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <body>
     <div>
       <ul
         class="c0"
-        orientation="horizontal"
         role="list"
       >
         <li
@@ -227,7 +181,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -236,22 +189,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -265,7 +218,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           data-completed="false"
           data-error="true"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -274,22 +226,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -302,7 +254,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -311,22 +262,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -339,7 +290,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -348,22 +298,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -373,115 +323,89 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
       </ul>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -491,7 +415,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -511,23 +434,20 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -538,56 +458,40 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <div>
     <ul
       class="c0"
-      orientation="horizontal"
       role="list"
     >
       <li
@@ -596,7 +500,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -605,22 +508,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -634,7 +537,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         data-completed="false"
         data-error="true"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -643,22 +545,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -671,7 +573,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -680,22 +581,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -708,7 +609,6 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -717,22 +617,22 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -798,115 +698,89 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 exports[`Spinner should render component with lineClamp equal 2 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -916,7 +790,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -936,23 +809,20 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -963,57 +833,41 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <body>
     <div>
       <ul
         class="c0"
-        orientation="horizontal"
         role="list"
       >
         <li
@@ -1022,7 +876,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1031,22 +884,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -1060,7 +913,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           data-completed="false"
           data-error="true"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1069,22 +921,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -1097,7 +949,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1106,22 +957,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1134,7 +985,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1143,22 +993,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1168,115 +1018,89 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
       </ul>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -1286,7 +1110,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -1306,23 +1129,20 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1333,56 +1153,40 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <div>
     <ul
       class="c0"
-      orientation="horizontal"
       role="list"
     >
       <li
@@ -1391,7 +1195,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -1400,22 +1203,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -1429,7 +1232,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         data-completed="false"
         data-error="true"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -1438,22 +1240,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -1466,7 +1268,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -1475,22 +1276,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -1503,7 +1304,6 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -1512,22 +1312,22 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -1593,115 +1393,89 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 exports[`Spinner should render component with stepWidth 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -1711,7 +1485,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -1731,23 +1504,20 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -1758,57 +1528,41 @@ exports[`Spinner should render component with stepWidth 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <body>
     <div>
       <ul
         class="c0"
-        orientation="horizontal"
         role="list"
       >
         <li
@@ -1817,7 +1571,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1826,22 +1579,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -1855,7 +1608,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
           data-completed="false"
           data-error="true"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1864,22 +1616,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -1892,7 +1644,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1901,22 +1652,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1929,7 +1680,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -1938,22 +1688,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1963,115 +1713,89 @@ exports[`Spinner should render component with stepWidth 1`] = `
       </ul>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -2081,7 +1805,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -2101,23 +1824,20 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -2128,56 +1848,40 @@ exports[`Spinner should render component with stepWidth 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <div>
     <ul
       class="c0"
-      orientation="horizontal"
       role="list"
     >
       <li
@@ -2186,7 +1890,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -2195,22 +1898,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -2224,7 +1927,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
         data-completed="false"
         data-error="true"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -2233,22 +1935,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -2261,7 +1963,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -2270,22 +1971,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -2298,7 +1999,6 @@ exports[`Spinner should render component with stepWidth 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -2307,22 +2007,22 @@ exports[`Spinner should render component with stepWidth 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -2388,115 +2088,89 @@ exports[`Spinner should render component with stepWidth 1`] = `
 exports[`Spinner should render default component 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -2506,7 +2180,6 @@ exports[`Spinner should render default component 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -2526,23 +2199,20 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -2553,57 +2223,41 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <body>
     <div>
       <ul
         class="c0"
-        orientation="horizontal"
         role="list"
       >
         <li
@@ -2612,7 +2266,6 @@ exports[`Spinner should render default component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -2621,22 +2274,22 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -2650,7 +2303,6 @@ exports[`Spinner should render default component 1`] = `
           data-completed="false"
           data-error="true"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -2659,22 +2311,22 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -2687,7 +2339,6 @@ exports[`Spinner should render default component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -2696,22 +2347,22 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -2724,7 +2375,6 @@ exports[`Spinner should render default component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="horizontal"
-          orientation="horizontal"
           role="listitem"
         >
           <span
@@ -2733,22 +2383,22 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -2758,115 +2408,89 @@ exports[`Spinner should render default component 1`] = `
       </ul>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -2876,7 +2500,6 @@ exports[`Spinner should render default component 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -2896,23 +2519,20 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -2923,56 +2543,40 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   overflow-x: scroll;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <div>
     <ul
       class="c0"
-      orientation="horizontal"
       role="list"
     >
       <li
@@ -2981,7 +2585,6 @@ exports[`Spinner should render default component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -2990,22 +2593,22 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -3019,7 +2622,6 @@ exports[`Spinner should render default component 1`] = `
         data-completed="false"
         data-error="true"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -3028,22 +2630,22 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -3056,7 +2658,6 @@ exports[`Spinner should render default component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -3065,22 +2666,22 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -3093,7 +2694,6 @@ exports[`Spinner should render default component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="horizontal"
-        orientation="horizontal"
         role="listitem"
       >
         <span
@@ -3102,22 +2702,22 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -3183,115 +2783,89 @@ exports[`Spinner should render default component 1`] = `
 exports[`Spinner should render vertical component 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -3301,7 +2875,6 @@ exports[`Spinner should render vertical component 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -3321,23 +2894,20 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -3348,56 +2918,40 @@ exports[`Spinner should render vertical component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <body>
     <div>
       <ul
         class="c0"
-        orientation="vertical"
         role="list"
       >
         <li
@@ -3406,7 +2960,6 @@ exports[`Spinner should render vertical component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="vertical"
-          orientation="vertical"
           role="listitem"
         >
           <span
@@ -3415,22 +2968,22 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -3444,7 +2997,6 @@ exports[`Spinner should render vertical component 1`] = `
           data-completed="false"
           data-error="true"
           data-orientation="vertical"
-          orientation="vertical"
           role="listitem"
         >
           <span
@@ -3453,22 +3005,22 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -3481,7 +3033,6 @@ exports[`Spinner should render vertical component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="vertical"
-          orientation="vertical"
           role="listitem"
         >
           <span
@@ -3490,22 +3041,22 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -3518,7 +3069,6 @@ exports[`Spinner should render vertical component 1`] = `
           data-active="false"
           data-completed="false"
           data-orientation="vertical"
-          orientation="vertical"
           role="listitem"
         >
           <span
@@ -3527,22 +3077,22 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c4 c5"
+              class="c4"
             >
               <div
-                class="c6 c7"
+                class="c5"
                 height="20"
                 width="20"
               />
               <div
-                class="c8 c9"
+                class="c6"
               />
             </div>
             <div
-              class="c10 c11"
+              class="c7"
             >
               <div
-                class="c12 c13"
+                class="c8"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -3552,115 +3102,89 @@ exports[`Spinner should render vertical component 1`] = `
       </ul>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c4 {
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   align-self: stretch;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
   flex-direction: row;
   width: 100%;
   margin: 0 0 8px 0;
 }
 
 [data-orientation='vertical'] .c4 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   width: 20px;
   margin: 0 8px 0 0;
 }
 
-.c7 {
+.c5 {
   margin: 0 4px 0 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
-[data-orientation='vertical'] .c6 {
+[data-orientation='vertical'] .c5 {
   margin: 0 0 4px 0;
 }
 
-[data-active='true'] .c6 path {
+[data-active='true'] .c5 path {
   fill: #0062FF;
 }
 
-[data-error='true'] .c6 path {
+[data-error='true'] .c5 path {
   fill: #D92020;
 }
 
-[data-warning='true'] .c6 path {
+[data-warning='true'] .c5 path {
   fill: #FF5C22;
 }
 
-[data-disabled='true'] .c6 path {
+[data-disabled='true'] .c5 path {
   fill: #A7C7FF;
 }
 
-.c9 {
+.c6 {
   height: 2px;
   width: 100%;
   background-color: #D5D8DE;
   border-radius: 1px;
 }
 
-[data-orientation='vertical'] .c8 {
+[data-orientation='vertical'] .c6 {
   height: 100%;
   width: 2px;
 }
 
-[data-completed='true'] .c8 {
+[data-completed='true'] .c6 {
   background-color: #0062FF;
 }
 
-[data-error='true'] .c8 {
+[data-error='true'] .c6 {
   background-color: #D92020;
 }
 
-[data-warning='true'] .c8 {
+[data-warning='true'] .c6 {
   background-color: #FF5C22;
 }
 
-[data-disabled='true'] .c8 {
+[data-disabled='true'] .c6 {
   background-color: #A7C7FF;
 }
 
 .c3 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 100%;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
-[data-orientation='vertical'] .c2 {
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
+[data-orientation='vertical'] .c3 {
   flex-direction: row;
 }
 
 .c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   box-sizing: border-box;
@@ -3670,7 +3194,6 @@ exports[`Spinner should render vertical component 1`] = `
   margin: 0;
   text-align: left;
   border: none;
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -3690,23 +3213,20 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 .c1:focus,
-.c1 > .c2 {
+.c1>.c2 {
   outline: none;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.c7 {
   display: flex;
   width: 100%;
 }
 
-[data-orientation='vertical'] .c10 {
+[data-orientation='vertical'] .c7 {
   margin: 0 0 20px 0;
 }
 
-.c13 {
+.c8 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -3717,55 +3237,39 @@ exports[`Spinner should render vertical component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   margin: 0 12px 0 0;
 }
 
-[data-disabled='true'] .c12 {
+[data-disabled='true'] .c8 {
   color: #B0B5BD;
 }
 
 .c0 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
-  -webkit-scroll-behavior: smooth;
-  -moz-scroll-behavior: smooth;
-  -ms-scroll-behavior: smooth;
   scroll-behavior: smooth;
   padding: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
-  -webkit-scrollbar-width: none;
-  -moz-scrollbar-width: none;
-  -ms-scrollbar-width: none;
   scrollbar-width: none;
-  -webkit-scrollbar-height: none;
-  -moz-scrollbar-height: none;
-  -ms-scrollbar-height: none;
-  scrollbar-height: none;
 }
 
-.c0 > * {
+.c0>* {
   padding: 2px;
 }
 
 .c0::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  width: 0!important;
+  height: 0!important;
 }
 
 <div>
     <ul
       class="c0"
-      orientation="vertical"
       role="list"
     >
       <li
@@ -3774,7 +3278,6 @@ exports[`Spinner should render vertical component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="vertical"
-        orientation="vertical"
         role="listitem"
       >
         <span
@@ -3783,22 +3286,22 @@ exports[`Spinner should render vertical component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -3812,7 +3315,6 @@ exports[`Spinner should render vertical component 1`] = `
         data-completed="false"
         data-error="true"
         data-orientation="vertical"
-        orientation="vertical"
         role="listitem"
       >
         <span
@@ -3821,22 +3323,22 @@ exports[`Spinner should render vertical component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -3849,7 +3351,6 @@ exports[`Spinner should render vertical component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="vertical"
-        orientation="vertical"
         role="listitem"
       >
         <span
@@ -3858,22 +3359,22 @@ exports[`Spinner should render vertical component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -3886,7 +3387,6 @@ exports[`Spinner should render vertical component 1`] = `
         data-active="false"
         data-completed="false"
         data-orientation="vertical"
-        orientation="vertical"
         role="listitem"
       >
         <span
@@ -3895,22 +3395,22 @@ exports[`Spinner should render vertical component 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c4 c5"
+            class="c4"
           >
             <div
-              class="c6 c7"
+              class="c5"
               height="20"
               width="20"
             />
             <div
-              class="c8 c9"
+              class="c6"
             />
           </div>
           <div
-            class="c10 c11"
+            class="c7"
           >
             <div
-              class="c12 c13"
+              class="c8"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>

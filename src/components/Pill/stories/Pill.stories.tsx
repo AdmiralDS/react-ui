@@ -86,7 +86,7 @@ export const PillsMenu = {
 //</editor-fold>
 
 //<editor-fold desc="NestedPills.">
-const NestedPillsStory: StoryFn<typeof Pill> = () => <PillNestedTemplate />;
+const NestedPillsStory: StoryFn<typeof Pill> = (props) => <PillNestedTemplate {...props} />;
 
 export const NestedPills = {
   render: NestedPillsStory,
@@ -105,7 +105,7 @@ export const NestedPills = {
 //</editor-fold>
 
 //<editor-fold desc="Pill с Tooltip.">
-const PillWithTooltipStory: StoryFn<typeof Pill> = () => <PillWithTooltipTemplate />;
+const PillWithTooltipStory: StoryFn<typeof Pill> = (props) => <PillWithTooltipTemplate {...props} />;
 
 export const PillWithTooltip = {
   render: PillWithTooltipStory,

@@ -35,9 +35,9 @@ export const FakeTarget = styled.div`
   flex: 0 0 auto;
 `;
 
-export const Portal = styled(PositionInPortal)<{ flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
-  ${({ flexDirection }) => (flexDirection ? `flex-direction: ${flexDirection};` : '')}
+  ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : '')}
   z-index: ${({ theme }) => theme.zIndex.tooltip};
 `;

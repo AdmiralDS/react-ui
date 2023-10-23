@@ -63,6 +63,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       selfRef,
       onMouseDown,
       onLeave,
+      containerRef,
       ...props
     },
     ref,
@@ -89,9 +90,9 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     return (
       <Item
         ref={resolvedRef}
-        dimension={dimension}
-        selected={selected}
-        hovered={hovered}
+        $dimension={dimension}
+        $selected={selected}
+        $hovered={hovered}
         data-hovered={hovered}
         data-disabled={disabled}
         data-dimension={dimension}
@@ -113,10 +114,11 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
 MenuItem.displayName = 'MenuItem';
 
 const Item = styled.div<{
-  dimension: ItemDimension;
-  selected?: boolean;
-  hovered?: boolean;
-  width?: number;
+  $dimension: ItemDimension;
+  $selected?: boolean;
+  $hovered?: boolean;
+  $width?: number;
+  $disabled?: boolean;
 }>`
   display: flex;
   align-items: center;

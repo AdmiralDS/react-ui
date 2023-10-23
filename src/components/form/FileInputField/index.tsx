@@ -17,7 +17,9 @@ const Field = styled(FieldComponent)`
   }
 `;
 
-export interface FileInputFieldProps extends Omit<FileInputProps, 'extraText'>, Omit<FieldOwnProps, 'inputRef'> {}
+export interface FileInputFieldProps
+  extends Omit<FileInputProps, 'extraText' | 'status'>,
+    Omit<FieldOwnProps, 'inputRef'> {}
 
 export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldProps>((props, ref) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -50,7 +52,7 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  } as const;
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
@@ -59,12 +61,11 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     ref: refSetter(ref, inputRef),
     id,
     'aria-required': required,
-    status,
     disabled,
     maxLength,
     skeleton,
     ...restProps,
-  };
+  } as const;
 
   return (
     <Field {...fieldContainerProps}>

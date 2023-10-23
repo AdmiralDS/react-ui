@@ -4,17 +4,14 @@ exports[`Spinner should render component with dimension m 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c9 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
 }
 
-[data-icon='left'] .c8 {
+[data-icon='left'] .c9 {
   margin: 0 8px 0 0;
 }
 
@@ -22,11 +19,11 @@ exports[`Spinner should render component with dimension m 1`] = `
   fill: #717681;
 }
 
-[data-disabled='true'] .c8 *[fill^='#'] {
+[data-disabled='true'] .c9 *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-[data-dimension='m'] .c8 {
+[data-dimension='m'] .c9 {
   width: 20px;
   height: 20px;
 }
@@ -35,13 +32,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   position: relative;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 16px 16px 15px 16px;
 }
@@ -50,35 +41,19 @@ exports[`Spinner should render component with dimension m 1`] = `
   padding: 10px 16px 9px 16px;
 }
 
-[data-icon='left'] .c5 {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
+[data-icon='left'] .c6 {
   flex-direction: row-reverse;
 }
 
 .c7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   min-height: 54px;
   width: 100%;
@@ -97,7 +72,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 550;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -116,18 +91,18 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c4:focus,
-.c4 > .c5 {
+.c4>.c5 {
   outline: none;
 }
 
-[data-dimension='m'] .c3 {
+[data-dimension='m'] .c4 {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -135,13 +110,11 @@ exports[`Spinner should render component with dimension m 1`] = `
   border-bottom: 1px solid #D5D8DE;
 }
 
-.c2 > .c3 .c8 {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
+.c2>.c3 .c8 {
   transform: rotate(0deg);
 }
 
-.c12 {
+.c11 {
   color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
@@ -151,7 +124,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -162,7 +135,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -170,22 +143,21 @@ exports[`Spinner should render component with dimension m 1`] = `
   position: relative;
 }
 
-.c0 > .c1:first-child {
+.c0>.c1:first-child {
   border-top: 1px solid #D5D8DE;
 }
 
-.c0 > .c1:first-child .c5 {
+.c0>.c1:first-child .c5 {
   padding: 9px 16px;
 }
 
-.c0 > .c1:last-child {
+.c0>.c1:last-child {
   border-bottom: 1px solid #D5D8DE;
 }
 
 .c10 {
   overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 0;
   visibility: hidden;
 }
@@ -227,7 +199,7 @@ exports[`Spinner should render component with dimension m 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_1"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_1"
               role="region"
             >
@@ -265,7 +237,7 @@ exports[`Spinner should render component with dimension m 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_2"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_2"
               role="region"
             >
@@ -303,7 +275,7 @@ exports[`Spinner should render component with dimension m 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_3"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_3"
               role="region"
             >
@@ -315,17 +287,14 @@ exports[`Spinner should render component with dimension m 1`] = `
     </div>
   </body>,
   "container": .c9 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
 }
 
-[data-icon='left'] .c8 {
+[data-icon='left'] .c9 {
   margin: 0 8px 0 0;
 }
 
@@ -333,11 +302,11 @@ exports[`Spinner should render component with dimension m 1`] = `
   fill: #717681;
 }
 
-[data-disabled='true'] .c8 *[fill^='#'] {
+[data-disabled='true'] .c9 *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-[data-dimension='m'] .c8 {
+[data-dimension='m'] .c9 {
   width: 20px;
   height: 20px;
 }
@@ -346,13 +315,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   position: relative;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 16px 16px 15px 16px;
 }
@@ -361,35 +324,19 @@ exports[`Spinner should render component with dimension m 1`] = `
   padding: 10px 16px 9px 16px;
 }
 
-[data-icon='left'] .c5 {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
+[data-icon='left'] .c6 {
   flex-direction: row-reverse;
 }
 
 .c7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   min-height: 54px;
   width: 100%;
@@ -408,7 +355,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 550;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -427,18 +374,18 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c4:focus,
-.c4 > .c5 {
+.c4>.c5 {
   outline: none;
 }
 
-[data-dimension='m'] .c3 {
+[data-dimension='m'] .c4 {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -446,13 +393,11 @@ exports[`Spinner should render component with dimension m 1`] = `
   border-bottom: 1px solid #D5D8DE;
 }
 
-.c2 > .c3 .c8 {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
+.c2>.c3 .c8 {
   transform: rotate(0deg);
 }
 
-.c12 {
+.c11 {
   color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
@@ -462,7 +407,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -473,7 +418,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -481,22 +426,21 @@ exports[`Spinner should render component with dimension m 1`] = `
   position: relative;
 }
 
-.c0 > .c1:first-child {
+.c0>.c1:first-child {
   border-top: 1px solid #D5D8DE;
 }
 
-.c0 > .c1:first-child .c5 {
+.c0>.c1:first-child .c5 {
   padding: 9px 16px;
 }
 
-.c0 > .c1:last-child {
+.c0>.c1:last-child {
   border-bottom: 1px solid #D5D8DE;
 }
 
 .c10 {
   overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 0;
   visibility: hidden;
 }
@@ -537,7 +481,7 @@ exports[`Spinner should render component with dimension m 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_1"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_1"
             role="region"
           >
@@ -575,7 +519,7 @@ exports[`Spinner should render component with dimension m 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_2"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_2"
             role="region"
           >
@@ -613,7 +557,7 @@ exports[`Spinner should render component with dimension m 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_3"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_3"
             role="region"
           >
@@ -681,17 +625,14 @@ exports[`Spinner should render default component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c9 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
 }
 
-[data-icon='left'] .c8 {
+[data-icon='left'] .c9 {
   margin: 0 8px 0 0;
 }
 
@@ -699,11 +640,11 @@ exports[`Spinner should render default component 1`] = `
   fill: #717681;
 }
 
-[data-disabled='true'] .c8 *[fill^='#'] {
+[data-disabled='true'] .c9 *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-[data-dimension='m'] .c8 {
+[data-dimension='m'] .c9 {
   width: 20px;
   height: 20px;
 }
@@ -712,13 +653,7 @@ exports[`Spinner should render default component 1`] = `
   position: relative;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 16px 16px 15px 16px;
 }
@@ -727,35 +662,19 @@ exports[`Spinner should render default component 1`] = `
   padding: 10px 16px 9px 16px;
 }
 
-[data-icon='left'] .c5 {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
+[data-icon='left'] .c6 {
   flex-direction: row-reverse;
 }
 
 .c7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   min-height: 54px;
   width: 100%;
@@ -774,7 +693,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 550;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -793,18 +712,18 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c4:focus,
-.c4 > .c5 {
+.c4>.c5 {
   outline: none;
 }
 
-[data-dimension='m'] .c3 {
+[data-dimension='m'] .c4 {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -812,13 +731,11 @@ exports[`Spinner should render default component 1`] = `
   border-bottom: 1px solid #D5D8DE;
 }
 
-.c2 > .c3 .c8 {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
+.c2>.c3 .c8 {
   transform: rotate(0deg);
 }
 
-.c12 {
+.c11 {
   color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
@@ -828,7 +745,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -839,7 +756,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -847,22 +764,21 @@ exports[`Spinner should render default component 1`] = `
   position: relative;
 }
 
-.c0 > .c1:first-child {
+.c0>.c1:first-child {
   border-top: 1px solid #D5D8DE;
 }
 
-.c0 > .c1:first-child .c5 {
+.c0>.c1:first-child .c5 {
   padding: 15px 16px;
 }
 
-.c0 > .c1:last-child {
+.c0>.c1:last-child {
   border-bottom: 1px solid #D5D8DE;
 }
 
 .c10 {
   overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 0;
   visibility: hidden;
 }
@@ -904,7 +820,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_1"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_1"
               role="region"
             >
@@ -942,7 +858,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_2"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_2"
               role="region"
             >
@@ -980,7 +896,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               aria-labelledby="accordion_title_AccordionItem_3"
-              class="c11 c12"
+              class="c11"
               id="accordion_content_AccordionItem_3"
               role="region"
             >
@@ -992,17 +908,14 @@ exports[`Spinner should render default component 1`] = `
     </div>
   </body>,
   "container": .c9 {
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
 }
 
-[data-icon='left'] .c8 {
+[data-icon='left'] .c9 {
   margin: 0 8px 0 0;
 }
 
@@ -1010,11 +923,11 @@ exports[`Spinner should render default component 1`] = `
   fill: #717681;
 }
 
-[data-disabled='true'] .c8 *[fill^='#'] {
+[data-disabled='true'] .c9 *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-[data-dimension='m'] .c8 {
+[data-dimension='m'] .c9 {
   width: 20px;
   height: 20px;
 }
@@ -1023,13 +936,7 @@ exports[`Spinner should render default component 1`] = `
   position: relative;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
   align-items: flex-start;
   padding: 16px 16px 15px 16px;
 }
@@ -1038,35 +945,19 @@ exports[`Spinner should render default component 1`] = `
   padding: 10px 16px 9px 16px;
 }
 
-[data-icon='left'] .c5 {
-  -webkit-flex-direction: row-reverse;
-  -ms-flex-direction: row-reverse;
+[data-icon='left'] .c6 {
   flex-direction: row-reverse;
 }
 
 .c7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
 
 .c4 {
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   min-height: 54px;
   width: 100%;
@@ -1085,7 +976,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 550;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1104,18 +995,18 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c4:focus,
-.c4 > .c5 {
+.c4>.c5 {
   outline: none;
 }
 
-[data-dimension='m'] .c3 {
+[data-dimension='m'] .c4 {
   min-height: 38px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 550;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1123,13 +1014,11 @@ exports[`Spinner should render default component 1`] = `
   border-bottom: 1px solid #D5D8DE;
 }
 
-.c2 > .c3 .c8 {
-  -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
+.c2>.c3 .c8 {
   transform: rotate(0deg);
 }
 
-.c12 {
+.c11 {
   color: #23262D;
   overflow-y: auto;
   max-height: 100vh;
@@ -1139,7 +1028,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1150,7 +1039,7 @@ exports[`Spinner should render default component 1`] = `
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1158,22 +1047,21 @@ exports[`Spinner should render default component 1`] = `
   position: relative;
 }
 
-.c0 > .c1:first-child {
+.c0>.c1:first-child {
   border-top: 1px solid #D5D8DE;
 }
 
-.c0 > .c1:first-child .c5 {
+.c0>.c1:first-child .c5 {
   padding: 15px 16px;
 }
 
-.c0 > .c1:last-child {
+.c0>.c1:last-child {
   border-bottom: 1px solid #D5D8DE;
 }
 
 .c10 {
   overflow: hidden;
-  -webkit-transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
-  transition: max-height 250ms cubic-bezier(0.4,0,0.2,1), visibility 250ms cubic-bezier(0.4,0,0.2,1);
+  transition: max-height 250ms cubic-bezier(0.4, 0, 0.2, 1),visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 0;
   visibility: hidden;
 }
@@ -1214,7 +1102,7 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_1"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_1"
             role="region"
           >
@@ -1252,7 +1140,7 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_2"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_2"
             role="region"
           >
@@ -1290,7 +1178,7 @@ exports[`Spinner should render default component 1`] = `
         >
           <div
             aria-labelledby="accordion_title_AccordionItem_3"
-            class="c11 c12"
+            class="c11"
             id="accordion_content_AccordionItem_3"
             role="region"
           >

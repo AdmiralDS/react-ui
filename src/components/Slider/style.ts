@@ -17,21 +17,21 @@ const skeletonMixin = css`
   }
 `;
 
-export const TrackWrapper = styled.div<{ dimension: SliderProps['dimension']; skeleton?: boolean }>`
+export const TrackWrapper = styled.div<{ $dimension: SliderProps['dimension']; $skeleton?: boolean }>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
-  height: ${({ dimension }) => (dimension === 'm' ? 36 : 40)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? 36 : 40)}px;
   padding-bottom: 20px;
   [data-disabled='true'] && {
     pointer-events: none;
     cursor: auto;
   }
 
-  ${({ skeleton }) => skeleton && skeletonMixin}};
+  ${({ $skeleton }) => $skeleton && skeletonMixin};
 `;
 
 export const Track = styled.div`
@@ -48,7 +48,7 @@ export const DefaultTrack = styled.div`
   transform: translateY(-50%);
 `;
 
-export const FilledTrack = styled.div<{ animation?: boolean }>`
+export const FilledTrack = styled.div<{ $animation?: boolean }>`
   display: block;
   [data-disabled='true'] && {
     background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
@@ -57,38 +57,38 @@ export const FilledTrack = styled.div<{ animation?: boolean }>`
   height: 2px;
   width: 0%;
   background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-  transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
+  transition: ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
-export const Thumb = styled.div<{ dimension: SliderProps['dimension']; animation?: boolean }>`
+export const Thumb = styled.div<{ $dimension: SliderProps['dimension']; $animation?: boolean }>`
   position: absolute;
-  width: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
-  height: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
+  width: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
   align-items: center;
   justify-content: center;
   transform: translateX(-50%) translateY(-50%);
   border-radius: 50%;
   top: 2px;
   left: 0;
-  transition: ${({ animation }) => (animation ? TRANSITION_ANIMATION : 'none')};
+  transition: ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
-export const ThumbCircle = styled.div<{ dimension: SliderProps['dimension'] }>`
+export const ThumbCircle = styled.div<{ $dimension: SliderProps['dimension'] }>`
   position: relative;
-  height: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
-  width: ${({ dimension }) => (dimension === 'm' ? 16 : 20)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
+  width: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
   background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
   border-radius: 50%;
   &:before {
     position: absolute;
     content: '';
-    height: ${({ dimension }) => (dimension === 'm' ? 6 : 8)}px;
-    width: ${({ dimension }) => (dimension === 'm' ? 6 : 8)}px;
+    height: ${({ $dimension }) => ($dimension === 'm' ? 6 : 8)}px;
+    width: ${({ $dimension }) => ($dimension === 'm' ? 6 : 8)}px;
     background: ${({ theme }) => theme.color['Special/Static White']};
-    top: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
-    bottom: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
-    left: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
-    right: ${({ dimension }) => (dimension === 'm' ? 5 : 6)}px;
+    top: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
+    bottom: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
+    left: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
+    right: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
     border-radius: 50%;
   }
   &:hover {

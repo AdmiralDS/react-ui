@@ -15,10 +15,7 @@ const StyledSpinner = styled(Spinner)`
   transform: translate(-50%, -50%);
 `;
 
-const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
-  'data-dimension': props.dimension,
-  'data-appearance': props.appearance,
-}))<StyledButtonProps>`
+const StyledButton = styled.button<StyledButtonProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -31,21 +28,21 @@ const StyledButton = styled.button.attrs<StyledButtonProps>((props) => ({
   background: transparent;
   padding: 0;
   white-space: nowrap;
-  ${(p) => p.skeleton && skeletonAnimationMixin};
+  ${(p) => p.$skeleton && skeletonAnimationMixin};
 
   ${ButtonContainer} {
-    visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
+    visibility: ${(p) => (p.$skeleton || p.$loading ? 'hidden' : 'visible')};
   }
 
   ${IconContainer} {
-    visibility: ${(p) => (p.skeleton || p.$loading ? 'hidden' : 'visible')};
+    visibility: ${(p) => (p.$skeleton || p.$loading ? 'hidden' : 'visible')};
   }
 
   ${appearanceMixin};
 
   ${dimensionMixin};
 
-  pointer-events: ${(p) => (p.$loading || p.skeleton || p.disabled ? 'none' : 'all')};
+  pointer-events: ${(p) => (p.$loading || p.$skeleton || p.disabled ? 'none' : 'all')};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -95,12 +92,14 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
     return (
       <StyledButton
         {...props}
+        data-dimension={dimension}
+        data-appearance={appearance}
         ref={ref}
-        appearance={appearance}
-        dimension={dimension}
+        $appearance={appearance}
+        $dimension={dimension}
         type={type}
         $loading={loading}
-        skeleton={skeleton}
+        $skeleton={skeleton}
       >
         {loading && <StyledSpinner dimension={dimension === 's' ? 'ms' : 'm'} />}
         {iconStart ? (

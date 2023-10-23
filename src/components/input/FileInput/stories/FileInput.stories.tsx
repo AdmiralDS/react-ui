@@ -98,8 +98,8 @@ export default {
 } as Meta<typeof FileInput>;
 
 //<editor-fold desc="FileInput XL">
-const FileInputDimensionXLStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputBaseTemplate {...props} dimension={'xl'} width={'480px'} />
+const FileInputDimensionXLStory: StoryFn<typeof FileInput> = ({ width = '480px', dimension = 'xl', ...props }) => (
+  <FileInputBaseTemplate {...props} width={width} dimension={dimension} />
 );
 
 export const FileInputDimensionXL = {
@@ -123,8 +123,8 @@ export const FileInputDimensionXL = {
 //</editor-fold>
 
 //<editor-fold desc="FileInput M">
-const FileInputDimensionMStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputBaseTemplate {...props} dimension={'m'} width={'350px'} />
+const FileInputDimensionMStory: StoryFn<typeof FileInput> = ({ width = '350px', dimension = 'm', ...props }) => (
+  <FileInputBaseTemplate {...props} width={width} dimension={dimension} />
 );
 
 export const FileInputDimensionM = {
@@ -143,13 +143,11 @@ export const FileInputDimensionM = {
 //</editor-fold>
 
 //<editor-fold desc="FileInput со статусом загрузки">
-const FileInputWithStatusStory: StoryFn<typeof FileInput> = (props) => (
-  <FileInputWithStatusTemplate {...props} dimension={'xl'} />
-);
+const FileInputWithStatusStory: StoryFn<typeof FileInput> = (props) => <FileInputWithStatusTemplate {...props} />;
 
 export const FileInputWithStatus = {
   render: FileInputWithStatusStory,
-  name: 'FileInput со статусом загрузки',
+  name: 'FileInput со статусом загрузки файлов',
 
   parameters: {
     docs: {

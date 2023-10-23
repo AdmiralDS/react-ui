@@ -16,9 +16,9 @@ function sliderBorderRadius(shape: Shape): string {
   return `${value} ${value} 0 0`;
 }
 
-const Wrapper = styled.div<{ dimension: 'xl' | 'm' | 's' }>`
+const Wrapper = styled.div<{ $dimension: 'xl' | 'm' | 's' }>`
   position: relative;
-  padding-bottom: ${({ dimension }) => (dimension === 'xl' ? 30 : 28)}px;
+  padding-bottom: ${({ $dimension }) => ($dimension === 'xl' ? 30 : 28)}px;
 `;
 
 const Slider = styled(SliderComponent)`
@@ -124,7 +124,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       onChange?.(full, short, event);
     };
     return (
-      <Wrapper data-dimension={dimension} dimension={dimension} {...wrapperProps}>
+      <Wrapper data-dimension={dimension} $dimension={dimension} {...wrapperProps}>
         <Input
           {...props}
           ref={refSetter(ref, inputRef)}

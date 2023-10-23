@@ -33,7 +33,7 @@ export const SortIcon = ({ sort, sortOrder, multipleSort, iconSize }: SortProps)
 
   return (
     <SortIconWrapper ref={sortRef}>
-      <Icon sort={sort || 'initial'} width={iconSize} height={iconSize} />
+      <Icon $sort={sort || 'initial'} width={iconSize} height={iconSize} />
       {multipleSort && sort && sortOrder && <SortOrder>{sortOrder}</SortOrder>}
     </SortIconWrapper>
   );

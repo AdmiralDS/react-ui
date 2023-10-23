@@ -34,7 +34,7 @@ const ButtonContent = styled.span`
   height: 100%;
 `;
 
-const Button = styled.button<{ selected: boolean; current: boolean }>`
+const Button = styled.button<{ selected: boolean; $current: boolean }>`
   display: flex;
   flex: 1 1 auto;
   position: relative;
@@ -81,12 +81,12 @@ const Button = styled.button<{ selected: boolean; current: boolean }>`
       position: absolute;
       content: '';
       border: 2px solid
-        ${({ theme, current }) =>
-          current ? theme.color['Neutral/Neutral 00'] : theme.color['Primary/Primary 60 Main']};
-      top: ${({ current }) => (current ? '2px' : '0px')};
-      bottom: ${({ current }) => (current ? '2px' : '0px')};
-      left: ${({ current }) => (current ? '2px' : '0px')};
-      right: ${({ current }) => (current ? '2px' : '0px')};
+        ${({ theme, $current }) =>
+          $current ? theme.color['Neutral/Neutral 00'] : theme.color['Primary/Primary 60 Main']};
+      top: ${({ $current }) => ($current ? '2px' : '0px')};
+      bottom: ${({ $current }) => ($current ? '2px' : '0px')};
+      left: ${({ $current }) => ($current ? '2px' : '0px')};
+      right: ${({ $current }) => ($current ? '2px' : '0px')};
       border-radius: 40px;
     }
   }
@@ -122,7 +122,7 @@ export const PaginationItem: React.FC<PageProps> = ({ onClick, page, selected, d
       aria-current={selected}
       aria-label={label}
       tabIndex={disabled ? -1 : 0}
-      current={selected}
+      $current={selected}
       disabled={disabled}
       selected={selected}
       onClick={onClick}

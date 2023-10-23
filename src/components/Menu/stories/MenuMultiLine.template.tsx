@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Theme, MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type StoryItem = {
   id: string;
@@ -60,7 +61,10 @@ const MultiLineMenuItem = styled(MenuItem)`
   white-space: pre-wrap;
 `;
 
-export const MenuMultiLineTemplate = (props: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+export const MenuMultiLineTemplate = ({
+  themeBorderKind,
+  ...props
+}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       return {
@@ -74,13 +78,8 @@ export const MenuMultiLineTemplate = (props: MenuProps & { themeBorderKind?: Bor
     });
   }, [props.dimension]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper style={{ maxWidth: '200px' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

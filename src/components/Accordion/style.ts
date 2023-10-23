@@ -91,18 +91,18 @@ export const ItemTitle = styled.button`
   }
 `;
 
-export const ItemWrapper = styled.div<{ opened?: boolean; disabled?: boolean }>`
+export const ItemWrapper = styled.div<{ $opened?: boolean; disabled?: boolean }>`
   border-bottom: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
   & > ${ItemTitle} ${Chevron} {
-    transform: ${(p) => (p.opened ? 'rotate(180deg)' : 'rotate(0deg)')};
+    transform: ${(p) => (p.$opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
   ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
-export const ItemContent = styled.div<{ contentMaxHeight: number | string }>`
+export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`
   color: ${(p) => p.theme.color[DefaultFontColorName]};
   overflow-y: auto;
-  max-height: ${(p) => p.contentMaxHeight};
+  max-height: ${(p) => p.$contentMaxHeight};
   padding: 4px 16px 16px 16px;
   ${typography['Body/Body 1 Long']}
   [data-dimension='m'] & {
@@ -114,21 +114,21 @@ export const ItemContent = styled.div<{ contentMaxHeight: number | string }>`
 type Dimension = 'l' | 'm';
 
 export const AccordionWrapper = styled.div<{
-  hideTopDivider: boolean;
-  hideBottomDivider: boolean;
-  dimension?: Dimension;
+  $hideTopDivider: boolean;
+  $hideBottomDivider: boolean;
+  $dimension?: Dimension;
 }>`
   position: relative;
 
   & > ${ItemWrapper}:first-child {
     & ${ItemTitleContent} {
-      padding: ${({ dimension }) => (dimension === 'l' ? '15px 16px' : '9px 16px')};
+      padding: ${({ $dimension }) => ($dimension === 'l' ? '15px 16px' : '9px 16px')};
     }
     border-top: 1px solid
-      ${({ theme, hideTopDivider }) => (hideTopDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
+      ${({ theme, $hideTopDivider }) => ($hideTopDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
   }
   & > ${ItemWrapper}:last-child {
     border-bottom: 1px solid
-      ${({ theme, hideBottomDivider }) => (hideBottomDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
+      ${({ theme, $hideBottomDivider }) => ($hideBottomDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
   }
 `;

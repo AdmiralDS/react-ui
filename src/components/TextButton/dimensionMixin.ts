@@ -3,9 +3,8 @@ import { typography } from '#src/components/Typography';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
 
 interface DimensionProps {
-  dimension?: string;
-  skeleton?: boolean;
-  displayRight?: boolean;
+  $dimension?: string;
+  $skeleton?: boolean;
 }
 
 export const dimensionMixin = css<DimensionProps>`

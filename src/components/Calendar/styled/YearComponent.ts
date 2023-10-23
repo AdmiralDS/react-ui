@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 type YearComponentProps = {
-  today?: boolean;
-  selected?: boolean;
+  $today?: boolean;
+  $selected?: boolean;
   disabled?: boolean;
 };
 
@@ -21,7 +21,7 @@ export const YearComponent = styled.div<YearComponentProps>`
   height: ${YEAR_HEIGHT};
   padding: ${YEAR_PADDING};
   margin-bottom: ${YEAR_MARGIN_BOTTOM};
-  border: 1px solid ${({ today, theme }) => (today ? theme.color['Neutral/Neutral 90'] : 'transparent')};
+  border: 1px solid ${({ $today, theme }) => ($today ? theme.color['Neutral/Neutral 90'] : 'transparent')};
   border-radius: ${YEAR_BORDER_RADIUS};
   background: transparent;
   ${typography['Body/Body 2 Long']}
@@ -44,9 +44,9 @@ export const YearComponent = styled.div<YearComponentProps>`
       }
     `}
 
-  ${({ disabled, theme, selected }) =>
+  ${({ disabled, theme, $selected }) =>
     !disabled &&
-    selected &&
+    $selected &&
     `
       border: 1px solid ${theme.color['Primary/Primary 60 Main']};
       color: ${theme.color['Special/Static White']};

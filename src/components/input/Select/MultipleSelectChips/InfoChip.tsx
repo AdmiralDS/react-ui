@@ -1,14 +1,21 @@
 import type { IChipProps, IConstantOption } from '#src/components/input/Select/types';
 import * as React from 'react';
 import { ContentTooltip, StyledChip } from './styled';
+import { passDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
 const chipIsChipMeta = (chip: IChipProps | React.ReactNode): chip is IChipProps =>
   typeof chip === 'object' && chip !== null && !React.isValidElement(chip);
 
-const getChipMeta = ({ value, disabled, renderChip }: IConstantOption, onChipRemove: (value: string) => void) => {
+const getChipMeta = (
+  { value, disabled, renderChip, ...restProps }: IConstantOption,
+  onChipRemove: (value: string) => void,
+) => {
   const chip = renderChip();
+  const dataProps = {} as Record<string, any>;
+  passDataAttributes(restProps, dataProps, 'data', false);
+
   return chipIsChipMeta(chip)
-    ? { ...chip, onClose: () => chip.onClose?.({ value, disabled }) }
+    ? { ...chip, onClose: () => chip.onClose?.({ value, disabled, ...dataProps }) }
     : { disabled, onClose: () => onChipRemove(value), children: chip };
 };
 

@@ -1,5 +1,7 @@
-import * as React from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
@@ -32,11 +34,11 @@ const ExtraText = styled(ExtraTextContainer)`
   padding-top: 20px;
 `;
 
-const Icon = styled(AttachFileOutline)<{ dimension?: FileInputDimension }>`
-  height: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
-  width: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
-  margin-right: ${(p) => (p.dimension === 'm' ? FILE_INPUT_ICON_MARGIN : '')};
-  margin-bottom: ${(p) => (p.dimension === 'xl' ? FILE_INPUT_ICON_MARGIN : '')};
+const Icon = styled(AttachFileOutline)<{ $dimension?: FileInputDimension }>`
+  height: ${(p) => (p.$dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
+  width: ${(p) => (p.$dimension === 'xl' ? FILE_INPUT_ICON_SIZE_XL : FILE_INPUT_ICON_SIZE_M)};
+  margin-right: ${(p) => (p.$dimension === 'm' ? FILE_INPUT_ICON_MARGIN : '')};
+  margin-bottom: ${(p) => (p.$dimension === 'xl' ? FILE_INPUT_ICON_MARGIN : '')};
   flex-shrink: 0;
 
   > * {
@@ -53,10 +55,10 @@ const Description = styled.div<{ disabled?: boolean }>`
   ${typography['Body/Body 1 Long']};
 `;
 
-const TitleText = styled.div<{ dimension?: FileInputDimension; disabled?: boolean }>`
+const TitleText = styled.div<{ $dimension?: FileInputDimension; disabled?: boolean }>`
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
-  ${(p) => (p.dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  ${(p) => p.dimension === 'xl' && titleXL}
+  ${(p) => (p.$dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(p) => p.$dimension === 'xl' && titleXL}
 `;
 
 const FocusBorder = styled.div`
@@ -93,7 +95,7 @@ const CustomInput = styled.input`
   opacity: 0;
 `;
 
-const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimension }>`
+const InputWrapper = styled.div<{ disabled?: boolean; $dimension: FileInputDimension }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -101,14 +103,14 @@ const InputWrapper = styled.div<{ disabled?: boolean; dimension: FileInputDimens
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   pointer-events: all;
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
-  ${(p) => (p.dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
+  ${(p) => (p.$dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
   box-sizing: border-box;
   overflow: visible;
 `;
 
-const Wrapper = styled.div<{ dimension: FileInputDimension; width?: string | number }>`
-  min-width: ${(p) => (p.dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
-  ${(p) => (p.width ? `width: ${typeof p.width === 'number' ? p.width + 'px' : p.width};` : '')}
+const Wrapper = styled.div<{ $dimension: FileInputDimension; $width?: string | number }>`
+  min-width: ${(p) => (p.$dimension === 'm' ? FILE_INPUT_MIN_WIDTH_M : FILE_INPUT_MIN_WIDTH_XL)};
+  ${(p) => (p.$width ? `width: ${typeof p.$width === 'number' ? p.$width + 'px' : p.$width};` : '')}
   box-sizing: border-box;
   ${typography['Body/Body 2 Long']};
   display: flex;
@@ -126,29 +128,30 @@ export interface RenderFileInputProps {
   onQueryUpload: () => void;
 }
 
-export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'title'> {
+export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'title'> {
   /** Размер компонента */
   dimension: FileInputDimension;
   /** Задает ширину */
   width?: string | number;
   /** Текстовое описание компонента (текст внутри области загрузки файлов).
    * Если к компоненту также нужно добавить label, используйте компонент FileInputField и его проп label*/
-  title?: React.ReactNode;
+  title?: ReactNode;
   /** @deprecated Используйте взамен проп title
    * Текст для кнопки при dimension M */
-  description?: React.ReactNode;
+  description?: ReactNode;
   /** Функция, возвращающая компонент, на который нужно "повесить" файловый инпут */
-  renderCustomFileInput?: (option: RenderFileInputProps) => React.ReactNode;
+  renderCustomFileInput?: (option: RenderFileInputProps) => ReactNode;
   /** Список файлов для синхронизации с нативным инпутом */
   files?: Array<File>;
   /** @deprecated Используйте взамен компонент FileInputField и его проп extraText
    * Текст будет виден ниже компонента */
-  extraText?: React.ReactNode;
-  /** Установка статуса поля */
+  extraText?: ReactNode;
+  /** @deprecated Используйте взамен компонент FileInputField и его проп status
+   * Установка статуса поля */
   status?: InputStatus;
 }
 
-export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
+export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
   (
     {
       dimension = 'xl',
@@ -166,16 +169,16 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const titleWithDescription = dimension === 'm' && title && description;
     const titleWithoutDescription = (title && !description) || (title && description && dimension === 'xl');
 
-    // TODO: удалить description, renderLabel, renderDescription, extraText при поднятии версии до новой мажорной
+    // TODO: удалить description, renderLabel, renderDescription, extraText, status при поднятии версии до новой мажорной
     const renderLabel = () => <LabelM disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
     const renderTitleText = () => (
-      <TitleText dimension={dimension} disabled={disabled}>
+      <TitleText $dimension={dimension} disabled={disabled}>
         {title}
       </TitleText>
     );
@@ -184,7 +187,7 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
       inputRef.current?.click();
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       const inputNode = inputRef.current;
       if (inputNode && files) {
         const dt = new DataTransfer();
@@ -194,7 +197,7 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     }, [files]);
 
     return (
-      <Wrapper dimension={dimension} width={width} data-status={status}>
+      <Wrapper $dimension={dimension} $width={width} data-status={status}>
         <FileInputWrapper>
           {renderCustomFileInput ? (
             <>
@@ -212,8 +215,8 @@ export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
           ) : (
             <>
               {titleWithDescription && renderLabel()}
-              <InputWrapper dimension={dimension} disabled={disabled}>
-                <Icon dimension={dimension} />
+              <InputWrapper $dimension={dimension} disabled={disabled}>
+                <Icon $dimension={dimension} />
                 {titleWithoutDescription && renderTitleText()}
                 {dimension === 'm' && description && renderDescription()}
                 <StyledInput

@@ -80,9 +80,7 @@ export default {
 } as Meta<typeof FileInputField>;
 
 //<editor-fold desc="FileInputField. Example">
-const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldBaseTemplate {...props} dimension={'xl'} />
-);
+const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => <FileInputFieldBaseTemplate {...props} />;
 
 export const FileInputFieldBase = {
   render: FileInputFieldBaseStory,
@@ -102,7 +100,7 @@ export const FileInputFieldBase = {
 
 //<editor-fold desc="FileInputField. Required">
 const FileInputFieldRequiredStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldRequiredTemplate {...props} dimension={'xl'} />
+  <FileInputFieldRequiredTemplate {...props} />
 );
 
 export const FileInputFieldRequired = {

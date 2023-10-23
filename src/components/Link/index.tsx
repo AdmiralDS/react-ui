@@ -25,11 +25,11 @@ export const Link = React.forwardRef(
   ) => {
     return (
       <LinkComponent
-        dimension={dimension}
+        $dimension={dimension}
         ref={ref}
         tabIndex={disabled ? -1 : props.tabIndex}
         disabled={disabled}
-        appearance={appearance}
+        $appearance={appearance}
         {...props}
       />
     );

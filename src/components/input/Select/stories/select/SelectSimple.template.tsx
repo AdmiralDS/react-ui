@@ -3,20 +3,17 @@ import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { Option, Select } from '@admiral-ds/react-ui';
-import type { SelectProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { SelectProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../../../.storybook/createBorderRadiusSwapper';
 
 export const SelectSimpleTemplate = ({
   placeholder = 'Select option',
+  themeBorderKind,
   ...props
 }: SelectProps & { themeBorderKind?: BorderRadiusType }) => {
   const [selectValue, setSelectValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
-
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
 
   const handleSelectedChange = (value: string | Array<string>) => {
     // eslint-disable-next-line no-console
@@ -24,7 +21,7 @@ export const SelectSimpleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Select
         {...props}
         value={selectValue}

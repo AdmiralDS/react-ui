@@ -10,8 +10,8 @@ import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
 
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -20,8 +20,8 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
-const verticalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const verticalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 'm':
@@ -32,8 +32,8 @@ const verticalPaddingValue = (props: { dimension?: ComponentDimension }) => {
       return 8;
   }
 };
-const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
     case 'm':
       return 16;
@@ -45,7 +45,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (props.iconCount ? iconSizeValue(props) + 8 : 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (props.$iconCount ? iconSizeValue(props) + 8 : 0)}px;
 `;
 
 const disabledColors = css`
@@ -143,7 +143,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
   padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   overflow-wrap: break-word;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   ${colorsBorderAndBackground}
   ${extraPadding}
 `;
@@ -170,7 +170,7 @@ const Text = styled.textarea<ExtraProps>`
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -189,7 +189,7 @@ const Text = styled.textarea<ExtraProps>`
   ${ieFixes}
 `;
 
-const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -218,20 +218,20 @@ interface TextBlockProps extends ExtraProps {
   disabled?: boolean;
 }
 
-const textAreaHeight = (rows: number, dimension?: ComponentDimension) => {
-  const textAreaLineHeight = dimension === 's' ? 20 : 24;
-  return rows * textAreaLineHeight + 2 * verticalPaddingValue({ dimension });
+const textAreaHeight = (rows: number, $dimension?: ComponentDimension) => {
+  const textAreaLineHeight = $dimension === 's' ? 20 : 24;
+  return rows * textAreaLineHeight + 2 * verticalPaddingValue({ $dimension });
 };
 
 const StyledContainer = styled(Container)<{
-  autoHeight: boolean;
-  rows: number;
-  maxRows?: number;
-  dimension: ComponentDimension;
+  $autoHeight: boolean;
+  $rows: number;
+  $maxRows?: number;
+  $dimension: ComponentDimension;
 }>`
-  min-height: ${(p) => textAreaHeight(p.rows, p.dimension)}px;
-  ${(p) => (p.maxRows ? `max-height: ${textAreaHeight(p.maxRows, p.dimension)}px;` : '')}
-  ${(p) => (p.autoHeight ? '' : `height: ${textAreaHeight(p.rows, p.dimension)}px;`)}
+  min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension)}px;
+  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension)}px;` : '')}
+  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
 `;
 
 function toHtmlString(value?: string) {
@@ -379,28 +379,33 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         ref={containerRef}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
-        skeleton={skeleton}
+        $skeleton={skeleton}
         data-disable-copying={props.disableCopying ? true : undefined}
-        autoHeight={!!autoHeight}
-        rows={rows}
-        maxRows={maxRows}
-        dimension={dimension}
+        $autoHeight={!!autoHeight}
+        $rows={rows}
+        $maxRows={maxRows}
+        $dimension={dimension}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}
       >
-        <HiddenSpanContainer ref={hiddenDivRef} dimension={dimension} disabled={props.disabled} iconCount={iconCount} />
+        <HiddenSpanContainer
+          ref={hiddenDivRef}
+          $dimension={dimension}
+          disabled={props.disabled}
+          $iconCount={iconCount}
+        />
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
-          dimension={dimension}
-          iconCount={iconCount}
-          autoHeight={autoHeight}
+          $dimension={dimension}
+          $iconCount={iconCount}
+          $autoHeight={autoHeight}
           value={inputData.value}
         />
         <BorderedDiv />
         {iconCount > 0 && (
-          <IconPanel disabled={props.disabled} dimension={dimension}>
+          <IconPanel disabled={props.disabled} $dimension={dimension}>
             {iconArray}
           </IconPanel>
         )}

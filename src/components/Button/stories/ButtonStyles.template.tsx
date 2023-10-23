@@ -1,11 +1,11 @@
-import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button } from '@admiral-ds/react-ui';
-import type { ButtonProps, ButtonAppearance, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ButtonProps, ButtonAppearance, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
+const ButtonContainer = styled.div<{ $appearance?: ButtonAppearance }>`
   padding: 24px;
   position: relative;
   display: block;
@@ -14,17 +14,15 @@ const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
     margin: 8px 16px 0 0;
   }
 
-  ${(p) => p.appearance === 'white' && 'background-color: #2B313B;'};
+  ${(p) => p.$appearance === 'white' && 'background-color: #2B313B;'};
 `;
 
-export const ButtonStylesTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const ButtonStylesTemplate = ({
+  themeBorderKind,
+  ...props
+}: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <ButtonContainer>
         <Button dimension={props.dimension}>Button 56</Button>
 
@@ -98,7 +96,7 @@ export const ButtonStylesTemplate = (props: ButtonProps & { themeBorderKind?: Bo
 
         <Button dimension={props.dimension} appearance="success" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
-      <ButtonContainer appearance="white">
+      <ButtonContainer $appearance="white">
         <Button dimension={props.dimension} appearance="white">
           Button 56
         </Button>

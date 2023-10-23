@@ -12,11 +12,11 @@ const Layout = styled.div`
   }
 `;
 
-const String = styled.div<{ appearance?: BadgeProps['appearance'] }>`
+const String = styled.div<{ $appearance?: BadgeProps['appearance'] }>`
   display: flex;
   align-items: center;
-  ${({ appearance, theme }) =>
-    appearance && appearance.indexOf('white') > -1 && `background: ${theme.color['Neutral/Neutral 05']};`}
+  ${({ $appearance, theme }) =>
+    $appearance && $appearance.indexOf('white') > -1 && `background: ${theme.color['Neutral/Neutral 05']};`}
   & > * {
     margin-right: 16px;
   }
@@ -93,28 +93,28 @@ export const BadgeVariantsTemplate = () => {
           </Badge>
           Light Disable
         </String>
-        <String appearance="white">
+        <String $appearance="white">
           <Badge appearance="white">5</Badge>
           <Badge appearance="white" dimension="s">
             5
           </Badge>
           White
         </String>
-        <String appearance="whiteInactive">
+        <String $appearance="whiteInactive">
           <Badge appearance="whiteInactive">5</Badge>
           <Badge appearance="whiteInactive" dimension="s">
             5
           </Badge>
           White Inactive
         </String>
-        <String appearance="whiteDisable">
+        <String $appearance="whiteDisable">
           <Badge appearance="whiteDisable">5</Badge>
           <Badge appearance="whiteDisable" dimension="s">
             5
           </Badge>
           White Disable
         </String>
-        <String appearance="whiteBlue">
+        <String $appearance="whiteBlue">
           <Badge appearance="whiteBlue">5</Badge>
           <Badge appearance="whiteBlue" dimension="s">
             5

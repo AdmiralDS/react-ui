@@ -51,7 +51,8 @@ export const findModelItem = (items: Array<MenuModelItemProps>, id: string): Men
 
     if (item.id === id) return item;
     if (item.subItems && item.subItems.length > 0) {
-      return findModelItem(item.subItems, id);
+      const subItem = findModelItem(item.subItems, id);
+      if (subItem) return subItem;
     }
   }
 };

@@ -30,21 +30,21 @@ export const BorderedDiv = styled.div`
 const ROW_HEIGHT = 24;
 
 const rowHeightStyle = css<{
-  multiple?: boolean;
-  opened?: boolean;
-  minRowCount?: number;
-  maxRowCount?: number;
+  $multiple?: boolean;
+  $opened?: boolean;
+  $minRowCount?: number;
+  $maxRowCount?: number;
 }>`
-  min-height: ${({ multiple, minRowCount }) => {
-    if (!multiple || !minRowCount) return 'none';
+  min-height: ${({ $multiple, $minRowCount }) => {
+    if (!$multiple || !$minRowCount) return 'none';
 
-    return `${ROW_HEIGHT * minRowCount + (minRowCount - 1) * 4}px`;
+    return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ multiple, maxRowCount, opened }) => {
-    if (!multiple || !maxRowCount || opened) return 'none';
+  max-height: ${({ $multiple, $maxRowCount, $opened }) => {
+    if (!$multiple || !$maxRowCount || $opened) return 'none';
 
-    return `${ROW_HEIGHT * maxRowCount + (maxRowCount - 1) * 4}px`;
+    return `${ROW_HEIGHT * $maxRowCount + ($maxRowCount - 1) * 4}px`;
   }};
 `;
 
@@ -57,31 +57,31 @@ const chipsShiftStyle = css`
 `;
 
 export const ValueWrapper = styled.div<{
-  dimension?: ComponentDimension;
-  multiple?: boolean;
-  minRowCount?: number;
-  maxRowCount?: number;
-  isEmpty?: boolean;
-  opened?: boolean;
+  $dimension?: ComponentDimension;
+  $multiple?: boolean;
+  $minRowCount?: number;
+  $maxRowCount?: number;
+  $isEmpty?: boolean;
+  $opened?: boolean;
 }>`
   flex: 1 1 auto;
   display: flex;
   overflow: hidden;
 
-  ${({ multiple, isEmpty }) => multiple && !isEmpty && chipsShiftStyle}
+  ${({ $multiple, $isEmpty }) => $multiple && !$isEmpty && chipsShiftStyle}
 
   gap: 4px;
-  flex-wrap: ${({ multiple }) => (multiple ? 'wrap' : 'unset')};
+  flex-wrap: ${({ $multiple }) => ($multiple ? 'wrap' : 'unset')};
   align-items: center;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
   ${rowHeightStyle}
   [data-disabled='true'] &&& {
     color: ${(props) => props.theme.color['Neutral/Neutral 30']};
   }
-  min-height: ${(p) => (p.dimension === 's' ? 20 : 24)}px;
+  min-height: ${(p) => (p.$dimension === 's' ? 20 : 24)}px;
 `;
 
 export const StringValueWrapper = styled.div`
@@ -97,7 +97,7 @@ const ieFixes = css`
   }
 `;
 
-export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?: boolean }>`
+export const Input = styled.input<{ $dimension?: ComponentDimension; $isMultiple?: boolean }>`
   outline: none;
   appearance: none;
 
@@ -111,7 +111,7 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
-  ${({ dimension }) => (dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
     color: ${(props) => props.theme.color['Neutral/Neutral 50']};
   }
@@ -131,7 +131,7 @@ export const Input = styled.input<{ dimension?: ComponentDimension; isMultiple?:
     pointer-events: none;
   }
 
-  height: ${({ dimension, isMultiple }) => `${getSelectValueHeight(dimension, isMultiple)}px`};
+  height: ${({ $dimension, $isMultiple }) => `${getSelectValueHeight($dimension, $isMultiple)}px`};
 
   ${ieFixes};
 `;
@@ -155,19 +155,19 @@ const focusedStyle = css`
   }
 `;
 
-export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentDimension }>`
+export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: ComponentDimension }>`
   flex: 0 0 auto;
 
   display: flex;
   align-items: center;
 
-  padding: ${({ dimension, multiple }) => (dimension === 's' && multiple ? '2px 0' : '0')};
+  padding: ${({ $dimension, $multiple }) => ($dimension === 's' && $multiple ? '2px 0' : '0')};
 
   & > * {
     margin-left: 8px;
     display: block;
-    width: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
-    height: ${({ dimension }) => (dimension === 's' ? 20 : 24)}px;
+    width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+    height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
   }
 
   [data-disabled='true'] &&& {
@@ -180,23 +180,23 @@ export const IconPanel = styled.div<{ multiple?: boolean; dimension?: ComponentD
 export const SelectWrapper = styled.div<{
   disabled?: boolean;
   readonly?: boolean;
-  focused: boolean;
-  multiple: boolean;
-  dimension?: ComponentDimension;
-  skeleton?: boolean;
+  $focused: boolean;
+  $multiple: boolean;
+  $dimension?: ComponentDimension;
+  $skeleton?: boolean;
 }>`
   position: relative;
   box-sizing: border-box;
   display: flex;
-  align-items: ${(p) => (p.multiple ? 'flex-start' : 'center')};
+  align-items: ${(p) => (p.$multiple ? 'flex-start' : 'center')};
   cursor: pointer;
 
-  padding: ${({ dimension, multiple }) => {
-    switch (dimension) {
+  padding: ${({ $dimension, $multiple }) => {
+    switch ($dimension) {
       case 'xl':
         return '16px 16px';
       case 's':
-        return multiple ? '4px 12px' : '6px 12px';
+        return $multiple ? '4px 12px' : '6px 12px';
       default:
         return '8px 16px';
     }
@@ -206,13 +206,13 @@ export const SelectWrapper = styled.div<{
     disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
 
   ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
-  ${({ focused, readonly }) => (focused && !readonly ? focusedStyle : '')};
+  ${({ $focused, readonly }) => ($focused && !readonly ? focusedStyle : '')};
 
   & ${BorderedDiv} {
     border-color: ${(props) =>
       props.disabled || props.readonly
         ? 'transparent'
-        : props.focused
+        : props.$focused
         ? props.theme.color['Primary/Primary 60 Main']
         : props.theme.color['Neutral/Neutral 40']};
   }
@@ -220,7 +220,7 @@ export const SelectWrapper = styled.div<{
   &:hover ${BorderedDiv} {
     ${(props) =>
       !props.disabled &&
-      !props.focused &&
+      !props.$focused &&
       `
       border-color: ${props.theme.color['Neutral/Neutral 60']}
     `};
@@ -256,20 +256,20 @@ export const SelectWrapper = styled.div<{
     `}
   }
 
-  border-radius: ${(p) => (p.skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
 
-  ${({ skeleton }) => skeleton && skeletonMixin};
-  ${({ skeleton }) => skeleton && disableEventMixin};
+  ${({ $skeleton }) => $skeleton && skeletonMixin};
+  ${({ $skeleton }) => $skeleton && disableEventMixin};
 `;
 
-export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
+export const OptionWrapper = styled.div<{ $dimension?: ComponentDimension }>`
   flex: 0 0 auto;
 
   word-break: break-word;
   display: flex;
   align-items: center;
-  padding: ${({ dimension }) => {
-    switch (dimension) {
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'xl':
         return '12px 16px';
       case 's':
@@ -281,8 +281,8 @@ export const OptionWrapper = styled.div<{ dimension?: ComponentDimension }>`
 
   background-color: transparent;
 
-  ${({ dimension }) => {
-    switch (dimension) {
+  ${({ $dimension }) => {
+    switch ($dimension) {
       case 'xl':
         return typography['Additional/L'];
       case 's':

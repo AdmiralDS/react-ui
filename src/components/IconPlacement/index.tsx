@@ -57,24 +57,24 @@ export interface IconPlacementProps extends ButtonHTMLAttributes<HTMLButtonEleme
   appearance?: IconPlacementAppearance | { iconColor: string };
 }
 
-const IconColor = css<{ iconColor: IconPlacementAppearance | string }>`
+const IconColor = css<{ $iconColor: IconPlacementAppearance | string }>`
   & *[fill^='#'] {
     fill: ${(p) => {
-      switch (p.iconColor) {
+      switch (p.$iconColor) {
         case 'primary':
           return p.theme.color['Primary/Primary 60 Main'];
         case 'secondary':
           return p.theme.color['Neutral/Neutral 50'];
         default:
-          return p.iconColor;
+          return p.$iconColor;
       }
     }};
   }
 `;
 
 const IconPlacementContent = styled.div<{
-  dimension?: IconPlacementDimension;
-  iconColor: IconPlacementAppearance | string;
+  $dimension?: IconPlacementDimension;
+  $iconColor: IconPlacementAppearance | string;
 }>`
   position: absolute;
   top: 0;
@@ -84,14 +84,14 @@ const IconPlacementContent = styled.div<{
   ${IconColor}
 
   & > svg {
-    height: ${(p) => getIconSize(p.dimension)}px;
-    width: ${(p) => getIconSize(p.dimension)}px;
+    height: ${(p) => getIconSize(p.$dimension)}px;
+    width: ${(p) => getIconSize(p.$dimension)}px;
   }
 `;
 
-const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
-  width: ${(p) => getHighlighterSize(p.dimension)}px;
-  height: ${(p) => getHighlighterSize(p.dimension)}px;
+const ActivityHighlighter = styled.div<{ $dimension?: IconPlacementDimension }>`
+  width: ${(p) => getHighlighterSize(p.$dimension)}px;
+  height: ${(p) => getHighlighterSize(p.$dimension)}px;
   border-radius: 50%;
   background-color: transparent;
   pointer-events: none;
@@ -101,17 +101,17 @@ const ActivityHighlighter = styled.div<{ dimension?: IconPlacementDimension }>`
   transform: translate(-50%, -50%);
 `;
 
-const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; highlightFocus: boolean }>`
+const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension; $highlightFocus: boolean }>`
   position: relative;
   padding: 0;
-  margin: ${(p) => getHighlighterOffset(p.dimension)}px;
+  margin: ${(p) => getHighlighterOffset(p.$dimension)}px;
   box-sizing: border-box;
   border: none;
   background-color: transparent;
   appearance: none;
   flex: 0 0 auto;
-  height: ${(p) => getIconSize(p.dimension)}px;
-  width: ${(p) => getIconSize(p.dimension)}px;
+  height: ${(p) => getIconSize(p.$dimension)}px;
+  width: ${(p) => getIconSize(p.$dimension)}px;
   border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
   overflow: visible;
 
@@ -135,7 +135,7 @@ const IconPlacementButton = styled.button<{ dimension?: IconPlacementDimension; 
 
   &:focus {
     > ${ActivityHighlighter} {
-      background-color: ${(p) => (p.highlightFocus ? p.theme.color['Opacity/Focus'] : 'transparent')};
+      background-color: ${(p) => (p.$highlightFocus ? p.theme.color['Opacity/Focus'] : 'transparent')};
     }
   }
   &:hover {
@@ -170,13 +170,13 @@ export const IconPlacement = React.forwardRef<HTMLButtonElement, IconPlacementPr
       <IconPlacementButton
         ref={ref}
         type={type}
-        dimension={dimension}
+        $dimension={dimension}
         disabled={disabled}
-        highlightFocus={highlightFocus}
+        $highlightFocus={highlightFocus}
         {...props}
       >
-        <ActivityHighlighter dimension={dimension} aria-hidden />
-        <IconPlacementContent dimension={dimension} iconColor={iconColor} aria-hidden>
+        <ActivityHighlighter $dimension={dimension} aria-hidden />
+        <IconPlacementContent $dimension={dimension} $iconColor={iconColor} aria-hidden>
           {children}
         </IconPlacementContent>
       </IconPlacementButton>

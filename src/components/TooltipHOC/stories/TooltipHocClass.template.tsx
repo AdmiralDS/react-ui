@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { TooltipHoc } from '@admiral-ds/react-ui';
-import type { TooltipHocProps, Theme } from '@admiral-ds/react-ui';
+import type { TooltipHocProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type TestType = {
   innerRef: React.ForwardedRef<HTMLHeadingElement>;
@@ -24,16 +25,14 @@ const TestForwardingRef = React.forwardRef<HTMLHeadingElement, Omit<TestType, 'i
 ));
 const TooltipedTest = TooltipHoc(TestForwardingRef);
 
-export const TooltipHocClassTemplate = (args: TooltipHocProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const TooltipHocClassTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TooltipedTest
-        {...args}
+        {...props}
         renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}
         label={'Наведи на меня мышью и увидишь тултип'}
       />

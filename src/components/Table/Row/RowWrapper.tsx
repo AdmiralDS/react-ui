@@ -1,8 +1,9 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
-import { ExpandedRow, ExpandedRowContent, Row, SimpleRow } from '#src/components/Table/style';
+import { Row, SimpleRow } from '#src/components/Table/style';
 import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
+import { ExpandedRow } from '#src/components/Table/Row/ExpandedRow';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер таблицы */
@@ -65,39 +66,32 @@ export const RowWrapper = ({
     e.stopPropagation();
   };
 
-  const handleExpandedMouseEnter = () => {
-    rowRef.current?.classList.remove('hoverable');
-  };
-  const handleExpandedMouseLeave = () => {
-    rowRef.current?.classList.add('hoverable');
-  };
-
   return (
     <Row
       {...props}
       ref={rowRef}
       onClick={() => handleRowClick(row.id)}
       onDoubleClick={() => handleRowDoubleClick(row.id)}
-      underline={underline}
+      $underline={underline}
       disabled={!!row.disabled}
-      dimension={dimension}
+      $dimension={dimension}
       className={`tr ${row.className || ''} hoverable`}
       data-row={row.id}
-      isGroup={isGroup}
-      rowWidth={rowWidth}
-      hover={!!row.hover}
+      $isGroup={isGroup}
+      $rowWidth={rowWidth}
+      $hover={!!row.hover}
       data-rowid={row.id}
     >
       <SimpleRow
         className="tr-simple"
-        showRowsActions={showRowsActions}
+        $showRowsActions={showRowsActions}
         selected={!!row.selected}
         disabled={!!row.disabled}
-        status={row.status}
-        rowStatusMap={rowStatusMap}
-        error={!!row.error}
-        success={!!row.success}
-        grey={!!grey}
+        $status={row.status}
+        $rowStatusMap={rowStatusMap}
+        $error={!!row.error}
+        $success={!!row.success}
+        $grey={!!grey}
       >
         {children}
       </SimpleRow>
@@ -112,17 +106,7 @@ export const RowWrapper = ({
           showRowsActions={showRowsActions}
         />
       )}
-      {row.expandedRowRender && (
-        <ExpandedRow
-          opened={row.expanded}
-          contentMaxHeight="90vh"
-          className="tr-expanded"
-          onMouseEnter={handleExpandedMouseEnter}
-          onMouseLeave={handleExpandedMouseLeave}
-        >
-          <ExpandedRowContent>{row.expandedRowRender(row)}</ExpandedRowContent>
-        </ExpandedRow>
-      )}
+      {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
     </Row>
   );
 };

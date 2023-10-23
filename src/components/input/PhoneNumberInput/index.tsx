@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
+import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -46,24 +46,24 @@ const disabledStyles = css`
   }
 `;
 
-const PhoneContainer = styled.div<{ dimension: Dimension; disabled?: boolean; readOnly?: boolean }>`
+const PhoneContainer = styled.div<{ $dimension: Dimension; disabled?: boolean; readOnly?: boolean }>`
   position: relative;
 
   & ${Chevron} {
-    width: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
-    height: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
+    width: ${(p) => (p.$dimension === 's' ? '20px' : '24px')};
+    height: ${(p) => (p.$dimension === 's' ? '20px' : '24px')};
   }
 
   & input {
-    padding-left: ${(p) => (p.dimension === 's' ? (p.readOnly ? '40px' : '60px') : p.readOnly ? '48px' : '72px')};
+    padding-left: ${(p) => (p.$dimension === 's' ? (p.readOnly ? '40px' : '60px') : p.readOnly ? '48px' : '72px')};
   }
 `;
 
 const CountryContainer = styled.div<{
-  dimension: Dimension;
-  isOpened?: boolean;
+  $dimension: Dimension;
+  $isOpened?: boolean;
   disabled?: boolean;
-  skeleton?: boolean;
+  $skeleton?: boolean;
 }>`
   cursor: pointer;
   position: absolute;
@@ -71,26 +71,26 @@ const CountryContainer = styled.div<{
   left: 16px;
   transform: translateY(-50%);
   display: flex;
-  height: ${(p) => (p.dimension === 's' ? '20px' : '24px')};
+  height: ${(p) => (p.$dimension === 's' ? '20px' : '24px')};
 
   & ${Chevron} {
     & *[fill^='#'] {
       stroke: none;
     }
 
-    transform: ${(p) => (p.isOpened && !p.disabled ? 'rotate(180deg)' : 'rotate(0deg)')};
+    transform: ${(p) => (p.$isOpened && !p.disabled ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
 
   ${(p) => p.disabled && disabledStyles};
-  visibility: ${(p) => (p.skeleton ? 'hidden' : 'visible')};
+  visibility: ${(p) => (p.$skeleton ? 'hidden' : 'visible')};
 `;
 
 const PhoneInputDropContainer = styled(StyledDropdownContainer)`
   width: 100%;
 `;
 
-const FlagContainer = styled.div<{ dimension: Dimension }>`
-  width: ${(p) => (p.dimension === 's' ? '18' : '22')}px;
+const FlagContainer = styled.div<{ $dimension: Dimension }>`
+  width: ${(p) => (p.$dimension === 's' ? '18' : '22')}px;
 `;
 
 // В данном компоненте согласно дизайну не предусмотрена очистка кнопкой
@@ -103,7 +103,7 @@ export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value | dis
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  dropContainerCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -290,7 +290,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     };
 
     return (
-      <PhoneContainer ref={containerRef} dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
+      <PhoneContainer ref={containerRef} $dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
         <TextInput
           {...props}
           type="tel"
@@ -328,13 +328,13 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           )}
         </TextInput>
         <CountryContainer
-          skeleton={skeleton}
-          dimension={dimension}
-          isOpened={isOpened}
+          $skeleton={skeleton}
+          $dimension={dimension}
+          $isOpened={isOpened}
           disabled={disabled}
           onClick={handleButtonClick}
         >
-          <FlagContainer dimension={dimension}>{IconComponent}</FlagContainer>
+          <FlagContainer $dimension={dimension}>{IconComponent}</FlagContainer>
           {!props.readOnly && <Chevron disabled={disabled || props.readOnly} />}
         </CountryContainer>
       </PhoneContainer>

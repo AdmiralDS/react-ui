@@ -1,6 +1,15 @@
-import type { HTMLAttributes } from 'react';
-import React, { useRef, useState } from 'react';
+import type {
+  ChangeEvent,
+  FunctionComponent,
+  HTMLAttributes,
+  MouseEventHandler,
+  MouseEvent,
+  ReactNode,
+  SVGProps,
+} from 'react';
+import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+
 import { typography } from '#src/components/Typography';
 import { Checkbox } from '#src/components/Checkbox';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
@@ -21,7 +30,10 @@ export interface TreeNodeRenderOptionProps {
   checked?: boolean;
   /** Неопределенное состояние checkbox-а */
   indeterminate?: boolean;
-  /** Уровень дерева item-а */
+  /**
+   * @deprecated Используйте indent
+   * Уровень дерева item-а
+   */
   level?: number;
   /** Отступ item-а */
   indent?: number;
@@ -30,7 +42,7 @@ export interface TreeNodeRenderOptionProps {
   /** Признак развернутого состояния item-а */
   expanded?: boolean;
   /** Обработчик клика мыши на item */
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
@@ -40,7 +52,7 @@ export interface TreeNodeRenderOptionProps {
 
 export interface TreeItemProps {
   id: string;
-  render: (options: TreeNodeRenderOptionProps) => React.ReactNode;
+  render: (options: TreeNodeRenderOptionProps) => ReactNode;
   disabled?: boolean;
   checked?: boolean;
   children?: Array<TreeItemProps>;
@@ -53,14 +65,14 @@ const ICON_SIZE_S = 20;
 export type Dimension = 'm' | 's';
 
 export interface NodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  label?: React.ReactNode;
-  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  label?: ReactNode;
+  icon?: FunctionComponent<SVGProps<SVGSVGElement>>;
   onChange?: (value: boolean) => void;
 }
 
 export interface TreeNodeProps extends NodeProps, TreeNodeRenderOptionProps {}
 
-const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean; dimension?: Dimension }>`
+const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean }>`
   transition: all 0.3s;
   & path {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
@@ -75,41 +87,41 @@ const StyledIconPlacement = styled(IconPlacement)`
   margin: 0 16px 0 0;
 `;
 
-export const backgroundColor = css<{ selected?: boolean; hovered?: boolean }>`
-  background: ${({ theme, selected, hovered }) =>
-    hovered
+export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
+  background: ${({ theme, $selected, $hovered }) =>
+    $hovered
       ? theme.color['Opacity/Hover']
-      : selected
+      : $selected
       ? theme.color['Opacity/Focus']
       : theme.color['Special/Elevated BG']};
 `;
 
 const RowWrapper = styled.div<{
-  dimension?: Dimension;
-  indent?: number;
-  selected?: boolean;
-  hovered?: boolean;
+  $dimension?: Dimension;
+  $indent?: number;
+  $selected?: boolean;
+  $hovered?: boolean;
   disabled?: boolean;
 }>`
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
-  ${(p) => (p.dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
   box-sizing: border-box;
-  min-height: ${({ dimension }) => (dimension === 'm' ? '40px' : '32px')};
+  min-height: ${({ $dimension }) => ($dimension === 'm' ? '40px' : '32px')};
   ${backgroundColor};
   cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   padding: ${(p) =>
-    p.dimension === 'm'
-      ? `8px 16px 8px ${16 + (p.indent || 0) * 40}px`
-      : `6px 16px 6px ${16 + (p.indent || 0) * 36}px`};
+    p.$dimension === 'm'
+      ? `8px 16px 8px ${16 + (p.$indent || 0) * 40}px`
+      : `6px 16px 6px ${16 + (p.$indent || 0) * 36}px`};
 `;
 
-const IconWrapper = styled.div<{ dimension?: Dimension }>`
+const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   margin-right: 8px;
   flex-shrink: 0;
-  width: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
-  height: ${(p) => (p.dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  width: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
+  height: ${(p) => (p.$dimension === 'm' ? `${ICON_SIZE_M}px` : `${ICON_SIZE_S}px`)};
   > svg {
     width: 100%;
     height: 100%;
@@ -139,6 +151,7 @@ export const TreeNode = ({
   checked,
   indeterminate,
   indent,
+  level,
   onChange,
   onHover,
   onClick,
@@ -148,12 +161,24 @@ export const TreeNode = ({
   style,
   ...props
 }: TreeNodeProps) => {
-  const Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>> | null = icon || null;
+  const Icon: FunctionComponent<SVGProps<SVGSVGElement>> | null = icon || null;
   const [mouseOnChevron, setMouseOnChevron] = useState<boolean>(false);
   const chevronRef = useRef<HTMLButtonElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const [hoveredState, setHoveredState] = useState<boolean>(false);
 
-  const handleMouseMove = () => {
+  const hoveredValue = hovered ?? hoveredState;
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     onHover?.();
+    if (!hoveredState) setHoveredState(true);
+    props.onMouseMove?.(e);
+  };
+
+  const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+    setHoveredState(false);
+    props.onMouseLeave?.(e);
+    // }
   };
 
   const handleChevronMouseMove = () => {
@@ -164,25 +189,27 @@ export const TreeNode = ({
     if (hasChildren) setMouseOnChevron(false);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === chevronRef.current) return;
     if (!disabled) onClick?.(e);
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.checked);
   };
 
   return (
     <RowWrapper
+      ref={rowRef}
       className={className}
       style={style}
-      dimension={dimension}
-      indent={indent}
+      $dimension={dimension}
+      $indent={indent}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      selected={selected}
-      hovered={hovered}
+      $selected={selected}
+      $hovered={hoveredValue}
       disabled={disabled}
     >
       {hasChildren && (
@@ -194,7 +221,7 @@ export const TreeNode = ({
           onMouseMove={handleChevronMouseMove}
           onMouseLeave={handleChevronMouseLeave}
         >
-          <Chevron $isOpened={expanded} dimension={dimension} aria-hidden />
+          <Chevron $isOpened={expanded} aria-hidden />
         </StyledIconPlacement>
       )}
       {checkboxVisible && (
@@ -209,7 +236,7 @@ export const TreeNode = ({
         />
       )}
       {Icon && (
-        <IconWrapper dimension={dimension}>
+        <IconWrapper $dimension={dimension}>
           <Icon />
         </IconWrapper>
       )}

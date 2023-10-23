@@ -4,12 +4,7 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -17,21 +12,18 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #B0B5BD;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -39,15 +31,15 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -58,29 +50,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -88,64 +75,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -157,7 +142,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -170,7 +155,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -186,25 +171,25 @@ fieldset:disabled .c1 {
         disabled=""
       >
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldMoscow"
           disabled=""
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               disabled=""
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -212,25 +197,25 @@ fieldset:disabled .c1 {
           Москва
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldVoronezh"
           disabled=""
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               disabled=""
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -238,25 +223,25 @@ fieldset:disabled .c1 {
           Воронеж
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldSamara"
           disabled=""
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               disabled=""
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -267,12 +252,7 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -280,21 +260,18 @@ fieldset:disabled .c1 {
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #B0B5BD;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -302,15 +279,15 @@ fieldset:disabled .c1 {
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -321,29 +298,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -351,64 +323,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -420,7 +390,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
   cursor: default;
@@ -433,7 +403,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -448,25 +418,25 @@ fieldset:disabled .c1 {
       disabled=""
     >
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldMoscow"
         disabled=""
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             disabled=""
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -474,25 +444,25 @@ fieldset:disabled .c1 {
         Москва
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldVoronezh"
         disabled=""
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             disabled=""
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -500,25 +470,25 @@ fieldset:disabled .c1 {
         Воронеж
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldSamara"
         disabled=""
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             disabled=""
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -585,12 +555,7 @@ exports[`CheckboxGroup should render component with label 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -598,21 +563,18 @@ exports[`CheckboxGroup should render component with label 1`] = `
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -620,15 +582,15 @@ exports[`CheckboxGroup should render component with label 1`] = `
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -639,29 +601,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -669,64 +626,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -738,7 +693,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -751,7 +706,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -767,23 +722,23 @@ fieldset:disabled .c1 {
       >
         Выберите города
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -791,23 +746,23 @@ fieldset:disabled .c1 {
           Москва
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -815,23 +770,23 @@ fieldset:disabled .c1 {
           Воронеж
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -842,12 +797,7 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -855,21 +805,18 @@ fieldset:disabled .c1 {
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -877,15 +824,15 @@ fieldset:disabled .c1 {
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -896,29 +843,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -926,64 +868,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -995,7 +935,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1008,7 +948,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1023,23 +963,23 @@ fieldset:disabled .c1 {
     >
       Выберите города
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1047,23 +987,23 @@ fieldset:disabled .c1 {
         Москва
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1071,23 +1011,23 @@ fieldset:disabled .c1 {
         Воронеж
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1154,12 +1094,7 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 14px;
@@ -1167,21 +1102,18 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 12px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1189,15 +1121,15 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   height: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1208,29 +1140,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1238,64 +1165,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -1307,7 +1232,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1320,7 +1245,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1335,23 +1260,23 @@ fieldset:disabled .c1 {
         class="c0"
       >
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1359,23 +1284,23 @@ fieldset:disabled .c1 {
           Москва
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1383,23 +1308,23 @@ fieldset:disabled .c1 {
           Воронеж
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1410,12 +1335,7 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 14px;
@@ -1423,21 +1343,18 @@ fieldset:disabled .c1 {
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 12px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1445,15 +1362,15 @@ fieldset:disabled .c1 {
   height: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1464,29 +1381,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1494,64 +1406,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -1563,7 +1473,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1576,7 +1486,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1590,23 +1500,23 @@ fieldset:disabled .c1 {
       class="c0"
     >
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1614,23 +1524,23 @@ fieldset:disabled .c1 {
         Москва
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1638,23 +1548,23 @@ fieldset:disabled .c1 {
         Воронеж
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -1721,12 +1631,7 @@ exports[`CheckboxGroup should render components 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -1734,21 +1639,18 @@ exports[`CheckboxGroup should render components 1`] = `
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -1756,15 +1658,15 @@ exports[`CheckboxGroup should render components 1`] = `
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1775,29 +1677,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -1805,64 +1702,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -1874,7 +1769,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -1887,7 +1782,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -1902,23 +1797,23 @@ fieldset:disabled .c1 {
         class="c0"
       >
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1926,23 +1821,23 @@ fieldset:disabled .c1 {
           Москва
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1950,23 +1845,23 @@ fieldset:disabled .c1 {
           Воронеж
         </label>
         <label
-          class="c1 c2"
+          class="c1"
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c3 c4 c5"
+            class="c2 c3"
           >
             <input
-              class="c6"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c7 c8"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c9"
+                class="c7"
                 focusable="false"
               />
             </div>
@@ -1977,12 +1872,7 @@ fieldset:disabled .c1 {
     </div>
   </body>,
   "container": .c0 {
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
   display: inline-flex;
   box-sizing: border-box;
   font-size: 16px;
@@ -1990,21 +1880,18 @@ fieldset:disabled .c1 {
   font-weight: normal;
   font-family: 'VTB Group UI',sans-serif;
   color: #23262D;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-.c0 > * {
+.c0>* {
   margin-top: 16px;
 }
 
-.c9 {
+.c7 {
   pointer-events: none;
 }
 
-.c4 {
+.c2 {
   position: relative;
   box-sizing: border-box;
   overflow: visible;
@@ -2012,15 +1899,15 @@ fieldset:disabled .c1 {
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
 
-fieldset[data-dimension='s'] .c3 {
+fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c8 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -2031,29 +1918,24 @@ fieldset[data-dimension='s'] .c3 {
   bottom: 0;
   border-radius: 4px;
   outline: 0;
-  -webkit-transition: background 0.1s ease-in;
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: #FFFFFF;
   border: 1px solid #717681;
 }
 
-.c8 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 4px;
@@ -2061,64 +1943,62 @@ fieldset[data-dimension='s'] .c3 {
   padding: 0;
 }
 
-.c6::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c6:checked + .c7 {
+.c4:checked+.c5 {
   background-color: #0062FF;
   border: none;
 }
 
-.c6:disabled {
+.c4:disabled {
   pointer-events: none;
 }
 
-.c6:disabled + .c7 {
+.c4:disabled+.c5 {
   border: 1px solid #B0B5BD;
   background-color: #E5E7EB;
 }
 
-.c6:not(:checked) + .c7 > * {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c6:hover:not(:disabled)::after,
-.c6:focus:not(:disabled) + .c6:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
 }
 
-.c6:checked:disabled + .c7 {
+.c4:checked:disabled+.c5 {
   background-color: #A7C7FF;
   border: none;
 }
 
-.c6:checked:disabled + .c7 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: #FFFFFF;
 }
 
-.c6:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c5 {
+.c3 {
   position: absolute;
   top: 2px;
   left: 2px;
 }
 
-.c2 {
+.c1 {
   display: inline-block;
   position: relative;
   padding-top: 2px;
@@ -2130,7 +2010,7 @@ fieldset[data-dimension='s'] .c3 {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
   cursor: pointer;
@@ -2143,7 +2023,7 @@ fieldset[data-dimension='s'] .c1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  font-feature-settings: 'tnum' on, 'lnum' on;
+  font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
@@ -2157,23 +2037,23 @@ fieldset:disabled .c1 {
       class="c0"
     >
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -2181,23 +2061,23 @@ fieldset:disabled .c1 {
         Москва
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>
@@ -2205,23 +2085,23 @@ fieldset:disabled .c1 {
         Воронеж
       </label>
       <label
-        class="c1 c2"
+        class="c1"
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c3 c4 c5"
+          class="c2 c3"
         >
           <input
-            class="c6"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c7 c8"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c9"
+              class="c7"
               focusable="false"
             />
           </div>

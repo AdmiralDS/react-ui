@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { HeightLimitedContainer as Container } from '#src/components/input/Container';
+import { HeightLimitedContainer } from '#src/components/input/Container';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -15,8 +15,8 @@ import { Spinner } from '#src/components/Spinner';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
-const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 24;
     case 's':
@@ -25,8 +25,8 @@ const iconSizeValue = (props: { dimension?: ComponentDimension }) => {
       return 24;
   }
 };
-const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
-  switch (props.dimension) {
+const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
     case 'xl':
       return 16;
     case 's':
@@ -37,7 +37,7 @@ const horizontalPaddingValue = (props: { dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.iconCount ?? 0)}px;
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
 const disabledColors = css`
@@ -55,7 +55,7 @@ function getBorderColor(status?: InputStatus) {
   }
 }
 
-export const InputBorderedDiv = styled.div<{ disabled?: boolean; status?: InputStatus }>`
+export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: InputStatus }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -69,7 +69,7 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; status?: InputS
   background: none;
   border-radius: inherit;
 
-  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.status)]};
+  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.$status)]};
   ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
@@ -93,17 +93,17 @@ function getFocusBorderColor(status?: InputStatus) {
   }
 }
 
-export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
     ${(p) =>
       p.disabled || p.readOnly
         ? 'border-color: transparent'
-        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.status)]}`}
+        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.$status)]}`}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
     border-color: ${(props) =>
-      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.status)]};
+      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.$status)]};
   }
 `;
 
@@ -126,7 +126,7 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0 ${horizontalPaddingValue}px;
 
-  ${(props) => (props.dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
   color: ${(props) => props.theme.color['Neutral/Neutral 90']};
 
@@ -170,7 +170,7 @@ const Input = styled.input<ExtraProps>`
   ${ieFixes}
 `;
 
-const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimension }>`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -201,7 +201,12 @@ const IconPanel = styled.div<{ disabled?: boolean; dimension?: ComponentDimensio
   }
 `;
 
-const StyledContainer = styled(Container)<{ disabled?: boolean; readOnly?: boolean; status?: InputStatus }>`
+const StyledContainer = styled(HeightLimitedContainer)<{
+  disabled?: boolean;
+  readOnly?: boolean;
+  $status?: InputStatus;
+  $dimension?: ComponentDimension;
+}>`
   ${BorderedDivStyles}
 `;
 
@@ -249,6 +254,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
+      dimension,
       type,
       displayClearIcon,
       isLoading,
@@ -340,7 +346,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<Spinner key="loading-icon" dimension={props.dimension === 's' ? 'ms' : 'm'} />);
+      iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
     }
 
     const iconCount = iconArray.length;
@@ -388,15 +394,15 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <StyledContainer
           className={className}
           style={style}
-          dimension={props.dimension}
+          $dimension={dimension}
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
-          status={status}
+          $status={status}
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
-          skeleton={skeleton}
+          $skeleton={skeleton}
           data-disable-copying={props.disableCopying ? true : undefined}
           {...(props.disableCopying && {
             onMouseDown: stopEvent,
@@ -407,12 +413,13 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             {...props}
             onChange={handleChange}
             placeholder={placeholder}
-            iconCount={iconCount}
+            $dimension={dimension}
+            $iconCount={iconCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
-          <InputBorderedDiv status={status} disabled={props.disabled || props.readOnly} />
+          <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
           {iconCount > 0 && (
-            <IconPanel disabled={props.disabled} dimension={props.dimension}>
+            <IconPanel disabled={props.disabled} $dimension={dimension}>
               {iconArray}
             </IconPanel>
           )}

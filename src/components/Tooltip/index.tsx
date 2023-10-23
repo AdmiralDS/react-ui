@@ -138,7 +138,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
       <Portal
         targetElement={targetElement ?? targetRef?.current}
         rootRef={rootRef}
-        flexDirection={portalFlexDirection}
+        $flexDirection={portalFlexDirection}
         fullContainerWidth={portalFullWidth}
       >
         <FakeTarget />

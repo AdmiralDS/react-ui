@@ -1,6 +1,7 @@
-import * as React from 'react';
-import { keyboardKey } from '../common/keyboardKey';
+import type { FC, HTMLAttributes, KeyboardEvent } from 'react';
+import { useCallback, useRef } from 'react';
 
+import { keyboardKey } from '../common/keyboardKey';
 import { moveFocus, nextItem, previousItem } from './utils';
 import { AccordionWrapper } from './style';
 
@@ -8,7 +9,7 @@ type Dimension = 'l' | 'm';
 
 export * from './AccordionItem';
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Расположение иконки шеврона в заголовке. По умолчанию иконка выравнивается по правому краю. */
@@ -23,7 +24,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   hideBottomDivider?: boolean;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordion: FC<AccordionProps> = ({
   children,
   dimension = 'l',
   iconPosition = 'right',
@@ -32,8 +33,8 @@ export const Accordion: React.FC<AccordionProps> = ({
   onKeyDown,
   ...props
 }) => {
-  const accordionRef = React.useRef<HTMLDivElement | null>(null);
-  const handleKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+  const accordionRef = useRef<HTMLDivElement | null>(null);
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     let focusedOption: any = ((accordionRef.current && accordionRef.current.ownerDocument) || document).activeElement;
     // если фокус находится на AccordionItem Title, то можно переключаться между accordion items с помощью ArrowDown, ArrowUp, Home, End
     if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'button') {
@@ -64,9 +65,9 @@ export const Accordion: React.FC<AccordionProps> = ({
       ref={accordionRef}
       data-dimension={dimension}
       data-icon={iconPosition}
-      hideTopDivider={hideTopDivider}
-      hideBottomDivider={hideBottomDivider}
-      dimension={dimension}
+      $hideTopDivider={hideTopDivider}
+      $hideBottomDivider={hideBottomDivider}
+      $dimension={dimension}
       onKeyDown={handleKeyDown}
       {...props}
     >

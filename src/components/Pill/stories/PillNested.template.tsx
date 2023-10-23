@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, Pills, refSetter, smallGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Shape, Color, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { Shape, Color, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 type Status = 'Error' | 'Success' | 'Special' | 'Warning' | 'Attention';
 
@@ -67,18 +68,18 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
   height: 16px;
 `;
 
-const stylesByStatusCssMixin = css<{ status?: Status }>`
-  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.status)]};
-  color: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+const stylesByStatusCssMixin = css<{ $status?: Status }>`
+  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.$status)]};
+  color: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
 `;
 
-const StatusPill = styled(Pill).attrs<{ status?: Status }>((p) => ({
-  'data-status': p.status,
-}))<{ status?: Status }>`
+const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status }>((p) => ({
+  'data-status': p.$status,
+}))<{ $status?: Status }>`
   ${stylesByStatusCssMixin}
 
   > ${HeartOutlinePillIcon} *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
   }
 `;
 
@@ -103,18 +104,18 @@ const NestedPill = styled.div`
   }
 `;
 
-const StyledPillIcon = styled.div<{ status?: Status }>`
+const StyledPillIcon = styled.div<{ $status?: Status }>`
   display: inline;
   width: 16px;
   height: 16px;
 
   *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
   }
 
   &:hover {
     & *[fill^='#'] {
-      fill: ${(p) => p.theme.color[getFontColorByStatus(p.status)]};
+      fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
     }
   }
 `;
@@ -203,13 +204,13 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
           <StatusPill
             {...props}
             ref={refSetter(ref, buttonRef as React.Ref<HTMLDivElement>)}
-            status={selectedPill?.status}
+            $status={selectedPill?.status}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
           >
-            {selectedPill?.icon && <StyledPillIcon status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>}
+            {selectedPill?.icon && <StyledPillIcon $status={selectedPill?.status}>{selectedPill?.icon}</StyledPillIcon>}
             {selectedPill?.label}
-            <StyledPillIcon status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
+            <StyledPillIcon $status={selectedPill?.status}>{statusIcon}</StyledPillIcon>
           </StatusPill>
         );
       }}
@@ -217,52 +218,54 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
   );
 });
 
-export const PillNestedTemplate = () => {
+export const PillNestedTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <WrapperVertical>
-      <Desc>
-        Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного компонента.
-        Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню, напротив,
-        можно назначать избирательно.
-      </Desc>
-      <Desc>
-        Для объединения двух StatusPill используется NestedPill, который стилизует правый и левый края StatusPill так,
-        чтобы они "слились" в единую форму.
-      </Desc>
-      <Pills>
-        <NestedPill>
-          <StatusPill status="Special" onClick={leftPillClicked}>
-            LeftNested
-          </StatusPill>
-          <StatusPill status="Warning" onClick={rightPillClicked}>
-            RightNested
-          </StatusPill>
-        </NestedPill>
-        <NestedPill>
-          <StatusPill status="Special" onClick={leftPillClicked}>
-            <StyledPillIcon status="Special">
-              <HeartOutline />
-            </StyledPillIcon>
-            LeftNested
-          </StatusPill>
-          <StatusPill status="Warning" onClick={rightPillClicked}>
-            <StyledPillIcon status="Warning">
-              <BurnSolid />
-            </StyledPillIcon>
-            RightNested
-          </StatusPill>
-        </NestedPill>
-        <NestedPill>
-          <PillMenu options={itemsLeft} />
-          <PillMenu options={itemsRight} />
-        </NestedPill>
-        <NestedPill>
-          <StatusPill status="Special" onClick={leftPillClicked}>
-            LeftNested
-          </StatusPill>
-          <PillMenu options={itemsRight} />
-        </NestedPill>
-      </Pills>
-    </WrapperVertical>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+      <WrapperVertical>
+        <Desc>
+          Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного
+          компонента. Используя иконки, следите, что бы иконки были во всех компонентах группы. Фукцию выпадающего меню,
+          напротив, можно назначать избирательно.
+        </Desc>
+        <Desc>
+          Для объединения двух StatusPill используется NestedPill, который стилизует правый и левый края StatusPill так,
+          чтобы они "слились" в единую форму.
+        </Desc>
+        <Pills>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              LeftNested
+            </StatusPill>
+            <StatusPill $status="Warning" onClick={rightPillClicked}>
+              RightNested
+            </StatusPill>
+          </NestedPill>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              <StyledPillIcon $status="Special">
+                <HeartOutline />
+              </StyledPillIcon>
+              LeftNested
+            </StatusPill>
+            <StatusPill $status="Warning" onClick={rightPillClicked}>
+              <StyledPillIcon $status="Warning">
+                <BurnSolid />
+              </StyledPillIcon>
+              RightNested
+            </StatusPill>
+          </NestedPill>
+          <NestedPill>
+            <PillMenu options={itemsLeft} />
+            <PillMenu options={itemsRight} />
+          </NestedPill>
+          <NestedPill>
+            <StatusPill $status="Special" onClick={leftPillClicked}>
+              LeftNested
+            </StatusPill>
+            <PillMenu options={itemsRight} />
+          </NestedPill>
+        </Pills>
+      </WrapperVertical>
+    </ThemeProvider>
   );
 };

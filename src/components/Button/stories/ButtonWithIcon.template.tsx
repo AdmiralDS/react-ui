@@ -1,9 +1,9 @@
-import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { Button, T } from '@admiral-ds/react-ui';
-import type { ButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const WrapperButton = styled.div`
   display: flex;
@@ -29,13 +29,8 @@ const DarkDiv = styled.div`
 `;
 
 export const ButtonWithIconTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
       <WrapperButton>
         <div>
           <T font="Body/Body 1 Long" as="div">

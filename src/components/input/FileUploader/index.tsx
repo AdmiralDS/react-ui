@@ -36,11 +36,11 @@ export interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputEle
   children?: ReactNode;
 }
 
-const Icon = styled(AttachFileOutline)<{ dimension?: Dimension }>`
-  height: ${(p) => (p.dimension === 'xl' ? '40px' : '24px')};
-  width: ${(p) => (p.dimension === 'xl' ? '40px' : '24px')};
-  margin-right: ${(p) => (p.dimension === 'm' ? '14px' : '')};
-  margin-bottom: ${(p) => (p.dimension === 'xl' ? '14px' : '')};
+const Icon = styled(AttachFileOutline)<{ $dimension?: Dimension }>`
+  height: ${(p) => (p.$dimension === 'xl' ? '40px' : '24px')};
+  width: ${(p) => (p.$dimension === 'xl' ? '40px' : '24px')};
+  margin-right: ${(p) => (p.$dimension === 'm' ? '14px' : '')};
+  margin-bottom: ${(p) => (p.$dimension === 'xl' ? '14px' : '')};
 
   > * {
     fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
@@ -100,10 +100,10 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
 
-const TitleText = styled.div<{ dimension?: Dimension; disabled?: boolean }>`
-  text-align: ${(p) => (p.dimension === 'xl' ? 'center' : 'start')};
-  margin: 0 ${(p) => (p.dimension === 'xl' ? '24px' : '')};
-  margin-bottom: ${(p) => (p.dimension === 'm' ? '16px' : '0px')};
+const TitleText = styled.div<{ $dimension?: Dimension; disabled?: boolean }>`
+  text-align: ${(p) => (p.$dimension === 'xl' ? 'center' : 'start')};
+  margin: 0 ${(p) => (p.$dimension === 'xl' ? '24px' : '')};
+  margin-bottom: ${(p) => (p.$dimension === 'm' ? '16px' : '0px')};
   max-width: 100%;
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   ${typography['Body/Body 2 Long']};
@@ -241,8 +241,8 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
               </CustomWrapper>
             ) : (
               <UploaderWrapperXL disabled={disabled}>
-                <Icon dimension={dimension} />
-                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                <Icon $dimension={dimension} />
+                {title && <TitleText $dimension={dimension} disabled={disabled} children={title} />}
                 <FileInput
                   {...props}
                   ref={refSetter(ref, inputRef)}
@@ -269,9 +269,9 @@ export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps
               </CustomWrapper>
             ) : (
               <>
-                {title && <TitleText dimension={dimension} disabled={disabled} children={title} />}
+                {title && <TitleText $dimension={dimension} disabled={disabled} children={title} />}
                 <UploaderWrapperM disabled={disabled}>
-                  <Icon dimension={dimension} />
+                  <Icon $dimension={dimension} />
                   {description && <Desc disabled={disabled}>{description}</Desc>}
                   <FileInput
                     {...props}

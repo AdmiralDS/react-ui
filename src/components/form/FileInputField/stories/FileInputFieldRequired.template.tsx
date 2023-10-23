@@ -2,27 +2,18 @@ import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { FileInputField, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
-import type {
-  FileAttributeProps,
-  FileInputFieldProps,
-  InputStatus,
-  Theme,
-  BorderRadiusType,
-} from '@admiral-ds/react-ui';
+import type { FileAttributeProps, FileInputFieldProps, InputStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const FileInputFieldRequiredTemplate = ({
   dimension = 'xl',
   label = 'Обязательно для заполнения',
   required = true,
+  themeBorderKind,
   ...props
 }: FileInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
@@ -118,7 +109,7 @@ export const FileInputFieldRequiredTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <div style={{ width: '480px' }}>
         <FileInputField
           {...props}

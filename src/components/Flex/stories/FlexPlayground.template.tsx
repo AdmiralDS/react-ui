@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { ThemeProvider } from 'styled-components';
 
-import { Flex, FLEX_CELL_MAX_SIZE, InputField, LIGHT_THEME, TextField } from '@admiral-ds/react-ui';
+import { Flex, FLEX_CELL_MAX_SIZE, InputField, TextField } from '@admiral-ds/react-ui';
 import type { FlexContainerProps, FlexCellSizes } from '@admiral-ds/react-ui';
 
 export const FlexPlaygroundTemplate = ({ rowGap = 20, columnGap = 10, ...props }: FlexContainerProps) => {

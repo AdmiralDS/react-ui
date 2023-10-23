@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { TooltipHoc, InputField, Button, refSetter } from '@admiral-ds/react-ui';
-import type { TooltipHocProps, Theme, InputFieldProps } from '@admiral-ds/react-ui';
+import type { TooltipHocProps, BorderRadiusType, InputFieldProps } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -22,16 +23,14 @@ const Component = React.forwardRef<HTMLInputElement, InputFieldProps>((props, re
 });
 const TooltipedComponent = TooltipHoc(Component);
 
-export const TooltipHocRefSetterTemplate = (args: TooltipHocProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const TooltipHocRefSetterTemplate = ({
+  themeBorderKind,
+  ...props
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <TooltipedComponent
-        {...args}
+        {...props}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}
         label={'Использование утилиты refSetter'}
       />

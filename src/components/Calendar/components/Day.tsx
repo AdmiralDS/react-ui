@@ -54,15 +54,15 @@ export const Day: FC<IDayCalendarProps> = ({
 
   return (
     <DayComponent
-      today={sameDay(day, new Date())}
-      selected={sameDay(day, selected) || rangeStart || rangeEnd}
-      inSelectingRange={inSelectingRange}
-      isActiveDate={sameDay(day, activeDate)}
-      corners={corners}
-      inRange={inRange || inSelectingRange}
+      $today={sameDay(day, new Date())}
+      $selected={sameDay(day, selected) || rangeStart || rangeEnd}
+      $inSelectingRange={inSelectingRange}
+      $isActiveDate={sameDay(day, activeDate)}
+      $corners={corners}
+      $inRange={inRange || inSelectingRange}
       disabled={disabled}
-      outsideMonth={outsideMonth}
-      highlightSpecialDayMixin={highlightSpecialDay(day)}
+      $outsideMonth={outsideMonth}
+      $highlightSpecialDayMixin={highlightSpecialDay(day)}
       onMouseEnter={(e) => !disabled && onMouseEnter && onMouseEnter(day, e)}
       onMouseDown={(e) => {
         e.preventDefault();

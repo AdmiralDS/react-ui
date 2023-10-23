@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Tooltip, Button } from '@admiral-ds/react-ui';
-import type { ITooltipProps, Theme } from '@admiral-ds/react-ui';
+import type { ITooltipProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-export const TooltipBaseTemplate = (args: ITooltipProps) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = (args as any).themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const TooltipBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
 
@@ -40,7 +39,7 @@ export const TooltipBaseTemplate = (args: ITooltipProps) => {
   }, [setVisible]);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
         <DeleteOutline aria-hidden />
       </Button>
@@ -55,7 +54,7 @@ export const TooltipBaseTemplate = (args: ITooltipProps) => {
               Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
           }
           style={{ minWidth: '200px', maxWidth: '300px' }}
-          tooltipPosition={args.tooltipPosition}
+          tooltipPosition={props.tooltipPosition}
           id="test1"
         />
       )}

@@ -22,10 +22,10 @@ const inlineMixin = css`
   }
 `;
 
-const Container = styled.div<{ displayInline?: boolean }>`
+const Container = styled.div<{ $displayInline?: boolean }>`
   display: flex;
   overflow: hidden;
-  ${(props) => (props.displayInline ? inlineMixin : 'flex-direction: column;')}
+  ${(props) => (props.$displayInline ? inlineMixin : 'flex-direction: column;')}
 `;
 
 const SkeletonLabel = styled.div`
@@ -47,18 +47,18 @@ const textSkeletonMixin = css`
   color: transparent;
 `;
 
-const StyledLabel = styled(Label)<{ skeleton?: boolean }>`
-  ${(p) => p.skeleton && textSkeletonMixin};
+const StyledLabel = styled(Label)<{ $skeleton?: boolean }>`
+  ${(p) => p.$skeleton && textSkeletonMixin};
 `;
 
 const containerSkeletonMixin = css`
   visibility: hidden;
 `;
 
-export const ExtrasContainer = styled.div<{ skeleton?: boolean }>`
+export const ExtrasContainer = styled.div<{ $skeleton?: boolean }>`
   display: flex;
   justify-content: space-between;
-  ${(p) => p.skeleton && containerSkeletonMixin};
+  ${(p) => p.$skeleton && containerSkeletonMixin};
 `;
 
 export const ExtraTextContainer = styled.div`
@@ -146,7 +146,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
       ...restFieldProps
     } = props;
 
-    const fieldContainerProps = { className, style, displayInline, ...restFieldProps } as Record<string, any>;
+    const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
 
     const labelProps = { htmlFor: id, children: label, required, disabled };
 
@@ -174,6 +174,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
     return (
       <Container
         {...fieldContainerProps}
+        $displayInline={displayInline}
         data-status={status}
         data-focus-within={hasFocus ? '' : undefined}
         data-required-within={required ? '' : undefined}
@@ -184,12 +185,12 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
         {labelProps.children && (
           <LabelContainer>
             {skeleton && <SkeletonLabel />}
-            <StyledLabel skeleton={skeleton} {...labelProps} />
+            <StyledLabel $skeleton={skeleton} {...labelProps} />
           </LabelContainer>
         )}
         <div>
           {children}
-          <ExtrasContainer skeleton={skeleton}>
+          <ExtrasContainer $skeleton={skeleton}>
             {extraText && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (

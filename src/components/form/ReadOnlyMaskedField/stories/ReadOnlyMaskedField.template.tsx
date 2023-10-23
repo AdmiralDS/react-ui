@@ -2,9 +2,10 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DateField, InputField, InputIconButton, PhoneInputField } from '@admiral-ds/react-ui';
-import type { ComponentDimension, FieldProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { ComponentDimension, FieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 interface FieldPropsWithDimension extends FieldProps {
   dimension?: ComponentDimension;
@@ -31,14 +32,10 @@ const maskedSurname = 'С••••••а';
 const initialPhoneNumber = '+7 095 364 83 75';
 const maskedPhoneNumber = '+7 095 ••• •• 75';
 
-export const ReadOnlyMaskedFieldTemplate = (
-  props: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType },
-) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const ReadOnlyMaskedFieldTemplate = ({
+  themeBorderKind,
+  ...props
+}: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType }) => {
   const Icon = (isMasked: boolean) => (isMasked ? EyeOutlineSvg : EyeCloseOutlineSvg);
 
   const [cardNumber, setCardNumber] = React.useState(maskedCardNumber);
@@ -57,7 +54,7 @@ export const ReadOnlyMaskedFieldTemplate = (
   const [isPhoneNumberVisible, setPhoneNumberVisible] = React.useState(false);
 
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <FormContainer>
         <InputField
           dimension={props.dimension}

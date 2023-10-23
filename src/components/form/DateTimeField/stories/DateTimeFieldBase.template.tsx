@@ -1,3 +1,5 @@
+import styled, { ThemeProvider } from 'styled-components';
+import type { BorderRadiusType, FieldProps, ComponentDimension } from '@admiral-ds/react-ui';
 import {
   DateTimeContainer,
   DateTimeDateInput,
@@ -5,7 +7,7 @@ import {
   DateTimeTimeInput,
   Field,
 } from '@admiral-ds/react-ui';
-import styled from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
   > * {
@@ -13,16 +15,49 @@ const DisplayContainer = styled.div`
   }
 `;
 
-export const DateTimeFieldBaseTemplate = () => {
+interface DateTimeFieldProps extends FieldProps {
+  dimension?: ComponentDimension;
+}
+
+export const DateTimeFieldBaseTemplate = ({
+  label = 'Введите дату',
+  dimension,
+  status,
+  disabled,
+  readOnly,
+  skeleton,
+  themeBorderKind,
+  ...props
+}: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+  const fieldProps = {
+    label,
+    disabled,
+    readOnly,
+    skeleton,
+    ...props,
+  } as Record<string, any>;
+  const baseDateTimeProps = {
+    status,
+    disabled,
+    readOnly,
+  } as Record<string, any>;
+  const dateTimeProps = {
+    dimension,
+    skeleton,
+    ...baseDateTimeProps,
+  } as Record<string, any>;
+
   return (
-    <DisplayContainer>
-      <Field label="Введите дату">
-        <DateTimeContainer>
-          <DateTimeDateInput dropContainerClassName="dateDropContainerClass" />
-          <DateTimeSeparator />
-          <DateTimeTimeInput dropContainerClassName="timeDropContainerClass" />
-        </DateTimeContainer>
-      </Field>
-    </DisplayContainer>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <DisplayContainer>
+        <Field {...fieldProps}>
+          <DateTimeContainer {...baseDateTimeProps} disabled={disabled || skeleton}>
+            <DateTimeDateInput {...dateTimeProps} dropContainerClassName="dateDropContainerClass" />
+            <DateTimeSeparator {...baseDateTimeProps} disabled={disabled || skeleton} />
+            <DateTimeTimeInput {...dateTimeProps} dropContainerClassName="timeDropContainerClass" />
+          </DateTimeContainer>
+        </Field>
+      </DisplayContainer>
+    </ThemeProvider>
   );
 };

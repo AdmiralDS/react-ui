@@ -8,10 +8,10 @@ const Separator = styled.div`
   height: 20px;
 `;
 
-const WrapperChip = styled.div<{ dimension?: 'm' | 's' }>`
+const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   display: flex;
   & > div {
-    margin-right: ${({ dimension }) => (dimension === 's' ? 8 : 12)}px;
+    margin-right: ${({ $dimension }) => ($dimension === 's' ? 8 : 12)}px;
   }
 `;
 
@@ -26,7 +26,7 @@ export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
   const [dataListS, setDataS] = React.useState(listData);
   return (
     <>
-      <WrapperChip dimension={props.dimension}>
+      <WrapperChip $dimension={props.dimension}>
         {dataListM.map((item) => (
           <Chips key={item.id} {...props} onClose={() => setDataM((prev) => prev.filter((d) => d.id !== item.id))}>
             {item.label}
@@ -34,7 +34,7 @@ export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
         ))}
       </WrapperChip>
       <Separator />
-      <WrapperChip dimension="s">
+      <WrapperChip $dimension="s">
         {dataListS.map((item) => (
           <Chips
             key={item.id}

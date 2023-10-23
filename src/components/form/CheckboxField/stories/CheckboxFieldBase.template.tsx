@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { CheckboxField, Hint } from '@admiral-ds/react-ui';
-import type { CheckboxFieldProps, Theme, CheckboxDimension, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { CheckboxFieldProps, CheckboxDimension, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoSolidSVG } from '@admiral-ds/icons/build/service/InfoSolid.svg';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const Container = styled.div`
   display: flex;
@@ -14,9 +15,9 @@ const Container = styled.div`
   }
 `;
 
-const InfoSolid = styled(InfoSolidSVG)<{ dimension: CheckboxDimension }>`
+const InfoSolid = styled(InfoSolidSVG)<{ $dimension: CheckboxDimension }>`
   margin-left: 5px;
-  width: ${(props) => (props.dimension === 'm' ? '24px' : '20px')};
+  width: ${(props) => (props.$dimension === 'm' ? '24px' : '20px')};
 
   & *[fill^='#'] {
     fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
@@ -34,7 +35,10 @@ const CheckboxWithInformer = styled.div`
   align-items: flex-start;
 `;
 
-export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+export const CheckboxFieldBaseTemplate = ({
+  themeBorderKind,
+  ...props
+}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
   const [visible1, setVisible1] = React.useState(false);
@@ -46,13 +50,8 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
     setChecked(Boolean(props.checked));
   }, [props.checked]);
 
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Container>
         <CheckboxField
           {...props}
@@ -126,7 +125,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
           >
-            <InfoSolid dimension="m" aria-hidden />
+            <InfoSolid $dimension="m" aria-hidden />
           </Hint>
         </CheckboxWithInformer>
         <CheckboxWithInformer>
@@ -141,7 +140,7 @@ export const CheckboxFieldBaseTemplate = (props: CheckboxFieldProps & { themeBor
               'At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples of mini units map to fluid grid column widths and row heights.'
             }
           >
-            <InfoSolid dimension="s" aria-hidden />
+            <InfoSolid $dimension="s" aria-hidden />
           </Hint>
         </CheckboxWithInformer>
       </Container>

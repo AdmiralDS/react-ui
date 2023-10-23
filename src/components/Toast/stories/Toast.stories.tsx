@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import LinkTo from '@storybook/addon-links/react';

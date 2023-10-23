@@ -51,24 +51,24 @@ export const checkboxTreeToMap = (
   }, new Map<string, CheckboxNodesMapItem>());
 };
 
-const paddingLeft = css<{ level?: number; dimension?: ItemDimension }>`
-  padding-left: ${({ dimension, level = 0 }) => {
-    switch (dimension) {
+const paddingLeft = css<{ $level?: number; $dimension?: ItemDimension }>`
+  padding-left: ${({ $dimension, $level = 0 }) => {
+    switch ($dimension) {
       case 's':
-        return 12 + 28 * level;
+        return 12 + 28 * $level;
       case 'm':
       case 'l':
       default:
-        return 16 + 32 * level;
+        return 16 + 32 * $level;
     }
   }}px;
 `;
-const CheckboxGroupMenuItem = styled(MenuItem)<{ level?: number; dimension?: ItemDimension }>`
+const CheckboxGroupMenuItem = styled(MenuItem)<{ $level?: number; $dimension?: ItemDimension }>`
   ${paddingLeft}
 `;
-const OptionContent = styled.div<{ dimension?: ItemDimension }>`
+const OptionContent = styled.div<{ $dimension?: ItemDimension }>`
   position: relative;
-  padding: 0 0 0 ${(props) => (props.dimension === 's' ? 28 : 32)}px;
+  padding: 0 0 0 ${(props) => (props.$dimension === 's' ? 28 : 32)}px;
 `;
 const PositionedCheckbox = styled(Checkbox)`
   position: absolute;
@@ -92,8 +92,8 @@ export interface MenuItemWithCheckboxProps extends MenuItemProps {
 export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWithCheckboxProps>(
   ({ checked, indeterminate, checkboxRef, level = 0, children, dimension = 'l', ...props }, ref) => {
     return (
-      <CheckboxGroupMenuItem dimension={dimension || 'l'} level={level} ref={ref} {...props}>
-        <OptionContent dimension={dimension || 'l'}>
+      <CheckboxGroupMenuItem $dimension={dimension || 'l'} $level={level} ref={ref} {...props}>
+        <OptionContent $dimension={dimension || 'l'}>
           <PositionedCheckbox
             dimension={dimension === 's' ? 's' : 'm'}
             checked={checked}

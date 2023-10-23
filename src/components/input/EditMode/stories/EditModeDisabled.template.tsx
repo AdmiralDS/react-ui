@@ -1,18 +1,15 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
 import { EditMode } from '@admiral-ds/react-ui';
-import type { EditModeProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { EditModeProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 export const EditModeDisabledTemplate = ({
   value = 'Привет!',
+  themeBorderKind,
   ...props
 }: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +18,7 @@ export const EditModeDisabledTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <EditMode {...props} value={localValue} onChange={handleChange} disabled />
     </ThemeProvider>
   );

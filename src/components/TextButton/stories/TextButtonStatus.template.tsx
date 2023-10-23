@@ -2,8 +2,9 @@ import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { TextButton, T } from '@admiral-ds/react-ui';
-import type { TextButtonProps, Theme, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { TextButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const StyledText = styled(T)`
   margin: 10px 0;
@@ -23,17 +24,14 @@ const WrapperButton = styled.div`
   }
 `;
 
-export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
-  function swapBorder(theme: Theme): Theme {
-    theme.shape.borderRadiusKind = props.themeBorderKind || theme.shape.borderRadiusKind;
-    return theme;
-  }
-
+export const TextButtonStatusTemplate = ({
+  themeBorderKind,
+}: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
-    <ThemeProvider theme={swapBorder}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <WrapperButton>
         <div>
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - M
           </StyledText>
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} />
@@ -41,7 +39,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} loading />
           <Separator />
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} skeleton />
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
           <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} />
@@ -52,7 +50,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <Separator />
         </div>
         <div>
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - M
           </StyledText>
           <TextButton dimension="m" text="Text Button" />
@@ -60,7 +58,7 @@ export const TextButtonStatusTemplate = (props: TextButtonProps & { themeBorderK
           <TextButton dimension="m" text="Text Button" loading />
           <Separator />
           <TextButton dimension="m" text="Text Button" skeleton />
-          <StyledText font="Body/Body 1 Long" as="div">
+          <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
           <TextButton dimension="s" text="Text Button" />

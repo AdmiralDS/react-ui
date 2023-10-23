@@ -19,9 +19,9 @@ export type BadgeAppearance =
   | 'whiteDisable'
   | 'whiteBlue';
 
-const background = css<{ appearance: BadgeAppearance }>`
-  background: ${({ appearance, theme }) => {
-    switch (appearance) {
+const background = css<{ $appearance: BadgeAppearance }>`
+  background: ${({ $appearance, theme }) => {
+    switch ($appearance) {
       case 'info':
         return theme.color['Primary/Primary 60 Main'];
       case 'warning':
@@ -49,9 +49,9 @@ const background = css<{ appearance: BadgeAppearance }>`
   }};
 `;
 
-const color = css<{ appearance: BadgeAppearance }>`
-  color: ${({ appearance, theme }) => {
-    switch (appearance) {
+const color = css<{ $appearance: BadgeAppearance }>`
+  color: ${({ $appearance, theme }) => {
+    switch ($appearance) {
       case 'info':
       case 'warning':
       case 'success':
@@ -76,16 +76,16 @@ const color = css<{ appearance: BadgeAppearance }>`
   }};
 `;
 
-export const BadgeComponent = styled.div<{ dimension: Dimension; appearance: BadgeAppearance }>`
+export const BadgeComponent = styled.div<{ $dimension: Dimension; $appearance: BadgeAppearance }>`
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: ${({ dimension }) => (dimension === 's' ? '0 5px' : '0 7px')};
-  height: ${({ dimension }) => (dimension === 's' ? '16px' : '20px')};
-  border-radius: ${({ dimension }) => (dimension === 's' ? '8px' : '10px')};
-  ${({ dimension }) => (dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
+  padding: ${({ $dimension }) => ($dimension === 's' ? '0 5px' : '0 6px')};
+  height: ${({ $dimension }) => ($dimension === 's' ? '16px' : '20px')};
+  border-radius: ${({ $dimension }) => ($dimension === 's' ? '8px' : '10px')};
+  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
   ${background}
   ${color}
   user-select: none;
@@ -112,8 +112,8 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
     return (
       <BadgeComponent
         ref={ref}
-        dimension={dimension}
-        appearance={appearance}
+        $dimension={dimension}
+        $appearance={appearance}
         aria-label={`${amountText} ${children}`}
         {...props}
       >

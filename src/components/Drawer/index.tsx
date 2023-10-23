@@ -1,10 +1,11 @@
+import type { CSSProperties, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import type { RuleSet } from 'styled-components';
+import styled, { useTheme, css, keyframes } from 'styled-components';
+
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import * as React from 'react';
-import type { CSSProperties } from 'react';
-import ReactDOM from 'react-dom';
-import type { DefaultTheme, FlattenInterpolation, ThemeProps } from 'styled-components';
-import styled, { useTheme, css, keyframes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
@@ -15,7 +16,7 @@ type Position = 'right' | 'left';
 
 const transitionTimingFunc = 'cubic-bezier(0, 0, 0.2, 1)';
 const transitionDuration = '0.3s';
-const transitionMixin = css`
+const transitionMixin = `
   ${transitionDuration} ${transitionTimingFunc} 0ms
 `;
 
@@ -37,16 +38,16 @@ const fadeInLeft = keyframes`
   }
 `;
 
-const fadeInMixin = css<{ position?: Position }>`
-  animation-name: ${({ position }) => (position === 'right' ? fadeInRight : fadeInLeft)};
+const fadeInMixin = css<{ $position?: Position }>`
+  animation-name: ${({ $position }) => ($position === 'right' ? fadeInRight : fadeInLeft)};
   animation-duration: ${transitionDuration};
   animation-timing-function: ${transitionTimingFunc};
 `;
 
 const Overlay = styled.div<{
-  overlayCssMixin: FlattenInterpolation<ThemeProps<DefaultTheme>>;
-  backdrop?: boolean;
-  position: Position;
+  $overlayCssMixin: RuleSet<object>;
+  $backdrop?: boolean;
+  $position: Position;
 }>`
   display: flex;
   align-items: center;
@@ -57,15 +58,15 @@ const Overlay = styled.div<{
   bottom: 0;
   right: 0;
   z-index: ${({ theme }) => theme.zIndex.drawer};
-  ${(p) => p.overlayCssMixin}
+  ${(p) => p.$overlayCssMixin}
   outline: none;
   pointer-events: none;
   background-color: transparent;
   transition: background-color ${transitionMixin};
 
   &[data-visible='true'] {
-    ${({ theme, backdrop }) => backdrop && `background-color: ${theme.color['Opacity/Modal']};`}
-    ${({ backdrop }) => backdrop && `pointer-events: auto;`}
+    ${({ theme, $backdrop }) => $backdrop && `background-color: ${theme.color['Opacity/Modal']};`}
+    ${({ $backdrop }) => $backdrop && `pointer-events: auto;`}
 
     & > div {
       opacity: 1;
@@ -76,24 +77,24 @@ const Overlay = styled.div<{
   }
 `;
 
-const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
+const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   position: absolute;
   box-sizing: border-box;
   top: 0;
   bottom: 0;
-  ${({ position }) => (position === 'right' ? 'right: 0;' : 'left: 0;')}
+  ${({ $position }) => ($position === 'right' ? 'right: 0;' : 'left: 0;')}
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
   overflow: hidden;
   padding: 20px 0 24px;
-  min-width: ${({ mobile }) => (mobile ? 'calc(100% - 16px)' : '320px')};
+  min-width: ${({ $mobile }) => ($mobile ? 'calc(100% - 16px)' : '320px')};
   max-width: calc(100% - 16px);
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
-  transform: ${({ position }) => (position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
+  transform: ${({ $position }) => ($position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
   transition:
     transform ${transitionMixin},
     opacity 0ms linear 0.3s;
@@ -101,13 +102,13 @@ const DrawerComponent = styled.div<{ position: Position; mobile?: boolean }>`
   opacity: 0;
 `;
 
-const CloseButton = styled(CloseIconPlacementButton)<{ mobile?: boolean }>`
+const CloseButton = styled(CloseIconPlacementButton)<{ $mobile?: boolean }>`
   position: absolute;
   top: 20px;
-  right: ${({ mobile }) => (mobile ? 16 : 24)}px;
+  right: ${({ $mobile }) => ($mobile ? 16 : 24)}px;
 `;
 
-export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
   /** Состояние компонента: открыт/закрыт */
   isOpen?: boolean;
   /** С какой части экрана будет выдвигаться компонент (right по умолчанию) */
@@ -139,7 +140,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayCssMixin?: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+  overlayCssMixin?: RuleSet<object>;
   /** Позволяет добавлять класс на подложку drawerа  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку drawerа  */
@@ -150,7 +151,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
+export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
       isOpen = false,
@@ -175,12 +176,12 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
-    const drawer = React.useRef<any>({});
-    const drawerRef: any = React.useRef<HTMLDivElement>(null);
-    const overlayRef = React.useRef<HTMLDivElement>(null);
-    const previousFocusedElement: any = React.useRef(null);
+    const drawer = useRef<any>({});
+    const drawerRef: any = useRef<HTMLDivElement>(null);
+    const overlayRef = useRef<HTMLDivElement>(null);
+    const previousFocusedElement: any = useRef(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (overlayRef.current) {
         if (isOpen) {
           overlayRef.current.dataset.visible = 'true';
@@ -197,7 +198,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     };
 
     // manage styles of drawer container
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (backdrop && isOpen) {
         manager.add(getDrawer(), container || document.body);
         if (drawerRef.current) {
@@ -210,7 +211,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     }, [backdrop, isOpen, container]);
 
     // manage focus
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (isOpen) {
         previousFocusedElement.current = document.activeElement;
 
@@ -224,7 +225,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       }
     }, [isOpen]);
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
         // prevent browser-specific escape key behavior (Safari exits fullscreen)
         event.preventDefault();
@@ -249,13 +250,11 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       }
     };
 
-    const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseDown = (event: MouseEvent<HTMLDivElement>) => {
       closeOnBackdropClick && event.target === overlayRef.current && onClose?.();
     };
 
-    const handleCloseBtnClick = (
-      event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-    ) => {
+    const handleCloseBtnClick = (event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       onClose?.();
     };
@@ -266,20 +265,20 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
         tabIndex={-1}
         onMouseDown={handleMouseDown}
         onKeyDown={handleKeyDown}
-        overlayCssMixin={overlayCssMixin}
+        $overlayCssMixin={overlayCssMixin}
         className={overlayClassName}
         style={overlayStyle}
-        backdrop={backdrop}
+        $backdrop={backdrop}
         data-visible={false}
-        position={position}
+        $position={position}
       >
         <DrawerComponent
           ref={refSetter(ref, drawerRef)}
           tabIndex={-1}
           role="dialog"
           aria-modal
-          position={position}
-          mobile={mobile}
+          $position={position}
+          $mobile={mobile}
           {...props}
         >
           <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
@@ -287,7 +286,7 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
             <CloseButton
               dimension="lSmall"
               aria-label={closeBtnAriaLabel}
-              mobile={mobile}
+              $mobile={mobile}
               onClick={handleCloseBtnClick}
             />
           )}

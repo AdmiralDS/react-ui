@@ -17,9 +17,9 @@ export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: never;
 }
 
-const width = css<{ dimension: CheckboxDimension }>`
-  width: ${({ dimension }) => {
-    switch (dimension) {
+const width = css<{ $dimension: CheckboxDimension }>`
+  width: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -34,9 +34,9 @@ const width = css<{ dimension: CheckboxDimension }>`
   }
 `;
 
-const height = css<{ dimension: CheckboxDimension }>`
-  height: ${({ dimension }) => {
-    switch (dimension) {
+const height = css<{ $dimension: CheckboxDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
       case 'm':
         return '20px';
       case 's':
@@ -62,7 +62,7 @@ const Indeterminate = styled(IndeterminateSVG)`
 `;
 
 const Container = styled.div<{
-  dimension: CheckboxDimension;
+  $dimension: CheckboxDimension;
 }>`
   position: relative;
   box-sizing: border-box;
@@ -72,7 +72,7 @@ const Container = styled.div<{
   ${height};
 `;
 
-export const Background = styled.div<{ error?: boolean }>`
+export const Background = styled.div<{ $error?: boolean }>`
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -89,18 +89,18 @@ export const Background = styled.div<{ error?: boolean }>`
   line-height: initial;
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   border: 1px solid
-    ${({ error, theme }) => (error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
+    ${({ $error, theme }) => ($error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
   & *[fill^='#'] {
     fill: ${({ theme }) => theme.color['Special/Static White']};
   }
 `;
 
-const indeterminate = css<{ indeterminate?: boolean }>`
+const indeterminateCss = css<{ $indeterminate?: boolean }>`
   &:not(:checked) + ${Background} {
-    background-color: ${({ theme, indeterminate }) => indeterminate && theme.color['Primary/Primary 60 Main']};
-    border: ${({ indeterminate }) => indeterminate && 'none'};
+    background-color: ${({ theme, $indeterminate }) => $indeterminate && theme.color['Primary/Primary 60 Main']};
+    border: ${({ $indeterminate }) => $indeterminate && 'none'};
     > * {
-      display: ${(p) => (p.indeterminate ? 'block' : 'none')};
+      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
     }
   }
 `;
@@ -142,7 +142,7 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
-const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
+const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -171,9 +171,9 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
     ${disabledCss};
   }
 
-  ${(props) => !props.readOnly && props.hovered && hoveredCss}
+  ${(props) => !props.readOnly && props.$hovered && hoveredCss}
 
-  ${indeterminate}
+  ${indeterminateCss}
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
@@ -189,7 +189,7 @@ const Input = styled.input<{ indeterminate?: boolean; hovered?: boolean }>`
 `;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, error, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -202,19 +202,20 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
     };
 
     return (
-      <Container dimension={dimension} className={className}>
+      <Container $dimension={dimension} className={className}>
         <Input
           ref={ref}
           disabled={disabled}
           readOnly={readOnly}
           {...props}
           type="checkbox"
-          indeterminate={props.indeterminate}
+          $indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
-          data-hovered={props.hovered}
+          data-hovered={hovered}
+          $hovered={hovered}
         />
-        <Background error={props.error}>
-          {props.indeterminate ? (
+        <Background $error={error}>
+          {indeterminate ? (
             <Indeterminate aria-hidden="true" focusable="false" />
           ) : (
             <Check aria-hidden="true" focusable="false" />
