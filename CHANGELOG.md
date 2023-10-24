@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.3.0](https://github.com/AdmiralDS/react-ui/compare/v7.2.0...v7.3.0) (2023-10-24)
+
+
+### Features
+
+* **Badge:** change padding in size M ([e658b8e](https://github.com/AdmiralDS/react-ui/commit/e658b8ea60b8bb5ae7e99d316fbfaf7bd4f48d73))
+
+
+### Bug Fixes
+
+* **Menu:** Исправлено закрытие дочерних меню при клике за пределами открытых меню. ([cc824a9](https://github.com/AdmiralDS/react-ui/commit/cc824a9cd5ae442c00aa8c8be19c717d0c221f4f)), closes [#1122](https://github.com/AdmiralDS/react-ui/issues/1122)
+
 ## [7.2.0](https://github.com/AdmiralDS/react-ui/compare/v7.1.0...v7.2.0) (2023-10-19)
 
 
