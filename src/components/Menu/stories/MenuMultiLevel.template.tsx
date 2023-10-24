@@ -92,6 +92,18 @@ const STORY_ITEMS: Array<StoryItem> = [
             id: '4-3-2',
             label: 'SubOption 4-3-2',
             value: 432,
+            children: [
+              {
+                id: '5-1-1',
+                label: 'SubOption 5-1-1',
+                value: 511,
+              },
+              {
+                id: '5-1-2',
+                label: 'SubOption 5-1-2',
+                value: 512,
+              },
+            ],
           },
           {
             id: '4-3-3',
@@ -105,28 +117,28 @@ const STORY_ITEMS: Array<StoryItem> = [
           },
           {
             id: '4-3-5',
-            label: 'SubOption 4-3-3',
+            label: 'SubOption 4-3-5',
             value: 435,
           },
           {
             id: '4-3-6',
-            label: 'SubOption 4-3-3',
-            value: 433,
+            label: 'SubOption 4-3-6',
+            value: 436,
           },
           {
             id: '4-3-7',
-            label: 'SubOption 4-3-3',
-            value: 433,
+            label: 'SubOption 4-3-7',
+            value: 437,
           },
           {
             id: '4-3-8',
-            label: 'SubOption 4-3-3',
-            value: 433,
+            label: 'SubOption 4-3-8',
+            value: 438,
           },
           {
             id: '4-3-9',
-            label: 'SubOption 4-3-3',
-            value: 433,
+            label: 'SubOption 4-3-9',
+            value: 439,
           },
         ],
       },
