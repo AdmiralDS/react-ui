@@ -26,7 +26,9 @@ export const Icon = styled.div<{ $shouldAnimate?: boolean }>`
 
 export const TextWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
 `;
 
 export const FormValuesWrapper = styled.div`
@@ -41,7 +43,8 @@ export const FormValuesWrapper = styled.div`
 `;
 
 export const ExtraText = styled.div`
-  color: #626f84;
+  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  ${typography['Body/Body 2 Short']}
 `;
 
 export const Separator = styled.div`
