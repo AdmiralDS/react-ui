@@ -46,7 +46,7 @@ export interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    *  Обработчик события при клике вне компонента
    */
-  onClickOutside: (e: Event) => void;
+  onClickOutside?: (e: Event) => void;
   /**
    * Сторона от родительского меню, в которой будет появляться дочернее меню при наличии места
    * */
@@ -94,7 +94,7 @@ export const SubMenuContainer = ({
   }, []);
 
   const handleClickOutside = (e: Event) => {
-    if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
+    if (!targetElement.contains(e.target) && useDropdownsClickOutside(e, dropdowns)) onClickOutside?.(e);
   };
   useClickOutside([wrapperRef], handleClickOutside);
 
