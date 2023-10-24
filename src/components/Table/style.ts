@@ -19,6 +19,7 @@ import {
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
 import { typography } from '../Typography';
+import { ResizerWrapper } from './RowWidthResizer';
 
 export const TableContainer = styled.div`
   position: relative;
@@ -26,6 +27,10 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+
+  &[data-dragging='true'] ${ResizerWrapper} {
+    pointer-events: none;
+  }
 `;
 
 export const StickyGroupRow = styled.div`

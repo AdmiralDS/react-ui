@@ -364,9 +364,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       }
       function handleDragStart() {
         setColumnDragging(true);
+        if (tableRef.current) tableRef.current.dataset.dragging = 'true';
       }
       function handleDragEnd() {
         setColumnDragging(false);
+        if (tableRef.current) tableRef.current.dataset.dragging = 'false';
       }
 
       if (normalCols && isAnyColumnDraggable) {
@@ -680,6 +682,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       <TableContainer
         ref={refSetter(ref, tableRef)}
         data-shadow={false}
+        data-dragging={false}
         {...props}
         className={`table ${props.className || ''}`}
       >

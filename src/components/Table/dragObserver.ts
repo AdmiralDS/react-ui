@@ -29,6 +29,7 @@ export function dragObserver(
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
   let _mirrorContainerStyle: string; // initial style of mirror container
+  let _currentTarget: HTMLElement | null = null;
 
   const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
@@ -151,6 +152,7 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
+    _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
     drake.dragging = true;
@@ -273,6 +275,13 @@ export function dragObserver(
 
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
+
+    if (_currentTarget?.dataset.thColumn == immediate?.dataset.thColumn) {
+      return;
+    } else {
+      _currentTarget = immediate;
+    }
+
     if (immediate !== null) {
       reference = getReference(dropTarget, immediate, clientX, clientY);
     } else {
@@ -362,8 +371,9 @@ export function dragObserver(
     function inside() {
       // faster, but only available if dropped inside a child element
       const rect = target.getBoundingClientRect();
-      if (horizontal) {
-        return resolve(x > rect.left + rect.width / 2);
+      if (horizontal && _item) {
+        // return resolve(x > rect.left + rect.width / 2);
+        return resolve(!(x > rect.left && x < rect.right && _item?.getBoundingClientRect().left > x));
       }
       return resolve(y > rect.top + rect.height / 2);
     }
