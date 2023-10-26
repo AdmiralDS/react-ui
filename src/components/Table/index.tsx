@@ -8,12 +8,10 @@ import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
-import { DropdownContext } from '#src/components/DropdownProvider';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { createPortal } from 'react-dom';
 
 import { HeaderCellComponent } from './HeaderCell';
-import { dragObserver } from './dragObserver';
+import { ColumnDrag } from './drag/ColumnDrag';
 import {
   Cell,
   CellTextContent,
@@ -30,13 +28,9 @@ import {
   NormalWrapper,
   TableContainer,
   HiddenHeader,
-  Mirror,
-  MirrorText,
   ActionBG,
 } from './style';
 import { VirtualBody } from './VirtualBody';
-import { ReactComponent as CursorGrabbing } from './icons/cursorGrabbing.svg';
-import { ReactComponent as CursorNotAllowed } from './icons/cursorNotAllowed.svg';
 import type {
   Column,
   TableRow,
@@ -98,7 +92,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     ref,
   ) => {
     const theme = useTheme() || LIGHT_THEME;
-    const { rootRef } = React.useContext(DropdownContext);
     const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
     const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
@@ -106,7 +99,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const [tableWidth, setTableWidth] = React.useState(0);
     const [bodyHeight, setBodyHeight] = React.useState(0);
     const [scrollbar, setScrollbarSize] = React.useState(0);
-    const [columnDragging, setColumnDragging] = React.useState(false);
 
     const stickyColumns = [...columnList].filter((col) => col.sticky);
 
@@ -131,9 +123,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const scrollBodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
-    const mirrorRef = React.useRef<HTMLDivElement>(null);
-    // save callback via useRef to not update dragObserver on each callback change
-    const columnDragCallback = React.useRef(onColumnDrag);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -312,93 +301,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       setVerticalScroll,
       setBodyHeight,
     ]);
-
-    React.useEffect(() => {
-      columnDragCallback.current = onColumnDrag;
-    }, [onColumnDrag]);
-
-    React.useEffect(() => {
-      if (mirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
-        const observer = observeRect(mirrorRef.current, (rect: any) => {
-          const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
-          const leftCoord =
-            stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
-            tableRef.current?.getBoundingClientRect().left ||
-            0;
-          if (scrollBodyRef.current) {
-            const scrollLeft = scrollBodyRef.current.scrollLeft;
-            const scrollWidth = scrollBodyRef.current.scrollWidth;
-            const offsetWidth = scrollBodyRef.current.offsetWidth;
-
-            if (rect.right > rightCoord && scrollWidth > offsetWidth && scrollLeft + offsetWidth < scrollWidth) {
-              scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
-            }
-            if (rect.left < leftCoord && scrollLeft > 0) {
-              scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
-            }
-          }
-        });
-
-        observer.observe();
-        return () => observer.unobserve();
-      }
-    }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, columnDragging]);
-
-    React.useEffect(() => {
-      const stickyCols = stickyColumnsWrapperRef.current;
-      const normalCols = normalColumnsWrapperRef.current;
-
-      function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
-        const columnName = item?.dataset?.thColumn;
-        if (columnName) {
-          if (stickyCols?.contains(item) && before === null) {
-            // if we place sticky column at the end of stickyCols
-            columnDragCallback.current?.(
-              columnName,
-              (normalCols?.firstElementChild as HTMLElement)?.dataset?.thColumn ?? null,
-            );
-          } else {
-            columnDragCallback.current?.(columnName, before?.dataset?.thColumn ?? null);
-          }
-        }
-      }
-      function handleDragStart() {
-        setColumnDragging(true);
-        if (tableRef.current) tableRef.current.dataset.dragging = 'true';
-      }
-      function handleDragEnd() {
-        setColumnDragging(false);
-        if (tableRef.current) tableRef.current.dataset.dragging = 'false';
-      }
-
-      if (normalCols && isAnyColumnDraggable) {
-        const observer = dragObserver(
-          [normalCols],
-          {
-            mirrorRef,
-            dimension,
-            direction: 'horizontal',
-            invalid: (el: HTMLElement) => {
-              return el.dataset.draggable == 'false';
-            },
-            accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
-              // column can be dragged only inside parent container
-              if (target !== source) return false;
-              // can not place column before CheckboxCell or ExnandCell
-              if (sibling?.dataset.droppable == 'false') return false;
-              return true;
-            },
-          },
-          handleDrop,
-          handleDragStart,
-          handleDragEnd,
-        );
-        if (stickyCols && isAnyStickyColumnDraggable) observer.containers.push(stickyCols);
-        return () => {
-          observer.unobserve();
-        };
-      }
-    }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -727,15 +629,16 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           {showRowsActions && <ActionBG data-overflowmenu $dimension={dimension} $greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
-        {(isAnyColumnDraggable || isAnyStickyColumnDraggable) &&
-          createPortal(
-            <Mirror $dimension={dimension} ref={mirrorRef}>
-              <CursorGrabbing className="icon-grabbing" />
-              <CursorNotAllowed className="icon-not-allowed" />
-              <MirrorText />
-            </Mirror>,
-            rootRef?.current || document.body,
-          )}
+        <ColumnDrag
+          onColumnDrag={onColumnDrag}
+          dimension={dimension}
+          isAnyColumnDraggable={isAnyColumnDraggable}
+          isAnyStickyColumnDraggable={isAnyStickyColumnDraggable}
+          tableRef={tableRef}
+          scrollBodyRef={scrollBodyRef}
+          normalColumnsWrapperRef={normalColumnsWrapperRef}
+          stickyColumnsWrapperRef={stickyColumnsWrapperRef}
+        />
       </TableContainer>
     );
   },

@@ -474,27 +474,13 @@ export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
   ${({ $dimension }) =>
     $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
-  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 8 : 10)}px;
-  && {
-    cursor: none;
-    svg {
-      display: none;
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      flex-shrink: 0;
-    }
-  }
+  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 40)}px;
 
   &[data-cursor='normal'] {
-    & .icon-grabbing {
-      display: block;
-    }
+    cursor: grabbing;
   }
   &[data-cursor='error'] {
-    & .icon-not-allowed {
-      display: block;
-    }
+    cursor: not-allowed;
   }
 `;
 
