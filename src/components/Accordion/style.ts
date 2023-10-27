@@ -69,6 +69,9 @@ export const ItemTitle = styled.button`
   &:hover {
     background: ${(p) => p.theme.color['Opacity/Hover']};
   }
+  &:active {
+    background: ${(p) => p.theme.color['Opacity/Press']};
+  }
   &:focus {
     &:before {
       position: absolute;
