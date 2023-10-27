@@ -29,6 +29,10 @@ exports[`ContentSwitcher should render component with Button 1`] = `
   background: #0000000D;
 }
 
+.c2:active:not(:disabled) {
+  background: #0000001F;
+}
+
 .c2 *[fill^='#'] {
   fill: #717681;
 }
@@ -43,6 +47,10 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 
 [data-appearance~='primary'] .c2.c2:hover:not(:disabled) {
   background: #0000000D;
+}
+
+[data-appearance~='primary'] .c2.c2:active:not(:disabled) {
+  background: #0000001F;
 }
 
 .c0 {
@@ -115,6 +123,10 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
   background: #0000000D;
 }
 
+.c2:active:not(:disabled) {
+  background: #0000001F;
+}
+
 .c2 *[fill^='#'] {
   fill: #717681;
 }
@@ -129,6 +141,10 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 
 [data-appearance~='primary'] .c2.c2:hover:not(:disabled) {
   background: #0000000D;
+}
+
+[data-appearance~='primary'] .c2.c2:active:not(:disabled) {
+  background: #0000001F;
 }
 
 .c0 {
