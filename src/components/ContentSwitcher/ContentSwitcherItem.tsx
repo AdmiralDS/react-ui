@@ -58,6 +58,9 @@ export const ContentSwitcherItemButton = styled.button<{
   &:hover:not(:disabled) {
     background: ${({ $active, disabled, theme }) => (!$active && !disabled ? theme.color['Opacity/Hover'] : '')};
   }
+  &:active:not(:disabled) {
+    background: ${({ $active, disabled, theme }) => (!$active && !disabled ? theme.color['Opacity/Press'] : '')};
+  }
 
   & *[fill^='#'] {
     fill: ${({ disabled, theme }) => {
@@ -101,6 +104,9 @@ export const ContentSwitcherItemButton = styled.button<{
       $active && !disabled ? theme.color['Primary/Primary 60 Main'] : 'transparent'};
     &:hover:not(:disabled) {
       background: ${({ $active, disabled, theme }) => (!$active && !disabled ? theme.color['Opacity/Hover'] : '')};
+    }
+    &:active:not(:disabled) {
+      background: ${({ $active, disabled, theme }) => (!$active && !disabled ? theme.color['Opacity/Press'] : '')};
     }
   }
 
