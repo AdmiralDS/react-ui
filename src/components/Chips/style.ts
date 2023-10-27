@@ -113,10 +113,10 @@ const actionsMixin = css<{
   $withCloseIcon?: boolean;
 }>`
   &:hover {
-    background-color: ${({ theme, $appearance, $selected, $withCloseIcon }) => {
-      if ($selected) return theme.color['Primary/Primary 70'];
-      if ($appearance === 'filled') return theme.color['Neutral/Neutral 20'];
-      else if (!$withCloseIcon) return theme.color['Opacity/Hover'];
+    ${({ theme, $appearance, $selected, $withCloseIcon }) => {
+      if ($selected) return `background-color: ${theme.color['Primary/Primary 70']}`;
+      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 20']}`;
+      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Hover']}`;
     }};
     ${(p) =>
       p.$selected &&
@@ -125,10 +125,10 @@ const actionsMixin = css<{
     `}
   }
   &:active {
-    background-color: ${({ theme, $appearance, $selected, $withCloseIcon }) => {
-      if ($selected) return theme.color['Primary/Primary 80'];
-      if ($appearance === 'filled') return theme.color['Neutral/Neutral 30'];
-      else if (!$withCloseIcon) return theme.color['Opacity/Press'];
+    ${({ theme, $appearance, $selected, $withCloseIcon }) => {
+      if ($selected) return `background-color: ${theme.color['Primary/Primary 80']}`;
+      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 30']}`;
+      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Press']}`;
     }};
     ${(p) =>
       p.$selected &&
