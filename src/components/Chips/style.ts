@@ -107,21 +107,33 @@ const chipTypography = css<{
   }
 `;
 
-const hoverMixin = css<{
+const actionsMixin = css<{
   $selected?: boolean;
   $appearance?: ChipAppearance;
   $withCloseIcon?: boolean;
 }>`
   &:hover {
-    background-color: ${({ theme, $appearance, $selected, $withCloseIcon }) => {
-      if ($selected) return theme.color['Primary/Primary 70'];
-      if ($appearance === 'filled') return theme.color['Neutral/Neutral 20'];
-      else if (!$withCloseIcon) return theme.color['Opacity/Hover'];
+    ${({ theme, $appearance, $selected, $withCloseIcon }) => {
+      if ($selected) return `background-color: ${theme.color['Primary/Primary 70']}`;
+      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 20']}`;
+      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Hover']}`;
     }};
     ${(p) =>
       p.$selected &&
       `
       border-color: ${p.theme.color['Primary/Primary 70']};
+    `}
+  }
+  &:active {
+    ${({ theme, $appearance, $selected, $withCloseIcon }) => {
+      if ($selected) return `background-color: ${theme.color['Primary/Primary 80']}`;
+      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 30']}`;
+      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Press']}`;
+    }};
+    ${(p) =>
+      p.$selected &&
+      `
+      border-color: ${p.theme.color['Primary/Primary 80']};
     `}
   }
 `;
@@ -150,7 +162,7 @@ const colorsBorderAndBackground = css<{
 
   border-radius: 16px;
 
-  ${(p) => p.$clickable && hoverMixin}
+  ${(p) => p.$clickable && actionsMixin}
 
   &:focus-visible {
     outline: 0;

@@ -19,10 +19,13 @@ const Button = styled.button`
     fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
   }
 
-  &:hover,
-  &:active {
+  &:hover {
     cursor: pointer;
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  }
+  &:active {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }
 
   &:focus-visible {
