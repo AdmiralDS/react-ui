@@ -29,7 +29,7 @@ export function dragObserver(
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
   let _mirrorContainerStyle: string; // initial style of mirror container
-  let _currentTarget: HTMLElement | null = null;
+  let _currentTarget: HTMLElement | null = null; // target over which cursor is now located
 
   const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
@@ -143,10 +143,7 @@ export function dragObserver(
       return;
     }
 
-    return {
-      item: item,
-      source: source,
-    };
+    return { item, source };
   }
 
   function start(context: any) {
@@ -276,7 +273,8 @@ export function dragObserver(
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
 
-    if (_currentTarget?.dataset.thColumn == immediate?.dataset.thColumn) {
+    // if _currentTarget has not changed, do not calculate the reference
+    if (_currentTarget?.isEqualNode(immediate)) {
       return;
     } else {
       _currentTarget = immediate;
@@ -349,6 +347,7 @@ export function dragObserver(
 
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
+    const itemRight = _item?.getBoundingClientRect().right;
     const reference = target !== dropTarget ? inside() : outside();
     return reference;
 
@@ -358,8 +357,8 @@ export function dragObserver(
       for (let i = 0; i < len; i++) {
         const el = dropTarget.children[i];
         const rect = el.getBoundingClientRect();
-        if (horizontal && rect.left + rect.width / 2 > x) {
-          return el;
+        if (horizontal && itemRight && x >= rect.left && x < rect.right) {
+          return itemRight <= x ? el.nextElementSibling : el;
         }
         if (!horizontal && rect.top + rect.height / 2 > y) {
           return el;
@@ -371,9 +370,8 @@ export function dragObserver(
     function inside() {
       // faster, but only available if dropped inside a child element
       const rect = target.getBoundingClientRect();
-      if (horizontal && _item) {
-        // return resolve(x > rect.left + rect.width / 2);
-        return resolve(!(x > rect.left && x < rect.right && _item?.getBoundingClientRect().left > x));
+      if (horizontal && itemRight) {
+        return resolve(x >= rect.left && x < rect.right && itemRight <= x);
       }
       return resolve(y > rect.top + rect.height / 2);
     }
