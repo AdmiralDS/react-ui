@@ -200,7 +200,7 @@ export function dragObserver(
     }
     drake.dragging = false;
     onDragEnd?.();
-    _source = _item = _initialSibling = _currentSibling = _lastDropTarget = null;
+    _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
   }
 
   function isInitialPlacement(target: any, s?: any) {
