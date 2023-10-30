@@ -80,6 +80,10 @@ exports[`Spinner should render component with dimension m 1`] = `
   background: #0000000D;
 }
 
+.c4:active {
+  background: #0000001F;
+}
+
 .c4:focus:before {
   position: absolute;
   content: '';
@@ -361,6 +365,10 @@ exports[`Spinner should render component with dimension m 1`] = `
 
 .c4:hover {
   background: #0000000D;
+}
+
+.c4:active {
+  background: #0000001F;
 }
 
 .c4:focus:before {
@@ -701,6 +709,10 @@ exports[`Spinner should render default component 1`] = `
   background: #0000000D;
 }
 
+.c4:active {
+  background: #0000001F;
+}
+
 .c4:focus:before {
   position: absolute;
   content: '';
@@ -982,6 +994,10 @@ exports[`Spinner should render default component 1`] = `
 
 .c4:hover {
   background: #0000000D;
+}
+
+.c4:active {
+  background: #0000001F;
 }
 
 .c4:focus:before {
