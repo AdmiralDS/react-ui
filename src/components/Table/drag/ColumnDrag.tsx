@@ -41,6 +41,12 @@ export const ColumnDrag = ({
   }, [onColumnDrag]);
 
   useEffect(() => {
+    if (tableRef.current) {
+      tableRef.current.dataset.dragging = String(columnDragging);
+    }
+  }, [columnDragging]);
+
+  useEffect(() => {
     if (columnMirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
       const observer = observeRect(columnMirrorRef.current, (rect: any) => {
         const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
@@ -87,11 +93,9 @@ export const ColumnDrag = ({
     }
     function handleDragStart() {
       setColumnDragging(true);
-      if (tableRef.current) tableRef.current.dataset.dragging = 'true';
     }
     function handleDragEnd() {
       setColumnDragging(false);
-      if (tableRef.current) tableRef.current.dataset.dragging = 'false';
     }
 
     if (normalCols && isAnyColumnDraggable) {
