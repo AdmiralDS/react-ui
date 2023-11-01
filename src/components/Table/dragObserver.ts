@@ -274,17 +274,15 @@ export function dragObserver(
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
 
     // if _currentTarget has not changed, do not calculate the reference
-    if (_currentTarget?.isEqualNode(immediate)) {
+    // if immediate is null, do not calculate the reference
+    if (_currentTarget?.isEqualNode(immediate) || immediate == null) {
+      _currentTarget = immediate;
       return;
     } else {
       _currentTarget = immediate;
+      reference = getReference(dropTarget, immediate, clientX, clientY);
     }
 
-    if (immediate !== null) {
-      reference = getReference(dropTarget, immediate, clientX, clientY);
-    } else {
-      return;
-    }
     if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
       _currentSibling = reference;
 
@@ -357,7 +355,7 @@ export function dragObserver(
       for (let i = 0; i < len; i++) {
         const el = dropTarget.children[i];
         const rect = el.getBoundingClientRect();
-        if (horizontal && itemRight && x >= rect.left && x < rect.right) {
+        if (horizontal && typeof itemRight == 'number' && x >= rect.left && x < rect.right) {
           return itemRight <= x ? el.nextElementSibling : el;
         }
         if (!horizontal && rect.top + rect.height / 2 > y) {
@@ -370,7 +368,7 @@ export function dragObserver(
     function inside() {
       // faster, but only available if dropped inside a child element
       const rect = target.getBoundingClientRect();
-      if (horizontal && itemRight) {
+      if (horizontal && typeof itemRight == 'number') {
         return resolve(x >= rect.left && x < rect.right && itemRight <= x);
       }
       return resolve(y > rect.top + rect.height / 2);
