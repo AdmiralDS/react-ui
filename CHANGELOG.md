@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.4.0](https://github.com/AdmiralDS/react-ui/compare/v7.3.0...v7.4.0) (2023-11-03)
+
+
+### Features
+
+* **Accordion:** add press state ([c0dab63](https://github.com/AdmiralDS/react-ui/commit/c0dab63d55e0212a11bdb796b9bc0061d1090709))
+* **Chips:** add press state ([d0ae0a0](https://github.com/AdmiralDS/react-ui/commit/d0ae0a0e6c485c70a2b9a51973402f4092790a8e))
+* **ContentSwitcher:** add press state ([84756bb](https://github.com/AdmiralDS/react-ui/commit/84756bbb8f610e25fdfbefc0af8f1514d8bd7047))
+* **PaginationOne:** add press state ([cb3584c](https://github.com/AdmiralDS/react-ui/commit/cb3584ca016c95052ba111f253e63b733e8411ee))
+
+
+### Bug Fixes
+
+* **Table:** при перетаскивании (drag and drop) столбцы меняются местами в момент, когда курсор заходит на область соседнего столбца ([0b25427](https://github.com/AdmiralDS/react-ui/commit/0b254276be2e7340124f87704a2d6406e588729d))
+* **Table:** при перетаскивании колонок используется системный курсор вместо прежних иконок ([e6e327f](https://github.com/AdmiralDS/react-ui/commit/e6e327f740330d6fc86743ec92da87803f3e5ff0))
+
 ## [7.3.0](https://github.com/AdmiralDS/react-ui/compare/v7.2.0...v7.3.0) (2023-10-24)
 
 
