@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import type { SearchSelectFieldProps } from '@admiral-ds/react-ui';
-import { SelectField, Option } from '@admiral-ds/react-ui';
+import { SelectField, Option, typography } from '@admiral-ds/react-ui';
 
 const jump = keyframes`
   50% {
@@ -26,13 +26,16 @@ export const Icon = styled.div<{ shouldAnimate?: boolean }>`
   ${({ shouldAnimate }) => (shouldAnimate ? animation : '')}
 `;
 
-export const TextWrapper = styled.div`
+const TextWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
 `;
 
-export const ExtraText = styled.div`
-  color: #626f84;
+const ExtraText = styled.div`
+  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  ${typography['Body/Body 2 Short']}
 `;
 
 const OPTIONS = [

@@ -591,6 +591,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       <TableContainer
         ref={refSetter(ref, tableRef)}
         data-shadow={false}
+        data-dragging={false}
         {...props}
         className={`table ${props.className || ''}`}
       >

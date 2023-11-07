@@ -474,7 +474,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
           <SubMenuContainer
             target={activeItemRef}
             defaultRenderDirection={subMenuRenderDirection}
-            onClickOutside={handleClickOutside}
+            onClickOutside={!parentMenuRef ? handleClickOutside : undefined}
           >
             {renderSubMenu()}
           </SubMenuContainer>

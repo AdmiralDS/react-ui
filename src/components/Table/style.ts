@@ -20,13 +20,20 @@ import {
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
 import { typography } from '../Typography';
+import { ResizerWrapper } from './RowWidthResizer';
 
+// устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
+// располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
 export const TableContainer = styled.div`
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+
+  &[data-dragging='true'] ${ResizerWrapper} {
+    pointer-events: none;
+  }
 `;
 
 export const StickyGroupRow = styled.div`

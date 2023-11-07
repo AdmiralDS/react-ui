@@ -29,6 +29,7 @@ export function dragObserver(
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
   let _grabbed: any; // holds mousedown context until first mousemove
   let _mirrorContainerStyle: string; // initial style of mirror container
+  let _currentTarget: HTMLElement | null = null; // target over which cursor is now located
 
   const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
@@ -150,6 +151,7 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
+    _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
     drake.dragging = true;
@@ -200,7 +202,7 @@ export function dragObserver(
     }
     drake.dragging = false;
     onDragEnd?.();
-    _source = _item = _initialSibling = _currentSibling = _lastDropTarget = null;
+    _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
   }
 
   function isInitialPlacement(target: any, s?: any) {
@@ -274,11 +276,17 @@ export function dragObserver(
 
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
-    if (immediate !== null) {
-      reference = getReference(dropTarget, immediate, clientX, clientY);
-    } else {
+
+    // if _currentTarget has not changed, do not calculate the reference
+    // if immediate is null, do not calculate the reference
+    if (_currentTarget?.isEqualNode(immediate) || immediate == null) {
+      _currentTarget = immediate;
       return;
+    } else {
+      _currentTarget = immediate;
+      reference = getReference(dropTarget, immediate, clientX, clientY);
     }
+
     if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
       _currentSibling = reference;
 
@@ -359,6 +367,7 @@ export function dragObserver(
 
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
+    const itemRight = _item?.getBoundingClientRect().right;
     const reference = target !== dropTarget ? inside() : outside();
     return reference;
 
@@ -368,8 +377,8 @@ export function dragObserver(
       for (let i = 0; i < len; i++) {
         const el = dropTarget.children[i];
         const rect = el.getBoundingClientRect();
-        if (horizontal && rect.left + rect.width / 2 > x) {
-          return el;
+        if (horizontal && typeof itemRight == 'number' && x >= rect.left && x < rect.right) {
+          return itemRight <= x ? el.nextElementSibling : el;
         }
         if (!horizontal && rect.top + rect.height / 2 > y) {
           return el;
@@ -381,8 +390,8 @@ export function dragObserver(
     function inside() {
       // faster, but only available if dropped inside a child element
       const rect = target.getBoundingClientRect();
-      if (horizontal) {
-        return resolve(x > rect.left + rect.width / 2);
+      if (horizontal && typeof itemRight == 'number') {
+        return resolve(x >= rect.left && x < rect.right && itemRight <= x);
       }
       return resolve(y > rect.top + rect.height / 2);
     }
