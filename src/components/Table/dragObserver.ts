@@ -368,6 +368,7 @@ export function dragObserver(
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
     const itemRight = _item?.getBoundingClientRect().right;
+    const itemBottom = _item?.getBoundingClientRect().bottom;
     const reference = target !== dropTarget ? inside() : outside();
     return reference;
 
@@ -380,8 +381,8 @@ export function dragObserver(
         if (horizontal && typeof itemRight == 'number' && x >= rect.left && x < rect.right) {
           return itemRight <= x ? el.nextElementSibling : el;
         }
-        if (!horizontal && rect.top + rect.height / 2 > y) {
-          return el;
+        if (!horizontal && typeof itemBottom == 'number' && y >= rect.top && y < rect.bottom) {
+          return itemBottom <= y ? el.nextElementSibling : el;
         }
       }
       return null;
@@ -393,7 +394,10 @@ export function dragObserver(
       if (horizontal && typeof itemRight == 'number') {
         return resolve(x >= rect.left && x < rect.right && itemRight <= x);
       }
-      return resolve(y > rect.top + rect.height / 2);
+      if (!horizontal && typeof itemBottom == 'number') {
+        return resolve(y >= rect.top && y < rect.bottom && itemBottom <= y);
+      }
+      return null;
     }
 
     function resolve(after: boolean) {
@@ -450,6 +454,13 @@ function getOffset(el: HTMLElement) {
   };
 }
 
+// elementFromPoint может вернуть null, если мы вышли за границы viewport.
+//
+// Если существует 2 соседних по вертикали элемента a и b, где a.left == b.left == x, a.bottom == b.top == y,
+// то elementFromPoint(x, y) вернет в качестве результата элемент b.
+//
+// Если существует 2 соседних по горизонтали элемента a и b, где a.right == b.left == x, a.top == b.top == y,
+// то elementFromPoint(x, y) вернет в качестве результата элемент b.
 function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
   const state = point.style.pointerEvents;
   point.style.pointerEvents = 'none';
