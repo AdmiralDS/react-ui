@@ -250,7 +250,7 @@ export const TabMenu: FC<TabMenuProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, []);
+  }, [activeTab]);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
