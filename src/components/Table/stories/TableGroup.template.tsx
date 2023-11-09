@@ -160,6 +160,7 @@ export const TableGroupTemplate = (props: TableProps) => {
     setRows(updRows);
   };
 
+  // зачем здесь этот колбек?
   const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
     setRows(updRows);

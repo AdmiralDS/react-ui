@@ -1,5 +1,5 @@
 import type { RuleSet } from 'styled-components';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { Color } from '#src/components/themes';
 
 export type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -257,7 +257,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
   rowsDraggable?: boolean;
-  onRowDrag?: (rowId: string, nextRowId: string | null) => void;
+  onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
+  renderDraggableColumn?: () => ReactNode;
+  renderDraggableRow?: () => ReactNode;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,

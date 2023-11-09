@@ -277,6 +277,11 @@ export function dragObserver(
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
 
+    // ловим момент, когда курсор находится над названием группы строк
+    if (immediate?.dataset?.grouprow == 'true') {
+      console.log('group row');
+    }
+
     // if _currentTarget has not changed, do not calculate the reference
     // if immediate is null, do not calculate the reference
     if (_currentTarget?.isEqualNode(immediate) || immediate == null) {

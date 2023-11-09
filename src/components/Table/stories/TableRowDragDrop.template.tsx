@@ -3,6 +3,10 @@ import { Table, T } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
+const Separator = styled.div`
+  height: 20px;
+`;
+
 const AmountCell = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
@@ -135,6 +139,108 @@ const rowList: RowData[] = [
   },
 ];
 
+const rowList2: RowData[] = [
+  {
+    id: '0002',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0003',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0004',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0001',
+    transfer_type: 'Group name',
+    expanded: false,
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+    groupTitle: 'Группа',
+    groupRows: ['0007', '0008'],
+  },
+  {
+    id: '0005',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0006',
+    transfer_type: 'МНО',
+    transfer_date: new Date('2020-08-06').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0007',
+    transfer_type: 'GR1',
+    transfer_date: new Date('2020-07-18').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+  {
+    id: '0008',
+    transfer_type: 'GR1',
+    transfer_date: new Date('2020-08-25').toLocaleDateString(),
+    transfer_amount: (
+      <AmountCell>
+        <T font="Body/Body 2 Short">{numberFormatter.format(100)}</T>
+      </AmountCell>
+    ),
+    currency: 'RUB',
+    rate: 2.5,
+  },
+];
+
 const columnList: Column[] = [
   {
     name: 'transfer_type',
@@ -162,11 +268,23 @@ const columnList: Column[] = [
 
 export const TableRowDragDropTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
+  const [cols2, setCols2] = React.useState(columnList);
   const [rows, setRows] = React.useState(rowList);
+  const [rows2, setRows2] = React.useState(rowList2);
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
+  };
+
+  const handleResize2 = ({ name, width }: { name: string; width: string }) => {
+    const newCols = cols2.map((col) => (col.name === name ? { ...col, width } : col));
+    setCols2(newCols);
+  };
+
+  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+    const updRows = rows2.map((row) => ({ ...row, expanded: ids[row.id] }));
+    setRows2(updRows);
   };
 
   const handleRowDrag = (rowId: string, nextRowId: string | null) => {
@@ -179,14 +297,41 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     setRows(tableRows);
   };
 
+  const handleRowDrag2 = (rowId: string, nextRowId: string | null) => {
+    const tableRows = [...rows2];
+    const movedIndex = tableRows.findIndex((row) => row.id === rowId);
+    const movedRow = tableRows.splice(movedIndex, 1)[0];
+    const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
+    tableRows.splice(beforeIndex, 0, movedRow);
+
+    setRows2(tableRows);
+  };
+
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      onColumnResize={handleResize}
-      rowsDraggable
-      onRowDrag={handleRowDrag}
-    />
+    <>
+      <T font="Body/Body 2 Long">Пример с обычными строками</T>
+      <Separator />
+      <Table
+        {...props}
+        rowList={rows}
+        columnList={cols}
+        onColumnResize={handleResize}
+        rowsDraggable
+        onRowDrag={handleRowDrag}
+      />
+      <Separator />
+      <T font="Body/Body 2 Long">Пример с группами строк</T>
+      <Separator />
+      <Table
+        {...props}
+        rowList={rows2}
+        columnList={cols2}
+        displayRowExpansionColumn
+        onRowExpansionChange={handleExpansionChange}
+        onColumnResize={handleResize2}
+        rowsDraggable
+        onRowDrag={handleRowDrag2}
+      />
+    </>
   );
 };
