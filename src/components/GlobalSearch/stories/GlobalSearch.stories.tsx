@@ -47,7 +47,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: ['xl', 'l', 'm', 's'],
+      options: ['xl', 'm', 's'],
       control: { type: 'radio' },
     },
     settingsButtonsDisabled: {
