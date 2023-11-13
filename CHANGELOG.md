@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.4.1](https://github.com/AdmiralDS/react-ui/compare/v7.4.0...v7.4.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* **SliderInput:** исправлен баг, связанный с отсутствием автокоррекции введенного значения, если значение выходит за пределы диапазона minValue-maxValue ([8de2dd0](https://github.com/AdmiralDS/react-ui/commit/8de2dd0fe37238488661ee7953f929493864786f))
+* **TabMenu:** Исправлена ошибка, связанная со сбросом выбранного пункта на начальный при масштабировании интерфейса. ([54cdec4](https://github.com/AdmiralDS/react-ui/commit/54cdec40c051eae836174244c8c7dcb1b022265f)), closes [#1125](https://github.com/AdmiralDS/react-ui/issues/1125)
+
 ## [7.4.0](https://github.com/AdmiralDS/react-ui/compare/v7.3.0...v7.4.0) (2023-11-03)
 
 

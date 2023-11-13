@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { forwardRef, useRef, useState, useEffect } from 'react';
+import type { ReactNode, ChangeEvent, HTMLAttributes, FocusEvent } from 'react';
 import styled from 'styled-components';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import type { TextInputProps } from '#src/components/input/TextInput';
@@ -43,7 +44,7 @@ const Input = styled(NumberInput)`
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом) */
-  onChange?: (fullStr: string, shortStr: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (fullStr: string, shortStr: string, event: ChangeEvent<HTMLInputElement>) => void;
   /** Минимальное значение слайдера */
   minValue?: number;
   /** Максимальное значение слайдера */
@@ -55,7 +56,7 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   /** Массив отметок слайдера */
   tickMarks?: number[];
   /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
-  renderTickMark?: (mark: string) => React.ReactNode;
+  renderTickMark?: (mark: string) => ReactNode;
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** разделитель между тысячами */
@@ -67,10 +68,10 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   /** плейсхолдер */
   placeholder?: string;
   /** Стандартные html-атрибуты, которые будут переданы wrapper-контейнеру компонента */
-  wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+  wrapperProps?: HTMLAttributes<HTMLDivElement>;
 }
 
-export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
+export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
   (
     {
       defaultValue = '',
@@ -97,13 +98,13 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
     const sliderDimension = dimension === 'xl' ? dimension : 'm';
     // десятичный разделитель
     const decimal = '.';
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const [sliderValue, setSliderValue] = React.useState<number>(minValue);
-    const [innerValueState, setInnerValueState] = React.useState(defaultValue || '');
+    const [sliderValue, setSliderValue] = useState<number>(minValue);
+    const [innerValueState, setInnerValueState] = useState(defaultValue || '');
     const innerValue = value ?? innerValueState;
 
-    React.useEffect(() => {
+    useEffect(() => {
       setSliderValue(+clearValue(String(innerValue), precision, decimal));
     }, [innerValue]);
 
@@ -114,7 +115,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
         changeInputData(inputRef.current, { value: newValue });
       }
     };
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       const prefixPart = prefix ? prefix + ' ' : '';
       const suffixPart = suffix ? ' ' + suffix : '';
       const full = prefixPart + event.target.value + suffixPart;
@@ -123,6 +124,25 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
       setInnerValueState(event.target.value);
       onChange?.(full, short, event);
     };
+    const handleInputBlur = (event: FocusEvent<HTMLInputElement>) => {
+      const numValue = Number(clearValue(event.target.value, precision, decimal));
+
+      if (inputRef.current) {
+        // если введеное значение меньше minValue
+        if (typeof minValue === 'number' && numValue < minValue) {
+          const fullValue = fitToCurrency(String(minValue), precision, decimal, thousand, true);
+
+          changeInputData(inputRef.current, { value: fullValue });
+        }
+        // если введеное значение больше maxValue
+        else if (typeof maxValue === 'number' && numValue > maxValue) {
+          const fullValue = fitToCurrency(String(maxValue), precision, decimal, thousand, true);
+
+          changeInputData(inputRef.current, { value: fullValue });
+        }
+      }
+      props.onBlur?.(event);
+    };
     return (
       <Wrapper data-dimension={dimension} $dimension={dimension} {...wrapperProps}>
         <Input
@@ -130,7 +150,7 @@ export const SliderInput = React.forwardRef<HTMLInputElement, SliderInputProps>(
           ref={refSetter(ref, inputRef)}
           value={innerValue}
           onChange={handleInputChange}
-          onBlur={props.onBlur}
+          onBlur={handleInputBlur}
           dimension={dimension}
           disabled={disabled}
           precision={precision}
