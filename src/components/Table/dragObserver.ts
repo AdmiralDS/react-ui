@@ -1,6 +1,8 @@
 type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
+  renderMirror: (dragItem: HTMLElement | null) => void;
+  removeMirror: () => void;
   dimension: 'xl' | 'l' | 'm' | 's';
   accepts?: (
     el: HTMLElement | null,
@@ -306,34 +308,17 @@ export function dragObserver(
 
   function renderMirrorImage() {
     const mirrorElement = o.mirrorRef.current;
+
     if (_mirror && !mirrorElement) {
       return;
     }
-    if (mirrorElement && o.direction === 'horizontal') {
-      const mirrorParent = mirrorElement.parentElement;
-      const title = (_item as HTMLElement).dataset.thTitle ?? '';
-
-      if (mirrorElement.lastElementChild) mirrorElement.lastElementChild.innerHTML = title;
+    if (mirrorElement) {
+      o.renderMirror(_item);
       mirrorElement.style.visibility = 'visible';
-      _mirror = o.mirrorRef.current;
-
+      _mirror = mirrorElement;
       touchy(document.documentElement, 'add', 'mousemove', drag);
 
-      if (mirrorParent) {
-        _mirrorContainerStyle = mirrorParent.style.userSelect;
-        mirrorParent.style.userSelect = 'none';
-      }
-    }
-    if (mirrorElement && o.direction === 'vertical') {
       const mirrorParent = mirrorElement.parentElement;
-      const firstCell = _item?.getElementsByClassName('td')[0];
-
-      if (firstCell) mirrorElement.appendChild(firstCell.cloneNode(true));
-      mirrorElement.style.visibility = 'visible';
-      _mirror = o.mirrorRef.current;
-
-      touchy(document.documentElement, 'add', 'mousemove', drag);
-
       if (mirrorParent) {
         _mirrorContainerStyle = mirrorParent.style.userSelect;
         mirrorParent.style.userSelect = 'none';
@@ -343,16 +328,14 @@ export function dragObserver(
 
   function removeMirrorImage() {
     const mirrorElement = o.mirrorRef.current;
+
     if (_mirror && mirrorElement) {
       const mirrorParent = mirrorElement.parentElement;
       if (mirrorParent) {
         mirrorParent.style.userSelect = _mirrorContainerStyle;
       }
 
-      if (o.direction === 'vertical' && mirrorElement.lastChild) {
-        mirrorElement.removeChild(mirrorElement.lastChild);
-      }
-
+      o.removeMirror();
       mirrorElement.style.visibility = 'hidden';
       touchy(document.documentElement, 'remove', 'mousemove', drag);
       _mirror = null;

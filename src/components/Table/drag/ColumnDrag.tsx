@@ -76,6 +76,7 @@ export const ColumnDrag = ({
   useEffect(() => {
     const stickyCols = stickyColumnsWrapperRef.current;
     const normalCols = normalColumnsWrapperRef.current;
+    const columnMirror = columnMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
       const columnName = item?.dataset?.thColumn;
@@ -97,12 +98,20 @@ export const ColumnDrag = ({
     function handleDragEnd() {
       setColumnDragging(false);
     }
+    function renderMirror(dragColumn: HTMLElement | null) {
+      // нужно избавить от data-th-title атрибута, так как в нем могут храниться не только строки
+      const title = dragColumn?.dataset.thTitle ?? '';
+      if (columnMirror?.lastElementChild) columnMirror.lastElementChild.innerHTML = title;
+    }
+    function removeMirror() {}
 
     if (normalCols && isAnyColumnDraggable) {
       const observer = dragObserver(
         [normalCols],
         {
           mirrorRef: columnMirrorRef,
+          renderMirror,
+          removeMirror,
           dimension,
           direction: 'horizontal',
           invalid: (el: HTMLElement) => {

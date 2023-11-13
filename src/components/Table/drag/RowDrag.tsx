@@ -55,6 +55,7 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
 
   useEffect(() => {
     const body = scrollBodyRef.current;
+    const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
       if (
@@ -74,12 +75,25 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
     function handleDragEnd() {
       setRowDragging(false);
     }
+    function renderMirror(dragRow: HTMLElement | null) {
+      const firstCell = dragRow?.getElementsByClassName('td')[0];
+      if (firstCell && rowMirror) {
+        rowMirror.appendChild(firstCell.cloneNode(true));
+      }
+    }
+    function removeMirror() {
+      if (rowMirror && rowMirror.lastChild) {
+        rowMirror.removeChild(rowMirror.lastChild);
+      }
+    }
 
     if (body && rowsDraggable) {
       const observer = dragObserver(
         [body],
         {
           mirrorRef: rowMirrorRef,
+          renderMirror,
+          removeMirror,
           dimension,
           direction: 'vertical',
           invalid: (el: HTMLElement, initEl: HTMLElement) => {
