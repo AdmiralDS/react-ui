@@ -90,3 +90,4 @@ export * from './components/FontsVTBGroup';
 export * from './components/DropdownProvider';
 
 export * from './components/Flex';
+export * from './components/GlobalSearch';
