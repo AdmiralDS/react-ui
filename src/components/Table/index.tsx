@@ -109,6 +109,15 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const isAnyColumnDraggable = columnList.filter((col) => !col.sticky && col.draggable).length > 0;
     const isAnyStickyColumnDraggable = columnList.filter((col) => col.sticky && col.draggable).length > 0;
 
+    const columnTitlesMap = React.useMemo(
+      () =>
+        columnList.reduce((acc: any, column) => {
+          acc[column.name] = column.title;
+          return acc;
+        }, {}),
+      [columnList],
+    );
+
     // show column with backgrounds for row actions only if there are some strokes with
     // overflow menu or single action and userShowRowsActions = true
     const showRowsActions = React.useMemo(
@@ -463,6 +472,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           renderCell={renderCell}
           indeterminate={indeterminate}
           checked={checked}
+          firstRowIngroup={row.groupRows?.[0] || 'null'}
         />
       );
     };
@@ -646,6 +656,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollBodyRef={scrollBodyRef}
           normalColumnsWrapperRef={normalColumnsWrapperRef}
           stickyColumnsWrapperRef={stickyColumnsWrapperRef}
+          columnTitlesMap={columnTitlesMap}
         />
         <RowDrag
           onRowDrag={onRowDrag}

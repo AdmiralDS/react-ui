@@ -518,6 +518,10 @@ export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
+
+  & > [data-title] {
+    ${singleLineTitle}
+  }
 `;
 
 export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
@@ -540,9 +544,9 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   }
 `;
 
-export const MirrorText = styled.div`
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+// export const MirrorText = styled.div`
+//   display: block;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// `;

@@ -5,7 +5,7 @@ import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
 
 import { dragObserver } from '../dragObserver';
-import { Mirror, MirrorText } from '../style';
+import { Mirror } from '../style';
 
 type ColumnDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
@@ -16,6 +16,7 @@ type ColumnDragProps = {
   scrollBodyRef: React.RefObject<HTMLElement>;
   normalColumnsWrapperRef: React.RefObject<HTMLElement>;
   stickyColumnsWrapperRef: React.RefObject<HTMLElement>;
+  columnTitlesMap: any;
 };
 
 export const ColumnDrag = ({
@@ -27,6 +28,7 @@ export const ColumnDrag = ({
   scrollBodyRef,
   normalColumnsWrapperRef,
   stickyColumnsWrapperRef,
+  columnTitlesMap,
 }: ColumnDragProps) => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -39,6 +41,10 @@ export const ColumnDrag = ({
   useEffect(() => {
     columnDragCallback.current = onColumnDrag;
   }, [onColumnDrag]);
+
+  useEffect(() => {
+    console.log('titles changed');
+  }, [columnTitlesMap]);
 
   useEffect(() => {
     if (tableRef.current) {
@@ -100,10 +106,18 @@ export const ColumnDrag = ({
     }
     function renderMirror(dragColumn: HTMLElement | null) {
       // нужно избавить от data-th-title атрибута, так как в нем могут храниться не только строки
-      const title = dragColumn?.dataset.thTitle ?? '';
-      if (columnMirror?.lastElementChild) columnMirror.lastElementChild.innerHTML = title;
+      // const title = dragColumn?.dataset.thTitle ?? '';
+      const title = dragColumn?.querySelector('[data-title]');
+
+      if (columnMirror && title) {
+        columnMirror.appendChild(title.cloneNode(true));
+      }
     }
-    function removeMirror() {}
+    function removeMirror() {
+      if (columnMirror && columnMirror.lastChild) {
+        columnMirror.removeChild(columnMirror.lastChild);
+      }
+    }
 
     if (normalCols && isAnyColumnDraggable) {
       const observer = dragObserver(
@@ -139,7 +153,7 @@ export const ColumnDrag = ({
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
     ? createPortal(
         <Mirror $dimension={dimension} ref={columnMirrorRef}>
-          <MirrorText />
+          {/* <MirrorText /> */}
         </Mirror>,
         rootRef?.current || document.body,
       )

@@ -177,7 +177,8 @@ const rowList: RowData[] = [
 const columnList1: Column[] = [
   {
     name: 'transfer_type',
-    title: <div style={{ color: 'red' }}>'Тип сделки'</div>,
+    title: <div style={{ color: 'red' }}>'Тип сделки cltkrb cltrjj frfrj'</div>,
+    // title: 'Тип сделки',
     draggable: true,
   },
   {

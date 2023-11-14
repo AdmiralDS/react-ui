@@ -66,6 +66,7 @@ export const RowWrapper = ({
     e.stopPropagation();
   };
 
+  // зачем data-rowid, ведь есть data-row
   return (
     <Row
       {...props}
