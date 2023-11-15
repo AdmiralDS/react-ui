@@ -250,6 +250,45 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       }
     }, [availableSlots, dimension]);
 
+    const selectedPos = React.useRef<number | undefined>();
+
+    React.useEffect(() => {
+      let focused = false;
+
+      function handleClick() {
+        if (focused) return;
+
+        const input = inputRef.current;
+
+        focused = true;
+
+        if (input && input.selectionStart !== null && input.selectionStart === input.selectionEnd) {
+          const result = /[^:|\d]/gm.exec(input.value);
+          if (result) {
+            const notDigitalPos = result.index;
+            const position = notDigitalPos < input.selectionStart ? notDigitalPos : input.selectionStart;
+            selectedPos.current = undefined;
+            if (position >= 0) {
+              input.selectionStart = position;
+              input.selectionEnd = position;
+            }
+          }
+        }
+      }
+
+      function handleBlur() {
+        focused = false;
+      }
+
+      inputRef.current?.parentNode?.addEventListener('click', handleClick);
+      inputRef.current?.addEventListener('blur', handleBlur);
+
+      return () => {
+        inputRef.current?.parentNode?.removeEventListener('click', handleClick);
+        inputRef.current?.removeEventListener('blur', handleBlur);
+      };
+    }, []);
+
     return (
       <StyledTextInput
         {...props}
