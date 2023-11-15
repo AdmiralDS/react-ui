@@ -5,17 +5,44 @@ import type { ComponentDimension, ExtraProps, InputStatus } from '#src/component
 import { typography } from '#src/components/Typography';
 import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
 
+export const containerHeights = css<{ $dimension?: ComponentDimension }>`
+  height: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 'xl':
+        return '56px';
+      case 's':
+        return '32px';
+      default:
+        return '40px';
+    }
+  }};
+`;
+
 const Container = styled.div`
   min-width: 280px;
 
   display: inline-flex;
-  padding-left: 0px;
+
   align-items: center;
   gap: 8px;
   flex: 1 0 0;
   border-radius: var(--Medium, 4px);
   border: 2px solid var(--primary-primary-60-main, #0062ff);
   background: var(--neutral-neutral-white, #fff);
+
+  height: 40px;
+  padding-left: 16px;
+  ${typography['Button/Button 1']}
+
+  &[data-dimension='xl'] {
+    height: 56px;
+  }
+
+  &[data-dimension='s'] {
+    height: 32px;
+    padding-left: 12px;
+    ${typography['Button/Button 2']}
+  }
 `;
 
 const ieFixes = css`
@@ -86,7 +113,7 @@ const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentD
 
 const SubmitButton = styled.div`
   display: flex;
-  padding: 16px 24px;
+
   justify-content: center;
   align-items: flex-start;
   gap: 8px;
@@ -102,7 +129,28 @@ const SubmitButton = styled.div`
     cursor: pointer;
   }
 
-  ${typography['Button/Button 1']}
+  padding: 8px 16px;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  [data-dimension='xl'] & {
+    padding: 16px 24px;
+    & > svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  [data-dimension='s'] & {
+    padding: 6px 12px;
+    & > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 export interface RenderProps {
@@ -133,9 +181,9 @@ export interface GlobalSearchProps extends React.HTMLAttributes<HTMLInputElement
   /** Специальный метод для рендера опции списка префикса по значению */
   renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
 }
-export const GlobalSearch: FC<GlobalSearchProps> = (props) => {
+export const GlobalSearch: FC<GlobalSearchProps> = ({ dimension, ...props }) => {
   return (
-    <Container {...props}>
+    <Container data-dimension={dimension} {...props}>
       <Input />
       <SubmitButton>Найти</SubmitButton>
       <input type="submit" hidden />
