@@ -117,7 +117,9 @@ export interface TableRow {
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
-  groupRows?: Array<string>;
+  // groupRows?: Array<string>;
+  // проверить, что эта правка не вызовет никаких ошибок
+  groupRows?: Array<RowId>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
@@ -257,7 +259,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
   rowsDraggable?: boolean;
-  onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
+  onRowDrag?: (rowId: RowId, nextRowId: RowId | null, groupRowId: RowId | null) => void;
   renderDraggableColumn?: () => ReactNode;
   renderDraggableRow?: () => ReactNode;
   /** Объект, который описывает соответствие цвета строки и её статуса.

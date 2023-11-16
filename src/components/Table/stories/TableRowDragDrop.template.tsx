@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Table, T } from '@admiral-ds/react-ui';
-import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
+import type { TableProps, Column, TableRow, RowId } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const Separator = styled.div`
@@ -287,7 +287,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     setRows2(updRows);
   };
 
-  const handleRowDrag = (rowId: string, nextRowId: string | null) => {
+  const handleRowDrag = (rowId: RowId, nextRowId: RowId | null) => {
     const tableRows = [...rows];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
@@ -297,12 +297,26 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     setRows(tableRows);
   };
 
-  const handleRowDrag2 = (rowId: string, nextRowId: string | null) => {
+  const handleRowDrag2 = (rowId: RowId, nextRowId: RowId | null, groupRowId: RowId | null) => {
     const tableRows = [...rows2];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
     const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
     tableRows.splice(beforeIndex, 0, movedRow);
+
+    if (groupRowId) {
+      const groupRows = tableRows.filter((row) => row?.groupTitle);
+      groupRows.forEach((row) => {
+        if (row.id == groupRowId) {
+          const newGroup = row.groupRows?.filter((id) => id !== groupRowId) || [];
+          newGroup.unshift(groupRowId);
+          row.groupRows = newGroup;
+        } else if (row.groupRows) {
+          const newGroup = row.groupRows.filter((id) => id !== groupRowId);
+          row.groupRows = newGroup;
+        }
+      });
+    }
 
     setRows2(tableRows);
   };
