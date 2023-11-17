@@ -18,8 +18,10 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   tableWidth: number;
   /** Признак необходимости отображать нижнюю границу */
   underline: boolean;
-  /** Признак является ли сторока групповой */
+  /** Признак является ли строка заголовком группы */
   isGroup: boolean;
+  /** Id заголовка группы, к которой относится строка */
+  groupId: RowId | null;
   /** Наличие вертикального скролла в таблице */
   verticalScroll: boolean;
   /** Ширина вертикальной полосы прокрутки */
@@ -43,6 +45,7 @@ export const RowWrapper = ({
   children,
   tableWidth,
   isGroup,
+  groupId,
   rowWidth,
   verticalScroll,
   scrollbar,
@@ -66,7 +69,6 @@ export const RowWrapper = ({
     e.stopPropagation();
   };
 
-  // зачем data-rowid, ведь есть data-row
   return (
     <Row
       {...props}
@@ -77,12 +79,13 @@ export const RowWrapper = ({
       disabled={!!row.disabled}
       $dimension={dimension}
       className={`tr ${row.className || ''} hoverable`}
-      data-row={row.id}
       $isGroup={isGroup}
       $rowWidth={rowWidth}
       $hover={!!row.hover}
-      data-rowid={row.id}
-      data-grouprow={isGroup}
+      data-row={row.id}
+      data-group={isGroup}
+      data-ingroup={groupId}
+      data-first-row-in-group={row?.groupRows?.[0] || null}
     >
       <SimpleRow
         className="tr-simple"

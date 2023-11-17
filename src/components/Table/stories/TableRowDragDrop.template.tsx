@@ -28,6 +28,11 @@ type RowData = TableRow & {
   rate: number;
 };
 
+type RowData2 = TableRow & {
+  transfer_type: string;
+  row_type: string;
+};
+
 const rowList: RowData[] = [
   {
     id: '0001',
@@ -139,105 +144,49 @@ const rowList: RowData[] = [
   },
 ];
 
-const rowList2: RowData[] = [
+const rowList2: RowData2[] = [
   {
     id: '0002',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    transfer_type: 'МНО2',
+    row_type: 'Обычная',
   },
   {
     id: '0003',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    transfer_type: 'МНО3',
+    row_type: 'Обычная',
   },
   {
     id: '0004',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    transfer_type: 'МНО4',
+    row_type: 'Обычная',
   },
   {
     id: '0001',
     transfer_type: 'Group name',
+    row_type: 'Заголовок группы',
     expanded: false,
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
     groupTitle: 'Группа',
     groupRows: ['0007', '0008'],
   },
   {
     id: '0005',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    transfer_type: 'МНО5',
+    row_type: 'Обычная',
   },
   {
     id: '0006',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    transfer_type: 'МНО6',
+    row_type: 'Обычная',
   },
   {
     id: '0007',
     transfer_type: 'GR1',
-    transfer_date: new Date('2020-07-18').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    row_type: 'Групповая',
   },
   {
     id: '0008',
     transfer_type: 'GR1',
-    transfer_date: new Date('2020-08-25').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(100)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    row_type: 'Групповая',
   },
 ];
 
@@ -266,9 +215,21 @@ const columnList: Column[] = [
   },
 ];
 
+const columnList2: Column[] = [
+  {
+    name: 'transfer_type',
+    title: 'Тип сделки',
+  },
+  {
+    name: 'row_type',
+    title: 'Тип строки',
+    width: 150,
+  },
+];
+
 export const TableRowDragDropTemplate = (props: TableProps) => {
   const [cols, setCols] = React.useState(columnList);
-  const [cols2, setCols2] = React.useState(columnList);
+  const [cols2, setCols2] = React.useState(columnList2);
   const [rows, setRows] = React.useState(rowList);
   const [rows2, setRows2] = React.useState(rowList2);
 
@@ -301,22 +262,23 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     const tableRows = [...rows2];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
+    movedRow['row_type'] = groupRowId ? 'Групповая' : 'Обычная';
     const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
     tableRows.splice(beforeIndex, 0, movedRow);
 
-    if (groupRowId) {
-      const groupRows = tableRows.filter((row) => row?.groupTitle);
-      groupRows.forEach((row) => {
-        if (row.id == groupRowId) {
-          const newGroup = row.groupRows?.filter((id) => id !== groupRowId) || [];
-          newGroup.unshift(groupRowId);
-          row.groupRows = newGroup;
-        } else if (row.groupRows) {
-          const newGroup = row.groupRows.filter((id) => id !== groupRowId);
-          row.groupRows = newGroup;
-        }
-      });
-    }
+    // if (groupRowId) {
+    const groupRows = tableRows.filter((row) => row?.groupTitle);
+    groupRows.forEach((row) => {
+      if (row.id == groupRowId) {
+        const newGroup = row.groupRows?.filter((id) => id !== rowId) || [];
+        newGroup.unshift(rowId);
+        row.groupRows = newGroup;
+      } else if (row.groupRows) {
+        const newGroup = row.groupRows.filter((id) => id !== rowId);
+        row.groupRows = newGroup;
+      }
+    });
+    // }
 
     setRows2(tableRows);
   };

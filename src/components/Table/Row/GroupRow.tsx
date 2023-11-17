@@ -21,7 +21,6 @@ export interface GroupRowProps extends Omit<RegularRowProps, 'columns' | 'sticky
   indeterminate?: boolean;
   /** Значение checkbox-а */
   checked?: boolean;
-  firstRowIngroup?: string | number | null;
 }
 
 export const GroupRow = ({
@@ -35,7 +34,6 @@ export const GroupRow = ({
   onRowSelectionChange,
   indeterminate,
   checked,
-  firstRowIngroup,
 }: GroupRowProps) => {
   const handleExpandClick = (e: React.MouseEvent<HTMLElement>) => {
     // клик по иконке стрелки не должен вызывать событие клика по строке
@@ -64,7 +62,7 @@ export const GroupRow = ({
 
   return (
     <>
-      <StickyGroupRow data-first-row={firstRowIngroup}>
+      <StickyGroupRow>
         {rowsDraggable && <DragCell $dimension={dimension} />}
         <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
           <ExpandIconPlacement

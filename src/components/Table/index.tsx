@@ -472,7 +472,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           renderCell={renderCell}
           indeterminate={indeterminate}
           checked={checked}
-          firstRowIngroup={row.groupRows?.[0] || 'null'}
         />
       );
     };
@@ -522,6 +521,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           underline={(isLastRow && showLastRowUnderline) || !isLastRow}
           tableWidth={tableWidth}
           isGroup={isGroupRow}
+          groupId={rowToGroupMap[row.id]?.groupId || null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}

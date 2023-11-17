@@ -57,16 +57,19 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
     const body = scrollBodyRef.current;
     const rowMirror = rowMirrorRef.current;
 
-    function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
-      if (
-        before?.dataset?.grouprow == 'true' ||
-        (before?.previousElementSibling as HTMLElement)?.dataset?.grouprow == 'true'
-      ) {
-        // неправильно работает второе условие, оно достижимо не только кгда курсор над заголовком группы
-        console.log('cursor under group row');
-      }
-      if (item?.dataset?.rowid) {
-        rowDragCallback.current?.(item.dataset.rowid, before?.dataset?.rowid ?? null, null);
+    function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: any) {
+      if (immediate?.dataset?.group == 'true') {
+        if (item?.dataset?.row && immediate?.dataset?.firstRowInGroup) {
+          rowDragCallback.current?.(item.dataset.row, immediate.dataset.firstRowInGroup, immediate.dataset.row);
+        }
+      } else {
+        if (item?.dataset?.row) {
+          rowDragCallback.current?.(
+            item.dataset.row,
+            before?.dataset?.row ?? null,
+            immediate?.dataset?.inGroup ?? null,
+          );
+        }
       }
     }
     function handleDragStart() {

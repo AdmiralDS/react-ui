@@ -118,7 +118,7 @@ export interface TableRow {
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
   // groupRows?: Array<string>;
-  // проверить, что эта правка не вызовет никаких ошибок
+  // проверить, что эта правка не вызовет никаких
   groupRows?: Array<RowId>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
