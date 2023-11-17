@@ -17,11 +17,9 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Опциональная надстройка над таблицей. Размерность : xl - 56px, l - 48px, m - 40px, s - 32px
-    <br />
-    Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue,
-    для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") -
-    settingsMenu
+    Компонент глобального поиска используется для поиска релевантных значений по введенному запросу. Используется,
+    например, для поиска по сайту. Как правило, располагается в верхней части страницы или шапке сайта, как один из
+    главных элементов взаимодействия.
   </Desc>
 );
 export default {
@@ -38,7 +36,7 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=39%3A91211',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=158162-129541',
       },
     ],
   },
@@ -89,13 +87,19 @@ export const PaneSimpleExample = {
         code: BasicExampleRaw,
       },
       description: {
-        story:
-          'Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue, ' +
-          'для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") - ' +
-          'settingsMenu',
+        story: 'Для того чтобы была ....',
       },
     },
   },
 
   name: 'Простой пример',
+  args: {
+    placeholder: 'Искать ...',
+    submitButtonProps: {
+      children: 'Найти',
+      onClick() {
+        console.log('Button cliked or Enter key was pressed. Run your function.');
+      },
+    },
+  },
 };

@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components';
 import type { FC, ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
-import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
+import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
-import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
+import { InputBorderedDiv } from '#src/components/input/TextInput';
+import { DropdownContainer } from '../DropdownContainer';
+
+import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
 export const containerHeights = css<{ $dimension?: ComponentDimension }>`
   height: ${({ $dimension }) => {
@@ -113,7 +117,7 @@ const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentD
 
 const SubmitButton = styled.div`
   display: flex;
-
+  user-select: none;
   justify-content: center;
   align-items: flex-start;
   gap: 8px;
@@ -132,8 +136,8 @@ const SubmitButton = styled.div`
   padding: 8px 16px;
 
   & > svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 
   [data-dimension='xl'] & {
@@ -162,7 +166,10 @@ export type RenderPropsType<T> = {
   value: T;
 };
 
-export interface GlobalSearchProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface GlobalSearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Пропсы для части кнопки */
+  submitButtonProps?: React.HTMLAttributes<HTMLDivElement>;
+
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
@@ -181,12 +188,54 @@ export interface GlobalSearchProps extends React.HTMLAttributes<HTMLInputElement
   /** Специальный метод для рендера опции списка префикса по значению */
   renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
 }
-export const GlobalSearch: FC<GlobalSearchProps> = ({ dimension, ...props }) => {
+
+export const GlobalSearch: FC<GlobalSearchProps> = ({
+  dimension,
+  placeholder,
+  id,
+  value,
+  defaultValue,
+  onChange,
+  children,
+  submitButtonProps = {},
+  ...props
+}) => {
+  const [inFocus, setInFocus] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const submitButtonRef = useRef<HTMLDivElement>(null);
+  const inputProps = { placeholder, id, value, defaultValue, onChange };
+  useEffect(() => {
+    if (inFocus) {
+      const listener = (event: KeyboardEvent) => {
+        if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+          event.preventDefault();
+          event.stopPropagation();
+          if (submitButtonRef.current) {
+            submitButtonRef.current.click();
+          }
+        }
+      };
+      document.addEventListener('keydown', listener);
+      return () => {
+        document.removeEventListener('keydown', listener);
+      };
+    }
+  }, [inFocus]);
   return (
-    <Container data-dimension={dimension} {...props}>
-      <Input />
-      <SubmitButton>Найти</SubmitButton>
-      <input type="submit" hidden />
+    <Container
+      data-dimension={dimension}
+      {...props}
+      ref={containerRef}
+      onFocus={() => setInFocus(true)}
+      onBlur={() => setInFocus(false)}
+    >
+      <Input {...inputProps} />
+      <SubmitButton
+        {...submitButtonProps}
+        children={submitButtonProps.children ?? <SearchOutline />}
+        ref={submitButtonRef}
+      />
+      <DropdownContainer alignSelf="stretch" targetRef={containerRef} children={children} />
     </Container>
   );
 };
