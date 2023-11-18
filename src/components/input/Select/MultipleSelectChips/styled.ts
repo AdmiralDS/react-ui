@@ -2,13 +2,6 @@ import styled, { css } from 'styled-components';
 import { COUNTER_WIDTH } from '#src/components/input/Select/constants';
 import { Chips } from '#src/components/Chips';
 
-export const ChipsHintWrap = styled.div`
-  display: flex;
-  gap: 4px;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
 export const ShadowCounterChip = styled.div`
   width: ${COUNTER_WIDTH}px;
   height: 24px;
@@ -37,6 +30,7 @@ export const StyledCounterChip = styled(Chips)`
   align-items: center;
   width: 35px;
   padding: 4px 0;
+  cursor: pointer;
 `;
 
 export const ContentTooltip = styled.div`
