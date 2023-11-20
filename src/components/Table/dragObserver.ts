@@ -24,6 +24,7 @@ export function dragObserver(
   let _mirror: HTMLElement | null; // mirror image
   let _source: HTMLElement | null; // source container
   let _item: HTMLElement | null; // item being dragged
+  let _itemSelector: string = '';
   let _offsetX: number; // reference x
   let _offsetY: number; // reference y
   let _initialSibling: HTMLElement | null; // reference sibling when grabbed
@@ -153,6 +154,10 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
+    _itemSelector =
+      o.direction == 'vertical'
+        ? `[data-row="${context.item?.dataset.row || ''}"]`
+        : `[data-th-column="${context.item?.dataset.thColumn || ''}"]`;
     _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
@@ -205,6 +210,7 @@ export function dragObserver(
     drake.dragging = false;
     onDragEnd?.();
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
+    _itemSelector = '';
   }
 
   function isInitialPlacement(target: any, s?: any) {
@@ -247,6 +253,8 @@ export function dragObserver(
       return;
     }
     e.preventDefault();
+
+    // const _item = getDragItem(_itemSelector);
 
     const clientX = getCoord('clientX', e) || 0;
     const clientY = getCoord('clientY', e) || 0;
@@ -296,9 +304,20 @@ export function dragObserver(
       if (_item.nextElementSibling === null && reference === null) {
         return;
       }
-
       onDrop?.(_item, reference, immediate);
     }
+  }
+
+  // при перетаскивании строки, сама перетаскиваемая строка может изменяться (удаляться, добавляться) и это каждый раз новый элемент
+  function getDragItem(selector: string) {
+    let result = null;
+    for (let c of o.containers) {
+      let res = c.querySelector(selector);
+      if (res) {
+        result = res;
+      }
+    }
+    return result as HTMLElement;
   }
 
   function renderMirrorImage() {

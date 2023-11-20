@@ -266,7 +266,6 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
     tableRows.splice(beforeIndex, 0, movedRow);
 
-    // if (groupRowId) {
     const groupRows = tableRows.filter((row) => row?.groupTitle);
     groupRows.forEach((row) => {
       if (row.id == groupRowId) {
@@ -278,7 +277,6 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
         row.groupRows = newGroup;
       }
     });
-    // }
 
     setRows2(tableRows);
   };

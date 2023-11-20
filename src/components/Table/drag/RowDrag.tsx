@@ -58,6 +58,7 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
     const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: any) {
+      console.log({ item, before, immediate });
       if (immediate?.dataset?.group == 'true') {
         if (item?.dataset?.row && immediate?.dataset?.firstRowInGroup) {
           rowDragCallback.current?.(item.dataset.row, immediate.dataset.firstRowInGroup, immediate.dataset.row);
