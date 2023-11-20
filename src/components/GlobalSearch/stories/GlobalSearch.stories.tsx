@@ -8,6 +8,7 @@ import { BasicExampleTemplate } from './BasicExample.template';
 
 // Imports of text sources
 import BasicExampleRaw from './BasicExample.template?raw';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -75,8 +76,12 @@ export default {
   },
 } as Meta<typeof GlobalSearch>;
 
-//<editor-fold desc="Simple">
-const PaneSimpleStory: StoryFn<typeof GlobalSearch> = (props) => <BasicExampleTemplate {...props} />;
+const queryClient = new QueryClient();
+const PaneSimpleStory: StoryFn<typeof GlobalSearch> = (props) => (
+  <QueryClientProvider client={queryClient}>
+    <BasicExampleTemplate {...props} />
+  </QueryClientProvider>
+);
 
 export const PaneSimpleExample = {
   render: PaneSimpleStory,

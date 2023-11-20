@@ -3,6 +3,7 @@ import type { FC, ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { InputBorderedDiv } from '#src/components/input/TextInput';
 import { DropdownContainer } from '../DropdownContainer';
@@ -21,7 +22,28 @@ export const containerHeights = css<{ $dimension?: ComponentDimension }>`
     }
   }};
 `;
+const Drop = styled(DropdownContainer)`
+  padding: 8px 0px;
+  ${(p) => p.theme.shadow['Shadow 08']}
+  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
 
+export const GlobalSearchOption = styled.div`
+  display: flex;
+  padding: 12px 16px;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+
+  overflow: hidden;
+  color: var(--neutral-neutral-90, #23262d);
+  font-variant-numeric: lining-nums tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  ${typography['Body/Body 1 Long']}
+`;
 const Container = styled.div`
   min-width: 280px;
 
@@ -235,7 +257,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         children={submitButtonProps.children ?? <SearchOutline />}
         ref={submitButtonRef}
       />
-      <DropdownContainer alignSelf="stretch" targetRef={containerRef} children={children} />
+      <Drop alignSelf="stretch" targetRef={containerRef} children={children} />
     </Container>
   );
 };
