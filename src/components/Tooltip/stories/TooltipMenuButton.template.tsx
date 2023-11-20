@@ -73,6 +73,7 @@ export const TooltipMenuButtonTemplate = ({
       </MenuButton>
       {visible && (
         <Tooltip
+          dimension={props.dimension}
           targetElement={btnRef.current}
           renderContent={renderTooltipContent}
           tooltipPosition={props.tooltipPosition}
