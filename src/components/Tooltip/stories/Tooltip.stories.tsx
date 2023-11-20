@@ -8,12 +8,14 @@ import { TooltipBaseTemplate } from './TooltipBase.template';
 import { TooltipDelayTemplate } from './TooltipDelay.template';
 import { TooltipRefTemplate } from './TooltipRef.template';
 import { TooltipMenuButtonTemplate } from './TooltipMenuButton.template';
+import { TooltipCustomTemplate } from './TooltipCustom.template';
 
 // Imports of text sources
 import TooltipBaseRaw from './TooltipBase.template?raw';
 import TooltipDelayRaw from './TooltipDelay.template?raw';
 import TooltipRefRaw from './TooltipRef.template?raw';
 import TooltipMenuButtonRaw from './TooltipMenuButton.template?raw';
+import TooltipCustomRaw from './TooltipCustom.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -169,6 +171,25 @@ export const TooltipRefExample = {
   },
 
   name: 'Tooltip. Пример с получением ref тултипа.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Пример с получением ref тултипа">
+const TooltipCustomStory: StoryFn<typeof Tooltip> = (props) => <TooltipCustomTemplate {...props} />;
+
+export const TooltipCustomExample = {
+  render: TooltipCustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TooltipCustomRaw,
+      },
+    },
+  },
+
+  name: 'Tooltip. Пример с кастомным наполнением тултипа.',
 };
 
 //</editor-fold>
