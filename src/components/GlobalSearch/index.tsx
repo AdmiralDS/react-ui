@@ -1,14 +1,39 @@
 import styled, { css } from 'styled-components';
 import type { FC, ReactNode } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Children } from 'react';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { InputBorderedDiv } from '#src/components/input/TextInput';
-import { DropdownContainer } from '../DropdownContainer';
-
+import { DropdownContainer } from '#src/components//DropdownContainer';
+import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { InputIconButton } from '#src/components/InputIconButton';
+import { changeInputData } from '#src/components/common/dom/changeInputData';
+
+const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
+    case 'xl':
+      return 24;
+    case 's':
+      return 20;
+    default:
+      return 24;
+  }
+};
+
+const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
+  switch (props.$dimension) {
+    case 'xl':
+      return 16;
+    case 's':
+      return 12;
+    default:
+      return 16;
+  }
+};
 
 export const containerHeights = css<{ $dimension?: ComponentDimension }>`
   height: ${({ $dimension }) => {
@@ -22,6 +47,11 @@ export const containerHeights = css<{ $dimension?: ComponentDimension }>`
     }
   }};
 `;
+
+const extraPadding = css<ExtraProps>`
+  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
+`;
+
 const Drop = styled(DropdownContainer)`
   padding: 8px 0px;
   ${(p) => p.theme.shadow['Shadow 08']}
@@ -29,27 +59,39 @@ const Drop = styled(DropdownContainer)`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
 `;
 
-export const GlobalSearchOption = styled.div`
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
+  flex: 0 0 auto;
+
   display: flex;
-  padding: 12px 16px;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
+  align-items: center;
 
-  overflow: hidden;
-  color: var(--neutral-neutral-90, #23262d);
-  font-variant-numeric: lining-nums tabular-nums;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  padding-right: ${horizontalPaddingValue}px;
 
-  ${typography['Body/Body 1 Long']}
+  & > svg {
+    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    display: block;
+    width: ${iconSizeValue}px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline-offset: 2px;
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    }
+  }
+
+  & > *:not(:first-child) {
+    margin-left: 8px;
+  }
 `;
+
 const Container = styled.div`
   min-width: 280px;
-
   display: inline-flex;
 
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
   flex: 1 0 0;
   border-radius: var(--Medium, 4px);
@@ -124,6 +166,7 @@ const Input = styled.input<ExtraProps>`
   }
 
   ${ieFixes}
+  ${extraPadding}
 `;
 
 const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -189,7 +232,13 @@ export type RenderPropsType<T> = {
 };
 
 export interface GlobalSearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  /** Пропсы для части кнопки */
+  /** Отображать иконку очистки поля */
+  displayClearIcon?: boolean;
+
+  /** Отображать статус загрузки данных */
+  isLoading?: boolean;
+
+  /** Пропсы для кнопки поиска*/
   submitButtonProps?: React.HTMLAttributes<HTMLDivElement>;
 
   /** Делает высоту компонента больше или меньше обычной */
@@ -209,6 +258,9 @@ export interface GlobalSearchProps extends React.InputHTMLAttributes<HTMLInputEl
 
   /** Специальный метод для рендера опции списка префикса по значению */
   renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+
+  /** Иконки для отображения в правом углу поля */
+  icons?: React.ReactNode;
 }
 
 export const GlobalSearch: FC<GlobalSearchProps> = ({
@@ -220,9 +272,13 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   onChange,
   children,
   submitButtonProps = {},
+  icons,
+  displayClearIcon,
+  isLoading,
   ...props
 }) => {
   const [inFocus, setInFocus] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const submitButtonRef = useRef<HTMLDivElement>(null);
   const inputProps = { placeholder, id, value, defaultValue, onChange };
@@ -243,6 +299,31 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       };
     }
   }, [inFocus]);
+  const iconArray = Children.toArray(icons);
+
+  if (displayClearIcon && !!value) {
+    iconArray.unshift(
+      <InputIconButton
+        icon={CloseOutlineSvg}
+        key="clear-icon"
+        onMouseDown={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          const inputEl = inputRef.current;
+          if (inputEl) {
+            changeInputData(inputEl, { value: '' });
+          }
+        }}
+        aria-hidden
+      />,
+    );
+  }
+
+  if (isLoading) {
+    iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
+  }
+
+  const iconCount = iconArray.length;
   return (
     <Container
       data-dimension={dimension}
@@ -251,7 +332,12 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       onFocus={() => setInFocus(true)}
       onBlur={() => setInFocus(false)}
     >
-      <Input {...inputProps} />
+      <Input {...inputProps} ref={inputRef} />
+      {iconCount > 0 ? (
+        <IconPanel disabled={props.disabled} $dimension={dimension}>
+          {iconArray}
+        </IconPanel>
+      ) : null}
       <SubmitButton
         {...submitButtonProps}
         children={submitButtonProps.children ?? <SearchOutline />}
