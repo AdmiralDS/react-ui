@@ -88,7 +88,7 @@ export const ChipBox = React.forwardRef<HTMLDivElement, ChipBoxProps>(
           onChipRemove={onChipRemove}
         />
         {shouldShowCount && childrenOptions.length > 0 && (
-          <CounterChip onClick={onChipClick} count={childrenOptions.length} disabled={disabled}>
+          <CounterChip count={childrenOptions.length} disabled={disabled}>
             {childrenOptions.map((innerOption) => (
               <InfoChip
                 key={innerOption.value}

@@ -1,24 +1,32 @@
 import * as React from 'react';
-import { Tooltip, TOOLTIP_DELAY, Button } from '@admiral-ds/react-ui';
-import type { ITooltipProps, BorderRadiusType } from '@admiral-ds/react-ui';
-import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import { Tooltip, Button, T, typography } from '@admiral-ds/react-ui';
+import type { ITooltipProps, BorderRadiusType, TooltipDimension } from '@admiral-ds/react-ui';
+import { ReactComponent as VIPOutline } from '@admiral-ds/icons/build/category/VIPOutline.svg';
+
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-export const TooltipDelayTemplate = ({
+const CustomP = styled.p<{ $dimension?: TooltipDimension }>`
+  padding: 0;
+  margin: 0;
+  color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  ${(p) => (p.$dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Caption/Caption 1'])};
+  ${(p) => (p.$dimension === 's' ? 'font-weight: bold;' : '')};
+`;
+
+export const TooltipCustomTemplate = ({
   themeBorderKind,
   ...props
 }: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
-  const btnRef = React.useRef<HTMLButtonElement | null>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
-  const [timer, setTimer] = React.useState<number>();
 
   React.useEffect(() => {
     function show() {
-      setTimer(window.setTimeout(() => setVisible(true), TOOLTIP_DELAY));
+      setVisible(true);
     }
     function hide() {
-      clearTimeout(timer);
       setVisible(false);
     }
     const button = btnRef.current;
@@ -32,33 +40,36 @@ export const TooltipDelayTemplate = ({
       button.addEventListener('mouseleave', hide);
       button.addEventListener('blur', hide);
       return () => {
-        if (timer) clearTimeout(timer);
         button.removeEventListener('mouseenter', show);
         button.removeEventListener('focus', show);
         button.removeEventListener('mouseleave', hide);
         button.removeEventListener('blur', hide);
       };
     }
-  }, [setTimer, setVisible, timer]);
+  }, [setVisible]);
+
+  const renderTooltipContent = () => {
+    return (
+      <>
+        <CustomP $dimension={props.dimension}>Фамилия Имя Отчество</CustomP>
+        <T font={props.dimension === 'm' ? 'Body/Body 2 Short' : 'Caption/Caption 1'} color="Neutral/Neutral 00">
+          Старший дизайнер
+        </T>
+      </>
+    );
+  };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
-        <DeleteOutline aria-hidden />
+        <VIPOutline aria-hidden />
       </Button>
       {visible && (
         <Tooltip
           dimension={props.dimension}
           targetElement={btnRef.current}
-          renderContent={() =>
-            `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-          College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage,
-          and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem
-          Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum'`
-          }
+          renderContent={renderTooltipContent}
           tooltipPosition={props.tooltipPosition}
-          style={{ minWidth: '200px', maxWidth: '300px' }}
           id="test1"
         />
       )}
