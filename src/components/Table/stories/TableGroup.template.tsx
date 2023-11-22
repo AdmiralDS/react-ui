@@ -17,17 +17,23 @@ const AmountCell = styled.div`
 const numberFormatter = new Intl.NumberFormat();
 
 type RowData = TableRow & {
-  transfer_type: string;
-  transfer_date: string;
-  transfer_amount: React.ReactNode;
-  currency: string;
-  rate: number;
+  transfer_type?: string;
+  transfer_date?: string;
+  transfer_amount?: React.ReactNode;
+  currency?: string;
+  rate?: number;
 };
 
 const rowList: RowData[] = [
   {
+    id: '0001',
+    expanded: false,
+    groupTitle: 'First group name',
+    groupRows: ['0002', '0003'],
+  },
+  {
     id: '0002',
-    transfer_type: 'МНО',
+    transfer_type: 'GR1',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -39,7 +45,7 @@ const rowList: RowData[] = [
   },
   {
     id: '0003',
-    transfer_type: 'МНО',
+    transfer_type: 'GR1',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -51,34 +57,13 @@ const rowList: RowData[] = [
   },
   {
     id: '0004',
-    transfer_type: 'МНО',
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(32_500_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-  },
-  {
-    id: '0001',
-    transfer_type: 'Group name',
-    expanded: false,
-    transfer_date: new Date('2020-08-06').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(18_000_000)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
-    groupTitle: 'Группа',
-    groupRows: ['0007', '0008'],
+    expanded: true,
+    groupTitle: 'Second group name',
+    groupRows: ['0005', '0006'],
   },
   {
     id: '0005',
-    transfer_type: 'МНО',
+    transfer_type: 'GR2',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -90,7 +75,7 @@ const rowList: RowData[] = [
   },
   {
     id: '0006',
-    transfer_type: 'МНО',
+    transfer_type: 'GR2',
     transfer_date: new Date('2020-08-06').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
@@ -102,19 +87,13 @@ const rowList: RowData[] = [
   },
   {
     id: '0007',
-    transfer_type: 'GR1',
-    transfer_date: new Date('2020-07-18').toLocaleDateString(),
-    transfer_amount: (
-      <AmountCell>
-        <T font="Body/Body 2 Short">{numberFormatter.format(200)}</T>
-      </AmountCell>
-    ),
-    currency: 'RUB',
-    rate: 2.5,
+    expanded: true,
+    groupTitle: 'Third group name',
+    groupRows: ['0008'],
   },
   {
     id: '0008',
-    transfer_type: 'GR1',
+    transfer_type: 'GR3',
     transfer_date: new Date('2020-08-25').toLocaleDateString(),
     transfer_amount: (
       <AmountCell>
