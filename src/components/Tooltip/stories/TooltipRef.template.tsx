@@ -46,6 +46,7 @@ export const TooltipRefTemplate = ({
       </Button>
       {visible && (
         <Tooltip
+          dimension={props.dimension}
           targetElement={btnRef.current}
           renderContent={() => 'Delete file'}
           ref={tooltipRef}
