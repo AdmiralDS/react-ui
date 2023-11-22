@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { GlobalSearch, useDebounce, Menu, MenuItem } from '@admiral-ds/react-ui';
-import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps } from '@admiral-ds/react-ui';
+import { GlobalSearch, useDebounce, Menu, MenuItem, getTextHighlightMeta } from '@admiral-ds/react-ui';
+import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps, HighlightFormat } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import styled, { ThemeProvider } from 'styled-components';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
@@ -25,6 +25,19 @@ const TextBlock = styled.div`
 const ItemList = styled(Menu)`
   max-height: 496px;
 `;
+
+const Highlight = styled.span`
+  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+`;
+
+function getHighlightedText(text = '', highlight = '', highlightFormat: HighlightFormat = 'wholly') {
+  const { parts, chunks } = getTextHighlightMeta(text, highlight, highlightFormat);
+
+  return parts.map((part, i) =>
+    chunks.indexOf(part.toLowerCase()) >= 0 ? <Highlight key={i}>{part}</Highlight> : part,
+  );
+}
+
 //
 // В storybook QueryClientProvider должен быть подготовлен на уровень выше чем темплейт примера:
 //
@@ -68,7 +81,7 @@ export const BasicExampleTemplate = ({
         render: (options: RenderOptionProps) => (
           <Item {...options} key={item.text + '_' + index}>
             <TimeOutline width={24} />
-            <TextBlock>{item.text}</TextBlock>
+            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
           </Item>
         ),
       })),
@@ -77,12 +90,12 @@ export const BasicExampleTemplate = ({
         render: (options: RenderOptionProps) => (
           <Item {...options} key={item.text + '_' + index}>
             <SearchOutline width={24} />
-            <TextBlock>{item.text}</TextBlock>
+            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
           </Item>
         ),
       })),
     ];
-  }, [options]);
+  }, [options, history, searchValue]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['people', debouncedFilter],
