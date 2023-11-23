@@ -22,7 +22,7 @@ const TextBlock = styled.div`
   white-space: nowrap;
 `;
 
-const ItemList = styled(Menu)`
+const MenuList = styled(Menu)`
   max-height: 496px;
 `;
 
@@ -67,35 +67,34 @@ export const BasicExampleTemplate = ({
   ...props
 }: GlobalSearchProps & { themeBorderKind?: BorderRadiusType }) => {
   const [history, setHistory] = React.useState<Array<{ value: string; text: string }>>([]);
-  const [searchValue, setSearchValue] = React.useState(props.value ? String(props.value) : '');
+  const [searchValue, setSearchValue] = React.useState('');
+  const [tempValue, setTempValue] = React.useState<string | undefined>();
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
 
   const [filter, setFilter] = React.useState('');
 
   const debouncedFilter = useDebounce(filter, 500);
 
-  const model = React.useMemo(() => {
-    return [
-      ...history.map((item, index) => ({
-        id: item.text + '_' + index,
-        render: (options: RenderOptionProps) => (
-          <Item {...options} key={item.text + '_' + index}>
-            <TimeOutline width={24} />
-            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
-          </Item>
-        ),
-      })),
-      ...options.map((item, index) => ({
-        id: item.text + '_' + index,
-        render: (options: RenderOptionProps) => (
-          <Item {...options} key={item.text + '_' + index}>
-            <SearchOutline width={24} />
-            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
-          </Item>
-        ),
-      })),
-    ];
-  }, [options, history, searchValue]);
+  const model = [
+    ...history.map((item, index) => ({
+      id: item.text,
+      render: (options: RenderOptionProps) => (
+        <Item {...options} key={item.text + '_' + index}>
+          <TimeOutline width={24} />
+          <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
+        </Item>
+      ),
+    })),
+    ...options.map((item, index) => ({
+      id: item.text,
+      render: (options: RenderOptionProps) => (
+        <Item {...options} key={item.text + '_' + index}>
+          <SearchOutline width={24} />
+          <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
+        </Item>
+      ),
+    })),
+  ];
 
   const { data, isLoading } = useQuery({
     queryKey: ['people', debouncedFilter],
@@ -114,23 +113,54 @@ export const BasicExampleTemplate = ({
     const value = e.target.value;
     setSearchValue(value);
     setFilter(value);
+    setTempValue(undefined);
   };
 
   const handleSubmitButtonClick = () => {
+    console.log('handleSubmitButtonClick');
+    if (tempValue) {
+      setSearchValue(tempValue);
+      setTempValue(undefined);
+    }
     setHistory((oldHistory) => [{ value: searchValue, text: searchValue }, ...oldHistory]);
   };
 
+  const handleMenuSelectItem = (id: string) => {
+    console.log('handleMenuSelectItem');
+    setSearchValue(id);
+    setTempValue(undefined);
+  };
+
+  const handleMenuActivateItem = (id?: string) => {
+    console.log('handleMenuActivateItem');
+    setTempValue(id);
+  };
+
+  const handleMenuMouseLeave = () => {
+    setTempValue(undefined);
+  };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <GlobalSearch
           {...props}
-          value={searchValue}
+          value={tempValue ?? searchValue}
           onChange={handleOnChange}
-          submitButtonProps={{ onClick: handleSubmitButtonClick }}
+          submitButtonProps={{ onClick: handleSubmitButtonClick, children: 'Найти' }}
           isLoading={isLoading}
         >
-          <ItemList defaultIsActive={false} model={model} />
+          <Menu
+            maxHeight="496px"
+            rowCount={10}
+            defaultIsActive={false}
+            model={model}
+            onSelectItem={handleMenuSelectItem}
+            active={tempValue}
+            onActivateItem={handleMenuActivateItem}
+            onMouseLeave={handleMenuMouseLeave}
+            disableSelectedOptionHighlight
+            preventFocusSteal
+          />
         </GlobalSearch>
       </Wrapper>
     </ThemeProvider>

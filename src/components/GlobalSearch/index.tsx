@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { FC, ReactNode } from 'react';
+import type { ChangeEvent, FC, ReactNode } from 'react';
 import { useEffect, useRef, useState, Children } from 'react';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
@@ -61,11 +61,9 @@ const Drop = styled(DropdownContainer)`
 
 const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   flex: 0 0 auto;
-
+  gap: 8px;
   display: flex;
   align-items: center;
-
-  padding-right: ${horizontalPaddingValue}px;
 
   & > svg {
     border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
@@ -81,18 +79,13 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
     }
   }
-
-  & > *:not(:first-child) {
-    margin-left: 8px;
-  }
 `;
 
 const Container = styled.div`
   min-width: 280px;
   display: inline-flex;
-
-  align-items: stretch;
   gap: 8px;
+  align-items: stretch;
   flex: 1 0 0;
   border-radius: var(--Medium, 4px);
   border: 2px solid var(--primary-primary-60-main, #0062ff);
@@ -166,7 +159,6 @@ const Input = styled.input<ExtraProps>`
   }
 
   ${ieFixes}
-  ${extraPadding}
 `;
 
 const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -277,7 +269,8 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   isLoading,
   ...props
 }) => {
-  const [inFocus, setInFocus] = useState(false);
+  const [displayOptionsVisible, setDisplayOptionsVisible] = useState<boolean>(false);
+  const [inFocus, setInFocus] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const submitButtonRef = useRef<HTMLDivElement>(null);
@@ -324,15 +317,23 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   }
 
   const iconCount = iconArray.length;
+
+  const handleInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    inputProps.onChange?.(e);
+    setDisplayOptionsVisible(true);
+  };
   return (
     <Container
       data-dimension={dimension}
       {...props}
       ref={containerRef}
       onFocus={() => setInFocus(true)}
-      onBlur={() => setInFocus(false)}
+      onBlur={() => {
+        setInFocus(false);
+        setDisplayOptionsVisible(false);
+      }}
     >
-      <Input {...inputProps} ref={inputRef} />
+      <Input {...inputProps} onChange={handleInputOnChange} ref={inputRef} />
       {iconCount > 0 ? (
         <IconPanel disabled={props.disabled} $dimension={dimension}>
           {iconArray}
@@ -341,9 +342,13 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       <SubmitButton
         {...submitButtonProps}
         children={submitButtonProps.children ?? <SearchOutline />}
+        onClick={(e) => {
+          submitButtonProps.onClick?.(e);
+          setDisplayOptionsVisible(false);
+        }}
         ref={submitButtonRef}
       />
-      <Drop alignSelf="stretch" targetRef={containerRef} children={children} />
+      {displayOptionsVisible && <Drop alignSelf="stretch" targetRef={containerRef} children={children} />}
     </Container>
   );
 };
