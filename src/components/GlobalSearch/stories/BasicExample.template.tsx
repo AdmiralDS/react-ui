@@ -22,10 +22,6 @@ const TextBlock = styled.div`
   white-space: nowrap;
 `;
 
-const MenuList = styled(Menu)`
-  max-height: 496px;
-`;
-
 const Highlight = styled.span`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
@@ -68,7 +64,7 @@ export const BasicExampleTemplate = ({
 }: GlobalSearchProps & { themeBorderKind?: BorderRadiusType }) => {
   const [history, setHistory] = React.useState<Array<{ value: string; text: string }>>([]);
   const [searchValue, setSearchValue] = React.useState('');
-  const [tempValue, setTempValue] = React.useState<string | undefined>();
+  const [tempValue, setTempValue] = React.useState<string>('');
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
 
   const [filter, setFilter] = React.useState('');
@@ -79,7 +75,7 @@ export const BasicExampleTemplate = ({
     ...history.map((item, index) => ({
       id: item.text,
       render: (options: RenderOptionProps) => (
-        <Item {...options} key={item.text + '_' + index}>
+        <Item {...options} key={item.text + '_history_' + index}>
           <TimeOutline width={24} />
           <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
         </Item>
@@ -88,7 +84,7 @@ export const BasicExampleTemplate = ({
     ...options.map((item, index) => ({
       id: item.text,
       render: (options: RenderOptionProps) => (
-        <Item {...options} key={item.text + '_' + index}>
+        <Item {...options} key={item.text + '_suggest_' + index}>
           <SearchOutline width={24} />
           <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
         </Item>
@@ -113,38 +109,39 @@ export const BasicExampleTemplate = ({
     const value = e.target.value;
     setSearchValue(value);
     setFilter(value);
-    setTempValue(undefined);
+    setTempValue('');
   };
 
   const handleSubmitButtonClick = () => {
     console.log('handleSubmitButtonClick');
-    if (tempValue) {
-      setSearchValue(tempValue);
-      setTempValue(undefined);
-    }
-    setHistory((oldHistory) => [{ value: searchValue, text: searchValue }, ...oldHistory]);
+    const value = tempValue === '' ? searchValue : tempValue;
+
+    setSearchValue(value);
+    setTempValue('');
+
+    setHistory((oldHistory) => [{ value: value, text: value }, ...oldHistory]);
   };
 
   const handleMenuSelectItem = (id: string) => {
     console.log('handleMenuSelectItem');
     setSearchValue(id);
-    setTempValue(undefined);
+    setTempValue('');
   };
 
   const handleMenuActivateItem = (id?: string) => {
     console.log('handleMenuActivateItem');
-    setTempValue(id);
+    setTempValue(id ?? '');
   };
 
   const handleMenuMouseLeave = () => {
-    setTempValue(undefined);
+    setTempValue('');
   };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <GlobalSearch
           {...props}
-          value={tempValue ?? searchValue}
+          value={tempValue === '' ? searchValue : tempValue}
           onChange={handleOnChange}
           submitButtonProps={{ onClick: handleSubmitButtonClick, children: 'Найти' }}
           isLoading={isLoading}
