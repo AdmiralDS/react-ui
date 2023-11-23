@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import type { ChangeEvent, FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useEffect, useRef, useState, Children } from 'react';
-import type { MenuItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuItemProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
@@ -12,6 +12,7 @@ import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { Menu } from '#src/components/Menu';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -21,17 +22,6 @@ const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
       return 20;
     default:
       return 24;
-  }
-};
-
-const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
-  switch (props.$dimension) {
-    case 'xl':
-      return 16;
-    case 's':
-      return 12;
-    default:
-      return 16;
   }
 };
 
@@ -46,10 +36,6 @@ export const containerHeights = css<{ $dimension?: ComponentDimension }>`
         return '40px';
     }
   }};
-`;
-
-const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
 const Drop = styled(DropdownContainer)`
@@ -223,7 +209,13 @@ export type RenderPropsType<T> = {
   value: T;
 };
 
-export interface GlobalSearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  /** Вызывается при изменении значения в поле ввода */
+  onChange: (newValue: string) => void;
+
+  /** Модель данных, с рендер-пропсами*/
+  model: Array<MenuModelItemProps>;
+
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
@@ -262,13 +254,15 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   value,
   defaultValue,
   onChange,
-  children,
   submitButtonProps = {},
   icons,
   displayClearIcon,
   isLoading,
+  model,
   ...props
 }) => {
+  const [needSubmit, setNeedSubmit] = useState(0);
+  const [tempValue, setTempValue] = useState<string>('');
   const [displayOptionsVisible, setDisplayOptionsVisible] = useState<boolean>(false);
   const [inFocus, setInFocus] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -278,11 +272,19 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   useEffect(() => {
     if (inFocus) {
       const listener = (event: KeyboardEvent) => {
+        console.log(`key code: ${event.code}`);
         if (event.code === 'Enter' || event.code === 'NumpadEnter') {
           event.preventDefault();
           event.stopPropagation();
           if (submitButtonRef.current) {
             submitButtonRef.current.click();
+          }
+        }
+        if (event.code === 'ArrowDown') {
+          if (!displayOptionsVisible) {
+            setDisplayOptionsVisible(true);
+          } else if (tempValue === '') {
+            setTempValue(model[0]?.id);
           }
         }
       };
@@ -291,7 +293,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         document.removeEventListener('keydown', listener);
       };
     }
-  }, [inFocus]);
+  }, [inFocus, displayOptionsVisible, tempValue, model]);
   const iconArray = Children.toArray(icons);
 
   if (displayClearIcon && !!value) {
@@ -319,9 +321,31 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   const iconCount = iconArray.length;
 
   const handleInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    inputProps.onChange?.(e);
     setDisplayOptionsVisible(true);
+    setTempValue('');
+    inputProps.onChange?.(e.target.value);
   };
+
+  const handleMenuSelectItem = (id: string) => {
+    setTempValue('');
+    setNeedSubmit((val) => val + 1);
+    inputProps.onChange?.(id);
+  };
+
+  const handleMenuActivateItem = (id?: string) => {
+    console.log(`handleMenuActivateItem ${id}`);
+    setTempValue(id ?? '');
+  };
+
+  const handleMenuMouseLeave = () => {
+    setTempValue('');
+  };
+
+  useEffect(() => {
+    if (needSubmit > 0 && submitButtonRef.current) {
+      submitButtonRef.current.click();
+    }
+  }, [needSubmit]);
   return (
     <Container
       data-dimension={dimension}
@@ -331,9 +355,18 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       onBlur={() => {
         setInFocus(false);
         setDisplayOptionsVisible(false);
+        setTempValue('');
       }}
     >
-      <Input {...inputProps} onChange={handleInputOnChange} ref={inputRef} />
+      <Input
+        {...inputProps}
+        value={tempValue === '' ? inputProps.value : tempValue}
+        onChange={handleInputOnChange}
+        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+          console.log(`onInput ${e.target.value}`);
+        }}
+        ref={inputRef}
+      />
       {iconCount > 0 ? (
         <IconPanel disabled={props.disabled} $dimension={dimension}>
           {iconArray}
@@ -348,7 +381,22 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         }}
         ref={submitButtonRef}
       />
-      {displayOptionsVisible && <Drop alignSelf="stretch" targetRef={containerRef} children={children} />}
+      {displayOptionsVisible && (
+        <Drop alignSelf="stretch" targetRef={containerRef}>
+          <Menu
+            maxHeight="496px"
+            rowCount={10}
+            model={model}
+            onSelectItem={handleMenuSelectItem}
+            active={tempValue}
+            onActivateItem={handleMenuActivateItem}
+            onMouseLeave={handleMenuMouseLeave}
+            defaultIsActive
+            disableSelectedOptionHighlight
+            preventFocusSteal
+          />
+        </Drop>
+      )}
     </Container>
   );
 };

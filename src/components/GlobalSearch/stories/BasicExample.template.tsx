@@ -64,7 +64,7 @@ export const BasicExampleTemplate = ({
 }: GlobalSearchProps & { themeBorderKind?: BorderRadiusType }) => {
   const [history, setHistory] = React.useState<Array<{ value: string; text: string }>>([]);
   const [searchValue, setSearchValue] = React.useState('');
-  const [tempValue, setTempValue] = React.useState<string>('');
+
   const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
 
   const [filter, setFilter] = React.useState('');
@@ -105,60 +105,29 @@ export const BasicExampleTemplate = ({
     }
   }, [data]);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleOnChange = (value: string) => {
+    console.log(`handleOnChange ${value}`);
     setSearchValue(value);
     setFilter(value);
-    setTempValue('');
   };
 
   const handleSubmitButtonClick = () => {
-    console.log('handleSubmitButtonClick');
-    const value = tempValue === '' ? searchValue : tempValue;
-
-    setSearchValue(value);
-    setTempValue('');
-
-    setHistory((oldHistory) => [{ value: value, text: value }, ...oldHistory]);
+    const value = searchValue;
+    console.log(`handleSubmitButtonClick ${value}`);
+    setHistory((oldHistory) => [{ value, text: value }, ...oldHistory]);
   };
 
-  const handleMenuSelectItem = (id: string) => {
-    console.log('handleMenuSelectItem');
-    setSearchValue(id);
-    setTempValue('');
-  };
-
-  const handleMenuActivateItem = (id?: string) => {
-    console.log('handleMenuActivateItem');
-    setTempValue(id ?? '');
-  };
-
-  const handleMenuMouseLeave = () => {
-    setTempValue('');
-  };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <GlobalSearch
           {...props}
-          value={tempValue === '' ? searchValue : tempValue}
+          value={searchValue}
           onChange={handleOnChange}
           submitButtonProps={{ onClick: handleSubmitButtonClick, children: 'Найти' }}
           isLoading={isLoading}
-        >
-          <Menu
-            maxHeight="496px"
-            rowCount={10}
-            defaultIsActive={false}
-            model={model}
-            onSelectItem={handleMenuSelectItem}
-            active={tempValue}
-            onActivateItem={handleMenuActivateItem}
-            onMouseLeave={handleMenuMouseLeave}
-            disableSelectedOptionHighlight
-            preventFocusSteal
-          />
-        </GlobalSearch>
+          model={model}
+        />
       </Wrapper>
     </ThemeProvider>
   );
