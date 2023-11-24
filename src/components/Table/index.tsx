@@ -514,7 +514,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
       const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-      const node = (isGroupRow || visible) && (
+      const node = (
         <RowWrapper
           dimension={dimension}
           row={row}
@@ -531,6 +531,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           showRowsActions={showRowsActions}
           rowStatusMap={rowStatusMap}
           key={`row_${row.id}`}
+          visible={visible}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
         </RowWrapper>

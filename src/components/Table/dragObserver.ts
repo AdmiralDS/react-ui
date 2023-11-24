@@ -17,7 +17,7 @@ type Options = {
 export function dragObserver(
   initialContainers: HTMLElement[],
   options: Options,
-  onDrop?: (item: HTMLElement | null, reference: HTMLElement | null, immediate?: HTMLElement | null) => void,
+  onDrop?: (item: HTMLElement | null, reference: HTMLElement | null, immediate?: HTMLElement) => void,
   onDragStart?: () => void,
   onDragEnd?: () => void,
 ) {
@@ -369,6 +369,7 @@ export function dragObserver(
 
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
+    console.log('immediate', target?.dataset?.row);
     const itemRight = _item?.getBoundingClientRect().right;
     const itemBottom = _item?.getBoundingClientRect().bottom;
     const reference = target !== dropTarget ? inside() : outside();
@@ -403,6 +404,7 @@ export function dragObserver(
     }
 
     function resolve(after: boolean) {
+      console.log({ 1: after, 2: after ? target.nextElementSibling : target });
       return after ? target.nextElementSibling : target;
     }
   }

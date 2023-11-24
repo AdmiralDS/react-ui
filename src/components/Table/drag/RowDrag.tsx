@@ -57,19 +57,26 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
     const body = scrollBodyRef.current;
     const rowMirror = rowMirrorRef.current;
 
-    function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: any) {
-      console.log({ item, before, immediate });
-      if (immediate?.dataset?.group == 'true') {
-        if (item?.dataset?.row && immediate?.dataset?.firstRowInGroup) {
-          rowDragCallback.current?.(item.dataset.row, immediate.dataset.firstRowInGroup, immediate.dataset.row);
-        }
-      } else {
-        if (item?.dataset?.row) {
-          rowDragCallback.current?.(
-            item.dataset.row,
-            before?.dataset?.row ?? null,
-            immediate?.dataset?.inGroup ?? null,
-          );
+    function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: HTMLElement) {
+      // console.log({ item: item?.dataset?.row, before: before?.dataset?.row, immediate: immediate?.dataset?.row });
+      const rowId = item?.dataset?.row;
+      const rowInGroup = item?.dataset?.ingroup;
+      const beforeRowId = before?.dataset?.row ?? null;
+      const immediateRowId = immediate?.dataset?.row;
+      const immediateGroup = immediate?.dataset?.group;
+      const immediateInGroup = immediate?.dataset?.ingroup;
+      const immediateFirstRowInGroup = immediate?.dataset?.firstRowInGroup;
+
+      if (rowId) {
+        // навелись мышкой на заголовок группы
+        if (immediateRowId && immediateGroup == 'true') {
+          // перетаскиваемая строка не является частью этой группы
+          if (rowInGroup !== immediateRowId) {
+            const nextRowId = immediateFirstRowInGroup ?? beforeRowId;
+            rowDragCallback.current?.(rowId, nextRowId, immediateRowId);
+          }
+        } else {
+          rowDragCallback.current?.(rowId, beforeRowId, immediateInGroup ?? null);
         }
       }
     }
