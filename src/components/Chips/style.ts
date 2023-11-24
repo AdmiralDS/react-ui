@@ -243,8 +243,8 @@ export const ChipContentWrapperStyled = styled.div<{
         return $disabled
           ? theme.color['Neutral/Neutral 30']
           : $appearance === 'filled'
-          ? theme.color['Neutral/Neutral 50']
-          : theme.color['Primary/Primary 60 Main'];
+            ? theme.color['Neutral/Neutral 50']
+            : theme.color['Primary/Primary 60 Main'];
       }};
     }
   }

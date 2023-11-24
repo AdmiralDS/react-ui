@@ -33,8 +33,8 @@ export function getPosition(
         ? 'left'
         : 'right'
       : !isEnoughOnLeft && isEnoughOnRight
-      ? 'right'
-      : 'left';
+        ? 'right'
+        : 'left';
 
   const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > containerRect.height - 1;
 
