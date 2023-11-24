@@ -75,6 +75,19 @@ const readOnlyCss = css`
   }
 `;
 
+const actionCss = css<{ $dimension: Dimension }>`
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  ${({ $dimension }) => `
+        width: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+        height: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+      `}
+`;
+
 export const Input = styled.input<{ $dimension: Dimension }>`
   appearance: none;
   ::-ms-check {
@@ -96,6 +109,10 @@ export const Input = styled.input<{ $dimension: Dimension }>`
 
   ${({ readOnly }) => readOnly && readOnlyCss};
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:not(:checked):disabled + ${Span} {
     background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   }
@@ -113,17 +130,15 @@ export const Input = styled.input<{ $dimension: Dimension }>`
 
   &:not(:disabled):hover {
     &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      ${({ $dimension }) => `
-        width: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
-        height: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
-      `}
+      ${actionCss};
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+
+  &:not(:disabled):active {
+    &::after {
+      ${actionCss};
+      background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
 
