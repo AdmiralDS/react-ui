@@ -52,6 +52,10 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   margin: 0;
   opacity: 0;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:checked {
     & + div > span {
       &:before {
@@ -81,6 +85,12 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
       }
       &:focus-visible + div > span {
         outline: none;
+      }
+    }
+    &:active {
+      & + div > div {
+        ${({ readOnly }) => !readOnly && `visibility: visible`};
+        background: ${({ theme }) => theme.color['Opacity/Press']};
       }
     }
   }
