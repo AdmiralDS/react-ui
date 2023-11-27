@@ -3,6 +3,7 @@ type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
   renderMirror: (dragItem: HTMLElement | null) => void;
   removeMirror: () => void;
+  updateDragItem?: ((selector: string, group?: boolean) => HTMLElement | null) | null;
   dimension: 'xl' | 'l' | 'm' | 's';
   accepts?: (
     el: HTMLElement | null,
@@ -37,6 +38,7 @@ export function dragObserver(
   const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
     direction: options.direction ?? 'horizontal',
+    updateDragItem: options.updateDragItem ?? null,
     accepts: options.accepts ?? always,
     invalid: options.invalid ?? invalidTarget,
     containers: [...initialContainers],
@@ -154,10 +156,11 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
-    _itemSelector =
-      o.direction == 'vertical'
-        ? `[data-row="${context.item?.dataset.row || ''}"]`
-        : `[data-th-column="${context.item?.dataset.thColumn || ''}"]`;
+    // _itemSelector =
+    //   o.direction == 'vertical'
+    //     ? `[data-row="${context.item?.dataset.row || ''}"]`
+    //     : `[data-th-column="${context.item?.dataset.thColumn || ''}"]`;
+    _itemSelector = o.direction == 'vertical' ? context.item?.dataset.row : context.item?.dataset.thColumn;
     _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
@@ -220,7 +223,8 @@ export function dragObserver(
     } else if (_mirror) {
       sibling = _currentSibling;
     } else {
-      sibling = _item?.nextElementSibling;
+      // sibling = _item?.nextElementSibling;
+      sibling = getItemNextSibling();
     }
     return target === _source && sibling === _initialSibling;
   }
@@ -254,6 +258,16 @@ export function dragObserver(
     }
     e.preventDefault();
 
+    if (o.updateDragItem) {
+      const updatedItem = o.updateDragItem?.(_itemSelector);
+      if (updatedItem) {
+        if (o.direction === 'vertical') {
+          delete _item?.dataset.dragover;
+          updatedItem.dataset.dragover = 'true';
+        }
+        _item = updatedItem;
+      }
+    }
     // const _item = getDragItem(_itemSelector);
 
     const clientX = getCoord('clientX', e) || 0;
@@ -297,11 +311,13 @@ export function dragObserver(
       reference = getReference(dropTarget, immediate, clientX, clientY);
     }
 
-    if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
+    // if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
+    if (_item && ((reference === null && changed) || (reference !== _item && reference !== getItemNextSibling()))) {
       _currentSibling = reference;
 
       // fix bug when last item move from container and then turn back
-      if (_item.nextElementSibling === null && reference === null) {
+      // if (_item.nextElementSibling === null && reference === null) {
+      if (getItemNextSibling() === null && reference === null) {
         return;
       }
       onDrop?.(_item, reference, immediate);
@@ -309,15 +325,15 @@ export function dragObserver(
   }
 
   // при перетаскивании строки, сама перетаскиваемая строка может изменяться (удаляться, добавляться) и это каждый раз новый элемент
-  function getDragItem(selector: string) {
-    let result = null;
-    for (let c of o.containers) {
-      let res = c.querySelector(selector);
-      if (res) {
-        result = res;
-      }
-    }
-    return result as HTMLElement;
+
+  function getItemNextSibling() {
+    const updatedItem = o.updateDragItem?.(_itemSelector, true) || _item;
+    return updatedItem?.nextElementSibling;
+  }
+
+  function getItemRect(): any {
+    const updatedItem = o.updateDragItem?.(_itemSelector, true) || _item;
+    return updatedItem ? updatedItem.getBoundingClientRect() : {};
   }
 
   function renderMirrorImage() {
@@ -369,9 +385,10 @@ export function dragObserver(
 
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
-    console.log('immediate', target?.dataset?.row);
-    const itemRight = _item?.getBoundingClientRect().right;
-    const itemBottom = _item?.getBoundingClientRect().bottom;
+    // const itemRight = _item?.getBoundingClientRect().right;
+    // const itemBottom = _item?.getBoundingClientRect().bottom;
+    const itemRight = getItemRect()?.right;
+    const itemBottom = getItemRect()?.bottom;
     const reference = target !== dropTarget ? inside() : outside();
     return reference;
 
@@ -404,7 +421,6 @@ export function dragObserver(
     }
 
     function resolve(after: boolean) {
-      console.log({ 1: after, 2: after ? target.nextElementSibling : target });
       return after ? target.nextElementSibling : target;
     }
   }

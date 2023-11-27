@@ -34,7 +34,6 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
-  visible?: boolean;
 }
 
 export const RowWrapper = ({
@@ -53,7 +52,6 @@ export const RowWrapper = ({
   grey,
   showRowsActions,
   rowStatusMap,
-  visible,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -88,7 +86,6 @@ export const RowWrapper = ({
       data-group={isGroup}
       data-ingroup={groupId}
       data-first-row-in-group={row?.groupRows?.[0] || null}
-      style={visible ? {} : { display: 'none' }}
     >
       <SimpleRow
         className="tr-simple"

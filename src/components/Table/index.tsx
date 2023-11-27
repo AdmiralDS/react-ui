@@ -452,12 +452,17 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     };
 
     const renderGroupRow = (row: TableRow) => {
+      // const indeterminate =
+      //   row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
+      //   row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
+
       const indeterminate =
-        row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
-        row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
+        row.groupRows?.some((rowId) => rowToGroupMap[rowId]?.checked) &&
+        row.groupRows?.some((rowId) => !rowToGroupMap[rowId]?.checked);
 
       const hasGroupRows = row.groupRows?.length;
-      const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
+      // const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
+      const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId]?.checked) : row.selected;
 
       return (
         <GroupRow
@@ -514,7 +519,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
       const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
-      const node = (
+      const node = (isGroupRow || visible) && (
         <RowWrapper
           dimension={dimension}
           row={row}
@@ -531,7 +536,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           showRowsActions={showRowsActions}
           rowStatusMap={rowStatusMap}
           key={`row_${row.id}`}
-          visible={visible}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
         </RowWrapper>
@@ -665,6 +669,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           rowsDraggable={rowsDraggable}
           tableRef={tableRef}
           scrollBodyRef={scrollBodyRef}
+          rowToGroupMap={rowToGroupMap}
         />
       </TableContainer>
     );

@@ -13,9 +13,10 @@ type RowDragProps = {
   rowsDraggable?: boolean;
   tableRef?: React.RefObject<HTMLElement>;
   scrollBodyRef: React.RefObject<HTMLElement>;
+  rowToGroupMap: any;
 };
 
-export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: RowDragProps) => {
+export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, rowToGroupMap }: RowDragProps) => {
   const { rootRef } = useContext(DropdownContext);
 
   const [rowDragging, setRowDragging] = useState(false);
@@ -23,6 +24,11 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
   // save callback via useRef to not update dragObserver on each callback change
   const rowDragCallback = useRef(onRowDrag);
   const rowMirrorRef = useRef<HTMLDivElement>(null);
+  const rowToGroup = useRef(rowToGroupMap);
+
+  useEffect(() => {
+    rowToGroup.current = rowToGroupMap;
+  }, [rowToGroupMap]);
 
   useEffect(() => {
     rowDragCallback.current = onRowDrag;
@@ -97,6 +103,18 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
         rowMirror.removeChild(rowMirror.lastChild);
       }
     }
+    function updateDragItem(selector: string, group?: boolean) {
+      let newItem: HTMLElement | null = null;
+      if (body) {
+        newItem = body.querySelector(`[data-row="${selector}"]`);
+
+        if (!newItem && group) {
+          const groupId = rowToGroup.current?.[selector]?.groupId;
+          newItem = body.querySelector(`[data-row="${groupId}"]`);
+        }
+      }
+      return newItem;
+    }
 
     if (body && rowsDraggable) {
       const observer = dragObserver(
@@ -105,6 +123,7 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef }: 
           mirrorRef: rowMirrorRef,
           renderMirror,
           removeMirror,
+          updateDragItem,
           dimension,
           direction: 'vertical',
           invalid: (el: HTMLElement, initEl: HTMLElement) => {

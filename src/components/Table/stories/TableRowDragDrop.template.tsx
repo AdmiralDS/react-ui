@@ -301,6 +301,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
   };
 
   const handleRowDrag2 = (rowId: RowId, nextRowId: RowId | null, groupRowId: RowId | null) => {
+    console.log({ rowId, nextRowId, groupRowId });
     const tableRows = [...rows2];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
@@ -325,6 +326,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     });
 
     setRows2(tableRows);
+    console.log(tableRows);
   };
 
   return (
