@@ -139,6 +139,7 @@ export const Input = styled.input<{ $dimension: Dimension }>`
     &::after {
       ${actionCss};
       background-color: ${({ theme }) => theme.color['Opacity/Press']};
+      //TODO: на checked не срабатывает почему-то
     }
   }
 

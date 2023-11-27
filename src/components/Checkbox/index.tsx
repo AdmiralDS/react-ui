@@ -105,18 +105,31 @@ const indeterminateCss = css<{ $indeterminate?: boolean }>`
   }
 `;
 
+const actionCss = css`
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+`;
+
 const hoveredCss = css`
   &:not(:disabled) {
     &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      width: calc(100% + 16px);
-      height: calc(100% + 16px);
+      ${actionCss};
       background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    }
+  }
+`;
+
+const activeCss = css`
+  &:not(:disabled) {
+    &::after {
+      ${actionCss};
+      background-color: ${({ theme }) => theme.color['Opacity/Press']};
     }
   }
 `;
@@ -177,6 +190,10 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
+
+  &:active:not(:disabled) {
+    ${activeCss}
+  }
 
   &:checked:disabled + ${Background} {
     ${disabledCheckedBackgroundCss}
