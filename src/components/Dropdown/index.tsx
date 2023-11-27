@@ -162,8 +162,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           menuFocus === 'firstOption'
             ? getMenuFirstOption()
             : menuFocus === 'lastOption'
-            ? getMenuLastOption()
-            : activeOption || getMenuFirstOption();
+              ? getMenuLastOption()
+              : activeOption || getMenuFirstOption();
         (selectedItem as HTMLElement)?.focus();
       } else {
         const focusedOption = ((containerRef.current && containerRef.current.ownerDocument) || document).activeElement;

@@ -12,8 +12,8 @@ export const backGroundColorMixin = css<{ $appearance: ButtonAppearance }>`
     $appearance === 'secondary' || $appearance === 'ghost'
       ? theme.color['Neutral/Neutral 10']
       : $appearance === 'white'
-      ? theme.color['Neutral/Neutral 50']
-      : theme.color['Neutral/Neutral 05']};
+        ? theme.color['Neutral/Neutral 50']
+        : theme.color['Neutral/Neutral 05']};
 `;
 
 const PseudoTextDiv = styled.div<{ $dimension: Dimension; $appearance: ButtonAppearance }>`

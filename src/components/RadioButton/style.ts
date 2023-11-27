@@ -43,8 +43,8 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
       disabled
         ? theme.color['Neutral/Neutral 30']
         : $error
-        ? theme.color['Error/Error 60 Main']
-        : theme.color['Neutral/Neutral 50']};
+          ? theme.color['Error/Error 60 Main']
+          : theme.color['Neutral/Neutral 50']};
   fieldset:disabled & {
     border: ${BORDER_WIDTH_DEFAULT}px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }

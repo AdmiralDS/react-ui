@@ -213,8 +213,8 @@ export const SelectWrapper = styled.div<{
       props.disabled || props.readonly
         ? 'transparent'
         : props.$focused
-        ? props.theme.color['Primary/Primary 60 Main']
-        : props.theme.color['Neutral/Neutral 40']};
+          ? props.theme.color['Primary/Primary 60 Main']
+          : props.theme.color['Neutral/Neutral 40']};
   }
 
   &:hover ${BorderedDiv} {
