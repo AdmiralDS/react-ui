@@ -7,19 +7,58 @@ const DIMENSION_M = 20;
 const DIMENSION_S = 18;
 const BORDER_WIDTH_DEFAULT = 1;
 const BORDER_WIDTH_CHECKED = 5;
-const TEXT_PADDING_M = 12;
-const TEXT_PADDING_S = 10;
-const INPUT_OFFSET = 2;
-const INNER_PADDING_M = 2;
-const INNER_PADDING_S = 2;
 const FOCUS_OFFSET = 2;
 const FOCUS_BORDER_WIDTH = 2;
 const HOVER_BORDER_WIDTH_M = 8;
 const HOVER_BORDER_WIDTH_S = 7;
+const LABEL_MARGIN_M = '10px';
+const LABEL_MARGIN_S = '9px';
+
+export const RadioButtonHover = styled.div<{ $dimension: Dimension }>`
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: ${(p) => p.theme.color['Opacity/Hover']};
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  ${(p) => `
+        width: calc(100% + ${p.$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+        height: calc(100% + ${p.$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
+      `}
+  background-color: ${(p) => p.theme.color['Opacity/Hover']};
+`;
+export const RadioButtonLabel = styled.div<{
+  $dimension: Dimension;
+  disabled: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: ${(p) => (p.$dimension === 's' ? LABEL_MARGIN_S : LABEL_MARGIN_M)};
+  ${(p) => (p.$dimension === 's' ? 'margin-top: 1px;' : '')}
+  ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  fieldset:disabled && {
+    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  }
+  fieldset[data-dimension='s'] && {
+    margin-left: ${LABEL_MARGIN_S};
+    margin-top: 1px;
+    ${typography['Body/Body 2 Short']}
+  }
+`;
+
+const disabledCss = css`
+  border-color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+`;
 
 export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $error?: boolean }>`
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -28,41 +67,37 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
   content: '';
   box-sizing: border-box;
   pointer-events: none;
+  border-radius: 50%;
+  transition: all 0.25s ease-in-out;
 
-  ${({ theme, $dimension }) => `
-    background-color: ${theme.color['Neutral/Neutral 00']};
-    width: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
-    height: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
-  `}
+  width: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
+  height: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  border: ${BORDER_WIDTH_DEFAULT}px solid ${(p) => p.theme.color['Neutral/Neutral 50']};
+
   fieldset[data-dimension='s'] & {
     width: ${DIMENSION_S}px;
     height: ${DIMENSION_S}px;
   }
-  border: ${BORDER_WIDTH_DEFAULT}px solid
-    ${({ disabled, $error, theme }) =>
-      disabled
-        ? theme.color['Neutral/Neutral 30']
-        : $error
-          ? theme.color['Error/Error 60 Main']
-          : theme.color['Neutral/Neutral 50']};
+  ${(p) => (p.disabled ? disabledCss : '')}
+  ${(p) => (p.$error ? `border-color: ${p.theme.color['Error/Error 60 Main']};` : '')}
+
   fieldset:disabled & {
-    border: ${BORDER_WIDTH_DEFAULT}px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    border: ${BORDER_WIDTH_DEFAULT}px solid ${(p) => p.theme.color['Neutral/Neutral 30']};
   }
-  border-radius: 50%;
-  transition: all 0.25s ease-in-out;
 `;
 
 export const InputContainer = styled.div<{ $dimension: Dimension }>`
-  position: absolute;
-  top: ${(p) => (p.$dimension === 's' ? 1 : INPUT_OFFSET)}px;
-  left: ${(p) => (p.$dimension === 's' ? 1 : INPUT_OFFSET)}px;
-  display: inline-block;
-  ${({ $dimension }) => `
-    min-width: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
-    height: ${$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  ${(p) => `
+    width: ${p.$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
+    height: ${p.$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
   `}
   fieldset[data-dimension='s'] & {
-    min-width: ${DIMENSION_S}px;
+    width: ${DIMENSION_S}px;
     height: ${DIMENSION_S}px;
   }
 `;
@@ -70,94 +105,93 @@ export const InputContainer = styled.div<{ $dimension: Dimension }>`
 const readOnlyCss = css`
   pointer-events: none;
 
-  &:not(:checked) + ${Span} {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  &:not(:checked) {
+    & + div > span {
+      background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+    }
   }
-`;
 
-const actionCss = css<{ $dimension: Dimension }>`
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  ${({ $dimension }) => `
-        width: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
-        height: calc(100% + ${$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
-      `}
+  &:checked {
+    & + div > span {
+      background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+    }
+  }
 `;
 
 export const Input = styled.input<{ $dimension: Dimension }>`
-  appearance: none;
-  ::-ms-check {
-    display: none;
-  }
-  width: 100%;
-  height: 100%;
-
   position: absolute;
-  margin: 0;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0;
+  opacity: 0;
 
   box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 50%;
 
-  ${({ readOnly }) => readOnly && readOnlyCss};
+  ${(p) => p.readOnly && readOnlyCss};
 
   &:disabled {
     cursor: default;
   }
 
-  &:not(:checked):disabled + ${Span} {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-  }
-
-  &:checked:disabled + ${Span} {
-    border: ${BORDER_WIDTH_CHECKED}px solid ${({ theme }) => theme.color['Primary/Primary 30']};
-  }
-
-  &:checked:not(:disabled) + ${Span} {
-    border: ${({ theme, readOnly }) =>
-      readOnly
-        ? `${BORDER_WIDTH_CHECKED}px solid ${theme.color['Primary/Primary 30']}`
-        : `${BORDER_WIDTH_CHECKED}px solid ${theme.color['Primary/Primary 60 Main']}`};
-  }
-
-  &:not(:disabled):hover {
-    &::after {
-      ${actionCss};
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+  &:not(:checked):disabled {
+    & + div > span {
+      background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
     }
   }
 
-  &:not(:disabled):active {
-    &::after {
-      ${actionCss};
-      background-color: ${({ theme }) => theme.color['Opacity/Press']};
-      //TODO: на checked не срабатывает почему-то
+  &:checked:disabled {
+    & + div > span {
+      border: ${BORDER_WIDTH_CHECKED}px solid ${(p) => p.theme.color['Primary/Primary 30']};
+      background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
     }
   }
 
-  &:focus-visible {
-    outline-offset: ${FOCUS_OFFSET}px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid ${FOCUS_BORDER_WIDTH}px;
+  &:checked:not(:disabled) {
+    & + div > span {
+      border: ${(p) =>
+        p.readOnly
+          ? `${BORDER_WIDTH_CHECKED}px solid ${p.theme.color['Primary/Primary 30']}`
+          : `${BORDER_WIDTH_CHECKED}px solid ${p.theme.color['Primary/Primary 60 Main']}`};
+    }
+  }
+
+  &:not(:disabled) {
+    &:focus-visible + div {
+      outline-offset: ${FOCUS_OFFSET}px;
+      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid ${FOCUS_BORDER_WIDTH}px;
+    }
+
+    &:hover {
+      & + div > div {
+        ${(p) => !p.readOnly && `visibility: visible`};
+      }
+      &:focus-visible + div {
+        outline: none;
+      }
+    }
+    &:active {
+      & + div > div {
+        ${(p) => !p.readOnly && `visibility: visible`};
+        background: ${(p) => p.theme.color['Opacity/Press']};
+      }
+      &:focus-visible + div {
+        outline: none;
+      }
+    }
   }
 `;
 
 export const Hint = styled.div<{ $dimension: Dimension; disabled?: boolean }>`
   margin-top: 6px;
-  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
-  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  ${(p) => (p.$dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
 
   fieldset[data-dimension='s'] && {
     ${typography['Caption/Caption 1']}
-    color: ${({ disabled, theme }) =>
-      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
   }
 `;
 
@@ -166,33 +200,26 @@ export const RadioButtonComponent = styled.label<{
   disabled?: boolean;
   readOnly?: boolean;
 }>`
-  margin: 0;
-  ${({ $dimension }) => `
-    padding-top: ${$dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
-    padding-bottom: ${$dimension === 's' ? INNER_PADDING_S : INNER_PADDING_M}px;
-    padding-left: ${$dimension === 's' ? DIMENSION_S + TEXT_PADDING_S : DIMENSION_M + TEXT_PADDING_M}px;
-  `}
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: ${(p) => (p.$dimension === 's' ? '1px 0 1px 1px' : '2px 0 2px 2px')};
+  user-select: none;
 
-  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
+  cursor: ${(p) => (p.disabled || p.readOnly ? 'default' : 'pointer')};
 
-  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
-  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
+  ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
 
   fieldset[data-dimension='s'] && {
-    ${typography['Body/Body 2 Short']}
-    color: ${({ disabled, theme }) =>
-      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90']};
+    padding: 1px 0 1px 1px;
+    ${typography['Body/Body 2 Short']};
   }
   fieldset:disabled && {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-  }
-
-  fieldset:disabled & {
+    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
     cursor: default;
   }
 
-  ${({ readOnly }) => readOnly && `pointer-events: none`};
+  ${(p) => p.readOnly && `pointer-events: none`};
 `;
