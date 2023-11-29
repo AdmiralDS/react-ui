@@ -209,6 +209,7 @@ export function dragObserver(
     removeMirrorImage();
     if (_item && o.direction === 'vertical') {
       delete _item.dataset.dragover;
+      delete _currentTarget?.dataset?.groupover;
     }
     drake.dragging = false;
     onDragEnd?.();
@@ -301,12 +302,18 @@ export function dragObserver(
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
 
+    if (o.direction === 'vertical') {
+      delete _currentTarget?.dataset.groupover;
+    }
+
     // if _currentTarget has not changed, do not calculate the reference
     // if immediate is null, do not calculate the reference
     if (_currentTarget?.isEqualNode(immediate) || immediate == null) {
+      if (immediate?.dataset?.group == 'true') immediate.dataset.groupover = 'true';
       _currentTarget = immediate;
       return;
     } else {
+      if (immediate?.dataset?.group == 'true') immediate.dataset.groupover = 'true';
       _currentTarget = immediate;
       reference = getReference(dropTarget, immediate, clientX, clientY);
     }

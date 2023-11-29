@@ -389,6 +389,13 @@ const rowHoverMixin = css`
   }
 `;
 
+const groupRowHoverMixin = css`
+  &[data-groupover='true'] > .tr-simple > *,
+  & ${OverflowMenuWrapper} {
+    background: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
+`;
+
 export const Row = styled.div<{
   $dimension: TableProps['dimension'];
   $underline: boolean;
@@ -414,6 +421,8 @@ export const Row = styled.div<{
     opacity: 0.4;
   }
   transition: opacity 0.3 ease;
+
+  ${groupRowHoverMixin}
 `;
 
 export const SimpleRow = styled.div<{
