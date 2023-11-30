@@ -45,6 +45,7 @@ export const TooltipBaseTemplate = ({
       </Button>
       {visible && (
         <Tooltip
+          dimension={props.dimension}
           targetElement={btnRef.current}
           renderContent={() =>
             `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin

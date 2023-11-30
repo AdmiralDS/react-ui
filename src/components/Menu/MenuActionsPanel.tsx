@@ -69,8 +69,8 @@ export function getHighlightedFilteredOptions(
           chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
         )
       : !searchValue
-      ? option.label
-      : null;
+        ? option.label
+        : null;
     if (itemValue) {
       model.push({
         id: option.id,

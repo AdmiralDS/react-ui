@@ -231,8 +231,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const innerSelected = disableSelectedOptionHighlight
       ? []
       : selected === undefined
-      ? selectedState
-      : valueToArray(selected);
+        ? selectedState
+        : valueToArray(selected);
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -316,7 +316,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeState, currentActiveMenu]);
+    }, [active, activeId, activeState, currentActiveMenu]);
 
     React.useEffect(() => {
       if (defaultIsActive) activateMenu?.(wrapperRef);

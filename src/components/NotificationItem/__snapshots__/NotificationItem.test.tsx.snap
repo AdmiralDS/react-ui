@@ -17,7 +17,6 @@ exports[`NotificationItem should render error components with all properties 1`]
   padding: 0;
   white-space: nowrap;
   border-radius: 4px;
-  pointer-events: all;
 }
 
 .c6[data-appearance='primary'] {
@@ -289,7 +288,6 @@ exports[`NotificationItem should render error components with all properties 1`]
   padding: 0;
   white-space: nowrap;
   border-radius: 4px;
-  pointer-events: all;
 }
 
 .c6[data-appearance='primary'] {

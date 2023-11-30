@@ -208,10 +208,10 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       !disabledSlots?.length && (startTime || endTime || (startTime && endTime))
         ? slots.filter((slot) => filterTime(slot.value, startTime, endTime))
         : disabledSlots?.length > 0 && !(startTime || endTime || (startTime && endTime))
-        ? disableSlots(slots, disabledSlots)
-        : disabledSlots?.length > 0 && (startTime || endTime || (startTime && endTime))
-        ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
-        : slots;
+          ? disableSlots(slots, disabledSlots)
+          : disabledSlots?.length > 0 && (startTime || endTime || (startTime && endTime))
+            ? disableSlots(slots, disabledSlots)?.filter((slot) => filterTime(slot.value, startTime, endTime))
+            : slots;
 
     const handleSelectOption = (option: string) => {
       if (inputRef.current) {

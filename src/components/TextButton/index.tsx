@@ -41,8 +41,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   ${appearanceMixin};
 
   ${dimensionMixin};
-
-  pointer-events: ${(p) => (p.$loading || p.$skeleton || p.disabled ? 'none' : 'all')};
 `;
 
 export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -89,6 +87,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
     },
     ref,
   ) => {
+    const disabled = props.disabled || loading || skeleton;
     return (
       <StyledButton
         {...props}
@@ -98,6 +97,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         $appearance={appearance}
         $dimension={dimension}
         type={type}
+        disabled={disabled}
         $loading={loading}
         $skeleton={skeleton}
       >

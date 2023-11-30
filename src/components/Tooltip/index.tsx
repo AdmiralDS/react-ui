@@ -8,7 +8,11 @@ import type { TooltipPositionType, InternalTooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 import { DropdownContext } from '../DropdownProvider';
 
+export type TooltipDimension = 'm' | 's';
+
 export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Размер компонента */
+  dimension?: TooltipDimension;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
@@ -36,7 +40,7 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 export const TOOLTIP_DELAY = 1500;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
-  ({ renderContent, targetRef, targetElement, tooltipPosition, ...props }, ref) => {
+  ({ dimension = 'm', renderContent, targetRef, targetElement, tooltipPosition, ...props }, ref) => {
     const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
     const tooltipHeight = React.useRef(0);
     const { rootRef } = React.useContext(DropdownContext);
@@ -143,7 +147,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
       >
         <FakeTarget />
         <TooltipWrapper ref={refSetter(ref, tooltipElementRef)}>
-          <TooltipContainer role="tooltip" {...props}>
+          <TooltipContainer role="tooltip" $dimension={dimension} {...props}>
             {renderContent()}
           </TooltipContainer>
         </TooltipWrapper>

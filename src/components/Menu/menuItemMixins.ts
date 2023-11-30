@@ -20,8 +20,8 @@ export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
     $hovered
       ? theme.color['Opacity/Hover']
       : $selected
-      ? theme.color['Opacity/Focus']
-      : theme.color['Special/Elevated BG']};
+        ? theme.color['Opacity/Focus']
+        : theme.color['Special/Elevated BG']};
 `;
 
 export const paddings = css<{ $dimension?: ItemDimension }>`
