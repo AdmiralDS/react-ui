@@ -64,7 +64,6 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
     const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: HTMLElement) {
-      // console.log({ item: item?.dataset?.row, before: before?.dataset?.row, immediate: immediate?.dataset?.row });
       const rowId = item?.dataset?.row;
       const rowInGroup = item?.dataset?.ingroup;
       const beforeRowId = before?.dataset?.row ?? null;

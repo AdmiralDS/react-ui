@@ -16,7 +16,6 @@ type ColumnDragProps = {
   scrollBodyRef: React.RefObject<HTMLElement>;
   normalColumnsWrapperRef: React.RefObject<HTMLElement>;
   stickyColumnsWrapperRef: React.RefObject<HTMLElement>;
-  columnTitlesMap: any;
 };
 
 export const ColumnDrag = ({
@@ -28,7 +27,6 @@ export const ColumnDrag = ({
   scrollBodyRef,
   normalColumnsWrapperRef,
   stickyColumnsWrapperRef,
-  columnTitlesMap,
 }: ColumnDragProps) => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -41,10 +39,6 @@ export const ColumnDrag = ({
   useEffect(() => {
     columnDragCallback.current = onColumnDrag;
   }, [onColumnDrag]);
-
-  useEffect(() => {
-    console.log('titles changed');
-  }, [columnTitlesMap]);
 
   useEffect(() => {
     if (tableRef.current) {
@@ -105,8 +99,6 @@ export const ColumnDrag = ({
       setColumnDragging(false);
     }
     function renderMirror(dragColumn: HTMLElement | null) {
-      // нужно избавить от data-th-title атрибута, так как в нем могут храниться не только строки
-      // const title = dragColumn?.dataset.thTitle ?? '';
       const title = dragColumn?.querySelector('[data-title]');
 
       if (columnMirror && title) {
@@ -151,11 +143,6 @@ export const ColumnDrag = ({
   }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
-    ? createPortal(
-        <Mirror $dimension={dimension} ref={columnMirrorRef}>
-          {/* <MirrorText /> */}
-        </Mirror>,
-        rootRef?.current || document.body,
-      )
+    ? createPortal(<Mirror $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
     : null;
 };

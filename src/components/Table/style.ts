@@ -552,10 +552,3 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
     cursor: not-allowed;
   }
 `;
-
-// export const MirrorText = styled.div`
-//   display: block;
-//   white-space: nowrap;
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-// `;
