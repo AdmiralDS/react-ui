@@ -10,6 +10,7 @@ export * from './components/Button';
 export * from './components/ContentSwitcher';
 export * from './components/ContentSwitcher/ContentSwitcherItem';
 export * from './components/Checkbox';
+export * from './components/CheckboxComponent';
 export * from './components/form';
 export * from './components/CheckboxGroup';
 export * from './components/CheckboxCompositeGroup';

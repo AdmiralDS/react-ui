@@ -6,9 +6,11 @@ import { FieldSet, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FieldSetCheckboxTemplate } from './FieldSetCheckbox.template';
 import { FieldSetRadioButtonTemplate } from './FieldSetRadioButton.template';
+import { FieldSetCheckboxComponentTemplate } from '#src/components/form/FieldSet/stories/FieldSetCheckboxComponent.template';
 
 // Imports of text sources
 import FieldSetCheckboxRaw from './FieldSetCheckbox.template?raw';
+import FieldSetCheckboxComponentRaw from './FieldSetCheckboxComponent.template?raw';
 import FieldSetRadioButtonRaw from './FieldSetRadioButton.template?raw';
 
 const Desc = styled.div`
@@ -89,6 +91,26 @@ export const FieldSetCheckbox = {
 //</editor-fold>
 
 //<editor-fold desc="">
+const FieldSetCheckboxComponentStory: StoryFn<typeof FieldSet> = (props) => (
+  <FieldSetCheckboxComponentTemplate {...props} />
+);
+
+export const FieldSetCheckboxComponent = {
+  render: FieldSetCheckboxComponentStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FieldSetCheckboxComponentRaw,
+      },
+    },
+  },
+
+  name: 'CheckboxComponent Fieldset',
+};
+//</editor-fold>
+
+//<editor-fold desc="">
 const FieldSetRadioButtonStory: StoryFn<typeof FieldSet> = (props) => <FieldSetRadioButtonTemplate {...props} />;
 
 export const FieldSetRadioButton = {
@@ -104,3 +126,4 @@ export const FieldSetRadioButton = {
 
   name: 'RadioGroup Fieldset',
 };
+//</editor-fold>
