@@ -140,7 +140,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const rowToGroupMap = Object.entries(groupToRowsMap).reduce<GroupRows>((acc, [groupId, info]) => {
       info.rows.forEach((id) => {
-        const row = rowList.find((item) => item.id.toString() === id);
+        const row = rowList.find((item) => item.id === id);
         if (row && !groupToRowsMap[id]) {
           acc[id] = { groupId, checked: !!row.selected };
         }
@@ -159,7 +159,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
         if (isGroupRow) {
           groupToRowsMap[row.id].rows.forEach((rowId) => {
-            const row = rowList.find((item) => item.id.toString() === rowId);
+            const row = rowList.find((item) => item.id === rowId);
             if (row) tableRows.push(row);
           });
         }
@@ -173,14 +173,14 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const zebraRows = greyZebraRows
       ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
           if (rowToGroupMap[row.id]) {
-            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id].groupId].rows.indexOf(String(row.id));
+            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.rows.indexOf(row.id);
             acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
           } else if (groupToRowsMap[row.id]) {
             acc[row.id] = 'group';
-          } else if (index === 0 || acc[tableRows[index - 1].id].includes('group')) {
+          } else if (index === 0 || acc[tableRows[index - 1]?.id].includes('group')) {
             acc[row.id] = 'odd';
           } else {
-            acc[row.id] = acc[tableRows[index - 1].id] === 'odd' ? 'even' : 'odd';
+            acc[row.id] = acc[tableRows[index - 1]?.id] === 'odd' ? 'even' : 'odd';
           }
           return acc;
         }, {})
@@ -308,9 +308,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
-        groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
-        groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
-      const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
+        groupInfo.rows.some((rowId) => rowToGroupMap[rowId]?.checked) &&
+        groupInfo.rows.some((rowId) => !rowToGroupMap[rowId]?.checked);
+      const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId]?.checked);
       return { checked, indeterminate };
     };
 
@@ -321,7 +321,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (!groupInfo) return;
 
       const value = groupInfo?.rows.some((rowId) =>
-        rowId === changedDepId.toString() ? !rowToGroupMap[rowId].checked : rowToGroupMap[rowId].checked,
+        rowId === changedDepId ? !rowToGroupMap[rowId]?.checked : rowToGroupMap[rowId]?.checked,
       );
       return { groupId, value };
     };
@@ -335,7 +335,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
         if (groupInfo) {
-          const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
+          const rowInCurrentGroup = groupInfo.rows.includes(row.id);
 
           if (row.id === id || rowInCurrentGroup) {
             ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);
@@ -443,16 +443,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     };
 
     const renderGroupRow = (row: TableRow) => {
-      // const indeterminate =
-      //   row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
-      //   row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
-
       const indeterminate =
         row.groupRows?.some((rowId) => rowToGroupMap[rowId]?.checked) &&
         row.groupRows?.some((rowId) => !rowToGroupMap[rowId]?.checked);
 
       const hasGroupRows = row.groupRows?.length;
-      // const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
       const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId]?.checked) : row.selected;
 
       return (
@@ -507,7 +502,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderRow = (row: TableRow, index: number) => {
       const isGroupRow = !!groupToRowsMap[row.id];
       const rowInGroup = !!rowToGroupMap[row.id];
-      const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
+      const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.expanded : true;
       const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
       const node = (isGroupRow || visible) && (

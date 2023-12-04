@@ -1,5 +1,5 @@
 import type { RuleSet } from 'styled-components';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
 import type { Color } from '#src/components/themes';
 
 export type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -117,8 +117,6 @@ export interface TableRow {
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
-  // groupRows?: Array<string>;
-  // проверить, что эта правка не вызовет никаких
   groupRows?: Array<RowId>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
@@ -258,10 +256,16 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Включение возможности drag & drop строк */
   rowsDraggable?: boolean;
+  /** Колбек, который срабатывает при попытке перетащить строку таблицы на новое место.
+   * rowId - id строки, которая перетаскивается;
+   * nextRowId - id строки, перед которой пытается встать передвигаемая строка.
+   * Если nextRowId равен null, значит строку передвигают в самый конец таблицы.
+   * groupRowId - id групповой строки (строки с заголовком группы), по данному id можно
+   * определить к какой группе будет относиться перетаскиваемая строка
+   */
   onRowDrag?: (rowId: RowId, nextRowId: RowId | null, groupRowId: RowId | null) => void;
-  renderDraggableColumn?: () => ReactNode;
-  renderDraggableRow?: () => ReactNode;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,
@@ -275,15 +279,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export type GroupInfo = {
-  rows: Array<string>;
+  rows: Array<RowId>;
   expanded: boolean;
 };
 
 type RowInfo = {
-  groupId: string;
+  groupId: RowId;
   checked: boolean;
 };
 
-export type Group = Record<string, GroupInfo>;
-export type GroupRows = Record<string, RowInfo>;
-export type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
+export type Group = Record<RowId, GroupInfo>;
+export type GroupRows = Record<RowId, RowInfo>;
+export type ZebraRows = Record<RowId, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
