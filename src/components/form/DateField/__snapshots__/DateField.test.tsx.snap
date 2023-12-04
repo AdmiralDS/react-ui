@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateField should render component 1`] = `
+.c1 {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border: none;
+  border-radius: 4px;
+  pointer-events: all;
+}
+
+.c2 {
+  height: 40px;
+}
+
+.c0 {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.c10 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.c9 *[fill^='#'] {
+  fill: #717681;
+}
+
+[disabled] .c9.c9.c9 {
+  pointer-events: none;
+}
+
+[disabled] .c9.c9.c9 *[fill^='#'] {
+  fill: #B0B5BD;
+}
+
+.c9:hover {
+  cursor: pointer;
+}
+
+.c9:hover *[fill^='#'] {
+  fill: #0046E2;
+}
+
+.c7 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  pointer-events: none;
+  overflow: hidden;
+  min-width: 0;
+  background: none;
+  border-radius: inherit;
+  border: 1px solid #9BA0AA;
+}
+
+.c5 {
+  outline: none;
+  appearance: none;
+  border-radius: inherit;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 10px;
+  border: none;
+  text-overflow: ellipsis;
+  padding: 0 16px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+  background-color: #FFFFFF;
+  padding-right: 48px;
+}
+
+.c5.c5.c5:disabled {
+  color: #B0B5BD;
+}
+
+.c5::placeholder {
+  color: #717681;
+}
+
+.c5:disabled::placeholder {
+  color: #B0B5BD;
+}
+
+[data-disable-copying] .c5 {
+  user-select: none;
+  pointer-events: none;
+}
+
+.c5.c5.c5:invalid+.c6 {
+  border: 1px solid #D92020;
+}
+
+.c5.c5.c5:invalid:hover:not(:disabled)+.c6 {
+  border: 1px solid #BA1717;
+}
+
+.c5.c5.c5:invalid:focus:not(:disabled)+.c6 {
+  border: 2px solid #D92020;
+}
+
+[data-read-only] .c5.c5.c5,
+.c5.c5.c5:disabled {
+  background-color: #E5E7EB;
+  border-color: transparent;
+}
+
+.c5 ::-ms-clear,
+.c5 ::-ms-reveal {
+  display: none;
+}
+
+.c8 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.c8>svg {
+  border-radius: 4px;
+  display: block;
+  width: 24px;
+}
+
+.c8>svg:focus {
+  outline: none;
+}
+
+.c8>svg:focus-visible {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c8>*:not(:first-child) {
+  margin-left: 8px;
+}
+
+.c3:focus-within:not(:disabled)>.c6 {
+  border: 2px solid #0062FF;
+}
+
+.c3:hover:not(:focus-within)>.c6 {
+  border-color: #646973;
+}
+
+.c4 {
+  min-width: 150px;
+}
+
+<div>
+  <div
+    class="c0"
+    data-field-id="some static snapshot id"
+  >
+    <div>
+      <div
+        class="c1 c2 c3 c4"
+      >
+        <input
+          class="c5"
+          data-testid="my test input"
+          id="some static snapshot id"
+        />
+        <div
+          class="c6 c7"
+        />
+        <div
+          class="c8"
+        >
+          <div
+            class="c9"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="c10"
+      />
+    </div>
+  </div>
+</div>
+`;
