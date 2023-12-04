@@ -74,6 +74,26 @@ const indeterminateCss = css`
   }
 `;
 
+const hoveredCss = css`
+  &:not(:disabled) {
+    & + div > div {
+      visibility: visible;
+    }
+    &:focus-visible + div {
+      outline: none;
+    }
+  }
+`;
+
+const activeCss = css`
+  &:not(:disabled) {
+    ${hoveredCss}
+    & + div > div {
+      background: ${(p) => p.theme.color['Opacity/Press']};
+    }
+  }
+`;
+
 export const Input = styled.input<{
   $dimension: CheckboxComponentDimension;
   $indeterminate?: boolean;
@@ -123,6 +143,8 @@ export const Input = styled.input<{
     }
   }
 
+  ${(p) => !p.readOnly && p.$hovered && hoveredCss}
+
   &:not(:disabled) {
     &:focus-visible + div {
       outline-offset: ${FOCUS_OFFSET}px;
@@ -130,21 +152,10 @@ export const Input = styled.input<{
     }
 
     &:hover {
-      & + div > div {
-        ${(p) => !p.readOnly && `visibility: visible`};
-      }
-      &:focus-visible + div {
-        outline: none;
-      }
+      ${(p) => !p.readOnly && hoveredCss}
     }
     &:active {
-      & + div > div {
-        ${(p) => !p.readOnly && `visibility: visible`};
-        background: ${(p) => p.theme.color['Opacity/Press']};
-      }
-      &:focus-visible + div {
-        outline: none;
-      }
+      ${(p) => !p.readOnly && activeCss}
     }
 
     ${(p) => p.$indeterminate && indeterminateCss};
