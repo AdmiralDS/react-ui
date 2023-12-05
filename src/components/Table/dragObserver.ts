@@ -1,16 +1,28 @@
 type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
-  renderMirror: (dragItem: HTMLElement | null) => void;
-  removeMirror: () => void;
-  updateDragItem?: ((selector: string, group?: boolean) => HTMLElement | null) | null;
   dimension: 'xl' | 'l' | 'm' | 's';
+  /** Функция для отрисовки контента перетаскиваемой плашки */
+  renderMirror: (dragItem: HTMLElement | null) => void;
+  /** Функция для очистки контента перетаскиваемой плашки */
+  removeMirror: () => void;
+  /** Функция для обновления сведений о перетаскиваемом элементе. Н-р, при drag&drop строк, распределенных по группам,
+   * строка может в ходе одного перетаскивания изменяться (удаляться, добавляться), поэтому элемент строки нужно обновлять.
+   * id - уникальный идентификатор, по которому можно извлечь перетаскиваемый элемент,
+   * seacrhInGroup - признак того, нужно ли проводить дополнительный поиск внутри группы (актуально при drag&drop строк,
+   * если строка перемещена в свернутую группу, то сама строка не рендерится на экране, и все вычисления нужно производить относительно заголовка группы) */
+  updateDragItem?: (id: any, seacrhInGroup?: boolean) => HTMLElement | null;
+  /** Проверяет возможность перемещения el в target-контейнер из source-контейнера, где el будет встроен перед элементом sibling */
   accepts?: (
     el: HTMLElement | null,
     target: HTMLElement | null,
     source: HTMLElement | null,
     sibling: HTMLElement | null,
   ) => boolean;
+  /** Проверяет, можно ли начать процесс перетаскивания el, где handle - это элемент, на котором произошло событие mousedown,
+   * el - это любой элемент между handle и родительским контейнером (взят из o.containers),
+   * утилита проходит циклом по всем элементам между handle и родительским контейнером и для кажого el вызывает функцию invalid
+   */
   invalid?: (el: HTMLElement, handle: HTMLElement) => boolean;
   direction?: Direction;
 };
@@ -25,9 +37,7 @@ export function dragObserver(
   let _mirror: HTMLElement | null; // mirror image
   let _source: HTMLElement | null; // source container
   let _item: HTMLElement | null; // item being dragged
-  let _itemSelector: string = '';
-  let _offsetX: number; // reference x
-  let _offsetY: number; // reference y
+  let _itemId: any = '';
   let _initialSibling: HTMLElement | null; // reference sibling when grabbed
   let _currentSibling: HTMLElement | null; // reference sibling now
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
@@ -38,7 +48,7 @@ export function dragObserver(
   const o: Required<Options> & { containers: HTMLElement[] } = {
     ...options,
     direction: options.direction ?? 'horizontal',
-    updateDragItem: options.updateDragItem ?? null,
+    updateDragItem: options.updateDragItem ?? updateItem,
     accepts: options.accepts ?? always,
     invalid: options.invalid ?? invalidTarget,
     containers: [...initialContainers],
@@ -112,11 +122,6 @@ export function dragObserver(
     start(grabbed);
 
     if (_item) {
-      const offset = getOffset(_item);
-      // distances between left-top corner of an _item and cursor position
-      _offsetX = getCoord('pageX', e) - offset.left;
-      _offsetY = getCoord('pageY', e) - offset.top;
-
       if (o.direction === 'vertical') {
         _item.dataset.dragover = 'true';
       }
@@ -156,11 +161,7 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
-    // _itemSelector =
-    //   o.direction == 'vertical'
-    //     ? `[data-row="${context.item?.dataset.row || ''}"]`
-    //     : `[data-th-column="${context.item?.dataset.thColumn || ''}"]`;
-    _itemSelector = o.direction == 'vertical' ? context.item?.dataset.row : context.item?.dataset.thColumn;
+    _itemId = o.direction == 'vertical' ? context.item?.dataset.row : context.item?.dataset.thColumn;
     _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
@@ -214,7 +215,7 @@ export function dragObserver(
     drake.dragging = false;
     onDragEnd?.();
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
-    _itemSelector = '';
+    _itemId = '';
   }
 
   function isInitialPlacement(target: any, s?: any) {
@@ -260,7 +261,7 @@ export function dragObserver(
     e.preventDefault();
 
     if (o.updateDragItem) {
-      const updatedItem = o.updateDragItem?.(_itemSelector);
+      const updatedItem = o.updateDragItem?.(_itemId);
       if (updatedItem) {
         if (o.direction === 'vertical') {
           delete _item?.dataset.dragover;
@@ -275,9 +276,7 @@ export function dragObserver(
     const clientY = getCoord('clientY', e) || 0;
     let x, y;
     if (o.direction === 'vertical') {
-      // x = clientX - _offsetX;
       x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 18 : 24);
-      // y = clientY - _offsetY;
       y = clientY - _mirror.getBoundingClientRect().height / 2;
     } else if (o.direction === 'horizontal') {
       x = clientX - (o.dimension === 's' || o.dimension === 'm' ? 18 : 20);
@@ -331,15 +330,13 @@ export function dragObserver(
     }
   }
 
-  // при перетаскивании строки, сама перетаскиваемая строка может изменяться (удаляться, добавляться) и это каждый раз новый элемент
-
   function getItemNextSibling() {
-    const updatedItem = o.updateDragItem?.(_itemSelector, true) || _item;
+    const updatedItem = o.updateDragItem?.(_itemId, true) || _item;
     return updatedItem?.nextElementSibling;
   }
 
   function getItemRect(): any {
-    const updatedItem = o.updateDragItem?.(_itemSelector, true) || _item;
+    const updatedItem = o.updateDragItem?.(_itemId, true) || _item;
     return updatedItem ? updatedItem.getBoundingClientRect() : {};
   }
 
@@ -472,15 +469,6 @@ function touchy(
   crossvent[op](el, type, fn);
 }
 
-// get element coords according to document context
-function getOffset(el: HTMLElement) {
-  const rect = el.getBoundingClientRect();
-  return {
-    left: rect.left + window.scrollX,
-    top: rect.top + window.scrollY,
-  };
-}
-
 // elementFromPoint может вернуть null, если мы вышли за границы viewport.
 //
 // Если существует 2 соседних по вертикали элемента a и b, где a.left == b.left == x, a.bottom == b.top == y,
@@ -495,7 +483,9 @@ function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
   point.style.pointerEvents = state;
   return el;
 }
-
+function updateItem() {
+  return null;
+}
 function always() {
   return true;
 }

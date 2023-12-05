@@ -102,12 +102,12 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
         rowMirror.removeChild(rowMirror.lastChild);
       }
     }
-    function updateDragItem(selector: string, group?: boolean) {
+    function updateDragItem(selector: string, seacrhInGroup?: boolean) {
       let newItem: HTMLElement | null = null;
       if (body) {
         newItem = body.querySelector(`[data-row="${selector}"]`);
 
-        if (!newItem && group) {
+        if (!newItem && seacrhInGroup) {
           const groupId = rowToGroup.current?.[selector]?.groupId;
           newItem = body.querySelector(`[data-row="${groupId}"]`);
         }
