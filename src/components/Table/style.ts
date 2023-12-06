@@ -342,7 +342,7 @@ export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>
   width: 100%;
   overflow: hidden;
   &:hover {
-    *[fill^='#'] {
+    ${SortIcon} *[fill^='#'] {
       fill: ${({ theme, $sort }) =>
         $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
