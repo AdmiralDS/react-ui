@@ -36,201 +36,14 @@ exports[`CheckboxCompositeGroup should render component with disabled state 1`] 
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: none;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: default;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -239,11 +52,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
-  cursor: default;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -253,9 +64,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -269,26 +330,35 @@ fieldset:disabled .c1 {
           data-field-id="checkboxFieldCities"
           disabled=""
         >
+          <input
+            class="c2"
+            disabled=""
+            id="checkboxFieldCities"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c4"
-              disabled=""
-              id="checkboxFieldCities"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
+              disabled=""
             >
               <div
                 aria-hidden="true"
-                class="c7"
+                class="c6"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Города :
+          <div
+            class="c7"
+            disabled=""
+          >
+            Города :
+          </div>
         </label>
         <div
           class="c8 c9"
@@ -300,27 +370,36 @@ fieldset:disabled .c1 {
             data-field-name="Москва"
             disabled=""
           >
+            <input
+              class="c10"
+              disabled=""
+              id="checkboxField1"
+              name="Москва"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                disabled=""
-                id="checkboxField1"
-                name="Москва"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
+                disabled=""
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Москва
+            <div
+              class="c7"
+              disabled=""
+            >
+              Москва
+            </div>
           </label>
           <label
             class="c1"
@@ -328,27 +407,36 @@ fieldset:disabled .c1 {
             data-field-name="Воронеж"
             disabled=""
           >
+            <input
+              class="c10"
+              disabled=""
+              id="checkboxField2"
+              name="Воронеж"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                disabled=""
-                id="checkboxField2"
-                name="Воронеж"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
+                disabled=""
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Воронеж
+            <div
+              class="c7"
+              disabled=""
+            >
+              Воронеж
+            </div>
           </label>
           <label
             class="c1"
@@ -356,27 +444,36 @@ fieldset:disabled .c1 {
             data-field-name="Самара"
             disabled=""
           >
+            <input
+              class="c10"
+              disabled=""
+              id="checkboxField3"
+              name="Самара"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                disabled=""
-                id="checkboxField3"
-                name="Самара"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
+                disabled=""
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Самара
+            <div
+              class="c7"
+              disabled=""
+            >
+              Самара
+            </div>
           </label>
           <label
             class="c1"
@@ -384,27 +481,36 @@ fieldset:disabled .c1 {
             data-field-name="Омск"
             disabled=""
           >
+            <input
+              class="c10"
+              disabled=""
+              id="checkboxField4"
+              name="Омск"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                disabled=""
-                id="checkboxField4"
-                name="Омск"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
+                disabled=""
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Омск
+            <div
+              class="c7"
+              disabled=""
+            >
+              Омск
+            </div>
           </label>
         </div>
       </div>
@@ -443,201 +549,14 @@ fieldset:disabled .c1 {
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: none;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: default;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -646,11 +565,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
-  cursor: default;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -660,9 +577,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -675,26 +842,35 @@ fieldset:disabled .c1 {
         data-field-id="checkboxFieldCities"
         disabled=""
       >
+        <input
+          class="c2"
+          disabled=""
+          id="checkboxFieldCities"
+          type="checkbox"
+        />
         <div
-          class="c2 c3"
+          class="c3"
         >
-          <input
-            class="c4"
-            disabled=""
-            id="checkboxFieldCities"
-            type="checkbox"
-          />
           <div
-            class="c5 c6"
+            class="c4"
+          />
+          <span
+            class="c5"
+            disabled=""
           >
             <div
               aria-hidden="true"
-              class="c7"
+              class="c6"
               focusable="false"
             />
-          </div>
+          </span>
         </div>
-        Города :
+        <div
+          class="c7"
+          disabled=""
+        >
+          Города :
+        </div>
       </label>
       <div
         class="c8 c9"
@@ -706,27 +882,36 @@ fieldset:disabled .c1 {
           data-field-name="Москва"
           disabled=""
         >
+          <input
+            class="c10"
+            disabled=""
+            id="checkboxField1"
+            name="Москва"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              disabled=""
-              id="checkboxField1"
-              name="Москва"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
+              disabled=""
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Москва
+          <div
+            class="c7"
+            disabled=""
+          >
+            Москва
+          </div>
         </label>
         <label
           class="c1"
@@ -734,27 +919,36 @@ fieldset:disabled .c1 {
           data-field-name="Воронеж"
           disabled=""
         >
+          <input
+            class="c10"
+            disabled=""
+            id="checkboxField2"
+            name="Воронеж"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              disabled=""
-              id="checkboxField2"
-              name="Воронеж"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
+              disabled=""
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Воронеж
+          <div
+            class="c7"
+            disabled=""
+          >
+            Воронеж
+          </div>
         </label>
         <label
           class="c1"
@@ -762,27 +956,36 @@ fieldset:disabled .c1 {
           data-field-name="Самара"
           disabled=""
         >
+          <input
+            class="c10"
+            disabled=""
+            id="checkboxField3"
+            name="Самара"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              disabled=""
-              id="checkboxField3"
-              name="Самара"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
+              disabled=""
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Самара
+          <div
+            class="c7"
+            disabled=""
+          >
+            Самара
+          </div>
         </label>
         <label
           class="c1"
@@ -790,27 +993,36 @@ fieldset:disabled .c1 {
           data-field-name="Омск"
           disabled=""
         >
+          <input
+            class="c10"
+            disabled=""
+            id="checkboxField4"
+            name="Омск"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              disabled=""
-              id="checkboxField4"
-              name="Омск"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
+              disabled=""
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Омск
+          <div
+            class="c7"
+            disabled=""
+          >
+            Омск
+          </div>
         </label>
       </div>
     </div>
@@ -905,201 +1117,14 @@ exports[`CheckboxCompositeGroup should render component with label 1`] = `
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1108,11 +1133,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1122,9 +1145,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -1136,25 +1409,32 @@ fieldset:disabled .c1 {
           class="c1"
           data-field-id="checkboxFieldCities"
         >
+          <input
+            class="c2"
+            id="checkboxFieldCities"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c4"
-              id="checkboxFieldCities"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
-                class="c7"
+                class="c6"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Города :
+          <div
+            class="c7"
+          >
+            Города :
+          </div>
         </label>
         <div
           class="c8 c9"
@@ -1164,104 +1444,132 @@ fieldset:disabled .c1 {
             data-field-id="checkboxField1"
             data-field-name="Москва"
           >
+            <input
+              class="c10"
+              id="checkboxField1"
+              name="Москва"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField1"
-                name="Москва"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Москва
+            <div
+              class="c7"
+            >
+              Москва
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField2"
             data-field-name="Воронеж"
           >
+            <input
+              class="c10"
+              id="checkboxField2"
+              name="Воронеж"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField2"
-                name="Воронеж"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Воронеж
+            <div
+              class="c7"
+            >
+              Воронеж
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField3"
             data-field-name="Самара"
           >
+            <input
+              class="c10"
+              id="checkboxField3"
+              name="Самара"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField3"
-                name="Самара"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Самара
+            <div
+              class="c7"
+            >
+              Самара
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField4"
             data-field-name="Омск"
           >
+            <input
+              class="c10"
+              id="checkboxField4"
+              name="Омск"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField4"
-                name="Омск"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Омск
+            <div
+              class="c7"
+            >
+              Омск
+            </div>
           </label>
         </div>
       </div>
@@ -1300,201 +1608,14 @@ fieldset:disabled .c1 {
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1503,11 +1624,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1517,9 +1636,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -1530,25 +1899,32 @@ fieldset:disabled .c1 {
         class="c1"
         data-field-id="checkboxFieldCities"
       >
+        <input
+          class="c2"
+          id="checkboxFieldCities"
+          type="checkbox"
+        />
         <div
-          class="c2 c3"
+          class="c3"
         >
-          <input
-            class="c4"
-            id="checkboxFieldCities"
-            type="checkbox"
-          />
           <div
-            class="c5 c6"
+            class="c4"
+          />
+          <span
+            class="c5"
           >
             <div
               aria-hidden="true"
-              class="c7"
+              class="c6"
               focusable="false"
             />
-          </div>
+          </span>
         </div>
-        Города :
+        <div
+          class="c7"
+        >
+          Города :
+        </div>
       </label>
       <div
         class="c8 c9"
@@ -1558,104 +1934,132 @@ fieldset:disabled .c1 {
           data-field-id="checkboxField1"
           data-field-name="Москва"
         >
+          <input
+            class="c10"
+            id="checkboxField1"
+            name="Москва"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField1"
-              name="Москва"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Москва
+          <div
+            class="c7"
+          >
+            Москва
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField2"
           data-field-name="Воронеж"
         >
+          <input
+            class="c10"
+            id="checkboxField2"
+            name="Воронеж"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField2"
-              name="Воронеж"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Воронеж
+          <div
+            class="c7"
+          >
+            Воронеж
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField3"
           data-field-name="Самара"
         >
+          <input
+            class="c10"
+            id="checkboxField3"
+            name="Самара"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField3"
-              name="Самара"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Самара
+          <div
+            class="c7"
+          >
+            Самара
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField4"
           data-field-name="Омск"
         >
+          <input
+            class="c10"
+            id="checkboxField4"
+            name="Омск"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField4"
-              name="Омск"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Омск
+          <div
+            class="c7"
+          >
+            Омск
+          </div>
         </label>
       </div>
     </div>
@@ -1750,201 +2154,14 @@ exports[`CheckboxCompositeGroup should render component with small dimension 1`]
   padding-left: 25px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 16px;
-  height: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 28px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1953,11 +2170,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1967,9 +2182,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -1981,25 +2446,32 @@ fieldset:disabled .c1 {
           class="c1"
           data-field-id="checkboxFieldCities"
         >
+          <input
+            class="c2"
+            id="checkboxFieldCities"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c4"
-              id="checkboxFieldCities"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
-                class="c7"
+                class="c6"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Города :
+          <div
+            class="c7"
+          >
+            Города :
+          </div>
         </label>
         <div
           class="c8 c9"
@@ -2009,104 +2481,132 @@ fieldset:disabled .c1 {
             data-field-id="checkboxField1"
             data-field-name="Москва"
           >
+            <input
+              class="c10"
+              id="checkboxField1"
+              name="Москва"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField1"
-                name="Москва"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Москва
+            <div
+              class="c7"
+            >
+              Москва
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField2"
             data-field-name="Воронеж"
           >
+            <input
+              class="c10"
+              id="checkboxField2"
+              name="Воронеж"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField2"
-                name="Воронеж"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Воронеж
+            <div
+              class="c7"
+            >
+              Воронеж
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField3"
             data-field-name="Самара"
           >
+            <input
+              class="c10"
+              id="checkboxField3"
+              name="Самара"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField3"
-                name="Самара"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Самара
+            <div
+              class="c7"
+            >
+              Самара
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField4"
             data-field-name="Омск"
           >
+            <input
+              class="c10"
+              id="checkboxField4"
+              name="Омск"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField4"
-                name="Омск"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Омск
+            <div
+              class="c7"
+            >
+              Омск
+            </div>
           </label>
         </div>
       </div>
@@ -2145,201 +2645,14 @@ fieldset:disabled .c1 {
   padding-left: 25px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 16px;
-  height: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 28px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -2348,11 +2661,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -2362,9 +2673,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -2375,25 +2936,32 @@ fieldset:disabled .c1 {
         class="c1"
         data-field-id="checkboxFieldCities"
       >
+        <input
+          class="c2"
+          id="checkboxFieldCities"
+          type="checkbox"
+        />
         <div
-          class="c2 c3"
+          class="c3"
         >
-          <input
-            class="c4"
-            id="checkboxFieldCities"
-            type="checkbox"
-          />
           <div
-            class="c5 c6"
+            class="c4"
+          />
+          <span
+            class="c5"
           >
             <div
               aria-hidden="true"
-              class="c7"
+              class="c6"
               focusable="false"
             />
-          </div>
+          </span>
         </div>
-        Города :
+        <div
+          class="c7"
+        >
+          Города :
+        </div>
       </label>
       <div
         class="c8 c9"
@@ -2403,104 +2971,132 @@ fieldset:disabled .c1 {
           data-field-id="checkboxField1"
           data-field-name="Москва"
         >
+          <input
+            class="c10"
+            id="checkboxField1"
+            name="Москва"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField1"
-              name="Москва"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Москва
+          <div
+            class="c7"
+          >
+            Москва
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField2"
           data-field-name="Воронеж"
         >
+          <input
+            class="c10"
+            id="checkboxField2"
+            name="Воронеж"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField2"
-              name="Воронеж"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Воронеж
+          <div
+            class="c7"
+          >
+            Воронеж
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField3"
           data-field-name="Самара"
         >
+          <input
+            class="c10"
+            id="checkboxField3"
+            name="Самара"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField3"
-              name="Самара"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Самара
+          <div
+            class="c7"
+          >
+            Самара
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField4"
           data-field-name="Омск"
         >
+          <input
+            class="c10"
+            id="checkboxField4"
+            name="Омск"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField4"
-              name="Омск"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Омск
+          <div
+            class="c7"
+          >
+            Омск
+          </div>
         </label>
       </div>
     </div>
@@ -2595,201 +3191,14 @@ exports[`CheckboxCompositeGroup should render components 1`] = `
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -2798,11 +3207,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -2812,9 +3219,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <body>
@@ -2826,25 +3483,32 @@ fieldset:disabled .c1 {
           class="c1"
           data-field-id="checkboxFieldCities"
         >
+          <input
+            class="c2"
+            id="checkboxFieldCities"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c4"
-              id="checkboxFieldCities"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
-                class="c7"
+                class="c6"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Города :
+          <div
+            class="c7"
+          >
+            Города :
+          </div>
         </label>
         <div
           class="c8 c9"
@@ -2854,104 +3518,132 @@ fieldset:disabled .c1 {
             data-field-id="checkboxField1"
             data-field-name="Москва"
           >
+            <input
+              class="c10"
+              id="checkboxField1"
+              name="Москва"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField1"
-                name="Москва"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Москва
+            <div
+              class="c7"
+            >
+              Москва
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField2"
             data-field-name="Воронеж"
           >
+            <input
+              class="c10"
+              id="checkboxField2"
+              name="Воронеж"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField2"
-                name="Воронеж"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Воронеж
+            <div
+              class="c7"
+            >
+              Воронеж
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField3"
             data-field-name="Самара"
           >
+            <input
+              class="c10"
+              id="checkboxField3"
+              name="Самара"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField3"
-                name="Самара"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Самара
+            <div
+              class="c7"
+            >
+              Самара
+            </div>
           </label>
           <label
             class="c1"
             data-field-id="checkboxField4"
             data-field-name="Омск"
           >
+            <input
+              class="c10"
+              id="checkboxField4"
+              name="Омск"
+              type="checkbox"
+            />
             <div
-              class="c2 c3"
+              class="c3"
             >
-              <input
-                class="c10"
-                id="checkboxField4"
-                name="Омск"
-                type="checkbox"
-              />
               <div
-                class="c5 c6"
+                class="c4"
+              />
+              <span
+                class="c5"
               >
                 <div
                   aria-hidden="true"
                   class="c11"
                   focusable="false"
                 />
-              </div>
+              </span>
             </div>
-            Омск
+            <div
+              class="c7"
+            >
+              Омск
+            </div>
           </label>
         </div>
       </div>
@@ -2990,201 +3682,14 @@ fieldset:disabled .c1 {
   padding-left: 30px;
 }
 
-.c11 {
-  pointer-events: none;
-}
-
-.c7 {
-  pointer-events: none;
-}
-
-.c7 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c2 {
-  position: relative;
-  box-sizing: border-box;
-  overflow: visible;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 16px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  height: 16px;
-}
-
-.c6 {
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 4px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-}
-
-.c6 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c4 ::-ms-check {
-  display: none;
-}
-
-.c4:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:disabled {
-  pointer-events: none;
-}
-
-.c4:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c4:not(:checked)+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c4:not(:checked)+.c5 >* {
-  display: block;
-}
-
-.c4:hover:not(:disabled)::after,
-.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c4:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c4:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c4:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c10 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  cursor: pointer;
-  border-radius: 4px;
-  margin: 0;
-  padding: 0;
-}
-
-.c10 ::-ms-check {
-  display: none;
-}
-
-.c10:checked+.c5 {
-  background-color: #0062FF;
-  border: none;
-}
-
-.c10:disabled {
-  pointer-events: none;
-}
-
-.c10:disabled+.c5 {
-  border: 1px solid #B0B5BD;
-  background-color: #E5E7EB;
-}
-
-.c10:not(:checked)+.c5 >* {
-  display: none;
-}
-
-.c10:hover:not(:disabled)::after,
-.c10:focus:not(:disabled)+.c10:not(:disabled)::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c10:checked:disabled+.c5 {
-  background-color: #A7C7FF;
-  border: none;
-}
-
-.c10:checked:disabled+.c5 *[fill^='#'] {
-  fill: #FFFFFF;
-}
-
-.c10:focus-visible {
-  outline-offset: 2px;
-  outline: #0062FF solid 2px;
-}
-
-.c3 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
-
 .c1 {
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  pointer-events: auto;
-  padding-left: 32px;
+  box-sizing: content-box;
+  padding: 0;
+  user-select: none;
+  cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -3193,11 +3698,9 @@ fieldset[data-dimension='s'] .c2 {
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
-  cursor: pointer;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  padding-left: 28px;
+fieldset[data-dimension='s'] .c1.c1 {
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -3207,9 +3710,259 @@ fieldset[data-dimension='s'] .c1 {
   text-rendering: geometricPrecision;
 }
 
-fieldset:disabled .c1 {
+fieldset:disabled .c1.c1 {
   color: #B0B5BD;
   cursor: default;
+}
+
+.c2 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c2 ::-ms-check {
+  display: none;
+}
+
+.c2:disabled {
+  cursor: default;
+}
+
+.c2:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c2:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c2:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c2:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c2:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c2:not(:disabled):not(:checked)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c2:not(:disabled) >* {
+  display: block;
+}
+
+.c10 {
+  appearance: none;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.c10 ::-ms-check {
+  display: none;
+}
+
+.c10:disabled {
+  cursor: default;
+}
+
+.c10:disabled:not(:checked)+div>span {
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
+}
+
+.c10:disabled:checked+div>span {
+  border-color: #A7C7FF;
+  background-color: #A7C7FF;
+}
+
+.c10:disabled:checked+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c10:checked:not(:disabled)+div>span {
+  border-color: #0062FF;
+  background-color: #0062FF;
+}
+
+.c10:not(:disabled):focus-visible+div {
+  outline-offset: 2px;
+  outline: #0062FF solid 2px;
+}
+
+.c10:not(:disabled):hover:not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):hover:not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
+  visibility: visible;
+}
+
+.c10:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
+  outline: none;
+}
+
+.c10:not(:disabled):active:not(:disabled)+div>div {
+  background: #0000001F;
+}
+
+.c3 {
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+fieldset[data-dimension='s'] .c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: #0000000D;
+}
+
+fieldset[data-dimension='s'] .c4.c4 {
+  width: 32px;
+  height: 32px;
+}
+
+.c5 {
+  box-sizing: border-box;
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  outline: 0;
+  transition: background 0.1s ease-in;
+  line-height: initial;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  width: 16px;
+  height: 16px;
+}
+
+.c5 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+fieldset:disabled .c5.c5 *[fill^='#'] {
+  fill: #E5E7EB;
+}
+
+.c11 {
+  pointer-events: none;
+}
+
+.c6 {
+  pointer-events: none;
+}
+
+.c6 *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
+.c7 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c7.c7 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c7.c7 {
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
 }
 
 <div>
@@ -3220,25 +3973,32 @@ fieldset:disabled .c1 {
         class="c1"
         data-field-id="checkboxFieldCities"
       >
+        <input
+          class="c2"
+          id="checkboxFieldCities"
+          type="checkbox"
+        />
         <div
-          class="c2 c3"
+          class="c3"
         >
-          <input
-            class="c4"
-            id="checkboxFieldCities"
-            type="checkbox"
-          />
           <div
-            class="c5 c6"
+            class="c4"
+          />
+          <span
+            class="c5"
           >
             <div
               aria-hidden="true"
-              class="c7"
+              class="c6"
               focusable="false"
             />
-          </div>
+          </span>
         </div>
-        Города :
+        <div
+          class="c7"
+        >
+          Города :
+        </div>
       </label>
       <div
         class="c8 c9"
@@ -3248,104 +4008,132 @@ fieldset:disabled .c1 {
           data-field-id="checkboxField1"
           data-field-name="Москва"
         >
+          <input
+            class="c10"
+            id="checkboxField1"
+            name="Москва"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField1"
-              name="Москва"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Москва
+          <div
+            class="c7"
+          >
+            Москва
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField2"
           data-field-name="Воронеж"
         >
+          <input
+            class="c10"
+            id="checkboxField2"
+            name="Воронеж"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField2"
-              name="Воронеж"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Воронеж
+          <div
+            class="c7"
+          >
+            Воронеж
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField3"
           data-field-name="Самара"
         >
+          <input
+            class="c10"
+            id="checkboxField3"
+            name="Самара"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField3"
-              name="Самара"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Самара
+          <div
+            class="c7"
+          >
+            Самара
+          </div>
         </label>
         <label
           class="c1"
           data-field-id="checkboxField4"
           data-field-name="Омск"
         >
+          <input
+            class="c10"
+            id="checkboxField4"
+            name="Омск"
+            type="checkbox"
+          />
           <div
-            class="c2 c3"
+            class="c3"
           >
-            <input
-              class="c10"
-              id="checkboxField4"
-              name="Омск"
-              type="checkbox"
-            />
             <div
-              class="c5 c6"
+              class="c4"
+            />
+            <span
+              class="c5"
             >
               <div
                 aria-hidden="true"
                 class="c11"
                 focusable="false"
               />
-            </div>
+            </span>
           </div>
-          Омск
+          <div
+            class="c7"
+          >
+            Омск
+          </div>
         </label>
       </div>
     </div>
