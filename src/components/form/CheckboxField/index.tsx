@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 import type { CheckboxComponentDimension } from '#src/components/form/CheckboxField/style';
 import {
   Check,
