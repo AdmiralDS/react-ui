@@ -45,10 +45,12 @@ export function dragObserver(
   let _mirrorContainerStyle: string; // initial style of mirror container
   let _currentTarget: HTMLElement | null = null; // target over which cursor is now located
 
-  const o: Required<Options> & { containers: HTMLElement[] } = {
+  const o: Required<Omit<Options, 'updateDragItem'>> & { updateDragItem: Options['updateDragItem'] } & {
+    containers: HTMLElement[];
+  } = {
     ...options,
     direction: options.direction ?? 'horizontal',
-    updateDragItem: options.updateDragItem ?? updateItem,
+    updateDragItem: options.updateDragItem,
     accepts: options.accepts ?? always,
     invalid: options.invalid ?? invalidTarget,
     containers: [...initialContainers],
@@ -122,9 +124,7 @@ export function dragObserver(
     start(grabbed);
 
     if (_item) {
-      if (o.direction === 'vertical') {
-        _item.dataset.dragover = 'true';
-      }
+      _item.dataset.dragover = 'true';
       renderMirrorImage();
       drag(e);
     }
@@ -208,10 +208,8 @@ export function dragObserver(
   function cleanup() {
     ungrab();
     removeMirrorImage();
-    if (_item && o.direction === 'vertical') {
-      delete _item.dataset.dragover;
-      delete _currentTarget?.dataset?.groupover;
-    }
+    delete _item?.dataset.dragover;
+    delete _currentTarget?.dataset?.groupover;
     drake.dragging = false;
     onDragEnd?.();
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
@@ -225,7 +223,6 @@ export function dragObserver(
     } else if (_mirror) {
       sibling = _currentSibling;
     } else {
-      // sibling = _item?.nextElementSibling;
       sibling = getItemNextSibling();
     }
     return target === _source && sibling === _initialSibling;
@@ -263,14 +260,11 @@ export function dragObserver(
     if (o.updateDragItem) {
       const updatedItem = o.updateDragItem?.(_itemId);
       if (updatedItem) {
-        if (o.direction === 'vertical') {
-          delete _item?.dataset.dragover;
-          updatedItem.dataset.dragover = 'true';
-        }
+        delete _item?.dataset.dragover;
+        updatedItem.dataset.dragover = 'true';
         _item = updatedItem;
       }
     }
-    // const _item = getDragItem(_itemSelector);
 
     const clientX = getCoord('clientX', e) || 0;
     const clientY = getCoord('clientY', e) || 0;
@@ -301,33 +295,36 @@ export function dragObserver(
     let reference;
     const immediate = getImmediateChild(dropTarget, elementBehindCursor);
 
-    if (o.direction === 'vertical') {
-      delete _currentTarget?.dataset.groupover;
-    }
-
     // if _currentTarget has not changed, do not calculate the reference
     // if immediate is null, do not calculate the reference
     if (_currentTarget?.isEqualNode(immediate) || immediate == null) {
-      if (immediate?.dataset?.group == 'true') immediate.dataset.groupover = 'true';
-      _currentTarget = immediate;
+      updateCurrentTarget(immediate);
       return;
     } else {
-      if (immediate?.dataset?.group == 'true') immediate.dataset.groupover = 'true';
-      _currentTarget = immediate;
+      updateCurrentTarget(immediate);
       reference = getReference(dropTarget, immediate, clientX, clientY);
     }
 
-    // if (_item && ((reference === null && changed) || (reference !== _item && reference !== _item.nextElementSibling))) {
     if (_item && ((reference === null && changed) || (reference !== _item && reference !== getItemNextSibling()))) {
       _currentSibling = reference;
 
       // fix bug when last item move from container and then turn back
-      // if (_item.nextElementSibling === null && reference === null) {
       if (getItemNextSibling() === null && reference === null) {
         return;
       }
       onDrop?.(_item, reference, immediate);
     }
+  }
+
+  function updateCurrentTarget(immediate: HTMLElement | null) {
+    if (o.direction === 'vertical') {
+      delete _currentTarget?.dataset.groupover;
+
+      if (immediate?.dataset?.group == 'true') {
+        immediate.dataset.groupover = 'true';
+      }
+    }
+    _currentTarget = immediate;
   }
 
   function getItemNextSibling() {
@@ -389,8 +386,6 @@ export function dragObserver(
 
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
-    // const itemRight = _item?.getBoundingClientRect().right;
-    // const itemBottom = _item?.getBoundingClientRect().bottom;
     const itemRight = getItemRect()?.right;
     const itemBottom = getItemRect()?.bottom;
     const reference = target !== dropTarget ? inside() : outside();
@@ -482,9 +477,6 @@ function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
   const el = document.elementFromPoint(x, y);
   point.style.pointerEvents = state;
   return el;
-}
-function updateItem() {
-  return null;
 }
 function always() {
   return true;
