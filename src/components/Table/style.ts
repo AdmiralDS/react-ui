@@ -212,13 +212,13 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
-export const DragIcon = styled(DragOutline)<{ disabled?: boolean }>`
+export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   display: flex;
   flex-shrink: 0;
   cursor: pointer;
   & *[fill^='#'] {
-    fill: ${({ theme, disabled }) =>
-      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
+    fill: ${({ theme, $disabled }) =>
+      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
   }
 `;
 

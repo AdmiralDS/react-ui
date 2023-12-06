@@ -140,7 +140,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const rowToGroupMap = Object.entries(groupToRowsMap).reduce<GroupRows>((acc, [groupId, info]) => {
       info.rows.forEach((id) => {
-        const row = rowList.find((item) => item.id === id);
+        const row = rowList.find((item) => item.id.toString() === id);
         if (row && !groupToRowsMap[id]) {
           acc[id] = { groupId, checked: !!row.selected };
         }
@@ -159,7 +159,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
         if (isGroupRow) {
           groupToRowsMap[row.id].rows.forEach((rowId) => {
-            const row = rowList.find((item) => item.id === rowId);
+            const row = rowList.find((item) => item.id.toString() === rowId);
             if (row) tableRows.push(row);
           });
         }
@@ -173,7 +173,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const zebraRows = greyZebraRows
       ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
           if (rowToGroupMap[row.id]) {
-            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.rows.indexOf(row.id);
+            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.rows.indexOf(String(row.id));
             acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
           } else if (groupToRowsMap[row.id]) {
             acc[row.id] = 'group';
@@ -321,7 +321,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (!groupInfo) return;
 
       const value = groupInfo?.rows.some((rowId) =>
-        rowId === changedDepId ? !rowToGroupMap[rowId]?.checked : rowToGroupMap[rowId]?.checked,
+        rowId === changedDepId.toString() ? !rowToGroupMap[rowId]?.checked : rowToGroupMap[rowId]?.checked,
       );
       return { groupId, value };
     };
@@ -335,7 +335,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
         if (groupInfo) {
-          const rowInCurrentGroup = groupInfo.rows.includes(row.id);
+          const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
 
           if (row.id === id || rowInCurrentGroup) {
             ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);

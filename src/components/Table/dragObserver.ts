@@ -208,7 +208,7 @@ export function dragObserver(
   function cleanup() {
     ungrab();
     removeMirrorImage();
-    delete _item?.dataset.dragover;
+    delete _item?.dataset?.dragover;
     delete _currentTarget?.dataset?.groupover;
     drake.dragging = false;
     onDragEnd?.();
@@ -260,7 +260,7 @@ export function dragObserver(
     if (o.updateDragItem) {
       const updatedItem = o.updateDragItem?.(_itemId);
       if (updatedItem) {
-        delete _item?.dataset.dragover;
+        delete _item?.dataset?.dragover;
         updatedItem.dataset.dragover = 'true';
         _item = updatedItem;
       }
@@ -339,7 +339,6 @@ export function dragObserver(
 
   function renderMirrorImage() {
     const mirrorElement = o.mirrorRef.current;
-
     if (_mirror && !mirrorElement) {
       return;
     }
@@ -464,13 +463,14 @@ function touchy(
   crossvent[op](el, type, fn);
 }
 
-// elementFromPoint может вернуть null, если мы вышли за границы viewport.
+// document.elementFromPoint может вернуть null, если мы вышли за границы viewport
 //
 // Если существует 2 соседних по вертикали элемента a и b, где a.left == b.left == x, a.bottom == b.top == y,
 // то elementFromPoint(x, y) вернет в качестве результата элемент b.
 //
 // Если существует 2 соседних по горизонтали элемента a и b, где a.right == b.left == x, a.top == b.top == y,
 // то elementFromPoint(x, y) вернет в качестве результата элемент b.
+
 function getElementBehindPoint(point: HTMLElement, x: number, y: number) {
   const state = point.style.pointerEvents;
   point.style.pointerEvents = 'none';
