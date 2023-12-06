@@ -77,6 +77,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -169,6 +173,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -317,6 +328,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -409,6 +424,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -612,6 +634,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -704,6 +730,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -848,6 +881,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -940,6 +977,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -1139,6 +1183,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -1231,6 +1279,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -1375,6 +1430,10 @@ fieldset:disabled .c0.c0 {
   background-color: #0062FF;
 }
 
+.c1:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -1467,6 +1526,13 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
 }
 
 .c5 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 

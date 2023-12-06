@@ -110,6 +110,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -183,6 +187,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -277,10 +285,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -623,6 +645,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -696,6 +722,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -790,10 +820,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -1191,6 +1235,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -1264,6 +1312,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -1358,10 +1410,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -1682,6 +1748,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -1755,6 +1825,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -1849,10 +1923,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -2228,6 +2316,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -2301,6 +2393,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -2395,10 +2491,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -2719,6 +2829,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -2792,6 +2906,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -2886,10 +3004,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -3265,6 +3397,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -3338,6 +3474,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -3432,10 +3572,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
@@ -3756,6 +3910,10 @@ fieldset:disabled .c1.c1 {
   background-color: #0062FF;
 }
 
+.c2:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
+}
+
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
@@ -3829,6 +3987,10 @@ fieldset:disabled .c1.c1 {
 .c10:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
+}
+
+.c10:checked:not(:disabled)+div>span *[fill^='#'] {
+  fill: #FFFFFF;
 }
 
 .c10:not(:disabled):focus-visible+div {
@@ -3923,10 +4085,24 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c11 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .c6 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
