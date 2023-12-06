@@ -117,7 +117,7 @@ export interface TableRow {
   /** Название группы */
   groupTitle?: string;
   /** Строки таблицы, находящиеся в группе */
-  groupRows?: Array<RowId>;
+  groupRows?: Array<string>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
@@ -279,15 +279,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export type GroupInfo = {
-  rows: Array<RowId>;
+  rows: Array<string>;
   expanded: boolean;
 };
 
 type RowInfo = {
-  groupId: RowId;
+  groupId: string;
   checked: boolean;
 };
 
-export type Group = Record<RowId, GroupInfo>;
-export type GroupRows = Record<RowId, RowInfo>;
-export type ZebraRows = Record<RowId, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;
+export type Group = Record<string, GroupInfo>;
+export type GroupRows = Record<string, RowInfo>;
+export type ZebraRows = Record<string, 'odd' | 'even' | 'ingroup odd' | 'ingroup even' | 'group'>;

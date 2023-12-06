@@ -6,14 +6,14 @@ import type { TableProps } from '#src/components/Table';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorRow } from '../style';
+import type { GroupRows } from '../types';
 
 type RowDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
   onRowDrag: TableProps['onRowDrag'];
   rowsDraggable?: boolean;
-  tableRef?: React.RefObject<HTMLElement>;
   scrollBodyRef: React.RefObject<HTMLElement>;
-  rowToGroupMap: any;
+  rowToGroupMap: GroupRows;
 };
 
 export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, rowToGroupMap }: RowDragProps) => {
@@ -23,8 +23,8 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
 
   // save callback via useRef to not update dragObserver on each callback change
   const rowDragCallback = useRef(onRowDrag);
-  const rowMirrorRef = useRef<HTMLDivElement>(null);
   const rowToGroup = useRef(rowToGroupMap);
+  const rowMirrorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     rowToGroup.current = rowToGroupMap;
@@ -75,8 +75,9 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
       if (rowId) {
         // навелись мышкой на заголовок группы
         if (immediateRowId && immediateGroup == 'true') {
-          // перетаскиваемая строка не является частью этой группы
-          if (rowInGroup !== immediateRowId) {
+          // перетаскиваемая строка не является частью этой группы или
+          // перетаскиваемая строка находится внутри этой группы, но не на первой позиции
+          if (rowInGroup !== immediateRowId || (rowInGroup == immediateRowId && immediateFirstRowInGroup !== rowId)) {
             const nextRowId = immediateFirstRowInGroup ?? beforeRowId;
             rowDragCallback.current?.(rowId, nextRowId, immediateRowId);
           }

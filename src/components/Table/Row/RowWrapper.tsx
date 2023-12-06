@@ -85,7 +85,7 @@ export const RowWrapper = ({
       data-row={row.id}
       data-group={isGroup}
       data-ingroup={groupId}
-      data-first-row-in-group={row?.groupRows?.[0] || null}
+      data-first-row-in-group={row?.groupRows?.[0] ?? null}
     >
       <SimpleRow
         className="tr-simple"

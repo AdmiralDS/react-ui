@@ -652,7 +652,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           onRowDrag={onRowDrag}
           dimension={dimension}
           rowsDraggable={rowsDraggable}
-          tableRef={tableRef}
           scrollBodyRef={scrollBodyRef}
           rowToGroupMap={rowToGroupMap}
         />

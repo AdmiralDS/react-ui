@@ -5,7 +5,7 @@ import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
 
 import { dragObserver } from '../dragObserver';
-import { Mirror } from '../style';
+import { MirrorColumn } from '../style';
 
 type ColumnDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
@@ -143,6 +143,6 @@ export const ColumnDrag = ({
   }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
-    ? createPortal(<Mirror $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(<MirrorColumn $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
     : null;
 };

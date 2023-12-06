@@ -508,7 +508,7 @@ export const HiddenHeader = styled.div`
   }
 `;
 
-export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
+export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
