@@ -58,7 +58,7 @@ const readOnlyCss = css`
       border-color: ${(p) => p.theme.color['Primary/Primary 30']};
       background-color: ${(p) => p.theme.color['Primary/Primary 30']};
       & *[fill^='#'] {
-        fill: ${(p) => p.theme.color['Special/Static White']};
+        fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
       }
     }
   }
@@ -130,7 +130,7 @@ export const Input = styled.input<{
         border-color: ${(p) => p.theme.color['Primary/Primary 30']};
         background-color: ${(p) => p.theme.color['Primary/Primary 30']};
         & *[fill^='#'] {
-          fill: ${(p) => p.theme.color['Special/Static White']};
+          fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
         }
       }
     }
@@ -140,6 +140,9 @@ export const Input = styled.input<{
     & + div > span {
       border-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
       background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+      & *[fill^='#'] {
+        fill: ${(p) => p.theme.color['Special/Static White']};
+      }
     }
   }
 
@@ -231,7 +234,7 @@ export const CheckboxComponentBackground = styled.span<{
   background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
   border: 1px solid ${(p) => (p.$error ? p.theme.color['Error/Error 60 Main'] : p.theme.color['Neutral/Neutral 50'])};
   & *[fill^='#'] {
-    fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Special/Static White'])};
+    fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Neutral/Neutral 00'])};
   }
   fieldset:disabled && {
     & *[fill^='#'] {
