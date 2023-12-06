@@ -243,11 +243,29 @@ export const CheckboxComponentBackground = styled.span<{
   }
 `;
 
-export const Check = styled(CheckSVG)`
+export const Check = styled(CheckSVG)<{ $dimension: CheckboxComponentDimension }>`
+  ${(p) => `
+    width: ${p.$dimension === 's' ? 16 : 20}px;
+    height: ${p.$dimension === 's' ? 16 : 20}px;
+  `}
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 `;
 
-export const Indeterminate = styled(IndeterminateSVG)`
+export const Indeterminate = styled(IndeterminateSVG)<{ $dimension: CheckboxComponentDimension }>`
+  ${(p) => `
+    width: ${p.$dimension === 's' ? 16 : 20}px;
+    height: ${p.$dimension === 's' ? 16 : 20}px;
+  `}
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
   & *[fill^='#'] {
     fill: ${(p) => p.theme.color['Special/Static White']};

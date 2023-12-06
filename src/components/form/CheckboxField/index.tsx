@@ -92,9 +92,9 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
           <CheckboxComponentHover $dimension={dimension} />
           <CheckboxComponentBackground $dimension={dimension} $error={error} disabled={disabled || readOnly}>
             {indeterminate ? (
-              <Indeterminate aria-hidden="true" focusable="false" />
+              <Indeterminate aria-hidden="true" focusable="false" $dimension={dimension} />
             ) : (
-              <Check aria-hidden="true" focusable="false" />
+              <Check aria-hidden="true" focusable="false" $dimension={dimension} />
             )}
           </CheckboxComponentBackground>
         </InputContainer>
