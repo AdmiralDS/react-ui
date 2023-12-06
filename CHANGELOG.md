@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.5.1](https://github.com/AdmiralDS/react-ui/compare/v7.5.0...v7.5.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* убраны зависимости из раздела dependencies ([3c1989b](https://github.com/AdmiralDS/react-ui/commit/3c1989b88244b2f7b88356795a10a6752a701d0c))
+
 ## [7.5.0](https://github.com/AdmiralDS/react-ui/compare/v7.4.1...v7.5.0) (2023-11-24)
 
 
