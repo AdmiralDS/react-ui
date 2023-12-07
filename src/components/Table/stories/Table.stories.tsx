@@ -766,6 +766,10 @@ export const DraggableRowsExample = {
       source: {
         code: TableRowDragDropRaw,
       },
+      description: {
+        story: `Функция изменения порядка строк является опциональной. По умолчанию строки таблицы не подлежат перемещению.
+      Для того чтобы строки можно было перемещать, необходимо в таблицу передать параметр rowsDraggable равный true.\n\n`,
+      },
     },
   },
   name: 'Table. Drag and Drop строк',

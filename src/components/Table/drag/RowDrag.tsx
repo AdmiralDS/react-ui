@@ -64,8 +64,12 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
     const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: HTMLElement) {
+      // item - не всегда актуальный элемент, если мы перетаскивали строку и поместили её в закрытую группу,
+      // то строка перестает рендерится в dom, и колбек handleDrop вернет в качестве item тот объект строки,
+      // который существовал до размонтирования строки и удаления её из dom
+      // в объекте item имеет смысл работать только с data-row атрибутом, остальные атрибуты могут быть не актуальными
       const rowId = item?.dataset?.row;
-      const rowInGroup = item?.dataset?.ingroup;
+      const rowInGroup = rowToGroup.current?.[rowId as any]?.groupId;
       const beforeRowId = before?.dataset?.row ?? null;
       const immediateRowId = immediate?.dataset?.row;
       const immediateGroup = immediate?.dataset?.group;

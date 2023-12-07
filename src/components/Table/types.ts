@@ -80,11 +80,16 @@ export type Column = {
   renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
+// TODO: Удалить в 9.x.x версии
+/**
+ * @deprecated Будет удалено в 9.x.x версии.
+ * Взамен используйте для id строк значения типа string
+ **/
 export type RowId = string | number;
 export type IdSelectionStatusMap = Record<RowId, boolean>;
 
 export interface TableRow {
-  id: RowId;
+  id: RowId | string;
   className?: string;
   /** Строка в состоянии selected */
   selected?: boolean;
@@ -265,7 +270,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * groupRowId - id групповой строки (строки с заголовком группы), по данному id можно
    * определить к какой группе будет относиться перетаскиваемая строка
    */
-  onRowDrag?: (rowId: RowId, nextRowId: RowId | null, groupRowId: RowId | null) => void;
+  onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,
