@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.5.1](https://github.com/AdmiralDS/react-ui/compare/v7.5.0...v7.5.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* убраны зависимости из раздела dependencies ([3c1989b](https://github.com/AdmiralDS/react-ui/commit/3c1989b88244b2f7b88356795a10a6752a701d0c))
+
+## [7.5.0](https://github.com/AdmiralDS/react-ui/compare/v7.4.1...v7.5.0) (2023-11-24)
+
+
+### Features
+
+* **Select:** В режиме multiple убран функционал показа выбранных опций при ховере над счетчиком. ([72136d5](https://github.com/AdmiralDS/react-ui/commit/72136d53fcbe06b4b4555b253075e23429df15d3)), closes [#1155](https://github.com/AdmiralDS/react-ui/issues/1155)
+* **TimePicker:** Изменено поведение при клике по полю ввода, находящемуся не в фокусе: курсор устанавливается в первую незаполненную позицию. ([a816099](https://github.com/AdmiralDS/react-ui/commit/a816099de8e2c05b6b0aa51464382fe5a98f7b15)), closes [#827](https://github.com/AdmiralDS/react-ui/issues/827)
+* **Tooltip:** add dimension S ([1323402](https://github.com/AdmiralDS/react-ui/commit/1323402521fba1d5c04a671c40bd7c822c9faf04))
+
+
+### Bug Fixes
+
+* **TextButton:** события для тултипа должны быть доступны в disabled состоянии ([746eec4](https://github.com/AdmiralDS/react-ui/commit/746eec4a4ec69b5b3a7fdb52e117913d34eaff77))
+
 ### [7.4.1](https://github.com/AdmiralDS/react-ui/compare/v7.4.0...v7.4.1) (2023-11-10)
 
 

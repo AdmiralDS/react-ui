@@ -78,8 +78,8 @@ export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
         ? kind.backgroundHover
           ? kind.backgroundHover
           : kind.background
-          ? kind.background
-          : 'neutral'
+            ? kind.background
+            : 'neutral'
         : (kind as TagKind);
 
     useLayoutEffect(() => {
