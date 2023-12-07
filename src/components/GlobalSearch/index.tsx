@@ -272,7 +272,6 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   useEffect(() => {
     if (inFocus) {
       const listener = (event: KeyboardEvent) => {
-        console.log(`key code: ${event.code}`);
         if (event.code === 'Enter' || event.code === 'NumpadEnter') {
           event.preventDefault();
           event.stopPropagation();
@@ -283,8 +282,6 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         if (event.code === 'ArrowDown') {
           if (!displayOptionsVisible) {
             setDisplayOptionsVisible(true);
-          } else if (tempValue === '') {
-            setTempValue(model[0]?.id);
           }
         }
       };
@@ -333,7 +330,6 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   };
 
   const handleMenuActivateItem = (id?: string) => {
-    console.log(`handleMenuActivateItem ${id}`);
     setTempValue(id ?? '');
   };
 
@@ -362,9 +358,6 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         {...inputProps}
         value={tempValue === '' ? inputProps.value : tempValue}
         onChange={handleInputOnChange}
-        onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-          console.log(`onInput ${e.target.value}`);
-        }}
         ref={inputRef}
       />
       {iconCount > 0 ? (

@@ -69,29 +69,43 @@ export const BasicExampleTemplate = ({
 
   const [filter, setFilter] = React.useState('');
 
-  const debouncedFilter = useDebounce(filter, 500);
-
   const model = [
-    ...history.map((item, index) => ({
-      id: item.text,
-      render: (options: RenderOptionProps) => (
-        <Item {...options} key={item.text + '_history_' + index}>
-          <TimeOutline width={24} />
-          <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
-        </Item>
-      ),
-    })),
-    ...options.map((item, index) => ({
-      id: item.text,
-      render: (options: RenderOptionProps) => (
-        <Item {...options} key={item.text + '_suggest_' + index}>
-          <SearchOutline width={24} />
-          <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
-        </Item>
-      ),
-    })),
+    ...history
+      .filter((item) => item.text.includes(filter))
+      .map((item, index) => ({
+        id: item.text,
+        render: (options: RenderOptionProps) => (
+          <Item {...options} key={item.text + '_history_' + index}>
+            <TimeOutline width={24} />
+            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
+          </Item>
+        ),
+      })),
+    ...options
+      .filter((item) => item.text.includes(filter))
+      .map((item, index) => ({
+        id: item.text,
+        render: (options: RenderOptionProps) => (
+          <Item {...options} key={item.text + '_suggest_' + index}>
+            <SearchOutline width={24} />
+            <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
+          </Item>
+        ),
+      })),
   ];
 
+  if (model.length === 0) {
+    model.push({
+      id: 'Нет совпадений',
+      render: () => (
+        <Item disabled>
+          <TextBlock>Нет совпадений</TextBlock>
+        </Item>
+      ),
+    });
+  }
+
+  const debouncedFilter = useDebounce(filter, 500);
   const { data, isLoading } = useQuery({
     queryKey: ['people', debouncedFilter],
     queryFn: () => searchPeopleByName(debouncedFilter),
@@ -124,7 +138,7 @@ export const BasicExampleTemplate = ({
           {...props}
           value={searchValue}
           onChange={handleOnChange}
-          submitButtonProps={{ onClick: handleSubmitButtonClick, children: 'Найти' }}
+          submitButtonProps={{ ...props.submitButtonProps, onClick: handleSubmitButtonClick }}
           isLoading={isLoading}
           model={model}
         />

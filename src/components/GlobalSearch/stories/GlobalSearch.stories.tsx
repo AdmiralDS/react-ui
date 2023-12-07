@@ -106,5 +106,6 @@ export const PaneSimpleExample = {
         console.log('Button cliked or Enter key was pressed. Run your function.');
       },
     },
+    displayClearIcon: true,
   },
 };
