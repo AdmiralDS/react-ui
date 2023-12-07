@@ -20,7 +20,7 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -88,6 +88,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -95,6 +99,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -189,6 +197,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -361,7 +370,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -429,6 +438,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -436,6 +449,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -530,6 +547,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -757,7 +775,7 @@ exports[`CheckboxGroup should render component with label 1`] = `
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -825,6 +843,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -832,6 +854,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -926,6 +952,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -1086,7 +1113,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1154,6 +1181,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -1161,6 +1192,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -1255,6 +1290,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -1470,7 +1506,7 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1538,6 +1574,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -1545,6 +1585,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -1639,6 +1683,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 16px;
   height: 16px;
   position: absolute;
@@ -1798,7 +1843,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1866,6 +1911,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -1873,6 +1922,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -1967,6 +2020,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 16px;
   height: 16px;
   position: absolute;
@@ -2181,7 +2235,7 @@ exports[`CheckboxGroup should render components 1`] = `
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -2249,6 +2303,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -2256,6 +2314,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -2350,6 +2412,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -2509,7 +2572,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: flex;
+  display: inline flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -2577,6 +2640,10 @@ fieldset:disabled .c1.c1 {
   fill: #FFFFFF;
 }
 
+.c2:disabled:checked+div>span>svg {
+  visibility: visible;
+}
+
 .c2:checked:not(:disabled)+div>span {
   border-color: #0062FF;
   background-color: #0062FF;
@@ -2584,6 +2651,10 @@ fieldset:disabled .c1.c1 {
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
   fill: #FFFFFF;
+}
+
+.c2:checked:not(:disabled)+div>span>svg {
+  visibility: visible;
 }
 
 .c2:not(:disabled):focus-visible+div {
@@ -2678,6 +2749,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
 }
 
 .c6 {
+  visibility: hidden;
   width: 20px;
   height: 20px;
   position: absolute;
