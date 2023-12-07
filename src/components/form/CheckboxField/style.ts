@@ -60,6 +60,9 @@ const readOnlyCss = css`
       & *[fill^='#'] {
         fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
       }
+      & > svg {
+        visibility: visible;
+      }
     }
   }
 `;
@@ -132,6 +135,9 @@ export const Input = styled.input<{
         & *[fill^='#'] {
           fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
         }
+        & > svg {
+          visibility: visible;
+        }
       }
     }
   }
@@ -142,6 +148,9 @@ export const Input = styled.input<{
       background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
       & *[fill^='#'] {
         fill: ${(p) => p.theme.color['Special/Static White']};
+      }
+      & > svg {
+        visibility: visible;
       }
     }
   }
@@ -257,6 +266,7 @@ const iconCss = css<{ $dimension: CheckboxComponentDimension }>`
 `;
 
 export const Check = styled(CheckSVG)<{ $dimension: CheckboxComponentDimension }>`
+  visibility: hidden;
   ${iconCss}
 `;
 
