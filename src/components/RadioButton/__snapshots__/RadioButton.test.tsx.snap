@@ -3,9 +3,55 @@
 exports[`RadioButton should render component with disabled state 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c4 {
+  "baseElement": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 10px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -14,12 +60,14 @@ exports[`RadioButton should render component with disabled state 1`] = `
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #B0B5BD;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -31,76 +79,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
-.c1 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  display: inline-block;
-  min-width: 20px;
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 20px;
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
   height: 18px;
 }
 
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
+.c1 {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 32px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 2px 0 2px 2px;
+  user-select: none;
   cursor: default;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -113,6 +164,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -120,14 +172,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -137,28 +185,83 @@ fieldset:disabled .c0 {
         class="c0"
         disabled=""
       >
-        <div
+        <input
           class="c1"
+          data-testid="element"
+          disabled=""
+          type="radio"
+          value="radio1"
+        />
+        <div
+          class="c2"
         >
-          <input
-            class="c2"
-            data-testid="element"
-            disabled=""
-            type="radio"
-            value="radio1"
+          <div
+            class="c3"
           />
           <span
-            class="c3 c4"
+            aria-hidden="true"
+            class="c4"
             disabled=""
           />
         </div>
-        text
+        <div
+          class="c5"
+          disabled=""
+        >
+          text
+        </div>
       </label>
     </div>
   </body>,
-  "container": .c4 {
+  "container": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 10px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #B0B5BD;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -167,12 +270,14 @@ fieldset:disabled .c0 {
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #B0B5BD;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
+  border-color: #B0B5BD;
+  background-color: #E5E7EB;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -184,76 +289,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
-.c1 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  display: inline-block;
-  min-width: 20px;
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 20px;
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
   height: 18px;
 }
 
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
+.c1 {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 32px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 2px 0 2px 2px;
+  user-select: none;
   cursor: default;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -266,6 +374,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -273,14 +382,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -289,22 +394,31 @@ fieldset:disabled .c0 {
       class="c0"
       disabled=""
     >
-      <div
+      <input
         class="c1"
+        data-testid="element"
+        disabled=""
+        type="radio"
+        value="radio1"
+      />
+      <div
+        class="c2"
       >
-        <input
-          class="c2"
-          data-testid="element"
-          disabled=""
-          type="radio"
-          value="radio1"
+        <div
+          class="c3"
         />
         <span
-          class="c3 c4"
+          aria-hidden="true"
+          class="c4"
           disabled=""
         />
       </div>
-      text
+      <div
+        class="c5"
+        disabled=""
+      >
+        text
+      </div>
     </label>
   </div>,
   "debug": [Function],
@@ -364,9 +478,55 @@ fieldset:disabled .c0 {
 exports[`RadioButton should render component with required properties 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c4 {
+  "baseElement": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 10px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -375,12 +535,12 @@ exports[`RadioButton should render component with required properties 1`] = `
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #717681;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -392,76 +552,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
-.c1 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  display: inline-block;
-  min-width: 20px;
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 20px;
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
   height: 18px;
 }
 
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
+.c1 {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 32px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 2px 0 2px 2px;
+  user-select: none;
   cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -474,6 +637,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -481,14 +645,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -497,26 +657,80 @@ fieldset:disabled .c0 {
       <label
         class="c0"
       >
-        <div
+        <input
           class="c1"
+          data-testid="element"
+          type="radio"
+          value="radio1"
+        />
+        <div
+          class="c2"
         >
-          <input
-            class="c2"
-            data-testid="element"
-            type="radio"
-            value="radio1"
+          <div
+            class="c3"
           />
           <span
-            class="c3 c4"
+            aria-hidden="true"
+            class="c4"
           />
         </div>
-        text
+        <div
+          class="c5"
+        >
+          text
+        </div>
       </label>
     </div>
   </body>,
-  "container": .c4 {
+  "container": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 10px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -525,12 +739,12 @@ fieldset:disabled .c0 {
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #717681;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 20px;
+  height: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -542,76 +756,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
-.c1 {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  display: inline-block;
-  min-width: 20px;
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 20px;
   height: 20px;
 }
 
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
   height: 18px;
 }
 
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
+.c1 {
   position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 32px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 2px 0 2px 2px;
+  user-select: none;
   cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -624,6 +841,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -631,14 +849,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -646,20 +860,28 @@ fieldset:disabled .c0 {
     <label
       class="c0"
     >
-      <div
+      <input
         class="c1"
+        data-testid="element"
+        type="radio"
+        value="radio1"
+      />
+      <div
+        class="c2"
       >
-        <input
-          class="c2"
-          data-testid="element"
-          type="radio"
-          value="radio1"
+        <div
+          class="c3"
         />
         <span
-          class="c3 c4"
+          aria-hidden="true"
+          class="c4"
         />
       </div>
-      text
+      <div
+        class="c5"
+      >
+        text
+      </div>
     </label>
   </div>,
   "debug": [Function],
@@ -719,9 +941,56 @@ fieldset:disabled .c0 {
 exports[`RadioButton should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c4 {
+  "baseElement": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -730,12 +999,12 @@ exports[`RadioButton should render component with small dimension 1`] = `
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #717681;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 18px;
+  height: 18px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -747,76 +1016,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
+  height: 18px;
+}
+
 .c1 {
   position: absolute;
-  top: 1px;
-  left: 1px;
-  display: inline-block;
-  min-width: 18px;
-  height: 18px;
-}
-
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
-  height: 18px;
-}
-
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 14px);
-  height: calc(100% + 14px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 28px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 1px 0 1px 1px;
+  user-select: none;
   cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -829,6 +1101,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -836,14 +1109,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -852,26 +1121,81 @@ fieldset:disabled .c0 {
       <label
         class="c0"
       >
-        <div
+        <input
           class="c1"
+          data-testid="element"
+          type="radio"
+          value="radio1"
+        />
+        <div
+          class="c2"
         >
-          <input
-            class="c2"
-            data-testid="element"
-            type="radio"
-            value="radio1"
+          <div
+            class="c3"
           />
           <span
-            class="c3 c4"
+            aria-hidden="true"
+            class="c4"
           />
         </div>
-        text
+        <div
+          class="c5"
+        >
+          text
+        </div>
       </label>
     </div>
   </body>,
-  "container": .c4 {
+  "container": .c3 {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  background: #0000000D;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 14px);
+  height: calc(100% + 14px);
+  background-color: #0000000D;
+}
+
+.c5 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: #23262D;
+}
+
+fieldset:disabled .c5.c5 {
+  color: #B0B5BD;
+}
+
+fieldset[data-dimension='s'] .c5.c5 {
+  margin-left: 9px;
+  margin-top: 1px;
+  font-family: 'VTB Group UI',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
   display: inline-block;
   position: absolute;
+  flex-shrink: 0;
   margin: 0;
   top: 0;
   left: 0;
@@ -880,12 +1204,12 @@ fieldset:disabled .c0 {
   content: '';
   box-sizing: border-box;
   pointer-events: none;
-  background-color: #FFFFFF;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #717681;
   border-radius: 50%;
   transition: all 0.25s ease-in-out;
+  width: 18px;
+  height: 18px;
+  background-color: #FFFFFF;
+  border: 1px solid #717681;
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -897,76 +1221,79 @@ fieldset:disabled .c4 {
   border: 1px solid #B0B5BD;
 }
 
+.c2 {
+  pointer-events: none;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 18px;
+  height: 18px;
+}
+
 .c1 {
   position: absolute;
-  top: 1px;
-  left: 1px;
-  display: inline-block;
-  min-width: 18px;
-  height: 18px;
-}
-
-fieldset[data-dimension='s'] .c1 {
-  min-width: 18px;
-  height: 18px;
-}
-
-.c2 {
-  appearance: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
   cursor: pointer;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  box-sizing: border-box;
 }
 
-.c2 ::-ms-check {
-  display: none;
+.c1:disabled {
+  cursor: default;
 }
 
-.c2:not(:checked):disabled+.c3 {
+.c1:not(:checked):disabled+div>span {
   background-color: #E5E7EB;
 }
 
-.c2:checked:disabled+.c3 {
+.c1:checked:disabled+div>span {
   border: 5px solid #A7C7FF;
+  background-color: #FFFFFF;
 }
 
-.c2:checked:not(:disabled)+.c3 {
+.c1:checked:not(:disabled)+div>span {
   border: 5px solid #0062FF;
 }
 
-.c2:not(:disabled):hover::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: calc(100% + 14px);
-  height: calc(100% + 14px);
-  background-color: #0000000D;
-}
-
-.c2:focus-visible {
+.c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
+.c1:not(:disabled):hover+div>div {
+  visibility: visible;
+}
+
+.c1:not(:disabled):hover:focus-visible+div {
+  outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
+}
+
+.c1:not(:disabled):active:focus-visible+div {
+  outline: none;
+}
+
 .c0 {
-  margin: 0;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 28px;
-  display: inline-block;
+  display: flex;
+  align-items: flex-start;
   position: relative;
   box-sizing: content-box;
+  padding: 1px 0 1px 1px;
+  user-select: none;
   cursor: pointer;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -979,6 +1306,7 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
+  padding: 1px 0 1px 1px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -986,14 +1314,10 @@ fieldset[data-dimension='s'] .c0.c0 {
   line-height: 16px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
 }
 
 fieldset:disabled .c0.c0 {
   color: #B0B5BD;
-}
-
-fieldset:disabled .c0 {
   cursor: default;
 }
 
@@ -1001,20 +1325,28 @@ fieldset:disabled .c0 {
     <label
       class="c0"
     >
-      <div
+      <input
         class="c1"
+        data-testid="element"
+        type="radio"
+        value="radio1"
+      />
+      <div
+        class="c2"
       >
-        <input
-          class="c2"
-          data-testid="element"
-          type="radio"
-          value="radio1"
+        <div
+          class="c3"
         />
         <span
-          class="c3 c4"
+          aria-hidden="true"
+          class="c4"
         />
       </div>
-      text
+      <div
+        class="c5"
+      >
+        text
+      </div>
     </label>
   </div>,
   "debug": [Function],

@@ -15,6 +15,10 @@ exports[`Toggle should render component with disabled state 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -42,6 +46,11 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -156,6 +165,10 @@ exports[`Toggle should render component with disabled state 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -183,6 +196,11 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -352,6 +370,10 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -379,6 +401,11 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -490,6 +517,10 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -517,6 +548,11 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -683,6 +719,10 @@ exports[`Toggle should render component with required properties 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -710,6 +750,11 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -821,6 +866,10 @@ exports[`Toggle should render component with required properties 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -848,6 +897,11 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -1014,6 +1068,10 @@ exports[`Toggle should render component with small dimension 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -1041,6 +1099,11 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {
@@ -1152,6 +1215,10 @@ exports[`Toggle should render component with small dimension 1`] = `
   opacity: 0;
 }
 
+.c1:disabled {
+  cursor: default;
+}
+
 .c1:checked+div>span {
   background: #0062FF;
 }
@@ -1179,6 +1246,11 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):hover:focus-visible+div>span {
   outline: none;
+}
+
+.c1:not(:disabled):active+div>div {
+  visibility: visible;
+  background: #0000001F;
 }
 
 .c5 {

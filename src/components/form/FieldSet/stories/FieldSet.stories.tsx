@@ -69,7 +69,7 @@ export default {
   },
 } as Meta<typeof FieldSet>;
 
-//<editor-fold desc="">
+//<editor-fold desc="Checkbox Fieldset">
 const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props) => <FieldSetCheckboxTemplate {...props} />;
 
 export const FieldSetCheckbox = {
@@ -85,10 +85,9 @@ export const FieldSetCheckbox = {
 
   name: 'Checkbox Fieldset',
 };
-
 //</editor-fold>
 
-//<editor-fold desc="">
+//<editor-fold desc="RadioGroup Fieldset">
 const FieldSetRadioButtonStory: StoryFn<typeof FieldSet> = (props) => <FieldSetRadioButtonTemplate {...props} />;
 
 export const FieldSetRadioButton = {
@@ -104,3 +103,4 @@ export const FieldSetRadioButton = {
 
   name: 'RadioGroup Fieldset',
 };
+//</editor-fold>

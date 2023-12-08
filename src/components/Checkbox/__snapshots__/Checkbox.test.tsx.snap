@@ -94,6 +94,18 @@ fieldset[data-dimension='s'] .c0 {
   background-color: #0000000D;
 }
 
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
+}
+
 .c1:checked:disabled+.c2 {
   background-color: #A7C7FF;
   border: none;
@@ -220,6 +232,18 @@ fieldset[data-dimension='s'] .c0 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
+}
+
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
 }
 
 .c1:checked:disabled+.c2 {
@@ -405,6 +429,18 @@ fieldset[data-dimension='s'] .c0 {
   background-color: #0000000D;
 }
 
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
+}
+
 .c1:checked:disabled+.c2 {
   background-color: #A7C7FF;
   border: none;
@@ -530,6 +566,18 @@ fieldset[data-dimension='s'] .c0 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
+}
+
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
 }
 
 .c1:checked:disabled+.c2 {
@@ -714,6 +762,18 @@ fieldset[data-dimension='s'] .c0 {
   background-color: #0000000D;
 }
 
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
+}
+
 .c1:checked:disabled+.c2 {
   background-color: #A7C7FF;
   border: none;
@@ -839,6 +899,18 @@ fieldset[data-dimension='s'] .c0 {
   width: calc(100% + 16px);
   height: calc(100% + 16px);
   background-color: #0000000D;
+}
+
+.c1:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: #0000001F;
 }
 
 .c1:checked:disabled+.c2 {

@@ -1,11 +1,20 @@
-import * as React from 'react';
+import type { InputHTMLAttributes, ReactNode, KeyboardEvent } from 'react';
+import { forwardRef } from 'react';
 
-import { Hint, Input, InputContainer, RadioButtonComponent, Span } from '#src/components/RadioButton/style';
+import {
+  Hint,
+  Input,
+  InputContainer,
+  RadioButtonComponent,
+  RadioButtonHover,
+  RadioButtonLabel,
+  Span,
+} from '#src/components/RadioButton/style';
 import { keyboardKey } from '../common/keyboardKey';
 
 type Dimension = 'm' | 's';
 
-export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Состояние кнопки, выбрана или нет */
   checked?: boolean;
   /** Отключение кнопки */
@@ -15,14 +24,14 @@ export interface RadioButtonProps extends React.InputHTMLAttributes<HTMLInputEle
   /** Размер радиокнопки */
   dimension?: Dimension;
   /** Дополнительный текст (подсказка), который выводится нижней строкой */
-  extraText?: React.ReactNode;
+  extraText?: ReactNode;
   /** Состояние ошибки */
   error?: boolean;
 }
 
-export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
-  ({ children, disabled, readOnly, error = false, dimension = 'm', extraText, className, ...props }, ref) => {
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
+  ({ children, disabled = false, readOnly, error = false, dimension = 'm', extraText, className, ...props }, ref) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
         if (code === keyboardKey[' ']) {
@@ -35,23 +44,28 @@ export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
 
     return (
       <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className} $dimension={dimension}>
+        <Input
+          ref={ref}
+          type="radio"
+          disabled={disabled}
+          readOnly={readOnly}
+          $dimension={dimension}
+          {...props}
+          onKeyDown={handleKeyDown}
+        />
         <InputContainer $dimension={dimension}>
-          <Input
-            ref={ref}
-            type="radio"
-            disabled={disabled}
-            readOnly={readOnly}
-            $dimension={dimension}
-            {...props}
-            onKeyDown={handleKeyDown}
-          />
-          <Span disabled={disabled || readOnly} $dimension={dimension} $error={error} />
+          <RadioButtonHover $dimension={dimension} />
+          <Span disabled={disabled || readOnly} $dimension={dimension} $error={error} aria-hidden />
         </InputContainer>
-        {children}
-        {extraText && (
-          <Hint disabled={disabled} $dimension={dimension}>
-            {extraText}
-          </Hint>
+        {children && (
+          <RadioButtonLabel $dimension={dimension} disabled={disabled}>
+            {children}
+            {extraText && (
+              <Hint disabled={disabled} $dimension={dimension}>
+                {extraText}
+              </Hint>
+            )}
+          </RadioButtonLabel>
         )}
       </RadioButtonComponent>
     );
