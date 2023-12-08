@@ -134,13 +134,12 @@ export const TableGroupTemplate = (props: TableProps) => {
   const [rows, setRows] = React.useState(rowList);
   const [cols, setCols] = React.useState(columnList);
 
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+  const handleExpansionChange = (ids: Record<string, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
     setRows(updRows);
   };
 
-  // зачем здесь этот колбек?
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
+  const handleSelectionChange = (ids: Record<string, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
     setRows(updRows);
   };

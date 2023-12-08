@@ -11,9 +11,9 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Отображаемая строка */
   row: TableRow;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId) => void;
+  onRowClick?: (rowId: RowId | string) => void;
   /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId) => void;
+  onRowDoubleClick?: (rowId: RowId | string) => void;
   /** Ширина таблицы */
   tableWidth: number;
   /** Признак необходимости отображать нижнюю границу */
@@ -21,7 +21,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Признак является ли строка заголовком группы */
   isGroup: boolean;
   /** Id заголовка группы, к которой относится строка */
-  groupId: RowId | null;
+  groupId: RowId | string | null;
   /** Наличие вертикального скролла в таблице */
   verticalScroll: boolean;
   /** Ширина вертикальной полосы прокрутки */
@@ -56,11 +56,11 @@ export const RowWrapper = ({
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
 
-  const handleRowClick = (rowId: RowId) => {
+  const handleRowClick = (rowId: RowId | string) => {
     onRowClick?.(rowId);
   };
 
-  const handleRowDoubleClick = (rowId: RowId) => {
+  const handleRowDoubleClick = (rowId: RowId | string) => {
     onRowDoubleClick?.(rowId);
   };
 

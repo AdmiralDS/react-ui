@@ -69,14 +69,15 @@ export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, ro
       // который существовал до размонтирования строки и удаления её из dom
       // в объекте item имеет смысл работать только с data-row атрибутом, остальные атрибуты могут быть не актуальными
       const rowId = item?.dataset?.row;
-      const rowInGroup = rowToGroup.current?.[rowId as any]?.groupId;
-      const beforeRowId = before?.dataset?.row ?? null;
-      const immediateRowId = immediate?.dataset?.row;
-      const immediateGroup = immediate?.dataset?.group;
-      const immediateInGroup = immediate?.dataset?.ingroup;
-      const immediateFirstRowInGroup = immediate?.dataset?.firstRowInGroup;
 
       if (rowId) {
+        const rowInGroup = rowToGroup.current?.[rowId]?.groupId;
+        const beforeRowId = before?.dataset?.row ?? null;
+        const immediateRowId = immediate?.dataset?.row;
+        const immediateGroup = immediate?.dataset?.group;
+        const immediateInGroup = immediate?.dataset?.ingroup;
+        const immediateFirstRowInGroup = immediate?.dataset?.firstRowInGroup;
+
         // навелись мышкой на заголовок группы
         if (immediateRowId && immediateGroup == 'true') {
           // перетаскиваемая строка не является частью этой группы или

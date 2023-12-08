@@ -314,7 +314,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return { checked, indeterminate };
     };
 
-    const parentGroupWillBeChecked = (changedDepId: RowId) => {
+    const parentGroupWillBeChecked = (changedDepId: RowId | string) => {
       const groupId = rowToGroupMap[changedDepId]?.groupId;
       const groupInfo = groupId ? groupToRowsMap[groupId] : undefined;
 
@@ -326,7 +326,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return { groupId, value };
     };
 
-    function handleCheckboxChange(id: RowId) {
+    function handleCheckboxChange(id: RowId | string) {
       const groupInfo = groupToRowsMap[id];
       const rowHasGroup = rowToGroupMap[id];
 
@@ -353,7 +353,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       onRowSelectionChange?.(idsMap, id);
     }
 
-    function handleExpansionChange(id: RowId) {
+    function handleExpansionChange(id: RowId | string) {
       const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
         const value = row.id === id ? !row.expanded : !!row.expanded;
         ids[row.id] = value;

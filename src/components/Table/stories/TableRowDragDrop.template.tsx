@@ -307,7 +307,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     setCols2(newCols);
   };
 
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+  const handleExpansionChange = (ids: Record<string, boolean>): void => {
     const updRows = rows2.map((row) => ({ ...row, expanded: ids[row.id] }));
     setRows2(updRows);
   };

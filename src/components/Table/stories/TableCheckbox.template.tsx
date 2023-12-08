@@ -200,7 +200,7 @@ export const TableCheckboxTemplate = (props: TableProps) => {
   const [rows, setRows] = React.useState(rowList);
   const [cols, setCols] = React.useState(columnList);
 
-  const handleSelectionChange = (ids: Record<string | number, boolean>): void => {
+  const handleSelectionChange = (ids: Record<string, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, selected: ids[row.id] }));
     setRows(updRows);
   };

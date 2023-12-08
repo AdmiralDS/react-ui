@@ -32,9 +32,9 @@ export interface RegularRowProps {
   rowsDraggable?: boolean;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева). */
-  onRowExpansionChange?: (rowId: RowId) => void;
+  onRowExpansionChange?: (rowId: RowId | string) => void;
   /** Колбек на выбор/снятие выбора со строки (на нажатие по чекбоксу строки). */
-  onRowSelectionChange?: (rowId: RowId) => void;
+  onRowSelectionChange?: (rowId: RowId | string) => void;
   /** Функция рендера ячейки */
   renderBodyCell: (row: TableRow, column: Column) => React.ReactNode;
 }
