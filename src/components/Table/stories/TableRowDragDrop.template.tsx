@@ -313,6 +313,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
   };
 
   const handleRowDrag = (rowId: string, nextRowId: string | null) => {
+    // меняем строки местами
     const tableRows = [...rows];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
@@ -323,6 +324,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
   };
 
   const handleRowDrag2 = (rowId: string, nextRowId: string | null, groupRowId: string | null) => {
+    // меняем строки местами
     const tableRows = [...rows2];
     const movedIndex = tableRows.findIndex((row) => row.id === rowId);
     const movedRow = tableRows.splice(movedIndex, 1)[0];
@@ -330,11 +332,12 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     const beforeIndex = nextRowId ? tableRows.findIndex((row) => row.id === nextRowId) : tableRows.length;
     tableRows.splice(beforeIndex, 0, movedRow);
 
+    // обновляем значения параметров row.groupRows
     const groupRows = tableRows.filter((row) => row?.groupTitle);
     groupRows.forEach((row) => {
-      if (row.id == groupRowId) {
-        const newGroup = row.groupRows?.filter((id) => id !== rowId) || [];
-        let beforeIndex = nextRowId ? newGroup.findIndex((id) => id == nextRowId) : newGroup.length;
+      if (row.id === groupRowId) {
+        const newGroup = row?.groupRows?.filter((id) => id !== rowId) || [];
+        let beforeIndex = nextRowId ? newGroup.findIndex((id) => id === nextRowId) : newGroup.length;
         beforeIndex = beforeIndex == -1 ? newGroup.length : beforeIndex;
         newGroup.splice(beforeIndex, 0, rowId);
         row.groupRows = newGroup;

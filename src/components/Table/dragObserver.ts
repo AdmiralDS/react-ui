@@ -37,7 +37,7 @@ export function dragObserver(
   let _mirror: HTMLElement | null; // mirror image
   let _source: HTMLElement | null; // source container
   let _item: HTMLElement | null; // item being dragged
-  let _itemId: any = '';
+  let _itemId: string = '';
   let _initialSibling: HTMLElement | null; // reference sibling when grabbed
   let _currentSibling: HTMLElement | null; // reference sibling now
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
@@ -161,7 +161,7 @@ export function dragObserver(
   function start(context: any) {
     _source = context.source;
     _item = context.item;
-    _itemId = o.direction == 'vertical' ? context.item?.dataset.row : context.item?.dataset.thColumn;
+    _itemId = o.direction == 'vertical' ? context.item?.dataset?.row : context.item?.dataset?.thColumn;
     _currentTarget = context.item;
     _initialSibling = _currentSibling = context.item.nextElementSibling;
 
