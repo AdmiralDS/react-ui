@@ -6,6 +6,8 @@ import {
   ExpandIconPlacement,
   Filler,
   StickyWrapper,
+  DragCell,
+  DragIcon,
 } from '#src/components/Table/style';
 import { Checkbox } from '#src/components/Checkbox';
 import type { TableRow, RowId, Column, Dimension } from '#src/components/Table';
@@ -26,11 +28,13 @@ export interface RegularRowProps {
   displayRowSelectionColumn: boolean;
   /** Отображение столбца со стрелками для детализации (раскрытия) строк */
   displayRowExpansionColumn: boolean;
+  /** Активен ли drag&drop строк в таблице */
+  rowsDraggable?: boolean;
   /** Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца */
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева). */
-  onRowExpansionChange?: (rowId: RowId) => void;
+  onRowExpansionChange?: (rowId: RowId | string) => void;
   /** Колбек на выбор/снятие выбора со строки (на нажатие по чекбоксу строки). */
-  onRowSelectionChange?: (rowId: RowId) => void;
+  onRowSelectionChange?: (rowId: RowId | string) => void;
   /** Функция рендера ячейки */
   renderBodyCell: (row: TableRow, column: Column) => React.ReactNode;
 }
@@ -43,10 +47,13 @@ export const RegularRow = ({
   stickyColumns,
   displayRowSelectionColumn,
   displayRowExpansionColumn,
+  rowsDraggable,
   onRowExpansionChange,
   onRowSelectionChange,
   renderBodyCell,
 }: RegularRowProps) => {
+  const iconSize = dimension === 's' || dimension === 'm' ? 20 : 24;
+
   const handleCheckboxClick = (e: React.MouseEvent<HTMLElement>) => {
     // клик по чекбоксу не должен вызывать событие клика по строке
     e.stopPropagation();
@@ -60,8 +67,13 @@ export const RegularRow = ({
 
   return (
     <>
-      {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+      {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
         <StickyWrapper>
+          {rowsDraggable && (
+            <DragCell $dimension={dimension}>
+              <DragIcon data-dragicon width={iconSize} height={iconSize} $disabled={row.disabled} />
+            </DragCell>
+          )}
           {displayRowExpansionColumn && (
             <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
               {row.expandedRowRender && (

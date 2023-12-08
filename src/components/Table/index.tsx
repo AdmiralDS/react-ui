@@ -12,6 +12,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { HeaderCellComponent } from './HeaderCell';
 import { ColumnDrag } from './drag/ColumnDrag';
+import { RowDrag } from './drag/RowDrag';
 import {
   Cell,
   CellTextContent,
@@ -29,6 +30,7 @@ import {
   TableContainer,
   HiddenHeader,
   ActionBG,
+  DragCell,
 } from './style';
 import { VirtualBody } from './VirtualBody';
 import type {
@@ -86,6 +88,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
+      rowsDraggable = false,
+      onRowDrag,
       rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       ...props
     },
@@ -169,14 +173,14 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const zebraRows = greyZebraRows
       ? tableRows.reduce<ZebraRows>((acc: ZebraRows, row: TableRow, index: number) => {
           if (rowToGroupMap[row.id]) {
-            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id].groupId].rows.indexOf(String(row.id));
+            const indexInGroup = groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.rows.indexOf(String(row.id));
             acc[row.id] = `ingroup ${indexInGroup % 2 === 0 ? 'odd' : 'even'}`;
           } else if (groupToRowsMap[row.id]) {
             acc[row.id] = 'group';
-          } else if (index === 0 || acc[tableRows[index - 1].id].includes('group')) {
+          } else if (index === 0 || acc[tableRows[index - 1]?.id].includes('group')) {
             acc[row.id] = 'odd';
           } else {
-            acc[row.id] = acc[tableRows[index - 1].id] === 'odd' ? 'even' : 'odd';
+            acc[row.id] = acc[tableRows[index - 1]?.id] === 'odd' ? 'even' : 'odd';
           }
           return acc;
         }, {})
@@ -304,25 +308,25 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
-        groupInfo.rows.some((rowId) => rowToGroupMap[rowId].checked) &&
-        groupInfo.rows.some((rowId) => !rowToGroupMap[rowId].checked);
-      const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId].checked);
+        groupInfo.rows.some((rowId) => rowToGroupMap[rowId]?.checked) &&
+        groupInfo.rows.some((rowId) => !rowToGroupMap[rowId]?.checked);
+      const checked = groupInfo.rows.every((rowId) => rowToGroupMap[rowId]?.checked);
       return { checked, indeterminate };
     };
 
-    const parentGroupWillBeChecked = (changedDepId: RowId) => {
+    const parentGroupWillBeChecked = (changedDepId: RowId | string) => {
       const groupId = rowToGroupMap[changedDepId]?.groupId;
       const groupInfo = groupId ? groupToRowsMap[groupId] : undefined;
 
       if (!groupInfo) return;
 
       const value = groupInfo?.rows.some((rowId) =>
-        rowId === changedDepId.toString() ? !rowToGroupMap[rowId].checked : rowToGroupMap[rowId].checked,
+        rowId === changedDepId.toString() ? !rowToGroupMap[rowId]?.checked : rowToGroupMap[rowId]?.checked,
       );
       return { groupId, value };
     };
 
-    function handleCheckboxChange(id: RowId) {
+    function handleCheckboxChange(id: RowId | string) {
       const groupInfo = groupToRowsMap[id];
       const rowHasGroup = rowToGroupMap[id];
 
@@ -349,7 +353,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       onRowSelectionChange?.(idsMap, id);
     }
 
-    function handleExpansionChange(id: RowId) {
+    function handleExpansionChange(id: RowId | string) {
       const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
         const value = row.id === id ? !row.expanded : !!row.expanded;
         ids[row.id] = value;
@@ -440,11 +444,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderGroupRow = (row: TableRow) => {
       const indeterminate =
-        row.groupRows?.some((rowId) => rowToGroupMap[rowId].checked) &&
-        row.groupRows?.some((rowId) => !rowToGroupMap[rowId].checked);
+        row.groupRows?.some((rowId) => rowToGroupMap[rowId]?.checked) &&
+        row.groupRows?.some((rowId) => !rowToGroupMap[rowId]?.checked);
 
       const hasGroupRows = row.groupRows?.length;
-      const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId].checked) : row.selected;
+      const checked = hasGroupRows ? row.groupRows?.every((rowId) => rowToGroupMap[rowId]?.checked) : row.selected;
 
       return (
         <GroupRow
@@ -453,6 +457,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           checkboxDimension={checkboxDimension}
           displayRowExpansionColumn={displayRowExpansionColumn}
           displayRowSelectionColumn={displayRowSelectionColumn}
+          rowsDraggable={rowsDraggable}
           onRowExpansionChange={handleExpansionChange}
           onRowSelectionChange={handleCheckboxChange}
           renderCell={renderCell}
@@ -471,6 +476,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         stickyColumns={stickyColumns}
         displayRowExpansionColumn={displayRowExpansionColumn}
         displayRowSelectionColumn={displayRowSelectionColumn}
+        rowsDraggable={rowsDraggable}
         renderBodyCell={renderBodyCell(idx)}
         onRowExpansionChange={handleExpansionChange}
         onRowSelectionChange={handleCheckboxChange}
@@ -496,7 +502,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderRow = (row: TableRow, index: number) => {
       const isGroupRow = !!groupToRowsMap[row.id];
       const rowInGroup = !!rowToGroupMap[row.id];
-      const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id].groupId].expanded : true;
+      const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.expanded : true;
       const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
 
       const node = (isGroupRow || visible) && (
@@ -506,6 +512,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           underline={(isLastRow && showLastRowUnderline) || !isLastRow}
           tableWidth={tableWidth}
           isGroup={isGroupRow}
+          groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
@@ -558,8 +565,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderHiddenHeader = () => {
       return (
         <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
-          {(displayRowSelectionColumn || displayRowExpansionColumn) && (
+          {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
+              {rowsDraggable && <DragCell $dimension={dimension} />}
               {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
               {displayRowSelectionColumn && (
                 <CheckboxCell $dimension={dimension}>
@@ -596,8 +604,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           className="thead"
         >
           <Header $dimension={dimension} ref={headerRef} className="tr">
-            {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0) && (
+            {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
+                {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
                 {displayRowExpansionColumn && (
                   <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
                 )}
@@ -638,6 +647,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollBodyRef={scrollBodyRef}
           normalColumnsWrapperRef={normalColumnsWrapperRef}
           stickyColumnsWrapperRef={stickyColumnsWrapperRef}
+        />
+        <RowDrag
+          onRowDrag={onRowDrag}
+          dimension={dimension}
+          rowsDraggable={rowsDraggable}
+          scrollBodyRef={scrollBodyRef}
+          rowToGroupMap={rowToGroupMap}
         />
       </TableContainer>
     );

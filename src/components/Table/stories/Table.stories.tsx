@@ -23,6 +23,7 @@ import { TableCustomTitleTemplate } from './TableCustomTitle.template';
 import { TableRenderCellTemplate } from './TableRenderCell.template';
 import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
+import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
 
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
@@ -46,6 +47,7 @@ import TableCustomTitleRaw from './TableCustomTitle.template?raw';
 import TableRenderCellRaw from './TableRenderCell.template?raw';
 import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
+import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -651,7 +653,8 @@ export const GroupExample = {
       },
       description: {
         story: `Строки в таблице можно группировать под общим заголовком. При группировке допускается только один уровень 
-      вложенности строк. Для того чтобы задать группу строк, нужно в массиве rowList создать объект строки, которая будет являться 
+      вложенности строк. Не допускается использование строк вне групп, то есть все строки в таблице должны входить в какую-то группу.
+      Для того чтобы задать группу строк, нужно в массиве rowList создать объект строки, которая будет являться 
       заголовком группы. Для такой строки необходимо задать два параметра:\n\n* groupTitle - название группы\n\n* groupRows - массив с 
       id строк, входящих в данную группу. Сами строки, относящиеся к группе, должны быть просто перечислены в массиве rowList.`,
       },
@@ -745,12 +748,48 @@ export const DraggableColumnsExample = {
       перед которым пытается встать передвигаемый столбец. Параметр nextColumnName может быть также равен null, если столбец пытается встать в самый конец таблицы.
       При срабатывании колбека onColumnDrag, пользователь должен будет соответственно обновить список столбцов (columnList) для таблицы.\n\nМиниатюра заголовка, 
       возникающая при перемещении колонки, отрисовывается по умолчанию через портал в document.body. Если пользователь хочет изменить document.body
-      на свой элемент, то пользователю следует\n\n1)убедиться, что компоненты библиотеки @admiral-ds/react-ui (включая таблицу) 
-      обернуты компонентом DropdownProvider\n\n2) задать для компонента DropdownProvider параметр rootRef, где rootRef - это реф 
+      на свой элемент, то пользователю следует:\n\n1) убедиться, что компоненты библиотеки @admiral-ds/react-ui (включая таблицу) 
+      обернуты компонентом DropdownProvider;\n\n2) задать для компонента DropdownProvider параметр rootRef, где rootRef - это реф 
       на dom-элемент, внутри которого отрендерится миниатюра заголовка.`,
       },
     },
   },
   name: 'Table. Drag and Drop столбцов',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с drag and drop строк">
+const RowDragDropStory: StoryFn<typeof Table> = (props) => <TableRowDragDropTemplate {...props} />;
+export const DraggableRowsExample = {
+  render: RowDragDropStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TableRowDragDropRaw,
+      },
+      description: {
+        story: `Функция изменения порядка строк является опциональной. По умолчанию строки таблицы не подлежат перемещению.
+      Для того чтобы строки можно было перемещать, необходимо в таблицу передать параметр rowsDraggable равный true. 
+      При установленном параметре rowsDraggable у каждой строки (кроме строк с заголовками групп) слева появится иконка 
+      с 6ю точками, так называемая Drag зона.\n\nДля перемещения строки следует мышью навестись на Drag зону и “зажать” левую кнопку мыши над ней, 
+      после чего над строкой появится миниатюра строки, в которой отображается содержание первой ячейки строки.
+      Передвигая данную миниатюру по вертикали в пределах тела таблицы, можно изменить местоположение интересующей строки. При этом,
+      отменяется сортировка строк, если она была произведена ранее. Если перемещаемая миниатюра выходит за границы тела таблицы 
+      наполовину своей высоты, то перемещение становится невозможным, курсор принимает соответствующий вид.\n\nПроцесс перемещения строк 
+      контролируется пользователем. Поэтому для таблицы должен быть задан колбек onRowDrag, который срабатывает при каждой попытке 
+      изменить местоположение строки таблицы. Данный колбек имеет три параметра:\n\n* rowId - id строки, которая сейчас перемещается;\n\n* nextRowId - 
+      id строки, перед которой пытается встать перемещаемая строка. Параметр nextRowId может быть также равен null, 
+      если строка пытается встать в самый конец таблицы;\n\n* groupRowId - id групповой строки (строки с заголовком группы), по данному id можно
+      определить к какой группе будет относиться перемещаемая строка. Параметр groupRowId может быть также равен null,
+      это значит, что перемещаемая строка не будет относиться ни к какой группе.\n\nПри срабатывании колбека onRowDrag, 
+      пользователь должен будет соответственно обновить список строк (rowList) для таблицы.\n\nМиниатюра строки, 
+      возникающая при перемещении строки, отрисовывается по умолчанию через портал в document.body. Если пользователь хочет изменить document.body
+      на свой элемент, то пользователю следует:\n\n1) убедиться, что компоненты библиотеки @admiral-ds/react-ui (включая таблицу) 
+      обернуты компонентом DropdownProvider;\n\n2) задать для компонента DropdownProvider параметр rootRef, где rootRef - это реф 
+      на dom-элемент, внутри которого отрендерится миниатюра строки.`,
+      },
+    },
+  },
+  name: 'Table. Drag and Drop строк',
 };
 //</editor-fold>

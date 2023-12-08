@@ -11,15 +11,17 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Отображаемая строка */
   row: TableRow;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId) => void;
+  onRowClick?: (rowId: RowId | string) => void;
   /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId) => void;
+  onRowDoubleClick?: (rowId: RowId | string) => void;
   /** Ширина таблицы */
   tableWidth: number;
   /** Признак необходимости отображать нижнюю границу */
   underline: boolean;
-  /** Признак является ли сторока групповой */
+  /** Признак является ли строка заголовком группы */
   isGroup: boolean;
+  /** Id заголовка группы, к которой относится строка */
+  groupId: RowId | string | null;
   /** Наличие вертикального скролла в таблице */
   verticalScroll: boolean;
   /** Ширина вертикальной полосы прокрутки */
@@ -43,6 +45,7 @@ export const RowWrapper = ({
   children,
   tableWidth,
   isGroup,
+  groupId,
   rowWidth,
   verticalScroll,
   scrollbar,
@@ -53,11 +56,11 @@ export const RowWrapper = ({
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
 
-  const handleRowClick = (rowId: RowId) => {
+  const handleRowClick = (rowId: RowId | string) => {
     onRowClick?.(rowId);
   };
 
-  const handleRowDoubleClick = (rowId: RowId) => {
+  const handleRowDoubleClick = (rowId: RowId | string) => {
     onRowDoubleClick?.(rowId);
   };
 
@@ -76,10 +79,13 @@ export const RowWrapper = ({
       disabled={!!row.disabled}
       $dimension={dimension}
       className={`tr ${row.className || ''} hoverable`}
-      data-row={row.id}
       $isGroup={isGroup}
       $rowWidth={rowWidth}
       $hover={!!row.hover}
+      data-row={row.id}
+      data-group={isGroup}
+      data-ingroup={groupId}
+      data-first-row-in-group={row?.groupRows?.[0] ?? null}
     >
       <SimpleRow
         className="tr-simple"

@@ -167,7 +167,7 @@ export const TableRenderGroupTitleTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  const handleExpansionChange = (ids: Record<string | number, boolean>): void => {
+  const handleExpansionChange = (ids: Record<string, boolean>): void => {
     const updRows = rows.map((row) => ({ ...row, expanded: ids[row.id] }));
     setRows(updRows);
   };
