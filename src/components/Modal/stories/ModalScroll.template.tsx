@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, ModalTitle, ModalContent, ModalButtonPanel, Button } from '@admiral-ds/react-ui';
+import { Modal, ModalTitle, ModalContent, ModalButtonPanel, Button, CheckboxField } from '@admiral-ds/react-ui';
 import type { ModalProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -20,10 +20,12 @@ export const ModalScrollTemplate = ({
             setOpened(false);
           }}
           aria-labelledby="modal-title"
-          style={{ height: '90vh' }} // IE bug https://github.com/philipwalton/flexbugs#flexbug-3
+          style={{ maxHeight: '90vh' }} // IE bug https://github.com/philipwalton/flexbugs#flexbug-3
         >
           <ModalTitle id="modal-title">Modal title</ModalTitle>
           <ModalContent>
+            <CheckboxField>Lorem ipsum dolor</CheckboxField>
+            <br />
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate ducimus nisi nulla numquam obcaecati
             quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cupiditate
             ducimus nisi nulla numquam obcaecati quam quasi quod ut veritatis? Lorem ipsum dolor sit amet, consectetur
