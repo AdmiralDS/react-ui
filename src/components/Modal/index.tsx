@@ -8,7 +8,6 @@ import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import type { CSSProperties, FC } from 'react';
 import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
@@ -73,7 +72,9 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
 const Content = styled.div<{ $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ $mobile }) => `8px ${$mobile ? 16 : 24}px`};
+  scrollbar-gutter: stable;
+  padding-block: 8px;
+  padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
 `;
 
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
@@ -351,16 +352,15 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     if (node) {
       const resizeObserver = new ResizeObserver(
         throttle(() => {
-          const overflow = checkOverflow(node);
-          if (overflow) {
-            const leftPadding = (node.computedStyleMap().get('padding-left') as CSSUnitValue).value;
-            const paddingValue = `${leftPadding - (node.offsetWidth - node.clientWidth)}px`;
-            node.style.overflowY = 'scroll';
-            node.style.paddingRight = paddingValue;
-          } else {
-            node.style.paddingRight = '';
-            node.style.overflowY = '';
-          }
+          // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
+          const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
+
+          // Вычисляем ширину полоски скролла
+          const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
+
+          // При уменьшении масштаба область скрола не менят свой размер и может становиться больше необходимого паддинга,
+          // по этому имеет смысл держать минимально возможный паддинг от полосы скрола
+          node.style.paddingRight = `${paddingValue > 4 ? paddingValue : 4}px`;
         }, 500),
       );
       resizeObserver.observe(node);
