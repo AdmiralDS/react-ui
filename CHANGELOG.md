@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.6.0](https://github.com/AdmiralDS/react-ui/compare/v7.5.1...v7.6.0) (2023-12-09)
+
+
+### Features
+
+* **Checkbox:** add press state ([999d125](https://github.com/AdmiralDS/react-ui/commit/999d125cf7562fddbc2b5ef57d4d46d85d85cbe1))
+* **CheckboxField:** add press state ([70da626](https://github.com/AdmiralDS/react-ui/commit/70da62682b665165e15d05fa6db43c98197320cc))
+* **RadioButton:** add press state ([7e218e4](https://github.com/AdmiralDS/react-ui/commit/7e218e4349f97d348c078832c120247a472c04f9))
+* **Table:** добавлен функционал drag and drop для строк таблицы ([ffa0979](https://github.com/AdmiralDS/react-ui/commit/ffa0979efb94fb59d58762b8bc618e4064f64191))
+* **Toggle:** add press state ([520d242](https://github.com/AdmiralDS/react-ui/commit/520d242396f1653d6af8d4c26d03ff03fb475fbc))
+
+
+### Bug Fixes
+
+* **Modal:** Появление скрола не должно приводить к переполнению стека ([f878d94](https://github.com/AdmiralDS/react-ui/commit/f878d949f5a054463838c3ab51bd7b8c312c69d3))
+* **Table:** исправлен баг с окрашиванием иконок внутри заголовков столбцов при ховере ([abb6245](https://github.com/AdmiralDS/react-ui/commit/abb624565cce0b938e5ce25a5caca439c3fb3292))
+
 ### [7.5.1](https://github.com/AdmiralDS/react-ui/compare/v7.5.0...v7.5.1) (2023-12-06)
 
 
