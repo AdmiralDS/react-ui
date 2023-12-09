@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.6.1](https://github.com/AdmiralDS/react-ui/compare/v7.6.0...v7.6.1) (2023-12-09)
+
+
+### Bug Fixes
+
+* **Modal:** контент модального окна не должен прыгать при изменении масштаба ([1002390](https://github.com/AdmiralDS/react-ui/commit/100239093909b3e5a8b5575f46cf23692154bd84))
+
 ## [7.6.0](https://github.com/AdmiralDS/react-ui/compare/v7.5.1...v7.6.0) (2023-12-09)
 
 
