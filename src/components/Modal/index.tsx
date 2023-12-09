@@ -70,10 +70,10 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   }};
 `;
 
-const Content = styled.div<{ $scrollbar: number; $mobile: boolean }>`
+const Content = styled.div<{ $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ $scrollbar, $mobile }) => `8px ${($mobile ? 16 : 24) - $scrollbar}px 8px ${$mobile ? 16 : 24}px`};
+  padding: ${({ $mobile }) => `8px ${$mobile ? 16 : 24}px`};
 `;
 
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
@@ -335,36 +335,43 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
+function throttle(f: () => void, delay: number): () => void {
+  let timer = setTimeout(() => {});
+  return function (...args: []) {
+    clearTimeout(timer);
+    timer = setTimeout(() => f.apply(args), delay);
+  };
+}
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [scrollbarSize, setScrollbarSize] = React.useState(0);
   const mobile = React.useContext(ModalContext).mobile;
 
   React.useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
-
-  React.useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
+    const node = contentRef.current;
+    if (node) {
+      const resizeObserver = new ResizeObserver(
+        throttle(() => {
+          const overflow = checkOverflow(node);
+          if (overflow) {
+            const leftPadding = (node.computedStyleMap().get('padding-left') as CSSUnitValue).value;
+            const paddingValue = `${leftPadding - (node.offsetWidth - node.clientWidth)}px`;
+            node.style.overflowY = 'scroll';
+            node.style.paddingRight = paddingValue;
+          } else {
+            node.style.paddingRight = '';
+            node.style.overflowY = '';
+          }
+        }, 500),
+      );
+      resizeObserver.observe(node);
       return () => {
-        resizeObserver.disconnect();
+        resizeObserver.unobserve(node);
       };
     }
-  }, [overflow, setOverflow]);
+  }, []);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $scrollbar={overflow ? scrollbarSize : 0} $mobile={mobile} {...props}>
+    <Content tabIndex={-1} ref={contentRef} $mobile={mobile} {...props}>
       {children}
     </Content>
   );
