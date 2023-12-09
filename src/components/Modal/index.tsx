@@ -73,7 +73,7 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
 const Content = styled.div<{ $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ $mobile }) => `8px ${$mobile ? 16 : 24}px 8px ${$mobile ? 16 : 24}px`};
+  padding: ${({ $mobile }) => `8px ${$mobile ? 16 : 24}px`};
 `;
 
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
@@ -335,6 +335,13 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
+function throttle(f: () => void, delay: number): () => void {
+  let timer = setTimeout(() => {});
+  return function (...args: []) {
+    clearTimeout(timer);
+    timer = setTimeout(() => f.apply(args), delay);
+  };
+}
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const mobile = React.useContext(ModalContext).mobile;
@@ -342,25 +349,26 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   React.useLayoutEffect(() => {
     const node = contentRef.current;
     if (node) {
-      let timeOut = setTimeout(() => {});
-      const resizeObserver = new ResizeObserver(() => {
-        clearTimeout(timeOut);
-        const overflow = checkOverflow(node);
-        if (overflow) {
-          const paddingValue = `${(mobile ? 16 : 24) - (node.offsetWidth - node.clientWidth)}px`;
-          timeOut = setTimeout(() => {
+      const resizeObserver = new ResizeObserver(
+        throttle(() => {
+          const overflow = checkOverflow(node);
+          if (overflow) {
+            const leftPadding = (node.computedStyleMap().get('padding-left') as CSSUnitValue).value;
+            const paddingValue = `${leftPadding - (node.offsetWidth - node.clientWidth)}px`;
+            node.style.overflowY = 'scroll';
             node.style.paddingRight = paddingValue;
-          }, 1000);
-        } else {
-          node.style.paddingRight = '';
-        }
-      });
+          } else {
+            node.style.paddingRight = '';
+            node.style.overflowY = '';
+          }
+        }, 500),
+      );
       resizeObserver.observe(node);
       return () => {
         resizeObserver.unobserve(node);
       };
     }
-  }, [mobile]);
+  }, []);
 
   return (
     <Content tabIndex={-1} ref={contentRef} $mobile={mobile} {...props}>
