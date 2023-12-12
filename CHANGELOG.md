@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.7.0](https://github.com/AdmiralDS/react-ui/compare/v7.6.1...v7.7.0) (2023-12-12)
+
+
+### Features
+
+* **PhoneNumberInput:** Добавлены коды недостающих стран ([13ac8f2](https://github.com/AdmiralDS/react-ui/commit/13ac8f2fb811f55c4b26aa3bf05525280e6778f5)), closes [#1201](https://github.com/AdmiralDS/react-ui/issues/1201)
+
 ### [7.6.1](https://github.com/AdmiralDS/react-ui/compare/v7.6.0...v7.6.1) (2023-12-09)
 
 
