@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
+import { ReactComponent as DragOutline } from './icons/dragIcon.svg';
 import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
@@ -211,6 +212,16 @@ export const SortOrder = styled.div`
   color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
 `;
 
+export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
+  display: flex;
+  flex-shrink: 0;
+  cursor: pointer;
+  & *[fill^='#'] {
+    fill: ${({ theme, $disabled }) =>
+      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
+  }
+`;
+
 export const Cell = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: flex-start;
@@ -272,6 +283,24 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
   }};
 `;
 
+// padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
+export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 's':
+        return '6px 8px 5px 8px';
+      case 'l':
+        return '12px 12px 11px 12px';
+      case 'xl':
+        return '16px 12px 15px 12px';
+      case 'm':
+      default:
+        return '10px 8px 9px 8px';
+    }
+  }};
+`;
+
 export const HeaderCell = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: relative;
   display: inline-flex;
@@ -313,7 +342,7 @@ export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>
   width: 100%;
   overflow: hidden;
   &:hover {
-    *[fill^='#'] {
+    ${SortIcon} *[fill^='#'] {
       fill: ${({ theme, $sort }) =>
         $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
     }
@@ -360,6 +389,13 @@ const rowHoverMixin = css`
   }
 `;
 
+const groupRowHoverMixin = css`
+  &[data-groupover='true'] > .tr-simple > *,
+  & ${OverflowMenuWrapper} {
+    background: ${({ theme }) => theme.color['Opacity/Hover']};
+  }
+`;
+
 export const Row = styled.div<{
   $dimension: TableProps['dimension'];
   $underline: boolean;
@@ -380,6 +416,13 @@ export const Row = styled.div<{
    &:hover:is(.hoverable) {
     ${({ $hover }) => $hover && rowHoverMixin}
   }
+
+  &[data-dragover='true'] > * {
+    opacity: 0.4;
+  }
+  transition: opacity 0.3 ease;
+
+  ${groupRowHoverMixin}
 `;
 
 export const SimpleRow = styled.div<{
@@ -465,7 +508,7 @@ export const HiddenHeader = styled.div`
   }
 `;
 
-export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
+export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
@@ -484,11 +527,28 @@ export const Mirror = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
+
+  & > [data-title] {
+    ${singleLineTitle}
+  }
 `;
 
-export const MirrorText = styled.div`
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
+  position: fixed;
+  z-index: 6;
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 288px;
+  ${({ theme }) => theme.shadow['Shadow 08']}
+  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
+  ${rowStyle}
+
+  &[data-cursor='normal'] {
+    cursor: grabbing;
+  }
+  &[data-cursor='error'] {
+    cursor: not-allowed;
+  }
 `;

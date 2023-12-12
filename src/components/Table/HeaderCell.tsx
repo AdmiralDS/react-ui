@@ -66,7 +66,6 @@ export const HeaderCellComponent = ({
       className="th"
       data-draggable={draggable}
       data-th-column={name}
-      data-th-title={title}
       ref={cellRef}
     >
       <HeaderCellContent $cellAlign={cellAlign}>

@@ -8,7 +8,6 @@ import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import type { CSSProperties, FC } from 'react';
 import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
@@ -70,10 +69,12 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   }};
 `;
 
-const Content = styled.div<{ $scrollbar: number; $mobile: boolean }>`
+const Content = styled.div<{ $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ $scrollbar, $mobile }) => `8px ${($mobile ? 16 : 24) - $scrollbar}px 8px ${$mobile ? 16 : 24}px`};
+  scrollbar-gutter: stable;
+  padding-block: 8px;
+  padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
 `;
 
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
@@ -335,36 +336,42 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
+function throttle(f: () => void, delay: number): () => void {
+  let timer = setTimeout(() => {});
+  return function (...args: []) {
+    clearTimeout(timer);
+    timer = setTimeout(() => f.apply(args), delay);
+  };
+}
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [scrollbarSize, setScrollbarSize] = React.useState(0);
   const mobile = React.useContext(ModalContext).mobile;
 
   React.useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
+    const node = contentRef.current;
+    if (node) {
+      const resizeObserver = new ResizeObserver(
+        throttle(() => {
+          // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
+          const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
 
-  React.useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
+          // Вычисляем ширину полоски скролла
+          const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
+
+          // При уменьшении масштаба область скрола не менят свой размер и может становиться больше необходимого паддинга,
+          // по этому имеет смысл держать минимально возможный паддинг от полосы скрола
+          node.style.paddingRight = `${paddingValue > 4 ? paddingValue : 4}px`;
+        }, 500),
+      );
+      resizeObserver.observe(node);
       return () => {
-        resizeObserver.disconnect();
+        resizeObserver.unobserve(node);
       };
     }
-  }, [overflow, setOverflow]);
+  }, []);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $scrollbar={overflow ? scrollbarSize : 0} $mobile={mobile} {...props}>
+    <Content tabIndex={-1} ref={contentRef} $mobile={mobile} {...props}>
       {children}
     </Content>
   );

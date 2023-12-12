@@ -5,7 +5,7 @@ import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
 
 import { dragObserver } from '../dragObserver';
-import { Mirror, MirrorText } from '../style';
+import { MirrorColumn } from '../style';
 
 type ColumnDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
@@ -76,6 +76,7 @@ export const ColumnDrag = ({
   useEffect(() => {
     const stickyCols = stickyColumnsWrapperRef.current;
     const normalCols = normalColumnsWrapperRef.current;
+    const columnMirror = columnMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null) {
       const columnName = item?.dataset?.thColumn;
@@ -97,12 +98,26 @@ export const ColumnDrag = ({
     function handleDragEnd() {
       setColumnDragging(false);
     }
+    function renderMirror(dragColumn: HTMLElement | null) {
+      const title = dragColumn?.querySelector('[data-title]');
+
+      if (columnMirror && title) {
+        columnMirror.appendChild(title.cloneNode(true));
+      }
+    }
+    function removeMirror() {
+      if (columnMirror && columnMirror.lastChild) {
+        columnMirror.removeChild(columnMirror.lastChild);
+      }
+    }
 
     if (normalCols && isAnyColumnDraggable) {
       const observer = dragObserver(
         [normalCols],
         {
           mirrorRef: columnMirrorRef,
+          renderMirror,
+          removeMirror,
           dimension,
           direction: 'horizontal',
           invalid: (el: HTMLElement) => {
@@ -128,11 +143,6 @@ export const ColumnDrag = ({
   }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
-    ? createPortal(
-        <Mirror $dimension={dimension} ref={columnMirrorRef}>
-          <MirrorText />
-        </Mirror>,
-        rootRef?.current || document.body,
-      )
+    ? createPortal(<MirrorColumn $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
     : null;
 };

@@ -80,11 +80,16 @@ export type Column = {
   renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
+// TODO: Удалить в 9.x.x версии
+/**
+ * @deprecated Будет удалено в 9.x.x версии.
+ * Взамен используйте для id строк значения типа string
+ **/
 export type RowId = string | number;
-export type IdSelectionStatusMap = Record<RowId, boolean>;
+export type IdSelectionStatusMap = Record<RowId | string, boolean>;
 
 export interface TableRow {
-  id: RowId;
+  id: RowId | string;
   className?: string;
   /** Строка в состоянии selected */
   selected?: boolean;
@@ -171,16 +176,16 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние checked было изменено,
    * а значениями ключей - значение checked
    */
-  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId) => void;
+  onRowSelectionChange?: (idSelectionStatusMap: IdSelectionStatusMap, id?: RowId | string) => void;
   /** Колбек на раскрытие/свертывание строки (на нажатие по стрелке слева).
    * idSelectionStatusMap - это объект, ключами которого являются id строк, чье состояние expanded было изменено,
    * а значениями ключей - значение expanded
    */
   onRowExpansionChange?: (idSelectionStatusMap: IdSelectionStatusMap) => void;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId) => void;
+  onRowClick?: (rowId: RowId | string) => void;
   /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId) => void;
+  onRowDoubleClick?: (rowId: RowId | string) => void;
   /** Размер таблицы */
   dimension?: Dimension;
   /** Отображение столбца с чекбоксами, позволяющими выбрать необходимые строки */
@@ -256,6 +261,17 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Включение возможности drag & drop строк */
+  rowsDraggable?: boolean;
+  /** Колбек, который срабатывает при попытке перетащить строку таблицы на новое место.
+   * rowId - id строки, которая перетаскивается;
+   * nextRowId - id строки, перед которой пытается встать передвигаемая строка.
+   * Если nextRowId равен null, значит строку передвигают в самый конец таблицы.
+   * groupRowId - id групповой строки (строки с заголовком группы), по данному id можно
+   * определить к какой группе будет относиться перетаскиваемая строка
+   * Если groupRowId равен null, то строка не принадлежит ни к какой группе.
+   */
+  onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,
