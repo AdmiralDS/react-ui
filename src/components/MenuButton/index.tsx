@@ -83,6 +83,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       dropContainerClassName,
       dropContainerStyle,
       className,
+      renderTopPanel,
       renderBottomPanel,
       ...props
     },
@@ -118,6 +119,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     };
     const dropMenuProps = {
       ...passDropdownDataAttributes(props),
+      renderTopPanel,
       renderBottomPanel,
       items,
       onChange,
