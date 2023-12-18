@@ -377,6 +377,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       {displayOptionsVisible && (
         <Drop alignSelf="stretch" targetRef={containerRef}>
           <Menu
+            dimension={dimension === 'xl' ? 'l' : dimension}
             maxHeight="496px"
             rowCount={10}
             model={model}

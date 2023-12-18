@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { GlobalSearch, useDebounce, Menu, MenuItem, getTextHighlightMeta } from '@admiral-ds/react-ui';
+import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta } from '@admiral-ds/react-ui';
 import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps, HighlightFormat } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import styled, { ThemeProvider } from 'styled-components';
@@ -76,7 +76,7 @@ export const BasicExampleTemplate = ({
         id: item.text,
         render: (options: RenderOptionProps) => (
           <Item {...options} key={item.text + '_history_' + index}>
-            <TimeOutline width={24} />
+            <TimeOutline width={options.dimension === 's' ? 20 : 24} />
             <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
           </Item>
         ),
@@ -88,7 +88,7 @@ export const BasicExampleTemplate = ({
         id: item.text,
         render: (options: RenderOptionProps) => (
           <Item {...options} key={item.text + '_suggest_' + index}>
-            <SearchOutline width={24} />
+            <SearchOutline width={options.dimension === 's' ? 20 : 24} />
             <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
           </Item>
         ),

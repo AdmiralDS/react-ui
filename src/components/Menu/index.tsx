@@ -371,7 +371,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const renderChildren = () => {
       return model.map((item, index) => {
-        return renderItem(item, index);
+        return renderItem({ dimension, ...item }, index);
       });
     };
 
