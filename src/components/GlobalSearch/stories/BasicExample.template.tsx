@@ -71,7 +71,7 @@ export const BasicExampleTemplate = ({
 
   const model = [
     ...history
-      .filter((item) => item.text.includes(filter))
+      .filter((item) => item.text.includes(filter) || filter === '')
       .map((item, index) => ({
         id: item.text,
         render: (options: RenderOptionProps) => (
@@ -83,6 +83,7 @@ export const BasicExampleTemplate = ({
       })),
     ...options
       .filter((item) => item.text.includes(filter))
+      .filter((item) => history.every((hist) => hist.text !== item.text))
       .map((item, index) => ({
         id: item.text,
         render: (options: RenderOptionProps) => (
@@ -140,7 +141,7 @@ export const BasicExampleTemplate = ({
           onChange={handleOnChange}
           submitButtonProps={{ ...props.submitButtonProps, onClick: handleSubmitButtonClick }}
           isLoading={isLoading}
-          model={model}
+          model={model.slice(0, 10)}
         />
       </Wrapper>
     </ThemeProvider>
