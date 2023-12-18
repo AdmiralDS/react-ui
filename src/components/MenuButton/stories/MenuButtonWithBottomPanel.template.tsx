@@ -47,7 +47,7 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
   },
 ];
 
-export const MenuButtonWithPanelTemplate = ({
+export const MenuButtonWithBottomPanelTemplate = ({
   themeBorderKind,
   ...props
 }: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {

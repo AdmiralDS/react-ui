@@ -7,14 +7,16 @@ import { MenuButtonIconTemplate } from './MenuButtonIcon.template';
 import { MenuButtonBaseTemplate } from './MenuButtonBase.template';
 import { MenuButtonOptionsTemplate } from './MenuButtonOptions.template';
 import { MenuButtonVariantsTemplate } from './MenuButtonVariants.template';
-import { MenuButtonWithPanelTemplate } from './MenuButtonWithPanel.template';
+import { MenuButtonWithBottomPanelTemplate } from './MenuButtonWithBottomPanel.template';
+import { MenuButtonWithTopPanelTemplate } from './MenuButtonWithTopPanel.template';
 
 // Imports of text sources
 import MenuButtonIconRaw from './MenuButtonIcon.template?raw';
 import MenuButtonBaseRaw from './MenuButtonBase.template?raw';
 import MenuButtonOptionsRaw from './MenuButtonOptions.template?raw';
 import MenuButtonVariantsRaw from './MenuButtonVariants.template?raw';
-import MenuButtonWithPanelRaw from './MenuButtonWithPanel.template?raw';
+import MenuButtonWithBottomPanelRaw from './MenuButtonWithBottomPanel.template?raw';
+import MenuButtonWithTopPanelRaw from './MenuButtonWithTopPanel.template?raw';
 
 export default {
   title: 'Admiral-2.1/MenuButton',
@@ -242,18 +244,41 @@ export const MenuButtonIcon = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с чекбоксами и нижней панелью в выпадающем меню">
-const MenuButtonWithPanelStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonWithPanelTemplate {...props} />;
+const MenuButtonWithBottomPanelStory: StoryFn<typeof MenuButton> = (props) => (
+  <MenuButtonWithBottomPanelTemplate {...props} />
+);
 
-export const MenuButtonWithPanel = {
-  render: MenuButtonWithPanelStory,
+export const MenuButtonWithBottomPanel = {
+  render: MenuButtonWithBottomPanelStory,
 
   parameters: {
     docs: {
       source: {
-        code: MenuButtonWithPanelRaw,
+        code: MenuButtonWithBottomPanelRaw,
       },
     },
   },
 
   name: 'MenuButton с чекбоксами и нижней панелью в выпадающем меню',
 };
+//</editor-fold>
+
+//<editor-fold desc="MenuButton с чекбоксами и верхней панелью в выпадающем меню">
+const MenuButtonWithTopPanelStory: StoryFn<typeof MenuButton> = (props) => (
+  <MenuButtonWithTopPanelTemplate {...props} />
+);
+
+export const MenuButtonWithTopPanel = {
+  render: MenuButtonWithTopPanelStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonWithTopPanelRaw,
+      },
+    },
+  },
+
+  name: 'MenuButton с чекбоксами и верхней панелью в выпадающем меню',
+};
+//</editor-fold>
