@@ -33,6 +33,8 @@ export interface RenderOptionProps {
   disabled?: boolean;
   /** Только для чтения */
   readOnly?: boolean;
+  /** Размер MenuItems */
+  dimension?: ItemDimension;
 }
 
 export interface MenuModelItemProps {
@@ -42,12 +44,10 @@ export interface MenuModelItemProps {
   readOnly?: boolean;
   subItems?: Array<MenuModelItemProps>;
   expandIcon?: React.ReactNode;
-}
-
-export interface MenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
-  /** Размер MenuItems */
   dimension?: ItemDimension;
 }
+
+export interface MenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {}
 
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
   (
