@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.8.0](https://github.com/AdmiralDS/react-ui/compare/v7.7.0...v7.8.0) (2023-12-19)
+
+
+### Features
+
+* **GlobalSearch:** добавлен компонент GlobalSearch ([1ede321](https://github.com/AdmiralDS/react-ui/commit/1ede32101dc75529cd81dc1618ffdf934a7301be))
+
+
+### Bug Fixes
+
+* **MenuButton:** pass renderTopPanel prop ([19fe0fd](https://github.com/AdmiralDS/react-ui/commit/19fe0fde09894dc9d880b3789eefc7eeaf43e270))
+* **Menu:** on arrow down change active ID ([ca6303f](https://github.com/AdmiralDS/react-ui/commit/ca6303fce946b25ae7ba70c62862a9f6e7557c2a))
+* **Select:** Исправлена проблема редера опций при использовании внешней фильтрации ([215bb23](https://github.com/AdmiralDS/react-ui/commit/215bb23ae66abf3ddd9a9e8ed4625389b87fb8b5)), closes [#1186](https://github.com/AdmiralDS/react-ui/issues/1186)
+
 ## [7.7.0](https://github.com/AdmiralDS/react-ui/compare/v7.6.1...v7.7.0) (2023-12-12)
 
 
