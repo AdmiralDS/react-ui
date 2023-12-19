@@ -53,7 +53,7 @@ export const DropDownOption = ({
     const itemId = id ?? value;
 
     const item: SelectItemProps = {
-      id: itemId,
+      id: value,
       value,
       render: (options: RenderOptionProps) => {
         if (renderOption) {
