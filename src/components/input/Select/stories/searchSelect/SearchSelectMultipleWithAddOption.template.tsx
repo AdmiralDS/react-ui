@@ -19,13 +19,13 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
     setSearchValue(e.target.value);
   };
 
-  const renderOptions = () => {
+  const renderedOptions = React.useMemo(() => {
     return options.map((option, ind) => (
       <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
         {option.text}
       </Option>
     ));
-  };
+  }, [options]);
 
   const handleAddButtonClick = () => {
     if (searchValue && !options.find((item) => item.text === searchValue)) {
@@ -65,7 +65,7 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
           );
         }}
       >
-        {renderOptions()}
+        {renderedOptions}
       </Select>
     </>
   );
