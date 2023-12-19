@@ -1,9 +1,9 @@
 import type { FC, HTMLAttributes } from 'react';
-import { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
+import { createContext, useContext, useLayoutEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { typography } from '#src/components/Typography';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { throttleWrap } from '#src/components/common/utils/throttleWrap';
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
@@ -17,11 +17,12 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   }};
 `;
 
-const Content = styled.div<{ $scrollbar: number; $mobile: boolean }>`
+const Content = styled.div<{ $mobile: boolean }>`
   overflow-y: auto;
   outline: none;
-  padding: ${({ $scrollbar, $mobile }) => `8px ${($mobile ? 16 : 24) - $scrollbar}px 8px ${$mobile ? 16 : 24}px`};
-  box-sizing: border-box;
+  scrollbar-gutter: stable;
+  padding-block: 8px;
+  padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
   height: 100%;
 `;
 
@@ -57,34 +58,33 @@ export const DrawerTitle: FC<HTMLAttributes<HTMLHeadingElement>> = ({ children, 
 
 export const DrawerContent: FC<HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [overflow, setOverflow] = useState(false);
-  const [scrollbarSize, setScrollbarSize] = useState(0);
   const mobile = useContext(DrawerContext).mobile;
 
   useLayoutEffect(() => {
-    if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-      setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-      setOverflow(checkOverflow(contentRef.current));
-    }
-  }, [children, overflow, setOverflow]);
+    const node = contentRef.current;
+    if (node) {
+      const resizeObserver = new ResizeObserver(
+        throttleWrap(() => {
+          // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
+          const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
 
-  useLayoutEffect(() => {
-    if (contentRef.current) {
-      const resizeObserver = new ResizeObserver(() => {
-        if (contentRef.current && checkOverflow(contentRef.current) !== overflow) {
-          setScrollbarSize(contentRef.current.offsetWidth - contentRef.current.clientWidth);
-          setOverflow(checkOverflow(contentRef.current));
-        }
-      });
-      resizeObserver.observe(contentRef.current);
+          // Вычисляем ширину полоски скролла
+          const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
+
+          // При уменьшении масштаба область скрола не менят свой размер и может становиться больше необходимого паддинга,
+          // по этому имеет смысл держать минимально возможный паддинг от полосы скрола
+          node.style.paddingRight = `${paddingValue > 4 ? paddingValue : 4}px`;
+        }, 500),
+      );
+      resizeObserver.observe(node);
       return () => {
-        resizeObserver.disconnect();
+        resizeObserver.unobserve(node);
       };
     }
-  }, [overflow, setOverflow]);
+  }, []);
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $scrollbar={overflow ? scrollbarSize : 0} $mobile={mobile} {...props}>
+    <Content tabIndex={-1} ref={contentRef} $mobile={mobile} {...props}>
       {children}
     </Content>
   );
