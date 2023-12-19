@@ -14,6 +14,7 @@ import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/I
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
+import { throttleWrap } from '#src/components/common/utils/throttleWrap';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -336,13 +337,6 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
-function throttle(f: () => void, delay: number): () => void {
-  let timer = setTimeout(() => {});
-  return function (...args: []) {
-    clearTimeout(timer);
-    timer = setTimeout(() => f.apply(args), delay);
-  };
-}
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
   const contentRef = React.useRef<HTMLDivElement | null>(null);
   const mobile = React.useContext(ModalContext).mobile;
@@ -351,7 +345,7 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     const node = contentRef.current;
     if (node) {
       const resizeObserver = new ResizeObserver(
-        throttle(() => {
+        throttleWrap(() => {
           // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
           const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
 
