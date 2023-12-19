@@ -6,13 +6,18 @@ import type { ComponentDimension, ExtraProps } from '#src/components/input/types
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { InputBorderedDiv } from '#src/components/input/TextInput';
-import { DropdownContainer } from '#src/components//DropdownContainer';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { Menu } from '#src/components/Menu';
+import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
+import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
+import { refSetter } from '#src/components/common/utils/refSetter';
+import type { RenderProps } from '#src/components/input/InputEx';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -24,19 +29,6 @@ const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
       return 24;
   }
 };
-
-export const containerHeights = css<{ $dimension?: ComponentDimension }>`
-  height: ${({ $dimension }) => {
-    switch ($dimension) {
-      case 'xl':
-        return '56px';
-      case 's':
-        return '32px';
-      default:
-        return '40px';
-    }
-  }};
-`;
 
 const Drop = styled(DropdownContainer)`
   padding: 8px 0px;
@@ -73,9 +65,9 @@ const Container = styled.div`
   gap: 8px;
   align-items: stretch;
   flex: 1 0 0;
-  border-radius: var(--Medium, 4px);
-  border: 2px solid var(--primary-primary-60-main, #0062ff);
-  background: var(--neutral-neutral-white, #fff);
+  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+  background: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
   height: 40px;
   padding-left: 16px;
@@ -200,15 +192,6 @@ const SubmitButton = styled.div`
   }
 `;
 
-export interface RenderProps {
-  value?: ReactNode;
-  disabled?: boolean;
-  readOnly?: boolean;
-}
-export type RenderPropsType<T> = {
-  value: T;
-};
-
 export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
@@ -245,10 +228,20 @@ export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLIn
 
   /** Иконки для отображения в правом углу поля */
   icons?: React.ReactNode;
+
+  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
+  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+   * если не указан, выравнивание произойдет относительно контейнера компонента
+   */
+  alignDropRef?: React.RefObject<HTMLElement>;
+
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  prefixDropContainerStyle?: DropContainerStyles;
 }
 
 export const GlobalSearch: FC<GlobalSearchProps> = ({
   dimension,
+  alignDropRef,
   placeholder,
   id,
   value,
@@ -259,6 +252,13 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   displayClearIcon,
   isLoading,
   model,
+
+  prefixValue,
+  renderPrefixValue = ({ value }) => (!value ? value : String(value)),
+  prefixValueList,
+  onPrefixValueChange,
+  renderPrefixOption,
+  prefixDropContainerStyle,
   ...props
 }) => {
   const [needSubmit, setNeedSubmit] = useState(0);
@@ -342,11 +342,37 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
       submitButtonRef.current.click();
     }
   }, [needSubmit]);
+
+  const innerContainerRef = useRef<HTMLDivElement | null>(null);
+  const alignRef = alignDropRef || innerContainerRef;
+  const menuDimension = dimension === 'xl' ? 'l' : dimension;
+  const renderPrefix = prefixValueList
+    ? (props: RenderProps) => (
+        <SuffixSelect
+          dropAlign="flex-start"
+          dimension={menuDimension}
+          alignRef={alignRef}
+          value={props.value || ''}
+          onChange={(value) => onPrefixValueChange?.(value)}
+          options={prefixValueList}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
+          dropContainerCssMixin={prefixDropContainerStyle?.dropContainerCssMixin}
+          dropContainerClassName={prefixDropContainerStyle?.dropContainerClassName}
+          dropContainerStyle={prefixDropContainerStyle?.dropContainerStyle}
+          renderValue={renderPrefixValue}
+          renderOption={renderPrefixOption}
+        />
+      )
+    : renderPrefixValue;
+
+  const prefix = renderPrefix({ value: prefixValue, disabled: props.disabled, readOnly: props.readOnly });
+
   return (
     <Container
       data-dimension={dimension}
       {...props}
-      ref={containerRef}
+      ref={refSetter(innerContainerRef, containerRef)}
       onFocus={() => setInFocus(true)}
       onBlur={() => {
         setInFocus(false);
@@ -354,6 +380,11 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         setTempValue('');
       }}
     >
+      {!!prefix && (
+        <PrefixContainer $dimension={dimension} disabled={props.disabled}>
+          {prefix}
+        </PrefixContainer>
+      )}
       <Input
         {...inputProps}
         value={tempValue === '' ? inputProps.value : tempValue}

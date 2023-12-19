@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta } from '@admiral-ds/react-ui';
 import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps, HighlightFormat } from '@admiral-ds/react-ui';
@@ -58,16 +59,18 @@ async function searchPeopleByName(name: string) {
   return response.json();
 }
 
+const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
+
 export const BasicExampleTemplate = ({
   themeBorderKind,
   ...props
 }: GlobalSearchProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [history, setHistory] = React.useState<Array<{ value: string; text: string }>>([]);
-  const [searchValue, setSearchValue] = React.useState('');
+  const [history, setHistory] = useState<Array<{ value: string; text: string }>>([]);
+  const [searchValue, setSearchValue] = useState('');
 
-  const [options, setOptions] = React.useState<Array<{ value: string; text: string }>>([]);
+  const [options, setOptions] = useState<Array<{ value: string; text: string }>>([]);
 
-  const [filter, setFilter] = React.useState('');
+  const [filter, setFilter] = useState('');
 
   const model = [
     ...history
@@ -112,7 +115,7 @@ export const BasicExampleTemplate = ({
     queryFn: () => searchPeopleByName(debouncedFilter),
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data) {
       const names = data['results'] as Array<{ name: string }>;
       const options = names.map(({ name }) => ({ value: name, text: name }));
@@ -132,11 +135,16 @@ export const BasicExampleTemplate = ({
     setHistory((oldHistory) => [{ value, text: value }, ...oldHistory]);
   };
 
+  const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
+
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
       <Wrapper>
         <GlobalSearch
           {...props}
+          prefixValue={prefixValue}
+          prefixValueList={PREFIX_OPTIONS}
+          onPrefixValueChange={setPrefixValue}
           value={searchValue}
           onChange={handleOnChange}
           submitButtonProps={{ ...props.submitButtonProps, onClick: handleSubmitButtonClick }}

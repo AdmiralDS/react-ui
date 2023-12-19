@@ -92,7 +92,8 @@ export const PaneSimpleExample = {
         code: BasicExampleRaw,
       },
       description: {
-        story: 'Для того чтобы была ....',
+        story:
+          'prefix появляется если назначать prefixValue, а если назначить prefixValueList превращается в мини префикс селект.',
       },
     },
   },
