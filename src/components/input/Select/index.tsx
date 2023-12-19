@@ -33,6 +33,7 @@ import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { uid } from '#src/components/common/uid';
 
 export type { SearchFormat } from './types';
 
@@ -629,6 +630,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
+    const memorisedChildren = React.useMemo(
+      () =>
+        React.Children.map(children, (child) =>
+          React.isValidElement(child) ? React.cloneElement(child, { key: uid(), ...child.props }) : null,
+        ),
+      [children],
+    );
+
     const memorisedDropDownOptions = React.useMemo(
       () => (
         <DropDownProvider
@@ -638,10 +647,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           multiple={multiple}
           showCheckbox={showCheckbox}
         >
-          {children}
+          {memorisedChildren}
         </DropDownProvider>
       ),
-      [children, dimension, showCheckbox],
+      [memorisedChildren, dimension, showCheckbox],
     );
 
     const memorisedConstantOptions = React.useMemo(
@@ -650,10 +659,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           onConstantOptionMount={onConstantOptionMount}
           onConstantOptionUnMount={onConstantOptionUnMount}
         >
-          {children}
+          {memorisedChildren}
         </ConstantSelectProvider>
       ),
-      [children],
+      [memorisedChildren],
     );
 
     const dropContainerProps = passDropdownDataAttributes(props);
