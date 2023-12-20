@@ -235,7 +235,7 @@ export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLIn
    */
   alignDropRef?: React.RefObject<HTMLElement>;
 
-  /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
+  /** Позволяет добавлять стили и className для выпадающего меню кнопки */
   prefixDropContainerStyle?: DropContainerStyles;
 }
 
