@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.8.1](https://github.com/AdmiralDS/react-ui/compare/v7.8.0...v7.8.1) (2023-12-20)
+
+
+### Bug Fixes
+
+* **Drawer:** падинги должны пересчитываться корректно при использовании зума ([f3f1596](https://github.com/AdmiralDS/react-ui/commit/f3f1596ebce8bad5847fb35c8edc91141ae5ec3d))
+
 ## [7.8.0](https://github.com/AdmiralDS/react-ui/compare/v7.7.0...v7.8.0) (2023-12-19)
 
 
