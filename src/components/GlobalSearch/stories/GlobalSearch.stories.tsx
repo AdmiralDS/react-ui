@@ -49,29 +49,8 @@ export default {
       options: ['xl', 'm', 's'],
       control: { type: 'radio' },
     },
-    settingsButtonsDisabled: {
-      control: 'boolean',
-    },
     searchValue: {
       control: { type: 'text' },
-    },
-    dropContainerCssMixin: {
-      control: false,
-    },
-    columnsButtonDropContainerStyle: {
-      control: false,
-    },
-    settingsButtonDropContainerStyle: {
-      control: false,
-    },
-    columns: {
-      control: false,
-    },
-    settingsMenu: {
-      control: false,
-    },
-    locale: {
-      control: false,
     },
   },
 } as Meta<typeof GlobalSearch>;
