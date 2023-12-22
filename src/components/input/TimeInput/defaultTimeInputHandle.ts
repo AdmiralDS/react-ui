@@ -50,7 +50,7 @@ export function defaultTimeInputHandle(inputData: InputData | null): InputData {
       if (inputValue.charAt(selectionStart) === ':') {
         moveCursor = moveCursor + 1;
       }
-      const spliced = inputValue.replace(/:/g, '');
+      const spliced = splice(inputValue.replace(/:/g, ''), selectionStart, 1, '');
       inputValue = `${spliced.substring(0, 2).replace(/\D/g, '_')}:${spliced.substring(2, 4).replace(/\D/g, '_')}`;
     } else {
       // в остальных случаях ввод символа блокируется (н-р, нельзя ввести букву)
