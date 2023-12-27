@@ -56,17 +56,6 @@ export const NormalWrapper = styled.div`
   display: flex;
 `;
 
-export const ActionBG = styled.div<{
-  $dimension: TableProps['dimension'];
-  $greyHeader?: boolean;
-}>`
-  ${actionsBGStyle};
-  right: 0;
-  bottom: 1px;
-  background: ${({ theme, $greyHeader }) =>
-    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
-`;
-
 export const OverflowMenuWrapper = styled.div<{
   $offset: number;
   $dimension: TableProps['dimension'];
@@ -114,9 +103,6 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
     }
     & > div.tr {
       overflow-y: scroll;
-    }
-    & > [data-overflowmenu='true'] {
-      margin-right: ${({ $scrollbar }) => $scrollbar}px;
     }
   }
 
