@@ -29,7 +29,6 @@ import {
   NormalWrapper,
   TableContainer,
   HiddenHeader,
-  ActionBG,
   DragCell,
 } from './style';
 import { VirtualBody } from './VirtualBody';
@@ -635,7 +634,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             </NormalWrapper>
             <Filler />
           </Header>
-          {showRowsActions && <ActionBG data-overflowmenu $dimension={dimension} $greyHeader={greyHeader} />}
         </HeaderWrapper>
         {renderBody()}
         <ColumnDrag
