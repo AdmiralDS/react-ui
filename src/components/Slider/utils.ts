@@ -38,10 +38,10 @@ const calcValueByPos = (
       calcValue = +calcValue.toFixed(decimal);
     }
   }
-  if (minValue + sliderValue === minValue && calcValue !== minValue) {
+  if (minValue > calcValue) {
     return minValue;
   }
-  if (minValue + sliderValue === maxValue && calcValue !== maxValue) {
+  if (calcValue > maxValue) {
     return maxValue;
   }
   return calcValue;
