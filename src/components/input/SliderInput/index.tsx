@@ -43,7 +43,10 @@ const Input = styled(NumberInput)`
 // and create new native input onChange with event
 
 export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
-  /** Колбек на изменение значения компонента (fullStr - строка вместе с префиксом/суффиксом/разделителями, shortStr - строка только с числом) */
+  /** Колбек на изменение значения компонента
+   * (fullStr - строка вместе с префиксом/суффиксом/разделителями,
+   * shortStr - строка только с числом без символа разделителя тысяч)
+   * */
   onChange?: (fullStr: string, shortStr: string, event: ChangeEvent<HTMLInputElement>) => void;
   /** Минимальное значение слайдера */
   minValue?: number;
