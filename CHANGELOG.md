@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.8.4](https://github.com/AdmiralDS/react-ui/compare/v7.8.3...v7.8.4) (2024-01-09)
+
+
+### Bug Fixes
+
+* **Slider:** значения слайдера не должны выходить за диапазон ([2e945ff](https://github.com/AdmiralDS/react-ui/commit/2e945ff1ca3528534b1c917dff8d9fee8d1b95a0))
+
 ### [7.8.3](https://github.com/AdmiralDS/react-ui/compare/v7.8.2...v7.8.3) (2024-01-09)
 
 
