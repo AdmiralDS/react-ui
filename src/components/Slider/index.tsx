@@ -81,14 +81,6 @@ export const Slider = ({
     }
 
     let newValue = value;
-    // value должно быть больше или равно minValue
-    if (newValue < minValue) {
-      newValue = minValue;
-    }
-    // value должно быть меньше или равно maxValue
-    if (newValue > maxValue) {
-      newValue = maxValue;
-    }
     // value должно быть кратно step
     if (step && step !== 'any') {
       newValue = Math.round(newValue / step) * step;
@@ -96,6 +88,15 @@ export const Slider = ({
         const decimal = step.toString().match(/\.(\d+)/)?.[1].length;
         newValue = +newValue.toFixed(decimal);
       }
+    }
+
+    // value должно быть больше или равно minValue
+    if (newValue < minValue) {
+      newValue = minValue;
+    }
+    // value должно быть меньше или равно maxValue
+    if (newValue > maxValue) {
+      newValue = maxValue;
     }
 
     correctSliderPosition(newValue);
