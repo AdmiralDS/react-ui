@@ -203,11 +203,11 @@ export const ChipComponentStyled = styled.div<{
     ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.$withCloseIcon ? `padding-left: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) => (p.$withCloseIcon ? `padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}
   ${(p) =>
     p.$withBadge && !p.$withCloseIcon
-      ? `padding-right: ${p.$dimension === 's' ? 4 : 6}px;
-         padding-left: ${p.$dimension === 's' ? 8 : 12}px;`
+      ? `padding-inline-end: ${p.$dimension === 's' ? 4 : 6}px;
+         padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;`
       : ''}
   ${chipTypography}
 `;
@@ -257,11 +257,11 @@ export const ChipChildrenWrapperStyled = styled.div`
 `;
 export const IconBeforeWrapperStyled = styled.div`
   display: inline-block;
-  margin-right: 8px;
+  margin-inline-end: 8px;
 `;
 export const IconAfterWrapperStyled = styled.div<{ $dimension: ChipDimension; $withCloseIcon?: boolean }>`
   display: inline-block;
-  margin-left: ${(p) => (p.$withCloseIcon ? '2px' : '8px')};
+  margin-inline-start: ${(p) => (p.$withCloseIcon ? '2px' : '8px')};
 `;
 export const IconWrapperStyled = styled.div<{
   $dimension: ChipDimension;
@@ -277,7 +277,7 @@ export const IconWrapperStyled = styled.div<{
 `;
 
 export const StyledBadge = styled(Badge)<{ dimension: ChipDimension }>`
-  margin-left: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
+  margin-inline-start: ${({ dimension }) => (dimension === 's' ? '6px' : '8px')};
 `;
 
 export const CloseIconButton = styled(CloseIconPlacementButton)<{
@@ -285,6 +285,7 @@ export const CloseIconButton = styled(CloseIconPlacementButton)<{
   appearance: IconPlacementAppearance;
 }>`
   //дополнительный отступ в 2px, чтобы кружок ховера не стоял вплотную к элементу слева
-  margin-left: ${(p) => (p.dimension === 's' ? '6px' : '8px')};
-  ${(p) => (p.appearance === 'primary' ? (p.dimension === 's' ? 'margin-right: 3px' : 'margin-right: 5px') : '')};
+  margin-inline-start: ${(p) => (p.dimension === 's' ? '6px' : '8px')};
+  ${(p) =>
+    p.appearance === 'primary' ? (p.dimension === 's' ? 'margin-inline-end: 3px' : 'margin-inline-end: 5px') : ''};
 `;
