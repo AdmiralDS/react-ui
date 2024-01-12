@@ -255,11 +255,11 @@ export const ChipChildrenWrapperStyled = styled.div`
   text-overflow: ellipsis;
   display: inline-block;
 `;
-export const IconBeforeWrapperStyled = styled.div`
+export const IconStartWrapperStyled = styled.div`
   display: inline-block;
   margin-inline-end: 8px;
 `;
-export const IconAfterWrapperStyled = styled.div<{ $dimension: ChipDimension; $withCloseIcon?: boolean }>`
+export const IconEndWrapperStyled = styled.div<{ $dimension: ChipDimension; $withCloseIcon?: boolean }>`
   display: inline-block;
   margin-inline-start: ${(p) => (p.$withCloseIcon ? '2px' : '8px')};
 `;

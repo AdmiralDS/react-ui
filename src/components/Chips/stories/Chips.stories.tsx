@@ -82,6 +82,12 @@ export default {
     selected: {
       control: { type: 'boolean' },
     },
+    iconStart: {
+      control: false,
+    },
+    iconEnd: {
+      control: false,
+    },
     iconBefore: {
       control: false,
     },

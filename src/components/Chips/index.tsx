@@ -9,8 +9,8 @@ import {
   ChipComponentStyled,
   ChipContentWrapperStyled,
   CloseIconButton,
-  IconAfterWrapperStyled,
-  IconBeforeWrapperStyled,
+  IconEndWrapperStyled,
+  IconStartWrapperStyled,
   IconWrapperStyled,
   StyledBadge,
 } from './style';
@@ -36,9 +36,21 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContentTooltip?: () => ReactNode;
-  /** Иконка перед текстом Chips'a **/
+  /** Иконка перед текстом Chips'a */
+  iconStart?: ReactNode;
+  /** Иконка после текста Chips'a.
+   * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест) */
+  iconEnd?: ReactNode;
+  /**
+   * @deprecated Используйте iconStart или iconEnd
+   * Иконка перед текстом Chips'a
+   */
   iconBefore?: ReactNode;
-  /** Иконка после текста Chips'a. Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест) **/
+  /**
+   * @deprecated Используйте iconStart или iconEnd
+   * Иконка после текста Chips'a.
+   * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест)
+   */
   iconAfter?: ReactNode;
   /** Число, которое будет отображено в компоненте Badge справа от content */
   badge?: number;
@@ -56,6 +68,8 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
       renderContentTooltip = defaultRenderContent,
       iconBefore,
       iconAfter,
+      iconStart,
+      iconEnd,
       badge,
       ...props
     },
@@ -150,20 +164,20 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
             $selected={selected}
             $withCloseIcon={withCloseIcon}
           >
-            {iconBefore && (
-              <IconBeforeWrapperStyled>
+            {(iconStart || iconBefore) && (
+              <IconStartWrapperStyled>
                 <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
-                  {iconBefore}
+                  {iconStart ? iconStart : iconBefore}
                 </IconWrapperStyled>
-              </IconBeforeWrapperStyled>
+              </IconStartWrapperStyled>
             )}
             <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
-            {!onClose && iconAfter && (
-              <IconAfterWrapperStyled $dimension={dimension}>
+            {!onClose && (iconEnd || iconAfter) && (
+              <IconEndWrapperStyled $dimension={dimension}>
                 <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
-                  {iconAfter}
+                  {iconEnd ? iconEnd : iconAfter}
                 </IconWrapperStyled>
-              </IconAfterWrapperStyled>
+              </IconEndWrapperStyled>
             )}
             {!onClose && typeof badge !== 'undefined' && (
               <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
