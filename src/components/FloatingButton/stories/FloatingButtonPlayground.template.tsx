@@ -11,7 +11,7 @@ export const FloatingButtonPlaygroundTemplate = ({
 }: FloatingButtonProps & { themeBorderKind?: BorderRadiusType }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
-      <FloatingButton {...props}>
+      <FloatingButton badge={5} {...props}>
         <PersonSolid />
       </FloatingButton>
     </ThemeProvider>

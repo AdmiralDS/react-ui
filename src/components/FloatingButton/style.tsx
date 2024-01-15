@@ -2,11 +2,21 @@ import styled, { css } from 'styled-components';
 import type { FloatingButtonProps } from '#src/components/FloatingButton';
 import { Badge as BaseBadge } from '#src/components/Badge';
 
+const focusVisibleStyle = css`
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+  }
+`;
+
 export const FloatingButtonWrapper = styled.button<{
   $dimension: FloatingButtonProps['dimension'];
   $appearance: FloatingButtonProps['appearance'];
+  $mobile: boolean;
 }>`
-  position: relative;
+  position: fixed;
+  inset-inline-end: ${(p) => (p.$mobile ? 16 : 28)}px;
+  inset-block-end: ${(p) => (p.$mobile ? 16 : 28)}px;
   box-sizing: border-box;
   border: none;
   appearance: none;
@@ -19,6 +29,7 @@ export const FloatingButtonWrapper = styled.button<{
   background-color: ${(p) =>
     p.$appearance == 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Special/Elevated BG']};
   ${(p) => p.theme.shadow['Shadow 08']}
+  ${focusVisibleStyle}
 `;
 
 export const IconColor = css<{ $appearance?: FloatingButtonProps['appearance'] }>`

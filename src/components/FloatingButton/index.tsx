@@ -17,6 +17,7 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   badge?: ReactNode;
   dot?: boolean;
   status?: 'info' | 'error' | 'success' | 'warning';
+  mobile?: boolean;
 }
 
 // type = 'button' важно указывать, так как иначе по умолчанию будет submit
@@ -30,6 +31,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       status = 'info',
       badge,
       dot = false,
+      mobile = false,
       children,
       ...props
     },
@@ -37,7 +39,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
   ) => {
     const badgeDimension = dimension === 'xl' ? 'm' : 's';
     return (
-      <FloatingButtonWrapper $dimension={dimension} $appearance={appearance} ref={ref} type={type}>
+      <FloatingButtonWrapper $dimension={dimension} $appearance={appearance} $mobile={mobile} ref={ref} type={type}>
         <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
         {typeof badge !== 'undefined' && !dot && (
           <Badge dimension={badgeDimension} appearance={status}>

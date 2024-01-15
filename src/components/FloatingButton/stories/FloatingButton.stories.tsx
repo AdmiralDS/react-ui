@@ -30,7 +30,7 @@ export default {
   },
   argTypes: {
     dimension: {
-      options: ['xl', 'l', 'm', 's'],
+      options: ['xl', 'm'],
       control: { type: 'radio' },
     },
     disabled: {
