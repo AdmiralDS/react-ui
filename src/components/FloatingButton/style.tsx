@@ -30,6 +30,8 @@ export const FloatingButtonWrapper = styled.button<{
     p.$appearance == 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Special/Elevated BG']};
   ${(p) => p.theme.shadow['Shadow 08']}
   ${focusVisibleStyle}
+
+  cursor: pointer;
 `;
 
 export const IconColor = css<{ $appearance?: FloatingButtonProps['appearance'] }>`

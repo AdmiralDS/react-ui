@@ -3,9 +3,11 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { FloatingButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FloatingButtonPlaygroundTemplate } from './FloatingButtonPlayground.template';
+import { FloatingButtonTooltipTemplate } from './FloatingButtonTooltip.template';
 
 // Imports of text sources
 import FloatingButtonPlaygroundRaw from './FloatingButtonPlayground.template?raw';
+import FloatingButtonTooltipRaw from './FloatingButtonTooltip.template?raw';
 
 export default {
   title: 'Admiral-2.1/FloatingButton',
@@ -69,6 +71,30 @@ export const FloatingButtonPlaygroundExample = {
   },
 
   name: 'Playground',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Tooltip">
+const FloatingButtonTooltipStory: StoryFn<typeof FloatingButton> = (props) => (
+  <FloatingButtonTooltipTemplate {...props} />
+);
+
+export const FloatingButtonTooltipExample = {
+  render: FloatingButtonTooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FloatingButtonTooltipRaw,
+      },
+      description: {
+        story: ``,
+      },
+    },
+  },
+
+  name: 'Tooltip',
 };
 
 //</editor-fold>
