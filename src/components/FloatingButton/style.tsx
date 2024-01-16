@@ -74,7 +74,7 @@ export const BadgeDot = styled.div<{
 }>`
   position: absolute;
   top: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
-  right: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
+  inset-inline-end: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
   box-sizing: border-box;
   display: flex;
@@ -91,5 +91,5 @@ export const Badge = styled(BaseBadge)<{ dimension: 's' | 'm' }>`
   padding: ${({ dimension }) => (dimension === 's' ? '0 4px' : '0 5px')};
   position: absolute;
   top: -3px;
-  right: -3px;
+  inset-inline-end: -3px;
 `;

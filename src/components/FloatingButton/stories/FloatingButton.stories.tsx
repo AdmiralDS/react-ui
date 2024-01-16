@@ -3,11 +3,17 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { FloatingButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FloatingButtonPlaygroundTemplate } from './FloatingButtonPlayground.template';
+import { FloatingButtonStyleTemplate } from './FloatingButtonStyle.template';
 import { FloatingButtonTooltipTemplate } from './FloatingButtonTooltip.template';
+import { FloatingButtonPositionTemplate } from './FloatingButtonPosition.template';
+import { FloatingButtonMobileTemplate } from './FloatingButtonMobile.template';
 
 // Imports of text sources
 import FloatingButtonPlaygroundRaw from './FloatingButtonPlayground.template?raw';
+import FloatingButtonStyleRaw from './FloatingButtonStyle.template?raw';
 import FloatingButtonTooltipRaw from './FloatingButtonTooltip.template?raw';
+import FloatingButtonPositionRaw from './FloatingButtonPosition.template?raw';
+import FloatingButtonMobileRaw from './FloatingButtonMobile.template?raw';
 
 export default {
   title: 'Admiral-2.1/FloatingButton',
@@ -75,6 +81,28 @@ export const FloatingButtonPlaygroundExample = {
 
 //</editor-fold>
 
+//<editor-fold desc="Style">
+const FloatingButtonStyleStory: StoryFn<typeof FloatingButton> = (props) => <FloatingButtonStyleTemplate {...props} />;
+
+export const FloatingButtonStyleExample = {
+  render: FloatingButtonStyleStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FloatingButtonStyleRaw,
+      },
+      description: {
+        story: ``,
+      },
+    },
+  },
+
+  name: 'FloatingButton. Функции и размеры',
+};
+
+//</editor-fold>
+
 //<editor-fold desc="Tooltip">
 const FloatingButtonTooltipStory: StoryFn<typeof FloatingButton> = (props) => (
   <FloatingButtonTooltipTemplate {...props} />
@@ -94,7 +122,56 @@ export const FloatingButtonTooltipExample = {
     },
   },
 
-  name: 'Tooltip',
+  name: 'FloatingButton. Пример с Tooltip',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Position">
+const FloatingButtonPositionStory: StoryFn<typeof FloatingButton> = (props) => (
+  <FloatingButtonPositionTemplate {...props} />
+);
+
+export const FloatingButtonPositionExample = {
+  render: FloatingButtonPositionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FloatingButtonPositionRaw,
+      },
+      description: {
+        story: `По умолчанию кнопка располагается в правом нижнем углу экрана, на расстоянии 28 px от краев экрана. 
+        Пользователь может задать свое расположение кнопки, переопределив её позиционирование через стили.`,
+      },
+    },
+  },
+
+  name: 'FloatingButton. Расположение',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Mobile">
+const FloatingButtonMobileStory: StoryFn<typeof FloatingButton> = (props) => (
+  <FloatingButtonMobileTemplate {...props} />
+);
+
+export const FloatingButtonMobileExample = {
+  render: FloatingButtonMobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FloatingButtonMobileRaw,
+      },
+      description: {
+        story: `На мобильных устройствах отступ по умолчанию равен 16px от краев экрана.`,
+      },
+    },
+  },
+
+  name: 'FloatingButton. Mobile',
 };
 
 //</editor-fold>
