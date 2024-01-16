@@ -15,14 +15,14 @@ const listDataIcon = [
     id: '1',
     label: 'Москва',
     disabled: false,
-    iconBefore: <VacationIcon />,
-    iconAfter: <AlertSolid />,
+    iconStart: <VacationIcon />,
+    iconEnd: <AlertSolid />,
     selected: false,
   },
-  { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
-  { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
-  { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  { id: '5', label: 'Вильнус', disabled: false, iconBefore: <BurnIcon />, selected: false, badge: 3 },
+  { id: '2', label: 'Тверь', disabled: false, iconStart: <TrophyIcon />, selected: false },
+  { id: '3', label: 'Самара', disabled: false, iconEnd: <BurnIcon />, selected: false },
+  { id: '4', label: 'Омск', disabled: false, iconEnd: <DiamondSolid />, selected: false },
+  { id: '5', label: 'Вильнус', disabled: false, iconStart: <BurnIcon />, selected: false, badge: 3 },
 ];
 
 const Separator = styled.div`
@@ -51,8 +51,8 @@ export const ChipsBadgesTemplate = (props: ChipsProps) => {
             dimension="m"
             selected={selectedM === item.id}
             onClick={() => (props.disabled ? null : setSelectedM(item.id))}
-            iconBefore={item?.iconBefore}
-            iconAfter={item?.iconAfter}
+            iconStart={item?.iconStart}
+            iconEnd={item?.iconEnd}
           >
             {item.label}
           </Chips>
@@ -69,8 +69,8 @@ export const ChipsBadgesTemplate = (props: ChipsProps) => {
             appearance="filled"
             selected={selectedS === item.id}
             onClick={() => (props.disabled ? null : setSelectedS(item.id))}
-            iconBefore={item?.iconBefore}
-            iconAfter={item?.iconAfter}
+            iconStart={item?.iconStart}
+            iconEnd={item?.iconEnd}
           >
             {item.label}
           </Chips>

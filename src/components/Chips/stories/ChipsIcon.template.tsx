@@ -26,14 +26,14 @@ const listDataIcon = [
     id: '1',
     label: 'Москва',
     disabled: false,
-    iconBefore: <VacationIcon />,
-    iconAfter: <AlertSolid />,
+    iconStart: <VacationIcon />,
+    iconEnd: <AlertSolid />,
     selected: false,
   },
-  { id: '2', label: 'Тверь', disabled: false, iconBefore: <TrophyIcon />, selected: false },
-  { id: '3', label: 'Самара', disabled: false, iconAfter: <BurnIcon />, selected: false },
-  { id: '4', label: 'Омск', disabled: false, iconAfter: <DiamondSolid />, selected: false },
-  { id: '5', label: 'Вильнус', disabled: false, iconBefore: <BurnIcon />, selected: false, badge: 3 },
+  { id: '2', label: 'Тверь', disabled: false, iconStart: <TrophyIcon />, selected: false },
+  { id: '3', label: 'Самара', disabled: false, iconEnd: <BurnIcon />, selected: false },
+  { id: '4', label: 'Омск', disabled: false, iconEnd: <DiamondSolid />, selected: false },
+  { id: '5', label: 'Вильнус', disabled: false, iconStart: <BurnIcon />, selected: false, badge: 3 },
 ];
 
 export const ChipsIconTemplate = (props: ChipsProps) => {
@@ -48,8 +48,8 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
             key={d.id}
             selected={selectedM === d.id}
             onClick={() => (props.disabled ? null : setSelectedM(d.id))}
-            iconBefore={d?.iconBefore}
-            iconAfter={d?.iconAfter}
+            iconStart={d?.iconStart}
+            iconEnd={d?.iconEnd}
           >
             {d.label}
           </Chips>
@@ -64,8 +64,8 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
             key={d.id}
             selected={selectedS === d.id}
             onClick={() => (props.disabled ? null : setSelectedS(d.id))}
-            iconBefore={d?.iconBefore}
-            iconAfter={d?.iconAfter}
+            iconStart={d?.iconStart}
+            iconEnd={d?.iconEnd}
           >
             {d.label}
           </Chips>

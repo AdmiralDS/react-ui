@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.8.4](https://github.com/AdmiralDS/react-ui/compare/v7.8.3...v7.8.4) (2024-01-09)
+
+
+### Bug Fixes
+
+* **Slider:** значения слайдера не должны выходить за диапазон ([2e945ff](https://github.com/AdmiralDS/react-ui/commit/2e945ff1ca3528534b1c917dff8d9fee8d1b95a0))
+
+### [7.8.3](https://github.com/AdmiralDS/react-ui/compare/v7.8.2...v7.8.3) (2024-01-09)
+
+
+### Bug Fixes
+
+* **SliderInput:** проверка на выход из диапазона значений должна проводиться после вычисления ([9309be1](https://github.com/AdmiralDS/react-ui/commit/9309be110e385e8fa93779d2a81fb4e684d4731a))
+* **Table:** при showRowsActions равным true в заголовке таблицы, над иконками действий, перекрытие подложкой не происходит ([f606b3f](https://github.com/AdmiralDS/react-ui/commit/f606b3fd0bde082e605f117aabafbd497a5772ee))
+* **TimeInput:** редактирование поля не должно приводить к неожиданным результатам ([506f419](https://github.com/AdmiralDS/react-ui/commit/506f4196201fd44579a0707063198e977e28a542))
+
 ### [7.8.2](https://github.com/AdmiralDS/react-ui/compare/v7.8.1...v7.8.2) (2023-12-20)
 
 ### [7.8.1](https://github.com/AdmiralDS/react-ui/compare/v7.8.0...v7.8.1) (2023-12-20)
