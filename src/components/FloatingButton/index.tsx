@@ -19,29 +19,6 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   status?: Status;
   /** Мобильная версия компонента */
   mobile?: boolean;
-  /** Состояние загрузки */
-  // loading?: boolean;
-  /** Состояние skeleton */
-  // skeleton?: boolean;
-}
-
-export interface FloatingButtonProps2 extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Внешний вид кнопки */
-  appearance?: Appearance;
-  /** Размер кнопки */
-  dimension?: Dimension;
-  /** Отображение компонента вместе с Badge, где badge - это число, которое будет отображено в компоненте Badge
-   * Если status не задан, то компонент Badge по умолчанию окрасится в цвет info
-   */
-  badge?: number;
-  /** Статус компонента, если параметр задан, то статус будет отображен через Badge Dot */
-  status?: Status;
-  /** Мобильная версия компонента */
-  mobile?: boolean;
-  /** Состояние загрузки */
-  // loading?: boolean;
-  /** Состояние skeleton */
-  // skeleton?: boolean;
 }
 
 export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>(
@@ -54,6 +31,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       badge,
       badgeDot,
       mobile = false,
+      disabled = false,
       children,
       ...props
     },
@@ -65,6 +43,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
         $dimension={dimension}
         $appearance={appearance}
         $mobile={mobile}
+        $disabled={disabled}
         ref={ref}
         type={type}
         {...props}

@@ -13,6 +13,7 @@ export const FloatingButtonWrapper = styled.button<{
   $dimension: FloatingButtonProps['dimension'];
   $appearance: FloatingButtonProps['appearance'];
   $mobile: boolean;
+  $disabled: boolean;
 }>`
   position: fixed;
   inset-inline-end: ${(p) => (p.$mobile ? 16 : 28)}px;
