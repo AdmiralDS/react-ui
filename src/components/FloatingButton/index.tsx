@@ -1,6 +1,14 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
-import { FloatingButtonWrapper, FloatingButtonContent, BadgeDot, Badge } from './style';
+import {
+  FloatingButtonWrapper,
+  FloatingButtonWrapperWithTooltip,
+  FloatingButtonContent,
+  BadgeDot,
+  Badge,
+} from './style';
+
+import type { ITooltipProps } from '#src/components/Tooltip';
 
 type Appearance = 'primary' | 'secondary';
 type Dimension = 'm' | 'xl';
@@ -19,6 +27,12 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   status?: Status;
   /** Мобильная версия компонента */
   mobile?: boolean;
+  /** Отключение кнопки */
+  disabled?: boolean;
+  /** */
+  tooltip?: string;
+  /** */
+  tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
 
 export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>(
@@ -32,13 +46,42 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       badgeDot,
       mobile = false,
       disabled = false,
+      tooltip,
+      tooltipPosition = 'left',
       children,
       ...props
     },
     ref,
   ) => {
     const badgeDimension = dimension === 'xl' ? 'm' : 's';
-    return (
+
+    const renderContent = () => (
+      <>
+        <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
+        {typeof badge !== 'undefined' && !badgeDot && (
+          <Badge dimension={badgeDimension} appearance={status}>
+            {badge}
+          </Badge>
+        )}
+        {badgeDot && <BadgeDot $status={status} $dimension={dimension} />}
+      </>
+    );
+
+    return tooltip ? (
+      <FloatingButtonWrapperWithTooltip
+        $dimension={dimension}
+        $appearance={appearance}
+        $mobile={mobile}
+        $disabled={disabled}
+        ref={ref}
+        type={type}
+        renderContent={() => tooltip}
+        tooltipPosition={tooltipPosition}
+        {...props}
+      >
+        {renderContent()}
+      </FloatingButtonWrapperWithTooltip>
+    ) : (
       <FloatingButtonWrapper
         $dimension={dimension}
         $appearance={appearance}
@@ -48,13 +91,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
         type={type}
         {...props}
       >
-        <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
-        {typeof badge !== 'undefined' && !badgeDot && (
-          <Badge dimension={badgeDimension} appearance={status}>
-            {badge}
-          </Badge>
-        )}
-        {badgeDot && <BadgeDot $status={status} $dimension={dimension} />}
+        {renderContent()}
       </FloatingButtonWrapper>
     );
   },

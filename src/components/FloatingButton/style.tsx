@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import type { FloatingButtonProps } from '#src/components/FloatingButton';
 import { Badge as BaseBadge } from '#src/components/Badge';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const focusVisibleStyle = css`
   &:focus-visible {
@@ -34,6 +35,8 @@ export const FloatingButtonWrapper = styled.button<{
 
   cursor: pointer;
 `;
+
+export const FloatingButtonWrapperWithTooltip = TooltipHoc(FloatingButtonWrapper);
 
 export const IconColor = css<{ $appearance?: FloatingButtonProps['appearance'] }>`
   & *[fill^='#'] {
