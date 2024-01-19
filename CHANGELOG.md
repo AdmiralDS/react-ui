@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.9.0](https://github.com/AdmiralDS/react-ui/compare/v7.8.4...v7.9.0) (2024-01-19)
+
+
+### Features
+
+* **Chips:** add iconStart/iconEnd props ([34e829c](https://github.com/AdmiralDS/react-ui/commit/34e829cca5a17bb4b61025748f6dcd9baef858f7))
+
+
+### Bug Fixes
+
+* стили при перетаскивания файла над областью инпута ([a0b4c31](https://github.com/AdmiralDS/react-ui/commit/a0b4c31a37506eae096775b5eef7bfd654501f22))
+
 ### [7.8.4](https://github.com/AdmiralDS/react-ui/compare/v7.8.3...v7.8.4) (2024-01-09)
 
 
