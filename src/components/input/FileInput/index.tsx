@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes, ReactNode } from 'react';
-import { forwardRef, useRef, useEffect } from 'react';
+import { forwardRef, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as AttachFileOutline } from '@admiral-ds/icons/build/system/AttachFileOutline.svg';
@@ -196,6 +196,15 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       }
     }, [files]);
 
+    const [isDragOver, setDragOver] = useState(false);
+    const handleDragEnter = () => {
+      console.log('drag enter');
+      setDragOver(true);
+    };
+    const handleDragLeave = () => {
+      console.log('drag leave');
+      setDragOver(false);
+    };
     return (
       <Wrapper $dimension={dimension} $width={width} data-status={status}>
         <FileInputWrapper>
@@ -215,7 +224,14 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           ) : (
             <>
               {titleWithDescription && renderLabel()}
-              <InputWrapper $dimension={dimension} disabled={disabled}>
+              <InputWrapper
+                $dimension={dimension}
+                disabled={disabled}
+                data-isdragover={isDragOver}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDragLeave}
+              >
                 <Icon $dimension={dimension} />
                 {titleWithoutDescription && renderTitleText()}
                 {dimension === 'm' && description && renderDescription()}
