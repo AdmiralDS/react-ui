@@ -198,11 +198,9 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
     const [isDragOver, setDragOver] = useState(false);
     const handleDragEnter = () => {
-      console.log('drag enter');
       setDragOver(true);
     };
     const handleDragLeave = () => {
-      console.log('drag leave');
       setDragOver(false);
     };
     return (
