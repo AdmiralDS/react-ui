@@ -1,11 +1,14 @@
-import { forwardRef } from 'react';
-import type { ButtonHTMLAttributes } from 'react';
+import { forwardRef, useState } from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
+import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
 import {
   FloatingButtonWrapper,
   FloatingButtonWrapperWithTooltip,
   FloatingButtonContent,
   BadgeDot,
   Badge,
+  GroupWrapper,
+  MenuWrapper,
 } from './style';
 
 import type { ITooltipProps } from '#src/components/Tooltip';
@@ -25,6 +28,8 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   badgeDot?: boolean;
   /** Статус компонента */
   status?: Status;
+  // renderBadge?: () => ReactNode;
+  // renderBadgeDot?: () => ReactNode;
   /** Мобильная версия компонента */
   mobile?: boolean;
   /** Отключение кнопки */
@@ -44,6 +49,8 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       status = 'info',
       badge,
       badgeDot,
+      // renderBadge,
+      // renderBadgeDot,
       mobile = false,
       disabled = false,
       tooltip,
@@ -96,3 +103,34 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     );
   },
 );
+
+export interface FloatingButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
+  /** Размер кнопки */
+  dimension?: Dimension;
+  /** Мобильная версия компонента */
+  mobile?: boolean;
+  /** Отключение кнопки */
+  disabled?: boolean;
+}
+
+export const FloatingButtonGroup = ({
+  dimension = 'm',
+  mobile = false,
+  disabled = false,
+  ...props
+}: FloatingButtonGroupProps) => {
+  const [open, setOpened] = useState(false);
+  return (
+    <GroupWrapper $dimension={dimension} $mobile={mobile} data-open={open} {...props}>
+      <MenuWrapper $dimension={dimension}>
+        <FloatingButton appearance="secondary">
+          <EmailOutline />
+        </FloatingButton>
+        <FloatingButton appearance="secondary">
+          <EmailOutline />
+        </FloatingButton>
+      </MenuWrapper>
+      <FloatingButton onClick={() => setOpened(!open)}>Toggle menu</FloatingButton>
+    </GroupWrapper>
+  );
+};
