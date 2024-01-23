@@ -33,6 +33,7 @@ export const disabledStyles = css`
 `;
 
 export const hoverStyles = css`
+  &[data-isdragover='true'],
   &:hover {
     cursor: pointer;
     background: ${(p) => p.theme.color['Opacity/Hover']};
