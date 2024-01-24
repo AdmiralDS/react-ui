@@ -1,35 +1,23 @@
-import { forwardRef, useState } from 'react';
-import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
-import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
-import {
-  FloatingButtonWrapper,
-  FloatingButtonWrapperWithTooltip,
-  FloatingButtonContent,
-  BadgeDot,
-  Badge,
-  GroupWrapper,
-  MenuWrapper,
-} from './style';
+import { forwardRef, useContext, useMemo } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { FloatingButtonWrapper, FloatingButtonWrapperWithTooltip, FloatingButtonContent, BadgeContent } from './style';
 
 import type { ITooltipProps } from '#src/components/Tooltip';
+import { FloatingButtonMenuContext } from '#src/components/FloatingButton/FloatingButtonMenuContext';
 
 type Appearance = 'primary' | 'secondary';
 type Dimension = 'm' | 'xl';
 type Status = 'info' | 'error' | 'success' | 'warning';
+
+export * from './FloatingButtonMenu';
 
 export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид кнопки */
   appearance?: Appearance;
   /** Размер кнопки */
   dimension?: Dimension;
-  /** Отображение компонента вместе с Badge, где badge - это число, которое будет отображено в компоненте Badge */
-  badge?: number;
-  /** Отображение компонента вместе с Badge Dot */
-  badgeDot?: boolean;
-  /** Статус компонента */
-  status?: Status;
-  // renderBadge?: () => ReactNode;
-  // renderBadgeDot?: () => ReactNode;
+  /** */
+  renderBadge?: () => ReactNode;
   /** Мобильная версия компонента */
   mobile?: boolean;
   /** Отключение кнопки */
@@ -44,15 +32,11 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
   (
     {
       type = 'button',
-      appearance = 'primary',
-      dimension = 'm',
-      status = 'info',
-      badge,
-      badgeDot,
-      // renderBadge,
-      // renderBadgeDot,
+      appearance: propAppearance = 'primary',
+      dimension: propDimension = 'm',
+      renderBadge,
       mobile = false,
-      disabled = false,
+      disabled: propDisabled = false,
       tooltip,
       tooltipPosition = 'left',
       children,
@@ -60,17 +44,19 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     },
     ref,
   ) => {
-    const badgeDimension = dimension === 'xl' ? 'm' : 's';
+    const {
+      dimension: contextDimension,
+      appearance: contextAppearance,
+      disabled: contextDisabled,
+    } = useContext(FloatingButtonMenuContext);
+    const appearance = useMemo(() => contextAppearance ?? propAppearance, [contextAppearance, propAppearance]);
+    const dimension = useMemo(() => contextDimension ?? propDimension, [contextDimension, propDimension]);
+    const disabled = useMemo(() => contextDisabled ?? propDisabled, [contextDisabled, propDisabled]);
 
     const renderContent = () => (
       <>
         <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
-        {typeof badge !== 'undefined' && !badgeDot && (
-          <Badge dimension={badgeDimension} appearance={status}>
-            {badge}
-          </Badge>
-        )}
-        {badgeDot && <BadgeDot $status={status} $dimension={dimension} />}
+        {renderBadge && <BadgeContent>{renderBadge()}</BadgeContent>}
       </>
     );
 
@@ -104,33 +90,4 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
   },
 );
 
-export interface FloatingButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
-  /** Размер кнопки */
-  dimension?: Dimension;
-  /** Мобильная версия компонента */
-  mobile?: boolean;
-  /** Отключение кнопки */
-  disabled?: boolean;
-}
-
-export const FloatingButtonGroup = ({
-  dimension = 'm',
-  mobile = false,
-  disabled = false,
-  ...props
-}: FloatingButtonGroupProps) => {
-  const [open, setOpened] = useState(false);
-  return (
-    <GroupWrapper $dimension={dimension} $mobile={mobile} data-open={open} {...props}>
-      <MenuWrapper $dimension={dimension}>
-        <FloatingButton appearance="secondary">
-          <EmailOutline />
-        </FloatingButton>
-        <FloatingButton appearance="secondary">
-          <EmailOutline />
-        </FloatingButton>
-      </MenuWrapper>
-      <FloatingButton onClick={() => setOpened(!open)}>Toggle menu</FloatingButton>
-    </GroupWrapper>
-  );
-};
+FloatingButton.displayName = 'FloatingButton';

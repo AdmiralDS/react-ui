@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import type { HTMLAttributes } from 'react';
 
-const getDotColor = css<{ $appearance: Appearance }>`
+const getBackground = css<{ $appearance: Appearance }>`
   ${({ theme, $appearance }) => {
     switch ($appearance) {
       case 'info':
@@ -20,7 +21,7 @@ const getDotColor = css<{ $appearance: Appearance }>`
   }}
 `;
 
-const getDotSize = css<{ $dimension: Dimension }>`
+const getSize = css<{ $dimension: Dimension }>`
   ${({ $dimension }) => {
     switch ($dimension) {
       case 'l':
@@ -36,15 +37,24 @@ const getDotSize = css<{ $dimension: Dimension }>`
   }}
 `;
 
+const Dot = styled.div<{ $dimension: Dimension; $appearance: Appearance }>`
+  position: relative;
+  box-sizing: border-box;
+  width: ${getSize}px;
+  height: ${getSize}px;
+  background: ${getBackground};
+  border: 1px solid ${getBackground};
+  border-radius: 50%;
+`;
+
 type Dimension = 'l' | 'm' | 's' | 'xs';
 type Appearance = 'neutral' | 'info' | 'error' | 'success' | 'warning' | 'attention';
 
-export const BadgeDot = styled.div<{ $dimension: Dimension; $appearance: Appearance }>`
-  position: relative;
-  box-sizing: border-box;
-  width: ${getDotSize}px;
-  height: ${getDotSize}px;
-  background-color: ${getDotColor};
-  border: 1px solid ${getDotColor};
-  border-radius: 50%;
-`;
+export interface BadgeDotProps extends HTMLAttributes<HTMLDivElement> {
+  dimension?: Dimension;
+  appearance?: Appearance;
+}
+
+export const BadgeDot = ({ dimension = 'm', appearance = 'neutral' }: BadgeDotProps) => {
+  return <Dot $dimension={dimension} $appearance={appearance} data-dot />;
+};

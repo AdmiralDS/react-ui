@@ -7,7 +7,7 @@ import { FloatingButtonStyleTemplate } from './FloatingButtonStyle.template';
 import { FloatingButtonTooltipTemplate } from './FloatingButtonTooltip.template';
 import { FloatingButtonPositionTemplate } from './FloatingButtonPosition.template';
 import { FloatingButtonMobileTemplate } from './FloatingButtonMobile.template';
-import { FloatingButtonGroupTemplate } from './FloatingButtonGroup.template';
+import { FloatingButtonMenuTemplate } from './FloatingButtonMenu.template';
 
 // Imports of text sources
 import FloatingButtonPlaygroundRaw from './FloatingButtonPlayground.template?raw';
@@ -15,7 +15,7 @@ import FloatingButtonStyleRaw from './FloatingButtonStyle.template?raw';
 import FloatingButtonTooltipRaw from './FloatingButtonTooltip.template?raw';
 import FloatingButtonPositionRaw from './FloatingButtonPosition.template?raw';
 import FloatingButtonMobileRaw from './FloatingButtonMobile.template?raw';
-import FloatingButtonGroupRaw from './FloatingButtonGroup.template?raw';
+import FloatingButtonMenuRaw from './FloatingButtonMenu.template?raw';
 
 export default {
   title: 'Admiral-2.1/FloatingButton',
@@ -178,16 +178,16 @@ export const FloatingButtonMobileExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="Group">
-const FloatingButtonGroupStory: StoryFn<typeof FloatingButton> = (props) => <FloatingButtonGroupTemplate {...props} />;
+//<editor-fold desc="Menu">
+const FloatingButtonMenuStory: StoryFn<typeof FloatingButton> = (props) => <FloatingButtonMenuTemplate {...props} />;
 
-export const FloatingButtonGroupExample = {
-  render: FloatingButtonGroupStory,
+export const FloatingButtonMenuExample = {
+  render: FloatingButtonMenuStory,
 
   parameters: {
     docs: {
       source: {
-        code: FloatingButtonGroupRaw,
+        code: FloatingButtonMenuRaw,
       },
       description: {
         story: ``,
@@ -195,7 +195,7 @@ export const FloatingButtonGroupExample = {
     },
   },
 
-  name: 'FloatingButtonGroup',
+  name: 'FloatingButtonMenu',
 };
 
 //</editor-fold>

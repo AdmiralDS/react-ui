@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { FloatingButton, T } from '@admiral-ds/react-ui';
-import type { FloatingButtonProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { FloatingButtonProps } from '@admiral-ds/react-ui';
 import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
-import styled, { ThemeProvider } from 'styled-components';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+import styled from 'styled-components';
 
 const Container = styled.div<{ $reduceMargin?: boolean }>`
   position: relative;
@@ -12,12 +11,9 @@ const Container = styled.div<{ $reduceMargin?: boolean }>`
   transform: scale(1);
 `;
 
-export const FloatingButtonStyleTemplate = ({
-  themeBorderKind,
-  ...props
-}: FloatingButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <>
       <div>Компонент имеет два размера – M (40 px) и XL (56 px). Два типа – Primary и Secondary.</div>
       <Container>
         <FloatingButton dimension="xl" style={{ insetInline: '0px auto' }}>
@@ -106,6 +102,6 @@ export const FloatingButtonStyleTemplate = ({
           <EmailOutline />
         </FloatingButton>
       </Container>
-    </ThemeProvider>
+    </>
   );
 };

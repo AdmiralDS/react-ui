@@ -92,3 +92,4 @@ export * from './components/DropdownProvider';
 export * from './components/Flex';
 export * from './components/GlobalSearch';
 export * from './components/FloatingButton';
+export * from './components/BadgeDot';
