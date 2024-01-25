@@ -1,5 +1,6 @@
 import { forwardRef, useContext, useMemo } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
 import { FloatingButtonWrapper, FloatingButtonWrapperWithTooltip, FloatingButtonContent, BadgeContent } from './style';
 
 import type { ITooltipProps } from '#src/components/Tooltip';
@@ -27,6 +28,9 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   /** */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
+
+// export type FloatingButtonProps = PolymorphicComponentProps<'web', FloatingButtonBaseProps, WebTarget, WebTarget>;
+// export const FloatingButton = forwardRef<typeof FloatingButtonWrapper, FloatingButtonProps>(
 
 export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>(
   (
@@ -56,7 +60,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     const renderContent = () => (
       <>
         <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
-        {renderBadge && <BadgeContent>{renderBadge()}</BadgeContent>}
+        {renderBadge && <BadgeContent $dimension={dimension}>{renderBadge()}</BadgeContent>}
       </>
     );
 

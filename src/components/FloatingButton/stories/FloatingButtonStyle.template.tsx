@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FloatingButton, T } from '@admiral-ds/react-ui';
+import { FloatingButton, Badge, BadgeDot } from '@admiral-ds/react-ui';
 import type { FloatingButtonProps } from '@admiral-ds/react-ui';
 import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
 import styled from 'styled-components';
@@ -31,42 +31,78 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
       </Container>
       <div>Можно использовать с бэйджами – Badge (выключка справа) и Badge Dot</div>
       <Container $reduceMargin>
-        <FloatingButton dimension="xl" badgeDot status="warning" style={{ insetInline: '0px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => <BadgeDot appearance="warning" dimension="l" />}
+          style={{ insetInline: '0px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton badgeDot status="warning" style={{ insetInline: '84px auto' }}>
+        <FloatingButton
+          renderBadge={() => <BadgeDot appearance="warning" dimension="m" />}
+          style={{ insetInline: '84px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
         <FloatingButton
           dimension="xl"
           appearance="secondary"
-          badgeDot
-          status="warning"
+          renderBadge={() => <BadgeDot appearance="warning" dimension="l" />}
           style={{ insetInline: '184px auto' }}
         >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton appearance="secondary" badgeDot status="warning" style={{ insetInline: '268px auto' }}>
+        <FloatingButton
+          appearance="secondary"
+          renderBadge={() => <BadgeDot appearance="warning" dimension="m" />}
+          style={{ insetInline: '268px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
       </Container>
       <Container>
-        <FloatingButton dimension="xl" badge={5} status="warning" style={{ insetInline: '0px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => (
+            <Badge appearance="warning" dimension="m">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '0px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton badge={5} status="warning" style={{ insetInline: '84px auto' }}>
+        <FloatingButton
+          renderBadge={() => (
+            <Badge appearance="warning" dimension="s">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '84px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
         <FloatingButton
           dimension="xl"
           appearance="secondary"
-          badge={25}
-          status="warning"
+          renderBadge={() => (
+            <Badge appearance="warning" dimension="m">
+              5
+            </Badge>
+          )}
           style={{ insetInline: '184px auto' }}
         >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton appearance="secondary" badge={25} status="warning" style={{ insetInline: '268px auto' }}>
+        <FloatingButton
+          appearance="secondary"
+          renderBadge={() => (
+            <Badge appearance="warning" dimension="s">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '268px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
       </Container>
@@ -75,30 +111,78 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
         обводку цвета «Neutral 00».
       </div>
       <Container $reduceMargin>
-        <FloatingButton dimension="xl" badgeDot style={{ insetInline: '0px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => <BadgeDot appearance="info" dimension="l" />}
+          style={{ insetInline: '0px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badgeDot status="error" style={{ insetInline: '84px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => <BadgeDot appearance="error" dimension="l" />}
+          style={{ insetInline: '84px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badgeDot status="success" style={{ insetInline: '184px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => <BadgeDot appearance="success" dimension="l" />}
+          style={{ insetInline: '184px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badgeDot status="warning" style={{ insetInline: '268px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => <BadgeDot appearance="warning" dimension="l" />}
+          style={{ insetInline: '268px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
       </Container>
       <Container>
-        <FloatingButton dimension="xl" badge={5} style={{ insetInline: '0px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => (
+            <Badge appearance="info" dimension="m">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '0px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badge={5} status="error" style={{ insetInline: '84px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => (
+            <Badge appearance="error" dimension="m">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '84px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badge={5} status="success" style={{ insetInline: '184px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => (
+            <Badge appearance="success" dimension="m">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '184px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
-        <FloatingButton dimension="xl" badge={5} status="warning" style={{ insetInline: '268px auto' }}>
+        <FloatingButton
+          dimension="xl"
+          renderBadge={() => (
+            <Badge appearance="warning" dimension="m">
+              5
+            </Badge>
+          )}
+          style={{ insetInline: '268px auto' }}
+        >
           <EmailOutline />
         </FloatingButton>
       </Container>

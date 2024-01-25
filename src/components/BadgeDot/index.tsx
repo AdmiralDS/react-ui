@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 
 const getBackground = css<{ $appearance: Appearance }>`
@@ -55,6 +56,8 @@ export interface BadgeDotProps extends HTMLAttributes<HTMLDivElement> {
   appearance?: Appearance;
 }
 
-export const BadgeDot = ({ dimension = 'm', appearance = 'neutral' }: BadgeDotProps) => {
-  return <Dot $dimension={dimension} $appearance={appearance} data-dot />;
-};
+export const BadgeDot = forwardRef<HTMLDivElement, BadgeDotProps>(
+  ({ dimension = 'm', appearance = 'neutral' }: BadgeDotProps, ref) => {
+    return <Dot ref={ref} $dimension={dimension} $appearance={appearance} data-dot />;
+  },
+);

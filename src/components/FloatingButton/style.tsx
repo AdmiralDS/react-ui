@@ -57,32 +57,18 @@ export const FloatingButtonContent = styled.div<{
   }
 `;
 
-// export const BadgeDot = styled.div<{
-//   $status: FloatingButtonProps['status'];
-//   $dimension: FloatingButtonProps['dimension'];
-// }>`
-//   position: absolute;
-//   top: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
-//   inset-inline-end: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
-//   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
-//   box-sizing: border-box;
-//   display: flex;
-//   flex-shrink: 0;
-//   width: ${(p) => (p.$dimension == 'm' ? 10 : 12)}px;
-//   height: ${(p) => (p.$dimension == 'm' ? 10 : 12)}px;
-//   border-radius: 50%;
-//   ${badgeDotBackground}
-// `;
-
-// export const Badge = styled(BaseBadge)`
-//   box-sizing: border-box;
-//   border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
-//   position: absolute;
-//   top: -3px;
-//   inset-inline-end: -3px;
-// `;
-
-export const BadgeContent = styled.div``;
+export const BadgeContent = styled.div<{ $dimension: FloatingButtonProps['dimension'] }>`
+  position: absolute;
+  top: -3px;
+  inset-inline-end: -3px;
+  &:has(> *[data-dot]) {
+    top: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
+    inset-inline-end: ${(p) => (p.$dimension == 'm' ? 1 : 3)}px;
+  }
+  && > * {
+    border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  }
+`;
 
 export const GroupWrapper = styled.div<{
   $dimension: FloatingButtonProps['dimension'];
