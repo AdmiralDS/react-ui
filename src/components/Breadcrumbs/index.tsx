@@ -13,7 +13,7 @@ import {
   Separator,
   Wrapper,
 } from './style';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
 
@@ -27,7 +27,7 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   /** Является ли последняя хлебная крошка активной */
   lastBreadcrumbActive?: boolean;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

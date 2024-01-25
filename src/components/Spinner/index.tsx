@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { RuleSet } from 'styled-components';
 import styled, { css, keyframes } from 'styled-components';
 
 import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
@@ -17,7 +16,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   /** Белый цвет компонента */
   inverse?: boolean;
   /** Миксин svg иконки */
-  svgMixin?: RuleSet<object>;
+  svgMixin?: ReturnType<typeof css>;
 }
 
 const getIcon = (dimension: Dimension) => {
@@ -81,7 +80,7 @@ const spin = keyframes`
 const SpinnerWrapper = styled.div<{
   $inverse: boolean;
   $dimension: Dimension;
-  $svgMixin?: RuleSet<object>;
+  $svgMixin?: ReturnType<typeof css>;
 }>`
   position: relative;
 

@@ -1,23 +1,16 @@
 import { forwardRef } from 'react';
-import type { RuleSet, PolymorphicComponentProps, WebTarget } from 'styled-components';
+import type { ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
 import { BadgeComponent } from '#src/components/Badge';
 
-export interface ContentSwitcherItemBaseProps extends HTMLButtonElement {
+export interface ContentSwitcherItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Активная кнопка */
   active?: boolean;
   /** Позволяет добавлять  миксин созданный с помощью styled css  */
-  cssMixin?: RuleSet<object>;
+  cssMixin?: ReturnType<typeof css>;
 }
-
-export type ContentSwitcherItemProps = PolymorphicComponentProps<
-  'web',
-  ContentSwitcherItemBaseProps,
-  WebTarget,
-  WebTarget
->;
 
 const colorMixin = css<{ $active?: boolean; disabled?: boolean }>`
   color: ${({ $active, disabled, theme }) => {
@@ -38,7 +31,7 @@ const BORDER_RADIUS = 22;
 
 export const ContentSwitcherItemButton = styled.button<{
   $active?: boolean;
-  $cssMixin?: RuleSet<object>;
+  $cssMixin?: ReturnType<typeof css>;
 }>`
   border: none;
   border-radius: ${BORDER_RADIUS}px;
@@ -113,7 +106,7 @@ export const ContentSwitcherItemButton = styled.button<{
   ${(p) => p.$cssMixin && p.$cssMixin}
 `;
 
-export const ContentSwitcherItem = forwardRef<typeof ContentSwitcherItemButton, ContentSwitcherItemProps>(
+export const ContentSwitcherItem = forwardRef<HTMLButtonElement, ContentSwitcherItemProps>(
   ({ active, cssMixin, ...props }: ContentSwitcherItemProps, ref) => {
     return <ContentSwitcherItemButton ref={ref} {...props} $active={active} $cssMixin={cssMixin} />;
   },

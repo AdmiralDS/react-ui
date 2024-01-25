@@ -5,7 +5,7 @@ import { IconButton } from '#src/components/IconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as SettingsOutline } from '@admiral-ds/icons/build/system/SettingsOutline.svg';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
@@ -24,7 +24,7 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
   menu: React.ReactNode;
   buttonDimension?: 's' | 'l';
   disabled?: boolean;
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   dropContainerClassName?: string;
   dropContainerStyle?: CSSProperties;
 }

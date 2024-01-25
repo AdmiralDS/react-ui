@@ -1,4 +1,4 @@
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 
 export type ButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white' | 'danger' | 'success';
 /** @deprecated use ButtonAppearance instead */
@@ -12,5 +12,5 @@ export interface StyledButtonProps {
   $displayAsSquare?: boolean;
   $loading?: boolean;
   $skeleton?: boolean;
-  $buttonCssMixin?: RuleSet<object>;
+  $buttonCssMixin?: ReturnType<typeof css>;
 }

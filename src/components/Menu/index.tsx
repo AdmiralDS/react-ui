@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
@@ -79,7 +78,7 @@ export interface RenderPanelProps {
   /** Размер компонента */
   dimension: MenuDimensions;
   /** Позволяет добавлять миксин для панели, созданный с помощью styled css  */
-  menuActionsPanelCssMixin?: RuleSet<object>;
+  menuActionsPanelCssMixin?: ReturnType<typeof css>;
 }
 
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
