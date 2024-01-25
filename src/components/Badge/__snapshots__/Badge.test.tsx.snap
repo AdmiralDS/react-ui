@@ -9,8 +9,9 @@ exports[`Badge should render component with small dimension 1`] = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 5px;
+  padding: 0 4px;
   height: 16px;
+  border: 1px solid #E5E7EB;
   border-radius: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -40,8 +41,9 @@ exports[`Badge should render component with small dimension 1`] = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 5px;
+  padding: 0 4px;
   height: 16px;
+  border: 1px solid #E5E7EB;
   border-radius: 8px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -126,8 +128,9 @@ exports[`Badge should render default component 1`] = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6px;
+  padding: 0 5px;
   height: 20px;
+  border: 1px solid #E5E7EB;
   border-radius: 10px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
@@ -157,8 +160,9 @@ exports[`Badge should render default component 1`] = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6px;
+  padding: 0 5px;
   height: 20px;
+  border: 1px solid #E5E7EB;
   border-radius: 10px;
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
