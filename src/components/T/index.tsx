@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import type { ElementType, ForwardRefExoticComponent, PropsWithoutRef, RefAttributes } from 'react';
+import type { ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
 import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '#src/components/common/polymorphicProps';
