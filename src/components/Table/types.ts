@@ -1,4 +1,4 @@
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import type { CSSProperties } from 'react';
 import type { Color } from '#src/components/themes';
 
@@ -66,7 +66,7 @@ export type Column = {
   filterMenuAlignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
   /** Позволяет добавлять миксин для меню фильтра, созданный с помощью styled css  */
-  filterMenuCssMixin?: RuleSet<object>;
+  filterMenuCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   filterMenuClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

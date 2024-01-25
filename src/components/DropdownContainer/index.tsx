@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { CSSProperties } from 'react';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -11,7 +11,7 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{
   $alignSelf?: string;
-  $dropContainerCssMixin?: RuleSet<object>;
+  $dropContainerCssMixin?: ReturnType<typeof css>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
@@ -43,7 +43,7 @@ const Portal = styled(PositionInPortal)<{ $reverse: boolean }>`
 
 export interface DropContainerStyles {
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
@@ -76,7 +76,7 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
 }
 
 export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(

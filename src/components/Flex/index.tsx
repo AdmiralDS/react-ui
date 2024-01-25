@@ -1,19 +1,12 @@
 import { forwardRef } from 'react';
-import { CellDiv, ContainerDiv, GrowCellDiv, RowDiv } from '#src/components/Flex/Flex.styled';
-import type {
-  FlexContainerProps,
-  FlexCellProps,
-  FlexGrowCellProps,
-  FlexRowProps,
-} from '#src/components/Flex/Flex.types';
+import { CellDiv, ContainerDiv, GrowCellDiv, RowDiv } from './Flex.styled';
+import type { FlexContainerProps, FlexCellProps, FlexGrowCellProps, FlexRowProps } from './Flex.types';
 
-export * from './Flex.types';
-
-const Container = forwardRef<typeof ContainerDiv, FlexContainerProps>(({ rowGap, columnGap, ...props }, ref) => {
+const Container = forwardRef<HTMLDivElement, FlexContainerProps>(({ rowGap, columnGap, ...props }, ref) => {
   return <ContainerDiv ref={ref} $rowGap={rowGap} $columnGap={columnGap} {...props} />;
 });
 
-const Row = forwardRef<typeof RowDiv, FlexRowProps>(
+const Row = forwardRef<HTMLDivElement, FlexRowProps>(
   ({ rowGap, columnGap, wrap, direction, alignItems, ...props }, ref) => {
     return (
       <RowDiv
@@ -29,11 +22,11 @@ const Row = forwardRef<typeof RowDiv, FlexRowProps>(
   },
 );
 
-const Cell = forwardRef<typeof CellDiv, FlexCellProps>(({ col, columnGap, ...props }, ref) => {
+const Cell = forwardRef<HTMLDivElement, FlexCellProps>(({ col, columnGap, ...props }, ref) => {
   return <CellDiv ref={ref} $col={col} $columnGap={columnGap} {...props} />;
 });
 
-const GrowCell = forwardRef<typeof GrowCellDiv, FlexGrowCellProps>(({ grow, ...props }, ref) => {
+const GrowCell = forwardRef<HTMLDivElement, FlexGrowCellProps>(({ grow, ...props }, ref) => {
   return <GrowCellDiv ref={ref} $grow={grow} {...props} />;
 });
 
@@ -43,3 +36,5 @@ export const Flex = {
   Cell,
   GrowCell,
 };
+
+export * from './Flex.types';

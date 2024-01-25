@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
 import styled from 'styled-components';
 
 import { DateInput } from '../DateInput';
@@ -51,7 +50,7 @@ export const DateTimeTimeInput = styled(TimeInput)<{ disabled?: boolean; readOnl
 
 DateTimeTimeInput.displayName = 'DateTimeTimeInput';
 
-export type DateTimeSeparatorProps = PolymorphicComponentProps<'web', DateTimeBaseProps, WebTarget, WebTarget>;
+export type DateTimeSeparatorProps = DateTimeBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 function getSeparatorColor(disabled?: boolean, readOnly?: boolean, status?: InputStatus) {
   if (disabled) return 'Neutral/Neutral 30';
@@ -89,15 +88,13 @@ const DateTimeSeparatorDiv = styled.div<{ disabled?: boolean; readOnly?: boolean
   border-left: 1px solid ${(p) => p.theme.color[getSeparatorColor(p.disabled, p.readOnly, p.$status)]};
 `;
 
-export const DateTimeSeparator = forwardRef<typeof DateTimeSeparatorDiv, DateTimeSeparatorProps>(
-  ({ status, ...props }, ref) => {
-    return <DateTimeSeparatorDiv ref={ref} $status={status} {...props} />;
-  },
-);
+export const DateTimeSeparator = forwardRef<HTMLDivElement, DateTimeSeparatorProps>(({ status, ...props }, ref) => {
+  return <DateTimeSeparatorDiv ref={ref} $status={status} {...props} />;
+});
 
 DateTimeSeparator.displayName = 'DateTimeSeparator';
 
-export type DateTimeContainerProps = PolymorphicComponentProps<'web', DateTimeBaseProps, WebTarget, WebTarget>;
+export type DateTimeContainerProps = DateTimeBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 const DateTimeContainerDiv = styled.div<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   display: flex;
@@ -111,10 +108,8 @@ const DateTimeContainerDiv = styled.div<{ disabled?: boolean; readOnly?: boolean
   }
 `;
 
-export const DateTimeContainer = forwardRef<typeof DateTimeContainerDiv, DateTimeContainerProps>(
-  ({ status, ...props }, ref) => {
-    return <DateTimeContainerDiv ref={ref} $status={status} {...props} />;
-  },
-);
+export const DateTimeContainer = forwardRef<HTMLDivElement, DateTimeContainerProps>(({ status, ...props }, ref) => {
+  return <DateTimeContainerDiv ref={ref} $status={status} {...props} />;
+});
 
 DateTimeContainer.displayName = 'DateTimeContainer';

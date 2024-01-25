@@ -79,12 +79,6 @@ export default {
     theme: {
       control: false,
     },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
     ref: {
       control: false,
     },

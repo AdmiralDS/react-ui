@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
 import * as React from 'react';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { useMemo, useRef, useState, useLayoutEffect } from 'react';
 import { Checkbox } from '#src/components/Checkbox';
@@ -41,7 +41,7 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, R
   buttonDimension?: 's' | 'l';
   menuDimension?: MenuDimension;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

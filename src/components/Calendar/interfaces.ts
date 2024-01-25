@@ -1,7 +1,7 @@
 import type { MouseEvent, SyntheticEvent } from 'react';
 
 import type { DateValidator } from './validator';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 
 export interface IDateBaseProps {
   /** Выбранное значение даты */
@@ -67,7 +67,7 @@ export interface CalendarPropType extends IDateSelectionProps {
   onViewYearSelect?: () => void;
 
   /** Позволяет добавлять стили на необходимые даты */
-  highlightSpecialDay?: (date: Date) => RuleSet<object> | undefined;
+  highlightSpecialDay?: (date: Date) => ReturnType<typeof css> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
@@ -102,7 +102,7 @@ export interface IDayCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   month: number;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
-  highlightSpecialDay: (date: Date) => RuleSet<object> | undefined;
+  highlightSpecialDay: (date: Date) => ReturnType<typeof css> | undefined;
 }
 
 export type IWeekCalendarProps = IDayCalendarProps;
@@ -111,7 +111,7 @@ export interface IMonthCalendarProps extends IDateCalendarBaseProps {
   day: Date;
   onMouseEnter: (date: Date, event: MouseEvent<HTMLDivElement>) => void;
   onMouseLeave: () => void;
-  highlightSpecialDay: (date: Date) => RuleSet<object> | undefined;
+  highlightSpecialDay: (date: Date) => ReturnType<typeof css> | undefined;
 }
 
 export interface IYearsCalendarProps extends IDateCalendarBaseProps {

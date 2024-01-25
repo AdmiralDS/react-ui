@@ -7,7 +7,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import { refSetter } from '../common/utils/refSetter';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
@@ -42,7 +42,7 @@ export interface TagMenuProps
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */

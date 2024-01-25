@@ -1,11 +1,10 @@
-import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 
-export const AnchorWrapper = styled.div<{ $anchorCssMixin?: RuleSet<object> }>`
+export const AnchorWrapper = styled.div<{ $anchorCssMixin?: ReturnType<typeof css> }>`
   display: inline-block;
   position: relative;
   cursor: pointer;

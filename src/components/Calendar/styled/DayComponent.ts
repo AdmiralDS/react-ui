@@ -1,4 +1,3 @@
-import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -13,7 +12,7 @@ type DayComponentProps = {
   disabled?: boolean;
   $inSelectingRange: boolean;
   $outsideMonth?: boolean;
-  $highlightSpecialDayMixin?: RuleSet<object>;
+  $highlightSpecialDayMixin?: ReturnType<typeof css>;
 };
 
 const DAY_SIZE = '36px';
