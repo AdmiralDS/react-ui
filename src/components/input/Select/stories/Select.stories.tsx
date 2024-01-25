@@ -99,12 +99,6 @@ export default {
     theme: {
       control: false,
     },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
   },
 } as Meta<typeof Select>;
 
