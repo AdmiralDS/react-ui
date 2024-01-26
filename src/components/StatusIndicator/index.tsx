@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { FC, HTMLAttributes, ReactNode } from 'react';
-import type { RuleSet } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
@@ -26,7 +25,7 @@ const cssDefault = css`
 const StatusContainer = styled.div<{
   $dimension: Dimension;
   $displayRight?: boolean;
-  $cssMixin?: RuleSet<object>;
+  $cssMixin?: ReturnType<typeof css>;
 }>`
   display: inline-flex;
   align-items: center;
@@ -45,7 +44,7 @@ export interface StatusIndicatorProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Позволяет добавлять миксин, созданный с помощью styled css  */
-  cssMixin?: RuleSet<object>;
+  cssMixin?: ReturnType<typeof css>;
   /** Иконка индикатора статуса */
   icon?: ReactNode;
   /** Позиционирование иконки статуса. По умолчанию - слева */

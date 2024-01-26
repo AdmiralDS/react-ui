@@ -3,7 +3,6 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import type { RuleSet } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
@@ -24,7 +23,7 @@ export interface ModalStatusIconProps {
   status: ModalStatusIconType;
 }
 
-const Overlay = styled.div<{ $overlayStyledCss: RuleSet<object> }>`
+const Overlay = styled.div<{ $overlayStyledCss: ReturnType<typeof css> }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,7 +189,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayStyledCss?: RuleSet<object>;
+  overlayStyledCss?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на подложку модального окна  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку модального окна  */

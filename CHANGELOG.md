@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.9.1](https://github.com/AdmiralDS/react-ui/compare/v7.9.0...v7.9.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* remove RuleSet, fix typings for T, Link, ContentSwitcherItemButton ([9a93121](https://github.com/AdmiralDS/react-ui/commit/9a931216af0961ea5579598ac911c1bc7f377c00))
+
 ## [7.9.0](https://github.com/AdmiralDS/react-ui/compare/v7.8.4...v7.9.0) (2024-01-19)
 
 

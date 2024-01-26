@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -12,7 +12,7 @@ import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/com
 
 const Container = styled.div<{
   $alignSelf?: string;
-  $dropContainerCssMixin?: RuleSet<object>;
+  $dropContainerCssMixin?: ReturnType<typeof css>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
@@ -68,7 +68,7 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   setMenuFocus?: React.Dispatch<React.SetStateAction<'firstOption' | 'lastOption' | 'activeOption'>>;
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
 }
 
 /**

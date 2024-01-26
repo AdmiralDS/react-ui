@@ -11,7 +11,9 @@ const Divider = styled.div`
 export const LinkAsPropTemplate = () => {
   return (
     <>
-      <Link as="button">Render button instead of anchor</Link>
+      <Link as="button" type="button">
+        Render button instead of anchor
+      </Link>
       <Divider />
       <Link as="div" dimension="s">
         Render div instead of anchor

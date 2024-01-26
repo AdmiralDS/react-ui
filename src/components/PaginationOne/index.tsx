@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
-import type { RuleSet } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
@@ -63,7 +62,7 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const extendMixin = (mixin?: RuleSet<object>, showPageNumberInput?: boolean) => css`
+const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boolean) => css`
   width: auto;
   min-width: ${showPageNumberInput ? 80 : 68}px;
 
@@ -93,7 +92,7 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** @deprecated use pageSizeDropContainerStyle.dropContainerCssMixin and
    * pageNumberDropContainerStyle.dropContainerCssMixin instead.
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   pageSizeDropContainerStyle?: DropContainerStyles;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */

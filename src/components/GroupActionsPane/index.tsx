@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 import React, { forwardRef, useState } from 'react';
-import type { RuleSet, PolymorphicComponentProps, WebTarget } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 import type { Dimension as ButtonDimension } from '#src/components/TextButton/types';
 import type { MenuDimension } from '#src/components/GroupActionsPane/ColumnsButton';
@@ -8,7 +8,6 @@ import { ColumnsButton } from '#src/components/GroupActionsPane/ColumnsButton';
 import { SettingsButton } from '#src/components/GroupActionsPane/SettingsButton';
 import { SearchBlock } from '#src/components/GroupActionsPane/SearchBlock';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
-import { TProps } from '#src/components/T';
 
 export type PaneDimension = 's' | 'm' | 'l' | 'xl';
 
@@ -97,7 +96,7 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
 
   /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: RuleSet<object>;
+  dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   columnsButtonDropContainerStyle?: DropContainerStyles;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
@@ -188,12 +187,11 @@ const PaneSeparatorDiv = styled.div<{ $dimension?: 's' | 'm' }>`
   align-self: center;
 `;
 
-export type PaneSeparatorBaseProps = {
+export type PaneSeparatorProps = {
   dimension?: 's' | 'm';
-};
-export type PaneSeparatorProps = PolymorphicComponentProps<'web', PaneSeparatorBaseProps, WebTarget, WebTarget>;
+} & HTMLAttributes<HTMLDivElement>;
 
-export const PaneSeparator = forwardRef<typeof PaneSeparatorDiv, PaneSeparatorProps>(({ dimension, ...props }, ref) => {
+export const PaneSeparator = forwardRef<HTMLDivElement, PaneSeparatorProps>(({ dimension, ...props }, ref) => {
   return <PaneSeparatorDiv ref={ref} $dimension={dimension} {...props} />;
 });
 

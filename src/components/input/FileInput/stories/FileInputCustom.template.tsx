@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
 import styled from 'styled-components';
 
 import { Button, FileInput, fullWidthPositionMixin } from '@admiral-ds/react-ui';
@@ -9,10 +9,10 @@ import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 
 //<editor-fold desc="MyFileItem">
 interface MyFileItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  filesLayoutCssMixin?: RuleSet<object>;
+  filesLayoutCssMixin?: ReturnType<typeof css>;
   onCloseIconClick?: () => void;
 }
-const MyFileItem = styled.div<{ filesLayoutCssMixin?: RuleSet<object> }>`
+const MyFileItem = styled.div<{ filesLayoutCssMixin?: ReturnType<typeof css> }>`
   display: flex;
   align-items: center;
   user-select: none;

@@ -1,11 +1,10 @@
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
 
 import type { ButtonAppearance, Dimension } from '#src/components/Button/types';
 
-export type PseudoTextBaseProps = { $dimension: Dimension; $appearance: ButtonAppearance };
-export type PseudoTextProps = PolymorphicComponentProps<'web', PseudoTextBaseProps, WebTarget, WebTarget>;
+export type PseudoTextBaseProps = { dimension: Dimension; appearance: ButtonAppearance };
+export type PseudoTextProps = PseudoTextBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 export const backGroundColorMixin = css<{ $appearance: ButtonAppearance }>`
   background: ${({ theme, $appearance }) =>
@@ -23,8 +22,6 @@ const PseudoTextDiv = styled.div<{ $dimension: Dimension; $appearance: ButtonApp
   ${backGroundColorMixin}
 `;
 
-export const PseudoText = forwardRef<typeof PseudoTextDiv, PseudoTextProps>(
-  ({ dimension, appearance, ...props }, ref) => {
-    return <PseudoTextDiv ref={ref} $dimension={dimension} $appearance={appearance} {...props} />;
-  },
-);
+export const PseudoText = forwardRef<HTMLDivElement, PseudoTextProps>(({ dimension, appearance, ...props }, ref) => {
+  return <PseudoTextDiv ref={ref} $dimension={dimension} $appearance={appearance} {...props} />;
+});

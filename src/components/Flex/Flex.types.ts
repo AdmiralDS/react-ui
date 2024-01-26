@@ -1,5 +1,3 @@
-import type { PolymorphicComponentProps, WebTarget } from 'styled-components';
-
 export type FlexCellSizes =
   | 1
   | 2
@@ -34,24 +32,24 @@ export interface FlexContainerBaseProps {
   rowGap?: FlexGapSizes;
   columnGap?: FlexGapSizes;
 }
-export type FlexContainerProps = PolymorphicComponentProps<'web', FlexContainerBaseProps, WebTarget, WebTarget>;
+export type FlexContainerProps = FlexContainerBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 export interface FlexRowBaseProps extends FlexContainerBaseProps {
   wrap?: FlexWrap;
   direction?: FlexDirection;
   alignItems?: FlexAlignItems;
 }
-export type FlexRowProps = PolymorphicComponentProps<'web', FlexRowBaseProps, WebTarget, WebTarget>;
+export type FlexRowProps = FlexRowBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 export interface FlexCellBaseProps {
   col?: FlexCellSizes;
   columnGap?: FlexGapSizes;
 }
-export type FlexCellProps = PolymorphicComponentProps<'web', FlexCellBaseProps, WebTarget, WebTarget>;
+export type FlexCellProps = FlexCellBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 export interface FlexGrowCellBaseProps {
   grow?: number;
 }
-export type FlexGrowCellProps = PolymorphicComponentProps<'web', FlexGrowCellBaseProps, WebTarget, WebTarget>;
+export type FlexGrowCellProps = FlexGrowCellBaseProps & React.HTMLAttributes<HTMLDivElement>;
 
 export const FLEX_CELL_MAX_SIZE: FlexCellSizes = 24;

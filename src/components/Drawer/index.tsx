@@ -1,8 +1,7 @@
 import type { CSSProperties, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import type { RuleSet } from 'styled-components';
-import styled, { useTheme, css, keyframes } from 'styled-components';
+import styled, { css, useTheme, keyframes } from 'styled-components';
 
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -45,7 +44,7 @@ const fadeInMixin = css<{ $position?: Position }>`
 `;
 
 const Overlay = styled.div<{
-  $overlayCssMixin: RuleSet<object>;
+  $overlayCssMixin: ReturnType<typeof css>;
   $backdrop?: boolean;
   $position: Position;
 }>`
@@ -140,7 +139,7 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
    * Например цвет фона в зависимости от темы:
    *  const overlayStyles = css\`background-color: ${({ theme }) => hexToRgba(theme.color["Neutral/Neutral 05"], 0.6)};\`
    * */
-  overlayCssMixin?: RuleSet<object>;
+  overlayCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на подложку drawerа  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку drawerа  */
