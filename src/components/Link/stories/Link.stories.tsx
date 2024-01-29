@@ -71,9 +71,7 @@ export default {
 } as Meta<typeof Link>;
 
 //<editor-fold desc="Playground">
-const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => (
-  <LinkPlaygroundTemplate children={props.children} {...props} />
-);
+const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => <LinkPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: LinkPlaygroundStory,

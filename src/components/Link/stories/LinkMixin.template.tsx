@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LinkComponentCssMixin } from '@admiral-ds/react-ui';
-import type { LinkComponent } from '@admiral-ds/react-ui';
+import type { LinkComponentProps } from '@admiral-ds/react-ui';
 import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ const Divider = styled.div`
   height: 12px;
 `;
 
-const StyledRouterLink = styled(RouterLink)<LinkComponent>`
+const StyledRouterLink = styled(RouterLink)<LinkComponentProps>`
   ${LinkComponentCssMixin}
 `;
 

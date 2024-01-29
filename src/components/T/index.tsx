@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import type { ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
 import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '#src/components/common/polymorphicProps';
@@ -46,10 +45,14 @@ const Tspan = styled.span<{
   ${(p) => p.$skeleton && skeletonMixin}
 `;
 
-type TProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, TOwnProps>;
-type TextComponent = <C extends React.ElementType = 'span'>(props: TProps<C>) => React.ReactNode | null;
-export const T: TextComponent & { displayName?: string } = forwardRef(
-  <P extends ElementType = 'span'>(
+export type TProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, TOwnProps>;
+export type TextComponentType = (<C extends React.ElementType = 'span'>(
+  props: TProps<C>,
+) => ReturnType<typeof Tspan>) & {
+  displayName?: string | undefined;
+};
+export const T: TextComponentType = forwardRef(
+  <P extends React.ElementType = 'span'>(
     { font, color, cssMixin, skeleton, ...props }: TProps<P>,
     ref: PolymorphicRef<P>,
   ) => {

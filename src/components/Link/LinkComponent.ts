@@ -4,13 +4,13 @@ import { styleColorMixin, styleDisabledMixin, styleMixin, styleTextMixin } from 
 export type AppearanceLink = 'primary' | 'secondary';
 export type Dimension = 'm' | 's';
 
-export type LinkComponent = {
+export type LinkComponentProps = {
   disabled?: boolean;
   $appearance?: AppearanceLink;
   $dimension?: Dimension;
 };
 
-export const LinkComponentCssMixin = css<LinkComponent>`
+export const LinkComponentCssMixin = css<LinkComponentProps>`
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   display: flex;
   pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
@@ -24,6 +24,6 @@ export const LinkComponentCssMixin = css<LinkComponent>`
   ${(props) => (props.disabled ? styleDisabledMixin : '')}
 `;
 
-export const LinkComponent = styled.a<LinkComponent>`
+export const LinkComponent = styled.a<LinkComponentProps>`
   ${LinkComponentCssMixin}
 `;

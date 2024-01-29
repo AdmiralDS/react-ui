@@ -19,7 +19,7 @@ export const LinkWithIconTemplate = () => {
         Link with icon. Dimension - m
       </T>
       <Separator />
-      <Link appearance="primary" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link appearance="primary" href="" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}>
         <ArrowLeftOutline width={24} />
         <Divider />
         Link
@@ -29,7 +29,12 @@ export const LinkWithIconTemplate = () => {
         Link with icon. Dimension - s
       </T>
       <Separator />
-      <Link appearance="secondary" dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link
+        appearance="secondary"
+        dimension="s"
+        href=""
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
+      >
         Link
         <Divider />
         <ArrowRightOutline width={20} />
