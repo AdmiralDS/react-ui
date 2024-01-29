@@ -12,10 +12,12 @@ const focusVisibleStyle = css`
   }
 `;
 
-const primaryAppearanceMixin = css`
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+const primaryAppearanceMixin = css<{ $disabled: boolean }>`
+  background-color: ${({ theme, $disabled }) =>
+    $disabled ? theme.color['Neutral/Neutral 10'] : theme.color['Primary/Primary 60 Main']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: ${({ theme, $disabled }) =>
+      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Special/Static White']};
   }
 
   &:hover {
@@ -25,19 +27,14 @@ const primaryAppearanceMixin = css`
   &:active {
     background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
   }
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    }
-  }
 `;
 
-const secondaryAppearanceMixin = css`
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
+  background-color: ${({ theme, $disabled }) =>
+    $disabled ? theme.color['Special/Elevated BG'] : theme.color['Special/Elevated BG']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    fill: ${({ theme, $disabled }) =>
+      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 
   &:hover {
@@ -47,18 +44,10 @@ const secondaryAppearanceMixin = css`
   &:active {
     background-color: ${({ theme }) => theme.color['Opacity/Press']};
   }
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
-    & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    }
-  }
 `;
 
 export const FloatingButtonWrapper = styled.button<{
   $dimension: FloatingButtonProps['dimension'];
-  $appearance: FloatingButtonProps['appearance'];
   $mobile: boolean;
   disabled: boolean;
 }>`
@@ -67,38 +56,39 @@ export const FloatingButtonWrapper = styled.button<{
   inset-block-end: ${(p) => (p.$mobile ? 16 : 28)}px;
   display: block;
   border: none;
+  border-radius: 50%;
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
   margin: 0;
-  padding: ${(p) => (p.$dimension == 'm' ? 8 : 16)}px;
+  padding: 0;
   height: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
   width: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
-  border: none;
-  border-radius: 50%;
   pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   ${(p) => p.theme.shadow['Shadow 08']}
-
-  &:hover {
-    cursor: pointer;
-  }
-  ${(p) => (p.$appearance == 'primary' ? primaryAppearanceMixin : secondaryAppearanceMixin)}
+  z-index: ${(p) => p.theme.zIndex['floatingButton']};
   ${focusVisibleStyle}
 `;
 
 export const FloatingButtonWrapperWithTooltip = TooltipHoc(FloatingButtonWrapper);
 
-export const IconColor = css<{ $appearance?: FloatingButtonProps['appearance'] }>`
-  & *[fill^='#'] {
-    fill: ${(p) =>
-      p.$appearance == 'primary' ? p.theme.color['Special/Static White'] : p.theme.color['Primary/Primary 60 Main']};
-  }
-`;
-
 export const FloatingButtonContent = styled.div<{
+  $dimension: FloatingButtonProps['dimension'];
   $appearance: FloatingButtonProps['appearance'];
+  $disabled: boolean;
 }>`
-  ${IconColor}
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: ${(p) => (p.$dimension == 'm' ? 8 : 16)}px;
+  border-radius: 50%;
+  ${(p) => (p.$appearance == 'primary' ? primaryAppearanceMixin : secondaryAppearanceMixin)}
 
   & > svg {
     height: 24px;
@@ -113,7 +103,7 @@ export const Badge = styled(BaseBadge)`
   border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
-export const BadgeDot = styled(BaseBadgeDot)<{ dimension: FloatingButtonProps['dimension'] }>`
+export const BadgeDot = styled(BaseBadgeDot)`
   position: absolute;
   top: ${(p) => (p.dimension == 'm' ? 1 : 3)}px;
   inset-inline-end: ${(p) => (p.dimension == 'm' ? 1 : 3)}px;

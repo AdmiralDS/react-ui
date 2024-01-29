@@ -124,6 +124,21 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
           <EmailOutline />
         </FloatingButton>
       </Container>
+      <div>Компонент в состоянии disabled</div>
+      <Container>
+        <FloatingButton dimension="xl" disabled style={{ insetInline: '0px auto' }}>
+          <EmailOutline />
+        </FloatingButton>
+        <FloatingButton disabled style={{ insetInline: '84px' }}>
+          <EmailOutline />
+        </FloatingButton>
+        <FloatingButton dimension="xl" appearance="secondary" disabled style={{ insetInline: '184px auto' }}>
+          <EmailOutline />
+        </FloatingButton>
+        <FloatingButton appearance="secondary" disabled style={{ insetInline: '268px auto' }}>
+          <EmailOutline />
+        </FloatingButton>
+      </Container>
     </>
   );
 };

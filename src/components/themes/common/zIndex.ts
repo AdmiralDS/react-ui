@@ -7,6 +7,7 @@ export interface ZIndex {
   modal: number;
   dropdown: number;
   drawer: number;
+  floatingButton: number;
 }
 
 const Z_INDEX_BASE_NUMBER = 100;
@@ -19,4 +20,5 @@ export const zIndex = {
   dropdown: Z_INDEX_BASE_NUMBER - 3,
   modal: Z_INDEX_BASE_NUMBER - 4,
   drawer: Z_INDEX_BASE_NUMBER - 4,
+  floatingButton: Z_INDEX_BASE_NUMBER - 5,
 } as ZIndex;

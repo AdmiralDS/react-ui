@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import type { RuleSet } from 'styled-components';
 import { FloatingButton } from '#src/components/FloatingButton';
 import type { FloatingButtonProps } from '#src/components/FloatingButton';
+import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 import { GroupWrapper, MenuWrapper } from './style';
 import { FloatingButtonMenuContext } from '../FloatingButton/FloatingButtonMenuContext';
@@ -63,7 +64,7 @@ export const FloatingButtonMenu = ({
         <MenuWrapper $dimension={dimension}>{children}</MenuWrapper>
       </FloatingButtonMenuContext.Provider>
       <FloatingButton onClick={() => setOpened(!open)} appearance={appearance} dimension={dimension} {...props}>
-        {icon}
+        {open ? <CloseOutline /> : icon}
       </FloatingButton>
     </GroupWrapper>
   );

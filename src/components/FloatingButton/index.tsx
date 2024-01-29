@@ -1,5 +1,7 @@
 import { forwardRef, useContext, useMemo } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
+import type { ITooltipProps } from '#src/components/Tooltip';
+
 import {
   FloatingButtonWrapper,
   FloatingButtonWrapperWithTooltip,
@@ -7,36 +9,36 @@ import {
   Badge,
   BadgeDot,
 } from './style';
-
-import type { ITooltipProps } from '#src/components/Tooltip';
-import { FloatingButtonMenuContext } from '#src/components/FloatingButton/FloatingButtonMenuContext';
+import { FloatingButtonMenuContext } from './FloatingButtonMenuContext';
 
 type Appearance = 'primary' | 'secondary';
 type Dimension = 'm' | 'xl';
 type BadgeProps = {
+  /** Число, которое будет прописано в компоненте Badge */
   count?: number;
+  /** Отображение компонента в виде BadgeDot */
   dot?: boolean;
+  /** Внешний вид компонента Badge. По умолчанию info */
   appearance?: 'info' | 'error' | 'success' | 'warning';
 };
 
-export * from './FloatingButtonMenu';
-
 export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Внешний вид кнопки */
+  /** Внешний вид компонента */
   appearance?: Appearance;
-  /** Размер кнопки */
+  /** Размер компонента */
   dimension?: Dimension;
-  /** */
+  /** Использование компонента вместе с Badge, где параметр badge - это объект с настройками для отображения бейджа */
   badge?: BadgeProps;
   /** Мобильная версия компонента */
   mobile?: boolean;
-  /** Отключение кнопки */
+  /** Отключение компонента */
   disabled?: boolean;
-  /** */
+  /** Текст тултипа. Если параметр tooltip не задан, то тултип не отображается */
   tooltip?: string;
-  /** */
+  /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
+export * from './FloatingButtonMenu';
 
 export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>(
   (
@@ -44,7 +46,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       type = 'button',
       appearance: propAppearance = 'primary',
       dimension: propDimension = 'm',
-      badge,
+      badge = {},
       mobile = false,
       disabled: propDisabled = false,
       tooltip,
@@ -63,12 +65,14 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     const dimension = useMemo(() => contextDimension ?? propDimension, [contextDimension, propDimension]);
     const disabled = useMemo(() => contextDisabled ?? propDisabled, [contextDisabled, propDisabled]);
 
-    const displayBadge = badge && badge.count && !badge.dot;
-    const displayDot = badge && badge.dot;
+    const displayBadge = badge.count && !badge.dot && !disabled;
+    const displayDot = badge.dot && !disabled;
 
     const renderContent = () => (
       <>
-        <FloatingButtonContent $appearance={appearance}>{children}</FloatingButtonContent>
+        <FloatingButtonContent $dimension={dimension} $appearance={appearance} $disabled={disabled}>
+          {children}
+        </FloatingButtonContent>
         {displayBadge && (
           <Badge dimension={dimension == 'xl' ? 'm' : 's'} appearance={badge.appearance ?? 'info'}>
             {badge.count}
@@ -80,12 +84,11 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
 
     return tooltip ? (
       <FloatingButtonWrapperWithTooltip
-        $dimension={dimension}
-        $appearance={appearance}
-        $mobile={mobile}
-        disabled={disabled}
         ref={ref}
         type={type}
+        disabled={disabled}
+        $dimension={dimension}
+        $mobile={mobile}
         renderContent={() => tooltip}
         tooltipPosition={tooltipPosition}
         {...props}
@@ -94,12 +97,11 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
       </FloatingButtonWrapperWithTooltip>
     ) : (
       <FloatingButtonWrapper
-        $dimension={dimension}
-        $appearance={appearance}
-        $mobile={mobile}
-        disabled={disabled}
         ref={ref}
         type={type}
+        disabled={disabled}
+        $dimension={dimension}
+        $mobile={mobile}
         {...props}
       >
         {renderContent()}
