@@ -57,7 +57,9 @@ export interface BadgeDotProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const BadgeDot = forwardRef<HTMLDivElement, BadgeDotProps>(
-  ({ dimension = 'm', appearance = 'neutral' }: BadgeDotProps, ref) => {
-    return <Dot ref={ref} $dimension={dimension} $appearance={appearance} data-dot />;
+  ({ dimension = 'm', appearance = 'neutral', ...props }: BadgeDotProps, ref) => {
+    return <Dot ref={ref} $dimension={dimension} $appearance={appearance} {...props} />;
   },
 );
+
+BadgeDot.displayName = 'BadgeDot';
