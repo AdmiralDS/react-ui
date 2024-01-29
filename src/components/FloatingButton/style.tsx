@@ -121,15 +121,21 @@ export const GroupWrapper = styled.div<{
   box-sizing: border-box;
   width: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
   height: auto;
+  z-index: ${(p) => p.theme.zIndex['floatingButton']};
 
-  &[data-open='true'] {
-    & > div {
-      margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;
-      opacity: 1;
-      transition:
-        margin-bottom 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms,
-        opacity 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms;
-    }
+  & > div[data-visible='false'] {
+    margin-bottom: ${(p) => (p.$dimension == 'm' ? -20 : -28)}px;
+    opacity: 0;
+    transition:
+      margin-bottom 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms,
+      opacity 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms;
+  }
+  & > div[data-visible='true'] {
+    margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;
+    opacity: 1;
+    transition:
+      margin-bottom 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms,
+      opacity 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms;
   }
 
   & button {
@@ -140,17 +146,11 @@ export const GroupWrapper = styled.div<{
 
   ${(p) => p.$dropContainerCssMixin || ''}
 `;
-
 export const MenuWrapper = styled.div<{ $dimension: FloatingButtonProps['dimension'] }>`
   position: relative;
   display: block;
   box-sizing: border-box;
   z-index: -1;
-  margin-bottom: ${(p) => (p.$dimension == 'm' ? -20 : -28)}px;
-  opacity: 0;
-  transition:
-    margin-bottom 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms,
-    opacity 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms;
 
   & > button {
     margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;

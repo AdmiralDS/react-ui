@@ -7,6 +7,7 @@ import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/
 
 import { GroupWrapper, MenuWrapper } from './style';
 import { FloatingButtonMenuContext } from '../FloatingButton/FloatingButtonMenuContext';
+import { useMountTransition } from './useMountTransition';
 
 type Dimension = 'm' | 'xl';
 
@@ -47,22 +48,27 @@ export const FloatingButtonMenu = ({
   ...props
 }: FloatingButtonMenuProps) => {
   const [open, setOpened] = useState(false);
+  const hasTransitionedIn = useMountTransition(open, 200);
+
   const contextValue = useMemo(
     () => ({ dimension, disabled, appearance: 'secondary' as FloatingButtonProps['appearance'] }),
     [dimension, disabled],
   );
   return (
     <GroupWrapper
-      data-open={open}
       $dimension={dimension}
       $mobile={mobile}
       $dropContainerCssMixin={containerCssMixin}
       className={containerClassName}
       style={containerStyle}
     >
-      <FloatingButtonMenuContext.Provider value={contextValue}>
-        <MenuWrapper $dimension={dimension}>{children}</MenuWrapper>
-      </FloatingButtonMenuContext.Provider>
+      {(open || hasTransitionedIn) && (
+        <FloatingButtonMenuContext.Provider value={contextValue}>
+          <MenuWrapper $dimension={dimension} data-visible={open && hasTransitionedIn}>
+            {children}
+          </MenuWrapper>
+        </FloatingButtonMenuContext.Provider>
+      )}
       <FloatingButton onClick={() => setOpened(!open)} appearance={appearance} dimension={dimension} {...props}>
         {open ? <CloseOutline /> : icon}
       </FloatingButton>
