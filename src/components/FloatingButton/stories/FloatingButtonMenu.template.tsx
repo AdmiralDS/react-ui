@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { FloatingButton, FloatingButtonMenu } from '@admiral-ds/react-ui';
 import type { FloatingButtonMenuProps } from '@admiral-ds/react-ui';
 
@@ -8,7 +7,12 @@ import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/P
 
 export const FloatingButtonMenuTemplate = (props: FloatingButtonMenuProps) => {
   return (
-    <FloatingButtonMenu icon={<EmailOutline />} dimension="xl" {...props}>
+    <FloatingButtonMenu
+      icon={<EmailOutline />}
+      dimension="xl"
+      onOpenChange={(isOpen) => console.log(isOpen ? 'open' : 'close')}
+      {...props}
+    >
       <FloatingButton>
         <DeleteOutline />
       </FloatingButton>

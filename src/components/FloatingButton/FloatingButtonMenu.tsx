@@ -1,12 +1,12 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import type { RuleSet } from 'styled-components';
 import { FloatingButton } from '#src/components/FloatingButton';
 import type { FloatingButtonProps } from '#src/components/FloatingButton';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
-import { GroupWrapper, MenuWrapper } from './style';
-import { FloatingButtonMenuContext } from '../FloatingButton/FloatingButtonMenuContext';
+import { GroupWrapper, MenuWrapper, TRANSITION_DURATION } from './style';
+import { FloatingButtonMenuContext } from './FloatingButtonMenuContext';
 import { useMountTransition } from './useMountTransition';
 
 type Dimension = 'm' | 'xl';
@@ -34,7 +34,7 @@ export interface FloatingButtonMenuProps extends FloatingButtonProps {
 
 export const FloatingButtonMenu = ({
   icon,
-  isOpen,
+  isOpen: propIsOpen,
   onOpenChange,
   appearance = 'primary',
   dimension = 'm',
@@ -47,30 +47,64 @@ export const FloatingButtonMenu = ({
   children,
   ...props
 }: FloatingButtonMenuProps) => {
-  const [open, setOpened] = useState(false);
-  const hasTransitionedIn = useMountTransition(open, 200);
+  const [open, setOpen] = useState(false);
+  const isOpen = propIsOpen ?? open;
+
+  const hasTransitionedIn = useMountTransition(isOpen, TRANSITION_DURATION);
+
+  const floatButtonGroupRef = useRef<HTMLDivElement>(null);
+  const floatButtonRef = useRef<HTMLButtonElement>(null);
 
   const contextValue = useMemo(
     () => ({ dimension, disabled, appearance: 'secondary' as FloatingButtonProps['appearance'] }),
     [dimension, disabled],
   );
+
+  const handleOpenChange = () => {
+    setOpen((prevState) => {
+      onOpenChange?.(!prevState);
+      return !prevState;
+    });
+  };
+
+  const onClick = (e: MouseEvent) => {
+    // клик по основной кнопке приводит к изменению open на противоположное
+    // клик вне компонента приводит к закрытию меню
+    if (floatButtonGroupRef.current?.contains(e.target as Node)) {
+      if (floatButtonRef.current?.contains(e.target as Node)) {
+        handleOpenChange();
+      }
+      return;
+    }
+    setOpen(false);
+    onOpenChange?.(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', onClick);
+    return () => {
+      document.removeEventListener('click', onClick);
+    };
+  }, []);
+
   return (
     <GroupWrapper
+      ref={floatButtonGroupRef}
       $dimension={dimension}
       $mobile={mobile}
       $dropContainerCssMixin={containerCssMixin}
       className={containerClassName}
       style={containerStyle}
     >
-      {(open || hasTransitionedIn) && (
+      {(isOpen || hasTransitionedIn) && (
         <FloatingButtonMenuContext.Provider value={contextValue}>
-          <MenuWrapper $dimension={dimension} data-visible={open && hasTransitionedIn}>
+          <MenuWrapper $dimension={dimension} data-visible={isOpen && hasTransitionedIn}>
             {children}
           </MenuWrapper>
         </FloatingButtonMenuContext.Provider>
       )}
-      <FloatingButton onClick={() => setOpened(!open)} appearance={appearance} dimension={dimension} {...props}>
-        {open ? <CloseOutline /> : icon}
+      <FloatingButton ref={floatButtonRef} appearance={appearance} dimension={dimension} {...props}>
+        {isOpen ? <CloseOutline /> : icon}
       </FloatingButton>
     </GroupWrapper>
   );

@@ -110,6 +110,17 @@ export const BadgeDot = styled(BaseBadgeDot)`
   border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
+export const TRANSITION_DURATION = 200;
+const OPEN_TIMING_FUNC = 'cubic-bezier(0, 0, 0.2, 1)';
+const CLOSE_TIMING_FUNC = 'cubic-bezier(0.4, 0, 1, 1)';
+
+const openTransitionMixin = `
+  ${TRANSITION_DURATION}ms ${OPEN_TIMING_FUNC} 0ms
+`;
+const closeTransitionMixin = `
+  ${TRANSITION_DURATION}ms ${CLOSE_TIMING_FUNC} 0ms
+`;
+
 export const GroupWrapper = styled.div<{
   $dimension: FloatingButtonProps['dimension'];
   $mobile: boolean;
@@ -127,15 +138,15 @@ export const GroupWrapper = styled.div<{
     margin-bottom: ${(p) => (p.$dimension == 'm' ? -20 : -28)}px;
     opacity: 0;
     transition:
-      margin-bottom 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms,
-      opacity 0.2s cubic-bezier(0, 0, 0.2, 1) 0ms;
+      margin-bottom ${closeTransitionMixin},
+      opacity ${closeTransitionMixin};
   }
   & > div[data-visible='true'] {
     margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;
     opacity: 1;
     transition:
-      margin-bottom 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms,
-      opacity 0.2s cubic-bezier(0.4, 0, 1, 1) 0ms;
+      margin-bottom ${openTransitionMixin},
+      opacity ${openTransitionMixin};
   }
 
   & button {

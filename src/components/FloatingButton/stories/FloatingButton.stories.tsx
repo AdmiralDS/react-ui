@@ -8,6 +8,7 @@ import { FloatingButtonTooltipTemplate } from './FloatingButtonTooltip.template'
 import { FloatingButtonPositionTemplate } from './FloatingButtonPosition.template';
 import { FloatingButtonMobileTemplate } from './FloatingButtonMobile.template';
 import { FloatingButtonMenuTemplate } from './FloatingButtonMenu.template';
+import { FloatingButtonMenuControlledTemplate } from './FloatingButtonMenuControlled.template';
 
 // Imports of text sources
 import FloatingButtonPlaygroundRaw from './FloatingButtonPlayground.template?raw';
@@ -16,6 +17,7 @@ import FloatingButtonTooltipRaw from './FloatingButtonTooltip.template?raw';
 import FloatingButtonPositionRaw from './FloatingButtonPosition.template?raw';
 import FloatingButtonMobileRaw from './FloatingButtonMobile.template?raw';
 import FloatingButtonMenuRaw from './FloatingButtonMenu.template?raw';
+import FloatingButtonMenuControlledRaw from './FloatingButtonMenuControlled.template?raw';
 
 export default {
   title: 'Admiral-2.1/FloatingButton',
@@ -196,6 +198,30 @@ export const FloatingButtonMenuExample = {
   },
 
   name: 'FloatingButtonMenu',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Menu controlled">
+const FloatingButtonMenuControlledStory: StoryFn<typeof FloatingButton> = (props) => (
+  <FloatingButtonMenuControlledTemplate {...props} />
+);
+
+export const FloatingButtonMenuControlledExample = {
+  render: FloatingButtonMenuControlledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FloatingButtonMenuControlledRaw,
+      },
+      description: {
+        story: ``,
+      },
+    },
+  },
+
+  name: 'FloatingButtonMenu. Controlled mode',
 };
 
 //</editor-fold>
