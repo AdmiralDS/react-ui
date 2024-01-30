@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { MainPrimaryColorName, T } from '@admiral-ds/react-ui';
-import type { TProps } from '@admiral-ds/react-ui';
+import type { TOwnProps } from '@admiral-ds/react-ui';
 
 const BlueText = styled(T)`
   color: ${(p) => p.theme.color[MainPrimaryColorName]};
@@ -15,7 +15,7 @@ const OrangeColor = css`
   color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
 `;
 
-export const TTextStatusTemplate = ({ ...props }: TProps) => {
+export const TTextStatusTemplate = ({ ...props }: TOwnProps) => {
   return (
     <>
       <BlueText font={'Body/Body 1 Short'} forwardedAs="a" href={'https://'}>

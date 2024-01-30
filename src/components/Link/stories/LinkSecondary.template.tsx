@@ -12,14 +12,19 @@ export const LinkSecondaryTemplate = () => {
       <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
-      <Link appearance="secondary" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link appearance="secondary" href="" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
       <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
-      <Link appearance="secondary" dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link
+        appearance="secondary"
+        dimension="s"
+        href=""
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
+      >
         Link
       </Link>
     </>

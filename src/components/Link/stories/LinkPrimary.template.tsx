@@ -12,14 +12,19 @@ export const LinkPrimaryTemplate = () => {
       <T font="Body/Body 1 Long" as="div">
         Dimension - M
       </T>
-      <Link appearance="primary" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link appearance="primary" href="" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}>
         Link
       </Link>
       <Separator />
       <T font="Body/Body 1 Long" as="div">
         Dimension - S
       </T>
-      <Link appearance="primary" dimension="s" href="" onClick={(e: any) => e.preventDefault()}>
+      <Link
+        appearance="primary"
+        dimension="s"
+        href=""
+        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.preventDefault()}
+      >
         Link
       </Link>
     </>

@@ -16,9 +16,13 @@ export interface LinkProps {
 
 export type LinkPolymorphicProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, LinkProps>;
 
-type LinkComp = <C extends React.ElementType = 'a'>(props: LinkPolymorphicProps<C>) => React.ReactNode | null;
+export type LinkComponentType = (<C extends React.ElementType = 'a'>(
+  props: LinkPolymorphicProps<C>,
+) => ReturnType<typeof LinkComponent>) & {
+  displayName?: string | undefined;
+};
 
-export const Link: LinkComp & { displayName?: string } = React.forwardRef(
+export const Link: LinkComponentType = React.forwardRef(
   <C extends React.ElementType = 'a'>(
     { disabled = false, appearance = 'primary', dimension = 'm', ...props }: LinkPolymorphicProps<C>,
     ref: PolymorphicRef<C>,
@@ -39,4 +43,4 @@ export const Link: LinkComp & { displayName?: string } = React.forwardRef(
 Link.displayName = 'Link';
 
 export { LinkComponentCssMixin } from './LinkComponent';
-export type { LinkComponent } from './LinkComponent';
+export type { LinkComponentProps } from './LinkComponent';

@@ -163,7 +163,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     const decimal = userDecimal.slice(0, 1);
 
     useEffect(() => {
-      if (innerValue) {
+      if (innerValue || innerValue === 0) {
         let minusDsb = false;
         let plusDsb = false;
         if (typeof minValue === 'number') {
