@@ -46,6 +46,22 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
   }
 `;
 
+const dimensionMixin = css<{ $dimension: FloatingButtonProps['dimension'] }>`
+  width: ${(p) => (p.$dimension == 'xl' ? 56 : 40)}px;
+  height: ${(p) => (p.$dimension == 'xl' ? 56 : 40)}px;
+
+  .floating_button_menu[data-dimension='xl'] & {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+  }
+  .floating_button_menu[data-dimension='m'] & {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+  }
+`;
+
 export const FloatingButtonWrapper = styled.button<{
   $dimension: FloatingButtonProps['dimension'];
   $mobile: boolean;
@@ -62,8 +78,7 @@ export const FloatingButtonWrapper = styled.button<{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
-  width: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
+  ${dimensionMixin}
   pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   ${(p) => p.theme.shadow['Shadow 08']}
@@ -89,6 +104,9 @@ export const FloatingButtonContent = styled.div<{
   padding: ${(p) => (p.$dimension == 'm' ? 8 : 16)}px;
   border-radius: 50%;
   ${(p) => (p.$appearance == 'primary' ? primaryAppearanceMixin : secondaryAppearanceMixin)}
+  .floating_button_menu & {
+    ${secondaryAppearanceMixin}
+  }
 
   & > svg {
     height: 24px;
@@ -157,16 +175,13 @@ export const GroupWrapper = styled.div<{
 
   ${(p) => p.$dropContainerCssMixin || ''}
 `;
-export const MenuWrapper = styled.div<{ $dimension: FloatingButtonProps['dimension'] }>`
+export const MenuWrapper = styled.div`
   position: relative;
   display: block;
   box-sizing: border-box;
   z-index: -1;
 
-  & > button {
-    margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;
-  }
-  & > button:last-child {
+  && > button:last-child {
     margin: 0px;
   }
 `;

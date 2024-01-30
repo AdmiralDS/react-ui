@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import type { RuleSet } from 'styled-components';
 import { FloatingButton } from '#src/components/FloatingButton';
@@ -6,7 +6,6 @@ import type { FloatingButtonProps } from '#src/components/FloatingButton';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 import { GroupWrapper, MenuWrapper, TRANSITION_DURATION } from './style';
-import { FloatingButtonMenuContext } from './FloatingButtonMenuContext';
 import { useMountTransition } from './useMountTransition';
 
 type Dimension = 'm' | 'xl';
@@ -55,11 +54,6 @@ export const FloatingButtonMenu = ({
   const floatButtonGroupRef = useRef<HTMLDivElement>(null);
   const floatButtonRef = useRef<HTMLButtonElement>(null);
 
-  const contextValue = useMemo(
-    () => ({ dimension, disabled, appearance: 'secondary' as FloatingButtonProps['appearance'] }),
-    [dimension, disabled],
-  );
-
   const handleOpenChange = () => {
     setOpen((prevState) => {
       onOpenChange?.(!prevState);
@@ -91,17 +85,21 @@ export const FloatingButtonMenu = ({
     <GroupWrapper
       ref={floatButtonGroupRef}
       $dimension={dimension}
+      data-group
+      data-dimension={dimension}
       $mobile={mobile}
       $dropContainerCssMixin={containerCssMixin}
       className={containerClassName}
       style={containerStyle}
     >
-      {(isOpen || hasTransitionedIn) && (
-        <FloatingButtonMenuContext.Provider value={contextValue}>
-          <MenuWrapper $dimension={dimension} data-visible={isOpen && hasTransitionedIn}>
-            {children}
-          </MenuWrapper>
-        </FloatingButtonMenuContext.Provider>
+      {(isOpen || hasTransitionedIn) && !disabled && (
+        <MenuWrapper
+          className="floating_button_menu"
+          data-dimension={dimension}
+          data-visible={isOpen && hasTransitionedIn}
+        >
+          {children}
+        </MenuWrapper>
       )}
       <FloatingButton ref={floatButtonRef} appearance={appearance} dimension={dimension} {...props}>
         {isOpen ? <CloseOutline /> : icon}

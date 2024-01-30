@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useMemo } from 'react';
+import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import type { ITooltipProps } from '#src/components/Tooltip';
 
@@ -9,7 +9,6 @@ import {
   Badge,
   BadgeDot,
 } from './style';
-import { FloatingButtonMenuContext } from './FloatingButtonMenuContext';
 
 type Appearance = 'primary' | 'secondary';
 type Dimension = 'm' | 'xl';
@@ -44,11 +43,11 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
   (
     {
       type = 'button',
-      appearance: propAppearance = 'primary',
-      dimension: propDimension = 'm',
+      appearance = 'primary',
+      dimension = 'm',
       badge = {},
       mobile = false,
-      disabled: propDisabled = false,
+      disabled = false,
       tooltip,
       tooltipPosition = 'left',
       children,
@@ -56,15 +55,6 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     },
     ref,
   ) => {
-    const {
-      dimension: contextDimension,
-      appearance: contextAppearance,
-      disabled: contextDisabled,
-    } = useContext(FloatingButtonMenuContext);
-    const appearance = useMemo(() => contextAppearance ?? propAppearance, [contextAppearance, propAppearance]);
-    const dimension = useMemo(() => contextDimension ?? propDimension, [contextDimension, propDimension]);
-    const disabled = useMemo(() => contextDisabled ?? propDisabled, [contextDisabled, propDisabled]);
-
     const displayBadge = badge.count && !badge.dot && !disabled;
     const displayDot = badge.dot && !disabled;
 
