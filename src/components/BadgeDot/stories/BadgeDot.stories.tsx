@@ -10,10 +10,6 @@ import { BadgeDotVariantsTemplate } from './BadgeDotVariants.template';
 import BadgeDotPlaygroundRaw from './BadgeDotPlayground.template?raw';
 import BadgeDotVariantsRaw from './BadgeDotVariants.template?raw';
 
-const Separator = styled.div`
-  height: 20px;
-  width: 8px;
-`;
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
@@ -22,11 +18,8 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Badge — компонент, который обычно дополняет другие компоненты и показывает количественные значения. Например, в
-    компоненте Tabs может показывать количество элементов в закладке. Или показывать количество оповещений в панели
-    нотификации.
-    <Separator />
-    Компонент существует в двух размерах — S 16 и M 20 px по высоте.
+    BadgeDot — вспомогательный компонент применяемый в сочетании с другими компонентами для обозначения статуса. Имеет
+    шесть разных цветов и четыре размера.
   </Desc>
 );
 
@@ -44,11 +37,11 @@ export default {
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18581',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=37-18426&mode=design&t=hEGLAaOLUryZYP7B-4',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18684',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=37-18581&mode=design&t=hEGLAaOLUryZYP7B-4',
       },
     ],
   },
@@ -60,18 +53,6 @@ export default {
     appearance: {
       options: ['neutral', 'info', 'error', 'success', 'warning', 'attention'],
       control: { type: 'select' },
-    },
-    theme: {
-      control: false,
-    },
-    as: {
-      control: false,
-    },
-    forwardedAs: {
-      control: false,
-    },
-    ref: {
-      control: false,
     },
   },
 } as Meta<typeof BadgeDot>;

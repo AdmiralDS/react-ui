@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 
-const getBackground = css<{ $appearance: Appearance }>`
+const getBackground = css<{ $appearance: BadgeDotAppearance }>`
   ${({ theme, $appearance }) => {
     switch ($appearance) {
       case 'info':
@@ -22,7 +22,7 @@ const getBackground = css<{ $appearance: Appearance }>`
   }}
 `;
 
-const getSize = css<{ $dimension: Dimension }>`
+const getSize = css<{ $dimension: BadgeDotDimension }>`
   ${({ $dimension }) => {
     switch ($dimension) {
       case 'l':
@@ -38,7 +38,7 @@ const getSize = css<{ $dimension: Dimension }>`
   }}
 `;
 
-const Dot = styled.div<{ $dimension: Dimension; $appearance: Appearance }>`
+const Dot = styled.div<{ $dimension: BadgeDotDimension; $appearance: BadgeDotAppearance }>`
   position: relative;
   box-sizing: border-box;
   width: ${getSize}px;
@@ -48,12 +48,14 @@ const Dot = styled.div<{ $dimension: Dimension; $appearance: Appearance }>`
   border-radius: 50%;
 `;
 
-type Dimension = 'l' | 'm' | 's' | 'xs';
-type Appearance = 'neutral' | 'info' | 'error' | 'success' | 'warning' | 'attention';
+export type BadgeDotDimension = 'l' | 'm' | 's' | 'xs';
+export type BadgeDotAppearance = 'neutral' | 'info' | 'error' | 'success' | 'warning' | 'attention';
 
 export interface BadgeDotProps extends HTMLAttributes<HTMLDivElement> {
-  dimension?: Dimension;
-  appearance?: Appearance;
+  /** Размер компонента */
+  dimension?: BadgeDotDimension;
+  /** Внешний вид компонента */
+  appearance?: BadgeDotAppearance;
 }
 
 export const BadgeDot = forwardRef<HTMLDivElement, BadgeDotProps>(

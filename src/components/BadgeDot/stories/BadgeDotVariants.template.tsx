@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BadgeDot, typography } from '@admiral-ds/react-ui';
-import type { BadgeDotProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const Layout = styled.div`
@@ -12,15 +11,12 @@ const Layout = styled.div`
   }
 `;
 
-const String = styled.div<{ $appearance?: BadgeDotProps['appearance'] }>`
+const String = styled.div`
   display: flex;
   align-items: center;
-  ${({ $appearance, theme }) =>
-    $appearance && $appearance.indexOf('white') > -1 && `background: ${theme.color['Neutral/Neutral 05']};`}
   & > * {
     margin-right: 16px;
   }
-
   & > *:last-child {
     margin-right: 40px;
   }
