@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
-import type { RuleSet } from 'styled-components';
+import type { css } from 'styled-components';
+
 import { FloatingButton } from '#src/components/FloatingButton';
 import type { FloatingButtonProps } from '#src/components/FloatingButton';
 import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -12,7 +13,7 @@ type Dimension = 'm' | 'xl';
 
 export interface FloatingButtonMenuProps extends FloatingButtonProps {
   /** Иконка для размещения в основной кнопке */
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
   /** Состояние видимости меню */
   isOpen?: boolean;
   /** Обработчик события на изменение видимости меню */
@@ -24,7 +25,7 @@ export interface FloatingButtonMenuProps extends FloatingButtonProps {
   /** Отключение компонента */
   disabled?: boolean;
   /** Позволяет добавлять миксин для контейнера компонента, созданный с помощью styled css  */
-  containerCssMixin?: RuleSet<object>;
+  containerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер компонента  */
   containerClassName?: string;
   /** Позволяет добавлять стили на контейнер компонента  */
@@ -63,15 +64,17 @@ export const FloatingButtonMenu = ({
 
   const onClick = (e: MouseEvent) => {
     // клик по основной кнопке приводит к изменению open на противоположное
-    // клик вне компонента приводит к закрытию меню
     if (floatButtonGroupRef.current?.contains(e.target as Node)) {
       if (floatButtonRef.current?.contains(e.target as Node)) {
         handleOpenChange();
       }
       return;
     }
-    setOpen(false);
-    onOpenChange?.(false);
+    // клик вне компонента приводит к закрытию меню, если меню было открыто
+    if (floatButtonGroupRef.current?.querySelector('.floating_button_menu') != null) {
+      setOpen(false);
+      onOpenChange?.(false);
+    }
   };
 
   useEffect(() => {
@@ -85,8 +88,6 @@ export const FloatingButtonMenu = ({
     <GroupWrapper
       ref={floatButtonGroupRef}
       $dimension={dimension}
-      data-group
-      data-dimension={dimension}
       $mobile={mobile}
       $dropContainerCssMixin={containerCssMixin}
       className={containerClassName}

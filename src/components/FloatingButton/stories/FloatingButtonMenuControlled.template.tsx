@@ -17,11 +17,11 @@ export const FloatingButtonMenuControlledTemplate = (props: FloatingButtonMenuPr
   return (
     <>
       <FloatingButtonMenu
+        {...props}
         icon={<EmailOutline />}
         dimension="xl"
         isOpen={open}
         onOpenChange={(isOpen) => console.log(isOpen ? 'open' : 'close')}
-        {...props}
       >
         <FloatingButton>
           <DeleteOutline />

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
-import { FloatingButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { FloatingButton, FloatingButtonMenu } from '@admiral-ds/react-ui';
 
 import { FloatingButtonPlaygroundTemplate } from './FloatingButtonPlayground.template';
 import { FloatingButtonStyleTemplate } from './FloatingButtonStyle.template';
@@ -46,16 +46,6 @@ export default {
       control: { type: 'radio' },
     },
     disabled: {
-      control: { type: 'boolean' },
-    },
-    loading: {
-      control: { type: 'boolean' },
-    },
-    themeBorderKind: {
-      options: ALL_BORDER_RADIUS_VALUES,
-      control: { type: 'radio' },
-    },
-    skeleton: {
       control: { type: 'boolean' },
     },
   },
@@ -181,7 +171,9 @@ export const FloatingButtonMobileExample = {
 //</editor-fold>
 
 //<editor-fold desc="Menu">
-const FloatingButtonMenuStory: StoryFn<typeof FloatingButton> = (props) => <FloatingButtonMenuTemplate {...props} />;
+const FloatingButtonMenuStory: StoryFn<typeof FloatingButtonMenu> = (props) => (
+  <FloatingButtonMenuTemplate {...props} />
+);
 
 export const FloatingButtonMenuExample = {
   render: FloatingButtonMenuStory,
@@ -203,7 +195,7 @@ export const FloatingButtonMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Menu controlled">
-const FloatingButtonMenuControlledStory: StoryFn<typeof FloatingButton> = (props) => (
+const FloatingButtonMenuControlledStory: StoryFn<typeof FloatingButtonMenu> = (props) => (
   <FloatingButtonMenuControlledTemplate {...props} />
 );
 

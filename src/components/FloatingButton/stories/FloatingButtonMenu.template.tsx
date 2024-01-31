@@ -8,10 +8,10 @@ import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/P
 export const FloatingButtonMenuTemplate = (props: FloatingButtonMenuProps) => {
   return (
     <FloatingButtonMenu
+      {...props}
       icon={<EmailOutline />}
       dimension="xl"
       onOpenChange={(isOpen) => console.log(isOpen ? 'open' : 'close')}
-      {...props}
     >
       <FloatingButton>
         <DeleteOutline />

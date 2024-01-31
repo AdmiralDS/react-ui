@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { RuleSet } from 'styled-components';
-import type { FloatingButtonProps } from '#src/components/FloatingButton';
+import type { FloatingButtonProps, FloatingButtonMenuProps } from '#src/components/FloatingButton';
 import { Badge as BaseBadge } from '#src/components/Badge';
 import { BadgeDot as BaseBadgeDot } from '#src/components/BadgeDot';
 import { TooltipHoc } from '#src/components/TooltipHOC';
@@ -82,7 +81,6 @@ export const FloatingButtonWrapper = styled.button<{
   pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   ${(p) => p.theme.shadow['Shadow 08']}
-  z-index: ${(p) => p.theme.zIndex['floatingButton']};
   ${focusVisibleStyle}
 `;
 
@@ -94,7 +92,6 @@ export const FloatingButtonContent = styled.div<{
   $disabled: boolean;
 }>`
   display: flex;
-  flex: 0 0 auto;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
@@ -109,6 +106,7 @@ export const FloatingButtonContent = styled.div<{
   }
 
   & > svg {
+    flex: 0 0 auto;
     height: 24px;
     width: 24px;
   }
@@ -140,9 +138,9 @@ const closeTransitionMixin = `
 `;
 
 export const GroupWrapper = styled.div<{
-  $dimension: FloatingButtonProps['dimension'];
+  $dimension: FloatingButtonMenuProps['dimension'];
   $mobile: boolean;
-  $dropContainerCssMixin?: RuleSet<object>;
+  $dropContainerCssMixin?: FloatingButtonMenuProps['containerCssMixin'];
 }>`
   position: fixed;
   inset-inline-end: ${(p) => (p.$mobile ? 16 : 28)}px;
@@ -150,7 +148,6 @@ export const GroupWrapper = styled.div<{
   box-sizing: border-box;
   width: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
   height: auto;
-  z-index: ${(p) => p.theme.zIndex['floatingButton']};
 
   & > div[data-visible='false'] {
     margin-bottom: ${(p) => (p.$dimension == 'm' ? -20 : -28)}px;
@@ -179,7 +176,6 @@ export const MenuWrapper = styled.div`
   position: relative;
   display: block;
   box-sizing: border-box;
-  z-index: -1;
 
   && > button:last-child {
     margin: 0px;

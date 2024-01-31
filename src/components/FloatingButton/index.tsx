@@ -55,7 +55,7 @@ export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>
     },
     ref,
   ) => {
-    const displayBadge = badge.count && !badge.dot && !disabled;
+    const displayBadge = typeof badge.count !== 'undefined' && !badge.dot && !disabled;
     const displayDot = badge.dot && !disabled;
 
     const renderContent = () => (
