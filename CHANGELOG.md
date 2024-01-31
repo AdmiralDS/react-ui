@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.10.0](https://github.com/AdmiralDS/react-ui/compare/v7.9.2...v7.10.0) (2024-01-31)
+
+
+### Features
+
+* **BadgeDot:** добавлен компонент BadgeDot ([9458ea4](https://github.com/AdmiralDS/react-ui/commit/9458ea46ce957397e1c30c0563ac5a6d4ae4357b))
+* **FloatingButton:** добавлены компоненты FloatingButton и FloatingButtonMenu ([89163a5](https://github.com/AdmiralDS/react-ui/commit/89163a5c7522ea7983a5937f3e3a23e194f40cad))
+
+
+### Bug Fixes
+
+* circular dependency ([93fbde6](https://github.com/AdmiralDS/react-ui/commit/93fbde638c5bd6a372a3a04e96df19e59920ef97))
+* **NumberInput:** Значение 0 не должно приводить к блокировки кнопок +- ([423778b](https://github.com/AdmiralDS/react-ui/commit/423778bb1cb50e8a1d47cd40abdd8c62c4854d46))
+
 ### [7.9.2](https://github.com/AdmiralDS/react-ui/compare/v7.9.1...v7.9.2) (2024-01-29)
 
 ### [7.9.1](https://github.com/AdmiralDS/react-ui/compare/v7.9.0...v7.9.1) (2024-01-25)
