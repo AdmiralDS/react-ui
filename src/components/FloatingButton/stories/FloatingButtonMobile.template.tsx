@@ -19,7 +19,7 @@ const MobileWrapper = styled.div`
 export const FloatingButtonMobileTemplate = (props: FloatingButtonProps) => {
   return (
     <MobileWrapper>
-      <FloatingButton mobile {...props}>
+      <FloatingButton {...props} mobile>
         <EmailOutline />
       </FloatingButton>
     </MobileWrapper>

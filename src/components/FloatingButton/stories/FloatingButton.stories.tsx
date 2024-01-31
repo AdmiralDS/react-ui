@@ -1,14 +1,13 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { FloatingButton, FloatingButtonMenu } from '@admiral-ds/react-ui';
+import { FloatingButton } from '@admiral-ds/react-ui';
 
 import { FloatingButtonPlaygroundTemplate } from './FloatingButtonPlayground.template';
 import { FloatingButtonStyleTemplate } from './FloatingButtonStyle.template';
 import { FloatingButtonTooltipTemplate } from './FloatingButtonTooltip.template';
 import { FloatingButtonPositionTemplate } from './FloatingButtonPosition.template';
 import { FloatingButtonMobileTemplate } from './FloatingButtonMobile.template';
-import { FloatingButtonMenuTemplate } from './FloatingButtonMenu.template';
-import { FloatingButtonMenuControlledTemplate } from './FloatingButtonMenuControlled.template';
 
 // Imports of text sources
 import FloatingButtonPlaygroundRaw from './FloatingButtonPlayground.template?raw';
@@ -16,11 +15,22 @@ import FloatingButtonStyleRaw from './FloatingButtonStyle.template?raw';
 import FloatingButtonTooltipRaw from './FloatingButtonTooltip.template?raw';
 import FloatingButtonPositionRaw from './FloatingButtonPosition.template?raw';
 import FloatingButtonMobileRaw from './FloatingButtonMobile.template?raw';
-import FloatingButtonMenuRaw from './FloatingButtonMenu.template?raw';
-import FloatingButtonMenuControlledRaw from './FloatingButtonMenuControlled.template?raw';
+
+const Desc = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+const Description = () => (
+  <Desc>
+    Компонент FloatingButton используется для отображения наиболее частых или важных действий на экране. Не
+    рекомендуется использовать более одной FloatingButton на экране.
+  </Desc>
+);
 
 export default {
-  title: 'Admiral-2.1/FloatingButton',
+  title: 'Admiral-2.1/FloatingButton/FloatingButton',
   decorators: undefined,
   component: FloatingButton,
   parameters: {
@@ -29,14 +39,15 @@ export default {
         code: null,
       },
     },
+    componentSubtitle: <Description />,
     design: [
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=190878-139566&mode=dev',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=191233-164632&mode=design&t=aOVIJbOXBwclj7Gu-4',
       },
       {
         type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=191233-164632&mode=dev',
+        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?type=design&node-id=209967-6837&mode=design&t=aOVIJbOXBwclj7Gu-4',
       },
     ],
   },
@@ -45,8 +56,22 @@ export default {
       options: ['xl', 'm'],
       control: { type: 'radio' },
     },
+    appearance: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
     disabled: {
       control: { type: 'boolean' },
+    },
+    mobile: {
+      control: { type: 'boolean' },
+    },
+    tooltip: {
+      control: { type: 'text' },
+    },
+    tooltipPosition: {
+      options: ['bottom', 'top', 'left', 'right'],
+      control: { type: 'radio' },
     },
   },
 } as Meta<typeof FloatingButton>;
@@ -63,9 +88,6 @@ export const FloatingButtonPlaygroundExample = {
     docs: {
       source: {
         code: FloatingButtonPlaygroundRaw,
-      },
-      description: {
-        story: ``,
       },
     },
   },
@@ -85,9 +107,6 @@ export const FloatingButtonStyleExample = {
     docs: {
       source: {
         code: FloatingButtonStyleRaw,
-      },
-      description: {
-        story: ``,
       },
     },
   },
@@ -111,7 +130,12 @@ export const FloatingButtonTooltipExample = {
         code: FloatingButtonTooltipRaw,
       },
       description: {
-        story: ``,
+        story: `Иконка внутри FloatingButton должна быть однозначной и понятной. 
+        Для пояснения значения иконки можно использовать Tooltip c подсказкой. 
+        Для того чтобы задать текст подсказки используйте параметр tooltip.\n\nПо дефолту Tooltip 
+        появляется слева от кнопки при ховере. Можно настроить появление тултипа справа, снизу, сверху, 
+        в зависимости от расположения кнопки, для этого используйте параметр 
+        tooltipPosition.\n\nВ случае, когда смысл кнопки очевиден, тултип можно не использовать.`,
       },
     },
   },
@@ -135,7 +159,8 @@ export const FloatingButtonPositionExample = {
         code: FloatingButtonPositionRaw,
       },
       description: {
-        story: `По умолчанию кнопка располагается в правом нижнем углу экрана, на расстоянии 28 px от краев экрана. 
+        story: `Кнопка FloatingButton постоянно видна на экране и не скроллится с
+        контентом страницы. По умолчанию кнопка располагается в правом нижнем углу экрана, на расстоянии 28 px от краев экрана. 
         Пользователь может задать свое расположение кнопки, переопределив её позиционирование через стили.`,
       },
     },
@@ -160,60 +185,12 @@ export const FloatingButtonMobileExample = {
         code: FloatingButtonMobileRaw,
       },
       description: {
-        story: `На мобильных устройствах отступ по умолчанию равен 16px от краев экрана.`,
+        story: `На мобильных устройствах отступ по умолчанию равен 16px от краев экрана (вместо стандартных 28px).`,
       },
     },
   },
 
   name: 'FloatingButton. Mobile',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="Menu">
-const FloatingButtonMenuStory: StoryFn<typeof FloatingButtonMenu> = (props) => (
-  <FloatingButtonMenuTemplate {...props} />
-);
-
-export const FloatingButtonMenuExample = {
-  render: FloatingButtonMenuStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: FloatingButtonMenuRaw,
-      },
-      description: {
-        story: ``,
-      },
-    },
-  },
-
-  name: 'FloatingButtonMenu',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="Menu controlled">
-const FloatingButtonMenuControlledStory: StoryFn<typeof FloatingButtonMenu> = (props) => (
-  <FloatingButtonMenuControlledTemplate {...props} />
-);
-
-export const FloatingButtonMenuControlledExample = {
-  render: FloatingButtonMenuControlledStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: FloatingButtonMenuControlledRaw,
-      },
-      description: {
-        story: ``,
-      },
-    },
-  },
-
-  name: 'FloatingButtonMenu. Controlled mode',
 };
 
 //</editor-fold>
