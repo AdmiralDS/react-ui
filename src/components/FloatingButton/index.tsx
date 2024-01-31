@@ -37,7 +37,6 @@ export interface FloatingButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
 }
-export * from './FloatingButtonMenu';
 
 export const FloatingButton = forwardRef<HTMLButtonElement, FloatingButtonProps>(
   (

@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
-import type { FloatingButtonProps, FloatingButtonMenuProps } from '#src/components/FloatingButton';
+import type { FloatingButtonProps } from '../FloatingButton';
 import { Badge as BaseBadge } from '#src/components/Badge';
 import { BadgeDot as BaseBadgeDot } from '#src/components/BadgeDot';
 import { TooltipHoc } from '#src/components/TooltipHOC';
+import type { FloatingButtonMenuProps } from './FloatingButtonMenu';
 
 const focusVisibleStyle = css`
   &:focus-visible {

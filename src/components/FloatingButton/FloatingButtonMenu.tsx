@@ -102,7 +102,7 @@ export const FloatingButtonMenu = ({
           {children}
         </MenuWrapper>
       )}
-      <FloatingButton ref={floatButtonRef} appearance={appearance} dimension={dimension} {...props}>
+      <FloatingButton ref={floatButtonRef} appearance={appearance} dimension={dimension} type={type} {...props}>
         {isOpen ? <CloseOutline /> : icon}
       </FloatingButton>
     </GroupWrapper>
