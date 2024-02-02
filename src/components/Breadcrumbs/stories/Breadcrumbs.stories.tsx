@@ -8,6 +8,7 @@ import { BreadcrumbsSizesTemplate } from './BreadcrumbsSizes.template';
 import { BreadcrumbsMobileTemplate } from './BreadcrumbsMobile.template';
 import { BreadcrumbsLinkTemplate } from './BreadcrumbsLink.template';
 import { BreadcrumbsActiveCrumbTemplate } from './BreadcrumbsActiveCrumb.template';
+import { BreadcrumbsIconsTemplate } from './BreadcrumbsIcons.template';
 
 // Imports of text sources
 import BreadcrumbsPlaygroundRaw from './BreadcrumbsPlayground.template?raw';
@@ -15,6 +16,7 @@ import BreadcrumbsSizesRaw from './BreadcrumbsSizes.template?raw';
 import BreadcrumbsMobileRaw from './BreadcrumbsMobile.template?raw';
 import BreadcrumbsLinkRaw from './BreadcrumbsLink.template?raw';
 import BreadcrumbsActiveCrumbRaw from './BreadcrumbsActiveCrumb.template?raw';
+import BreadcrumbsIconsRaw from './BreadcrumbsIcons.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -191,4 +193,26 @@ export const ActiveCrumbExample = {
   },
 
   name: 'Breadcrumbs. Пример с активной/неактивной последней вкладкой.',
+};
+
+//<editor-fold desc="Crumb with icon">
+const CrumbWithIconStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsIconsTemplate />;
+
+export const CrumbWithIconExample = {
+  render: CrumbWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: BreadcrumbsIconsRaw,
+      },
+      description: {
+        story: `Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает 
+        текущее местоположение. Либо последняя вкладка активна и отображает предыдущий уровень сайта. Управляет 
+        поведением последней вкладки параметр lastBreadcrumbActive.`,
+      },
+    },
+  },
+
+  name: 'Breadcrumbs. Пример вкладок с иконками.',
 };
