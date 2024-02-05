@@ -115,14 +115,14 @@ export const FloatingButtonContent = styled.div<{
 
 const badgeMixin = css`
   position: absolute;
-  outline: ${(p) => p.theme.color['Neutral/Neutral 00']} solid 1px;
-  outline-offset: -1px;
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
 export const Badge = styled(BaseBadge)`
   top: -3px;
   inset-inline-end: -3px;
   ${badgeMixin}
+  padding: ${({ dimension }) => (dimension === 's' ? '0 4px' : '0 5px')};
 `;
 
 export const BadgeDot = styled(BaseBadgeDot)`
