@@ -51,10 +51,11 @@ export const Day: FC<IDayCalendarProps> = ({
     corners['top-right'] = end || (weekEnd && !start);
     corners['bottom-right'] = end || (weekEnd && !start);
   }
-
+  const todayDate = new Date();
+  todayDate.setHours(0, 0, 0, 0);
   return (
     <DayComponent
-      $today={sameDay(day, new Date())}
+      $today={sameDay(day, todayDate)}
       $selected={sameDay(day, selected) || rangeStart || rangeEnd}
       $inSelectingRange={inSelectingRange}
       $isActiveDate={sameDay(day, activeDate)}

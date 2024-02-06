@@ -142,9 +142,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         }
 
         const values = Array.isArray(maybeDate) ? maybeDate : [maybeDate];
-        const toFormatValues = values
-          .map((date) => (date ? new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())) : date))
-          .map((date) => (date ? date.toISOString().substring(0, 10) : ''));
+        const toFormatValues = values.map((date) => (date ? date.toLocaleDateString() : ''));
         const value = formatter(toFormatValues);
         changeInputData(inputRef.current, { value });
 

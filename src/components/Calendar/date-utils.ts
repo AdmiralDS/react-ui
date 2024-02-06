@@ -74,12 +74,11 @@ const isEqual = (dateLeft: Date, dateRight: Date): boolean => {
   return dateLeft.getTime() === dateRight.getTime();
 };
 
-const isSameDay = (dateLeft: Date, dateRight: Date): boolean => {
-  const dateLeftStartOfDay = startOfDay(dateLeft);
-  const dateRightStartOfDay = startOfDay(dateRight);
-
-  return dateLeftStartOfDay.getTime() === dateRightStartOfDay.getTime();
-};
+function isSameDay(d1: Date, d2: Date) {
+  return (
+    d1.getFullYear() === d2.getFullYear() && d1.getUTCDate() === d2.getUTCDate() && d1.getMonth() === d2.getMonth()
+  );
+}
 
 const isSameMonth = (dateLeft: Date, dateRight: Date): boolean => {
   return dateLeft.getFullYear() === dateRight.getFullYear() && dateLeft.getMonth() === dateRight.getMonth();
