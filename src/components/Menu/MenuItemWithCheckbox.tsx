@@ -1,9 +1,10 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 
 export interface ItemWithCheckbox {
   id: string;
@@ -51,9 +52,9 @@ export const checkboxTreeToMap = (
   }, new Map<string, CheckboxNodesMapItem>());
 };
 
-const paddingLeft = css<{ $level?: number; $dimension?: ItemDimension }>`
-  padding-left: ${({ $dimension, $level = 0 }) => {
-    switch ($dimension) {
+const paddingLeft = css<{ $level?: number; dimension?: ItemDimension }>`
+  padding-left: ${({ dimension, $level = 0 }) => {
+    switch (dimension) {
       case 's':
         return 12 + 28 * $level;
       case 'm':
@@ -63,17 +64,8 @@ const paddingLeft = css<{ $level?: number; $dimension?: ItemDimension }>`
     }
   }}px;
 `;
-const CheckboxGroupMenuItem = styled(MenuItem)<{ $level?: number; $dimension?: ItemDimension }>`
+const CheckboxGroupMenuItem = styled(MenuItem)<{ $level?: number }>`
   ${paddingLeft}
-`;
-const OptionContent = styled.div<{ $dimension?: ItemDimension }>`
-  position: relative;
-  padding: 0 0 0 ${(props) => (props.$dimension === 's' ? 28 : 32)}px;
-`;
-const PositionedCheckbox = styled(Checkbox)`
-  position: absolute;
-  top: 2px;
-  left: 2px;
 `;
 
 export interface MenuItemWithCheckboxProps extends MenuItemProps {
@@ -92,20 +84,19 @@ export interface MenuItemWithCheckboxProps extends MenuItemProps {
 export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWithCheckboxProps>(
   ({ checked, indeterminate, checkboxRef, level = 0, children, dimension = 'l', ...props }, ref) => {
     return (
-      <CheckboxGroupMenuItem $dimension={dimension || 'l'} $level={level} ref={ref} {...props}>
-        <OptionContent $dimension={dimension || 'l'}>
-          <PositionedCheckbox
-            dimension={dimension === 's' ? 's' : 'm'}
-            checked={checked}
-            indeterminate={indeterminate}
-            hovered={props.hovered}
-            disabled={props.disabled}
-            readOnly={props.readOnly}
-            ref={checkboxRef}
-            onChange={() => false}
-          />
+      <CheckboxGroupMenuItem dimension={dimension} $level={level} ref={ref} {...props}>
+        <CheckboxField
+          dimension={dimension === 's' ? 's' : 'm'}
+          checked={checked}
+          indeterminate={indeterminate}
+          hovered={props.hovered}
+          disabled={props.disabled}
+          readOnly={props.readOnly}
+          ref={checkboxRef}
+          onChange={() => false}
+        >
           {children}
-        </OptionContent>
+        </CheckboxField>
       </CheckboxGroupMenuItem>
     );
   },
