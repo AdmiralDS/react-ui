@@ -37,7 +37,7 @@ exports[`CheckboxCompositeGroup should render component with disabled state 1`] 
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -589,7 +589,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1196,7 +1196,7 @@ exports[`CheckboxCompositeGroup should render component with label 1`] = `
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1726,7 +1726,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -2311,7 +2311,7 @@ exports[`CheckboxCompositeGroup should render component with small dimension 1`]
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -2841,7 +2841,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -3426,7 +3426,7 @@ exports[`CheckboxCompositeGroup should render components 1`] = `
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -3956,7 +3956,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c1 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
