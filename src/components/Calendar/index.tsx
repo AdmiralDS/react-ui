@@ -51,13 +51,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
       const current = new Date();
       if (selected) {
         return selected;
-      } else {
-        if (minDate && before(current, minDate)) {
-          return minDate;
-        } else if (maxDate && after(current, maxDate)) {
-          return maxDate;
-        }
+      } else if (minDate && before(current, minDate)) {
+        return minDate;
+      } else if (maxDate && after(current, maxDate)) {
+        return maxDate;
       }
+
       return current;
     };
 
