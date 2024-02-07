@@ -113,18 +113,22 @@ export const FloatingButtonContent = styled.div<{
   }
 `;
 
-export const Badge = styled(BaseBadge)`
+const badgeMixin = css`
   position: absolute;
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
+`;
+
+export const Badge = styled(BaseBadge)`
   top: -3px;
   inset-inline-end: -3px;
-  border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  ${badgeMixin}
+  padding: ${({ dimension }) => (dimension === 's' ? '0 4px' : '0 5px')};
 `;
 
 export const BadgeDot = styled(BaseBadgeDot)`
-  position: absolute;
   top: ${(p) => (p.dimension == 'm' ? 1 : 3)}px;
   inset-inline-end: ${(p) => (p.dimension == 'm' ? 1 : 3)}px;
-  border-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  ${badgeMixin}
 `;
 
 export const TRANSITION_DURATION = 200;

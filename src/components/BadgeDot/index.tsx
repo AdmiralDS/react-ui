@@ -44,7 +44,6 @@ const Dot = styled.div<{ $dimension: BadgeDotDimension; $appearance: BadgeDotApp
   width: ${getSize}px;
   height: ${getSize}px;
   background: ${getBackground};
-  border: 1px solid ${getBackground};
   border-radius: 50%;
 `;
 
