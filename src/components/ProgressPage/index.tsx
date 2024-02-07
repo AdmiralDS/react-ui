@@ -1,6 +1,5 @@
 import type { FC, HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { TYPOGRAPHY } from '#src/components/Typography';
 
 export type AppearanceProgressPage = 'primary' | 'error';
 
@@ -37,7 +36,7 @@ const Label = styled.div<{ $appearance?: AppearanceProgressPage }>`
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
-  font-family: ${TYPOGRAPHY.fontFamily};
+  font-family: ${(p) => p.theme.fontFamily};
   color: ${({ theme, $appearance }) =>
     $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 90']};
 `;

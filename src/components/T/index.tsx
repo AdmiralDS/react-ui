@@ -2,12 +2,11 @@ import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
 import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '#src/components/common/polymorphicProps';
-import { typography } from '#src/components/Typography';
-import type { ColorName } from '#src/components/themes';
+import type { ColorName, ThemeTypographyType } from '#src/components/themes';
 import { DefaultFontColorName } from '#src/components/themes';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
-export type FontName = keyof typeof typography;
+export type FontName = keyof ThemeTypographyType;
 
 export type TOwnProps = {
   /**  Имя шрифта из списка дизайн системы */
@@ -40,7 +39,7 @@ const Tspan = styled.span<{
           : $color
         : theme.color[DefaultFontColorName];
   }};
-  ${(p) => typography[p.$font]};
+  ${(p) => p.theme.typography[p.$font]};
   ${(p) => (p.$cssMixin ? p.$cssMixin : '')}
   ${(p) => p.$skeleton && skeletonMixin}
 `;
