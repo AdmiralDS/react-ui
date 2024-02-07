@@ -227,7 +227,7 @@ export const TreeNode = ({
       {checkboxVisible && (
         <StyledCheckbox
           {...props}
-          hovered={!mouseOnChevron && hovered}
+          hovered={!mouseOnChevron && hoveredValue}
           dimension={dimension}
           disabled={disabled}
           checked={checked}
