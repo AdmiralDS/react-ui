@@ -3,6 +3,7 @@ import { COLOR as color } from '../light/color';
 import { shadow } from './shadow';
 import { zIndex } from '../common/zIndex';
 import { locales } from '../common/locales';
+import { typography } from '#src/components/Typography';
 
 export const LIGHT_THEME: Theme = {
   color,
@@ -12,4 +13,6 @@ export const LIGHT_THEME: Theme = {
   shape: { borderRadiusKind: 'Border radius 4' },
   currentLocale: 'ru',
   locales,
+  typography,
+  fontFamily: `'VTB Group UI', sans-serif`,
 };

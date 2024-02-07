@@ -1,5 +1,4 @@
 import { css } from 'styled-components';
-import { TYPOGRAPHY } from '#src/components/Typography';
 import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
 export const width = css<{ $dimension: CheckboxDimension }>`
@@ -32,7 +31,7 @@ export const styleTextMixin = css<{ $dimension: CheckboxDimension; disabled?: bo
   font-size: ${({ $dimension }) => ($dimension === 'm' ? 16 : 14)}px;
   line-height: ${({ $dimension }) => ($dimension === 'm' ? 20 : 16)}px;
   font-weight: normal;
-  font-family: ${TYPOGRAPHY.fontFamily};
+  font-family: ${(p) => p.theme.fontFamily};
   color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
   user-select: none;
 `;

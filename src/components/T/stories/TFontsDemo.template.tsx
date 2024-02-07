@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { useTheme } from 'styled-components';
 
-import { DefaultFontColorName, LIGHT_THEME, T, TooltipHoc, typography, TYPOGRAPHY } from '@admiral-ds/react-ui';
+import { DefaultFontColorName, LIGHT_THEME, T, TooltipHoc, typography } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 
 import { FONTS, NEW_FONTS } from '#src/components/T/stories/storyDescriptions';
@@ -81,6 +81,7 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
 const CopyButton = TooltipHoc(CopyIcon);
 
 export const TFontsDemoTemplate = () => {
+  const theme = useTheme() || LIGHT_THEME;
   return (
     <Wrapper>
       <Table>
@@ -124,7 +125,7 @@ export const TFontsDemoTemplate = () => {
                     <tbody>
                       <tr>
                         <td>Шрифт:</td>
-                        <td>{TYPOGRAPHY.fontFamily}</td>
+                        <td>{theme.fontFamily}</td>
                       </tr>
                       {item.style.map((st: any, index: number) => (
                         <tr key={index}>
@@ -186,7 +187,7 @@ export const TFontsDemoTemplate = () => {
                     <tbody>
                       <tr>
                         <td>Шрифт:</td>
-                        <td>{TYPOGRAPHY.fontFamily}</td>
+                        <td>{theme.fontFamily}</td>
                       </tr>
                       {item.style.map((st: any, index: number) => (
                         <tr key={index}>

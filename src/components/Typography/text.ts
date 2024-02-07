@@ -19,7 +19,7 @@ export const getTextStyle = ({
   lineHeight: keyof Typography['lineHeight'];
 }) => css`
   color: ${color || 'inherit'};
-  font-family: ${TYPOGRAPHY.fontFamily};
+  font-family: ${(p) => p.theme.fontFamily};
   font-size: ${TYPOGRAPHY.fontSize[fontSize]};
   font-weight: ${TYPOGRAPHY.fontWeight[fontWeight]};
   line-height: ${TYPOGRAPHY.lineHeight[lineHeight]};
