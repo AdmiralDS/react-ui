@@ -50,12 +50,12 @@ const dimensionMixin = css<{ $dimension: FloatingButtonProps['dimension'] }>`
   width: ${(p) => (p.$dimension == 'xl' ? 56 : 40)}px;
   height: ${(p) => (p.$dimension == 'xl' ? 56 : 40)}px;
 
-  .floating_button_menu[data-dimension='xl'] & {
+  .floating_button_menu[data-dimension='xl'] && {
     width: 56px;
     height: 56px;
     margin-bottom: 16px;
   }
-  .floating_button_menu[data-dimension='m'] & {
+  .floating_button_menu[data-dimension='m'] && {
     width: 40px;
     height: 40px;
     margin-bottom: 12px;
@@ -102,7 +102,7 @@ export const FloatingButtonContent = styled.div<{
   padding: ${(p) => (p.$dimension == 'm' ? 8 : 16)}px;
   border-radius: 50%;
   ${(p) => (p.$appearance == 'primary' ? primaryAppearanceMixin : secondaryAppearanceMixin)}
-  .floating_button_menu & {
+  .floating_button_menu && {
     ${secondaryAppearanceMixin}
   }
 
