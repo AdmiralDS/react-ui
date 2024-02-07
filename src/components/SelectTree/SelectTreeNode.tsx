@@ -1,8 +1,9 @@
 import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
+
 import { typography } from '#src/components/Typography';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 const PADDING_LEFT_M = 40;
@@ -99,9 +100,8 @@ const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   }
 `;
 
-const StyledCheckbox = styled(Checkbox)`
-  margin: 2px;
-  margin-right: 10px;
+const StyledCheckbox = styled(CheckboxField)`
+  margin-right: 8px;
   flex-shrink: 0;
 `;
 
