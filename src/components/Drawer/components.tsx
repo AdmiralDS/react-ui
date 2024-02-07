@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { typography } from '#src/components/Typography';
 import { throttleWrap } from '#src/components/common/utils/throttleWrap';
+import { resizePaddings } from '../common/dom/resizePaddings';
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
@@ -63,19 +64,8 @@ export const DrawerContent: FC<HTMLAttributes<HTMLDivElement>> = ({ children, ..
   useLayoutEffect(() => {
     const node = contentRef.current;
     if (node) {
-      const resizeObserver = new ResizeObserver(
-        throttleWrap(() => {
-          // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
-          const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
-
-          // Вычисляем ширину полоски скролла
-          const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
-
-          // При уменьшении масштаба область скрола не менят свой размер и может становиться больше необходимого паддинга,
-          // по этому имеет смысл держать минимально возможный паддинг от полосы скрола
-          node.style.paddingRight = `${paddingValue > 4 ? paddingValue : 4}px`;
-        }, 500),
-      );
+      resizePaddings(node);
+      const resizeObserver = new ResizeObserver(throttleWrap(() => resizePaddings(node), 250));
       resizeObserver.observe(node);
       return () => {
         resizeObserver.unobserve(node);
