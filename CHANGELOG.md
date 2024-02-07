@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.11.0](https://github.com/AdmiralDS/react-ui/compare/v7.10.0...v7.11.0) (2024-02-07)
+
+
+### Features
+
+* **Breadcrumbs:** для хлебных крошек добавлен параметр iconStart, позволяющий задавать иконку слева от отекста крошки ([2283272](https://github.com/AdmiralDS/react-ui/commit/228327230a720210bd70e2a73802c7465c1be605))
+* **MenuItemWithCheckbox:** replace Checkbox with CheckboxField ([0a8c2aa](https://github.com/AdmiralDS/react-ui/commit/0a8c2aa883477ccbff27317415a7efd914009dc6))
+
+
+### Bug Fixes
+
+* **Badge:** исправлена ошибка с выравниванием контента в бейдже ([5d471c6](https://github.com/AdmiralDS/react-ui/commit/5d471c69c954f352b4111af71a45ceb9e4b35da4))
+* **DateInput:** сравнение дат должно приводить к коннсистентному результату ([d8dc984](https://github.com/AdmiralDS/react-ui/commit/d8dc984e76a86e3b33be125b63ac964422dec720))
+* **Storybook:** изменен пример выбора месяца для DateInput ([8d8ddb7](https://github.com/AdmiralDS/react-ui/commit/8d8ddb7afd2cb3c00de8788852bc34b1dfdab38e))
+* **TreeNode:** fix Checkbox hover when TreeNode is hovered ([a0722fb](https://github.com/AdmiralDS/react-ui/commit/a0722fb3a0a6d6c643fd1e67772a624ec0618ddf))
+
 ## [7.10.0](https://github.com/AdmiralDS/react-ui/compare/v7.9.2...v7.10.0) (2024-01-31)
 
 
