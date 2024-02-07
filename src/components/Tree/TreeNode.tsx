@@ -11,7 +11,7 @@ import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { IconPlacement } from '#src/components/IconPlacement';
 
@@ -129,8 +129,8 @@ const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   }
 `;
 
-const StyledCheckbox = styled(Checkbox)`
-  margin: 2px 10px 2px 2px;
+const StyledCheckbox = styled(CheckboxField)`
+  margin-right: 8px;
   flex-shrink: 0;
 `;
 
@@ -227,7 +227,7 @@ export const TreeNode = ({
       {checkboxVisible && (
         <StyledCheckbox
           {...props}
-          hovered={!mouseOnChevron && hovered}
+          hovered={!mouseOnChevron && hoveredValue}
           dimension={dimension}
           disabled={disabled}
           checked={checked}
