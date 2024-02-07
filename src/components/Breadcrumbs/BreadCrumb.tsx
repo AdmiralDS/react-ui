@@ -26,6 +26,17 @@ export const Crumb = styled.li<{ $dimension: BreadcrumbsProps['dimension'] }>`
   ${getTypography}
 `;
 
+const IconContainer = styled.div<{ $dimension: BreadcrumbsProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension == 'l' ? 20 : 16)}px;
+  height: ${({ $dimension }) => ($dimension == 'l' ? 20 : 16)}px;
+  flex-shrink: 0;
+  margin-right: 8px;
+
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+`;
+
 export const Content = styled.span`
   width: 100%;
   height: 100%;
@@ -45,9 +56,15 @@ const TextWithTooltip = TooltipHoc(TextWrapper);
 const activeCrumbMixin = css`
   &:hover {
     color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    ${IconContainer} *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+    }
   }
   &:active {
     color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    ${IconContainer} *[fill^='#'] {
+      fill: ${({ theme }) => theme.color['Primary/Primary 80']};
+    }
   }
 `;
 
@@ -81,6 +98,8 @@ export const CrumbAnchor = styled.a<{ $active?: boolean }>`
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
   /** Текст хлебной крошки */
   text: string;
+  /** Иконка перед текстом хлебной крошки */
+  iconStart?: React.ReactNode;
   /** Url хлебной крошки (href атрибут, используемый во внутреннем Anchor) */
   url?: string;
   /** Позволяет вместо внутреннего Anchor отрендерить любой другой компонент (https://styled-components.com/docs/api#as-polymorphic-prop)
@@ -99,7 +118,10 @@ interface InternalBreadcrumbProps {
 }
 
 export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & InternalBreadcrumbProps>(
-  ({ text, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', active = true, ...props }, ref) => {
+  (
+    { text, iconStart, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', active = true, ...props },
+    ref,
+  ) => {
     const tooltip = text.length > 40;
 
     return (
@@ -112,6 +134,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & Inte
           {...linkProps}
         >
           <Content tabIndex={-1} role="link">
+            {iconStart && <IconContainer $dimension={dimension}>{iconStart}</IconContainer>}
             {tooltip ? <TextWithTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</TextWithTooltip> : text}
             {children}
           </Content>
