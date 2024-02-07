@@ -27,6 +27,17 @@ const Option = styled.a`
   }
 `;
 
+const IconContainer = styled.div<{ $dimension: MenuButtonProps['dimension'] }>`
+  width: ${({ $dimension }) => ($dimension == 'm' ? 20 : 16)}px;
+  height: ${({ $dimension }) => ($dimension == 'm' ? 20 : 16)}px;
+  flex-shrink: 0;
+  margin-right: 8px;
+
+  & *[fill^='#'] {
+    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  }
+`;
+
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
 export interface MenuButtonProps {
@@ -65,12 +76,14 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
               role="option"
             >
               <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {item.iconStart && <IconContainer $dimension={dimension}>{item.iconStart}</IconContainer>}
                 {item.text.slice(0, 37) + '...'}
               </Option>
             </MenuItemWithTooltip>
           ) : (
             <MenuItem dimension={dimension} {...options} key={id} role="option">
               <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+                {item.iconStart && <IconContainer $dimension={dimension}>{item.iconStart}</IconContainer>}
                 {item.text}
               </Option>
             </MenuItem>
