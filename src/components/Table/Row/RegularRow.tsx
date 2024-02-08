@@ -9,7 +9,7 @@ import {
   DragCell,
   DragIcon,
 } from '#src/components/Table/style';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 import type { TableRow, RowId, Column, Dimension } from '#src/components/Table';
 import type { CheckboxDimension } from '#src/components/Checkbox/CheckboxDimension';
 
@@ -91,7 +91,7 @@ export const RegularRow = ({
           )}
           {displayRowSelectionColumn && (
             <CheckboxCell $dimension={dimension} className="td_checkbox" data-column="checkbox" data-row={row.id}>
-              <Checkbox
+              <CheckboxField
                 disabled={row.disabled || row.checkboxDisabled}
                 dimension={checkboxDimension}
                 checked={!!row.selected}
