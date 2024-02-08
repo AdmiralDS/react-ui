@@ -4,7 +4,7 @@ exports[`SelectTree should render component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -361,7 +361,7 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
     </div>
   </body>,
   "container": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -773,7 +773,7 @@ exports[`SelectTree should render component with expanded lists 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1130,7 +1130,7 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
     </div>
   </body>,
   "container": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1542,7 +1542,7 @@ exports[`SelectTree should render small components 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
@@ -1899,7 +1899,7 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
     </div>
   </body>,
   "container": .c4 {
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;

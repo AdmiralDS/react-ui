@@ -19,7 +19,7 @@ export const CheckboxComponentWrapper = styled.label<{
   disabled?: boolean;
   readOnly?: boolean;
 }>`
-  display: inline flex;
+  display: inline-flex;
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;

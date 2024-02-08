@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.11.1](https://github.com/AdmiralDS/react-ui/compare/v7.11.0...v7.11.1) (2024-02-07)
+
+
+### Bug Fixes
+
+* **Theme:** typography стало токенами объекта темы ([c422aa1](https://github.com/AdmiralDS/react-ui/commit/c422aa13ab4c478d16dadf8ab4bc7f24373b2be4))
+* two value syntax may break in older browsers ([d38d4c6](https://github.com/AdmiralDS/react-ui/commit/d38d4c6b896c3ee931daed614e11fea9ea803a23))
+* Пересчет падингов контента модалки должен происходить сразу при появлении ([3d064f8](https://github.com/AdmiralDS/react-ui/commit/3d064f88568d4649dff979332a64d61922af9e98))
+
 ## [7.11.0](https://github.com/AdmiralDS/react-ui/compare/v7.10.0...v7.11.0) (2024-02-07)
 
 

@@ -14,6 +14,7 @@ import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
 import { throttleWrap } from '#src/components/common/utils/throttleWrap';
+import { resizePaddings } from '../common/dom/resizePaddings';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -343,19 +344,8 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   React.useLayoutEffect(() => {
     const node = contentRef.current;
     if (node) {
-      const resizeObserver = new ResizeObserver(
-        throttleWrap(() => {
-          // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
-          const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
-
-          // Вычисляем ширину полоски скролла
-          const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
-
-          // При уменьшении масштаба область скрола не менят свой размер и может становиться больше необходимого паддинга,
-          // по этому имеет смысл держать минимально возможный паддинг от полосы скрола
-          node.style.paddingRight = `${paddingValue > 4 ? paddingValue : 4}px`;
-        }, 500),
-      );
+      resizePaddings(node);
+      const resizeObserver = new ResizeObserver(throttleWrap(() => resizePaddings(node), 250));
       resizeObserver.observe(node);
       return () => {
         resizeObserver.unobserve(node);
