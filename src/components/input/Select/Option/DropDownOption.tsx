@@ -11,6 +11,7 @@ import type { SelectItemProps } from '#src/components/input/Select/types';
 
 interface OptionRenderProps {
   selected?: boolean;
+  hovered?: boolean;
 }
 
 const convertDimension = (selectDimension?: ComponentDimension): ItemDimension | undefined => {
@@ -31,11 +32,12 @@ export const DropDownOption = ({
 
   const optionIsDisabled = optionGroupContext?.disabled || disabled;
 
-  const multipleOptionRender = ({ selected = false }: OptionRenderProps) => (
+  const multipleOptionRender = ({ selected = false, hovered = false }: OptionRenderProps) => (
     <>
       {dropDownContext?.showCheckbox && (
         <StyledCheckbox
           checked={selected}
+          hovered={hovered}
           dimension={dropDownContext?.dimension === 's' ? 's' : 'm'}
           disabled={disabled}
           // Состояние контролируется через Item, по сути контролируемый readOnly
@@ -67,7 +69,7 @@ export const DropDownOption = ({
             key={itemId}
             {...htmlProps}
           >
-            {defaultOptionRender({ selected: options.selected })}
+            {defaultOptionRender({ selected: options.selected, hovered: options.hovered })}
           </CustomOptionWrapper>
         );
       },
