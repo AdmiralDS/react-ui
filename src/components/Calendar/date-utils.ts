@@ -75,9 +75,7 @@ const isEqual = (dateLeft: Date, dateRight: Date): boolean => {
 };
 
 function isSameDay(d1: Date, d2: Date) {
-  return (
-    d1.getFullYear() === d2.getFullYear() && d1.getUTCDate() === d2.getUTCDate() && d1.getMonth() === d2.getMonth()
-  );
+  return d1.getFullYear() === d2.getFullYear() && d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth();
 }
 
 const isSameMonth = (dateLeft: Date, dateRight: Date): boolean => {
