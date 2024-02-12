@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -570,7 +570,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
               {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
               {displayRowSelectionColumn && (
                 <CheckboxCell $dimension={dimension}>
-                  <Checkbox dimension={checkboxDimension} />
+                  <CheckboxField dimension={checkboxDimension} />
                 </CheckboxCell>
               )}
             </StickyWrapper>
@@ -617,7 +617,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
                     data-draggable={false}
                     data-droppable={false}
                   >
-                    <Checkbox
+                    <CheckboxField
                       dimension={checkboxDimension}
                       checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
                       indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}

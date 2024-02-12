@@ -11,7 +11,7 @@ import {
 } from '#src/components/Table/style';
 import * as React from 'react';
 import type { TableRow } from '#src/components/Table';
-import { Checkbox } from '#src/components/Checkbox';
+import { CheckboxField } from '#src/components/form';
 import type { RegularRowProps } from '#src/components/Table/Row/RegularRow';
 
 export interface GroupRowProps extends Omit<RegularRowProps, 'columns' | 'stickyColumns' | 'renderBodyCell'> {
@@ -76,7 +76,7 @@ export const GroupRow = ({
         </ExpandCell>
         {displayRowSelectionColumn && (
           <CheckboxCell $dimension={dimension} className="td_checkbox" data-column="checkbox" data-row={row.id}>
-            <Checkbox
+            <CheckboxField
               disabled={row.disabled || row.checkboxDisabled || row.groupRows?.length === 0}
               dimension={checkboxDimension}
               checked={!!checked}

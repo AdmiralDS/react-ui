@@ -1,11 +1,12 @@
 import * as React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+
 import { GroupActionsPane, PaneSeparator, typography, TextButton } from '@admiral-ds/react-ui';
 import type { GroupActionsPaneProps, PaneColumn, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
@@ -29,6 +30,11 @@ const columns: PaneColumn[] = [
   { id: 'currency', title: 'Валюта', visible: true },
   { id: 'rate', title: 'Ставка', visible: true },
   { id: 'status', title: 'Статус', visible: true },
+  {
+    id: 'custom',
+    title: 'Очень длинное название поля, которое не помещается в выпадающий список по ширине',
+    visible: false,
+  },
 ];
 
 export const PaneSimpleTemplate = ({
