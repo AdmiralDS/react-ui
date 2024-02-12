@@ -21,11 +21,20 @@ const Input = styled(TextInput)`
   min-width: 150px;
 `;
 
+function toUTCDateIsoString(date: Date): string {
+  const newDate = new Date(date);
+  newDate.setUTCDate(newDate.getDate());
+  newDate.setUTCHours(0, 0, 0, 0);
+  return newDate.toISOString();
+}
+
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
 function defaultFormatter(isoValues: string[], joinString = ' - '): string {
   return isoValues
     .map((iso) => new Date(iso))
-    .map((date) => (isValidDate(date) ? date.toLocaleDateString('ru').replace(/[^ -~]/g, '') : '__.__.____'))
+    .map((date) =>
+      isValidDate(date) ? date.toLocaleDateString('ru', { timeZone: 'UTC' }).replace(/[^ -~]/g, '') : '__.__.____',
+    )
     .join(joinString);
 }
 
@@ -142,7 +151,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         }
 
         const values = Array.isArray(maybeDate) ? maybeDate : [maybeDate];
-        const toFormatValues = values.map((date) => (date ? date.toLocaleDateString() : ''));
+        const toFormatValues = values.map((date) => (date ? toUTCDateIsoString(date) : ''));
         const value = formatter(toFormatValues);
         changeInputData(inputRef.current, { value });
 
