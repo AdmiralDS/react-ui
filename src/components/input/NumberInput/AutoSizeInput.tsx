@@ -263,6 +263,15 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
           selectionStart: cursor - 1,
           selectionEnd: cursor - 1,
         };
+      }
+      if (init_value.length > newValue.length && init_value.indexOf(newValue) == 0) {
+        //
+        return {
+          ...inputData,
+          value: newValue,
+          selectionStart: cursor,
+          selectionEnd: cursor,
+        };
       } else {
         return {
           ...inputData,
