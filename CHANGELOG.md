@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.12.0](https://github.com/AdmiralDS/react-ui/compare/v7.11.1...v7.12.0) (2024-02-12)
+
+
+### Features
+
+* **GroupActionsPane:** replace Checkbox with CheckboxField ([1b735a8](https://github.com/AdmiralDS/react-ui/commit/1b735a8a726186767f9e47b4f48e2340de9e44ad))
+* **Table:** replace Checkbox with CheckboxField ([6eee1a2](https://github.com/AdmiralDS/react-ui/commit/6eee1a2ec3eb890c289e0b909c34c445992590c8))
+
+
+### Bug Fixes
+
+* **Calendar:** пересчет дат ведется в локальной таймзоне и при парсинге или форматировании там зона переносится в UTC без трансформации даты ([2f70b2a](https://github.com/AdmiralDS/react-ui/commit/2f70b2a479b7be8e9632c96160c81b260d826bcc))
+
 ### [7.11.1](https://github.com/AdmiralDS/react-ui/compare/v7.11.0...v7.11.1) (2024-02-07)
 
 

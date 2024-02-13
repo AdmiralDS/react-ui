@@ -1,9 +1,9 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
-import * as React from 'react';
+import type { CSSProperties, FormEvent, HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
+import { useMemo, useRef, useState, useLayoutEffect, forwardRef } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
-import { useMemo, useRef, useState, useLayoutEffect } from 'react';
-import { Checkbox } from '#src/components/Checkbox';
+
+import { CheckboxField } from '#src/components/form';
 import { IconButton } from '#src/components/IconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
@@ -24,14 +24,14 @@ export interface RenderOptionProps {
   /** Отключение секции */
   disabled?: boolean;
   /** Обработчик клика по item */
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   /** Обработчик наведения мыши на item */
   onHover?: () => void;
 }
 
 export interface ItemProps {
   id: string;
-  render: (options: RenderOptionProps) => React.ReactNode;
+  render: (options: RenderOptionProps) => ReactNode;
   disabled?: boolean;
 }
 
@@ -58,9 +58,9 @@ const ColumnsMenuItem = styled(MenuItem)`
   flex-flow: nowrap;
 `;
 
-const StyledCheckbox = styled(Checkbox)`
+const StyledCheckboxField = styled(CheckboxField)`
   flex-shrink: 0;
-  margin-right: 10px;
+  margin-right: 8px;
 `;
 
 const TextWrapper = styled.span`
@@ -74,6 +74,7 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
 
   const [overflow, setOverflow] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useLayoutEffect(() => {
     if (textRef.current && checkOverflow(textRef.current) !== overflow) {
@@ -100,13 +101,14 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
   }, []);
 
   return (
-    <ColumnsMenuItem {...props} ref={itemRef}>
-      <StyledCheckbox
+    <ColumnsMenuItem {...props} ref={itemRef} onHover={() => setHovered(true)} onLeave={() => setHovered(false)}>
+      <StyledCheckboxField
         checked={visible}
-        onChange={(e: React.FormEvent<HTMLInputElement>) => {
+        onChange={(e: FormEvent<HTMLInputElement>) => {
           e.preventDefault();
           e.stopPropagation();
         }}
+        hovered={hovered}
       />
       <TextWrapper ref={textRef}>{title}</TextWrapper>
       {tooltipVisible && overflow && <Tooltip targetElement={itemRef.current} renderContent={() => title} />}
@@ -114,7 +116,7 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
   );
 };
 
-export const ColumnsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
+export const ColumnsButton = forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
     {
       columns = [],

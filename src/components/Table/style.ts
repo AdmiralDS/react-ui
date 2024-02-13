@@ -12,7 +12,6 @@ import {
   headerStyle,
   multiLineTitle,
   overflowMenuStyle,
-  actionsBGStyle,
   rowBackground,
   rowStyle,
   singleLineTitle,
@@ -239,14 +238,14 @@ export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }
   padding: ${({ $dimension }) => {
     switch ($dimension) {
       case 's':
-        return '8px 14px 7px 14px';
+        return '6px 12px 5px 12px';
       case 'l':
-        return '14px 18px 13px 18px';
+        return '12px 16px 11px 16px';
       case 'xl':
-        return '18px 18px 17px 18px';
+        return '16px 16px 15px 16px';
       case 'm':
       default:
-        return '12px 14px 11px 14px';
+        return '10px 12px 9px 12px';
     }
   }};
 `;

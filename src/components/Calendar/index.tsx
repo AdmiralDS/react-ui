@@ -49,6 +49,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
   ) => {
     const getInitialViewDate = () => {
       const current = new Date();
+      current.setHours(0, 0, 0, 0);
       if (selected) {
         return selected;
       } else if (minDate && before(current, minDate)) {

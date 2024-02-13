@@ -1,7 +1,7 @@
 import type { ComponentDimension } from '#src/components/input';
 import styled from 'styled-components';
-import { Checkbox } from '#src/components/Checkbox';
 import { OptionWrapper } from '#src/components/input/Select/styled';
+import { CheckboxField } from '#src/components/form/CheckboxField';
 
 interface CustomOptionProps {
   disabled?: boolean;
@@ -22,7 +22,7 @@ export const CustomOption = styled(OptionWrapper)<CustomOptionProps>`
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
 `;
 
-export const StyledCheckbox = styled(Checkbox)`
+export const StyledCheckbox = styled(CheckboxField)`
   margin-right: 8px;
   flex-shrink: 0;
 `;
