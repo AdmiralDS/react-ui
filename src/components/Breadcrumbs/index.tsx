@@ -121,11 +121,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];
     const id = item?.id || item?.text;
-    return items.length > 1 ? (
-      <Breadcrumb key={id} data-number={0} dimension={dimension} {...item}>
-        <Separator width={iconSize} height={iconSize} aria-hidden />
-      </Breadcrumb>
-    ) : null;
+    return items.length > 1 ? <Breadcrumb key={id} data-number={0} dimension={dimension} {...item} /> : null;
   }, [items, dimension]);
 
   const renderLastItem = React.useCallback(() => {
@@ -139,6 +135,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         data-number={items.length - 1}
         dimension={dimension}
         active={lastBreadcrumbActive}
+        displaySeparator={false}
         {...(mobile ? {} : order)}
         {...item}
       />
@@ -157,9 +154,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
           dimension={dimension}
           {...(mobile ? {} : order)}
           {...item}
-        >
-          <Separator width={iconSize} height={iconSize} aria-hidden />
-        </Breadcrumb>
+        />
       );
     });
   };
