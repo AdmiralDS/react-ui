@@ -264,11 +264,19 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
           selectionEnd: cursor - 1,
         };
       }
-      if (init_value.length > newValue.length && init_value.indexOf(newValue) == 0) {
-        //
+      if (precision && init_value.length > newValue.length && init_value.indexOf(newValue) == 0) {
+        // если пытаемся в уже заполненную десятичную часть (кол-во знаков в десятичной части равно precision) ввести новую цифру,
+        // то эта цифра должна заменить собой соседнюю цифру
+
+        const insertAmount = init_value.length - newValue.length;
+
+        const start = newValue.slice(0, cursor);
+        const end = precision - insertAmount > 0 ? init_value.slice(-(precision - insertAmount)) : '';
+
+        const updValue = (start + end).slice(0, newValue.length);
         return {
           ...inputData,
-          value: newValue,
+          value: updValue,
           selectionStart: cursor,
           selectionEnd: cursor,
         };
