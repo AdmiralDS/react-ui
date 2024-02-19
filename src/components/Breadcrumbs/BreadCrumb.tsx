@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
+import { Separator } from './style';
 
 const getTypography = css<{ $dimension: BreadcrumbsProps['dimension'] }>`
   ${({ $dimension }) => {
@@ -115,14 +116,28 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
 interface InternalBreadcrumbProps {
   /** Признак активности хлебной крошки */
   active?: boolean;
+  /** Отображать хлебную крошку вместе с разделителем */
+  displaySeparator?: boolean;
 }
 
 export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & InternalBreadcrumbProps>(
   (
-    { text, iconStart, url = '#', linkAs, linkProps, children, tabIndex, dimension = 'l', active = true, ...props },
+    {
+      text,
+      iconStart,
+      url = '#',
+      linkAs,
+      linkProps,
+      tabIndex,
+      dimension = 'l',
+      active = true,
+      displaySeparator = true,
+      ...props
+    },
     ref,
   ) => {
     const tooltip = text.length > 40;
+    const iconSize = dimension === 'l' ? 20 : 16;
 
     return (
       <Crumb ref={ref} $dimension={dimension} {...props}>
@@ -136,9 +151,9 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & Inte
           <Content tabIndex={-1} role="link">
             {iconStart && <IconContainer $dimension={dimension}>{iconStart}</IconContainer>}
             {tooltip ? <TextWithTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</TextWithTooltip> : text}
-            {children}
           </Content>
         </CrumbAnchor>
+        {displaySeparator && <Separator width={iconSize} height={iconSize} aria-hidden />}
       </Crumb>
     );
   },
