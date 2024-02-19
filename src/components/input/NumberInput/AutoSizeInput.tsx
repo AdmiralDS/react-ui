@@ -268,12 +268,12 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         // если пытаемся в уже заполненную десятичную часть (кол-во знаков в десятичной части равно precision) ввести новую цифру,
         // то эта цифра должна заменить собой соседнюю цифру
 
-        const insertAmount = init_value.length - newValue.length;
-
         const start = newValue.slice(0, cursor);
-        const end = precision - insertAmount > 0 ? init_value.slice(-(precision - insertAmount)) : '';
+        const diff = newValue.length - start.length;
+        const end = diff > 0 ? init_value.slice(-diff) : '';
 
-        const updValue = (start + end).slice(0, newValue.length);
+        const updValue = start + end;
+
         return {
           ...inputData,
           value: updValue,
