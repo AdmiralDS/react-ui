@@ -10,3 +10,4 @@ package-lock.json
 .npmrc
 admiral-ds-react-ui-*.tgz
 tsconfig.tsbuildinfo
+bun.lockb
