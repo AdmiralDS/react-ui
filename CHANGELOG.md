@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.12.1](https://github.com/AdmiralDS/react-ui/compare/v7.12.0...v7.12.1) (2024-02-22)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** исправлено некорректное поведение иконок-разделителей ([5aca901](https://github.com/AdmiralDS/react-ui/commit/5aca901a34811a8a4124f9ae91e37d76ea16aac6))
+* **NumberInput:** исправлен механизм ввода цифр в дробной части ([2e71ed2](https://github.com/AdmiralDS/react-ui/commit/2e71ed233c31d7dfca66a2875bd3194f79e89e06))
+
 ## [7.12.0](https://github.com/AdmiralDS/react-ui/compare/v7.11.1...v7.12.0) (2024-02-12)
 
 
