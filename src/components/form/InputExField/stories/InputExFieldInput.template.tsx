@@ -7,8 +7,10 @@ import type { InputExFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
-  > * {
-    margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  & > * {
+    flex: 0 0 128px;
   }
 `;
 
@@ -43,6 +45,8 @@ export const InputExFieldInputTemplate = ({
           suffixValueList={SUFFIX_OPTIONS}
           onSuffixValueChange={setSuffixValue}
           suffixDropContainerStyle={{ dropContainerClassName: 'suffixDropContainerClass' }}
+          maxLength={50}
+          displayCharacterCounter
           label={label}
         />
         <InputExField
