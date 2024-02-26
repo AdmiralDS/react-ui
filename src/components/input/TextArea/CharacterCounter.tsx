@@ -42,7 +42,9 @@ export const CharacterCounter: React.FC<CharacterCounterProps> = ({
   }, [inputRef]);
   return currentCount > maxLength * 0.8 ? (
     <Container {...props} error={currentCount >= maxLength} transparent={currentCount < maxLength * 0.8}>
-      {currentCount}/{maxLength}
+      {currentCount}
+      {' / '}
+      {maxLength}
     </Container>
   ) : null;
 };
