@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { addons } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
-import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider } from '@admiral-ds/react-ui';
+import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider, LightThemeCss } from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
@@ -58,6 +58,7 @@ export const decorators = [
   (Story) => (
     <>
       <FontsVTBGroup />
+      <LightThemeCss />
       <Story />
     </>
   ),
