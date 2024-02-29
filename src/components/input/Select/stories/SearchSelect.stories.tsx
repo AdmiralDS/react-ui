@@ -19,6 +19,7 @@ import { SearchSelectCustomOptionMultiTemplate } from './searchSelect/SearchSele
 import { SearchSelectCustomChipMultiTemplate } from './searchSelect/SearchSelectCustomChipMulti.template';
 import { SearchSelectExternalFilterTemplate } from './searchSelect/SearchSelectExternalFilter.template';
 import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVirtualScroll.template';
+import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSelectWithOnChangeHandler.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
@@ -37,6 +38,7 @@ import SearchSelectCustomOptionMultiRaw from './searchSelect/SearchSelectCustomO
 import SearchSelectCustomChipMultiRaw from './searchSelect/SearchSelectCustomChipMulti.template?raw';
 import SearchSelectExternalFilterRaw from './searchSelect/SearchSelectExternalFilter.template?raw';
 import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScroll.template?raw';
+import SearchSelectWithOnClickHandlerTemplateRaw from './searchSelect/SearchSelectWithOnChangeHandler.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -455,7 +457,7 @@ export const ExternalFilter = {
 };
 //</editor-fold>
 
-// <editor-fold desc="Внешняя фильтрация">
+// <editor-fold desc="Пример с обработчиком OnChange">
 const VirtualScrollStory: StoryFn<typeof Select> = (props) => <SearchSelectVirtualScrollTemplate {...props} />;
 
 export const VirtualScroll = {
@@ -470,5 +472,32 @@ export const VirtualScroll = {
   },
 
   name: 'VirtualScroll',
+};
+//</editor-fold>
+// <editor-fold desc="Внешняя фильтрация">
+const WithOnChangeHandlerStory: StoryFn<typeof Select> = (props) => (
+  <SearchSelectWithOnChangeHandlerTemplate {...props} />
+);
+
+export const WithOnChangeHandler = {
+  render: WithOnChangeHandlerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithOnClickHandlerTemplateRaw,
+      },
+      description: {
+        story:
+          'Так как компонент построен на нативном select, при использовании нативного события onchange в режиме multiple ' +
+          'необходимо помнить, что в качестве event.target.value возвращается значение первой выбранной option из массива ' +
+          'выбранных опций. Поэтому для обработки этого события используйте event.selectedOptions или свойство option.selected. ' +
+          'Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает ' +
+          'выбранные опции в порядке их выбора пользователем',
+      },
+    },
+  },
+
+  name: 'Multiple с обработчиком события onChange',
 };
 //</editor-fold>
