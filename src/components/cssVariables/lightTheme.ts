@@ -136,5 +136,32 @@ export const lightThemeText = `
   --admiral-color-Teal_Teal60Main: '#007D79';
   --admiral-color-Teal_Teal70: '#005D5D';
   --admiral-color-Teal_Teal80: '#004144';
+
+  /*
+  * Z-indexes
+  */
+
+  --admiral-z-index-tooltip: 100;
+  --admiral-z-index-notification: 99;
+  --admiral-z-index-hint: 98;
+  --admiral-z-index-dropdown: 97;
+  --admiral-z-index-modal: 96;
+  --admiral-z-index-drawer: 96;
+
+  /* 
+  * Box-shadows 
+  */
+
+  --admiral-box-shadow-Shadow02: 0px 0.9px 2px 0px rgba(0, 0, 0, 0.28);
+  --admiral-box-shadow-Shadow04: 0px 1.6px 3.6px 0px rgba(0, 0, 0, 0.14), 0px 0.2px 0.9px 0.3px rgba(0, 0, 0, 0.12);
+  --admiral-box-shadow-Shadow08: 0px 3.2px 9px 0px rgba(0, 0, 0, 0.16), 0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.10), 0px -1.5px 6px 0px rgba(0, 0, 0, 0.06);
+  --admiral-box-shadow-Shadow12: 0px 0.8px 1.8px 0px rgba(0, 0, 0, 0.04), 0px 4px 18px 0px rgba(0, 0, 0, 0.08), 0px 1.2px 12px 0px rgba(0, 0, 0, 0.10);
+  --admiral-box-shadow-Shadow16: 0px 6.4px 28px 0px rgba(0, 0, 0, 0.12), 0px 1.2px 18px 0px rgba(0, 0, 0, 0.08);
+  --admiral-box-shadow-ShadowStroke: 0px -1px 0px 0px #D6D8DD inset;
+
+  /* 
+  * Font-family 
+  */
+  --admiral-font-family: 'VTB Group UI', sans-serif;
 }
 `;

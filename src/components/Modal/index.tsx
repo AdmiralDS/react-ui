@@ -35,7 +35,8 @@ const Overlay = styled.div<{ $overlayStyledCss: ReturnType<typeof css> }>`
   right: 0;
   background-color: ${({ theme }) => theme.color['Opacity/Modal']};
   transition: opacity 0.3s ease 0s;
-  z-index: ${({ theme }) => theme.zIndex.modal};
+  // z-index: ${({ theme }) => theme.zIndex.modal};
+  z-index: var(--admiral-z-index-modal, ${({ theme }) => theme.zIndex.modal});
   ${(p) => p.$overlayStyledCss}
   outline: none;
 `;

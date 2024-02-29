@@ -3,7 +3,14 @@ import { useEffect, useState } from 'react';
 import { addons } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
-import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider, LightThemeCss } from '@admiral-ds/react-ui';
+import {
+  DARK_THEME,
+  LIGHT_THEME,
+  FontsVTBGroup,
+  DropdownProvider,
+  LightThemeCss,
+  DarkThemeCss,
+} from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
@@ -38,7 +45,12 @@ function ThemeWrapper(props) {
     return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
   }, [channel, setDark]);
   // render your custom theme provider
-  return <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>{props.children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
+      {isDark ? <DarkThemeCss /> : <LightThemeCss />}
+      {props.children}
+    </ThemeProvider>
+  );
 }
 
 const StoryContainer = styled.div`
@@ -46,19 +58,21 @@ const StoryContainer = styled.div`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 `;
 
+// переназначение z-index так не работает, так как все компоненты с z-index рендерятся через портал
 export const decorators = [
   (renderStory) => (
     <ThemeWrapper>
       <GlobalStyles />
       <DropdownProvider>
-        <StoryContainer>{renderStory()}</StoryContainer>
+        <StoryContainer style={{ '--admiral-z-index-modal': '60', '--admiral-z-index-' } as React.CSSProperties}>
+          {renderStory()}
+        </StoryContainer>
       </DropdownProvider>
     </ThemeWrapper>
   ),
   (Story) => (
     <>
       <FontsVTBGroup />
-      <LightThemeCss />
       <Story />
     </>
   ),

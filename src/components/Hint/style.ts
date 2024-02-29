@@ -82,7 +82,8 @@ export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
-  z-index: ${({ theme }) => theme.zIndex.hint};
+  // z-index: ${({ theme }) => theme.zIndex.hint};
+  z-index: var(--admiral-z-index-hint, ${({ theme }) => theme.zIndex.hint});
 `;
 
 export const FakeTarget = styled.div`
