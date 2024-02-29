@@ -64,7 +64,7 @@ export const decorators = [
     <ThemeWrapper>
       <GlobalStyles />
       <DropdownProvider>
-        <StoryContainer style={{ '--admiral-z-index-modal': '60', '--admiral-z-index-' } as React.CSSProperties}>
+        <StoryContainer style={{ '--admiral-z-index-modal': '60' } as React.CSSProperties}>
           {renderStory()}
         </StoryContainer>
       </DropdownProvider>
