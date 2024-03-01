@@ -14,7 +14,7 @@ const Container = styled.div<{ $reduceMargin?: boolean }>`
 export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
   return (
     <>
-      <T font="Additional/M" as="div">
+      <T font="Body/Body 1 Short" as="div">
         Компонент имеет два размера – M (40 px) и XL (56 px). Два типа – Primary и Secondary.
       </T>
       <Container>
@@ -31,7 +31,7 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
           <EmailOutline />
         </FloatingButton>
       </Container>
-      <T font="Additional/M" as="div">
+      <T font="Body/Body 1 Short" as="div">
         Компонент можно использовать с бэйджами – Badge и Badge Dot. Для этого необходимо задать параметр badge.
         <br />
         Параметр badge - это специальный объект с настройками, где свойство <i>count</i> отвечает за числовой контент
@@ -76,7 +76,7 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
           <EmailOutline />
         </FloatingButton>
       </Container>
-      <T font="Additional/M" as="div">
+      <T font="Body/Body 1 Short" as="div">
         Бейджи могут иметь следующие статусы: Info, Error, Success, Warning. Все бейджи имеют одно-пиксельную внутреннюю
         обводку цвета «Neutral 00».
       </T>
@@ -108,7 +108,7 @@ export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
           <EmailOutline />
         </FloatingButton>
       </Container>
-      <T font="Additional/M" as="div">
+      <T font="Body/Body 1 Short" as="div">
         Компонент можно перевести в состояние disabled
       </T>
       <Container>

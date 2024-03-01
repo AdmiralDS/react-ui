@@ -59,5 +59,5 @@ export const Form = styled.form`
 
 export const StyledGroup = styled(OptionGroup)`
   color: ${(p) => p.theme.color['Purple/Purple 60 Main']};
-  ${typography['Main/S']}
+  ${typography['Header/H5']}
 `;

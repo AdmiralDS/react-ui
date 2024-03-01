@@ -24,7 +24,7 @@ export const FloatingButtonMenuModesTemplate = ({ icon, ...props }: FloatingButt
   return (
     <Layout>
       <div>
-        <T font="Additional/M" as="div" style={{ marginBottom: '16px', fontStyle: 'italic' }}>
+        <T font="Body/Body 1 Short" as="div" style={{ marginBottom: '16px', fontStyle: 'italic' }}>
           Контролируемый режим
         </T>
         <Toggle onChange={onChange}>Открыть/закрыть меню</Toggle>
@@ -43,7 +43,7 @@ export const FloatingButtonMenuModesTemplate = ({ icon, ...props }: FloatingButt
           <PrintOutline />
         </FloatingButton>
       </FloatingButtonMenu>
-      <T font="Additional/M" as="div" style={{ fontStyle: 'italic' }}>
+      <T font="Body/Body 1 Short" as="div" style={{ fontStyle: 'italic' }}>
         Неконтролируемый режим
       </T>
       <FloatingButtonMenu

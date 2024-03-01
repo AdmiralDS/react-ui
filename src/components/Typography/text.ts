@@ -25,6 +25,7 @@ export const getTextStyle = ({
   line-height: ${TYPOGRAPHY.lineHeight[lineHeight]};
 `;
 
+// Пора избавиться от старых значений типографики, они присутствуют только в компоненте T
 /**
  * @deprecated since version 0.0.35
  * Will be deleted in version 0.0.38
