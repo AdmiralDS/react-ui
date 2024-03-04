@@ -10,7 +10,7 @@ exports[`Link should render component 1`] = `
   text-decoration: none;
   position: relative;
   border-radius: 4px;
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   font-family: 'VTB Group UI',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -21,37 +21,37 @@ exports[`Link should render component 1`] = `
 }
 
 .c0:hover {
-  color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c0:focus {
-  color: #0046E2;
-  outline-color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+  outline-color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c0:focus *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c0:active {
-  color: #0132B0;
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c0:active *[fill^='#'] {
-  fill: #0132B0;
+  fill: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c0:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c0 *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 <div>

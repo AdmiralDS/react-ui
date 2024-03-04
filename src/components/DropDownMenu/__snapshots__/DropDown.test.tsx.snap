@@ -63,7 +63,7 @@ ul[data-dimension='s'] .c6 {
   pointer-events: none;
   position: fixed;
   overflow: visible;
-  z-index: 97;
+  z-index: var(--admiral-z-index-dropdown, 97);
 }
 
 .c3 {
@@ -729,7 +729,7 @@ ul[data-selectedid="13"] .c14.c14 {
   pointer-events: none;
   position: fixed;
   overflow: visible;
-  z-index: 97;
+  z-index: var(--admiral-z-index-dropdown, 97);
 }
 
 .c3 {
@@ -1045,7 +1045,7 @@ ul[data-dimension='s'] .c6 {
   pointer-events: none;
   position: fixed;
   overflow: visible;
-  z-index: 97;
+  z-index: var(--admiral-z-index-dropdown, 97);
 }
 
 .c3 {

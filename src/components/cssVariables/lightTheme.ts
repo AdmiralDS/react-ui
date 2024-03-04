@@ -1,7 +1,6 @@
 // language=css
 export const lightThemeText = `
 :root,
-:host,
 .admiral-theme-light {
   color-scheme: light;
 
