@@ -47,7 +47,7 @@ function ThemeWrapper(props) {
   // render your custom theme provider
   return (
     <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
-      {isDark ? <DarkThemeCss /> : <LightThemeCss />}
+      {/* {isDark ? <DarkThemeCss /> : <LightThemeCss />} */}
       {props.children}
     </ThemeProvider>
   );
@@ -64,7 +64,15 @@ export const decorators = [
     <ThemeWrapper>
       <GlobalStyles />
       <DropdownProvider>
-        <StoryContainer style={{ '--admiral-z-index-modal': '60' } as React.CSSProperties}>
+        <StoryContainer
+        // style={
+        //   {
+        //     '--admiral-color-Primary_Primary60Main': 'pink',
+        //     '--admiral-color-Neutral_Neutral90': 'green',
+        //     '--admiral-color-Primary_Primary70': 'purple',
+        //   } as React.CSSProperties
+        // }
+        >
           {renderStory()}
         </StoryContainer>
       </DropdownProvider>
