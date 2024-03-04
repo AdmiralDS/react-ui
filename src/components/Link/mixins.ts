@@ -25,7 +25,7 @@ export const styleColorMixin = css<{ $appearance?: AppearanceLink }>`
 `;
 
 export const styleMixin = css`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 
   &:hover {
     color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});

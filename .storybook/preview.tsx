@@ -47,7 +47,7 @@ function ThemeWrapper(props) {
   // render your custom theme provider
   return (
     <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
-      {/* {isDark ? <DarkThemeCss /> : <LightThemeCss />} */}
+      {isDark ? <DarkThemeCss /> : <LightThemeCss />}
       {props.children}
     </ThemeProvider>
   );

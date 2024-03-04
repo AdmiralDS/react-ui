@@ -73,6 +73,12 @@ export const TYPOGRAPHY: Typography = {
 export const typography = createTypography();
 
 export function createTypography() {
+  /**
+   * @deprecated since version 7.12.1
+   * Will be deleted in version 9.x.x
+   *
+   * use property 'Header/HL3' instead
+   */
   return {
     'Main/XXL': css`
       font-family: ${(p) => p.theme.fontFamily};
@@ -85,7 +91,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Header/H1' instead
+     */
     'Main/XL': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -97,7 +108,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Header/H2' instead
+     */
     'Main/L': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -109,7 +125,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Header/H3' instead
+     */
     'Main/M': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -121,7 +142,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Header/H5' instead
+     */
     'Main/S': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -133,7 +159,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Header/H6' instead
+     */
     'Main/XS-bold': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -145,7 +176,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Subtitle/Subtitle 1' instead
+     */
     'Main/XS': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -157,7 +193,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Subtitle/Subtitle 2' instead
+     */
     'Additional/L-bold': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -169,7 +210,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Body/Body 1 Long' instead
+     */
     'Additional/L': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -181,7 +227,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Body/Body 1 Short' instead
+     */
     'Additional/M': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -193,7 +244,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Body/Body 2 Long' instead
+     */
     'Additional/S': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -205,7 +261,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Subtitle/Subtitle 3' instead
+     */
     'Additional/S-bold': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -217,7 +278,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Body/Body 2 Short' instead
+     */
     'Additional/XS': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -229,7 +295,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Button/Button 1' instead
+     */
     'Button/M': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -243,7 +314,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Button/Button 2' instead
+     */
     'Button/S': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
@@ -257,7 +333,12 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 9.x.x
+     *
+     * use property 'Caption/Caption 1' instead
+     */
     'Caption/XS': css`
       font-family: ${(p) => p.theme.fontFamily};
       font-style: normal;
