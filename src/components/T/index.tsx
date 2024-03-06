@@ -24,6 +24,7 @@ const skeletonMixin = css`
   pointer-events: none;
 `;
 
+// Единственное место, где типографика берется из темы. Это будет проблемно перевести на css variables
 const Tspan = styled.span<{
   $font: FontName;
   $color?: ColorName;
@@ -34,10 +35,10 @@ const Tspan = styled.span<{
     return $skeleton
       ? 'transparent'
       : $color
+      ? theme.color[$color]
         ? theme.color[$color]
-          ? theme.color[$color]
-          : $color
-        : theme.color[DefaultFontColorName];
+        : $color
+      : theme.color[DefaultFontColorName];
   }};
   ${(p) => p.theme.typography[p.$font]};
   ${(p) => (p.$cssMixin ? p.$cssMixin : '')}

@@ -13,11 +13,11 @@ export const Chevron = styled(ChevronDownOutline)`
     margin: 0 8px 0 0;
   }
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
   }
   [data-disabled='true'] & {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${({ theme }) => theme.color['Neutral/Neutral 30']});
     }
   }
   [data-dimension='m'] & {
