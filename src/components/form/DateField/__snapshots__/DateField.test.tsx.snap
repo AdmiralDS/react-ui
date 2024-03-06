@@ -132,17 +132,17 @@ exports[`DateField should render component 1`] = `
   padding-right: 16px;
 }
 
-.c8>svg {
+.c8 svg {
   border-radius: 4px;
   display: block;
   width: 24px;
 }
 
-.c8>svg:focus {
+.c8 svg:focus {
   outline: none;
 }
 
-.c8>svg:focus-visible {
+.c8 svg:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
