@@ -1,8 +1,11 @@
 import * as React from 'react';
-
-import { InputField } from '@admiral-ds/react-ui';
-import type { InputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { MouseEvent, ChangeEvent } from 'react';
+import { useState, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+
+import { Hint, InputField, InputIconButton } from '@admiral-ds/react-ui';
+import type { InputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const DisplayContainer = styled.div`
@@ -11,22 +14,36 @@ const DisplayContainer = styled.div`
   }
 `;
 
+const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
+of mini units map to fluid grid column widths and row heights.`;
+
 export const InputFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
   themeBorderKind,
   ...props
 }: InputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
-  const [invalidInputValue, setInvalidInputValue] = React.useState<string>('Hello');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const [invalidInputValue, setInvalidInputValue] = useState<string>('Hello');
+  const [visible, setVisible] = useState(false);
+  const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+  const handleIconClick = (e: MouseEvent<SVGSVGElement>) => {
+    if (visible) {
+      handleVisibilityChange(false);
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const informerInputRef = useRef<HTMLDivElement>(null);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setValue(inputValue);
     props.onChange?.(e);
   };
 
-  const handleInvalidInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInvalidInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     const invalidInputValue = e.target.value;
     setInvalidInputValue(invalidInputValue);
     props.onChange?.(e);
@@ -87,6 +104,24 @@ export const InputFieldInputTemplate = ({
           data-container-id="inputFieldIdEight"
           label="Поле для ввода пароля (type='password')"
           type="password"
+        />
+        <InputField
+          containerRef={informerInputRef}
+          data-container-id="inputFieldIdNine"
+          label="Поле с информером"
+          //readOnly
+          icons={
+            <Hint
+              visible={visible}
+              onVisibilityChange={handleVisibilityChange}
+              visibilityTrigger="click"
+              renderContent={() => text}
+              targetElement={informerInputRef.current}
+              anchorId="hint_target"
+            >
+              <InputIconButton icon={HelpOutline} onClick={handleIconClick} />
+            </Hint>
+          }
         />
       </DisplayContainer>
     </ThemeProvider>
