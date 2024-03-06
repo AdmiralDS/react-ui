@@ -41,7 +41,7 @@ export const RadioButtonLabel = styled.div<{
   ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   fieldset:disabled && {
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   fieldset[data-dimension='s'] && {
     margin-left: ${LABEL_MARGIN_S};
@@ -51,8 +51,8 @@ export const RadioButtonLabel = styled.div<{
 `;
 
 const disabledCss = css`
-  border-color: ${(p) => p.theme.color['Neutral/Neutral 30']};
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+  border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
 `;
 
 export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $error?: boolean }>`
@@ -72,8 +72,9 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
 
   width: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
   height: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
-  border: ${BORDER_WIDTH_DEFAULT}px solid ${(p) => p.theme.color['Neutral/Neutral 50']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  border: ${BORDER_WIDTH_DEFAULT}px solid
+    var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 
   fieldset[data-dimension='s'] & {
     width: ${DIMENSION_S}px;
@@ -83,7 +84,8 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
   ${(p) => (p.$error ? `border-color: ${p.theme.color['Error/Error 60 Main']};` : '')}
 
   fieldset:disabled & {
-    border: ${BORDER_WIDTH_DEFAULT}px solid ${(p) => p.theme.color['Neutral/Neutral 30']};
+    border: ${BORDER_WIDTH_DEFAULT}px solid
+      var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;
 
@@ -107,13 +109,13 @@ const readOnlyCss = css`
 
   &:not(:checked) {
     & + div > span {
-      background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+      background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
     }
   }
 
   &:checked {
     & + div > span {
-      background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+      background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
   }
 `;
@@ -139,14 +141,14 @@ export const Input = styled.input<{ $dimension: Dimension }>`
 
   &:not(:checked):disabled {
     & + div > span {
-      background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+      background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
     }
   }
 
   &:checked:disabled {
     & + div > span {
       border: ${BORDER_WIDTH_CHECKED}px solid ${(p) => p.theme.color['Primary/Primary 30']};
-      background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+      background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
   }
 
@@ -217,7 +219,7 @@ export const RadioButtonComponent = styled.label<{
     ${typography['Body/Body 2 Short']};
   }
   fieldset:disabled && {
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: default;
   }
 

@@ -138,12 +138,12 @@ const Item = styled.div<{
   &&[data-disabled='true'] {
     cursor: not-allowed;
     background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     && *[fill^='#'] {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
     && input[type='checkbox'] + * [fill^='#'] {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
+      fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
   }
 `;

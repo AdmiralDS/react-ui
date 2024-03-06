@@ -295,7 +295,7 @@ export const OptionWrapper = styled.div<{ $dimension?: ComponentDimension }>`
 
 const ShadowContainerMixin = css`
   ${typography['Body/Body 1 Short']}
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   ${(p) => p.theme.shadow['Shadow 08']}

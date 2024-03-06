@@ -95,7 +95,7 @@ export const ItemTitle = styled.button`
 `;
 
 export const ItemWrapper = styled.div<{ $opened?: boolean; disabled?: boolean }>`
-  border-bottom: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   & > ${ItemTitle} ${Chevron} {
     transform: ${(p) => (p.$opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }

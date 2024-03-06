@@ -8,7 +8,7 @@ const BlueText = styled(T)`
 `;
 
 const CustomParagraph = styled(T)`
-  color: ${(p) => p.theme.color['Neutral/Neutral 70']};
+  color: var(--admiral-color-Neutral_Neutral70, ${(p) => p.theme.color['Neutral/Neutral 70']});
 `;
 
 const OrangeColor = css`

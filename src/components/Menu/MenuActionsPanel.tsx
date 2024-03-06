@@ -36,14 +36,14 @@ const TextWrapper = styled.div`
   white-space: nowrap;
 `;
 const StyledMenuItem = styled(MenuItem)`
-  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 
   &&[data-disabled='true'] {
     background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-    color: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     && *[fill^='#'] {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
   }
 `;
@@ -69,8 +69,8 @@ export function getHighlightedFilteredOptions(
           chunks.includes(part.toLowerCase()) ? <HighlightText key={i}>{part}</HighlightText> : part,
         )
       : !searchValue
-        ? option.label
-        : null;
+      ? option.label
+      : null;
     if (itemValue) {
       model.push({
         id: option.id,

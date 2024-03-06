@@ -115,7 +115,7 @@ export const FloatingButtonContent = styled.div<{
 
 const badgeMixin = css`
   position: absolute;
-  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
+  border: 1px solid var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
 export const Badge = styled(BaseBadge)`

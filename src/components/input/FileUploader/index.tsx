@@ -49,11 +49,11 @@ const Icon = styled(AttachFileOutline)<{ $dimension?: Dimension }>`
 
 const disabledStyles = css`
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
-  color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
 
   & svg {
     > * {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

@@ -90,7 +90,7 @@ const MyItem = styled.div<{
     cursor: default;
     background-color: ${({ theme, selected }) =>
       selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   &&[data-hovered='true'] {

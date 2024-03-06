@@ -35,7 +35,7 @@ export const CheckboxComponentWrapper = styled.label<{
     ${typography['Body/Body 2 Short']};
   }
   fieldset:disabled && {
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: default;
   }
 
@@ -48,8 +48,8 @@ const readOnlyCss = css`
 
   &:not(:checked) {
     & + div > span {
-      border-color: ${(p) => p.theme.color['Neutral/Neutral 30']};
-      background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+      border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+      background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
     }
   }
 
@@ -58,7 +58,7 @@ const readOnlyCss = css`
       border-color: ${(p) => p.theme.color['Primary/Primary 30']};
       background-color: ${(p) => p.theme.color['Primary/Primary 30']};
       & *[fill^='#'] {
-        fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
+        fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
       }
       & > svg {
         visibility: visible;
@@ -123,8 +123,8 @@ export const Input = styled.input<{
 
     &:not(:checked) {
       & + div > span {
-        border-color: ${(p) => p.theme.color['Neutral/Neutral 30']};
-        background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
+        border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+        background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
       }
     }
 
@@ -133,7 +133,7 @@ export const Input = styled.input<{
         border-color: ${(p) => p.theme.color['Primary/Primary 30']};
         background-color: ${(p) => p.theme.color['Primary/Primary 30']};
         & *[fill^='#'] {
-          fill: ${(p) => p.theme.color['Neutral/Neutral 00']};
+          fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
         }
         & > svg {
           visibility: visible;
@@ -240,14 +240,14 @@ export const CheckboxComponentBackground = styled.span<{
 
   /* disable inheritance from parent elements */
   line-height: initial;
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   border: 1px solid ${(p) => (p.$error ? p.theme.color['Error/Error 60 Main'] : p.theme.color['Neutral/Neutral 50'])};
   & *[fill^='#'] {
     fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 10'] : p.theme.color['Neutral/Neutral 00'])};
   }
   fieldset:disabled && {
     & *[fill^='#'] {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 10']};
+      fill: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
     }
   }
 `;
@@ -289,7 +289,7 @@ export const CheckboxComponentLabel = styled.div<{
   ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
   fieldset:disabled && {
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   fieldset[data-dimension='s'] && {
     ${typography['Body/Body 2 Short']}

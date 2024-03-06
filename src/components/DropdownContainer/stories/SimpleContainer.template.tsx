@@ -7,7 +7,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 const StyledText = styled.div`
   ${typography['Body/Body 1 Short']}
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   padding: 8px;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};

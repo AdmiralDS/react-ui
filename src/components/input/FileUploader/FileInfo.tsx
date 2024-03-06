@@ -197,7 +197,7 @@ const Close = styled.div`
   & svg {
     width: 24px;
     height: 24px;
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 

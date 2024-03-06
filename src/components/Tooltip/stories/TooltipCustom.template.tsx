@@ -10,7 +10,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const CustomP = styled.p<{ $dimension?: TooltipDimension }>`
   padding: 0;
   margin: 0;
-  color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   ${(p) => (p.$dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Caption/Caption 1'])};
   ${(p) => (p.$dimension === 's' ? 'font-weight: bold;' : '')};
 `;

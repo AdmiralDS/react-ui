@@ -30,7 +30,7 @@ function customOptionRender({ value, ...props }: RenderPropsType<ReactNode> & Me
 }
 
 const containerContrastBorder = css`
-  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+  border: dashed 2px var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const InputExCustomTemplate = ({

@@ -24,7 +24,7 @@ const focusStyle = css`
   &:focus-visible {
     outline-offset: -4px;
     &[data-appearance~='primary'] {
-      outline: ${(p) => p.theme.color['Neutral/Neutral 00']} solid 2px;
+      outline: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']}) solid 2px;
     }
     &[data-appearance~='secondary'] {
       outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;

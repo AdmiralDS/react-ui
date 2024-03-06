@@ -44,7 +44,7 @@ const WrapperVertical = styled.div`
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   font-size: 16px;
   line-height: 24px;
 `;
