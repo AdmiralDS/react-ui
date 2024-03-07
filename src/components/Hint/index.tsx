@@ -68,6 +68,8 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей хинт */
     closeButtonAriaLabel?: string;
   };
+  /** Появление хинта не приводит к перемещению фокуса */
+  preventFocusSteal?: boolean;
 }
 
 export const Hint: React.FC<HintProps> = ({
@@ -85,6 +87,7 @@ export const Hint: React.FC<HintProps> = ({
   anchorId: anchorIdProp,
   anchorCssMixin,
   locale,
+  preventFocusSteal,
   ...props
 }) => {
   const { rootRef } = React.useContext(DropdownContext);
@@ -283,6 +286,7 @@ export const Hint: React.FC<HintProps> = ({
             anchorId={anchorId}
             hideHint={hideHint}
             locale={locale}
+            preventFocusSteal={preventFocusSteal}
             {...props}
           />
         </Portal>
