@@ -11,7 +11,7 @@ const Text = styled.div`
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 8px;
-  color: ${({ theme }) => theme.color[DefaultFontColorName]};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
 `;
 
 const onSelectAvatar = (id: string) => {

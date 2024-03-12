@@ -8,7 +8,7 @@ import { resizePaddings } from '../common/dom/resizePaddings';
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin: 0;
   padding: ${({ $mobile, $displayCloseIcon }) => {
     if ($mobile) {

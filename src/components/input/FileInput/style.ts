@@ -36,11 +36,11 @@ export const hoverStyles = css`
   &[data-isdragover='true'],
   &:hover {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
 

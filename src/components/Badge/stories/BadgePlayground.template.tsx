@@ -16,12 +16,14 @@ const String = styled.div<{ appearance?: BadgeProps['appearance'] }>`
   display: flex;
   align-items: center;
   ${({ appearance, theme }) =>
-    appearance && appearance.indexOf('white') > -1 && `background: ${theme.color['Neutral/Neutral 05']};`}
+    appearance &&
+    appearance.indexOf('white') > -1 &&
+    `background: var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']});`}
   & > * {
     margin-right: 16px;
   }
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const BadgePlaygroundTemplate = (props: BadgeProps) => {

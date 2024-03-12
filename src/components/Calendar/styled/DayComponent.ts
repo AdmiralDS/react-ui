@@ -35,7 +35,7 @@ export const DayComponent = styled.div<DayComponentProps>`
   padding: ${DAY_PADDING};
   margin-bottom: ${DAY_MARGIN_BOTTOM};
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   box-sizing: border-box;
   user-select: none;
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};

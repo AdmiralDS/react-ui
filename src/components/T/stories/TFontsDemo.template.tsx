@@ -19,7 +19,7 @@ const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  color: ${({ theme }) => theme.color[DefaultFontColorName]};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
 
   th,
   td[data-label] {
@@ -29,7 +29,7 @@ const Table = styled.table`
   }
   th {
     ${typography['Header/H3']}
-    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   td[data-label]:last-child {
     padding: 8px;
@@ -48,7 +48,7 @@ const FontDesc = styled.table`
     white-space: nowrap;
   }
   td:first-child {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     padding-right: 16px;
   }
 `;

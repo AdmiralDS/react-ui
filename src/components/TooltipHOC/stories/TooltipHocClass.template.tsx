@@ -10,7 +10,7 @@ type TestType = {
 };
 
 const StyledH2 = styled.h2`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 class Test extends React.Component<TestType> {

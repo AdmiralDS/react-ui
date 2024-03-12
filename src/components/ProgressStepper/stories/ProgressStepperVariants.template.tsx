@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Sect = styled.div`
   margin-bottom: 60px;
   ${typography['Body/Body 1 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   label {
     display: block;
     margin-bottom: 20px;

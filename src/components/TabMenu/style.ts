@@ -130,7 +130,7 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
     display: inline-block;
     flex: 1 0 auto;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
     width: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
     height: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;

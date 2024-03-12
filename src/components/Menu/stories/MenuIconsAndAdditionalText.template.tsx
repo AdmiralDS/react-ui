@@ -90,7 +90,7 @@ const StyledMenuItem = styled(MenuItem)`
 
 const StyledAdditionalText = styled.div`
   ${typography['Caption/Caption 1']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 `;
 

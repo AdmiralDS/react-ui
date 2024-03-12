@@ -18,7 +18,7 @@ export const RadioButtonHover = styled.div<{ $dimension: Dimension }>`
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: ${(p) => p.theme.color['Opacity/Hover']};
+  background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -178,7 +178,7 @@ export const Input = styled.input<{ $dimension: Dimension }>`
     &:active {
       & + div > div {
         ${(p) => !p.readOnly && `visibility: visible`};
-        background: ${(p) => p.theme.color['Opacity/Press']};
+        background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
       }
       &:focus-visible + div {
         outline: none;

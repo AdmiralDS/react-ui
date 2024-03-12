@@ -91,7 +91,7 @@ const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   min-width: ${({ $mobile }) => ($mobile ? 'calc(100% - 16px)' : '320px')};
   max-width: calc(100% - 16px);
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;
   transform: ${({ $position }) => ($position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};

@@ -68,7 +68,7 @@ const Item = styled.button`
   &:focus {
     border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
     & ${ItemContent} {
-      background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+      background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     }
   }
   &:focus,
@@ -77,10 +77,10 @@ const Item = styled.button`
   }
 
   &:hover ${ItemContent} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:active ${ItemContent} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
   }
 `;
 

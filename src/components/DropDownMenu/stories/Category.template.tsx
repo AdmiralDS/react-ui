@@ -9,7 +9,7 @@ import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/Car
 
 const StyledText = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   pointer-events: none;
 `;
 

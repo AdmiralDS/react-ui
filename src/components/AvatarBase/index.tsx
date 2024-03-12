@@ -40,10 +40,10 @@ const getTextColor = css<{ $appearance: AvatarAppearance | { background?: string
         return theme.color[DefaultFontColorName];
       case 'neutral3':
       case 'grey':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'neutral4':
       case 'dark':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       default:
         return $appearance?.text || theme.color[DefaultFontColorName];
     }
@@ -104,13 +104,13 @@ const getIconColor = css<{ $appearance: AvatarAppearance | { background?: string
       case 'white':
       case 'neutral2':
       case 'light':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       case 'neutral3':
       case 'grey':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'neutral4':
       case 'dark':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       default:
         return $appearance?.icon || theme.color['Neutral/Neutral 50'];
     }

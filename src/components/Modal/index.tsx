@@ -61,7 +61,7 @@ const width = css<{ $dimension: Dimension; $mobile?: boolean }>`
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin: 0;
   padding: ${({ $mobile, $displayCloseIcon }) => {
     if ($mobile) {
@@ -149,7 +149,7 @@ const ModalComponent = styled.div<{ $dimension: Dimension; $mobile?: boolean }>`
   ${({ theme }) => theme.shadow['Shadow 16']}
   border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
   ${({ $mobile }) => ($mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   outline: none;
 `;
 

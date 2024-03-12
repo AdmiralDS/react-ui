@@ -34,7 +34,7 @@ const IconContainer = styled.div<{ $dimension: BreadcrumbsProps['dimension'] }>`
   margin-right: 8px;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 
@@ -56,15 +56,15 @@ const TextWithTooltip = TooltipHoc(TextWrapper);
 
 const activeCrumbMixin = css`
   &:hover {
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     ${IconContainer} *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
   &:active {
-    color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     ${IconContainer} *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 80']};
+      fill: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     }
   }
 `;
@@ -74,7 +74,7 @@ export const CrumbAnchor = styled.a<{ $active?: boolean }>`
   align-items: center;
   text-decoration: none;
   position: relative;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 
   ${({ $active }) => $active && activeCrumbMixin}
 
@@ -82,7 +82,7 @@ export const CrumbAnchor = styled.a<{ $active?: boolean }>`
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       border-radius: 4px;
       top: 0;
       left: 0;

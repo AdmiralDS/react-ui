@@ -21,11 +21,11 @@ const primaryAppearanceMixin = css<{ $disabled: boolean }>`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
   }
 `;
 

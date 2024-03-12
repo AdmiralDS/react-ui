@@ -23,9 +23,9 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   & > span {
     min-width: 20px;
@@ -34,13 +34,13 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   &:hover {
     cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
 
   &:active {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
   }
 

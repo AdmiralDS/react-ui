@@ -15,16 +15,16 @@ const circleBackground = css<{ $background: TagKind | string }>`
     switch ($background) {
       case 'success':
       case 'green':
-        return theme.color['Success/Success 50 Main'];
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       case 'primary':
       case 'blue':
-        return theme.color['Primary/Primary 60 Main'];
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       case 'danger':
       case 'red':
-        return theme.color['Error/Error 60 Main'];
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
       case 'warning':
       case 'orange':
-        return theme.color['Warning/Warning 50 Main'];
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
       default:
         return $background;
     }
@@ -47,7 +47,7 @@ const wrapperBackground = css<{ $background: TagKind | string }>`
       case 'orange':
         return theme.color['Warning/Warning 10'];
       case 'neutral':
-        return theme.color['Neutral/Neutral 10'];
+        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
       default:
         return $background || theme.color['Neutral/Neutral 10'];
     }
@@ -151,13 +151,13 @@ export const Wrapper = styled.button<{
       left: -4px;
       right: -4px;
       border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }
 `;
 
 export const Text = styled.span`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,7 +184,7 @@ export const Icon = styled.div`
   margin-right: 4px;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 
@@ -196,12 +196,12 @@ export const StatusIcon = styled.div`
   margin-left: 4px;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:hover {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
   }
 `;

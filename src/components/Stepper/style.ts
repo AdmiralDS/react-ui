@@ -139,7 +139,7 @@ export const StepWrapper = styled.li<{
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
       top: 0px;
       left: 0px;
@@ -171,7 +171,7 @@ export const Content = styled.div<{ $lineClamp: 1 | 2 | 3 }>`
     return 3;
   }};
   overflow: hidden;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   [data-disabled='true'] & {
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
   }

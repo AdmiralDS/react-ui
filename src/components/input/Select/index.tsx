@@ -48,7 +48,7 @@ export type { SearchFormat } from './types';
  */
 
 export const DropDownText = styled(OptionWrapper)`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 `;
 
 type PartialOption = { value: string; disabled: boolean } & IConstantOption;

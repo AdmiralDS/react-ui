@@ -8,7 +8,7 @@ import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
 
 export const Separator = styled(ChevronRight)`
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   flex-shrink: 0;
   margin-left: 8px;

@@ -25,7 +25,7 @@ export const YearComponent = styled.div<YearComponentProps>`
   border-radius: ${YEAR_BORDER_RADIUS};
   background: transparent;
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   user-select: none;
   cursor: pointer;
 

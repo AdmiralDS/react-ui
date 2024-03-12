@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const StyledDrop = styled(DropdownContainer)`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
   ${(props) => props.theme.shadow['Shadow 08']};
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};

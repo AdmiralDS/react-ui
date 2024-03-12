@@ -49,10 +49,12 @@ const backGroundColorMixin = css<{ $status?: NotificationItemStatus }>`
 
 const borderColorMixin = css<{ $status?: NotificationItemStatus }>`
   border-color: ${({ theme, $status }) => {
-    if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if ($status === 'error') return theme.color['Error/Error 60 Main'];
-    if ($status === 'success') return theme.color['Success/Success 50 Main'];
-    return theme.color['Primary/Primary 60 Main'];
+    if ($status === 'warning')
+      return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+    if ($status === 'error') return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+    if ($status === 'success')
+      return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+    return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
   }};
 `;
 
@@ -82,13 +84,13 @@ const Content = styled.div`
 
 const Title = styled.div`
   ${typography['Subtitle/Subtitle 3']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin-bottom: 4px;
 `;
 
 const CustomBody = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const ButtonPanel = styled.div`
@@ -114,10 +116,12 @@ const IconWrapper = styled.div<{ $status?: NotificationItemStatus }>`
     height: 24px;
     & *[fill^='#'] {
       fill: ${({ theme, $status }) => {
-        if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
-        if ($status === 'error') return theme.color['Error/Error 60 Main'];
-        if ($status === 'success') return theme.color['Success/Success 50 Main'];
-        return theme.color['Primary/Primary 60 Main'];
+        if ($status === 'warning')
+          return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+        if ($status === 'error') return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+        if ($status === 'success')
+          return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       }};
     }
   }

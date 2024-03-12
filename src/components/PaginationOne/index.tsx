@@ -22,7 +22,7 @@ const ComplexWrapper = styled.div`
   user-select: none;
   min-width: 696px;
   justify-content: space-between;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const SimpleWrapper = styled(ComplexWrapper)`

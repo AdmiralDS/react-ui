@@ -22,12 +22,12 @@ export const Content = styled.div`
   }
   white-space: nowrap;
   ${typography['Body/Body 2 Short']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   &:hover {
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:active {
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   [data-disabled='true'] && {
     color: ${({ theme }) => theme.color['Neutral/Neutral 30']};

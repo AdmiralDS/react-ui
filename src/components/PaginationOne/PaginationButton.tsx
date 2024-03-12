@@ -16,7 +16,7 @@ const Button = styled.button`
   overflow: visible;
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:hover {
@@ -33,7 +33,7 @@ const Button = styled.button`
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       top: -4px;
       bottom: -4px;
       left: -4px;

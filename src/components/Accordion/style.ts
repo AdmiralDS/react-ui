@@ -13,11 +13,11 @@ export const Chevron = styled(ChevronDownOutline)`
     margin: 0 8px 0 0;
   }
   & *[fill^='#'] {
-    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   [data-disabled='true'] & {
     & *[fill^='#'] {
-      fill: var(--admiral-color-Neutral_Neutral30, ${({ theme }) => theme.color['Neutral/Neutral 30']});
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
   [data-dimension='m'] & {
@@ -64,19 +64,19 @@ export const ItemTitle = styled.button`
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: ${(p) => p.theme.color[DefaultFontColorName]};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   ${typography['Subtitle/Subtitle 2']}
   &:hover {
-    background: ${(p) => p.theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
-    background: ${(p) => p.theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
   &:focus {
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       top: -1px;
       left: 0;
       bottom: -1px;
@@ -103,7 +103,7 @@ export const ItemWrapper = styled.div<{ $opened?: boolean; disabled?: boolean }>
 `;
 
 export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`
-  color: ${(p) => p.theme.color[DefaultFontColorName]};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   overflow-y: auto;
   max-height: ${(p) => p.$contentMaxHeight};
   padding: 4px 16px 16px 16px;
@@ -128,10 +128,16 @@ export const AccordionWrapper = styled.div<{
       padding: ${({ $dimension }) => ($dimension === 'l' ? '15px 16px' : '9px 16px')};
     }
     border-top: 1px solid
-      ${({ theme, $hideTopDivider }) => ($hideTopDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
+      ${({ theme, $hideTopDivider }) =>
+        $hideTopDivider
+          ? 'transparent'
+          : `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
   }
   & > ${ItemWrapper}:last-child {
     border-bottom: 1px solid
-      ${({ theme, $hideBottomDivider }) => ($hideBottomDivider ? 'transparent' : theme.color['Neutral/Neutral 20'])};
+      ${({ theme, $hideBottomDivider }) =>
+        $hideBottomDivider
+          ? 'transparent'
+          : `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
   }
 `;

@@ -23,28 +23,28 @@ const background = css<{ $appearance: BadgeAppearance }>`
   background: ${({ $appearance, theme }) => {
     switch ($appearance) {
       case 'info':
-        return theme.color['Primary/Primary 60 Main'];
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       case 'warning':
-        return theme.color['Warning/Warning 50 Main'];
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
       case 'success':
-        return theme.color['Success/Success 50 Main'];
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       case 'error':
-        return theme.color['Error/Error 60 Main'];
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
       case 'grey':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       case 'dark':
-        return theme.color['Neutral/Neutral 80'];
+        return `var(--admiral-color-Neutral_Neutral80, ${theme.color['Neutral/Neutral 80']})`;
       case 'whiteBlue':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'white':
       case 'whiteInactive':
       case 'whiteDisable':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       case 'light':
       case 'lightInactive':
       case 'lightDisable':
       default:
-        return theme.color['Neutral/Neutral 10'];
+        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
     }
   }};
 `;
@@ -57,21 +57,21 @@ const color = css<{ $appearance: BadgeAppearance }>`
       case 'success':
       case 'error':
       case 'grey':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'dark':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       case 'whiteBlue':
-        return theme.color['Primary/Primary 60 Main'];
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       case 'lightInactive':
       case 'whiteInactive':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       case 'whiteDisable':
       case 'lightDisable':
-        return theme.color['Neutral/Neutral 30'];
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
       case 'white':
       case 'light':
       default:
-        return theme.color['Neutral/Neutral 90'];
+        return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
     }
   }};
 `;

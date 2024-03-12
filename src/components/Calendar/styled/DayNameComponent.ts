@@ -13,6 +13,6 @@ export const DayNameComponent = styled.div`
   padding: ${DAY_NAME_PADDING};
   margin-bottom: ${DAY_NAME_MARGIN_BOTTOM};
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   box-sizing: border-box;
 `;

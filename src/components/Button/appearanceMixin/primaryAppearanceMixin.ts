@@ -9,13 +9,13 @@ export const primaryAppearanceMixin = css`
   }
 
   &&&:hover {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
-    border-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
+    border-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 
   &&&:active {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
-    border-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
+    border-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
   }
 
   &&&&[data-appearance~='disabled'],

@@ -33,7 +33,7 @@ const SubMenuWrapper = styled.div`
 
 const InnerContainer = styled.div`
   background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ theme }) => theme.shadow['Shadow 08']}
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
   overflow: hidden;

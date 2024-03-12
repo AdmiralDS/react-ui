@@ -11,17 +11,17 @@ const selectedMixin = css`
 
 const hoverMixin = css`
   background: ${({ theme }) => theme.color['Opacity/Hover']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 
 const pressMixin = css`
   background: ${({ theme }) => theme.color['Opacity/Press']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 
@@ -45,7 +45,7 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
   border: 2px solid transparent;
   border-radius: 20px;
   ${typography['Body/Body 1 Short']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   background: transparent;
   border: none;
   appearance: none;
@@ -57,7 +57,7 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
   -webkit-tap-highlight-color: transparent;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled {

@@ -21,22 +21,22 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
 
   &:hover {
     cursor: pointer;
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+          fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
         }
       }
     }
   }
 
   &:active {
-    color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Primary/Primary 80']};
+          fill: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
         }
       }
     }
@@ -68,12 +68,12 @@ const primaryAppearanceMixin = css`
 `;
 
 const secondaryAppearanceMixin = css`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${IconContainer} {
     svg {
       path {
-        fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+        fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
       }
     }
   }

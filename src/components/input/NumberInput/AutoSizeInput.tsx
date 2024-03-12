@@ -51,8 +51,9 @@ export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
   background: none;
   border: 1px solid
     ${({ theme, $status }) => {
-      if ($status === 'error') return theme.color['Error/Error 60 Main'];
-      if ($status === 'success') return theme.color['Success/Success 50 Main'];
+      if ($status === 'error') return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      if ($status === 'success')
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       return theme.color['Neutral/Neutral 40'];
     }};
   border-radius: inherit;

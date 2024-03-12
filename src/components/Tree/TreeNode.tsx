@@ -125,7 +125,7 @@ const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   > svg {
     width: 100%;
     height: 100%;
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 
