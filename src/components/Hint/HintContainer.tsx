@@ -22,6 +22,7 @@ export interface HintContainerPropsType extends Omit<React.HTMLAttributes<HTMLDi
   locale?: {
     closeButtonAriaLabel?: string;
   };
+  preventFocusSteal?: boolean;
 }
 
 export type RefType = HTMLDivElement | null;
@@ -39,6 +40,7 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       hideHint,
       startRecalculation,
       locale,
+      preventFocusSteal,
       ...props
     },
     ref,
@@ -71,13 +73,13 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
 
     // trap focus
     React.useLayoutEffect(() => {
-      if (hintRef.current && visibilityTrigger === 'click') {
+      if (!preventFocusSteal && hintRef.current && visibilityTrigger === 'click') {
         const focusableEls = getKeyboardFocusableElements(hintRef.current);
         setFirstFocusableChild(focusableEls[0]);
         setLastFocusableChild(focusableEls[focusableEls.length - 1]);
         (focusableEls[0] as any)?.focus();
       }
-    }, [visibilityTrigger, content]);
+    }, [visibilityTrigger, content, preventFocusSteal]);
 
     React.useImperativeHandle(ref, () => hintRef.current);
 

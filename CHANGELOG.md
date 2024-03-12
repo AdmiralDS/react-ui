@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.13.0](https://github.com/AdmiralDS/react-ui/compare/v7.12.2...v7.13.0) (2024-03-07)
+
+
+### Features
+
+* **Hint:** add preventFocusSteal ([31cd160](https://github.com/AdmiralDS/react-ui/commit/31cd16025f4224af18d3748a2da7f49d6cfaf9a8))
+
+### [7.12.2](https://github.com/AdmiralDS/react-ui/compare/v7.12.1...v7.12.2) (2024-03-01)
+
+
+### Bug Fixes
+
+* add missing spaces ([d023faf](https://github.com/AdmiralDS/react-ui/commit/d023faf559b80d56324c92b9f139d7da30f538c0))
+
 ### [7.12.1](https://github.com/AdmiralDS/react-ui/compare/v7.12.0...v7.12.1) (2024-02-22)
 
 

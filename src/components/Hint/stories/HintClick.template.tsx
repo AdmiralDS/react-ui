@@ -14,6 +14,13 @@ export const HintClickTemplate = ({
 }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (visible) {
+      setVisible(false);
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
@@ -32,6 +39,7 @@ export const HintClickTemplate = ({
           iconStart={<HelpOutline aria-hidden />}
           aria-label="Additional information"
           aria-describedby="hint_click"
+          onClick={handleButtonClick}
         />
       </Hint>
     </ThemeProvider>

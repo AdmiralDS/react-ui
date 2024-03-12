@@ -78,7 +78,7 @@ export const HintContent = styled.div`
   }
 `;
 
-export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: string }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
