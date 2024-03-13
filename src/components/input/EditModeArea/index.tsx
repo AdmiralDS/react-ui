@@ -149,7 +149,7 @@ const MultilineMixin = css`
   }
 `;
 
-const SingleMixin = css`
+const SinglelineMixin = css`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -193,11 +193,10 @@ const Text = styled.div<{ $multiline?: boolean }>`
   align-items: center;
   cursor: text;
   margin-right: 12px;
-  padding-left: 16px;
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 
   ${TypographyMixin};
-  ${(p) => (p.$multiline ? MultilineMixin : SingleMixin)}
+  ${(p) => (p.$multiline ? MultilineMixin : SinglelineMixin)}
 
   [data-disabled='true'] & {
     cursor: default;
@@ -266,7 +265,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
       onClear,
       value,
       showTooltip = true,
-      multilineView = false,
+      multilineView = true,
       ...props
     },
     ref,
