@@ -49,9 +49,10 @@ const EditArea = styled(TextArea)`
   }
 `;
 
-const EditButton = styled(Button)`
+const EditButton = styled(Button)<{ $multiline: boolean }>`
   margin-left: 4px;
   flex-shrink: 0;
+  ${(p) => p.$multiline && 'align-self: flex-start;'}
 `;
 
 const multilineIcon = css`
@@ -348,6 +349,8 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 dimension={editDimension}
                 value={value}
                 containerRef={wrapperRef}
+                autoHeight={multilineView}
+                rows={1}
                 {...props}
               />
               <EditButton
@@ -357,6 +360,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 disabled={props.status === 'error'}
                 onClick={handleConfirm}
                 iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
+                $multiline={multilineView}
               />
               <EditButton
                 appearance="secondary"
@@ -364,6 +368,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 displayAsSquare
                 onClick={handleCancel}
                 iconStart={<CancelIcon height={iconSize} width={iconSize} />}
+                $multiline={multilineView}
               />
             </>
           )
