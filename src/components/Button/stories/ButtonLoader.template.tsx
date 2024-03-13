@@ -8,7 +8,10 @@ const Separator = styled.div`
 `;
 
 const DarkDiv = styled.div`
-  background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+  background-color: var(
+    --admiral-color-Special_DarkStaticNeutral00,
+    ${(p) => p.theme.color['Special/Dark Static Neutral 00']}
+  );
   padding: 2px;
 `;
 

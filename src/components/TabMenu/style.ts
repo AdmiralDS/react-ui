@@ -72,7 +72,7 @@ export const Underline = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   height: ${LINE_HEIGHT};
   transition: all 0.2s ease-out;
 `;
@@ -147,10 +147,10 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
     background: ${({ theme }) => theme.color['Opacity/Press']};
   }
   &:disabled {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: default;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

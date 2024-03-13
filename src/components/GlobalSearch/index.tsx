@@ -34,7 +34,7 @@ const Drop = styled(DropdownContainer)`
   padding: 8px 0px;
   ${(p) => p.theme.shadow['Shadow 08']}
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -44,7 +44,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   align-items: center;
 
   & > svg {
-    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     display: block;
     width: ${iconSizeValue}px;
 
@@ -65,7 +65,7 @@ const Container = styled.div`
   gap: 8px;
   align-items: stretch;
   flex: 1 0 0;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
   background: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
@@ -161,7 +161,7 @@ const SubmitButton = styled.div`
 
   color: ${(props) => props.theme.color['Special/Static White']};
   &&& *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 
   &:hover {

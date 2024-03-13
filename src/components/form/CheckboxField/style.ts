@@ -225,7 +225,7 @@ export const CheckboxComponentBackground = styled.span<{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   ${(p) => `
     width: ${p.$dimension === 's' ? 16 : 20}px;
     height: ${p.$dimension === 's' ? 16 : 20}px;

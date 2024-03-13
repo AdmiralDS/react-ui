@@ -10,7 +10,7 @@ const StyledText = styled.div`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   padding: 8px;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   ${(p) => p.theme.shadow['Shadow 08']}
   overflow: auto;
 `;

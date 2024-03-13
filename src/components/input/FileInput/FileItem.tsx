@@ -60,7 +60,7 @@ const PreviewWrapper = styled.div<{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   border-width: 1px;
   border-style: solid;
   ${typography['Body/Body 2 Long']};
@@ -78,7 +78,7 @@ const hoveredFileTypeIconCss = css`
       &::before {
         content: '';
         position: absolute;
-        border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+        border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -104,7 +104,7 @@ const ImagePreview = styled.div`
   min-width: 40px;
   width: 40px;
   height: 40px;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   margin-right: 8px;
   overflow: hidden;
 
@@ -118,7 +118,7 @@ const ImagePreview = styled.div`
 const IconWrapper = styled.div<{ $status?: Status; $showHover: boolean }>`
   position: relative;
   margin-right: 8px;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   width: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 

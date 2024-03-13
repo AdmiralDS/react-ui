@@ -27,7 +27,7 @@ const Pane = styled.div<{ $dimension?: PaneDimension }>`
     }
   }};
   width: 100%;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   display: flex;
   justify-content: space-between;
 `;

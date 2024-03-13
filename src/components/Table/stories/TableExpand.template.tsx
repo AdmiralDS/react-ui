@@ -9,7 +9,7 @@ const AmountCell = styled.div`
 
   &[data-disabled='true'] {
     & > * {
-      color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
@@ -25,7 +25,7 @@ const Content = styled.div`
   height: 100%;
   flex-direction: column;
   padding-left: 16px;
-  background: ${({ theme }) => theme.color['Special/Elevated BG']};
+  background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   & > div {
     margin-bottom: 8px;
   }

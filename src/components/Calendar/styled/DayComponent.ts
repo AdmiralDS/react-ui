@@ -21,8 +21,8 @@ const DAY_MARGIN_BOTTOM = '4px';
 
 const hoverMixin = css`
   &:hover:after {
-    border: 1px solid ${(p) => p.theme.color['Primary/Primary 60 Main']};
-    background: ${(p) => p.theme.color['Special/Elevated BG']};
+    border: 1px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+    background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
     z-index: -1;
   }
 `;
@@ -48,20 +48,23 @@ export const DayComponent = styled.div<DayComponentProps>`
     top: 0;
     bottom: 0;
     border: 1px solid
-      ${({ theme, $today, $selected }) => ($today && !$selected ? theme.color['Neutral/Neutral 90'] : 'transparent')};
+      ${({ theme, $today, $selected }) =>
+        $today && !$selected
+          ? `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`
+          : 'transparent'};
     border-radius: 50%;
   }
 
   ${({ disabled, theme }) =>
     disabled &&
     `
-      color: ${theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
     `}
 
   ${({ theme, $outsideMonth }) =>
     $outsideMonth &&
     `
-      color: ${theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
       opacity: 0;
       pointer-events: none;
     `}
@@ -73,11 +76,15 @@ export const DayComponent = styled.div<DayComponentProps>`
     !disabled &&
     $selected &&
     `
-      color: ${theme.color['Special/Static White']};
-      background: ${$inSelectingRange ? theme.color['Primary/Primary 70'] : theme.color['Primary/Primary 60 Main']};
+      color: var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']});
+      background: ${
+        $inSelectingRange
+          ? `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`
+          : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+      };
       border-radius: 50%;
       &:hover {
-        background: ${theme.color['Primary/Primary 70']};
+        background: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});
       }
     `}
 
@@ -94,7 +101,7 @@ export const DayComponent = styled.div<DayComponentProps>`
         right: 0;
         top: 0;
         bottom: 0;
-        background: ${theme.color['Opacity/Hover']};
+        background: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});
         ${
           $corners &&
           Object.keys($corners)

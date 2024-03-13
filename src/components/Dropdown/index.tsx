@@ -17,7 +17,7 @@ const Container = styled.div<{
   pointer-events: initial;
   margin: 8px 0;
   background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   ${(p) => p.theme.shadow['Shadow 08']}
   flex: 0 0 auto;
   ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf}` : '')};
@@ -162,8 +162,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           menuFocus === 'firstOption'
             ? getMenuFirstOption()
             : menuFocus === 'lastOption'
-              ? getMenuLastOption()
-              : activeOption || getMenuFirstOption();
+            ? getMenuLastOption()
+            : activeOption || getMenuFirstOption();
         (selectedItem as HTMLElement)?.focus();
       } else {
         const focusedOption = ((containerRef.current && containerRef.current.ownerDocument) || document).activeElement;

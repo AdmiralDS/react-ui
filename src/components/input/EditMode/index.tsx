@@ -91,7 +91,7 @@ const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
     cursor: default;
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
   [data-disabled='false'] & {

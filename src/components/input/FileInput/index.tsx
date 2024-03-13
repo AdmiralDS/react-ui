@@ -69,7 +69,7 @@ const FocusBorder = styled.div`
   right: -3px;
   pointer-events: none;
   overflow: visible;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 const StyledInput = styled.input`
@@ -100,7 +100,7 @@ const InputWrapper = styled.div<{ disabled?: boolean; $dimension: FileInputDimen
   display: flex;
   align-items: center;
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   pointer-events: all;
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
   ${(p) => (p.$dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};

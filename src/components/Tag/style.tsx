@@ -122,7 +122,7 @@ export const Wrapper = styled.button<{
   `}
 
   ${({ $width }) => $width && `width: ${typeof $width === 'number' ? `${$width}px` : $width};`}
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   ${({ $statusViaBackground, theme }) =>
     $statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
   ${({ $statusViaBackground, theme }) =>
@@ -150,7 +150,7 @@ export const Wrapper = styled.button<{
       bottom: -4px;
       left: -4px;
       right: -4px;
-      border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+      border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
       border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }

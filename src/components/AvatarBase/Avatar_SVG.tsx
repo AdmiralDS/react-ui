@@ -120,7 +120,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
       case 'dark':
         return `var(--admiral-color-Neutral_Neutral80, ${theme.color['Neutral/Neutral 80']})`;
       default:
-        return appearance?.background || theme.color['Neutral/Neutral 10'];
+        return appearance?.background || `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
     }
   };
   const getStatusColor = (status: AvatarBaseProps['status']) => {
@@ -128,13 +128,13 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
       case 'success':
         return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       case 'warn':
-        return theme.color['Attention/Attention 50 Main'];
+        return `var(--admiral-color-Attention_Attention50Main, ${theme.color['Attention/Attention 50 Main']})`;
       case 'danger':
         return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
       case 'inactive':
         return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       default:
-        return status || theme.color['Neutral/Neutral 50'];
+        return status || `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }
   };
   const appearance = appearanceProp || 'light';

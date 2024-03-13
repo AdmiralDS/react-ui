@@ -73,7 +73,7 @@ const NotificationWrapper = styled.div<{
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   padding: 12px 44px 12px 52px;
   ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 16px;')}
   ${(p) => (p.$isClosable ? '' : 'padding-right: 16px;')}

@@ -259,12 +259,17 @@ const holidayCalendar: Array<{ date: string; type: string }> = [
 ];
 
 const holidayMixin = css<{ disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Success/Success 30'] : p.theme.color['Success/Success 50 Main'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Success_Success30, ${p.theme.color['Success/Success 30']})`
+      : `var(--admiral-color-Success_Success50Main, ${p.theme.color['Success/Success 50 Main']})`};
 `;
 
 const preHolidayMixin = css<{ disabled?: boolean }>`
   color: ${(p) =>
-    p.disabled ? p.theme.color['Attention/Attention 30'] : p.theme.color['Attention/Attention 50 Main']};
+    p.disabled
+      ? `var(--admiral-color-Attention_Attention30, ${p.theme.color['Attention/Attention 30']})`
+      : `var(--admiral-color-Attention_Attention50Main, ${p.theme.color['Attention/Attention 50 Main']})`};
 `;
 
 const holidayDates = new Map(

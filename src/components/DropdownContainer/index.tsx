@@ -195,7 +195,7 @@ DropdownContainer.displayName = 'DropdownContainer';
 
 export const StyledDropdownContainer = styled(DropdownContainer)`
   ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   width: max-content;
 `;

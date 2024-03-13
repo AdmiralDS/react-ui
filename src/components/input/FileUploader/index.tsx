@@ -81,7 +81,7 @@ const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   flex-direction: column;
   padding: 24px 0;
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
@@ -95,7 +95,7 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   flex-direction: row;
   padding: 8px 0;
   border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;

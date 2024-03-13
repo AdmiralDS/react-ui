@@ -53,7 +53,7 @@ export const FilledTrack = styled.div<{ $animation?: boolean }>`
   }
   position: absolute;
   height: 2px;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   transition:
     left ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')},
     right ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')};

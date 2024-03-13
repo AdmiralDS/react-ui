@@ -5,7 +5,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 const activeFilter = css`
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 

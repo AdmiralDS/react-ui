@@ -14,7 +14,7 @@ const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 
 const CustomValueStyle = styled.div`
-  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border: ${({ theme }) => theme.color['Primary/Primary 60 Main']} 1px dashed;
 `;
 

@@ -61,7 +61,7 @@ export const HintDialog = styled.div<{
   ${typography['Body/Body 2 Long']}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ theme }) => theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   box-sizing: border-box;
   ${sizes}
 `;

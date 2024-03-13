@@ -240,24 +240,24 @@ export const lightThemeText = `
   * Border-radius
   */
   --admiral-border-kind-Small_0: 0;
-  --admiral-border-kind-Small_2: 2;
-  --admiral-border-kind-Small_4: 4;
+  --admiral-border-kind-Small_2: 2px;
+  --admiral-border-kind-Small_4: 4px;
   --admiral-border-radius-Small: var(--admiral-border-kind-Small_4);
 
   --admiral-border-kind-Medium_0: 0;
-  --admiral-border-kind-Medium_2: 2;
-  --admiral-border-kind-Medium_4: 4;
-  --admiral-border-kind-Medium_6: 6;
-  --admiral-border-kind-Medium_8: 8;
-  --admiral-border-kind-Medium_10: 10;
+  --admiral-border-kind-Medium_2: 2px;
+  --admiral-border-kind-Medium_4: 4px;
+  --admiral-border-kind-Medium_6: 6px;
+  --admiral-border-kind-Medium_8: 8px;
+  --admiral-border-kind-Medium_10: 10px;
   --admiral-border-radius-Medium: var(--admiral-border-kind-Medium_4);
 
   --admiral-border-kind-Large_0: 0;
-  --admiral-border-kind-Large_2: 4;
-  --admiral-border-kind-Large_4: 8;
-  --admiral-border-kind-Large_6: 12;
-  --admiral-border-kind-Large_8: 16;
-  --admiral-border-kind-Large_10: 20;
-  --admiral-border-radius_Large: var(--admiral-border-kind-Large_4);
+  --admiral-border-kind-Large_2: 4px;
+  --admiral-border-kind-Large_4: 8px;
+  --admiral-border-kind-Large_6: 12px;
+  --admiral-border-kind-Large_8: 16px;
+  --admiral-border-kind-Large_10: 20px;
+  --admiral-border-radius-Large: var(--admiral-border-kind-Large_4);
 }
 `;

@@ -16,10 +16,11 @@ const panelItemStyle = css<{ $view: boolean }>`
   margin: 0;
   border-radius: ${YEAR_MONTH_BORDER_RADIUS};
   ${typography['Subtitle/Subtitle 2']}
-  color: ${(props) => props.theme.color['Primary/Primary 60 Main']};
-  background: ${(props) => (props.$view ? props.theme.color['Opacity/Focus'] : 'transparent')};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  background: ${(p) =>
+    p.$view ? `var(--admiral-color-Opacity_Focus, ${p.theme.color['Opacity/Focus']})` : 'transparent'};
   &:hover {
-    background: ${(props) => props.theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
 

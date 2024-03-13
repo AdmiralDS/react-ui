@@ -18,7 +18,7 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   height: 40px;
   padding: 10px 12px;
   border: 2px solid transparent;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
@@ -46,14 +46,14 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
 
   &:focus-visible {
     outline: none;
-    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 
   &:disabled {
     cursor: not-allowed;
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

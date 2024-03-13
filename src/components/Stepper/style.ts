@@ -27,7 +27,7 @@ export const StepIcon = styled(StepSvg)`
   }
   [data-active='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }
   [data-error='true'] & {
@@ -57,16 +57,16 @@ export const StepRail = styled.div`
   }
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
   [data-completed='true'] & {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
   [data-error='true'] & {
-    background-color: ${({ theme }) => theme.color['Error/Error 60 Main']};
+    background-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
   [data-warning='true'] & {
     background-color: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
   }
   [data-disabled='true'] & {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
+    background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   }
   border-radius: 1px;
 `;
@@ -140,7 +140,7 @@ export const StepWrapper = styled.li<{
       position: absolute;
       content: '';
       border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+      border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
       top: 0px;
       left: 0px;
       bottom: 0px;
@@ -173,7 +173,7 @@ export const Content = styled.div<{ $lineClamp: 1 | 2 | 3 }>`
   overflow: hidden;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   [data-disabled='true'] & {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   ${typography['Body/Body 2 Long']}
   margin: 0 12px 0 0;

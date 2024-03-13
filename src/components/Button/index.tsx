@@ -174,7 +174,8 @@ const StyledButton = styled.button.attrs<
   display: inline-block;
   white-space: nowrap;
   border: none;
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
   appearance: none;
   vertical-align: middle;
   pointer-events: ${(p) => (p.$loading || p.disabled || p.$skeleton ? 'none' : 'all')};

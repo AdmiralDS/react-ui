@@ -41,18 +41,22 @@ export const ContentSwitcherItemButton = styled.button<{
   position: relative;
   outline: 0;
   background-color: ${({ theme, disabled, $active }) =>
-    $active && !disabled ? theme.color['Neutral/Neutral 00'] : 'transparent'};
+    $active && !disabled
+      ? `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`
+      : 'transparent'};
 
-  ${typography['Button/Button 1']};
+  ${typography['Button/Button 1']}
   white-space: nowrap;
 
   ${colorMixin};
 
   &:hover:not(:disabled) {
-    ${({ $active, disabled, theme }) => (!$active && !disabled ? `background: ${theme.color['Opacity/Hover']}` : '')};
+    ${({ $active, disabled, theme }) =>
+      !$active && !disabled ? `background: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});` : ''};
   }
   &:active:not(:disabled) {
-    ${({ $active, disabled, theme }) => (!$active && !disabled ? `background: ${theme.color['Opacity/Press']}` : '')};
+    ${({ $active, disabled, theme }) =>
+      !$active && !disabled ? `background: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});` : ''};
   }
 
   & *[fill^='#'] {
@@ -71,7 +75,10 @@ export const ContentSwitcherItemButton = styled.button<{
   }
 
   & ${BadgeComponent} {
-    background-color: ${(p) => (p.$active ? p.theme.color['Neutral/Neutral 50'] : p.theme.color['Neutral/Neutral 00'])};
+    background-color: ${(p) =>
+      p.$active
+        ? `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`
+        : `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`};
     color: ${({ theme, disabled, $active }) => {
       if ($active) return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
@@ -94,12 +101,20 @@ export const ContentSwitcherItemButton = styled.button<{
 
   [data-appearance~='primary'] && {
     background-color: ${({ theme, disabled, $active }) =>
-      $active && !disabled ? theme.color['Primary/Primary 60 Main'] : 'transparent'};
+      $active && !disabled
+        ? `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+        : 'transparent'};
     &:hover:not(:disabled) {
-      ${({ $active, disabled, theme }) => (!$active && !disabled ? `background: ${theme.color['Opacity/Hover']}` : '')};
+      ${({ $active, disabled, theme }) =>
+        !$active && !disabled
+          ? `background: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});`
+          : ''};
     }
     &:active:not(:disabled) {
-      ${({ $active, disabled, theme }) => (!$active && !disabled ? `background: ${theme.color['Opacity/Press']}` : '')};
+      ${({ $active, disabled, theme }) =>
+        !$active && !disabled
+          ? `background: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});`
+          : ''};
     }
   }
 

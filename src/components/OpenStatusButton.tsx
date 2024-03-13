@@ -19,7 +19,7 @@ export const OpenStatusButton = styled(ChevronDownOutline)<{ $isOpen?: boolean; 
     pointer-events: none;
 
     *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

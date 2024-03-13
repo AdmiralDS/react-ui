@@ -90,7 +90,7 @@ const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   padding: 20px 0 24px;
   min-width: ${({ $mobile }) => ($mobile ? 'calc(100% - 16px)' : '320px')};
   max-width: calc(100% - 16px);
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ theme }) => theme.shadow['Shadow 16']}
   outline: none;

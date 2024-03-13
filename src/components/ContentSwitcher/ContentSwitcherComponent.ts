@@ -27,7 +27,7 @@ const padding = {
 };
 
 export const ContentSwitcherComponent = styled.div<ContentSwitcherComponentProps>`
-  background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  background: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border: 2px solid var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-radius: ${({ $dimension }) => BORDER_RADIUS[$dimension]}px;
   display: inline-flex;

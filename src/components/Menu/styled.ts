@@ -15,7 +15,7 @@ export const Chevron = styled(SmallArrowRightOutline)`
   }
   [data-disabled='true'] & {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
   [data-dimension='s'] & {

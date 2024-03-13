@@ -22,7 +22,7 @@ const ProgressWrapper = styled.div`
 
 const Progress = styled.div<{ $percent: number }>`
   width: ${({ $percent }) => $percent}%;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 const Header = styled.div<{ $mobile?: boolean }>`

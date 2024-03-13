@@ -36,14 +36,14 @@ export const FormValuesWrapper = styled.div`
   font-size: 16px;
   line-height: 24px;
   border: 1px solid black;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   min-height: 100px;
   padding: 12px;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const ExtraText = styled.div`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   ${typography['Body/Body 2 Short']}
 `;
 

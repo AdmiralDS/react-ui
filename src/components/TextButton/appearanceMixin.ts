@@ -44,11 +44,11 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+          fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
         }
       }
     }
@@ -56,12 +56,12 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
 `;
 
 const primaryAppearanceMixin = css`
-  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 
   ${IconContainer} {
     svg {
       path {
-        fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+        fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       }
     }
   }

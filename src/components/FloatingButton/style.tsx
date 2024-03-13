@@ -38,11 +38,11 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.color['Opacity/Press']};
+    background-color: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
 

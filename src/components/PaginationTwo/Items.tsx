@@ -6,7 +6,7 @@ import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/s
 
 const selectedMixin = css`
   background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-  color: ${({ theme }) => theme.color['Special/Static White']};
+  color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 
 const hoverMixin = css`
@@ -63,9 +63,10 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
   &:disabled {
     cursor: default;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
-    ${({ selected, theme }) => !selected && `color: ${theme.color['Neutral/Neutral 30']};`}
+    ${({ selected, theme }) =>
+      !selected && `color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});`}
   }
 
   ${({ selected }) => selected && selectedMixin}

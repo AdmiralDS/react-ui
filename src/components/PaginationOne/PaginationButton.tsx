@@ -10,11 +10,11 @@ const Button = styled.button`
   width: 40px;
   height: 40px;
   border: none;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   overflow: visible;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
@@ -25,7 +25,7 @@ const Button = styled.button`
   }
   &:active {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   &:focus-visible {
@@ -38,14 +38,14 @@ const Button = styled.button`
       bottom: -4px;
       left: -4px;
       right: -4px;
-      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+      border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     }
   }
 
   &:disabled {
     cursor: not-allowed;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

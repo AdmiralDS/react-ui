@@ -78,21 +78,21 @@ export const CheckboxDemoTemplate = ({
           <Row>
             <Checkbox error />
             <Checkbox dimension="s" error />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Состояние ошибки
             </T>
           </Row>
           <Row>
             <Checkbox readOnly />
             <Checkbox dimension="s" readOnly />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Readonly
             </T>
           </Row>
           <Row>
             <Checkbox readOnly defaultChecked />
             <Checkbox dimension="s" readOnly defaultChecked />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Readonly active
             </T>
           </Row>

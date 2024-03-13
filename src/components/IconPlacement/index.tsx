@@ -112,7 +112,7 @@ const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension;
   flex: 0 0 auto;
   height: ${(p) => getIconSize(p.$dimension)}px;
   width: ${(p) => getIconSize(p.$dimension)}px;
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   overflow: visible;
 
   cursor: pointer;
@@ -124,7 +124,7 @@ const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension;
     cursor: default;
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 
@@ -140,12 +140,12 @@ const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension;
   }
   &:hover {
     > ${ActivityHighlighter} {
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+      background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
   &:active {
     > ${ActivityHighlighter} {
-      background-color: ${({ theme }) => theme.color['Opacity/Press']};
+      background-color: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
     }
   }
   &:focus-visible {

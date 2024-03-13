@@ -51,7 +51,7 @@ const STORY_ITEMS: Array<StoryItem> = [
 ];
 
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
   ${(p) => p.theme.shadow['Shadow 08']}

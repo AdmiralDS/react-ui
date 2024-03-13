@@ -108,7 +108,7 @@ const PreviewWrapper = styled.div<{ $dimension?: Dimension; $fileDimension?: Dim
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   border-width: 1px;
   border-style: solid;
   padding: ${(p) => (p.$fileDimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};

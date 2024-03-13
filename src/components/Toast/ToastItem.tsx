@@ -92,7 +92,7 @@ const Progress = styled.div.attrs<{ $percent: number }>((props) => ({
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 /** Шаблон для отображения кастомного уведомления со шкалой отсчета времени,

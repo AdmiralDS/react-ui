@@ -123,7 +123,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   align-items: center;
 
   & > svg {
-    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     display: block;
     width: ${iconSizeValue}px;
 

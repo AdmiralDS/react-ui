@@ -23,7 +23,7 @@ export const TooltipContainer = styled.div<{ $dimension?: TooltipDimension }>`
   background-color: ${({ theme }) => theme.color['Neutral/Neutral 80']};
   ${(p) => (p.$dimension === 'm' ? typography['Body/Body 2 Short'] : typography['Caption/Caption 1'])}
   color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   ${(props) => props.theme.shadow['Shadow 04']}
   padding: ${(p) => (p.$dimension === 'm' ? TOOLTIP_PADDING_M : TOOLTIP_PADDING_S)};
   max-width: min(488px, calc(100vw - 16px));

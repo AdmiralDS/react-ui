@@ -4,7 +4,7 @@ import { typography } from '#src/components/Typography';
 
 export const Pill = styled.div`
   display: flex;
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   ${typography['Caption/Caption 1']}
   padding: 0 4px;
   height: 16px;

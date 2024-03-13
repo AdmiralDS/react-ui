@@ -1,31 +1,31 @@
 import { css } from 'styled-components';
 
 export const successAppearanceMixin = css`
-  background-color: ${({ theme }) => theme.color['Success/Success 50 Main']};
-  color: ${({ theme }) => theme.color['Special/Static White']};
-  border: 1px solid ${({ theme }) => theme.color['Success/Success 50 Main']};
+  background-color: var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
+  color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
+  border: 1px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
 
   &&& *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 
   &&&:hover {
-    background-color: ${({ theme }) => theme.color['Success/Success 60']};
-    border-color: ${({ theme }) => theme.color['Success/Success 60']};
+    background-color: var(--admiral-color-Success_Success60, ${(p) => p.theme.color['Success/Success 60']});
+    border-color: var(--admiral-color-Success_Success60, ${(p) => p.theme.color['Success/Success 60']});
   }
 
   &&&:active {
-    background-color: ${({ theme }) => theme.color['Success/Success 70']};
-    border-color: ${({ theme }) => theme.color['Success/Success 70']};
+    background-color: var(--admiral-color-Success_Success70, ${(p) => p.theme.color['Success/Success 70']});
+    border-color: var(--admiral-color-Success_Success70, ${(p) => p.theme.color['Success/Success 70']});
   }
 
   &&&[data-appearance~='disabled'],
   &&&:disabled {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    border-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    border-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
     &&& *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
