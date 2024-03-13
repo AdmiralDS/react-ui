@@ -53,7 +53,7 @@ const Wrapper = styled.div<{
   flex-direction: column;
   align-items: stretch;
   pointer-events: initial;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};
@@ -230,8 +230,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const innerSelected = disableSelectedOptionHighlight
       ? []
       : selected === undefined
-        ? selectedState
-        : valueToArray(selected);
+      ? selectedState
+      : valueToArray(selected);
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);

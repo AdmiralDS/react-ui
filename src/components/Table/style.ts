@@ -149,7 +149,7 @@ export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
       left: -6px;
       right: -6px;
       border-radius: 50%;
-      background: ${({ theme }) => theme.color['Opacity/Hover']};
+      background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
   ${({ disabled }) => disabled && 'pointer-events: none;'}
@@ -377,7 +377,7 @@ const rowHoverMixin = css`
 const groupRowHoverMixin = css`
   &[data-groupover='true'] > .tr-simple > *,
   & ${OverflowMenuWrapper} {
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
 
@@ -499,7 +499,7 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   visibility: hidden;
   display: flex;
   max-width: 200px;
-  ${({ theme }) => theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ $dimension }) =>
@@ -525,7 +525,7 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: center;
   max-width: 288px;
-  ${({ theme }) => theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
   padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
   ${rowStyle}

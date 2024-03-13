@@ -145,7 +145,7 @@ const ModalComponent = styled.div<{ $dimension: Dimension; $mobile?: boolean }>`
   padding: 20px 0 24px;
   ${width};
   max-height: ${({ $mobile }) => ($mobile ? '84vh' : '90vh')};
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   ${({ theme }) => theme.shadow['Shadow 16']}
   border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
   ${({ $mobile }) => ($mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}

@@ -66,7 +66,7 @@ const ChevronWrapper = styled.div<{ $dimension?: Dimension }>`
       border-radius: 50%;
       width: calc(100% + 12px);
       height: calc(100% + 12px);
-      background-color: ${(p) => p.theme.color['Opacity/Hover']};
+      background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
 `;

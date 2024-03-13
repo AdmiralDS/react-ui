@@ -183,7 +183,7 @@ GroupActionsPane.displayName = 'GroupActionsPane';
 const PaneSeparatorDiv = styled.div<{ $dimension?: 's' | 'm' }>`
   width: 1px;
   height: ${({ $dimension }) => ($dimension === 's' ? '16px' : '20px')};
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   align-self: center;
 `;
 

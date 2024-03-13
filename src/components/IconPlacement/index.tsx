@@ -62,9 +62,9 @@ const IconColor = css<{ $iconColor: IconPlacementAppearance | string }>`
     fill: ${(p) => {
       switch (p.$iconColor) {
         case 'primary':
-          return p.theme.color['Primary/Primary 60 Main'];
+          return `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`;
         case 'secondary':
-          return p.theme.color['Neutral/Neutral 50'];
+          return `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`;
         default:
           return p.$iconColor;
       }
@@ -130,12 +130,13 @@ const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension;
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 
   &:focus {
     > ${ActivityHighlighter} {
-      background-color: ${(p) => (p.$highlightFocus ? p.theme.color['Opacity/Focus'] : 'transparent')};
+      background-color: ${(p) =>
+        p.$highlightFocus ? `var(--admiral-color-Opacity_Focus, ${p.theme.color['Opacity/Focus']})` : 'transparent'};
     }
   }
   &:hover {

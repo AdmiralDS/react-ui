@@ -12,7 +12,7 @@ import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
 const StyledDrop = styled(DropdownContainer)`
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;

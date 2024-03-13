@@ -17,7 +17,7 @@ const ProgressWrapper = styled.div`
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 const Progress = styled.div<{ $percent: number }>`

@@ -76,7 +76,7 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   &:not(:disabled) {
     &:focus-visible + div > span {
       outline-offset: 2px;
-      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
 
     &:hover {
@@ -90,7 +90,7 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
     &:active {
       & + div > div {
         ${({ readOnly }) => !readOnly && `visibility: visible`};
-        background: ${({ theme }) => theme.color['Opacity/Press']};
+        background: var(--admiral-color-Opacity_Press ${(p) => p.theme.color['Opacity/Press']});
       }
     }
   }
@@ -145,7 +145,7 @@ const Hover = styled.div<{ $dimension: Dimension }>`
   position: absolute;
   top: ${HOVER_INDENT};
   left: ${HOVER_INDENT};
-  background: ${({ theme }) => theme.color['Opacity/Hover']};
+  background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   ${hoverSizes}
 `;
 

@@ -204,7 +204,7 @@ export const CheckboxComponentHover = styled.div<{ $dimension: CheckboxComponent
         width: ${p.$dimension === 's' ? 32 : 36}px;
         height: ${p.$dimension === 's' ? 32 : 36}px;
       `}
-  background-color: ${(p) => p.theme.color['Opacity/Hover']};
+  background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
 
   fieldset[data-dimension='s'] && {
     width: 32px;

@@ -69,7 +69,7 @@ const BorderedDiv = styled.div`
   border-radius: inherit;
 
   [data-status='error'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='success'] &&& {
@@ -85,7 +85,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
   &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+    border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 
   &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
@@ -97,11 +97,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
   [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
@@ -109,7 +109,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
@@ -168,16 +168,16 @@ const Text = styled.textarea<ExtraProps>`
   overflow-y: auto;
   overflow-x: hidden;
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder,
   &:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {

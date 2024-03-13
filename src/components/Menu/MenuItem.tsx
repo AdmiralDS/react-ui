@@ -137,7 +137,7 @@ const Item = styled.div<{
 
   &&[data-disabled='true'] {
     cursor: not-allowed;
-    background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+    background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     && *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});

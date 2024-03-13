@@ -12,13 +12,20 @@ export const styleTextMixin = css<{ $dimension: DropDownItemDimension }>`
 `;
 
 export const colorTextMixin = css<{ disabled?: boolean }>`
-  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
+  color: ${({ theme, disabled }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
 export const backgroundColor = css<{ selected?: boolean; id?: string }>`
   background: ${({ theme, selected }) =>
-    selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-  ${({ id, theme }) => id && `ul[data-selectedid="${id}"] && {background: ${theme.color['Opacity/Focus']};}`}
+    selected
+      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
+  ${({ id, theme }) =>
+    id &&
+    `ul[data-selectedid="${id}"] && {background: var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']});}`}
 `;
 
 export const paddings = css<{ $dimension?: DropDownItemDimension }>`

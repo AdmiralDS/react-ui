@@ -141,10 +141,10 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
   }
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active:not(:disabled) {
-    background: ${({ theme }) => theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press ${(p) => p.theme.color['Opacity/Press']});
   }
   &:disabled {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});

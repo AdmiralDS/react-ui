@@ -43,7 +43,7 @@ const InnerContainer = styled.div`
   width: 100%;
   padding: 6px 8px;
   margin: 0 8px 0 24px;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   flex-direction: column;
   align-items: flex-start;
 `;

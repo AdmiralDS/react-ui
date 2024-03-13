@@ -7,7 +7,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const ContentArea = styled.div`
   display: flex;
   height: 100%;
-  background: ${({ theme }) => theme.color['Success/Success 20']};
+  background: var(--admiral-color-Success_Success20, ${(p) => p.theme.color['Success/Success 20']});
 `;
 
 export const DrawerWidthTemplate = ({

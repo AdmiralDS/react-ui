@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import styled, { css, useTheme, keyframes } from 'styled-components';
 
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from '#src/components/Modal/manager';
@@ -56,7 +57,6 @@ const Overlay = styled.div<{
   left: 0;
   bottom: 0;
   right: 0;
-  // z-index: ${({ theme }) => theme.zIndex.drawer};
   z-index: var(--admiral-z-index-drawer, ${({ theme }) => theme.zIndex.drawer});
   ${(p) => p.$overlayCssMixin}
   outline: none;
@@ -65,7 +65,8 @@ const Overlay = styled.div<{
   transition: background-color ${transitionMixin};
 
   &[data-visible='true'] {
-    ${({ theme, $backdrop }) => $backdrop && `background-color: ${theme.color['Opacity/Modal']};`}
+    ${({ theme, $backdrop }) =>
+      $backdrop && `background-color: var(--admiral-color-Opacity_Modal, ${theme.color['Opacity/Modal']});`}
     ${({ $backdrop }) => $backdrop && `pointer-events: auto;`}
 
     & > div {
@@ -92,7 +93,7 @@ const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   max-width: calc(100% - 16px);
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  ${({ theme }) => theme.shadow['Shadow 16']}
+  box-shadow: var(--admiral-box-shadow-Shadow16, ${(p) => parseShadow(p.theme.shadow['Shadow 16'])});
   outline: none;
   transform: ${({ $position }) => ($position === 'right' ? 'translateX(100%)' : 'translateX(-100%)')};
   transition:

@@ -76,7 +76,7 @@ const Wrapper = styled.div`
   width: fit-content;
   margin: 10px;
   display: inline-block;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 const StyledMenuItem = styled(MenuItem)`

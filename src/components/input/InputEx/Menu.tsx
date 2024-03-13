@@ -26,9 +26,9 @@ const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string |
 
 const Wrapper = styled.div<{ $dimension?: MenuDimensions; $maxHeight?: string | number }>`
   pointer-events: initial;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};

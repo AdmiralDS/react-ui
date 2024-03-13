@@ -12,7 +12,7 @@ import {
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {
-    border-color: ${(props) => props.theme.color['Error/Error 60 Main']};
+    border-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 `;
 

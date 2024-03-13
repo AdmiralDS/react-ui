@@ -37,7 +37,7 @@ const Part = styled.div`
 const Divider = styled.div`
   width: 1px;
   height: 24px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 const PageAdditional = styled.span`

@@ -3,6 +3,7 @@ import { typography } from '#src/components/Typography';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
 export const AnchorWrapper = styled.div<{ $anchorCssMixin?: ReturnType<typeof css> }>`
   display: inline-block;
@@ -57,10 +58,10 @@ export const HintDialog = styled.div<{
 }>`
   display: flex;
   padding: 4px 0;
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   ${typography['Body/Body 2 Long']}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  ${({ theme }) => theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   box-sizing: border-box;
   ${sizes}
@@ -82,7 +83,6 @@ export const Portal = styled(PositionInPortal)<{ $flexDirection?: string }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
-  // z-index: ${({ theme }) => theme.zIndex.hint};
   z-index: var(--admiral-z-index-hint, ${({ theme }) => theme.zIndex.hint});
 `;
 

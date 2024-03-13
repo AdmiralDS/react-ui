@@ -192,7 +192,7 @@ const Close = styled.div`
   height: 32px;
   &:hover {
     border-radius: 50%;
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   & svg {
     width: 24px;

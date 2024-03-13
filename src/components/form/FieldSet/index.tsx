@@ -12,19 +12,19 @@ export type FieldSetDimension = (typeof ALL_FIELDSET_DIMENSIONS_VALUES)[number];
 
 const Legend = styled.legend<{ $dimension?: FieldSetDimension }>`
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   fieldset:disabled & {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: default;
   }
 
   [aria-required='true'] &:after {
     content: ' *';
-    color: ${(props) => props.theme.color['Error/Error 60 Main']};
+    color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='error'] & {
-    color: ${(props) => props.theme.color['Error/Error 60 Main']};
+    color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 `;
 

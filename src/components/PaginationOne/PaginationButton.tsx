@@ -21,7 +21,7 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+    background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
   &:active {
     cursor: pointer;

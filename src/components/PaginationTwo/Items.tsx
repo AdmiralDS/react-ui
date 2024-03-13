@@ -10,7 +10,7 @@ const selectedMixin = css`
 `;
 
 const hoverMixin = css`
-  background: ${({ theme }) => theme.color['Opacity/Hover']};
+  background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
@@ -18,7 +18,7 @@ const hoverMixin = css`
 `;
 
 const pressMixin = css`
-  background: ${({ theme }) => theme.color['Opacity/Press']};
+  background: var(--admiral-color-Opacity_Press ${(p) => p.theme.color['Opacity/Press']});
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});

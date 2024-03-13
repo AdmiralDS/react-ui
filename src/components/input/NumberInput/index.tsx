@@ -97,7 +97,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
       }};
   }
   &:hover:not(:focus-within) input:invalid + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 `;
 

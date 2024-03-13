@@ -27,7 +27,7 @@ const MyFileItem = styled.div<{ filesLayoutCssMixin?: ReturnType<typeof css> }>`
   ${(p) => p.filesLayoutCssMixin}
 
   &:hover {
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     color: ${(p) => p.theme.color['Magenta/Magenta 60 Main']};
   }
 `;

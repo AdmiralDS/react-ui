@@ -70,18 +70,18 @@ export const ExtraTextContainer = styled.div`
 
   ${typography['Body/Body 2 Short']}
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 
   [data-disabled] & {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-status='error'] & {
-    color: ${(props) => props.theme.color['Error/Error 60 Main']};
+    color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='success'] & {
-    color: ${(props) => props.theme.color['Success/Success 50 Main']};
+    color: var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 `;
 

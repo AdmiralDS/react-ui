@@ -75,11 +75,11 @@ export const ValueWrapper = styled.div<{
   align-items: center;
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${rowHeightStyle}
   [data-disabled='true'] &&& {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   min-height: ${(p) => (p.$dimension === 's' ? 20 : 24)}px;
 `;
@@ -109,11 +109,11 @@ export const Input = styled.input<{ $dimension?: ComponentDimension; $isMultiple
   text-overflow: ellipsis;
   padding: 0;
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:read-only {
@@ -123,7 +123,7 @@ export const Input = styled.input<{ $dimension?: ComponentDimension; $isMultiple
   &:disabled,
   &:disabled::placeholder {
     cursor: inherit;
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {
@@ -296,9 +296,9 @@ export const OptionWrapper = styled.div<{ $dimension?: ComponentDimension }>`
 const ShadowContainerMixin = css`
   ${typography['Body/Body 1 Short']}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   overflow: auto;
 `;
 

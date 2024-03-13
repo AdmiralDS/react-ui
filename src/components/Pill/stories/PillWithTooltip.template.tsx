@@ -22,7 +22,7 @@ const WrapperVertical = styled.div`
 
 const StyledPill = styled(Pill)`
   background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
-  color: ${(p) => p.theme.color['Special/Static White']};
+  color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 
 const StyledPillWithTooltipHoc = TooltipHoc(StyledPill);

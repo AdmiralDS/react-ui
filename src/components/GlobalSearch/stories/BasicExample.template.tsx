@@ -24,7 +24,7 @@ const TextBlock = styled.div`
 `;
 
 const Highlight = styled.span`
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 function getHighlightedText(text = '', highlight = '', highlightFormat: HighlightFormat = 'wholly') {

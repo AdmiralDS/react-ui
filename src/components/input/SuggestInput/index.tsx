@@ -24,7 +24,7 @@ const SuggestDropdownContainer = styled(StyledDropdownContainer)`
   overflow-y: auto;
   min-width: 100%;
   padding: 8px 0;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
 `;
 
 export interface SuggestItem {

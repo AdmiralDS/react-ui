@@ -27,7 +27,7 @@ export const RadioButtonHover = styled.div<{ $dimension: Dimension }>`
         width: calc(100% + ${p.$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
         height: calc(100% + ${p.$dimension === 's' ? HOVER_BORDER_WIDTH_S * 2 : HOVER_BORDER_WIDTH_M * 2}px);
       `}
-  background-color: ${(p) => p.theme.color['Opacity/Hover']};
+  background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
 `;
 export const RadioButtonLabel = styled.div<{
   $dimension: Dimension;

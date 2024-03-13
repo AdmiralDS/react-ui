@@ -41,7 +41,7 @@ const ItemContent = styled.div`
   height: 4px;
   width: 16px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 
   [aria-selected='true'] & {
     background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
