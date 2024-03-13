@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { EditMode, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { EditModeArea, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { EditModePlaygroundTemplate } from './EditModePlayground.template';
-import { EditModeDimensionTemplate } from './EditModeDimension.template';
-import { EditModeDisabledTemplate } from './EditModeDisabled.template';
-import { EditModeCssMixinTemplate } from './EditModeCssMixin.template';
+import { EditModeAreaPlaygroundTemplate } from './EditModeAreaPlayground.template';
+import { EditModeAreaDimensionTemplate } from './EditModeAreaDimension.template';
+import { EditModeAreaDisabledTemplate } from './EditModeAreaDisabled.template';
+import { EditModeAreaCssMixinTemplate } from './EditModeAreaCssMixin.template';
 
 // Imports of text sources
-import EditModePlaygroundRaw from './EditModePlayground.template?raw';
-import EditModeDimensionRaw from './EditModeDimension.template?raw';
-import EditModeDisabledRaw from './EditModeDisabled.template?raw';
-import EditModeCssMixinRaw from './EditModeCssMixin.template?raw';
+import EditModeAreaPlaygroundRaw from './EditModeAreaPlayground.template?raw';
+import EditModeAreaDimensionRaw from './EditModeAreaDimension.template?raw';
+import EditModeAreaDisabledRaw from './EditModeAreaDisabled.template?raw';
+import EditModeAreaCssMixinRaw from './EditModeAreaCssMixin.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -23,8 +23,8 @@ const Desc = styled.div`
 const Description = () => <Desc>Компонент для редактирования текста. Может быть с лэйблом или без него.</Desc>;
 
 export default {
-  title: 'Admiral-2.1/Input/EditMode',
-  component: EditMode,
+  title: 'Admiral-2.1/Input/EditModeArea',
+  component: EditModeArea,
   decorators: undefined,
   parameters: {
     docs: {
@@ -103,10 +103,10 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as Meta<typeof EditMode>;
+} as Meta<typeof EditModeArea>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof EditMode> = (props) => <EditModePlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaPlaygroundTemplate {...props} />;
 
 export const Playground = {
   render: PlaygroundStory,
@@ -114,7 +114,7 @@ export const Playground = {
   parameters: {
     docs: {
       source: {
-        code: EditModePlaygroundRaw,
+        code: EditModeAreaPlaygroundRaw,
       },
     },
   },
@@ -123,7 +123,7 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Варианты размеров и начертания компонента">
-const DimensionStory: StoryFn<typeof EditMode> = (props) => <EditModeDimensionTemplate {...props} />;
+const DimensionStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaDimensionTemplate {...props} />;
 
 export const DimensionExample = {
   render: DimensionStory,
@@ -131,7 +131,7 @@ export const DimensionExample = {
   parameters: {
     docs: {
       source: {
-        code: EditModeDimensionRaw,
+        code: EditModeAreaDimensionRaw,
       },
       description: {
         story: `Компонент разработан в 4 размерах: S, M (имеют написание Regular и Bold) и XL, XXL (только Bold). 
@@ -147,7 +147,7 @@ export const DimensionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Компонент в состоянии disabled">
-const DisabledStory: StoryFn<typeof EditMode> = (props) => <EditModeDisabledTemplate {...props} />;
+const DisabledStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaDisabledTemplate {...props} />;
 
 export const DisabledExample = {
   render: DisabledStory,
@@ -155,7 +155,7 @@ export const DisabledExample = {
   parameters: {
     docs: {
       source: {
-        code: EditModeDisabledRaw,
+        code: EditModeAreaDisabledRaw,
       },
     },
   },
@@ -166,7 +166,7 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="Стилизация компонента">
-const CssMixinStory: StoryFn<typeof EditMode> = (props) => <EditModeCssMixinTemplate {...props} />;
+const CssMixinStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaCssMixinTemplate {...props} />;
 
 export const CssMixinExample = {
   render: CssMixinStory,
@@ -174,7 +174,7 @@ export const CssMixinExample = {
   parameters: {
     docs: {
       source: {
-        code: EditModeCssMixinRaw,
+        code: EditModeAreaCssMixinRaw,
       },
       description: {
         story: `Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.`,

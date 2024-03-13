@@ -3,8 +3,8 @@ import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Button } from '#src/components/Button';
-import type { TextInputProps } from '#src/components/input/TextInput';
-import { TextInput } from '#src/components/input/TextInput';
+import type { TextAreaProps } from '#src/components/input/TextArea';
+import { TextArea } from '#src/components/input/TextArea';
 import { typography } from '#src/components/Typography';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -41,9 +41,10 @@ const TypographyMixin = css`
   }
 `;
 
-const EditInput = styled(TextInput)`
+const EditArea = styled(TextArea)`
   flex: 1 1 auto;
-  & input {
+  & textarea,
+  & :first-child {
     ${TypographyMixin}
   }
 `;
@@ -221,11 +222,11 @@ const stopEvent = (e: MouseEvent) => e.preventDefault();
 
 type Dimension = 's' | 'm' | 'xl' | 'xxl';
 
-export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displayClearIcon'> {
+export interface EditModeAreaProps extends Omit<TextAreaProps, 'dimension' | 'displayClearIcon'> {
   /** Значение компонента */
   value: string | number;
   /** Колбек на изменение значения компонента */
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
   /** Размер компонента */
   dimension?: Dimension;
   /** Жирное начертание текста. В размерах xl и xxl текст всегда жирный */
@@ -252,7 +253,7 @@ export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displ
   multilineView?: boolean;
 }
 
-export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
+export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
   (
     {
       dimension = 'm',
@@ -273,7 +274,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     const [edit, setEdit] = useState(false);
     const [valueBeforeEdit, setValueBeforeEdit] = useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
@@ -341,7 +342,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
           !disabled &&
           !props.readOnly && (
             <>
-              <EditInput
+              <EditArea
                 ref={refSetter(ref, inputRef)}
                 autoFocus
                 disabled={disabled}
@@ -389,4 +390,4 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
   },
 );
 
-EditMode.displayName = 'EditMode';
+EditModeArea.displayName = 'EditMode';

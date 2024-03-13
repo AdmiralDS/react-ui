@@ -1,19 +1,19 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
-import { EditMode } from '@admiral-ds/react-ui';
-import type { EditModeProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import { EditModeArea } from '@admiral-ds/react-ui';
+import type { EditModeAreaProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
-export const EditModePlaygroundTemplate = ({
+export const EditModeAreaPlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
   ...props
-}: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeAreaProps & { themeBorderKind?: BorderRadiusType }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.currentTarget.value;
     setValue(inputValue);
     props.onChange?.(e);
@@ -21,7 +21,7 @@ export const EditModePlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
-      <EditMode {...props} value={localValue} onChange={handleChange} placeholder={placeholder} />
+      <EditModeArea {...props} value={localValue} onChange={handleChange} placeholder={placeholder} />
     </ThemeProvider>
   );
 };
