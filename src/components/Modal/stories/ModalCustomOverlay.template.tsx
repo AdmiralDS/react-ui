@@ -5,7 +5,7 @@ import { ThemeProvider, css } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const overlayStyles = css`
-  background-color: ${({ theme }) => `${theme.color['Error/Error 20']}66`};
+  background-color: #ffdddd66;
 `;
 
 export const ModalCustomOverlayTemplate = ({

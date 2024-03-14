@@ -172,7 +172,7 @@ export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: Componen
 
   [data-disabled='true'] &&& {
     & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

@@ -5,7 +5,7 @@ import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/sy
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 const selectedMixin = css`
-  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 
@@ -83,7 +83,9 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
       content: '';
       border: 2px solid
         ${({ theme, $current }) =>
-          $current ? theme.color['Neutral/Neutral 00'] : theme.color['Primary/Primary 60 Main']};
+          $current
+            ? `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`
+            : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
       top: ${({ $current }) => ($current ? '2px' : '0px')};
       bottom: ${({ $current }) => ($current ? '2px' : '0px')};
       left: ${({ $current }) => ($current ? '2px' : '0px')};

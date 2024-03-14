@@ -69,8 +69,8 @@ const readOnlyCss = css`
 
 const indeterminateCss = css`
   &:not(:checked) + div > span {
-    border-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
-    background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+    background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
   > * {
     display: block;
@@ -144,8 +144,8 @@ export const Input = styled.input<{
 
   &:checked:not(:disabled) {
     & + div > span {
-      border-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
-      background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+      border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       & *[fill^='#'] {
         fill: ${(p) => p.theme.color['Special/Static White']};
       }

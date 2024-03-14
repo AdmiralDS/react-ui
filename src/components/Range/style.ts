@@ -75,7 +75,7 @@ export const ThumbCircle = styled.div<{ $dimension: RangeProps['dimension']; $ac
   position: relative;
   width: ${({ $dimension }) => ($dimension === 's' ? 16 : 20)}px;
   height: ${({ $dimension }) => ($dimension === 's' ? 16 : 20)}px;
-  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border-radius: 50%;
   &:before {
     position: absolute;

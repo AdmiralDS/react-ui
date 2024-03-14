@@ -10,35 +10,35 @@ exports[`ContentSwitcher should render component with Button 1`] = `
   position: relative;
   outline: 0;
   background-color: transparent;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
-  color: #717681;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-appearance~='primary'] .c2.c2 {
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c2 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -46,16 +46,16 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 [data-appearance~='primary'] .c2.c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 [data-appearance~='primary'] .c2.c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c0 {
-  background: #E5E7EB;
-  border: 2px solid #E5E7EB;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 2px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border-radius: 20px;
   display: inline-flex;
   height: 32px;
@@ -63,7 +63,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c0[data-appearance~='primary'] {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   background-color: transparent;
 }
 
@@ -104,35 +104,35 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
   position: relative;
   outline: 0;
   background-color: transparent;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
-  color: #717681;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-appearance~='primary'] .c2.c2 {
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c2 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -140,16 +140,16 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 [data-appearance~='primary'] .c2.c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 [data-appearance~='primary'] .c2.c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c0 {
-  background: #E5E7EB;
-  border: 2px solid #E5E7EB;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 2px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border-radius: 20px;
   display: inline-flex;
   height: 32px;
@@ -157,7 +157,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c0[data-appearance~='primary'] {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   background-color: transparent;
 }
 

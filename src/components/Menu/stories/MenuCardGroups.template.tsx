@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  box-shadow: var(--admiral-box-shadow-Shadow08);
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -67,7 +67,7 @@ const InnerContainer = styled.div`
   width: 100%;
   padding: 6px 8px;
   margin: 0 8px 0 24px;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   flex-direction: column;
   align-items: flex-start;
 `;

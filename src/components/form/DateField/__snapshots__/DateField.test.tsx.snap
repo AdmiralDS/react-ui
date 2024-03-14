@@ -70,28 +70,28 @@ exports[`DateField should render component 1`] = `
   border: none;
   text-overflow: ellipsis;
   padding: 0 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   background-color: #FFFFFF;
   padding-right: 48px;
 }
 
 .c5.c5.c5:disabled {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c5::placeholder {
-  color: #717681;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c5:disabled::placeholder {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 [data-disable-copying] .c5 {
@@ -100,15 +100,15 @@ exports[`DateField should render component 1`] = `
 }
 
 .c5.c5.c5:invalid+.c6 {
-  border: 1px solid #D92020;
+  border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 .c5.c5.c5:invalid:hover:not(:disabled)+.c6 {
-  border: 1px solid #BA1717;
+  border: 1px solid var(--admiral-color-Error_Error70, #BA1717);
 }
 
 .c5.c5.c5:invalid:focus:not(:disabled)+.c6 {
-  border: 2px solid #D92020;
+  border: 2px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-read-only] .c5.c5.c5,
@@ -133,7 +133,7 @@ exports[`DateField should render component 1`] = `
 }
 
 .c8 svg {
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   display: block;
   width: 24px;
 }
@@ -144,7 +144,7 @@ exports[`DateField should render component 1`] = `
 
 .c8 svg:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c8>*:not(:first-child) {

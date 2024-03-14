@@ -19,10 +19,10 @@ const InfoSolid = styled(InfoSolidSVG)<{ dimension: Dimension }>`
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   [data-focus-within] & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+    fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+    fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 `;
 

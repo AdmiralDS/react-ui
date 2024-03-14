@@ -90,10 +90,10 @@ const StyledIconPlacement = styled(IconPlacement)`
 export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
   background: ${({ theme, $selected, $hovered }) =>
     $hovered
-      ? theme.color['Opacity/Hover']
+      ? `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`
       : $selected
-      ? theme.color['Opacity/Focus']
-      : theme.color['Special/Elevated BG']};
+      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 `;
 
 const RowWrapper = styled.div<{

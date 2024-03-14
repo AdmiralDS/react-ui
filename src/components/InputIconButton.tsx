@@ -12,13 +12,13 @@ export function AnyIcon({ icon, ...props }: AnyIconProps) {
 
 export const InputIconButton = styled(AnyIcon)`
   & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   [disabled] &&& {
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${(props) => props.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 
@@ -27,6 +27,6 @@ export const InputIconButton = styled(AnyIcon)`
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+    fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 `;

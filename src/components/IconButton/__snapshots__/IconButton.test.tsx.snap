@@ -5,7 +5,7 @@ exports[`IconButton should render component 1`] = `
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   appearance: none;
@@ -36,19 +36,19 @@ exports[`IconButton should render component 1`] = `
 
 .c0:hover {
   cursor: pointer;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c0:hover *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c0:active {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press #0000001F);
 }
 
 .c0:active *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c0:disabled {
@@ -57,12 +57,12 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c0:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1 {
@@ -88,7 +88,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c1 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c1>svg {

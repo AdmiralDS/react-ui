@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { throttle } from '#src/components/common/utils/throttle';
 import type { RenderDirection, SubMenuPosition } from './utils';

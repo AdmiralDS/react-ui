@@ -28,7 +28,7 @@ export const MenuActionsPanel = ({ dimension, menuActionsPanelCssMixin, ...props
 };
 
 const HighlightText = styled.span`
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 const TextWrapper = styled.div`
   overflow: hidden;

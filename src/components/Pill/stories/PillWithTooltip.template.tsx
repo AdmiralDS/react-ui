@@ -21,7 +21,7 @@ const WrapperVertical = styled.div`
 `;
 
 const StyledPill = styled(Pill)`
-  background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 

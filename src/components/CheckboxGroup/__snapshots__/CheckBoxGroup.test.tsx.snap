@@ -10,8 +10,8 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #B0B5BD;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   user-select: none;
 }
 
@@ -27,28 +27,28 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   padding: 0;
   user-select: none;
   cursor: default;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -75,8 +75,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -85,7 +85,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -93,8 +93,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -127,7 +127,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -149,14 +149,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -173,13 +173,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -193,7 +193,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -215,26 +215,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -360,8 +360,8 @@ fieldset[data-dimension='s'] .c7.c7 {
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #B0B5BD;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   user-select: none;
 }
 
@@ -377,28 +377,28 @@ fieldset[data-dimension='s'] .c7.c7 {
   padding: 0;
   user-select: none;
   cursor: default;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -425,8 +425,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -435,7 +435,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -443,8 +443,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -477,7 +477,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -499,14 +499,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -523,13 +523,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -543,7 +543,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -565,26 +565,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #B0B5BD;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -765,8 +765,8 @@ exports[`CheckboxGroup should render component with label 1`] = `
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -782,28 +782,28 @@ exports[`CheckboxGroup should render component with label 1`] = `
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -830,8 +830,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -840,7 +840,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -848,8 +848,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -882,7 +882,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -904,14 +904,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -928,13 +928,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -948,7 +948,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -970,26 +970,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1103,8 +1103,8 @@ fieldset[data-dimension='s'] .c7.c7 {
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -1120,28 +1120,28 @@ fieldset[data-dimension='s'] .c7.c7 {
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -1168,8 +1168,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -1178,7 +1178,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -1186,8 +1186,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -1220,7 +1220,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -1242,14 +1242,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -1266,13 +1266,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -1286,7 +1286,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -1308,26 +1308,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1496,8 +1496,8 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   font-size: 14px;
   line-height: 16px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -1513,28 +1513,28 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -1561,8 +1561,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -1571,7 +1571,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -1579,8 +1579,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -1613,7 +1613,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -1635,14 +1635,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -1659,13 +1659,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 16px;
   height: 16px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -1679,7 +1679,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -1701,26 +1701,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1833,8 +1833,8 @@ fieldset[data-dimension='s'] .c7.c7 {
   font-size: 14px;
   line-height: 16px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -1850,28 +1850,28 @@ fieldset[data-dimension='s'] .c7.c7 {
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -1898,8 +1898,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -1908,7 +1908,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -1916,8 +1916,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -1950,7 +1950,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -1972,14 +1972,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -1996,13 +1996,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 16px;
   height: 16px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -2016,7 +2016,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -2038,26 +2038,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -2225,8 +2225,8 @@ exports[`CheckboxGroup should render components 1`] = `
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -2242,28 +2242,28 @@ exports[`CheckboxGroup should render components 1`] = `
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -2290,8 +2290,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -2300,7 +2300,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -2308,8 +2308,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -2342,7 +2342,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -2364,14 +2364,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -2388,13 +2388,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -2408,7 +2408,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -2430,26 +2430,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -2562,8 +2562,8 @@ fieldset[data-dimension='s'] .c7.c7 {
   font-size: 16px;
   line-height: 20px;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -2579,28 +2579,28 @@ fieldset[data-dimension='s'] .c7.c7 {
   padding: 0;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c1.c1 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -2627,8 +2627,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:not(:checked)+div>span {
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c2:disabled:checked+div>span {
@@ -2637,7 +2637,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c2:disabled:checked+div>span>svg {
@@ -2645,8 +2645,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span {
-  border-color: #0062FF;
-  background-color: #0062FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
@@ -2679,7 +2679,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:not(:disabled):active:not(:disabled)+div>div {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c3 {
@@ -2701,14 +2701,14 @@ fieldset[data-dimension='s'] .c3 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 fieldset[data-dimension='s'] .c4.c4 {
@@ -2725,13 +2725,13 @@ fieldset[data-dimension='s'] .c4.c4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   width: 20px;
   height: 20px;
   outline: 0;
   transition: background 0.1s ease-in;
   line-height: initial;
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid #717681;
 }
 
@@ -2745,7 +2745,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c6 {
@@ -2767,26 +2767,26 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: #23262D;
 }
 
 fieldset:disabled .c7.c7 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c7.c7 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }

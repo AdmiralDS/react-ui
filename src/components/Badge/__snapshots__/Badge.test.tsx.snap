@@ -12,15 +12,15 @@ exports[`Badge should render component with small dimension 1`] = `
   padding: 0 5px;
   height: 16px;
   border-radius: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: #E5E7EB;
-  color: #23262D;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -43,15 +43,15 @@ exports[`Badge should render component with small dimension 1`] = `
   padding: 0 5px;
   height: 16px;
   border-radius: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: #E5E7EB;
-  color: #23262D;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -129,15 +129,15 @@ exports[`Badge should render default component 1`] = `
   padding: 0 6px;
   height: 20px;
   border-radius: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: #E5E7EB;
-  color: #23262D;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 
@@ -160,15 +160,15 @@ exports[`Badge should render default component 1`] = `
   padding: 0 6px;
   height: 20px;
   border-radius: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: #E5E7EB;
-  color: #23262D;
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
 }
 

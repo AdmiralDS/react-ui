@@ -38,7 +38,7 @@ exports[`OverflowMenu should render component 1`] = `
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -53,12 +53,12 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c0:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c0:focus >.c1 {
@@ -66,11 +66,11 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:hover >.c1 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c0:active >.c1 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c0:focus-visible >.c1 {
@@ -134,7 +134,7 @@ exports[`OverflowMenu should render component 1`] = `
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -149,12 +149,12 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c0:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c0:focus >.c1 {
@@ -162,11 +162,11 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:hover >.c1 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c0:active >.c1 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c0:focus-visible >.c1 {

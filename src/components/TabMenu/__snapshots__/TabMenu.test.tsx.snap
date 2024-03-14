@@ -38,7 +38,7 @@ exports[`TabMenu should render default component 1`] = `
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -53,12 +53,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c7:focus >.c9 {
@@ -66,11 +66,11 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:hover >.c9 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c7:active >.c9 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c7:focus-visible >.c9 {
@@ -103,7 +103,7 @@ exports[`TabMenu should render default component 1`] = `
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   height: 2px;
   transition: all 0.2s ease-out;
 }
@@ -136,11 +136,11 @@ exports[`TabMenu should render default component 1`] = `
   appearance: none;
   border: none;
   color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   user-select: none;
@@ -172,7 +172,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c2 [data-badge] {
@@ -180,20 +180,20 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press #0000001F);
 }
 
 .c2:disabled {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c13 {
@@ -207,11 +207,11 @@ exports[`TabMenu should render default component 1`] = `
   appearance: none;
   border: none;
   color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   user-select: none;
@@ -243,7 +243,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c13 [data-badge] {
@@ -251,20 +251,20 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c13:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press #0000001F);
 }
 
 .c13:disabled {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
 .c13:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c1 {
@@ -464,7 +464,7 @@ exports[`TabMenu should render default component 1`] = `
   flex: 0 0 auto;
   height: 24px;
   width: 24px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -479,12 +479,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c7:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c7:focus >.c9 {
@@ -492,11 +492,11 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:hover >.c9 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c7:active >.c9 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c7:focus-visible >.c9 {
@@ -529,7 +529,7 @@ exports[`TabMenu should render default component 1`] = `
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   height: 2px;
   transition: all 0.2s ease-out;
 }
@@ -562,11 +562,11 @@ exports[`TabMenu should render default component 1`] = `
   appearance: none;
   border: none;
   color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   user-select: none;
@@ -598,7 +598,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c2 [data-badge] {
@@ -606,20 +606,20 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c2:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press #0000001F);
 }
 
 .c2:disabled {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c13 {
@@ -633,11 +633,11 @@ exports[`TabMenu should render default component 1`] = `
   appearance: none;
   border: none;
   color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   user-select: none;
@@ -669,7 +669,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c13 [data-badge] {
@@ -677,20 +677,20 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:hover:not(:disabled) {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c13:active:not(:disabled) {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press #0000001F);
 }
 
 .c13:disabled {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
 .c13:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c1 {

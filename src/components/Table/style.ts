@@ -194,7 +194,7 @@ export const SortOrder = styled.div`
   font-feature-settings:
     'tnum' on,
     'lnum' on;
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`

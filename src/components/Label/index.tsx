@@ -12,7 +12,8 @@ export const Label = styled.label<{ disabled?: boolean }>`
   }
 
   [data-focus-within] & {
-    color: ${(props) => (props.disabled ? '' : props.theme.color['Neutral/Neutral 50'])};
+    color: ${(p) =>
+      p.disabled ? '' : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   }
   [data-required-within] &:after {
     content: ' *';

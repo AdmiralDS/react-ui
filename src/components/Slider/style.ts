@@ -77,7 +77,7 @@ export const ThumbCircle = styled.div<{ $dimension: SliderProps['dimension'] }>`
   position: relative;
   height: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
   width: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
-  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border-radius: 50%;
   &:before {
     position: absolute;
