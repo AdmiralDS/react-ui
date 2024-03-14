@@ -192,7 +192,6 @@ const Text = styled.div<{ $multiline?: boolean }>`
   align-items: center;
   cursor: text;
   margin-right: 12px;
-  padding-left: 16px;
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 
   ${TypographyMixin};
