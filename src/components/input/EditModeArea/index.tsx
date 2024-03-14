@@ -267,6 +267,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
       value,
       showTooltip = true,
       multilineView = true,
+      rows = 1,
       ...props
     },
     ref,
@@ -350,7 +351,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 value={value}
                 containerRef={wrapperRef}
                 autoHeight={multilineView}
-                rows={1}
+                rows={rows}
                 {...props}
               />
               <EditButton
