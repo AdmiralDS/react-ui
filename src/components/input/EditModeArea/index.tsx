@@ -1,13 +1,11 @@
 import type { ChangeEventHandler, MouseEvent } from 'react';
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import type { css } from 'styled-components';
 
 import type { TextAreaProps } from '#src/components/input/TextArea';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 
-import { Tooltip } from '#src/components/Tooltip';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import {
   CancelIcon,
   ConfirmIcon,
@@ -43,13 +41,6 @@ export interface EditModeAreaProps extends Omit<TextAreaProps, 'dimension' | 'di
   /** Функция обработчика события нажатия кнопки отмены
    * @param value - значение поля ввода до нажатия кнопки редактирования */
   onCancel?: (value: string | number) => void;
-  /**
-   * @deprecated Используйте onCancel
-   * Колбек на нажатие кнопки очистки инпута
-   */
-  onClear?: () => void;
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
 }
 
 export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
@@ -62,10 +53,9 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
       onEdit,
       onConfirm,
       onCancel,
-      onClear,
       value,
-      showTooltip = true,
       rows = 1,
+      autoHeight = true,
       ...props
     },
     ref,
@@ -75,34 +65,6 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
     const iconSize = dimension === 's' ? 20 : 24;
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-
-    const [overflowActive, setOverflowActive] = useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
-    const [node, setNode] = useState<HTMLElement | null>(null);
-    const textRef = useRef<HTMLDivElement>(null);
-
-    useLayoutEffect(() => {
-      function show() {
-        setTooltipVisible(true);
-      }
-      function hide() {
-        setTooltipVisible(false);
-      }
-      if (node) {
-        node.addEventListener('mouseenter', show);
-        node.addEventListener('mouseleave', hide);
-        return () => {
-          node.removeEventListener('mouseenter', show);
-          node.removeEventListener('mouseleave', hide);
-        };
-      }
-    }, [setTooltipVisible, node]);
-
-    useLayoutEffect(() => {
-      if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
-        setOverflowActive(checkOverflow(textRef.current));
-      }
-    }, [tooltipVisible, textRef.current, setOverflowActive]);
 
     const enableEdit = () => {
       setEdit(true);
@@ -121,7 +83,6 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: valueBeforeEdit.toString() });
         onCancel?.(valueBeforeEdit);
-        onClear?.();
       }
     };
     const editDimension = dimension === 'xxl' ? 'xl' : dimension;
@@ -149,6 +110,7 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 value={value}
                 containerRef={wrapperRef}
                 rows={rows}
+                autoHeight={autoHeight}
                 {...props}
               />
               <EditButton
@@ -172,12 +134,9 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
           )
         ) : (
           <>
-            <Text ref={refSetter(textRef, setNode)} $multiline onClick={!props.readOnly ? enableEdit : undefined}>
+            <Text $multiline onClick={!props.readOnly ? enableEdit : undefined}>
               {value}
             </Text>
-            {showTooltip && tooltipVisible && overflowActive && (
-              <Tooltip renderContent={() => value} targetElement={textRef.current} />
-            )}
             {!props.readOnly && <EditIcon $multiline height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>
         )}
