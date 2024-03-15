@@ -268,6 +268,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       placeholder,
       skeleton = false,
       showTooltip = true,
+      disableCopying,
       ...props
     },
     ref,
@@ -403,8 +404,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
           $skeleton={skeleton}
-          data-disable-copying={props.disableCopying ? true : undefined}
-          {...(props.disableCopying && {
+          data-disable-copying={disableCopying ? true : undefined}
+          {...(disableCopying && {
             onMouseDown: stopEvent,
           })}
         >
