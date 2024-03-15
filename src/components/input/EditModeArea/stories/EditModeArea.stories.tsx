@@ -90,16 +90,10 @@ export default {
     handleInput: {
       control: false,
     },
-    showTooltip: {
-      control: { type: 'boolean' },
-    },
     skeleton: {
       control: { type: 'boolean' },
     },
     isLoading: {
-      control: { type: 'boolean' },
-    },
-    multilineView: {
       control: { type: 'boolean' },
     },
   },
