@@ -131,7 +131,6 @@ const MultilineMixin = css`
   [data-dimension='s'] &&& {
     padding-top: 6px;
     padding-bottom: 6px;
-    padding-left: 12px;
   }
 
   [data-dimension='m'] &&&,
