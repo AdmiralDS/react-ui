@@ -7,11 +7,20 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { CancelIcon, ConfirmIcon, EditButton, EditIcon, EditInput, Text, Wrapper } from './style';
+import {
+  CancelIcon,
+  ConfirmIcon,
+  EditButton,
+  EditIcon,
+  EditInput,
+  Text,
+  Wrapper,
+} from '#src/components/input/EditMode/style';
 
 const stopEvent = (e: MouseEvent) => e.preventDefault();
 
-type Dimension = 's' | 'm' | 'xl' | 'xxl';
+export type EditModeDimension = 's' | 'm' | 'xl' | 'xxl';
+type Dimension = EditModeDimension;
 
 export interface EditModeProps extends Omit<TextInputProps, 'dimension' | 'displayClearIcon'> {
   /** Значение компонента */

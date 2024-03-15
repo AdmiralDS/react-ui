@@ -8,11 +8,20 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import { CancelIcon, ConfirmIcon, EditArea, EditButton, EditIcon, Text, Wrapper } from '../EditMode/style';
+import {
+  CancelIcon,
+  ConfirmIcon,
+  EditArea,
+  EditButton,
+  EditIcon,
+  Text,
+  Wrapper,
+} from '#src/components/input/EditMode/style';
+import type { EditModeDimension } from '#src/components/input/EditMode';
 
 const stopEvent = (e: MouseEvent) => e.preventDefault();
 
-type Dimension = 's' | 'm' | 'xl' | 'xxl';
+type Dimension = EditModeDimension;
 
 export interface EditModeAreaProps extends Omit<TextAreaProps, 'dimension' | 'displayClearIcon'> {
   /** Значение компонента */
