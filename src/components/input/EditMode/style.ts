@@ -74,7 +74,7 @@ export const multilineIcon = css`
   }
 
   [data-dimension='xxl'] &&& {
-    margin-top: 12px;
+    margin-top: 16px;
   }
 `;
 
