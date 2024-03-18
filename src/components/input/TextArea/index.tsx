@@ -301,6 +301,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       autoHeight,
       skeleton = false,
       dimension = 'm',
+      disableCopying,
       ...props
     },
     ref,
@@ -380,12 +381,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         $skeleton={skeleton}
-        data-disable-copying={props.disableCopying ? true : undefined}
+        data-disable-copying={disableCopying ? true : undefined}
         $autoHeight={!!autoHeight}
         $rows={rows}
         $maxRows={maxRows}
         $dimension={dimension}
-        {...(props.disableCopying && {
+        {...(disableCopying && {
           onMouseDown: stopEvent,
         })}
       >

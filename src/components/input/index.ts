@@ -12,6 +12,7 @@ export * from './NumberInput';
 export * from './Container';
 export * from './StatusIcon';
 export * from './EditMode';
+export * from './EditModeArea';
 export * from './PhoneNumberInput';
 export * from './InputEx';
 export * from './FileInput';

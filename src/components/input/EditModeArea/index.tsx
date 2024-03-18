@@ -1,18 +1,16 @@
 import type { ChangeEventHandler, MouseEvent } from 'react';
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { css } from 'styled-components';
+import { forwardRef, useRef, useState } from 'react';
 
-import type { TextInputProps } from '#src/components/input/TextInput';
+import type { TextAreaProps } from '#src/components/input/TextArea';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { Tooltip } from '#src/components/Tooltip';
-import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+
 import {
   CancelIcon,
   ConfirmIcon,
+  EditArea,
   EditButton,
   EditIcon,
-  EditInput,
   Text,
   Wrapper,
 } from '#src/components/input/EditMode/style';
@@ -20,23 +18,14 @@ import type { EditModeComponentProps } from '#src/components/input/EditMode/type
 
 const stopEvent = (e: MouseEvent) => e.preventDefault();
 
-export interface EditModeProps
+export interface EditModeAreaProps
   extends EditModeComponentProps,
-    Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value'> {
+    Omit<TextAreaProps, 'dimension' | 'displayClearIcon' | 'value'> {
   /** Колбек на изменение значения компонента */
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  /**
-   * @deprecated Используйте onCancel
-   * Колбек на нажатие кнопки очистки инпута
-   */
-  onClear?: () => void;
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
-  /** Многострочное отображение текста в режиме просмотра значения, по умолчанию false */
-  multilineView?: boolean;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
 }
 
-export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
+export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
   (
     {
       dimension = 'm',
@@ -46,10 +35,9 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       onEdit,
       onConfirm,
       onCancel,
-      onClear,
       value,
-      showTooltip = true,
-      multilineView = false,
+      rows = 1,
+      autoHeight = true,
       ...props
     },
     ref,
@@ -57,36 +45,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     const [edit, setEdit] = useState(false);
     const [valueBeforeEdit, setValueBeforeEdit] = useState(value);
     const iconSize = dimension === 's' ? 20 : 24;
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-
-    const [overflowActive, setOverflowActive] = useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
-    const [node, setNode] = useState<HTMLElement | null>(null);
-    const textRef = useRef<HTMLDivElement>(null);
-
-    useLayoutEffect(() => {
-      function show() {
-        setTooltipVisible(true);
-      }
-      function hide() {
-        setTooltipVisible(false);
-      }
-      if (node) {
-        node.addEventListener('mouseenter', show);
-        node.addEventListener('mouseleave', hide);
-        return () => {
-          node.removeEventListener('mouseenter', show);
-          node.removeEventListener('mouseleave', hide);
-        };
-      }
-    }, [setTooltipVisible, node]);
-
-    useLayoutEffect(() => {
-      if (textRef.current && checkOverflow(textRef.current) !== overflowActive) {
-        setOverflowActive(checkOverflow(textRef.current));
-      }
-    }, [tooltipVisible, textRef.current, setOverflowActive]);
 
     const enableEdit = () => {
       setEdit(true);
@@ -105,7 +65,6 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: valueBeforeEdit.toString() });
         onCancel?.(valueBeforeEdit);
-        onClear?.();
       }
     };
     const editDimension = dimension === 'xxl' ? 'xl' : dimension;
@@ -125,13 +84,15 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
           !disabled &&
           !props.readOnly && (
             <>
-              <EditInput
+              <EditArea
                 ref={refSetter(ref, inputRef)}
                 autoFocus
                 disabled={disabled}
                 dimension={editDimension}
                 value={value}
                 containerRef={wrapperRef}
+                rows={rows}
+                autoHeight={autoHeight}
                 {...props}
               />
               <EditButton
@@ -141,7 +102,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
                 disabled={props.status === 'error'}
                 onClick={handleConfirm}
                 iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
-                $multiline={false}
+                $multiline={true}
               />
               <EditButton
                 appearance="secondary"
@@ -149,25 +110,16 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
                 displayAsSquare
                 onClick={handleCancel}
                 iconStart={<CancelIcon height={iconSize} width={iconSize} />}
-                $multiline={false}
+                $multiline={true}
               />
             </>
           )
         ) : (
           <>
-            <Text
-              ref={refSetter(textRef, setNode)}
-              $multiline={multilineView}
-              onClick={!props.readOnly ? enableEdit : undefined}
-            >
+            <Text $multiline onClick={!props.readOnly ? enableEdit : undefined}>
               {value}
             </Text>
-            {showTooltip && tooltipVisible && overflowActive && (
-              <Tooltip renderContent={() => value} targetElement={textRef.current} />
-            )}
-            {!props.readOnly && (
-              <EditIcon $multiline={multilineView} height={iconSize} width={iconSize} onClick={enableEdit} />
-            )}
+            {!props.readOnly && <EditIcon $multiline height={iconSize} width={iconSize} onClick={enableEdit} />}
           </>
         )}
       </Wrapper>
@@ -175,4 +127,4 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
   },
 );
 
-EditMode.displayName = 'EditMode';
+EditModeArea.displayName = 'EditMode';
