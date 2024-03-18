@@ -28,7 +28,8 @@ export const Container = styled.div<{ $skeleton?: boolean }>`
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
 
   pointer-events: ${(p) => (p.$skeleton ? 'none' : 'all')};
   ${({ $skeleton }) => $skeleton && skeletonMixin};

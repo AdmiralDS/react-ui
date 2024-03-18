@@ -9,11 +9,11 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c3:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c3[data-disabled] {
@@ -389,11 +389,11 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c3:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c3[data-disabled] {
@@ -824,11 +824,11 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c6:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c6[data-disabled] {
@@ -850,7 +850,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c1 svg path {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c5 {
@@ -1236,11 +1236,11 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c6:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c6[data-disabled] {
@@ -1262,7 +1262,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c1 svg path {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c5 {
@@ -1703,11 +1703,11 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c4[data-disabled] {
@@ -1779,7 +1779,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: dZhwyk 2s ease infinite;
+  animation: ioAouA 2s ease infinite;
 }
 
 .c0[data-appearance~='primary'] {
@@ -2089,11 +2089,11 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c4[data-disabled] {
@@ -2165,7 +2165,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: dZhwyk 2s ease infinite;
+  animation: ioAouA 2s ease infinite;
 }
 
 .c0[data-appearance~='primary'] {

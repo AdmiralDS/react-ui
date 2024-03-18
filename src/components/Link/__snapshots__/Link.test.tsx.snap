@@ -9,13 +9,13 @@ exports[`Link should render component 1`] = `
   width: fit-content;
   text-decoration: none;
   position: relative;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }

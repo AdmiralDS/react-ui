@@ -19,7 +19,7 @@ const getFlag = (value: string) => {
 };
 
 const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Magenta/Magenta 50']};
+  color: var(--admiral-color-Magenta_Magenta50, ${(p) => p.theme.color['Magenta/Magenta 50']});
   display: flex;
   column-gap: 8px;
   margin: 0;
@@ -27,7 +27,7 @@ const RenderingValue = styled.div`
   border-width: 1px;
   border-style: dotted;
   border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Magenta/Magenta 50']};
+  border-color: var(--admiral-color-Magenta_Magenta50, ${(p) => p.theme.color['Magenta/Magenta 50']});
 `;
 
 const CustomSelect = styled(Select)<{ multiple?: boolean }>`

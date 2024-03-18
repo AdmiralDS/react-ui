@@ -3,6 +3,7 @@ import { typography } from '#src/components/Typography';
 import type { ComponentDimension } from '#src/components/input/types';
 import { CHIP_OFFSET, COUNTER_WIDTH } from './constants';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { skeletonMixin } from '../Container';
 import { Menu } from '#src/components/Menu';
 import { MenuItem } from '#src/components/Menu/MenuItem';
@@ -203,60 +204,63 @@ export const SelectWrapper = styled.div<{
   }};
 
   background: ${({ theme, disabled, readonly }) =>
-    disabled || readonly ? theme.color['Neutral/Neutral 10'] : theme.color['Neutral/Neutral 00']};
+    disabled || readonly
+      ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
+      : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
 
   ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
   ${({ $focused, readonly }) => ($focused && !readonly ? focusedStyle : '')};
 
   & ${BorderedDiv} {
-    border-color: ${(props) =>
-      props.disabled || props.readonly
+    border-color: ${(p) =>
+      p.disabled || p.readonly
         ? 'transparent'
-        : props.$focused
-        ? props.theme.color['Primary/Primary 60 Main']
-        : props.theme.color['Neutral/Neutral 40']};
+        : p.$focused
+          ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
+          : `var(--admiral-color-Neutral_Neutral40, ${p.theme.color['Neutral/Neutral 40']})`};
   }
 
   &:hover ${BorderedDiv} {
-    ${(props) =>
-      !props.disabled &&
-      !props.$focused &&
+    ${(p) =>
+      !p.disabled &&
+      !p.$focused &&
       `
-      border-color: ${props.theme.color['Neutral/Neutral 60']}
+      border-color: var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']});
     `};
   }
 
   &[data-status='success'] {
-    ${(props) =>
-      !props.disabled &&
-      !props.readonly &&
+    ${(p) =>
+      !p.disabled &&
+      !p.readonly &&
       `
       ${BorderedDiv} {
-      border-color: ${props.theme.color['Success/Success 50 Main']};
+      border-color: var(--admiral-color-Success_Success50Main, ${p.theme.color['Success/Success 50 Main']});
       }
       &:hover ${BorderedDiv} {
-        border-color: ${props.theme.color['Success/Success 60']};
+        border-color: var(--admiral-color-Success_Success60, ${p.theme.color['Success/Success 60']});
       }
     `}
   }
 
   &[data-status='error'],
   &:invalid {
-    ${(props) =>
-      !props.disabled &&
-      !props.readonly &&
+    ${(p) =>
+      !p.disabled &&
+      !p.readonly &&
       `
       ${BorderedDiv} {
-        border-color: ${props.theme.color['Error/Error 60 Main']};
+        border-color: var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});
       }
   
       &:hover ${BorderedDiv} {
-        border-color: ${props.theme.color['Error/Error 70']};
+        border-color: var(--admiral-color-Error_Error70, ${p.theme.color['Error/Error 70']});
       }
     `}
   }
 
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
 
   ${({ $skeleton }) => $skeleton && skeletonMixin};
   ${({ $skeleton }) => $skeleton && disableEventMixin};

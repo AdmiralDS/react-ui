@@ -73,7 +73,12 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
   };
   return (
     <CopyOutlineWrapper ref={ref}>
-      <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
+      <CopyOutline
+        width={16}
+        height={16}
+        onClick={copyToClipboard}
+        fill={`var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`}
+      />
     </CopyOutlineWrapper>
   );
 });

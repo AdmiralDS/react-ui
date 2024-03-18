@@ -12,19 +12,19 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border: none;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c0:focus-visible {
@@ -32,7 +32,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -45,7 +45,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c0:hover {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c1 {
@@ -62,7 +62,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c2 {
@@ -99,19 +99,19 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   user-select: none;
   pointer-events: auto;
   cursor: default;
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border: none;
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c0:focus-visible {
@@ -119,7 +119,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -132,7 +132,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c0:hover {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c1 {
@@ -149,7 +149,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c2 {
@@ -241,19 +241,19 @@ exports[`Chips should render component with selected prop  1`] = `
   user-select: none;
   pointer-events: auto;
   cursor: pointer;
-  background-color: #0062FF;
-  border: 1px solid #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #FFFFFF;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c0:focus-visible {
@@ -261,7 +261,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -274,7 +274,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c0:hover {
-  color: #FFFFFF;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c1 {
@@ -291,7 +291,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2 {
@@ -328,19 +328,19 @@ exports[`Chips should render component with selected prop  1`] = `
   user-select: none;
   pointer-events: auto;
   cursor: pointer;
-  background-color: #0062FF;
-  border: 1px solid #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #FFFFFF;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c0:focus-visible {
@@ -348,7 +348,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -361,7 +361,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c0:hover {
-  color: #FFFFFF;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c1 {
@@ -378,7 +378,7 @@ exports[`Chips should render component with selected prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2 {
@@ -471,18 +471,18 @@ exports[`Chips should render default component 1`] = `
   pointer-events: auto;
   cursor: default;
   background-color: transparent;
-  border: 1px solid #0062FF;
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0:focus-visible {
@@ -490,7 +490,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -503,7 +503,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c0:hover {
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -520,7 +520,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2 {
@@ -558,18 +558,18 @@ exports[`Chips should render default component 1`] = `
   pointer-events: auto;
   cursor: default;
   background-color: transparent;
-  border: 1px solid #0062FF;
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
   padding: 6px 12px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0:focus-visible {
@@ -577,7 +577,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c0:focus-visible:before {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 20px;
   content: '';
   display: block;
@@ -590,7 +590,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c0:hover {
-  color: #0062FF;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -607,7 +607,7 @@ exports[`Chips should render default component 1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2 {

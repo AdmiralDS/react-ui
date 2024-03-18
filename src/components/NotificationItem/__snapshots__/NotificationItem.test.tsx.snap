@@ -16,7 +16,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   background: transparent;
   padding: 0;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
 }
 
 .c6[data-appearance='primary'] {
@@ -149,7 +149,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   border-width: 1px;
   border-style: solid;
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: #EDF5FF;
+  background-color: var(--admiral-color-Primary_Primary10, #EDF5FF);
 }
 
 .c2 {
@@ -287,7 +287,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   background: transparent;
   padding: 0;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
 }
 
 .c6[data-appearance='primary'] {
@@ -420,7 +420,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   border-width: 1px;
   border-style: solid;
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: #EDF5FF;
+  background-color: var(--admiral-color-Primary_Primary10, #EDF5FF);
 }
 
 .c2 {

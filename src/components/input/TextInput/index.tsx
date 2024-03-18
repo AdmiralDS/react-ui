@@ -41,19 +41,23 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-color: transparent;
 `;
 
-function getBorderColor(status?: InputStatus) {
-  if (!status) return 'Neutral/Neutral 40';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 60 Main';
-    case 'success':
-      return 'Success/Success 50 Main';
-  }
-}
+const getBorderColor = css<{ $status?: InputStatus }>`
+  ${({ $status, theme }) => {
+    if (!$status) {
+      return `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
+    }
+    switch ($status) {
+      case 'error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+    }
+  }}
+`;
 
 export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: InputStatus }>`
   position: absolute;
@@ -69,41 +73,45 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
   background: none;
   border-radius: inherit;
 
-  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.$status)]};
+  border: 1px solid ${getBorderColor};
   ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
-function getHoverBorderColor(status?: InputStatus) {
-  if (!status) return 'Neutral/Neutral 60';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 70';
-    case 'success':
-      return 'Success/Success 60';
-  }
-}
+const getHoverBorderColor = css<{ $status?: InputStatus }>`
+  ${({ $status, theme }) => {
+    if (!$status) {
+      return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
+    }
+    switch ($status) {
+      case 'error':
+        return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
+    }
+  }}
+`;
 
-function getFocusBorderColor(status?: InputStatus) {
-  if (!status) return 'Primary/Primary 60 Main';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 60 Main';
-    case 'success':
-      return 'Success/Success 50 Main';
-  }
-}
+const getFocusBorderColor = css<{ $status?: InputStatus }>`
+  ${({ $status, theme }) => {
+    if (!$status) {
+      return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
+    switch ($status) {
+      case 'error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+    }
+  }}
+`;
 
 export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) =>
-      p.disabled || p.readOnly
-        ? 'border-color: transparent'
-        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.$status)]}`}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : `border: 2px solid ${getFocusBorderColor}`)}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    border-color: ${(props) =>
-      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.$status)]};
+    border-color: ${(props) => (props.disabled || props.readOnly ? 'transparent' : getHoverBorderColor)};
   }
 `;
 
@@ -147,7 +155,7 @@ const Input = styled.input<ExtraProps>`
     pointer-events: none;
   }
 
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &&&:invalid + ${InputBorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});

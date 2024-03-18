@@ -660,11 +660,11 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -676,12 +676,12 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -697,12 +697,12 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -726,7 +726,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #B0B5BD;
+  background-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c0 {
@@ -1440,11 +1440,11 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -1456,12 +1456,12 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -1477,12 +1477,12 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -1506,7 +1506,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #B0B5BD;
+  background-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c0 {
@@ -2275,11 +2275,11 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -2291,12 +2291,12 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -2312,12 +2312,12 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -2341,7 +2341,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0 {
@@ -3052,11 +3052,11 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -3068,12 +3068,12 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -3089,12 +3089,12 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -3118,7 +3118,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0 {
@@ -3884,11 +3884,11 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -3900,12 +3900,12 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -3921,12 +3921,12 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -3950,7 +3950,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0 {
@@ -4661,11 +4661,11 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c9[data-disabled] {
@@ -4677,12 +4677,12 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c2[data-appearance~='primary'] {
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2[data-appearance~='secondary'] {
   border-right: none;
-  border-radius: 4px 0 0 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px) 0 0 var(--admiral-border-radius-Medium, 4px);
 }
 
 .c2:focus-visible {
@@ -4698,12 +4698,12 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c7[data-appearance~='primary'] {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7[data-appearance~='secondary'] {
   border-left: none;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--admiral-border-radius-Medium, 4px) var(--admiral-border-radius-Medium, 4px) 0;
 }
 
 .c7:focus-visible {
@@ -4727,7 +4727,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 }
 
 .c5[data-appearance~='secondary'] {
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c0 {

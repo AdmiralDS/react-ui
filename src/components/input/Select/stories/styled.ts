@@ -58,6 +58,6 @@ export const Form = styled.form`
 `;
 
 export const StyledGroup = styled(OptionGroup)`
-  color: ${(p) => p.theme.color['Purple/Purple 60 Main']};
+  color: var(--admiral-color-Purple_Purple60Main, ${(p) => p.theme.color['Purple/Purple 60 Main']});
   ${typography['Header/H5']}
 `;

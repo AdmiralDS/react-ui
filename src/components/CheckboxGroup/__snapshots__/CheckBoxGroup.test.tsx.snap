@@ -34,7 +34,7 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -80,8 +80,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -98,7 +98,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -107,7 +107,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -180,7 +180,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -189,7 +189,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -222,7 +222,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset:disabled .c7.c7 {
@@ -384,7 +384,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -430,8 +430,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -448,7 +448,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -457,7 +457,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -530,7 +530,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -539,7 +539,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #E5E7EB;
+  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -572,7 +572,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset:disabled .c7.c7 {
@@ -789,7 +789,7 @@ exports[`CheckboxGroup should render component with label 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -835,8 +835,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -853,7 +853,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -862,7 +862,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -935,7 +935,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -944,7 +944,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -977,7 +977,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {
@@ -1127,7 +1127,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1173,8 +1173,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -1191,7 +1191,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -1200,7 +1200,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -1273,7 +1273,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -1282,7 +1282,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -1315,7 +1315,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {
@@ -1520,7 +1520,7 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1566,8 +1566,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -1584,7 +1584,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -1593,7 +1593,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -1666,7 +1666,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -1675,7 +1675,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -1708,7 +1708,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {
@@ -1857,7 +1857,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1903,8 +1903,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -1921,7 +1921,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -1930,7 +1930,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -2003,7 +2003,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -2012,7 +2012,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -2045,7 +2045,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {
@@ -2249,7 +2249,7 @@ exports[`CheckboxGroup should render components 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -2295,8 +2295,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -2313,7 +2313,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -2322,7 +2322,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -2395,7 +2395,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -2404,7 +2404,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -2437,7 +2437,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {
@@ -2586,7 +2586,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -2632,8 +2632,8 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:disabled:checked+div>span {
-  border-color: #A7C7FF;
-  background-color: #A7C7FF;
+  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c2:disabled:checked+div>span *[fill^='#'] {
@@ -2650,7 +2650,7 @@ fieldset:disabled .c1.c1 {
 }
 
 .c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c2:checked:not(:disabled)+div>span>svg {
@@ -2659,7 +2659,7 @@ fieldset:disabled .c1.c1 {
 
 .c2:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c2:not(:disabled):hover:not(:disabled)+div>div {
@@ -2732,7 +2732,7 @@ fieldset[data-dimension='s'] .c4.c4 {
   transition: background 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid #717681;
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -2741,7 +2741,7 @@ fieldset[data-dimension='s'] .c5.c5 {
 }
 
 .c5 *[fill^='#'] {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 fieldset:disabled .c5.c5 *[fill^='#'] {
@@ -2774,7 +2774,7 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c7.c7 {

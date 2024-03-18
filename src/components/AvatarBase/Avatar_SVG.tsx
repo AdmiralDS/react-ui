@@ -224,7 +224,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           cy={circleCenter}
           r={ACTIVITY_RING[dimension]}
           strokeWidth="2"
-          stroke={theme.color['Primary/Primary 60 Main']}
+          stroke={`var(--admiral-color_Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`}
           fill="none"
           mask={useId}
         />

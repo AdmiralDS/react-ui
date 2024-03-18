@@ -135,7 +135,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -151,7 +151,7 @@ exports[`TabMenu should render default component 1`] = `
 .c2:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: 0;
   left: 0;
   bottom: 0;
@@ -184,7 +184,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:active:not(:disabled) {
-  background: var(--admiral-color-Opacity_Press #0000001F);
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c2:disabled {
@@ -206,7 +206,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: #717681;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -222,7 +222,7 @@ exports[`TabMenu should render default component 1`] = `
 .c13:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: 0;
   left: 0;
   bottom: 0;
@@ -255,7 +255,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:active:not(:disabled) {
-  background: var(--admiral-color-Opacity_Press #0000001F);
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c13:disabled {
@@ -295,7 +295,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c8 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 <body>
@@ -561,7 +561,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -577,7 +577,7 @@ exports[`TabMenu should render default component 1`] = `
 .c2:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: 0;
   left: 0;
   bottom: 0;
@@ -610,7 +610,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:active:not(:disabled) {
-  background: var(--admiral-color-Opacity_Press #0000001F);
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c2:disabled {
@@ -632,7 +632,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: #717681;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -648,7 +648,7 @@ exports[`TabMenu should render default component 1`] = `
 .c13:focus:not(:active):before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: 0;
   left: 0;
   bottom: 0;
@@ -681,7 +681,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:active:not(:disabled) {
-  background: var(--admiral-color-Opacity_Press #0000001F);
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c13:disabled {
@@ -721,7 +721,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c8 svg *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 <div>

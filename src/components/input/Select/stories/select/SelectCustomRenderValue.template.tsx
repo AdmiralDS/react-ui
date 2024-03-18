@@ -19,15 +19,15 @@ const getFlag = (value: string) => {
 };
 
 const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Teal/Teal 80']};
+  color: var(--admiral-color-Teal_Teal80, ${(p) => p.theme.color['Teal/Teal 80']});
   display: flex;
   column-gap: 8px;
   padding: 0 3px;
   border-width: 1px;
   border-style: dotted;
   border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
-  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
+  border-color: var(--admiral-color-Teal_Teal80, ${(p) => p.theme.color['Teal/Teal 80']});
+  background-color: var(--admiral-color-Teal_Teal10, ${(p) => p.theme.color['Teal/Teal 10']});
 `;
 
 const CustomSelect = styled(Select)<{ multiple?: boolean }>`

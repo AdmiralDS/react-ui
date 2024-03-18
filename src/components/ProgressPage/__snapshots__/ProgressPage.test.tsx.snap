@@ -2,7 +2,7 @@
 
 exports[`ProgressBar should render component 1`] = `
 .c1 {
-  background: #D5D8DE;
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -10,7 +10,7 @@ exports[`ProgressBar should render component 1`] = `
 }
 
 .c2 {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
   width: 0%;
   border-radius: 2px;
   transition: all 0.3s linear;
@@ -25,8 +25,8 @@ exports[`ProgressBar should render component 1`] = `
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 <div>
@@ -51,7 +51,7 @@ exports[`ProgressBar should render component 1`] = `
 
 exports[`ProgressBar should render component with prop appearance=error 1`] = `
 .c1 {
-  background: #D5D8DE;
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -59,7 +59,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 }
 
 .c2 {
-  background: #D92020;
+  background: var(--admiral-color-Error_Error60Main, #D92020);
   width: 0%;
   border-radius: 2px;
   transition: all 0.3s linear;
@@ -74,8 +74,8 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #D92020;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 <div>
@@ -100,7 +100,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 
 exports[`ProgressBar should render component with prop percent 1`] = `
 .c1 {
-  background: #D5D8DE;
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -108,7 +108,7 @@ exports[`ProgressBar should render component with prop percent 1`] = `
 }
 
 .c2 {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
   width: 50%;
   border-radius: 2px;
   transition: all 0.3s linear;
@@ -123,8 +123,8 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
-  font-family: 'VTB Group UI',sans-serif;
-  color: #23262D;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 <div>

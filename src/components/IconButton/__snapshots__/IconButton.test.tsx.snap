@@ -44,7 +44,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:active {
-  background: var(--admiral-color-Opacity_Press #0000001F);
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c0:active *[fill^='#'] {

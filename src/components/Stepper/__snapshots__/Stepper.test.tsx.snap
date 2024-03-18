@@ -33,15 +33,15 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -65,7 +65,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -353,15 +353,15 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -385,7 +385,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -728,15 +728,15 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -760,7 +760,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -1048,15 +1048,15 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -1080,7 +1080,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -1423,15 +1423,15 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -1455,7 +1455,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -1743,15 +1743,15 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -1775,7 +1775,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -2118,15 +2118,15 @@ exports[`Spinner should render default component 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -2150,7 +2150,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -2438,15 +2438,15 @@ exports[`Spinner should render default component 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -2470,7 +2470,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -2813,15 +2813,15 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -2845,7 +2845,7 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {
@@ -3132,15 +3132,15 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 [data-error='true'] .c5 path {
-  fill: #D92020;
+  fill: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-warning='true'] .c5 path {
-  fill: #FF5C22;
+  fill: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c5 path {
-  fill: #A7C7FF;
+  fill: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c6 {
@@ -3164,7 +3164,7 @@ exports[`Spinner should render vertical component 1`] = `
 }
 
 [data-warning='true'] .c6 {
-  background-color: #FF5C22;
+  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
 }
 
 [data-disabled='true'] .c6 {

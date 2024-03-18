@@ -10,15 +10,19 @@ import { DropMenu } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
-function mainButtonBorderRadius(shape: Shape): string {
-  const radius = mediumGroupBorderRadius(shape);
-  return `var(--admiral-border-radius-Medium, ${radius}) 0 0 var(--admiral-border-radius-Medium, ${radius})`;
-}
+const mainButtonBorderRadius = css`
+  ${({ theme }) => {
+    const radius = mediumGroupBorderRadius(theme.shape);
+    return `var(--admiral-border-radius-Medium, ${radius}) 0 0 var(--admiral-border-radius-Medium, ${radius})`;
+  }}
+`;
 
-function menuButtonBorderRadius(shape: Shape): string {
-  const radius = mediumGroupBorderRadius(shape);
-  return `0 var(--admiral-border-radius-Medium, ${radius}) var(--admiral-border-radius-Medium, ${radius}) 0`;
-}
+const menuButtonBorderRadius = css`
+  ${({ theme }) => {
+    const radius = mediumGroupBorderRadius(theme.shape);
+    return `0 var(--admiral-border-radius-Medium, ${radius}) var(--admiral-border-radius-Medium, ${radius}) 0`;
+  }}
+`;
 
 const focusStyle = css`
   &:focus-visible {
@@ -34,22 +38,22 @@ const focusStyle = css`
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
   &[data-appearance~='secondary'] {
     border-right: none;
-    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
   ${focusStyle}
 `;
 
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
   &[data-appearance~='secondary'] {
     border-left: none;
-    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
   ${focusStyle}
 `;

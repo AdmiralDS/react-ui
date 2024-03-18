@@ -1,21 +1,21 @@
 import { forwardRef, useRef, useState, useEffect } from 'react';
 import type { ReactNode, ChangeEvent, HTMLAttributes, FocusEvent } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import type { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
 import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
-import type { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-function sliderBorderRadius(shape: Shape): string {
-  const value = mediumGroupBorderRadius(shape);
-
-  return `${value} ${value} 0 0`;
-}
+const sliderBorderRadius = css`
+  ${({ theme }) => {
+    const value = mediumGroupBorderRadius(theme.shape);
+    return `var(--admiral-border-radius-Medium, ${value}) var(--admiral-border-radius-Medium, ${value}) 0 0`;
+  }}
+`;
 
 const Wrapper = styled.div<{ $dimension: 'xl' | 'm' | 's' }>`
   position: relative;
@@ -36,7 +36,7 @@ const Slider = styled(SliderComponent)`
 `;
 
 const Input = styled(NumberInput)`
-  border-radius: ${(p) => (p.skeleton ? 0 : sliderBorderRadius(p.theme.shape))};
+  border-radius: ${(p) => (p.skeleton ? 0 : sliderBorderRadius)};
 `;
 
 // TODO: in next major version rename onChange to OLD_onChange deprecated method,

@@ -12,12 +12,19 @@ interface CustomOptionProps {
 
 export const CustomOption = styled(OptionWrapper)<CustomOptionProps>`
   background-color: ${({ active, selected, theme }) => {
-    if (selected) return theme.color['Opacity/Focus'];
-    if (active) return theme.color['Opacity/Hover'];
+    if (selected) {
+      return `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`;
+    }
+    if (active) {
+      return `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`;
+    }
     return 'transparent';
   }};
 
-  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
   cursor: ${({ disabled }) => (disabled ? 'text' : 'pointer')};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
 `;

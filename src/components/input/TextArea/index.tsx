@@ -49,7 +49,7 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-color: transparent;
 `;
 
@@ -65,7 +65,7 @@ const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
   border-radius: inherit;
 
   [data-status='error'] &&& {
@@ -73,7 +73,7 @@ const BorderedDiv = styled.div`
   }
 
   [data-status='success'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 1px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   [data-read-only] &&& {
@@ -82,7 +82,7 @@ const BorderedDiv = styled.div`
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &:focus + ${BorderedDiv} {
     border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
@@ -93,7 +93,8 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   &:hover:not(:focus) + ${BorderedDiv} {
-    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+    border-color: ${(p) =>
+      p.disabled ? 'transparent' : `var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']})`};
   }
 
   &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
@@ -105,7 +106,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
+    border: 1px solid var(--admiral-color-Success_Success60, ${(p) => p.theme.color['Success/Success 60']});
   }
 
   [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
@@ -113,7 +114,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 2px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   [data-read-only] &&&,

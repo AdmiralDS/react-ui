@@ -14,7 +14,10 @@ const Prefix = styled.div<{ disabled?: boolean; $align?: 'left' | 'right' }>`
   flex-shrink: 0;
   align-items: center;
   user-select: none;
-  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  color: ${({ theme, disabled }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   ${({ $align }) => $align === 'right' && 'margin-left: auto;'}
 `;
 
@@ -51,10 +54,13 @@ export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
   background: none;
   border: 1px solid
     ${({ theme, $status }) => {
-      if ($status === 'error') return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
-      if ($status === 'success')
+      if ($status === 'error') {
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      }
+      if ($status === 'success') {
         return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
-      return theme.color['Neutral/Neutral 40'];
+      }
+      return `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
     }};
   border-radius: inherit;
 
@@ -81,7 +87,7 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   &[data-status='success']:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 2px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   &:disabled {
