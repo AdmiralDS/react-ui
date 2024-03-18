@@ -150,7 +150,7 @@ const MultilineMixin = css`
   }
 `;
 
-const SingleMixin = css`
+const SinglelineMixin = css`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,13 +158,11 @@ const SingleMixin = css`
   [data-dimension='s'] &&& {
     height: 32px;
     line-height: 32px;
-    padding-left: 12px;
   }
 
   [data-dimension='s-bold'] &&& {
     height: 32px;
     line-height: 32px;
-    padding-left: 12px;
   }
 
   [data-dimension='m'] &&& {
@@ -197,7 +195,7 @@ export const Text = styled.div<{ $multiline?: boolean }>`
   color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
 
   ${TypographyMixin};
-  ${(p) => (p.$multiline ? MultilineMixin : SingleMixin)}
+  ${(p) => (p.$multiline ? MultilineMixin : SinglelineMixin)}
 
   [data-disabled='true'] & {
     cursor: default;
