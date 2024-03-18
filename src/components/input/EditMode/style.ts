@@ -123,7 +123,7 @@ export const Wrapper = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
 `;
 
 const MultilineMixin = css`
-  word-wrap: break-word;
+  overflow-wrap: anywhere;
   height: auto;
   white-space: normal;
 
