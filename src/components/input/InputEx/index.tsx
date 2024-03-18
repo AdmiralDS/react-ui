@@ -101,19 +101,23 @@ const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentD
   padding-right: 8px;
   margin-right: 8px;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   white-space: nowrap;
 `;
 
 const SuffixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
-  border-left: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
+  border-left: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-left: 8px;
   margin-left: 8px;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   white-space: nowrap;
 `;
 
@@ -156,13 +160,14 @@ const Container = styled.div<{
   align-items: stretch;
   overflow: hidden;
   border: none;
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
   padding: 0 ${horizontalPaddingValue}px;
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &[data-read-only],
   &[data-disabled] {
-    background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   }
 
   ${containerHeights}

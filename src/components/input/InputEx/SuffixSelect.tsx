@@ -41,7 +41,7 @@ const Container = styled.div<{ $iconSizeValue?: string; disabled?: boolean }>`
 
   &:hover {
     & > ${OpenStatusButton} *[fill^='#'] {
-      fill: ${(p) => p.theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
 

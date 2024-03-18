@@ -2,6 +2,7 @@ import { useState, type HTMLAttributes, type ReactNode, forwardRef, useRef, useE
 import styled, { css } from 'styled-components';
 import { keyboardKey } from '../../common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';

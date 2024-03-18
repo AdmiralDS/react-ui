@@ -43,11 +43,18 @@ const Container = styled.div<{
 
 const statusMixin = css<{ $status?: Status }>`
   border-color: ${(p) => {
-    if (p.$status === 'Error') return p.theme.color['Error/Error 60 Main'];
-    if (p.$status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
-    return p.theme.color['Neutral/Neutral 40'];
+    if (p.$status === 'Error') {
+      return `var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']})`;
+    }
+    if (p.$status === 'Queue') {
+      return `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`;
+    }
+    return `var(--admiral-color-Neutral_Neutral40, ${p.theme.color['Neutral/Neutral 40']})`;
   }};
-  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) =>
+    p.$status === 'Queue'
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
 `;
 
 const PreviewWrapper = styled.div<{
@@ -85,7 +92,10 @@ const hoveredFileTypeIconCss = css`
         width: 100%;
         height: 100%;
         opacity: 0.6;
-        background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+        background-color: var(
+          --admiral-color-Special_DarkStaticNeutral00,
+          ${(p) => p.theme.color['Special/Dark Static Neutral 00']}
+        );
       }
       & svg {
         visibility: visible;
@@ -95,10 +105,14 @@ const hoveredFileTypeIconCss = css`
   }
 `;
 
-const getColor = (status?: Status) => {
-  if (status === 'Queue') return 'Neutral/Neutral 30';
-  return 'Neutral/Neutral 50';
-};
+const getColor = css<{ $status?: Status }>`
+  ${({ theme, $status }) => {
+    if ($status === 'Queue') {
+      return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    }
+    return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
+  }}
+`;
 
 const ImagePreview = styled.div`
   min-width: 40px;
@@ -123,7 +137,7 @@ const IconWrapper = styled.div<{ $status?: Status; $showHover: boolean }>`
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getColor(p.$status)]};
+    fill: ${getColor};
   }
 
   ${(p) => (p.$status === 'Queue' || !p.$showHover ? disabledStyles : hoveredFileTypeIconCss)};
@@ -144,7 +158,7 @@ const StyledEyeOutline = styled(EyeOutline)`
   visibility: hidden;
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 `;
 
@@ -173,7 +187,7 @@ const FileName = styled.div`
 `;
 
 const FileInfo = styled.span<{ $dimension?: FileInputDimension; $status?: Status }>`
-  color: ${(p) => p.theme.color[getColor(p.$status)]};
+  color: ${getColor};
   margin-left: ${(p) => (p.$dimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
@@ -191,7 +205,7 @@ const StyledSpinner = styled(Spinner)`
 
 export const ErrorBlock = styled.div<{ $status?: Status; $dimension?: FileInputDimension }>`
   margin-top: 8px;
-  color: ${(p) => p.theme.color['Error/Error 60 Main']};
+  color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   ${typography['Body/Body 2 Short']};
   height: ${(p) => (p.$dimension === 'xl' ? ERROR_BLOCK_HEIGHT_XL : ERROR_BLOCK_HEIGHT_M)};
 `;

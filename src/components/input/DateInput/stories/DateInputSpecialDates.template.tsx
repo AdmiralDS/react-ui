@@ -7,7 +7,10 @@ import type { BorderRadiusType, DateInputProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const weekendMixin = css<{ disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Error/Error 30'] : p.theme.color['Error/Error 60 Main'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Error_Error30, ${p.theme.color['Error/Error 30']})`
+      : `var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']})`};
 `;
 
 export const DateInputSpecialDatesTemplate = ({

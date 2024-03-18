@@ -15,7 +15,7 @@ const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 
 const CustomValueStyle = styled.div`
   color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-  border: ${({ theme }) => theme.color['Primary/Primary 60 Main']} 1px dashed;
+  border: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) 1px dashed;
 `;
 
 const CustomMenuItem = styled(MenuItem)`
