@@ -64,7 +64,7 @@ export const disabledRow = css`
 `;
 
 export const underlineRow = css`
-  border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 // TODO: Удалить error, success в 8.x.x версии
@@ -78,15 +78,26 @@ export const rowBackground = css<{
   $rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
 }>`
   ${({ theme, selected, $error, $success, disabled, $grey, $status, $rowStatusMap }) => {
-    if (disabled) return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
-    if (selected) return theme.color['Primary/Primary 20'];
-    if ($status && $rowStatusMap?.[$status])
+    if (disabled) {
+      return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
+    }
+    if (selected) {
+      return `var(--admiral-color-Primary_Primary20, ${theme.color['Primary/Primary 20']})`;
+    }
+    if ($status && $rowStatusMap?.[$status]) {
       return typeof $rowStatusMap[$status] === 'string'
         ? $rowStatusMap[$status]
         : ($rowStatusMap[$status] as any)(theme.color);
-    if ($error) return theme.color['Error/Error 20'];
-    if ($success) return theme.color['Success/Success 20'];
-    if ($grey) return theme.color['Neutral/Neutral 05'];
+    }
+    if ($error) {
+      return `var(--admiral-color-Error_Error20, ${theme.color['Error/Error 20']})`;
+    }
+    if ($success) {
+      return `var(--admiral-color-Success_Success20, ${theme.color['Success/Success 20']})`;
+    }
+    if ($grey) {
+      return `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`;
+    }
     return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
   }}
 `;

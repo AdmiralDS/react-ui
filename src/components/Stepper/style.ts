@@ -32,17 +32,17 @@ export const StepIcon = styled(StepSvg)`
   }
   [data-error='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Error/Error 60 Main']};
+      fill: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
     }
   }
   [data-warning='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
+      fill: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
     }
   }
   [data-disabled='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Primary/Primary 30']};
+      fill: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
     }
   }
   flex-shrink: 0;
@@ -63,7 +63,7 @@ export const StepRail = styled.div`
     background-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
   [data-warning='true'] & {
-    background-color: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
+    background-color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
   }
   [data-disabled='true'] & {
     background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
@@ -87,9 +87,9 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover svg {
     path {
       fill: ${({ $error, $warning, theme }) => {
-        if ($error) return theme.color['Error/Error 70'];
-        if ($warning) return theme.color['Warning/Warning 70'];
-        return theme.color['Primary/Primary 70'];
+        if ($error) return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+        if ($warning) return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+        return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
       }};
     }
   }
@@ -98,9 +98,9 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
 const clickableNotActiveCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover ${StepRail} {
     background-color: ${({ $error, $warning, theme }) => {
-      if ($error) return theme.color['Error/Error 70'];
-      if ($warning) return theme.color['Warning/Warning 70'];
-      return theme.color['Primary/Primary 70'];
+      if ($error) return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+      if ($warning) return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+      return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
     }};
   }
 `;

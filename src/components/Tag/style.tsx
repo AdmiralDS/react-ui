@@ -36,20 +36,20 @@ const wrapperBackground = css<{ $background: TagKind | string }>`
     switch ($background) {
       case 'success':
       case 'green':
-        return theme.color['Success/Success 10'];
+        return `var(--admiral-color-Success_Success10, ${theme.color['Success/Success 10']})`;
       case 'primary':
       case 'blue':
-        return theme.color['Primary/Primary 10'];
+        return `var(--admiral-color-Primary_Primary10, ${theme.color['Primary/Primary 10']})`;
       case 'danger':
       case 'red':
-        return theme.color['Error/Error 10'];
+        return `var(--admiral-color-Error_Error10, ${theme.color['Error/Error 10']})`;
       case 'warning':
       case 'orange':
-        return theme.color['Warning/Warning 10'];
+        return `var(--admiral-color-Warning_Warning10, ${theme.color['Warning/Warning 10']})`;
       case 'neutral':
         return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
       default:
-        return $background || theme.color['Neutral/Neutral 10'];
+        return $background || `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
     }
   }};
 `;
@@ -60,20 +60,20 @@ const wrapperBorder = css<{ $border: TagKind | string }>`
       switch ($border) {
         case 'success':
         case 'green':
-          return theme.color['Success/Success 40'];
+          return `var(--admiral-color-Success_Success40, ${theme.color['Success/Success 40']})`;
         case 'primary':
         case 'blue':
-          return theme.color['Primary/Primary 50'];
+          return `var(--admiral-color-Primary_Primary50, ${theme.color['Primary/Primary 50']})`;
         case 'danger':
         case 'red':
-          return theme.color['Error/Error 50'];
+          return `var(--admiral-color-Error_Error50, ${theme.color['Error/Error 50']})`;
         case 'warning':
         case 'orange':
-          return theme.color['Warning/Warning 40'];
+          return `var(--admiral-color-Warning_Warning40, ${theme.color['Warning/Warning 40']})`;
         case 'neutral':
-          return theme.color['Neutral/Neutral 40'];
+          return `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
         default:
-          return $border || theme.color['Neutral/Neutral 40'];
+          return $border || `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
       }
     }};
 `;
@@ -83,20 +83,20 @@ const wrapperHover = css<{ $backgroundHover: TagKind | string }>`
     switch ($backgroundHover) {
       case 'success':
       case 'green':
-        return theme.color['Success/Success 20'];
+        return `var(--admiral-color-Success_Success20, ${theme.color['Success/Success 20']})`;
       case 'primary':
       case 'blue':
-        return theme.color['Primary/Primary 20'];
+        return `var(--admiral-color-Primary_Primary20, ${theme.color['Primary/Primary 20']})`;
       case 'danger':
       case 'red':
-        return theme.color['Error/Error 20'];
+        return `var(--admiral-color-Error_Error20, ${theme.color['Error/Error 20']})`;
       case 'warning':
       case 'orange':
-        return theme.color['Warning/Warning 20'];
+        return `var(--admiral-color-Warning_Warning20, ${theme.color['Warning/Warning 20']})`;
       case 'neutral':
-        return theme.color['Neutral/Neutral 20'];
+        return `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`;
       default:
-        return $backgroundHover || theme.color['Neutral/Neutral 20'];
+        return $backgroundHover || `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`;
     }
   }};
 `;
@@ -124,9 +124,13 @@ export const Wrapper = styled.button<{
   ${({ $width }) => $width && `width: ${typeof $width === 'number' ? `${$width}px` : $width};`}
   border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   ${({ $statusViaBackground, theme }) =>
-    $statusViaBackground ? wrapperBackground : `background: ${theme.color['Neutral/Neutral 10']};`}
+    $statusViaBackground
+      ? wrapperBackground
+      : `background: var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']});`}
   ${({ $statusViaBackground, theme }) =>
-    $statusViaBackground ? wrapperBorder : `border: 1px solid ${theme.color['Neutral/Neutral 10']};`}
+    $statusViaBackground
+      ? wrapperBorder
+      : `border: 1px solid var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']});`}
 
   display: inline-flex;
   align-items: center;
@@ -135,9 +139,15 @@ export const Wrapper = styled.button<{
   &:hover,
   &:active {
     ${({ $statusViaBackground, theme, $clickable }) =>
-      $clickable && !$statusViaBackground ? `border: 1px solid ${theme.color['Neutral/Neutral 20']};` : ''}
+      $clickable && !$statusViaBackground
+        ? `border: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`
+        : ''}
     ${({ $statusViaBackground, theme, $clickable }) =>
-      $clickable ? ($statusViaBackground ? wrapperHover : `background: ${theme.color['Neutral/Neutral 20']};`) : ''}
+      $clickable
+        ? $statusViaBackground
+          ? wrapperHover
+          : `background: var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`
+        : ''}
   }
 
   &:focus-visible {

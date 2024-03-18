@@ -25,7 +25,7 @@ const Table = styled.table`
   td[data-label] {
     text-align: left;
     padding: 8px 60px 8px 8px;
-    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 70']};
+    border-bottom: 1px solid var(--admiral-color-Neutral_Neutral70, ${(p) => p.theme.color['Neutral/Neutral 70']});
   }
   th {
     ${typography['Header/H3']}

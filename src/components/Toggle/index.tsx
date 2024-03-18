@@ -63,11 +63,13 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
       }
 
       background: ${({ theme, readOnly }) =>
-        readOnly ? theme.color['Primary/Primary 30'] : theme.color['Primary/Primary 60 Main']};
+        readOnly
+          ? `var(--admiral-color-Primary_Primary30, ${theme.color['Primary/Primary 30']})`
+          : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
     }
 
     &:disabled + div > span {
-      background: ${({ theme }) => theme.color['Primary/Primary 30']};
+      background: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
     }
 
     ${hoverInputStyles};
@@ -90,7 +92,7 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
     &:active {
       & + div > div {
         ${({ readOnly }) => !readOnly && `visibility: visible`};
-        background: var(--admiral-color-Opacity_Press ${(p) => p.theme.color['Opacity/Press']});
+        background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
       }
     }
   }
@@ -104,7 +106,10 @@ const Label = styled.div<{
   flex-direction: column;
   ${({ $position }) => ($position === 'right' ? `margin-left: ${LABEL_MARGIN};` : `margin-right: ${LABEL_MARGIN};`)}
   ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
-  color: ${({ disabled, theme }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90'])};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
 const Hint = styled.div<{
@@ -113,7 +118,10 @@ const Hint = styled.div<{
 }>`
   margin-top: 4px;
   ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
-  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  color: ${({ theme, disabled }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
 `;
 
 const Slider = styled.span<{
@@ -130,13 +138,15 @@ const Slider = styled.span<{
     position: absolute;
     top: ${SLIDER_INDENT}px;
     left: ${SLIDER_INDENT}px;
-    background: ${({ theme }) => theme.color['Special/Static White']};
+    background: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
     transition: all 0.3s;
     ${sliderSizes}
   }
 
   background: ${({ theme, $faded }) =>
-    $faded ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
+    $faded
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
 `;
 
 const Hover = styled.div<{ $dimension: Dimension }>`

@@ -26,34 +26,34 @@ const WrapperVertical = styled.div`
 
 type Status = 'Error' | 'Success' | 'Special' | 'Warning' | 'Attention';
 
-const getBackgroundColorByStatus = (status?: Status): keyof Color => {
+const getBackgroundColorByStatus = (status?: Status): string => {
   switch (status) {
     case 'Error':
-      return 'Error/Error 60 Main';
+      return 'var(--admiral-color-Error_Error60Main)';
     case 'Success':
-      return 'Success/Success 50 Main';
+      return 'var(--admiral-color-Success_Success50Main)';
     case 'Special':
-      return 'Purple/Purple 60 Main';
+      return 'var(--admiral-color-Purple_Purple60Main)';
     case 'Warning':
-      return 'Warning/Warning 50 Main';
+      return 'var(--admiral-color-Warning_Warning50Main)';
     case 'Attention':
-      return 'Attention/Attention 50 Main';
+      return 'var(--admiral-color-Attention_Attention50Main)';
     default:
-      return 'Neutral/Neutral 10';
+      return 'var(--admiral-color-Neutral_Neutral10)';
   }
 };
 
-const getFontColorByStatus = (status?: Status): keyof Color => {
+const getFontColorByStatus = (status?: Status): string => {
   switch (status) {
     case 'Attention':
-      return 'Special/Dark Static Neutral 00';
+      return 'var(--admiral-color-Special_DarkStaticNeutral00)';
     case 'Error':
     case 'Success':
     case 'Special':
     case 'Warning':
-      return 'Special/Static White';
+      return 'var(--admiral-color-Special_StaticWhite)';
     default:
-      return 'Neutral/Neutral 90';
+      return 'var(--admiral-color-Neutral_Neutral90)';
   }
 };
 
@@ -64,8 +64,8 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
 `;
 
 const stylesByStatusCssMixin = css<{ $status?: Status }>`
-  background-color: ${(p) => p.theme.color[getBackgroundColorByStatus(p.$status)]};
-  color: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
+  background-color: ${(p) => getBackgroundColorByStatus(p.$status)};
+  color: ${(p) => getFontColorByStatus(p.$status)};
 `;
 
 const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status }>((p) => ({
@@ -74,7 +74,7 @@ const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status
   ${stylesByStatusCssMixin}
 
   > ${HeartOutlinePillIcon} *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
+    fill: ${(p) => getFontColorByStatus(p.$status)};
   }
 `;
 
@@ -84,12 +84,12 @@ const StyledPillIcon = styled.div<{ $status?: Status }>`
   height: 16px;
 
   *[fill^='#'] {
-    fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
+    fill: ${(p) => getFontColorByStatus(p.$status)};
   }
 
   &:hover {
     & *[fill^='#'] {
-      fill: ${(p) => p.theme.color[getFontColorByStatus(p.$status)]};
+      fill: ${(p) => getFontColorByStatus(p.$status)};
     }
   }
 `;

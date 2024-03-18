@@ -70,7 +70,7 @@ const StyledButton = styled.button<{
     }
   }
   &:active {
-    background: var(--admiral-color-Opacity_Press ${(p) => p.theme.color['Opacity/Press']});
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
     & *[fill^='#'] {
       fill: ${(p) =>
         p.$appearance === 'primary'

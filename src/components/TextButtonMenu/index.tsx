@@ -17,16 +17,16 @@ const StyledTextButton = styled(TextButton)<{ $menuOpened?: boolean; appearance?
     color: ${({ theme, appearance, $menuOpened }) =>
       $menuOpened
         ? appearance === 'primary'
-          ? theme.color['Primary/Primary 60 Main']
-          : theme.color['Neutral/Neutral 90']
+          ? `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+          : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`
         : 'inherited'};
     ${IconContainer} {
       & *[fill^='#'] {
         fill: ${({ theme, appearance, $menuOpened }) =>
           $menuOpened
             ? appearance === 'primary'
-              ? theme.color['Primary/Primary 60 Main']
-              : theme.color['Neutral/Neutral 50']
+              ? `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+              : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
             : 'inherited'};
       }
     }

@@ -91,7 +91,9 @@ const SpinnerWrapper = styled.div<{
     animation: ${spin} 1s linear infinite;
     path {
       fill: ${({ $inverse, theme }) =>
-        $inverse ? theme.color['Special/Static White'] : theme.color['Primary/Primary 60 Main']};
+        $inverse
+          ? `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`
+          : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
     }
   }
 `;

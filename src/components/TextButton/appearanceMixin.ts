@@ -12,7 +12,8 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     }
   }
 
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
 
   &:focus-visible {
     outline-offset: 2px;

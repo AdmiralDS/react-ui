@@ -16,7 +16,7 @@ const AmountCell = styled.div`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
+  background: var(--admiral-color-Cyan_Cyan10, ${(p) => p.theme.color['Cyan/Cyan 10']});
   padding: 16px;
 `;
 const Content = styled.div`

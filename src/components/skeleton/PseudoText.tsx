@@ -9,10 +9,10 @@ export type PseudoTextProps = PseudoTextBaseProps & React.HTMLAttributes<HTMLDiv
 export const backGroundColorMixin = css<{ $appearance: ButtonAppearance }>`
   background: ${({ theme, $appearance }) =>
     $appearance === 'secondary' || $appearance === 'ghost'
-      ? theme.color['Neutral/Neutral 10']
+      ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
       : $appearance === 'white'
-        ? theme.color['Neutral/Neutral 50']
-        : theme.color['Neutral/Neutral 05']};
+      ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
+      : `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`};
 `;
 
 const PseudoTextDiv = styled.div<{ $dimension: Dimension; $appearance: ButtonAppearance }>`

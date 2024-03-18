@@ -13,7 +13,7 @@ export interface ProgressPageProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Wrapper = styled.div`
-  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -21,7 +21,9 @@ const Wrapper = styled.div`
 `;
 const Progress = styled.div<{ $percent: number; $appearance?: AppearanceProgressPage }>`
   background: ${({ theme, $appearance }) =>
-    $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Primary/Primary 60 Main']};
+    $appearance === 'error'
+      ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`
+      : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   width: ${({ $percent }) => $percent}%;
   border-radius: 2px;
   transition: all 0.3s linear;
@@ -36,9 +38,11 @@ const Label = styled.div<{ $appearance?: AppearanceProgressPage }>`
   line-height: 16px;
   font-style: normal;
   font-weight: normal;
-  font-family: ${(p) => p.theme.fontFamily};
+  font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
   color: ${({ theme, $appearance }) =>
-    $appearance === 'error' ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 90']};
+    $appearance === 'error'
+      ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
 const Container = styled.div``;
