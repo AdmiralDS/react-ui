@@ -8,8 +8,8 @@ import {
   LIGHT_THEME,
   FontsVTBGroup,
   DropdownProvider,
-  LightThemeCss,
-  DarkThemeCss,
+  LightThemeCssVars,
+  DarkThemeCssVars,
 } from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     html {
-      background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+      background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
 `;
 
@@ -47,34 +47,25 @@ function ThemeWrapper(props) {
   // render your custom theme provider
   return (
     <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
-      {isDark ? <DarkThemeCss /> : <LightThemeCss />}
+      {isDark ? <DarkThemeCssVars /> : <LightThemeCssVars />}
       {props.children}
     </ThemeProvider>
   );
 }
 
-const StoryContainer = styled.div`
+const StoryContainer = styled.div.attrs((p) => ({
+  className: p.theme.name == 'light' ? 'admiral-light-theme' : 'admiral-dark-theme',
+}))`
   padding: 3em;
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
-// переназначение z-index так не работает, так как все компоненты с z-index рендерятся через портал
 export const decorators = [
   (renderStory) => (
     <ThemeWrapper>
       <GlobalStyles />
       <DropdownProvider>
-        <StoryContainer
-        // style={
-        //   {
-        //     '--admiral-color-Primary_Primary60Main': 'pink',
-        //     '--admiral-color-Neutral_Neutral90': 'green',
-        //     '--admiral-color-Primary_Primary70': 'purple',
-        //   } as React.CSSProperties
-        // }
-        >
-          {renderStory()}
-        </StoryContainer>
+        <StoryContainer>{renderStory()}</StoryContainer>
       </DropdownProvider>
     </ThemeWrapper>
   ),

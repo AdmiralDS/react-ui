@@ -1,9 +1,7 @@
 // language=css
 export const lightThemeText = `
 :root,
-.admiral-theme-light {
-  color-scheme: light;
-
+.admiral-light-theme {
   /*
    * Color Primitives
    * Проверить дополнительно на опечатки

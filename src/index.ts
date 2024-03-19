@@ -95,4 +95,4 @@ export * from './components/FloatingButton';
 export * from './components/FloatingButton/FloatingButtonMenu';
 export * from './components/BadgeDot';
 
-export * from './components/cssVariables/style';
+export * from './components/cssVariables';

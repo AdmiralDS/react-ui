@@ -1,9 +1,6 @@
 // language=css
 export const darkThemeText = `
-:host,
-.admiral-theme-dark {
-  color-scheme: dark;
-
+.admiral-dark-theme {
   /*
    * Color Primitives
    * Проверить дополнительно на опечатки
