@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 `;
 
 type NodesMapItem = {
-  parent?: NodesMapItem;
+  parent?: string;
   dependencies?: Array<string>;
   level: number;
   node: TreeItemProps;
@@ -58,7 +58,7 @@ const treeToMap = (
   return tree.reduce((acc: NodesMap, item) => {
     const key = item.id.toString();
     const selfIndent = levelHasChildren && itemHasChildren(item) ? indent : indent + 1;
-    acc[key] = { level, indent: selfIndent, node: item, parent } as NodesMapItem;
+    acc[key] = { level, indent: selfIndent, node: item, parent };
 
     if (dependencies && !itemHasChildren(item)) {
       dependencies.forEach((dependency) => dependency.push(key));
