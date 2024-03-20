@@ -9,7 +9,9 @@ const Separator = styled.div`
   height: 40px;
 `;
 
-export const PaginationOneTypesTemplate = (props: PaginationOneProps & { themeBorderKind?: BorderRadiusType }) => {
+export const PaginationOneTypesTemplate = (
+  props: PaginationOneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean },
+) => {
   const [pageSize1, setPageSize1] = React.useState(8);
   const [page1, setPage1] = React.useState(1);
   const [pageSize2, setPageSize2] = React.useState(8);
@@ -18,7 +20,7 @@ export const PaginationOneTypesTemplate = (props: PaginationOneProps & { themeBo
   const totalElements = 100;
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind, props.CSSCustomProps)}>
       <Field label="Pagination One Complex">
         <PaginationOne
           onChange={({ page, pageSize }) => {

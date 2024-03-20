@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { MenuButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -168,7 +169,10 @@ export default {
 } as Meta<typeof MenuButton>;
 
 //<editor-fold desc="MenuButton. Базовый пример.">
-const MenuButtonBaseStory: StoryFn<typeof MenuButton> = (props) => <MenuButtonBaseTemplate {...props} />;
+const MenuButtonBaseStory: StoryFn<typeof MenuButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuButtonBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MenuButtonBase = {
   render: MenuButtonBaseStory,
@@ -244,9 +248,10 @@ export const MenuButtonIcon = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с чекбоксами и нижней панелью в выпадающем меню">
-const MenuButtonWithBottomPanelStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonWithBottomPanelTemplate {...props} />
-);
+const MenuButtonWithBottomPanelStory: StoryFn<typeof MenuButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuButtonWithBottomPanelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MenuButtonWithBottomPanel = {
   render: MenuButtonWithBottomPanelStory,
@@ -264,9 +269,10 @@ export const MenuButtonWithBottomPanel = {
 //</editor-fold>
 
 //<editor-fold desc="MenuButton с чекбоксами и верхней панелью в выпадающем меню">
-const MenuButtonWithTopPanelStory: StoryFn<typeof MenuButton> = (props) => (
-  <MenuButtonWithTopPanelTemplate {...props} />
-);
+const MenuButtonWithTopPanelStory: StoryFn<typeof MenuButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuButtonWithTopPanelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MenuButtonWithTopPanel = {
   render: MenuButtonWithTopPanelStory,

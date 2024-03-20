@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, Pills, refSetter, smallGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Shape, Color, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { Shape, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -16,36 +16,40 @@ type PillOptionProps = {
   icon?: React.ReactNode;
 };
 
-const getBackgroundColorByStatus = (status?: Status): string => {
-  switch (status) {
-    case 'Error':
-      return 'var(--admiral-color-Error_Error60Main)';
-    case 'Success':
-      return 'var(--admiral-color-Success_Success50Main)';
-    case 'Special':
-      return 'var(--admiral-color-Purple_Purple60Main)';
-    case 'Warning':
-      return 'var(--admiral-color-Warning_Warning50Main)';
-    case 'Attention':
-      return 'var(--admiral-color-Attention_Attention50Main)';
-    default:
-      return 'var(--admiral-color-Neutral_Neutral10)';
-  }
-};
+const getBackgroundColorByStatus = css<{ $status?: Status }>`
+  ${({ $status, theme }) => {
+    switch ($status) {
+      case 'Error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'Success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      case 'Special':
+        return `var(--admiral-color-Purple_Purple60Main, ${theme.color['Purple/Purple 60 Main']})`;
+      case 'Warning':
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+      case 'Attention':
+        return `var(--admiral-color-Attention_Attention50Main, ${theme.color['Attention/Attention 50 Main']})`;
+      default:
+        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+    }
+  }}
+`;
 
-const getFontColorByStatus = (status?: Status): string => {
-  switch (status) {
-    case 'Attention':
-      return 'var(--admiral-color-Special_DarkStaticNeutral00)';
-    case 'Error':
-    case 'Success':
-    case 'Special':
-    case 'Warning':
-      return 'var(--admiral-color-Special_StaticWhite)';
-    default:
-      return 'var(--admiral-color-Neutral_Neutral90)';
-  }
-};
+const getFontColorByStatus = css<{ $status?: Status }>`
+  ${({ $status, theme }) => {
+    switch ($status) {
+      case 'Attention':
+        return `var(--admiral-color-Special_DarkStaticNeutral00, ${theme.color['Special/Dark Static Neutral 00']})`;
+      case 'Error':
+      case 'Success':
+      case 'Special':
+      case 'Warning':
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      default:
+        return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
+    }
+  }}
+`;
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -69,8 +73,8 @@ const HeartOutlinePillIcon = styled(HeartOutline)`
 `;
 
 const stylesByStatusCssMixin = css<{ $status?: Status }>`
-  background-color: ${(p) => getBackgroundColorByStatus(p.$status)};
-  color: ${(p) => getFontColorByStatus(p.$status)};
+  background-color: ${getBackgroundColorByStatus};
+  color: ${getFontColorByStatus};
 `;
 
 const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status }>((p) => ({
@@ -79,28 +83,32 @@ const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status
   ${stylesByStatusCssMixin}
 
   > ${HeartOutlinePillIcon} *[fill^='#'] {
-    fill: ${(p) => getFontColorByStatus(p.$status)};
+    fill: ${getFontColorByStatus};
   }
 `;
 
-function firstNestedPillBorderRadius(shape: Shape): string {
-  const radius = `var(--admiral-border-radius-Small, ${smallGroupBorderRadius(shape)})`;
-  return `${radius} 0 0 ${radius}`;
-}
+const firstNestedPillBorderRadius = css`
+  ${({ theme }) => {
+    const radius = smallGroupBorderRadius(theme.shape);
+    return `var(--admiral-border-radius-Small, ${radius}) 0 0 var(--admiral-border-radius-Small, ${radius})`;
+  }}
+`;
 
-function lastNestedPillBorderRadius(shape: Shape): string {
-  const radius = `var(--admiral-border-radius-Small, ${smallGroupBorderRadius(shape)})`;
-  return `0 ${radius} ${radius} 0`;
-}
+const lastNestedPillBorderRadius = css`
+  ${({ theme }) => {
+    const radius = smallGroupBorderRadius(theme.shape);
+    return `0 var(--admiral-border-radius-Small, ${radius}) var(--admiral-border-radius-Small, ${radius}) 0`;
+  }}
+`;
 
 const NestedPill = styled.div`
   display: flex;
 
   > ${StatusPill}:first-of-type {
-    border-radius: ${(p) => firstNestedPillBorderRadius(p.theme.shape)};
+    border-radius: ${firstNestedPillBorderRadius};
   }
   > ${StatusPill}:last-of-type {
-    border-radius: ${(p) => lastNestedPillBorderRadius(p.theme.shape)};
+    border-radius: ${lastNestedPillBorderRadius};
   }
 `;
 
@@ -110,12 +118,12 @@ const StyledPillIcon = styled.div<{ $status?: Status }>`
   height: 16px;
 
   *[fill^='#'] {
-    fill: ${(p) => getFontColorByStatus(p.$status)};
+    fill: ${getFontColorByStatus};
   }
 
   &:hover {
     & *[fill^='#'] {
-      fill: ${(p) => getFontColorByStatus(p.$status)};
+      fill: ${getFontColorByStatus};
     }
   }
 `;
@@ -218,9 +226,12 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
   );
 });
 
-export const PillNestedTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
+export const PillNestedTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <Desc>
           Компонент позволяет объединять два элемента в один, у каждого из которых есть все функции одиночного

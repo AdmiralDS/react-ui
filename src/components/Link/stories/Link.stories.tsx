@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Link, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { LinkPlaygroundTemplate } from './LinkPlayground.template';
@@ -71,7 +72,10 @@ export default {
 } as Meta<typeof Link>;
 
 //<editor-fold desc="Playground">
-const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => <LinkPlaygroundTemplate {...props} />;
+const LinkPlaygroundStory: StoryFn<typeof Link> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <LinkPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const Playground = {
   render: LinkPlaygroundStory,

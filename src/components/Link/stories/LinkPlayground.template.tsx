@@ -11,10 +11,11 @@ const Divider = styled.div`
 
 export const LinkPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: LinkProps & { themeBorderKind?: BorderRadiusType }) => {
+}: LinkProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T font="Body/Body 1 Short" as="div">
         Компонент Link используется для навигации. Может применяться отдельно или внутри текста, с иконкой или без.
       </T>

@@ -6,12 +6,13 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const ModalOneButtonTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ModalProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open modal with 1 button</Button>
       {opened && (
         <Modal

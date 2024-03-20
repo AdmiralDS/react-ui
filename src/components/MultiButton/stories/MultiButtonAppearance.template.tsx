@@ -59,8 +59,9 @@ const itemsDemo = [
 
 export const MultiButtonAppearanceTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MultiButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MultiButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
 
@@ -69,7 +70,7 @@ export const MultiButtonAppearanceTemplate = ({
   }, [props.dimension, itemsDemo]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <MultiButton
           {...props}

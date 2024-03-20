@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { Modal, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -100,7 +101,10 @@ export default {
 } as Meta<typeof Modal>;
 
 //<editor-fold desc="Пример c двумя кнопками">
-const ModalTwoButtonsStory: StoryFn<typeof Modal> = (props) => <ModalTwoButtonsTemplate {...props} />;
+const ModalTwoButtonsStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalTwoButtonsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalTwoButtonsExample = {
   render: ModalTwoButtonsStory,
@@ -119,7 +123,10 @@ export const ModalTwoButtonsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример c одной кнопкой">
-const ModalOneButtonStory: StoryFn<typeof Modal> = (props) => <ModalOneButtonTemplate {...props} />;
+const ModalOneButtonStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalOneButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalOneButtonExample = {
   render: ModalOneButtonStory,
@@ -138,7 +145,10 @@ export const ModalOneButtonExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример без кнопок">
-const ModalWithoutButtonsStory: StoryFn<typeof Modal> = (props) => <ModalWithoutButtonsTemplate {...props} />;
+const ModalWithoutButtonsStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalWithoutButtonsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalWithoutButtonsExample = {
   render: ModalWithoutButtonsStory,
@@ -157,7 +167,10 @@ export const ModalWithoutButtonsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример со скроллом">
-const ModalScrollStory: StoryFn<typeof Modal> = (props) => <ModalScrollTemplate {...props} />;
+const ModalScrollStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalScrollTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalScrollExample = {
   render: ModalScrollStory,
@@ -176,7 +189,10 @@ export const ModalScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Свободное (кастомизированное) наполнение">
-const ModalCustomContentStory: StoryFn<typeof Modal> = (props) => <ModalCustomContentTemplate {...props} />;
+const ModalCustomContentStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalCustomContentTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalCustomContentExample = {
   render: ModalCustomContentStory,
@@ -195,7 +211,10 @@ export const ModalCustomContentExample = {
 //</editor-fold>
 
 //<editor-fold desc="Кастомизация подложки модального окна">
-const ModalCustomOverlayStory: StoryFn<typeof Modal> = (props) => <ModalCustomOverlayTemplate {...props} />;
+const ModalCustomOverlayStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalCustomOverlayTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalCustomOverlayExample = {
   render: ModalCustomOverlayStory,
@@ -219,7 +238,10 @@ export const ModalCustomOverlayExample = {
 //</editor-fold>
 
 //<editor-fold desc="Статусные иконки">
-const ModalStatusIconStory: StoryFn<typeof Modal> = (props) => <ModalStatusIconTemplate {...props} />;
+const ModalStatusIconStory: StoryFn<typeof Modal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ModalStatusIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ModalStatusIconExample = {
   render: ModalStatusIconStory,

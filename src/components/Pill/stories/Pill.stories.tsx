@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { Pill, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -48,7 +49,10 @@ export default {
 } as Meta<typeof Pill>;
 
 //<editor-fold desc="Pills. Базовый пример.">
-const SimplePillsStory: StoryFn<typeof Pill> = (props) => <PillSimpleTemplate {...props} />;
+const SimplePillsStory: StoryFn<typeof Pill> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PillSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SimplePills = {
   render: SimplePillsStory,
@@ -67,7 +71,10 @@ export const SimplePills = {
 //</editor-fold>
 
 //<editor-fold desc="PillMenu. Pill с выпадающим списком.">
-const PillMenuStory: StoryFn<typeof Pill> = (props) => <PillMenuTemplate {...props} />;
+const PillMenuStory: StoryFn<typeof Pill> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PillMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const PillsMenu = {
   render: PillMenuStory,
@@ -86,7 +93,10 @@ export const PillsMenu = {
 //</editor-fold>
 
 //<editor-fold desc="NestedPills.">
-const NestedPillsStory: StoryFn<typeof Pill> = (props) => <PillNestedTemplate {...props} />;
+const NestedPillsStory: StoryFn<typeof Pill> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PillNestedTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const NestedPills = {
   render: NestedPillsStory,
@@ -105,7 +115,10 @@ export const NestedPills = {
 //</editor-fold>
 
 //<editor-fold desc="Pill с Tooltip.">
-const PillWithTooltipStory: StoryFn<typeof Pill> = (props) => <PillWithTooltipTemplate {...props} />;
+const PillWithTooltipStory: StoryFn<typeof Pill> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PillWithTooltipTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const PillWithTooltip = {
   render: PillWithTooltipStory,

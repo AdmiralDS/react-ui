@@ -20,10 +20,11 @@ export const NotificationItemBaseTemplate = ({
   displayStatusIcon = true,
   isClosable = true,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: NotificationItemProps & { themeBorderKind?: BorderRadiusType }) => {
+}: NotificationItemProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <NotificationItem {...props} status={status} displayStatusIcon={displayStatusIcon} isClosable={isClosable}>
         <NotificationItemTitle>{title}</NotificationItemTitle>
         <NotificationItemContent>{body}</NotificationItemContent>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { OverflowMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { OverflowMenuBaseTemplate } from './OverflowMenuBase.template';
@@ -82,7 +83,10 @@ export default {
 } as Meta<typeof OverflowMenu>;
 
 //<editor-fold desc="OverflowMenu. Базовый пример.">
-const OverflowMenuBaseStory: StoryFn<typeof OverflowMenu> = (props) => <OverflowMenuBaseTemplate {...props} />;
+const OverflowMenuBaseStory: StoryFn<typeof OverflowMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <OverflowMenuBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const OverflowMenuBase = {
   render: OverflowMenuBaseStory,

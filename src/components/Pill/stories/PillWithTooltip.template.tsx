@@ -33,7 +33,10 @@ const LabelWrapper = styled.div`
   white-space: nowrap;
 `;
 
-export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
+export const PillWithTooltipTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -72,7 +75,7 @@ export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderR
   }, [setTooltipVisible]);
   //debugger;
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <Desc>
           В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при

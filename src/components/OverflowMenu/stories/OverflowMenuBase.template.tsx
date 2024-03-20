@@ -50,8 +50,9 @@ const items: Array<any> = [
 
 export const OverflowMenuBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: OverflowMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: OverflowMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
     return items.map((item) => ({
@@ -66,7 +67,7 @@ export const OverflowMenuBaseTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <OverflowMenu
         {...props}
         items={model}

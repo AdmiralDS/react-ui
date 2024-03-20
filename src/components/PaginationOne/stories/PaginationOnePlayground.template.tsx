@@ -6,15 +6,16 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const PaginationOnePlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: PaginationOneProps & { themeBorderKind?: BorderRadiusType }) => {
+}: PaginationOneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [pageSize, setPageSize] = React.useState(8);
   const [page, setPage] = React.useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = props.totalItems || 100;
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <PaginationOne
         {...props}
         onChange={({ page, pageSize }) => {
