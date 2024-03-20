@@ -6,11 +6,12 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const TagPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TagProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TagProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <>
-      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
         <Tag {...props}>Playground</Tag>
       </ThemeProvider>
     </>

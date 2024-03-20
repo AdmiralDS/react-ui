@@ -60,8 +60,9 @@ const itemsDemo: Array<TagOptionProps> = [
 
 export const TagMenuPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TagMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<TagOptionProps | undefined>(itemsDemo[0]);
 
   const model = React.useMemo(() => {
@@ -77,7 +78,7 @@ export const TagMenuPlaygroundTemplate = ({
 
   return (
     <>
-      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
         <TagMenu
           items={model}
           selected={selected}

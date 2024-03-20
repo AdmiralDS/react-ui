@@ -24,9 +24,11 @@ const WrapperButton = styled.div`
   }
 `;
 
-export const TextButtonDimensionTemplate = (props: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TextButtonDimensionTemplate = (
+  props: TextButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean },
+) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind, props.CSSCustomProps)}>
       <WrapperButton>
         <div>
           <StyledText font="Body/Body 1 Long" forwardedAs="div">

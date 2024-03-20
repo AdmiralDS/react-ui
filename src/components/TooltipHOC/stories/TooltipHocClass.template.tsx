@@ -27,10 +27,11 @@ const TooltipedTest = TooltipHoc(TestForwardingRef);
 
 export const TooltipHocClassTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedTest
         {...props}
         renderContent={() => `Пример использования TooltipHoc с классовым компонентом.`}

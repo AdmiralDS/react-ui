@@ -19,10 +19,11 @@ const TooltipedHeading = TooltipHoc(H2);
 
 export const TooltipHocFCTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedHeading
         {...props}
         renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`}

@@ -87,10 +87,11 @@ const MessageForm = () => {
 
 export const ToastCustomComponentTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ToastProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <ToastProvider>
         <MessageForm />
         <Toast position={props.position} />

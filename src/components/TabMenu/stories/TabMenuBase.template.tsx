@@ -59,12 +59,13 @@ const Wrapper = styled.div`
 
 export const TabMenuBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string>('3');
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <TabMenu
           {...props}

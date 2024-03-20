@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { TagMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -100,7 +101,10 @@ export default {
 } as Meta<typeof TagMenu>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof TagMenu> = (props) => <TagMenuPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof TagMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagMenuPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const Playground = {
   render: PlaygroundStory,
@@ -119,7 +123,10 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="TagMenu. Размеры.">
-const SizesStory: StoryFn<typeof TagMenu> = (props) => <TagMenuSizesTemplate {...props} />;
+const SizesStory: StoryFn<typeof TagMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagMenuSizesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SizesExample = {
   render: SizesStory,

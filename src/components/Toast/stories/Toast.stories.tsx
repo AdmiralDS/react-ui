@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import LinkTo from '@storybook/addon-links/react';
 
 import { Toast, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -85,7 +86,8 @@ export default {
 
 //<editor-fold desc="Toast. Настройка места всплытия через стили.">
 const ToastNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastNotificationTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastNotificationTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastNotification = {
@@ -106,7 +108,8 @@ export const ToastNotification = {
 
 //<editor-fold desc="Toast. Базовый пример.">
 const ToastNotificationBaseStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastNotificationBaseTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastNotificationBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastNotificationBase = {
@@ -127,7 +130,8 @@ export const ToastNotificationBase = {
 
 //<editor-fold desc="Line Notification.">
 const ToastLineNotificationStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastLineNotificationTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastLineNotificationTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastLineNotification = {
@@ -148,7 +152,8 @@ export const ToastLineNotification = {
 
 //<editor-fold desc="'Toast. Custom component.">
 const ToastCustomComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastCustomComponentTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastCustomComponentTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastCustomComponent = {
@@ -169,7 +174,8 @@ export const ToastCustomComponent = {
 
 //<editor-fold desc="Toast. Custom component with Progress.">
 const ToastProgressComponentStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastProgressComponentTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastProgressComponentTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastProgressComponent = {
@@ -190,7 +196,8 @@ export const ToastProgressComponent = {
 
 //<editor-fold desc="Toast. Backward compatibility.">
 const ToastBackwardCompatibilityStory: StoryFn<typeof Toast> = (props: ToastProps) => {
-  return <ToastBackwardCompatibilityTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ToastBackwardCompatibilityTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ToastBackwardCompatibility = {

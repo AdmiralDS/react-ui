@@ -50,11 +50,12 @@ const overflowTabs = [
 
 export const TabMenuOverflowTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string>('3');
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ display: 'flex', width: '500px' }}>
         <TabMenu
           {...props}

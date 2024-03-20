@@ -104,10 +104,11 @@ const NotificationEmitter = () => {
 
 export const ToastNotificationBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ToastProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ToastProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <ToastProvider autoDeleteTime={props.autoDeleteTime}>
         <NotificationEmitter />
         <Toast position={props.position} />

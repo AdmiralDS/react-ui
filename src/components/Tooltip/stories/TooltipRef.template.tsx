@@ -7,8 +7,9 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const TooltipRefTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const tooltipRef = React.useRef(null);
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
@@ -40,7 +41,7 @@ export const TooltipRefTemplate = ({
   }, [setVisible]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test3">
         <DeleteOutline height={24} width={24} />
       </Button>

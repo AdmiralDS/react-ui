@@ -5,15 +5,15 @@ const getNumFromStr = (str: string) => {
   return result.replace(/^\D+/g, '');
 };
 
-export function createBorderRadiusSwapper(
-  borderRadiusKind?: BorderRadiusType,
-  borderRadiusType?: 'Small' | 'Medium' | 'Large',
-  CSSCustomProps?: boolean,
-) {
+export function createBorderRadiusSwapper(borderRadiusKind?: BorderRadiusType, CSSCustomProps?: boolean) {
   if (borderRadiusKind && CSSCustomProps) {
-    const cssPropName = `--admiral-border-radius-${borderRadiusType}`;
-    const cssPropValue = `var(--admiral-border-kind-${borderRadiusType}_${getNumFromStr(borderRadiusKind)})`;
-    document.body.style.setProperty(cssPropName, cssPropValue);
+    const cssPropValueSmall = `var(--admiral-border-kind-Small_${getNumFromStr(borderRadiusKind)})`;
+    const cssPropValueMedium = `var(--admiral-border-kind-Medium_${getNumFromStr(borderRadiusKind)})`;
+    const cssPropValueLarge = `var(--admiral-border-kind-Large_${getNumFromStr(borderRadiusKind)})`;
+
+    document.body.style.setProperty('--admiral-border-radius-Small', cssPropValueSmall);
+    document.body.style.setProperty('--admiral-border-radius-Medium', cssPropValueMedium);
+    document.body.style.setProperty('--admiral-border-radius-Large', cssPropValueLarge);
   } else if (!CSSCustomProps) {
     document.body.style.removeProperty('--admiral-border-radius-Small');
     document.body.style.removeProperty('--admiral-border-radius-Medium');

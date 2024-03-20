@@ -6,9 +6,13 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 const clickHandler = () => console.log('click active tag');
 
-export const TagStateTemplate = ({ themeBorderKind, ...props }: TagProps & { themeBorderKind?: BorderRadiusType }) => {
+export const TagStateTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+  ...props
+}: TagProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Tags>
         <Tag {...props} onClick={clickHandler}>
           Active

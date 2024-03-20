@@ -43,11 +43,12 @@ const disabledTabs = [
 
 export const TabMenuDisabledTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string>('2');
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TabMenu
         {...props}
         activeTab={selected}

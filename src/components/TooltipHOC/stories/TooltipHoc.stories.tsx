@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { InputField, TooltipHoc, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { TooltipHocProps } from '@admiral-ds/react-ui';
@@ -105,7 +106,10 @@ export default {
 } as Meta<typeof TooltipHocStory>;
 
 //<editor-fold desc="TooltipHoc. Базовый пример.">
-const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocBaseTemplate {...props} />;
+const TooltipHocBaseStory: StoryFn<typeof TooltipHocStory> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipHocBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipHocBaseExample = {
   render: TooltipHocBaseStory,
@@ -124,7 +128,10 @@ export const TooltipHocBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с классовым компонентом.">
-const TooltipHocClassStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocClassTemplate {...props} />;
+const TooltipHocClassStory: StoryFn<typeof TooltipHocStory> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipHocClassTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipHocClassExample = {
   render: TooltipHocClassStory,
@@ -143,7 +150,10 @@ export const TooltipHocClassExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Пример использования с функциональным компонентом.">
-const TooltipHocFCStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocFCTemplate {...props} />;
+const TooltipHocFCStory: StoryFn<typeof TooltipHocStory> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipHocFCTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipHocFCExample = {
   render: TooltipHocFCStory,
@@ -162,7 +172,10 @@ export const TooltipHocFCExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Утилита refSetter для мерджа рефов.">
-const TooltipHocRefSetterStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocRefSetterTemplate {...props} />;
+const TooltipHocRefSetterStory: StoryFn<typeof TooltipHocStory> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipHocRefSetterTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipHocRefSetterExample = {
   render: TooltipHocRefSetterStory,
@@ -185,7 +198,10 @@ export const TooltipHocRefSetterExample = {
 //</editor-fold>
 
 //<editor-fold desc="TooltipHoc. Прокидывание ref на результат вызова TooltipHoc.">
-const TooltipHocRefStory: StoryFn<typeof TooltipHocStory> = (props) => <TooltipHocRefTemplate {...props} />;
+const TooltipHocRefStory: StoryFn<typeof TooltipHocStory> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipHocRefTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipHocRefExample = {
   render: TooltipHocRefStory,
