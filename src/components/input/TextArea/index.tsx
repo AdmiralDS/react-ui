@@ -96,11 +96,15 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
   }
 
-  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+  &:user-invalid + ${BorderedDiv}, &:user-invalid:hover + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:hover:not(:disabled)
+    + ${BorderedDiv},
+    &:user-invalid:hover:not(:disabled)
+    + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
@@ -108,7 +112,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
   }
 
-  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:focus:not(:disabled)
+    + ${BorderedDiv},
+    &:user-invalid:focus:not(:disabled)
+    + ${BorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 

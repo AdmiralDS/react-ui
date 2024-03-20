@@ -96,7 +96,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
         return props.theme.color['Neutral/Neutral 60'];
       }};
   }
-  &:hover:not(:focus-within) input:invalid + ${BorderedDiv} {
+  &:hover:not(:focus-within) input:user-invalid + ${BorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 `;

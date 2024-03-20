@@ -47,7 +47,7 @@ export const TextAreaAsyncTemplate = () => {
         onChange={handleChangeTextValue}
       />
 
-      <TextArea data-testid="textField-2" autoHeight rows={3} maxRows={6} defaultValue={textValue} />
+      <TextArea data-testid="textField-2" autoHeight rows={3} maxRows={6} required />
     </Form>
   );
 };
