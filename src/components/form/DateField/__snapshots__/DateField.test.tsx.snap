@@ -99,15 +99,15 @@ exports[`DateField should render component 1`] = `
   pointer-events: none;
 }
 
-.c5.c5.c5:invalid+.c6 {
+.c5.c5.c5:user-invalid+.c6 {
   border: 1px solid #D92020;
 }
 
-.c5.c5.c5:invalid:hover:not(:disabled)+.c6 {
+.c5.c5.c5:user-invalid:hover:not(:disabled)+.c6 {
   border: 1px solid #BA1717;
 }
 
-.c5.c5.c5:invalid:focus:not(:disabled)+.c6 {
+.c5.c5.c5:user-invalid:focus:not(:disabled)+.c6 {
   border: 2px solid #D92020;
 }
 

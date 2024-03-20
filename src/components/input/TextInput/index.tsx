@@ -149,15 +149,15 @@ const Input = styled.input<ExtraProps>`
 
   background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
 
-  &&&:invalid + ${InputBorderedDiv} {
+  &&&:user-invalid + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
-  &&&:invalid:hover:not(:disabled) + ${InputBorderedDiv} {
+  &&&:user-invalid:hover:not(:disabled) + ${InputBorderedDiv} {
     border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
   }
 
-  &&&:invalid:focus:not(:disabled) + ${InputBorderedDiv} {
+  &&&:user-invalid:focus:not(:disabled) + ${InputBorderedDiv} {
     border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
   }
 
