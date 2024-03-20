@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.14.0](https://github.com/AdmiralDS/react-ui/compare/v7.13.0...v7.14.0) (2024-03-20)
+
+
+### Features
+
+* **EditModeArea:** add new component ([0ea9e26](https://github.com/AdmiralDS/react-ui/commit/0ea9e26ca147c63fc27c1f857d1acc8f867e2a35))
+* **EditModeAreaField:** add new component ([b25a70a](https://github.com/AdmiralDS/react-ui/commit/b25a70a00b5dd12d9c4595f9973a9a1e2ba133ae))
+
+
+### Bug Fixes
+
+* **EditMode:** fix multiline view ([3999429](https://github.com/AdmiralDS/react-ui/commit/399942920c9ad1070362e9eb124443ff10b5dd63))
+* **EditMode:** fix padding in view mode ([4ce88e7](https://github.com/AdmiralDS/react-ui/commit/4ce88e70c8f151dd8c3fb1901fa36611d25427db))
+* **EditMode:** fix padding-left ([0151e3f](https://github.com/AdmiralDS/react-ui/commit/0151e3f8de5ecd9ee39da22ebbbd6241f068ed46))
+
 ## [7.13.0](https://github.com/AdmiralDS/react-ui/compare/v7.12.2...v7.13.0) (2024-03-07)
 
 
