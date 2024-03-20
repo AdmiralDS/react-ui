@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.14.1](https://github.com/AdmiralDS/react-ui/compare/v7.14.0...v7.14.1) (2024-03-20)
+
+
+### Bug Fixes
+
+* Инвалидное состояние компонента должно отображаться только через статус или после манипуляции пользователем (required) ([5d71c78](https://github.com/AdmiralDS/react-ui/commit/5d71c78a9112bdfe06b18f1b0c876d8e32a350b4))
+
 ## [7.14.0](https://github.com/AdmiralDS/react-ui/compare/v7.13.0...v7.14.0) (2024-03-20)
 
 
