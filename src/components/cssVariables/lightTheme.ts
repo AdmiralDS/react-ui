@@ -240,6 +240,9 @@ export const lightThemeText = `
   --admiral-border-kind-Small_0: 0;
   --admiral-border-kind-Small_2: 2px;
   --admiral-border-kind-Small_4: 4px;
+  --admiral-border-kind-Small_6: 4px;
+  --admiral-border-kind-Small_8: 4px;
+  --admiral-border-kind-Small_10: 4px;
   --admiral-border-radius-Small: var(--admiral-border-kind-Small_4);
 
   --admiral-border-kind-Medium_0: 0;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { addons } from '@storybook/preview-api';
+import { addons, useGlobals } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
 import {
@@ -44,31 +44,41 @@ function ThemeWrapper(props) {
     channel.on(DARK_MODE_EVENT_NAME, setDark);
     return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
   }, [channel, setDark]);
+
+  useEffect(() => {
+    // document.body refers to body tag inside iframe#storybook-preview-iframe
+    document.body.classList.add(`admiral-${isDark ? 'dark' : 'light'}-theme`);
+    document.body.classList.remove(`admiral-${isDark ? 'light' : 'dark'}-theme`);
+  }, [isDark]);
+
+  const renderCssProps = () => (isDark ? <DarkThemeCssVars /> : <LightThemeCssVars />);
+
   // render your custom theme provider
   return (
     <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
-      {isDark ? <DarkThemeCssVars /> : <LightThemeCssVars />}
+      {props.CSSCustomProps && renderCssProps()}
       {props.children}
     </ThemeProvider>
   );
 }
 
-const StoryContainer = styled.div.attrs((p) => ({
-  className: p.theme.name == 'light' ? 'admiral-light-theme' : 'admiral-dark-theme',
-}))`
+const StoryContainer = styled.div`
   padding: 3em;
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
 export const decorators = [
-  (renderStory) => (
-    <ThemeWrapper>
-      <GlobalStyles />
-      <DropdownProvider>
-        <StoryContainer>{renderStory()}</StoryContainer>
-      </DropdownProvider>
-    </ThemeWrapper>
-  ),
+  (renderStory) => {
+    const [{ CSSCustomProps }] = useGlobals();
+    return (
+      <ThemeWrapper CSSCustomProps={CSSCustomProps}>
+        <GlobalStyles />
+        <DropdownProvider>
+          <StoryContainer>{renderStory()}</StoryContainer>
+        </DropdownProvider>
+      </ThemeWrapper>
+    );
+  },
   (Story) => (
     <>
       <FontsVTBGroup />
@@ -76,3 +86,16 @@ export const decorators = [
     </>
   ),
 ];
+
+export const globalTypes = {
+  CSSCustomProps: {
+    defaultValue: false,
+    toolbar: {
+      title: 'CSS Custom Props',
+      items: [
+        { value: true, title: 'Enable css custom props', icon: 'passed' },
+        { value: false, title: 'Disable css custom props', icon: 'failed' },
+      ],
+    },
+  },
+};

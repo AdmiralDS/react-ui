@@ -1,13 +1,24 @@
 import { BorderRadiusType, LIGHT_THEME, Theme } from '@admiral-ds/react-ui';
 
+const getNumFromStr = (str: string) => {
+  let result = str;
+  return result.replace(/^\D+/g, '');
+};
+
 export function createBorderRadiusSwapper(
   borderRadiusKind?: BorderRadiusType,
-  borderRadiusType?: 'small' | 'medium' | 'large',
+  borderRadiusType?: 'Small' | 'Medium' | 'Large',
+  CSSCustomProps?: boolean,
 ) {
-  let storyContainer =
-    document.getElementsByClassName('admiral-light-theme')[0] ??
-    document.getElementsByClassName('admiral-dark-theme')[0];
-  (storyContainer as HTMLElement)?.style.setProperty('--admiral-border-radius', '0');
+  if (borderRadiusKind && CSSCustomProps) {
+    const cssPropName = `--admiral-border-radius-${borderRadiusType}`;
+    const cssPropValue = `var(--admiral-border-kind-${borderRadiusType}_${getNumFromStr(borderRadiusKind)})`;
+    document.body.style.setProperty(cssPropName, cssPropValue);
+  } else if (!CSSCustomProps) {
+    document.body.style.removeProperty('--admiral-border-radius-Small');
+    document.body.style.removeProperty('--admiral-border-radius-Medium');
+    document.body.style.removeProperty('--admiral-border-radius-Large');
+  }
 
   return function swapBorder(theme?: Theme): Theme {
     if (theme) {

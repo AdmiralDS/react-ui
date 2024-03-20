@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { ButtonLoaderTemplate } from './ButtonLoader.template';
@@ -93,7 +94,8 @@ export default {
 
 //<editor-fold desc="Button. Playground">
 const ButtonPlaygroundStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonPlaygroundTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonPlayground = {

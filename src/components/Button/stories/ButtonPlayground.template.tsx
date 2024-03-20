@@ -19,10 +19,11 @@ const ButtonContainer = styled.div<{ appearance?: ButtonAppearance }>`
 
 export const ButtonPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, 'Medium', CSSCustomProps)}>
       <T font="Body/Body 1 Long" as="div">
         Кнопки представлены в четырех размерностях XL, L, M и S. Для дополнительных акцентов и более прозрачных действий
         могут применяться кнопки с иконками и текстом. Иконка может быть как перед надписью, так и после
