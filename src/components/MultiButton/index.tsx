@@ -2,7 +2,6 @@ import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
-import type { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';

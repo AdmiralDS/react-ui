@@ -91,23 +91,24 @@ const getHoverBorderColor = css<{ $status?: InputStatus }>`
   }}
 `;
 
-const getFocusBorderColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
-    if (!$status) {
-      return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
-    }
-    switch ($status) {
-      case 'error':
-        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
-      case 'success':
-        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
-    }
-  }}
+const getFocusBorder = css<{ $status?: InputStatus }>`
+  border: 2px solid
+    ${({ $status, theme }) => {
+      if (!$status) {
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      }
+      switch ($status) {
+        case 'error':
+          return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+        case 'success':
+          return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      }
+    }};
 `;
 
 export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : `border: 2px solid ${getFocusBorderColor}`)}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : getFocusBorder)}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {

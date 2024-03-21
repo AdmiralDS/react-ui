@@ -75,7 +75,7 @@ export const typography = createTypography();
 export function createTypography() {
   /**
    * @deprecated since version 7.12.1
-   * Will be deleted in version 9.x.x
+   * Will be deleted in version 10.x.x
    *
    * use property 'Header/HL3' instead
    */
@@ -93,7 +93,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Header/H1' instead
      */
@@ -110,7 +110,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Header/H2' instead
      */
@@ -127,7 +127,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Header/H3' instead
      */
@@ -144,7 +144,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Header/H5' instead
      */
@@ -161,7 +161,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Header/H6' instead
      */
@@ -178,7 +178,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Subtitle/Subtitle 1' instead
      */
@@ -195,7 +195,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Subtitle/Subtitle 2' instead
      */
@@ -212,7 +212,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Body/Body 1 Long' instead
      */
@@ -229,7 +229,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Body/Body 1 Short' instead
      */
@@ -246,7 +246,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Body/Body 2 Long' instead
      */
@@ -263,7 +263,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Subtitle/Subtitle 3' instead
      */
@@ -280,7 +280,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Body/Body 2 Short' instead
      */
@@ -297,7 +297,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Button/Button 1' instead
      */
@@ -316,7 +316,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Button/Button 2' instead
      */
@@ -335,7 +335,7 @@ export function createTypography() {
     `,
     /**
      * @deprecated since version 7.12.1
-     * Will be deleted in version 9.x.x
+     * Will be deleted in version 10.x.x
      *
      * use property 'Caption/Caption 1' instead
      */

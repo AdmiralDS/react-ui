@@ -182,8 +182,11 @@ const colorsBorderAndBackground = css<{
 
   border: ${({ theme, $appearance, $disabled }) => {
     if ($appearance === 'filled') return 'none';
-    if ($disabled) return `1px solid var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
-    else return `1px solid var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    if ($disabled) {
+      return `1px solid var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    } else {
+      return `1px solid var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
   }};
 
   border-radius: 16px;
@@ -269,8 +272,8 @@ export const ChipContentWrapperStyled = styled.div<{
         return $disabled
           ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
           : $appearance === 'filled'
-          ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
-          : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+            ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
+            : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       }};
     }
   }

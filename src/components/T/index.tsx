@@ -32,13 +32,14 @@ const Tspan = styled.span<{
   $skeleton?: boolean;
 }>`
   color: ${({ $color, theme, $skeleton }) => {
+    const cssVar = `--admiral-color-${$color?.replace('/', '_').replaceAll(' ', '')}`;
     return $skeleton
       ? 'transparent'
       : $color
-      ? theme.color[$color]
         ? theme.color[$color]
-        : $color
-      : theme.color[DefaultFontColorName];
+          ? `var(${cssVar}, ${theme.color[$color]})`
+          : $color
+        : `var(--admiral-color-Neutral_Neutral90, ${theme.color[DefaultFontColorName]})`;
   }};
   ${(p) => p.theme.typography[p.$font]};
   ${(p) => (p.$cssMixin ? p.$cssMixin : '')}

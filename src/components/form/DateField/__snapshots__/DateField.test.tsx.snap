@@ -6,7 +6,7 @@ exports[`DateField should render component 1`] = `
   display: flex;
   align-items: stretch;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   pointer-events: all;
 }
 
@@ -26,7 +26,7 @@ exports[`DateField should render component 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [disabled] .c9.c9.c9 {
@@ -34,7 +34,7 @@ exports[`DateField should render component 1`] = `
 }
 
 [disabled] .c9.c9.c9 *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c9:hover {
@@ -42,7 +42,7 @@ exports[`DateField should render component 1`] = `
 }
 
 .c9:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c7 {
@@ -57,7 +57,7 @@ exports[`DateField should render component 1`] = `
   min-width: 0;
   background: none;
   border-radius: inherit;
-  border: 1px solid #9BA0AA;
+  border: 1px solid var(--admiral-color-Neutral_Neutral40, #9BA0AA);
 }
 
 .c5 {
@@ -78,7 +78,7 @@ exports[`DateField should render component 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
-  background-color: #FFFFFF;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   padding-right: 48px;
 }
 
@@ -99,34 +99,21 @@ exports[`DateField should render component 1`] = `
   pointer-events: none;
 }
 
-<<<<<<< HEAD
-.c5.c5.c5:invalid+.c6 {
+.c5.c5.c5:user-invalid+.c6 {
   border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
-.c5.c5.c5:invalid:hover:not(:disabled)+.c6 {
+.c5.c5.c5:user-invalid:hover:not(:disabled)+.c6 {
   border: 1px solid var(--admiral-color-Error_Error70, #BA1717);
 }
 
-.c5.c5.c5:invalid:focus:not(:disabled)+.c6 {
-  border: 2px solid var(--admiral-color-Error_Error60Main, #D92020);
-=======
-.c5.c5.c5:user-invalid+.c6 {
-  border: 1px solid #D92020;
-}
-
-.c5.c5.c5:user-invalid:hover:not(:disabled)+.c6 {
-  border: 1px solid #BA1717;
-}
-
 .c5.c5.c5:user-invalid:focus:not(:disabled)+.c6 {
-  border: 2px solid #D92020;
->>>>>>> main
+  border: 2px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 [data-read-only] .c5.c5.c5,
 .c5.c5.c5:disabled {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border-color: transparent;
 }
 
@@ -165,11 +152,11 @@ exports[`DateField should render component 1`] = `
 }
 
 .c3:focus-within:not(:disabled)>.c6 {
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c3:hover:not(:focus-within)>.c6 {
-  border-color: #646973;
+  border-color: var(--admiral-color-Neutral_Neutral60, #646973);
 }
 
 .c4 {

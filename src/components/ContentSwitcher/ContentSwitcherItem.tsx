@@ -14,14 +14,22 @@ export interface ContentSwitcherItemProps extends ButtonHTMLAttributes<HTMLButto
 
 const colorMixin = css<{ $active?: boolean; disabled?: boolean }>`
   color: ${({ $active, disabled, theme }) => {
-    if ($active) return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
-    if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    if ($active) {
+      return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
+    }
+    if (disabled) {
+      return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    }
     return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
   }};
   [data-appearance~='primary'] && {
     color: ${({ $active, disabled, theme }) => {
-      if ($active) return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
-      if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      if ($active) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      }
       return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
     }};
   }
@@ -61,15 +69,21 @@ export const ContentSwitcherItemButton = styled.button<{
 
   & *[fill^='#'] {
     fill: ${({ disabled, theme }) => {
-      if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      }
       return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }};
   }
 
   [data-appearance~='primary'] && *[fill^='#'] {
     fill: ${({ $active, disabled, theme }) => {
-      if ($active) return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
-      if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      if ($active) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      }
       return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
     }};
   }
@@ -80,21 +94,33 @@ export const ContentSwitcherItemButton = styled.button<{
         ? `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`
         : `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`};
     color: ${({ theme, disabled, $active }) => {
-      if ($active) return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
-      if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      if ($active) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      }
       return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }};
   }
 
   [data-appearance~='primary'] && ${BadgeComponent} {
     background-color: ${({ $active, disabled, theme }) => {
-      if ($active) return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
-      if (disabled) return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+      if ($active) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+      }
       return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
     }};
     color: ${({ theme, disabled, $active }) => {
-      if ($active) return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
-      if (disabled) return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      if ($active) {
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      }
+      if (disabled) {
+        return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+      }
       return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
     }};
   }

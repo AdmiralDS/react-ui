@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export const dangerAppearanceMixin = css`
   background-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
-  border: 1px solid var(--admiral-color-Error_Error60Main, ${({ theme }) => theme.color['Error/Error 60 Main']});
+  border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   &&& *[fill^='#'] {
     fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
