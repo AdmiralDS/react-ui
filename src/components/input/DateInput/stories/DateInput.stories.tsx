@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import {
   DateInput,
   INPUT_DIMENSIONS_VALUES,
@@ -158,7 +159,10 @@ export default {
 } as Meta<typeof DateInput>;
 
 //<editor-fold desc="DateInput (input type=date)">
-const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => <DateInputPlaygroundTemplate {...props} />;
+const DateInputPlaygroundStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateInputPlayground = {
   render: DateInputPlaygroundStory,
@@ -177,7 +181,10 @@ export const DateInputPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Альтернативная иконка">
-const DateInputCustomIconStory: StoryFn<typeof DateInput> = (props) => <DateInputAlternativeIconTemplate {...props} />;
+const DateInputCustomIconStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputAlternativeIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateInputCustomIcon = {
   render: DateInputCustomIconStory,
@@ -195,7 +202,10 @@ export const DateInputCustomIcon = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Выбор месяца">
-const DateInputPickMonthStory: StoryFn<typeof DateInput> = (props) => <DateInputPickMonthTemplate {...props} />;
+const DateInputPickMonthStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputPickMonthTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateInputPickMonth = {
   render: DateInputPickMonthStory,
@@ -214,7 +224,10 @@ export const DateInputPickMonth = {
 //</editor-fold>
 
 //<editor-fold desc="DateInput. Выделение определенных дат">
-const DateInputSpecialDatesStory: StoryFn<typeof DateInput> = (props) => <DateInputSpecialDatesTemplate {...props} />;
+const DateInputSpecialDatesStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputSpecialDatesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateInputSpecialDates = {
   render: DateInputSpecialDatesStory,

@@ -31,9 +31,11 @@ const DarkDiv = styled.div`
   padding: 2px;
 `;
 
-export const ButtonWithIconTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ButtonWithIconTemplate = (
+  props: ButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean },
+) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind, props.CSSCustomProps)}>
       <WrapperButton>
         <div>
           <T font="Body/Body 1 Long" as="div">

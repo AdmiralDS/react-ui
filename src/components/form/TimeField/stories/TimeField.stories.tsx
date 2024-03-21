@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import {
   TimeField,
@@ -120,7 +121,10 @@ export default {
 } as Meta<typeof TimeField>;
 
 //<editor-fold desc="TimeField example">
-const TimeFieldInputStory: StoryFn<typeof TimeField> = (props) => <TimeFieldInputTemplate {...props} />;
+const TimeFieldInputStory: StoryFn<typeof TimeField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimeFieldInputTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TimeFieldInput = {
   render: TimeFieldInputStory,

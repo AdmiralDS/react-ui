@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { IconPlacement, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -67,9 +68,10 @@ export default {
 } as Meta<typeof IconPlacement>;
 
 //<editor-fold desc="IconPlacement. Playground">
-const IconPlacementPlaygroundStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementPlaygroundTemplate {...props} />
-);
+const IconPlacementPlaygroundStory: StoryFn<typeof IconPlacement> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <IconPlacementPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const IconPlacementPlayground = {
   render: IconPlacementPlaygroundStory,
@@ -88,7 +90,10 @@ export const IconPlacementPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Размеры">
-const IconPlacementSizesStory: StoryFn<typeof IconPlacement> = (props) => <IconPlacementSizesTemplate {...props} />;
+const IconPlacementSizesStory: StoryFn<typeof IconPlacement> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <IconPlacementSizesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const IconPlacementSizes = {
   render: IconPlacementSizesStory,
@@ -107,9 +112,10 @@ export const IconPlacementSizes = {
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Appearance">
-const IconPlacementAppearanceStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementAppearanceTemplate {...props} />
-);
+const IconPlacementAppearanceStory: StoryFn<typeof IconPlacement> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <IconPlacementAppearanceTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const IconPlacementAppearance = {
   render: IconPlacementAppearanceStory,
@@ -128,9 +134,10 @@ export const IconPlacementAppearance = {
 //</editor-fold>
 
 //<editor-fold desc="IconPlacement. Варианты использования">
-const IconPlacementVariantsStory: StoryFn<typeof IconPlacement> = (props) => (
-  <IconPlacementVariantsTemplate {...props} />
-);
+const IconPlacementVariantsStory: StoryFn<typeof IconPlacement> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <IconPlacementVariantsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const IconPlacementVariants = {
   render: IconPlacementVariantsStory,

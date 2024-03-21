@@ -11,8 +11,9 @@ export const FileInputBaseTemplate = ({
   dimension = 'xl',
   width = '480px',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FileInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: FileInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
@@ -104,7 +105,7 @@ export const FileInputBaseTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <FileInput
         dimension={dimension}
         disabled={props.disabled}

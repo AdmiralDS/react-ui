@@ -10,8 +10,9 @@ export const TextAreaPlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TextAreaProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TextAreaProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +22,7 @@ export const TextAreaPlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TextArea {...props} value={localValue} onChange={handleChange} placeholder={placeholder} />
     </ThemeProvider>
   );

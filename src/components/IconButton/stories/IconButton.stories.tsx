@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { IconButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { IconButtonDimensionTemplate } from './IconButtonDimension.template';
@@ -66,7 +67,10 @@ export default {
   },
 } as Meta<typeof IconButton>;
 
-const IconButtonDimensionStory: StoryFn<typeof IconButton> = (props) => <IconButtonDimensionTemplate {...props} />;
+const IconButtonDimensionStory: StoryFn<typeof IconButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <IconButtonDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const IconButtonDimension = {
   render: IconButtonDimensionStory,

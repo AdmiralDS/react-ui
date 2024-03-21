@@ -16,8 +16,9 @@ const weekendMixin = css<{ disabled?: boolean }>`
 export const DateInputSpecialDatesTemplate = ({
   placeholder,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
   const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
 
@@ -46,7 +47,7 @@ export const DateInputSpecialDatesTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DateInput
         {...props}
         value={localValue}

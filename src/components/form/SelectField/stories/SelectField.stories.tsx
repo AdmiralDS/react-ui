@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { SelectField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SelectFieldSimpleTemplate } from './SelectFieldSimple.template';
@@ -176,7 +177,8 @@ export default {
 
 //<editor-fold desc="Простой SearchSelect">
 const SimpleStory: StoryFn<typeof SelectField> = (props) => {
-  return <SelectFieldSimpleTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SelectFieldSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const SimpleSearchSelectStory = {

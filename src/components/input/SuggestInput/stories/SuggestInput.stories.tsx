@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import {
   SuggestInput,
   INPUT_DIMENSIONS_VALUES,
@@ -131,9 +132,10 @@ export default {
 } as Meta<typeof SuggestInput>;
 
 //<editor-fold desc="Suggest Input компонент">
-const SuggestInputPlaygroundStory: StoryFn<typeof SuggestInput> = (props) => (
-  <SuggestInputPlaygroundTemplate {...props} />
-);
+const SuggestInputPlaygroundStory: StoryFn<typeof SuggestInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SuggestInputPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SuggestInputPlayground = {
   render: SuggestInputPlaygroundStory,

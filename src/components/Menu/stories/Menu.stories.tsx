@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Menu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { MenuLargeNumberOfItemsTemplate } from './MenuLargeNumberOfItems.template';
@@ -105,7 +106,10 @@ export default {
 } as Meta<typeof Menu>;
 
 //<editor-fold desc="Базовый пример">
-const SimpleStory: StoryFn<typeof Menu> = (props) => <MenuSimpleTemplate {...props} />;
+const SimpleStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SimpleExample = {
   render: SimpleStory,
@@ -179,7 +183,10 @@ export const MenuWithCustomItemsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Меню с checkbox">
-const CheckboxMenuStory: StoryFn<typeof Menu> = (props) => <MenuCheckboxTemplate {...props} />;
+const CheckboxMenuStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuCheckboxTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const CheckboxMenuExample = {
   render: CheckboxMenuStory,
   parameters: {
@@ -197,7 +204,10 @@ export const CheckboxMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Меню с radioButton">
-const RadioButtonMenuStory: StoryFn<typeof Menu> = (props) => <MenuRadioButtonTemplate {...props} />;
+const RadioButtonMenuStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuRadioButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const RadioButtonMenuExample = {
   render: RadioButtonMenuStory,
   parameters: {
@@ -215,7 +225,10 @@ export const RadioButtonMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с Tooltip">
-const TooltipMenuStory: StoryFn<typeof Menu> = (props) => <MenuTooltipTemplate {...props} />;
+const TooltipMenuStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuTooltipTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const TooltipMenuExample = {
   render: TooltipMenuStory,
   parameters: {
@@ -233,7 +246,10 @@ export const TooltipMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с многострочными пунктами">
-const MultiLineMenuStory: StoryFn<typeof Menu> = (props) => <MenuMultiLineTemplate {...props} />;
+const MultiLineMenuStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuMultiLineTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MultiLineMenuExample = {
   render: MultiLineMenuStory,
   parameters: {
@@ -251,7 +267,10 @@ export const MultiLineMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с Actions с двумя кнопками">
-const MenuActionsTwoButtonsStory: StoryFn<typeof Menu> = (props) => <MenuActionsTwoButtonsTemplate {...props} />;
+const MenuActionsTwoButtonsStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuActionsTwoButtonsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MenuActionsTwoButtonsExample = {
   render: MenuActionsTwoButtonsStory,
   parameters: {
@@ -269,7 +288,10 @@ export const MenuActionsTwoButtonsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с Actions и Search">
-const MenuActionsAddUserValueStory: StoryFn<typeof Menu> = (props) => <MenuActionsAddUserValueTemplate {...props} />;
+const MenuActionsAddUserValueStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuActionsAddUserValueTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MenuActionsAddUserValueExample = {
   render: MenuActionsAddUserValueStory,
   parameters: {
@@ -287,7 +309,10 @@ export const MenuActionsAddUserValueExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с CheckboxGroup">
-const MenuCheckboxGroupStory: StoryFn<typeof Menu> = (props) => <MenuCheckboxGroupTemplate {...props} />;
+const MenuCheckboxGroupStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuCheckboxGroupTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MenuCheckboxGroupExample = {
   render: MenuCheckboxGroupStory,
   parameters: {
@@ -305,7 +330,10 @@ export const MenuCheckboxGroupExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с большим количеством item">
-const LargeNumberOfItemsStory: StoryFn<typeof Menu> = (props) => <MenuLargeNumberOfItemsTemplate {...props} />;
+const LargeNumberOfItemsStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuLargeNumberOfItemsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const LargeNumberOfItemsExample = {
   render: LargeNumberOfItemsStory,
   parameters: {
@@ -323,7 +351,10 @@ export const LargeNumberOfItemsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример без цикла обхода пунктов">
-const MenuWithLockCycleScrollStory: StoryFn<typeof Menu> = (props) => <MenuWithLockCycleScrollTemplate {...props} />;
+const MenuWithLockCycleScrollStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuWithLockCycleScrollTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MenuWithLockCycleScrollExample = {
   render: MenuWithLockCycleScrollStory,
@@ -343,7 +374,10 @@ export const MenuWithLockCycleScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Виртуальный скролл">
-const VirtualScrollStory: StoryFn<typeof Menu> = (props) => <MenuVirtualScrollTemplate {...props} />;
+const VirtualScrollStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuVirtualScrollTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const VirtualScrollExample = {
   render: VirtualScrollStory,
   parameters: {
@@ -364,7 +398,10 @@ export const VirtualScrollExample = {
 //</editor-fold>
 
 //<editor-fold desc="Многоуровневое меню">
-const MultiLevelStory: StoryFn<typeof Menu> = (props) => <MenuMultiLevelTemplate {...props} />;
+const MultiLevelStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuMultiLevelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MultiLevelExample = {
   render: MultiLevelStory,
   parameters: {

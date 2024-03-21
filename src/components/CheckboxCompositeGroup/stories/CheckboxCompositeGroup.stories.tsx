@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { CheckboxCompositeGroup, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import type { CheckboxCompositeGroupProps } from '@admiral-ds/react-ui';
 
@@ -41,9 +42,10 @@ export default {
 } as Meta<typeof CheckboxCompositeGroup>;
 
 //<editor-fold desc="CheckboxCompositeGroup. Пример">
-const CheckboxCompositeGroupExampleStory: StoryFn = (props: CheckboxCompositeGroupProps) => (
-  <CheckboxCompositeGroupExampleTemplate {...props} />
-);
+const CheckboxCompositeGroupExampleStory: StoryFn = (props: CheckboxCompositeGroupProps) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CheckboxCompositeGroupExampleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CheckboxCompositeGroupExample = {
   render: CheckboxCompositeGroupExampleStory,

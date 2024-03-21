@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Field, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { ReadOnlyMaskedFieldTemplate } from './ReadOnlyMaskedField.template';
@@ -52,7 +53,8 @@ export default {
 
 //<editor-fold desc="ReadOnly masked field">
 const ReadOnlyMaskedFieldStory: StoryFn<typeof Field> = (props) => {
-  return <ReadOnlyMaskedFieldTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ReadOnlyMaskedFieldTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ReadOnlyMaskedField = {

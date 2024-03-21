@@ -6,10 +6,11 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const SliderInputTickMarksTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SliderInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SliderInput
         {...props}
         defaultValue="15"

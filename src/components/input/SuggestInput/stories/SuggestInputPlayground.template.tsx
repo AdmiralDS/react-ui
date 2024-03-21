@@ -24,8 +24,9 @@ const OPTIONS = [
 export const SuggestInputPlaygroundTemplate = ({
   placeholder = 'Начните набирать text',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SuggestInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SuggestInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
   const [isLoading, setIsLoading] = React.useState(false);
   const [options, setOptions] = React.useState<string[] | undefined>();
@@ -61,7 +62,7 @@ export const SuggestInputPlaygroundTemplate = ({
   }, [isLoading]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SuggestInput
         className="suggest"
         {...props}

@@ -37,8 +37,9 @@ const CheckboxWithInformer = styled.div`
 
 export const CheckboxFieldBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
   const [visible1, setVisible1] = React.useState(false);
@@ -51,7 +52,7 @@ export const CheckboxFieldBaseTemplate = ({
   }, [props.checked]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
         <CheckboxField
           {...props}

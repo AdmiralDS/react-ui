@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { PhoneInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { PhoneInputFieldExampleTemplate } from './PhoneInputFieldExample.template';
@@ -74,9 +75,10 @@ export default {
 } as Meta<typeof PhoneInputField>;
 
 //<editor-fold desc="PhoneInputField example">
-const PhoneInputFieldExampleStory: StoryFn<typeof PhoneInputField> = (props) => (
-  <PhoneInputFieldExampleTemplate {...props} />
-);
+const PhoneInputFieldExampleStory: StoryFn<typeof PhoneInputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PhoneInputFieldExampleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const PhoneInputFieldExample = {
   render: PhoneInputFieldExampleStory,

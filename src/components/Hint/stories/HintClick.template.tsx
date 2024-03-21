@@ -10,8 +10,9 @@ of mini units map to fluid grid column widths and row heights.`;
 
 export const HintClickTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+}: HintProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +24,7 @@ export const HintClickTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Hint
         {...props}
         renderContent={() => text}

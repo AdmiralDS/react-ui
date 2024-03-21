@@ -22,8 +22,9 @@ export const TextFieldInputTemplate = ({
     'grid, and multiples of mini units map to fluid grid column widths and row heights.',
   label = 'Label',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TextFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TextFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
   const fieldRef = React.useRef(null);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,7 +34,7 @@ export const TextFieldInputTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <TextField
           data-container-id="textFieldIdOne"

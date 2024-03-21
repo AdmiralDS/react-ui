@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FieldWithTextInputTemplate } from './FieldWithTextInput.template';
@@ -51,7 +52,10 @@ export default {
 } as Meta<typeof Field>;
 
 //<editor-fold desc="Пример обертывания компонента TextInput">
-const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => <FieldWithTextInputTemplate {...props} />;
+const FieldWithTextInputStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FieldWithTextInputTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FieldWithTextInput = {
   render: FieldWithTextInputStory,

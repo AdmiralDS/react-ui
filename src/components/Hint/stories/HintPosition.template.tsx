@@ -13,8 +13,9 @@ const StyledButton = styled(Button)`
 
 export const HintPositionTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+}: HintProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [visible1, setVisible1] = React.useState(false);
   const [visible2, setVisible2] = React.useState(false);
   const [visible3, setVisible3] = React.useState(false);
@@ -25,7 +26,7 @@ export const HintPositionTemplate = ({
   const handleVisibilityChange4 = (visible: boolean) => setVisible4(visible);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
         <Hint
           {...props}

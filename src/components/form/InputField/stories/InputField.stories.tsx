@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import {
   InputField,
@@ -102,7 +103,10 @@ export default {
 } as Meta<typeof InputField>;
 
 //<editor-fold desc="Input field example">
-const InputFieldInputStory: StoryFn<typeof InputField> = (props) => <InputFieldInputTemplate {...props} />;
+const InputFieldInputStory: StoryFn<typeof InputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <InputFieldInputTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const InputFieldInput = {
   render: InputFieldInputStory,

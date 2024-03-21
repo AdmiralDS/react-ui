@@ -5,10 +5,11 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const NumberInputCustomisedTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: NumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: NumberInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <NumberInput
         {...props}
         onChange={(event) => {

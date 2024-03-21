@@ -15,10 +15,11 @@ const WrapperVertical = styled.div`
 
 export const IconPlacementVariantsTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <T font="Body/Body 1 Long" as="div">
           Примеры использования:

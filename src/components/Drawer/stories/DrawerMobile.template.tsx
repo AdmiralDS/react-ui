@@ -12,12 +12,13 @@ const ContentArea = styled.div`
 
 export const DrawerMobileTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
       <Drawer
         {...props}

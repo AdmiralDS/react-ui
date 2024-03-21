@@ -13,8 +13,9 @@ const Separator = styled.div`
 export const InputExBaseTemplate = ({
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
+}: InputExProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValueOne, setValueOne] = useState<string>(props.value ? String(props.value) : 'Вариант с префиксом');
   const [localValueTwo, setValueTwo] = useState<string>(props.value ? String(props.value) : 'Вариант с суффиксом');
   const [localValueThree, setValueThree] = useState<string>(
@@ -40,7 +41,7 @@ export const InputExBaseTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <InputEx
         {...props}
         value={localValueOne}

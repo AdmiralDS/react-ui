@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { EditModeField, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -109,9 +110,10 @@ export default {
 } as Meta<typeof EditModeField>;
 
 //<editor-fold desc="Playground">
-const EditModeFieldPlaygroundStory: StoryFn<typeof EditModeField> = (props) => (
-  <EditModeFieldPlaygroundTemplate {...props} />
-);
+const EditModeFieldPlaygroundStory: StoryFn<typeof EditModeField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <EditModeFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const EditModeFieldPlayground = {
   render: EditModeFieldPlaygroundStory,

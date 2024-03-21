@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SelectCustomRenderValueTemplate } from '#src/components/input/Select/stories/select/SelectCustomRenderValue.template';
@@ -103,7 +104,10 @@ export default {
 } as Meta<typeof Select>;
 
 //<editor-fold desc="Select. Простой Select">
-const SelectSimpleStory: StoryFn<typeof Select> = (props) => <SelectSimpleTemplate {...props} />;
+const SelectSimpleStory: StoryFn<typeof Select> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SelectSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SelectSimple = {
   render: SelectSimpleStory,

@@ -15,13 +15,14 @@ const anchorCss = css`
 
 export const HintAnchorCssTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+}: HintProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Hint
         {...props}
         visible={visible}

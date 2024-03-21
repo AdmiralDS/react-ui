@@ -9,8 +9,9 @@ export const EditModePlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +21,7 @@ export const EditModePlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <EditMode {...props} value={localValue} onChange={handleChange} placeholder={placeholder} />
     </ThemeProvider>
   );

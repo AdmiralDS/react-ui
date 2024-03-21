@@ -12,12 +12,13 @@ const ContentArea = styled.div`
 
 export const DrawerWidthTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open drawer</Button>
       <Drawer
         {...props}

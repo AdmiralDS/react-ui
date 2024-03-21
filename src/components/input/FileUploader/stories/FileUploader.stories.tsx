@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { FileUploader, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -104,7 +105,10 @@ export default {
 } as Meta<typeof FileUploader>;
 
 //<editor-fold desc="File Uploader. XL">
-const FileUploaderXLStory: StoryFn<typeof FileUploader> = (props) => <FileUploaderXLTemplate {...props} />;
+const FileUploaderXLStory: StoryFn<typeof FileUploader> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FileUploaderXLTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FileUploaderXL = {
   render: FileUploaderXLStory,

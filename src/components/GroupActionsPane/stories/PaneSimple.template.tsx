@@ -39,8 +39,9 @@ const columns: PaneColumn[] = [
 
 export const PaneSimpleTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: GroupActionsPaneProps & { themeBorderKind?: BorderRadiusType }) => {
+}: GroupActionsPaneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const dimension = ['s', 'm'].includes(props.dimension || 'm') ? 's' : 'm';
   const [columnsVisibility, setColumnsVisibility] = React.useState(columns);
   const [searchValue, setSearchValue] = React.useState<string>('');
@@ -58,7 +59,7 @@ export const PaneSimpleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <GroupActionsPane
           {...props}

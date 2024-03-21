@@ -10,8 +10,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const DateInputAlternativeIconTemplate = ({
   placeholder,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Другая иконка ->');
   const [value, setValue] = useState<string>('');
 
@@ -27,7 +28,7 @@ export const DateInputAlternativeIconTemplate = ({
   }, [placeholder]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DateInput
         {...props}
         value={value}

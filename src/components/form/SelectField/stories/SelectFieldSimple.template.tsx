@@ -20,8 +20,9 @@ const OPTIONS = [
 export const SelectFieldSimpleTemplate = ({
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SearchSelectFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SearchSelectFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selectValue, setSelectValue] = React.useState('');
 
   const renderOptions = () => {
@@ -38,7 +39,7 @@ export const SelectFieldSimpleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SelectField
         data-container-id="selectFieldIdOne"
         {...props}

@@ -8,12 +8,16 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
 
-export const HintBaseTemplate = ({ themeBorderKind, ...props }: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+export const HintBaseTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+  ...props
+}: HintProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Hint
         {...props}
         renderContent={() => text}

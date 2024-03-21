@@ -50,11 +50,13 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
 ];
 
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
+
 const Wrapper = styled.div`
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  box-shadow: var(--admiral-box-shadow-Shadow08);
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 const MultiLineMenuItem = styled(MenuItem)`
@@ -63,8 +65,9 @@ const MultiLineMenuItem = styled(MenuItem)`
 
 export const MenuMultiLineTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => {
       return {
@@ -79,7 +82,7 @@ export const MenuMultiLineTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper style={{ maxWidth: '200px' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

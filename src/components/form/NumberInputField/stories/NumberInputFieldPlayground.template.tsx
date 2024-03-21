@@ -12,8 +12,9 @@ export const NumberInputFieldPlaygroundTemplate = ({
   maxValue = 10000,
   decimal,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: NumberInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: NumberInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [status, setStatus] = React.useState<NumberInputFieldProps['status'] | undefined>(undefined);
   const [extraText, setExtraText] = React.useState('');
 
@@ -29,7 +30,7 @@ export const NumberInputFieldPlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <NumberInputField
         data-container-id="numberInputFieldIdOne"
         {...props}

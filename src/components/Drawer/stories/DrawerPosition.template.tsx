@@ -18,13 +18,14 @@ const ContentArea = styled.div`
 
 export const DrawerPositionTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
   const [position, setPosition] = React.useState<DrawerProps['position']>('right');
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <ButtonWrapper>
         <Button
           onClick={() => {

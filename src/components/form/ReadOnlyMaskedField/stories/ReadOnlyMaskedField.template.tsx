@@ -34,8 +34,9 @@ const maskedPhoneNumber = '+7 095 ••• •• 75';
 
 export const ReadOnlyMaskedFieldTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType }) => {
+}: FieldPropsWithDimension & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const Icon = (isMasked: boolean) => (isMasked ? EyeOutlineSvg : EyeCloseOutlineSvg);
 
   const [cardNumber, setCardNumber] = React.useState(maskedCardNumber);
@@ -54,7 +55,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
   const [isPhoneNumberVisible, setPhoneNumberVisible] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <FormContainer>
         <InputField
           dimension={props.dimension}

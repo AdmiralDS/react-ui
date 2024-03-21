@@ -282,8 +282,9 @@ const holidayDates = new Map(
 
 export const SimpleWithSpecialDatesTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: CalendarPropType & { themeBorderKind?: BorderRadiusType }) => {
+}: CalendarPropType & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
@@ -303,7 +304,7 @@ export const SimpleWithSpecialDatesTemplate = ({
   };
 
   return props.range ? (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Calendar
         {...props}
         range
@@ -317,7 +318,7 @@ export const SimpleWithSpecialDatesTemplate = ({
       />
     </ThemeProvider>
   ) : (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Calendar
         {...props}
         selected={selected}

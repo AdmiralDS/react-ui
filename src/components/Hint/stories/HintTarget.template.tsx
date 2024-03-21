@@ -10,14 +10,15 @@ of mini units map to fluid grid column widths and row heights.`;
 
 export const HintTargetTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: HintProps & { themeBorderKind?: BorderRadiusType }) => {
+}: HintProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
   const handleVisibilityChange = (visible: boolean) => setVisible(visible);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button
         ref={btnRef}
         dimension="xl"

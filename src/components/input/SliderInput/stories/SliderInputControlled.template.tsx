@@ -6,12 +6,13 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const SliderInputControlledTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SliderInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SliderInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [slider1, setSlider1] = React.useState(String(props.value ?? ''));
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SliderInput
         {...props}
         value={slider1}

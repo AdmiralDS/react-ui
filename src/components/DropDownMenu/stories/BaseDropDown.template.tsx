@@ -42,8 +42,9 @@ const items = [
 
 export const BaseDropDownTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DropDownMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DropDownMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<number | string>('');
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef(null);
@@ -64,7 +65,7 @@ export const BaseDropDownTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ width: 'fit-content' }}>
         <Button ref={buttonRef} onClick={() => setOpen(!open)} style={{ margin: 'auto' }}>
           Нажми

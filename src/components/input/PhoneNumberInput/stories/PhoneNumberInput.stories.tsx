@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { INPUT_STATUS_VALUES, PhoneNumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -121,7 +122,10 @@ export default {
 } as Meta<typeof PhoneNumberInput>;
 
 //<editor-fold desc="Phone Number Input. Размер XL">
-const PhoneNumberInputXLStory: StoryFn<typeof PhoneNumberInput> = (props) => <PhoneNumberInputXLTemplate {...props} />;
+const PhoneNumberInputXLStory: StoryFn<typeof PhoneNumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PhoneNumberInputXLTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const PhoneNumberInputXL = {
   render: PhoneNumberInputXLStory,

@@ -26,10 +26,11 @@ const handleClick = () => console.log('IconPlacement clicked');
 
 export const IconPlacementAppearanceTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <Wrapper>
           <WrapperVertical>

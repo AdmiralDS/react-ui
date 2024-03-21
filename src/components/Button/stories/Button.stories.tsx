@@ -116,7 +116,8 @@ export const ButtonPlayground = {
 
 //<editor-fold desc="Button. Стили">
 const ButtonStylesStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonStylesTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonStylesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonStyles = {
@@ -137,7 +138,8 @@ export const ButtonStyles = {
 
 //<editor-fold desc="Button с иконкой">
 const ButtonWithIconStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonWithIconTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonWithIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonWithIcon = {

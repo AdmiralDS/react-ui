@@ -10,8 +10,9 @@ export const PhoneNumberInputXLTemplate = ({
   defaultCountry = 'RUS',
   value = '+7 123 456 78 90',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: PhoneNumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: PhoneNumberInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(value ?? '');
 
   React.useEffect(() => {
@@ -27,7 +28,7 @@ export const PhoneNumberInputXLTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <PhoneNumberInput
         {...props}
         dimension="xl"

@@ -15,8 +15,9 @@ export const DateFieldBaseTemplate = ({
   label = 'Label',
   placeholder,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [placeholderValue, setPlaceholderValue] = React.useState<string>(placeholder || 'Это placeholder');
   const [localValue, setValue] = React.useState<string>('');
 
@@ -49,7 +50,7 @@ export const DateFieldBaseTemplate = ({
   }, [placeholder]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <FormContainer id="form 1" onBlur={handleFormBlur} onFocus={handleFormFocus}>
         <DateField
           data-container-id="dateFieldIdOne"

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Drawer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DrawerPlaygroundTemplate } from './DrawerPlayground.template';
@@ -118,7 +119,10 @@ export default {
 } as Meta<typeof Drawer>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Drawer> = (props) => <DrawerPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const Playground = {
   render: PlaygroundStory,
@@ -135,7 +139,10 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer с блокировкой контента страницы">
-const DrawerWithBackdropStory: StoryFn<typeof Drawer> = (props) => <DrawerWithBackdropTemplate {...props} />;
+const DrawerWithBackdropStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerWithBackdropTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerWithBackdropExample = {
   render: DrawerWithBackdropStory,
@@ -160,7 +167,10 @@ export const DrawerWithBackdropExample = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer без блокировки контента страницы">
-const DrawerWithoutBackdropStory: StoryFn<typeof Drawer> = (props) => <DrawerWithoutBackdropTemplate {...props} />;
+const DrawerWithoutBackdropStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerWithoutBackdropTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerWithoutBackdropExample = {
   render: DrawerWithoutBackdropStory,
@@ -185,7 +195,10 @@ export const DrawerWithoutBackdropExample = {
 //</editor-fold>
 
 //<editor-fold desc="Drawer с обязательным условием">
-const DrawerNonClosableStory: StoryFn<typeof Drawer> = (props) => <DrawerNonClosableTemplate {...props} />;
+const DrawerNonClosableStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerNonClosableTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerNonClosableExample = {
   render: DrawerNonClosableStory,
@@ -210,7 +223,10 @@ export const DrawerNonClosableExample = {
 //</editor-fold>
 
 //<editor-fold desc="Расположение компонента">
-const DrawerPositionStory: StoryFn<typeof Drawer> = (props) => <DrawerPositionTemplate {...props} />;
+const DrawerPositionStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerPositionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerPositionExample = {
   render: DrawerPositionStory,
@@ -233,7 +249,10 @@ export const DrawerPositionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Адаптив">
-const DrawerMobileStory: StoryFn<typeof Drawer> = (props) => <DrawerMobileTemplate {...props} />;
+const DrawerMobileStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerMobileTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerMobileExample = {
   render: DrawerMobileStory,
@@ -258,7 +277,10 @@ export const DrawerMobileExample = {
 //</editor-fold>
 
 //<editor-fold desc="Ширина компонента">
-const DrawerWidthStory: StoryFn<typeof Drawer> = (props) => <DrawerWidthTemplate {...props} />;
+const DrawerWidthStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerWidthTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerWidthExample = {
   render: DrawerWidthStory,
@@ -281,7 +303,10 @@ export const DrawerWidthExample = {
 //</editor-fold>
 
 //<editor-fold desc="Свободное (кастомизированное) наполнение">
-const DrawerCustomContentStory: StoryFn<typeof Drawer> = (props) => <DrawerCustomContentTemplate {...props} />;
+const DrawerCustomContentStory: StoryFn<typeof Drawer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DrawerCustomContentTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DrawerCustomContentExample = {
   render: DrawerCustomContentStory,

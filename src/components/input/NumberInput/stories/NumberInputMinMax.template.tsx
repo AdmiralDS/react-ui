@@ -10,8 +10,9 @@ export const NumberInputMinMaxTemplate = ({
   precision = 2,
   decimal,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: NumberInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: NumberInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [status, setStatus] = useState<NumberInputProps['status'] | undefined>(undefined);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ export const NumberInputMinMaxTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '24px' }}>
         В данном примере, если введенное значение выходит за границы диапазона minValue-maxValue, компонент переходит в
         состояние ошибки.

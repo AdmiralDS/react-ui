@@ -19,10 +19,11 @@ const ButtonContainer = styled.div<{ $appearance?: ButtonAppearance }>`
 
 export const ButtonStylesTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <ButtonContainer>
         <Button dimension={props.dimension}>Button 56</Button>
 

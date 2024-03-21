@@ -44,12 +44,13 @@ const DrawerForm = ({ onYesClick, onNoClick }: Props) => {
 
 export const DrawerPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open drawer with 2 buttons</Button>
       <Drawer
         {...props}
