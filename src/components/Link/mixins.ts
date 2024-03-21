@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import type { AppearanceLink, Dimension } from '#src/components/Link/LinkComponent';
 import { typography } from '#src/components/Typography';
-import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { mediumGroupBorderRadius } from '#src/components/themes';
 
 export const styleDisabledMixin = css`
   color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
@@ -22,7 +22,9 @@ export const styleColorMixin = css<{ $appearance?: AppearanceLink }>`
 
 export const styleMixin = css`
   border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+`;
 
+export const styleEventMixin = css`
   &:hover {
     color: ${({ theme }) => theme.color['Primary/Primary 70']};
     & *[fill^='#'] {
