@@ -47,8 +47,8 @@ function ThemeWrapper(props) {
 
   useEffect(() => {
     // document.body refers to body tag inside iframe#storybook-preview-iframe
-    document.body.classList.add(`admiral-${isDark ? 'dark' : 'light'}-theme`);
-    document.body.classList.remove(`admiral-${isDark ? 'light' : 'dark'}-theme`);
+    document.body.classList.add(`admiral-theme-${isDark ? 'dark' : 'light'}`);
+    document.body.classList.remove(`admiral-theme-${isDark ? 'light' : 'dark'}`);
   }, [isDark]);
 
   const renderCssProps = () => (isDark ? <DarkThemeCssVars /> : <LightThemeCssVars />);

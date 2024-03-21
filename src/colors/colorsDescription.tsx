@@ -457,8 +457,12 @@ export const ColorCircle = styled.div<{ $color: keyof Color; $size?: number; $bo
   width: ${({ $size = 16 }) => $size}px;
   height: ${({ $size = 16 }) => $size}px;
   border-radius: 50%;
-  background: ${({ theme, $color }) => theme.color[$color]};
-  ${({ $border, theme }) => $border && `border: 1px solid ${theme.color['Neutral/Neutral 20']};`}
+  background: ${({ theme, $color }) => {
+    const cssCustomProp = `--admiral-color-${$color?.replace('/', '_').replaceAll(' ', '')}`;
+    return $color ? `var(${cssCustomProp}, ${theme.color[$color]})` : 'transparent';
+  }};
+  ${({ $border, theme }) =>
+    $border && `border: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`}
   box-sizing: border-box;
 `;
 
