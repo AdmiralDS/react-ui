@@ -104,7 +104,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
         return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
       }};
   }
-  &:hover:not(:focus-within) input:invalid + ${BorderedDiv} {
+  &:hover:not(:focus-within) input:user-invalid + ${BorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 `;

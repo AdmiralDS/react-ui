@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import React, { forwardRef, useEffect, useMemo, useState } from 'react';
-import type { Dimension, TreeItemProps } from './TreeNode';
+import type { Dimension, TreeItemProps, TreeNodeRenderOptionProps } from './TreeNode';
 import styled from 'styled-components';
 
 // todo: Разделить контролируемое и неконтролируемое состояние в версии 7
@@ -34,6 +34,7 @@ const Wrapper = styled.div`
 `;
 
 type NodesMapItem = {
+  parent?: string;
   dependencies?: Array<string>;
   level: number;
   node: TreeItemProps;
@@ -50,13 +51,14 @@ const treeToMap = (
   level = 0,
   indent = 0,
   dependencies?: Array<Array<string>>,
+  parent?: string,
 ): NodesMap => {
   const levelHasChildren = tree.some((item) => itemHasChildren(item));
 
   return tree.reduce((acc: NodesMap, item) => {
     const key = item.id.toString();
     const selfIndent = levelHasChildren && itemHasChildren(item) ? indent : indent + 1;
-    acc[key] = { level, indent: selfIndent, node: item };
+    acc[key] = { level, indent: selfIndent, node: item, parent };
 
     if (dependencies && !itemHasChildren(item)) {
       dependencies.forEach((dependency) => dependency.push(key));
@@ -66,7 +68,7 @@ const treeToMap = (
       const itemDependencies: Array<string> = [];
       acc[key].dependencies = itemDependencies;
       allDependencies.push(itemDependencies);
-      const map = treeToMap(item.children, level + 1, indent + 1, allDependencies);
+      const map = treeToMap(item.children, level + 1, indent + 1, allDependencies, key);
       return { ...acc, ...map };
     }
 
@@ -92,8 +94,6 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     },
     ref,
   ) => {
-    const isControlled = model !== undefined;
-
     const [internalModel, setInternalModel] = useState<Array<TreeItemProps>>([...(defaultModel ?? [])]);
     const [selectedState, setSelectedState] = useState<string | undefined>(defaultSelected);
 
@@ -114,7 +114,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     }, [model]);
 
     const map = useMemo(() => {
-      return treeToMap(isControlled ? model : internalModel);
+      return treeToMap(model ?? internalModel);
     }, [modelObject]);
 
     const toggleExpand = (id: string) => {
@@ -137,6 +137,14 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       }
     };
 
+    const calculateParentNodeState = (node: NodesMapItem) => {
+      if (node.parent) {
+        const id = node.parent;
+        map[id].node.checked = map[id].dependencies?.every((depId: number | string) => map[depId].node.checked);
+        calculateParentNodeState(map[id]);
+      }
+    };
+
     const toggleCheck = (id: string | number) => {
       const hasChildren = itemHasChildren(map[id].node);
 
@@ -151,6 +159,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
         : map[id].node.checked;
 
       setChecked(id, !checked);
+
+      calculateParentNodeState(map[id]);
 
       if (onChange) {
         onChange([...internalModel]);
@@ -167,7 +177,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           node.dependencies?.some((depId: number | string) => map[depId].node.checked) &&
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
         const checked = hasChildren
-          ? node.dependencies?.every((depId: number | string) => map[depId].node.checked)
+          ? node.dependencies && node.dependencies?.every((depId: number | string) => map[depId].node.checked)
           : !!item.checked;
 
         return (
@@ -189,7 +199,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               },
               onClick: () => selectItem(item.id),
               onToggleExpand: () => toggleExpand(item.id),
-            })}
+            } as TreeNodeRenderOptionProps)}
             {item.children && hasChildren && item.expanded && renderChildren(item.children)}
           </React.Fragment>
         );

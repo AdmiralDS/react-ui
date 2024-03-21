@@ -157,15 +157,15 @@ const Input = styled.input<ExtraProps>`
 
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
-  &&&:invalid + ${InputBorderedDiv} {
+  &&&:user-invalid + ${InputBorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
-  &&&:invalid:hover:not(:disabled) + ${InputBorderedDiv} {
+  &&&:user-invalid:hover:not(:disabled) + ${InputBorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
-  &&&:invalid:focus:not(:disabled) + ${InputBorderedDiv} {
+  &&&:user-invalid:focus:not(:disabled) + ${InputBorderedDiv} {
     border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
@@ -276,6 +276,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       placeholder,
       skeleton = false,
       showTooltip = true,
+      disableCopying,
       ...props
     },
     ref,
@@ -411,8 +412,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           data-read-only={props.readOnly ? true : undefined}
           data-status={status}
           $skeleton={skeleton}
-          data-disable-copying={props.disableCopying ? true : undefined}
-          {...(props.disableCopying && {
+          data-disable-copying={disableCopying ? true : undefined}
+          {...(disableCopying && {
             onMouseDown: stopEvent,
           })}
         >

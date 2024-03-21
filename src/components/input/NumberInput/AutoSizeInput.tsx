@@ -78,11 +78,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border-color: transparent;
   }
 
-  &[data-status='error']:focus + ${BorderedDiv}, &:invalid:focus + ${BorderedDiv} {
+  &[data-status='error']:focus + ${BorderedDiv}, &:user-invalid:focus + ${BorderedDiv} {
     border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
-  &:invalid + ${BorderedDiv} {
+  &:user-invalid + ${BorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 

@@ -97,11 +97,15 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
       p.disabled ? 'transparent' : `var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']})`};
   }
 
-  &:invalid + ${BorderedDiv}, &:invalid:hover + ${BorderedDiv} {
+  &:user-invalid + ${BorderedDiv}, &:user-invalid:hover + ${BorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
-  [data-status='error'] &&&:hover:not(:disabled) + ${BorderedDiv}, &:invalid:hover:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:hover:not(:disabled)
+    + ${BorderedDiv},
+    &:user-invalid:hover:not(:disabled)
+    + ${BorderedDiv} {
     border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
@@ -109,7 +113,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     border: 1px solid var(--admiral-color-Success_Success60, ${(p) => p.theme.color['Success/Success 60']});
   }
 
-  [data-status='error'] &&&:focus:not(:disabled) + ${BorderedDiv}, &:invalid:focus:not(:disabled) + ${BorderedDiv} {
+  [data-status='error']
+    &&&:focus:not(:disabled)
+    + ${BorderedDiv},
+    &:user-invalid:focus:not(:disabled)
+    + ${BorderedDiv} {
     border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
@@ -302,6 +310,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       autoHeight,
       skeleton = false,
       dimension = 'm',
+      disableCopying,
       ...props
     },
     ref,
@@ -381,12 +390,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         $skeleton={skeleton}
-        data-disable-copying={props.disableCopying ? true : undefined}
+        data-disable-copying={disableCopying ? true : undefined}
         $autoHeight={!!autoHeight}
         $rows={rows}
         $maxRows={maxRows}
         $dimension={dimension}
-        {...(props.disableCopying && {
+        {...(disableCopying && {
           onMouseDown: stopEvent,
         })}
       >
