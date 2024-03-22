@@ -20,13 +20,18 @@ const primaryAppearanceMixin = css<{ $disabled: boolean }>`
       $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Special/Static White']};
   }
 
-  &:hover {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
-  }
+  ${({ theme, $disabled }) =>
+    $disabled
+      ? ''
+      : css`
+          &:hover {
+            background-color: ${theme.color['Primary/Primary 70']};
+          }
 
-  &:active {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
-  }
+          &:active {
+            background-color: ${theme.color['Primary/Primary 80']};
+          }
+        `}
 `;
 
 const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
@@ -37,13 +42,18 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
       $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
   }
 
-  &:hover {
-    background-color: ${({ theme }) => theme.color['Opacity/Hover']};
-  }
+  ${({ theme, $disabled }) =>
+    $disabled
+      ? ''
+      : css`
+          &:hover {
+            background-color: ${theme.color['Opacity/Hover']};
+          }
 
-  &:active {
-    background-color: ${({ theme }) => theme.color['Opacity/Press']};
-  }
+          &:active {
+            background-color: ${theme.color['Opacity/Press']};
+          }
+        `}
 `;
 
 const dimensionMixin = css<{ $dimension: FloatingButtonProps['dimension'] }>`
@@ -78,9 +88,8 @@ export const FloatingButtonWrapper = styled.button<{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  ${dimensionMixin}
-  pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  ${dimensionMixin};
+  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   ${(p) => p.theme.shadow['Shadow 08']}
   ${focusVisibleStyle}
 `;

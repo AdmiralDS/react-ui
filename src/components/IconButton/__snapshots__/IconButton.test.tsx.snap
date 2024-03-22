@@ -10,7 +10,6 @@ exports[`IconButton should render component 1`] = `
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
 }
 
 .c0[data-dimension='xl'] {

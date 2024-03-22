@@ -112,31 +112,30 @@ exports[`NotificationItem should render error components with all properties 1`]
 
 .c7:disabled {
   cursor: default;
-  pointer-events: none;
 }
 
 .c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c7:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7:focus >.c9 {
+.c7:not(:disabled):focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover >.c9 {
+.c7:not(:disabled):hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active >.c9 {
+.c7:not(:disabled):active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible >.c9 {
+.c7:not(:disabled):focus-visible >.c9 {
   background-color: transparent;
 }
 
@@ -383,31 +382,30 @@ exports[`NotificationItem should render error components with all properties 1`]
 
 .c7:disabled {
   cursor: default;
-  pointer-events: none;
 }
 
 .c7:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c7:focus-visible {
+.c7:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c7:focus >.c9 {
+.c7:not(:disabled):focus >.c9 {
   background-color: transparent;
 }
 
-.c7:hover >.c9 {
+.c7:not(:disabled):hover >.c9 {
   background-color: #0000000D;
 }
 
-.c7:active >.c9 {
+.c7:not(:disabled):active >.c9 {
   background-color: #0000001F;
 }
 
-.c7:focus-visible >.c9 {
+.c7:not(:disabled):focus-visible >.c9 {
   background-color: transparent;
 }
 

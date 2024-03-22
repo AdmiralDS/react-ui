@@ -49,31 +49,30 @@ exports[`OverflowMenu should render component 1`] = `
 
 .c0:disabled {
   cursor: default;
-  pointer-events: none;
 }
 
 .c0:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c0:focus-visible {
+.c0:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c0:focus >.c1 {
+.c0:not(:disabled):focus >.c1 {
   background-color: transparent;
 }
 
-.c0:hover >.c1 {
+.c0:not(:disabled):hover >.c1 {
   background-color: #0000000D;
 }
 
-.c0:active >.c1 {
+.c0:not(:disabled):active >.c1 {
   background-color: #0000001F;
 }
 
-.c0:focus-visible >.c1 {
+.c0:not(:disabled):focus-visible >.c1 {
   background-color: transparent;
 }
 
@@ -145,31 +144,30 @@ exports[`OverflowMenu should render component 1`] = `
 
 .c0:disabled {
   cursor: default;
-  pointer-events: none;
 }
 
 .c0:disabled *[fill^='#'] {
   fill: #B0B5BD;
 }
 
-.c0:focus-visible {
+.c0:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
 }
 
-.c0:focus >.c1 {
+.c0:not(:disabled):focus >.c1 {
   background-color: transparent;
 }
 
-.c0:hover >.c1 {
+.c0:not(:disabled):hover >.c1 {
   background-color: #0000000D;
 }
 
-.c0:active >.c1 {
+.c0:not(:disabled):active >.c1 {
   background-color: #0000001F;
 }
 
-.c0:focus-visible >.c1 {
+.c0:not(:disabled):focus-visible >.c1 {
   background-color: transparent;
 }
 

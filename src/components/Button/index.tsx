@@ -177,7 +177,7 @@ const StyledButton = styled.button.attrs<
   border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
   appearance: none;
   vertical-align: middle;
-  pointer-events: ${(p) => (p.$loading || p.disabled || p.$skeleton ? 'none' : 'all')};
+  cursor: ${(p) => (p.$loading || p.disabled || p.$skeleton ? 'default' : 'pointer')};
 
   ${appearanceMixin};
   ${dimensionMixin};
@@ -186,10 +186,6 @@ const StyledButton = styled.button.attrs<
 
   ${ButtonContent} {
     ${(p) => (p.$loading || p.$skeleton ? 'visibility: hidden;' : '')}
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 
