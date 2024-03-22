@@ -87,8 +87,12 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover svg {
     path {
       fill: ${({ $error, $warning, theme }) => {
-        if ($error) return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
-        if ($warning) return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+        if ($error) {
+          return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+        }
+        if ($warning) {
+          return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+        }
         return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
       }};
     }
@@ -98,8 +102,12 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
 const clickableNotActiveCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover ${StepRail} {
     background-color: ${({ $error, $warning, theme }) => {
-      if ($error) return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
-      if ($warning) return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+      if ($error) {
+        return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+      }
+      if ($warning) {
+        return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+      }
       return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
     }};
   }

@@ -32,7 +32,12 @@ export const DateTimeDateInput = styled(DateInput)<{ disabled?: boolean; readOnl
   }
 
   &:focus-within ${InputBorderedDiv}${InputBorderedDiv}${InputBorderedDiv} {
-    ${(p) => !p.disabled && !p.readOnly && `border-right: 1px solid ${getFocusBorderColor};`};
+    ${(p) =>
+      !p.disabled &&
+      !p.readOnly &&
+      css`
+        border-right: 1px solid ${getFocusBorderColor};
+      `};
   }
 `;
 
@@ -48,7 +53,12 @@ export const DateTimeTimeInput = styled(TimeInput)<{ disabled?: boolean; readOnl
   }
 
   &:focus-within ${InputBorderedDiv}${InputBorderedDiv}${InputBorderedDiv} {
-    ${(p) => !p.disabled && !p.readOnly && `border-left: 1px solid ${getFocusBorderColor};`};
+    ${(p) =>
+      !p.disabled &&
+      !p.readOnly &&
+      css`
+        border-left: 1px solid ${getFocusBorderColor};
+      `};
   }
 `;
 
@@ -75,7 +85,7 @@ const getSeparatorColor = css<{ disabled?: boolean; readOnly?: boolean; $status?
 `;
 
 const getHoverSeparatorColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
+  border-left-color: ${({ $status, theme }) => {
     if (!$status) {
       return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
     }
@@ -85,11 +95,11 @@ const getHoverSeparatorColor = css<{ $status?: InputStatus }>`
       case 'success':
         return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
     }
-  }}
+  }};
 `;
 
 const getFocusSeparatorColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
+  border-left-color: ${({ $status, theme }) => {
     if (!$status) {
       return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
     }
@@ -99,11 +109,11 @@ const getFocusSeparatorColor = css<{ $status?: InputStatus }>`
       case 'success':
         return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
     }
-  }}
+  }};
 `;
 
 const DateTimeSeparatorDiv = styled.div<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
-  border-left: 1px solid ${(p) => getSeparatorColor};
+  border-left: 1px solid ${getSeparatorColor};
 `;
 
 export const DateTimeSeparator = forwardRef<HTMLDivElement, DateTimeSeparatorProps>(({ status, ...props }, ref) => {
@@ -119,10 +129,10 @@ const DateTimeContainerDiv = styled.div<{ disabled?: boolean; readOnly?: boolean
   min-width: 288px;
 
   &:hover ${DateTimeSeparatorDiv} {
-    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${getHoverSeparatorColor};`};
+    ${(p) => !p.disabled && !p.readOnly && getHoverSeparatorColor};
   }
   &:focus-within ${DateTimeSeparatorDiv} {
-    ${(p) => !p.disabled && !p.readOnly && `border-left-color: ${getFocusSeparatorColor};`};
+    ${(p) => !p.disabled && !p.readOnly && getFocusSeparatorColor};
   }
 `;
 
