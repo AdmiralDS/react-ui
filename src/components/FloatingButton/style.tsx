@@ -23,13 +23,15 @@ const primaryAppearanceMixin = css<{ $disabled: boolean }>`
   ${({ theme, $disabled }) =>
     $disabled
       ? ''
-      : `&:hover {
+      : css`
+          &:hover {
             background-color: ${theme.color['Primary/Primary 70']};
           }
-        
+
           &:active {
             background-color: ${theme.color['Primary/Primary 80']};
-          }`}
+          }
+        `}
 `;
 
 const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
@@ -43,13 +45,15 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
   ${({ theme, $disabled }) =>
     $disabled
       ? ''
-      : `&:hover {
+      : css`
+          &:hover {
             background-color: ${theme.color['Opacity/Hover']};
           }
-    
+
           &:active {
             background-color: ${theme.color['Opacity/Press']};
-          }`}
+          }
+        `}
 `;
 
 const dimensionMixin = css<{ $dimension: FloatingButtonProps['dimension'] }>`
@@ -85,7 +89,7 @@ export const FloatingButtonWrapper = styled.button<{
   margin: 0;
   padding: 0;
   ${dimensionMixin};
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   ${(p) => p.theme.shadow['Shadow 08']}
   ${focusVisibleStyle}
 `;
