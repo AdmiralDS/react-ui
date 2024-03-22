@@ -89,7 +89,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -363,10 +363,6 @@ exports[`MultiButton should render component with disabled state 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -376,7 +372,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -648,10 +644,6 @@ exports[`MultiButton should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {
@@ -869,7 +861,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1143,10 +1135,6 @@ exports[`MultiButton should render component with disabled state 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -1156,7 +1144,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -1428,10 +1416,6 @@ exports[`MultiButton should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {
@@ -1704,7 +1688,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1978,10 +1962,6 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -1991,7 +1971,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -2263,10 +2243,6 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {
@@ -2481,7 +2457,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -2755,10 +2731,6 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -2768,7 +2740,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -3040,10 +3012,6 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {
@@ -3313,7 +3281,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -3587,10 +3555,6 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -3600,7 +3564,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -3872,10 +3836,6 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {
@@ -4090,7 +4050,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -4364,10 +4324,6 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c1:hover {
-  cursor: pointer;
-}
-
 .c6 {
   position: relative;
   box-sizing: border-box;
@@ -4377,7 +4333,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -4649,10 +4605,6 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c6:hover {
-  cursor: pointer;
 }
 
 .c9 {

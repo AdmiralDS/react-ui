@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components';
-import { styleColorMixin, styleDisabledMixin, styleMixin, styleTextMixin } from '#src/components/Link/mixins';
+import {
+  styleColorMixin,
+  styleDisabledMixin,
+  styleEventMixin,
+  styleMixin,
+  styleTextMixin,
+} from '#src/components/Link/mixins';
 
 export type AppearanceLink = 'primary' | 'secondary';
 export type Dimension = 'm' | 's';
@@ -13,7 +19,6 @@ export type LinkComponentProps = {
 export const LinkComponentCssMixin = css<LinkComponentProps>`
   cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   display: flex;
-  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
   align-items: center;
   width: fit-content;
   text-decoration: none;
@@ -21,7 +26,7 @@ export const LinkComponentCssMixin = css<LinkComponentProps>`
   ${styleMixin};
   ${styleColorMixin};
   ${styleTextMixin};
-  ${(props) => (props.disabled ? styleDisabledMixin : '')}
+  ${(props) => (props.disabled ? styleDisabledMixin : styleEventMixin)}
 `;
 
 export const LinkComponent = styled.a<LinkComponentProps>`

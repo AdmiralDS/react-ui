@@ -36,8 +36,6 @@ const StyledButton = styled.button<{
   appearance: none;
   vertical-align: middle;
 
-  pointer-events: ${(p) => (p.disabled || p.$skeleton ? 'none' : 'all')};
-
   &[data-dimension='xl'] {
     padding: 0;
     height: 56px;

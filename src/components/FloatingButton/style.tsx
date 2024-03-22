@@ -25,13 +25,18 @@ const primaryAppearanceMixin = css<{ $disabled: boolean }>`
         : `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`};
   }
 
-  &:hover {
-    background-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
-  }
+  ${({ theme, $disabled }) =>
+    $disabled
+      ? ''
+      : css`
+          &:hover {
+            background-color: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});
+          }
 
-  &:active {
-    background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
-  }
+          &:active {
+            background-color: var(--admiral-color-Primary_Primary80, ${theme.color['Primary/Primary 80']});
+          }
+        `}
 `;
 
 const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
@@ -43,13 +48,18 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
         : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
 
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
-  }
+  ${({ theme, $disabled }) =>
+    $disabled
+      ? ''
+      : css`
+          &:hover {
+            background-color: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});
+          }
 
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
-  }
+          &:active {
+            background-color: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});
+          }
+        `}
 `;
 
 const dimensionMixin = css<{ $dimension: FloatingButtonProps['dimension'] }>`
@@ -84,9 +94,8 @@ export const FloatingButtonWrapper = styled.button<{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  ${dimensionMixin}
-  pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  ${dimensionMixin};
+  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   ${focusVisibleStyle}
 `;

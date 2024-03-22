@@ -101,33 +101,7 @@ const ActivityHighlighter = styled.div<{ $dimension?: IconPlacementDimension }>`
   transform: translate(-50%, -50%);
 `;
 
-const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension; $highlightFocus: boolean }>`
-  position: relative;
-  padding: 0;
-  margin: ${(p) => getHighlighterOffset(p.$dimension)}px;
-  box-sizing: border-box;
-  border: none;
-  background-color: transparent;
-  appearance: none;
-  flex: 0 0 auto;
-  height: ${(p) => getIconSize(p.$dimension)}px;
-  width: ${(p) => getIconSize(p.$dimension)}px;
-  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
-  overflow: visible;
-
-  cursor: pointer;
-  > * {
-    pointer-events: none;
-  }
-
-  &:disabled {
-    cursor: default;
-    pointer-events: none;
-    & *[fill^='#'] {
-      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-    }
-  }
-
+const eventsMixin = css<{ $highlightFocus: boolean }>`
   &:focus-visible {
     outline-offset: 2px;
     outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
@@ -153,6 +127,36 @@ const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension;
     > ${ActivityHighlighter} {
       background-color: transparent;
     }
+  }
+`;
+
+const IconPlacementButton = styled.button<{ $dimension?: IconPlacementDimension; $highlightFocus: boolean }>`
+  position: relative;
+  padding: 0;
+  margin: ${(p) => getHighlighterOffset(p.$dimension)}px;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  appearance: none;
+  flex: 0 0 auto;
+  height: ${(p) => getIconSize(p.$dimension)}px;
+  width: ${(p) => getIconSize(p.$dimension)}px;
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
+  overflow: visible;
+
+  cursor: pointer;
+  > * {
+    pointer-events: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    & *[fill^='#'] {
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    }
+  }
+  &:not(:disabled) {
+    ${eventsMixin}
   }
 `;
 
