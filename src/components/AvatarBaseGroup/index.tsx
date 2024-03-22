@@ -93,21 +93,9 @@ export const AvatarBaseGroup: FC<AvatarBaseGroupProps> = ({
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
           const wrapperWidth = entry.contentRect.width || 0;
-          let validContent = 2,
-            visibleItems = 0,
-            hiddenItems = 0;
-
-          while (validContent + WIDTH[dimension] < wrapperWidth) {
-            validContent = validContent + WIDTH[dimension];
-            visibleItems++;
-          }
-          visibleItems = visibleItems > items.length ? items.length : visibleItems;
-          // оставляем место на меню, вычитая 1
-          visibleItems = visibleItems === items.length ? visibleItems : visibleItems - 1;
-          hiddenItems = items.length - visibleItems;
-
-          setVisibleItems(visibleItems);
-          setHiddenItems(hiddenItems);
+          const visibleItems = ~~(wrapperWidth / WIDTH[dimension]);
+          setVisibleItems(visibleItems >= items.length ? items.length : Math.max(visibleItems - 1, 0));
+          setHiddenItems(visibleItems >= items.length ? 0 : items.length - visibleItems + 1);
         });
       });
       resizeObserver.observe(wrapperRef.current);
