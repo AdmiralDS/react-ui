@@ -74,7 +74,7 @@ exports[`MenuButton should render component 1`] = `
   border-radius: 4px;
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -346,10 +346,6 @@ exports[`MenuButton should render component 1`] = `
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <body>
@@ -454,7 +450,7 @@ exports[`MenuButton should render component 1`] = `
   border-radius: 4px;
   appearance: none;
   vertical-align: middle;
-  pointer-events: all;
+  cursor: pointer;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -726,10 +722,6 @@ exports[`MenuButton should render component 1`] = `
   line-height: 20px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <div>
@@ -910,7 +902,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: 4px;
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1186,10 +1178,6 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0 .c4 {
   visibility: hidden;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <body>
@@ -1322,7 +1310,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: 4px;
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1598,10 +1586,6 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0 .c4 {
   visibility: hidden;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <div>
@@ -1768,7 +1752,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -2045,10 +2029,6 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0 .c2 {
   visibility: hidden;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <body>
@@ -2154,7 +2134,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  pointer-events: none;
+  cursor: default;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -2431,10 +2411,6 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0 .c2 {
   visibility: hidden;
-}
-
-.c0:hover {
-  cursor: pointer;
 }
 
 <div>

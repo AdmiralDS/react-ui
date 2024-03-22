@@ -4,7 +4,6 @@ exports[`Link should render component 1`] = `
 .c0 {
   cursor: pointer;
   display: flex;
-  pointer-events: auto;
   align-items: center;
   width: fit-content;
   text-decoration: none;
@@ -18,6 +17,10 @@ exports[`Link should render component 1`] = `
   line-height: 24px;
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c0 *[fill^='#'] {
+  fill: #0062FF;
 }
 
 .c0:hover {
@@ -48,10 +51,6 @@ exports[`Link should render component 1`] = `
 .c0:focus-visible {
   outline-offset: 2px;
   outline: #0062FF solid 2px;
-}
-
-.c0 *[fill^='#'] {
-  fill: #0062FF;
 }
 
 <div>
