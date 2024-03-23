@@ -1,13 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { BadgeDot } from '@admiral-ds/react-ui';
 
 import { ThemeBasicsTemplate } from './ThemeBasics.template';
 import { ThemeActivatingTemplate } from './ThemeActivating.template';
+import { ThemeContentTemplate } from './ThemeContent.template';
 
 // Imports of text sources
-import ThemeBasicsRaw from './ThemeBasics.template?raw';
 import ThemeActivatingRaw from './ThemeActivating.template?raw';
 
 const Desc = styled.div`
@@ -16,24 +15,21 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
-const Separator = styled.div`
-  height: 20px;
+const Term = styled.span`
+  font-weight: 500;
 `;
 
 const Description = () => (
   <Desc>
-    Начиная с версии 7.14.0 в библиотеке добавлена дополнительная возможность темизации компонентов с помощью
-    <b>css переменных</b> (необходимость прокидывать тему в компоненты библиотеки с помощью styled-components
-    ThemeProvider пока сохраняется). <Separator /> Библиотека предоставляет светлую (LightThemeCssVars) и темную
-    (DarkThemeCssVars) темы, где тема - это компонент, подключающий таблицу стилей, в которой согласно определенному API
-    заданы css переменные, в дальнейшем применяемые для стилизации компонентов. Пользователь также может создать свою
-    уникальную тему. Чтобы создать тему, необходимо понимание CSS, включая раздел&nbsp;
-    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">CSS Custom Properties</a>.
+    В библиотеке добавлена дополнительная возможность темизации компонентов с помощью <Term>css переменных</Term> (css
+    custom props / css variables). Необходимость прокидывать тему в компоненты библиотеки с помощью styled-components
+    ThemeProvider сохраняется.
   </Desc>
 );
 
 export default {
-  title: 'Admiral-2.1/CSS Custom Properties',
+  title: 'Experimental API/CSS Custom Properties',
+  component: Desc,
   decorators: undefined,
   parameters: {
     docs: {
@@ -50,22 +46,13 @@ const ThemeBasicsStory: StoryFn = () => <ThemeBasicsTemplate />;
 
 export const ThemeBasicsExample = {
   render: ThemeBasicsStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: ThemeBasicsRaw,
-      },
-    },
-  },
-
-  name: 'Theme Basics',
+  name: 'Базовые понятия',
 };
 
 //</editor-fold>
 
 //<editor-fold desc="Theme Activating">
-const ThemeActivatingStory: StoryFn<typeof BadgeDot> = () => <ThemeActivatingTemplate />;
+const ThemeActivatingStory: StoryFn = () => <ThemeActivatingTemplate />;
 
 export const ThemeActivatingExample = {
   render: ThemeActivatingStory,
@@ -78,7 +65,17 @@ export const ThemeActivatingExample = {
     },
   },
 
-  name: 'Theme Activating',
+  name: 'Подключение темы',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Theme Content">
+const ThemeContentStory: StoryFn = () => <ThemeContentTemplate />;
+
+export const ThemeContentExample = {
+  render: ThemeContentStory,
+  name: 'Состав темы',
 };
 
 //</editor-fold>
