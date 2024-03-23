@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.14.2](https://github.com/AdmiralDS/react-ui/compare/v7.14.1...v7.14.2) (2024-03-22)
+
+
+### Bug Fixes
+
+* **AvatarGrop:** бесконечный ререндер при минимальных размерах блока ([2bdc6a5](https://github.com/AdmiralDS/react-ui/commit/2bdc6a5eae00a81e61625750878affcc87237fb3))
+* **Button:** remove "pointer-events: none" in disabled/loading/skeleton state ([f604334](https://github.com/AdmiralDS/react-ui/commit/f604334435b9c4be16313b6fbd80bcde4994e235))
+* **FloatingButton:** remove "pointer-events: none" in disabled ([4d70387](https://github.com/AdmiralDS/react-ui/commit/4d703870fd0efd143df4a7f86f9a698517d1749c))
+* **IconButton:** remove "pointer-events: none" in disabled ([752b407](https://github.com/AdmiralDS/react-ui/commit/752b4076d92e55dc1bd90ebce6b9c441f18ce7c3))
+* **IconPlacement:** remove "pointer-events: none" in disabled ([22621e7](https://github.com/AdmiralDS/react-ui/commit/22621e7b883cbda27c8f645407caafaec554a3cc))
+* **Link:** remove "pointer-events: none" in disabled ([4d32706](https://github.com/AdmiralDS/react-ui/commit/4d327063eee4013a4651f0a546b278a50add3d22))
+
 ### [7.14.1](https://github.com/AdmiralDS/react-ui/compare/v7.14.0...v7.14.1) (2024-03-20)
 
 
