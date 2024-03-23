@@ -24,7 +24,6 @@ const skeletonMixin = css`
   pointer-events: none;
 `;
 
-// Единственное место, где типографика берется из темы. Это будет проблемно перевести на css variables
 const Tspan = styled.span<{
   $font: FontName;
   $color?: ColorName;
