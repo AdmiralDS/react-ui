@@ -65,6 +65,17 @@ const reverseString = (str: string) => {
   return str.split('').reverse().join('');
 };
 
+// Заменяет введенные [',', '.'] на символ decimal
+const replaceByDecimal = (str: string, decimal: string, thousand: string) => {
+  const validChars = [decimal, thousand];
+  const replaceableChars = [',', '.'];
+  let newStr = str
+    .split('')
+    .map((char) => (replaceableChars.includes(char) && !validChars.includes(char) ? decimal : char))
+    .join('');
+  return newStr;
+};
+
 export const validateThousand = (thousand: string): boolean => {
   return /[^a-zA-Z]*/.test(thousand);
 };
@@ -93,7 +104,8 @@ export function fitToCurrency(
     return value;
   }
 
-  let strDecimal = clearValue(String(value), precision, decimal, minValue);
+  let strDecimal = replaceByDecimal(String(value), decimal, thousand);
+  strDecimal = clearValue(strDecimal, precision, decimal, minValue);
   if (strDecimal === '') {
     return '';
   }
