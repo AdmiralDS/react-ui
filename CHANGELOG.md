@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.15.0](https://github.com/AdmiralDS/react-ui/compare/v7.14.2...v7.15.0) (2024-03-25)
+
+
+### Features
+
+* **CSS Custom Props:** добавлена дополнительная возможность стилизации компонентов с помощью css custom props (css variables), подробнее в документации storybook ([f69665f](https://github.com/AdmiralDS/react-ui/commit/f69665f5088b9f6120a6dfcc4c07e0e5ec84dc62))
+
+
+### Bug Fixes
+
+* **Firefox:** computedStyleMap не имплементирован в firefox ([3f8335e](https://github.com/AdmiralDS/react-ui/commit/3f8335e35c8560a9e61188de36e4d96a3760b638))
+* **Typography:** удалены старые deprecated компоненты со стилями типографики ([4a84e27](https://github.com/AdmiralDS/react-ui/commit/4a84e27d35490ba69cbccf889ebcd274c60ae8f9))
+
 ### [7.14.2](https://github.com/AdmiralDS/react-ui/compare/v7.14.1...v7.14.2) (2024-03-22)
 
 
