@@ -1,7 +1,13 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { fitToCurrency } from '#src/components/input/NumberInput';
+import {
+  fitToCurrency,
+  getDecimalSeparator,
+  getThousandSeparator,
+  validateThousand,
+} from '#src/components/input/NumberInput/utils';
 
 const Wrapper = styled.div<{ $position: number }>`
   position: absolute;
@@ -48,13 +54,20 @@ interface TickMarksProps {
 export const TickMarks = ({
   minValue,
   maxValue,
-  decimal = '.',
+  decimal: userDecimal,
+  thousand: userThousand,
   precision = 2,
-  thousand = ' ',
   tickMarks,
   onPointClick,
   renderTickMark,
 }: TickMarksProps) => {
+  const theme = useTheme() || LIGHT_THEME;
+  const thousand =
+    userThousand && validateThousand(userThousand)
+      ? userThousand.slice(0, 1)
+      : getThousandSeparator(theme.currentLocale);
+  const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);
+
   // filter items that fall into the range between minValue and maxValue
   const items = tickMarks.filter((d) => d >= minValue && d <= maxValue);
   const range = maxValue - minValue;
