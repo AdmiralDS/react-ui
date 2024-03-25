@@ -22,8 +22,8 @@ export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
     $hovered
       ? `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`
       : $selected
-      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
-      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
+        ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+        : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 `;
 
 export const paddings = css<{ $dimension?: ItemDimension }>`

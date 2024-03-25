@@ -230,8 +230,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const innerSelected = disableSelectedOptionHighlight
       ? []
       : selected === undefined
-      ? selectedState
-      : valueToArray(selected);
+        ? selectedState
+        : valueToArray(selected);
     const activeId = active === undefined ? activeState : active;
 
     const menuRef = React.useRef<HTMLDivElement | null>(null);
