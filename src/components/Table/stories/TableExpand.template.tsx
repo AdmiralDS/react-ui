@@ -9,14 +9,14 @@ const AmountCell = styled.div`
 
   &[data-disabled='true'] {
     & > * {
-      color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  background: ${({ theme }) => theme.color['Cyan/Cyan 10']};
+  background: var(--admiral-color-Cyan_Cyan10, ${(p) => p.theme.color['Cyan/Cyan 10']});
   padding: 16px;
 `;
 const Content = styled.div`
@@ -25,7 +25,7 @@ const Content = styled.div`
   height: 100%;
   flex-direction: column;
   padding-left: 16px;
-  background: ${({ theme }) => theme.color['Special/Elevated BG']};
+  background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   & > div {
     margin-bottom: 8px;
   }

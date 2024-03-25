@@ -91,18 +91,30 @@ const chipTypography = css<{
 }>`
   ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Long'])}
   color: ${({ theme, $appearance, $disabled, $selected }) => {
-    if ($disabled && !$selected) return theme.color['Neutral/Neutral 30'];
+    if ($disabled && !$selected) {
+      return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    }
 
-    if ($selected || ($selected && $disabled)) return theme.color['Special/Static White'];
+    if ($selected || ($selected && $disabled)) {
+      return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+    }
 
-    return $appearance === 'filled' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main'];
+    return $appearance === 'filled'
+      ? `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`
+      : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
   }};
 
   &:hover {
     color: ${({ theme, $appearance, $selected }) => {
-      if ($selected) return theme.color['Special/Static White'];
-      if ($appearance === 'filled' && !$selected) return theme.color['Neutral/Neutral 90'];
-      else return theme.color['Primary/Primary 60 Main'];
+      if ($selected) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+
+      if ($appearance === 'filled' && !$selected) {
+        return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
+      } else {
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      }
     }};
   }
 `;
@@ -114,26 +126,36 @@ const actionsMixin = css<{
 }>`
   &:hover {
     ${({ theme, $appearance, $selected, $withCloseIcon }) => {
-      if ($selected) return `background-color: ${theme.color['Primary/Primary 70']}`;
-      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 20']}`;
-      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Hover']}`;
+      if ($selected) {
+        return `background-color: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});`;
+      }
+      if ($appearance === 'filled') {
+        return `background-color: var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`;
+      } else if (!$withCloseIcon) {
+        return `background-color: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});`;
+      }
     }};
     ${(p) =>
       p.$selected &&
       `
-      border-color: ${p.theme.color['Primary/Primary 70']};
+      border-color: var(--admiral-color-Primary_Primary70, ${p.theme.color['Primary/Primary 70']});
     `}
   }
   &:active {
     ${({ theme, $appearance, $selected, $withCloseIcon }) => {
-      if ($selected) return `background-color: ${theme.color['Primary/Primary 80']}`;
-      if ($appearance === 'filled') return `background-color: ${theme.color['Neutral/Neutral 30']}`;
-      else if (!$withCloseIcon) return `background-color: ${theme.color['Opacity/Press']}`;
+      if ($selected) {
+        return `background-color: var(--admiral-color-Primary_Primary80, ${theme.color['Primary/Primary 80']});`;
+      }
+      if ($appearance === 'filled') {
+        return `background-color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});`;
+      } else if (!$withCloseIcon) {
+        return `background-color: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});`;
+      }
     }};
     ${(p) =>
       p.$selected &&
       `
-      border-color: ${p.theme.color['Primary/Primary 80']};
+      border-color: var(--admiral-color-Primary_Primary80, ${p.theme.color['Primary/Primary 80']});
     `}
   }
 `;
@@ -148,16 +170,23 @@ const colorsBorderAndBackground = css<{
 }>`
   background-color: ${({ theme, $appearance, $selected, $disabled }) => {
     if ($selected && !$disabled) {
-      return theme.color['Primary/Primary 60 Main'];
+      return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
     }
-    if ($selected && $disabled) return theme.color['Neutral/Neutral 30'];
-    return $appearance === 'filled' ? theme.color['Neutral/Neutral 10'] : 'transparent';
+    if ($selected && $disabled) {
+      return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    }
+    return $appearance === 'filled'
+      ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
+      : 'transparent';
   }};
 
   border: ${({ theme, $appearance, $disabled }) => {
     if ($appearance === 'filled') return 'none';
-    if ($disabled) return `1px solid ${theme.color['Neutral/Neutral 30']};`;
-    else return `1px solid ${theme.color['Primary/Primary 60 Main']};`;
+    if ($disabled) {
+      return `1px solid var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
+    } else {
+      return `1px solid var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
   }};
 
   border-radius: 16px;
@@ -168,7 +197,7 @@ const colorsBorderAndBackground = css<{
     outline: 0;
 
     &:before {
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       border-radius: 20px;
       content: '';
       display: block;
@@ -238,13 +267,13 @@ export const ChipContentWrapperStyled = styled.div<{
     & *[fill^='#'] {
       fill: ${({ theme, $appearance, $disabled, $selected }) => {
         if ($selected) {
-          return theme.color['Special/Static White'];
+          return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
         }
         return $disabled
-          ? theme.color['Neutral/Neutral 30']
+          ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
           : $appearance === 'filled'
-            ? theme.color['Neutral/Neutral 50']
-            : theme.color['Primary/Primary 60 Main'];
+            ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
+            : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       }};
     }
   }

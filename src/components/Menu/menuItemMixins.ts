@@ -12,16 +12,18 @@ export const styleTextMixin = css<{ $dimension: ItemDimension }>`
 
 export const colorTextMixin = css<{ $disabled?: boolean }>`
   color: ${({ theme, $disabled }) =>
-    $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 90']};
+    $disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
 export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
   background: ${({ theme, $selected, $hovered }) =>
     $hovered
-      ? theme.color['Opacity/Hover']
+      ? `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`
       : $selected
-        ? theme.color['Opacity/Focus']
-        : theme.color['Special/Elevated BG']};
+      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 `;
 
 export const paddings = css<{ $dimension?: ItemDimension }>`

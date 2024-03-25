@@ -50,11 +50,13 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
 ];
 
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
+
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 interface MyMenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
@@ -84,23 +86,31 @@ const MyItem = styled.div<{
   ${typography['Body/Body 1 Long']}
 
   background: ${({ theme, selected }) =>
-    selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
+    selected
+      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 
   &&[data-disabled='true'] {
     cursor: default;
     background-color: ${({ theme, selected }) =>
-      selected ? theme.color['Opacity/Focus'] : theme.color['Special/Elevated BG']};
-    color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+      selected
+        ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+        : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   &&[data-hovered='true'] {
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     color: ${({ theme, $success }) =>
-      $success ? theme.color['Success/Success 70'] : theme.color['Magenta/Magenta 60 Main']};
+      $success
+        ? `var(--admiral-color-Success_Success70, ${theme.color['Success/Success 70']})`
+        : `var(--admiral-color-Magenta_Magenta60Main, ${theme.color['Magenta/Magenta 60 Main']})`};
   }
 
   color: ${({ theme, $success }) =>
-    $success ? theme.color['Success/Success 50 Main'] : theme.color['Purple/Purple 60 Main']};
+    $success
+      ? `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`
+      : `var(--admiral-color-Purple_Purple60Main, ${theme.color['Purple/Purple 60 Main']})`};
 `;
 
 const MyMenuItem = ({

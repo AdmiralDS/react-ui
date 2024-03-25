@@ -2,7 +2,6 @@ import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '#src/components/Button';
-import type { Shape } from '#src/components/themes/common';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
@@ -10,46 +9,50 @@ import { DropMenu } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 
-function mainButtonBorderRadius(shape: Shape): string {
-  const radius = mediumGroupBorderRadius(shape);
-  return `${radius} 0 0 ${radius}`;
-}
+const mainButtonBorderRadius = css`
+  ${({ theme }) => {
+    const radius = mediumGroupBorderRadius(theme.shape);
+    return `var(--admiral-border-radius-Medium, ${radius}) 0 0 var(--admiral-border-radius-Medium, ${radius})`;
+  }}
+`;
 
-function menuButtonBorderRadius(shape: Shape): string {
-  const radius = mediumGroupBorderRadius(shape);
-  return `0 ${radius} ${radius} 0`;
-}
+const menuButtonBorderRadius = css`
+  ${({ theme }) => {
+    const radius = mediumGroupBorderRadius(theme.shape);
+    return `0 var(--admiral-border-radius-Medium, ${radius}) var(--admiral-border-radius-Medium, ${radius}) 0`;
+  }}
+`;
 
 const focusStyle = css`
   &:focus-visible {
     outline-offset: -4px;
     &[data-appearance~='primary'] {
-      outline: ${(p) => p.theme.color['Neutral/Neutral 00']} solid 2px;
+      outline: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']}) solid 2px;
     }
     &[data-appearance~='secondary'] {
-      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
 `;
 
 const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
   &[data-appearance~='secondary'] {
     border-right: none;
-    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
   ${focusStyle}
 `;
 
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
-    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
   &[data-appearance~='secondary'] {
     border-left: none;
-    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius(p.theme.shape))};
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
   ${focusStyle}
 `;
@@ -62,7 +65,9 @@ const Separator = styled.div<SeparatorProps>`
 
   &[data-appearance~='secondary'] {
     background-color: ${({ theme, disabled }) =>
-      disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
+      disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
 
   ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};

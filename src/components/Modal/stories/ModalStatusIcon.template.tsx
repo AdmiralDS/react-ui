@@ -21,13 +21,14 @@ const TooltipedButton = TooltipHoc(Button);
 
 export const ModalStatusIconTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ModalProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
   const [iconStatus, setIconStatus] = React.useState<ModalStatusIconType>('information');
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ display: 'flex', gap: '5px' }}>
         <TooltipedButton
           onClick={() => {

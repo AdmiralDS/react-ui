@@ -8,18 +8,21 @@ export const OpenStatusButton = styled(ChevronDownOutline)<{ $isOpen?: boolean; 
   transform: rotate(${(p) => (p.$isOpen ? 180 : 0)}deg);
   & *[fill^='#'] {
     fill: ${({ appearance, theme }) =>
-      appearance === 'white' ? theme.color['Special/Static White'] : theme.color['Neutral/Neutral 50']};
+      appearance === 'white'
+        ? `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   }
 
   &:hover *[fill^='#'] {
-    fill: ${(props) => (props.appearance === 'white' ? '' : props.theme.color['Primary/Primary 70'])};
+    fill: ${(p) =>
+      p.appearance === 'white' ? '' : `var(--admiral-color-Primary_Primary70, ${p.theme.color['Primary/Primary 70']})`};
   }
 
   &[data-disabled] {
     pointer-events: none;
 
     *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

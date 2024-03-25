@@ -53,7 +53,7 @@ const WrapperVertical = styled.div`
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   font-size: 16px;
   line-height: 24px;
 `;
@@ -69,8 +69,9 @@ const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
 
 export const DropMenuSimpleTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DropMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DropMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
@@ -85,7 +86,7 @@ export const DropMenuSimpleTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <Desc>
           Неконтроллируемое состояние видимости меню:

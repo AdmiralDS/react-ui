@@ -1,5 +1,6 @@
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '#src/components/Typography';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
@@ -33,9 +34,9 @@ const Overlay = styled.div<{ $overlayStyledCss: ReturnType<typeof css> }>`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.color['Opacity/Modal']};
+  background-color: var(--admiral-color-Opacity_Modal, ${(p) => p.theme.color['Opacity/Modal']});
   transition: opacity 0.3s ease 0s;
-  z-index: ${({ theme }) => theme.zIndex.modal};
+  z-index: var(--admiral-z-index-modal, ${({ theme }) => theme.zIndex.modal});
   ${(p) => p.$overlayStyledCss}
   outline: none;
 `;
@@ -60,7 +61,7 @@ const width = css<{ $dimension: Dimension; $mobile?: boolean }>`
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   ${({ $mobile }) => ($mobile ? typography['Header/H6'] : typography['Header/H5'])};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin: 0;
   padding: ${({ $mobile, $displayCloseIcon }) => {
     if ($mobile) {
@@ -107,19 +108,21 @@ function getModalIcon(status: ModalStatusIconType) {
   }
 }
 
-function getModalIconColor(status: ModalStatusIconType) {
-  switch (status) {
-    case 'success':
-      return 'Success/Success 50 Main';
-    case 'warning':
-      return 'Warning/Warning 50 Main';
-    case 'danger':
-      return 'Error/Error 60 Main';
-    case 'information':
-    default:
-      return 'Primary/Primary 60 Main';
-  }
-}
+const modalIconColor = css<{ $status: ModalStatusIconType }>`
+  fill: ${({ $status, theme }) => {
+    switch ($status) {
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      case 'warning':
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+      case 'danger':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'information':
+      default:
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
+  }};
+`;
 
 const ModalStatusIconWrapper = styled.div<{ $status: ModalStatusIconType; $mobile: boolean }>`
   margin-left: ${({ $mobile }) => ($mobile ? 16 : 24)}px;
@@ -128,7 +131,7 @@ const ModalStatusIconWrapper = styled.div<{ $status: ModalStatusIconType; $mobil
   height: 40px;
 
   & *[fill^='#'] {
-    fill: ${({ theme, $status }) => theme.color[getModalIconColor($status)]};
+    ${modalIconColor}
   }
 `;
 
@@ -144,11 +147,11 @@ const ModalComponent = styled.div<{ $dimension: Dimension; $mobile?: boolean }>`
   padding: 20px 0 24px;
   ${width};
   max-height: ${({ $mobile }) => ($mobile ? '84vh' : '90vh')};
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
-  ${({ theme }) => theme.shadow['Shadow 16']}
-  border-radius: ${(p) => largeGroupBorderRadius(p.theme.shape)};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+  box-shadow: var(--admiral-box-shadow-Shadow16, ${(p) => parseShadow(p.theme.shadow['Shadow 16'])});
+  border-radius: var(--admiral-border-radius-Large, ${(p) => largeGroupBorderRadius(p.theme.shape)});
   ${({ $mobile }) => ($mobile ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   outline: none;
 `;
 

@@ -36,7 +36,7 @@ const StyledCountryName = styled.span`
 
 const CountryCode = styled.span`
   flex: 0 0 auto;
-  color: ${(p) => p.theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 `;
 
 export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>((props, ref) => {

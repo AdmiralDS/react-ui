@@ -21,11 +21,13 @@ export const YearComponent = styled.div<YearComponentProps>`
   height: ${YEAR_HEIGHT};
   padding: ${YEAR_PADDING};
   margin-bottom: ${YEAR_MARGIN_BOTTOM};
-  border: 1px solid ${({ $today, theme }) => ($today ? theme.color['Neutral/Neutral 90'] : 'transparent')};
+  border: 1px solid
+    ${({ $today, theme }) =>
+      $today ? `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})` : 'transparent'};
   border-radius: ${YEAR_BORDER_RADIUS};
   background: transparent;
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   user-select: none;
   cursor: pointer;
 
@@ -33,14 +35,14 @@ export const YearComponent = styled.div<YearComponentProps>`
     disabled &&
     `
       cursor: default;
-      color: ${theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
     `}
 
   ${({ disabled, theme }) =>
     !disabled &&
     `
       &:hover {
-        border: 1px solid ${theme.color['Primary/Primary 60 Main']};
+        border: 1px solid var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']});
       }
     `}
 
@@ -48,12 +50,12 @@ export const YearComponent = styled.div<YearComponentProps>`
     !disabled &&
     $selected &&
     `
-      border: 1px solid ${theme.color['Primary/Primary 60 Main']};
-      color: ${theme.color['Special/Static White']};
-      background: ${theme.color['Primary/Primary 60 Main']};
+      border: 1px solid var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']});
+      color: var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']});
+      background: var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']});
       &:hover {
-        border: 1px solid ${theme.color['Primary/Primary 70']};
-        background: ${theme.color['Primary/Primary 70']};
+        border: 1px solid var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});
+        background: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});
       }
     `}
 `;

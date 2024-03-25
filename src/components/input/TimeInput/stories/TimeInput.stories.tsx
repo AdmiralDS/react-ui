@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import {
@@ -139,7 +140,10 @@ export default {
 } as Meta<typeof TimeInput>;
 
 //<editor-fold desc="Базовый компонент">
-const TimeInputSimpleStory: StoryFn<typeof TimeInput> = (props) => <TimeInputSimpleTemplate {...props} />;
+const TimeInputSimpleStory: StoryFn<typeof TimeInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimeInputSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TimeInputSimple = {
   render: TimeInputSimpleStory,

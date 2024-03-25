@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { DropdownContainer, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SimpleContainerTemplate } from './SimpleContainer.template';
@@ -62,7 +63,10 @@ export default {
 } as Meta<typeof DropdownContainer>;
 
 //<editor-fold desc="Простой контейнер">
-const SimpleContainerStory: StoryFn<typeof DropdownContainer> = (props) => <SimpleContainerTemplate {...props} />;
+const SimpleContainerStory: StoryFn<typeof DropdownContainer> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SimpleContainerTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SimpleContainer = {
   render: SimpleContainerStory,

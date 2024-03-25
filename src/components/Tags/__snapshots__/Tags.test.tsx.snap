@@ -16,9 +16,9 @@ exports[`Tags should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   width: 50px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -26,8 +26,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid #D5D8DE;
-  background: #D5D8DE;
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c1:focus-visible {
@@ -41,8 +41,8 @@ exports[`Tags should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c4 {
@@ -52,9 +52,9 @@ exports[`Tags should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   width: auto;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -62,8 +62,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid #D5D8DE;
-  background: #D5D8DE;
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c4:focus-visible {
@@ -77,21 +77,21 @@ exports[`Tags should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c3 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -103,7 +103,7 @@ exports[`Tags should render default component 1`] = `
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #1BA049;
+  background: var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
 .c5 {
@@ -113,7 +113,7 @@ exports[`Tags should render default component 1`] = `
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #D92020;
+  background: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 <body>
@@ -179,9 +179,9 @@ exports[`Tags should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   width: 50px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -189,8 +189,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid #D5D8DE;
-  background: #D5D8DE;
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c1:focus-visible {
@@ -204,8 +204,8 @@ exports[`Tags should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c4 {
@@ -215,9 +215,9 @@ exports[`Tags should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   width: auto;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -225,8 +225,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid #D5D8DE;
-  background: #D5D8DE;
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c4:focus-visible {
@@ -240,21 +240,21 @@ exports[`Tags should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c3 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -266,7 +266,7 @@ exports[`Tags should render default component 1`] = `
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #1BA049;
+  background: var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
 .c5 {
@@ -276,7 +276,7 @@ exports[`Tags should render default component 1`] = `
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #D92020;
+  background: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
 <div>

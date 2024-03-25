@@ -10,7 +10,7 @@ const Container = styled.div<{ $position: PositionToasts }>`
   display: flex;
   flex-direction: column;
   width: 384px;
-  z-index: ${({ theme }) => theme.zIndex.notification};
+  z-index: var(--admiral-z-index-notification, ${({ theme }) => theme.zIndex.notification});
   ${(p) => p.$position === 'top-right' && 'top: 16px'};
   ${(p) => (p.$position === 'bottom-right' || p.$position === 'bottom-left') && 'bottom: 16px'};
   ${(p) => (p.$position === 'top-right' || p.$position === 'bottom-right') && 'right: 16px'};

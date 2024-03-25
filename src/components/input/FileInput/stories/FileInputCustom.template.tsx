@@ -22,13 +22,13 @@ const MyFileItem = styled.div<{ filesLayoutCssMixin?: ReturnType<typeof css> }>`
   outline: none;
   margin: 0;
   padding: 12px 16px;
-  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+  border: dashed 2px var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin-top: 16px;
   ${(p) => p.filesLayoutCssMixin}
 
   &:hover {
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
-    color: ${(p) => p.theme.color['Magenta/Magenta 60 Main']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
+    color: var(--admiral-color-Magenta_Magenta60Main, ${(p) => p.theme.color['Magenta/Magenta 60 Main']});
   }
 `;
 
@@ -42,7 +42,7 @@ const CloseIcon = styled.div`
   height: 24px;
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 const CustomFileItem = ({ children, filesLayoutCssMixin, onCloseIconClick, ...props }: MyFileItemProps) => {

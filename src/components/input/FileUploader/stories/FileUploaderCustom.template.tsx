@@ -5,7 +5,7 @@ import type { FileUploaderProps } from '@admiral-ds/react-ui';
 import { ReactComponent as UploadSVG } from '@admiral-ds/icons/build/system/UploadOutline.svg';
 
 const StyledP = styled.p`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const FileUploaderCustomTemplate = (props: FileUploaderProps) => {

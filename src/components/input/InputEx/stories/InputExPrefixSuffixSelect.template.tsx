@@ -13,8 +13,9 @@ export const InputExPrefixSuffixSelectTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
+}: InputExProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +29,7 @@ export const InputExPrefixSuffixSelectTemplate = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <InputEx
         {...props}
         containerRef={inputRef}

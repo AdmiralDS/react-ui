@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { PaginationOne, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -89,16 +90,20 @@ const PaginationPlaygroundStory: StoryFn<typeof PaginationOne> = ({
   totalItems,
   onChange,
   ...props
-}) => (
-  <PaginationOnePlaygroundTemplate
-    page={page}
-    pageSize={pageSize}
-    pageSizes={pageSizes}
-    totalItems={totalItems}
-    onChange={onChange}
-    {...props}
-  />
-);
+}) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <PaginationOnePlaygroundTemplate
+      page={page}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      totalItems={totalItems}
+      onChange={onChange}
+      CSSCustomProps={CSSCustomProps}
+      {...props}
+    />
+  );
+};
 
 export const Playground = {
   render: PaginationPlaygroundStory,
@@ -122,16 +127,20 @@ const PaginationTypesStory: StoryFn<typeof PaginationOne> = ({
   totalItems,
   onChange,
   ...props
-}) => (
-  <PaginationOneTypesTemplate
-    page={page}
-    pageSize={pageSize}
-    pageSizes={pageSizes}
-    totalItems={totalItems}
-    onChange={onChange}
-    {...props}
-  />
-);
+}) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <PaginationOneTypesTemplate
+      page={page}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      totalItems={totalItems}
+      onChange={onChange}
+      CSSCustomProps={CSSCustomProps}
+      {...props}
+    />
+  );
+};
 
 export const PaginationTypesExample = {
   render: PaginationTypesStory,

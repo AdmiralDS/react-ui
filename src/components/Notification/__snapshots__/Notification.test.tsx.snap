@@ -10,49 +10,49 @@ exports[`Notification should render error components with all properties 1`] = `
   width: fit-content;
   text-decoration: none;
   position: relative;
-  border-radius: 4px;
-  color: #0062FF;
-  font-family: 'VTB Group UI',sans-serif;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c5 *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c5:hover {
-  color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:focus {
-  color: #0046E2;
-  outline-color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+  outline-color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:focus *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:active {
-  color: #0132B0;
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c5:active *[fill^='#'] {
-  fill: #0132B0;
+  fill: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c5:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c11 {
@@ -90,7 +90,7 @@ exports[`Notification should render error components with all properties 1`] = `
   flex: 0 0 auto;
   height: 20px;
   width: 20px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -104,12 +104,12 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c7:not(:disabled):focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c7:not(:disabled):focus >.c9 {
@@ -117,11 +117,11 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c7:not(:disabled):hover >.c9 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c7:not(:disabled):active >.c9 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c7:not(:disabled):focus-visible >.c9 {
@@ -132,12 +132,12 @@ exports[`Notification should render error components with all properties 1`] = `
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   padding: 12px 44px 12px 52px;
   border-width: 1px;
   border-style: solid;
-  border-color: #0062FF;
-  background-color: #EDF5FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary10, #EDF5FF);
 }
 
 .c2 {
@@ -147,26 +147,26 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c3 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   margin-bottom: 4px;
 }
 
 .c4 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c8 {
@@ -189,16 +189,16 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c6 {
   margin-top: 4px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -262,49 +262,49 @@ exports[`Notification should render error components with all properties 1`] = `
   width: fit-content;
   text-decoration: none;
   position: relative;
-  border-radius: 4px;
-  color: #0062FF;
-  font-family: 'VTB Group UI',sans-serif;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c5 *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c5:hover {
-  color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:hover *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:focus {
-  color: #0046E2;
-  outline-color: #0046E2;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+  outline-color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:focus *[fill^='#'] {
-  fill: #0046E2;
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
 .c5:active {
-  color: #0132B0;
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c5:active *[fill^='#'] {
-  fill: #0132B0;
+  fill: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
 .c5:focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c11 {
@@ -342,7 +342,7 @@ exports[`Notification should render error components with all properties 1`] = `
   flex: 0 0 auto;
   height: 20px;
   width: 20px;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Small, 4px);
   overflow: visible;
   cursor: pointer;
 }
@@ -356,12 +356,12 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c7:not(:disabled):focus-visible {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c7:not(:disabled):focus >.c9 {
@@ -369,11 +369,11 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c7:not(:disabled):hover >.c9 {
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c7:not(:disabled):active >.c9 {
-  background-color: #0000001F;
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c7:not(:disabled):focus-visible >.c9 {
@@ -384,12 +384,12 @@ exports[`Notification should render error components with all properties 1`] = `
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
   padding: 12px 44px 12px 52px;
   border-width: 1px;
   border-style: solid;
-  border-color: #0062FF;
-  background-color: #EDF5FF;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--admiral-color-Primary_Primary10, #EDF5FF);
 }
 
 .c2 {
@@ -399,26 +399,26 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c3 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   margin-bottom: 4px;
 }
 
 .c4 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c8 {
@@ -441,16 +441,16 @@ exports[`Notification should render error components with all properties 1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c6 {
   margin-top: 4px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }

@@ -12,14 +12,15 @@ const TooltipedInput = TooltipHoc(InputField);
 
 export const TooltipHocRefTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const handleBtnClick = () => {
     inputRef.current?.focus();
   };
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedInput
         {...props}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}

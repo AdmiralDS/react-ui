@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import {
   TextInput,
   INPUT_DIMENSIONS_VALUES,
@@ -93,7 +94,10 @@ export default {
 } as Meta<typeof TextInput>;
 
 //<editor-fold desc="Базовый input компонент">
-const TextInputPlaygroundStory: StoryFn<typeof TextInput> = (props) => <TextInputPlaygroundTemplate {...props} />;
+const TextInputPlaygroundStory: StoryFn<typeof TextInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextInputPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextInputPlayground = {
   render: TextInputPlaygroundStory,

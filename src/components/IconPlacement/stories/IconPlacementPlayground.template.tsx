@@ -19,10 +19,11 @@ export const IconPlacementPlaygroundTemplate = ({
   disabled = false,
   highlightFocus = false,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: IconPlacementProps & { themeBorderKind?: BorderRadiusType }) => {
+}: IconPlacementProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <T font="Body/Body 1 Short" as="div">
           Icon Placement - вспомогательный компонент, обычно используется в составе других компонентов или организмов.

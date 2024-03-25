@@ -21,8 +21,9 @@ export const InputExFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: InputExFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: InputExFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ export const InputExFieldInputTemplate = ({
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
   const [suffixValue, setSuffixValue] = useState<ReactNode>('suffix One');
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <InputExField
           data-container-id="InputExFieldIdOne"

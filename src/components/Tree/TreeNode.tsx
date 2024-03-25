@@ -75,7 +75,7 @@ export interface TreeNodeProps extends NodeProps, TreeNodeRenderOptionProps {}
 const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean }>`
   transition: all 0.3s;
   & path {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   width: 100%;
   height: 100%;
@@ -90,10 +90,10 @@ const StyledIconPlacement = styled(IconPlacement)`
 export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
   background: ${({ theme, $selected, $hovered }) =>
     $hovered
-      ? theme.color['Opacity/Hover']
+      ? `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`
       : $selected
-        ? theme.color['Opacity/Focus']
-        : theme.color['Special/Elevated BG']};
+      ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+      : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 `;
 
 const RowWrapper = styled.div<{
@@ -103,7 +103,7 @@ const RowWrapper = styled.div<{
   $hovered?: boolean;
   disabled?: boolean;
 }>`
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;
@@ -125,7 +125,7 @@ const IconWrapper = styled.div<{ $dimension?: Dimension }>`
   > svg {
     width: 100%;
     height: 100%;
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 

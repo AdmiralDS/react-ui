@@ -27,22 +27,22 @@ export const StepIcon = styled(StepSvg)`
   }
   [data-active='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }
   [data-error='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Error/Error 60 Main']};
+      fill: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
     }
   }
   [data-warning='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
+      fill: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
     }
   }
   [data-disabled='true'] & {
     path {
-      fill: ${({ theme }) => theme.color['Primary/Primary 30']};
+      fill: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
     }
   }
   flex-shrink: 0;
@@ -55,18 +55,18 @@ export const StepRail = styled.div`
     height: 100%;
     width: 2px;
   }
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   [data-completed='true'] & {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
   [data-error='true'] & {
-    background-color: ${({ theme }) => theme.color['Error/Error 60 Main']};
+    background-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
   [data-warning='true'] & {
-    background-color: ${({ theme }) => theme.color['Warning/Warning 50 Main']};
+    background-color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
   }
   [data-disabled='true'] & {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
+    background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   }
   border-radius: 1px;
 `;
@@ -87,9 +87,13 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover svg {
     path {
       fill: ${({ $error, $warning, theme }) => {
-        if ($error) return theme.color['Error/Error 70'];
-        if ($warning) return theme.color['Warning/Warning 70'];
-        return theme.color['Primary/Primary 70'];
+        if ($error) {
+          return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+        }
+        if ($warning) {
+          return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+        }
+        return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
       }};
     }
   }
@@ -98,9 +102,13 @@ const clickableCss = css<{ $error?: boolean; $warning?: boolean }>`
 const clickableNotActiveCss = css<{ $error?: boolean; $warning?: boolean }>`
   &:hover ${StepRail} {
     background-color: ${({ $error, $warning, theme }) => {
-      if ($error) return theme.color['Error/Error 70'];
-      if ($warning) return theme.color['Warning/Warning 70'];
-      return theme.color['Primary/Primary 70'];
+      if ($error) {
+        return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+      }
+      if ($warning) {
+        return `var(--admiral-color-Warning_Warning70, ${theme.color['Warning/Warning 70']})`;
+      }
+      return `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`;
     }};
   }
 `;
@@ -139,8 +147,8 @@ export const StepWrapper = styled.li<{
     &:before {
       position: absolute;
       content: '';
-      border: 2px solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-      border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+      border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
       top: 0px;
       left: 0px;
       bottom: 0px;
@@ -171,9 +179,9 @@ export const Content = styled.div<{ $lineClamp: 1 | 2 | 3 }>`
     return 3;
   }};
   overflow: hidden;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   [data-disabled='true'] & {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   ${typography['Body/Body 2 Long']}
   margin: 0 12px 0 0;

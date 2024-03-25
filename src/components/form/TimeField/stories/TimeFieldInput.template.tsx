@@ -17,8 +17,9 @@ export const TimeFieldInputTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода времени',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   React.useEffect(() => {
@@ -33,7 +34,7 @@ export const TimeFieldInputTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <TimeField
           data-container-id="timeFieldIdOne"

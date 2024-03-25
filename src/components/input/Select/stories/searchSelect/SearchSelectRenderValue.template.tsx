@@ -10,7 +10,7 @@ import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/fla
 import { OPTIONS_NAMES } from '#src/components/input/Select/stories/data';
 
 const RenderingValue = styled.div`
-  color: ${(p) => p.theme.color['Teal/Teal 80']};
+  color: var(--admiral-color-Teal_Teal80, ${(p) => p.theme.color['Teal/Teal 80']});
   display: flex;
   flex: 1 1 100%;
   column-gap: 8px;
@@ -18,8 +18,8 @@ const RenderingValue = styled.div`
   border-width: 1px;
   border-style: dotted;
   border-radius: 4px;
-  border-color: ${(p) => p.theme.color['Teal/Teal 80']};
-  background-color: ${(p) => p.theme.color['Teal/Teal 10']};
+  border-color: var(--admiral-color-Teal_Teal80, ${(p) => p.theme.color['Teal/Teal 80']});
+  background-color: var(--admiral-color-Teal_Teal10, ${(p) => p.theme.color['Teal/Teal 10']});
   box-sizing: border-box;
 `;
 

@@ -24,7 +24,7 @@ const TextBlock = styled.div`
 `;
 
 const Highlight = styled.span`
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 function getHighlightedText(text = '', highlight = '', highlightFormat: HighlightFormat = 'wholly') {
@@ -63,8 +63,9 @@ const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 
 export const BasicExampleTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: GlobalSearchProps & { themeBorderKind?: BorderRadiusType }) => {
+}: GlobalSearchProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [history, setHistory] = useState<Array<{ value: string; text: string }>>([]);
   const [searchValue, setSearchValue] = useState('');
 
@@ -138,7 +139,7 @@ export const BasicExampleTemplate = ({
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <GlobalSearch
           {...props}

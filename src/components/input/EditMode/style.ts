@@ -87,20 +87,20 @@ const iconStyle = css`
 export const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   ${iconStyle}
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   [data-disabled='true'] & {
     cursor: default;
     pointer-events: none;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
   [data-disabled='false'] & {
     &:hover {
       & *[fill^='#'] {
-        fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+        fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
       }
     }
   }
@@ -192,7 +192,7 @@ export const Text = styled.div<{ $multiline?: boolean }>`
   align-items: center;
   cursor: text;
   margin-right: 12px;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${TypographyMixin};
   ${(p) => (p.$multiline ? MultilineMixin : SinglelineMixin)}
@@ -205,7 +205,7 @@ export const Text = styled.div<{ $multiline?: boolean }>`
   [data-disabled='false'] & {
     &:hover {
       & + ${EditIcon} *[fill^='#'] {
-        fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+        fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
       }
     }
   }

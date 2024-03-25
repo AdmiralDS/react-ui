@@ -41,17 +41,17 @@ const ItemContent = styled.div`
   height: 4px;
   width: 16px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 
   [aria-selected='true'] & {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 
 const Item = styled.button`
   width: 24px;
   height: 12px;
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
 
   position: relative;
   box-sizing: border-box;
@@ -66,9 +66,9 @@ const Item = styled.button`
   -webkit-tap-highlight-color: transparent;
 
   &:focus {
-    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     & ${ItemContent} {
-      background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+      background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     }
   }
   &:focus,
@@ -77,10 +77,10 @@ const Item = styled.button`
   }
 
   &:hover ${ItemContent} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:active ${ItemContent} {
-    background-color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
   }
 `;
 

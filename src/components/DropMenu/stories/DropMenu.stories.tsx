@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { DropMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -113,7 +114,10 @@ export default {
 } as Meta<typeof DropMenu>;
 
 //<editor-fold desc="Базовый пример">
-const SimpleStory: StoryFn<typeof DropMenu> = (props) => <DropMenuSimpleTemplate {...props} />;
+const SimpleStory: StoryFn<typeof DropMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DropMenuSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SimpleExample = {
   render: SimpleStory,

@@ -109,32 +109,32 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
     switch (appearance) {
       case 'neutral1':
       case 'white':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       case 'neutral2':
       case 'light':
-        return theme.color['Neutral/Neutral 10'];
+        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
       case 'neutral3':
       case 'grey':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       case 'neutral4':
       case 'dark':
-        return theme.color['Neutral/Neutral 80'];
+        return `var(--admiral-color-Neutral_Neutral80, ${theme.color['Neutral/Neutral 80']})`;
       default:
-        return appearance?.background || theme.color['Neutral/Neutral 10'];
+        return appearance?.background || `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
     }
   };
   const getStatusColor = (status: AvatarBaseProps['status']) => {
     switch (status) {
       case 'success':
-        return theme.color['Success/Success 50 Main'];
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       case 'warn':
-        return theme.color['Attention/Attention 50 Main'];
+        return `var(--admiral-color-Attention_Attention50Main, ${theme.color['Attention/Attention 50 Main']})`;
       case 'danger':
-        return theme.color['Error/Error 60 Main'];
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
       case 'inactive':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       default:
-        return status || theme.color['Neutral/Neutral 50'];
+        return status || `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }
   };
   const appearance = appearanceProp || 'light';
@@ -224,7 +224,7 @@ export const AvatarSVG: React.FC<AvatarSVGProps> = ({
           cy={circleCenter}
           r={ACTIVITY_RING[dimension]}
           strokeWidth="2"
-          stroke={theme.color['Primary/Primary 60 Main']}
+          stroke={`var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`}
           fill="none"
           mask={useId}
         />

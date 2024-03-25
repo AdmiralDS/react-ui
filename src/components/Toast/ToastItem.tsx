@@ -78,10 +78,17 @@ const Progress = styled.div.attrs<{ $percent: number }>((props) => ({
   bottom: 0;
   left: 0;
   background: ${({ theme, $status }) => {
-    if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if ($status === 'error') return theme.color['Error/Error 60 Main'];
-    if ($status === 'success') return theme.color['Success/Success 50 Main'];
-    return theme.color['Primary/Primary 60 Main'];
+    switch ($status) {
+      case 'warning':
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+      case 'error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      case 'info':
+      default:
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
   }};
   height: 4px;
   transition: ${({ $duration }) => `all ${$duration}ms linear`};
@@ -90,7 +97,7 @@ const Progress = styled.div.attrs<{ $percent: number }>((props) => ({
 const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 /** Шаблон для отображения кастомного уведомления со шкалой отсчета времени,

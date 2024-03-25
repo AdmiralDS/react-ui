@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { NotificationItem, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -69,7 +70,8 @@ export default {
 
 //<editor-fold desc="Статическая нотификация. Базовый пример.">
 const StaticNotificationItemBaseStory: StoryFn<typeof NotificationItem> = (props) => {
-  return <NotificationItemBaseTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NotificationItemBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const StaticNotificationItemBase = {
@@ -90,7 +92,8 @@ export const StaticNotificationItemBase = {
 
 //<editor-fold desc="Статусы статических нотификаций">
 const StaticNotificationItemStatusStory: StoryFn<typeof NotificationItem> = (props) => {
-  return <NotificationItemStatusTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NotificationItemStatusTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const StaticNotificationItemStatus = {

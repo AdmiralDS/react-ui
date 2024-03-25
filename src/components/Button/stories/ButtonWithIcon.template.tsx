@@ -24,13 +24,18 @@ const Separator = styled.div`
 `;
 
 const DarkDiv = styled.div`
-  background-color: ${({ theme }) => theme.color['Special/Dark Static Neutral 00']};
+  background-color: var(
+    --admiral-color-Special_DarkStaticNeutral00,
+    ${(p) => p.theme.color['Special/Dark Static Neutral 00']}
+  );
   padding: 2px;
 `;
 
-export const ButtonWithIconTemplate = (props: ButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+export const ButtonWithIconTemplate = (
+  props: ButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean },
+) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind, props.CSSCustomProps)}>
       <WrapperButton>
         <div>
           <T font="Body/Body 1 Long" as="div">

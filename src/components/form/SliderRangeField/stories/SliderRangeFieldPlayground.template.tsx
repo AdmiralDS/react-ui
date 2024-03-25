@@ -8,10 +8,11 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const SliderRangeFieldPlaygroundTemplate = ({
   label = 'Введите диапазон',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SliderRangeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SliderRangeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SliderRangeField data-container-id="sliderRangeFieldIdOne" {...props} label={label} />
     </ThemeProvider>
   );

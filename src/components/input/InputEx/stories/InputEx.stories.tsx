@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { InputEx, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { InputExBaseTemplate } from './InputExBase.template';
@@ -111,7 +112,10 @@ export default {
 } as Meta<typeof InputEx>;
 
 //<editor-fold desc="Базовый InputExtended">
-const InputExBaseStory: StoryFn<typeof InputEx> = (props) => <InputExBaseTemplate {...props} />;
+const InputExBaseStory: StoryFn<typeof InputEx> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <InputExBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const InputExBase = {
   render: InputExBaseStory,
@@ -130,9 +134,10 @@ export const InputExBase = {
 //</editor-fold>
 
 //<editor-fold desc="InputExtended с выбором префикса и суффикса">
-const InputExPrefixSuffixSelectStory: StoryFn<typeof InputEx> = (props) => (
-  <InputExPrefixSuffixSelectTemplate {...props} />
-);
+const InputExPrefixSuffixSelectStory: StoryFn<typeof InputEx> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <InputExPrefixSuffixSelectTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const InputExPrefixSuffixSelect = {
   render: InputExPrefixSuffixSelectStory,
@@ -151,7 +156,10 @@ export const InputExPrefixSuffixSelect = {
 //</editor-fold>
 
 //<editor-fold desc="InputExtended. Кастомизация">
-const InputExCustomStory: StoryFn<typeof InputEx> = (props) => <InputExCustomTemplate {...props} />;
+const InputExCustomStory: StoryFn<typeof InputEx> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <InputExCustomTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const InputExCustom = {
   render: InputExCustomStory,

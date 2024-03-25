@@ -8,12 +8,13 @@ export const SliderRangePlaygroundTemplate = ({
   defaultValue,
   onChange,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SliderRangeProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SliderRangeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const handleChange = (value: any) => console.log(value);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SliderRange defaultValue={defaultValue || ['2', '6']} onChange={onChange || handleChange} {...props} />
     </ThemeProvider>
   );

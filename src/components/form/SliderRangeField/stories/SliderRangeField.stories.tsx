@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { SliderRangeField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SliderRangeFieldPlaygroundTemplate } from './SliderRangeFieldPlayground.template';
@@ -110,9 +111,10 @@ export default {
 } as Meta<typeof SliderRangeField>;
 
 //<editor-fold desc="SliderRangeField example">
-const SliderRangeFieldPlaygroundStory: StoryFn<typeof SliderRangeField> = (props) => (
-  <SliderRangeFieldPlaygroundTemplate {...props} />
-);
+const SliderRangeFieldPlaygroundStory: StoryFn<typeof SliderRangeField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderRangeFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SliderRangeFieldPlayground = {
   render: SliderRangeFieldPlaygroundStory,

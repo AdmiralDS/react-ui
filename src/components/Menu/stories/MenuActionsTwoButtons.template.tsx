@@ -54,18 +54,20 @@ const ActionPanelFlex = css`
   display: flex;
   gap: 8px;
 `;
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
 
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 export const MenuActionsTwoButtonsTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -78,7 +80,7 @@ export const MenuActionsTwoButtonsTemplate = ({
   }, [props.dimension, STORY_ITEMS]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

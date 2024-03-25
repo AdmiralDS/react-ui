@@ -27,15 +27,15 @@ const padding = {
 };
 
 export const ContentSwitcherComponent = styled.div<ContentSwitcherComponentProps>`
-  background: ${({ theme }) => theme.color['Neutral/Neutral 10']};
-  border: 2px solid ${(p) => p.theme.color['Neutral/Neutral 10']};
+  background: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+  border: 2px solid var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-radius: ${({ $dimension }) => BORDER_RADIUS[$dimension]}px;
   display: inline-flex;
   height: ${({ $dimension }) => SIZE[$dimension]}px;
   padding: 2px;
 
   &[data-appearance~='primary'] {
-    border: 2px solid ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     background-color: transparent;
   }
 

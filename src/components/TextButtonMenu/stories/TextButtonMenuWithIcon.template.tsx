@@ -57,8 +57,9 @@ const items = [
 export const TextButtonMenuWithIconTemplate = ({
   text = 'Text Button',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TextButtonMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TextButtonMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const model = React.useMemo(() => {
     return items.map((item) => ({
@@ -73,7 +74,7 @@ export const TextButtonMenuWithIconTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <TextButtonMenu
           {...props}

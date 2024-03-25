@@ -14,7 +14,7 @@ const WrapperVertical = styled.div`
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   font-size: 16px;
   line-height: 24px;
 `;
@@ -30,7 +30,7 @@ const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
 
 const StyledAdditionalText = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 `;
 
@@ -43,7 +43,7 @@ const InnerContainer = styled.div`
   width: 100%;
   padding: 6px 8px;
   margin: 0 8px 0 24px;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   flex-direction: column;
   align-items: flex-start;
 `;

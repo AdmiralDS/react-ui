@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { NumberInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { NumberInputFieldPlaygroundTemplate } from './NumberInputFieldPlayground.template';
@@ -113,9 +114,10 @@ export default {
 } as Meta<typeof NumberInputField>;
 
 //<editor-fold desc="NumberInputField example">
-const NumberInputFieldStory: StoryFn<typeof NumberInputField> = (props) => (
-  <NumberInputFieldPlaygroundTemplate {...props} />
-);
+const NumberInputFieldStory: StoryFn<typeof NumberInputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const NumberInputFieldPlayground = {
   render: NumberInputFieldStory,

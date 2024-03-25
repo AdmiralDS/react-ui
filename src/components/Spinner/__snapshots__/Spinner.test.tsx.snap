@@ -14,7 +14,7 @@ exports[`Spinner should render component with inverse color 1`] = `
 }
 
 .c0 svg path {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 <body>
@@ -39,7 +39,7 @@ exports[`Spinner should render component with inverse color 1`] = `
 }
 
 .c0 svg path {
-  fill: #FFFFFF;
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 <div>
@@ -119,7 +119,7 @@ exports[`Spinner should render component with small dimension 1`] = `
 }
 
 .c0 svg path {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 <body>
@@ -144,7 +144,7 @@ exports[`Spinner should render component with small dimension 1`] = `
 }
 
 .c0 svg path {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 <div>
@@ -224,7 +224,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0 svg path {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 <body>
@@ -249,7 +249,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0 svg path {
-  fill: #0062FF;
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 <div>

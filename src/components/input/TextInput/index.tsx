@@ -41,19 +41,23 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-color: transparent;
 `;
 
-function getBorderColor(status?: InputStatus) {
-  if (!status) return 'Neutral/Neutral 40';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 60 Main';
-    case 'success':
-      return 'Success/Success 50 Main';
-  }
-}
+const getBorderColor = css<{ $status?: InputStatus }>`
+  ${({ $status, theme }) => {
+    if (!$status) {
+      return `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
+    }
+    switch ($status) {
+      case 'error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+    }
+  }}
+`;
 
 export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: InputStatus }>`
   position: absolute;
@@ -69,41 +73,46 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
   background: none;
   border-radius: inherit;
 
-  border: 1px solid ${(p) => p.theme.color[getBorderColor(p.$status)]};
+  border: 1px solid ${getBorderColor};
   ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
-function getHoverBorderColor(status?: InputStatus) {
-  if (!status) return 'Neutral/Neutral 60';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 70';
-    case 'success':
-      return 'Success/Success 60';
-  }
-}
+const getHoverBorderColor = css<{ $status?: InputStatus }>`
+  ${({ $status, theme }) => {
+    if (!$status) {
+      return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
+    }
+    switch ($status) {
+      case 'error':
+        return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
+    }
+  }}
+`;
 
-function getFocusBorderColor(status?: InputStatus) {
-  if (!status) return 'Primary/Primary 60 Main';
-  switch (status) {
-    case 'error':
-      return 'Error/Error 60 Main';
-    case 'success':
-      return 'Success/Success 50 Main';
-  }
-}
+const getFocusBorder = css<{ $status?: InputStatus }>`
+  border: 2px solid
+    ${({ $status, theme }) => {
+      if (!$status) {
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      }
+      switch ($status) {
+        case 'error':
+          return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+        case 'success':
+          return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      }
+    }};
+`;
 
 export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) =>
-      p.disabled || p.readOnly
-        ? 'border-color: transparent'
-        : `border: 2px solid ${p.theme.color[getFocusBorderColor(p.$status)]}`}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : getFocusBorder)}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    border-color: ${(props) =>
-      props.disabled || props.readOnly ? 'transparent' : props.theme.color[getHoverBorderColor(props.$status)]};
+    border-color: ${(props) => (props.disabled || props.readOnly ? 'transparent' : getHoverBorderColor)};
   }
 `;
 
@@ -128,18 +137,18 @@ const Input = styled.input<ExtraProps>`
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   &&&:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {
@@ -147,18 +156,18 @@ const Input = styled.input<ExtraProps>`
     pointer-events: none;
   }
 
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &&&:user-invalid + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   &&&:user-invalid:hover:not(:disabled) + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
   &&&:user-invalid:focus:not(:disabled) + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-read-only] &&&,
@@ -182,7 +191,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   padding-right: ${horizontalPaddingValue}px;
 
   & svg {
-    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     display: block;
     width: ${iconSizeValue}px;
 
@@ -192,7 +201,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
 
     &:focus-visible {
       outline-offset: 2px;
-      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
 

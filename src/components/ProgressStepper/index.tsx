@@ -17,12 +17,12 @@ const ProgressWrapper = styled.div`
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 const Progress = styled.div<{ $percent: number }>`
   width: ${({ $percent }) => $percent}%;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 const Header = styled.div<{ $mobile?: boolean }>`
@@ -34,13 +34,13 @@ const Header = styled.div<{ $mobile?: boolean }>`
 
 const ActiveStep = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const ProgressText = styled.div`
   white-space: nowrap;
   flex-shrink: 0;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   ${typography['Caption/Caption 1']}
 `;
 
@@ -48,7 +48,7 @@ const NextStep = styled.div`
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   ${typography['Caption/Caption 1']}
 `;
 

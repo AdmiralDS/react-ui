@@ -13,10 +13,11 @@ const Container = styled.div`
 
 export const FieldSetCheckboxTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FieldSetPropsType & { themeBorderKind?: BorderRadiusType }) => {
+}: FieldSetPropsType & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
         <FieldSet data-container-id="fieldSetIdOne" {...props} legend={'Группа чекбоксов:'}>
           <CheckboxField name="check1">Text 1</CheckboxField>

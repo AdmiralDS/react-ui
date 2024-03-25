@@ -12,31 +12,32 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
     }
   }
 
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 
   &:hover {
     cursor: pointer;
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+          fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
         }
       }
     }
   }
 
   &:active {
-    color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Primary/Primary 80']};
+          fill: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
         }
       }
     }
@@ -44,11 +45,11 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     ${IconContainer} {
       svg {
         path {
-          fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+          fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
         }
       }
     }
@@ -56,24 +57,24 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
 `;
 
 const primaryAppearanceMixin = css`
-  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 
   ${IconContainer} {
     svg {
       path {
-        fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+        fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       }
     }
   }
 `;
 
 const secondaryAppearanceMixin = css`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${IconContainer} {
     svg {
       path {
-        fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+        fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
       }
     }
   }

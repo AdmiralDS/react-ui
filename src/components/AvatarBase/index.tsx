@@ -20,11 +20,11 @@ const Wrapper = styled.button<{ size: string }>`
   background: transparent;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 `;
 
@@ -37,15 +37,15 @@ const getTextColor = css<{ $appearance: AvatarAppearance | { background?: string
       case 'white':
       case 'neutral2':
       case 'light':
-        return theme.color[DefaultFontColorName];
+        return `var(--admiral-color-Neutral_Neutral90, ${theme.color[DefaultFontColorName]})`;
       case 'neutral3':
       case 'grey':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'neutral4':
       case 'dark':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       default:
-        return $appearance?.text || theme.color[DefaultFontColorName];
+        return $appearance?.text || `var(--admiral-color-Neutral_Neutral90, ${theme.color[DefaultFontColorName]})`;
     }
   }}
 `;
@@ -104,15 +104,15 @@ const getIconColor = css<{ $appearance: AvatarAppearance | { background?: string
       case 'white':
       case 'neutral2':
       case 'light':
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
       case 'neutral3':
       case 'grey':
-        return theme.color['Special/Static White'];
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
       case 'neutral4':
       case 'dark':
-        return theme.color['Neutral/Neutral 00'];
+        return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
       default:
-        return $appearance?.icon || theme.color['Neutral/Neutral 50'];
+        return $appearance?.icon || `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }
   }}
 `;

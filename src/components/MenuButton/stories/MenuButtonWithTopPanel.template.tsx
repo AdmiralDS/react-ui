@@ -49,8 +49,9 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
 
 export const MenuButtonWithTopPanelTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MenuButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
   const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
   const [selectedOption, setSelectedOption] = React.useState<string | undefined>();
@@ -88,7 +89,7 @@ export const MenuButtonWithTopPanelTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <MenuButton
         dimension="s"
         appearance="secondary"

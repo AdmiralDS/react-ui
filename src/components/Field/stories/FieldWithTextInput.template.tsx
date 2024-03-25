@@ -15,10 +15,11 @@ export const FieldWithTextInputTemplate = ({
   label = 'some label of wrapped component',
   id = 'props_id',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: FieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
         <Field {...props} label={label} id={id}>
           <TextInput id={id} />

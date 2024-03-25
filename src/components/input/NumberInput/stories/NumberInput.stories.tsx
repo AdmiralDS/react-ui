@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { NumberInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -118,7 +119,10 @@ export default {
 } as Meta<typeof NumberInput>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => <NumberInputPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof NumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const Playground = {
   render: PlaygroundStory,
   parameters: {
@@ -132,7 +136,10 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Задизейбленный.">
-const DisabledStory: StoryFn<typeof NumberInput> = (props) => <NumberInputDisabledTemplate {...props} />;
+const DisabledStory: StoryFn<typeof NumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const DisabledExample = {
   render: DisabledStory,
   parameters: {
@@ -147,7 +154,10 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример с minValue, maxValue.">
-const MinMaxStory: StoryFn<typeof NumberInput> = (props) => <NumberInputMinMaxTemplate {...props} />;
+const MinMaxStory: StoryFn<typeof NumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputMinMaxTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const MinMaxExample = {
   render: MinMaxStory,
   parameters: {
@@ -170,7 +180,10 @@ export const MinMaxExample = {
 //</editor-fold>
 
 //<editor-fold desc="NumberInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: StoryFn<typeof NumberInput> = (props) => <NumberInputCustomisedTemplate {...props} />;
+const CustomStory: StoryFn<typeof NumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputCustomisedTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const CustomExample = {
   render: CustomStory,
   parameters: {

@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { TextField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
@@ -98,7 +99,10 @@ export default {
 } as Meta<typeof TextField>;
 
 //<editor-fold desc="Text field example">
-const TextFieldInputStory: StoryFn<typeof TextField> = (props) => <TextFieldInputTemplate {...props} />;
+const TextFieldInputStory: StoryFn<typeof TextField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextFieldInputTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextFieldInput = {
   render: TextFieldInputStory,

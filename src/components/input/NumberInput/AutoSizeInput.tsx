@@ -14,7 +14,10 @@ const Prefix = styled.div<{ disabled?: boolean; $align?: 'left' | 'right' }>`
   flex-shrink: 0;
   align-items: center;
   user-select: none;
-  color: ${({ theme, disabled }) => (disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50'])};
+  color: ${({ theme, disabled }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   ${({ $align }) => $align === 'right' && 'margin-left: auto;'}
 `;
 
@@ -51,9 +54,13 @@ export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
   background: none;
   border: 1px solid
     ${({ theme, $status }) => {
-      if ($status === 'error') return theme.color['Error/Error 60 Main'];
-      if ($status === 'success') return theme.color['Success/Success 50 Main'];
-      return theme.color['Neutral/Neutral 40'];
+      if ($status === 'error') {
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      }
+      if ($status === 'success') {
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      }
+      return `var(--admiral-color-Neutral_Neutral40, ${theme.color['Neutral/Neutral 40']})`;
     }};
   border-radius: inherit;
 
@@ -64,7 +71,7 @@ export const BorderedDiv = styled.div<{ $status?: TextInputProps['status'] }>`
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+    border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 
   &:disabled + ${BorderedDiv} {
@@ -72,19 +79,19 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   &[data-status='error']:focus + ${BorderedDiv}, &:user-invalid:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   &:user-invalid + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   &[data-status='success']:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 2px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   &:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-read-only] &:focus + ${BorderedDiv} {
@@ -111,16 +118,16 @@ const Input = styled.input<ExtraProps & { $align?: 'left' | 'right' }>`
   max-width: 100%;
 
   background: transparent;
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   text-align: ${({ $align }) => ($align === 'left' ? 'left' : 'right')};
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {

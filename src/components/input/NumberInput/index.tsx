@@ -35,7 +35,7 @@ const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
           pointer-events: none;
 
           & *[fill^='#'] {
-            fill: ${theme.color['Neutral/Neutral 30']};
+            fill: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
           }
         `
       : ''}
@@ -78,26 +78,34 @@ const Wrapper = styled(HeightLimitedContainer)<{
   $skeleton?: boolean;
   $status?: TextInputProps['status'];
 }>`
-  background-color: ${(props) => {
-    if (props.disabled || props.readOnly) return props.theme.color['Neutral/Neutral 10'];
-    return props.theme.color['Neutral/Neutral 00'];
+  background-color: ${({ disabled, readOnly, theme }) => {
+    if (disabled || readOnly) {
+      return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+    }
+    return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
   }};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 90']};
-  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
 
   &:hover:not(:focus-within) ${BorderedDiv} {
     border: 1px solid
-      ${(props) => {
-        if (props.disabled || props.readOnly) return 'transparent';
-        if (props.$status === 'error') return props.theme.color['Error/Error 70'];
-        if (props.$status === 'success') return props.theme.color['Success/Success 60'];
-        return props.theme.color['Neutral/Neutral 60'];
+      ${({ disabled, readOnly, $status, theme }) => {
+        if (disabled || readOnly) return 'transparent';
+        if ($status === 'error') {
+          return `var(--admiral-color-Error_Error70, ${theme.color['Error/Error 70']})`;
+        }
+        if ($status === 'success') {
+          return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
+        }
+        return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
       }};
   }
   &:hover:not(:focus-within) input:user-invalid + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 `;
 

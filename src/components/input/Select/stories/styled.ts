@@ -36,14 +36,14 @@ export const FormValuesWrapper = styled.div`
   font-size: 16px;
   line-height: 24px;
   border: 1px solid black;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   min-height: 100px;
   padding: 12px;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const ExtraText = styled.div`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   ${typography['Body/Body 2 Short']}
 `;
 
@@ -58,6 +58,6 @@ export const Form = styled.form`
 `;
 
 export const StyledGroup = styled(OptionGroup)`
-  color: ${(p) => p.theme.color['Purple/Purple 60 Main']};
-  ${typography['Main/S']}
+  color: var(--admiral-color-Purple_Purple60Main, ${(p) => p.theme.color['Purple/Purple 60 Main']});
+  ${typography['Header/H5']}
 `;

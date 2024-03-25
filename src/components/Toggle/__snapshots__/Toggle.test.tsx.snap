@@ -20,7 +20,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -28,7 +28,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -37,7 +37,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -50,21 +50,21 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c4 {
@@ -73,7 +73,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #B0B5BD;
+  background: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c4:before {
@@ -81,7 +81,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -94,7 +94,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -170,7 +170,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -178,7 +178,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -187,7 +187,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -200,21 +200,21 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c4 {
@@ -223,7 +223,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #B0B5BD;
+  background: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c4:before {
@@ -231,7 +231,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -244,7 +244,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -375,7 +375,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -383,7 +383,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -392,7 +392,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -405,21 +405,21 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-right: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -428,7 +428,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -436,7 +436,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -449,7 +449,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -522,7 +522,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -530,7 +530,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -539,7 +539,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -552,21 +552,21 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-right: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -575,7 +575,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -583,7 +583,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -596,7 +596,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -724,7 +724,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -732,7 +732,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -741,7 +741,7 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -754,21 +754,21 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -777,7 +777,7 @@ exports[`Toggle should render component with required properties 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -785,7 +785,7 @@ exports[`Toggle should render component with required properties 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -798,7 +798,7 @@ exports[`Toggle should render component with required properties 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -871,7 +871,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -879,7 +879,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -888,7 +888,7 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -901,21 +901,21 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -924,7 +924,7 @@ exports[`Toggle should render component with required properties 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -932,7 +932,7 @@ exports[`Toggle should render component with required properties 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 16px;
   height: 16px;
@@ -945,7 +945,7 @@ exports[`Toggle should render component with required properties 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 36px;
   height: 36px;
   border-radius: 36px;
@@ -1073,7 +1073,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -1081,7 +1081,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -1090,7 +1090,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -1103,21 +1103,21 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -1126,7 +1126,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   flex-shrink: 0;
   width: 28px;
   height: 16px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -1134,7 +1134,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 12px;
   height: 12px;
@@ -1147,7 +1147,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 32px;
   height: 32px;
   border-radius: 32px;
@@ -1220,7 +1220,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:checked+div>span {
-  background: #0062FF;
+  background: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1:checked+div>span:before {
@@ -1228,7 +1228,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:checked:disabled+div>span {
-  background: #A7C7FF;
+  background: var(--admiral-color-Primary_Primary30, #A7C7FF);
 }
 
 .c1:checked+div>div {
@@ -1237,7 +1237,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):focus-visible+div>span {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -1250,21 +1250,21 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c5 {
   display: flex;
   flex-direction: column;
   margin-left: 8px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c4 {
@@ -1273,7 +1273,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   flex-shrink: 0;
   width: 28px;
   height: 16px;
-  background: #717681;
+  background: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 .c4:before {
@@ -1281,7 +1281,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   position: absolute;
   top: 2px;
   left: 2px;
-  background: #FFFFFF;
+  background: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   transition: all 0.3s;
   width: 12px;
   height: 12px;
@@ -1294,7 +1294,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   position: absolute;
   top: -8px;
   left: -8px;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   width: 32px;
   height: 32px;
   border-radius: 32px;

@@ -21,13 +21,13 @@ export const ERROR_BLOCK_HEIGHT_XL = '16px';
 export const ERROR_BLOCK_HEIGHT_M = '20px';
 
 export const disabledStyles = css`
-  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
-  color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  border: 1px dashed var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   pointer-events: none;
 
   & svg {
     > * {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
@@ -36,11 +36,11 @@ export const hoverStyles = css`
   &[data-isdragover='true'],
   &:hover {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
 

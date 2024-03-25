@@ -34,7 +34,7 @@ const TextWrapper = styled.div`
 `;
 
 const ExtraText = styled.div`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   ${typography['Body/Body 2 Short']}
 `;
 

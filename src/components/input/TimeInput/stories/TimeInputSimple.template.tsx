@@ -8,8 +8,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const TimeInputSimpleTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TimeInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TimeInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
 
   React.useEffect(() => {
@@ -24,7 +25,7 @@ export const TimeInputSimpleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TimeInput
         {...props}
         style={{ maxWidth: '320px' }}

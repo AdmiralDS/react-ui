@@ -8,7 +8,7 @@ import type { TableProps, Column } from '#src/components/Table';
 import { Button } from './Button';
 
 const FilterDropdownContainer = styled(StyledDropdownContainer)`
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
 `;
 
 export interface FilterCompProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'> {

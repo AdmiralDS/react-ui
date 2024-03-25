@@ -4,50 +4,54 @@ import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes';
 
 export const styleDisabledMixin = css`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   user-select: none;
 `;
 
 export const styleColorMixin = css<{ $appearance?: AppearanceLink }>`
   color: ${({ theme, $appearance }) =>
-    $appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
+    $appearance === 'secondary'
+      ? `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`
+      : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   & *[fill^='#'] {
     fill: ${({ theme, $appearance }) =>
-      $appearance === 'secondary' ? theme.color['Neutral/Neutral 90'] : theme.color['Primary/Primary 60 Main']};
+      $appearance === 'secondary'
+        ? `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`
+        : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
 `;
 
 export const styleMixin = css`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 export const styleEventMixin = css`
   &:hover {
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
   &:focus {
-    color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
-    outline-color: ${({ theme }) => theme.color['Primary/Primary 70']};
+    outline-color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:active {
-    color: ${({ theme }) => theme.color['Primary/Primary 80']};
+    color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 80']};
+      fill: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     }
   }
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 `;
 

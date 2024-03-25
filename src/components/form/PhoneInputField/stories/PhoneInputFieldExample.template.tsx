@@ -9,8 +9,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: PhoneInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: PhoneInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
     (acc, key) => {
       if (props[key] !== undefined) acc[key] = props[key];
@@ -35,7 +36,7 @@ export const PhoneInputFieldExampleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <PhoneInputField
         data-container-id="phoneInputFieldIdOne"
         {...cleanProps}

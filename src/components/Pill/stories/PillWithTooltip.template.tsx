@@ -9,7 +9,7 @@ const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const WrapperVertical = styled.div`
@@ -21,8 +21,8 @@ const WrapperVertical = styled.div`
 `;
 
 const StyledPill = styled(Pill)`
-  background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
-  color: ${(p) => p.theme.color['Special/Static White']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 
 const StyledPillWithTooltipHoc = TooltipHoc(StyledPill);
@@ -33,7 +33,10 @@ const LabelWrapper = styled.div`
   white-space: nowrap;
 `;
 
-export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderRadiusType }) => {
+export const PillWithTooltipTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -72,7 +75,7 @@ export const PillWithTooltipTemplate = (props: any & { themeBorderKind?: BorderR
   }, [setTooltipVisible]);
   //debugger;
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
         <Desc>
           В случаях ограниченного пространства задавайте максимальную ширину компонента, подсвечивая полный текст при

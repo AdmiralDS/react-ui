@@ -69,14 +69,16 @@ const items = [
   },
 ];
 
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
+
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
   width: fit-content;
   margin: 10px;
   display: inline-block;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -90,7 +92,7 @@ const StyledMenuItem = styled(MenuItem)`
 
 const StyledAdditionalText = styled.div`
   ${typography['Caption/Caption 1']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 `;
 

@@ -92,8 +92,9 @@ function parse(str = ''): Date[] {
 export const DateInputPickMonthTemplate = ({
   placeholder,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [currentActiveView, setCurrentActiveView] = useState<'YEAR' | 'MONTH'>('MONTH');
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
   const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
@@ -135,7 +136,7 @@ export const DateInputPickMonthTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DateInput
         {...props}
         handleInput={dateInputHandle}

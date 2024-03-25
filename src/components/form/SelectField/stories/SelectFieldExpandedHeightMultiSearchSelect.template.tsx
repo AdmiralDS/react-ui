@@ -6,7 +6,7 @@ import { Option, SelectField } from '@admiral-ds/react-ui';
 import type { SearchSelectFieldProps } from '@admiral-ds/react-ui';
 
 const containerContrastBorder = css`
-  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+  border: dashed 2px var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const SelectFieldExpandedHeightMultiSearchSelectTemplate = (props: SearchSelectFieldProps) => {

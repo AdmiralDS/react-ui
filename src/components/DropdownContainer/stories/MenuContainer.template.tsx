@@ -8,12 +8,12 @@ import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/Car
 
 const StyledAdditionalText = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 `;
 
 const containerContrastBorder = css`
-  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+  border: dashed 2px var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const Wrapper = styled.div`

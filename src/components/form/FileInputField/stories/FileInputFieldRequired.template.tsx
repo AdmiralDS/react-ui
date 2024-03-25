@@ -12,8 +12,9 @@ export const FileInputFieldRequiredTemplate = ({
   label = 'Обязательно для заполнения',
   required = true,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FileInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: FileInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
@@ -109,7 +110,7 @@ export const FileInputFieldRequiredTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div style={{ width: '480px' }}>
         <FileInputField
           {...props}

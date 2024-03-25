@@ -34,7 +34,7 @@ const IconContainer = styled.div<{ $dimension: MenuButtonProps['dimension'] }>`
   margin-right: 8px;
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 

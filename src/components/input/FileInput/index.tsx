@@ -42,7 +42,7 @@ const Icon = styled(AttachFileOutline)<{ $dimension?: FileInputDimension }>`
   flex-shrink: 0;
 
   > * {
-    fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 
@@ -51,12 +51,18 @@ const LabelM = styled(Label)`
   display: flex;
 `;
 const Description = styled.div<{ disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
   ${typography['Body/Body 1 Long']};
 `;
 
 const TitleText = styled.div<{ $dimension?: FileInputDimension; disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
   ${(p) => (p.$dimension === 'xl' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   ${(p) => p.$dimension === 'xl' && titleXL}
 `;
@@ -69,7 +75,7 @@ const FocusBorder = styled.div`
   right: -3px;
   pointer-events: none;
   overflow: visible;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 const StyledInput = styled.input`
@@ -84,7 +90,7 @@ const StyledInput = styled.input`
   opacity: 0;
   cursor: pointer;
   &:focus:focus-visible ~ ${FocusBorder} {
-    outline: ${(p) => `2px solid ${p.theme.color['Primary/Primary 60 Main']}`};
+    outline: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 
@@ -99,8 +105,8 @@ const InputWrapper = styled.div<{ disabled?: boolean; $dimension: FileInputDimen
   position: relative;
   display: flex;
   align-items: center;
-  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   pointer-events: all;
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
   ${(p) => (p.$dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};

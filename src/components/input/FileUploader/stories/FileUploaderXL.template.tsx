@@ -5,12 +5,13 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const FileUploaderXLTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: FileUploaderProps & { themeBorderKind?: BorderRadiusType }) => {
+}: FileUploaderProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const accept = ['image/*', '.pdf', 'application/json'];
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <FileUploader
         {...props}
         accept={accept.join(', ')}

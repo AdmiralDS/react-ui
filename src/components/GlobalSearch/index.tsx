@@ -17,6 +17,7 @@ import { Menu } from '#src/components/Menu';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderProps } from '#src/components/input/InputEx';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
@@ -32,9 +33,9 @@ const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
 
 const Drop = styled(DropdownContainer)`
   padding: 8px 0px;
-  ${(p) => p.theme.shadow['Shadow 08']}
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -44,7 +45,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   align-items: center;
 
   & > svg {
-    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     display: block;
     width: ${iconSizeValue}px;
 
@@ -54,7 +55,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
 
     &:focus-visible {
       outline-offset: 2px;
-      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
 `;
@@ -65,9 +66,9 @@ const Container = styled.div`
   gap: 8px;
   align-items: stretch;
   flex: 1 0 0;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
-  background: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   height: 40px;
   padding-left: 16px;
@@ -104,19 +105,19 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0;
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   &&&:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {
@@ -125,15 +126,15 @@ const Input = styled.input<ExtraProps>`
   }
 
   &&&:user-invalid + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   &&&:user-invalid:hover:not(:disabled) + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
   &&&:user-invalid:focus:not(:disabled) + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   ${ieFixes}
@@ -141,12 +142,14 @@ const Input = styled.input<ExtraProps>`
 
 const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
-  border-right: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
+  border-right: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-right: 8px;
   margin-right: 8px;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   white-space: nowrap;
 `;
 
@@ -157,11 +160,11 @@ const SubmitButton = styled.div`
   align-items: flex-start;
   gap: 8px;
 
-  background: ${(props) => props.theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 
-  color: ${(props) => props.theme.color['Special/Static White']};
+  color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   &&& *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 
   &:hover {

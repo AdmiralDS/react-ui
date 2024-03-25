@@ -4,8 +4,8 @@ import { Link, typography } from '@admiral-ds/react-ui';
 import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 
 const Title = styled.div`
-  ${typography['Main/XS-bold']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  ${typography['Header/H6']}
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin-bottom: 20px;
 `;
 

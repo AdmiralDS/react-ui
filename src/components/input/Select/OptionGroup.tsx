@@ -13,7 +13,7 @@ export interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
 
 const Category = styled(OptionWrapper)`
   font-weight: 500;
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   user-select: none;
 `;
 

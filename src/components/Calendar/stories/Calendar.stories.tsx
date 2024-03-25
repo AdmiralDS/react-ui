@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import type { CalendarPropType } from '@admiral-ds/react-ui';
 import { Calendar, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -82,7 +83,10 @@ export default {
 } as Meta<typeof Calendar>;
 
 //<editor-fold desc="Пример календаря с выбором даты>">
-const CalendarSimpleStory: StoryFn<typeof Calendar> = (props) => <CalendarSimpleTemplate {...props} />;
+const CalendarSimpleStory: StoryFn<typeof Calendar> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CalendarSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CalendarSimple = {
   render: CalendarSimpleStory,
@@ -278,7 +282,10 @@ export const SimpleWithSetActiveViewWithoutDay = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с подсветкой выходных, праздничный и специальных дат">
-const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (props) => <SimpleWithSpecialDatesTemplate {...props} />;
+const SimpleWithSpecialDatesStory: StoryFn<typeof Calendar> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SimpleWithSpecialDatesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SimpleWithSpecialDates = {
   render: SimpleWithSpecialDatesStory,

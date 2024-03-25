@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import {
   DateField,
@@ -151,7 +152,10 @@ export default {
 } as Meta<typeof DateField>;
 
 //<editor-fold desc="DateField example">
-const DateFieldBaseStory: StoryFn<typeof DateField> = (props) => <DateFieldBaseTemplate {...props} />;
+const DateFieldBaseStory: StoryFn<typeof DateField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateFieldBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateFieldBase = {
   render: DateFieldBaseStory,

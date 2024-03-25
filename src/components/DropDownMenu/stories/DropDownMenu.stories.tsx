@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { DropDownMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -74,9 +75,10 @@ export default {
 } as Meta<typeof DropDownMenu>;
 
 //<editor-fold desc="Базовый пример">
-const BaseDropDownStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => (
-  <BaseDropDownTemplate targetRef={targetRef} {...props} />
-);
+const BaseDropDownStory: StoryFn<typeof DropDownMenu> = ({ targetRef, ...props }) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <BaseDropDownTemplate targetRef={targetRef} CSSCustomProps={CSSCustomProps} {...props} />;
+};
 
 export const BaseDropDown = {
   render: BaseDropDownStory,

@@ -9,7 +9,7 @@ const AmountCell = styled.div`
 
   &[data-disabled='true'] {
     & > * {
-      color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

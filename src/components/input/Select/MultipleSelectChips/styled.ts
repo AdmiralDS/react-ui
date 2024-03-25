@@ -45,7 +45,7 @@ const disabledChipStyle = css`
   // оставлено, чтоб обрабатывался onClick
   pointer-events: auto;
   &:hover {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;
 
@@ -63,6 +63,6 @@ export const StyledChip = styled(Chips)`
   // По дизайну при наведении цвет чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
   // то чипс получается clickable и при ховере меняет цвет
   &:hover {
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   }
 `;

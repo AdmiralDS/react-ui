@@ -7,7 +7,7 @@ export const PositionedPortalContainer = styled.div`
   pointer-events: none;
   position: fixed;
   overflow: visible;
-  z-index: ${({ theme }) => theme.zIndex.dropdown};
+  z-index: var(--admiral-z-index-dropdown, ${({ theme }) => theme.zIndex.dropdown});
 `;
 
 export interface PositionInPortalProps {

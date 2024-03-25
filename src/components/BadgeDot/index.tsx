@@ -6,18 +6,18 @@ const getBackground = css<{ $appearance: BadgeDotAppearance }>`
   ${({ theme, $appearance }) => {
     switch ($appearance) {
       case 'info':
-        return theme.color['Primary/Primary 60 Main'];
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
       case 'error':
-        return theme.color['Error/Error 60 Main'];
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
       case 'success':
-        return theme.color['Success/Success 50 Main'];
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
       case 'warning':
-        return theme.color['Warning/Warning 50 Main'];
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
       case 'attention':
-        return theme.color['Attention/Attention 50 Main'];
+        return `var(--admiral-color-Attention_Attention50Main, ${theme.color['Attention/Attention 50 Main']})`;
       case 'neutral':
       default:
-        return theme.color['Neutral/Neutral 50'];
+        return `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`;
     }
   }}
 `;

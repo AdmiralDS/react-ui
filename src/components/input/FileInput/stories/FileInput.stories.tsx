@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { FileInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -98,9 +99,10 @@ export default {
 } as Meta<typeof FileInput>;
 
 //<editor-fold desc="FileInput XL">
-const FileInputDimensionXLStory: StoryFn<typeof FileInput> = ({ width = '480px', dimension = 'xl', ...props }) => (
-  <FileInputBaseTemplate {...props} width={width} dimension={dimension} />
-);
+const FileInputDimensionXLStory: StoryFn<typeof FileInput> = ({ width = '480px', dimension = 'xl', ...props }) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FileInputBaseTemplate {...props} width={width} dimension={dimension} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FileInputDimensionXL = {
   render: FileInputDimensionXLStory,

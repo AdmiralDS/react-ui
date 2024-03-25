@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { MultiButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -122,7 +123,10 @@ export default {
 } as Meta<typeof MultiButton>;
 
 //<editor-fold desc="MultiButton. Внешний вид.">
-const MultiButtonAppearanceStory: StoryFn<typeof MultiButton> = (props) => <MultiButtonAppearanceTemplate {...props} />;
+const MultiButtonAppearanceStory: StoryFn<typeof MultiButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MultiButtonAppearanceTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MultiButtonAppearance = {
   render: MultiButtonAppearanceStory,
@@ -160,7 +164,10 @@ export const MultiButtonDisabled = {
 //</editor-fold>
 
 //<editor-fold desc="MultiButton с иконкой.">
-const MultiButtonIconStory: StoryFn<typeof MultiButton> = (props) => <MultiButtonIconTemplate {...props} />;
+const MultiButtonIconStory: StoryFn<typeof MultiButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MultiButtonIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const MultiButtonIcon = {
   render: MultiButtonIconStory,

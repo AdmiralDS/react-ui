@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { EditModeArea, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { EditModeAreaPlaygroundTemplate } from './EditModeAreaPlayground.template';
@@ -100,7 +101,10 @@ export default {
 } as Meta<typeof EditModeArea>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof EditModeArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <EditModeAreaPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const Playground = {
   render: PlaygroundStory,
@@ -117,7 +121,10 @@ export const Playground = {
 //</editor-fold>
 
 //<editor-fold desc="Варианты размеров и начертания компонента">
-const DimensionStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaDimensionTemplate {...props} />;
+const DimensionStory: StoryFn<typeof EditModeArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <EditModeAreaDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DimensionExample = {
   render: DimensionStory,
@@ -141,7 +148,10 @@ export const DimensionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Компонент в состоянии disabled">
-const DisabledStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaDisabledTemplate {...props} />;
+const DisabledStory: StoryFn<typeof EditModeArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <EditModeAreaDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DisabledExample = {
   render: DisabledStory,
@@ -160,7 +170,10 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="Стилизация компонента">
-const CssMixinStory: StoryFn<typeof EditModeArea> = (props) => <EditModeAreaCssMixinTemplate {...props} />;
+const CssMixinStory: StoryFn<typeof EditModeArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <EditModeAreaCssMixinTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CssMixinExample = {
   render: CssMixinStory,

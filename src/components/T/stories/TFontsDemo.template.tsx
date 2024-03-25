@@ -19,17 +19,17 @@ const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  color: ${({ theme }) => theme.color[DefaultFontColorName]};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
 
   th,
   td[data-label] {
     text-align: left;
     padding: 8px 60px 8px 8px;
-    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 70']};
+    border-bottom: 1px solid var(--admiral-color-Neutral_Neutral70, ${(p) => p.theme.color['Neutral/Neutral 70']});
   }
   th {
     ${typography['Header/H3']}
-    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   td[data-label]:last-child {
     padding: 8px;
@@ -48,7 +48,7 @@ const FontDesc = styled.table`
     white-space: nowrap;
   }
   td:first-child {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     padding-right: 16px;
   }
 `;
@@ -73,7 +73,12 @@ const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, r
   };
   return (
     <CopyOutlineWrapper ref={ref}>
-      <CopyOutline width={16} height={16} onClick={copyToClipboard} fill={theme.color['Neutral/Neutral 90']} />
+      <CopyOutline
+        width={16}
+        height={16}
+        onClick={copyToClipboard}
+        fill={`var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`}
+      />
     </CopyOutlineWrapper>
   );
 });

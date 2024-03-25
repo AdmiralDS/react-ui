@@ -18,6 +18,7 @@ import {
   underlineRow,
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
 import { ResizerWrapper } from './RowWidthResizer';
 
@@ -28,7 +29,7 @@ export const TableContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
@@ -44,7 +45,9 @@ export const StickyGroupRow = styled.div`
 
 export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   background: ${({ theme, $greyHeader }) =>
-    $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+    $greyHeader
+      ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+      : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
     box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
@@ -96,9 +99,11 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
       right: 0;
       height: 100%;
       background: ${({ theme, $greyHeader }) =>
-        $greyHeader ? theme.color['Neutral/Neutral 05'] : theme.color['Neutral/Neutral 00']};
+        $greyHeader
+          ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+          : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
       width: ${({ $scrollbar }) => $scrollbar}px;
-      border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
+      border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
     }
     & > div.tr {
       overflow-y: scroll;
@@ -109,7 +114,7 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
     $greyHeader &&
     css`
       & > div.tr {
-        background: ${({ theme }) => theme.color['Neutral/Neutral 05']};
+        background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
       }
     `}
 `;
@@ -122,7 +127,7 @@ export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   ${headerStyle};
 
   & > * {
-    border-bottom: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 20']};
+    border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -149,7 +154,7 @@ export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
       left: -6px;
       right: -6px;
       border-radius: 50%;
-      background: ${({ theme }) => theme.color['Opacity/Hover']};
+      background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
   ${({ disabled }) => disabled && 'pointer-events: none;'}
@@ -177,7 +182,10 @@ export const SortIcon = styled(ArrowUpOutline)<{ $sort: 'asc' | 'desc' | 'initia
   margin: 2px 0;
 
   & *[fill^='#'] {
-    fill: ${({ theme, $sort }) => ($sort === 'initial' ? 'transparent' : theme.color['Primary/Primary 60 Main'])};
+    fill: ${({ theme, $sort }) =>
+      $sort === 'initial'
+        ? 'transparent'
+        : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
   ${({ $sort }) => ($sort === 'desc' ? 'transform: rotate(180deg);' : '')}
 `;
@@ -186,7 +194,7 @@ export const SortOrder = styled.div`
   position: absolute;
   top: 1px;
   right: 0;
-  font-family: 'VTB Group UI', sans-serif;
+  font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
   font-style: normal;
   font-weight: 500;
   font-size: 8px;
@@ -194,7 +202,7 @@ export const SortOrder = styled.div`
   font-feature-settings:
     'tnum' on,
     'lnum' on;
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
@@ -203,7 +211,9 @@ export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   cursor: pointer;
   & *[fill^='#'] {
     fill: ${({ theme, $disabled }) =>
-      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Neutral/Neutral 50']};
+      $disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   }
 `;
 
@@ -329,12 +339,16 @@ export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>
   &:hover {
     ${SortIcon} *[fill^='#'] {
       fill: ${({ theme, $sort }) =>
-        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+        $sort === 'initial'
+          ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
+          : `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`};
     }
 
     ${SortOrder} {
       color: ${({ theme, $sort }) =>
-        $sort === 'initial' ? theme.color['Neutral/Neutral 50'] : theme.color['Primary/Primary 70']};
+        $sort === 'initial'
+          ? `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`
+          : `var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']})`};
     }
   }
 `;
@@ -370,14 +384,14 @@ const rowHoverMixin = css`
   cursor: pointer;
   & > .tr-simple > *,
   & ${OverflowMenuWrapper} {
-    background: ${({ theme }) => theme.color['Primary/Primary 10']};
+    background: var(--admiral-color-Primary_Primary10, ${(p) => p.theme.color['Primary/Primary 10']});
   }
 `;
 
 const groupRowHoverMixin = css`
   &[data-groupover='true'] > .tr-simple > *,
   & ${OverflowMenuWrapper} {
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
 
@@ -393,7 +407,7 @@ export const Row = styled.div<{
   display: flex;
   flex-direction: column;
   min-width: fit-content;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   ${(p) => (p.$isGroup ? groupRowStyle : rowStyle)}
   ${({ disabled }) => disabled && disabledRow}
   ${({ $underline }) => $underline && underlineRow}
@@ -458,7 +472,7 @@ export const ExpandedRowContent = styled.div`
 
 export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 `;
 
 const getTechColumnsWidth = (
@@ -499,9 +513,9 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   visibility: hidden;
   display: flex;
   max-width: 200px;
-  ${({ theme }) => theme.shadow['Shadow 08']}
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ $dimension }) =>
     $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
   padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 40)}px;
@@ -525,8 +539,8 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   align-items: center;
   max-width: 288px;
-  ${({ theme }) => theme.shadow['Shadow 08']}
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 48)}px;
   ${rowStyle}
 

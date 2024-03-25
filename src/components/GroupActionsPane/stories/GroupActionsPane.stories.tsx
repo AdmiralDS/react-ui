@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { GroupActionsPane } from '@admiral-ds/react-ui';
@@ -78,7 +79,10 @@ export default {
 } as Meta<typeof GroupActionsPane>;
 
 //<editor-fold desc="Simple">
-const PaneSimpleStory: StoryFn<typeof GroupActionsPane> = (props) => <PaneSimpleTemplate {...props} />;
+const PaneSimpleStory: StoryFn<typeof GroupActionsPane> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PaneSimpleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const PaneSimpleExample = {
   render: PaneSimpleStory,

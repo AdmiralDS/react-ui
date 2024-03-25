@@ -7,7 +7,7 @@ import type { HighlightFormat } from '#src/components/common/utils/getTextHighli
 import { getTextHighlightMeta } from '#src/components/common/utils/getTextHighlightMeta';
 
 const Highlight = styled.span`
-  color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 function getHighlightedText(text = '', highlight = '', highlightFormat: HighlightFormat = 'wholly') {

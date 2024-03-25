@@ -14,8 +14,8 @@ const PREFIX_OPTIONS = ['prefix One', 'prefix Two', 'prefix Three'];
 const SUFFIX_OPTIONS = ['One', 'Two', 'Three'];
 
 const CustomValueStyle = styled.div`
-  color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
-  border: ${({ theme }) => theme.color['Primary/Primary 60 Main']} 1px dashed;
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  border: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) 1px dashed;
 `;
 
 const CustomMenuItem = styled(MenuItem)`
@@ -30,15 +30,16 @@ function customOptionRender({ value, ...props }: RenderPropsType<ReactNode> & Me
 }
 
 const containerContrastBorder = css`
-  border: dashed 2px ${(p) => p.theme.color['Neutral/Neutral 90']};
+  border: dashed 2px var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const InputExCustomTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: InputExProps & { themeBorderKind?: BorderRadiusType }) => {
+}: InputExProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,7 @@ export const InputExCustomTemplate = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <InputEx
         {...props}
         containerRef={inputRef}

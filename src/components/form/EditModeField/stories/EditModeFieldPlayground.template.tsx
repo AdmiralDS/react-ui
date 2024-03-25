@@ -8,8 +8,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const EditModeFieldPlaygroundTemplate = ({
   value = 'Admin',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: EditModeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +20,7 @@ export const EditModeFieldPlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <EditModeField
         data-container-id="editModeFieldIdOne"
         {...props}

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { GlobalSearch } from '@admiral-ds/react-ui';
@@ -56,11 +57,14 @@ export default {
 } as Meta<typeof GlobalSearch>;
 
 const queryClient = new QueryClient();
-const PaneSimpleStory: StoryFn<typeof GlobalSearch> = (props) => (
-  <QueryClientProvider client={queryClient}>
-    <BasicExampleTemplate {...props} />
-  </QueryClientProvider>
-);
+const PaneSimpleStory: StoryFn<typeof GlobalSearch> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BasicExampleTemplate {...props} CSSCustomProps={CSSCustomProps} />
+    </QueryClientProvider>
+  );
+};
 
 export const PaneSimpleExample = {
   render: PaneSimpleStory,

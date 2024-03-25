@@ -47,19 +47,33 @@ const getIcon = (status: NotificationStatus) => {
 
 const backGroundColorMixin = css<{ $status?: NotificationStatus }>`
   background-color: ${({ theme, $status }) => {
-    if ($status === 'warning') return theme.color['Warning/Warning 10'];
-    if ($status === 'error') return theme.color['Error/Error 10'];
-    if ($status === 'success') return theme.color['Success/Success 10'];
-    return theme.color['Primary/Primary 10'];
+    switch ($status) {
+      case 'warning':
+        return `var(--admiral-color-Warning_Warning10, ${theme.color['Warning/Warning 10']})`;
+      case 'error':
+        return `var(--admiral-color-Error_Error10, ${theme.color['Error/Error 10']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success10, ${theme.color['Success/Success 10']})`;
+      case 'info':
+      default:
+        return `var(--admiral-color-Primary_Primary10, ${theme.color['Primary/Primary 10']})`;
+    }
   }};
 `;
 
 const borderColorMixin = css<{ $status?: NotificationStatus }>`
   border-color: ${({ theme, $status }) => {
-    if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
-    if ($status === 'error') return theme.color['Error/Error 60 Main'];
-    if ($status === 'success') return theme.color['Success/Success 50 Main'];
-    return theme.color['Primary/Primary 60 Main'];
+    switch ($status) {
+      case 'warning':
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+      case 'error':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      case 'info':
+      default:
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+    }
   }};
 `;
 
@@ -71,7 +85,7 @@ const NotificationWrapper = styled.div<{
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   padding: 12px 44px 12px 52px;
   ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 16px;')}
   ${(p) => (p.$isClosable ? '' : 'padding-right: 16px;')}
@@ -89,13 +103,13 @@ const Content = styled.div`
 
 const Title = styled.div`
   ${typography['Subtitle/Subtitle 3']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   margin-bottom: 4px;
 `;
 
 const CustomBody = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const CloseButton = styled(CloseIconPlacementButton)`
@@ -115,10 +129,17 @@ const IconWrapper = styled.div<{ $status?: NotificationStatus }>`
     height: 24px;
     & *[fill^='#'] {
       fill: ${({ theme, $status }) => {
-        if ($status === 'warning') return theme.color['Warning/Warning 50 Main'];
-        if ($status === 'error') return theme.color['Error/Error 60 Main'];
-        if ($status === 'success') return theme.color['Success/Success 50 Main'];
-        return theme.color['Primary/Primary 60 Main'];
+        switch ($status) {
+          case 'warning':
+            return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+          case 'error':
+            return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+          case 'success':
+            return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+          case 'info':
+          default:
+            return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+        }
       }};
     }
   }

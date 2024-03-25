@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { Tooltip, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -100,7 +101,10 @@ export default {
 } as Meta<typeof Tooltip>;
 
 //<editor-fold desc="Базовый пример">
-const TooltipBaseStory: StoryFn<typeof Tooltip> = (props) => <TooltipBaseTemplate {...props} />;
+const TooltipBaseStory: StoryFn<typeof Tooltip> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipBaseExample = {
   render: TooltipBaseStory,
@@ -119,7 +123,10 @@ export const TooltipBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с MenuButton">
-const TooltipMenuButtonStory: StoryFn<typeof Tooltip> = (props) => <TooltipMenuButtonTemplate {...props} />;
+const TooltipMenuButtonStory: StoryFn<typeof Tooltip> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipMenuButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipMenuButtonExample = {
   render: TooltipMenuButtonStory,
@@ -138,7 +145,10 @@ export const TooltipMenuButtonExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с задержкой в появлении">
-const TooltipDelayStory: StoryFn<typeof Tooltip> = (props) => <TooltipDelayTemplate {...props} />;
+const TooltipDelayStory: StoryFn<typeof Tooltip> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipDelayTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipDelayExample = {
   render: TooltipDelayStory,
@@ -157,7 +167,10 @@ export const TooltipDelayExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с получением ref тултипа">
-const TooltipRefStory: StoryFn<typeof Tooltip> = (props) => <TooltipRefTemplate {...props} />;
+const TooltipRefStory: StoryFn<typeof Tooltip> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipRefTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipRefExample = {
   render: TooltipRefStory,
@@ -176,7 +189,10 @@ export const TooltipRefExample = {
 //</editor-fold>
 
 //<editor-fold desc="Пример с получением ref тултипа">
-const TooltipCustomStory: StoryFn<typeof Tooltip> = (props) => <TooltipCustomTemplate {...props} />;
+const TooltipCustomStory: StoryFn<typeof Tooltip> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TooltipCustomTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TooltipCustomExample = {
   render: TooltipCustomStory,

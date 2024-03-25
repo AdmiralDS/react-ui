@@ -6,9 +6,9 @@ const MobileWrapper = styled.div`
   width: 320px;
   padding: 20px 8px 80px;
   box-sizing: border-box;
-  border: ${(p) => `8px solid ${p.theme.color['Neutral/Neutral 50']}`};
+  border: 8px solid var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   border-bottom-style: none;
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
   margin-top: 20px;

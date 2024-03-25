@@ -9,10 +9,11 @@ export const SliderInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SliderInputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SliderInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <SliderInputField
         data-container-id="sliderInputFieldIdOne"
         {...props}

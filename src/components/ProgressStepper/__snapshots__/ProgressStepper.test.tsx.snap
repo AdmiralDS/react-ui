@@ -14,12 +14,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -30,25 +30,25 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -57,12 +57,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -120,12 +120,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -136,25 +136,25 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -163,12 +163,12 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -281,12 +281,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -297,25 +297,25 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -324,12 +324,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -387,12 +387,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -403,25 +403,25 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -430,12 +430,12 @@ exports[`Spinner should render component with custom stepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -548,12 +548,12 @@ exports[`Spinner should render component without nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -563,25 +563,25 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -633,12 +633,12 @@ exports[`Spinner should render component without nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -648,25 +648,25 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -773,12 +773,12 @@ exports[`Spinner should render default component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -789,25 +789,25 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -816,12 +816,12 @@ exports[`Spinner should render default component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -879,12 +879,12 @@ exports[`Spinner should render default component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -895,25 +895,25 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -922,12 +922,12 @@ exports[`Spinner should render default component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1040,12 +1040,12 @@ exports[`Spinner should render mobile component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -1055,25 +1055,25 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1082,12 +1082,12 @@ exports[`Spinner should render mobile component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1145,12 +1145,12 @@ exports[`Spinner should render mobile component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: #D5D8DE;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c5 {
   width: 50%;
-  background-color: #0062FF;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
@@ -1160,25 +1160,25 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c2 {
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1187,12 +1187,12 @@ exports[`Spinner should render mobile component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: #717681;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }

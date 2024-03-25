@@ -24,7 +24,7 @@ const collapsedMixin = css<{ $dimension?: InputDimension }>`
   white-space: nowrap;
   z-index: 1;
   &::after {
-    background-color: ${(props) => props.theme.color['Neutral/Neutral 20']};
+    background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -45,7 +45,7 @@ const InputWrapper = styled.div<{ $dimension?: InputDimension; $collapsed?: bool
     width: calc(100% - 4px);
     height: 2px;
     background-color: ${({ theme, $visibleInput }) =>
-      $visibleInput ? theme.color['Primary/Primary 60 Main'] : 'none'};
+      $visibleInput ? `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})` : 'none'};
   }
 
   ${({ $collapsed }) => $collapsed && collapsedMixin}
@@ -59,14 +59,14 @@ const StyledInput = styled.input<{ $dimension?: InputDimension; $visible?: boole
   border: none;
   background-color: transparent;
   padding: ${({ $dimension }) => ($dimension === 's' ? '0 12px' : '0 16px')};
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   box-sizing: border-box;
   width: 100%;
   text-overflow: ellipsis;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
 
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 

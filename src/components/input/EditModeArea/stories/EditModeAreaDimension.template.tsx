@@ -12,8 +12,9 @@ const Separator = styled.div`
 export const EditModeAreaDimensionTemplate = ({
   value = 'Привет!',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: EditModeAreaProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeAreaProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +23,7 @@ export const EditModeAreaDimensionTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T font="Body/Body 1 Long" as="div">
         Dimension - s
       </T>

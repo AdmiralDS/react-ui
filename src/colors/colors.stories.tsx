@@ -21,15 +21,15 @@ const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${typography['Body/Body 2 Long']}
 `;
 const ColorRow = styled.div`
   display: flex;
   & > * {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 00']};
-    color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+    background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+    color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   }
 `;
 const ColorComponent = styled.div`
@@ -45,7 +45,7 @@ const ColorDescription = styled.div`
   margin-right: 104px;
 `;
 const ColorProps = styled.div`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   margin-right: 16px;
   white-space: nowrap;
 `;
@@ -88,6 +88,7 @@ const Category = ({ categoryName }: { categoryName: string }) => {
       <Title>{categoryName == 'Opacity' ? 'Overlay opacity' : categoryName}</Title>
       <SubTitle>{COLORS_DESC[categoryName]}</SubTitle>
       {colors.map((colorName: keyof Color) => {
+        const cssCustomProp = `--admiral-color-${colorName.replace('/', '_').replaceAll(' ', '')}`;
         return (
           <ThemeProvider
             theme={
@@ -110,6 +111,7 @@ const Category = ({ categoryName }: { categoryName: string }) => {
                 <ColorDescription>{COLORS[categoryName][colorName].description}</ColorDescription>
                 <ColorProps>
                   <ColorProp>Token:</ColorProp>
+                  <ColorProp>CSS Custom Prop:</ColorProp>
                   <ColorProp>Name:</ColorProp>
                   <ColorProp>Hex:</ColorProp>
                   <ColorProp>Contrast:</ColorProp>
@@ -118,6 +120,10 @@ const Category = ({ categoryName }: { categoryName: string }) => {
                   <ColorProp>
                     {colorName}
                     <CopyButton renderContent={() => 'Копировать цветовой токен'} text={colorName} />
+                  </ColorProp>
+                  <ColorProp>
+                    {cssCustomProp}
+                    <CopyButton renderContent={() => 'Копировать название css custom property'} text={cssCustomProp} />
                   </ColorProp>
                   <ColorProp>{COLORS[categoryName][colorName].name}</ColorProp>
                   <ColorProp>{theme.color[colorName]}</ColorProp>

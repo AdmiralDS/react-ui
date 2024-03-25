@@ -16,11 +16,11 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 [data-dimension='m'] .c9 {
@@ -66,28 +66,28 @@ exports[`Spinner should render component with dimension m 1`] = `
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c4:hover {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c4:active {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -101,17 +101,17 @@ exports[`Spinner should render component with dimension m 1`] = `
 
 [data-dimension='m'] .c4 {
   min-height: 38px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c2>.c3 .c8 {
@@ -119,26 +119,26 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c11 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 [data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -148,7 +148,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid #D5D8DE;
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c0>.c1:first-child .c5 {
@@ -156,7 +156,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c10 {
@@ -303,11 +303,11 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 [data-dimension='m'] .c9 {
@@ -353,28 +353,28 @@ exports[`Spinner should render component with dimension m 1`] = `
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c4:hover {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c4:active {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -388,17 +388,17 @@ exports[`Spinner should render component with dimension m 1`] = `
 
 [data-dimension='m'] .c4 {
   min-height: 38px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c2>.c3 .c8 {
@@ -406,26 +406,26 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c11 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 [data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -435,7 +435,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid #D5D8DE;
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c0>.c1:first-child .c5 {
@@ -443,7 +443,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c10 {
@@ -645,11 +645,11 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 [data-dimension='m'] .c9 {
@@ -695,28 +695,28 @@ exports[`Spinner should render default component 1`] = `
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c4:hover {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c4:active {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -730,17 +730,17 @@ exports[`Spinner should render default component 1`] = `
 
 [data-dimension='m'] .c4 {
   min-height: 38px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c2>.c3 .c8 {
@@ -748,26 +748,26 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c11 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 [data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -777,7 +777,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid #D5D8DE;
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c0>.c1:first-child .c5 {
@@ -785,7 +785,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c10 {
@@ -932,11 +932,11 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: #717681;
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: #B0B5BD;
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 [data-dimension='m'] .c9 {
@@ -982,28 +982,28 @@ exports[`Spinner should render default component 1`] = `
   padding: 0;
   cursor: pointer;
   overflow: visible;
-  color: #23262D;
-  font-family: 'VTB Group UI',sans-serif;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c4:hover {
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c4:active {
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c4:focus:before {
   position: absolute;
   content: '';
-  border: 2px solid #0062FF;
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   top: -1px;
   left: 0;
   bottom: -1px;
@@ -1017,17 +1017,17 @@ exports[`Spinner should render default component 1`] = `
 
 [data-dimension='m'] .c4 {
   min-height: 38px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 550;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+  font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+  line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 .c2 {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c2>.c3 .c8 {
@@ -1035,26 +1035,26 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c11 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+  font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 [data-dimension='m'] .c11 {
   padding: 4px 16px 10px 16px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1064,7 +1064,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid #D5D8DE;
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c0>.c1:first-child .c5 {
@@ -1072,7 +1072,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid #D5D8DE;
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
 }
 
 .c10 {

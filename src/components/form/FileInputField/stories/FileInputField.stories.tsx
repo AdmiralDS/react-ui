@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { FileInputField, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { DataAttributesDescription } from '#src/components/form/common';
@@ -80,7 +81,10 @@ export default {
 } as Meta<typeof FileInputField>;
 
 //<editor-fold desc="FileInputField. Example">
-const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => <FileInputFieldBaseTemplate {...props} />;
+const FileInputFieldBaseStory: StoryFn<typeof FileInputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FileInputFieldBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FileInputFieldBase = {
   render: FileInputFieldBaseStory,
@@ -99,9 +103,10 @@ export const FileInputFieldBase = {
 //</editor-fold>
 
 //<editor-fold desc="FileInputField. Required">
-const FileInputFieldRequiredStory: StoryFn<typeof FileInputField> = (props) => (
-  <FileInputFieldRequiredTemplate {...props} />
-);
+const FileInputFieldRequiredStory: StoryFn<typeof FileInputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FileInputFieldRequiredTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FileInputFieldRequired = {
   render: FileInputFieldRequiredStory,

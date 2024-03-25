@@ -3,21 +3,26 @@ import type { FloatingButtonProps } from '../FloatingButton';
 import { Badge as BaseBadge } from '#src/components/Badge';
 import { BadgeDot as BaseBadgeDot } from '#src/components/BadgeDot';
 import { TooltipHoc } from '#src/components/TooltipHOC';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { FloatingButtonMenuProps } from './FloatingButtonMenu';
 
 const focusVisibleStyle = css`
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 `;
 
 const primaryAppearanceMixin = css<{ $disabled: boolean }>`
   background-color: ${({ theme, $disabled }) =>
-    $disabled ? theme.color['Neutral/Neutral 10'] : theme.color['Primary/Primary 60 Main']};
+    $disabled
+      ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
+      : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   & *[fill^='#'] {
     fill: ${({ theme, $disabled }) =>
-      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Special/Static White']};
+      $disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`};
   }
 
   ${({ theme, $disabled }) =>
@@ -25,21 +30,22 @@ const primaryAppearanceMixin = css<{ $disabled: boolean }>`
       ? ''
       : css`
           &:hover {
-            background-color: ${theme.color['Primary/Primary 70']};
+            background-color: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});
           }
 
           &:active {
-            background-color: ${theme.color['Primary/Primary 80']};
+            background-color: var(--admiral-color-Primary_Primary80, ${theme.color['Primary/Primary 80']});
           }
         `}
 `;
 
 const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
-  background-color: ${({ theme, $disabled }) =>
-    $disabled ? theme.color['Special/Elevated BG'] : theme.color['Special/Elevated BG']};
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   & *[fill^='#'] {
     fill: ${({ theme, $disabled }) =>
-      $disabled ? theme.color['Neutral/Neutral 30'] : theme.color['Primary/Primary 60 Main']};
+      $disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
 
   ${({ theme, $disabled }) =>
@@ -47,11 +53,11 @@ const secondaryAppearanceMixin = css<{ $disabled: boolean }>`
       ? ''
       : css`
           &:hover {
-            background-color: ${theme.color['Opacity/Hover']};
+            background-color: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});
           }
 
           &:active {
-            background-color: ${theme.color['Opacity/Press']};
+            background-color: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});
           }
         `}
 `;
@@ -90,7 +96,7 @@ export const FloatingButtonWrapper = styled.button<{
   padding: 0;
   ${dimensionMixin};
   cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   ${focusVisibleStyle}
 `;
 
@@ -124,7 +130,7 @@ export const FloatingButtonContent = styled.div<{
 
 const badgeMixin = css`
   position: absolute;
-  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 00']};
+  border: 1px solid var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
 export const Badge = styled(BaseBadge)`

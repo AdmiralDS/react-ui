@@ -10,9 +10,9 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   height: 24px;
   padding: 3px 7px;
   width: 60px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -29,21 +29,21 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -55,7 +55,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #1BA049;
+  background: var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
 <body>
@@ -82,9 +82,9 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   height: 24px;
   padding: 3px 7px;
   width: 60px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -101,21 +101,21 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c2 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -127,7 +127,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   height: 8px;
   border-radius: 50%;
   margin-right: 6px;
-  background: #1BA049;
+  background: var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
 <div>
@@ -208,9 +208,9 @@ exports[`Tag should render default component 1`] = `
   max-width: 100%;
   height: 24px;
   padding: 3px 7px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -227,21 +227,21 @@ exports[`Tag should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -266,9 +266,9 @@ exports[`Tag should render default component 1`] = `
   max-width: 100%;
   height: 24px;
   padding: 3px 7px;
-  border-radius: 4px;
-  background: #E5E7EB;
-  border: 1px solid #E5E7EB;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -285,21 +285,21 @@ exports[`Tag should render default component 1`] = `
   bottom: -4px;
   left: -4px;
   right: -4px;
-  border-radius: 4px;
-  border: 2px solid #0062FF;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
 .c1 {
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }

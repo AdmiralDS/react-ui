@@ -52,7 +52,7 @@ export const Wrapper = styled.div<{ $underline?: boolean; $mobile?: boolean; $di
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${({ theme, $underline }) => ($underline ? theme.color['Neutral/Neutral 20'] : 'transparent')};
+  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${(p) => (p.$underline ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent')};
   overflow: ${({ $mobile }) => ($mobile ? 'scroll' : 'hidden')};
 
   height: ${({ $dimension }) => ($dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;
@@ -72,7 +72,7 @@ export const Underline = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   height: ${LINE_HEIGHT};
   transition: all 0.2s ease-out;
 `;
@@ -104,7 +104,10 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
   background: transparent;
   appearance: none;
   border: none;
-  color: ${(p) => (p.$selected ? p.theme.color['Neutral/Neutral 90'] : p.theme.color['Neutral/Neutral 50'])};
+  color: ${(p) =>
+    p.$selected
+      ? `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   ${({ $dimension }) => ($dimension === 'm' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   user-select: none;
   cursor: pointer;
@@ -114,7 +117,8 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
     &:before {
       position: absolute;
       content: '';
-      border: ${LINE_HEIGHT} solid ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+      border: ${LINE_HEIGHT} solid
+        var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
       top: 0;
       left: 0;
       bottom: 0;
@@ -130,7 +134,7 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
     display: inline-block;
     flex: 1 0 auto;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
     width: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
     height: ${({ $dimension }) => ($dimension === 'm' ? ICON_SIZE_M : ICON_SIZE_L)}px;
@@ -141,16 +145,16 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
   }
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active:not(:disabled) {
-    background: ${({ theme }) => theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
   &:disabled {
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: default;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
@@ -183,7 +187,9 @@ export const StyledOverflowMenu = styled(OverflowMenu)<{ $isActive: boolean; dim
   & svg {
     & *[fill^='#'] {
       fill: ${({ theme, $isActive }) =>
-        $isActive ? theme.color['Primary/Primary 60 Main'] : theme.color['Neutral/Neutral 50']};
+        $isActive
+          ? `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+          : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
     }
   }
 `;

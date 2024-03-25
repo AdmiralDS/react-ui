@@ -7,17 +7,18 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const ContentArea = styled.div`
   display: flex;
   height: 100%;
-  background: ${({ theme }) => theme.color['Success/Success 20']};
+  background: var(--admiral-color-Success_Success20, ${(p) => p.theme.color['Success/Success 20']});
 `;
 
 export const DrawerMobileTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DrawerProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open mobile drawer</Button>
       <Drawer
         {...props}

@@ -94,3 +94,5 @@ export * from './components/GlobalSearch';
 export * from './components/FloatingButton';
 export * from './components/FloatingButton/FloatingButtonMenu';
 export * from './components/BadgeDot';
+
+export * from './components/CSSCustomProps';

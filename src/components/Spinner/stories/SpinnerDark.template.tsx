@@ -9,7 +9,9 @@ const Layout = styled.div<{
   flex-wrap: wrap;
   padding: 50px;
   background: ${({ theme, $inverse }) =>
-    $inverse ? theme.color[MainPrimaryColorName] : theme.color[DefaultBackgroundColorName]};
+    $inverse
+      ? `var(--admiral-color-Primary_Primary60Main, ${theme.color[MainPrimaryColorName]})`
+      : `var(--admiral-color-Neutral_Neutral00, ${theme.color[DefaultBackgroundColorName]})`};
 
   > * {
     flex: 0 0 auto;

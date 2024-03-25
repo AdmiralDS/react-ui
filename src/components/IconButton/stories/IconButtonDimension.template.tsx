@@ -26,10 +26,11 @@ const WrapperVertical = styled.div`
 
 export const IconButtonDimensionTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: IconButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: IconButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperIconButton>
         <WrapperVertical>
           <T font="Body/Body 1 Long" as="div">

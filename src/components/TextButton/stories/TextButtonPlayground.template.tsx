@@ -13,10 +13,11 @@ const Separator = styled.div`
 
 export const TextButtonPlaygroundTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TextButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TextButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TextButton text="Text Button" iconStart={<AttachFileOutline />} {...props} />
       <Separator />
       <TextButton text="Text Button" iconEnd={<AttachFileOutline />} {...props} />

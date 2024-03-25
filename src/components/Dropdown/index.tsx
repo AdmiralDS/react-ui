@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { keyboardKey } from '../common/keyboardKey';
@@ -16,9 +17,9 @@ const Container = styled.div<{
 }>`
   pointer-events: initial;
   margin: 8px 0;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   flex: 0 0 auto;
   ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf}` : '')};
   opacity: 0;
@@ -162,8 +163,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
           menuFocus === 'firstOption'
             ? getMenuFirstOption()
             : menuFocus === 'lastOption'
-              ? getMenuLastOption()
-              : activeOption || getMenuFirstOption();
+            ? getMenuLastOption()
+            : activeOption || getMenuFirstOption();
         (selectedItem as HTMLElement)?.focus();
       } else {
         const focusedOption = ((containerRef.current && containerRef.current.ownerDocument) || document).activeElement;

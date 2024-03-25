@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TextAreaPlaygroundTemplate } from './TextAreaPlayground.template';
@@ -91,7 +92,10 @@ export default {
   },
 } as Meta<typeof TextArea>;
 
-const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => <TextAreaPlaygroundTemplate {...props} />;
+const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextAreaPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextAreaPlayground = {
   render: TextAreaPlaygroundStory,

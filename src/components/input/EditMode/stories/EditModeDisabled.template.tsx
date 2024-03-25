@@ -8,8 +8,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const EditModeDisabledTemplate = ({
   value = 'Привет!',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: EditModeProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +19,7 @@ export const EditModeDisabledTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <EditMode {...props} value={localValue} onChange={handleChange} disabled />
     </ThemeProvider>
   );

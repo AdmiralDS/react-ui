@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 
 import { FieldSet, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -70,7 +71,10 @@ export default {
 } as Meta<typeof FieldSet>;
 
 //<editor-fold desc="Checkbox Fieldset">
-const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props) => <FieldSetCheckboxTemplate {...props} />;
+const FieldSetCheckboxStory: StoryFn<typeof FieldSet> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FieldSetCheckboxTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const FieldSetCheckbox = {
   render: FieldSetCheckboxStory,

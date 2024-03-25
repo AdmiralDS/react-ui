@@ -43,17 +43,17 @@ const Icon = styled(AttachFileOutline)<{ $dimension?: Dimension }>`
   margin-bottom: ${(p) => (p.$dimension === 'xl' ? '14px' : '')};
 
   > * {
-    fill: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 
 const disabledStyles = css`
-  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 30']}`};
-  color: ${(p) => p.theme.color['Neutral/Neutral 30']};
+  border: 1px dashed var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
 
   & svg {
     > * {
-      fill: ${(p) => p.theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;
@@ -61,11 +61,11 @@ const disabledStyles = css`
 const hoverStyles = css`
   &:hover {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
     cursor: pointer;
-    background: ${(p) => p.theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
 
@@ -80,8 +80,8 @@ const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   align-items: center;
   flex-direction: column;
   padding: 24px 0;
-  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
@@ -94,8 +94,8 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   justify-content: center;
   flex-direction: row;
   padding: 8px 0;
-  border: ${(p) => `1px dashed ${p.theme.color['Neutral/Neutral 40']}`};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
@@ -105,12 +105,18 @@ const TitleText = styled.div<{ $dimension?: Dimension; disabled?: boolean }>`
   margin: 0 ${(p) => (p.$dimension === 'xl' ? '24px' : '')};
   margin-bottom: ${(p) => (p.$dimension === 'm' ? '16px' : '0px')};
   max-width: 100%;
-  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
   ${typography['Body/Body 2 Long']};
 `;
 
 const Desc = styled.div<{ disabled?: boolean }>`
-  color: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
+  color: ${(p) =>
+    p.disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
   ${typography['Body/Body 1 Long']};
 `;
 

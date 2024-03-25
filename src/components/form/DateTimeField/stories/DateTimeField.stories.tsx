@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 
 import { INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -64,7 +65,10 @@ export default {
 } as Meta<typeof Field>;
 
 //<editor-fold desc="DateTimeField example">
-const DateTimeFieldBaseStory: StoryFn<typeof Field> = (props) => <DateTimeFieldBaseTemplate {...props} />;
+const DateTimeFieldBaseStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateTimeFieldBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateTimeFieldBase = {
   render: DateTimeFieldBaseStory,
@@ -83,7 +87,10 @@ export const DateTimeFieldBase = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField disabled example">
-const DateTimeFieldDisabledStory: StoryFn<typeof Field> = (props) => <DateTimeFieldDisabledTemplate {...props} />;
+const DateTimeFieldDisabledStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateTimeFieldDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateTimeFieldDisabled = {
   render: DateTimeFieldDisabledStory,
@@ -102,7 +109,10 @@ export const DateTimeFieldDisabled = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField read only example">
-const DateTimeFieldReadOnlyStory: StoryFn<typeof Field> = (props) => <DateTimeFieldReadOnlyTemplate {...props} />;
+const DateTimeFieldReadOnlyStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateTimeFieldReadOnlyTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateTimeFieldReadOnly = {
   render: DateTimeFieldReadOnlyStory,
@@ -121,7 +131,10 @@ export const DateTimeFieldReadOnly = {
 //</editor-fold>
 
 //<editor-fold desc="DateTimeField status example">
-const DateTimeFieldStatusStory: StoryFn<typeof Field> = (props) => <DateTimeFieldStatusTemplate {...props} />;
+const DateTimeFieldStatusStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateTimeFieldStatusTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DateTimeFieldStatus = {
   render: DateTimeFieldStatusStory,

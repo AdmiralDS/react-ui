@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { TextButton, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TextButtonPlaygroundTemplate } from './TextButtonPlayground.template';
@@ -74,7 +75,10 @@ export default {
 } as Meta<typeof TextButton>;
 
 //<editor-fold desc="TextButton. Playground">
-const TextButtonPlaygroundStory: StoryFn<typeof TextButton> = (props) => <TextButtonPlaygroundTemplate {...props} />;
+const TextButtonPlaygroundStory: StoryFn<typeof TextButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextButtonPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextButtonPlayground = {
   render: TextButtonPlaygroundStory,
@@ -93,7 +97,10 @@ export const TextButtonPlayground = {
 //</editor-fold>
 
 //<editor-fold desc="TextButton. Размеры'">
-const TextButtonDimensionStory: StoryFn<typeof TextButton> = (props) => <TextButtonDimensionTemplate {...props} />;
+const TextButtonDimensionStory: StoryFn<typeof TextButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextButtonDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextButtonDimension = {
   render: TextButtonDimensionStory,
@@ -112,7 +119,10 @@ export const TextButtonDimension = {
 //</editor-fold>
 
 //<editor-fold desc="TextButton. Скелетон, загрузка">
-const TextButtonStatusStory: StoryFn<typeof TextButton> = (props) => <TextButtonStatusTemplate {...props} />;
+const TextButtonStatusStory: StoryFn<typeof TextButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextButtonStatusTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextButtonStatus = {
   render: TextButtonStatusStory,

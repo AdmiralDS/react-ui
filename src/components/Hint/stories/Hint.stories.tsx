@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Hint, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { HintBaseTemplate } from './HintBase.template';
@@ -119,7 +120,10 @@ export default {
 } as Meta<typeof Hint>;
 
 //<editor-fold desc="Базовый пример">
-const HintBaseStory: StoryFn<typeof Hint> = (props) => <HintBaseTemplate {...props} />;
+const HintBaseStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintBaseExample = {
   render: HintBaseStory,
@@ -138,7 +142,10 @@ export const HintBaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="Позиционирование">
-const HintPositionStory: StoryFn<typeof Hint> = (props) => <HintPositionTemplate {...props} />;
+const HintPositionStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintPositionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintPositionExample = {
   render: HintPositionStory,
@@ -178,7 +185,10 @@ export const HintPositionExample = {
 //</editor-fold>
 
 //<editor-fold desc="Появление по клику">
-const HintClickStory: StoryFn<typeof Hint> = (props) => <HintClickTemplate {...props} />;
+const HintClickStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintClickTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintClickExample = {
   render: HintClickStory,
@@ -197,7 +207,10 @@ export const HintClickExample = {
 //</editor-fold>
 
 //<editor-fold desc="С кнопкой">
-const HintTextButtonStory: StoryFn<typeof Hint> = (props) => <HintTextButtonTemplate {...props} />;
+const HintTextButtonStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintTextButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintTextButtonExample = {
   render: HintTextButtonStory,
@@ -221,7 +234,10 @@ export const HintTextButtonExample = {
 //</editor-fold>
 
 //<editor-fold desc="Позиционирование относительно targetElement">
-const HintTargetStory: StoryFn<typeof Hint> = (props) => <HintTargetTemplate {...props} />;
+const HintTargetStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintTargetTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintTargetExample = {
   render: HintTargetStory,
@@ -240,7 +256,10 @@ export const HintTargetExample = {
 //</editor-fold>
 
 //<editor-fold desc="ClassName">
-const HintClassNameStory: StoryFn<typeof Hint> = (props) => <HintClassNameTemplate {...props} />;
+const HintClassNameStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintClassNameTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintClassNameExample = {
   render: HintClassNameStory,
@@ -262,7 +281,10 @@ export const HintClassNameExample = {
 //</editor-fold>
 
 //<editor-fold desc="Стилизация внешнего контейнера">
-const HintAnchorCssStory: StoryFn<typeof Hint> = (props) => <HintAnchorCssTemplate {...props} />;
+const HintAnchorCssStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintAnchorCssTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintAnchorCssExample = {
   render: HintAnchorCssStory,
@@ -281,7 +303,10 @@ export const HintAnchorCssExample = {
 //</editor-fold>
 
 //<editor-fold desc="Hint с заголовком">
-const HintWithHeaderStory: StoryFn<typeof Hint> = (props) => <HintWithHeaderTemplate {...props} />;
+const HintWithHeaderStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintWithHeaderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const HintWithHeaderExample = {
   render: HintWithHeaderStory,

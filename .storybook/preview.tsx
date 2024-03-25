@@ -1,9 +1,16 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { addons } from '@storybook/preview-api';
+import { addons, useGlobals } from '@storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
 
-import { DARK_THEME, LIGHT_THEME, FontsVTBGroup, DropdownProvider } from '@admiral-ds/react-ui';
+import {
+  DARK_THEME,
+  LIGHT_THEME,
+  FontsVTBGroup,
+  DropdownProvider,
+  LightThemeCssVars,
+  DarkThemeCssVars,
+} from '@admiral-ds/react-ui';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
@@ -11,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     html {
-      background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+      background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
 `;
 
@@ -37,24 +44,41 @@ function ThemeWrapper(props) {
     channel.on(DARK_MODE_EVENT_NAME, setDark);
     return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
   }, [channel, setDark]);
+
+  useEffect(() => {
+    // document.body refers to body tag inside iframe#storybook-preview-iframe
+    document.body.classList.add(`admiral-theme-${isDark ? 'dark' : 'light'}`);
+    document.body.classList.remove(`admiral-theme-${isDark ? 'light' : 'dark'}`);
+  }, [isDark]);
+
+  const renderCssProps = () => (isDark ? <DarkThemeCssVars /> : <LightThemeCssVars />);
+
   // render your custom theme provider
-  return <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>{props.children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={isDark ? DARK_THEME : LIGHT_THEME}>
+      {props.CSSCustomProps && renderCssProps()}
+      {props.children}
+    </ThemeProvider>
+  );
 }
 
 const StoryContainer = styled.div`
   padding: 3em;
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
 export const decorators = [
-  (renderStory) => (
-    <ThemeWrapper>
-      <GlobalStyles />
-      <DropdownProvider>
-        <StoryContainer>{renderStory()}</StoryContainer>
-      </DropdownProvider>
-    </ThemeWrapper>
-  ),
+  (renderStory) => {
+    const [{ CSSCustomProps }] = useGlobals();
+    return (
+      <ThemeWrapper CSSCustomProps={CSSCustomProps}>
+        <GlobalStyles />
+        <DropdownProvider>
+          <StoryContainer>{renderStory()}</StoryContainer>
+        </DropdownProvider>
+      </ThemeWrapper>
+    );
+  },
   (Story) => (
     <>
       <FontsVTBGroup />
@@ -62,3 +86,16 @@ export const decorators = [
     </>
   ),
 ];
+
+export const globalTypes = {
+  CSSCustomProps: {
+    defaultValue: false,
+    toolbar: {
+      title: 'CSS Custom Props',
+      items: [
+        { value: true, title: 'Enable css custom props', icon: 'passed' },
+        { value: false, title: 'Disable css custom props', icon: 'failed' },
+      ],
+    },
+  },
+};

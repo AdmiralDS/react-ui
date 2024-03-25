@@ -5,17 +5,18 @@ import { ThemeProvider, css } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const overlayStyles = css`
-  background-color: ${({ theme }) => `${theme.color['Error/Error 20']}66`};
+  background-color: #ffdddd66;
 `;
 
 export const ModalCustomOverlayTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ModalProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ModalProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button onClick={() => setOpened(true)}>Open modal with custom overlay</Button>
       {opened && (
         <Modal

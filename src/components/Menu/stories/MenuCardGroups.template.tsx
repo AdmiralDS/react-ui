@@ -50,12 +50,13 @@ const category = [
     ],
   },
 ];
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
 
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -67,14 +68,14 @@ const InnerContainer = styled.div`
   width: 100%;
   padding: 6px 8px;
   margin: 0 8px 0 24px;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color['Neutral/Neutral 20']}`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   flex-direction: column;
   align-items: flex-start;
 `;
 
 const StyledAdditionalText = styled.div`
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   pointer-events: none;
 `;
 

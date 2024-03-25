@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Checkbox, ALL_BORDER_RADIUS_VALUES, ALL_DIMENSIONS_VALUES } from '@admiral-ds/react-ui';
 
 import { CheckboxDemoTemplate } from './CheckboxDemo.template';
@@ -72,7 +73,10 @@ export default {
 } as Meta<typeof Checkbox>;
 
 //<editor-fold desc="Checkbox. Пример">
-const CheckboxDemoStory: StoryFn<typeof Checkbox> = (props) => <CheckboxDemoTemplate {...props} />;
+const CheckboxDemoStory: StoryFn<typeof Checkbox> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CheckboxDemoTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CheckboxDemo = {
   render: CheckboxDemoStory,

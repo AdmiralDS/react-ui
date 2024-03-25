@@ -10,11 +10,11 @@ const StyledText = styled(T)`
 `;
 
 const OrangeColor = css`
-  color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
+  color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
   > div {
     svg {
       path {
-        fill: ${(p) => p.theme.color['Warning/Warning 50 Main']};
+        fill: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
       }
     }
   }

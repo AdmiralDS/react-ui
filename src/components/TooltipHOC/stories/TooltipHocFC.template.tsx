@@ -5,7 +5,7 @@ import type { TooltipHocProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const StyledH2 = styled.h2`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const H2 = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
@@ -19,10 +19,11 @@ const TooltipedHeading = TooltipHoc(H2);
 
 export const TooltipHocFCTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedHeading
         {...props}
         renderContent={() => `Пример использования TooltipHoc с функциональным компонентом.`}

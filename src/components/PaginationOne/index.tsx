@@ -22,7 +22,7 @@ const ComplexWrapper = styled.div`
   user-select: none;
   min-width: 696px;
   justify-content: space-between;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 const SimpleWrapper = styled(ComplexWrapper)`
@@ -37,7 +37,7 @@ const Part = styled.div`
 const Divider = styled.div`
   width: 1px;
   height: 24px;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 const PageAdditional = styled.span`

@@ -20,13 +20,13 @@ const InfoSolid = styled(InfoSolidSVG)<{ $dimension: CheckboxDimension }>`
   width: ${(props) => (props.$dimension === 'm' ? '24px' : '20px')};
 
   & *[fill^='#'] {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   [data-focus-within] & *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+    fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:hover *[fill^='#'] {
-    fill: ${(props) => props.theme.color['Primary/Primary 70']};
+    fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 `;
 
@@ -37,8 +37,9 @@ const CheckboxWithInformer = styled.div`
 
 export const CheckboxFieldBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: CheckboxFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
 
   const [visible1, setVisible1] = React.useState(false);
@@ -51,7 +52,7 @@ export const CheckboxFieldBaseTemplate = ({
   }, [props.checked]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
         <CheckboxField
           {...props}

@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Button, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { ButtonLoaderTemplate } from './ButtonLoader.template';
@@ -93,7 +94,8 @@ export default {
 
 //<editor-fold desc="Button. Playground">
 const ButtonPlaygroundStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonPlaygroundTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonPlayground = {
@@ -114,7 +116,8 @@ export const ButtonPlayground = {
 
 //<editor-fold desc="Button. Стили">
 const ButtonStylesStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonStylesTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonStylesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonStyles = {
@@ -135,7 +138,8 @@ export const ButtonStyles = {
 
 //<editor-fold desc="Button с иконкой">
 const ButtonWithIconStory: StoryFn<typeof Button> = (props) => {
-  return <ButtonWithIconTemplate {...props} />;
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonWithIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonWithIcon = {

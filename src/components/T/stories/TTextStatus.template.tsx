@@ -4,15 +4,15 @@ import { MainPrimaryColorName, T } from '@admiral-ds/react-ui';
 import type { TOwnProps } from '@admiral-ds/react-ui';
 
 const BlueText = styled(T)`
-  color: ${(p) => p.theme.color[MainPrimaryColorName]};
+  color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color[MainPrimaryColorName]});
 `;
 
 const CustomParagraph = styled(T)`
-  color: ${(p) => p.theme.color['Neutral/Neutral 70']};
+  color: var(--admiral-color-Neutral_Neutral70, ${(p) => p.theme.color['Neutral/Neutral 70']});
 `;
 
 const OrangeColor = css`
-  color: ${(p) => p.theme.color['Warning/Warning 50 Main']};
+  color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
 `;
 
 export const TTextStatusTemplate = ({ ...props }: TOwnProps) => {

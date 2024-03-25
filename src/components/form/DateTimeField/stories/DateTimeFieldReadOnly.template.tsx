@@ -28,8 +28,9 @@ export const DateTimeFieldReadOnlyTemplate = ({
   readOnly = true,
   skeleton,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const fieldProps = {
     label,
     status,
@@ -50,7 +51,7 @@ export const DateTimeFieldReadOnlyTemplate = ({
   } as Record<string, any>;
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <Field {...fieldProps}>
           <DateTimeContainer {...baseDateTimeProps} disabled={disabled || skeleton}>

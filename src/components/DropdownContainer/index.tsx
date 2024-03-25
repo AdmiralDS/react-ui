@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -194,8 +195,8 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 DropdownContainer.displayName = 'DropdownContainer';
 
 export const StyledDropdownContainer = styled(DropdownContainer)`
-  ${(p) => p.theme.shadow['Shadow 08']}
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   width: max-content;
 `;

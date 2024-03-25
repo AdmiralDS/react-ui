@@ -6,8 +6,9 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const TabMenuDynamicAddTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TabMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TabMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [tabs, setTabs] = React.useState([
     {
       id: '1',
@@ -25,7 +26,7 @@ export const TabMenuDynamicAddTemplate = ({
   const [activeTab, setActiveTav] = React.useState('1');
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <div>
         <TabMenu {...props} activeTab={activeTab} onChange={(id) => setActiveTav(id)} tabs={tabs} underline />
         <div style={{ height: '20px' }} />

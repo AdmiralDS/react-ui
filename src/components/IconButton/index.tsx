@@ -29,7 +29,8 @@ const StyledButton = styled.button<{
   box-sizing: border-box;
   display: inline-block;
   border: none;
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
   background: ${({ $skeleton }) => ($skeleton ? 'red' : 'transparent')};
   -webkit-tap-highlight-color: transparent;
   appearance: none;
@@ -58,17 +59,21 @@ const StyledButton = styled.button<{
 
   &:hover {
     cursor: pointer;
-    background: ${({ theme }) => theme.color['Opacity/Hover']};
+    background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     & *[fill^='#'] {
       fill: ${(p) =>
-        p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+        p.$appearance === 'primary'
+          ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
+          : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
     }
   }
   &:active {
-    background: ${({ theme }) => theme.color['Opacity/Press']};
+    background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
     & *[fill^='#'] {
       fill: ${(p) =>
-        p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+        p.$appearance === 'primary'
+          ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
+          : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
     }
   }
 
@@ -76,13 +81,13 @@ const StyledButton = styled.button<{
     cursor: not-allowed;
     background-color: transparent;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 
   ${({ $skeleton }) => $skeleton && skeletonAnimationMixin};
@@ -111,7 +116,9 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
 
   & *[fill^='#'] {
     fill: ${(p) =>
-      p.$appearance === 'primary' ? p.theme.color['Primary/Primary 60 Main'] : p.theme.color['Neutral/Neutral 50']};
+      p.$appearance === 'primary'
+        ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   }
 
   & > svg {

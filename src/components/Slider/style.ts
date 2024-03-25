@@ -36,9 +36,9 @@ export const TrackWrapper = styled.div<{ $dimension: SliderProps['dimension']; $
 
 export const Track = styled.div`
   height: 2px;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+    background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
   width: 100%;
 `;
@@ -51,12 +51,12 @@ export const DefaultTrack = styled.div`
 export const FilledTrack = styled.div<{ $animation?: boolean }>`
   display: block;
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   position: absolute;
   height: 2px;
   width: 0%;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   transition: ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')};
 `;
 
@@ -77,14 +77,14 @@ export const ThumbCircle = styled.div<{ $dimension: SliderProps['dimension'] }>`
   position: relative;
   height: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
   width: ${({ $dimension }) => ($dimension === 'm' ? 16 : 20)}px;
-  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border-radius: 50%;
   &:before {
     position: absolute;
     content: '';
     height: ${({ $dimension }) => ($dimension === 'm' ? 6 : 8)}px;
     width: ${({ $dimension }) => ($dimension === 'm' ? 6 : 8)}px;
-    background: ${({ theme }) => theme.color['Special/Static White']};
+    background: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
     top: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
     bottom: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
     left: ${({ $dimension }) => ($dimension === 'm' ? 5 : 6)}px;
@@ -92,18 +92,18 @@ export const ThumbCircle = styled.div<{ $dimension: SliderProps['dimension'] }>`
     border-radius: 50%;
   }
   &:hover {
-    background: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
   &:active {
-    background: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     pointer-events: none;
     &:hover,
     &:active {
-      background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

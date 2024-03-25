@@ -11,12 +11,12 @@ const Circle = styled.div``;
 
 const cssDefault = css`
   > ${Text} {
-    color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+    color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   }
   > ${Circle} {
     svg {
       path {
-        fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+        fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
       }
     }
   }

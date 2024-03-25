@@ -5,7 +5,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 
 const activeFilter = css`
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 `;
 
@@ -38,12 +38,12 @@ export const ButtonContent = styled.span<{ $isFilterActive?: boolean; $iconSize:
   }
 
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:hover {
     *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
 

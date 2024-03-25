@@ -21,8 +21,9 @@ export const InputFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: InputFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: InputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = useState<string>(String(value) ?? '');
   const [invalidInputValue, setInvalidInputValue] = useState<string>('Hello');
   const [visible, setVisible] = useState(false);
@@ -52,7 +53,7 @@ export const InputFieldInputTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <InputField
           data-container-id="inputFieldIdOne"

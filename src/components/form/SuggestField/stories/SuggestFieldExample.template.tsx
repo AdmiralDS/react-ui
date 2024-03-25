@@ -25,8 +25,9 @@ export const SuggestFieldExampleTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода с вариантами подстановки значений',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SuggestFieldProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SuggestFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
     (acc, key) => {
       if (props[key] !== undefined) acc[key] = props[key];
@@ -71,7 +72,7 @@ export const SuggestFieldExampleTemplate = ({
   }, [isLoading]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <SuggestField
           data-container-id="suggestFieldIdOne"

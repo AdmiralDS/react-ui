@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Tags, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TagsKindTemplate } from './TagsKind.template';
@@ -68,7 +69,10 @@ export default {
 } as Meta<typeof Tags>;
 
 //<editor-fold desc="Tags">
-const KindStory: StoryFn<typeof Tags> = (props) => <TagsKindTemplate {...props} />;
+const KindStory: StoryFn<typeof Tags> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagsKindTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const KindExample = {
   render: KindStory,

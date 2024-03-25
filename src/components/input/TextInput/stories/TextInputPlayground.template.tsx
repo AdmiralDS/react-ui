@@ -10,8 +10,9 @@ export const TextInputPlaygroundTemplate = ({
   value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TextInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TextInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,7 @@ export const TextInputPlaygroundTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TextInput {...props} value={localValue} placeholder={placeholder} onChange={handleChange} />
     </ThemeProvider>
   );

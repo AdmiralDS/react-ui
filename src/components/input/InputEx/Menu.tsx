@@ -2,6 +2,7 @@ import { useState, type HTMLAttributes, type ReactNode, forwardRef, useRef, useE
 import styled, { css } from 'styled-components';
 import { keyboardKey } from '../../common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
@@ -26,9 +27,9 @@ const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string |
 
 const Wrapper = styled.div<{ $dimension?: MenuDimensions; $maxHeight?: string | number }>`
   pointer-events: initial;
-  background-color: ${(p) => p.theme.color['Special/Elevated BG']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
-  ${(p) => p.theme.shadow['Shadow 08']}
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   max-width: calc(100vw - 32px);
   border-color: transparent;
   ${menuListHeights};

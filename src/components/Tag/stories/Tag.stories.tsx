@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { Tag, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TagPlaygroundTemplate } from './TagPlayground.template';
@@ -89,7 +90,10 @@ export default {
 } as Meta<typeof Tag>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof Tag> = (props) => <TagPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof Tag> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const Playground = {
   render: PlaygroundStory,
@@ -187,7 +191,10 @@ export const CustomColorsExample = {
 //</editor-fold>
 
 //<editor-fold desc="Tag. Активный и пассивный.">
-const StateStory: StoryFn<typeof Tag> = () => <TagStateTemplate />;
+const StateStory: StoryFn<typeof Tag> = () => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagStateTemplate CSSCustomProps={CSSCustomProps} />;
+};
 
 export const StateExample = {
   render: StateStory,

@@ -96,11 +96,16 @@ const Container = styled.div<{ $dimension?: Dimension }>`
 
 const statusMixin = css<{ $status?: FileUploadStatus }>`
   border-color: ${(p) => {
-    if (p.$status === 'Error') return p.theme.color['Error/Error 60 Main'];
-    return p.theme.color['Neutral/Neutral 40'];
+    if (p.$status === 'Error') {
+      return `var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']})`;
+    }
+    return `var(--admiral-color-Neutral_Neutral40, ${p.theme.color['Neutral/Neutral 40']})`;
   }};
-  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 90'])};
-  background: ${(p) => p.theme.color['Special/Static White']};
+  color: ${(p) =>
+    p.$status === 'Queue'
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
+  background: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
 `;
 
 const PreviewWrapper = styled.div<{ $dimension?: Dimension; $fileDimension?: Dimension; $status?: FileUploadStatus }>`
@@ -108,7 +113,7 @@ const PreviewWrapper = styled.div<{ $dimension?: Dimension; $fileDimension?: Dim
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   border-width: 1px;
   border-style: solid;
   padding: ${(p) => (p.$fileDimension === 'xl' ? '7px 3px 7px 8px' : '7px 15px')};
@@ -143,8 +148,10 @@ const IconWrapper = styled.div<{ $status?: FileUploadStatus }>`
     width: 40px;
     height: 40px;
     fill: ${(p) => {
-      if (p.$status === 'Queue') return p.theme.color['Neutral/Neutral 30'];
-      return p.theme.color['Neutral/Neutral 50'];
+      if (p.$status === 'Queue') {
+        return `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`;
+      }
+      return `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`;
     }};
   }
 `;
@@ -168,7 +175,10 @@ const Title = styled.div`
 `;
 
 const Size = styled.span<{ $fileDimension?: Dimension; $status?: FileUploadStatus }>`
-  color: ${(p) => (p.$status === 'Queue' ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
+  color: ${(p) =>
+    p.$status === 'Queue'
+      ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   margin-left: ${(p) => (p.$fileDimension === 'xl' ? '0' : '4px')};
   white-space: nowrap;
 `;
@@ -192,12 +202,12 @@ const Close = styled.div`
   height: 32px;
   &:hover {
     border-radius: 50%;
-    background-color: ${(p) => p.theme.color['Opacity/Hover']};
+    background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   & svg {
     width: 24px;
     height: 24px;
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 

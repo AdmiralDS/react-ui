@@ -20,8 +20,9 @@ const initialValue: Array<ItemValue> = [
 
 export const CheckboxCompositeGroupExampleTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType }) => {
+}: CheckboxCompositeGroupProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [list, setValue] = React.useState<Array<ItemValue>>(initialValue);
 
   const someItemChecked = () => list.some((item) => item.checked);
@@ -36,7 +37,7 @@ export const CheckboxCompositeGroupExampleTemplate = ({
   const getIndeterminateStatus = () => !list.every((item) => item.checked) && someItemChecked();
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <CheckboxCompositeGroup {...props}>
         <CheckboxField
           indeterminate={getIndeterminateStatus()}

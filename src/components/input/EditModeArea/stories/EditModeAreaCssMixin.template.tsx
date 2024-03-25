@@ -12,8 +12,9 @@ const cssMixin = css`
 export const EditModeAreaCssMixinTemplate = ({
   value = 'Привет!',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: EditModeAreaProps & { themeBorderKind?: BorderRadiusType }) => {
+}: EditModeAreaProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -22,7 +23,7 @@ export const EditModeAreaCssMixinTemplate = ({
     props.onChange?.(e);
   };
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <EditModeArea {...props} value={localValue} onChange={handleChange} containerCssMixin={cssMixin} />
     </ThemeProvider>
   );

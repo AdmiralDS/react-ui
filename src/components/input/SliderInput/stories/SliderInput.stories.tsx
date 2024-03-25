@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { SliderInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -127,7 +128,10 @@ export default {
 } as Meta<typeof SliderInput>;
 
 //<editor-fold desc="SliderInput. Пример контролируемого инпута.">
-const ControlledStory: StoryFn<typeof SliderInput> = (props) => <SliderInputControlledTemplate {...props} />;
+const ControlledStory: StoryFn<typeof SliderInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderInputControlledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const ControlledExample = {
   render: ControlledStory,
@@ -157,7 +161,10 @@ export const ControlledExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. С промежуточными отметками.">
-const TickMarksStory: StoryFn<typeof SliderInput> = (props) => <SliderInputTickMarksTemplate {...props} />;
+const TickMarksStory: StoryFn<typeof SliderInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderInputTickMarksTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TickmarksExample = {
   render: TickMarksStory,
@@ -176,7 +183,10 @@ export const TickmarksExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример изменения настроек (suffix, precision, thousand).">
-const CustomStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomisedTemplate {...props} />;
+const CustomStory: StoryFn<typeof SliderInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderInputCustomisedTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CustomExample = {
   render: CustomStory,
@@ -195,7 +205,10 @@ export const CustomExample = {
 //</editor-fold>
 
 //<editor-fold desc="SliderInput. Пример кастомизирования текстовых подписей к отметкам слайдера.">
-const CustomMarkStory: StoryFn<typeof SliderInput> = (props) => <SliderInputCustomMarkTemplate {...props} />;
+const CustomMarkStory: StoryFn<typeof SliderInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderInputCustomMarkTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const CustomMarkExample = {
   render: CustomMarkStory,

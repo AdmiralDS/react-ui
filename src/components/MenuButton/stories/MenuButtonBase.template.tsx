@@ -51,8 +51,9 @@ const items = [
 
 export const MenuButtonBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MenuButtonProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MenuButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
@@ -68,7 +69,7 @@ export const MenuButtonBaseTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <MenuButton
         {...props}
         selected={selected}

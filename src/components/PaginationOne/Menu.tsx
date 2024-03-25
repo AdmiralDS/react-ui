@@ -18,14 +18,14 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   height: 40px;
   padding: 10px 12px;
   border: 2px solid transparent;
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   background-color: transparent;
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   & > span {
     min-width: 20px;
@@ -34,26 +34,26 @@ const Button = styled.button<{ $menuOpened?: boolean }>`
   &:hover {
     cursor: pointer;
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Primary/Primary 70']};
+      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
     }
   }
 
   &:active {
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+      fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
     }
   }
 
   &:focus-visible {
     outline: none;
-    border-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+    border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 
   &:disabled {
     cursor: not-allowed;
-    color: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     & *[fill^='#'] {
-      fill: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
 `;

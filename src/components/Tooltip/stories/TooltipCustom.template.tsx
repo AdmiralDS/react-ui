@@ -10,15 +10,16 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 const CustomP = styled.p<{ $dimension?: TooltipDimension }>`
   padding: 0;
   margin: 0;
-  color: ${(p) => p.theme.color['Neutral/Neutral 00']};
+  color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   ${(p) => (p.$dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Caption/Caption 1'])};
   ${(p) => (p.$dimension === 's' ? 'font-weight: bold;' : '')};
 `;
 
 export const TooltipCustomTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const [visible, setVisible] = React.useState(false);
 
@@ -60,7 +61,7 @@ export const TooltipCustomTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Button ref={btnRef} dimension="m" displayAsSquare aria-label="Delete" aria-describedby="test1">
         <VIPOutline aria-hidden />
       </Button>

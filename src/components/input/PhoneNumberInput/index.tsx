@@ -34,7 +34,10 @@ const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   margin-left: 1px;
 
   & path {
-    fill: ${(p) => (p.disabled ? p.theme.color['Neutral/Neutral 30'] : p.theme.color['Neutral/Neutral 50'])};
+    fill: ${(p) =>
+      p.disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   }
   ${(p) => p.disabled && 'pointer-events: none;'}
 `;

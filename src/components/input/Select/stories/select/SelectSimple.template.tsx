@@ -9,8 +9,9 @@ import { createBorderRadiusSwapper } from '../../../../../../.storybook/createBo
 export const SelectSimpleTemplate = ({
   placeholder = 'Select option',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: SelectProps & { themeBorderKind?: BorderRadiusType }) => {
+}: SelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selectValue, setSelectValue] = React.useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
@@ -21,7 +22,7 @@ export const SelectSimpleTemplate = ({
   };
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Select
         {...props}
         value={selectValue}

@@ -25,10 +25,11 @@ const TooltipedComponent = TooltipHoc(Component);
 
 export const TooltipHocRefSetterTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedComponent
         {...props}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}

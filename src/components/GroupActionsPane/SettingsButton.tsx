@@ -8,12 +8,13 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
 const StyledDrop = styled(DropdownContainer)`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
-  background-color: ${({ theme }) => theme.color['Special/Elevated BG']};
-  ${(props) => props.theme.shadow['Shadow 08']};
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
 `;
 
 const StyledIconButton = styled(IconButton)`

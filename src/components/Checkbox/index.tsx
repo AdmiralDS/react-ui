@@ -57,7 +57,7 @@ const Check = styled(CheckSVG)`
 const Indeterminate = styled(IndeterminateSVG)`
   pointer-events: none;
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 `;
 
@@ -81,23 +81,27 @@ export const Background = styled.div<{ $error?: boolean }>`
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   outline: 0;
   transition: background 0.1s ease-in;
 
   /* disable inheritance from parent elements */
   line-height: initial;
-  background-color: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   border: 1px solid
-    ${({ $error, theme }) => ($error ? theme.color['Error/Error 60 Main'] : theme.color['Neutral/Neutral 50'])};
+    ${({ $error, theme }) =>
+      $error
+        ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Special/Static White']};
+    fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 `;
 
 const indeterminateCss = css<{ $indeterminate?: boolean }>`
   &:not(:checked) + ${Background} {
-    background-color: ${({ theme, $indeterminate }) => $indeterminate && theme.color['Primary/Primary 60 Main']};
+    background-color: ${({ theme, $indeterminate }) =>
+      $indeterminate && `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
     border: ${({ $indeterminate }) => $indeterminate && 'none'};
     > * {
       display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
@@ -120,7 +124,7 @@ const hoveredCss = css`
   &:not(:disabled) {
     &::after {
       ${actionCss};
-      background-color: ${({ theme }) => theme.color['Opacity/Hover']};
+      background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
 `;
@@ -129,7 +133,7 @@ const activeCss = css`
   &:not(:disabled) {
     &::after {
       ${actionCss};
-      background-color: ${({ theme }) => theme.color['Opacity/Press']};
+      background-color: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
     }
   }
 `;
@@ -137,21 +141,21 @@ const activeCss = css`
 const disabledCss = css`
   pointer-events: none;
   & + ${Background} {
-    border: 1px solid ${({ theme }) => theme.color['Neutral/Neutral 30']};
-    background-color: ${({ theme }) => theme.color['Neutral/Neutral 10']};
+    border: 1px solid var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   }
 `;
 
 const disabledCheckedBackgroundCss = css`
-  background-color: ${({ theme }) => theme.color['Primary/Primary 30']};
+  background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   border: none;
   & *[fill^='#'] {
-    fill: ${({ theme }) => theme.color['Neutral/Neutral 00']};
+    fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   }
 `;
 
 const checkedBackgroundCss = css`
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border: none;
 `;
 
@@ -170,7 +174,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 
   box-sizing: border-box;
   cursor: pointer;
-  border-radius: ${(p) => smallGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   margin: 0;
   padding: 0;
 
@@ -201,7 +205,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 
   &:focus-visible {
     outline-offset: 2px;
-    outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
   }
 `;
 

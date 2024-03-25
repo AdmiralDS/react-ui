@@ -49,7 +49,7 @@ const extraPadding = css<ExtraProps>`
 `;
 
 const disabledColors = css`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+  background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   border-color: transparent;
 `;
 
@@ -65,15 +65,15 @@ const BorderedDiv = styled.div`
   min-width: 0;
 
   background: none;
-  border: 1px solid ${(props) => props.theme.color['Neutral/Neutral 40']};
+  border: 1px solid var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
   border-radius: inherit;
 
   [data-status='error'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='success'] &&& {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 1px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   [data-read-only] &&& {
@@ -82,10 +82,10 @@ const BorderedDiv = styled.div`
 `;
 
 const colorsBorderAndBackground = css<{ disabled?: boolean }>`
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &:focus + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Primary/Primary 60 Main']};
+    border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
 
   &&&:disabled + ${BorderedDiv}, [data-read-only] &&& + ${BorderedDiv} {
@@ -93,11 +93,12 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
   }
 
   &:hover:not(:focus) + ${BorderedDiv} {
-    border-color: ${(props) => (props.disabled ? 'transparent' : props.theme.color['Neutral/Neutral 60'])};
+    border-color: ${(p) =>
+      p.disabled ? 'transparent' : `var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']})`};
   }
 
   &:user-invalid + ${BorderedDiv}, &:user-invalid:hover + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='error']
@@ -105,11 +106,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     + ${BorderedDiv},
     &:user-invalid:hover:not(:disabled)
     + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
   [data-status='success'] &&&:hover:not(:disabled) + ${BorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Success/Success 60']};
+    border: 1px solid var(--admiral-color-Success_Success60, ${(p) => p.theme.color['Success/Success 60']});
   }
 
   [data-status='error']
@@ -117,11 +118,11 @@ const colorsBorderAndBackground = css<{ disabled?: boolean }>`
     + ${BorderedDiv},
     &:user-invalid:focus:not(:disabled)
     + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   [data-status='success'] &&&:focus:not(:disabled) + ${BorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Success/Success 50 Main']};
+    border: 2px solid var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
   }
 
   [data-read-only] &&&,
@@ -176,16 +177,16 @@ const Text = styled.textarea<ExtraProps>`
   overflow-y: auto;
   overflow-x: hidden;
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder,
   &:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {

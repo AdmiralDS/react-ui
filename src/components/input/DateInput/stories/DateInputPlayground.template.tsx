@@ -9,8 +9,9 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const DateInputPlaygroundTemplate = ({
   placeholder,
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: DateInputProps & { themeBorderKind?: BorderRadiusType }) => {
+}: DateInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
   const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
 
@@ -33,7 +34,7 @@ export const DateInputPlaygroundTemplate = ({
   }, [placeholder]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DateInput
         {...props}
         value={localValue}

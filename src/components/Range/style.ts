@@ -34,9 +34,9 @@ export const TrackWrapper = styled.div<{ $dimension: RangeProps['dimension']; $s
 
 export const Track = styled.div`
   height: 2px;
-  background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+  background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 20']};
+    background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
   width: 100%;
 `;
@@ -49,11 +49,11 @@ export const DefaultTrack = styled.div`
 export const FilledTrack = styled.div<{ $animation?: boolean }>`
   display: block;
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   position: absolute;
   height: 2px;
-  background-color: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   transition:
     left ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')},
     right ${({ $animation }) => ($animation ? TRANSITION_ANIMATION : 'none')};
@@ -75,14 +75,14 @@ export const ThumbCircle = styled.div<{ $dimension: RangeProps['dimension']; $ac
   position: relative;
   width: ${({ $dimension }) => ($dimension === 's' ? 16 : 20)}px;
   height: ${({ $dimension }) => ($dimension === 's' ? 16 : 20)}px;
-  background: ${({ theme }) => theme.color['Primary/Primary 60 Main']};
+  background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   border-radius: 50%;
   &:before {
     position: absolute;
     content: '';
     width: ${({ $dimension }) => ($dimension === 's' ? 6 : 8)}px;
     height: ${({ $dimension }) => ($dimension === 's' ? 6 : 8)}px;
-    background: ${({ theme }) => theme.color['Special/Static White']};
+    background: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
     top: ${({ $dimension }) => ($dimension === 's' ? 5 : 6)}px;
     bottom: ${({ $dimension }) => ($dimension === 's' ? 5 : 6)}px;
     right: ${({ $dimension }) => ($dimension === 's' ? 5 : 6)}px;
@@ -90,13 +90,14 @@ export const ThumbCircle = styled.div<{ $dimension: RangeProps['dimension']; $ac
     border-radius: 50%;
   }
   &:hover {
-    background: ${({ theme }) => theme.color['Primary/Primary 70']};
+    background: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
 
-  ${({ $active, theme }) => $active && `background: ${theme.color['Primary/Primary 70']};`}
+  ${({ $active, theme }) =>
+    $active && `background: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});`}
 
   [data-disabled='true'] && {
-    background: ${({ theme }) => theme.color['Neutral/Neutral 30']};
+    background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     pointer-events: none;
   }
 `;

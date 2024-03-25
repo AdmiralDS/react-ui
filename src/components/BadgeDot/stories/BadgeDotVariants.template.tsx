@@ -21,7 +21,7 @@ const String = styled.div`
     margin-right: 40px;
   }
   ${typography['Body/Body 2 Long']}
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const BadgeDotVariantsTemplate = () => {

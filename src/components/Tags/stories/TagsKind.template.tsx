@@ -7,11 +7,12 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 export const TagsKindTemplate = ({
   kind = 'success',
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TagsProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TagsProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <>
-      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
         <Tags
           dimension={props.dimension}
           width={50}

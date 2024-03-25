@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
 import { SliderRange, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
@@ -110,7 +111,10 @@ export default {
 } as Meta<typeof SliderRange>;
 
 //<editor-fold desc="SliderRange. Playground">
-const PlaygroundStory: StoryFn<typeof SliderRange> = (props) => <SliderRangePlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof SliderRange> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderRangePlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 export const PlaygroundExample = PlaygroundStory.bind({});
 PlaygroundExample.parameters = {
   docs: {

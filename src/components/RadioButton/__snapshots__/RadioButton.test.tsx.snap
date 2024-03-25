@@ -7,14 +7,14 @@ exports[`RadioButton should render component with disabled state 1`] = `
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -22,28 +22,28 @@ exports[`RadioButton should render component with disabled state 1`] = `
   flex-direction: column;
   align-content: center;
   margin-left: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -64,10 +64,10 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 20px;
   height: 20px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -76,7 +76,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -111,21 +111,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -138,7 +138,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -153,29 +153,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 2px 0 2px 2px;
   user-select: none;
   cursor: default;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -217,14 +217,14 @@ fieldset:disabled .c0.c0 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -232,28 +232,28 @@ fieldset:disabled .c0.c0 {
   flex-direction: column;
   align-content: center;
   margin-left: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -274,10 +274,10 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 20px;
   height: 20px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
-  border-color: #B0B5BD;
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -286,7 +286,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -321,21 +321,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -348,7 +348,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -363,29 +363,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 2px 0 2px 2px;
   user-select: none;
   cursor: default;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -482,14 +482,14 @@ exports[`RadioButton should render component with required properties 1`] = `
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -497,28 +497,28 @@ exports[`RadioButton should render component with required properties 1`] = `
   flex-direction: column;
   align-content: center;
   margin-left: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -539,8 +539,8 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 20px;
   height: 20px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -549,7 +549,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -584,21 +584,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -611,7 +611,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -626,29 +626,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 2px 0 2px 2px;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -686,14 +686,14 @@ fieldset:disabled .c0.c0 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -701,28 +701,28 @@ fieldset:disabled .c0.c0 {
   flex-direction: column;
   align-content: center;
   margin-left: 10px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -743,8 +743,8 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 20px;
   height: 20px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -753,7 +753,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -788,21 +788,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -815,7 +815,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -830,29 +830,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 2px 0 2px 2px;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -945,14 +945,14 @@ exports[`RadioButton should render component with small dimension 1`] = `
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 14px);
   height: calc(100% + 14px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -961,28 +961,28 @@ exports[`RadioButton should render component with small dimension 1`] = `
   align-content: center;
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1003,8 +1003,8 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 18px;
   height: 18px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -1013,7 +1013,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -1048,21 +1048,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -1075,7 +1075,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -1090,29 +1090,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 1px 0 1px 1px;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 
@@ -1150,14 +1150,14 @@ fieldset:disabled .c0.c0 {
   visibility: hidden;
   pointer-events: none;
   position: absolute;
-  background: #0000000D;
+  background: var(--admiral-color-Opacity_Hover, #0000000D);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   width: calc(100% + 14px);
   height: calc(100% + 14px);
-  background-color: #0000000D;
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
 .c5 {
@@ -1166,28 +1166,28 @@ fieldset:disabled .c0.c0 {
   align-content: center;
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset:disabled .c5.c5 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
   margin-left: 9px;
   margin-top: 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
@@ -1208,8 +1208,8 @@ fieldset[data-dimension='s'] .c5.c5 {
   transition: all 0.25s ease-in-out;
   width: 18px;
   height: 18px;
-  background-color: #FFFFFF;
-  border: 1px solid #717681;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -1218,7 +1218,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid #B0B5BD;
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
 .c2 {
@@ -1253,21 +1253,21 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: #E5E7EB;
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
 .c1:checked:disabled+div>span {
-  border: 5px solid #A7C7FF;
-  background-color: #FFFFFF;
+  border: 5px solid var(--admiral-color-Primary_Primary30, #A7C7FF);
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
 .c1:checked:not(:disabled)+div>span {
-  border: 5px solid #0062FF;
+  border: 5px solid var(--admiral-color_Primary_Primary60Main, #0062FF);
 }
 
 .c1:not(:disabled):focus-visible+div {
   outline-offset: 2px;
-  outline: #0062FF solid 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c1:not(:disabled):hover+div>div {
@@ -1280,7 +1280,7 @@ fieldset[data-dimension='s'] .c2 {
 
 .c1:not(:disabled):active+div>div {
   visibility: visible;
-  background: #0000001F;
+  background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
 .c1:not(:disabled):active:focus-visible+div {
@@ -1295,29 +1295,29 @@ fieldset[data-dimension='s'] .c2 {
   padding: 1px 0 1px 1px;
   user-select: none;
   cursor: pointer;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: #23262D;
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
   padding: 1px 0 1px 1px;
-  font-family: 'VTB Group UI',sans-serif;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
-  color: #B0B5BD;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   cursor: default;
 }
 

@@ -73,169 +73,240 @@ export const TYPOGRAPHY: Typography = {
 export const typography = createTypography();
 
 export function createTypography() {
+  /**
+   * @deprecated since version 7.12.1
+   * Will be deleted in version 10.x.x
+   *
+   * use property 'Header/HL3' instead
+   */
   return {
     'Main/XXL': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 42px;
-      line-height: 52px;
+      font-weight: var(--admiral-font-weight-Header_HL3, 550);
+      font-size: var(--admiral-font-size-Header_HL3, 42px);
+      line-height: var(--admiral-line-height-Header_HL3, 52px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Header/H1' instead
+     */
     'Main/XL': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 36px;
-      line-height: 44px;
+      font-weight: var(--admiral-font-weight-Header_H1, 550);
+      font-size: var(--admiral-font-size-Header_H1, 36px);
+      line-height: var(--admiral-line-height-Header_H1, 44px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Header/H2' instead
+     */
     'Main/L': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 40px;
+      font-weight: var(--admiral-font-weight-Header_H2, 500);
+      font-size: var(--admiral-font-size-Header_H2, 32px);
+      line-height: var(--admiral-line-height-Header_H2, 40px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Header/H3' instead
+     */
     'Main/M': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 28px;
-      line-height: 36px;
+      font-weight: var(--admiral-font-weight-Header_H3, 550);
+      font-size: var(--admiral-font-size-Header_H3, 28px);
+      line-height: var(--admiral-line-height-Header_H3, 36px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Header/H5' instead
+     */
     'Main/S': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 20px;
-      line-height: 28px;
+      font-weight: var(--admiral-font-weight-Header_H5, 550);
+      font-size: var(--admiral-font-size-Header_H5, 20px);
+      line-height: var(--admiral-line-height-Header_H5, 28px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Header/H6' instead
+     */
     'Main/XS-bold': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 18px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Header_H6, 550);
+      font-size: var(--admiral-font-size-Header_H6, 18px);
+      line-height: var(--admiral-line-height-Header_H6, 24px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Subtitle/Subtitle 1' instead
+     */
     'Main/XS': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle1, 400);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle1, 18px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle1, 24px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Subtitle/Subtitle 2' instead
+     */
     'Additional/L-bold': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Body/Body 1 Long' instead
+     */
     'Additional/L': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+      font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+      line-height: var(--admiral-line-height-Body_Body1Long, 24px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Body/Body 1 Short' instead
+     */
     'Additional/M': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+      font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+      line-height: var(--admiral-line-height-Body_Body1Short, 20px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Body/Body 2 Long' instead
+     */
     'Additional/S': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+      font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+      line-height: var(--admiral-line-height-Body_Body2Long, 20px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Subtitle/Subtitle 3' instead
+     */
     'Additional/S-bold': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 500);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Body/Body 2 Short' instead
+     */
     'Additional/XS': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
+      font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+      font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+      line-height: var(--admiral-line-height-Body_Body2Short, 16px);
       font-feature-settings:
         'tnum' on,
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Button/Button 1' instead
+     */
     'Button/M': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Button_Button1, 500);
+      font-size: var(--admiral-font-size-Button_Button1, 16px);
+      line-height: var(--admiral-line-height-Button_Button1, 24px);
       /* or 150% */
 
       font-feature-settings:
@@ -243,13 +314,18 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Button/Button 2' instead
+     */
     'Button/S': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Button_Button2, 500);
+      font-size: var(--admiral-font-size-Button_Button2, 14px);
+      line-height: var(--admiral-line-height-Button_Button2, 20px);
       /* or 143% */
 
       font-feature-settings:
@@ -257,13 +333,18 @@ export function createTypography() {
         'lnum' on;
       text-rendering: geometricPrecision;
     `,
-
+    /**
+     * @deprecated since version 7.12.1
+     * Will be deleted in version 10.x.x
+     *
+     * use property 'Caption/Caption 1' instead
+     */
     'Caption/XS': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 16px;
+      font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+      font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+      line-height: var(--admiral-line-height-Caption_Caption1, 16px);
       /* identical to box height, or 133% */
 
       font-feature-settings:
@@ -273,11 +354,11 @@ export function createTypography() {
     `,
 
     'Header/HL1': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 72px;
-      line-height: 80px;
+      font-weight: var(--admiral-font-weight-Header_HL1, 550);
+      font-size: var(--admiral-font-size-Header_HL1, 72px);
+      line-height: var(--admiral-line-height-Header_HL1, 80px);
       /* or 111% */
       font-feature-settings:
         'tnum' on,
@@ -286,11 +367,11 @@ export function createTypography() {
     `,
 
     'Header/HL2': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 56px;
-      line-height: 64px;
+      font-weight: var(--admiral-font-weight-Header_HL2, 550);
+      font-size: var(--admiral-font-size-Header_HL2, 56px);
+      line-height: var(--admiral-line-height-Header_HL2, 64px);
       /* or 114% */
       font-feature-settings:
         'tnum' on,
@@ -299,11 +380,11 @@ export function createTypography() {
     `,
 
     'Header/HL3': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 48px;
-      line-height: 56px;
+      font-weight: var(--admiral-font-weight-Header_HL3, 550);
+      font-size: var(--admiral-font-size-Header_HL3, 48px);
+      line-height: var(--admiral-line-height-Header_HL3, 56px);
       /* or 117% */
       font-feature-settings:
         'tnum' on,
@@ -312,11 +393,11 @@ export function createTypography() {
     `,
 
     'Header/H1': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 40px;
-      line-height: 48px;
+      font-weight: var(--admiral-font-weight-Header_H1, 550);
+      font-size: var(--admiral-font-size-Header_H1, 40px);
+      line-height: var(--admiral-line-height-Header_H1, 48px);
       /* or 120% */
       font-feature-settings:
         'tnum' on,
@@ -325,11 +406,11 @@ export function createTypography() {
     `,
 
     'Header/H2': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 34px;
-      line-height: 40px;
+      font-weight: var(--admiral-font-weight-Header_H2, 550);
+      font-size: var(--admiral-font-size-Header_H2, 34px);
+      line-height: var(--admiral-line-height-Header_H2, 40px);
       /* or 118% */
       font-feature-settings:
         'tnum' on,
@@ -338,11 +419,11 @@ export function createTypography() {
     `,
 
     'Header/H3': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 28px;
-      line-height: 36px;
+      font-weight: var(--admiral-font-weight-Header_H3, 550);
+      font-size: var(--admiral-font-size-Header_H3, 28px);
+      line-height: var(--admiral-line-height-Header_H3, 36px);
       /* or 129% */
       font-feature-settings:
         'tnum' on,
@@ -351,11 +432,11 @@ export function createTypography() {
     `,
 
     'Header/H4': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 24px;
-      line-height: 32px;
+      font-weight: var(--admiral-font-weight-Header_H4, 550);
+      font-size: var(--admiral-font-size-Header_H4, 24px);
+      line-height: var(--admiral-line-height-Header_H4, 32px);
       /* or 133% */
       font-feature-settings:
         'tnum' on,
@@ -364,11 +445,11 @@ export function createTypography() {
     `,
 
     'Header/H5': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 20px;
-      line-height: 28px;
+      font-weight: var(--admiral-font-weight-Header_H5, 550);
+      font-size: var(--admiral-font-size-Header_H5, 20px);
+      line-height: var(--admiral-line-height-Header_H5, 28px);
       /* or 140% */
       font-feature-settings:
         'tnum' on,
@@ -377,11 +458,11 @@ export function createTypography() {
     `,
 
     'Header/H6': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 18px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Header_H6, 550);
+      font-size: var(--admiral-font-size-Header_H6, 18px);
+      line-height: var(--admiral-line-height-Header_H6, 24px);
       /* or 133% */
       font-feature-settings:
         'tnum' on,
@@ -390,11 +471,11 @@ export function createTypography() {
     `,
 
     'Subtitle/Subtitle 1': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle1, 400);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle1, 18px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle1, 24px);
       /* or 133% */
       font-feature-settings:
         'tnum' on,
@@ -403,11 +484,11 @@ export function createTypography() {
     `,
 
     'Subtitle/Subtitle 2': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle2, 16px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle2, 24px);
       /* or 150% */
       font-feature-settings:
         'tnum' on,
@@ -416,11 +497,11 @@ export function createTypography() {
     `,
 
     'Subtitle/Subtitle 3': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 550;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Subtitle_Subtitle3, 550);
+      font-size: var(--admiral-font-size-Subtitle_Subtitle3, 14px);
+      line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
       /* or 143% */
       font-feature-settings:
         'tnum' on,
@@ -429,11 +510,11 @@ export function createTypography() {
     `,
 
     'Body/Body 1 Long': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
+      font-size: var(--admiral-font-size-Body_Body1Long, 16px);
+      line-height: var(--admiral-line-height-Body_Body1Long, 24px);
       /* or 150% */
       font-feature-settings:
         'tnum' on,
@@ -442,11 +523,11 @@ export function createTypography() {
     `,
 
     'Body/Body 1 Short': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
+      font-size: var(--admiral-font-size-Body_Body1Short, 16px);
+      line-height: var(--admiral-line-height-Body_Body1Short, 20px);
       /* or 125% */
       font-feature-settings:
         'tnum' on,
@@ -455,11 +536,11 @@ export function createTypography() {
     `,
 
     'Body/Body 2 Long': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+      font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+      line-height: var(--admiral-line-height-Body_Body2Long, 20px);
       /* or 133% */
       font-feature-settings:
         'tnum' on,
@@ -468,11 +549,11 @@ export function createTypography() {
     `,
 
     'Body/Body 2 Short': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 16px;
+      font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
+      font-size: var(--admiral-font-size-Body_Body2Short, 14px);
+      line-height: var(--admiral-line-height-Body_Body2Short, 16px);
       /* or 114% */
       font-feature-settings:
         'tnum' on,
@@ -481,11 +562,11 @@ export function createTypography() {
     `,
 
     'Button/Button 1': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: var(--admiral-font-weight-Button_Button1, 500);
+      font-size: var(--admiral-font-size-Button_Button1, 16px);
+      line-height: var(--admiral-line-height-Button_Button1, 24px);
       /* or 150% */
       font-feature-settings:
         'tnum' on,
@@ -494,11 +575,11 @@ export function createTypography() {
     `,
 
     'Button/Button 2': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 20px;
+      font-weight: var(--admiral-font-weight-Button_Button2, 500);
+      font-size: var(--admiral-font-size-Button_Button2, 14px);
+      line-height: var(--admiral-line-height-Button_Button2, 20px);
       /* or 143% */
       font-feature-settings:
         'tnum' on,
@@ -507,11 +588,11 @@ export function createTypography() {
     `,
 
     'Caption/Caption 1': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 16px;
+      font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+      font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+      line-height: var(--admiral-line-height-Caption_Caption1, 16px);
       /* identical to box height, or 133% */
       font-feature-settings:
         'tnum' on,
@@ -520,11 +601,11 @@ export function createTypography() {
     `,
 
     'Caption/Caption 2': css`
-      font-family: ${(p) => p.theme.fontFamily};
+      font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
-      font-weight: 400;
-      font-size: 10px;
-      line-height: 12px;
+      font-weight: var(--admiral-font-weight-Caption_Caption2, 400);
+      font-size: var(--admiral-font-size-Caption_Caption2, 10px);
+      line-height: var(--admiral-line-height-Caption_Caption2, 12px);
       /* or 120% */
       font-feature-settings:
         'tnum' on,

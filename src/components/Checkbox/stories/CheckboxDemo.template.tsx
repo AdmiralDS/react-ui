@@ -28,15 +28,16 @@ const Row = styled.div`
 
 export const CheckboxDemoTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: CheckBoxProps & { themeBorderKind?: BorderRadiusType }) => {
+}: CheckBoxProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [checked, setChecked] = React.useState<boolean>(props.checked ?? false);
   React.useEffect(() => {
     setChecked(Boolean(props.checked));
   }, [props.checked]);
   return (
     <>
-      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+      <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
         <Container>
           <T font="Header/H6" as="div">
             Состояния
@@ -78,21 +79,21 @@ export const CheckboxDemoTemplate = ({
           <Row>
             <Checkbox error />
             <Checkbox dimension="s" error />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Состояние ошибки
             </T>
           </Row>
           <Row>
             <Checkbox readOnly />
             <Checkbox dimension="s" readOnly />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Readonly
             </T>
           </Row>
           <Row>
             <Checkbox readOnly defaultChecked />
             <Checkbox dimension="s" readOnly defaultChecked />
-            <T font="Body/Body 1 Long" forwardedAs="div">
+            <T font="Body/Body 1 Long" as="div">
               Readonly active
             </T>
           </Row>

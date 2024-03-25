@@ -8,10 +8,11 @@ const TooltipedInput = TooltipHoc(InputField);
 
 export const TooltipHocBaseTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TooltipHocProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TooltipHocProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TooltipedInput
         {...props}
         renderContent={() => `Contrary to popular belief, Lorem Ipsum is not simply random text.`}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TabMenuBaseTemplate } from './TabMenuBase.template';
@@ -67,7 +68,10 @@ export default {
 } as Meta<typeof TabMenu>;
 
 //<editor-fold desc="TabMenu. Базовый пример.">
-const BaseStory: StoryFn<typeof TabMenu> = (props) => <TabMenuBaseTemplate {...props} />;
+const BaseStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const BaseExample = {
   render: BaseStory,
@@ -86,7 +90,10 @@ export const BaseExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с нижней серой полосой.">
-const UnderlineStory: StoryFn<typeof TabMenu> = (props) => <TabMenuUnderlineTemplate {...props} />;
+const UnderlineStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuUnderlineTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const UnderlineExample = {
   render: UnderlineStory,
@@ -105,7 +112,10 @@ export const UnderlineExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с задизейбленными табами.">
-const DisabledStory: StoryFn<typeof TabMenu> = (props) => <TabMenuDisabledTemplate {...props} />;
+const DisabledStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DisabledExample = {
   render: DisabledStory,
@@ -124,7 +134,10 @@ export const DisabledExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Пример с OverflowMenu.">
-const OverflowMenuStory: StoryFn<typeof TabMenu> = (props) => <TabMenuOverflowTemplate {...props} />;
+const OverflowMenuStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuOverflowTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const OverflowMenuExample = {
   render: OverflowMenuStory,
@@ -143,7 +156,10 @@ export const OverflowMenuExample = {
 //</editor-fold>
 
 //<editor-fold desc="TabMenu. Динамическое добавление вкладок.">
-const DynamicAddStory: StoryFn<typeof TabMenu> = (props) => <TabMenuDynamicAddTemplate {...props} />;
+const DynamicAddStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuDynamicAddTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const DynamicAddExample = {
   render: DynamicAddStory,

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import {
   SuggestField,
   INPUT_DIMENSIONS_VALUES,
@@ -122,7 +123,10 @@ export default {
 } as Meta<typeof SuggestField>;
 
 //<editor-fold desc="SuggestField example">
-const SuggestFieldExampleStory: StoryFn<typeof SuggestField> = (props) => <SuggestFieldExampleTemplate {...props} />;
+const SuggestFieldExampleStory: StoryFn<typeof SuggestField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SuggestFieldExampleTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SuggestFieldExample = {
   render: SuggestFieldExampleStory,

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { TextButtonMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TextButtonMenuPlaygroundTemplate } from './TextButtonMenuPlayground.template';
@@ -102,9 +103,10 @@ export default {
 } as Meta<typeof TextButtonMenu>;
 
 //<editor-fold desc="TextButtonMenu. Playground">
-const TextButtonMenuPlaygroundStory: StoryFn<typeof TextButtonMenu> = (props) => (
-  <TextButtonMenuPlaygroundTemplate {...props} />
-);
+const TextButtonMenuPlaygroundStory: StoryFn<typeof TextButtonMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextButtonMenuPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextButtonMenuPlayground = {
   render: TextButtonMenuPlaygroundStory,
@@ -144,9 +146,10 @@ export const TextButtonMenuDimension = {
 //</editor-fold>
 
 //<editor-fold desc="TextButtonMenu. С иконкой.">
-const TextButtonMenuWithIconStory: StoryFn<typeof TextButtonMenu> = (props) => (
-  <TextButtonMenuWithIconTemplate {...props} />
-);
+const TextButtonMenuWithIconStory: StoryFn<typeof TextButtonMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextButtonMenuWithIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const TextButtonMenuWithIcon = {
   render: TextButtonMenuWithIconStory,

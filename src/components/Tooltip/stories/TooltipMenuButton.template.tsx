@@ -12,8 +12,9 @@ const menuItems = [
 
 export const TooltipMenuButtonTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: ITooltipProps & { themeBorderKind?: BorderRadiusType }) => {
+}: ITooltipProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const menuModel = React.useMemo(() => {
     return menuItems.map((item) => ({
       id: String(item.id),
@@ -64,7 +65,7 @@ export const TooltipMenuButtonTemplate = ({
     [],
   );
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <MenuButton dimension="m" items={menuModel} style={{ marginRight: 20 }}>
         TEST
       </MenuButton>

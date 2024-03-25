@@ -64,8 +64,9 @@ const itemsDemoSizes: Array<TagOptionProps> = [
 
 export const TagMenuSizesTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: TagMenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: TagMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selectedM, setSelectedM] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
   const [selectedS, setSelectedS] = React.useState<TagOptionProps | undefined>(itemsDemoSizes[0]);
 
@@ -98,7 +99,7 @@ export const TagMenuSizesTemplate = ({
   }, [itemsDemoSizes]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TagMenu
         dimension="m"
         items={modelM}

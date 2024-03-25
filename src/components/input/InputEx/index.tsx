@@ -60,19 +60,19 @@ const Input = styled.input<ExtraProps>`
   text-overflow: ellipsis;
   padding: 0;
 
-  color: ${(props) => props.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   &&&:disabled {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   &::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 50']};
+    color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 
   &:disabled::placeholder {
-    color: ${(props) => props.theme.color['Neutral/Neutral 30']};
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
   [data-disable-copying] & {
@@ -81,15 +81,15 @@ const Input = styled.input<ExtraProps>`
   }
 
   &&&:user-invalid + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 1px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   &&&:user-invalid:hover:not(:disabled) + ${InputBorderedDiv} {
-    border: 1px solid ${(props) => props.theme.color['Error/Error 70']};
+    border: 1px solid var(--admiral-color-Error_Error70, ${(p) => p.theme.color['Error/Error 70']});
   }
 
   &&&:user-invalid:focus:not(:disabled) + ${InputBorderedDiv} {
-    border: 2px solid ${(props) => props.theme.color['Error/Error 60 Main']};
+    border: 2px solid var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
 
   ${ieFixes}
@@ -97,23 +97,27 @@ const Input = styled.input<ExtraProps>`
 
 const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
-  border-right: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
+  border-right: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-right: 8px;
   margin-right: 8px;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   white-space: nowrap;
 `;
 
 const SuffixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
   align-self: center;
-  border-left: solid 1px ${(props) => props.theme.color['Neutral/Neutral 20']};
+  border-left: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-left: 8px;
   margin-left: 8px;
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${(props) =>
-    props.disabled ? props.theme.color['Neutral/Neutral 30'] : props.theme.color['Neutral/Neutral 50']};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   white-space: nowrap;
 `;
 
@@ -123,7 +127,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   align-items: center;
 
   & > svg {
-    border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
     display: block;
     width: ${iconSizeValue}px;
 
@@ -133,7 +137,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
 
     &:focus-visible {
       outline-offset: 2px;
-      outline: ${(p) => p.theme.color['Primary/Primary 60 Main']} solid 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
 
@@ -156,13 +160,14 @@ const Container = styled.div<{
   align-items: stretch;
   overflow: hidden;
   border: none;
-  border-radius: ${(p) => (p.$skeleton ? 0 : mediumGroupBorderRadius(p.theme.shape))};
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
   padding: 0 ${horizontalPaddingValue}px;
-  background-color: ${(props) => props.theme.color['Neutral/Neutral 00']};
+  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
   &[data-read-only],
   &[data-disabled] {
-    background-color: ${(props) => props.theme.color['Neutral/Neutral 10']};
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
   }
 
   ${containerHeights}

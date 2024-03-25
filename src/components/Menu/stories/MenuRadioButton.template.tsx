@@ -50,17 +50,20 @@ const STORY_ITEMS: Array<StoryItem> = [
   },
 ];
 
+const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
+
 const Wrapper = styled.div`
-  border-radius: ${(p) => mediumGroupBorderRadius(p.theme.shape)};
+  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   border-color: transparent;
-  ${(p) => p.theme.shadow['Shadow 08']}
+  box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
 export const MenuRadioButtonTemplate = ({
   themeBorderKind,
+  CSSCustomProps,
   ...props
-}: MenuProps & { themeBorderKind?: BorderRadiusType }) => {
+}: MenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -75,7 +78,7 @@ export const MenuRadioButtonTemplate = ({
   }, [props.dimension]);
 
   return (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind)}>
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

@@ -39,7 +39,7 @@ export interface SelectTreeBranchProps {
 const Chevron = styled(ChevronRightOutline)<{ $isOpened?: boolean }>`
   transition: all 0.3s;
   & path {
-    fill: ${(p) => p.theme.color['Neutral/Neutral 50']};
+    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   width: 100%;
   height: 100%;
@@ -66,7 +66,7 @@ const ChevronWrapper = styled.div<{ $dimension?: Dimension }>`
       border-radius: 50%;
       width: calc(100% + 12px);
       height: calc(100% + 12px);
-      background-color: ${(p) => p.theme.color['Opacity/Hover']};
+      background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     }
   }
 `;
@@ -79,7 +79,7 @@ const TreeItem = styled.ul<{ $dimension?: Dimension }>`
 `;
 
 const Wrapper = styled.li<{ $dimension?: Dimension; $level: number }>`
-  color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])};
   display: flex;
   align-items: flex-start;

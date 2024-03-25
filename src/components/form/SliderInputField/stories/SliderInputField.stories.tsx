@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
+import { useGlobals } from '@storybook/preview-api';
 import { SliderInputField, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { SliderInputFieldPlaygroundTemplate } from './SliderInputFieldPlayground.template';
@@ -113,9 +114,10 @@ export default {
 } as Meta<typeof SliderInputField>;
 
 //<editor-fold desc="SliderInputField example">
-const SliderInputFieldPlaygroundStory: StoryFn<typeof SliderInputField> = (props) => (
-  <SliderInputFieldPlaygroundTemplate {...props} />
-);
+const SliderInputFieldPlaygroundStory: StoryFn<typeof SliderInputField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SliderInputFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const SliderInputFieldPlayground = {
   render: SliderInputFieldPlaygroundStory,

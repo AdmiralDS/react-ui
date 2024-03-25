@@ -16,7 +16,7 @@ const Wrapper = styled.div<{ $mobile?: boolean }>`
   flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')};
   flex: 1 1 auto;
   list-style: none;
-  color: ${({ theme }) => theme.color['Neutral/Neutral 90']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 const PagesWrapper = styled.ul`
   position: relative;
@@ -40,7 +40,7 @@ const Button = styled(SecondaryButton)`
 `;
 
 const PageSize = styled.div`
-  color: ${({ theme }) => theme.color['Neutral/Neutral 50']};
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   ${typography['Body/Body 1 Long']}
   margin-left: 16px;
 `;
