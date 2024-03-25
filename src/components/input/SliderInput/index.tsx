@@ -1,11 +1,18 @@
 import { forwardRef, useRef, useState, useEffect } from 'react';
 import type { ReactNode, ChangeEvent, HTMLAttributes, FocusEvent } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 import { Slider as SliderComponent } from '#src/components/Slider';
 import type { TextInputProps } from '#src/components/input/TextInput';
 
 import { NumberInput } from '#src/components/input/NumberInput';
-import { clearValue, fitToCurrency } from '#src/components/input/NumberInput/utils';
+import {
+  clearValue,
+  fitToCurrency,
+  getDecimalSeparator,
+  getThousandSeparator,
+  validateThousand,
+} from '#src/components/input/NumberInput/utils';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -62,8 +69,12 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
   renderTickMark?: (mark: string) => ReactNode;
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
-  /** разделитель между тысячами */
+  /** разделитель между тысячами. Если значение не задано,
+   * то оно определяется согласно локали, в русской локали thousand - это пробел */
   thousand?: string;
+  /** разделитель между целым и десятичным. Если значение не задано,
+   * то оно определяется согласно локали, в русской локали decimal - это запятая */
+  decimal?: string;
   /** префикс (строка, которая выводится перед числовым значением) */
   prefix?: string;
   /** суффикс (строка, которая выводится после числового значения) */
@@ -87,7 +98,8 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
       tickMarks,
       dimension = 'xl',
       precision = 0,
-      thousand = ' ',
+      thousand: userThousand,
+      decimal: userDecimal,
       prefix = '',
       suffix = '₽',
       placeholder = '0 ₽',
@@ -99,16 +111,21 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
     ref,
   ) => {
     const sliderDimension = dimension === 'xl' ? dimension : 'm';
-    // десятичный разделитель
-    const decimal = '.';
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const theme = useTheme() || LIGHT_THEME;
+    const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);
+    const thousand =
+      userThousand && validateThousand(userThousand)
+        ? userThousand.slice(0, 1)
+        : getThousandSeparator(theme.currentLocale);
 
     const [sliderValue, setSliderValue] = useState<number>(minValue);
     const [innerValueState, setInnerValueState] = useState(defaultValue || '');
     const innerValue = value ?? innerValueState;
 
     useEffect(() => {
-      setSliderValue(+clearValue(String(innerValue), precision, decimal));
+      setSliderValue(+clearValue(String(innerValue), precision, decimal).replace(decimal, '.'));
     }, [innerValue]);
 
     const handleSliderChange = (e: any, value: number) => {
@@ -128,7 +145,7 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
       onChange?.(full, short, event);
     };
     const handleInputBlur = (event: FocusEvent<HTMLInputElement>) => {
-      const numValue = Number(clearValue(event.target.value, precision, decimal));
+      const numValue = Number(clearValue(event.target.value, precision, decimal).replace(decimal, '.'));
 
       if (inputRef.current) {
         // если введеное значение меньше minValue

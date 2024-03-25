@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SliderRange } from '@admiral-ds/react-ui';
 
 export const SliderRangeControlledTemplate = () => {
-  const [value, setValue] = React.useState<[string, string]>(['2.0', '5.0']);
+  const [value, setValue] = React.useState<[string, string]>(['2,0', '5,0']);
   return (
     <SliderRange
       value={value}

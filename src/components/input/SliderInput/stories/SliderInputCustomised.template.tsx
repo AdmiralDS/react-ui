@@ -17,6 +17,7 @@ export const SliderInputCustomisedTemplate = ({
         onChange={(full, short, event) => console.log({ full, short, event })}
         suffix="$"
         thousand=","
+        decimal="."
         precision={3}
         placeholder="0.000 $"
       />
