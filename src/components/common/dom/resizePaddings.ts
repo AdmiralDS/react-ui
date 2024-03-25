@@ -1,6 +1,8 @@
+import { getComputedStyleProperty } from './getComputedStylePropertyValueAsNumber';
+
 export function resizePaddings(node: HTMLDivElement) {
   // Берем значение паддинга из начала блока для просчета симметричного отступа с обоих краев модалки
-  const leftPadding = (node.computedStyleMap().get('padding-inline-start') as CSSUnitValue)?.value ?? 0;
+  const leftPadding = getComputedStyleProperty(node, 'padding-inline-start') ?? 0;
 
   // Вычисляем ширину полоски скролла
   const paddingValue = leftPadding - (node.offsetWidth - node.clientWidth);
