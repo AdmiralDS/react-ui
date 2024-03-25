@@ -1,7 +1,8 @@
 import type { ChangeEvent, MouseEvent, FocusEvent, KeyboardEvent } from 'react';
 import { useState, useRef, useEffect, forwardRef, Children } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
 
+import { LIGHT_THEME } from '#src/components/themes';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
@@ -16,7 +17,7 @@ import { keyboardKey } from '../../common/keyboardKey';
 import { HeightLimitedContainer } from '../Container';
 
 import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } from './AutoSizeInput';
-import { clearValue, fitToCurrency, validateThousand } from './utils';
+import { clearValue, fitToCurrency, validateThousand, getDecimalSeparator, getThousandSeparator } from './utils';
 
 const extraPadding = css<ExtraProps>`
   padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
@@ -116,9 +117,11 @@ export interface NumberInputProps extends TextInputProps {
   prefix?: string;
   /** суффикс (строка, которая выводится после числового значения) */
   suffix?: string;
-  /** разделитель между тысячами */
+  /** разделитель между тысячами. Если значение не задано,
+   * то оно определяется согласно локали, в русской локали thousand - это пробел  */
   thousand?: string;
-  /** разделитель между целым и десятичным */
+  /** разделитель между целым и десятичным. Если значение не задано,
+   * то оно определяется согласно локали, в русской локали decimal - это запятая */
   decimal?: string;
   /** Шаг инпута. Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision */
   step?: number;
@@ -145,8 +148,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       prefix = '',
       suffix = '₽',
       precision = 2,
-      thousand: userThousand = ' ',
-      decimal: userDecimal = '.',
+      thousand: userThousand,
+      decimal: userDecimal,
       step = 1,
       minValue,
       maxValue,
@@ -166,19 +169,23 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const theme = useTheme() || LIGHT_THEME;
     // thousand, decimal - не более одного символа
-    const thousand = validateThousand(userThousand) ? userThousand.slice(0, 1) : ' ';
-    const decimal = userDecimal.slice(0, 1);
+    const thousand =
+      userThousand && validateThousand(userThousand)
+        ? userThousand.slice(0, 1)
+        : getThousandSeparator(theme.currentLocale);
+    const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);
 
     useEffect(() => {
       if (innerValue || innerValue === 0) {
         let minusDsb = false;
         let plusDsb = false;
         if (typeof minValue === 'number') {
-          minusDsb = Number(clearValue(String(innerValue), precision, decimal)) - step < minValue;
+          minusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) - step < minValue;
         }
         if (typeof maxValue === 'number') {
-          plusDsb = Number(clearValue(String(innerValue), precision, decimal)) + step > maxValue;
+          plusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) + step > maxValue;
         }
         setMinusDisabled(minusDsb);
         setPlusDisabled(plusDsb);
@@ -191,7 +198,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     const handleMinus = () => {
       const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal)) - step;
+      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
       const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
         if (typeof minValue === 'number') {
@@ -205,7 +212,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     };
     const handlePlus = () => {
       const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal)) + step;
+      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
       const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
         if (typeof maxValue === 'number') {
@@ -259,7 +266,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     /**
      * При потере фокуса:
      * если precision > 0, количество цифр после разделителя decimal должно быть равно precision.
-     * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70.' => '70.00' при precision={2}
+     * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70,' => '70,00' при precision={2}
      */
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
       const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);

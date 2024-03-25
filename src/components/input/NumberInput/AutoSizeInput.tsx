@@ -182,9 +182,9 @@ export interface InputProps extends TextInputProps {
   /** суффикс (строка, которая выводится после числового значения) */
   suffix?: string;
   /** разделитель между тысячами */
-  thousand?: string;
+  thousand: string;
   /** разделитель между целым и десятичным */
-  decimal?: string;
+  decimal: string;
   /** Минимальное значение */
   minValue?: number;
   /** Количество иконок */
@@ -204,8 +204,8 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       precision = 2,
       prefix = '',
       suffix,
-      thousand = ' ',
-      decimal = '.',
+      thousand,
+      decimal,
       status,
       minValue,
       iconCount,

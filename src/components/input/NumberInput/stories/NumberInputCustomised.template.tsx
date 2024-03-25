@@ -17,6 +17,7 @@ export const NumberInputCustomisedTemplate = ({
         }}
         suffix="$"
         thousand=","
+        decimal="."
         precision={1}
         placeholder="0.0 $"
       />

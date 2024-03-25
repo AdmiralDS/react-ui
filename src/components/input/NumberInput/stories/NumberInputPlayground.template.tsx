@@ -12,7 +12,7 @@ export const NumberInputPlaygroundTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <NumberInput
         prefix="От"
-        defaultValue="2.00"
+        defaultValue="2,00"
         onChange={(event) => {
           console.log(event.target.value);
         }}

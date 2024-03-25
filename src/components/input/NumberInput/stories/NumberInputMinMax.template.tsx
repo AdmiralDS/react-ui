@@ -4,11 +4,15 @@ import type { BorderRadiusType, NumberInputProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
+function convertStrToNum(str: string, precision: number, decimal: string) {
+  return Number(clearValue(str, precision, decimal).replace(decimal, '.'));
+}
+
 export const NumberInputMinMaxTemplate = ({
   minValue = -1000,
   maxValue = 2000,
   precision = 2,
-  decimal,
+  decimal = ',',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -16,7 +20,7 @@ export const NumberInputMinMaxTemplate = ({
   const [status, setStatus] = useState<NumberInputProps['status'] | undefined>(undefined);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const numValue = Number(clearValue(event.target.value, precision, decimal));
+    const numValue = convertStrToNum(event.target.value, precision, decimal);
     if (event.target.value && (numValue < minValue || numValue > maxValue)) {
       setStatus('error');
     } else {
