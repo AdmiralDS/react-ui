@@ -10,8 +10,9 @@ export const SliderRangeControlledTemplate = () => {
         console.log(value);
         setValue([value[0].str, value[1].str]);
       }}
-      prefix={['From', 'To']}
-      suffix="$"
+      prefix={['От', 'До']}
+      suffix="₽"
+      placeholder={['От 0,0 ₽', 'До 0,0 ₽']}
       precision={1}
     />
   );

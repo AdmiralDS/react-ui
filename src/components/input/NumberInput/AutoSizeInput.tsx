@@ -202,7 +202,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       type,
       precision = 2,
-      prefix = '',
+      prefix,
       suffix,
       thousand,
       decimal,

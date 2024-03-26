@@ -42,6 +42,7 @@ export const NumberInputMinMaxTemplate = ({
         status={status}
         precision={precision}
         decimal={decimal}
+        placeholder="Введите число"
       />
     </ThemeProvider>
   );

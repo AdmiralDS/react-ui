@@ -9,6 +9,7 @@ export const SliderRangeCustomTemplate = () => {
       maxValue={100}
       prefix={['From', 'To']}
       suffix="$"
+      placeholder={['From 0 $', 'To 0 $']}
     />
   );
 };

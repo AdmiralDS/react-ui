@@ -29,9 +29,9 @@ export const NumberInputControlledTemplate = () => {
           console.log(event.target.value);
           setValue1(event.target.value);
         }}
-        prefix="From"
-        suffix="$"
-        placeholder="From 0 $"
+        prefix="От"
+        suffix="₽"
+        placeholder="От 0 ₽"
         style={{ marginBottom: '40px' }}
       />
       <NumberInput
