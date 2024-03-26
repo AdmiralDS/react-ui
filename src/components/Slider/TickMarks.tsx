@@ -63,7 +63,7 @@ export const TickMarks = ({
 }: TickMarksProps) => {
   const theme = useTheme() || LIGHT_THEME;
   const thousand =
-    userThousand && validateThousand(userThousand)
+    typeof userThousand !== 'undefined' && validateThousand(userThousand)
       ? userThousand.slice(0, 1)
       : getThousandSeparator(theme.currentLocale);
   const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);

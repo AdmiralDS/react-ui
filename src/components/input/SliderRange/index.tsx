@@ -87,9 +87,9 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   precision = 0,
   thousand: userThousand,
   decimal: userDecimal,
-  prefix = ['', ''],
+  prefix,
   suffix,
-  placeholder = ['', ''],
+  placeholder,
   value,
   defaultValue,
   onChange,
@@ -105,7 +105,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   const theme = useTheme() || LIGHT_THEME;
   const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);
   const thousand =
-    userThousand && validateThousand(userThousand)
+    typeof userThousand !== 'undefined' && validateThousand(userThousand)
       ? userThousand.slice(0, 1)
       : getThousandSeparator(theme.currentLocale);
 
@@ -225,8 +225,8 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
         <NumberInput
           ref={input1Ref}
           value={input1}
-          prefix={prefix[0]}
-          placeholder={placeholder[0]}
+          prefix={prefix?.[0]}
+          placeholder={placeholder?.[0]}
           skeleton={skeleton}
           onChange={handleInput1Change}
           onBlur={handleInput1Blur}
@@ -236,8 +236,8 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
         <NumberInput
           ref={input2Ref}
           value={input2}
-          prefix={prefix[1]}
-          placeholder={placeholder[1]}
+          prefix={prefix?.[1]}
+          placeholder={placeholder?.[1]}
           skeleton={skeleton}
           onChange={handleInput2Change}
           onBlur={handleInput2Blur}

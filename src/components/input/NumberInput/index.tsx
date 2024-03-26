@@ -172,7 +172,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     const theme = useTheme() || LIGHT_THEME;
     // thousand, decimal - не более одного символа
     const thousand =
-      userThousand && validateThousand(userThousand)
+      typeof userThousand !== 'undefined' && validateThousand(userThousand)
         ? userThousand.slice(0, 1)
         : getThousandSeparator(theme.currentLocale);
     const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);

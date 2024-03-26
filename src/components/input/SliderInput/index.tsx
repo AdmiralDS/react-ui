@@ -116,7 +116,7 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
     const theme = useTheme() || LIGHT_THEME;
     const decimal = userDecimal?.slice(0, 1) ?? getDecimalSeparator(theme.currentLocale);
     const thousand =
-      userThousand && validateThousand(userThousand)
+      typeof userThousand !== 'undefined' && validateThousand(userThousand)
         ? userThousand.slice(0, 1)
         : getThousandSeparator(theme.currentLocale);
 
@@ -125,7 +125,7 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
     const innerValue = value ?? innerValueState;
 
     useEffect(() => {
-      setSliderValue(+clearValue(String(innerValue), precision, decimal).replace(decimal, '.'));
+      setSliderValue(Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')));
     }, [innerValue]);
 
     const handleSliderChange = (e: any, value: number) => {
