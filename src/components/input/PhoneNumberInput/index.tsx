@@ -92,6 +92,7 @@ const PhoneInputDropContainer = styled(StyledDropdownContainer)`
 `;
 
 const FlagContainer = styled.div<{ $dimension: Dimension }>`
+  line-height: initial;
   width: ${(p) => (p.$dimension === 's' ? '18' : '22')}px;
 `;
 
