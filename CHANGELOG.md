@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/AdmiralDS/react-ui/compare/v7.15.0...v8.0.0) (2024-03-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **NumberInput, SliderInput, SliderRange:** в компонентах удалены значения по умолчанию для параметров placeholder, prefix, suffix
+* **Slider:** в Slider удалены значения по умолчанию для параметров decimal и thousand. Если параметры decimal и thousand не заданы, то их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно)
+* **SliderInput, SliderRange:** в компонентах удалено значение по умолчанию для параметра thousand, и добавлен новый параметр decimal. Если параметры thousand и decimal не заданы, то их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно)
+* **NumberInput:** в NumberInput удалены значения по умолчанию для параметров decimal и thousand. Если данные параметры не заданы, их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно). В утилите clearValue параметр decimal теперь равен запятой по умолчанию
+
+### Features
+
+* **NumberInput:** добавлен функционал автозамены десятичного разделителя, н-р, при decimal равным запятой, введенная точка автоматически заменяется на запятую ([cb9ac67](https://github.com/AdmiralDS/react-ui/commit/cb9ac671f62eda0e67bee2641908c3ceb4299807))
+
+
+### Bug Fixes
+
+* **PhoneNumberInput:** Исправлено смещение иконки флага при изменении line-height на контейнере ([a49203e](https://github.com/AdmiralDS/react-ui/commit/a49203e93394bdf7eb375f56c0fdde76843d29ee)), closes [#1043](https://github.com/AdmiralDS/react-ui/issues/1043)
+
+
+* **NumberInput, SliderInput, SliderRange:** в компонентах удалены значения по умолчанию для параметров placeholder, prefix, suffix ([04b8bd8](https://github.com/AdmiralDS/react-ui/commit/04b8bd815304e7a01b1b06d3ff7afb25355dc0ed))
+* **NumberInput:** в NumberInput удалены значения по умолчанию для параметров decimal и thousand. Если данные параметры не заданы, их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно). В утилите clearValue параметр decimal теперь равен запятой по умолчанию ([b75534f](https://github.com/AdmiralDS/react-ui/commit/b75534faac5b50872a8b9b0845cd5cc6906029ea))
+* **SliderInput, SliderRange:** в компонентах удалено значение по умолчанию для параметра thousand, и добавлен новый параметр decimal. Если параметры thousand и decimal не заданы, то их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно) ([98b348f](https://github.com/AdmiralDS/react-ui/commit/98b348f0b7bc619c6f38b2cfe61c2fe8dbf17fb4))
+* **Slider:** в Slider удалены значения по умолчанию для параметров decimal и thousand. Если параметры decimal и thousand не заданы, то их значения определяются согласно локали (в русской локали это символы запятой и пробела соответственно) ([128e09b](https://github.com/AdmiralDS/react-ui/commit/128e09b711631416970d1691576e64647b9b5c6b))
+
 ## [7.15.0](https://github.com/AdmiralDS/react-ui/compare/v7.14.2...v7.15.0) (2024-03-25)
 
 
