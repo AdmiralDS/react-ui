@@ -9,13 +9,13 @@ export const repeatStringNumTimes = (str: string, n: number) => {
 };
 
 /**
- * Возвращает входную строку str, из которой удалены все символы кроме цифр, символа decimal (по умолчанию точки) и минуса
+ * Возвращает входную строку str, из которой удалены все символы кроме цифр, символа decimal (по умолчанию запятая) и минуса
  * @param str входная строка
  * @param precision точность (количество знаков после точки)
- * @param decimal десятичный разделитель (по умолчанию точка)
+ * @param decimal десятичный разделитель (по умолчанию запятая)
  * @param minValue если minValue >= 0, то при форматировании из строки будут удалены знаки минуса
  */
-export const clearValue = (str: string, precision: number, decimal = '.', minValue?: number) => {
+export const clearValue = (str: string, precision: number, decimal = ',', minValue?: number) => {
   let validChars =
     precision > 0
       ? [decimal, '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -37,11 +37,11 @@ export const clearValue = (str: string, precision: number, decimal = '.', minVal
         .filter((char) => char !== '-')
         .join('');
   }
-  // если введено '-.', нужно заменить на '-0.'
+  // если введено '-,', нужно заменить на '-0,'
   if (newStr[0] === '-' && newStr[1] === decimal) {
     newStr = newStr[0] + '0' + newStr.slice(1, newStr.length);
   }
-  // оставляем только самую первую из введенных точек
+  // оставляем только самый первый из введенных decimal
   if (newStr.indexOf(decimal) > -1) {
     const firstDecimalIndex = newStr.indexOf(decimal);
     newStr = newStr
@@ -49,7 +49,7 @@ export const clearValue = (str: string, precision: number, decimal = '.', minVal
       .filter((char, index) => char !== decimal || (char === decimal && index === firstDecimalIndex))
       .join('');
   }
-  // если число начинается с нуля, то после него можно вводить только десятичный разделитель (decimal, по умолчанию точка)
+  // если число начинается с нуля, то после него можно вводить только десятичный разделитель (decimal)
   // если после нуля введено нечто отличное от decimal, то оно заменяет собой ноль. Например 05 -> 5, -0122 ->  -122
   if (newStr[0] === '0' && newStr[1] !== decimal && newStr.length >= 2) {
     newStr = newStr.slice(1, newStr.length);
@@ -63,6 +63,17 @@ export const clearValue = (str: string, precision: number, decimal = '.', minVal
 // возвращает строку с обратным порядоком символов
 const reverseString = (str: string) => {
   return str.split('').reverse().join('');
+};
+
+// Заменяет введенные [',', '.'] на символ decimal
+const replaceByDecimal = (str: string, decimal: string, thousand: string) => {
+  const validChars = [decimal, thousand];
+  const replaceableChars = [',', '.'];
+  let newStr = str
+    .split('')
+    .map((char) => (replaceableChars.includes(char) && !validChars.includes(char) ? decimal : char))
+    .join('');
+  return newStr;
 };
 
 export const validateThousand = (thousand: string): boolean => {
@@ -93,7 +104,8 @@ export function fitToCurrency(
     return value;
   }
 
-  let strDecimal = clearValue(String(value), precision, decimal, minValue);
+  let strDecimal = replaceByDecimal(String(value), decimal, thousand);
+  strDecimal = clearValue(strDecimal, precision, decimal, minValue);
   if (strDecimal === '') {
     return '';
   }
@@ -155,3 +167,29 @@ export function fitToCurrency(
 
   return newValue;
 }
+
+/** Returns the `decimal` number separator based on locale */
+export const getDecimalSeparator = (locale: string) => {
+  const testNumber = 1.9;
+  const testText = testNumber.toLocaleString(locale);
+  const one = (1).toLocaleString(locale);
+  const nine = (9).toLocaleString(locale);
+  const pattern = `${one}(.+)${nine}`;
+
+  const result = new RegExp(pattern).exec(testText);
+
+  return (result && result[1]) || ',';
+};
+
+/** Returns the `thousand` number separator based on locale */
+export const getThousandSeparator = (locale: string) => {
+  const testNumber = 1900;
+  const testText = testNumber.toLocaleString(locale);
+  const one = (1).toLocaleString(locale);
+  const nine = (900).toLocaleString(locale);
+  const pattern = `${one}(.+)${nine}`;
+
+  const result = new RegExp(pattern).exec(testText);
+
+  return (result && result[1]) || ' ';
+};

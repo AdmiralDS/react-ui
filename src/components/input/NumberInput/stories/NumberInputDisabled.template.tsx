@@ -10,7 +10,7 @@ export const NumberInputDisabledTemplate = ({
 }: NumberInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <NumberInput {...props} disabled />
+      <NumberInput {...props} disabled placeholder="0 ₽" />
     </ThemeProvider>
   );
 };

@@ -17,7 +17,7 @@ function declOfNum(n: number, text_forms: Array<string>) {
 }
 
 export const NumberInputControlledTemplate = () => {
-  const [value1, setValue1] = useState<string | undefined>('50.00');
+  const [value1, setValue1] = useState<string | undefined>('50,00');
   const [value2, setValue2] = useState<string | undefined>('1');
   const [suffix, setSuffix] = useState('минута');
 
@@ -29,9 +29,9 @@ export const NumberInputControlledTemplate = () => {
           console.log(event.target.value);
           setValue1(event.target.value);
         }}
-        prefix="From"
-        suffix="$"
-        placeholder="From 0 $"
+        prefix="От"
+        suffix="₽"
+        placeholder="От 0 ₽"
         style={{ marginBottom: '40px' }}
       />
       <NumberInput

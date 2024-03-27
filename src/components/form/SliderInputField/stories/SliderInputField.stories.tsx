@@ -91,6 +91,9 @@ export default {
     thousand: {
       control: { type: 'text' },
     },
+    decimal: {
+      control: { type: 'text' },
+    },
     minValue: {
       control: { type: 'number' },
     },

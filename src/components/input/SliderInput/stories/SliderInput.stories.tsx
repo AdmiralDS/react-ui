@@ -63,6 +63,9 @@ export default {
     thousand: {
       control: { type: 'text' },
     },
+    decimal: {
+      control: { type: 'text' },
+    },
     prefix: {
       control: { type: 'text' },
     },

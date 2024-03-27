@@ -5,12 +5,16 @@ import { NumberInputField, clearValue } from '@admiral-ds/react-ui';
 import type { NumberInputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
+function convertStrToNum(str: string, precision: number, decimal: string) {
+  return Number(clearValue(str, precision, decimal).replace(decimal, '.'));
+}
+
 export const NumberInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
   precision = 0,
   maxValue = 10000,
-  decimal,
+  decimal = ',',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -19,7 +23,7 @@ export const NumberInputFieldPlaygroundTemplate = ({
   const [extraText, setExtraText] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const numValue = Number(clearValue(event.target.value, precision, decimal));
+    const numValue = convertStrToNum(event.target.value, precision, decimal);
     if (event.target.value && numValue > maxValue) {
       setStatus('error');
       setExtraText('Достигнуто максимальное значение');
