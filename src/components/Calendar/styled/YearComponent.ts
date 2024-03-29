@@ -34,7 +34,7 @@ export const YearComponent = styled.div<YearComponentProps>`
   ${({ disabled, theme }) =>
     disabled &&
     `
-      cursor: default;
+      cursor: not-allowed;
       color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
     `}
 

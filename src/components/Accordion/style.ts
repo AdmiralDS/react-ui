@@ -62,11 +62,11 @@ export const ItemTitle = styled.button`
   background: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   ${typography['Subtitle/Subtitle 2']}
   &:hover {
+    cursor: pointer;
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
@@ -88,18 +88,21 @@ export const ItemTitle = styled.button`
     outline: none;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   [data-dimension='m'] & {
     min-height: 38px;
     ${typography['Subtitle/Subtitle 3']}
   }
 `;
 
-export const ItemWrapper = styled.div<{ $opened?: boolean; disabled?: boolean }>`
+export const ItemWrapper = styled.div<{ $opened?: boolean }>`
   border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   & > ${ItemTitle} ${Chevron} {
     transform: ${(p) => (p.$opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
-  ${({ disabled }) => disabled && 'pointer-events: none;'}
 `;
 
 export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`

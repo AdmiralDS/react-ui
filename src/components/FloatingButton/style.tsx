@@ -95,7 +95,7 @@ export const FloatingButtonWrapper = styled.button<{
   margin: 0;
   padding: 0;
   ${dimensionMixin};
-  cursor: ${(p) => (p.disabled ? 'default' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   ${focusVisibleStyle}
 `;

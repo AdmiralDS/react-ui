@@ -63,7 +63,7 @@ export default {
       control: { type: 'text' },
     },
     showTooltip: {
-      control: false,
+      control: { type: 'boolean' },
     },
     isMenuAvatar: {
       control: false,
