@@ -206,7 +206,7 @@ export const Range = ({
   };
 
   return (
-    <Wrapper data-disabled={disabled} {...props}>
+    <Wrapper data-disabled={disabled} $disabled={disabled} $skeleton={skeleton} {...props}>
       <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
           <FilledTrack ref={filledRef} $animation={animation} />

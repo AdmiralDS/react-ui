@@ -138,28 +138,6 @@ export const ScrollTableBody = styled.div`
   flex: 1 1 auto;
 `;
 
-export const ExpandIconWrapper = styled.div<{ disabled?: boolean }>`
-  position: relative;
-  display: flex;
-  flex: 1 0 auto;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  &:hover {
-    &:before {
-      position: absolute;
-      content: '';
-      top: -6px;
-      bottom: -6px;
-      left: -6px;
-      right: -6px;
-      border-radius: 50%;
-      background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
-    }
-  }
-  ${({ disabled }) => disabled && 'pointer-events: none;'}
-`;
-
 export const ExpandIcon = styled(ChevronDownOutline)<{ $isOpened?: boolean }>`
   transition: transform 0.3s ease-in-out;
   transform: rotate(${(p) => (p.$isOpened ? 180 : 0)}deg);
@@ -208,7 +186,7 @@ export const SortOrder = styled.div`
 export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   display: flex;
   flex-shrink: 0;
-  cursor: pointer;
+  cursor: ${(p) => (p.$disabled ? 'not-allowed' : 'pointer')};
   & *[fill^='#'] {
     fill: ${({ theme, $disabled }) =>
       $disabled
@@ -413,7 +391,7 @@ export const Row = styled.div<{
   ${({ $underline }) => $underline && underlineRow}
   ${({ $rowWidth }) => $rowWidth && rowWidthStyle}
    &:hover:is(.hoverable) {
-    ${({ $hover }) => $hover && rowHoverMixin}
+    ${({ $hover, disabled }) => $hover && !disabled && rowHoverMixin}
   }
 
   &[data-dragover='true'] > * {

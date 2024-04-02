@@ -63,9 +63,12 @@ const Indeterminate = styled(IndeterminateSVG)`
 
 const Container = styled.div<{
   $dimension: CheckboxDimension;
+  $disabled?: boolean;
+  $readOnly?: boolean;
 }>`
   position: relative;
   box-sizing: border-box;
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : props.$readOnly ? 'default' : 'pointer')};
 
   overflow: visible;
   ${width};
@@ -139,7 +142,6 @@ const activeCss = css`
 `;
 
 const disabledCss = css`
-  pointer-events: none;
   & + ${Background} {
     border: 1px solid var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
@@ -178,13 +180,19 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   margin: 0;
   padding: 0;
 
-  ${(props) => props.readOnly && disabledCss}
+  ${(props) =>
+    props.readOnly &&
+    css`
+      pointer-events: none;
+      ${disabledCss}
+    `}
 
   &:checked + ${Background} {
     ${(props) => (props.readOnly ? disabledCheckedBackgroundCss : checkedBackgroundCss)}
   }
 
   &:disabled {
+    cursor: not-allowed;
     ${disabledCss};
   }
 
@@ -223,7 +231,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
     };
 
     return (
-      <Container $dimension={dimension} className={className}>
+      <Container $dimension={dimension} $disabled={disabled} $readOnly={readOnly} className={className}>
         <Input
           ref={ref}
           disabled={disabled}
