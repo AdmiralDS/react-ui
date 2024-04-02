@@ -22,10 +22,7 @@ const Input = styled(TextInput)`
 `;
 
 function toUTCDateIsoString(date: Date): string {
-  const newDate = new Date(date);
-  newDate.setUTCDate(newDate.getDate());
-  newDate.setUTCHours(0, 0, 0, 0);
-  return newDate.toISOString();
+  return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
 }
 
 // IE11 fix toLocaleDateString('ru') extra invisible characters by using .replace(/[^ -~]/g,'')
