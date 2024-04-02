@@ -142,6 +142,7 @@ const activeCss = css`
 `;
 
 const disabledCss = css`
+  pointer-events: none;
   & + ${Background} {
     border: 1px solid var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
@@ -180,12 +181,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   margin: 0;
   padding: 0;
 
-  ${(props) =>
-    props.readOnly &&
-    css`
-      pointer-events: none;
-      ${disabledCss}
-    `}
+  ${(props) => props.readOnly && disabledCss}
 
   &:checked + ${Background} {
     ${(props) => (props.readOnly ? disabledCheckedBackgroundCss : checkedBackgroundCss)}

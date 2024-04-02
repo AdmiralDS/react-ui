@@ -83,6 +83,27 @@ const paddings = css<{ $dimension: ChipDimension }>`
   }};
 `;
 
+const chipTypographyHover = css<{
+  $dimension: ChipDimension;
+  $disabled?: boolean;
+  $selected?: boolean;
+  $appearance?: ChipAppearance;
+}>`
+  &:hover {
+    color: ${({ theme, $appearance, $selected }) => {
+      if ($selected) {
+        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
+      }
+
+      if ($appearance === 'filled' && !$selected) {
+        return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
+      } else {
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      }
+    }};
+  }
+`;
+
 const chipTypography = css<{
   $dimension: ChipDimension;
   $disabled?: boolean;
@@ -104,19 +125,7 @@ const chipTypography = css<{
       : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
   }};
 
-  &:hover {
-    color: ${({ theme, $appearance, $selected }) => {
-      if ($selected) {
-        return `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`;
-      }
-
-      if ($appearance === 'filled' && !$selected) {
-        return `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`;
-      } else {
-        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
-      }
-    }};
-  }
+  ${($disabled) => !$disabled && chipTypographyHover}
 `;
 
 const actionsMixin = css<{
@@ -191,7 +200,7 @@ const colorsBorderAndBackground = css<{
 
   border-radius: 16px;
 
-  ${(p) => p.$clickable && actionsMixin}
+  ${(p) => p.$clickable && !p.$disabled && actionsMixin}
 
   &:focus-visible {
     outline: 0;
@@ -227,9 +236,11 @@ export const ChipComponentStyled = styled.div<{
   position: relative;
   max-width: 190px;
   user-select: none;
-  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
+  & > * {
+    pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
+  }
   cursor: ${({ $defaultChip, $disabled, $withTooltip }) =>
-    ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : 'default'};
+    ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : $disabled ? 'not-allowed' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
   ${(p) => (p.$withCloseIcon ? `padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}

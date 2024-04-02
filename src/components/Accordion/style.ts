@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { typography } from '#src/components/Typography';
 import { DefaultFontColorName } from '#src/components/themes/common';
@@ -48,23 +48,7 @@ export const TitleContent = styled.span`
   flex: 1 1 auto;
 `;
 
-export const ItemTitle = styled.button`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 54px;
-  width: 100%;
-  background: transparent;
-  -webkit-tap-highlight-color: transparent;
-  text-align: left;
-  border: none;
-  background: none;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
-  ${typography['Subtitle/Subtitle 2']}
+const eventsMixin = css`
   &:hover {
     cursor: pointer;
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
@@ -86,6 +70,29 @@ export const ItemTitle = styled.button`
   &:focus,
   & > ${ItemTitleContent} {
     outline: none;
+  }
+`;
+
+export const ItemTitle = styled.button`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 54px;
+  width: 100%;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
+  ${typography['Subtitle/Subtitle 2']}
+
+  &:not(:disabled) {
+    ${eventsMixin}
   }
 
   &:disabled {

@@ -43,7 +43,7 @@ export const ContentSwitcherItemButton = styled.button<{
 }>`
   border: none;
   border-radius: ${BORDER_RADIUS}px;
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   display: flex;
   align-items: center;
   position: relative;
