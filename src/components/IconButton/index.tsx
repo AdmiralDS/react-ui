@@ -24,6 +24,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
 
 const StyledButton = styled.button<{
   $skeleton?: boolean;
+  $loading?: boolean;
   $appearance?: IconButtonAppearance;
 }>`
   box-sizing: border-box;
@@ -58,7 +59,7 @@ const StyledButton = styled.button<{
   }
 
   &:hover {
-    cursor: pointer;
+    cursor: ${({ $skeleton }) => ($skeleton ? 'default' : 'pointer')};
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     & *[fill^='#'] {
       fill: ${(p) =>
@@ -78,7 +79,7 @@ const StyledButton = styled.button<{
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: ${({ $loading }) => ($loading ? 'default' : 'not-allowed')};
     background-color: transparent;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
@@ -167,6 +168,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         disabled={disabledOptions}
         type={type}
         $skeleton={skeleton}
+        $loading={loading}
         $appearance={appearance}
         {...props}
       >
