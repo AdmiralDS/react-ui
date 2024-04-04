@@ -11,7 +11,7 @@ export const Separator = styled(ChevronRight)`
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: 4px;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
