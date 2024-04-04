@@ -49,7 +49,20 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const wrapperRef = React.useRef<HTMLOListElement>(null);
   const overflowRef = React.useRef<HTMLOListElement>(null);
   const hasMounted = React.useRef(false);
-  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({ 0: true });
+  const [visibilityMap, setVisibilityMap] = React.useState<{ [index: number | string]: boolean }>({
+    0: true,
+    [items.length - 1]: true,
+  });
+  const [opacity, setOpacity] = React.useState(false);
+
+  // При первичном рендере wrapper не видим (opacity: 0).
+  // wrapper станет видимым после того, как отработает IntersectionObserver и будет определено,
+  // какие items показывать, а какие спрятать в меню
+  React.useEffect(() => {
+    if (wrapperRef.current && opacity) {
+      wrapperRef.current.style.opacity = '1';
+    }
+  }, [opacity]);
 
   React.useEffect(() => {
     if (!hasMounted.current) {
@@ -102,6 +115,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       ...prev,
       ...updatedEntries,
     }));
+    setOpacity(true);
   };
 
   React.useLayoutEffect(() => {
@@ -116,7 +130,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [mobile, setVisibilityMap, items]);
+  }, [mobile, setVisibilityMap, setOpacity, items]);
 
   const renderFirstItem = React.useCallback(() => {
     const item = items[0];

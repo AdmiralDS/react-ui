@@ -39,6 +39,7 @@ export const Wrapper = styled.ol<{ $mobile?: boolean }>`
   list-style: none;
   padding: 0;
   margin: 0;
+  opacity: 0;
   flex-wrap: nowrap;
   overflow-x: ${({ $mobile }) => ($mobile ? 'scroll' : 'visible')};
   overflow-y: visible;
