@@ -69,7 +69,7 @@ const reverseString = (str: string) => {
 const replaceByDecimal = (str: string, decimal: string, thousand: string) => {
   const validChars = [decimal, thousand];
   const replaceableChars = [',', '.'];
-  let newStr = str
+  const newStr = str
     .split('')
     .map((char) => (replaceableChars.includes(char) && !validChars.includes(char) ? decimal : char))
     .join('');
