@@ -152,7 +152,7 @@ export const Tab = styled.button<{ $dimension: Dimension; $selected: boolean }>`
   }
   &:disabled {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-    cursor: default;
+    cursor: not-allowed;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }

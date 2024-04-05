@@ -61,7 +61,7 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
   }
 
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
