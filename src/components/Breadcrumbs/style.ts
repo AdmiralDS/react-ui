@@ -11,7 +11,7 @@ export const Separator = styled(ChevronRight)`
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: 4px;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -39,6 +39,7 @@ export const Wrapper = styled.ol<{ $mobile?: boolean }>`
   list-style: none;
   padding: 0;
   margin: 0;
+  opacity: 0;
   flex-wrap: nowrap;
   overflow-x: ${({ $mobile }) => ($mobile ? 'scroll' : 'visible')};
   overflow-y: visible;

@@ -40,6 +40,10 @@ const IconContainer = styled.div<{ $dimension: MenuButtonProps['dimension'] }>`
 
 const MenuItemWithTooltip = TooltipHoc(MenuItem);
 
+const OverflowMenuStyled = styled(OverflowMenu)`
+  margin: 0 4px 0 4px;
+`;
+
 export interface MenuButtonProps {
   /** Размер меню */
   dimension: 'm' | 's';
@@ -94,7 +98,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
   }, [options]);
 
   return (
-    <OverflowMenu
+    <OverflowMenuStyled
       dimension={dimension}
       items={model}
       dropContainerCssMixin={dropContainerCssMixin}
