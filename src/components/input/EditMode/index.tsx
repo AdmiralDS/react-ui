@@ -1,6 +1,5 @@
 import type { ChangeEventHandler, MouseEvent } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { css } from 'styled-components';
 
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -166,7 +165,12 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
               <Tooltip renderContent={() => value} targetElement={textRef.current} />
             )}
             {!props.readOnly && (
-              <EditIcon $multiline={multilineView} height={iconSize} width={iconSize} onClick={enableEdit} />
+              <EditIcon
+                $multiline={multilineView}
+                height={iconSize}
+                width={iconSize}
+                onClick={disabled ? undefined : enableEdit}
+              />
             )}
           </>
         )}

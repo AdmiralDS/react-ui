@@ -91,6 +91,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
       : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
   ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   overflow: hidden;
+  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
 
   &:hover:not(:focus-within) ${BorderedDiv} {
     border: 1px solid

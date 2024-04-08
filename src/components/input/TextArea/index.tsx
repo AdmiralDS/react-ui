@@ -161,6 +161,10 @@ const HiddenSpanContainer = styled.div<TextBlockProps>`
   overflow-x: hidden;
   overflow-y: auto;
   ${textBlockStyleMixin}
+
+  [data-disable-copying] & {
+    cursor: default;
+  }
 `;
 
 const Text = styled.textarea<ExtraProps>`
@@ -186,6 +190,7 @@ const Text = styled.textarea<ExtraProps>`
 
   &:disabled::placeholder,
   &:disabled {
+    cursor: not-allowed;
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
@@ -237,10 +242,12 @@ const StyledContainer = styled(Container)<{
   $rows: number;
   $maxRows?: number;
   $dimension: ComponentDimension;
+  disabled?: boolean;
 }>`
   min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension)}px;
   ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension)}px;` : '')}
   ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
+  ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
 
 function toHtmlString(value?: string) {
@@ -390,6 +397,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         $skeleton={skeleton}
+        disabled={props.disabled}
         data-disable-copying={disableCopying ? true : undefined}
         $autoHeight={!!autoHeight}
         $rows={rows}

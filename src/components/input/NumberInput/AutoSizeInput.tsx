@@ -135,6 +135,10 @@ const Input = styled.input<ExtraProps & { $align?: 'left' | 'right' }>`
     pointer-events: none;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   ${colorsBorderAndBackground}
   ${ieFixes}
 `;
