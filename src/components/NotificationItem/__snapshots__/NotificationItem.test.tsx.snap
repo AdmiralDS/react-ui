@@ -111,7 +111,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c7:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c7:disabled *[fill^='#'] {
@@ -381,7 +381,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c7:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c7:disabled *[fill^='#'] {

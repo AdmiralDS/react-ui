@@ -11,7 +11,6 @@ const loadingKeyframes = keyframes`
 `;
 
 export const skeletonMixin = css`
-  cursor: progress;
   background-image: linear-gradient(0.25turn, transparent, #fff, transparent), linear-gradient(#eee, #eee),
     radial-gradient(38px circle at 19px 19px, #eee 50%, transparent 51%), linear-gradient(#eee, #eee);
   background-repeat: no-repeat;

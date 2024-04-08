@@ -64,7 +64,6 @@ exports[`Spinner should render component with dimension m 1`] = `
   background: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
@@ -76,15 +75,16 @@ exports[`Spinner should render component with dimension m 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:hover {
+.c4:not(:disabled):hover {
+  cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:active {
+.c4:not(:disabled):active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:focus:before {
+.c4:not(:disabled):focus:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -94,9 +94,13 @@ exports[`Spinner should render component with dimension m 1`] = `
   right: 0;
 }
 
-.c4:focus,
-.c4>.c5 {
+.c4:not(:disabled):focus,
+.c4:not(:disabled)>.c5 {
   outline: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
 }
 
 [data-dimension='m'] .c4 {
@@ -351,7 +355,6 @@ exports[`Spinner should render component with dimension m 1`] = `
   background: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
@@ -363,15 +366,16 @@ exports[`Spinner should render component with dimension m 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:hover {
+.c4:not(:disabled):hover {
+  cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:active {
+.c4:not(:disabled):active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:focus:before {
+.c4:not(:disabled):focus:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -381,9 +385,13 @@ exports[`Spinner should render component with dimension m 1`] = `
   right: 0;
 }
 
-.c4:focus,
-.c4>.c5 {
+.c4:not(:disabled):focus,
+.c4:not(:disabled)>.c5 {
   outline: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
 }
 
 [data-dimension='m'] .c4 {
@@ -693,7 +701,6 @@ exports[`Spinner should render default component 1`] = `
   background: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
@@ -705,15 +712,16 @@ exports[`Spinner should render default component 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:hover {
+.c4:not(:disabled):hover {
+  cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:active {
+.c4:not(:disabled):active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:focus:before {
+.c4:not(:disabled):focus:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -723,9 +731,13 @@ exports[`Spinner should render default component 1`] = `
   right: 0;
 }
 
-.c4:focus,
-.c4>.c5 {
+.c4:not(:disabled):focus,
+.c4:not(:disabled)>.c5 {
   outline: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
 }
 
 [data-dimension='m'] .c4 {
@@ -980,7 +992,6 @@ exports[`Spinner should render default component 1`] = `
   background: none;
   margin: 0;
   padding: 0;
-  cursor: pointer;
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
@@ -992,15 +1003,16 @@ exports[`Spinner should render default component 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:hover {
+.c4:not(:disabled):hover {
+  cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:active {
+.c4:not(:disabled):active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:focus:before {
+.c4:not(:disabled):focus:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -1010,9 +1022,13 @@ exports[`Spinner should render default component 1`] = `
   right: 0;
 }
 
-.c4:focus,
-.c4>.c5 {
+.c4:not(:disabled):focus,
+.c4:not(:disabled)>.c5 {
   outline: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
 }
 
 [data-dimension='m'] .c4 {

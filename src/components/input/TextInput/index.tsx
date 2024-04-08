@@ -175,6 +175,10 @@ const Input = styled.input<ExtraProps>`
     ${disabledColors}
   }
 
+  &&&:disabled {
+    cursor: not-allowed;
+  }
+
   ${extraPadding}
   ${ieFixes}
 `;

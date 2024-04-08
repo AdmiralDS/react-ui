@@ -16,7 +16,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -115,7 +115,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   justify-content: space-between;
   position: relative;
   width: fit-content;
-  cursor: default;
+  cursor: not-allowed;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
@@ -166,7 +166,7 @@ exports[`Toggle should render component with disabled state 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -265,7 +265,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   justify-content: space-between;
   position: relative;
   width: fit-content;
-  cursor: default;
+  cursor: not-allowed;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
@@ -371,7 +371,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -518,7 +518,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -720,7 +720,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -867,7 +867,7 @@ exports[`Toggle should render component with required properties 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -1069,7 +1069,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {
@@ -1216,7 +1216,7 @@ exports[`Toggle should render component with small dimension 1`] = `
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:checked+div>span {

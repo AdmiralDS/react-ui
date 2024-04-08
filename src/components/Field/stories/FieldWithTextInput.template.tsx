@@ -18,11 +18,12 @@ export const FieldWithTextInputTemplate = ({
   CSSCustomProps,
   ...props
 }: FieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const inputProps = { disabled: props.disabled, skeleton: props.skeleton };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
         <Field {...props} label={label} id={id}>
-          <TextInput id={id} />
+          <TextInput {...inputProps} id={id} />
         </Field>
         <Field label="Inline label" id="some_id" displayInline>
           <TextInput id="some_id" />

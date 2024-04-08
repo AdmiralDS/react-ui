@@ -19,13 +19,15 @@ exports[`ProgressBar should render component 1`] = `
 .c0 {
   display: flex;
   padding-bottom: 8px;
-  font-size: 12px;
   justify-content: space-between;
   width: 100%;
-  line-height: 16px;
-  font-style: normal;
-  font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 
@@ -68,13 +70,15 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 .c0 {
   display: flex;
   padding-bottom: 8px;
-  font-size: 12px;
   justify-content: space-between;
   width: 100%;
-  line-height: 16px;
-  font-style: normal;
-  font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: var(--admiral-color-Error_Error60Main, #D92020);
 }
 
@@ -117,13 +121,15 @@ exports[`ProgressBar should render component with prop percent 1`] = `
 .c0 {
   display: flex;
   padding-bottom: 8px;
-  font-size: 12px;
   justify-content: space-between;
   width: 100%;
-  line-height: 16px;
-  font-style: normal;
-  font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
+  font-size: var(--admiral-font-size-Caption_Caption1, 12px);
+  line-height: var(--admiral-line-height-Caption_Caption1, 16px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
 }
 

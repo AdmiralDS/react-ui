@@ -43,7 +43,7 @@ const hoverInputStyles = css<{ $dimension: Dimension }>`
 
 const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   position: absolute;
-  cursor: pointer;
+  cursor: ${({ readOnly }) => (readOnly ? 'default' : 'pointer')};
   top: 0;
   left: 0;
   right: 0;

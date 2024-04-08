@@ -48,7 +48,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c7:disabled *[fill^='#'] {
@@ -188,7 +188,7 @@ exports[`TabMenu should render default component 1`] = `
 
 .c2:disabled {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c2:disabled *[fill^='#'] {
@@ -259,7 +259,7 @@ exports[`TabMenu should render default component 1`] = `
 
 .c13:disabled {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c13:disabled *[fill^='#'] {
@@ -473,7 +473,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c7:disabled *[fill^='#'] {
@@ -613,7 +613,7 @@ exports[`TabMenu should render default component 1`] = `
 
 .c2:disabled {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c2:disabled *[fill^='#'] {
@@ -684,7 +684,7 @@ exports[`TabMenu should render default component 1`] = `
 
 .c13:disabled {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c13:disabled *[fill^='#'] {

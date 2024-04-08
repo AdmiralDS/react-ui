@@ -107,7 +107,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -152,7 +152,7 @@ fieldset[data-dimension='s'] .c2 {
   box-sizing: content-box;
   padding: 2px 0 2px 2px;
   user-select: none;
-  cursor: default;
+  cursor: not-allowed;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -176,7 +176,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <body>
@@ -317,7 +317,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -362,7 +362,7 @@ fieldset[data-dimension='s'] .c2 {
   box-sizing: content-box;
   padding: 2px 0 2px 2px;
   user-select: none;
-  cursor: default;
+  cursor: not-allowed;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -386,7 +386,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <div>
@@ -580,7 +580,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -649,7 +649,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <body>
@@ -784,7 +784,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -853,7 +853,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <div>
@@ -1044,7 +1044,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -1113,7 +1113,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <body>
@@ -1249,7 +1249,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:not(:checked):disabled+div>span {
@@ -1318,7 +1318,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 <div>

@@ -44,7 +44,7 @@ const defaultAppearanceMixin = css<StyledButtonProps>`
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: ${({ $skeleton, $loading }) => ($skeleton || $loading ? 'default' : 'not-allowed')};
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     ${IconContainer} {
       svg {
