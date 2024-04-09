@@ -676,14 +676,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         $multiple={multiple}
         disabled={disabled}
         data-disabled={disabled}
-        readonly={readOnly}
+        $readonly={readOnly}
         $dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onClick={handleWrapperClick}
-        onFocus={onFocus}
+        onClick={disabled || readOnly ? undefined : handleWrapperClick}
+        onFocus={disabled || readOnly ? undefined : onFocus}
         $skeleton={skeleton}
-        onBlur={handleWrapperBlur}
+        onBlur={disabled || readOnly ? undefined : handleWrapperBlur}
         title={title}
       >
         {memorisedConstantOptions}

@@ -56,6 +56,11 @@ const disabledStyles = css`
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
+
+  cursor: not-allowed;
+  & > * {
+    pointer-events: none;
+  }
 `;
 
 const hoverStyles = css`
@@ -64,7 +69,6 @@ const hoverStyles = css`
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
-    cursor: pointer;
     background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
@@ -82,8 +86,6 @@ const UploaderWrapperXL = styled.div<{ disabled?: boolean }>`
   padding: 24px 0;
   border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  pointer-events: ${(p) => (p.disabled ? 'none' : 'all')};
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
 
@@ -96,7 +98,6 @@ const UploaderWrapperM = styled.div<{ disabled?: boolean }>`
   padding: 8px 0;
   border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'default')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
 `;
 
@@ -130,6 +131,10 @@ const FileInput = styled.input`
   right: 0;
   bottom: 0;
   opacity: 0;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   &:focus {
     outline: none;

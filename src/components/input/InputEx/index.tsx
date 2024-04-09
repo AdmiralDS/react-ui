@@ -93,6 +93,28 @@ const Input = styled.input<ExtraProps>`
   }
 
   ${ieFixes}
+
+  &&&:disabled {
+    cursor: not-allowed;
+  }
+`;
+
+const prefixsuffixMixin = css<{ disabled?: boolean; $dimension?: ComponentDimension }>`
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
+  color: ${({ disabled, theme }) =>
+    disabled
+      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
+  white-space: nowrap;
+
+  [data-disable-copying] & {
+    cursor: default;
+  }
+
+  [data-read-only] & {
+    pointer-events: none;
+    user-select: none;
+  }
 `;
 
 const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -100,12 +122,7 @@ const PrefixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentD
   border-right: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-right: 8px;
   margin-right: 8px;
-  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${({ disabled, theme }) =>
-    disabled
-      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
-      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
-  white-space: nowrap;
+  ${prefixsuffixMixin}
 `;
 
 const SuffixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -113,12 +130,7 @@ const SuffixContainer = styled.div<{ disabled?: boolean; $dimension?: ComponentD
   border-left: solid 1px var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   padding-left: 8px;
   margin-left: 8px;
-  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])};
-  color: ${({ disabled, theme }) =>
-    disabled
-      ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
-      : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
-  white-space: nowrap;
+  ${prefixsuffixMixin}
 `;
 
 const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
@@ -173,6 +185,7 @@ const Container = styled.div<{
   ${containerHeights}
   ${({ $skeleton }) => $skeleton && skeletonMixin};
   ${BorderedDivStyles}
+  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
 `;
 
 export interface RenderProps {

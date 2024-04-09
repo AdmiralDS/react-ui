@@ -25,8 +25,10 @@ export const CustomOption = styled(OptionWrapper)<CustomOptionProps>`
     disabled
       ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
       : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
-  cursor: ${({ disabled }) => (disabled ? 'text' : 'pointer')};
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  & > * {
+    pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
+  }
 `;
 
 export const StyledCheckbox = styled(CheckboxField)`

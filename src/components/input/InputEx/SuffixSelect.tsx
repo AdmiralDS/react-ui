@@ -11,17 +11,13 @@ const StyledMenu = styled(Menu)<{ $width?: string }>`
   width: ${({ $width }) => ($width ? $width : 'auto')};
 `;
 
-const disableEventMixin = css`
-  pointer-events: none;
-  cursor: default;
-`;
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 const Container = styled.div<{ $iconSizeValue?: string; disabled?: boolean }>`
   display: flex;
   align-items: center;
   cursor: pointer;
 
-  [data-read-only] {
+  &[data-read-only] {
     cursor: default;
   }
 
@@ -39,13 +35,16 @@ const Container = styled.div<{ $iconSizeValue?: string; disabled?: boolean }>`
     }
   }
 
-  &:hover {
-    & > ${OpenStatusButton} *[fill^='#'] {
-      fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
-    }
-  }
-
-  ${(p) => (p.disabled ? disableEventMixin : '')}
+  ${(p) =>
+    p.disabled
+      ? 'cursor: not-allowed;'
+      : css`
+          &:hover {
+            & > ${OpenStatusButton} *[fill^='#'] {
+              fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
+            }
+          }
+        `}
 `;
 const ValueContainer = styled.div`
   margin-right: 4px;

@@ -89,6 +89,9 @@ const StyledInput = styled.input`
   bottom: 0;
   opacity: 0;
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
   &:focus:focus-visible ~ ${FocusBorder} {
     outline: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
@@ -232,9 +235,9 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                 $dimension={dimension}
                 disabled={disabled}
                 data-isdragover={isDragOver}
-                onDragEnter={handleDragEnter}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDragLeave}
+                onDragEnter={disabled ? undefined : handleDragEnter}
+                onDragLeave={disabled ? undefined : handleDragLeave}
+                onDrop={disabled ? undefined : handleDragLeave}
               >
                 <Icon $dimension={dimension} />
                 {titleWithoutDescription && renderTitleText()}

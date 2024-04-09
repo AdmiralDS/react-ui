@@ -67,7 +67,7 @@ const CountryContainer = styled.div<{
   disabled?: boolean;
   $skeleton?: boolean;
 }>`
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   position: absolute;
   top: 50%;
   left: 16px;
@@ -338,7 +338,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
           onClick={handleButtonClick}
         >
           <FlagContainer $dimension={dimension}>{IconComponent}</FlagContainer>
-          {!props.readOnly && <Chevron disabled={disabled || props.readOnly} />}
+          {!props.readOnly && <Chevron disabled={disabled} />}
         </CountryContainer>
       </PhoneContainer>
     );
