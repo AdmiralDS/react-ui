@@ -1,4 +1,4 @@
-import { createRef, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createRef, useLayoutEffect, useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, FC, HTMLAttributes, ReactNode, RefObject, MouseEvent, KeyboardEvent } from 'react';
 import type { css } from 'styled-components';
 
@@ -21,6 +21,7 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
+import { throttleWrap } from '#src/components/common/utils/throttleWrap';
 
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Контент вкладки */
@@ -79,12 +80,16 @@ export const TabMenu: FC<TabMenuProps> = ({
 }) => {
   const [openedMenu, setOpenedMenu] = useState(false);
   // state for visible tabs in !mobile mode
-  const [visibilityMap, setVisibilityMap] = useState<{ [index: number | string]: boolean }>(
-    tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
+  const [visibilityMap, setVisibilityMap] = useState<{ [index: number | string]: boolean }>({});
+
+  useEffect(() => {
+    const visibility = tabs.reduce<{ [index: number | string]: boolean }>((initialMap, _, index) => {
       initialMap[index] = true;
       return initialMap;
-    }, {}),
-  );
+    }, {});
+
+    setVisibilityMap(visibility);
+  }, [tabs]);
 
   // add refs to tabs
   const tabsWithRef: Array<TabWithRefProps> = useMemo(() => {
@@ -213,63 +218,56 @@ export const TabMenu: FC<TabMenuProps> = ({
     }
   };
 
-  const setUnderline = () => {
-    const activeTabRef = tabsWithRef.filter((tab) => tab.id === activeTab)?.[0]?.ref.current;
-    const left = parseFloat(underlineRef.current?.style.left || '0');
-    const underlineWidth = parseFloat(underlineRef.current?.style.width || '0');
-
-    if (activeTabRef && tablistRef.current) {
-      // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
-      const activeTabWidth = activeTabRef.getBoundingClientRect().width;
-      const activeTabLeft =
-        activeTabRef.getBoundingClientRect().left -
-        tablistRef.current.getBoundingClientRect().left +
-        tablistRef.current.scrollLeft;
-
-      if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
-        styleUnderline(activeTabLeft, activeTabWidth);
-      }
-    }
-    if (!activeTabRef || (!mobile && !activeTabIsVisible)) {
-      styleUnderline(0, 0);
-    }
-  };
-
-  useLayoutEffect(() => setUnderline(), [tabsWithRef, activeTab, dimension, visibilityMap]);
-
   // recalculation on resize. For example, it happens after fonts loading
   useLayoutEffect(() => {
+    function setUnderline() {
+      const activeTabRef = tabsWithRef.filter((tab) => tab.id === activeTab)?.[0]?.ref.current;
+      const left = parseFloat(underlineRef.current?.style.left || '0');
+      const underlineWidth = parseFloat(underlineRef.current?.style.width || '0');
+
+      if (activeTabRef && tablistRef.current) {
+        // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
+        const activeTabWidth = activeTabRef.getBoundingClientRect().width;
+        const activeTabLeft =
+          activeTabRef.getBoundingClientRect().left -
+          tablistRef.current.getBoundingClientRect().left +
+          tablistRef.current.scrollLeft;
+
+        if (activeTabLeft !== left || activeTabWidth !== underlineWidth) {
+          styleUnderline(activeTabLeft, activeTabWidth);
+        }
+      }
+      if (!activeTabRef || (!mobile && !activeTabIsVisible)) {
+        styleUnderline(0, 0);
+      }
+    }
+
     if (tablistRef.current?.firstElementChild) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach(() => {
-          setUnderline();
-        });
-      });
+      const resizeObserver = new ResizeObserver(throttleWrap(setUnderline, 100));
       resizeObserver.observe(tablistRef.current?.firstElementChild);
       return () => {
         resizeObserver.disconnect();
       };
     }
-  }, [activeTab]);
-
-  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-    const updatedEntries: { [index: number | string]: boolean } = {};
-    entries.forEach((entry: any) => {
-      const target = entry.target;
-      const targetNumber = target.dataset.number;
-
-      // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
-      // результату, данное сравнение равносильно (a - b) < 0.01
-      updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
-    });
-
-    setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
-      ...prev,
-      ...updatedEntries,
-    }));
-  };
+  }, [tabsWithRef, activeTab, dimension, visibilityMap]);
 
   useLayoutEffect(() => {
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      const updatedEntries: { [index: number | string]: boolean } = {};
+      entries.forEach((entry: any) => {
+        const target = entry.target;
+        const targetNumber = target.dataset.number;
+
+        // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+        // результату, данное сравнение равносильно (a - b) < 0.01
+        updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
+      });
+
+      setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
+        ...prev,
+        ...updatedEntries,
+      }));
+    };
     const observer = new IntersectionObserver(handleIntersection, {
       root: tablistRef.current,
       threshold: [0, 1.0],
@@ -281,7 +279,7 @@ export const TabMenu: FC<TabMenuProps> = ({
       });
     }
     return () => observer.disconnect();
-  }, [tabsWithRef, mobile, setVisibilityMap]);
+  }, [tabsWithRef, mobile, visibilityMap]);
 
   const handleTabClick = (event: MouseEvent<HTMLButtonElement>) => {
     mobile && event.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
