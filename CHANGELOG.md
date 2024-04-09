@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.2](https://github.com/AdmiralDS/react-ui/compare/v8.0.1...v8.0.2) (2024-04-06)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** исправлен момент со скачками верстки при первоначальном рендере ([9206373](https://github.com/AdmiralDS/react-ui/commit/9206373a7259f4b4ca0121bb18ce3b55650f9c01))
+* **Breadcrumbs:** исправлены внутренние отступы в компоненте ([86da102](https://github.com/AdmiralDS/react-ui/commit/86da102f746c8f23b15c783068d72c9c42af264a))
+
 ### [8.0.1](https://github.com/AdmiralDS/react-ui/compare/v8.0.0...v8.0.1) (2024-04-03)
 
 ## [8.0.0](https://github.com/AdmiralDS/react-ui/compare/v7.15.0...v8.0.0) (2024-03-27)
