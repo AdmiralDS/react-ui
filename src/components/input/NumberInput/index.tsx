@@ -33,9 +33,10 @@ const PlusMinusIcon = styled(InputIconButton)<{ disabled?: boolean }>`
   ${({ disabled, theme }) =>
     disabled
       ? css`
-          pointer-events: none;
+          cursor: not-allowed;
 
-          & *[fill^='#'] {
+          & *[fill^='#'],
+          &:hover *[fill^='#'] {
             fill: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});
           }
         `
@@ -248,14 +249,14 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         <PlusMinusIcon
           icon={MinusOutline}
           key="minus-icon"
-          onClick={handleMinus}
+          onClick={props.disabled || minusDisabled ? undefined : handleMinus}
           disabled={props.disabled || minusDisabled}
           aria-hidden
         />,
         <PlusMinusIcon
           icon={PlusOutline}
           key="plus-icon"
-          onClick={handlePlus}
+          onClick={props.disabled || plusDisabled ? undefined : handlePlus}
           disabled={props.disabled || plusDisabled}
           aria-hidden
         />,
