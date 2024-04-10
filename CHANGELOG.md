@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.0.3](https://github.com/AdmiralDS/react-ui/compare/v8.0.2...v8.0.3) (2024-04-10)
+
+
+### Bug Fixes
+
+* **TabMenu:** [#1296](https://github.com/AdmiralDS/react-ui/issues/1296) изменена логика пересчета видимых табов ([9cb84e9](https://github.com/AdmiralDS/react-ui/commit/9cb84e935420b2ee3aa9fc24cbc0d582c863544f))
+
 ### [8.0.2](https://github.com/AdmiralDS/react-ui/compare/v8.0.1...v8.0.2) (2024-04-06)
 
 
