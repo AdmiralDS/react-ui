@@ -21,6 +21,7 @@ type HeaderCellType = {
   handleResizeChange: (props: { name: string; width: number }) => void;
   handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
+  columnWidth?: string;
   columnMinWidth: number;
 };
 
@@ -36,6 +37,7 @@ export const HeaderCellComponent = ({
   handleResizeChange,
   handleSort,
   multipleSort,
+  columnWidth,
   columnMinWidth,
   index,
 }: HeaderCellType) => {
@@ -62,6 +64,7 @@ export const HeaderCellComponent = ({
   return (
     <HeaderCell
       $dimension={dimension}
+      // style={{ width: columnWidth, minWidth: columnWidth }}
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-draggable={draggable}

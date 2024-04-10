@@ -172,29 +172,30 @@ const rowList: RowData[] = [
 ];
 
 const columnList: Column[] = [
-  {
-    name: 'transfer_type',
-    title: 'Тип сделки',
-    width: 'calc(20% - 40px)',
-  },
-  {
-    name: 'transfer_date',
-    title: 'Дата сделки',
-    width: '250px',
-  },
+  // {
+  //   name: 'transfer_type',
+  //   title: 'Тип сделки',
+  //   width: 'calc(20% - 40px)',
+  // },
+  // {
+  //   name: 'transfer_date',
+  //   title: 'Дата сделки',
+  //   width: '250px',
+  // },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 200,
+    width: '33%',
   },
   {
     name: 'currency',
     title: 'Валюта',
-    width: '20%',
+    width: '33%',
   },
   {
     name: 'rate',
     title: 'Ставка',
+    width: '33%',
   },
 ];
 
