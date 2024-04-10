@@ -26,7 +26,7 @@ export const CheckboxComponentWrapper = styled.label<{
   padding: 0;
   user-select: none;
 
-  cursor: ${(p) => (p.disabled || p.readOnly ? 'default' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : p.readOnly ? 'default' : 'pointer')};
 
   ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) =>
@@ -39,7 +39,7 @@ export const CheckboxComponentWrapper = styled.label<{
   }
   fieldset:disabled && {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-    cursor: default;
+    cursor: not-allowed;
   }
 
   ${(p) => (p.readOnly ? `pointer-events: none` : '')};
@@ -122,7 +122,7 @@ export const Input = styled.input<{
   box-sizing: border-box;
 
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
 
     &:not(:checked) {
       & + div > span {

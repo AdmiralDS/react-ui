@@ -47,10 +47,6 @@ export default {
       control: { type: 'boolean' },
     },
 
-    disableCopying: {
-      control: { type: 'boolean' },
-    },
-
     showCheckbox: {
       control: { type: 'boolean' },
     },

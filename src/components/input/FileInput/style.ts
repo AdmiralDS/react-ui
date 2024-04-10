@@ -23,7 +23,10 @@ export const ERROR_BLOCK_HEIGHT_M = '20px';
 export const disabledStyles = css`
   border: 1px dashed var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-  pointer-events: none;
+  cursor: not-allowed;
+  & > * {
+    pointer-events: none;
+  }
 
   & svg {
     > * {
@@ -39,7 +42,6 @@ export const hoverStyles = css`
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
   &:active {
-    cursor: pointer;
     background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;

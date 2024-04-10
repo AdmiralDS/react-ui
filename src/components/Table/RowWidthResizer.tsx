@@ -16,7 +16,7 @@ export const ResizerWrapper = styled.div<{ disabled: boolean; $dimension: TableP
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  cursor: ${({ disabled }) => (disabled ? 'pointer' : 'col-resize')};
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'col-resize')};
 
   padding: ${({ $dimension }) => {
     switch ($dimension) {

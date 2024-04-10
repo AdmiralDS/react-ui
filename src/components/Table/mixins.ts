@@ -60,7 +60,10 @@ export const multiLineTitle = css<{ $lineClamp: number }>`
 
 export const disabledRow = css`
   color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-  pointer-events: none;
+  cursor: not-allowed;
+  & > * {
+    pointer-events: none;
+  }
 `;
 
 export const underlineRow = css`

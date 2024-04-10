@@ -1,5 +1,6 @@
 import type { FC, HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
+import { typography } from '#src/components/Typography';
 
 export type AppearanceProgressPage = 'primary' | 'error';
 
@@ -32,13 +33,9 @@ const Progress = styled.div<{ $percent: number; $appearance?: AppearanceProgress
 const Label = styled.div<{ $appearance?: AppearanceProgressPage }>`
   display: flex;
   padding-bottom: 8px;
-  font-size: 12px;
   justify-content: space-between;
   width: 100%;
-  line-height: 16px;
-  font-style: normal;
-  font-weight: normal;
-  font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
+  ${typography['Caption/Caption 1']}
   color: ${({ theme, $appearance }) =>
     $appearance === 'error'
       ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`

@@ -4,9 +4,10 @@ import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 
 const TRANSITION_ANIMATION = 'all  ease-in 0.3s';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ $disabled?: boolean; $skeleton?: boolean }>`
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  cursor: ${(p) => (p.$disabled ? 'not-allowed' : p.$skeleton ? 'default' : 'pointer')};
 `;
 
 const skeletonMixin = css`
@@ -21,14 +22,12 @@ export const TrackWrapper = styled.div<{ $dimension: SliderProps['dimension']; $
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  cursor: pointer;
   display: flex;
   align-items: center;
   height: ${({ $dimension }) => ($dimension === 'm' ? 36 : 40)}px;
   padding-bottom: 20px;
   [data-disabled='true'] && {
     pointer-events: none;
-    cursor: auto;
   }
 
   ${({ $skeleton }) => $skeleton && skeletonMixin};

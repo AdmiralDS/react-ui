@@ -89,7 +89,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -372,7 +372,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
   padding: 0;
   height: 56px;
   width: 56px;
@@ -861,7 +861,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1144,7 +1144,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
   padding: 0;
   height: 56px;
   width: 56px;

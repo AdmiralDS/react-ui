@@ -143,7 +143,9 @@ const disableEventMixin = css`
 `;
 
 const disabledStyle = css`
-  ${disableEventMixin}
+  && > * {
+    pointer-events: none;
+  }
 
   & ${BorderedDiv} {
     border-color: transparent;
@@ -180,7 +182,7 @@ export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: Componen
 
 export const SelectWrapper = styled.div<{
   disabled?: boolean;
-  readonly?: boolean;
+  $readonly?: boolean;
   $focused: boolean;
   $multiple: boolean;
   $dimension?: ComponentDimension;
@@ -190,7 +192,7 @@ export const SelectWrapper = styled.div<{
   box-sizing: border-box;
   display: flex;
   align-items: ${(p) => (p.$multiple ? 'flex-start' : 'center')};
-  cursor: pointer;
+  cursor: ${({ disabled, $readonly }) => (disabled ? 'not-allowed' : $readonly ? 'default' : 'pointer')};
 
   padding: ${({ $dimension, $multiple }) => {
     switch ($dimension) {
@@ -203,17 +205,17 @@ export const SelectWrapper = styled.div<{
     }
   }};
 
-  background: ${({ theme, disabled, readonly }) =>
-    disabled || readonly
+  background: ${({ theme, disabled, $readonly }) =>
+    disabled || $readonly
       ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
 
-  ${({ disabled, readonly }) => (readonly || disabled ? disabledStyle : '')};
-  ${({ $focused, readonly }) => ($focused && !readonly ? focusedStyle : '')};
+  ${({ disabled, $readonly }) => ($readonly || disabled ? disabledStyle : '')};
+  ${({ $focused, $readonly }) => ($focused && !$readonly ? focusedStyle : '')};
 
   & ${BorderedDiv} {
     border-color: ${(p) =>
-      p.disabled || p.readonly
+      p.disabled || p.$readonly
         ? 'transparent'
         : p.$focused
           ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
@@ -223,6 +225,7 @@ export const SelectWrapper = styled.div<{
   &:hover ${BorderedDiv} {
     ${(p) =>
       !p.disabled &&
+      !p.$readonly &&
       !p.$focused &&
       `
       border-color: var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']});
@@ -232,7 +235,7 @@ export const SelectWrapper = styled.div<{
   &[data-status='success'] {
     ${(p) =>
       !p.disabled &&
-      !p.readonly &&
+      !p.$readonly &&
       `
       ${BorderedDiv} {
       border-color: var(--admiral-color-Success_Success50Main, ${p.theme.color['Success/Success 50 Main']});
@@ -247,7 +250,7 @@ export const SelectWrapper = styled.div<{
   &:user-invalid {
     ${(p) =>
       !p.disabled &&
-      !p.readonly &&
+      !p.$readonly &&
       `
       ${BorderedDiv} {
         border-color: var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});

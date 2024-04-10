@@ -81,7 +81,7 @@ export const multilineIcon = css`
 const iconStyle = css`
   display: flex;
   flex-shrink: 0;
-  cursor: pointer;
+  user-select: none;
 `;
 
 export const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
@@ -89,10 +89,10 @@ export const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
+  cursor: pointer;
 
   [data-disabled='true'] & {
-    cursor: default;
-    pointer-events: none;
+    cursor: not-allowed;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }

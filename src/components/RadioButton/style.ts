@@ -140,7 +140,7 @@ export const Input = styled.input<{ $dimension: Dimension }>`
   ${(p) => p.readOnly && readOnlyCss};
 
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
   }
 
   &:not(:checked):disabled {
@@ -218,7 +218,7 @@ export const RadioButtonComponent = styled.label<{
   padding: ${(p) => (p.$dimension === 's' ? '1px 0 1px 1px' : '2px 0 2px 2px')};
   user-select: none;
 
-  cursor: ${(p) => (p.disabled || p.readOnly ? 'default' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : p.readOnly ? 'default' : 'pointer')};
 
   ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) =>
@@ -232,8 +232,14 @@ export const RadioButtonComponent = styled.label<{
   }
   fieldset:disabled && {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-    cursor: default;
+    cursor: not-allowed;
   }
 
-  ${(p) => p.readOnly && `pointer-events: none`};
+  ${(p) =>
+    p.readOnly &&
+    css`
+      & > * {
+        pointer-events: none;
+      }
+    `};
 `;

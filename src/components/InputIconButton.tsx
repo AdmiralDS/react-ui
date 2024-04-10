@@ -14,16 +14,13 @@ export const InputIconButton = styled(AnyIcon)`
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
+  cursor: pointer;
 
   [disabled] &&& {
     pointer-events: none;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 
   &:hover *[fill^='#'] {

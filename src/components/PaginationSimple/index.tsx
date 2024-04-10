@@ -67,9 +67,6 @@ const Item = styled.button`
 
   &:focus {
     border-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-    & ${ItemContent} {
-      background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
-    }
   }
   &:focus,
   & > ${ItemContentWrapper} {

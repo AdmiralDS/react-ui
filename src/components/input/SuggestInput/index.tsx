@@ -238,7 +238,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           setSearchText(e.currentTarget.value);
         }}
       >
-        {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && (
+        {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && !props.readOnly && (
           <SuggestDropdownContainer
             targetElement={portalTargetRef?.current || inputRef.current}
             alignSelf={alignDropdown}

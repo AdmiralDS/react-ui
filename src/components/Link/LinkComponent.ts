@@ -17,7 +17,7 @@ export type LinkComponentProps = {
 };
 
 export const LinkComponentCssMixin = css<LinkComponentProps>`
-  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   display: flex;
   align-items: center;
   width: fit-content;

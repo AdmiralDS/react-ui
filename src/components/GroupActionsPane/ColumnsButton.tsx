@@ -122,6 +122,7 @@ export const ColumnsButton = forwardRef<HTMLButtonElement, ColumnsButtonProps>(
       columns = [],
       menuDimension = 'l',
       buttonDimension = 'l',
+      disabled,
       onColumnsChange,
       dropContainerCssMixin,
       dropContainerClassName,
@@ -183,8 +184,8 @@ export const ColumnsButton = forwardRef<HTMLButtonElement, ColumnsButtonProps>(
           ref={refSetter(ref, buttonRef)}
           dimension={buttonDimension}
           onClick={handleBtnClick}
+          disabled={disabled || columns.length === 0}
           {...props}
-          disabled={columns.length === 0}
         >
           <PlusOutline />
         </IconButton>

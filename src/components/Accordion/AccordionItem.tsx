@@ -50,7 +50,7 @@ export const AccordionItem: FC<AccordionItemProps> = ({
     [expanded, userExpanded, onClick, title],
   );
   return (
-    <ItemWrapper $opened={collapseOpened} data-disabled={disabled} disabled={disabled}>
+    <ItemWrapper $opened={collapseOpened} data-disabled={disabled}>
       <ItemTitle
         onClick={handleClick}
         role="button"
@@ -58,6 +58,7 @@ export const AccordionItem: FC<AccordionItemProps> = ({
         aria-expanded={collapseOpened}
         aria-controls={ITEM_CONTENT_ID}
         id={ITEM_TITLE_ID}
+        disabled={disabled}
         {...props}
       >
         <ItemTitleContent tabIndex={-1}>

@@ -57,6 +57,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       hasSubmenu,
       onHover,
       disabled,
+      readOnly,
       hovered,
       dimension = 'l',
       selected = false,
@@ -95,6 +96,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         $hovered={hovered}
         data-hovered={hovered}
         data-disabled={disabled}
+        data-readonly={readOnly}
         data-dimension={dimension}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -145,6 +147,10 @@ const Item = styled.div<{
     && input[type='checkbox'] + * [fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
+  }
+
+  &&[data-readonly='true'] {
+    cursor: default;
   }
 `;
 

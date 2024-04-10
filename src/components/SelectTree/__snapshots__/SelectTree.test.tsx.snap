@@ -33,7 +33,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -55,7 +55,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {
@@ -390,7 +390,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -412,7 +412,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {
@@ -802,7 +802,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -824,7 +824,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {
@@ -1159,7 +1159,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -1181,7 +1181,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {
@@ -1571,7 +1571,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -1593,7 +1593,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {
@@ -1928,7 +1928,7 @@ fieldset[data-dimension='s'] .c4.c4 {
 
 fieldset:disabled .c4.c4 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6 {
@@ -1950,7 +1950,7 @@ fieldset:disabled .c4.c4 {
 }
 
 .c6:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c6:disabled:not(:checked)+div>span {

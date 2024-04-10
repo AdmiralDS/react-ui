@@ -73,8 +73,8 @@ export const RowWrapper = ({
     <Row
       {...props}
       ref={rowRef}
-      onClick={() => handleRowClick(row.id)}
-      onDoubleClick={() => handleRowDoubleClick(row.id)}
+      onClick={row.disabled ? undefined : () => handleRowClick(row.id)}
+      onDoubleClick={row.disabled ? undefined : () => handleRowDoubleClick(row.id)}
       $underline={underline}
       disabled={!!row.disabled}
       $dimension={dimension}

@@ -91,7 +91,7 @@ const MyItem = styled.div<{
       : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 
   &&[data-disabled='true'] {
-    cursor: default;
+    cursor: not-allowed;
     background-color: ${({ theme, selected }) =>
       selected
         ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`

@@ -10,7 +10,7 @@ exports[`CheckboxField should render component with disabled state 1`] = `
   box-sizing: content-box;
   padding: 0;
   user-select: none;
-  cursor: default;
+  cursor: not-allowed;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -33,7 +33,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -55,7 +55,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {
@@ -270,7 +270,7 @@ fieldset[data-dimension='s'] .c6.c6 {
   box-sizing: content-box;
   padding: 0;
   user-select: none;
-  cursor: default;
+  cursor: not-allowed;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -293,7 +293,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -315,7 +315,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {
@@ -608,7 +608,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -630,7 +630,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {
@@ -864,7 +864,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -886,7 +886,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {
@@ -1175,7 +1175,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -1197,7 +1197,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {
@@ -1431,7 +1431,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 
 fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1 {
@@ -1453,7 +1453,7 @@ fieldset:disabled .c0.c0 {
 }
 
 .c1:disabled {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .c1:disabled:not(:checked)+div>span {

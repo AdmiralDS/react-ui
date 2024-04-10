@@ -10,6 +10,7 @@ exports[`Checkbox should render component with disabled state 1`] = `
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: not-allowed;
   overflow: visible;
   width: 20px;
   height: 20px;
@@ -69,6 +70,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -150,6 +152,7 @@ fieldset[data-dimension='s'] .c0 {
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: not-allowed;
   overflow: visible;
   width: 20px;
   height: 20px;
@@ -209,6 +212,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -345,6 +349,7 @@ exports[`Checkbox should render component with required properties 1`] = `
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
   overflow: visible;
   width: 20px;
   height: 20px;
@@ -404,6 +409,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -484,6 +490,7 @@ fieldset[data-dimension='s'] .c0 {
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
   overflow: visible;
   width: 20px;
   height: 20px;
@@ -543,6 +550,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -678,6 +686,7 @@ exports[`Checkbox should render component with small dimension 1`] = `
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
   overflow: visible;
   width: 16px;
   height: 16px;
@@ -737,6 +746,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 
@@ -817,6 +827,7 @@ fieldset[data-dimension='s'] .c0 {
 .c0 {
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
   overflow: visible;
   width: 16px;
   height: 16px;
@@ -876,6 +887,7 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled {
+  cursor: not-allowed;
   pointer-events: none;
 }
 

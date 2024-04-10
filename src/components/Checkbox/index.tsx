@@ -63,9 +63,12 @@ const Indeterminate = styled(IndeterminateSVG)`
 
 const Container = styled.div<{
   $dimension: CheckboxDimension;
+  $disabled?: boolean;
+  $readOnly?: boolean;
 }>`
   position: relative;
   box-sizing: border-box;
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : props.$readOnly ? 'default' : 'pointer')};
 
   overflow: visible;
   ${width};
@@ -185,6 +188,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   }
 
   &:disabled {
+    cursor: not-allowed;
     ${disabledCss};
   }
 
@@ -223,7 +227,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
     };
 
     return (
-      <Container $dimension={dimension} className={className}>
+      <Container $dimension={dimension} $disabled={disabled} $readOnly={readOnly} className={className}>
         <Input
           ref={ref}
           disabled={disabled}

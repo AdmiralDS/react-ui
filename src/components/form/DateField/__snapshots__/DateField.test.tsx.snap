@@ -25,6 +25,10 @@ exports[`DateField should render component 1`] = `
   justify-content: space-between;
 }
 
+.c9 {
+  cursor: pointer;
+}
+
 .c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
@@ -35,10 +39,6 @@ exports[`DateField should render component 1`] = `
 
 [disabled] .c9.c9.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-}
-
-.c9:hover {
-  cursor: pointer;
 }
 
 .c9:hover *[fill^='#'] {
@@ -115,6 +115,10 @@ exports[`DateField should render component 1`] = `
 .c5.c5.c5:disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   border-color: transparent;
+}
+
+.c5.c5.c5:disabled {
+  cursor: not-allowed;
 }
 
 .c5 ::-ms-clear,

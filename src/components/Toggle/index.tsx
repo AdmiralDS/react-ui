@@ -43,7 +43,7 @@ const hoverInputStyles = css<{ $dimension: Dimension }>`
 
 const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   position: absolute;
-  cursor: pointer;
+  cursor: ${({ readOnly }) => (readOnly ? 'default' : 'pointer')};
   top: 0;
   left: 0;
   right: 0;
@@ -53,7 +53,7 @@ const Input = styled.input<{ $dimension: Dimension; checked?: boolean }>`
   opacity: 0;
 
   &:disabled {
-    cursor: default;
+    cursor: not-allowed;
   }
 
   &:checked {
@@ -178,7 +178,7 @@ const Wrapper = styled.label<{
   justify-content: space-between;
   position: relative;
   width: ${({ width }) => (width ? (typeof width === 'number' ? `${width}px` : width) : 'fit-content')};
-  cursor: ${({ disabled, readOnly }) => (disabled || readOnly ? 'default' : 'pointer')};
+  cursor: ${({ disabled, readOnly }) => (disabled ? 'not-allowed' : readOnly ? 'default' : 'pointer')};
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   ${({ readOnly }) => readOnly && `pointer-events: none`};

@@ -175,6 +175,10 @@ const Input = styled.input<ExtraProps>`
     ${disabledColors}
   }
 
+  &&&:disabled {
+    cursor: not-allowed;
+  }
+
   ${extraPadding}
   ${ieFixes}
 `;
@@ -217,6 +221,7 @@ const StyledContainer = styled(HeightLimitedContainer)<{
   $dimension?: ComponentDimension;
 }>`
   ${BorderedDivStyles}
+  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
 `;
 
 function defaultHandleInput(newInputData: InputData | null): InputData {
