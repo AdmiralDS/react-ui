@@ -190,8 +190,16 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
 
-        function handleResize(entries: any) {
-          entries.forEach((entry: any) => {
+        // const listener = throttle((entries: any) => {
+        //   handleResize(entries);
+        // }, 100);
+
+        // const resizeObserver = new ResizeObserver((entries) => {
+        //   listener(entries);
+        // });
+        const resizeObserver = new ResizeObserver((entries) => {
+          console.log(entries[0].borderBoxSize[0].inlineSize);
+          entries.forEach((entry) => {
             // find all body cells in the same column as entry column
             const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
               `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
@@ -209,36 +217,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
               cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
             });
           });
-        }
-
-        const listener = throttle((entries: any) => {
-          handleResize(entries);
-        }, 100);
-
-        const resizeObserver = new ResizeObserver((entries) => {
-          console.log('without throttle', entries[0].borderBoxSize[0].inlineSize);
-          listener(entries);
         });
-        // const resizeObserver = new ResizeObserver((entries) => {
-        //   entries.forEach((entry) => {
-        //     // find all body cells in the same column as entry column
-        //     const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-        //       `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-        //     );
-        //     bodyCells?.forEach((cell) => {
-        //       cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-        //     });
-
-        //     // find all header cells in the same column as entry column
-        //     const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
-        //       `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-        //     );
-        //     headerCells?.forEach((cell) => {
-        //       cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-        //       cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
-        //     });
-        //   });
-        // });
 
         hiddenColumns?.forEach((col) => resizeObserver.observe(col));
         return () => {
@@ -303,33 +282,16 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (scrollBody) {
         scrollBody.addEventListener('scroll', handleScroll);
 
-        function handleObserveRect(rect: any) {
-          if (scrollBody) {
-            if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
-              setVerticalScroll(true);
-            } else {
-              setVerticalScroll(false);
-            }
-            setTableWidth(rect.width);
-            setBodyHeight(rect.height);
-            moveOverflowMenu(scrollBody.scrollLeft);
+        const observer = observeRect(scrollBody, (rect: any) => {
+          if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
+            setVerticalScroll(true);
+          } else {
+            setVerticalScroll(false);
           }
-        }
-        const listener = throttle((rect: any) => {
-          handleObserveRect(rect);
-        }, 150);
-
-        const observer = observeRect(scrollBody, listener);
-        // const observer = observeRect(scrollBody, (rect: any) => {
-        //   if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
-        //     setVerticalScroll(true);
-        //   } else {
-        //     setVerticalScroll(false);
-        //   }
-        //   setTableWidth(rect.width);
-        //   setBodyHeight(rect.height);
-        //   moveOverflowMenu(scrollBody.scrollLeft);
-        // });
+          setTableWidth(rect.width);
+          setBodyHeight(rect.height);
+          moveOverflowMenu(scrollBody.scrollLeft);
+        });
         observer.observe();
 
         return () => {
@@ -422,18 +384,24 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       onHeaderSelectionChange?.(e.target.checked);
     }
 
-    function handleResizeChange({ name, width }: { name: string; width: number }) {
-      onColumnResize?.({ name, width: width + 'px' });
-    }
+    const handleResizeChange = React.useCallback(
+      ({ name, width }: { name: string; width: number }) => {
+        onColumnResize?.({ name, width: width + 'px' });
+      },
+      [onColumnResize],
+    );
 
-    const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
-      let newSort: 'asc' | 'desc' | 'initial' = 'initial';
-      if (colSort === 'asc') newSort = 'desc';
-      if (colSort === 'desc') newSort = 'initial';
-      if (colSort === 'initial') newSort = 'asc';
+    const handleSort = React.useCallback(
+      (name: string, colSort: 'asc' | 'desc' | 'initial') => {
+        let newSort: 'asc' | 'desc' | 'initial' = 'initial';
+        if (colSort === 'asc') newSort = 'desc';
+        if (colSort === 'desc') newSort = 'initial';
+        if (colSort === 'initial') newSort = 'asc';
 
-      onSortChange?.({ name, sort: newSort });
-    };
+        onSortChange?.({ name, sort: newSort });
+      },
+      [onSortChange],
+    );
 
     const multipleSort = React.useMemo<boolean>(() => {
       return columnList.filter((col) => !!col.sort).length > 1;
