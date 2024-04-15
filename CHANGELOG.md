@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.1.0](https://github.com/AdmiralDS/react-ui/compare/v8.0.3...v8.1.0) (2024-04-15)
+
+
+### Features
+
+* **FileInput:** добавлен формат файла ZIP ([ab9fd46](https://github.com/AdmiralDS/react-ui/commit/ab9fd46d786f9900bfed2e0ecf68f5c504d082e8))
+
 ### [8.0.3](https://github.com/AdmiralDS/react-ui/compare/v8.0.2...v8.0.3) (2024-04-10)
 
 
