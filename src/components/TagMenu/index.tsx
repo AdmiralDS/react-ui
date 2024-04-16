@@ -67,6 +67,10 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
       isVisible,
       onVisibilityChange,
       onClickOutside,
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       as,
       className = '',
       alignSelf = 'flex-end',
@@ -96,7 +100,13 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
         }
       }, [options, dimension]);
 
-    const dropMenuProps = passDropdownDataAttributes(props);
+    const dropMenuProps = {
+      ...passDropdownDataAttributes(props),
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+    };
 
     return (
       <DropMenu

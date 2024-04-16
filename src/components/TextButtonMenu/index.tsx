@@ -95,6 +95,10 @@ export const TextButtonMenu = forwardRef<HTMLButtonElement, TextButtonMenuProps>
       isVisible,
       onVisibilityChange,
       onClickOutside,
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       onChange,
       onOpen,
       onClose,
@@ -110,7 +114,13 @@ export const TextButtonMenu = forwardRef<HTMLButtonElement, TextButtonMenuProps>
     },
     ref,
   ) => {
-    const dropMenuProps = passDropdownDataAttributes(props);
+    const dropMenuProps = {
+      ...passDropdownDataAttributes(props),
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+    };
 
     return (
       <DropMenu
