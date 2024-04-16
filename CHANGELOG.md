@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.1.1](https://github.com/AdmiralDS/react-ui/compare/v8.1.0...v8.1.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* **TagMenu, TextButtonMenu:** [#1301](https://github.com/AdmiralDS/react-ui/issues/1301) renderBottomPanel пропса должна попадать на внутренний DropMenu компонент ([569cad2](https://github.com/AdmiralDS/react-ui/commit/569cad282a5a0ee12d1117500b0a8d3fb2c112b2))
+
 ## [8.1.0](https://github.com/AdmiralDS/react-ui/compare/v8.0.3...v8.1.0) (2024-04-15)
 
 
