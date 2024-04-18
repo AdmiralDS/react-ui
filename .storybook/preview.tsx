@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { addons, useGlobals } from '@storybook/preview-api';
-import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { useEffect } from 'react';
+import { useGlobals } from '@storybook/preview-api';
+import { themes } from '@storybook/theming';
+import { DocsContainer } from '@storybook/addon-docs';
+import { useDarkMode } from 'storybook-dark-mode';
 
 import {
   DARK_THEME,
@@ -30,20 +32,18 @@ export const parameters = {
       order: ['Admiral-2.1', ['Atoms', 'Input', 'Form Field', 'Data Table']],
     },
   },
+  docs: {
+    container: (props) => {
+      const theme = useDarkMode() ? themes.dark : themes.normal;
+      return <DocsContainer {...props} theme={theme} />;
+    },
+  },
 };
-// get channel to listen to event emitter
-const channel = addons.getChannel();
 
 // create a component that uses the dark mode hook
 function ThemeWrapper(props) {
   // this example uses hook but you can also use class component as well
-  const [isDark, setDark] = useState(false);
-
-  useEffect(() => {
-    // listen to DARK_MODE event
-    channel.on(DARK_MODE_EVENT_NAME, setDark);
-    return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
-  }, [channel, setDark]);
+  const isDark = useDarkMode();
 
   useEffect(() => {
     // document.body refers to body tag inside iframe#storybook-preview-iframe
