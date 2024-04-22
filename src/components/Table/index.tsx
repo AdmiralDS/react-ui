@@ -9,7 +9,7 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { throttle } from './throttle';
+import { debounce } from '#src/components/common/utils/debounce';
 
 import { HeaderCellComponent } from './HeaderCell';
 import { ColumnDrag } from './drag/ColumnDrag';
