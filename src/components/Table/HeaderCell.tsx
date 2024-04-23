@@ -21,8 +21,8 @@ type HeaderCellType = {
   handleResizeChange: (props: { name: string; width: number }) => void;
   handleSort: (name: string, colSort: 'asc' | 'desc' | 'initial') => void;
   multipleSort?: boolean;
-  columnWidth?: string;
   columnMinWidth: number;
+  hidden?: boolean;
 };
 
 export const HeaderCellComponent = React.memo(
@@ -38,8 +38,8 @@ export const HeaderCellComponent = React.memo(
     handleResizeChange,
     handleSort,
     multipleSort,
-    columnWidth,
     columnMinWidth,
+    hidden,
     index,
   }: HeaderCellType) => {
     const {
@@ -58,15 +58,15 @@ export const HeaderCellComponent = React.memo(
     const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
     const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
     const spacer = spacingBetweenItems || defaultSpacer;
-    const colWidth = typeof width === 'number' ? width + 'px' : width;
+    const hiddenColWidth = typeof width === 'number' ? width + 'px' : width;
+    const normalColWidth = `var(--th-${column.name}-width, 100px)`;
 
     const cellRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <HeaderCell
         $dimension={dimension}
-        // style={{ width: columnWidth, minWidth: columnWidth }}
-        style={{ width: colWidth, minWidth: colWidth }}
+        style={{ width: hidden ? hiddenColWidth : normalColWidth, minWidth: hidden ? hiddenColWidth : normalColWidth }}
         className="th"
         data-draggable={draggable}
         data-th-column={name}

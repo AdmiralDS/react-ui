@@ -186,38 +186,45 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         }, {})
       : {};
 
+    function updateColumnWidth() {
+      const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
+      hiddenColumns?.forEach((column) => {
+        const name = column.dataset.thColumn ?? '';
+        const width = column.getBoundingClientRect().width;
+        headerRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
+        scrollBodyRef.current?.style.setProperty(`--td-${name}-width`, width + 'px');
+      });
+      // tableRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
+    }
+
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
 
-        // const listener = throttle((entries: any) => {
-        //   handleResize(entries);
-        // }, 100);
-
-        // const resizeObserver = new ResizeObserver((entries) => {
-        //   listener(entries);
-        // });
-        const resizeObserver = new ResizeObserver((entries) => {
-          console.log(entries[0].borderBoxSize[0].inlineSize);
-          entries.forEach((entry) => {
-            // find all body cells in the same column as entry column
-            const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-              `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-            );
-            bodyCells?.forEach((cell) => {
-              cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+        const resizeObserver = new ResizeObserver(
+          debounce(() => {
+            // console.log(entries[0].borderBoxSize[0].inlineSize);
+            updateColumnWidth();
+            const entries = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
+            entries?.forEach((entry) => {
+              // find all body cells in the same column as entry column
+              // const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
+              //   `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
+              // );
+              // bodyCells?.forEach((cell) => {
+              //   cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+              // });
+              // find all header cells in the same column as entry column
+              // const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
+              //   `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
+              // );
+              // headerCells?.forEach((cell) => {
+              //   cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
+              //   cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
+              // });
             });
-
-            // find all header cells in the same column as entry column
-            const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
-              `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-            );
-            headerCells?.forEach((cell) => {
-              cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-              cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
-            });
-          });
-        });
+          }, 100),
+        );
 
         hiddenColumns?.forEach((col) => resizeObserver.observe(col));
         return () => {
@@ -289,6 +296,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             setVerticalScroll(false);
           }
           setTableWidth(rect.width);
+          updateColumnWidth();
           setBodyHeight(rect.height);
           moveOverflowMenu(scrollBody.scrollLeft);
         });
@@ -407,38 +415,27 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return columnList.filter((col) => !!col.sort).length > 1;
     }, [columnList]);
 
-    const renderHeaderCell = (column: Column, index: number, hidden?: boolean) => {
-      // const hiddenColWidth = typeof column.width === 'number' ? column.width + 'px' : column.width;
-      // const headerCellWidth = hiddenHeaderRef.current
-      //   ?.querySelector<HTMLElement>(`[data-th-column="${column.name}"]`)
-      //   ?.getBoundingClientRect().width;
-      // const normalColWidth = headerCellWidth ? headerCellWidth + 'px' : hiddenColWidth;
-      return (
-        <HeaderCellComponent
-          key={`head_${column.name}`}
-          column={column}
-          // columnWidth={(hidden ? hiddenColWidth : normalColWidth) || '100px'}
-          index={index}
-          columnsAmount={columnList.length}
-          showDividerForLastColumn={showDividerForLastColumn}
-          disableColumnResize={disableColumnResize}
-          headerLineClamp={headerLineClamp}
-          headerExtraLineClamp={headerExtraLineClamp}
-          handleResizeChange={handleResizeChange}
-          handleSort={handleSort}
-          dimension={dimension}
-          spacingBetweenItems={spacingBetweenItems}
-          multipleSort={multipleSort}
-          columnMinWidth={columnMinWidth}
-        />
-      );
-    };
+    const renderHeaderCell = (column: Column, index: number, hidden?: boolean) => (
+      <HeaderCellComponent
+        key={`head_${column.name}`}
+        column={column}
+        index={index}
+        columnsAmount={columnList.length}
+        showDividerForLastColumn={showDividerForLastColumn}
+        disableColumnResize={disableColumnResize}
+        headerLineClamp={headerLineClamp}
+        headerExtraLineClamp={headerExtraLineClamp}
+        handleResizeChange={handleResizeChange}
+        handleSort={handleSort}
+        dimension={dimension}
+        spacingBetweenItems={spacingBetweenItems}
+        multipleSort={multipleSort}
+        columnMinWidth={columnMinWidth}
+        hidden={hidden}
+      />
+    );
 
     const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
-      const headerCellWidth = hiddenHeaderRef.current
-        ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
-        ?.getBoundingClientRect().width;
-
       const render = () => {
         if (col.renderCell) {
           return col.renderCell((row as any)[col.name], row, idx);
@@ -454,7 +451,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <Cell
           key={`${row.id}_${col.name}`}
           $dimension={dimension}
-          style={{ width: headerCellWidth || '100px' }}
+          style={{ width: `var(--td-${col.name}-width, 100px)` }}
           className="td"
           data-column={col.name}
           data-row={row.id}
