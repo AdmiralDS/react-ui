@@ -186,45 +186,22 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         }, {})
       : {};
 
-    function updateColumnWidth() {
+    const updateColumnsWidth = () => {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
       hiddenColumns?.forEach((column) => {
-        const name = column.dataset.thColumn ?? '';
+        const name = column.dataset.thColumn;
         const width = column.getBoundingClientRect().width;
-        headerRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
-        scrollBodyRef.current?.style.setProperty(`--td-${name}-width`, width + 'px');
+        if (name) {
+          headerRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
+          scrollBodyRef.current?.style.setProperty(`--td-${name}-width`, width + 'px');
+        }
       });
-      // tableRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
-    }
+    };
 
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
-
-        const resizeObserver = new ResizeObserver(
-          debounce(() => {
-            // console.log(entries[0].borderBoxSize[0].inlineSize);
-            updateColumnWidth();
-            const entries = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
-            entries?.forEach((entry) => {
-              // find all body cells in the same column as entry column
-              // const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-              //   `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-              // );
-              // bodyCells?.forEach((cell) => {
-              //   cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-              // });
-              // find all header cells in the same column as entry column
-              // const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
-              //   `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-              // );
-              // headerCells?.forEach((cell) => {
-              //   cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-              //   cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
-              // });
-            });
-          }, 100),
-        );
+        const resizeObserver = new ResizeObserver(debounce(() => updateColumnsWidth(), 100));
 
         hiddenColumns?.forEach((col) => resizeObserver.observe(col));
         return () => {
@@ -296,7 +273,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             setVerticalScroll(false);
           }
           setTableWidth(rect.width);
-          updateColumnWidth();
+          updateColumnsWidth();
           setBodyHeight(rect.height);
           moveOverflowMenu(scrollBody.scrollLeft);
         });

@@ -60,13 +60,14 @@ export const HeaderCellComponent = React.memo(
     const spacer = spacingBetweenItems || defaultSpacer;
     const hiddenColWidth = typeof width === 'number' ? width + 'px' : width;
     const normalColWidth = `var(--th-${column.name}-width, 100px)`;
+    const colWidth = hidden ? hiddenColWidth : normalColWidth;
 
     const cellRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <HeaderCell
         $dimension={dimension}
-        style={{ width: hidden ? hiddenColWidth : normalColWidth, minWidth: hidden ? hiddenColWidth : normalColWidth }}
+        style={{ width: colWidth, minWidth: colWidth }}
         className="th"
         data-draggable={draggable}
         data-th-column={name}
