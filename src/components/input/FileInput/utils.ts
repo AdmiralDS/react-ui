@@ -6,6 +6,7 @@ import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documen
 import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
 import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
+import { ReactComponent as ZIPSolid } from '@admiral-ds/icons/build/documents/ZIPSolid.svg';
 
 export const formatBytes = (bytes: number, decimals = 2): number => {
   return Number((bytes / 1024).toFixed(decimals));
@@ -56,6 +57,7 @@ export function acceptFile(file: File, acceptedFiles: string): boolean {
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
+ * https://www.iana.org/assignments/media-types/media-types.xhtml
  * @param type {string}
  */
 export const formatFileType = (type: string) => {
@@ -84,6 +86,8 @@ export const formatFileType = (type: string) => {
     case 'application/msword':
     case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
       return 'Word';
+    case 'application/zip':
+      return 'ZIP';
     default:
       return 'Docs';
   }
@@ -91,6 +95,7 @@ export const formatFileType = (type: string) => {
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
+ * https://www.iana.org/assignments/media-types/media-types.xhtml
  * @param type {string}
  */
 export const getFileTypeIcon = (type: string) => {
@@ -115,6 +120,8 @@ export const getFileTypeIcon = (type: string) => {
     case 'application/msword':
     case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
       return FileWordSolid;
+    case 'application/zip':
+      return ZIPSolid;
     default:
       return DocsSolid;
   }

@@ -18,8 +18,11 @@ const file3 = new File(['foo'], 'example3.doc', {
 const file4 = new File(['foo'], 'example4.xls', {
   type: 'application/vnd.ms-excel',
 });
+const file5 = new File(['foo'], 'example5.zip', {
+  type: 'application/zip',
+});
 
-const filesInitial = [file1, file2, file3, file4];
+const filesInitial = [file1, file2, file3, file4, file5];
 const filesAttributesInitial: FileAttributeProps[] = [
   {
     fileId: '1',
@@ -49,6 +52,13 @@ const filesAttributesInitial: FileAttributeProps[] = [
     fileType: file4.type,
     fileSize: file4.size,
     status: 'Queue',
+  },
+  {
+    fileId: '5',
+    fileName: 'example5',
+    fileType: file5.type,
+    fileSize: file5.size,
+    status: 'Uploaded',
   },
 ];
 const filesMapInitial = () => {
@@ -143,10 +153,9 @@ export const FileInputWithStatusTemplate = (props: FileInputProps) => {
       dimension={props.dimension}
       disabled={props.disabled}
       width={props.dimension === 'xl' ? '480px' : '288px'}
-      title={props.dimension === 'xl' ? `Загрузите файлы изображений` : 'Добавьте файлы'}
+      title={props.dimension === 'xl' ? `Загрузите файлы` : 'Добавьте файлы'}
       ref={inputRef}
       onInput={handleChange}
-      accept="image/*"
       files={fileList}
     >
       {renderFileList()}
