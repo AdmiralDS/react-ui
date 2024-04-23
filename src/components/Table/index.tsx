@@ -201,7 +201,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
-        const resizeObserver = new ResizeObserver(debounce(() => updateColumnsWidth(), 100));
+        const resizeObserver = new ResizeObserver(debounce(updateColumnsWidth, 100));
 
         hiddenColumns?.forEach((col) => resizeObserver.observe(col));
         return () => {
@@ -273,6 +273,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             setVerticalScroll(false);
           }
           setTableWidth(rect.width);
+          // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
           setBodyHeight(rect.height);
           moveOverflowMenu(scrollBody.scrollLeft);
