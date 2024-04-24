@@ -24,7 +24,7 @@ import { ResizerWrapper } from './RowWidthResizer';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
-export const TableContainer = styled.div`
+export const TableContainer = styled.div<{ $showLastRowUnderline: boolean }>`
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -33,6 +33,10 @@ export const TableContainer = styled.div`
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
+  }
+  &[data-borders='true'] {
+    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    ${(p) => p.$showLastRowUnderline && 'border-bottom: none;'}
   }
 `;
 
@@ -128,6 +132,11 @@ export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
 
   & > * {
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+  }
+  [data-borders='true'] & {
+    & .th:not(:last-child) {
+      border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    }
   }
 `;
 

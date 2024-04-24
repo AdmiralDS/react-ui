@@ -18,6 +18,21 @@ export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
         return '10px 13px 9px 12px';
     }
   }};
+  [data-borders='true'] && {
+    padding: ${({ $dimension }) => {
+      switch ($dimension) {
+        case 's':
+          return '6px 12px 5px 12px';
+        case 'l':
+          return '12px 16px 11px 16px';
+        case 'xl':
+          return '16px 16px 15px 16px';
+        case 'm':
+        default:
+          return '10px 12px 9px 12px';
+      }
+    }};
+  }
 `;
 
 export const rowStyle = css<{ $dimension: TableProps['dimension'] }>`
