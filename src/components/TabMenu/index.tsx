@@ -21,7 +21,7 @@ import {
   Wrapper,
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
-import { throttleWrap } from '#src/components/common/utils/throttleWrap';
+import { debounce } from '#src/components/common/utils/debounce';
 
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Контент вкладки */
@@ -243,7 +243,7 @@ export const TabMenu: FC<TabMenuProps> = ({
     }
 
     if (tablistRef.current?.firstElementChild) {
-      const resizeObserver = new ResizeObserver(throttleWrap(setUnderline, 100));
+      const resizeObserver = new ResizeObserver(debounce(setUnderline, 100));
       resizeObserver.observe(tablistRef.current?.firstElementChild);
       return () => {
         resizeObserver.disconnect();

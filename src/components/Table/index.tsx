@@ -9,6 +9,7 @@ import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { debounce } from '#src/components/common/utils/debounce';
 
 import { HeaderCellComponent } from './HeaderCell';
 import { ColumnDrag } from './drag/ColumnDrag';
@@ -186,30 +187,22 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         }, {})
       : {};
 
+    const updateColumnsWidth = () => {
+      const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
+      hiddenColumns?.forEach((column) => {
+        const name = column.dataset.thColumn;
+        const width = column.getBoundingClientRect().width;
+        if (name) {
+          headerRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
+          scrollBodyRef.current?.style.setProperty(`--td-${name}-width`, width + 'px');
+        }
+      });
+    };
+
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
-
-        const resizeObserver = new ResizeObserver((entries) => {
-          entries.forEach((entry) => {
-            // find all body cells in the same column as entry column
-            const bodyCells = scrollBodyRef.current?.querySelectorAll<HTMLElement>(
-              `[data-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-            );
-            bodyCells?.forEach((cell) => {
-              cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-            });
-
-            // find all header cells in the same column as entry column
-            const headerCells = headerRef.current?.querySelectorAll<HTMLElement>(
-              `[data-th-column="${(entry.target as HTMLElement).dataset.thColumn}"]`,
-            );
-            headerCells?.forEach((cell) => {
-              cell.style.width = entry.borderBoxSize[0].inlineSize + 'px';
-              cell.style.minWidth = entry.borderBoxSize[0].inlineSize + 'px';
-            });
-          });
-        });
+        const resizeObserver = new ResizeObserver(debounce(updateColumnsWidth, 100));
 
         hiddenColumns?.forEach((col) => resizeObserver.observe(col));
         return () => {
@@ -281,6 +274,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             setVerticalScroll(false);
           }
           setTableWidth(rect.width);
+          // если изменился размер таблицы, то следует пересчитать ширину колонок
+          updateColumnsWidth();
           setBodyHeight(rect.height);
           moveOverflowMenu(scrollBody.scrollLeft);
         });
@@ -376,24 +371,30 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       onHeaderSelectionChange?.(e.target.checked);
     }
 
-    function handleResizeChange({ name, width }: { name: string; width: number }) {
-      onColumnResize?.({ name, width: width + 'px' });
-    }
+    const handleResizeChange = React.useCallback(
+      ({ name, width }: { name: string; width: number }) => {
+        onColumnResize?.({ name, width: width + 'px' });
+      },
+      [onColumnResize],
+    );
 
-    const handleSort = (name: string, colSort: 'asc' | 'desc' | 'initial') => {
-      let newSort: 'asc' | 'desc' | 'initial' = 'initial';
-      if (colSort === 'asc') newSort = 'desc';
-      if (colSort === 'desc') newSort = 'initial';
-      if (colSort === 'initial') newSort = 'asc';
+    const handleSort = React.useCallback(
+      (name: string, colSort: 'asc' | 'desc' | 'initial') => {
+        let newSort: 'asc' | 'desc' | 'initial' = 'initial';
+        if (colSort === 'asc') newSort = 'desc';
+        if (colSort === 'desc') newSort = 'initial';
+        if (colSort === 'initial') newSort = 'asc';
 
-      onSortChange?.({ name, sort: newSort });
-    };
+        onSortChange?.({ name, sort: newSort });
+      },
+      [onSortChange],
+    );
 
     const multipleSort = React.useMemo<boolean>(() => {
       return columnList.filter((col) => !!col.sort).length > 1;
     }, [columnList]);
 
-    const renderHeaderCell = (column: Column, index: number) => (
+    const renderHeaderCell = (column: Column, index: number, hidden?: boolean) => (
       <HeaderCellComponent
         key={`head_${column.name}`}
         column={column}
@@ -409,13 +410,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         spacingBetweenItems={spacingBetweenItems}
         multipleSort={multipleSort}
         columnMinWidth={columnMinWidth}
+        hidden={hidden}
       />
     );
 
     const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
-      const headerCellWidth = hiddenHeaderRef.current
-        ?.querySelector<HTMLElement>(`[data-th-column="${col.name}"]`)
-        ?.getBoundingClientRect().width;
       // ошибка
       const withResizer = idx < columnList.length - 1 || (idx === columnList.length - 1 && showDividerForLastColumn);
 
@@ -435,7 +434,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           key={`${row.id}_${col.name}`}
           $dimension={dimension}
           $resizer={withResizer}
-          style={{ width: headerCellWidth || '100px' }}
+          style={{ width: `var(--td-${col.name}-width, 100px)` }}
           className="td"
           data-column={col.name}
           data-row={row.id}
@@ -584,8 +583,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             $selectionColumn={displayRowSelectionColumn}
             $dimension={dimension}
           >
-            {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
-            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
+            {stickyColumns.length > 0 &&
+              stickyColumns.map((col, index) => renderHeaderCell(col as Column, index, true))}
+            {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index, true)))}
           </HeaderCellsWrapper>
         </HiddenHeader>
       );
