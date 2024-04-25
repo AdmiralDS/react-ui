@@ -282,6 +282,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Цвет можно задать либо в виде строки со значением цвета, либо в виде функции,
    * которая на вход получает объект color (равный theme.color) и возвращает строку со значением цвета. */
   rowBackgroundColorByStatusMap?: { [key: string]: ((color: Color) => string) | string };
+  /** */
+  showBorders?: boolean;
 }
 
 export type GroupInfo = {

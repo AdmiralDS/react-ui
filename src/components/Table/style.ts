@@ -24,19 +24,25 @@ import { ResizerWrapper } from './RowWidthResizer';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
-export const TableContainer = styled.div<{ $showLastRowUnderline: boolean }>`
+export const TableContainer = styled.div`
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 
-  &[data-dragging='true'] ${ResizerWrapper} {
-    pointer-events: none;
-  }
   &[data-borders='true'] {
-    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    ${(p) => p.$showLastRowUnderline && 'border-bottom: none;'}
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+      z-index: 6;
+      pointer-events: none;
+    }
   }
 `;
 
@@ -133,11 +139,6 @@ export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   & > * {
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
-  [data-borders='true'] & {
-    & .th:not(:last-child) {
-      border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    }
-  }
 `;
 
 export const ScrollTableBody = styled.div`
@@ -204,13 +205,18 @@ export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   }
 `;
 
-export const Cell = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const Cell = styled.div<{ $dimension: TableProps['dimension']; $resizer?: boolean }>`
   display: flex;
   align-items: flex-start;
   flex: 0 0 auto;
   box-sizing: border-box;
   ${cellStyle};
   overflow: hidden;
+  border-right: 1px solid transparent;
+  [data-borders='true'] & {
+    border-color: ${(p) =>
+      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
+  }
 `;
 
 export const CellTextContent = styled.div<{ $cellAlign?: 'left' | 'right' }>`
@@ -245,6 +251,7 @@ export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }
         return '10px 12px 9px 12px';
     }
   }};
+  border: none;
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
@@ -263,6 +270,7 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 12px 9px 12px';
     }
   }};
+  border: none;
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
@@ -281,14 +289,20 @@ export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 8px 9px 8px';
     }
   }};
+  border: none;
 `;
 
-export const HeaderCell = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $resizer?: boolean }>`
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
   flex: 0 0 auto;
   ${cellStyle}
+  border-right: 1px solid transparent;
+  [data-borders='true'] & {
+    border-color: ${(p) =>
+      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
+  }
   &:hover {
     cursor: pointer;
   }

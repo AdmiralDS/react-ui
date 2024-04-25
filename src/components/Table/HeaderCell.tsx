@@ -57,11 +57,14 @@ export const HeaderCellComponent = ({
   const spacer = spacingBetweenItems || defaultSpacer;
   const colWidth = typeof width === 'number' ? width + 'px' : width;
 
+  const withResizer = index < columnsAmount - 1 || (index === columnsAmount - 1 && showDividerForLastColumn);
+
   const cellRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <HeaderCell
       $dimension={dimension}
+      $resizer={withResizer}
       style={{ width: colWidth, minWidth: colWidth }}
       className="th"
       data-draggable={draggable}
@@ -84,16 +87,7 @@ export const HeaderCellComponent = ({
         <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
         {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellRef.current} />}
       </HeaderCellContent>
-      {index < columnsAmount - 1 && (
-        <RowWidthResizer
-          name={name}
-          onChange={handleResizeChange}
-          disabled={disableResize || disableColumnResize}
-          dimension={dimension}
-          columnMinWidth={columnMinWidth}
-        />
-      )}
-      {index === columnsAmount - 1 && showDividerForLastColumn && (
+      {withResizer && (
         <RowWidthResizer
           name={name}
           onChange={handleResizeChange}
