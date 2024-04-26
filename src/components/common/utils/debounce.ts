@@ -1,4 +1,4 @@
-export function throttleWrap(f: () => void, delay: number): () => void {
+export function debounce(f: () => void, delay: number): () => void {
   let timer = setTimeout(() => {});
   return function (...args: []) {
     clearTimeout(timer);

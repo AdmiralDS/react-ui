@@ -3,7 +3,7 @@ import { createContext, useContext, useLayoutEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { typography } from '#src/components/Typography';
-import { throttleWrap } from '#src/components/common/utils/throttleWrap';
+import { debounce } from '#src/components/common/utils/debounce';
 import { resizePaddings } from '../common/dom/resizePaddings';
 
 const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
@@ -65,7 +65,7 @@ export const DrawerContent: FC<HTMLAttributes<HTMLDivElement>> = ({ children, ..
     const node = contentRef.current;
     if (node) {
       resizePaddings(node);
-      const resizeObserver = new ResizeObserver(throttleWrap(() => resizePaddings(node), 250));
+      const resizeObserver = new ResizeObserver(debounce(() => resizePaddings(node), 250));
       resizeObserver.observe(node);
       return () => {
         resizeObserver.unobserve(node);

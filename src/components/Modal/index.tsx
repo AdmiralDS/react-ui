@@ -14,7 +14,7 @@ import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/I
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
-import { throttleWrap } from '#src/components/common/utils/throttleWrap';
+import { debounce } from '#src/components/common/utils/debounce';
 import { resizePaddings } from '../common/dom/resizePaddings';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -348,7 +348,7 @@ export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     const node = contentRef.current;
     if (node) {
       resizePaddings(node);
-      const resizeObserver = new ResizeObserver(throttleWrap(() => resizePaddings(node), 250));
+      const resizeObserver = new ResizeObserver(debounce(() => resizePaddings(node), 250));
       resizeObserver.observe(node);
       return () => {
         resizeObserver.unobserve(node);
