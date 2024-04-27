@@ -4,7 +4,7 @@ import { render, within } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import type { ChangeEvent, PropsWithChildren } from 'react';
-import { useState } from 'react';
+import { act, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const options = ['one', 'two', 'three'];
@@ -115,9 +115,11 @@ describe('SearchSelect', () => {
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.tab();
-      await user.type(inputELem, '{Space}');
-      await user.type(inputELem, 'a');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{Space}');
+        await user.type(inputELem, 'a');
+      });
 
       expect(inputELem.value).toBe('a');
     });
@@ -145,11 +147,15 @@ describe('SearchSelect', () => {
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
 
-      await user.tab();
+      await act(async () => {
+        await user.tab();
+      });
       expect(selectElem).toHaveFocus();
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.type(inputELem, '{space}');
+      });
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
@@ -159,14 +165,18 @@ describe('SearchSelect', () => {
       const user = userEvent.setup();
       render(<SelectComponent />);
       const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
-      await user.click(selectWrapper);
+      await act(async () => {
+        await user.click(selectWrapper);
+      });
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
-      await user.type(selectWrapper, '{esc}');
+      await act(async () => {
+        await user.type(selectWrapper, '{esc}');
+      });
       expect(dropDownContainer).not.toBeInTheDocument();
     });
 
@@ -174,7 +184,10 @@ describe('SearchSelect', () => {
       const user = userEvent.setup();
       render(<SelectComponent />);
       const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
-      await user.click(selectWrapper);
+
+      await act(async () => {
+        await user.click(selectWrapper);
+      });
 
       const parent = document.getElementById('parent') as HTMLElement;
 
@@ -183,7 +196,9 @@ describe('SearchSelect', () => {
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
-      await user.click(parent);
+      await act(async () => {
+        await user.click(parent);
+      });
       expect(dropDownContainer).not.toBeInTheDocument();
       expect(inputELem).not.toHaveFocus();
     });
@@ -197,12 +212,16 @@ describe('SearchSelect', () => {
       const parent = document.getElementById('parent') as HTMLElement;
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.click(selectWrapper);
-      await user.type(inputELem, 'asd');
+      await act(async () => {
+        await user.click(selectWrapper);
+        await user.type(inputELem, 'asd');
+      });
 
       expect(within(valueWrapper).queryByText('one')).toBeNull();
 
-      await user.click(parent);
+      await act(async () => {
+        await user.click(parent);
+      });
       expect(within(valueWrapper).getByText('one')).toBeInTheDocument();
     });
 
@@ -210,7 +229,9 @@ describe('SearchSelect', () => {
       const user = userEvent.setup();
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
-      await user.click(document.querySelector('.chip') as HTMLElement);
+      await act(async () => {
+        await user.click(document.querySelector('.chip') as HTMLElement);
+      });
       expect(document.getElementsByClassName('dropdown-container').length).toEqual(0);
     });
 
@@ -223,11 +244,13 @@ describe('SearchSelect', () => {
         </>,
       );
 
-      await user.tab();
-      const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
-      await user.type(selectWrapper, '{enter}');
-      await user.type(selectWrapper, 'on');
-      await user.tab();
+      await act(async () => {
+        await user.tab();
+        const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
+        await user.type(selectWrapper, '{enter}');
+        await user.type(selectWrapper, 'on');
+        await user.tab();
+      });
 
       expect(document.getElementsByClassName('dropdown-container').length).toEqual(0);
     });
@@ -240,10 +263,14 @@ describe('SearchSelect', () => {
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
       expect(!!inputELem.value).toBeFalsy();
-      await user.type(inputELem, '{Backspace}');
+      await act(async () => {
+        await user.type(inputELem, '{Backspace}');
+      });
       expect(inputELem.value).toBe('on');
     });
 
@@ -253,11 +280,15 @@ describe('SearchSelect', () => {
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.tab();
-      await user.type(inputELem, ' ');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, ' ');
+      });
       expect(!!inputELem.value).toBeFalsy();
-      await user.type(inputELem, 'r');
-      await user.type(inputELem, 'oner');
+      await act(async () => {
+        await user.type(inputELem, 'r');
+        await user.type(inputELem, 'oner');
+      });
     });
   });
 
@@ -269,10 +300,18 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
-      await user.tab();
-      await user.type(valueWrapper, '{enter}');
-      await user.type(valueWrapper, '{arrowdown}');
-      await user.type(valueWrapper, '{enter}');
+      await act(async () => {
+        await user.tab();
+      });
+      await act(async () => {
+        await user.type(valueWrapper, '{enter}');
+      });
+      await act(async () => {
+        await user.type(valueWrapper, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.type(valueWrapper, '{enter}');
+      });
 
       const visibleText = within(valueWrapper).getByText(options[1]);
       expect(visibleText).toBeInTheDocument();
@@ -286,13 +325,17 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
-      await user.tab();
-      await user.type(valueWrapper, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(valueWrapper, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const optionElements = within(dropDownContainer).getAllByTestId('option');
 
-      await user.click(optionElements[1]);
+      await act(async () => {
+        await user.click(optionElements[1]);
+      });
 
       const visibleText = within(valueWrapper).getByText(options[1]);
       expect(visibleText).toBeInTheDocument();
@@ -307,8 +350,10 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
-      await user.tab();
-      await user.type(valueWrapper, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(valueWrapper, '{space}');
+      });
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
@@ -319,8 +364,12 @@ describe('SearchSelect', () => {
         expect(checkbox.checked).toBeFalsy();
       });
 
-      await user.type(inputELem, '{arrowdown}');
-      await user.keyboard('{enter}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.keyboard('{enter}');
+      });
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
@@ -331,11 +380,21 @@ describe('SearchSelect', () => {
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{enter}');
-      await user.type(inputELem, '{enter}');
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{enter}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{enter}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{enter}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{enter}');
+      });
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
         if ([0, 1].includes(ind)) expect(checkbox.checked).toBeTruthy();
@@ -359,8 +418,10 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
       const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
 
-      await user.tab();
-      await user.keyboard('{enter}');
+      await act(async () => {
+        await user.tab();
+        await user.keyboard('{enter}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
@@ -370,7 +431,9 @@ describe('SearchSelect', () => {
         expect(checkbox.checked).toBeFalsy();
       });
 
-      await user.click(dropDownOptions[0]);
+      await act(async () => {
+        await user.click(dropDownOptions[0]);
+      });
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
@@ -381,9 +444,11 @@ describe('SearchSelect', () => {
       expect(dropDownContainer).toBeInTheDocument();
       // expect(inputELem).toHaveFocus();
 
-      await user.click(dropDownOptions[1]);
-      await user.click(dropDownOptions[1]);
-      await user.click(dropDownOptions[2]);
+      await act(async () => {
+        await user.click(dropDownOptions[1]);
+        await user.click(dropDownOptions[1]);
+        await user.click(dropDownOptions[2]);
+      });
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
@@ -417,7 +482,9 @@ describe('SearchSelect', () => {
         else expect(nativeOption.selected).toBeFalsy();
       });
 
-      await user.click(chipsCloses[0]);
+      await act(async () => {
+        await user.click(chipsCloses[0]);
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
@@ -464,15 +531,19 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
 
-      await user.type(inputELem, '{backspace}');
+      await act(async () => {
+        await user.type(inputELem, '{backspace}');
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
@@ -495,15 +566,19 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.tab();
-      await user.keyboard('{enter}');
+      await act(async () => {
+        await user.tab();
+        await user.keyboard('{enter}');
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
 
-      await user.type(inputELem, '{backspace}');
+      await act(async () => {
+        await user.type(inputELem, '{backspace}');
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
@@ -534,7 +609,9 @@ describe('SearchSelect', () => {
         else expect(nativeOption.selected).toBeFalsy();
       });
 
-      await user.click(chipsCloses[1]);
+      await act(async () => {
+        await user.click(chipsCloses[1]);
+      });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
         if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
@@ -549,8 +626,10 @@ describe('SearchSelect', () => {
       render(<SelectComponent value={options[1]} />);
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -561,7 +640,9 @@ describe('SearchSelect', () => {
         else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
       dropDownOptions.forEach((option, optionInd) => {
         //Выбрана должна быть вторая опция
         if (optionInd === 1) expect(option).toHaveAttribute('value', 'two');
@@ -575,8 +656,10 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -587,7 +670,9 @@ describe('SearchSelect', () => {
         else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
-      await user.type(inputELem, '{arrowup}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowup}');
+      });
       expect(dropDownOptions[dropDownOptions.length - 1]).toHaveAttribute('data-hovered', 'true');
     });
 
@@ -596,8 +681,10 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
@@ -608,7 +695,9 @@ describe('SearchSelect', () => {
         else expect(option).toHaveAttribute('data-hovered', 'false');
       });
 
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
       expect(dropDownOptions[1]).toHaveAttribute('data-hovered', 'true');
     });
 
@@ -635,15 +724,21 @@ describe('SearchSelect', () => {
       );
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
       dropDownOptions.forEach((option, optionInd) => {
         if (optionInd === 3) expect(option).toHaveAttribute('data-hovered', 'true');
         else expect(option).not.toHaveAttribute('data-hovered', 'true');
@@ -673,13 +768,17 @@ describe('SearchSelect', () => {
       );
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{Space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{Space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
-      await user.type(inputELem, '{arrowup}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowup}');
+      });
       expect(dropDownOptions[3]).toHaveAttribute('data-hovered', 'true');
     });
 
@@ -706,14 +805,18 @@ describe('SearchSelect', () => {
       );
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      await user.tab();
-      await user.type(inputELem, '{space}');
+      await act(async () => {
+        await user.tab();
+        await user.type(inputELem, '{space}');
+      });
 
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
 
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
       expect(dropDownOptions[1]).toHaveAttribute('data-hovered', 'true');
     });
 
@@ -733,19 +836,29 @@ describe('SearchSelect', () => {
         </SelectComponent>,
       );
 
-      await user.tab();
+      await act(async () => {
+        await user.tab();
+      });
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
-      await user.type(inputELem, '{space}');
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{space}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
 
       const dropDownContainer = baseElement.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
       expect(dropDownOptions[2]).toHaveAttribute('data-hovered', 'true');
 
-      await user.type(inputELem, '1');
+      await act(async () => {
+        await user.type(inputELem, '1');
+      });
 
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
       expect(dropDownOptionsAfterInput.length).toBe(1);
@@ -753,7 +866,9 @@ describe('SearchSelect', () => {
         if (ind === 2) expect(option).toHaveAttribute('data-hovered', 'true');
         else expect(option).not.toHaveAttribute('data-hovered', 'true');
       });
-      await user.type(inputELem, '{arrowdown}');
+      await act(async () => {
+        await user.type(inputELem, '{arrowdown}');
+      });
       expect(dropDownOptionsAfterInput[0]).toHaveAttribute('data-hovered', 'true');
     });
   });
@@ -764,11 +879,13 @@ describe('SearchSelect', () => {
     render(<SelectComponent onBlur={onBlur} />);
 
     const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-    await user.tab();
-    await user.type(inputELem, '{space}');
-    await user.type(inputELem, 'on');
-    await user.type(inputELem, '{esc}');
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+      await user.type(inputELem, '{space}');
+      await user.type(inputELem, 'on');
+      await user.type(inputELem, '{esc}');
+      await user.tab();
+    });
 
     expect(onBlur).toBeCalledTimes(1);
   });
