@@ -130,5 +130,4 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
   );
 };
 
-SelectTree.defaultProps = { dimension: 'm' };
 SelectTree.displayName = 'SelectTree';

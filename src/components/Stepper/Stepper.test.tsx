@@ -32,7 +32,7 @@ describe('Spinner', () => {
       <Stepper lineClamp={lineClamp} activeStep={activeStep} orientation={orientation} stepWidth={stepWidth}>
         {steps.map((step) => {
           return (
-            <Step {...step}>
+            <Step {...step} key={step.key}>
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{step.content}</StepContent>
             </Step>
           );
