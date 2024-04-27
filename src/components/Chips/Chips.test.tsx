@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import userEvent from '@testing-library/user-event';
 
 import { Chips, LIGHT_THEME } from '@admiral-ds/react-ui';
+import { act } from 'react';
 
 describe('Chips', () => {
   it('should render default component', () => {
@@ -51,7 +52,9 @@ describe('Chips', () => {
       </ThemeProvider>,
     );
     expect(document.body).toHaveFocus();
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
     expect(wrapper.getByTestId('test-element')).toHaveFocus();
   });
 });
