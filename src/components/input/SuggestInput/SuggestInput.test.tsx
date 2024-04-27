@@ -2,6 +2,7 @@ import { SuggestInput, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-u
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
+import { act } from 'react';
 
 const options = ['one', 'two', 'three'];
 
@@ -17,11 +18,19 @@ describe('SuggestInput', () => {
       </ThemeProvider>,
     );
 
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
     const input = screen.getByPlaceholderText('numbers') as HTMLInputElement;
-    await user.type(input, 'on');
-    await user.type(input, '{arrowdown}');
-    await user.type(input, '{enter}');
+    await act(async () => {
+      await user.type(input, 'on');
+    });
+    await act(async () => {
+      await user.type(input, '{arrowdown}');
+    });
+    await act(async () => {
+      await user.type(input, '{enter}');
+    });
 
     expect(input.value).toBe('two');
   });
@@ -48,7 +57,9 @@ describe('SuggestInput', () => {
       expect(textElement.length).toBe(0);
     });
 
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
     // input.focus();
 
     // Сразу после фокуса элементы должны появиться
@@ -65,13 +76,17 @@ describe('SuggestInput', () => {
 
     const input = getByPlaceholderText('numbers') as HTMLInputElement;
 
-    await user.type(input, 'on');
+    await act(async () => {
+      await user.type(input, 'on');
+    });
 
     // На открывшейся панели должен появиться текст в теге span
     const spanInDropdown = screen.getByText('on', { selector: 'span' });
     expect(spanInDropdown).toBeVisible();
 
-    await user.type(input, '{enter}');
+    await act(async () => {
+      await user.type(input, '{enter}');
+    });
     expect(input.value).toBe('one');
     expect(submit.mock.calls).toHaveLength(0);
   });

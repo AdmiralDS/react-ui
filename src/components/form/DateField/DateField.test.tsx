@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LIGHT_THEME } from '#src/components/themes';
 import { DateField } from '#src/components/form/DateField';
+import { act } from 'react';
 
 const testId = 'my test input';
 
@@ -24,11 +25,17 @@ describe('DateField', () => {
         <DateField data-testid={testId} />
       </ThemeProvider>,
     );
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
     const input = screen.getByTestId(testId) as HTMLInputElement;
-    await user.keyboard('21.0');
+    await act(async () => {
+      await user.keyboard('21.0');
+    });
     expect(input.value).toBe('21.0_.____');
-    await user.keyboard('2.2023');
+    await act(async () => {
+      await user.keyboard('2.2023');
+    });
     expect(input.value).toBe('21.02.2023');
   });
 });
