@@ -415,8 +415,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     );
 
     const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
-      // ошибка
-      const withResizer = idx < columnList.length - 1 || (idx === columnList.length - 1 && showDividerForLastColumn);
+      const withResizer = col.name === columnList[columnList.length - 1].name ? showDividerForLastColumn : true;
 
       const render = () => {
         if (col.renderCell) {
@@ -597,7 +596,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         data-shadow={false}
         data-borders={showBorders}
         data-dragging={false}
-        data-last-divider={showDividerForLastColumn}
         {...props}
         className={`table ${props.className || ''}`}
       >

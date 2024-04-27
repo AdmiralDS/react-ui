@@ -16,11 +16,11 @@ import {
   rowStyle,
   singleLineTitle,
   underlineRow,
+  borderStyle,
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
-import { ResizerWrapper } from './RowWidthResizer';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
@@ -212,11 +212,7 @@ export const Cell = styled.div<{ $dimension: TableProps['dimension']; $resizer?:
   box-sizing: border-box;
   ${cellStyle};
   overflow: hidden;
-  border-right: 1px solid transparent;
-  [data-borders='true'] & {
-    border-color: ${(p) =>
-      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
-  }
+  ${borderStyle}
 `;
 
 export const CellTextContent = styled.div<{ $cellAlign?: 'left' | 'right' }>`
@@ -298,11 +294,7 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   box-sizing: border-box;
   flex: 0 0 auto;
   ${cellStyle}
-  border-right: 1px solid transparent;
-  [data-borders='true'] & {
-    border-color: ${(p) =>
-      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
-  }
+  ${borderStyle}
   &:hover {
     cursor: pointer;
   }
@@ -420,7 +412,7 @@ export const Row = styled.div<{
   &[data-dragover='true'] > * {
     opacity: 0.4;
   }
-  transition: opacity 0.3 ease;
+  transition: opacity 0.3s ease;
 
   ${groupRowHoverMixin}
 `;

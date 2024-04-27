@@ -239,6 +239,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Включение постоянной видимости иконок действий над строками (OverflowMenu и иконки одиночных действий).
    * По умолчанию showRowsActions = false, при этом иконки действий видны только при ховере строк. */
   showRowsActions?: boolean;
+  /** Включение границ между ячейками таблицы и обводки всей таблицы.
+   * Последняя колонка имеет границы справа только, если параметр showDividerForLastColumn равен true. */
+  showBorders?: boolean;
   /** Включение виртуального скролла для тела таблицы.
    * У таблицы обязательно должна быть задана высота, тогда тело таблицы растянется по высоте и подстроится под высоту таблицы.
    */
@@ -282,8 +285,6 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Цвет можно задать либо в виде строки со значением цвета, либо в виде функции,
    * которая на вход получает объект color (равный theme.color) и возвращает строку со значением цвета. */
   rowBackgroundColorByStatusMap?: { [key: string]: ((color: Color) => string) | string };
-  /** */
-  showBorders?: boolean;
 }
 
 export type GroupInfo = {

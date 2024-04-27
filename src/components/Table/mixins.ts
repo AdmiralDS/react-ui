@@ -148,3 +148,11 @@ export const overflowMenuStyle = css<{ $offset: number; $dimension: TableProps['
   ${actionsBGStyle};
   left: ${({ $dimension, $offset }) => $offset - getActionSize($dimension)}px;
 `;
+
+export const borderStyle = css<{ $resizer?: boolean }>`
+  border-right: 1px solid transparent;
+  [data-borders='true'] & {
+    border-color: ${(p) =>
+      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
+  }
+`;
