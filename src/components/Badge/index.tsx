@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
+import type { ButtonAppearance, ButtonProps } from '#src/components/Button';
 
 type Dimension = 'm' | 's';
 export type BadgeAppearance =
@@ -124,3 +125,26 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 );
 
 Badge.displayName = 'Badge';
+
+interface ButtonBadgeProps extends Omit<BadgeProps, 'appearance' | 'dimension'>, Pick<ButtonProps, 'appearance'> {
+  disabled?: boolean;
+}
+
+function getBadgeAppearance(appearance: ButtonAppearance, disabled: boolean) {
+  switch (appearance) {
+    case 'secondary':
+    case 'ghost':
+      if (disabled) return 'lightDisable';
+      return 'info';
+    case 'primary':
+    default:
+      if (disabled) return 'whiteDisable';
+      return 'whiteBlue';
+  }
+}
+
+export const ButtonBadge = ({ appearance = 'primary', disabled = false, ...props }: ButtonBadgeProps) => {
+  const isVisible = appearance === 'primary' || appearance === 'secondary' || appearance === 'ghost';
+  const badgeAppearance = getBadgeAppearance(appearance, disabled);
+  return isVisible ? <Badge {...props} dimension="s" appearance={badgeAppearance} /> : null;
+};

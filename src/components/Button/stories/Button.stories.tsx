@@ -6,12 +6,14 @@ import { ButtonLoaderTemplate } from './ButtonLoader.template';
 import { ButtonWithIconTemplate } from './ButtonWithIcon.template';
 import { ButtonStylesTemplate } from './ButtonStyles.template';
 import { ButtonPlaygroundTemplate } from './ButtonPlayground.template';
+import { ButtonWithBadgeTemplate } from './ButtonWithBadge.template';
 
 // Imports of text sources
 import ButtonLoaderRaw from './ButtonLoader.template?raw';
 import ButtonWithIconRaw from './ButtonWithIcon.template?raw';
 import ButtonStylesRaw from './ButtonStyles.template?raw';
 import ButtonPlaygroundRaw from './ButtonPlayground.template?raw';
+import ButtonWithBadgeRaw from './ButtonWithBadge.template?raw';
 
 export default {
   title: 'Admiral-2.1/Button',
@@ -75,6 +77,9 @@ export default {
     },
 
     icon: {
+      control: false,
+    },
+    iconPlace: {
       control: false,
     },
 
@@ -176,3 +181,25 @@ export const ButtonLoader = {
 
   name: 'Button. Загрузка',
 };
+
+//<editor-fold desc="Button с Badge">
+const ButtonWithBadgeStory: StoryFn<typeof Button> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonWithBadgeTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const ButtonWithBadge = {
+  render: ButtonWithBadgeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonWithBadgeRaw,
+      },
+    },
+  },
+
+  name: 'Button с Badge',
+};
+
+//</editor-fold>
