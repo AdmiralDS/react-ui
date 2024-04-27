@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.2.0](https://github.com/AdmiralDS/react-ui/compare/v8.1.1...v8.2.0) (2024-04-27)
+
+
+### Features
+
+* **Badge:** добавлен стилизованный Badge для кнопок ([d43536e](https://github.com/AdmiralDS/react-ui/commit/d43536ec11f7d6ed4421d2ce6ed2efd6357b8836))
+
+
+### Bug Fixes
+
+* **Table:** исправлен баг с ResizeObserver loop ([fe692a8](https://github.com/AdmiralDS/react-ui/commit/fe692a8c636d9ec207177748bb2040de63c1c819))
+
 ### [8.1.1](https://github.com/AdmiralDS/react-ui/compare/v8.1.0...v8.1.1) (2024-04-16)
 
 
