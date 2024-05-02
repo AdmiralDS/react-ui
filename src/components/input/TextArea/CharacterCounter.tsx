@@ -29,19 +29,13 @@ export const CharacterCounter: React.FC<CharacterCounterProps> = ({
 }: CharacterCounterProps) => {
   const [currentCount, setCurrentCount] = React.useState(0);
   React.useEffect(() => {
-    function oninput(this: HTMLInputElement | HTMLTextAreaElement) {
-      const { value } = this;
-      setCurrentCount(value.length);
-    }
-
-    const node = inputRef.current;
-    if (node) {
-      node.addEventListener('input', oninput);
-      oninput.call(node);
-      return () => {
-        node.removeEventListener('input', oninput);
-      };
-    }
+    const timer = setInterval(() => {
+      const node = inputRef.current;
+      if (node) {
+        setCurrentCount(node.value.length);
+      }
+    }, 250);
+    return () => clearInterval(timer);
   }, [inputRef]);
   return currentCount > maxLength * 0.8 ? (
     <Container {...props} error={currentCount >= maxLength} transparent={currentCount < maxLength * 0.8}>

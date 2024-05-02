@@ -1,5 +1,7 @@
+import '@testing-library/jest-dom';
 import { SuggestInput, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-ui';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 import { act } from 'react';
