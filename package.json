@@ -108,7 +108,7 @@
     "standard-version": "^9.5.0",
     "storybook": "^7.0.8",
     "storybook-addon-dir": "^1.0.6",
-    "storybook-dark-mode": "^3.0.0",
+    "storybook-dark-mode": "^4.0.0",
     "styled-components": "6.1.8",
     "ts-jest": "^29.1.0",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
