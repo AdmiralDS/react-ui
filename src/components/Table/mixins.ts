@@ -153,6 +153,6 @@ export const borderStyle = css<{ $resizer?: boolean }>`
   border-right: 1px solid transparent;
   [data-borders='true'] & {
     border-color: ${(p) =>
-      p.$resizer && `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
+      p.$resizer ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent'};
   }
 `;

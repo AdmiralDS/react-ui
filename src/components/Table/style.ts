@@ -21,6 +21,7 @@ import {
 import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
+import { ResizerWrapper } from './RowWidthResizer';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
@@ -30,6 +31,10 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+
+  &[data-dragging='true'] ${ResizerWrapper} {
+    pointer-events: none;
+  }
 
   &[data-borders='true'] {
     &:before {
@@ -466,6 +471,7 @@ export const ExpandedRowContent = styled.div`
 export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  border: none;
 `;
 
 const getTechColumnsWidth = (
@@ -512,6 +518,7 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   ${({ $dimension }) =>
     $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
   padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 40)}px;
+  border: none;
 
   &[data-cursor='normal'] {
     cursor: grabbing;
