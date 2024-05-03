@@ -16,6 +16,7 @@ import {
   rowStyle,
   singleLineTitle,
   underlineRow,
+  borderStyle,
 } from './mixins';
 import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
@@ -33,6 +34,20 @@ export const TableContainer = styled.div`
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
+  }
+
+  &[data-borders='true'] {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+      z-index: 6;
+      pointer-events: none;
+    }
   }
 `;
 
@@ -195,13 +210,14 @@ export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   }
 `;
 
-export const Cell = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const Cell = styled.div<{ $dimension: TableProps['dimension']; $resizer?: boolean }>`
   display: flex;
   align-items: flex-start;
   flex: 0 0 auto;
   box-sizing: border-box;
   ${cellStyle};
   overflow: hidden;
+  ${borderStyle}
 `;
 
 export const CellTextContent = styled.div<{ $cellAlign?: 'left' | 'right' }>`
@@ -236,6 +252,7 @@ export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }
         return '10px 12px 9px 12px';
     }
   }};
+  border: none;
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
@@ -254,6 +271,7 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 12px 9px 12px';
     }
   }};
+  border: none;
 `;
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
@@ -272,14 +290,16 @@ export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 8px 9px 8px';
     }
   }};
+  border: none;
 `;
 
-export const HeaderCell = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $resizer?: boolean }>`
   position: relative;
   display: inline-flex;
   box-sizing: border-box;
   flex: 0 0 auto;
   ${cellStyle}
+  ${borderStyle}
   &:hover {
     cursor: pointer;
   }
@@ -397,7 +417,7 @@ export const Row = styled.div<{
   &[data-dragover='true'] > * {
     opacity: 0.4;
   }
-  transition: opacity 0.3 ease;
+  transition: opacity 0.3s ease;
 
   ${groupRowHoverMixin}
 `;
@@ -451,6 +471,7 @@ export const ExpandedRowContent = styled.div`
 export const EmptyMessage = styled(Cell)`
   margin: 2px 0;
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  border: none;
 `;
 
 const getTechColumnsWidth = (
@@ -497,6 +518,7 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   ${({ $dimension }) =>
     $dimension === 's' || $dimension === 'm' ? typography['Subtitle/Subtitle 3'] : typography['Subtitle/Subtitle 2']}
   padding-left: ${({ $dimension }) => ($dimension === 's' || $dimension === 'm' ? 36 : 40)}px;
+  border: none;
 
   &[data-cursor='normal'] {
     cursor: grabbing;

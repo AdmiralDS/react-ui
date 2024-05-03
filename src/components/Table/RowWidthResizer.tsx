@@ -7,7 +7,7 @@ const RESIZER_WIDTH = '17px';
 
 export const ResizerWrapper = styled.div<{ disabled: boolean; $dimension: TableProps['dimension'] }>`
   position: absolute;
-  right: -8px;
+  right: -9px;
   z-index: 1;
   top: 0;
   width: ${RESIZER_WIDTH};

@@ -91,6 +91,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       rowsDraggable = false,
       onRowDrag,
       rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
+      showBorders = false,
       ...props
     },
     ref,
@@ -414,6 +415,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     );
 
     const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
+      const withResizer = col.name === columnList[columnList.length - 1].name ? showDividerForLastColumn : true;
+
       const render = () => {
         if (col.renderCell) {
           return col.renderCell((row as any)[col.name], row, idx);
@@ -429,6 +432,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <Cell
           key={`${row.id}_${col.name}`}
           $dimension={dimension}
+          $resizer={withResizer}
           style={{ width: `var(--td-${col.name}-width, 100px)` }}
           className="td"
           data-column={col.name}
@@ -590,6 +594,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       <TableContainer
         ref={refSetter(ref, tableRef)}
         data-shadow={false}
+        data-borders={showBorders}
         data-dragging={false}
         {...props}
         className={`table ${props.className || ''}`}

@@ -210,6 +210,7 @@ export const TableStyleTemplate = (props: TableProps) => {
       rowList={rowList}
       columnList={cols}
       greyHeader
+      showBorders
       spacingBetweenItems={'20px'}
       style={{
         maxHeight: '400px',

@@ -8,14 +8,14 @@ export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
   padding: ${({ $dimension }) => {
     switch ($dimension) {
       case 's':
-        return '6px 13px 5px 12px';
+        return '6px 12px 5px 12px';
       case 'l':
-        return '12px 17px 11px 16px';
+        return '12px 16px 11px 16px';
       case 'xl':
-        return '16px 17px 15px 16px';
+        return '16px 16px 15px 16px';
       case 'm':
       default:
-        return '10px 13px 9px 12px';
+        return '10px 12px 9px 12px';
     }
   }};
 `;
@@ -147,4 +147,12 @@ export const actionsBGStyle = css<{ $dimension: TableProps['dimension'] }>`
 export const overflowMenuStyle = css<{ $offset: number; $dimension: TableProps['dimension'] }>`
   ${actionsBGStyle};
   left: ${({ $dimension, $offset }) => $offset - getActionSize($dimension)}px;
+`;
+
+export const borderStyle = css<{ $resizer?: boolean }>`
+  border-right: 1px solid transparent;
+  [data-borders='true'] & {
+    border-color: ${(p) =>
+      p.$resizer ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent'};
+  }
 `;
