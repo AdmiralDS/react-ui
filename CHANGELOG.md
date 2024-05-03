@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.3.0](https://github.com/AdmiralDS/react-ui/compare/v8.2.0...v8.3.0) (2024-05-03)
+
+
+### Features
+
+* **Table:** добавлен параметр showBorders, отвечающий за отображение границ между ячейками и обводки всей таблицы ([a6a7a92](https://github.com/AdmiralDS/react-ui/commit/a6a7a923446fb985d7862515f7965c9dda2eed27))
+
+
+### Bug Fixes
+
+* **CharacterCounter:** [#1317](https://github.com/AdmiralDS/react-ui/issues/1317) InputField - character counter must update on state change ([1eabdb4](https://github.com/AdmiralDS/react-ui/commit/1eabdb41039e9348e9bee0de33b06492b947b9e0))
+
 ## [8.2.0](https://github.com/AdmiralDS/react-ui/compare/v8.1.1...v8.2.0) (2024-04-27)
 
 
