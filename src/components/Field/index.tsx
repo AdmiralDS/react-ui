@@ -7,6 +7,7 @@ import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounte
 import { Label } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
+import { useState } from 'react';
 
 const inlineMixin = css`
   flex-direction: row;
@@ -141,14 +142,14 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
       label,
       required,
       disabled,
-      id = uid(),
+      id,
       skeleton = false,
       ...restFieldProps
     } = props;
-
+    const [defaultID] = useState(uid());
     const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
 
-    const labelProps = { htmlFor: id, children: label, required, disabled };
+    const labelProps = { htmlFor: id ?? defaultID, children: label, required, disabled };
 
     React.useEffect(() => {
       const onFocusIn = () => {
