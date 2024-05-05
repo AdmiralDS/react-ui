@@ -531,34 +531,34 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return node ? renderRowWrapper?.(row, index, node) ?? node : node;
     };
 
-    const renderBody = () => {
+    const renderEmptyMessage = () => {
       const emptyMessage = locale?.emptyMessage || theme.locales[theme.currentLocale].table.emptyMessage;
-      if (tableRows.length === 0) {
-        return (
-          <ScrollTableBody ref={scrollBodyRef} className="tbody">
-            <Row
-              $underline={showLastRowUnderline}
-              $dimension={dimension}
-              className="tr"
-              $rowWidth={headerRef.current?.scrollWidth}
-            >
-              <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
-            </Row>
-          </ScrollTableBody>
-        );
-      }
+      return (
+        <Row
+          $underline={showLastRowUnderline}
+          $dimension={dimension}
+          className="tr"
+          $rowWidth={headerRef.current?.scrollWidth}
+        >
+          <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
+        </Row>
+      );
+    };
+
+    const renderBody = () => {
       return virtualScroll ? (
         <VirtualBody
           height={bodyHeight}
           rowList={tableRows}
           childHeight={virtualScroll.fixedRowHeight}
           renderRow={renderRow}
+          renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
           ref={scrollBodyRef}
           className="tbody"
         />
       ) : (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
-          {tableRows.map((row, index) => renderRow(row, index))}
+          {tableRows.length ? tableRows.map((row, index) => renderRow(row, index)) : renderEmptyMessage()}
         </ScrollTableBody>
       );
     };
