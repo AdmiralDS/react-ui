@@ -3,7 +3,7 @@ import { IconPlacement } from '#src/components/IconPlacement';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
-export interface RowActionProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface RowActionProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   dimension?: Dimension;
 }
 
