@@ -15,10 +15,11 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
+  renderEmptyMessage?: () => React.ReactNode;
 }
 
 export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
-  ({ height, childHeight, renderAhead = 20, rowList, renderRow, ...props }, ref) => {
+  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -56,11 +57,19 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
       [rowNodes, startNode, visibleNodeCount],
     );
 
+    const renderContent = () => {
+      return (
+        <>
+          <Spacer style={{ minHeight: topPadding }} />
+          {visibleChildren}
+          <Spacer style={{ minHeight: bottomPadding }} />
+        </>
+      );
+    };
+
     return (
       <ScrollTableBody style={{ height }} ref={refSetter(ref, scrollContainerRef)} {...props}>
-        <Spacer style={{ minHeight: topPadding }} />
-        {visibleChildren}
-        <Spacer style={{ minHeight: bottomPadding }} />
+        {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
       </ScrollTableBody>
     );
   },
