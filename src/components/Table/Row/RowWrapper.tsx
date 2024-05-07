@@ -4,6 +4,8 @@ import { Row, SimpleRow } from '#src/components/Table/style';
 import type { Dimension, RowId, TableRow, TableProps } from '#src/components/Table';
 import { OverflowMenu } from '#src/components/Table/OverflowMenu';
 import { ExpandedRow } from '#src/components/Table/Row/ExpandedRow';
+import { useTheme } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер таблицы */
@@ -55,6 +57,13 @@ export const RowWrapper = ({
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
+  const theme = useTheme() || LIGHT_THEME;
+  const rowStatusColor =
+    row.status && rowStatusMap?.[row.status]
+      ? typeof rowStatusMap[row.status] === 'string'
+        ? rowStatusMap[row.status]
+        : (rowStatusMap[row.status] as any)(theme.color)
+      : undefined;
 
   const handleRowClick = (rowId: RowId | string) => {
     onRowClick?.(rowId);

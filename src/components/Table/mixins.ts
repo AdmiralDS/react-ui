@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
+import { LIGHT_THEME } from '#src/components/themes';
 import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
@@ -90,7 +91,7 @@ export const rowBackground = css<{
     if ($status && $rowStatusMap?.[$status]) {
       return typeof $rowStatusMap[$status] === 'string'
         ? $rowStatusMap[$status]
-        : ($rowStatusMap[$status] as any)(theme.color);
+        : ($rowStatusMap[$status] as any)(theme?.color || LIGHT_THEME);
     }
     if ($error) {
       return `var(--admiral-color-Error_Error20, ${theme.color['Error/Error 20']})`;
