@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.3.1](https://github.com/AdmiralDS/react-ui/compare/v8.3.0...v8.3.1) (2024-05-07)
+
+
+### Bug Fixes
+
+* **Table:** [#1290](https://github.com/AdmiralDS/react-ui/issues/1290) исправлен баг с virtualScroll и сбрасыванием горизонтального скролла ([0d3c388](https://github.com/AdmiralDS/react-ui/commit/0d3c3887be3cb3b6509a5cf902f17e822eeecf07))
+* **Table:** [#1322](https://github.com/AdmiralDS/react-ui/issues/1322) исправлено типизирование RowAction ([7b8e469](https://github.com/AdmiralDS/react-ui/commit/7b8e469a93a906862d1d629e6514a481a35fc8bc))
+
 ## [8.3.0](https://github.com/AdmiralDS/react-ui/compare/v8.2.0...v8.3.0) (2024-05-03)
 
 
