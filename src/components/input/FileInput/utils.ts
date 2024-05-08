@@ -7,6 +7,7 @@ import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XL
 import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as ZIPSolid } from '@admiral-ds/icons/build/documents/ZIPSolid.svg';
+import { ReactComponent as FileCSVSolid } from '@admiral-ds/icons/build/documents/FileCSVSolid.svg';
 
 export const formatBytes = (bytes: number, decimals = 2): number => {
   return Number((bytes / 1024).toFixed(decimals));
@@ -88,6 +89,8 @@ export const formatFileType = (type: string) => {
       return 'Word';
     case 'application/zip':
       return 'ZIP';
+    case 'text/csv':
+      return 'CSV';
     default:
       return 'Docs';
   }
@@ -122,6 +125,8 @@ export const getFileTypeIcon = (type: string) => {
       return FileWordSolid;
     case 'application/zip':
       return ZIPSolid;
+    case 'text/csv':
+      return FileCSVSolid;
     default:
       return DocsSolid;
   }
