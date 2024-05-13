@@ -1,16 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import {
-  GroupActionsPane,
-  PaneSeparator,
-  typography,
-  TextButton,
-  FieldSet,
-  Checkbox,
-  Button,
-  MenuItem,
-} from '@admiral-ds/react-ui';
+import { GroupActionsPane, PaneSeparator, typography, TextButton, Button } from '@admiral-ds/react-ui';
 import type { GroupActionsPaneProps, PaneColumn, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
