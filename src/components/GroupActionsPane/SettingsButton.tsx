@@ -22,7 +22,8 @@ const StyledIconButton = styled(IconButton)`
 `;
 
 export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  menu: React.ReactNode;
+  menu?: React.ReactNode;
+  renderMenu?: (obj: { closeMenu: () => void }) => React.ReactNode;
   buttonDimension?: 's' | 'l';
   disabled?: boolean;
   dropContainerCssMixin?: ReturnType<typeof css>;
@@ -32,11 +33,24 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
-    { menu, buttonDimension = 'l', dropContainerCssMixin, dropContainerClassName, dropContainerStyle, ...props },
+    {
+      menu,
+      renderMenu,
+      buttonDimension = 'l',
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      ...props
+    },
     ref,
   ) => {
     const [opened, setOpened] = useState<boolean>(false);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+    const closeMenu = () => {
+      setOpened(false);
+      buttonRef.current?.focus();
+    };
 
     const handleBtnClick = () => {
       setOpened((prevOpened) => !prevOpened);
@@ -68,7 +82,7 @@ export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonP
             className={dropContainerClassName}
             style={dropContainerStyle}
           >
-            {menu}
+            {renderMenu?.({ closeMenu }) ?? menu}
           </StyledDrop>
         )}
       </>

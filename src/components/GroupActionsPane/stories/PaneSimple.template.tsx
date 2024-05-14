@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { GroupActionsPane, PaneSeparator, typography, TextButton } from '@admiral-ds/react-ui';
+import { GroupActionsPane, PaneSeparator, typography, TextButton, Button } from '@admiral-ds/react-ui';
 import type { GroupActionsPaneProps, PaneColumn, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
@@ -16,11 +16,19 @@ const Wrapper = styled.div`
 
 const SettingsMenu = styled.div`
   width: 320px;
-  height: 200px;
+  padding: 20px;
   ${typography['Body/Body 2 Long']}
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  margin-top: 28px;
+  & > button:first-child {
+    margin-right: 8px;
+  }
 `;
 
 const columns: PaneColumn[] = [
@@ -58,6 +66,20 @@ export const PaneSimpleTemplate = ({
     console.log('Search input left');
   };
 
+  const renderSettingsMenu = ({ closeMenu }: any) => (
+    <SettingsMenu>
+      Здесь могут быть опции с настройками и кнопки для применения/сбрасывания настроек
+      <ButtonWrapper>
+        <Button dimension="s" onClick={closeMenu}>
+          Сохранить
+        </Button>
+        <Button dimension="s" onClick={closeMenu}>
+          Очистить
+        </Button>
+      </ButtonWrapper>
+    </SettingsMenu>
+  );
+
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
@@ -71,7 +93,7 @@ export const PaneSimpleTemplate = ({
           onSearchLeave={handleSearchLeave}
           columnsButtonDropContainerStyle={{ dropContainerClassName: 'columnsButtonDropContainerClass' }}
           settingsButtonDropContainerStyle={{ dropContainerClassName: 'settingsButtonDropContainerClass' }}
-          settingsMenu={<SettingsMenu>Здесь может быть меню настройки</SettingsMenu>}
+          renderSettingsMenu={renderSettingsMenu}
         >
           <TextButton text={'Action 1'} dimension={dimension} iconStart={<GovernmentOutline />} />
           <TextButton text={'Action 2'} dimension={dimension} iconStart={<TelegramOutline />} />
