@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.4.0](https://github.com/AdmiralDS/react-ui/compare/v8.3.1...v8.4.0) (2024-05-14)
+
+
+### Features
+
+* **FileInput:** добавлено определение формата файла CSV ([3751652](https://github.com/AdmiralDS/react-ui/commit/3751652cb871433b44966c7563324a0f06f40434))
+* **GroupActionsPane:** [#1329](https://github.com/AdmiralDS/react-ui/issues/1329) добавлен параметр renderSettingsMenu с возможностью закрытия меню при клике на элемент внутри меню, параметр settingsMenu помечен как deprecated ([68b7bd5](https://github.com/AdmiralDS/react-ui/commit/68b7bd5ce38c0cf309c7654cc731155d67877a42))
+
 ### [8.3.1](https://github.com/AdmiralDS/react-ui/compare/v8.3.0...v8.3.1) (2024-05-07)
 
 

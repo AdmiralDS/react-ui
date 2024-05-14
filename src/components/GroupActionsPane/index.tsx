@@ -45,6 +45,11 @@ const IconsBlock = styled.div`
   justify-content: flex-end;
 `;
 
+type MenuProps = {
+  /** Функция закрытия меню настроек */
+  closeMenu: () => void;
+};
+
 // TODO: в дальнейшем удалить параметр name, сделать параметры id и title обязательными
 export interface PaneColumn {
   /** @deprecated Используйте id для уникального идентификатора колонки и title для заголовка колонки */
@@ -80,8 +85,16 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   /** Обработчик изменения строки поиска */
   onChangeSearchValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
-  /** Объект, отображаемый в качестве меню настройки */
+  /**
+   * @deprecated Будет удалено в 10.x.x версии.
+   * Взамен используйте параметр renderSettingsMenu.
+   *
+   * Объект, отображаемый в качестве меню настройки
+   **/
   settingsMenu?: React.ReactNode;
+
+  /** Функция отрисовки содержимого меню настроек */
+  renderSettingsMenu?: (obj: MenuProps) => React.ReactNode;
 
   /** Признак блокировки кнопок настройки таблицы */
   settingsButtonsDisabled?: boolean;
@@ -109,6 +122,7 @@ export const GroupActionsPane = ({
   dimension = 'xl',
   columns,
   settingsMenu,
+  renderSettingsMenu,
   onColumnsChange,
   onSearchEnter,
   onSearchLeave,
@@ -163,9 +177,10 @@ export const GroupActionsPane = ({
             dropContainerStyle={columnsButtonDropContainerStyle?.dropContainerStyle}
           />
         )}
-        {settingsMenu && (
+        {(settingsMenu || renderSettingsMenu) && (
           <SettingsButton
             menu={settingsMenu}
+            renderMenu={renderSettingsMenu}
             buttonDimension={iconButtonDimension}
             disabled={settingsButtonsDisabled}
             dropContainerCssMixin={settingsButtonDropContainerStyle?.dropContainerCssMixin}
