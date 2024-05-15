@@ -104,6 +104,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const [tableWidth, setTableWidth] = React.useState(0);
     const [bodyHeight, setBodyHeight] = React.useState(0);
     const [scrollbar, setScrollbarSize] = React.useState(0);
+    const [headerScrollbar, setHeaderScrollbar] = React.useState(0);
 
     const stickyColumns = [...columnList].filter((col) => col.sticky);
 
@@ -215,6 +216,14 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const size = getScrollbarSize();
       setScrollbarSize(size);
     }, [setScrollbarSize]);
+
+    React.useEffect(() => {
+      if (hiddenHeaderRef.current) {
+        const width = hiddenHeaderRef.current.offsetWidth - hiddenHeaderRef.current.clientWidth;
+        console.log(width);
+        setHeaderScrollbar(width);
+      }
+    }, [setHeaderScrollbar, verticalScroll]);
 
     React.useLayoutEffect(() => {
       const scrollBody = scrollBodyRef.current;
@@ -581,6 +590,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             $expansionColumn={displayRowExpansionColumn}
             $selectionColumn={displayRowSelectionColumn}
             $dimension={dimension}
+            $scrollbar={headerScrollbar}
           >
             {stickyColumns.length > 0 &&
               stickyColumns.map((col, index) => renderHeaderCell(col as Column, index, true))}

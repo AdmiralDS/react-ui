@@ -175,27 +175,27 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    width: 'calc(20% - 40px)',
+    width: '25%',
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: '250px',
+    width: '25%',
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 200,
+    width: '25%',
   },
   {
     name: 'currency',
     title: 'Валюта',
-    width: '20%',
+    width: '25%',
   },
-  {
-    name: 'rate',
-    title: 'Ставка',
-  },
+  // {
+  //   name: 'rate',
+  //   title: 'Ставка',
+  // },
 ];
 
 export const TableColumnWidthTemplate = (props: TableProps) => {
@@ -206,5 +206,13 @@ export const TableColumnWidthTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <Table
+      {...props}
+      rowList={rowList}
+      columnList={cols}
+      onColumnResize={handleResize}
+      style={{ width: '100%', height: '300px' }}
+    />
+  );
 };

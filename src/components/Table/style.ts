@@ -482,14 +482,21 @@ const getTechColumnsWidth = (
   (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
   (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
 
+// замечено, что баг решается в двух случаях:
+// 1) на родителе с padding нужно указать box-sizing: border-box
+// 2) либо у таблицы не должно быть постоянного (в настройках mac "полоса прокрутки видна всегда") вертикального скролла
+// поэтому пытаюсь экспериментировать с учетом вертикального скролла
 export const HeaderCellsWrapper = styled.div<{
   $dimension: TableProps['dimension'];
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
+  $scrollbar: number;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
+  width: calc(
+    100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + p.$scrollbar + 'px'}
+  );
 `;
 
 export const HiddenHeader = styled.div`
