@@ -64,7 +64,7 @@ export const HeaderCellComponent = React.memo(
 
     const withResizer = index < columnsAmount - 1 || (index === columnsAmount - 1 && showDividerForLastColumn);
 
-    const cellRef = React.useRef<HTMLDivElement>(null);
+    const [cellNode, setCellNode] = React.useState<HTMLDivElement | null>(null);
 
     return (
       <HeaderCell
@@ -74,7 +74,7 @@ export const HeaderCellComponent = React.memo(
         className="th"
         data-draggable={draggable}
         data-th-column={name}
-        ref={cellRef}
+        ref={(node) => setCellNode(node)}
       >
         <HeaderCellContent $cellAlign={cellAlign}>
           <HeaderCellTitle
@@ -90,7 +90,7 @@ export const HeaderCellComponent = React.memo(
             {sortable && <SortIcon sort={sort} sortOrder={sortOrder} multipleSort={multipleSort} iconSize={iconSize} />}
           </HeaderCellTitle>
           <HeaderCellSpacer width={renderFilter ? spacer : `${parseInt(spacer) - parseInt(defaultSpacer)}px`} />
-          {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellRef.current} />}
+          {renderFilter && <Filter column={column} dimension={dimension} targetElement={cellNode} />}
         </HeaderCellContent>
         {withResizer && (
           <RowWidthResizer
