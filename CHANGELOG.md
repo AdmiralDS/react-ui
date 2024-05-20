@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.1](https://github.com/AdmiralDS/react-ui/compare/v8.4.0...v8.4.1) (2024-05-17)
+
+
+### Bug Fixes
+
+* **Table:** [#1332](https://github.com/AdmiralDS/react-ui/issues/1332) исправлен баг с некорректным позиционированием меню фильтрации ([4acc6a2](https://github.com/AdmiralDS/react-ui/commit/4acc6a2f35ae1b78b3ef7e800cd72e33069b352c))
+
 ## [8.4.0](https://github.com/AdmiralDS/react-ui/compare/v8.3.1...v8.4.0) (2024-05-14)
 
 
