@@ -9,6 +9,7 @@ import { appearanceMixin } from './appearanceMixin';
 import { ButtonIconContainer, dimensionMixin } from './dimensionMixin';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
+import { applyDefaultTheme } from '#src/components/themes/common/defaultTheme';
 
 export type { ButtonAppearance } from './types';
 export * from './dimensionMixin';
@@ -168,6 +169,7 @@ const StyledButton = styled.button.attrs<
   'data-appearance': [props.$appearance, props.$displayAsDisabled ? 'disabled' : undefined]
     .filter((val) => val !== undefined)
     .join(' '),
+  ...applyDefaultTheme(props),
 }))<StyledButtonProps>`
   position: relative;
   box-sizing: border-box;

@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     html {
-      background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+      /* background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']}); */
     }
 `;
 
@@ -64,19 +64,21 @@ function ThemeWrapper(props) {
 
 const StoryContainer = styled.div`
   padding: 3em;
-  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  /* background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']}); */
 `;
 
 export const decorators = [
   (renderStory) => {
     const [{ CSSCustomProps }] = useGlobals();
     return (
-      <ThemeWrapper CSSCustomProps={CSSCustomProps}>
+      <>
+        {/* <ThemeWrapper CSSCustomProps={CSSCustomProps}></ThemeWrapper> */}
         <GlobalStyles />
         <DropdownProvider>
           <StoryContainer>{renderStory()}</StoryContainer>
         </DropdownProvider>
-      </ThemeWrapper>
+        {/* </ThemeWrapper> */}
+      </>
     );
   },
   (Story) => (
