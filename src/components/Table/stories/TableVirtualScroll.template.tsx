@@ -3,13 +3,13 @@ import { Table } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 
 type RowData = TableRow & {
-  transfer_number: number;
+  transfer_number: React.ReactNode;
   transfer_date: string;
 };
 
 const rowList: RowData[] = [...Array(1000).keys()].map((_item, index) => ({
   id: String(index),
-  transfer_number: index,
+  transfer_number: <div style={{ minHeight: `${30 + index}px` }}>{index}</div>,
   transfer_date: new Date('2020-08-06').toLocaleDateString(),
 }));
 
