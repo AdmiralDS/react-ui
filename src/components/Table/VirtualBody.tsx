@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import observeRect from '../common/observeRect';
 
 import { ScrollTableBody } from './style';
 
@@ -8,6 +9,35 @@ const Spacer = styled.div`
   display: flex;
   flex: 0 0 auto;
 `;
+
+interface RowMeasurerProps extends React.HTMLAttributes<HTMLDivElement> {
+  onHeightChange: (height: number) => void;
+}
+
+const RowMeasurer = ({ children, onHeightChange }: RowMeasurerProps) => {
+  const [node, setNode] = React.useState<HTMLDivElement | null>(null);
+  const nodeHeight = React.useRef(0);
+
+  React.useEffect(() => {
+    if (node) {
+      const observer = observeRect(node, (rect) => {
+        if (rect) {
+          const { height } = rect;
+          if (nodeHeight.current !== height) {
+            nodeHeight.current = height;
+            onHeightChange(height);
+          }
+        }
+      });
+      observer.observe();
+      return () => {
+        observer.unobserve();
+      };
+    }
+  }, [node]);
+
+  return <div ref={(node) => setNode(node)}>{children}</div>;
+};
 
 interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
@@ -76,9 +106,6 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     } else {
       visibleNodeCount = endNode - startNode + 1;
     }
-
-    // некорректно работает, при росте startNode - visibleNodeCount должно уменьшаться
-    console.log({ startNode, visibleNodeCount });
 
     const topPadding = typeof childHeight === 'number' ? `${startNode * childHeight}px` : childPositions[startNode];
     const bottomPadding =

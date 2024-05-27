@@ -250,6 +250,15 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
      * все строки должны быть одной фиксированной высоты
      */
     fixedRowHeight: number;
+    // Обдумываю api по примеру react-window
+    /** Estimated size of a item in the direction being windowed.
+     * For vertical lists, this is the row height. For horizontal lists, this is the column width.
+     * This value is used to calculated the estimated total size of a list before its items have all been measured.
+     * The total size impacts user scrolling behavior. It is updated whenever new items are measured.*/
+    estimatedItemSize: number;
+    /** Returns the size of a item in the direction being windowed. For vertical lists, this is the row height.
+     * For horizontal lists, this is the column width. */
+    itemSize: (index: number) => number;
   };
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
