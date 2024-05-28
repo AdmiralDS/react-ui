@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { TabIcon } from '#src/components/TabMenuComponent/TabIcon';
+import { TabMenuIconContainer } from '#src/components/TabMenuComponent/TabMenuIconContainer';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -37,6 +38,19 @@ export const TabMenuComponentBaseTemplate = ({
         <TabIcon content={<TabContent />} selected />
         <TabIcon content={<TabContent />} disabled />
       </Wrapper>
+      <Wrapper>
+        <TabMenuIconContainer>
+          <TabIcon content={<TabContent />} />
+          <TabIcon content={<TabContent />} selected />
+          <TabIcon content={<TabContent />} disabled />
+        </TabMenuIconContainer>
+      </Wrapper>
+      <Wrapper>
+        <TabMenuIconContainer $underline>
+          <TabIcon content={<TabContent />} />
+          <TabIcon content={<TabContent />} selected />
+          <TabIcon content={<TabContent />} disabled />
+        </TabMenuIconContainer>
       </Wrapper>
     </ThemeProvider>
   );
