@@ -6,6 +6,7 @@ import type { TabProps } from '#src/components/TabMenuComponent/types';
 import { TAB_ICON_ICON_SIZE, TAB_MENU_ICON_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
 const Tab = styled.button<{ $selected?: boolean }>`
+  box-sizing: border-box;
   padding: 0 6px 8px 6px;
   display: flex;
   flex-direction: column;
