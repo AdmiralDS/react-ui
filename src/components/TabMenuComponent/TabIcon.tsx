@@ -4,6 +4,7 @@ import { typography } from '#src/components/Typography';
 
 import type { TabProps } from '#src/components/TabMenuComponent/types';
 import { TAB_ICON_ICON_SIZE, TAB_MENU_ICON_HEIGHT } from '#src/components/TabMenuComponent/constants';
+import { forwardRef } from 'react';
 
 const Tab = styled.button<{ $selected?: boolean }>`
   box-sizing: border-box;
@@ -49,10 +50,10 @@ const Tab = styled.button<{ $selected?: boolean }>`
     }
   }
 `;
-export const TabIcon = ({ content, disabled, selected, ...props }: TabProps) => {
+export const TabIcon = forwardRef(({ children, content, disabled, selected, ...props }: TabProps, ref) => {
   return (
     <Tab disabled={disabled} $selected={selected} {...props}>
-      {content}
+      {content || children}
     </Tab>
   );
-};
+});
