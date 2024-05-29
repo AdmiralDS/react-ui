@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
 export const TabMenuIconContainer = styled.div<{ $underline?: boolean }>`
+  position: relative;
   box-sizing: border-box;
   height: fit-content;
   display: flex;
