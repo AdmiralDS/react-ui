@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import observeRect from '../common/observeRect';
+import observeRect from '../../common/observeRect';
 
-import { ScrollTableBody } from './style';
+import { ScrollTableBody } from '../style';
 
 const Spacer = styled.div`
   display: flex;
@@ -39,16 +39,16 @@ const RowMeasurer = ({ children, onHeightChange }: RowMeasurerProps) => {
   return <div ref={(node) => setNode(node)}>{children}</div>;
 };
 
-interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+interface VariableSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
-  childHeight: number | ((index: number) => number);
+  childHeight: (index: number) => number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
 }
 
-export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
+export const VariableSizeBody = React.forwardRef<HTMLDivElement, VariableSizeBodyProps>(
   ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -90,7 +90,7 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
       [scrollTop, childPositions, itemCount],
     );
 
-    let startNode = typeof childHeight === 'number' ? Math.floor(scrollTop / childHeight) : firstVisibleNode;
+    let startNode = firstVisibleNode;
     startNode = Math.max(0, startNode - renderAhead);
 
     const lastVisibleNode = React.useMemo(
@@ -99,19 +99,10 @@ export const VirtualBody = React.forwardRef<HTMLDivElement, VirtualBodyProps>(
     );
     const endNode = Math.min(itemCount - 1, lastVisibleNode + renderAhead);
 
-    let visibleNodeCount: number;
-    if (typeof childHeight === 'number') {
-      visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhead;
-      visibleNodeCount = Math.min(itemCount - startNode, visibleNodeCount);
-    } else {
-      visibleNodeCount = endNode - startNode + 1;
-    }
+    let visibleNodeCount = endNode - startNode + 1;
 
-    const topPadding = typeof childHeight === 'number' ? `${startNode * childHeight}px` : childPositions[startNode];
-    const bottomPadding =
-      typeof childHeight === 'number'
-        ? `${(itemCount - startNode - visibleNodeCount) * childHeight}px`
-        : childPositions[itemCount - startNode - visibleNodeCount];
+    const topPadding = childPositions[startNode];
+    const bottomPadding = childPositions[itemCount - startNode - visibleNodeCount];
 
     const visibleChildren = React.useMemo(
       () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),

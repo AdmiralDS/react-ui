@@ -2,16 +2,6 @@ import { useRef, useEffect, useCallback, useState, useMemo } from 'react';
 import { renderToString } from 'react-dom/server';
 import { uid } from '#src/components/common/uid';
 
-// Изучаю кастомный хук для измерения высоты строки
-
-/**
- * This custom hook is designed to replace the `<CellMeasurer />` component in `react-virtualized`
- * in `react-window`
- *
- * This hook returns props to be given to the `<VariableSizeList />` component in `react-window`
- *
- * `items` are react elements
- */
 export default function useRowMeasurer({ items }: { items: Array<React.ReactNode> }) {
   // create a ref to get the `div` element the `VariableSizeList` uses
   const innerRef = useRef(null);

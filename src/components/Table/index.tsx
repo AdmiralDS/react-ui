@@ -32,7 +32,7 @@ import {
   HiddenHeader,
   DragCell,
 } from './style';
-import { VirtualBody } from './VirtualBody';
+import { FixedSizeBody, VariableSizeBody, VariableSizeList } from './virtualScroll';
 import type {
   Column,
   TableRow,
@@ -547,11 +547,21 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderBody = () => {
       return virtualScroll ? (
-        <VirtualBody
+        // <VariableSizeBody
+        //   height={bodyHeight}
+        //   rowList={tableRows}
+        //   // childHeight={virtualScroll.fixedRowHeight}
+        //   childHeight={(index) => 53 + index}
+        //   renderRow={renderRow}
+        //   renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
+        //   ref={scrollBodyRef}
+        //   className="tbody"
+        // />
+        <VariableSizeList
           height={bodyHeight}
           rowList={tableRows}
           // childHeight={virtualScroll.fixedRowHeight}
-          childHeight={(index) => 53 + index}
+          itemSize={(index) => 53 + index}
           renderRow={renderRow}
           renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
           ref={scrollBodyRef}
