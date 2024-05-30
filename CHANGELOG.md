@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.2](https://github.com/AdmiralDS/react-ui/compare/v8.4.1...v8.4.2) (2024-05-30)
+
+
+### Bug Fixes
+
+* **TextAria:** [#1341](https://github.com/AdmiralDS/react-ui/issues/1341)  при включении иконки очистки скролл становится не доступен для курсора мыши ([ccd32ef](https://github.com/AdmiralDS/react-ui/commit/ccd32ef47bfaf2574f9c2c6d98387c58b9e4b186))
+
 ### [8.4.1](https://github.com/AdmiralDS/react-ui/compare/v8.4.0...v8.4.1) (2024-05-17)
 
 
