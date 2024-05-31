@@ -9,6 +9,16 @@ const Spacer = styled.div`
   flex: 0 0 auto;
 `;
 
+const Row = ({ children, index, setSize }: any) => {
+  const rowRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    setSize(index, rowRef.current?.getBoundingClientRect().height || 50);
+  }, [setSize, index]);
+
+  return <div ref={rowRef}>{children}</div>;
+};
+
 type itemSizeGetter = (index: number) => number;
 
 type ItemMetadata = {
@@ -27,18 +37,26 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
+  tableWidth: number;
+  estimatedRowHeight?: number;
   itemSize: itemSizeGetter;
 }
 // логика взята из VariableSizeList react-window
 export const VariableSizeList = React.forwardRef<HTMLDivElement, Props>(
-  ({ height, renderAhead = 20, rowList, renderRow, renderEmptyMessage, itemSize, ...props }, ref) => {
+  ({ height, renderAhead = 20, rowList, tableWidth, itemSize, renderRow, renderEmptyMessage, ...props }, ref) => {
     const [scrollTop, setScrollTop] = React.useState(0);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
     const rowInstance = React.useRef<InstanceProps>({
       itemMetadataMap: {},
-      estimatedItemSize: 50,
+      estimatedItemSize: 150,
       lastMeasuredIndex: -1,
     });
+    const rowMap = React.useRef<any>({});
+
+    // // clear up if rowList/tableWidth updated
+    // React.useEffect(() => {
+    //   rowInstance.current.itemMetadataMap = {};
+    // }, [rowList, tableWidth]);
 
     React.useEffect(() => {
       function handleScroll(e: any) {
@@ -55,6 +73,7 @@ export const VariableSizeList = React.forwardRef<HTMLDivElement, Props>(
     }, []);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
+    // filter(Boolean) removes all empty items from an array
     const rowNodes = React.useMemo(
       () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
       [rowList, renderRow],
@@ -78,8 +97,15 @@ export const VariableSizeList = React.forwardRef<HTMLDivElement, Props>(
       [rowNodes, startIndex, visibleNodeCount],
     );
 
+    // Read this value AFTER items have been created,
+    // So their actual sizes (if variable) are taken into consideration.
+    const estimatedTotalSize = getEstimatedTotalSize(itemCount, rowInstance.current);
+
     const topPadding = rowInstance.current.itemMetadataMap[startIndex]?.offset || 0;
-    const bottomPadding = rowInstance.current.itemMetadataMap[itemCount - startIndex - visibleNodeCount]?.offset || 0;
+    const bottomPadding =
+      estimatedTotalSize -
+        (rowInstance.current.itemMetadataMap[stopIndex]?.offset +
+          rowInstance.current.itemMetadataMap[stopIndex]?.size) || 0;
 
     const renderContent = () => {
       return (
@@ -98,6 +124,29 @@ export const VariableSizeList = React.forwardRef<HTMLDivElement, Props>(
     );
   },
 );
+
+const getEstimatedTotalSize = (
+  itemCount: number,
+  { itemMetadataMap, estimatedItemSize, lastMeasuredIndex }: InstanceProps,
+) => {
+  let totalSizeOfMeasuredItems = 0;
+
+  // Edge case check for when the number of items decreases while a scroll is in progress.
+  // https://github.com/bvaughn/react-window/pull/138
+  if (lastMeasuredIndex >= itemCount) {
+    lastMeasuredIndex = itemCount - 1;
+  }
+
+  if (lastMeasuredIndex >= 0) {
+    const itemMetadata = itemMetadataMap[lastMeasuredIndex];
+    totalSizeOfMeasuredItems = itemMetadata.offset + itemMetadata.size;
+  }
+
+  const numUnmeasuredItems = itemCount - lastMeasuredIndex - 1;
+  const totalSizeOfUnmeasuredItems = numUnmeasuredItems * estimatedItemSize;
+
+  return totalSizeOfMeasuredItems + totalSizeOfUnmeasuredItems;
+};
 
 function findNearestItem(itemSize: itemSizeGetter, instanceProps: InstanceProps, offset: number, itemCount: number) {
   const { itemMetadataMap, lastMeasuredIndex } = instanceProps;
@@ -227,14 +276,24 @@ function getRangeToRender(
     return [0, 0];
   }
 
-  const startIndex = findNearestItem(itemSize, rowInstance, scrollTop, itemCount);
-  const stopIndex = getStopIndexForStartIndex(itemSize, startIndex, scrollTop, rowInstance, height, itemCount);
+  const overscan = Math.max(1, renderAhead);
 
-  const overscanBackward = Math.max(1, renderAhead);
-  const overscanForward = Math.max(1, renderAhead);
+  let startIndex = findNearestItem(itemSize, rowInstance, scrollTop, itemCount);
+  startIndex = Math.max(0, startIndex - overscan);
 
-  return [
-    Math.max(0, startIndex - overscanBackward),
-    Math.max(0, Math.min(itemCount - 1, stopIndex + overscanForward)),
-  ];
+  let stopIndex = getStopIndexForStartIndex(itemSize, startIndex, scrollTop, rowInstance, height, itemCount);
+  stopIndex = Math.max(0, Math.min(itemCount - 1, stopIndex + overscan));
+
+  // вычисляю размер строк с учетом overscan
+  getItemMetadata(itemSize, stopIndex, rowInstance);
+
+  return [startIndex, stopIndex];
 }
+
+const resetAfterIndex = (index: number, rowInstance: InstanceProps, shouldForceUpdate: boolean = true) => {
+  rowInstance.lastMeasuredIndex = Math.min(rowInstance.lastMeasuredIndex, index - 1);
+
+  if (shouldForceUpdate) {
+    //   instance.forceUpdate();
+  }
+};

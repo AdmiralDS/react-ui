@@ -562,6 +562,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           rowList={tableRows}
           // childHeight={virtualScroll.fixedRowHeight}
           itemSize={(index) => 53 + index}
+          tableWidth={tableWidth}
           renderRow={renderRow}
           renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
           ref={scrollBodyRef}
