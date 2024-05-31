@@ -213,7 +213,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   flex-direction: column;
   align-items: center;
 
-  padding-right: ${horizontalPaddingValue}px;
+  margin-right: ${horizontalPaddingValue}px;
   padding-top: ${verticalPaddingValue}px;
 
   & > * {
