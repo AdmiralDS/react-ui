@@ -547,22 +547,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderBody = () => {
       return virtualScroll ? (
-        // <VariableSizeBody
-        //   height={bodyHeight}
-        //   rowList={tableRows}
-        //   // childHeight={virtualScroll.fixedRowHeight}
-        //   childHeight={(index) => 53 + index}
-        //   renderRow={renderRow}
-        //   renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
-        //   ref={scrollBodyRef}
-        //   className="tbody"
-        // />
         <VariableSizeList
           height={bodyHeight}
           rowList={tableRows}
-          // childHeight={virtualScroll.fixedRowHeight}
           itemSize={(index) => 53 + index}
-          tableWidth={tableWidth}
           renderRow={renderRow}
           renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
           ref={scrollBodyRef}
