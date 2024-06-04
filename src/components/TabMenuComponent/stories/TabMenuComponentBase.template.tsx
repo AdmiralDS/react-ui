@@ -5,7 +5,11 @@ import styled, { ThemeProvider } from 'styled-components';
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { TabIcon } from '#src/components/TabMenuComponent/TabIcon';
-import { TabMenuIconContainer } from '#src/components/TabMenuComponent/TabMenuIconContainer';
+import {
+  TabMenuIconScrollingContainer,
+  TabMenuIconScrollingContainerWrapper,
+  TabMenuIconWrapper,
+} from '#src/components/TabMenuComponent/TabMenuIconContainer';
 import { TabActiveUnderline } from '#src/components/TabMenuComponent/TabActiveUnderline';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -31,6 +35,12 @@ const CustomTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ..
   );
 });
 
+const StyledSlideArrow = styled(SlideArrow)<{ $direction: 'left' | 'right' }>`
+  position: absolute;
+  top: 18px;
+  ${(p) => (p.$direction === 'left' ? 'left: 0' : 'right: 0')};
+`;
+
 const tabs = [
   { text: 'Text1', id: '1' },
   { text: 'Text22', id: '22' },
@@ -41,7 +51,7 @@ const tabs = [
 ];
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 325px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -106,20 +116,24 @@ export const TabMenuComponentBaseTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <TabMenuIconContainer $underline>
-          {iconTabs}
-          <TabActiveUnderline
-            $left={`${underlineLeft}px`}
-            $width={`${underlineWidth}px`}
-            $transition={underlineTransition}
-          />
-        </TabMenuIconContainer>
-        <SlideArrow>
-          <ArrowLeftOutline />
-        </SlideArrow>
-        <SlideArrow>
-          <ArrowRightOutline />
-        </SlideArrow>
+        <TabMenuIconWrapper>
+          <TabMenuIconScrollingContainerWrapper $underline>
+            <TabMenuIconScrollingContainer>
+              {iconTabs}
+              <TabActiveUnderline
+                $left={`${underlineLeft}px`}
+                $width={`${underlineWidth}px`}
+                $transition={underlineTransition}
+              />
+            </TabMenuIconScrollingContainer>
+          </TabMenuIconScrollingContainerWrapper>
+          <StyledSlideArrow $direction="left">
+            <ArrowLeftOutline />
+          </StyledSlideArrow>
+          <StyledSlideArrow $direction="right">
+            <ArrowRightOutline />
+          </StyledSlideArrow>
+        </TabMenuIconWrapper>
       </Wrapper>
     </ThemeProvider>
   );
