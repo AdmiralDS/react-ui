@@ -50,10 +50,12 @@ const Tab = styled.button<{ $selected?: boolean }>`
     }
   }
 `;
-export const TabIcon = forwardRef(({ children, content, disabled, selected, ...props }: TabProps, ref) => {
-  return (
-    <Tab disabled={disabled} $selected={selected} {...props}>
-      {content || children}
-    </Tab>
-  );
-});
+export const TabIcon = forwardRef<HTMLButtonElement, TabProps>(
+  ({ children, disabled, selected, ...props }: TabProps, ref) => {
+    return (
+      <Tab ref={ref} disabled={disabled} $selected={selected} {...props}>
+        {children}
+      </Tab>
+    );
+  },
+);
