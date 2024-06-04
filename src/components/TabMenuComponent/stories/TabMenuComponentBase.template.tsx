@@ -1,5 +1,5 @@
-import { createRef, forwardRef, useLayoutEffect, useMemo, useState } from 'react';
 import type { MouseEventHandler, RefObject } from 'react';
+import { createRef, forwardRef, useLayoutEffect, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -64,9 +64,6 @@ export const TabMenuComponentBaseTemplate = ({
 }) => {
   const [activeTab, setActiveTab] = useState<string | undefined>('333');
   const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    const { left, width } = getUnderlinePosition(e.currentTarget);
-    setUnderlineWidth(width);
-    setUnderlineLeft(left);
     setActiveTab(e.currentTarget.id);
   };
 
@@ -86,15 +83,36 @@ export const TabMenuComponentBaseTemplate = ({
     );
   });
 
+  const styleUnderline = (enableTransition: boolean) => {
+    const { left, width } = getUnderlinePosition(tabsWithRef.find((tab) => tab.id === activeTab)?.ref.current);
+    setUnderlineTransition(enableTransition);
+    setUnderlineWidth(width);
+    setUnderlineLeft(left);
+  };
+
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
+  const [underlineTransition, setUnderlineTransition] = useState(false);
+  useLayoutEffect(() => {
+    if (underlineWidth === 0) {
+      setTimeout(() => {
+        styleUnderline(false);
+      }, 300);
+    } else {
+      styleUnderline(true);
+    }
+  }, [activeTab]);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <TabMenuIconContainer $underline>
           {iconTabs}
-          <TabActiveUnderline $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} />
+          <TabActiveUnderline
+            $left={`${underlineLeft}px`}
+            $width={`${underlineWidth}px`}
+            $transition={underlineTransition}
+          />
         </TabMenuIconContainer>
         <SlideArrow>
           <ArrowLeftOutline />
