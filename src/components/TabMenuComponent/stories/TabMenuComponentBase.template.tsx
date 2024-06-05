@@ -1,5 +1,5 @@
+import { createRef, forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import type { MouseEventHandler, RefObject } from 'react';
-import { createRef, forwardRef, useLayoutEffect, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -43,11 +43,14 @@ const StyledSlideArrow = styled(SlideArrow)<{ $direction: 'left' | 'right' }>`
 
 const tabs = [
   { text: 'Text1', id: '1' },
-  { text: 'Text22', id: '22' },
-  { text: 'Text333', id: '333' },
-  { text: 'Text4444', id: '4444' },
-  { text: 'Text55555', id: '55555' },
-  { text: 'Text666666', id: '666666' },
+  { text: 'Text22', id: '2' },
+  { text: 'Text333', id: '3' },
+  { text: 'Text4444', id: '4' },
+  { text: 'Text55555', id: '5' },
+  { text: 'Text66666', id: '6' },
+  { text: 'Text7777', id: '7' },
+  { text: 'Text888', id: '8' },
+  { text: 'Text99', id: '9' },
 ];
 
 const Wrapper = styled.div`
@@ -72,14 +75,13 @@ export const TabMenuComponentBaseTemplate = ({
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
-  const [activeTab, setActiveTab] = useState<string | undefined>('333');
+  //<editor-fold desc="Создание табов для отрисовки">
+  const [activeTab, setActiveTab] = useState<string | undefined>('3');
   const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     setActiveTab(e.currentTarget.id);
   };
 
-  const tabsWithRef: Array<TabWithRefProps> = useMemo(() => {
-    return tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
-  }, [tabs]);
+  const tabsWithRef: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   const iconTabs = tabs.map((tab, index) => {
     return (
       <CustomTab
@@ -92,14 +94,15 @@ export const TabMenuComponentBaseTemplate = ({
       />
     );
   });
+  //</editor-fold>
 
+  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
   const styleUnderline = (enableTransition: boolean) => {
     const { left, width } = getUnderlinePosition(tabsWithRef.find((tab) => tab.id === activeTab)?.ref.current);
     setUnderlineTransition(enableTransition);
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };
-
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
   const [underlineTransition, setUnderlineTransition] = useState(false);
@@ -112,13 +115,56 @@ export const TabMenuComponentBaseTemplate = ({
       styleUnderline(true);
     }
   }, [activeTab]);
+  //</editor-fold>
+
+  //<editor-fold desc="Отображение и обработка кнопок прокурутки">
+  const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
+  const [scrollingContainerLeft, setScrollingContainerLeft] = useState(0);
+  const [scrolledToRight, setScrolledToRight] = useState(false);
+  const [prevDisabled, setPrevDisabled] = useState(true);
+  const [nextDisabled, setNextDisabled] = useState(false);
+  const step = 70;
+
+  useLayoutEffect(() => {
+    if (!scrollingContainerRef.current) return;
+
+    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
+
+    setPrevDisabled(scrollingContainerLeft === 0);
+    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
+    setNextDisabled(newNextDisabled);
+    setScrolledToRight(newNextDisabled);
+  });
+
+  const handleLeftClick = () => {
+    if (scrolledToRight) setScrolledToRight(false);
+    setScrollingContainerLeft((prev) => (prev - step < 0 ? 0 : prev - step));
+  };
+  const handleRightClick = () => {
+    if (!scrollingContainerRef.current) return;
+    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
+
+    const newValue = scrollingContainerLeft + step;
+    const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
+    const resValue = newValue > maxValue ? maxValue : newValue;
+
+    if (resValue === maxValue) setScrolledToRight(true);
+    setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
+  };
+  //</editor-fold
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <TabMenuIconWrapper>
-          <TabMenuIconScrollingContainerWrapper $underline>
-            <TabMenuIconScrollingContainer>
+          <TabMenuIconScrollingContainerWrapper>
+            <TabMenuIconScrollingContainer
+              $underline
+              ref={scrollingContainerRef}
+              $leftValue={scrolledToRight ? `${scrollingContainerLeft}px` : 0}
+              $floatValue={scrolledToRight ? 'inline-end' : 'inline-start'}
+              $translateXValue={`${-scrollingContainerLeft}px`}
+            >
               {iconTabs}
               <TabActiveUnderline
                 $left={`${underlineLeft}px`}
@@ -127,12 +173,16 @@ export const TabMenuComponentBaseTemplate = ({
               />
             </TabMenuIconScrollingContainer>
           </TabMenuIconScrollingContainerWrapper>
-          <StyledSlideArrow $direction="left">
-            <ArrowLeftOutline />
-          </StyledSlideArrow>
-          <StyledSlideArrow $direction="right">
-            <ArrowRightOutline />
-          </StyledSlideArrow>
+          {!prevDisabled && (
+            <StyledSlideArrow $direction="left" onClick={handleLeftClick}>
+              <ArrowLeftOutline />
+            </StyledSlideArrow>
+          )}
+          {!nextDisabled && (
+            <StyledSlideArrow $direction="right" onClick={handleRightClick}>
+              <ArrowRightOutline />
+            </StyledSlideArrow>
+          )}
         </TabMenuIconWrapper>
       </Wrapper>
     </ThemeProvider>
