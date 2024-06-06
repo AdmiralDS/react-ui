@@ -53,16 +53,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     0: true,
     [items.length - 1]: true,
   });
-  const [opacity, setOpacity] = React.useState(false);
 
   // При первичном рендере wrapper не видим (opacity: 0).
   // wrapper станет видимым после того, как отработает IntersectionObserver и будет определено,
   // какие items показывать, а какие спрятать в меню
-  React.useEffect(() => {
-    if (wrapperRef.current && opacity) {
-      wrapperRef.current.style.opacity = '1';
-    }
-  }, [opacity]);
+  // Исключение mobile = true - wrapper всегда видим (opacity: 1)
+  const [opacity, setOpacity] = React.useState<0 | 1>(mobile ? 1 : 0);
 
   React.useEffect(() => {
     if (!hasMounted.current) {
@@ -115,7 +111,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       ...prev,
       ...updatedEntries,
     }));
-    setOpacity(true);
+    setOpacity(1);
   };
 
   React.useLayoutEffect(() => {
@@ -192,7 +188,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   return (
     <Navigation aria-label="Breadcrumb" {...props}>
-      <Wrapper ref={wrapperRef} $mobile={mobile} role="list">
+      <Wrapper ref={wrapperRef} $mobile={mobile} $opacity={opacity} role="list">
         {mobile ? (
           <>
             {renderFirstItem()}
