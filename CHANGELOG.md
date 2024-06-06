@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.3](https://github.com/AdmiralDS/react-ui/compare/v8.4.2...v8.4.3) (2024-06-06)
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** [#1349](https://github.com/AdmiralDS/react-ui/issues/1349) исправлен баг с отображением мобильной версии компонента ([9e55beb](https://github.com/AdmiralDS/react-ui/commit/9e55bebd6dfae6e688102694079e8d7df5cb8ab4))
+
 ### [8.4.2](https://github.com/AdmiralDS/react-ui/compare/v8.4.1...v8.4.2) (2024-05-30)
 
 
