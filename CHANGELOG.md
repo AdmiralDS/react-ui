@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.4](https://github.com/AdmiralDS/react-ui/compare/v8.4.3...v8.4.4) (2024-06-07)
+
+
+### Bug Fixes
+
+*  [#1344](https://github.com/AdmiralDS/react-ui/issues/1344) перестали отображаться иконки фильтров ([34b9f02](https://github.com/AdmiralDS/react-ui/commit/34b9f0250c7123b0c6041b4d30981b5c25b8eada))
+
 ### [8.4.3](https://github.com/AdmiralDS/react-ui/compare/v8.4.2...v8.4.3) (2024-06-06)
 
 
