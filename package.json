@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.4.1",
+  "version": "8.4.5",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@admiral-ds/flags": "^3.1.1",
     "@admiral-ds/fonts": "^2.0.0",
-    "@admiral-ds/icons": "^4.0.0",
+    "@admiral-ds/icons": "4.2.0",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.5",
@@ -109,7 +109,7 @@
     "storybook": "^7.0.8",
     "storybook-addon-dir": "^1.0.6",
     "storybook-dark-mode": "^4.0.0",
-    "styled-components": "6.1.11",
+    "styled-components": ">=5.1.0",
     "ts-jest": "^29.1.0",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "^5.1.6",
