@@ -13,8 +13,10 @@ import {
 import { TabActiveUnderline } from '#src/components/TabMenuComponent/TabActiveUnderline';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import type { TabProps } from '#src/components/TabMenuComponent/types';
+import type { TabDimension, TabProps } from '#src/components/TabMenuComponent/types';
 import { SlideArrow } from '#src/components/TabMenuComponent/SlideArrow';
+import type { TabHorizontalProps } from '#src/components/TabMenuComponent/TabHorizontal';
+import { BadgeForTab, IconForTab, TabHorizontal } from '#src/components/TabMenuComponent/TabHorizontal';
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
@@ -26,7 +28,7 @@ interface TabContentProps extends TabProps {
 
 type TabWithRefProps = TabContentProps & { ref: RefObject<HTMLButtonElement> };
 
-const CustomTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ...props }: TabContentProps, ref) => {
+const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ...props }: TabContentProps, ref) => {
   return (
     <TabIcon {...props} id={id} ref={ref}>
       <MinusCircleOutline />
@@ -34,6 +36,22 @@ const CustomTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ..
     </TabIcon>
   );
 });
+interface CustomHorizontalTabProps extends TabContentProps, TabHorizontalProps {}
+const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
+  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomHorizontalTabProps, ref) => {
+    return (
+      <TabHorizontal {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+        <IconForTab $dimension={dimension} $disabled={disabled}>
+          <MinusCircleOutline />
+        </IconForTab>
+        {text}
+        <BadgeForTab disabled={disabled} selected={selected}>
+          5
+        </BadgeForTab>
+      </TabHorizontal>
+    );
+  },
+);
 
 const StyledSlideArrow = styled(SlideArrow)<{ $direction: 'left' | 'right' }>`
   position: absolute;
@@ -84,7 +102,7 @@ export const TabMenuComponentBaseTemplate = ({
   const tabsWithRef: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   const iconTabs = tabs.map((tab, index) => {
     return (
-      <CustomTab
+      <CustomIconTab
         text={tab.text}
         id={tab.id}
         key={tab.id}
@@ -123,7 +141,7 @@ export const TabMenuComponentBaseTemplate = ({
   const [scrolledToRight, setScrolledToRight] = useState(false);
   const [prevDisabled, setPrevDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
-  const step = 70;
+  const step = 160;
 
   useLayoutEffect(() => {
     if (!scrollingContainerRef.current) return;
@@ -152,6 +170,7 @@ export const TabMenuComponentBaseTemplate = ({
     setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
   };
   //</editor-fold
+  const dimension: TabDimension = 'l';
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -184,6 +203,9 @@ export const TabMenuComponentBaseTemplate = ({
             </StyledSlideArrow>
           )}
         </TabMenuIconWrapper>
+        <CustomHorizontalTab text="Text" />
+        <CustomHorizontalTab text="Text" selected />
+        <CustomHorizontalTab text="Text" disabled />
       </Wrapper>
     </ThemeProvider>
   );
