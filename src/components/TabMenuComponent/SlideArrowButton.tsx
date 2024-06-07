@@ -6,7 +6,7 @@ import {
 } from '#src/components/TabMenuComponent/constants';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
-export const SlideArrow = styled.button`
+export const SlideArrowButton = styled.button`
   appearance: none;
   border: none;
   border-radius: 50%;

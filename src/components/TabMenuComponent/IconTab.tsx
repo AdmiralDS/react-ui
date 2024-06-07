@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 import type { TabProps } from '#src/components/TabMenuComponent/types';
-import { TAB_ICON_ICON_SIZE, TAB_MENU_ICON_HEIGHT } from '#src/components/TabMenuComponent/constants';
+import { TAB_ICON_ICON_SIZE, ICON_TAB_HEIGHT } from '#src/components/TabMenuComponent/constants';
 import { forwardRef } from 'react';
 
 const Tab = styled.button<{ $selected?: boolean }>`
@@ -11,7 +11,7 @@ const Tab = styled.button<{ $selected?: boolean }>`
   padding: 0 6px 8px 6px;
   display: flex;
   flex-direction: column;
-  height: ${TAB_MENU_ICON_HEIGHT}px;
+  height: ${ICON_TAB_HEIGHT}px;
   justify-content: center;
   align-items: center;
   background: transparent;
@@ -50,7 +50,7 @@ const Tab = styled.button<{ $selected?: boolean }>`
     }
   }
 `;
-export const TabIcon = forwardRef<HTMLButtonElement, TabProps>(
+export const IconTab = forwardRef<HTMLButtonElement, TabProps>(
   ({ children, disabled, selected, ...props }: TabProps, ref) => {
     return (
       <Tab ref={ref} disabled={disabled} $selected={selected} {...props}>

@@ -4,19 +4,19 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { TabIcon } from '#src/components/TabMenuComponent/TabIcon';
+import { IconTab } from '#src/components/TabMenuComponent/IconTab';
 import {
-  TabMenuIconScrollingContainer,
-  TabMenuIconScrollingContainerWrapper,
-  TabMenuIconWrapper,
-} from '#src/components/TabMenuComponent/TabMenuIconContainer';
-import { TabActiveUnderline } from '#src/components/TabMenuComponent/TabActiveUnderline';
+  IconTabMenuScrollingContainer,
+  IconTabMenuScrollingContainerWrapper,
+  IconTabMenuWrapper,
+} from '#src/components/TabMenuComponent/IconTabMenuContainer';
+import { ActiveTabUnderline } from '#src/components/TabMenuComponent/ActiveTabUnderline';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import type { TabDimension, TabProps } from '#src/components/TabMenuComponent/types';
-import { SlideArrow } from '#src/components/TabMenuComponent/SlideArrow';
-import type { TabHorizontalProps } from '#src/components/TabMenuComponent/TabHorizontal';
-import { BadgeForTab, IconForTab, TabHorizontal } from '#src/components/TabMenuComponent/TabHorizontal';
+import { SlideArrowButton } from '#src/components/TabMenuComponent/SlideArrowButton';
+import type { HorizontalTabProps } from '#src/components/TabMenuComponent/HorizontalTab';
+import { TabBadge, TabIcon, HorizontalTab } from '#src/components/TabMenuComponent/HorizontalTab';
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
@@ -30,30 +30,30 @@ type TabWithRefProps = TabContentProps & { ref: RefObject<HTMLButtonElement> };
 
 const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ...props }: TabContentProps, ref) => {
   return (
-    <TabIcon {...props} id={id} ref={ref}>
+    <IconTab {...props} id={id} ref={ref}>
       <MinusCircleOutline />
       <div>{text}</div>
-    </TabIcon>
+    </IconTab>
   );
 });
-interface CustomHorizontalTabProps extends TabContentProps, TabHorizontalProps {}
+interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
   ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <TabHorizontal {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
-        <IconForTab $dimension={dimension} $disabled={disabled}>
+      <HorizontalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+        <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
-        </IconForTab>
+        </TabIcon>
         {text}
-        <BadgeForTab disabled={disabled} selected={selected}>
+        <TabBadge disabled={disabled} selected={selected}>
           5
-        </BadgeForTab>
-      </TabHorizontal>
+        </TabBadge>
+      </HorizontalTab>
     );
   },
 );
 
-const StyledSlideArrow = styled(SlideArrow)<{ $direction: 'left' | 'right' }>`
+const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;
   top: 18px;
   ${(p) => (p.$direction === 'left' ? 'left: 0' : 'right: 0')};
@@ -175,9 +175,9 @@ export const TabMenuComponentBaseTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <TabMenuIconWrapper>
-          <TabMenuIconScrollingContainerWrapper>
-            <TabMenuIconScrollingContainer
+        <IconTabMenuWrapper>
+          <IconTabMenuScrollingContainerWrapper>
+            <IconTabMenuScrollingContainer
               $underline
               ref={scrollingContainerRef}
               $leftValue={scrolledToRight ? `${scrollingContainerLeft}px` : 0}
@@ -185,13 +185,13 @@ export const TabMenuComponentBaseTemplate = ({
               $translateXValue={`${-scrollingContainerLeft}px`}
             >
               {iconTabs}
-              <TabActiveUnderline
+              <ActiveTabUnderline
                 $left={`${underlineLeft}px`}
                 $width={`${underlineWidth}px`}
                 $transition={underlineTransition}
               />
-            </TabMenuIconScrollingContainer>
-          </TabMenuIconScrollingContainerWrapper>
+            </IconTabMenuScrollingContainer>
+          </IconTabMenuScrollingContainerWrapper>
           {!prevDisabled && (
             <StyledSlideArrow $direction="left" onClick={handleLeftClick}>
               <ArrowLeftOutline />
@@ -202,7 +202,7 @@ export const TabMenuComponentBaseTemplate = ({
               <ArrowRightOutline />
             </StyledSlideArrow>
           )}
-        </TabMenuIconWrapper>
+        </IconTabMenuWrapper>
         <CustomHorizontalTab text="Text" />
         <CustomHorizontalTab text="Text" selected />
         <CustomHorizontalTab text="Text" disabled />

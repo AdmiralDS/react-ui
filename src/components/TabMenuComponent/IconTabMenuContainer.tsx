@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
-export const TabMenuIconScrollingContainer = styled.div<{
+export const IconTabMenuScrollingContainer = styled.div<{
   $underline?: boolean;
   $floatValue: string;
   $leftValue: number | string;
@@ -19,7 +19,7 @@ export const TabMenuIconScrollingContainer = styled.div<{
   ${(p) => (p.$translateXValue ? `transform: translateX(${p.$translateXValue});` : '')};
 `;
 
-export const TabMenuIconScrollingContainerWrapper = styled.div`
+export const IconTabMenuScrollingContainerWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
   padding: 0;
@@ -28,7 +28,7 @@ export const TabMenuIconScrollingContainerWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const TabMenuIconWrapper = styled.div<{ $underline?: boolean }>`
+export const IconTabMenuWrapper = styled.div<{ $underline?: boolean }>`
   position: relative;
   box-sizing: border-box;
   padding: 0 16px;
