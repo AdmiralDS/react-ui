@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
-export const ActiveTabUnderline = styled.div<{
+export const ActiveHorizontalTabUnderline = styled.div<{
   $left: number | string;
   $width: number | string;
   $transition?: boolean;
@@ -12,7 +12,6 @@ export const ActiveTabUnderline = styled.div<{
   bottom: 0;
   left: ${(p) => p.$left};
   width: ${(p) => p.$width};
-  display: flex;
   background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   height: ${UNDERLINE_HEIGHT}px;
   transition: ${(p) => (p.$transition ? 'all 0.2s ease-out' : 'unset')};

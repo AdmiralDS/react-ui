@@ -11,6 +11,7 @@ import { VerticalTab } from '../tabs/VerticalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers/VerticalTabMenuContainer';
+import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 
 const TAB_MENU_WIDTH = '260px';
 
@@ -56,10 +57,10 @@ const Wrapper = styled.div`
 `;
 
 const getUnderlinePosition = (element?: HTMLButtonElement | null | undefined) => {
-  if (!element) return { left: 0, width: 0 };
+  if (!element) return { top: 0, height: 0 };
   const rect = element.getBoundingClientRect();
   const parentRect = element.parentElement?.getBoundingClientRect();
-  return { left: rect.left - (parentRect ? parentRect.left : 0), width: rect.width };
+  return { top: rect.top - (parentRect ? parentRect.top : 0), height: rect.height };
 };
 
 export const VerticalTabMenuTemplate = ({
@@ -114,17 +115,17 @@ export const VerticalTabMenuTemplate = ({
   //</editor-fold>
 
   //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
-  const [underlineLeftL, setUnderlineLeftL] = useState(0);
-  const [underlineWidthL, setUnderlineWidthL] = useState(0);
+  const [underlineTopL, setUnderlineTopL] = useState(0);
+  const [underlineHeightL, setUnderlineHeightL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const styleUnderlineL = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.id === activeTabL)?.ref.current);
+    const { top, height } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.id === activeTabL)?.ref.current);
     setUnderlineTransitionL(enableTransition);
-    setUnderlineWidthL(width);
-    setUnderlineLeftL(left);
+    setUnderlineHeightL(height);
+    setUnderlineTopL(top);
   };
   useLayoutEffect(() => {
-    if (underlineWidthL === 0) {
+    if (underlineHeightL === 0) {
       setTimeout(() => {
         styleUnderlineL(false);
       }, 300);
@@ -132,17 +133,17 @@ export const VerticalTabMenuTemplate = ({
       styleUnderlineL(true);
     }
   }, [activeTabL]);
-  const [underlineLeftM, setUnderlineLeftM] = useState(0);
-  const [underlineWidthM, setUnderlineWidthM] = useState(0);
+  const [underlineTopM, setUnderlineTopM] = useState(0);
+  const [underlineHeightM, setUnderlineHeightM] = useState(0);
   const [underlineTransitionM, setUnderlineTransitionM] = useState(false);
   const styleUnderlineM = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.id === activeTabM)?.ref.current);
+    const { top, height } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.id === activeTabM)?.ref.current);
     setUnderlineTransitionM(enableTransition);
-    setUnderlineWidthM(width);
-    setUnderlineLeftM(left);
+    setUnderlineHeightM(height);
+    setUnderlineTopM(top);
   };
   useLayoutEffect(() => {
-    if (underlineWidthM === 0) {
+    if (underlineHeightM === 0) {
       setTimeout(() => {
         styleUnderlineM(false);
       }, 300);
@@ -157,19 +158,21 @@ export const VerticalTabMenuTemplate = ({
       <Wrapper>
         <VerticalTabMenuContainer $underlinePosition="right">
           {verticalTabsL}
-          {/*<ActiveTabUnderline
-            $left={`${underlineLeftL}px`}
-            $width={`${underlineWidthL}px`}
+          <ActiveVerticalTabUnderline
+            $top={`${underlineTopL}px`}
+            $height={`${underlineHeightL}px`}
             $transition={underlineTransitionL}
-          />*/}
+            $underlinePosition="right"
+          />
         </VerticalTabMenuContainer>
         <VerticalTabMenuContainer $underlinePosition="left">
           {verticalTabsM}
-          {/*<ActiveTabUnderline
-            $left={`${underlineLeftM}px`}
-            $width={`${underlineWidthM}px`}
+          <ActiveVerticalTabUnderline
+            $top={`${underlineTopM}px`}
+            $height={`${underlineHeightM}px`}
             $transition={underlineTransitionM}
-          />*/}
+            $underlinePosition="left"
+          />
         </VerticalTabMenuContainer>
       </Wrapper>
     </ThemeProvider>

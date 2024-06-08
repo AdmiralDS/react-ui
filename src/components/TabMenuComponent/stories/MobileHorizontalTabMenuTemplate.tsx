@@ -1,4 +1,4 @@
-import { createRef, forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { createRef, forwardRef, useLayoutEffect, useState } from 'react';
 import type { MouseEventHandler, RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -6,7 +6,7 @@ import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
-import { ActiveTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveTabUnderline';
+import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import type { HorizontalTabProps, TabProps } from '#src/components/TabMenuComponent/types';
 import { HorizontalTab } from '../tabs/HorizontalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
@@ -158,7 +158,7 @@ export const MobileHorizontalTabMenuTemplate = ({
       <Wrapper>
         <MobileHorizontalTabMenuContainer $underline>
           {horizontalTabsL}
-          <ActiveTabUnderline
+          <ActiveHorizontalTabUnderline
             $left={`${underlineLeftL}px`}
             $width={`${underlineWidthL}px`}
             $transition={underlineTransitionL}
@@ -166,7 +166,7 @@ export const MobileHorizontalTabMenuTemplate = ({
         </MobileHorizontalTabMenuContainer>
         <MobileHorizontalTabMenuContainer $underline>
           {horizontalTabsM}
-          <ActiveTabUnderline
+          <ActiveHorizontalTabUnderline
             $left={`${underlineLeftM}px`}
             $width={`${underlineWidthM}px`}
             $transition={underlineTransitionM}

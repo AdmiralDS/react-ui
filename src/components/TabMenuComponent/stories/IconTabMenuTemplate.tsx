@@ -13,7 +13,7 @@ import {
   IconTabMenuScrollingContainerWrapper,
   IconTabMenuWrapper,
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
-import { ActiveTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveTabUnderline';
+import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import type { TabProps } from '#src/components/TabMenuComponent/types';
 import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
 import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
@@ -165,7 +165,7 @@ export const IconTabMenuTemplate = ({
               $translateXValue={`${-scrollingContainerLeft}px`}
             >
               {iconTabs}
-              <ActiveTabUnderline
+              <ActiveHorizontalTabUnderline
                 $left={`${underlineLeft}px`}
                 $width={`${underlineWidth}px`}
                 $transition={underlineTransition}
