@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import {
   SLIDE_ARROW_ICON_SIZE,
   SLIDE_ARROW_BUTTON_SIZE,

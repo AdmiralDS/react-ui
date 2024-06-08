@@ -7,4 +7,12 @@ export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'conte
   disabled?: boolean;
   /** Выбранная вкладка */
   selected?: boolean;
+  /** Размер вкладки */
+  dimension?: TabDimension;
+}
+
+export interface IconTabProps extends Omit<TabProps, 'dimension'> {}
+export interface HorizontalTabProps extends TabProps {}
+export interface VerticalTabProps extends TabProps {
+  width?: string | number;
 }

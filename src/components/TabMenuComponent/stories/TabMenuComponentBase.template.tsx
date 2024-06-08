@@ -3,23 +3,24 @@ import type { MouseEventHandler, RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { IconTab } from '#src/components/TabMenuComponent/IconTab';
+import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
+import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+
 import {
   IconTabMenuScrollingContainer,
   IconTabMenuScrollingContainerWrapper,
   IconTabMenuWrapper,
-} from '#src/components/TabMenuComponent/IconTabMenuContainer';
-import { ActiveTabUnderline } from '#src/components/TabMenuComponent/ActiveTabUnderline';
-
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import type { TabDimension, TabProps } from '#src/components/TabMenuComponent/types';
-import { SlideArrowButton } from '#src/components/TabMenuComponent/SlideArrowButton';
-import type { HorizontalTabProps } from '#src/components/TabMenuComponent/HorizontalTab';
-import { TabBadge, TabIcon, HorizontalTab } from '#src/components/TabMenuComponent/HorizontalTab';
-
-import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
-import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+} from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
+import { ActiveTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveTabUnderline';
+import type { HorizontalTabProps, TabProps, VerticalTabProps } from '#src/components/TabMenuComponent/types';
+import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
+import { HorizontalTab } from '../tabs/HorizontalTab';
+import { VerticalTab } from '../tabs/VerticalTab';
+import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
+import { TabBadge, VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
+import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
 
 interface TabContentProps extends TabProps {
   text: string;
@@ -49,6 +50,22 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
           5
         </TabBadge>
       </HorizontalTab>
+    );
+  },
+);
+interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
+const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
+  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomVerticalTabProps, ref) => {
+    return (
+      <VerticalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+        <TabIcon $dimension={dimension} $disabled={disabled}>
+          <MinusCircleOutline />
+        </TabIcon>
+        {text}
+        <VerticalTabBadge disabled={disabled} selected={selected}>
+          5
+        </VerticalTabBadge>
+      </VerticalTab>
     );
   },
 );
@@ -170,7 +187,6 @@ export const TabMenuComponentBaseTemplate = ({
     setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
   };
   //</editor-fold
-  const dimension: TabDimension = 'l';
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -206,6 +222,7 @@ export const TabMenuComponentBaseTemplate = ({
         <CustomHorizontalTab text="Text" />
         <CustomHorizontalTab text="Text" selected />
         <CustomHorizontalTab text="Text" disabled />
+        <CustomVerticalTab text="Text" />
       </Wrapper>
     </ThemeProvider>
   );
