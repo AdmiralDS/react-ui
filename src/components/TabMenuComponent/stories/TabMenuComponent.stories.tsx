@@ -3,10 +3,12 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { TabMenuComponentBaseTemplate } from './TabMenuComponentBase.template';
+import { IconTabMenuTemplate } from './IconTabMenuTemplate';
+import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTemplate';
 
 // Imports of text sources
-import TabMenuComponentBaseRaw from './TabMenuComponentBase.template?raw';
+import IconTabMenuRaw from './IconTabMenuTemplate?raw';
+import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent',
@@ -59,24 +61,45 @@ export default {
   },
 } as Meta<typeof TabMenu>;
 
-//<editor-fold desc="TabMenu. Базовый пример.">
-const TabMenuComponentBaseStory: StoryFn<typeof TabMenu> = (props) => {
+//<editor-fold desc="IconTabMenu.">
+const IconTabMenuStory: StoryFn<typeof TabMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <TabMenuComponentBaseTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <IconTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const TabMenuComponentBaseExample = {
-  render: TabMenuComponentBaseStory,
+export const IconTabMenuExample = {
+  render: IconTabMenuStory,
 
   parameters: {
     docs: {
       source: {
-        code: TabMenuComponentBaseRaw,
+        code: IconTabMenuRaw,
       },
     },
   },
 
-  name: 'TabMenuComponent.',
+  name: 'IconTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="MobileHorizontalTabMenu.">
+const MobileHorizontalTabMenuStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MobileHorizontalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
+export const MobileHorizontalTabMenuExample = {
+  render: MobileHorizontalTabMenuStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MobileHorizontalTabMenuRaw,
+      },
+    },
+  },
+
+  name: 'MobileHorizontalTabMenu.',
+};
+//</editor-fold>
 //</editor-fold>

@@ -14,12 +14,8 @@ import {
   IconTabMenuWrapper,
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
 import { ActiveTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveTabUnderline';
-import type { HorizontalTabProps, TabProps, VerticalTabProps } from '#src/components/TabMenuComponent/types';
+import type { TabProps } from '#src/components/TabMenuComponent/types';
 import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
-import { HorizontalTab } from '../tabs/HorizontalTab';
-import { VerticalTab } from '../tabs/VerticalTab';
-import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
-import { TabBadge, VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
 
 interface TabContentProps extends TabProps {
@@ -37,38 +33,6 @@ const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id
     </IconTab>
   );
 });
-interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
-const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomHorizontalTabProps, ref) => {
-    return (
-      <HorizontalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
-        <TabIcon $dimension={dimension} $disabled={disabled}>
-          <MinusCircleOutline />
-        </TabIcon>
-        {text}
-        <TabBadge disabled={disabled} selected={selected}>
-          5
-        </TabBadge>
-      </HorizontalTab>
-    );
-  },
-);
-interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
-const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomVerticalTabProps, ref) => {
-    return (
-      <VerticalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
-        <TabIcon $dimension={dimension} $disabled={disabled}>
-          <MinusCircleOutline />
-        </TabIcon>
-        {text}
-        <VerticalTabBadge disabled={disabled} selected={selected}>
-          5
-        </VerticalTabBadge>
-      </VerticalTab>
-    );
-  },
-);
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;
@@ -102,7 +66,7 @@ const getUnderlinePosition = (element?: HTMLButtonElement | null | undefined) =>
   return { left: rect.left - (parentRect ? parentRect.left : 0), width: rect.width };
 };
 
-export const TabMenuComponentBaseTemplate = ({
+export const IconTabMenuTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -219,10 +183,6 @@ export const TabMenuComponentBaseTemplate = ({
             </StyledSlideArrow>
           )}
         </IconTabMenuWrapper>
-        <CustomHorizontalTab text="Text" />
-        <CustomHorizontalTab text="Text" selected />
-        <CustomHorizontalTab text="Text" disabled />
-        <CustomVerticalTab text="Text" />
       </Wrapper>
     </ThemeProvider>
   );
