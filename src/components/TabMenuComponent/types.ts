@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react';
 
 export type TabDimension = 'l' | 'm';
+export type VerticalUnderlinePosition = 'left' | 'right';
 
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Отключение вкладки */
