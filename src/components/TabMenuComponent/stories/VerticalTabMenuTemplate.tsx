@@ -7,11 +7,12 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import type { TabProps, VerticalTabProps } from '#src/components/TabMenuComponent/types';
-import { VerticalTab } from '../tabs/VerticalTab';
+import { VerticalTab } from '#src/components/TabMenuComponent//tabs/VerticalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers/VerticalTabMenuContainer';
 import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
+import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
 
 const TAB_MENU_WIDTH = '260px';
 
@@ -30,7 +31,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
-        {text}
+        <TabText>{text}</TabText>
         <VerticalTabBadge disabled={disabled} selected={selected}>
           5
         </VerticalTabBadge>
@@ -43,7 +44,7 @@ const tabs = [
   { text: 'Text1', id: '1' },
   { text: 'Text22', id: '2' },
   { text: 'Text333', id: '3' },
-  { text: 'Text4444', id: '4' },
+  { text: 'Text4444 is very very very very very very very long', id: '4' },
   { text: 'Text55555', id: '5', disabled: true },
   { text: 'Text66666', id: '6' },
   { text: 'Text7777', id: '7' },
