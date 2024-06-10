@@ -6,11 +6,13 @@ import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTemplate';
 import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
+import { HorizontalTabMenuTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
 import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
 import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
+import HorizontalTabMenuRaw from './HorizontalTabMenuTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent',
@@ -123,5 +125,26 @@ export const VerticalTabMenuExample = {
   },
 
   name: 'VerticalTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalTabMenu.">
+const HorizontalTabMenuStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HorizontalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalTabMenuExample = {
+  render: HorizontalTabMenuStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalTabMenuRaw,
+      },
+    },
+  },
+
+  name: 'HorizontalTabMenu.',
 };
 //</editor-fold>
