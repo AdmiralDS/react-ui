@@ -36,7 +36,7 @@ export interface RegularRowProps {
   /** Колбек на выбор/снятие выбора со строки (на нажатие по чекбоксу строки). */
   onRowSelectionChange?: (rowId: RowId | string) => void;
   /** Функция рендера ячейки */
-  renderBodyCell: (row: TableRow, column: Column) => React.ReactNode;
+  renderBodyCell: (row: TableRow, column: Column & { index: number }) => React.ReactNode;
 }
 
 export const RegularRow = ({
@@ -100,10 +100,12 @@ export const RegularRow = ({
               />
             </CheckboxCell>
           )}
-          {stickyColumns.length > 0 && stickyColumns.map((col) => renderBodyCell(row, col))}
+          {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderBodyCell(row, { ...col, index }))}
         </StickyWrapper>
       )}
-      {columns.map((col) => (col.sticky ? null : renderBodyCell(row, col)))}
+      {columns.map((col, index) =>
+        col.sticky ? null : renderBodyCell(row, { ...col, index: index + stickyColumns.length }),
+      )}
       <Filler />
     </>
   );

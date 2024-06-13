@@ -59,9 +59,6 @@ export const HeaderCellComponent = React.memo(
     const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
     const spacer = spacingBetweenItems || defaultSpacer;
     const hiddenColWidth = typeof width === 'number' ? width + 'px' : width;
-    // проблема в том, что имя css переменной не может содержать точку
-    // возможно стоит генерировать имена css переменных, основываясь на порядковый номер колонки
-    // const normalColWidth = `var(--th-${name}-width, 100px)`;
     const normalColWidth = `var(--th-${index}-width, 100px)`;
     const colWidth = hidden ? hiddenColWidth : normalColWidth;
 
@@ -77,6 +74,7 @@ export const HeaderCellComponent = React.memo(
         className="th"
         data-draggable={draggable}
         data-th-column={name}
+        {...(hidden ? { 'data-index': index } : {})}
         ref={(node) => setCellNode(node)}
       >
         <HeaderCellContent $cellAlign={cellAlign}>
