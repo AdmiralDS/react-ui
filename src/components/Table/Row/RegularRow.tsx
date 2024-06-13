@@ -103,9 +103,7 @@ export const RegularRow = ({
           {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderBodyCell(row, { ...col, index }))}
         </StickyWrapper>
       )}
-      {columns.map((col, index) =>
-        col.sticky ? null : renderBodyCell(row, { ...col, index: index + stickyColumns.length }),
-      )}
+      {columns.map((col, index) => (col.sticky ? null : renderBodyCell(row, { ...col, index })))}
       <Filler />
     </>
   );
