@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
+
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
 
 const AmountCell = styled.div`
   text-overflow: ellipsis;
@@ -204,5 +208,30 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <NotificationItem displayStatusIcon>
+        <NotificationItemTitle>Table API</NotificationItemTitle>
+        <NotificationItemContent>
+          API таблицы предполагает 2 обязательных параметра: columnList и rowList, где
+          <Separator height={8} />
+          <li>
+            columnList - массив данных с описанием столбцов, у каждого столбца должен быть задан уникальный
+            идентификатор name;
+          </li>
+          <Separator height={8} />
+          <li>
+            rowList - массив данных с описанием строк, у каждой строки должен быть задан уникальный идентификатор id.
+          </li>
+          <Separator height={16} />
+          Между столбцами и строками таблицы существует четкий МАППИНГ для задания контента ячеек:
+          <Separator height={8} />
+          <li>название свойства строки ⇔ name столбца</li>
+          <li>значение свойства строки ⇔ контент ячейки строки в данном столбце</li>
+        </NotificationItemContent>
+      </NotificationItem>
+      <Separator height={40} />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+    </>
+  );
 };
