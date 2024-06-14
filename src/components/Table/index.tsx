@@ -190,11 +190,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const updateColumnsWidth = () => {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
       hiddenColumns?.forEach((column) => {
-        const name = column.dataset.thColumn;
+        const index = column.dataset.index;
         const width = column.getBoundingClientRect().width;
-        if (name) {
-          headerRef.current?.style.setProperty(`--th-${name}-width`, width + 'px');
-          scrollBodyRef.current?.style.setProperty(`--td-${name}-width`, width + 'px');
+        if (index) {
+          headerRef.current?.style.setProperty(`--th-${index}-width`, width + 'px');
+          scrollBodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
         }
       });
     };
@@ -414,7 +414,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       />
     );
 
-    const renderBodyCell = (idx: number) => (row: TableRow, col: Column) => {
+    const renderBodyCell = (idx: number) => (row: TableRow, col: Column & { index: number }) => {
       const withResizer = col.name === columnList[columnList.length - 1].name ? showDividerForLastColumn : true;
 
       const render = () => {
@@ -433,7 +433,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           key={`${row.id}_${col.name}`}
           $dimension={dimension}
           $resizer={withResizer}
-          style={{ width: `var(--td-${col.name}-width, 100px)` }}
+          style={{ width: `var(--td-${col.index}-width, 100px)` }}
           className="td"
           data-column={col.name}
           data-row={row.id}
