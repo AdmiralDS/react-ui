@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.6](https://github.com/AdmiralDS/react-ui/compare/v8.4.5...v8.4.6) (2024-06-14)
+
+
+### Bug Fixes
+
+* **Table:** [#1343](https://github.com/AdmiralDS/react-ui/issues/1343) изменено именование css переменных внутри таблицы, описано правило маппинга данных в документации ([f5b6b54](https://github.com/AdmiralDS/react-ui/commit/f5b6b5416d9fc82ec520ae720819b7ead79daab1))
+
 ### [8.4.5](https://github.com/AdmiralDS/react-ui/compare/v8.4.4...v8.4.5) (2024-06-07)
 
 ### [8.4.4](https://github.com/AdmiralDS/react-ui/compare/v8.4.3...v8.4.4) (2024-06-07)
