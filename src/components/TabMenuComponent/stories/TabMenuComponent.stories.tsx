@@ -6,12 +6,14 @@ import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTemplate';
 import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
+import { VerticalTabMenuWithOverflowTemplate } from './VerticalTabMenuWithOverflowTemplate';
 import { HorizontalTabMenuTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
 import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
 import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
+import VerticalTabMenuWithOverflowRaw from './VerticalTabMenuWithOverflowTemplate?raw';
 import HorizontalTabMenuRaw from './HorizontalTabMenuTemplate?raw';
 
 export default {
@@ -125,6 +127,27 @@ export const VerticalTabMenuExample = {
   },
 
   name: 'VerticalTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="VerticalTabMenuWithOverflow.">
+const VerticalTabMenuWithOverflowStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <VerticalTabMenuWithOverflowTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const VerticalTabMenuWithOverflowExample = {
+  render: VerticalTabMenuWithOverflowStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VerticalTabMenuWithOverflowRaw,
+      },
+    },
+  },
+
+  name: 'VerticalTabMenuWithOverflow.',
 };
 //</editor-fold>
 

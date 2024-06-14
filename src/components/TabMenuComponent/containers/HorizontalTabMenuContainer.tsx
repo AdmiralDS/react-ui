@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import type { Dimension } from '#src/components/TabMenu/constants';
 import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
-export const HorizontalTabMenuContainer = styled.div<{ $underline?: boolean; $dimension?: Dimension }>`
+export const HorizontalTabMenuContainer = styled.div<{ $underline?: boolean }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
