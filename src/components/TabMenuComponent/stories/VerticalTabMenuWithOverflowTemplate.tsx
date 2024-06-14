@@ -20,8 +20,8 @@ import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/conta
 import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
 import {
-  HORIZONTAL_TAB_HEIGHT_L,
-  HORIZONTAL_TAB_HEIGHT_M,
+  BASE_TAB_HEIGHT_L,
+  BASE_TAB_HEIGHT_M,
   VERTICAL_TABS_GAP,
 } from '#src/components/TabMenuComponent/constants';
 import { VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containers/VerticalTabOverflowMenu';
@@ -110,7 +110,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
       setMaxTabs(
         Math.floor(
           (containerRef.current.clientHeight + VERTICAL_TABS_GAP) /
-            ((dimension === 'l' ? HORIZONTAL_TAB_HEIGHT_L : HORIZONTAL_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
+            ((dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
         ),
       );
     }
@@ -195,7 +195,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const getUnderlinePosition = () => {
     const index = visibleTabs.findIndex((tab) => tab === activeTabL);
     if (index < 0) return { top: 0, height: 0 };
-    const height = dimension === 'l' ? HORIZONTAL_TAB_HEIGHT_L : HORIZONTAL_TAB_HEIGHT_M;
+    const height = dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M;
     const top = index * (height + VERTICAL_TABS_GAP);
     return { top: top, height: height };
   };

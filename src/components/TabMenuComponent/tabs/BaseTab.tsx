@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import type { TabDimension } from '#src/components/TabMenuComponent/types';
 import {
-  HORIZONTAL_TAB_HEIGHT_L,
-  HORIZONTAL_TAB_HEIGHT_M,
+  BASE_TAB_HEIGHT_L,
+  BASE_TAB_HEIGHT_M,
   HORIZONTAL_TAB_PADDING_L,
   HORIZONTAL_TAB_PADDING_M,
 } from '#src/components/TabMenuComponent/constants';
@@ -18,7 +18,7 @@ export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimen
   gap: 8px;
   align-items: center;
   width: ${(p) => p.$width};
-  height: ${({ $dimension }) => ($dimension === 'm' ? HORIZONTAL_TAB_HEIGHT_M : HORIZONTAL_TAB_HEIGHT_L)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? BASE_TAB_HEIGHT_M : BASE_TAB_HEIGHT_L)}px;
   padding: ${({ $dimension }) => ($dimension === 'm' ? HORIZONTAL_TAB_PADDING_M : HORIZONTAL_TAB_PADDING_L)};
   background: transparent;
   color: ${(p) =>
