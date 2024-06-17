@@ -19,11 +19,7 @@ import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers/VerticalTabMenuContainer';
 import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
-import {
-  BASE_TAB_HEIGHT_L,
-  BASE_TAB_HEIGHT_M,
-  VERTICAL_TABS_GAP,
-} from '#src/components/TabMenuComponent/constants';
+import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
 import { VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containers/VerticalTabOverflowMenu';
 import * as React from 'react';
 
@@ -221,10 +217,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
             legend="Dimension"
             dimension="s"
           >
-            <RadioButton value="m" name="M" checked={dimension === 'm'}>
+            <RadioButton value="m" name="M" checked={dimension === 'm'} onChange={() => undefined}>
               M
             </RadioButton>
-            <RadioButton value="l" name="L" checked={dimension === 'l'}>
+            <RadioButton value="l" name="L" checked={dimension === 'l'} onChange={() => undefined}>
               L
             </RadioButton>
           </FieldSet>
@@ -235,10 +231,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
             legend="Show underline"
             dimension="s"
           >
-            <RadioButton value="true" checked={showUnderline}>
+            <RadioButton value="true" checked={showUnderline} onChange={() => undefined}>
               true
             </RadioButton>
-            <RadioButton value="false" checked={!showUnderline}>
+            <RadioButton value="false" checked={!showUnderline} onChange={() => undefined}>
               false
             </RadioButton>
           </FieldSet>
@@ -249,10 +245,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
             legend="Underline position"
             dimension="s"
           >
-            <RadioButton value="right" checked={underlinePosition === 'right'}>
+            <RadioButton value="right" checked={underlinePosition === 'right'} onChange={() => undefined}>
               Right
             </RadioButton>
-            <RadioButton value="left" checked={underlinePosition === 'left'}>
+            <RadioButton value="left" checked={underlinePosition === 'left'} onChange={() => undefined}>
               Left
             </RadioButton>
           </FieldSet>
