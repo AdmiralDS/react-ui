@@ -3,7 +3,6 @@ import type { MouseEventHandler, RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
-import { checkOverflow } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
@@ -13,7 +12,6 @@ import { HorizontalTab } from '#src/components/TabMenuComponent/tabs/HorizontalT
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { TabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
-import { TabOverflowMenu } from '#src/components/TabMenuComponent/containers/TabOverflowMenu';
 
 interface TabContentProps extends TabProps {
   text: string;
@@ -42,13 +40,8 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
 const tabs = [
   { text: 'Text1', id: '1' },
   { text: 'Text22', id: '2' },
-  { text: 'Text333', id: '3' },
+  { text: 'Text333', id: '3', disabled: true },
   { text: 'Text4444', id: '4' },
-  { text: 'Text55555', id: '5', disabled: true },
-  { text: 'Text66666', id: '6' },
-  { text: 'Text7777', id: '7' },
-  { text: 'Text888', id: '8' },
-  { text: 'Text99', id: '9' },
 ];
 
 const Wrapper = styled.div`
@@ -155,7 +148,6 @@ export const HorizontalTabMenuTemplate = ({
   }, [activeTabM]);
   //</editor-fold>
   const containerRef = useRef<HTMLDivElement>(null);
-  const overflow = checkOverflow(containerRef.current);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -167,7 +159,6 @@ export const HorizontalTabMenuTemplate = ({
             $width={`${underlineWidthL}px`}
             $transition={underlineTransitionL}
           />
-          <TabOverflowMenu items={[]} isHidden={!overflow} />
         </HorizontalTabMenuContainer>
         <HorizontalTabMenuContainer $underline>
           {horizontalTabsM}
@@ -176,7 +167,6 @@ export const HorizontalTabMenuTemplate = ({
             $width={`${underlineWidthM}px`}
             $transition={underlineTransitionM}
           />
-          <TabOverflowMenu items={[]} isHidden={!overflow} dimension="m" />
         </HorizontalTabMenuContainer>
       </Wrapper>
     </ThemeProvider>
