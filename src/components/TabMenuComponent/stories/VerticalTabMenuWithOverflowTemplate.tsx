@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEventHandler } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -99,18 +99,34 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const [underlinePosition, setUnderlinePosition] = useState<VerticalUnderlinePosition>('right');
   //</editor-fold>
 
+  //<editor-fold desc="Управление высотой контейнера">
   const containerRef = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
   const [maxTabs, setMaxTabs] = useState(0);
+
+  useLayoutEffect(() => {
+    if (containerRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => setContainerHeight(entry.contentRect.height || 0));
+      });
+      resizeObserver.observe(containerRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, []);
+
   useEffect(() => {
     if (containerRef.current) {
       setMaxTabs(
         Math.floor(
-          (containerRef.current.clientHeight + VERTICAL_TABS_GAP) /
+          (containerHeight + VERTICAL_TABS_GAP) /
             ((dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
         ),
       );
     }
-  }, [containerRef, dimension]);
+  }, [containerRef, containerHeight, dimension]);
+  //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
@@ -136,10 +152,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   useEffect(() => {
     const allTabsVisible = tabs.length <= maxTabs;
-    const tabsVisible: string[] = [];
-    const tabsHidden: string[] = [];
-    const addToVisible = (id: string) => tabsVisible.push(id);
-    const addToHidden = (id: string) => tabsHidden.push(id);
+    const newVisibleTabs: string[] = [];
+    const newHiddenTabs: string[] = [];
+    const addToVisible = (id: string) => newVisibleTabs.push(id);
+    const addToHidden = (id: string) => newHiddenTabs.push(id);
 
     let activeTabIsVisible = false;
     tabs.forEach((tab, index) => {
@@ -157,10 +173,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
         addToHidden(tab.id);
       }
     });
-    setVisibleTabs(tabsVisible);
-    setHiddenTabs(tabsHidden);
+    setVisibleTabs(newVisibleTabs);
+    setHiddenTabs(newHiddenTabs);
   }, [maxTabs, activeTabL]);
-  const visibleTabsItems = useMemo(() => {
+  const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((id) => {
       const currentTab = tabs.findIndex((tab) => tab.id === id);
@@ -203,7 +219,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   };
   useEffect(() => {
     styleUnderlineL(true);
-  }, [activeTabL, visibleTabsItems]);
+  }, [activeTabL, renderedVisibleTabs]);
   //</editor-fold>
 
   return (
@@ -259,16 +275,15 @@ export const VerticalTabMenuWithOverflowTemplate = ({
           $underlinePosition={underlinePosition}
           $showUnderline={showUnderline}
         >
-          {visibleTabsItems}
-          {hiddenTabs.length > 0 && (
-            <VerticalTabOverflowMenu
-              items={overflowMenuItems}
-              alignSelf="flex-start"
-              onSelectItem={(id) => setActiveTabL(id)}
-              selected={activeTabL}
-              dimension={dimension}
-            />
-          )}
+          {renderedVisibleTabs}
+          <VerticalTabOverflowMenu
+            items={overflowMenuItems}
+            alignSelf="flex-start"
+            onSelectItem={(id) => setActiveTabL(id)}
+            selected={activeTabL}
+            dimension={dimension}
+            isHidden={hiddenTabs.length === 0}
+          />
           <ActiveVerticalTabUnderline
             $top={`${underlineTopL}px`}
             $height={`${underlineHeightL}px`}

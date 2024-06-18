@@ -12,6 +12,7 @@ import { HorizontalTab } from '#src/components/TabMenuComponent/tabs/HorizontalT
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { TabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
+import { TabText } from "#src/components/TabMenuComponent/tabs/TabText";
 
 interface TabContentProps extends TabProps {
   text: string;
@@ -28,7 +29,7 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
-        {text}
+        <TabText>{text}</TabText>
         <TabBadge disabled={disabled} selected={selected}>
           5
         </TabBadge>
