@@ -25,7 +25,7 @@ interface TabContentProps extends TabProps {
   id?: string;
 }
 
-type InnerTabProps = {
+type TabWidthMapProps = {
   id: string;
   width: number;
 };
@@ -96,7 +96,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   CSSCustomProps?: boolean;
 }) => {
   const dimension = 'l';
-  //<editor-fold desc="Создание табов для отрисовки">
+  //<editor-fold desc="Управление шириной контейнера">
   const [containerWidth, setContainerWidth] = useState(0);
 
   useLayoutEffect(() => {
@@ -110,6 +110,9 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
       };
     }
   }, []);
+  //</editor-fold>
+
+  //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
   const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     setActiveTabL(e.currentTarget.id);
@@ -130,14 +133,13 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   const horizontalTabsL = tabs.map((tab) => {
     return renderVisibleTab(tab.text, tab.id, tab.disabled);
   });
-  //</editor-fold>
 
   const visibleContainerRef = useRef<HTMLDivElement>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const [overflowL, setOverflowL] = useState(false);
-  const [innerTabs, setInnerTabs] = useState<Array<InnerTabProps>>([]);
+  const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
   useEffect(() => {
-    const tabWidth: InnerTabProps[] = [];
+    const tabWidth: TabWidthMapProps[] = [];
     if (hiddenContainerRef.current) {
       const overflow = checkOverflow(hiddenContainerRef.current);
       if (overflow !== overflowL) setOverflowL(overflow);
@@ -148,21 +150,20 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
         tabWidth.push({ id: tabs[i].id, width: width });
       }
     }
-    setInnerTabs(tabWidth);
+    setTabWidthMap(tabWidth);
   }, [hiddenContainerRef]);
 
   const [visibleTabs, setVisibleTabs] = useState<string[]>([]);
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   useEffect(() => {
-    const tabsVisible: string[] = [];
-    const tabsHidden: string[] = [];
-    if (visibleContainerRef.current && innerTabs.length > 0) {
-      //const maxWidth = visibleContainerRef.current.clientWidth;
+    const newVisibleTabs: string[] = [];
+    const newHiddenTabs: string[] = [];
+    if (visibleContainerRef.current && tabWidthMap.length > 0) {
       const maxWidth = containerWidth;
-      const addToVisible = (id: string) => tabsVisible.push(id);
-      const addToHidden = (id: string) => tabsHidden.push(id);
+      const addToVisible = (id: string) => newVisibleTabs.push(id);
+      const addToHidden = (id: string) => newHiddenTabs.push(id);
 
-      const activeTabWidth = innerTabs.find((tab) => tab.id === activeTabL)?.width;
+      const activeTabWidth = tabWidthMap.find((tab) => tab.id === activeTabL)?.width;
       let availableWidth = overflowL
         ? maxWidth -
           (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) -
@@ -170,7 +171,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
         : maxWidth;
       tabs.forEach((tab, index) => {
         const tabIsActive = tab.id === activeTabL;
-        const tabWidth = innerTabs[index].width;
+        const tabWidth = tabWidthMap[index].width;
 
         if (availableWidth >= tabWidth || tabIsActive) {
           addToVisible(tab.id);
@@ -189,10 +190,10 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
         }
       });
     }
-    setVisibleTabs(tabsVisible);
-    setHiddenTabs(tabsHidden);
-  }, [visibleContainerRef, containerWidth, innerTabs, overflowL, activeTabL]);
-  const visibleTabsItems = useMemo(() => {
+    setVisibleTabs(newVisibleTabs);
+    setHiddenTabs(newHiddenTabs);
+  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowL, activeTabL]);
+  const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((id) => {
       const currentTab = tabs.findIndex((tab) => tab.id === id);
@@ -214,20 +215,21 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
       };
     });
   }, [hiddenTabs, dimension]);
+  //</editor-fold>
 
   //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
   const [underlineLeftL, setUnderlineLeftL] = useState(0);
   const [underlineWidthL, setUnderlineWidthL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const getActiveTabWidth = () => {
-    return innerTabs.find((tab) => tab.id === activeTabL)?.width || 0;
+    return tabWidthMap.find((tab) => tab.id === activeTabL)?.width || 0;
   };
   const getActiveTabLeft = () => {
     const index = visibleTabs.findIndex((tab) => tab === activeTabL);
     if (index < 0) return 0;
     let left = 0;
     for (let i = 0; i < index; i++) {
-      const tabWidth = innerTabs.find((tab) => tab.id === visibleTabs[i])?.width || 0;
+      const tabWidth = tabWidthMap.find((tab) => tab.id === visibleTabs[i])?.width || 0;
       left += tabWidth;
     }
     return left;
@@ -245,7 +247,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   };
   useEffect(() => {
     styleUnderlineL(true);
-  }, [activeTabL, visibleTabsItems]);
+  }, [activeTabL, renderedVisibleTabs]);
   //</editor-fold>
 
   return (
@@ -254,7 +256,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
         <div style={{ position: 'relative', height: '70px' }}>
           <HiddenContainer ref={hiddenContainerRef}>{horizontalTabsL}</HiddenContainer>
           <VisibleContainer ref={visibleContainerRef} $underline>
-            {visibleTabsItems}
+            {renderedVisibleTabs}
             <TabOverflowMenu
               items={overflowMenuItems}
               isHidden={!overflowL}
