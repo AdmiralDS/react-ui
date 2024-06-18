@@ -117,7 +117,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     setActiveTabL(e.currentTarget.id);
   };
-  const renderVisibleTab = (index: number, text: string, id: string, disabled?: boolean) => {
+  const renderVisibleTab = (text: string, id: string, disabled?: boolean) => {
     return (
       <CustomVerticalTab
         dimension={dimension}
@@ -164,7 +164,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((id) => {
       const currentTab = tabs.findIndex((tab) => tab.id === id);
-      return renderVisibleTab(currentTab, tabs[currentTab].text, id, tabs[currentTab].disabled);
+      return renderVisibleTab(tabs[currentTab].text, id, tabs[currentTab].disabled);
     });
   }, [visibleTabs, dimension]);
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
