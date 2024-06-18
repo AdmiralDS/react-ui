@@ -151,7 +151,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
       }
     }
     setTabWidthMap(tabWidth);
-  }, [hiddenContainerRef]);
+  }, [hiddenContainerRef, containerWidth]);
 
   const [visibleTabs, setVisibleTabs] = useState<string[]>([]);
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
