@@ -12,9 +12,6 @@ import { OverflowMenu } from '#src/components/OverflowMenu';
 
 const OverflowMenuContainer = styled.div<{ $isHidden?: boolean; $dimension?: TabDimension }>`
   box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  right: 0;
   visibility: ${(p) => (p.$isHidden ? 'hidden' : 'visible')};
   padding: ${(p) => (p.$dimension === 'l' ? OVERFLOW_MENU_CONTAINER_PADDING_L : OVERFLOW_MENU_CONTAINER_PADDING_M)}px;
   ${(p) => `

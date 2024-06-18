@@ -8,6 +8,7 @@ import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTempla
 import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
 import { VerticalTabMenuWithOverflowTemplate } from './VerticalTabMenuWithOverflowTemplate';
 import { HorizontalTabMenuTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuTemplate';
+import { HorizontalTabMenuWithOverflowTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuWithOverflowTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
@@ -15,6 +16,7 @@ import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
 import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
 import VerticalTabMenuWithOverflowRaw from './VerticalTabMenuWithOverflowTemplate?raw';
 import HorizontalTabMenuRaw from './HorizontalTabMenuTemplate?raw';
+import HorizontalTabMenuWithOverflowRaw from './HorizontalTabMenuWithOverflowTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent',
@@ -169,5 +171,26 @@ export const HorizontalTabMenuExample = {
   },
 
   name: 'HorizontalTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalTabMenuWithOverflow.">
+const HorizontalTabMenuWithOverflowStory: StoryFn<typeof TabMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HorizontalTabMenuWithOverflowTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalTabMenuWithOverflowExample = {
+  render: HorizontalTabMenuWithOverflowStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalTabMenuWithOverflowRaw,
+      },
+    },
+  },
+
+  name: 'HorizontalTabMenuWithOverflow.',
 };
 //</editor-fold>
