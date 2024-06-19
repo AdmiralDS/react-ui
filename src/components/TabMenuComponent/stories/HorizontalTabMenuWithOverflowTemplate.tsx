@@ -131,7 +131,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   };
 
   const horizontalTabsL = tabs.map((tab) => {
-    return renderVisibleTab(tab.text, tab.id, tab.disabled);
+    return renderVisibleTab(tab.text, `${tab.id}-hidden`, tab.disabled);
   });
 
   const visibleContainerRef = useRef<HTMLDivElement>(null);
