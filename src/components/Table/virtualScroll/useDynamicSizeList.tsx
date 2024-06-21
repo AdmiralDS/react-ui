@@ -166,12 +166,12 @@ function useDynamicSizeList(props: UseDynamicSizeListProps) {
   };
 }
 
-export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ containerHeight, rowList, renderRow }, ref) => {
+export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listHeight, rowList, renderRow }, ref) => {
   const [listItems, setListItems] = useState(rowList);
   const scrollElementRef = useRef<HTMLDivElement>(null);
 
   const { virtualItems, totalHeight, measureElement } = useDynamicSizeList({
-    listHeight: containerHeight,
+    listHeight,
     estimateItemHeight: useCallback(() => 1000, []),
     itemsCount: listItems.length,
     getScrollElement: useCallback(() => scrollElementRef.current, []),

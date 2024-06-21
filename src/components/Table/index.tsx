@@ -556,7 +556,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         //   ref={scrollBodyRef}
         //   className="tbody"
         // />
-        <DynamicHeight ref={scrollBodyRef} containerHeight={bodyHeight} rowList={tableRows} renderRow={renderRow} />
+        <DynamicHeight ref={scrollBodyRef} listHeight={bodyHeight} listItems={tableRows} renderRow={renderRow} />
       ) : (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           {tableRows.length ? tableRows.map((row, index) => renderRow(row, index)) : renderEmptyMessage()}
