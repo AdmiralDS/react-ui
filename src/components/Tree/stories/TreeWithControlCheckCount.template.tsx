@@ -1,74 +1,44 @@
 import { useState } from 'react';
-import { Tree, TreeNode } from '@admiral-ds/react-ui';
+import { T, Tree, TreeNode } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
-import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
+// import styled from 'styled-components';
+
+// const InfoText = styled.div
 
 const demo1_TreeModel: Array<TreeItemProps> = [
   {
-    render: (options: TreeNodeRenderOptionProps) => (
-      <TreeNode
-        key={'1'}
-        icon={FolderSolid}
-        label={'Текст заголовка, первый уровень компонента, размер M 40 1'}
-        {...options}
-      />
-    ),
+    render: (options: TreeNodeRenderOptionProps) => <TreeNode key={'1'} label={'Корневой элемент'} {...options} />,
     id: '1',
     checked: false,
     children: [
       {
         render: (options: TreeNodeRenderOptionProps) => (
-          <TreeNode
-            key={'1-3'}
-            icon={FolderSolid}
-            label={'Текст раскрывающейся строки, второй уровень компонента 3'}
-            {...options}
-          />
+          <TreeNode key={'1-3'} label={'Первый дочерний элемент'} {...options} />
         ),
         id: '1-3',
         checked: false,
         children: [
           {
             render: (options: TreeNodeRenderOptionProps) => (
-              <TreeNode
-                key={'2-2'}
-                icon={FolderSolid}
-                label={'Текст  строки, третий уровень компонента 2'}
-                {...options}
-              />
+              <TreeNode key={'2-2'} label={'Текст  строки, третий уровень компонента 2'} {...options} />
             ),
             id: '2-2',
           },
           {
             render: (options: TreeNodeRenderOptionProps) => (
-              <TreeNode
-                key={'2-3'}
-                icon={FolderSolid}
-                label={'Текст  строки, третий уровень компонента 3'}
-                {...options}
-              />
+              <TreeNode key={'2-3'} label={'Текст  строки, третий уровень компонента 3'} {...options} />
             ),
             id: '2-3',
           },
           {
             render: (options: TreeNodeRenderOptionProps) => (
-              <TreeNode
-                key={'2-4'}
-                icon={FolderSolid}
-                label={'Текст  строки, третий уровень компонента 4'}
-                {...options}
-              />
+              <TreeNode key={'2-4'} label={'Текст  строки, третий уровень компонента 4'} {...options} />
             ),
             id: '2-4',
           },
           {
             render: (options: TreeNodeRenderOptionProps) => (
-              <TreeNode
-                key={'2-5'}
-                icon={FolderSolid}
-                label={'Текст  строки с чекбоксом, третий уровень компонента 5'}
-                {...options}
-              />
+              <TreeNode key={'2-5'} label={'Текст  строки с чекбоксом, третий уровень компонента 5'} {...options} />
             ),
             id: '2-5',
             checked: false,
@@ -153,83 +123,48 @@ const demo1_TreeModel: Array<TreeItemProps> = [
         id: '1-1',
         checked: false,
         render: (options: TreeNodeRenderOptionProps) => (
-          <TreeNode
-            {...options}
-            icon={FolderSolid}
-            label={'Текст раскрывающейся строки, второй уровень компонента 1'}
-            key={'1-1'}
-          />
+          <TreeNode {...options} label={'Текст раскрывающейся строки, второй уровень компонента 1'} key={'1-1'} />
         ),
       },
       {
         id: '1-2',
         checked: false,
         render: (options: TreeNodeRenderOptionProps) => (
-          <TreeNode
-            {...options}
-            icon={FolderSolid}
-            label={'Текст раскрывающейся строки, второй уровень компонента 2'}
-            key={'1-2'}
-          />
+          <TreeNode {...options} label={'Текст раскрывающейся строки, второй уровень компонента 2'} key={'1-2'} />
         ),
       },
     ],
   },
-  {
-    render: (options: TreeNodeRenderOptionProps) => (
-      <TreeNode
-        {...options}
-        icon={FolderSolid}
-        label={'Текст заголовка, первый уровень компонента, размер M 40 2'}
-        key={'2'}
-      />
-    ),
-    id: '2',
-    checked: false,
-  },
-  {
-    render: (options: TreeNodeRenderOptionProps) => (
-      <TreeNode
-        {...options}
-        icon={FolderSolid}
-        label={'Текст заголовка, первый уровень компонента, размер M 40 3'}
-        key={'3'}
-      />
-    ),
-    id: '3',
-  },
-  {
-    render: (options: TreeNodeRenderOptionProps) => (
-      <TreeNode
-        {...options}
-        icon={FolderSolid}
-        label={'Текст заголовка, первый уровень компонента, размер M 40 4'}
-        key={'4'}
-      />
-    ),
-    id: '4',
-    disabled: true,
-  },
-  {
-    render: (options: TreeNodeRenderOptionProps) => (
-      <TreeNode
-        {...options}
-        icon={FolderSolid}
-        label={'Текст заголовка, первый уровень компонента, с пустым массивом children'}
-        key={'5'}
-      />
-    ),
-    id: '5',
-    children: [],
-  },
 ];
 
-export const TreeWithCheckboxesTemplate = (props: TreeProps) => {
+export const TreeWithControlCheckCountTemplate = (props: TreeProps) => {
   const [dataList, setDataList] = useState<TreeItemProps[]>(demo1_TreeModel);
+  const [countSelected, setCountSelected] = useState(0);
+  const changeTreeValues = (newDataList: Array<TreeItemProps>) => {
+    console.log(newDataList);
+    const findChecked = (arr: Array<TreeItemProps>, checked: Array<string>) => {
+      arr.forEach((el: TreeItemProps) => {
+        if (el?.checked) {
+          checked.push(el.id);
+        }
+        if (Array.isArray(el?.children)) {
+          findChecked(el.children, checked);
+        }
+      });
 
-  const handleChange = (dataList: TreeItemProps[]) => {
-    setDataList(dataList);
+      return checked;
+    };
+    const checkedList = findChecked(dataList, []);
+    setCountSelected(checkedList.length);
+    setDataList(newDataList);
   };
 
-  return <Tree {...props} model={dataList} onChange={handleChange} />;
+  return (
+    <>
+      <T font="Subtitle/Subtitle 1" as="p">
+        Выбрано элементов: {countSelected}
+      </T>
+      <Tree {...props} dimension="s" model={dataList} onChange={changeTreeValues} />
+    </>
+  );
 };
