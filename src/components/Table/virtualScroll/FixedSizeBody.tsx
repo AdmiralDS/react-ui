@@ -1,13 +1,7 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { ScrollTableBody } from '../style';
-
-const Spacer = styled.div`
-  display: flex;
-  flex: 0 0 auto;
-`;
+import { ScrollTableBody, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;

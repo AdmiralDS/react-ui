@@ -1,6 +1,6 @@
-import { forwardRef, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, memo } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { ScrollTableBody } from '../style';
+import { ScrollTableBody, Spacer } from '../style';
 
 type Key = string | number;
 
@@ -19,7 +19,7 @@ function useLatest<T>(value: T) {
   return valueRef;
 }
 
-export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listHeight, renderRow }, ref) => {
+export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, renderRow, listHeight }, ref) => {
   const scrollElementRef = useRef<HTMLDivElement>(null);
   const [measurementCache, setMeasurementCache] = useState<Record<Key, number>>({});
   const [scrollTop, setScrollTop] = useState(0);
@@ -27,7 +27,7 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
   const getItemKey = useCallback((index: number) => listItems[index]!.id, [listItems]);
   const estimateItemHeight = useCallback((index: number) => 40, []);
   const itemsCount = listItems.length;
-  const overscan = 10;
+  const overscan = 20;
 
   useEffect(() => {
     function handleScroll(e: any) {
@@ -43,7 +43,7 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
     return () => scrollContainer?.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const { virtualItems, startIndex, endIndex, totalHeight, allItems } = useMemo(() => {
+  const { virtualItems, totalHeight, allItems } = useMemo(() => {
     const getItemHeight = (index: number) => {
       const key = getItemKey(index);
       if (typeof measurementCache[key] === 'number') {
@@ -100,69 +100,32 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
     scrollTop,
   });
 
-  //   const measureElementInner = useCallback(
-  //     (element: Element | null, resizeObserver: ResizeObserver, entry?: ResizeObserverEntry) => {
-  //       if (!element) {
-  //         return;
-  //       }
+  const lastIndex = virtualItems.length - 1;
+  const topPadding = `${virtualItems[0].offsetTop}px`;
+  const bottomPadding = `${totalHeight - (virtualItems[lastIndex].offsetTop + virtualItems[lastIndex].height)}px`;
 
-  //       if (!element.isConnected) {
-  //         resizeObserver.unobserve(element);
-  //         return;
-  //       }
+  return (
+    <ScrollTableBody ref={refSetter(ref, scrollElementRef)} style={{ height: listHeight }}>
+      <Spacer style={{ minHeight: topPadding }} />
+      {virtualItems.map((virtualItem) => {
+        const item = listItems[virtualItem.index]!;
 
-  //       const indexAttribute = element.getAttribute('data-index') || '';
-  //       const index = parseInt(indexAttribute, 10);
-
-  //       const { measurementCache, getItemKey, allItems, scrollTop } = latestData.current;
-
-  //       const key = getItemKey(index);
-  //       const isResize = Boolean(entry);
-
-  //       resizeObserver.observe(element);
-
-  //       if (!isResize && typeof measurementCache[key] === 'number') {
-  //         return;
-  //       }
-
-  //       const height = entry?.borderBoxSize[0]?.blockSize ?? element.getBoundingClientRect().height;
-
-  //       if (measurementCache[key] === height) {
-  //         return;
-  //       }
-
-  //       const item = allItems[index]!;
-  //       const delta = height - item.height;
-
-  //       if (delta !== 0 && scrollTop > item.offsetTop) {
-  //         const element = scrollElementRef.current;
-  //         if (element) {
-  //           element.scrollBy(0, delta);
-  //         }
-  //       }
-
-  //       setMeasurementCache((cache) => ({ ...cache, [key]: height }));
-  //     },
-  //     [],
-  //   );
-
-  //   const itemsResizeObserver = useMemo(() => {
-  //     const ro = new ResizeObserver((entries) => {
-  //       entries.forEach((entry) => {
-  //         measureElementInner(entry.target, ro, entry);
-  //       });
-  //     });
-  //     return ro;
-  //   }, [latestData]);
-
-  //   const measureElement = useCallback(
-  //     (element: Element | null) => {
-  //       measureElementInner(element, itemsResizeObserver);
-  //     },
-  //     [itemsResizeObserver],
-  //   );
-
-  console.log(virtualItems);
+        return (
+          <RowWrapper
+            key={item.id}
+            id={item.id}
+            data-index={virtualItem.index}
+            latestData={latestData}
+            scrollElementRef={scrollElementRef}
+            setMeasurementCache={setMeasurementCache}
+          >
+            {renderRow(item, virtualItem.index)}
+          </RowWrapper>
+        );
+      })}
+      <Spacer style={{ minHeight: bottomPadding }} />
+    </ScrollTableBody>
+  );
 
   return (
     <ScrollTableBody
@@ -170,11 +133,19 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
       style={{
         height: listHeight,
         position: 'relative',
-        display: 'block',
       }}
     >
-      <div style={{ height: totalHeight }}>
-        <div style={{ position: 'absolute', top: '0', transform: `translateY(${virtualItems[0].offsetTop}px)` }}>
+      <div style={{ height: totalHeight, display: 'flex', flex: '1 0 auto' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            transform: `translateY(${virtualItems[0].offsetTop}px)`,
+            willChange: 'auto',
+          }}
+        >
           {virtualItems.map((virtualItem) => {
             const item = listItems[virtualItem.index]!;
 
@@ -183,31 +154,11 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
                 key={item.id}
                 id={item.id}
                 data-index={virtualItem.index}
-                //   style={{
-                //     position: 'absolute',
-                //     top: 0,
-                //     // left: 0,
-                //     // right: 0,
-                //     transform: `translateY(${virtualItem.offsetTop}px)`,
-                //   }}
                 latestData={latestData}
                 scrollElementRef={scrollElementRef}
                 setMeasurementCache={setMeasurementCache}
               >
-                {/* <div
-                key={item.id}
-                data-index={virtualItem.index}
-                ref={measureElement}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  // left: 0,
-                  // right: 0,
-                  transform: `translateY(${virtualItem.offsetTop}px)`,
-                }}
-              > */}
                 {renderRow(item, virtualItem.index)}
-                {/* </div> */}
               </RowWrapper>
             );
           })}
@@ -217,7 +168,7 @@ export const DynamicHeight = forwardRef<HTMLDivElement, any>(({ listItems, listH
   );
 });
 
-const RowWrapper = ({ children, latestData, id, scrollElementRef, setMeasurementCache, ...props }: any) => {
+const RowWrapper = memo(({ children, latestData, id, scrollElementRef, setMeasurementCache, ...props }: any) => {
   const [node, setNode] = useState<HTMLDivElement | null>(null);
   const { measurementCache, allItems, scrollTop } = latestData.current;
 
@@ -258,4 +209,4 @@ const RowWrapper = ({ children, latestData, id, scrollElementRef, setMeasurement
       {children}
     </div>
   );
-};
+});
