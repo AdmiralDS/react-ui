@@ -10,6 +10,8 @@ export interface TabProps extends HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   /** Выбранная вкладка */
   selected?: boolean;
+  /** Коллбэк при выборе вкладки */
+  onSelectTab?: (tabId: string) => void;
   /** Размер вкладки */
   dimension?: TabDimension;
 }

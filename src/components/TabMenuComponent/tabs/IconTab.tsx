@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import type { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
 import { typography } from '#src/components/Typography';
@@ -51,9 +52,14 @@ const Tab = styled.button<{ $selected?: boolean }>`
   }
 `;
 export const IconTab = forwardRef<HTMLButtonElement, IconTabProps>(
-  ({ children, disabled, selected, tabId, ...props }: IconTabProps, ref) => {
+  ({ children, disabled, selected, onSelectTab, tabId, ...props }: IconTabProps, ref) => {
+    const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+      const tabId = e.currentTarget.dataset.tabid || '';
+      onSelectTab?.(tabId);
+    };
+
     return (
-      <Tab ref={ref} data-tabid={tabId} disabled={disabled} $selected={selected} {...props}>
+      <Tab {...props} ref={ref} data-tabid={tabId} disabled={disabled} $selected={selected} onClick={handleTabClick}>
         {children}
       </Tab>
     );

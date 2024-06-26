@@ -1,5 +1,4 @@
 import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { MouseEventHandler } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MenuItem, RadioButton, FieldSet } from '@admiral-ds/react-ui';
@@ -31,9 +30,17 @@ interface TabContentProps extends TabProps {
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab
+        {...props}
+        ref={ref}
+        tabId={tabId}
+        dimension={dimension}
+        disabled={disabled}
+        selected={selected}
+        onSelectTab={onSelectTab}
+      >
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -128,9 +135,9 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
-  const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
-  const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.dataset.tabid);
+  const [activeTab, setActiveTab] = useState<string | undefined>('3');
+  const handleSelectTab = (tabId: string) => {
+    setActiveTab(tabId);
   };
   const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
     return (
@@ -139,10 +146,10 @@ export const VerticalTabMenuWithOverflowTemplate = ({
         dimension={dimension}
         text={text}
         key={tabId}
-        selected={tabId === activeTabL}
+        selected={tabId === activeTab}
         disabled={disabled}
         width={TAB_MENU_WIDTH}
-        onClick={handleTabLClick}
+        onSelectTab={handleSelectTab}
       />
     );
   };
@@ -158,12 +165,12 @@ export const VerticalTabMenuWithOverflowTemplate = ({
 
     let activeTabIsVisible = false;
     tabs.forEach((tab, index) => {
-      const tabIsActive = tab.tabId === activeTabL;
+      const tabIsActive = tab.tabId === activeTab;
       if (
         allTabsVisible ||
         index < maxTabs - 2 ||
         (index === maxTabs - 2 && (activeTabIsVisible || tabIsActive)) ||
-        (index > maxTabs - 2 && tab.tabId === activeTabL)
+        (index > maxTabs - 2 && tab.tabId === activeTab)
       ) {
         addToVisible(tab.tabId);
         if (tabIsActive) activeTabIsVisible = true;
@@ -174,7 +181,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
     });
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [maxTabs, activeTabL]);
+  }, [maxTabs, activeTab]);
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((id) => {
@@ -204,7 +211,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const [underlineHeightL, setUnderlineHeightL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const getUnderlinePosition = () => {
-    const index = visibleTabs.findIndex((tab) => tab === activeTabL);
+    const index = visibleTabs.findIndex((tab) => tab === activeTab);
     if (index < 0) return { top: 0, height: 0 };
     const height = dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M;
     const top = index * (height + VERTICAL_TABS_GAP);
@@ -218,7 +225,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   };
   useEffect(() => {
     styleUnderlineL(true);
-  }, [activeTabL, renderedVisibleTabs]);
+  }, [activeTab, renderedVisibleTabs]);
   //</editor-fold>
 
   return (
@@ -278,8 +285,8 @@ export const VerticalTabMenuWithOverflowTemplate = ({
           <VerticalTabOverflowMenu
             items={overflowMenuItems}
             alignSelf="flex-start"
-            onSelectItem={(id) => setActiveTabL(id)}
-            selected={activeTabL}
+            onSelectItem={(id) => setActiveTab(id)}
+            selected={activeTab}
             dimension={dimension}
             isHidden={hiddenTabs.length === 0}
           />

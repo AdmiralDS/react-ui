@@ -1,5 +1,5 @@
 import { createRef, forwardRef, useLayoutEffect, useState } from 'react';
-import type { MouseEventHandler, RefObject } from 'react';
+import type { RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -24,9 +24,17 @@ interface TabWithRefProps extends TabContentProps {
 
 interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <HorizontalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
+      <HorizontalTab
+        {...props}
+        ref={ref}
+        tabId={tabId}
+        dimension={dimension}
+        disabled={disabled}
+        selected={selected}
+        onSelectTab={onSelectTab}
+      >
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -77,12 +85,12 @@ export const MobileHorizontalTabMenuTemplate = ({
 }) => {
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
-  const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.dataset.tabid);
+  const handleSelectTabL = (tabId: string) => {
+    setActiveTabL(tabId);
   };
   const [activeTabM, setActiveTabM] = useState<string | undefined>('3');
-  const handleTabMClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabM(e.currentTarget.dataset.tabid);
+  const handleSelectTabM = (tabId: string) => {
+    setActiveTabM(tabId);
   };
 
   const tabsWithRefL: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
@@ -94,7 +102,7 @@ export const MobileHorizontalTabMenuTemplate = ({
         key={tab.tabId}
         selected={tab.tabId === activeTabL}
         disabled={tab.disabled}
-        onClick={handleTabLClick}
+        onSelectTab={handleSelectTabL}
         ref={tabsWithRefL[index].ref}
       />
     );
@@ -109,7 +117,7 @@ export const MobileHorizontalTabMenuTemplate = ({
         key={tab.tabId}
         selected={tab.tabId === activeTabM}
         disabled={tab.disabled}
-        onClick={handleTabMClick}
+        onSelectTab={handleSelectTabM}
         ref={tabsWithRefM[index].ref}
       />
     );

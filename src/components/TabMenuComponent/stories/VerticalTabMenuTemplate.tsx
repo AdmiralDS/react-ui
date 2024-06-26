@@ -1,5 +1,5 @@
 import { createRef, forwardRef, useLayoutEffect, useState } from 'react';
-import type { MouseEventHandler, RefObject } from 'react';
+import type { RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -27,9 +27,17 @@ interface TabWithRefProps extends TabContentProps {
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab
+        {...props}
+        ref={ref}
+        tabId={tabId}
+        dimension={dimension}
+        disabled={disabled}
+        selected={selected}
+        onSelectTab={onSelectTab}
+      >
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -76,12 +84,12 @@ export const VerticalTabMenuTemplate = ({
 }) => {
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
-  const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.dataset.tabid);
+  const handleSelectTabL = (tabId: string) => {
+    setActiveTabL(tabId);
   };
   const [activeTabM, setActiveTabM] = useState<string | undefined>('3');
-  const handleTabMClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabM(e.currentTarget.dataset.tabid);
+  const handleSelectTabM = (tabId: string) => {
+    setActiveTabM(tabId);
   };
 
   const tabsWithRefL: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
@@ -94,7 +102,7 @@ export const VerticalTabMenuTemplate = ({
         selected={tab.tabId === activeTabL}
         disabled={tab.disabled}
         width={TAB_MENU_WIDTH}
-        onClick={handleTabLClick}
+        onSelectTab={handleSelectTabL}
         ref={tabsWithRefL[index].ref}
       />
     );
@@ -110,7 +118,7 @@ export const VerticalTabMenuTemplate = ({
         selected={tab.tabId === activeTabM}
         disabled={tab.disabled}
         width={TAB_MENU_WIDTH}
-        onClick={handleTabMClick}
+        onSelectTab={handleSelectTabM}
         ref={tabsWithRefM[index].ref}
       />
     );

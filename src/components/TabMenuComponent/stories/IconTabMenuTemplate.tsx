@@ -1,5 +1,5 @@
 import { createRef, forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { MouseEventHandler, RefObject } from 'react';
+import type { RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -80,8 +80,8 @@ export const IconTabMenuTemplate = ({
 }) => {
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTab, setActiveTab] = useState<string | undefined>('3');
-  const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTab(e.currentTarget.dataset.tabid);
+  const handleSelectTab = (tabId: string) => {
+    setActiveTab(tabId);
   };
 
   const tabsWithRef: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
@@ -92,7 +92,7 @@ export const IconTabMenuTemplate = ({
         text={tab.text}
         key={tab.tabId}
         selected={tab.tabId === activeTab}
-        onClick={handleTabClick}
+        onSelectTab={handleSelectTab}
         ref={tabsWithRef[index].ref}
       />
     );

@@ -1,5 +1,4 @@
 import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { MouseEventHandler } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType, MenuModelItemProps, RenderOptionProps } from '@admiral-ds/react-ui';
@@ -31,9 +30,17 @@ type TabWidthMapProps = {
 
 interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <HorizontalTab {...props} tabId={tabId} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <HorizontalTab
+        {...props}
+        tabId={tabId}
+        ref={ref}
+        dimension={dimension}
+        disabled={disabled}
+        selected={selected}
+        onSelectTab={onSelectTab}
+      >
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -112,9 +119,9 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
-  const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
-  const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.dataset.tabid);
+  const [activeTab, setActiveTab] = useState<string | undefined>('3');
+  const handleSelectTab = (tabId: string) => {
+    setActiveTab(tabId);
   };
   const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
     return (
@@ -122,9 +129,9 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
         tabId={tabId}
         text={text}
         key={tabId}
-        selected={tabId === activeTabL}
+        selected={tabId === activeTab}
         disabled={disabled}
-        onClick={handleTabLClick}
+        onSelectTab={handleSelectTab}
       />
     );
   };
@@ -162,14 +169,14 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
       const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
       const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
-      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === activeTabL)?.width;
+      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === activeTab)?.width;
       let availableWidth = overflowL
         ? maxWidth -
           (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) -
           (activeTabWidth || 0)
         : maxWidth;
       tabs.forEach((tab, index) => {
-        const tabIsActive = tab.tabId === activeTabL;
+        const tabIsActive = tab.tabId === activeTab;
         const tabWidth = tabWidthMap[index].width;
 
         if (availableWidth >= tabWidth || tabIsActive) {
@@ -191,7 +198,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
     }
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowL, activeTabL]);
+  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowL, activeTab]);
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((tabId) => {
@@ -221,10 +228,10 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   const [underlineWidthL, setUnderlineWidthL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const getActiveTabWidth = () => {
-    return tabWidthMap.find((tab) => tab.tabId === activeTabL)?.width || 0;
+    return tabWidthMap.find((tab) => tab.tabId === activeTab)?.width || 0;
   };
   const getActiveTabLeft = () => {
-    const index = visibleTabs.findIndex((tab) => tab === activeTabL);
+    const index = visibleTabs.findIndex((tab) => tab === activeTab);
     if (index < 0) return 0;
     let left = 0;
     for (let i = 0; i < index; i++) {
@@ -246,7 +253,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   };
   useEffect(() => {
     styleUnderlineL(true);
-  }, [activeTabL, renderedVisibleTabs]);
+  }, [activeTab, renderedVisibleTabs]);
   //</editor-fold>
 
   return (
@@ -259,8 +266,8 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
             <TabOverflowMenu
               items={overflowMenuItems}
               isHidden={!overflowL}
-              onSelectItem={(tabId) => setActiveTabL(tabId)}
-              selected={activeTabL}
+              onSelectItem={(tabId) => setActiveTab(tabId)}
+              selected={activeTab}
               dimension={dimension}
             />
             <ActiveHorizontalTabUnderline
