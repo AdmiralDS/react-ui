@@ -15,16 +15,18 @@ import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuCompone
 
 interface TabContentProps extends TabProps {
   text: string;
-  id?: string;
 }
 
-type TabWithRefProps = TabContentProps & { ref: RefObject<HTMLButtonElement> };
+interface TabWithRefProps extends TabContentProps {
+  tabId: string;
+  ref: RefObject<HTMLButtonElement>;
+}
 
 interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomHorizontalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <HorizontalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <HorizontalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -38,15 +40,15 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
 );
 
 const tabs = [
-  { text: 'Text1', id: '1' },
-  { text: 'Text22', id: '2' },
-  { text: 'Text333', id: '3' },
-  { text: 'Text4444', id: '4' },
-  { text: 'Text55555', id: '5', disabled: true },
-  { text: 'Text66666', id: '6' },
-  { text: 'Text7777', id: '7' },
-  { text: 'Text888', id: '8' },
-  { text: 'Text99', id: '9' },
+  { text: 'Text1', tabId: '1' },
+  { text: 'Text22', tabId: '2' },
+  { text: 'Text333', tabId: '3' },
+  { text: 'Text4444', tabId: '4' },
+  { text: 'Text55555', tabId: '5', disabled: true },
+  { text: 'Text66666', tabId: '6' },
+  { text: 'Text7777', tabId: '7' },
+  { text: 'Text888', tabId: '8' },
+  { text: 'Text99', tabId: '9' },
 ];
 
 const Wrapper = styled.div`
@@ -76,21 +78,21 @@ export const MobileHorizontalTabMenuTemplate = ({
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
   const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.id);
+    setActiveTabL(e.currentTarget.dataset.tabid);
   };
   const [activeTabM, setActiveTabM] = useState<string | undefined>('3');
   const handleTabMClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabM(e.currentTarget.id);
+    setActiveTabM(e.currentTarget.dataset.tabid);
   };
 
   const tabsWithRefL: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   const horizontalTabsL = tabs.map((tab, index) => {
     return (
       <CustomHorizontalTab
+        data-tabid={tab.tabId}
         text={tab.text}
-        id={tab.id}
-        key={tab.id}
-        selected={tab.id === activeTabL}
+        key={tab.tabId}
+        selected={tab.tabId === activeTabL}
         disabled={tab.disabled}
         onClick={handleTabLClick}
         ref={tabsWithRefL[index].ref}
@@ -101,11 +103,11 @@ export const MobileHorizontalTabMenuTemplate = ({
   const horizontalTabsM = tabs.map((tab, index) => {
     return (
       <CustomHorizontalTab
+        data-tabid={tab.tabId}
         dimension="m"
         text={tab.text}
-        id={tab.id}
-        key={tab.id}
-        selected={tab.id === activeTabM}
+        key={tab.tabId}
+        selected={tab.tabId === activeTabM}
         disabled={tab.disabled}
         onClick={handleTabMClick}
         ref={tabsWithRefM[index].ref}
@@ -119,7 +121,7 @@ export const MobileHorizontalTabMenuTemplate = ({
   const [underlineWidthL, setUnderlineWidthL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const styleUnderlineL = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.id === activeTabL)?.ref.current);
+    const { left, width } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.tabId === activeTabL)?.ref.current);
     setUnderlineTransitionL(enableTransition);
     setUnderlineWidthL(width);
     setUnderlineLeftL(left);
@@ -137,7 +139,7 @@ export const MobileHorizontalTabMenuTemplate = ({
   const [underlineWidthM, setUnderlineWidthM] = useState(0);
   const [underlineTransitionM, setUnderlineTransitionM] = useState(false);
   const styleUnderlineM = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.id === activeTabM)?.ref.current);
+    const { left, width } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.tabId === activeTabM)?.ref.current);
     setUnderlineTransitionM(enableTransition);
     setUnderlineWidthM(width);
     setUnderlineLeftM(left);

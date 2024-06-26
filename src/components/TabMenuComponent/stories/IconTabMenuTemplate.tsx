@@ -20,14 +20,16 @@ import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/Sl
 
 interface TabContentProps extends TabProps {
   text: string;
-  id?: string;
 }
 
-type TabWithRefProps = TabContentProps & { ref: RefObject<HTMLButtonElement> };
+interface TabWithRefProps extends TabContentProps {
+  tabId: string;
+  ref: RefObject<HTMLButtonElement>;
+}
 
-const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, id, ...props }: TabContentProps, ref) => {
+const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, ...props }: TabContentProps, ref) => {
   return (
-    <IconTab {...props} id={id} ref={ref}>
+    <IconTab {...props} ref={ref}>
       <MinusCircleOutline />
       <div>{text}</div>
     </IconTab>
@@ -41,15 +43,15 @@ const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right'
 `;
 
 const tabs = [
-  { text: 'Text1', id: '1' },
-  { text: 'Text22', id: '2' },
-  { text: 'Text333', id: '3' },
-  { text: 'Text4444', id: '4' },
-  { text: 'Text55555', id: '5' },
-  { text: 'Text66666', id: '6' },
-  { text: 'Text7777', id: '7' },
-  { text: 'Text888', id: '8' },
-  { text: 'Text99', id: '9' },
+  { text: 'Text1', tabId: '1' },
+  { text: 'Text22', tabId: '2' },
+  { text: 'Text333', tabId: '3' },
+  { text: 'Text4444', tabId: '4' },
+  { text: 'Text55555', tabId: '5' },
+  { text: 'Text66666', tabId: '6' },
+  { text: 'Text7777', tabId: '7' },
+  { text: 'Text888', tabId: '8' },
+  { text: 'Text99', tabId: '9' },
 ];
 
 const Wrapper = styled.div`
@@ -77,17 +79,17 @@ export const IconTabMenuTemplate = ({
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTab, setActiveTab] = useState<string | undefined>('3');
   const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTab(e.currentTarget.id);
+    setActiveTab(e.currentTarget.dataset.tabid);
   };
 
   const tabsWithRef: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   const iconTabs = tabs.map((tab, index) => {
     return (
       <CustomIconTab
+        data-tabid={tab.tabId}
         text={tab.text}
-        id={tab.id}
-        key={tab.id}
-        selected={tab.id === activeTab}
+        key={tab.tabId}
+        selected={tab.tabId === activeTab}
         onClick={handleTabClick}
         ref={tabsWithRef[index].ref}
       />
@@ -97,7 +99,7 @@ export const IconTabMenuTemplate = ({
 
   //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
   const styleUnderline = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRef.find((tab) => tab.id === activeTab)?.ref.current);
+    const { left, width } = getUnderlinePosition(tabsWithRef.find((tab) => tab.tabId === activeTab)?.ref.current);
     setUnderlineTransition(enableTransition);
     setUnderlineWidth(width);
     setUnderlineLeft(left);

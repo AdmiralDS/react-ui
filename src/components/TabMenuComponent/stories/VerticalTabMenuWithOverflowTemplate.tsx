@@ -27,14 +27,13 @@ const TAB_MENU_WIDTH = '260px';
 
 interface TabContentProps extends TabProps {
   text: string;
-  id?: string;
 }
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -48,15 +47,15 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
 );
 
 const tabs = [
-  { text: 'Text1', id: '1' },
-  { text: 'Text22', id: '2' },
-  { text: 'Text333', id: '3' },
-  { text: 'Text4444', id: '4' },
-  { text: 'Text55555', id: '5' },
-  { text: 'Text66666', id: '6' },
-  { text: 'Text7777 is very very very very long', id: '7' },
-  { text: 'Text888', id: '8', disabled: true },
-  { text: 'Text99', id: '9' },
+  { text: 'Text1', tabId: '1' },
+  { text: 'Text22', tabId: '2' },
+  { text: 'Text333', tabId: '3' },
+  { text: 'Text4444', tabId: '4' },
+  { text: 'Text55555', tabId: '5' },
+  { text: 'Text66666', tabId: '6' },
+  { text: 'Text7777 is very very very very long', tabId: '7' },
+  { text: 'Text888', tabId: '8', disabled: true },
+  { text: 'Text99', tabId: '9' },
 ];
 
 const PropsWrapper = styled.div`
@@ -131,16 +130,16 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
   const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.id);
+    setActiveTabL(e.currentTarget.dataset.tabid);
   };
-  const renderVisibleTab = (text: string, id: string, disabled?: boolean) => {
+  const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
     return (
       <CustomVerticalTab
+        data-tabid={tabId}
         dimension={dimension}
         text={text}
-        id={id}
-        key={id}
-        selected={id === activeTabL}
+        key={tabId}
+        selected={tabId === activeTabL}
         disabled={disabled}
         width={TAB_MENU_WIDTH}
         onClick={handleTabLClick}
@@ -154,23 +153,23 @@ export const VerticalTabMenuWithOverflowTemplate = ({
     const allTabsVisible = tabs.length <= maxTabs;
     const newVisibleTabs: string[] = [];
     const newHiddenTabs: string[] = [];
-    const addToVisible = (id: string) => newVisibleTabs.push(id);
-    const addToHidden = (id: string) => newHiddenTabs.push(id);
+    const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
+    const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
     let activeTabIsVisible = false;
     tabs.forEach((tab, index) => {
-      const tabIsActive = tab.id === activeTabL;
+      const tabIsActive = tab.tabId === activeTabL;
       if (
         allTabsVisible ||
         index < maxTabs - 2 ||
         (index === maxTabs - 2 && (activeTabIsVisible || tabIsActive)) ||
-        (index > maxTabs - 2 && tab.id === activeTabL)
+        (index > maxTabs - 2 && tab.tabId === activeTabL)
       ) {
-        addToVisible(tab.id);
+        addToVisible(tab.tabId);
         if (tabIsActive) activeTabIsVisible = true;
       }
       if (!allTabsVisible && (index > maxTabs - 2 || (index === maxTabs - 2 && !activeTabIsVisible && !tabIsActive))) {
-        addToHidden(tab.id);
+        addToHidden(tab.tabId);
       }
     });
     setVisibleTabs(newVisibleTabs);
@@ -179,18 +178,18 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
     return visibleTabs.map((id) => {
-      const currentTab = tabs.findIndex((tab) => tab.id === id);
+      const currentTab = tabs.findIndex((tab) => tab.tabId === id);
       return renderVisibleTab(tabs[currentTab].text, id, tabs[currentTab].disabled);
     });
   }, [visibleTabs, dimension]);
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
     if (hiddenTabs.length === 0) return [];
-    return hiddenTabs.map((id) => {
-      const currentTab = tabs.findIndex((tab) => tab.id === id);
+    return hiddenTabs.map((tabId) => {
+      const currentTab = tabs.findIndex((tab) => tab.tabId === tabId);
       return {
-        id: id,
+        id: tabId,
         render: (options: RenderOptionProps) => (
-          <MenuItem dimension={dimension} {...options} key={id}>
+          <MenuItem dimension={dimension} {...options} key={tabId}>
             <MenuItemWrapper>{tabs[currentTab].text}</MenuItemWrapper>
           </MenuItem>
         ),

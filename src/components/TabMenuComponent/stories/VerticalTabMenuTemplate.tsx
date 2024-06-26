@@ -18,16 +18,18 @@ const TAB_MENU_WIDTH = '260px';
 
 interface TabContentProps extends TabProps {
   text: string;
-  id?: string;
 }
 
-type TabWithRefProps = TabContentProps & { ref: RefObject<HTMLButtonElement> };
+interface TabWithRefProps extends TabContentProps {
+  tabId: string;
+  ref: RefObject<HTMLButtonElement>;
+}
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, id, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} id={id} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -41,15 +43,15 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
 );
 
 const tabs = [
-  { text: 'Text1', id: '1' },
-  { text: 'Text22', id: '2' },
-  { text: 'Text333', id: '3' },
-  { text: 'Text4444 is very very very very very very very long', id: '4' },
-  { text: 'Text55555', id: '5', disabled: true },
-  { text: 'Text66666', id: '6' },
-  { text: 'Text7777', id: '7' },
-  { text: 'Text888', id: '8' },
-  { text: 'Text99', id: '9' },
+  { text: 'Text1', tabId: '1' },
+  { text: 'Text22', tabId: '2' },
+  { text: 'Text333', tabId: '3' },
+  { text: 'Text4444 is very very very very very very very long', tabId: '4' },
+  { text: 'Text55555', tabId: '5', disabled: true },
+  { text: 'Text66666', tabId: '6' },
+  { text: 'Text7777', tabId: '7' },
+  { text: 'Text888', tabId: '8' },
+  { text: 'Text99', tabId: '9' },
 ];
 
 const Wrapper = styled.div`
@@ -75,21 +77,21 @@ export const VerticalTabMenuTemplate = ({
   //<editor-fold desc="Создание табов для отрисовки">
   const [activeTabL, setActiveTabL] = useState<string | undefined>('3');
   const handleTabLClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabL(e.currentTarget.id);
+    setActiveTabL(e.currentTarget.dataset.tabid);
   };
   const [activeTabM, setActiveTabM] = useState<string | undefined>('3');
   const handleTabMClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    setActiveTabM(e.currentTarget.id);
+    setActiveTabM(e.currentTarget.dataset.tabid);
   };
 
   const tabsWithRefL: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
   const verticalTabsL = tabs.map((tab, index) => {
     return (
       <CustomVerticalTab
+        data-tabid={tab.tabId}
         text={tab.text}
-        id={tab.id}
-        key={tab.id}
-        selected={tab.id === activeTabL}
+        key={tab.tabId}
+        selected={tab.tabId === activeTabL}
         disabled={tab.disabled}
         width={TAB_MENU_WIDTH}
         onClick={handleTabLClick}
@@ -101,11 +103,11 @@ export const VerticalTabMenuTemplate = ({
   const verticalTabsM = tabs.map((tab, index) => {
     return (
       <CustomVerticalTab
+        data-tabid={tab.tabId}
         dimension="m"
         text={tab.text}
-        id={tab.id}
-        key={tab.id}
-        selected={tab.id === activeTabM}
+        key={tab.tabId}
+        selected={tab.tabId === activeTabM}
         disabled={tab.disabled}
         width={TAB_MENU_WIDTH}
         onClick={handleTabMClick}
@@ -120,7 +122,7 @@ export const VerticalTabMenuTemplate = ({
   const [underlineHeightL, setUnderlineHeightL] = useState(0);
   const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
   const styleUnderlineL = (enableTransition: boolean) => {
-    const { top, height } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.id === activeTabL)?.ref.current);
+    const { top, height } = getUnderlinePosition(tabsWithRefL.find((tab) => tab.tabId === activeTabL)?.ref.current);
     setUnderlineTransitionL(enableTransition);
     setUnderlineHeightL(height);
     setUnderlineTopL(top);
@@ -138,7 +140,7 @@ export const VerticalTabMenuTemplate = ({
   const [underlineHeightM, setUnderlineHeightM] = useState(0);
   const [underlineTransitionM, setUnderlineTransitionM] = useState(false);
   const styleUnderlineM = (enableTransition: boolean) => {
-    const { top, height } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.id === activeTabM)?.ref.current);
+    const { top, height } = getUnderlinePosition(tabsWithRefM.find((tab) => tab.tabId === activeTabM)?.ref.current);
     setUnderlineTransitionM(enableTransition);
     setUnderlineHeightM(height);
     setUnderlineTopM(top);
