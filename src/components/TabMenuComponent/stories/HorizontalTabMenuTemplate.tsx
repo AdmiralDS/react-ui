@@ -19,15 +19,14 @@ interface TabContentProps extends TabProps {
 }
 
 interface TabWithRefProps extends TabContentProps {
-  tabId: string;
   ref: RefObject<HTMLButtonElement>;
 }
 
 interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, ...props }: CustomHorizontalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <HorizontalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <HorizontalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -85,7 +84,7 @@ export const HorizontalTabMenuTemplate = ({
   const horizontalTabsL = tabs.map((tab, index) => {
     return (
       <CustomHorizontalTab
-        data-tabid={tab.tabId}
+        tabId={tab.tabId}
         text={tab.text}
         key={tab.tabId}
         selected={tab.tabId === activeTabL}
@@ -99,7 +98,7 @@ export const HorizontalTabMenuTemplate = ({
   const horizontalTabsM = tabs.map((tab, index) => {
     return (
       <CustomHorizontalTab
-        data-tabid={tab.tabId}
+        tabId={tab.tabId}
         dimension="m"
         text={tab.text}
         key={tab.tabId}

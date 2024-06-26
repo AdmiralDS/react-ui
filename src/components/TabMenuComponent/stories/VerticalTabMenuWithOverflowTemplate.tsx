@@ -31,9 +31,9 @@ interface TabContentProps extends TabProps {
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -135,7 +135,7 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
     return (
       <CustomVerticalTab
-        data-tabid={tabId}
+        tabId={tabId}
         dimension={dimension}
         text={text}
         key={tabId}

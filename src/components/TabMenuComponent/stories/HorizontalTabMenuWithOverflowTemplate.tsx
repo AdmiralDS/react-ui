@@ -31,9 +31,9 @@ type TabWidthMapProps = {
 
 interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, ...props }: CustomHorizontalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (
-      <HorizontalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <HorizontalTab {...props} tabId={tabId} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -119,7 +119,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
   const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
     return (
       <CustomHorizontalTab
-        data-tabid={tabId}
+        tabId={tabId}
         text={text}
         key={tabId}
         selected={tabId === activeTabL}

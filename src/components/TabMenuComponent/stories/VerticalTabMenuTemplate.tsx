@@ -27,9 +27,9 @@ interface TabWithRefProps extends TabContentProps {
 
 interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, text, ...props }: CustomVerticalTabProps, ref) => {
+  ({ dimension = 'l', disabled, selected, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
     return (
-      <VerticalTab {...props} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
+      <VerticalTab {...props} ref={ref} tabId={tabId} dimension={dimension} disabled={disabled} selected={selected}>
         <TabIcon $dimension={dimension} $disabled={disabled}>
           <MinusCircleOutline />
         </TabIcon>
@@ -88,7 +88,7 @@ export const VerticalTabMenuTemplate = ({
   const verticalTabsL = tabs.map((tab, index) => {
     return (
       <CustomVerticalTab
-        data-tabid={tab.tabId}
+        tabId={tab.tabId}
         text={tab.text}
         key={tab.tabId}
         selected={tab.tabId === activeTabL}
@@ -103,7 +103,7 @@ export const VerticalTabMenuTemplate = ({
   const verticalTabsM = tabs.map((tab, index) => {
     return (
       <CustomVerticalTab
-        data-tabid={tab.tabId}
+        tabId={tab.tabId}
         dimension="m"
         text={tab.text}
         key={tab.tabId}
@@ -159,7 +159,7 @@ export const VerticalTabMenuTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <VerticalTabMenuContainer $underlinePosition="right">
+        <VerticalTabMenuContainer $showUnderline $underlinePosition="right">
           {verticalTabsL}
           <ActiveVerticalTabUnderline
             $top={`${underlineTopL}px`}

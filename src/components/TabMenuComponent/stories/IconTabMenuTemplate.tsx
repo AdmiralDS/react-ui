@@ -27,14 +27,16 @@ interface TabWithRefProps extends TabContentProps {
   ref: RefObject<HTMLButtonElement>;
 }
 
-const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(({ text, ...props }: TabContentProps, ref) => {
-  return (
-    <IconTab {...props} ref={ref}>
-      <MinusCircleOutline />
-      <div>{text}</div>
-    </IconTab>
-  );
-});
+const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(
+  ({ text, tabId, ...props }: TabContentProps, ref) => {
+    return (
+      <IconTab {...props} tabId={tabId} ref={ref}>
+        <MinusCircleOutline />
+        <div>{text}</div>
+      </IconTab>
+    );
+  },
+);
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;
@@ -86,7 +88,7 @@ export const IconTabMenuTemplate = ({
   const iconTabs = tabs.map((tab, index) => {
     return (
       <CustomIconTab
-        data-tabid={tab.tabId}
+        tabId={tab.tabId}
         text={tab.text}
         key={tab.tabId}
         selected={tab.tabId === activeTab}

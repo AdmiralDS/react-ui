@@ -51,9 +51,9 @@ const Tab = styled.button<{ $selected?: boolean }>`
   }
 `;
 export const IconTab = forwardRef<HTMLButtonElement, IconTabProps>(
-  ({ children, disabled, selected, ...props }: IconTabProps, ref) => {
+  ({ children, disabled, selected, tabId, ...props }: IconTabProps, ref) => {
     return (
-      <Tab ref={ref} disabled={disabled} $selected={selected} {...props}>
+      <Tab ref={ref} data-tabid={tabId} disabled={disabled} $selected={selected} {...props}>
         {children}
       </Tab>
     );
