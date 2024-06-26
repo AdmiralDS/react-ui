@@ -7,14 +7,14 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
-import type { HorizontalTabProps, TabProps } from '#src/components/TabMenuComponent/types';
+import type { HorizontalTabProps } from '#src/components/TabMenuComponent/types';
 import { HorizontalTab } from '#src/components/TabMenuComponent/tabs/HorizontalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { TabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
 import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
 
-interface TabContentProps extends TabProps {
+interface TabContentProps extends HorizontalTabProps {
   text: string;
 }
 
@@ -22,7 +22,7 @@ interface TabWithRefProps extends TabContentProps {
   ref: RefObject<HTMLButtonElement>;
 }
 
-interface CustomHorizontalTabProps extends TabContentProps, HorizontalTabProps {}
+interface CustomHorizontalTabProps extends TabContentProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
   ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomHorizontalTabProps, ref) => {
     return (

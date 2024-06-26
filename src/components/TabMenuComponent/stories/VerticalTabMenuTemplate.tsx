@@ -6,7 +6,7 @@ import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
-import type { TabProps, VerticalTabProps } from '#src/components/TabMenuComponent/types';
+import type { VerticalTabProps } from '#src/components/TabMenuComponent/types';
 import { VerticalTab } from '#src/components/TabMenuComponent//tabs/VerticalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
@@ -16,7 +16,7 @@ import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
 
 const TAB_MENU_WIDTH = '260px';
 
-interface TabContentProps extends TabProps {
+interface TabContentProps extends VerticalTabProps {
   text: string;
 }
 
@@ -25,7 +25,7 @@ interface TabWithRefProps extends TabContentProps {
   ref: RefObject<HTMLButtonElement>;
 }
 
-interface CustomVerticalTabProps extends TabContentProps, VerticalTabProps {}
+interface CustomVerticalTabProps extends TabContentProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
   ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
     return (

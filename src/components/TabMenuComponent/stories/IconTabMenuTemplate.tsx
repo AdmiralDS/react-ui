@@ -14,11 +14,11 @@ import {
   IconTabMenuWrapper,
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
-import type { TabProps } from '#src/components/TabMenuComponent/types';
+import type { IconTabProps } from '#src/components/TabMenuComponent/types';
 import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
 import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
 
-interface TabContentProps extends TabProps {
+interface TabContentProps extends IconTabProps {
   text: string;
 }
 
