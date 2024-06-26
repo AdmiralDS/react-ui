@@ -21,3 +21,4 @@ export const TabBadge = ({ disabled = false, selected = false, ...props }: TabBa
 export const VerticalTabBadge = styled(TabBadge)`
   margin-left: auto;
 `;
+TabBadge.displayName = 'TabBadge';

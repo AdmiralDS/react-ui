@@ -33,3 +33,4 @@ export const VerticalTabOverflowMenu = ({ dimension = 'l', isHidden = false, ...
     </OverflowMenuContainer>
   );
 };
+VerticalTabOverflowMenu.displayName = 'VerticalTabOverflowMenu';

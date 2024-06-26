@@ -13,6 +13,7 @@ import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
+import { Tab } from "#src/components/TabMenu/style";
 
 type TabWidthMapProps = {
   tabId: string;
@@ -222,3 +223,4 @@ export const TabMenuHorizontal = ({
     </Wrapper>
   );
 };
+TabMenuHorizontal.displayName = 'TabMenuHorizontal';

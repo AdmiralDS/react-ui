@@ -21,3 +21,4 @@ export const VerticalTabMenuContainer = styled.div<{
         ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`
         : 'transparent'};
 `;
+VerticalTabMenuContainer.displayName = 'VerticalTabMenuContainer';

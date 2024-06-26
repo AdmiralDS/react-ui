@@ -41,3 +41,4 @@ export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimen
     cursor: not-allowed;
   }
 `;
+BaseTab.displayName = 'BaseTab';

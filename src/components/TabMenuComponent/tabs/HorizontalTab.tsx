@@ -30,3 +30,4 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     );
   },
 );
+HorizontalTab.displayName = 'HorizontalTab';

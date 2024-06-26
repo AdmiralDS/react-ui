@@ -65,3 +65,4 @@ export const IconTab = forwardRef<HTMLButtonElement, IconTabProps>(
     );
   },
 );
+IconTab.displayName = 'IconTab';

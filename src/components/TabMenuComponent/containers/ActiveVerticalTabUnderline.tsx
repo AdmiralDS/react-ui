@@ -18,3 +18,4 @@ export const ActiveVerticalTabUnderline = styled.div<{
   width: ${UNDERLINE_HEIGHT}px;
   transition: ${(p) => (p.$transition ? 'all 0.2s ease-out' : 'unset')};
 `;
+ActiveVerticalTabUnderline.displayName = 'ActiveVerticalTabUnderline';

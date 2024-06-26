@@ -43,3 +43,4 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
     );
   },
 );
+VerticalTab.displayName = 'VerticalTab';

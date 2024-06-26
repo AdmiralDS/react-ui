@@ -32,3 +32,4 @@ export const TabOverflowMenu = ({ dimension = 'l', isHidden = false, ...props }:
     </OverflowMenuContainer>
   );
 };
+TabOverflowMenu.displayName = 'TabOverflowMenu';

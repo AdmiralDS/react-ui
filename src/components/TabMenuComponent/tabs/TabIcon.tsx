@@ -21,3 +21,4 @@ export const TabIcon = styled.div<{ $dimension: TabDimension; $disabled?: boolea
     height: ${({ $dimension }) => ($dimension === 'm' ? HORIZONTAL_TAB_ICON_SIZE_M : HORIZONTAL_TAB_ICON_SIZE_L)}px;
   }
 `;
+TabIcon.displayName = 'TabIcon';

@@ -5,3 +5,4 @@ export const TabText = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+TabText.displayName = 'TabText';

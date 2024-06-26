@@ -16,3 +16,4 @@ export const ActiveHorizontalTabUnderline = styled.div<{
   height: ${UNDERLINE_HEIGHT}px;
   transition: ${(p) => (p.$transition ? 'all 0.2s ease-out' : 'unset')};
 `;
+ActiveHorizontalTabUnderline.displayName = 'ActiveHorizontalTabUnderline';

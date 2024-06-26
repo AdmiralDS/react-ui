@@ -23,3 +23,4 @@ export const MobileHorizontalTabMenuContainer = styled.div<{ $underline?: boolea
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
+MobileHorizontalTabMenuContainer.displayName = 'MobileHorizontalTabMenuContainer';

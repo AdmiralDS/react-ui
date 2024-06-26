@@ -18,6 +18,7 @@ export const IconTabMenuScrollingContainer = styled.div<{
   float: ${(p) => p.$floatValue};
   ${(p) => (p.$translateXValue ? `transform: translateX(${p.$translateXValue});` : '')};
 `;
+IconTabMenuScrollingContainer.displayName = 'IconTabMenuScrollingContainer';
 
 export const IconTabMenuScrollingContainerWrapper = styled.div`
   position: relative;
@@ -27,9 +28,11 @@ export const IconTabMenuScrollingContainerWrapper = styled.div`
   height: fit-content;
   overflow: hidden;
 `;
+IconTabMenuScrollingContainerWrapper.displayName = 'IconTabMenuScrollingContainerWrapper';
 
 export const IconTabMenuWrapper = styled.div<{ $underline?: boolean }>`
   position: relative;
   box-sizing: border-box;
   padding: 0 16px;
 `;
+IconTabMenuWrapper.displayName = 'IconTabMenuWrapper';

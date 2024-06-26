@@ -34,3 +34,4 @@ export const SlideArrowButton = styled.button`
     background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
   }
 `;
+SlideArrowButton.displayName = 'SlideArrowButton';
