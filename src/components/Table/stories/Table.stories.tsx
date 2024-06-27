@@ -16,7 +16,8 @@ import { TableZebraTemplate } from './TableZebra.template';
 import { TableExpandTemplate } from './TableExpand.template';
 import { TableExtraTextTemplate } from './TableExtraText.template';
 import { TableOverflowMenuTemplate } from './TableOverflowMenu.template';
-import { TableVirtualScrollTemplate } from './TableVirtualScroll.template';
+import { TableFixedVirtualScrollTemplate } from './TableFixedVirtualScroll.template';
+import { TableDynamicVirtualScrollTemplate } from './TableDynamicVirtualScroll.template';
 import { TableLoadOnScrollTemplate } from './TableLoadOnScroll.template';
 import { TableGroupTemplate } from './TableGroup.template';
 import { TableCustomTitleTemplate } from './TableCustomTitle.template';
@@ -40,7 +41,8 @@ import TableZebraRaw from './TableZebra.template?raw';
 import TableExpandRaw from './TableExpand.template?raw';
 import TableExtraTextRaw from './TableExtraText.template?raw';
 import TableOverflowMenuRaw from './TableOverflowMenu.template?raw';
-import TableVirtualScrollRaw from './TableVirtualScroll.template?raw';
+import TableFixedVirtualScrollRaw from './TableFixedVirtualScroll.template?raw';
+import TableDynamicVirtualScrollRaw from './TableDynamicVirtualScroll.template?raw';
 import TableLoadScrollRaw from './TableLoadOnScroll.template?raw';
 import TableGroupRaw from './TableGroup.template?raw';
 import TableCustomTitleRaw from './TableCustomTitle.template?raw';
@@ -600,14 +602,14 @@ export const OverflowMenuExample = {
 };
 //</editor-fold>
 
-//<editor-fold desc="Пример с виртуальным скроллом">
-const VirtualScrollStory: StoryFn<typeof Table> = (props) => <TableVirtualScrollTemplate {...props} />;
-export const VirtualScrollExample = {
-  render: VirtualScrollStory,
+//<editor-fold desc="Пример с виртуальным скроллом с фиксированной высотой строки">
+const FixedVirtualScrollStory: StoryFn<typeof Table> = (props) => <TableFixedVirtualScrollTemplate {...props} />;
+export const FixedVirtualScrollExample = {
+  render: FixedVirtualScrollStory,
   parameters: {
     docs: {
       source: {
-        code: TableVirtualScrollRaw,
+        code: TableFixedVirtualScrollRaw,
       },
       description: {
         story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
@@ -621,7 +623,32 @@ export const VirtualScrollExample = {
       },
     },
   },
-  name: 'Table. Виртуальный скролл.',
+  name: 'Table. Виртуальный скролл с фиксированной высотой строки.',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с виртуальным скроллом с динамической высотой строки">
+const DynamicVirtualScrollStory: StoryFn<typeof Table> = (props) => <TableDynamicVirtualScrollTemplate {...props} />;
+export const DynamicVirtualScrollExample = {
+  render: DynamicVirtualScrollStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TableDynamicVirtualScrollRaw,
+      },
+      description: {
+        story: `В случае если в таблице необходимо отобразить большое количество строк, возможно использовать функцию виртуального скролла.
+      На данный момент функция виртуального скролла реализована только для случая, когда все строки в таблице единой фиксированной высоты. 
+      Например, для размера таблицы m высота строки по умолчанию составляет 40px (если содержимое ячеек занимает одну 
+      строку в высоту и для ячеек не было задано каких-то кастомных стилей), для размеров s - 32px, l - 48px, xl - 56px.\n\nДля того 
+      чтобы активировать виртуальный скролл, необходимо задать параметр virtualScroll. Значением virtualScroll должен являться объект, в котором 
+      в свойстве fixedRowHeight необходимо задать фиксированную высоту строки.\n\nПримечание: таблица обязательно должна иметь четко 
+      заданную высоту (height, minHeight). Это нужно для того, чтобы тело таблицы, которое
+      является flex-элементом, могло растянуться на всю высоту таблицы, в противном случае высота тела таблицы будет равна 0.`,
+      },
+    },
+  },
+  name: 'Table. Виртуальный скролл с динамической высотой строки.',
 };
 //</editor-fold>
 

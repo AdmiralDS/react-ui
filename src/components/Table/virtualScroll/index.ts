@@ -1,4 +1,4 @@
 export * from './FixedSizeBody';
 export * from './VariableSizeBody';
 export * from './VariableSizeList';
-export * from './useDynamicSizeListImproved';
+export * from './DynamicSizeBody';

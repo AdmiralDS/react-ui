@@ -32,7 +32,7 @@ import {
   HiddenHeader,
   DragCell,
 } from './style';
-import { FixedSizeBody, VariableSizeBody, VariableSizeList, DynamicHeight } from './virtualScroll';
+import { FixedSizeBody, DynamicSizeBody } from './virtualScroll';
 import type {
   Column,
   TableRow,
@@ -546,17 +546,28 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     };
 
     const renderBody = () => {
-      return virtualScroll ? (
-        // <VariableSizeList
-        //   height={bodyHeight}
-        //   rowList={tableRows}
-        //   itemSize={(index) => 53 + index}
-        //   renderRow={renderRow}
-        //   renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
-        //   ref={scrollBodyRef}
-        //   className="tbody"
-        // />
-        <DynamicHeight ref={scrollBodyRef} listHeight={bodyHeight} listItems={tableRows} renderRow={renderRow} />
+      return virtualScroll && (virtualScroll.fixedRowHeight || virtualScroll.estimatedRowHeight) ? (
+        virtualScroll.fixedRowHeight ? (
+          <FixedSizeBody
+            height={bodyHeight}
+            rowList={tableRows}
+            childHeight={virtualScroll.fixedRowHeight}
+            renderRow={renderRow}
+            renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
+            ref={scrollBodyRef}
+            className="tbody"
+          />
+        ) : (
+          <DynamicSizeBody
+            height={bodyHeight}
+            rowList={tableRows}
+            renderRow={renderRow}
+            renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
+            estimatedRowHeight={virtualScroll.estimatedRowHeight}
+            ref={scrollBodyRef}
+            className="tbody"
+          />
+        )
       ) : (
         <ScrollTableBody ref={scrollBodyRef} className="tbody">
           {tableRows.length ? tableRows.map((row, index) => renderRow(row, index)) : renderEmptyMessage()}
