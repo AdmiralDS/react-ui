@@ -13,7 +13,6 @@ import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-import { Tab } from "#src/components/TabMenu/style";
 
 type TabWidthMapProps = {
   tabId: string;
@@ -39,6 +38,8 @@ const Wrapper = styled.div`
 export interface TabMenuHorizontalProps {
   /** Размер компонента */
   dimension?: TabDimension;
+  /** Показывать серую полосу снизу */
+  showUnderline?: boolean;
   /** ID выбранной вкладки */
   selectedTabId?: string;
   /** ID выбранной по умолчанию вкладки */
@@ -57,6 +58,7 @@ export interface TabMenuHorizontalProps {
 
 export const TabMenuHorizontal = ({
   dimension = 'l',
+  showUnderline,
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
@@ -96,9 +98,7 @@ export const TabMenuHorizontal = ({
       return renderTab(tabId, tabId === selectedTab, undefined);
     });
   }, [tabsId, renderTab]);
-  /*const horizontalTabs = tabsId.map((tabId) => {
-    return renderTab(tabId, tabId === selectedTab, undefined);
-  });*/
+
   const [visibleTabs, setVisibleTabs] = useState<string[]>([]);
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
@@ -209,7 +209,7 @@ export const TabMenuHorizontal = ({
   return (
     <Wrapper>
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
-      <VisibleContainer ref={visibleContainerRef} $underline>
+      <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
         <TabOverflowMenu
           items={overflowMenuItems}
