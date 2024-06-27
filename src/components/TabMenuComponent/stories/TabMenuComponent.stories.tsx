@@ -5,17 +5,13 @@ import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTemplate';
-import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
 import { VerticalTabMenuWithOverflowTemplate } from './VerticalTabMenuWithOverflowTemplate';
-import { HorizontalTabMenuTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuTemplate';
 import { HorizontalTabMenuWithOverflowTemplate } from '#src/components/TabMenuComponent/stories/HorizontalTabMenuWithOverflowTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
 import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
-import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
 import VerticalTabMenuWithOverflowRaw from './VerticalTabMenuWithOverflowTemplate?raw';
-import HorizontalTabMenuRaw from './HorizontalTabMenuTemplate?raw';
 import HorizontalTabMenuWithOverflowRaw from './HorizontalTabMenuWithOverflowTemplate?raw';
 
 export default {
@@ -111,27 +107,6 @@ export const MobileHorizontalTabMenuExample = {
 };
 //</editor-fold>
 
-//<editor-fold desc="VerticalTabMenu.">
-const VerticalTabMenuStory: StoryFn<typeof TabMenu> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <VerticalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const VerticalTabMenuExample = {
-  render: VerticalTabMenuStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: VerticalTabMenuRaw,
-      },
-    },
-  },
-
-  name: 'VerticalTabMenu.',
-};
-//</editor-fold>
-
 //<editor-fold desc="VerticalTabMenuWithOverflow.">
 const VerticalTabMenuWithOverflowStory: StoryFn<typeof TabMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
@@ -150,27 +125,6 @@ export const VerticalTabMenuWithOverflowExample = {
   },
 
   name: 'VerticalTabMenuWithOverflow.',
-};
-//</editor-fold>
-
-//<editor-fold desc="HorizontalTabMenu.">
-const HorizontalTabMenuStory: StoryFn<typeof TabMenu> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <HorizontalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const HorizontalTabMenuExample = {
-  render: HorizontalTabMenuStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: HorizontalTabMenuRaw,
-      },
-    },
-  },
-
-  name: 'HorizontalTabMenu.',
 };
 //</editor-fold>
 
