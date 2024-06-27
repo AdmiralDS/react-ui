@@ -1,8 +1,8 @@
-import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, type ReactNode, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { MenuItem, RadioButton, FieldSet } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, RenderOptionProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
@@ -10,22 +10,24 @@ import type { TabDimension, VerticalTabProps, VerticalUnderlinePosition } from '
 import { VerticalTab } from '#src/components/TabMenuComponent//tabs/VerticalTab';
 import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
 import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
-import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers/VerticalTabMenuContainer';
-import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
-import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
-import { VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containers/VerticalTabOverflowMenu';
-import * as React from 'react';
+import { TabMenuVertical } from '#src/components/TabMenuComponent/tabMenus/TabMenuVertical';
 
 const TAB_MENU_WIDTH = '260px';
 
 interface TabContentProps extends VerticalTabProps {
   text: string;
+  badge?: number;
+  disabled?: boolean;
+  icon?: ReactNode;
 }
 
 interface CustomVerticalTabProps extends TabContentProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
-  ({ dimension = 'l', disabled, selected, onSelectTab, tabId, text, ...props }: CustomVerticalTabProps, ref) => {
+  (
+    { dimension = 'l', disabled, selected, onSelectTab, icon, badge, tabId, text, ...props }: CustomVerticalTabProps,
+    ref,
+  ) => {
     return (
       <VerticalTab
         {...props}
@@ -36,27 +38,31 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
         selected={selected}
         onSelectTab={onSelectTab}
       >
-        <TabIcon $dimension={dimension} $disabled={disabled}>
-          <MinusCircleOutline />
-        </TabIcon>
+        {icon && (
+          <TabIcon $dimension={dimension} $disabled={disabled}>
+            {icon}
+          </TabIcon>
+        )}
         <TabText>{text}</TabText>
-        <VerticalTabBadge disabled={disabled} selected={selected}>
-          5
-        </VerticalTabBadge>
+        {badge && (
+          <VerticalTabBadge disabled={disabled} selected={selected}>
+            {badge}
+          </VerticalTabBadge>
+        )}
       </VerticalTab>
     );
   },
 );
 
 const tabs = [
-  { text: 'Text1', tabId: '1' },
-  { text: 'Text22', tabId: '2' },
+  { text: 'Text1', tabId: '1', badge: 1 },
+  { text: 'Text22', tabId: '2', icon: <MinusCircleOutline /> },
   { text: 'Text333', tabId: '3' },
-  { text: 'Text4444', tabId: '4' },
-  { text: 'Text55555', tabId: '5' },
+  { text: 'Text4444', tabId: '4', badge: 4 },
+  { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
   { text: 'Text66666', tabId: '6' },
   { text: 'Text7777 is very very very very long', tabId: '7' },
-  { text: 'Text888', tabId: '8', disabled: true },
+  { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
   { text: 'Text99', tabId: '9' },
 ];
 
@@ -100,128 +106,48 @@ export const VerticalTabMenuWithOverflowTemplate = ({
   const [underlinePosition, setUnderlinePosition] = useState<VerticalUnderlinePosition>('right');
   //</editor-fold>
 
-  //<editor-fold desc="Управление высотой контейнера">
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState(0);
-  const [maxTabs, setMaxTabs] = useState(0);
+  const tabsMap = useMemo(() => {
+    return tabs.map((tab) => tab.tabId);
+  }, [tabs]);
 
-  useLayoutEffect(() => {
-    if (containerRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => setContainerHeight(entry.contentRect.height || 0));
-      });
-      resizeObserver.observe(containerRef.current);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, []);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>('3');
+  const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      setMaxTabs(
-        Math.floor(
-          (containerHeight + VERTICAL_TABS_GAP) /
-            ((dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
-        ),
-      );
-    }
-  }, [containerRef, containerHeight, dimension]);
-  //</editor-fold>
-
-  //<editor-fold desc="Создание табов для отрисовки">
-  const [activeTab, setActiveTab] = useState<string | undefined>('3');
-  const handleSelectTab = (tabId: string) => {
-    setActiveTab(tabId);
+  const tabIsDisabled = (tabId: string) => {
+    const currentTab = tabs.find((tab) => tab.tabId === tabId);
+    return !!currentTab?.disabled;
   };
-  const renderVisibleTab = (text: string, tabId: string, disabled?: boolean) => {
+  const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
+    const currentTab = tabs.find((tab) => tab.tabId === tabId);
+    const text = currentTab?.text || '';
+    const disabled = !!currentTab?.disabled;
+    const badge = currentTab?.badge;
+    const icon = currentTab?.icon;
     return (
       <CustomVerticalTab
         tabId={tabId}
         dimension={dimension}
         text={text}
+        badge={badge}
+        icon={icon}
         key={tabId}
-        selected={tabId === activeTab}
+        selected={selected}
         disabled={disabled}
         width={TAB_MENU_WIDTH}
-        onSelectTab={handleSelectTab}
+        onSelectTab={onSelectTab}
       />
     );
   };
-
-  const [visibleTabs, setVisibleTabs] = useState<string[]>([]);
-  const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
-  useEffect(() => {
-    const allTabsVisible = tabs.length <= maxTabs;
-    const newVisibleTabs: string[] = [];
-    const newHiddenTabs: string[] = [];
-    const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
-    const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
-
-    let activeTabIsVisible = false;
-    tabs.forEach((tab, index) => {
-      const tabIsActive = tab.tabId === activeTab;
-      if (
-        allTabsVisible ||
-        index < maxTabs - 2 ||
-        (index === maxTabs - 2 && (activeTabIsVisible || tabIsActive)) ||
-        (index > maxTabs - 2 && tab.tabId === activeTab)
-      ) {
-        addToVisible(tab.tabId);
-        if (tabIsActive) activeTabIsVisible = true;
-      }
-      if (!allTabsVisible && (index > maxTabs - 2 || (index === maxTabs - 2 && !activeTabIsVisible && !tabIsActive))) {
-        addToHidden(tab.tabId);
-      }
-    });
-    setVisibleTabs(newVisibleTabs);
-    setHiddenTabs(newHiddenTabs);
-  }, [maxTabs, activeTab]);
-  const renderedVisibleTabs = useMemo(() => {
-    if (visibleTabs.length === 0) return [];
-    return visibleTabs.map((id) => {
-      const currentTab = tabs.findIndex((tab) => tab.tabId === id);
-      return renderVisibleTab(tabs[currentTab].text, id, tabs[currentTab].disabled);
-    });
-  }, [visibleTabs, dimension]);
-  const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
-    if (hiddenTabs.length === 0) return [];
-    return hiddenTabs.map((tabId) => {
-      const currentTab = tabs.findIndex((tab) => tab.tabId === tabId);
-      return {
-        id: tabId,
-        render: (options: RenderOptionProps) => (
-          <MenuItem dimension={dimension} {...options} key={tabId}>
-            <MenuItemWrapper>{tabs[currentTab].text}</MenuItemWrapper>
-          </MenuItem>
-        ),
-        disabled: tabs[currentTab].disabled,
-      };
-    });
-  }, [hiddenTabs, dimension]);
-  //</editor-fold>
-
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
-  const [underlineTopL, setUnderlineTopL] = useState(0);
-  const [underlineHeightL, setUnderlineHeightL] = useState(0);
-  const [underlineTransitionL, setUnderlineTransitionL] = useState(false);
-  const getUnderlinePosition = () => {
-    const index = visibleTabs.findIndex((tab) => tab === activeTab);
-    if (index < 0) return { top: 0, height: 0 };
-    const height = dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M;
-    const top = index * (height + VERTICAL_TABS_GAP);
-    return { top: top, height: height };
+  const renderDropMenuItem = (tabId: string) => {
+    const currentTab = tabs.find((tab) => tab.tabId === tabId);
+    return (options: RenderOptionProps) => {
+      return (
+        <MenuItem dimension={dimension} {...options} key={tabId}>
+          <MenuItemWrapper>{currentTab?.text}</MenuItemWrapper>
+        </MenuItem>
+      );
+    };
   };
-  const styleUnderlineL = (enableTransition: boolean) => {
-    const { top, height } = getUnderlinePosition();
-    setUnderlineTransitionL(enableTransition);
-    setUnderlineHeightL(height);
-    setUnderlineTopL(top);
-  };
-  useEffect(() => {
-    styleUnderlineL(true);
-  }, [activeTab, renderedVisibleTabs]);
-  //</editor-fold>
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -271,27 +197,18 @@ export const VerticalTabMenuWithOverflowTemplate = ({
           </FieldSet>
         </PropsWrapper>
         <Divider />
-        <VerticalTabMenuContainer
-          ref={containerRef}
-          $underlinePosition={underlinePosition}
-          $showUnderline={showUnderline}
-        >
-          {renderedVisibleTabs}
-          <VerticalTabOverflowMenu
-            items={overflowMenuItems}
-            alignSelf="flex-start"
-            onSelectItem={(id) => setActiveTab(id)}
-            selected={activeTab}
-            dimension={dimension}
-            isHidden={hiddenTabs.length === 0}
-          />
-          <ActiveVerticalTabUnderline
-            $top={`${underlineTopL}px`}
-            $height={`${underlineHeightL}px`}
-            $transition={underlineTransitionL}
-            $underlinePosition={underlinePosition}
-          />
-        </VerticalTabMenuContainer>
+        <TabMenuVertical
+          dimension={dimension}
+          showUnderline={showUnderline}
+          underlinePosition={underlinePosition}
+          selectedTabId={selectedTab}
+          defaultSelectedTabId="3"
+          onSelectTab={handleSelectTab}
+          tabsId={tabsMap}
+          renderTab={renderTab}
+          renderDropMenuItem={renderDropMenuItem}
+          tabIsDisabled={tabIsDisabled}
+        />
       </Wrapper>
     </ThemeProvider>
   );
