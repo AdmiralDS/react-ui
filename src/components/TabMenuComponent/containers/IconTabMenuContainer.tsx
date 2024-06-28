@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
 export const IconTabMenuScrollingContainer = styled.div<{
-  $underline?: boolean;
+  $showUnderline?: boolean;
   $floatValue: string;
   $leftValue: number | string;
   $translateXValue: number | string;
@@ -13,7 +13,7 @@ export const IconTabMenuScrollingContainer = styled.div<{
   box-sizing: border-box;
   height: fit-content;
   display: flex;
-  box-shadow: inset 0 -${UNDERLINE_HEIGHT}px 0 0 ${(p) => (p.$underline ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent')};
+  box-shadow: inset 0 -${UNDERLINE_HEIGHT}px 0 0 ${(p) => (p.$showUnderline ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent')};
   transition: transform 300ms ease-in-out;
   float: ${(p) => p.$floatValue};
   ${(p) => (p.$translateXValue ? `transform: translateX(${p.$translateXValue});` : '')};
@@ -30,7 +30,7 @@ export const IconTabMenuScrollingContainerWrapper = styled.div`
 `;
 IconTabMenuScrollingContainerWrapper.displayName = 'IconTabMenuScrollingContainerWrapper';
 
-export const IconTabMenuWrapper = styled.div<{ $underline?: boolean }>`
+export const IconTabMenuWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
   padding: 0 16px;

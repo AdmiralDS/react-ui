@@ -1,59 +1,43 @@
-import { createRef, forwardRef, useLayoutEffect, useRef, useState } from 'react';
-import type { RefObject } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
-import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
-import {
-  IconTabMenuScrollingContainer,
-  IconTabMenuScrollingContainerWrapper,
-  IconTabMenuWrapper,
-} from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import type { IconTabProps } from '#src/components/TabMenuComponent/types';
 import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
-import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
+import { TabMenuIcon } from '#src/components/TabMenuComponent/tabMenus/TabMenuIcon';
+import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
 
 interface TabContentProps extends IconTabProps {
   text: string;
-}
-
-interface TabWithRefProps extends TabContentProps {
-  tabId: string;
-  ref: RefObject<HTMLButtonElement>;
+  disabled?: boolean;
+  icon: ReactNode;
 }
 
 const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(
-  ({ text, tabId, ...props }: TabContentProps, ref) => {
+  ({ text, icon, tabId, ...props }: TabContentProps, ref) => {
     return (
       <IconTab {...props} tabId={tabId} ref={ref}>
-        <MinusCircleOutline />
-        <div>{text}</div>
+        {icon}
+        <TabText>{text}</TabText>
       </IconTab>
     );
   },
 );
 
-const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
-  position: absolute;
-  top: 18px;
-  ${(p) => (p.$direction === 'left' ? 'left: 0' : 'right: 0')};
-`;
-
 const tabs = [
-  { text: 'Text1', tabId: '1' },
-  { text: 'Text22', tabId: '2' },
-  { text: 'Text333', tabId: '3' },
-  { text: 'Text4444', tabId: '4' },
-  { text: 'Text55555', tabId: '5' },
-  { text: 'Text66666', tabId: '6' },
-  { text: 'Text7777', tabId: '7' },
-  { text: 'Text888', tabId: '8' },
-  { text: 'Text99', tabId: '9' },
+  { text: 'Text1', tabId: '1', icon: <MinusCircleOutline /> },
+  { text: 'Text22', tabId: '2', icon: <MinusCircleOutline /> },
+  { text: 'Text333', tabId: '3', icon: <MinusCircleOutline /> },
+  { text: 'Text4444', tabId: '4', icon: <MinusCircleOutline /> },
+  { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
+  { text: 'Text66666', tabId: '6', icon: <MinusCircleOutline /> },
+  { text: 'Text7777 is very very very very long', tabId: '7', icon: <MinusCircleOutline /> },
+  { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
+  { text: 'Text99', tabId: '9', icon: <MinusCircleOutline /> },
 ];
 
 const Wrapper = styled.div`
@@ -63,13 +47,6 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-const getUnderlinePosition = (element?: HTMLButtonElement | null | undefined) => {
-  if (!element) return { left: 0, width: 0 };
-  const rect = element.getBoundingClientRect();
-  const parentRect = element.parentElement?.getBoundingClientRect();
-  return { left: rect.left - (parentRect ? parentRect.left : 0), width: rect.width };
-};
-
 export const IconTabMenuTemplate = ({
   themeBorderKind,
   CSSCustomProps,
@@ -78,115 +55,47 @@ export const IconTabMenuTemplate = ({
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
-  //<editor-fold desc="Создание табов для отрисовки">
-  const [activeTab, setActiveTab] = useState<string | undefined>('3');
-  const handleSelectTab = (tabId: string) => {
-    setActiveTab(tabId);
+  const tabsMap = useMemo(() => {
+    return tabs.map((tab) => tab.tabId);
+  }, [tabs]);
+
+  const [selectedTab, setSelectedTab] = useState<string | undefined>('3');
+  const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
+
+  const tabIsDisabled = (tabId: string) => {
+    const currentTab = tabs.find((tab) => tab.tabId === tabId);
+    return !!currentTab?.disabled;
   };
 
-  const tabsWithRef: Array<TabWithRefProps> = tabs.map((tab) => ({ ...tab, ref: createRef<HTMLButtonElement>() }));
-  const iconTabs = tabs.map((tab, index) => {
+  const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
+    const currentTab = tabs.find((tab) => tab.tabId === tabId);
+    const text = currentTab?.text || '';
+    const disabled = !!currentTab?.disabled;
+    const icon = currentTab?.icon;
     return (
       <CustomIconTab
-        tabId={tab.tabId}
-        text={tab.text}
-        key={tab.tabId}
-        selected={tab.tabId === activeTab}
-        onSelectTab={handleSelectTab}
-        ref={tabsWithRef[index].ref}
+        tabId={tabId}
+        text={text}
+        icon={icon}
+        key={tabId}
+        selected={selected}
+        disabled={disabled}
+        onSelectTab={onSelectTab}
       />
     );
-  });
-  //</editor-fold>
-
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
-  const styleUnderline = (enableTransition: boolean) => {
-    const { left, width } = getUnderlinePosition(tabsWithRef.find((tab) => tab.tabId === activeTab)?.ref.current);
-    setUnderlineTransition(enableTransition);
-    setUnderlineWidth(width);
-    setUnderlineLeft(left);
   };
-  const [underlineLeft, setUnderlineLeft] = useState(0);
-  const [underlineWidth, setUnderlineWidth] = useState(0);
-  const [underlineTransition, setUnderlineTransition] = useState(false);
-  useLayoutEffect(() => {
-    if (underlineWidth === 0) {
-      setTimeout(() => {
-        styleUnderline(false);
-      }, 300);
-    } else {
-      styleUnderline(true);
-    }
-  }, [activeTab]);
-  //</editor-fold>
-
-  //<editor-fold desc="Отображение и обработка кнопок прокурутки">
-  const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
-  const [scrollingContainerLeft, setScrollingContainerLeft] = useState(0);
-  const [scrolledToRight, setScrolledToRight] = useState(false);
-  const [prevDisabled, setPrevDisabled] = useState(true);
-  const [nextDisabled, setNextDisabled] = useState(false);
-  const step = 160;
-
-  useLayoutEffect(() => {
-    if (!scrollingContainerRef.current) return;
-
-    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
-
-    setPrevDisabled(scrollingContainerLeft === 0);
-    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
-    setNextDisabled(newNextDisabled);
-    setScrolledToRight(newNextDisabled);
-  });
-
-  const handleLeftClick = () => {
-    if (scrolledToRight) setScrolledToRight(false);
-    setScrollingContainerLeft((prev) => (prev - step < 0 ? 0 : prev - step));
-  };
-  const handleRightClick = () => {
-    if (!scrollingContainerRef.current) return;
-    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
-
-    const newValue = scrollingContainerLeft + step;
-    const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
-    const resValue = newValue > maxValue ? maxValue : newValue;
-
-    if (resValue === maxValue) setScrolledToRight(true);
-    setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
-  };
-  //</editor-fold
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <IconTabMenuWrapper>
-          <IconTabMenuScrollingContainerWrapper>
-            <IconTabMenuScrollingContainer
-              $underline
-              ref={scrollingContainerRef}
-              $leftValue={scrolledToRight ? `${scrollingContainerLeft}px` : 0}
-              $floatValue={scrolledToRight ? 'inline-end' : 'inline-start'}
-              $translateXValue={`${-scrollingContainerLeft}px`}
-            >
-              {iconTabs}
-              <ActiveHorizontalTabUnderline
-                $left={`${underlineLeft}px`}
-                $width={`${underlineWidth}px`}
-                $transition={underlineTransition}
-              />
-            </IconTabMenuScrollingContainer>
-          </IconTabMenuScrollingContainerWrapper>
-          {!prevDisabled && (
-            <StyledSlideArrow $direction="left" onClick={handleLeftClick}>
-              <ArrowLeftOutline />
-            </StyledSlideArrow>
-          )}
-          {!nextDisabled && (
-            <StyledSlideArrow $direction="right" onClick={handleRightClick}>
-              <ArrowRightOutline />
-            </StyledSlideArrow>
-          )}
-        </IconTabMenuWrapper>
+        <TabMenuIcon
+          selectedTabId={selectedTab}
+          defaultSelectedTabId="3"
+          onSelectTab={handleSelectTab}
+          tabsId={tabsMap}
+          renderTab={renderTab}
+          tabIsDisabled={tabIsDisabled}
+        />
       </Wrapper>
     </ThemeProvider>
   );
