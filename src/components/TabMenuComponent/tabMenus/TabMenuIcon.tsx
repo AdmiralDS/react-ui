@@ -1,18 +1,17 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
+import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+
 import {
   IconTabMenuScrollingContainer,
   IconTabMenuScrollingContainerWrapper,
   IconTabMenuWrapper,
-} from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements/ActiveHorizontalTabUnderline';
-import { SlideArrowButton } from '#src/components/TabMenuComponent/containerElements/SlideArrowButton';
+} from '#src/components/TabMenuComponent/containers';
+import { ActiveHorizontalTabUnderline, SlideArrowButton } from '#src/components/TabMenuComponent/containerElements';
 import type { TabMenuIconProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
-
-import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
-import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-import { getTabWidthMap, getUnderlinePosition } from "#src/components/TabMenuComponent/utils";
+import { getTabWidthMap, getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;

@@ -2,14 +2,10 @@ import { forwardRef, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import type { BorderRadiusType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, IconTabProps } from '@admiral-ds/react-ui';
+import { TabMenuIcon, IconTab, TabText } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-
-import type { IconTabProps } from '#src/components/TabMenuComponent/types';
-import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
-import { TabMenuIcon } from '#src/components/TabMenuComponent/tabMenus/TabMenuIcon';
-import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
 
 interface TabContentProps extends IconTabProps {
   text: string;

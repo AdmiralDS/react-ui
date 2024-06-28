@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
+import { OverflowMenu } from '#src/components/OverflowMenu';
+
 import type { TabDimension } from '#src/components/TabMenuComponent/types';
 import {
   VERTICAL_OVERFLOW_MENU_CONTAINER_PADDING,
   VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_L,
   VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-import { OverflowMenu } from '#src/components/OverflowMenu';
 import type { TabOverflowMenuProps } from '#src/components/TabMenuComponent/containerElements/types';
 
 const OverflowMenuContainer = styled.div<{ $isHidden?: boolean; $dimension?: TabDimension }>`

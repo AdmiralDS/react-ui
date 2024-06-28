@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements/ActiveHorizontalTabUnderline';
-import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/MobileHorizontalTabMenuContainer';
+import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements';
+import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
 import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
-import { getTabWidthMap, getUnderlinePosition } from "#src/components/TabMenuComponent/utils";
+import { getTabWidthMap, getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
 export const TabMenuHorizontalMobile = ({
   showUnderline,

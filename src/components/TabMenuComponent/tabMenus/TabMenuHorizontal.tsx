@@ -1,12 +1,15 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { HorizontalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements/HorizontalTabOverflowMenu';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements/ActiveHorizontalTabUnderline';
-import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
+import {
+  ActiveHorizontalTabUnderline,
+  HorizontalTabOverflowMenu,
+} from '#src/components/TabMenuComponent/containerElements';
+
+import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
 import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,

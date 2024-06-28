@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
 import type { MouseEventHandler } from 'react';
 
+import { uid } from '#src/components/common/uid';
+
 import type { VerticalTabProps } from '#src/components/TabMenuComponent/types';
 import { BaseTab } from '#src/components/TabMenuComponent/tabs/BaseTab';
-import { uid } from '#src/components/common/uid';
 
 export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
   (

@@ -1,17 +1,25 @@
 import { forwardRef, type ReactNode, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { MenuItem, RadioButton, FieldSet } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, RenderOptionProps } from '@admiral-ds/react-ui';
+import type {
+  BorderRadiusType,
+  RenderOptionProps,
+  TabDimension,
+  VerticalTabProps,
+  VerticalUnderlinePosition,
+} from '@admiral-ds/react-ui';
+import {
+  MenuItem,
+  RadioButton,
+  FieldSet,
+  TabMenuVertical,
+  VerticalTab,
+  TabIcon,
+  VerticalTabBadge,
+  TabText,
+} from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-
-import type { TabDimension, VerticalTabProps, VerticalUnderlinePosition } from '#src/components/TabMenuComponent/types';
-import { VerticalTab } from '#src/components/TabMenuComponent//tabs/VerticalTab';
-import { TabIcon } from '#src/components/TabMenuComponent/tabElements/TabIcon';
-import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabElements/TabBadge';
-import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
-import { TabMenuVertical } from '#src/components/TabMenuComponent/tabMenus/TabMenuVertical';
 
 const TAB_MENU_WIDTH = '260px';
 

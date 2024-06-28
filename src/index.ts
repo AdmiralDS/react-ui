@@ -40,6 +40,7 @@ export * from './components/ProgressHeader';
 export * from './components/ProgressStepper';
 export * from './components/Modal';
 export * from './components/TabMenu';
+export * from './components/TabMenuComponent';
 export * from './components/PositionInPortal';
 export * from './components/MultiButton';
 export * from './components/Notification';

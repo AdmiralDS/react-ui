@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { typography } from '#src/components/Typography';
+
 import type { TabDimension } from '#src/components/TabMenuComponent/types';
 import {
   BASE_TAB_HEIGHT_L,
@@ -7,7 +9,6 @@ import {
   HORIZONTAL_TAB_PADDING_L,
   HORIZONTAL_TAB_PADDING_M,
 } from '#src/components/TabMenuComponent/constants';
-import { typography } from '#src/components/Typography';
 
 export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimension; $width: string | number }>`
   box-sizing: border-box;

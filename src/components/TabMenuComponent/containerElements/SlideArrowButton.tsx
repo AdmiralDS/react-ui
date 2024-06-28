@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
+import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
+
 import {
   SLIDE_ARROW_ICON_SIZE,
   SLIDE_ARROW_BUTTON_SIZE,
   SLIDE_ARROW_BUTTON_PADDING,
 } from '#src/components/TabMenuComponent/constants';
-import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
 export const SlideArrowButton = styled.button`
   appearance: none;

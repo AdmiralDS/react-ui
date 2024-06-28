@@ -2,17 +2,10 @@ import { forwardRef, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import type { BorderRadiusType, RenderOptionProps } from '@admiral-ds/react-ui';
-import { MenuItem } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, RenderOptionProps, HorizontalTabProps } from '@admiral-ds/react-ui';
+import { TabMenuHorizontal, HorizontalTab, TabIcon, TabBadge, TabText, MenuItem } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
-
-import type { HorizontalTabProps } from '#src/components/TabMenuComponent/types';
-import { HorizontalTab } from '#src/components/TabMenuComponent/tabs/HorizontalTab';
-import { TabIcon } from '#src/components/TabMenuComponent/tabElements/TabIcon';
-import { TabBadge } from '#src/components/TabMenuComponent/tabElements/TabBadge';
-import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
-import { TabMenuHorizontal } from '#src/components/TabMenuComponent/tabMenus/TabMenuHorizontal';
 
 interface TabContentProps extends HorizontalTabProps {
   text: string;

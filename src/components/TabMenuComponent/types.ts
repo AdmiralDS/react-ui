@@ -9,7 +9,7 @@ export type TabWidthMapProps = {
   width: number;
 };
 
-export interface TabProps extends HTMLAttributes<HTMLButtonElement> {
+export interface BaseTabProps extends HTMLAttributes<HTMLButtonElement> {
   /** ID вкладки */
   tabId?: string;
   /** Отключение вкладки */
@@ -22,9 +22,9 @@ export interface TabProps extends HTMLAttributes<HTMLButtonElement> {
   dimension?: TabDimension;
 }
 
-export interface IconTabProps extends Omit<TabProps, 'dimension'> {}
-export interface HorizontalTabProps extends TabProps {}
-export interface VerticalTabProps extends TabProps {
+export interface IconTabProps extends Omit<BaseTabProps, 'dimension'> {}
+export interface HorizontalTabProps extends BaseTabProps {}
+export interface VerticalTabProps extends BaseTabProps {
   /** Ширина вкладки */
   width?: string | number;
 }
