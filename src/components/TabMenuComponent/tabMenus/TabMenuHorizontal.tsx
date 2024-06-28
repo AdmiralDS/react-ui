@@ -199,13 +199,13 @@ export const TabMenuHorizontal = ({
     const left = getActiveTabLeft();
     return { left: left, width: width };
   };
-  const styleUnderlineL = () => {
+  const styleUnderline = () => {
     const { left, width } = getUnderlinePosition();
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };
   useEffect(() => {
-    styleUnderlineL();
+    styleUnderline();
   }, [selectedTab, renderedVisibleTabs]);
   //</editor-fold>
 

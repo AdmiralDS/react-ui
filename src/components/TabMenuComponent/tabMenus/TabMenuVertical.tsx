@@ -7,7 +7,6 @@ import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/conta
 import { VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containers/VerticalTabOverflowMenu';
 import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
-import * as React from 'react';
 
 export interface TabMenuVerticalProps {
   /** Размер компонента */
@@ -178,3 +177,4 @@ export const TabMenuVertical = ({
     </VerticalTabMenuContainer>
   );
 };
+TabMenuVertical.displayName = 'TabMenuVertical';
