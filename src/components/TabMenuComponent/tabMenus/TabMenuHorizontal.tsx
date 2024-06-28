@@ -8,7 +8,7 @@ import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
-import type { TabDimension } from '#src/components/TabMenuComponent/types';
+import type { TabDimension, TabMenuBaseProps } from '#src/components/TabMenuComponent/types';
 import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
@@ -35,25 +35,11 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-export interface TabMenuHorizontalProps {
+export interface TabMenuHorizontalProps extends TabMenuBaseProps {
   /** Размер компонента */
   dimension?: TabDimension;
-  /** Показывать серую полосу снизу */
-  showUnderline?: boolean;
-  /** ID выбранной вкладки */
-  selectedTabId?: string;
-  /** ID выбранной по умолчанию вкладки */
-  defaultSelectedTabId?: string;
-  /** Коллбэк на изменение выбранной вкладки */
-  onSelectTab?: (tabId: string) => void;
-  /** Массив из уникальных ID вкладок */
-  tabsId: string[];
-  /** Рендер-функция для отрисовки вкладки */
-  renderTab: (tabId: string, selected: boolean, onSelectTab?: (tabId: string) => void) => ReactNode;
   /** Рендер-функция для отрисовки элемента выпадающего списка */
   renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
-  /** Коллбэк для определения, является ли вкладка disabled */
-  tabIsDisabled: (tabId: string) => boolean;
 }
 
 export const TabMenuHorizontal = ({

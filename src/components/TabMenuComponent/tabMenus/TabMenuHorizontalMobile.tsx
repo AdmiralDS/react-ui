@@ -1,30 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/MobileHorizontalTabMenuContainer';
+import type { TabMenuBaseProps } from '#src/components/TabMenuComponent/types';
 
 type TabWidthMapProps = {
   tabId: string;
   width: number;
 };
 
-export interface TabMenuHorizontalMobileProps {
-  /** Показывать серую полосу снизу */
-  showUnderline?: boolean;
-  /** ID выбранной вкладки */
-  selectedTabId?: string;
-  /** ID выбранной по умолчанию вкладки */
-  defaultSelectedTabId?: string;
-  /** Коллбэк на изменение выбранной вкладки */
-  onSelectTab?: (tabId: string) => void;
-  /** Массив из уникальных ID вкладок */
-  tabsId: string[];
-  /** Рендер-функция для отрисовки вкладки */
-  renderTab: (tabId: string, selected: boolean, onSelectTab?: (tabId: string) => void) => ReactNode;
-  /** Коллбэк для определения, является ли вкладка disabled */
-  tabIsDisabled: (tabId: string) => boolean;
-}
+export interface TabMenuHorizontalMobileProps extends TabMenuBaseProps {}
 
 export const TabMenuHorizontalMobile = ({
   showUnderline,

@@ -1,34 +1,20 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 
-import type { TabDimension, VerticalUnderlinePosition } from '#src/components/TabMenuComponent/types';
+import type { TabDimension, TabMenuBaseProps, VerticalUnderlinePosition } from '#src/components/TabMenuComponent/types';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers/VerticalTabMenuContainer';
 import { VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containers/VerticalTabOverflowMenu';
 import { ActiveVerticalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveVerticalTabUnderline';
 import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
 
-export interface TabMenuVerticalProps {
+export interface TabMenuVerticalProps extends TabMenuBaseProps {
   /** Размер компонента */
   dimension?: TabDimension;
-  /** Показывать серую полосу сбоку */
-  showUnderline?: boolean;
   /** Позиция серой полосы */
   underlinePosition?: VerticalUnderlinePosition;
-  /** ID выбранной вкладки */
-  selectedTabId?: string;
-  /** ID выбранной по умолчанию вкладки */
-  defaultSelectedTabId?: string;
-  /** Коллбэк на изменение выбранной вкладки */
-  onSelectTab?: (tabId: string) => void;
-  /** Массив из уникальных ID вкладок */
-  tabsId: string[];
-  /** Рендер-функция для отрисовки вкладки */
-  renderTab: (tabId: string, selected: boolean, onSelectTab?: (tabId: string) => void) => ReactNode;
   /** Рендер-функция для отрисовки элемента выпадающего списка */
   renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
-  /** Коллбэк для определения, является ли вкладка disabled */
-  tabIsDisabled: (tabId: string) => boolean;
 }
 
 export const TabMenuVertical = ({

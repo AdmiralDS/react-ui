@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -9,6 +8,8 @@ import {
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
+import type { TabMenuBaseProps } from '#src/components/TabMenuComponent/types';
+
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
@@ -17,21 +18,7 @@ type TabWidthMapProps = {
   width: number;
 };
 
-export interface TabMenuIconProps {
-  /** Показывать серую полосу снизу */
-  showUnderline?: boolean;
-  /** ID выбранной вкладки */
-  selectedTabId?: string;
-  /** ID выбранной по умолчанию вкладки */
-  defaultSelectedTabId?: string;
-  /** Коллбэк на изменение выбранной вкладки */
-  onSelectTab?: (tabId: string) => void;
-  /** Массив из уникальных ID вкладок */
-  tabsId: string[];
-  /** Рендер-функция для отрисовки вкладки */
-  renderTab: (tabId: string, selected: boolean, onSelectTab?: (tabId: string) => void) => ReactNode;
-  /** Коллбэк для определения, является ли вкладка disabled */
-  tabIsDisabled: (tabId: string) => boolean;
+export interface TabMenuIconProps extends TabMenuBaseProps {
   /** Шаг прокрутки при нажатии кнопок вправо/влево */
   scrollStep?: number;
 }
