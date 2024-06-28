@@ -8,16 +8,11 @@ import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
-import type { TabDimension, TabMenuBaseProps } from '#src/components/TabMenuComponent/types';
+import type { TabDimension, TabMenuBaseProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-
-type TabWidthMapProps = {
-  tabId: string;
-  width: number;
-};
 
 const HiddenContainer = styled.div`
   visibility: hidden;

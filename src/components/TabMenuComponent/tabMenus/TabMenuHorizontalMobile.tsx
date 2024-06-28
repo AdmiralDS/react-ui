@@ -2,12 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/MobileHorizontalTabMenuContainer';
-import type { TabMenuBaseProps } from '#src/components/TabMenuComponent/types';
-
-type TabWidthMapProps = {
-  tabId: string;
-  width: number;
-};
+import type { TabMenuBaseProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 
 export interface TabMenuHorizontalMobileProps extends TabMenuBaseProps {}
 

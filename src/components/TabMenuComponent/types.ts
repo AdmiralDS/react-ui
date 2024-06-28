@@ -1,7 +1,12 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from 'react';
 
 export type TabDimension = 'l' | 'm';
 export type VerticalUnderlinePosition = 'left' | 'right';
+
+export type TabWidthMapProps = {
+  tabId: string;
+  width: number;
+};
 
 export interface TabProps extends HTMLAttributes<HTMLButtonElement> {
   /** ID вкладки */
