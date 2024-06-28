@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/MobileHorizontalTabMenuContainer';
 import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import { getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
 export const TabMenuHorizontalMobile = ({
   showUnderline,
@@ -52,32 +53,8 @@ export const TabMenuHorizontalMobile = ({
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
-  const getActiveTabWidth = () => {
-    return tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width || 0;
-  };
-
-  const getActiveTabLeft = () => {
-    if (!selectedTab || tabWidthMap.length === 0) return 0;
-
-    let left = 0;
-    let i = 0;
-
-    while (tabWidthMap[i].tabId !== selectedTabId && i < tabWidthMap.length) {
-      left += tabWidthMap[i].width;
-      i++;
-    }
-
-    return left;
-  };
-
-  const getUnderlinePosition = () => {
-    const width = getActiveTabWidth();
-    const left = getActiveTabLeft();
-    return { left: left, width: width };
-  };
-
   const styleUnderline = () => {
-    const { left, width } = getUnderlinePosition();
+    const { left, width } = getUnderlinePosition(tabWidthMap, selectedTabId);
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };

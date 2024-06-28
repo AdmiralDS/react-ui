@@ -12,6 +12,7 @@ import type { TabMenuIconProps, TabWidthMapProps } from '#src/components/TabMenu
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+import { getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;
@@ -101,32 +102,8 @@ export const TabMenuIcon = ({
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
-  const getActiveTabWidth = () => {
-    return tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width || 0;
-  };
-
-  const getActiveTabLeft = () => {
-    if (!selectedTab || tabWidthMap.length === 0) return 0;
-
-    let left = 0;
-    let i = 0;
-
-    while (tabWidthMap[i].tabId !== selectedTabId && i < tabWidthMap.length) {
-      left += tabWidthMap[i].width;
-      i++;
-    }
-
-    return left;
-  };
-
-  const getUnderlinePosition = () => {
-    const width = getActiveTabWidth();
-    const left = getActiveTabLeft();
-    return { left: left, width: width };
-  };
-
   const styleUnderline = () => {
-    const { left, width } = getUnderlinePosition();
+    const { left, width } = getUnderlinePosition(tabWidthMap, selectedTabId);
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };
