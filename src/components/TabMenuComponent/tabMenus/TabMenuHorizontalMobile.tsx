@@ -6,6 +6,7 @@ import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/compon
 import { getTabWidthMap, getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
 export const TabMenuHorizontalMobile = ({
+  dimension = 'l',
   showUnderline,
   selectedTabId,
   defaultSelectedTabId,
@@ -31,7 +32,7 @@ export const TabMenuHorizontalMobile = ({
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, handleSelectTab);
     });
-  }, [tabsId, renderTab]);
+  }, [tabsId, renderTab, dimension]);
 
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 

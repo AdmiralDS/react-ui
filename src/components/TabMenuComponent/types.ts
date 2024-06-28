@@ -57,7 +57,10 @@ export interface TabMenuIconProps extends TabMenuBaseProps {
   scrollStep?: number;
 }
 
-export interface TabMenuHorizontalMobileProps extends TabMenuBaseProps {}
+export interface TabMenuHorizontalMobileProps extends TabMenuBaseProps {
+  /** Размер компонента */
+  dimension?: TabDimension;
+}
 
 export interface TabMenuHorizontalProps extends TabMenuBaseProps, TabMenuWithOverflowProps {}
 

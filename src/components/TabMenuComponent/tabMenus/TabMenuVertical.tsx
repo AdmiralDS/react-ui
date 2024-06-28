@@ -13,7 +13,7 @@ import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/co
 export const TabMenuVertical = ({
   dimension = 'l',
   showUnderline,
-  underlinePosition,
+  underlinePosition = 'right',
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,

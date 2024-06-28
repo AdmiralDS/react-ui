@@ -2,9 +2,9 @@ import { forwardRef, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import type { BorderRadiusType, RenderOptionProps, HorizontalTabProps } from '@admiral-ds/react-ui';
-import { TabMenuHorizontal, HorizontalTab, TabIcon, TabBadge, TabText, MenuItem } from '@admiral-ds/react-ui';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+import type { BorderRadiusType, RenderOptionProps, HorizontalTabProps, TabMenuHorizontalProps } from '#src/index';
+import { TabMenuHorizontal, HorizontalTab, TabIcon, TabBadge, TabText, MenuItem } from '#src/index';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
 interface TabContentProps extends HorizontalTabProps {
@@ -60,20 +60,22 @@ const MenuItemWrapper = styled.div`
   align-items: center;
 `;
 
-export const HorizontalTabMenuWithOverflowTemplate = ({
+export const TabMenuHorizontalTemplate = ({
+  dimension = 'l',
+  showUnderline,
+  defaultSelectedTabId = '3',
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: {
+}: TabMenuHorizontalProps & {
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
-  const dimension = 'l';
   const tabsMap = useMemo(() => {
     return tabs.map((tab) => tab.tabId);
   }, [tabs]);
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>('3');
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(defaultSelectedTabId);
   const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
 
   const tabIsDisabled = (tabId: string) => {
@@ -88,6 +90,7 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
     const icon = currentTab?.icon;
     return (
       <CustomHorizontalTab
+        dimension={dimension}
         tabId={tabId}
         text={text}
         badge={badge}
@@ -114,7 +117,9 @@ export const HorizontalTabMenuWithOverflowTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <TabMenuHorizontal
+          {...props}
           dimension={dimension}
+          showUnderline={showUnderline}
           selectedTabId={selectedTab}
           defaultSelectedTabId="3"
           onSelectTab={handleSelectTab}

@@ -1,27 +1,28 @@
-import { forwardRef, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import { forwardRef, type ReactNode, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import type { BorderRadiusType, HorizontalTabProps } from '@admiral-ds/react-ui';
-import { TabMenuHorizontalMobile, HorizontalTab, TabIcon, TabBadge, TabText } from '@admiral-ds/react-ui';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+import type { BorderRadiusType, RenderOptionProps, TabMenuVerticalProps, VerticalTabProps } from '#src/index';
+import { MenuItem, TabMenuVertical, VerticalTab, TabIcon, VerticalTabBadge, TabText } from '#src/index';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
-interface TabContentProps extends HorizontalTabProps {
+const TAB_MENU_WIDTH = '260px';
+
+interface TabContentProps extends VerticalTabProps {
   text: string;
   badge?: number;
   disabled?: boolean;
   icon?: ReactNode;
 }
 
-interface CustomHorizontalTabProps extends TabContentProps {}
-const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
+interface CustomVerticalTabProps extends TabContentProps {}
+const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
   (
-    { dimension = 'l', disabled, selected, onSelectTab, tabId, text, icon, badge, ...props }: CustomHorizontalTabProps,
+    { dimension = 'l', disabled, selected, onSelectTab, icon, badge, tabId, text, ...props }: CustomVerticalTabProps,
     ref,
   ) => {
     return (
-      <HorizontalTab
+      <VerticalTab
         {...props}
         ref={ref}
         tabId={tabId}
@@ -37,11 +38,11 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <TabBadge disabled={disabled} selected={selected}>
+          <VerticalTabBadge disabled={disabled} selected={selected}>
             {badge}
-          </TabBadge>
+          </VerticalTabBadge>
         )}
-      </HorizontalTab>
+      </VerticalTab>
     );
   },
 );
@@ -59,16 +60,33 @@ const tabs = [
 ];
 
 const Wrapper = styled.div`
+  box-sizing: border-box;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 350px;
+  overflow: hidden;
+  align-items: center;
+`;
+const MenuItemWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
 `;
 
-export const MobileHorizontalTabMenuTemplate = ({
+export const VerticalTabMenuTemplate = ({
+  dimension = 'l',
+  width = TAB_MENU_WIDTH,
+  showUnderline = true,
+  underlinePosition = 'right',
+  defaultSelectedTabId = '3',
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: {
+}: TabMenuVerticalProps & {
+  width?: string | number;
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
@@ -76,64 +94,59 @@ export const MobileHorizontalTabMenuTemplate = ({
     return tabs.map((tab) => tab.tabId);
   }, [tabs]);
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>('3');
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(defaultSelectedTabId);
   const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
 
   const tabIsDisabled = (tabId: string) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return !!currentTab?.disabled;
   };
-
-  const renderTabL = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
+  const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     const text = currentTab?.text || '';
     const disabled = !!currentTab?.disabled;
     const badge = currentTab?.badge;
     const icon = currentTab?.icon;
     return (
-      <CustomHorizontalTab
+      <CustomVerticalTab
         tabId={tabId}
+        dimension={dimension}
         text={text}
         badge={badge}
         icon={icon}
         key={tabId}
         selected={selected}
         disabled={disabled}
+        width={width}
         onSelectTab={onSelectTab}
       />
     );
   };
-  const renderTabM = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
+  const renderDropMenuItem = (tabId: string) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
-    const text = currentTab?.text || '';
-    const disabled = !!currentTab?.disabled;
-    const badge = currentTab?.badge;
-    const icon = currentTab?.icon;
-    return (
-      <CustomHorizontalTab
-        dimension="m"
-        tabId={tabId}
-        text={text}
-        badge={badge}
-        icon={icon}
-        key={tabId}
-        selected={selected}
-        disabled={disabled}
-        onSelectTab={onSelectTab}
-      />
-    );
+    return (options: RenderOptionProps) => {
+      return (
+        <MenuItem dimension={dimension} {...options} key={tabId}>
+          <MenuItemWrapper>{currentTab?.text}</MenuItemWrapper>
+        </MenuItem>
+      );
+    };
   };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <TabMenuHorizontalMobile
-          showUnderline
+        <TabMenuVertical
+          {...props}
+          dimension={dimension}
+          showUnderline={showUnderline}
+          underlinePosition={underlinePosition}
           selectedTabId={selectedTab}
-          defaultSelectedTabId="3"
+          defaultSelectedTabId={defaultSelectedTabId}
           onSelectTab={handleSelectTab}
           tabsId={tabsMap}
-          renderTab={renderTabL}
+          renderTab={renderTab}
+          renderDropMenuItem={renderDropMenuItem}
           tabIsDisabled={tabIsDisabled}
         />
       </Wrapper>
