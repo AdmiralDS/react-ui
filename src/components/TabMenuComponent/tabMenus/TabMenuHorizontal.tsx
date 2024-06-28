@@ -1,14 +1,13 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { TabOverflowMenu } from '#src/components/TabMenuComponent/containers/TabOverflowMenu';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
-import type { TabDimension, TabMenuBaseProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
@@ -29,13 +28,6 @@ const VisibleContainer = styled(HorizontalTabMenuContainer)`
 const Wrapper = styled.div`
   position: relative;
 `;
-
-export interface TabMenuHorizontalProps extends TabMenuBaseProps {
-  /** Размер компонента */
-  dimension?: TabDimension;
-  /** Рендер-функция для отрисовки элемента выпадающего списка */
-  renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
-}
 
 export const TabMenuHorizontal = ({
   dimension = 'l',

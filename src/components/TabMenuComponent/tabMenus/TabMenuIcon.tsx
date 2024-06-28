@@ -8,15 +8,10 @@ import {
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
-import type { TabMenuBaseProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import type { TabMenuIconProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-
-export interface TabMenuIconProps extends TabMenuBaseProps {
-  /** Шаг прокрутки при нажатии кнопок вправо/влево */
-  scrollStep?: number;
-}
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;

@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+import type { RenderOptionProps } from "@admiral-ds/react-ui";
 
 export type TabDimension = 'l' | 'm';
 export type VerticalUnderlinePosition = 'left' | 'right';
@@ -42,4 +43,27 @@ export interface TabMenuBaseProps {
   renderTab: (tabId: string, selected: boolean, onSelectTab?: (tabId: string) => void) => ReactNode;
   /** Коллбэк для определения, является ли вкладка disabled */
   tabIsDisabled: (tabId: string) => boolean;
+}
+
+export interface TabMenuIconProps extends TabMenuBaseProps {
+  /** Шаг прокрутки при нажатии кнопок вправо/влево */
+  scrollStep?: number;
+}
+
+export interface TabMenuHorizontalMobileProps extends TabMenuBaseProps {}
+
+export interface TabMenuHorizontalProps extends TabMenuBaseProps {
+  /** Размер компонента */
+  dimension?: TabDimension;
+  /** Рендер-функция для отрисовки элемента выпадающего списка */
+  renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
+}
+
+export interface TabMenuVerticalProps extends TabMenuBaseProps {
+  /** Размер компонента */
+  dimension?: TabDimension;
+  /** Позиция серой полосы */
+  underlinePosition?: VerticalUnderlinePosition;
+  /** Рендер-функция для отрисовки элемента выпадающего списка */
+  renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
 }
