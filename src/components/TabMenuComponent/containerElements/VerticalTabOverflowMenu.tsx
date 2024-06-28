@@ -7,7 +7,7 @@ import {
   VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
 import { OverflowMenu } from '#src/components/OverflowMenu';
-import type { OverflowMenuProps } from '#src/components/OverflowMenu';
+import type { TabOverflowMenuProps } from '#src/components/TabMenuComponent/containerElements/types';
 
 const OverflowMenuContainer = styled.div<{ $isHidden?: boolean; $dimension?: TabDimension }>`
   box-sizing: border-box;
@@ -20,11 +20,6 @@ const OverflowMenuContainer = styled.div<{ $isHidden?: boolean; $dimension?: Tab
   height: ${(p) =>
     p.$dimension === 'l' ? VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_L : VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M}px;
 `;
-
-export interface TabOverflowMenuProps extends Omit<OverflowMenuProps, 'dimension'> {
-  dimension?: TabDimension;
-  isHidden?: boolean;
-}
 
 export const VerticalTabOverflowMenu = ({ dimension = 'l', isHidden = false, ...props }: TabOverflowMenuProps) => {
   return (

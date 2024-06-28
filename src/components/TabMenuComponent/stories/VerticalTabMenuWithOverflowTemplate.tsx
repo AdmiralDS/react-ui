@@ -8,9 +8,9 @@ import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/se
 
 import type { TabDimension, VerticalTabProps, VerticalUnderlinePosition } from '#src/components/TabMenuComponent/types';
 import { VerticalTab } from '#src/components/TabMenuComponent//tabs/VerticalTab';
-import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
-import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
-import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
+import { TabIcon } from '#src/components/TabMenuComponent/tabElements/TabIcon';
+import { VerticalTabBadge } from '#src/components/TabMenuComponent/tabElements/TabBadge';
+import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
 import { TabMenuVertical } from '#src/components/TabMenuComponent/tabMenus/TabMenuVertical';
 
 const TAB_MENU_WIDTH = '260px';

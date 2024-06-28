@@ -9,7 +9,7 @@ import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/se
 import type { IconTabProps } from '#src/components/TabMenuComponent/types';
 import { IconTab } from '#src/components/TabMenuComponent/tabs/IconTab';
 import { TabMenuIcon } from '#src/components/TabMenuComponent/tabMenus/TabMenuIcon';
-import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
+import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
 
 interface TabContentProps extends IconTabProps {
   text: string;

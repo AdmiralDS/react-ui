@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { TabOverflowMenu } from '#src/components/TabMenuComponent/containers/TabOverflowMenu';
+import { HorizontalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements/HorizontalTabOverflowMenu';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
+import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements/ActiveHorizontalTabUnderline';
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/HorizontalTabMenuContainer';
 import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
@@ -179,7 +179,7 @@ export const TabMenuHorizontal = ({
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
       <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
-        <TabOverflowMenu
+        <HorizontalTabOverflowMenu
           items={overflowMenuItems}
           isHidden={!overflowState}
           onSelectItem={handleSelectTab}

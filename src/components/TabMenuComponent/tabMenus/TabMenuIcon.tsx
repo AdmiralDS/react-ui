@@ -6,8 +6,8 @@ import {
   IconTabMenuScrollingContainerWrapper,
   IconTabMenuWrapper,
 } from '#src/components/TabMenuComponent/containers/IconTabMenuContainer';
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
-import { SlideArrowButton } from '#src/components/TabMenuComponent/containers/SlideArrowButton';
+import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements/ActiveHorizontalTabUnderline';
+import { SlideArrowButton } from '#src/components/TabMenuComponent/containerElements/SlideArrowButton';
 import type { TabMenuIconProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';

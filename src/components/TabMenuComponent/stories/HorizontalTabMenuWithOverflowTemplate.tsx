@@ -9,9 +9,9 @@ import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/se
 
 import type { HorizontalTabProps } from '#src/components/TabMenuComponent/types';
 import { HorizontalTab } from '#src/components/TabMenuComponent/tabs/HorizontalTab';
-import { TabIcon } from '#src/components/TabMenuComponent/tabs/TabIcon';
-import { TabBadge } from '#src/components/TabMenuComponent/tabs/TabBadge';
-import { TabText } from '#src/components/TabMenuComponent/tabs/TabText';
+import { TabIcon } from '#src/components/TabMenuComponent/tabElements/TabIcon';
+import { TabBadge } from '#src/components/TabMenuComponent/tabElements/TabBadge';
+import { TabText } from '#src/components/TabMenuComponent/tabElements/TabText';
 import { TabMenuHorizontal } from '#src/components/TabMenuComponent/tabMenus/TabMenuHorizontal';
 
 interface TabContentProps extends HorizontalTabProps {
