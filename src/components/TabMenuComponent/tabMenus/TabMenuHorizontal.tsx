@@ -90,8 +90,10 @@ export const TabMenuHorizontal = ({
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
-    setSelectedTabInner(tabId);
-    onSelectTab?.(tabId);
+    if (!tabIsDisabled(tabId)) {
+      setSelectedTabInner(tabId);
+      onSelectTab?.(tabId);
+    }
   };
   const horizontalTabs = useMemo(() => {
     return tabsId.map((tabId) => {

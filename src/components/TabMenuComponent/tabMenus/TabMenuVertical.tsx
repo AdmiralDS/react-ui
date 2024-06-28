@@ -77,8 +77,10 @@ export const TabMenuVertical = ({
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
-    setSelectedTabInner(tabId);
-    onSelectTab?.(tabId);
+    if (!tabIsDisabled(tabId)) {
+      setSelectedTabInner(tabId);
+      onSelectTab?.(tabId);
+    }
   };
 
   const [visibleTabs, setVisibleTabs] = useState<string[]>([]);
