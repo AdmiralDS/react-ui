@@ -66,6 +66,7 @@ export const TabMenuHorizontal = ({
   renderTab,
   renderDropMenuItem,
   tabIsDisabled,
+  ...props
 }: TabMenuHorizontalProps) => {
   //<editor-fold desc="Управление шириной контейнера">
   const [containerWidth, setContainerWidth] = useState(0);
@@ -209,7 +210,7 @@ export const TabMenuHorizontal = ({
   //</editor-fold>
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
       <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}

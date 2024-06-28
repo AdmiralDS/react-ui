@@ -43,6 +43,7 @@ export const TabMenuVertical = ({
   renderTab,
   renderDropMenuItem,
   tabIsDisabled,
+  ...props
 }: TabMenuVerticalProps) => {
   //<editor-fold desc="Управление высотой контейнера">
   const containerRef = useRef<HTMLDivElement>(null);
@@ -153,7 +154,12 @@ export const TabMenuVertical = ({
   //</editor-fold>
 
   return (
-    <VerticalTabMenuContainer ref={containerRef} $underlinePosition={underlinePosition} $showUnderline={showUnderline}>
+    <VerticalTabMenuContainer
+      {...props}
+      ref={containerRef}
+      $underlinePosition={underlinePosition}
+      $showUnderline={showUnderline}
+    >
       {renderedVisibleTabs}
       <VerticalTabOverflowMenu
         items={overflowMenuItems}
