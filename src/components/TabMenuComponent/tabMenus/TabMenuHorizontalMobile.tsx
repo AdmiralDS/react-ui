@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containers/ActiveHorizontalTabUnderline';
 import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers/MobileHorizontalTabMenuContainer';
 import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
-import { getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
+import { getTabWidthMap, getUnderlinePosition } from "#src/components/TabMenuComponent/utils";
 
 export const TabMenuHorizontalMobile = ({
   showUnderline,
@@ -36,14 +36,8 @@ export const TabMenuHorizontalMobile = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useEffect(() => {
-    const tabWidth: TabWidthMapProps[] = [];
     if (containerRef.current) {
-      const renderedTabs = containerRef.current.children;
-      for (let i = 0; i < renderedTabs.length; i++) {
-        const tab = renderedTabs[i];
-        const width = tab.getBoundingClientRect().width;
-        tabWidth.push({ tabId: tabsId[i], width: width });
-      }
+      const tabWidth = getTabWidthMap(tabsId, containerRef.current.children);
       setTabWidthMap(tabWidth);
     }
   }, [containerRef, horizontalTabs]);

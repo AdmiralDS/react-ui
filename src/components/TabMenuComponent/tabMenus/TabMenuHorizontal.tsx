@@ -12,7 +12,7 @@ import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-import { getActiveTabWidth } from '#src/components/TabMenuComponent/utils';
+import { getActiveTabWidth, getTabWidthMap } from '#src/components/TabMenuComponent/utils';
 
 const HiddenContainer = styled.div`
   visibility: hidden;
@@ -81,16 +81,10 @@ export const TabMenuHorizontal = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useLayoutEffect(() => {
-    const tabWidth: TabWidthMapProps[] = [];
     if (hiddenContainerRef.current) {
       const overflow = checkOverflow(hiddenContainerRef.current);
       if (overflowState !== overflow) setOverflowState(overflow);
-      const renderedTabs = hiddenContainerRef.current.children;
-      for (let i = 0; i < renderedTabs.length; i++) {
-        const tab = renderedTabs[i];
-        const width = tab.getBoundingClientRect().width;
-        tabWidth.push({ tabId: tabsId[i], width: width });
-      }
+      const tabWidth = getTabWidthMap(tabsId, hiddenContainerRef.current.children);
       setTabWidthMap(tabWidth);
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs]);

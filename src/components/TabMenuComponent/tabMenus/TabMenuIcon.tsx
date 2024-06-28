@@ -12,7 +12,7 @@ import type { TabMenuIconProps, TabWidthMapProps } from '#src/components/TabMenu
 
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-import { getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
+import { getTabWidthMap, getUnderlinePosition } from "#src/components/TabMenuComponent/utils";
 
 const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right' }>`
   position: absolute;
@@ -85,14 +85,8 @@ export const TabMenuIcon = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useEffect(() => {
-    const tabWidth: TabWidthMapProps[] = [];
     if (scrollingContainerRef.current) {
-      const renderedTabs = scrollingContainerRef.current.children;
-      for (let i = 0; i < renderedTabs.length; i++) {
-        const tab = renderedTabs[i];
-        const width = tab.getBoundingClientRect().width;
-        tabWidth.push({ tabId: tabsId[i], width: width });
-      }
+      const tabWidth = getTabWidthMap(tabsId, scrollingContainerRef.current.children);
       setTabWidthMap(tabWidth);
     }
   }, [scrollingContainerRef, iconTabs]);
