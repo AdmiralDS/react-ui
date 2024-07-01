@@ -31,18 +31,13 @@ function useLatest<T>(value: T) {
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
   ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
     const scrollElementRef = useRef<HTMLDivElement>(null);
-    const [measurementCache, setMeasurementCache] = useState<Record<Key, number>>({});
+    const [measurementCache, setMeasurementCache] = useState<Record<Key, number> & { lastMeasuredIndex: number }>({
+      lastMeasuredIndex: -1,
+    });
     const [scrollTop, setScrollTop] = useState(0);
 
     const getItemKey = useCallback((index: number) => rowList[index]!.id, [rowList]);
-
-    // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
-    const rowNodes = useMemo(
-      () => rowList.filter((row, index) => Boolean(renderRow(row, index))),
-      [rowList, renderRow],
-    );
-    // const itemsCount = useMemo(() => rowList.length, [rowList]);
-    const itemsCount = useMemo(() => rowNodes.length, [rowNodes]);
+    const itemsCount = useMemo(() => rowList.length, [rowList]);
 
     useEffect(() => {
       function handleScroll(e: any) {
@@ -58,12 +53,15 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const { virtualItems, totalHeight, allItems } = useMemo(() => {
-      const getItemHeight = (index: number) => {
+    const getItemHeight = useCallback(
+      (index: number) => {
         const key = getItemKey(index);
-        return measurementCache[key] ?? estimatedRowHeight(index);
-      };
+        return measurementCache[key] ? measurementCache[key] : estimatedRowHeight(index);
+      },
+      [getItemKey, estimatedRowHeight, measurementCache],
+    );
 
+    const { virtualItems, totalHeight, allItems } = useMemo(() => {
       const rangeStart = scrollTop;
       const rangeEnd = scrollTop + height;
 
@@ -92,7 +90,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
           endIndex = Math.min(itemsCount - 1, index + renderAhead);
         }
       }
-      console.log({ rangeStart, rangeEnd, startIndex, endIndex, allRows });
+
       const virtualRows = allRows.slice(startIndex, endIndex + 1);
 
       return {
@@ -102,7 +100,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         allItems: allRows,
         totalHeight,
       };
-    }, [scrollTop, renderAhead, height, getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
+    }, [scrollTop, renderAhead, height, getItemKey, getItemHeight, measurementCache, itemsCount]);
 
     const latestData = useLatest({ measurementCache });
 
@@ -115,12 +113,12 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         <>
           <Spacer style={{ minHeight: topPadding }} />
           {virtualItems.map((virtualItem) => {
-            // const item = rowList[virtualItem.index]!;
-            const item = rowNodes[virtualItem.index]!;
+            const item = rowList[virtualItem.index]!;
 
             return (
               <RowWrapper
                 key={item.id}
+                data-index={virtualItem.index}
                 id={item.id}
                 latestData={latestData}
                 scrollElementRef={scrollElementRef}
@@ -151,11 +149,12 @@ const RowWrapper = memo(({ children, latestData, id, scrollElementRef, setMeasur
     if (node) {
       const resizeObserver = new ResizeObserver(() => {
         const height = node.getBoundingClientRect().height || 0;
+        const index = Number(node.dataset.index);
 
         if (measurementCache[id] === height) {
           return;
         }
-        setMeasurementCache((cache: any) => ({ ...cache, [id]: height }));
+        setMeasurementCache((cache: any) => ({ ...cache, [id]: height, lastMeasuredIndex: index }));
       });
       resizeObserver.observe(node);
       return () => {
