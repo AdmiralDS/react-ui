@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.4.8](https://github.com/AdmiralDS/react-ui/compare/v8.4.7...v8.4.8) (2024-07-01)
+
+
+### Bug Fixes
+
+* **SuggestField:** [#1362](https://github.com/AdmiralDS/react-ui/issues/1362) не показывается счётчик введённых символов ([72065f4](https://github.com/AdmiralDS/react-ui/commit/72065f4af98dc3968a32e67c2cdfce7dde6d9130))
+* **SuggestInput:** [#1368](https://github.com/AdmiralDS/react-ui/issues/1368) в контролируемом режиме onChange не срабатывает ([b41301b](https://github.com/AdmiralDS/react-ui/commit/b41301b5a66f1e791762f6fdfc1e07c1f450d2e7))
+
 ### [8.4.7](https://github.com/AdmiralDS/react-ui/compare/v8.4.6...v8.4.7) (2024-06-21)
 
 ### [8.4.6](https://github.com/AdmiralDS/react-ui/compare/v8.4.5...v8.4.6) (2024-06-14)
