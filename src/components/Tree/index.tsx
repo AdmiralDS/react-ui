@@ -60,7 +60,7 @@ const treeToMap = (
     const selfIndent = levelHasChildren && itemHasChildren(item) ? indent : indent + 1;
     acc[key] = { level, indent: selfIndent, node: item, parent };
 
-    if (dependencies && !itemHasChildren(item)) {
+    if (dependencies) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
     if (item.children && itemHasChildren(item)) {

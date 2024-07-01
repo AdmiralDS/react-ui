@@ -6,12 +6,14 @@ import { Tree } from '@admiral-ds/react-ui';
 
 import { TreeWithCheckboxesTemplate } from './TreeWithCheckboxes.template';
 import { TreeSimpleTemplate } from './TreeSimple.template';
-import { TreeUncontrolledTemplate } from '#src/components/Tree/stories/TreeUncontrolled.template';
+import { TreeUncontrolledTemplate } from './TreeUncontrolled.template';
+import { TreeWithControlCheckCountTemplate } from './TreeWithControlCheckCount.template';
 
 // Imports of text sources
 import TreeWithCheckboxesRaw from './TreeWithCheckboxes.template?raw';
 import TreeSimpleRaw from './TreeSimple.template?raw';
 import TreeUncontrolledRaw from './TreeUncontrolled.template?raw';
+import TreeWithControlCheckCountRaw from './TreeWithControlCheckCount.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -128,4 +130,27 @@ export const TreeUncontrolledExample = {
   },
 
   name: 'Неконтролируемое дерево',
+};
+
+const TreeWithControlCheckCountStory: StoryFn<typeof Tree> = (props) => (
+  <TreeWithControlCheckCountTemplate {...props} />
+);
+
+export const TreeWithControlCheckCountExample = {
+  render: TreeWithControlCheckCountStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TreeWithControlCheckCountRaw,
+      },
+      description: {
+        story:
+          'Пример показывает обработку состояния checked в модели. Checked являются узлы, которые непосредственно выбраны, ' +
+          'либо узлы, у которых все дочерние элементы находятся в состоянии checked',
+      },
+    },
+  },
+
+  name: 'С контролем количества выбранных',
 };

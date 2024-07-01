@@ -227,5 +227,9 @@ const demo1_TreeModel: Array<TreeItemProps> = [
 export const TreeWithCheckboxesTemplate = (props: TreeProps) => {
   const [dataList, setDataList] = useState<TreeItemProps[]>(demo1_TreeModel);
 
-  return <Tree {...props} model={dataList} onChange={(dataList) => setDataList(dataList)} />;
+  const handleChange = (dataList: TreeItemProps[]) => {
+    setDataList(dataList);
+  };
+
+  return <Tree {...props} model={dataList} onChange={handleChange} />;
 };

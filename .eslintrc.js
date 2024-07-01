@@ -19,10 +19,12 @@ module.exports = {
     'prettier/prettier': 2, // Means error,
     'import/no-cycle': [2, { ignoreExternal: true }],
     'import/no-duplicates': ['error', { considerQueryString: true }],
+    '@typescript-eslint/no-import-type-side-effects': 'error',
     '@typescript-eslint/consistent-type-imports': [
       'error',
       {
         prefer: 'type-imports',
+        fixStyle: 'separate-type-imports',
       },
     ],
     'import/default': 0,
