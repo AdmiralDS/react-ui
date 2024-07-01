@@ -31,13 +31,17 @@ function useLatest<T>(value: T) {
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
   ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
     const scrollElementRef = useRef<HTMLDivElement>(null);
-    const [measurementCache, setMeasurementCache] = useState<Record<Key, number> & { lastMeasuredIndex: number }>({
-      lastMeasuredIndex: -1,
-    });
+    const [measurementCache, setMeasurementCache] = useState<Record<Key, number>>({});
     const [scrollTop, setScrollTop] = useState(0);
 
     const getItemKey = useCallback((index: number) => rowList[index]!.id, [rowList]);
-    const itemsCount = useMemo(() => rowList.length, [rowList]);
+
+    // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
+    const rowNodes = useMemo(
+      () => rowList.filter((row, index) => Boolean(renderRow(row, index))),
+      [rowList, renderRow],
+    );
+    const itemsCount = useMemo(() => rowNodes.length, [rowNodes]);
 
     useEffect(() => {
       function handleScroll(e: any) {
@@ -53,21 +57,13 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const getItemHeight = useCallback(
-      (index: number) => {
+    const { totalHeight, allItems } = useMemo(() => {
+      const getItemHeight = (index: number) => {
         const key = getItemKey(index);
-        return measurementCache[key] ? measurementCache[key] : estimatedRowHeight(index);
-      },
-      [getItemKey, estimatedRowHeight, measurementCache],
-    );
-
-    const { virtualItems, totalHeight, allItems } = useMemo(() => {
-      const rangeStart = scrollTop;
-      const rangeEnd = scrollTop + height;
+        return measurementCache[key] ?? estimatedRowHeight(index);
+      };
 
       let totalHeight = 0;
-      let startIndex = -1;
-      let endIndex = -1;
       const allRows: DynamicSizeItem[] = Array(itemsCount);
 
       for (let index = 0; index < itemsCount; index++) {
@@ -81,31 +77,36 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
 
         totalHeight += row.height;
         allRows[index] = row;
-
-        if (startIndex === -1 && row.offsetTop + row.height > rangeStart) {
-          startIndex = Math.max(0, index - renderAhead);
-        }
-
-        if (endIndex === -1 && row.offsetTop + row.height >= rangeEnd) {
-          endIndex = Math.min(itemsCount - 1, index + renderAhead);
-        }
       }
 
-      const virtualRows = allRows.slice(startIndex, endIndex + 1);
-
       return {
-        virtualItems: virtualRows,
-        startIndex,
-        endIndex,
         allItems: allRows,
         totalHeight,
       };
-    }, [scrollTop, renderAhead, height, getItemKey, getItemHeight, measurementCache, itemsCount]);
+    }, [scrollTop, renderAhead, height, getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
+
+    const firstVisibleNode = useMemo(
+      () => findStartNode(scrollTop, allItems, itemsCount),
+      [scrollTop, allItems, itemsCount],
+    );
+
+    let startNode = firstVisibleNode;
+    startNode = Math.max(0, startNode - renderAhead);
+
+    const lastVisibleNode = useMemo(
+      () => findEndNode(allItems, firstVisibleNode, itemsCount, height),
+      [allItems, firstVisibleNode, itemsCount, height],
+    );
+    const endNode = Math.min(itemsCount - 1, lastVisibleNode + renderAhead);
+
+    let visibleNodeCount = endNode - startNode + 1;
+
+    const virtualItems = allItems.slice(startNode, startNode + visibleNodeCount);
 
     const latestData = useLatest({ measurementCache });
 
     const lastIndex = virtualItems.length - 1;
-    const topPadding = `${virtualItems[0].offsetTop}px`;
+    const topPadding = `${virtualItems[0]?.offsetTop || 0}px`;
     const bottomPadding = `${totalHeight - (virtualItems[lastIndex].offsetTop + virtualItems[lastIndex].height)}px`;
 
     const renderContent = () => {
@@ -113,17 +114,11 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         <>
           <Spacer style={{ minHeight: topPadding }} />
           {virtualItems.map((virtualItem) => {
-            const item = rowList[virtualItem.index]!;
+            // const item = rowList[virtualItem.index]!;
+            const item = rowNodes[virtualItem.index]!;
 
             return (
-              <RowWrapper
-                key={item.id}
-                data-index={virtualItem.index}
-                id={item.id}
-                latestData={latestData}
-                scrollElementRef={scrollElementRef}
-                setMeasurementCache={setMeasurementCache}
-              >
+              <RowWrapper key={item.id} id={item.id} latestData={latestData} setMeasurementCache={setMeasurementCache}>
                 {renderRow(item, virtualItem.index)}
               </RowWrapper>
             );
@@ -141,7 +136,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
   },
 );
 
-const RowWrapper = memo(({ children, latestData, id, scrollElementRef, setMeasurementCache, ...props }: any) => {
+const RowWrapper = memo(({ children, latestData, id, setMeasurementCache, ...props }: any) => {
   const [node, setNode] = useState<HTMLDivElement | null>(null);
   const { measurementCache } = latestData.current;
 
@@ -149,12 +144,11 @@ const RowWrapper = memo(({ children, latestData, id, scrollElementRef, setMeasur
     if (node) {
       const resizeObserver = new ResizeObserver(() => {
         const height = node.getBoundingClientRect().height || 0;
-        const index = Number(node.dataset.index);
 
         if (measurementCache[id] === height) {
           return;
         }
-        setMeasurementCache((cache: any) => ({ ...cache, [id]: height, lastMeasuredIndex: index }));
+        setMeasurementCache((cache: any) => ({ ...cache, [id]: height }));
       });
       resizeObserver.observe(node);
       return () => {
@@ -164,8 +158,46 @@ const RowWrapper = memo(({ children, latestData, id, scrollElementRef, setMeasur
   }, [node]);
 
   return (
-    <div ref={(node) => setNode(node)} {...props}>
+    <div ref={(node) => setNode(node)} style={{ display: 'flex' }} {...props}>
       {children}
     </div>
   );
 });
+
+/* inspired by https://dev.to/adamklein/build-your-own-virtual-scroll-part-ii-3j86 */
+
+function findStartNode(scrollTop: number, nodePositions: DynamicSizeItem[], itemsCount: number) {
+  /* Так как nodePositions - это отсортированный по возрастанию массив, 
+  для поиска startNode можно применить алгоритм двоичного поиска. https://www.geeksforgeeks.org/binary-search/ */
+  let startRange = 0;
+  let endRange = itemsCount - 1;
+  while (endRange !== startRange) {
+    const middle = Math.floor((endRange - startRange) / 2 + startRange);
+
+    if (nodePositions[middle].offsetTop <= scrollTop && nodePositions[middle + 1].offsetTop > scrollTop) {
+      return middle;
+    }
+
+    if (middle === startRange) {
+      // кейс когда start и end range идут друг за другом
+      return endRange;
+    } else {
+      if (nodePositions[middle].offsetTop <= scrollTop) {
+        startRange = middle;
+      } else {
+        endRange = middle;
+      }
+    }
+  }
+  return itemsCount;
+}
+
+function findEndNode(nodePositions: DynamicSizeItem[], startNode: number, itemsCount: number, height: number) {
+  let endNode;
+  for (endNode = startNode; endNode < itemsCount; endNode++) {
+    if (nodePositions[endNode].offsetTop > nodePositions[startNode].offsetTop + height) {
+      return endNode;
+    }
+  }
+  return endNode;
+}
