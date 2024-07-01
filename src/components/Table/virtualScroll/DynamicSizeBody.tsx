@@ -1,7 +1,12 @@
-import * as React from 'react';
+import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
+import type { ReactNode } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
+
 import { ScrollTableBody, Spacer } from '../style';
 import type { RowId } from '../types';
+
+import { findStartIndex, findEndIndex } from './utils';
+import { VirtualRowWrapper } from './VirtualRowWrapper';
 
 type DynamicSizeItem = {
   key: RowId | string;
@@ -18,34 +23,33 @@ interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
   renderAhead?: number;
   rowList: any[];
-  renderRow: (row: any, index: number) => React.ReactNode;
-  renderEmptyMessage?: () => React.ReactNode;
+  renderRow: (row: any, index: number) => ReactNode;
+  renderEmptyMessage?: () => ReactNode;
   estimatedRowHeight?: (index: number) => number;
 }
 
-export const DynamicSizeBody = React.forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
+export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
   ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
-    const [measurementCache, setMeasurementCache] = React.useState<Cache>({});
-    const [scrollTop, setScrollTop] = React.useState(0);
+    const [measurementCache, setMeasurementCache] = useState<Cache>({});
+    const [scrollTop, setScrollTop] = useState(0);
 
-    const scrollElementRef = React.useRef<HTMLDivElement>(null);
-    const measurementCacheRef = React.useRef<Cache>(measurementCache);
+    const scrollElementRef = useRef<HTMLDivElement>(null);
+    const measurementCacheRef = useRef<Cache>(measurementCache);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       measurementCacheRef.current = measurementCache;
     });
 
-    const getItemKey = React.useCallback((index: number) => rowList[index]!.id, [rowList]);
-
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
-    const rowNodes = React.useMemo(
+    const rowNodes = useMemo(
       () => rowList.filter((row, index) => Boolean(renderRow(row, index))),
       [rowList, renderRow],
     );
-    // const itemsCount = useMemo(() => rowList.length, [rowList]);
-    const itemsCount = React.useMemo(() => rowNodes.length, [rowNodes]);
+    const itemsCount = useMemo(() => rowNodes.length, [rowNodes]);
 
-    React.useEffect(() => {
+    const getItemKey = useCallback((index: number) => rowNodes[index]!.id, [rowNodes]);
+
+    useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
           setScrollTop(e.target.scrollTop);
@@ -59,18 +63,13 @@ export const DynamicSizeBody = React.forwardRef<HTMLDivElement, DynamicSizeBodyP
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const { virtualItems, totalHeight, allItems } = React.useMemo(() => {
+    const { totalHeight, allItems } = useMemo(() => {
       const getItemHeight = (index: number) => {
         const key = getItemKey(index);
         return measurementCache[key] ?? estimatedRowHeight(index);
       };
 
-      const rangeStart = scrollTop;
-      const rangeEnd = scrollTop + height;
-
       let totalHeight = 0;
-      let startIndex = -1;
-      let endIndex = -1;
       const allRows: DynamicSizeItem[] = Array(itemsCount);
 
       for (let index = 0; index < itemsCount; index++) {
@@ -84,30 +83,36 @@ export const DynamicSizeBody = React.forwardRef<HTMLDivElement, DynamicSizeBodyP
 
         totalHeight += row.height;
         allRows[index] = row;
-
-        if (startIndex === -1 && row.offsetTop + row.height > rangeStart) {
-          startIndex = Math.max(0, index - renderAhead);
-        }
-
-        if (endIndex === -1 && row.offsetTop + row.height >= rangeEnd) {
-          endIndex = Math.min(itemsCount - 1, index + renderAhead);
-        }
       }
-      console.log({ rangeStart, rangeEnd, startIndex, endIndex, allRows });
-      const virtualRows = allRows.slice(startIndex, endIndex + 1);
 
       return {
-        virtualItems: virtualRows,
-        startIndex,
-        endIndex,
         allItems: allRows,
         totalHeight,
       };
-    }, [scrollTop, renderAhead, height, getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
+    }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
 
-    const lastIndex = virtualItems.length - 1;
-    const topPadding = `${virtualItems[0]?.offsetTop || 0}px`;
-    const bottomPadding = `${totalHeight - (virtualItems[lastIndex]?.offsetTop || 0 + virtualItems[lastIndex]?.height || 0)}px`;
+    const startIndex = useMemo(() => {
+      let start = findStartIndex(scrollTop, allItems, itemsCount);
+      return Math.max(0, start - renderAhead);
+    }, [scrollTop, allItems, itemsCount, renderAhead]);
+
+    const endIndex = useMemo(() => {
+      let end = findEndIndex(allItems, startIndex, itemsCount, height);
+      return Math.min(itemsCount - 1, end + renderAhead);
+    }, [allItems, startIndex, itemsCount, height, renderAhead]);
+
+    const visibleNodeCount = endIndex - startIndex + 1;
+
+    const virtualItems = useMemo(() => allItems.slice(startIndex, visibleNodeCount), [allItems, startIndex, endIndex]);
+
+    // const lastIndex = virtualItems.length - 1;
+    // const topPadding = `${virtualItems[0]?.offsetTop || 0}px`;
+    // const bottomPadding = `${totalHeight - (virtualItems[lastIndex]?.offsetTop || 0 + virtualItems[lastIndex]?.height || 0)}px`;
+
+    // console.log({ allItems, virtualItems, totalHeight, topPadding, bottomPadding });
+
+    const topPadding = allItems[startIndex].offsetTop;
+    const bottomPadding = allItems[itemsCount - startIndex - visibleNodeCount].offsetTop;
 
     const renderContent = () => {
       return (
@@ -117,9 +122,14 @@ export const DynamicSizeBody = React.forwardRef<HTMLDivElement, DynamicSizeBodyP
             const item = rowNodes[virtualItem.index];
 
             return (
-              <RowWrapper key={item.id} id={item.id} cacheRef={measurementCacheRef} setCache={setMeasurementCache}>
+              <VirtualRowWrapper
+                key={item.id}
+                id={item.id}
+                cacheRef={measurementCacheRef}
+                setCache={setMeasurementCache}
+              >
                 {renderRow(item, virtualItem.index)}
-              </RowWrapper>
+              </VirtualRowWrapper>
             );
           })}
           <Spacer style={{ minHeight: bottomPadding }} />
@@ -134,34 +144,3 @@ export const DynamicSizeBody = React.forwardRef<HTMLDivElement, DynamicSizeBodyP
     );
   },
 );
-
-type RowWrapperProps = {
-  id: RowId | number;
-  children: React.ReactNode;
-  cacheRef: React.MutableRefObject<Cache>;
-  setCache: any;
-};
-
-const RowWrapper: React.FC<RowWrapperProps> = React.memo(({ children, cacheRef, id, setCache }) => {
-  const [node, setNode] = React.useState<HTMLDivElement | null>(null);
-  const measurementCache = cacheRef.current;
-
-  React.useLayoutEffect(() => {
-    if (node) {
-      const resizeObserver = new ResizeObserver(() => {
-        const height = node.getBoundingClientRect().height || 0;
-
-        if (measurementCache[id] === height) {
-          return;
-        }
-        setCache((cache: Cache) => ({ ...cache, [id]: height }));
-      });
-      resizeObserver.observe(node);
-      return () => {
-        resizeObserver.disconnect();
-      };
-    }
-  }, [node]);
-
-  return <div ref={(node) => setNode(node)}>{children}</div>;
-});
