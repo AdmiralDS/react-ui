@@ -29,7 +29,7 @@ export interface VerticalTabProps extends BaseTabProps {
   width?: string | number;
 }
 
-interface TabMenuBaseProps {
+interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Показывать серую полосу снизу */
   showUnderline?: boolean;
   /** ID выбранной вкладки */
