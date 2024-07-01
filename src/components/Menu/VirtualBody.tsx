@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { type MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 const Spacer = styled.div`
   display: flex;

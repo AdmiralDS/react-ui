@@ -1,4 +1,5 @@
-import { useState, type HTMLAttributes, type ReactNode, forwardRef, useRef, useEffect } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { useState, forwardRef, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { keyboardKey } from '../../common/keyboardKey';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
