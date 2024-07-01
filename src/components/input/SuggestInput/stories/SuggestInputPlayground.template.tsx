@@ -67,7 +67,7 @@ export const SuggestInputPlaygroundTemplate = ({
         className="suggest"
         {...props}
         value={localValue}
-        onInput={handleChange}
+        onChange={handleChange}
         onOptionSelect={handleSelectOption}
         options={options}
         isLoading={isLoading}

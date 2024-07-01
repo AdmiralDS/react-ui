@@ -6,5 +6,14 @@ import type { SuggestInputProps } from '@admiral-ds/react-ui';
 const options = ['one', 'two', 'three'];
 
 export const SuggestInputUncontrolledTemplate = (props: SuggestInputProps) => {
-  return <SuggestInput options={options} placeholder="numbers" dimension={props.dimension} />;
+  return (
+    <SuggestInput
+      options={options}
+      placeholder="numbers"
+      dimension={props.dimension}
+      onChange={(e) => {
+        console.log(e.target.value);
+      }}
+    />
+  );
 };
