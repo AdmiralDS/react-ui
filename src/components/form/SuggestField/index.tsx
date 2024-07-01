@@ -8,11 +8,13 @@ import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface SuggestFieldProps extends SuggestInputProps, Omit<FieldOwnProps, 'inputRef'> {}
 
 export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps>((props, ref) => {
   const fieldRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const {
     className,
     displayInline,
@@ -23,6 +25,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     id = uid(),
     disabled,
     displayCharacterCounter,
+    maxLength,
     skeleton,
     ...restProps
   } = props;
@@ -36,7 +39,9 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     displayInline,
     disabled,
     displayCharacterCounter,
+    maxLength,
     ref: fieldRef,
+    inputRef,
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
@@ -46,10 +51,11 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
 
   const suggestProps = {
-    ref,
+    ref: refSetter(ref, inputRef),
     id,
     'aria-required': required,
     status,
+    maxLength,
     disabled,
     skeleton,
     ...restProps,
