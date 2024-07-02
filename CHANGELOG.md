@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.5.0](https://github.com/AdmiralDS/react-ui/compare/v8.4.8...v8.5.0) (2024-07-02)
+
+
+### Features
+
+* **TabMenuHorizontal,HorizontalTabs,TabMenuVertical,TabMenuIcon:** добавлены новые компоненты TabMenu ([2a92b42](https://github.com/AdmiralDS/react-ui/commit/2a92b4243c0c1302926728103fa0d6778aeba95c))
+* **TabMenu:** компонент помечен как deprecated ([d7fadf6](https://github.com/AdmiralDS/react-ui/commit/d7fadf68c79ab9fd718949d34eb0a86c37298dbe))
+
 ### [8.4.8](https://github.com/AdmiralDS/react-ui/compare/v8.4.7...v8.4.8) (2024-07-01)
 
 
