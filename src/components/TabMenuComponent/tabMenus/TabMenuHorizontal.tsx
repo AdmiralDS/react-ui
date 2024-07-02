@@ -43,6 +43,12 @@ export const TabMenuHorizontal = ({
   renderTab,
   renderDropMenuItem,
   tabIsDisabled,
+  alignSelf,
+  menuWidth,
+  menuMaxHeight,
+  dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   ...props
 }: TabMenuHorizontalProps) => {
   //<editor-fold desc="Управление шириной контейнера">
@@ -188,6 +194,12 @@ export const TabMenuHorizontal = ({
           onSelectItem={handleSelectTab}
           selected={selectedTab}
           dimension={dimension}
+          alignSelf={alignSelf}
+          menuWidth={menuWidth}
+          menuMaxHeight={menuMaxHeight}
+          dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
         />
         <ActiveHorizontalTabUnderline $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
       </VisibleContainer>

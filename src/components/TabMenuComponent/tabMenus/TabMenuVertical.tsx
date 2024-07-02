@@ -21,6 +21,12 @@ export const TabMenuVertical = ({
   renderTab,
   renderDropMenuItem,
   tabIsDisabled,
+  alignSelf,
+  menuWidth,
+  menuMaxHeight,
+  dropContainerCssMixin,
+  dropContainerClassName,
+  dropContainerStyle,
   ...props
 }: TabMenuVerticalProps) => {
   //<editor-fold desc="Управление высотой контейнера">
@@ -141,11 +147,16 @@ export const TabMenuVertical = ({
       {renderedVisibleTabs}
       <VerticalTabOverflowMenu
         items={overflowMenuItems}
-        alignSelf="flex-start"
         onSelectItem={handleSelectTab}
         selected={selectedTab}
         dimension={dimension}
         isHidden={hiddenTabs.length === 0}
+        alignSelf={alignSelf}
+        menuWidth={menuWidth}
+        menuMaxHeight={menuMaxHeight}
+        dropContainerCssMixin={dropContainerCssMixin}
+        dropContainerClassName={dropContainerClassName}
+        dropContainerStyle={dropContainerStyle}
       />
       <ActiveVerticalTabUnderline
         $top={`${underlineTop}px`}
