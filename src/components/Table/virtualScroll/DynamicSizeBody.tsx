@@ -46,8 +46,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
       [rowList, renderRow],
     );
     const itemsCount = useMemo(() => rowNodes.length, [rowNodes]);
-
-    const getItemKey = useCallback((index: number) => rowNodes[index]!.id, [rowNodes]);
+    const getItemKey = useCallback((index: number) => rowNodes[index].id, [rowNodes]);
 
     useEffect(() => {
       function handleScroll(e: any) {
@@ -63,12 +62,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const { totalHeight, allItems } = useMemo(() => {
-      const getItemHeight = (index: number) => {
-        const key = getItemKey(index);
-        return measurementCache[key] ?? estimatedRowHeight(index);
-      };
-
+    const { allItems, totalHeight } = useMemo(() => {
       let totalHeight = 0;
       const allRows: DynamicSizeItem[] = Array(itemsCount);
 
@@ -76,8 +70,8 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         const key = getItemKey(index);
         const row = {
           key,
-          index: index,
-          height: getItemHeight(index),
+          index,
+          height: measurementCache[key] ?? estimatedRowHeight(index),
           offsetTop: totalHeight,
         };
 
@@ -85,34 +79,23 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         allRows[index] = row;
       }
 
-      return {
-        allItems: allRows,
-        totalHeight,
-      };
-    }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
+      return { allItems: allRows, totalHeight };
+    }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes, renderAhead, scrollTop, height]);
 
     const startIndex = useMemo(() => {
-      let start = findStartIndex(scrollTop, allItems, itemsCount);
+      const start = findStartIndex(scrollTop, allItems, itemsCount);
       return Math.max(0, start - renderAhead);
     }, [scrollTop, allItems, itemsCount, renderAhead]);
 
     const endIndex = useMemo(() => {
-      let end = findEndIndex(allItems, startIndex, itemsCount, height);
+      const end = findEndIndex(allItems, startIndex, scrollTop + height, itemsCount);
       return Math.min(itemsCount - 1, end + renderAhead);
-    }, [allItems, startIndex, itemsCount, height, renderAhead]);
-
-    const visibleNodeCount = endIndex - startIndex + 1;
-
-    const virtualItems = useMemo(() => allItems.slice(startIndex, visibleNodeCount), [allItems, startIndex, endIndex]);
-
-    // const lastIndex = virtualItems.length - 1;
-    // const topPadding = `${virtualItems[0]?.offsetTop || 0}px`;
-    // const bottomPadding = `${totalHeight - (virtualItems[lastIndex]?.offsetTop || 0 + virtualItems[lastIndex]?.height || 0)}px`;
-
-    // console.log({ allItems, virtualItems, totalHeight, topPadding, bottomPadding });
+    }, [allItems, startIndex, scrollTop, height, itemsCount, renderAhead]);
 
     const topPadding = allItems[startIndex].offsetTop;
-    const bottomPadding = allItems[itemsCount - startIndex - visibleNodeCount].offsetTop;
+    const bottomPadding = totalHeight - (allItems[endIndex].offsetTop + allItems[endIndex].height);
+
+    const virtualItems = useMemo(() => allItems.slice(startIndex, endIndex + 1), [allItems, startIndex, endIndex]);
 
     const renderContent = () => {
       return (

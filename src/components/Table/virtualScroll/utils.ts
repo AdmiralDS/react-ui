@@ -7,40 +7,45 @@ type DynamicSizeItem = {
   height: number;
 };
 
-/* inspired by https://dev.to/adamklein/build-your-own-virtual-scroll-part-ii-3j86 */
+export const findStartIndex = (scrollTop: number, allItems: DynamicSizeItem[], itemsCount: number): number => {
+  /* Так как allItems - это отсортированный по возрастанию массив (по параметру offsetTop),
+  для поиска startIndex можно применить алгоритм двоичного поиска https://www.geeksforgeeks.org/binary-search/ */
+  let low = 0;
+  let high = itemsCount - 1;
+  while (low <= high) {
+    const middle = low + Math.floor((high - low) / 2);
+    const currentOffset = allItems[middle].offsetTop;
 
-export function findStartIndex(scrollTop: number, allItems: DynamicSizeItem[], itemsCount: number) {
-  /* Так как nodePositions - это отсортированный по возрастанию массив, 
-  для поиска startNode можно применить алгоритм двоичного поиска. https://www.geeksforgeeks.org/binary-search/ */
-  let startRange = 0;
-  let endRange = itemsCount - 1;
-  while (endRange !== startRange) {
-    const middle = Math.floor((endRange - startRange) / 2 + startRange);
-
-    if (allItems[middle].offsetTop <= scrollTop && allItems[middle + 1].offsetTop > scrollTop) {
+    if (currentOffset === scrollTop) {
       return middle;
-    }
-
-    if (middle === startRange) {
-      // кейс когда start и end range идут друг за другом
-      return endRange;
-    } else {
-      if (allItems[middle].offsetTop <= scrollTop) {
-        startRange = middle;
-      } else {
-        endRange = middle;
-      }
+    } else if (currentOffset < scrollTop) {
+      low = middle + 1;
+    } else if (currentOffset > scrollTop) {
+      high = middle - 1;
     }
   }
-  return itemsCount;
-}
 
-export function findEndIndex(allItems: DynamicSizeItem[], startIndex: number, itemsCount: number, height: number) {
-  let endNode;
-  for (endNode = startIndex; endNode < itemsCount; endNode++) {
-    if (allItems[endNode].offsetTop > allItems[startIndex].offsetTop + height) {
-      return endNode;
-    }
+  if (low > 0) {
+    return low - 1;
+  } else {
+    return 0;
   }
-  return endNode;
+};
+
+export function findEndIndex(
+  allItems: DynamicSizeItem[],
+  startIndex: number,
+  maxOffset: number,
+  itemsCount: number,
+): number {
+  let stopIndex = startIndex;
+  const itemMetadata = allItems[startIndex];
+  let offset = itemMetadata.offsetTop + itemMetadata.height;
+
+  while (stopIndex < itemsCount - 1 && offset < maxOffset) {
+    stopIndex++;
+    offset += allItems[stopIndex].height;
+  }
+
+  return stopIndex;
 }
