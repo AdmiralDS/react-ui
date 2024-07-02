@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ActiveHorizontalTabSelector } from '#src/components/TabMenuComponent/containerElements';
-import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
-import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import { HorizontalTabsContainer } from '#src/components/TabMenuComponent/containers';
+import type { HorizontalTabsProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import { getTabWidthMap, getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
 
-export const TabMenuHorizontalMobile = ({
+export const HorizontalTabs = ({
   dimension = 'l',
   showUnderline,
   selectedTabId,
@@ -15,7 +15,7 @@ export const TabMenuHorizontalMobile = ({
   renderTab,
   tabIsDisabled,
   ...props
-}: TabMenuHorizontalMobileProps) => {
+}: HorizontalTabsProps) => {
   //<editor-fold desc="Создание табов для отрисовки">
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -60,10 +60,10 @@ export const TabMenuHorizontalMobile = ({
   //</editor-fold>
 
   return (
-    <MobileHorizontalTabMenuContainer {...props} ref={containerRef} $showUnderline={showUnderline}>
+    <HorizontalTabsContainer {...props} ref={containerRef} $showUnderline={showUnderline}>
       {horizontalTabs}
       <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
-    </MobileHorizontalTabMenuContainer>
+    </HorizontalTabsContainer>
   );
 };
-TabMenuHorizontalMobile.displayName = 'TabMenuHorizontalMobile';
+HorizontalTabs.displayName = 'HorizontalTabs';

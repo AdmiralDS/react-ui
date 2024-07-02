@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 
-import { ALL_BORDER_RADIUS_VALUES, TabMenuHorizontalMobile } from '@admiral-ds/react-ui';
+import { ALL_BORDER_RADIUS_VALUES, HorizontalTabs } from '@admiral-ds/react-ui';
 
-import { MobileHorizontalTabMenuTemplate } from './MobileHorizontalTabMenuTemplate';
+import { HorizontalTabsTemplate } from './HorizontalTabsTemplate';
 
 // Imports of text sources
-import MobileHorizontalTabMenuRaw from './MobileHorizontalTabMenuTemplate?raw';
+import HorizontalTabsRaw from './HorizontalTabsTemplate?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -18,14 +18,15 @@ const Desc = styled.div`
 const Description = () => (
   <Desc>
     Компонент настроен таким образом, что если закладки не помещаются в ширину экрана, то они “выходят” за область
-    экрана и их можно прокручивать свайпом, в остальном, поведение такое же, как и у настольной версии.
+    экрана и их можно прокручивать свайпом, в остальном, поведение такое же, как и у настольной версии. Рекомендуется
+    использовать для мобильной версии.
   </Desc>
 );
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/TabMenuHorizontalMobile',
+  title: 'Admiral-2.1/TabMenuComponent/HorizontalTabs',
   decorators: undefined,
-  component: TabMenuHorizontalMobile,
+  component: HorizontalTabs,
   parameters: {
     docs: {
       source: {
@@ -65,25 +66,25 @@ export default {
       control: false,
     },
   },
-} as Meta<typeof TabMenuHorizontalMobile>;
+} as Meta<typeof HorizontalTabs>;
 
-//<editor-fold desc="MobileHorizontalTabMenu.">
-const MobileHorizontalTabMenuStory: StoryFn<typeof TabMenuHorizontalMobile> = (props) => {
+//<editor-fold desc="HorizontalTabs.">
+const HorizontalTabsStory: StoryFn<typeof HorizontalTabs> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <MobileHorizontalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <HorizontalTabsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const MobileHorizontalTabMenuExample = {
-  render: MobileHorizontalTabMenuStory,
+export const HorizontalTabsExample = {
+  render: HorizontalTabsStory,
 
   parameters: {
     docs: {
       source: {
-        code: MobileHorizontalTabMenuRaw,
+        code: HorizontalTabsRaw,
       },
     },
   },
 
-  name: 'MobileHorizontalTabMenu.',
+  name: 'HorizontalTabs.',
 };
 //</editor-fold>

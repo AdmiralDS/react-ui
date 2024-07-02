@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { SELECTOR_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
-export const MobileHorizontalTabMenuContainer = styled.div<{ $showUnderline?: boolean }>`
+export const HorizontalTabsContainer = styled.div<{ $showUnderline?: boolean }>`
   position: relative;
   display: flex;
   flex: 1 1 auto;
@@ -22,4 +22,4 @@ export const MobileHorizontalTabMenuContainer = styled.div<{ $showUnderline?: bo
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
-MobileHorizontalTabMenuContainer.displayName = 'MobileHorizontalTabMenuContainer';
+HorizontalTabsContainer.displayName = 'HorizontalTabsContainer';

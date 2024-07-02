@@ -1,4 +1,4 @@
 export * from './TabMenuIcon';
 export * from './TabMenuHorizontal';
-export * from './TabMenuHorizontalMobile';
+export * from './HorizontalTabs';
 export * from './TabMenuVertical';

@@ -22,10 +22,10 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
-const Description = () => <Desc>(Deprecated используйте TabMenuHorizontal или TabMenuHorizontalMobile).</Desc>;
+const Description = () => <Desc>(Deprecated используйте TabMenuHorizontal или HorizontalTabs).</Desc>;
 
 export default {
-  title: 'Deprecated/TabMenu (Deprecated используйте TabMenuHorizontal или TabMenuHorizontalMobile)',
+  title: 'Deprecated/TabMenu (Deprecated используйте TabMenuHorizontal или HorizontalTabs)',
   decorators: undefined,
   component: TabMenu,
   parameters: {

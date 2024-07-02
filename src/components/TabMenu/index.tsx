@@ -66,7 +66,7 @@ export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCh
 }
 
 /**
- * @deprecated use TabMenuHorizontal/TabMenuHorizontalMobile instead
+ * @deprecated use TabMenuHorizontal/HorizontalTabs instead
  */
 export const TabMenu: FC<TabMenuProps> = ({
   tabs,
