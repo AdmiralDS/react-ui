@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import type { RenderOptionProps } from '@admiral-ds/react-ui';
+import { DropMenuComponentProps, DropMenuStyleProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 export type TabDimension = 'l' | 'm';
 export type VerticalUnderlinePosition = 'left' | 'right';
@@ -29,7 +29,7 @@ export interface VerticalTabProps extends BaseTabProps {
   width?: string | number;
 }
 
-interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
+interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement>, DropMenuComponentProps {
   /** Показывать серую полосу снизу */
   showUnderline?: boolean;
   /** ID выбранной вкладки */
@@ -45,7 +45,7 @@ interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Коллбэк для определения, является ли вкладка disabled */
   tabIsDisabled: (tabId: string) => boolean;
 }
-interface TabMenuWithOverflowProps {
+interface TabMenuWithOverflowProps extends DropMenuStyleProps {
   /** Размер компонента */
   dimension?: TabDimension;
   /** Рендер-функция для отрисовки элемента выпадающего списка */
