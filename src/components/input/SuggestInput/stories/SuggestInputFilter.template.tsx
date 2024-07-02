@@ -47,7 +47,7 @@ export const SuggestInputFilterTemplate = (props: SuggestInputProps) => {
       className="suggest"
       {...props}
       value={localValue}
-      onInput={handleChange}
+      onChange={handleChange}
       onOptionSelect={handleSelectOption}
       options={options}
       onSearchButtonClick={() => {
