@@ -1,4 +1,4 @@
-import * as React from 'react';
+import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import { TabMenu, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
@@ -16,8 +16,16 @@ import TabMenuDisabledRaw from './TabMenuDisabled.template?raw';
 import TabMenuOverflowRaw from './TabMenuOverflow.template?raw';
 import TabMenuDynamicAddRaw from './TabMenuDynamicAdd.template?raw';
 
+const Desc = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+const Description = () => <Desc>(Deprecated используйте TabMenuHorizontal или TabMenuHorizontalMobile).</Desc>;
+
 export default {
-  title: 'Admiral-2.1/TabMenu',
+  title: 'Deprecated/TabMenu (Deprecated используйте TabMenuHorizontal или TabMenuHorizontalMobile)',
   decorators: undefined,
   component: TabMenu,
   parameters: {
@@ -26,6 +34,7 @@ export default {
         code: null,
       },
     },
+    componentSubtitle: <Description />,
     design: [
       {
         type: 'figma',

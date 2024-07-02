@@ -65,6 +65,9 @@ export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCh
   dropContainerStyle?: CSSProperties;
 }
 
+/**
+ * @deprecated use TabMenuHorizontal/TabMenuHorizontalMobile instead
+ */
 export const TabMenu: FC<TabMenuProps> = ({
   tabs,
   dimension = 'l',
