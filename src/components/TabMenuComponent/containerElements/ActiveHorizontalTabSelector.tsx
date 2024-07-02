@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { UNDERLINE_HEIGHT } from '#src/components/TabMenuComponent/constants';
+import { SELECTOR_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
-export const ActiveHorizontalTabUnderline = styled.div<{
+export const ActiveHorizontalTabSelector = styled.div<{
   $left: number | string;
   $width: number | string;
   $transition?: boolean;
@@ -13,7 +13,7 @@ export const ActiveHorizontalTabUnderline = styled.div<{
   left: ${(p) => p.$left};
   width: ${(p) => p.$width};
   background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-  height: ${UNDERLINE_HEIGHT}px;
+  height: ${SELECTOR_HEIGHT}px;
   transition: ${(p) => (p.$transition ? 'all 0.2s ease-out' : 'unset')};
 `;
-ActiveHorizontalTabUnderline.displayName = 'ActiveHorizontalTabUnderline';
+ActiveHorizontalTabSelector.displayName = 'ActiveHorizontalTabSelector';

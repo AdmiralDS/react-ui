@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { ActiveHorizontalTabUnderline } from '#src/components/TabMenuComponent/containerElements';
+import { ActiveHorizontalTabSelector } from '#src/components/TabMenuComponent/containerElements';
 import { MobileHorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
 import type { TabMenuHorizontalMobileProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import { getTabWidthMap, getUnderlinePosition } from '#src/components/TabMenuComponent/utils';
@@ -62,7 +62,7 @@ export const TabMenuHorizontalMobile = ({
   return (
     <MobileHorizontalTabMenuContainer {...props} ref={containerRef} $showUnderline={showUnderline}>
       {horizontalTabs}
-      <ActiveHorizontalTabUnderline $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
+      <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
     </MobileHorizontalTabMenuContainer>
   );
 };

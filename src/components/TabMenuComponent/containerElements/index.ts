@@ -1,5 +1,5 @@
-export * from './ActiveHorizontalTabUnderline';
-export * from './ActiveVerticalTabUnderline';
+export * from './ActiveHorizontalTabSelector';
+export * from './ActiveVerticalTabSelector';
 export * from './SlideArrowButton';
 export * from './types';
 export * from './HorizontalTabOverflowMenu';

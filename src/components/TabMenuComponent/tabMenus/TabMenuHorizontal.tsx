@@ -5,7 +5,7 @@ import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import {
-  ActiveHorizontalTabUnderline,
+  ActiveHorizontalTabSelector,
   HorizontalTabOverflowMenu,
 } from '#src/components/TabMenuComponent/containerElements';
 
@@ -201,7 +201,7 @@ export const TabMenuHorizontal = ({
           dropContainerClassName={dropContainerClassName}
           dropContainerStyle={dropContainerStyle}
         />
-        <ActiveHorizontalTabUnderline $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
+        <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
       </VisibleContainer>
     </Wrapper>
   );

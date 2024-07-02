@@ -4,7 +4,7 @@ import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
 import {
-  ActiveVerticalTabUnderline,
+  ActiveVerticalTabSelector,
   VerticalTabOverflowMenu,
 } from '#src/components/TabMenuComponent/containerElements';
 import type { TabMenuVerticalProps } from '#src/components/TabMenuComponent/types';
@@ -158,7 +158,7 @@ export const TabMenuVertical = ({
         dropContainerClassName={dropContainerClassName}
         dropContainerStyle={dropContainerStyle}
       />
-      <ActiveVerticalTabUnderline
+      <ActiveVerticalTabSelector
         $top={`${underlineTop}px`}
         $height={`${underlineHeight}px`}
         $transition={true}
