@@ -3,10 +3,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
-import {
-  ActiveVerticalTabSelector,
-  VerticalTabOverflowMenu,
-} from '#src/components/TabMenuComponent/containerElements';
+import { ActiveVerticalTabSelector, VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements';
 import type { TabMenuVerticalProps } from '#src/components/TabMenuComponent/types';
 import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
 

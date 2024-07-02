@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { DropMenuComponentProps, DropMenuStyleProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
+import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type TabDimension = 'l' | 'm';
 export type VerticalUnderlinePosition = 'left' | 'right';

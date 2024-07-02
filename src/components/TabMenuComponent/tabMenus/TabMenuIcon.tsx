@@ -117,11 +117,7 @@ export const TabMenuIcon = ({
           $translateXValue={`${-scrollingContainerLeft}px`}
         >
           {iconTabs}
-          <ActiveHorizontalTabSelector
-            $left={`${underlineLeft}px`}
-            $width={`${underlineWidth}px`}
-            $transition={true}
-          />
+          <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
         </IconTabMenuScrollingContainer>
       </IconTabMenuScrollingContainerWrapper>
       {!prevDisabled && (
