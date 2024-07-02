@@ -31,7 +31,7 @@ const tabs = [
   { text: 'Text4444', tabId: '4', icon: <MinusCircleOutline /> },
   { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
   { text: 'Text66666', tabId: '6', icon: <MinusCircleOutline /> },
-  { text: 'Text7777 is very very very very long', tabId: '7', icon: <MinusCircleOutline /> },
+  { text: 'Text7777', tabId: '7', icon: <MinusCircleOutline /> },
   { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
   { text: 'Text99', tabId: '9', icon: <MinusCircleOutline /> },
 ];

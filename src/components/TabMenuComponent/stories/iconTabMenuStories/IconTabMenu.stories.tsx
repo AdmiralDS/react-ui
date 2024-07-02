@@ -1,4 +1,4 @@
-import * as React from 'react';
+import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuIcon } from '@admiral-ds/react-ui';
@@ -7,6 +7,20 @@ import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
+
+const Desc = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+const Description = () => (
+  <Desc>
+    Альтернативный вариант табов. Существует в одном размере - 68px по высоте. Может применяться, например, для
+    отображения банковских карт пользователя. Компонент можно использовать без линии снизу. В случае переполнения
+    появляются кнопки “листания” вкладок.
+  </Desc>
+);
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent/TabMenuIcon',
@@ -18,6 +32,7 @@ export default {
         code: null,
       },
     },
+    componentSubtitle: <Description />,
   },
   argTypes: {
     showUnderline: {
