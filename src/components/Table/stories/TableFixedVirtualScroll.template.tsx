@@ -9,7 +9,7 @@ type RowData = TableRow & {
 
 const rowList: RowData[] = [...Array(1000).keys()].map((_item, index) => ({
   id: String(index),
-  transfer_number: <div style={{ minHeight: '30px' }}>{index}</div>,
+  transfer_number: index,
   transfer_date: new Date('2020-08-06').toLocaleDateString(),
 }));
 
@@ -40,7 +40,7 @@ export const TableFixedVirtualScrollTemplate = (props: TableProps) => {
       columnList={cols}
       rowList={rowList}
       virtualScroll={{ fixedRowHeight: 40 }}
-      style={{ height: '500px', width: '500px' }}
+      style={{ height: '500px' }}
       onColumnResize={handleResize}
     />
   );
