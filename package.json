@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.5.0",
+  "version": "8.6.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -100,7 +100,7 @@
     "prettier": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0",
+    "react-router-dom": "^6.24.1",
     "resize-observer-polyfill": "^1.5.1",
     "rollup": "^4.18.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -112,7 +112,7 @@
     "styled-components": "^6.1.11",
     "ts-jest": "^29.1.5",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.3",
     "typescript-plugin-styled-components": "^3.0.0"
   },
   "repository": "https://github.com/AdmiralDS/react-ui",

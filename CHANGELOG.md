@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.6.0](https://github.com/AdmiralDS/react-ui/compare/v8.5.0...v8.6.0) (2024-07-03)
+
+
+### Features
+
+* **Colors:** добавлены новые токены Opacity ([1c21ea1](https://github.com/AdmiralDS/react-ui/commit/1c21ea152987167738b92f42507cc21c91aa8e43))
+* **Table:** [#845](https://github.com/AdmiralDS/react-ui/issues/845) добавлен функционал виртуального скролла для строк с динамической высотой ([11ce091](https://github.com/AdmiralDS/react-ui/commit/11ce0915a00eafd14360179d569c7dd839add9b1))
+
 ## [8.5.0](https://github.com/AdmiralDS/react-ui/compare/v8.4.8...v8.5.0) (2024-07-02)
 
 
