@@ -80,7 +80,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
       }
 
       return { allItems: allRows, totalHeight };
-    }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes, renderAhead, scrollTop, height]);
+    }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
 
     const startIndex = useMemo(() => {
       const start = findStartIndex(scrollTop, allItems, itemsCount);

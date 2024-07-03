@@ -3,7 +3,7 @@ import { Table } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 
 type RowData = TableRow & {
-  transfer_number: React.ReactNode;
+  transfer_number: number;
   transfer_date: string;
 };
 
