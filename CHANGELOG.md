@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.5.0](https://github.com/AdmiralDS/react-ui/compare/v8.4.8...v8.5.0) (2024-07-02)
+
+
+### Features
+
+* **TabMenuHorizontal,HorizontalTabs,TabMenuVertical,TabMenuIcon:** добавлены новые компоненты TabMenu ([2a92b42](https://github.com/AdmiralDS/react-ui/commit/2a92b4243c0c1302926728103fa0d6778aeba95c))
+* **TabMenu:** компонент помечен как deprecated ([d7fadf6](https://github.com/AdmiralDS/react-ui/commit/d7fadf68c79ab9fd718949d34eb0a86c37298dbe))
+
+### [8.4.8](https://github.com/AdmiralDS/react-ui/compare/v8.4.7...v8.4.8) (2024-07-01)
+
+
+### Bug Fixes
+
+* **SuggestField:** [#1362](https://github.com/AdmiralDS/react-ui/issues/1362) не показывается счётчик введённых символов ([72065f4](https://github.com/AdmiralDS/react-ui/commit/72065f4af98dc3968a32e67c2cdfce7dde6d9130))
+* **SuggestInput:** [#1368](https://github.com/AdmiralDS/react-ui/issues/1368) в контролируемом режиме onChange не срабатывает ([b41301b](https://github.com/AdmiralDS/react-ui/commit/b41301b5a66f1e791762f6fdfc1e07c1f450d2e7))
+
 ### [8.4.7](https://github.com/AdmiralDS/react-ui/compare/v8.4.6...v8.4.7) (2024-06-21)
 
 ### [8.4.6](https://github.com/AdmiralDS/react-ui/compare/v8.4.5...v8.4.6) (2024-06-14)

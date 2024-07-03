@@ -61,6 +61,9 @@ export default {
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
+    maxLength: {
+      control: { type: 'number' },
+    },
     displayInline: {
       control: { type: 'boolean' },
     },

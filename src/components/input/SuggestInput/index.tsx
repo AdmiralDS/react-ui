@@ -165,7 +165,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
 
     React.useEffect(() => {
       function onInputChange(this: HTMLInputElement) {
-        if (!props.onInput) forceUpdate();
+        if (!props.onInput && !props.onChange) forceUpdate();
       }
 
       if (inputRef.current) {
@@ -175,7 +175,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
           node.removeEventListener('input', onInputChange);
         };
       }
-    }, [props.onInput]);
+    }, [props.onInput, props.onChange]);
 
     const iconArray = React.Children.toArray(icons);
 

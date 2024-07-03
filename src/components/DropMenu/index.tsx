@@ -34,6 +34,21 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
+export interface DropMenuStyleProps {
+  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /**  Ширина меню */
+  menuWidth?: string;
+  /** Задает максимальную высоту меню */
+  menuMaxHeight?: string | number;
+  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  dropContainerCssMixin?: ReturnType<typeof css>;
+  /** Позволяет добавлять класс на контейнер выпадающего меню  */
+  dropContainerClassName?: string;
+  /** Позволяет добавлять стили на контейнер выпадающего меню  */
+  dropContainerStyle?: CSSProperties;
+}
+
 export interface DropMenuComponentProps
   extends Pick<
       DropMenuProps,
