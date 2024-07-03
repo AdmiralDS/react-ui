@@ -551,3 +551,10 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
     cursor: not-allowed;
   }
 `;
+
+export const Spacer = styled.div`
+  display: flex;
+  flex: 0 0 auto;
+  will-change: min-height;
+  transform: translate3d(0px, 0px, 0px);
+`;
