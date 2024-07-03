@@ -247,6 +247,24 @@ export const COLORS: ColorsProps = {
       description: 'Статичный Press на темных поверхностях',
       opacity: '12%',
     },
+    'Opacity/Neutral 8': {
+      name: 'Neutral 8',
+      contrast: { light: '-', dark: '-' },
+      description: 'Цвет #000000 в светлой теме или #FFFFFF в темной теме с прозрачностью 8%',
+      opacity: '8%',
+    },
+    'Opacity/Neutral 12': {
+      name: 'Neutral 12',
+      contrast: { light: '-', dark: '-' },
+      description: 'Цвет #000000 в светлой теме или #FFFFFF в темной теме с прозрачностью 12%',
+      opacity: '12%',
+    },
+    'Opacity/Neutral 16': {
+      name: 'Neutral 16',
+      contrast: { light: '-', dark: '-' },
+      description: 'Цвет #000000 в светлой теме или #FFFFFF в темной теме с прозрачностью 16%',
+      opacity: '16%',
+    },
   },
   Error: {
     'Error/Error 10': { name: 'Error 10', contrast: { light: '-', dark: '-' }, description: 'Фон статусных элементов' },

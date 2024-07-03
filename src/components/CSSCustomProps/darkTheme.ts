@@ -55,6 +55,9 @@ export const darkThemeText = `
   --admiral-color-Opacity_DarkStaticHover: #FFFFFF0F;
   --admiral-color-Opacity_DarkStaticFocus: #FFFFFF17;
   --admiral-color-Opacity_DarkStaticPress: #FFFFFF1F;
+  --admiral-color-Opacity_Neutral8: #FFFFFF14;
+  --admiral-color-Opacity_Neutral12: #FFFFFF1F;
+  --admiral-color-Opacity_Neutral16: #FFFFFF29;
 
   /* Error */
   --admiral-color-Error_Error10: #1F2024;

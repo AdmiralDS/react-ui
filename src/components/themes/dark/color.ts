@@ -53,6 +53,9 @@ export const COLOR: Color = {
   'Opacity/Dark Static Hover': '#FFFFFF0F',
   'Opacity/Dark Static Focus': '#FFFFFF17',
   'Opacity/Dark Static Press': '#FFFFFF1F',
+  'Opacity/Neutral 8': '#FFFFFF14',
+  'Opacity/Neutral 12': '#FFFFFF1F',
+  'Opacity/Neutral 16': '#FFFFFF29',
   //</editor-fold>
 
   //<editor-fold desc="Error">

@@ -56,6 +56,9 @@ export const lightThemeText = `
   --admiral-color-Opacity_DarkStaticHover: #FFFFFF0F;
   --admiral-color-Opacity_DarkStaticFocus: #FFFFFF17;
   --admiral-color-Opacity_DarkStaticPress: #FFFFFF1F;
+  --admiral-color-Opacity_Neutral8: #00000014;
+  --admiral-color-Opacity_Neutral12: #0000001F;
+  --admiral-color-Opacity_Neutral16: #00000029;
 
   /* Error */
   --admiral-color-Error_Error10: #FFEFEF;
