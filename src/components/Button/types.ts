@@ -1,6 +1,6 @@
 import type { css } from 'styled-components';
 
-export type ButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white' | 'danger' | 'success';
+export type ButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'white' | 'danger' | 'success';
 /** @deprecated use ButtonAppearance instead */
 export type Appearance = ButtonAppearance;
 export type Dimension = 'xl' | 'l' | 'm' | 's';

@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import { primaryAppearanceMixin } from './primaryAppearanceMixin';
 import { secondaryAppearanceMixin } from './secondaryAppearanceMixin';
+import { tertiaryAppearanceMixin } from './tertiaryAppearanceMixin';
 import { ghostAppearanceMixin } from './ghostAppearanceMixin';
 import { whiteAppearanceMixin } from './whiteAppearanceMixin';
 import { dangerAppearanceMixin } from './dangerAppearanceMixin';
@@ -13,6 +14,9 @@ export const appearanceMixin = css`
   }
   &[data-appearance~='secondary'] {
     ${secondaryAppearanceMixin}
+  }
+  &[data-appearance~='tertiary'] {
+    ${tertiaryAppearanceMixin}
   }
   &[data-appearance~='ghost'] {
     ${ghostAppearanceMixin}

@@ -125,7 +125,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const spinnerDimension = dimension === 's' ? 'ms' : 'm';
-    const spinnerInverse = appearance !== 'secondary' && appearance !== 'ghost';
+    const spinnerInverse = appearance !== 'secondary' && appearance !== 'tertiary' && appearance !== 'ghost';
     const hasIconStart = !!iconStart || (!!icon && iconPlace === 'left');
     const hasIconEnd = !!iconEnd || (!!icon && iconPlace === 'right');
     const additionalPadding = (!displayAsSquare && !hasIconStart ? 2 : 0) + (!displayAsSquare && !hasIconEnd ? 2 : 0);

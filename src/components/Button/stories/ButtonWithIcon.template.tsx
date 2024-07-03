@@ -93,7 +93,7 @@ export const ButtonWithIconTemplate = (
         <T font="Body/Body 1 Long" as="div">
           Button with icon stretch
         </T>
-        <Button dimension="l" appearance="primary" style={{ width: '100%' }} iconStart={<StarSolid />}>
+        <Button dimension="l" appearance="tertiary" style={{ width: '100%' }} iconStart={<StarSolid />}>
           Button
         </Button>
       </div>

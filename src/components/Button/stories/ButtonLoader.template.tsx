@@ -48,6 +48,9 @@ export const ButtonLoaderTemplate = () => {
           <Button dimension="xl" appearance="secondary" loading onClick={handleClick}>
             Button 56
           </Button>
+          <Button dimension="xl" appearance="tertiary" loading onClick={handleClick}>
+            Button 56
+          </Button>
           <Button dimension="xl" appearance="ghost" loading>
             Button 56
           </Button>
@@ -73,6 +76,9 @@ export const ButtonLoaderTemplate = () => {
             Button 48
           </Button>
           <Button dimension="l" appearance="secondary" loading>
+            Button 48
+          </Button>
+          <Button dimension="l" appearance="tertiary" loading>
             Button 48
           </Button>
           <Button dimension="l" appearance="ghost" loading>
@@ -102,6 +108,9 @@ export const ButtonLoaderTemplate = () => {
           <Button dimension="m" appearance="secondary" loading>
             Button 40
           </Button>
+          <Button dimension="m" appearance="tertiary" loading>
+            Button 40
+          </Button>
           <Button dimension="m" appearance="ghost" loading>
             Button 40
           </Button>
@@ -127,6 +136,9 @@ export const ButtonLoaderTemplate = () => {
             Button 32
           </Button>
           <Button dimension="s" appearance="secondary" loading>
+            Button 32
+          </Button>
+          <Button dimension="s" appearance="tertiary" loading>
             Button 32
           </Button>
           <Button dimension="s" appearance="ghost" loading>
