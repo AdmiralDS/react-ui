@@ -45,7 +45,7 @@ export default {
       control: 'boolean',
     },
     appearance: {
-      options: ['primary', 'secondary', 'danger', 'success', 'ghost', 'white'],
+      options: ['primary', 'secondary', 'tertiary', 'danger', 'success', 'ghost', 'white'],
       control: { type: 'select' },
     },
     onClick: { action: 'clicked' },

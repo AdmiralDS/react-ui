@@ -39,6 +39,9 @@ const MainButton = styled(Button)`
   &[data-appearance~='primary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
+  &[data-appearance~='tertiary'] {
+    border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
+  }
   &[data-appearance~='secondary'] {
     border-right: none;
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
@@ -48,6 +51,9 @@ const MainButton = styled(Button)`
 
 const MenuButton = styled(Button)`
   &[data-appearance~='primary'] {
+    border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
+  }
+  &[data-appearance~='tertiary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
   &[data-appearance~='secondary'] {
@@ -60,6 +66,9 @@ const MenuButton = styled(Button)`
 const Separator = styled.div<SeparatorProps>`
   width: 1px;
   &[data-appearance~='primary'] {
+    background-color: transparent;
+  }
+  &[data-appearance~='tertiary'] {
     background-color: transparent;
   }
 
@@ -78,7 +87,7 @@ const Wrapper = styled.div`
 `;
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
-type Appearance = 'primary' | 'secondary';
+type Appearance = 'primary' | 'secondary' | 'tertiary';
 
 interface SeparatorProps {
   disabled?: boolean;

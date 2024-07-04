@@ -136,6 +136,9 @@ function getBadgeAppearance(appearance: ButtonAppearance, disabled: boolean) {
     case 'ghost':
       if (disabled) return 'lightDisable';
       return 'info';
+    case 'tertiary':
+      if (disabled) return 'whiteDisable';
+      return 'white';
     case 'primary':
     default:
       if (disabled) return 'whiteDisable';
@@ -144,7 +147,8 @@ function getBadgeAppearance(appearance: ButtonAppearance, disabled: boolean) {
 }
 
 export const ButtonBadge = ({ appearance = 'primary', disabled = false, ...props }: ButtonBadgeProps) => {
-  const isVisible = appearance === 'primary' || appearance === 'secondary' || appearance === 'ghost';
+  const isVisible =
+    appearance === 'primary' || appearance === 'secondary' || appearance === 'tertiary' || appearance === 'ghost';
   const badgeAppearance = getBadgeAppearance(appearance, disabled);
   return isVisible ? <Badge {...props} dimension="s" appearance={badgeAppearance} /> : null;
 };

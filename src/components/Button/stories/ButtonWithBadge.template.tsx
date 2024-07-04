@@ -41,6 +41,13 @@ export const ButtonWithBadgeTemplate = ({
           </ButtonBadge>
         </Button>
 
+        <Button {...props} appearance="tertiary" displayAsSquare={false}>
+          Button
+          <ButtonBadge appearance="tertiary" disabled={props.disabled || props.displayAsDisabled}>
+            5
+          </ButtonBadge>
+        </Button>
+
         <Button {...props} appearance="ghost" displayAsSquare={false}>
           Button
           <ButtonBadge appearance="ghost" disabled={props.disabled || props.displayAsDisabled}>

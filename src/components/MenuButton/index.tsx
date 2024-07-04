@@ -12,7 +12,7 @@ import { passDropdownDataAttributes } from '#src/components/common/utils/splitDa
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
-export type MenuButtonAppearance = 'primary' | 'secondary' | 'ghost' | 'white';
+export type MenuButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'white';
 
 export interface MenuButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,

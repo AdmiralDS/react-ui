@@ -1,18 +1,18 @@
-import * as React from 'react';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
-import { PaginationButton } from '#src/components/PaginationOne/PaginationButton';
 import { MenuButton } from '#src/components/PaginationOne/Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
 import { keyboardKey } from '../common/keyboardKey';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import { Button } from '#src/components/Button';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -69,7 +69,7 @@ const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boole
   ${mixin};
 `;
 
-export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Колбек, который срабатывает при изменении номера  страницы или размера страницы */
   onChange: (result: { page: number; pageSize: number }) => void;
   /** Номер текущей страницы */
@@ -123,7 +123,7 @@ export interface PaginationOneProps extends Omit<React.HTMLAttributes<HTMLDivEle
   };
 }
 
-export const PaginationOne: React.FC<PaginationOneProps> = ({
+export const PaginationOne: FC<PaginationOneProps> = ({
   page,
   pageSize,
   pageSizes,
@@ -165,12 +165,12 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
-  const [isVisible, setIsVisible] = React.useState(false);
-  const [selectedPageNumber, setSelectedPageNumber] = React.useState(page.toString());
-  const [activePageNumber, setActivePageNumber] = React.useState<string | undefined>(page.toString());
-  const [inputPageNumber, setInputPageNumber] = React.useState(page.toString());
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedPageNumber, setSelectedPageNumber] = useState(page.toString());
+  const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
+  const [inputPageNumber, setInputPageNumber] = useState(page.toString());
 
-  const pageNumberInputRef = React.useRef<HTMLInputElement>(null);
+  const pageNumberInputRef = useRef<HTMLInputElement>(null);
 
   const parsePageNumber = (pageSelected: string) => {
     if (pageSelected === '') {
@@ -229,7 +229,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isVisible && pageNumberInputRef) {
       pageNumberInputRef.current?.select();
       pageNumberInputRef.current?.focus();
@@ -243,7 +243,7 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
     setActivePageNumber(parsePageNumber(inputValue).toString());
   };
 
-  const handleInputPageNumberKeyDown = (e: React.KeyboardEvent) => {
+  const handleInputPageNumberKeyDown = (e: KeyboardEvent) => {
     const code = keyboardKey.getCode(e);
 
     if (code === keyboardKey.Enter) {
@@ -341,12 +341,22 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           </MenuButton>
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
           <ButtonsWrapper>
-            <PaginationButton aria-label={backwardText} disabled={backButtonDisabled} onClick={pageDecrement}>
-              <ChevronLeft width={24} height={24} />
-            </PaginationButton>
-            <PaginationButton aria-label={forwardText} disabled={forwardButtonDisabled} onClick={pageIncrement}>
-              <ChevronRight width={24} height={24} />
-            </PaginationButton>
+            <Button
+              appearance="tertiary"
+              iconStart={<ChevronLeft />}
+              displayAsSquare
+              aria-label={backwardText}
+              disabled={backButtonDisabled}
+              onClick={pageDecrement}
+            />
+            <Button
+              appearance="tertiary"
+              iconStart={<ChevronRight />}
+              displayAsSquare
+              aria-label={forwardText}
+              disabled={forwardButtonDisabled}
+              onClick={pageIncrement}
+            />
           </ButtonsWrapper>
         </Part>
       </ComplexWrapper>
@@ -364,12 +374,22 @@ export const PaginationOne: React.FC<PaginationOneProps> = ({
           )}
         </PageSizeAdditional>
         <ButtonsWrapper>
-          <PaginationButton aria-label={backwardText} disabled={backButtonDisabled} onClick={pageDecrement}>
-            <ChevronLeft width={24} height={24} />
-          </PaginationButton>
-          <PaginationButton aria-label={forwardText} disabled={forwardButtonDisabled} onClick={pageIncrement}>
-            <ChevronRight width={24} height={24} />
-          </PaginationButton>
+          <Button
+            appearance="tertiary"
+            iconStart={<ChevronLeft />}
+            displayAsSquare
+            aria-label={backwardText}
+            disabled={backButtonDisabled}
+            onClick={pageDecrement}
+          />
+          <Button
+            appearance="tertiary"
+            iconStart={<ChevronRight />}
+            displayAsSquare
+            aria-label={forwardText}
+            disabled={forwardButtonDisabled}
+            onClick={pageIncrement}
+          />
         </ButtonsWrapper>
       </SimpleWrapper>
     );

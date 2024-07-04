@@ -53,6 +53,21 @@ export const ButtonStylesTemplate = ({
         <Button dimension={props.dimension} appearance="secondary" displayAsSquare iconStart={<StarSolid />} />
       </ButtonContainer>
       <ButtonContainer>
+        <Button dimension={props.dimension} appearance="tertiary">
+          Button 56
+        </Button>
+
+        <Button dimension={props.dimension} appearance="tertiary" iconStart={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={props.dimension} appearance="tertiary" iconEnd={<StarSolid />}>
+          Button 56
+        </Button>
+
+        <Button dimension={props.dimension} appearance="tertiary" displayAsSquare iconStart={<StarSolid />} />
+      </ButtonContainer>
+      <ButtonContainer>
         <Button dimension={props.dimension} appearance="ghost">
           Button 56
         </Button>
