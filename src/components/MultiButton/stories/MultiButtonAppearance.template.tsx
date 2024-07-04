@@ -64,6 +64,7 @@ export const MultiButtonAppearanceTemplate = ({
 }: MultiButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
+  const [selected3, setSelected3] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
     return itemsDemo.slice(1, itemsDemo.length);
@@ -102,6 +103,24 @@ export const MultiButtonAppearanceTemplate = ({
           items={model}
           onVisibilityChange={handleVisibilityChange}
           data-dropdown-container-id="second-multi-button-with-dropdown"
+          onMainButtonClick={handleMainButtonClick}
+          dropContainerClassName="dropContainerClass"
+          dropContainerStyle={{ width: '250px' }}
+        >
+          {itemsDemo[0].render}
+        </MultiButton>
+        <Separator />
+        <MultiButton
+          {...props}
+          appearance="tertiary"
+          selected={selected3}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected3(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="third-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
           dropContainerClassName="dropContainerClass"
           dropContainerStyle={{ width: '250px' }}

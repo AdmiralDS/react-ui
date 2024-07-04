@@ -72,7 +72,7 @@ export default {
       control: { type: 'radio' },
     },
     appearance: {
-      options: ['primary', 'secondary'],
+      options: ['primary', 'secondary', 'tertiary'],
       control: { type: 'radio' },
     },
     disabled: {
