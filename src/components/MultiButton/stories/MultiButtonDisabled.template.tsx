@@ -92,6 +92,7 @@ const itemsDisabled = [
 export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
+  const [selected3, setSelected3] = React.useState<string | undefined>(undefined);
 
   const model = React.useMemo(() => {
     return itemsDisabled.slice(1, itemsDisabled.length);
@@ -124,6 +125,22 @@ export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
           onSelectItem={(id) => {
             logSelectedId(id);
             setSelected2(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          onMainButtonClick={handleMainButtonClick}
+        >
+          {itemsDemo[0].render}
+        </MultiButton>
+        <Separator />
+        <MultiButton
+          {...props}
+          appearance="tertiary"
+          disabled
+          selected={selected3}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected3(id);
           }}
           items={model}
           onVisibilityChange={handleVisibilityChange}

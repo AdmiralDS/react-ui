@@ -65,6 +65,7 @@ export const MultiButtonIconTemplate = ({
 }: MultiButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [selected, setSelected] = React.useState<string | undefined>(undefined);
   const [selected2, setSelected2] = React.useState<string | undefined>(undefined);
+  const [selected3, setSelected3] = React.useState<string | undefined>(undefined);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -103,6 +104,23 @@ export const MultiButtonIconTemplate = ({
           <BonusSolid />
           MultiButton
         </MultiButton>
+        <Separator />
+        <MultiButton
+          {...props}
+          appearance="tertiary"
+          selected={selected3}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected3(id);
+          }}
+          items={itemsDemo}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="third-multi-button-with-dropdown"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
       </div>
       <Separator />
       <div style={{ display: 'flex' }}>
@@ -117,7 +135,7 @@ export const MultiButtonIconTemplate = ({
           }}
           items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
-          data-dropdown-container-id="first-multi-button-with-dropdown"
+          data-dropdown-container-id="first-multi-button-with-dropdown-disabled"
           className="multi-button-class"
           onMainButtonClick={handleMainButtonClick}
         >
@@ -136,7 +154,25 @@ export const MultiButtonIconTemplate = ({
           }}
           items={itemsDemo}
           onVisibilityChange={handleVisibilityChange}
-          data-dropdown-container-id="second-multi-button-with-dropdown"
+          data-dropdown-container-id="second-multi-button-with-dropdown-disabled"
+          onMainButtonClick={handleMainButtonClick}
+        >
+          <BonusSolid />
+          MultiButton
+        </MultiButton>
+        <Separator />
+        <MultiButton
+          {...props}
+          disabled
+          appearance="tertiary"
+          selected={selected3}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected3(id);
+          }}
+          items={itemsDemo}
+          onVisibilityChange={handleVisibilityChange}
+          data-dropdown-container-id="third-multi-button-with-dropdown-disabled"
           onMainButtonClick={handleMainButtonClick}
         >
           <BonusSolid />

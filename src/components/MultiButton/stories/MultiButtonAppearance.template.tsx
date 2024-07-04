@@ -87,7 +87,6 @@ export const MultiButtonAppearanceTemplate = ({
           className="multi-button-class"
           onMainButtonClick={handleMainButtonClick}
           dropContainerClassName="dropContainerClass"
-          dropContainerStyle={{ width: '250px' }}
         >
           {itemsDemo[0].render}
         </MultiButton>
@@ -105,7 +104,6 @@ export const MultiButtonAppearanceTemplate = ({
           data-dropdown-container-id="second-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
           dropContainerClassName="dropContainerClass"
-          dropContainerStyle={{ width: '250px' }}
         >
           {itemsDemo[0].render}
         </MultiButton>
@@ -123,7 +121,6 @@ export const MultiButtonAppearanceTemplate = ({
           data-dropdown-container-id="third-multi-button-with-dropdown"
           onMainButtonClick={handleMainButtonClick}
           dropContainerClassName="dropContainerClass"
-          dropContainerStyle={{ width: '250px' }}
         >
           {itemsDemo[0].render}
         </MultiButton>
