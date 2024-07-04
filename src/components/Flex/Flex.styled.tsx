@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import type { FlexGapSizes, FlexAlignItems, FlexCellSizes, FlexDirection, FlexWrap } from './Flex.types';
+import type { FlexAlignItems, FlexDirection, FlexWrap } from './Flex.types';
 import { calcCellWidth } from './Flex.utils';
 import { FLEX_CELL_MAX_SIZE } from './Flex.types';
 
@@ -8,7 +8,7 @@ export const withBoxSize = css`
   box-sizing: border-box;
 `;
 
-export const ContainerDiv = styled.div<{ $rowGap?: FlexGapSizes; $columnGap?: FlexGapSizes }>`
+export const ContainerDiv = styled.div<{ $rowGap?: number; $columnGap?: number }>`
   ${withBoxSize};
 
   display: flex;
@@ -20,8 +20,8 @@ export const ContainerDiv = styled.div<{ $rowGap?: FlexGapSizes; $columnGap?: Fl
 `;
 
 export const RowDiv = styled.div<{
-  $rowGap?: FlexGapSizes;
-  $columnGap?: FlexGapSizes;
+  $rowGap?: number;
+  $columnGap?: number;
   $wrap?: FlexWrap;
   $direction?: FlexDirection;
   $alignItems?: FlexAlignItems;
@@ -38,8 +38,8 @@ export const RowDiv = styled.div<{
 `;
 
 export const CellDiv = styled.div<{
-  $col?: FlexCellSizes;
-  $columnGap?: FlexGapSizes;
+  $col?: number;
+  $columnGap?: number;
 }>`
   ${withBoxSize};
 

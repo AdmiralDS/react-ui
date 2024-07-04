@@ -1,10 +1,9 @@
 import { round } from '../common/utils/round';
-import type { FlexCellSizes, FlexGapSizes } from './Flex.types';
 import { FLEX_CELL_MAX_SIZE } from './Flex.types';
 
 interface CalcCellWidthParams {
-  column: FlexCellSizes;
-  columnGap: FlexGapSizes;
+  column: number;
+  columnGap: number;
 }
 
 export const calcCellWidth = ({ column, columnGap = 0 }: CalcCellWidthParams): string => {
