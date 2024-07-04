@@ -161,6 +161,48 @@ exports[`MenuButton should render component 1`] = `
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
 .c0[data-appearance~='ghost'] {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -534,6 +576,48 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
@@ -989,6 +1073,48 @@ exports[`MenuButton should render component with loading state 1`] = `
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
 .c0[data-appearance~='ghost'] {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -1394,6 +1520,48 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
@@ -1840,6 +2008,48 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
 .c0[data-appearance~='ghost'] {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -2219,6 +2429,48 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0[data-appearance~='tertiary'] {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
