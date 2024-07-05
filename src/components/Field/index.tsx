@@ -9,17 +9,18 @@ import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
 import { useState } from 'react';
 
+const ContentWrapper = styled.div``;
+
 const inlineMixin = css`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-
-  > * {
-    flex: 1 1 auto;
-  }
 
   ${Label} {
     margin: 0 8px 0 0;
+  }
+
+  ${ContentWrapper} {
+    flex: 1 1 auto;
   }
 `;
 
@@ -189,7 +190,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
             <StyledLabel $skeleton={skeleton} {...labelProps} />
           </LabelContainer>
         )}
-        <div>
+        <ContentWrapper>
           {children}
           <ExtrasContainer $skeleton={skeleton}>
             {extraText && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
@@ -202,7 +203,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
               </>
             )}
           </ExtrasContainer>
-        </div>
+        </ContentWrapper>
       </Container>
     );
   },

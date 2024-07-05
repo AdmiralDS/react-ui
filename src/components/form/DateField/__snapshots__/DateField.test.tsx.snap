@@ -172,7 +172,9 @@ exports[`DateField should render component 1`] = `
     class="c0"
     data-field-id="some static snapshot id"
   >
-    <div>
+    <div
+      class=""
+    >
       <div
         class="c1 c2 c3 c4"
       >
