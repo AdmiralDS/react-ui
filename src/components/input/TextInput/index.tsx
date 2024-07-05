@@ -268,7 +268,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
 export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
-      dimension,
+      dimension = 'm',
       type,
       displayClearIcon,
       isLoading,
@@ -350,6 +350,10 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         <InputIconButton
           icon={CloseOutlineSvg}
           key="clear-icon"
+          onMouseDown={(e) => {
+            // запрет на перемещение фокуса при клике по иконке
+            e.preventDefault();
+          }}
           onClick={() => {
             if (inputRef.current) {
               changeInputData(inputRef.current, { value: '' });
@@ -448,7 +452,4 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   },
 );
 
-TextInput.defaultProps = {
-  dimension: 'm',
-} as const;
 TextInput.displayName = 'TextInput';
