@@ -269,7 +269,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
 export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
   (
     {
-      dimension,
+      dimension = 'm',
       menuWidth,
       displayClearIcon,
       status,
@@ -460,9 +460,5 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     );
   },
 );
-
-InputEx.defaultProps = {
-  dimension: 'm',
-} as const;
 
 InputEx.displayName = 'InputEx';

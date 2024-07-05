@@ -100,6 +100,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       highlightSpecialDay,
       locale,
       onDateIncreaseDecrease,
+      dimension = 'm',
       ...props
     },
     ref,
@@ -185,7 +186,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
 
     return (
       <Input
-        {...props}
+        {...{ dimension, ...props }}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
         icons={iconArray}
@@ -222,5 +223,4 @@ export const StyledCalendar = styled(Calendar)`
   border-radius: 0;
 `;
 
-DateInput.defaultProps = { dimension: 'm' };
 DateInput.displayName = 'DateInput';

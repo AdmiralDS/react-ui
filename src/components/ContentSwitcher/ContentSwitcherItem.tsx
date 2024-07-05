@@ -148,11 +148,7 @@ export const ContentSwitcherItemButton = styled.button<{
 `;
 
 export const ContentSwitcherItem = forwardRef<HTMLButtonElement, ContentSwitcherItemProps>(
-  ({ active, cssMixin, ...props }: ContentSwitcherItemProps, ref) => {
-    return <ContentSwitcherItemButton ref={ref} {...props} $active={active} $cssMixin={cssMixin} />;
+  ({ active, cssMixin, type = 'button', ...props }: ContentSwitcherItemProps, ref) => {
+    return <ContentSwitcherItemButton ref={ref} {...{ type, ...props }} $active={active} $cssMixin={cssMixin} />;
   },
 );
-
-ContentSwitcherItem.defaultProps = {
-  type: 'button',
-};

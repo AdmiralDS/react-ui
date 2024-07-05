@@ -99,7 +99,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       status,
       highlightFormat,
       locale,
-      dimension = TextInput.defaultProps?.dimension ?? 'xl',
+      dimension = 'm',
       portalTargetRef,
       ...props
     },
