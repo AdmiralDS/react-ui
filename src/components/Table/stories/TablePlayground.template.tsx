@@ -228,6 +228,9 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
           <Separator height={8} />
           <li>название свойства строки ⇔ name столбца</li>
           <li>значение свойства строки ⇔ контент ячейки строки в данном столбце</li>
+          <Separator height={8} />
+          ВАЖНО: таблица не поддерживает сложные составные имена столбцов с использованием точки (н-р, 'test.name'), имя
+          столбца не должно быть составной структурой.
         </NotificationItemContent>
       </NotificationItem>
       <Separator height={40} />
