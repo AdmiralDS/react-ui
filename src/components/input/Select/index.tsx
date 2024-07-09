@@ -1,7 +1,29 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
+import type {
+  BaseSyntheticEvent,
+  FocusEvent,
+  MouseEvent,
+  ChangeEventHandler,
+  CSSProperties,
+  InputHTMLAttributes,
+  ReactNode,
+  RefObject,
+  KeyboardEventHandler,
+  ChangeEvent,
+} from 'react';
+import {
+  forwardRef,
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  useCallback,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react';
 import type { css } from 'styled-components';
 import styled, { useTheme } from 'styled-components';
+
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { keyboardKey } from '../../common/keyboardKey';
@@ -54,9 +76,9 @@ export const DropDownText = styled(OptionWrapper)`
 type PartialOption = { value: string; disabled: boolean } & IConstantOption;
 const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disabled }) => !disabled)?.value;
 
-const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();
+const stopPropagation = (evt: BaseSyntheticEvent) => evt.stopPropagation();
 
-export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'> {
+export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'> {
   value?: string | string[];
 
   /** Позволяет использовать Select как select */
@@ -93,25 +115,25 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
    * Взамен используйте параметр targetElement.
    *
    * Референс на контейнер для правильного позиционирования выпадающего списка */
-  portalTargetRef?: React.RefObject<HTMLElement>;
+  portalTargetRef?: RefObject<HTMLElement>;
   /** Элемент, относительно которого позиционируется выпадающее меню
    * В 8.x.x версии данный параметр станет обязательным, заменив собой portalTargetRef
    */
   targetElement?: Element | null;
 
   /** Ref внутреннего input компонента */
-  inputTargetRef?: React.RefObject<HTMLInputElement>;
+  inputTargetRef?: RefObject<HTMLInputElement>;
 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  icons?: ReactNode;
 
   /** Статус поля */
   status?: InputStatus;
 
-  renderSelectValue?: (value: string | string[] | undefined, searchText: string) => React.ReactNode;
+  renderSelectValue?: (value: string | string[] | undefined, searchText: string) => ReactNode;
 
   /**  Значение введенное пользователем для поиска */
   inputValue?: string;
@@ -119,11 +141,11 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** первоначальное значение в строке поиска без переведения строки в контролируемый компонент */
   defaultInputValue?: string;
 
-  onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onInputChange?: ChangeEventHandler<HTMLInputElement>;
 
-  onFocus?: (evt: React.FocusEvent<HTMLDivElement>) => void;
+  onFocus?: (evt: FocusEvent<HTMLDivElement>) => void;
 
-  onBlur?: (evt: React.FocusEvent<HTMLDivElement>) => void;
+  onBlur?: (evt: FocusEvent<HTMLDivElement>) => void;
 
   /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
@@ -143,14 +165,14 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
    **/
   locale?: {
     /** Сообщение, отображаемое при пустом наборе опций */
-    emptyMessage?: React.ReactNode;
+    emptyMessage?: ReactNode;
   };
 
   /** Позволяет добавить панель внизу под выпадающим списком */
-  renderDropDownBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+  renderDropDownBottomPanel?: (props: RenderPanelProps) => ReactNode;
 
   /** Позволяет добавить панель сверху над выпадающим списком */
-  renderDropDownTopPanel?: (props: RenderPanelProps) => React.ReactNode;
+  renderDropDownTopPanel?: (props: RenderPanelProps) => ReactNode;
 
   /** Состояние принудительного открытия выпадающего списка опций */
   forcedOpen?: boolean;
@@ -159,16 +181,16 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onChangeDropDownState?: (opened: boolean) => void;
 
   /** Inner input keyboard event handler */
-  onInputKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyUpCapture?: React.KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyUpCapture?: KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyDownCapture?: KeyboardEventHandler<HTMLInputElement>;
 
   /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
@@ -192,7 +214,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onSelectedChange?: (value: string | Array<string>) => void;
 }
 
-export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       value,
@@ -252,23 +274,23 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const emptyMessage = locale?.emptyMessage || (
       <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
-    const [selectedValue, setSelectedValue] = React.useState(value ?? defaultValue);
-    const [internalSearchValue, setSearchValue] = React.useState('');
+    const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
+    const [internalSearchValue, setSearchValue] = useState('');
     const searchValue = inputValue === undefined ? internalSearchValue : inputValue;
-    const [shouldRenderSelectValue, setShouldRenderSelectValue] = React.useState(false);
+    const [shouldRenderSelectValue, setShouldRenderSelectValue] = useState(false);
 
-    const [activeItem, setActiveItem] = React.useState<string>();
+    const [activeItem, setActiveItem] = useState<string>();
 
-    const [constantOptions, setConstantOptions] = React.useState<IConstantOption[]>([]);
-    const [dropDownItems, setDropItems] = React.useState<Array<SelectItemProps>>([]);
+    const [constantOptions, setConstantOptions] = useState<IConstantOption[]>([]);
+    const [dropDownItems, setDropItems] = useState<Array<SelectItemProps>>([]);
 
-    const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(forcedOpen);
-    const [isFocused, setIsFocused] = React.useState(false);
+    const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(forcedOpen);
+    const [isFocused, setIsFocused] = useState(false);
 
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
 
-    const calcRowCount = React.useMemo<number | 'none'>(() => {
+    const calcRowCount = useMemo<number | 'none'>(() => {
       if (maxRowCount !== 'none' && maxRowCount > 0) return maxRowCount;
 
       return idleHeight === 'fixed' ? 1 : 'none';
@@ -277,20 +299,20 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const fixedHeight = calcRowCount !== 'none';
 
     const externalValue = value ?? defaultValue;
-    const selectedArray = React.useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
+    const selectedArray = useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
 
-    const unmountedSelectedOptions = React.useRef<Array<string>>([]);
+    const unmountedSelectedOptions = useRef<Array<string>>([]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (Array.isArray(value)) selectedArray.current = value;
     }, [value]);
 
-    const selectedOption = React.useMemo(
+    const selectedOption = useMemo(
       () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
     );
 
-    const selectedOptions = React.useMemo(() => {
+    const selectedOptions = useMemo(() => {
       if (multiple && Array.isArray(selectedValue)) {
         return selectedValue.reduce((acc: Array<IConstantOption>, item: string) => {
           const option = constantOptions.find((option) => option.value === item);
@@ -302,7 +324,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     }, [constantOptions, selectedValue, multiple]);
 
-    const dropDownModel = React.useMemo<Array<MenuModelItemProps>>(() => {
+    const dropDownModel = useMemo<Array<MenuModelItemProps>>(() => {
       const filteredItems = dropDownItems.filter((item) => {
         return onFilterItem(item.value, searchValue, searchFormat);
       });
@@ -318,12 +340,12 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension, searchValue]);
 
-    const inputRef = inputTargetRef ?? React.useRef<HTMLInputElement | null>(null);
-    const selectRef = React.useRef<HTMLSelectElement | null>(null);
-    const containerRef = React.useRef<HTMLDivElement | null>(null);
-    const valueWrapperRef = React.useRef<HTMLDivElement>(null);
-    const dropDownRef = React.useRef<HTMLDivElement | null>(null);
-    const mutableState = React.useRef<{ shouldExtendInputValue: boolean }>({
+    const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
+    const selectRef = useRef<HTMLSelectElement | null>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const valueWrapperRef = useRef<HTMLDivElement>(null);
+    const dropDownRef = useRef<HTMLDivElement | null>(null);
+    const mutableState = useRef<{ shouldExtendInputValue: boolean }>({
       shouldExtendInputValue: false,
     });
 
@@ -343,22 +365,22 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value));
     };
 
-    const handleDropDownOptionMount = React.useCallback((option: SelectItemProps) => {
+    const handleDropDownOptionMount = useCallback((option: SelectItemProps) => {
       setDropItems((prev) => [...prev, option]);
     }, []);
 
-    const handleDropDownOptionUnMount = React.useCallback((option: MenuModelItemProps) => {
+    const handleDropDownOptionUnMount = useCallback((option: MenuModelItemProps) => {
       setDropItems((prev) => prev.filter((prevOption) => prevOption.id !== option.id));
     }, []);
 
-    const onCloseSelect = React.useCallback(() => {
+    const onCloseSelect = useCallback(() => {
       setIsSearchPanelOpen(false);
       if (inputRef.current) changeInputData(inputRef.current, { value: '' });
 
       setShouldRenderSelectValue(true);
     }, [selectedValue]);
 
-    const handleOptionSelect = React.useCallback(
+    const handleOptionSelect = useCallback(
       (optionValue: string) => {
         const selectElem = selectRef.current;
 
@@ -379,7 +401,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [onCloseSelect, multiple],
     );
 
-    const resetOptions = React.useCallback(() => {
+    const resetOptions = useCallback(() => {
       const selectElem = selectRef.current;
 
       if (!selectElem) return;
@@ -388,13 +410,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       selectElem.dispatchEvent(new Event('change', { bubbles: true }));
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (forcedOpen !== isSearchPanelOpen) {
         setIsSearchPanelOpen(forcedOpen);
       }
     }, [forcedOpen]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       onChangeDropDownState?.(isSearchPanelOpen);
 
       if (!isSearchPanelOpen && isFocused && document.activeElement !== containerRef.current) {
@@ -406,7 +428,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const shouldFixMultiSelectHeight = fixedHeight && !isSearchPanelOpen;
 
-    const renderMultipleSelectValue = React.useCallback(
+    const renderMultipleSelectValue = useCallback(
       () => (
         <MultipleSelectChips
           containerRef={valueWrapperRef}
@@ -447,13 +469,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       setIsSearchPanelOpen((prev) => !prev);
     };
 
-    const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const mutateAndExtendTargetInputValue = (evt: ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
       evt.target.value = `${visibleValue}${evt.target.value}`;
       mutableState.current.shouldExtendInputValue = false;
     };
 
-    const onLocalInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const onLocalInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
       if (!multiple) setShouldRenderSelectValue(false);
       mutateAndExtendTargetInputValue(evt);
       if (inputValue === undefined) setSearchValue(evt.target.value);
@@ -492,7 +514,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       });
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       function handleKeyDown(evt: KeyboardEvent) {
         const code = keyboardKey.getCode(evt);
 
@@ -539,14 +561,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       };
     }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
-    const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
+    const onFocus = (evt: FocusEvent<HTMLDivElement>) => {
       if (!isFocused) {
         setIsFocused(true);
         onFocusFromProps?.(evt);
       }
     };
 
-    const handleWrapperBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
+    const handleWrapperBlur = (evt: FocusEvent<HTMLDivElement>) => {
       // если фокус переходит не на инпут, содержащийся внутри компонента
       if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
@@ -556,7 +578,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleNativeControlChange = (evt: ChangeEvent<HTMLSelectElement>) => {
       const value = multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value;
 
       let newSelectedArray: Array<string> = [];
@@ -595,31 +617,31 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       onSelectedChange?.(multiple ? newSelectedArray : value);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       if ((!isFocused && !multiple) || multiple) {
         if (inputRef.current) changeInputData(inputRef.current, { value: '' });
         setShouldRenderSelectValue(true);
       }
     }, [multiple, isFocused]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
       }
     }, [isSearchPanelOpen, modeIsSelect]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (isSearchPanelOpen) {
         const activeValue = selectedValue && !Array.isArray(selectedValue) ? selectedValue : undefined;
         setActiveItem(activeValue);
       }
     }, [isSearchPanelOpen]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (!selectIsUncontrolled) setSelectedValue(value);
     }, [value, selectIsUncontrolled]);
 
-    const handleWrapperClick = (e: React.MouseEvent) => {
+    const handleWrapperClick = (e: MouseEvent) => {
       if (e.target && dropDownRef.current?.contains(e.target as Node)) return;
 
       const passClick = !modeIsSelect && isSearchPanelOpen;
@@ -638,15 +660,15 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
-    const memorisedChildren = React.useMemo(
+    const memorisedChildren = useMemo(
       () =>
-        React.Children.map(children, (child) =>
-          React.isValidElement(child) ? React.cloneElement(child, { key: uid(), ...child.props }) : null,
+        Children.map(children, (child) =>
+          isValidElement(child) ? cloneElement(child, { key: uid(), ...child.props }) : null,
         ),
       [children],
     );
 
-    const memorisedDropDownOptions = React.useMemo(
+    const memorisedDropDownOptions = useMemo(
       () => (
         <DropDownProvider
           onDropDownOptionMount={handleDropDownOptionMount}
@@ -661,7 +683,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [memorisedChildren, dimension, showCheckbox],
     );
 
-    const memorisedConstantOptions = React.useMemo(
+    const memorisedConstantOptions = useMemo(
       () => (
         <ConstantSelectProvider
           onConstantOptionMount={onConstantOptionMount}
