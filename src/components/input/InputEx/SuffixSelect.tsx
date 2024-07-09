@@ -1,6 +1,7 @@
-import * as React from 'react';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode, RefObject, MouseEvent, PropsWithChildren } from 'react';
+import { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
+
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/input/InputEx/Menu';
@@ -11,7 +12,7 @@ const StyledMenu = styled(Menu)<{ $width?: string }>`
   width: ${({ $width }) => ($width ? $width : 'auto')};
 `;
 
-const preventDefault = (e: React.MouseEvent) => e.preventDefault();
+const preventDefault = (e: MouseEvent) => e.preventDefault();
 const Container = styled.div<{ $iconSizeValue?: string; disabled?: boolean }>`
   display: flex;
   align-items: center;
@@ -55,7 +56,7 @@ export type RenderPropsType<T> = {
 
 export type SuffixSelectProps<T> = {
   /** ref элемента относительно которого будет выравниваться дроп контейнер */
-  alignRef?: React.RefObject<HTMLElement>;
+  alignRef?: RefObject<HTMLElement>;
 
   /** задает выравнивание дроп контейнера относительно компонента */
   dropAlign?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
@@ -84,8 +85,8 @@ export type SuffixSelectProps<T> = {
   /** обработчик события на изменение видимости контейнера с опциями */
   onOpenChange?: (isOpen: boolean) => void;
 
-  renderValue?: (props: RenderPropsType<T>) => React.ReactNode;
-  renderOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderValue?: (props: RenderPropsType<T>) => ReactNode;
+  renderOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   disabled?: boolean;
 
@@ -114,14 +115,14 @@ export const SuffixSelect = <T extends ReactNode>({
   renderValue,
   renderOption,
   ...props
-}: React.PropsWithChildren<SuffixSelectProps<T>>) => {
-  const [isOpenState, setIsOpenState] = React.useState<boolean>(false);
+}: PropsWithChildren<SuffixSelectProps<T>>) => {
+  const [isOpenState, setIsOpenState] = useState<boolean>(false);
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const alignContainerRef = props.alignRef === undefined ? containerRef : props.alignRef;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleContainerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault(); // prevent focus stealing from input
     const newOpenStatus = !isOpen;
     props.onOpenChange?.(newOpenStatus);
