@@ -233,11 +233,18 @@ export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputEle
   /** Иконки для отображения в правом углу поля */
   icons?: ReactNode;
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
    */
   alignDropRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой alignDropRef
+   */
+  targetElement?: Element | null;
 
   /** Позволяет добавлять стили и className для выпадающего меню кнопки */
   prefixDropContainerStyle?: DropContainerStyles;
@@ -246,6 +253,7 @@ export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputEle
 export const GlobalSearch: FC<GlobalSearchProps> = ({
   dimension,
   alignDropRef,
+  targetElement,
   placeholder,
   id,
   value,
@@ -348,14 +356,14 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   }, [needSubmit]);
 
   const innerContainerRef = useRef<HTMLDivElement | null>(null);
-  const alignRef = alignDropRef || innerContainerRef;
+  const alignRef = targetElement || alignDropRef?.current || innerContainerRef.current;
   const menuDimension = dimension === 'xl' ? 'l' : dimension;
   const renderPrefix = prefixValueList
     ? (props: RenderProps) => (
         <SuffixSelect
           dropAlign="flex-start"
           dimension={menuDimension}
-          alignRef={alignRef}
+          targetElement={alignRef}
           value={props.value || ''}
           onChange={(value) => onPrefixValueChange?.(value)}
           options={prefixValueList}
@@ -410,7 +418,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         ref={submitButtonRef}
       />
       {displayOptionsVisible && (
-        <Drop alignSelf="stretch" targetRef={containerRef}>
+        <Drop alignSelf="stretch" targetElement={containerRef.current}>
           <Menu
             dimension={dimension === 'xl' ? 'l' : dimension}
             maxHeight="496px"
