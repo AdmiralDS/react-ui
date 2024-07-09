@@ -17,13 +17,15 @@ export const colorTextMixin = css<{ $disabled?: boolean }>`
       : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
-export const backgroundColor = css<{ $selected?: boolean; $hovered?: boolean }>`
-  background: ${({ theme, $selected, $hovered }) =>
+export const backgroundColor = css<{ $preselected: boolean; $selected?: boolean; $hovered?: boolean }>`
+  background: ${({ theme, $selected, $preselected, $hovered }) =>
     $hovered
       ? `var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']})`
-      : $selected
-        ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
-        : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
+      : $preselected
+        ? `var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']})`
+        : $selected
+          ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
+          : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 `;
 
 export const paddings = css<{ $dimension?: ItemDimension }>`

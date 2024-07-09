@@ -19,6 +19,7 @@ import { MenuMultiLineTemplate } from './MenuMultiLine.template';
 import { MenuActionsTwoButtonsTemplate } from './MenuActionsTwoButtons.template';
 import { MenuActionsAddUserValueTemplate } from './MenuActionsAddUserValue.template';
 import { MenuCheckboxGroupTemplate } from './MenuCheckboxGroup.template';
+import { MenuWithPreselectTemplate } from './MenuWithPreselect.template';
 
 // Imports of text sources
 import MenuLargeNumberOfItemsRaw from './MenuLargeNumberOfItems.template?raw';
@@ -36,6 +37,7 @@ import MenuMultiLineRaw from './MenuMultiLine.template?raw';
 import MenuActionsTwoButtonsRaw from './MenuActionsTwoButtons.template?raw';
 import MenuActionsAddUserValueRaw from './MenuActionsAddUserValue.template?raw';
 import MenuCheckboxGroupRaw from './MenuCheckboxGroup.template?raw';
+import MenuWithPreselectRaw from './MenuWithPreselect.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -417,5 +419,30 @@ export const MultiLevelExample = {
     },
   },
   name: 'Многоуровневое меню',
+};
+//</editor-fold>
+
+//<editor-fold desc="Меню c состоянием preselect">
+const MenuWithPreselectStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuWithPreselectTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const MenuWithPreselectExample = {
+  render: MenuWithPreselectStory,
+  parameters: {
+    docs: {
+      source: {
+        code: MenuWithPreselectRaw,
+      },
+      description: {
+        story:
+          'Для активации работы режима preselected в меню необходимо указать preselectedModeActive. Переключение ' +
+          'элементов в состояние preselected может осуществляться в неконтролируемом режиме, а для поиска нужного ' +
+          'элемента меню по нажатию на кнопку необходимо перевести компонент в контролируемый режим и написать обработчик.' +
+          'Пример указан в коде.',
+      },
+    },
+  },
+  name: 'Меню c состоянием preselect',
 };
 //</editor-fold>
