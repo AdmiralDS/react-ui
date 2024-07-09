@@ -80,6 +80,7 @@ export const HeaderCellComponent = React.memo(
         <HeaderCellContent $cellAlign={cellAlign}>
           <HeaderCellTitle
             $sort={sort || 'initial'}
+            $sortable={sortable}
             onClick={sortable ? () => handleSort(name, sort || 'initial') : undefined}
           >
             <TitleContent $dimension={dimension} $sortable={sortable}>
