@@ -95,12 +95,16 @@ export interface DropMenuProps
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Элемент, относительно которого позиционируется портал */
-  targetElement?: Element;
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   *  Компонент, относительно которого необходимо выравнивать выпадающее меню */
   alignMenuRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой alignMenuRef
+   */
+  targetElement?: Element | null;
   /** Компонент, для которого необходимо Menu */
   renderContentProp: (options: RenderContentProps) => ReactNode;
   /** Видимость выпадающего меню */
