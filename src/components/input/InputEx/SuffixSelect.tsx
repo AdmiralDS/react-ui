@@ -55,8 +55,16 @@ export type RenderPropsType<T> = {
 };
 
 export type SuffixSelectProps<T> = {
-  /** ref элемента относительно которого будет выравниваться дроп контейнер */
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * ref элемента относительно которого будет выравниваться дроп контейнер */
   alignRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой alignRef
+   */
+  targetElement?: Element | null;
 
   /** задает выравнивание дроп контейнера относительно компонента */
   dropAlign?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
@@ -101,6 +109,8 @@ export type SuffixSelectProps<T> = {
 };
 
 export const SuffixSelect = <T extends ReactNode>({
+  alignRef,
+  targetElement,
   dropAlign,
   dimension,
   menuWidth,
@@ -119,8 +129,8 @@ export const SuffixSelect = <T extends ReactNode>({
   const [isOpenState, setIsOpenState] = useState<boolean>(false);
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
-  const alignContainerRef = props.alignRef === undefined ? containerRef : props.alignRef;
   const containerRef = useRef<HTMLDivElement>(null);
+  const alignContainerRef = targetElement || alignRef?.current || containerRef.current;
 
   const handleContainerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault(); // prevent focus stealing from input
@@ -156,7 +166,7 @@ export const SuffixSelect = <T extends ReactNode>({
         <StyledDropdownContainer
           role="listbox"
           alignSelf={dropAlign}
-          targetElement={alignContainerRef.current}
+          targetElement={alignContainerRef}
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
           className={dropContainerClassName}

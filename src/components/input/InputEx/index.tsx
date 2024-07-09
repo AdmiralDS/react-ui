@@ -213,11 +213,19 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
    */
   alignDropRef?: RefObject<HTMLElement>;
+
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой alignDropRef
+   */
+  targetElement?: Element | null;
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
@@ -276,6 +284,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       status,
       containerRef = () => null,
       alignDropRef,
+      targetElement,
       icons,
       children,
       className,
@@ -304,7 +313,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     ref,
   ) => {
     const innerContainerRef = useRef<HTMLDivElement | null>(null);
-    const alignRef = alignDropRef || innerContainerRef;
+    const alignRef = targetElement || alignDropRef?.current || innerContainerRef.current;
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
@@ -312,7 +321,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-start"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            alignRef={alignRef}
+            targetElement={alignRef}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
             options={prefixValueList}
@@ -335,7 +344,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-end"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            alignRef={alignRef}
+            targetElement={alignRef}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
             options={suffixValueList}
