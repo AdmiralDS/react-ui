@@ -98,6 +98,9 @@ export default {
     portalTargetRef: {
       control: false,
     },
+    targetElement: {
+      control: false,
+    },
     onSearchButtonClick: {
       control: false,
     },

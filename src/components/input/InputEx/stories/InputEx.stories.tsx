@@ -92,6 +92,9 @@ export default {
     alignDropRef: {
       control: false,
     },
+    targetElement: {
+      control: false,
+    },
     dropContainerCssMixin: {
       control: false,
     },
