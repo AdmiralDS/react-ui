@@ -1,5 +1,8 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
-import * as React from 'react';
+import type { HTMLAttributes, KeyboardEvent, MouseEvent, ReactNode, Ref, RefObject } from 'react';
+import { forwardRef, useRef, useState } from 'react';
+import type { css } from 'styled-components';
+import styled from 'styled-components';
+
 import { keyboardKey } from '../common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
@@ -7,8 +10,6 @@ import type { DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
-import type { css } from 'styled-components';
-import styled from 'styled-components';
 
 const StyledMenu = styled(Menu)<{ $width?: string }>`
   width: ${({ $width }) => ($width ? $width : 'auto')};
@@ -21,15 +22,15 @@ const DropMenuContainer = styled(StyledDropdownContainer)<{
 
 export interface RenderContentProps {
   /** Ref на отрендеренный элемент */
-  buttonRef: React.Ref<HTMLElement>;
+  buttonRef: Ref<HTMLElement>;
   /** Состояние меню */
   menuState: boolean;
   /** Обработчик нажатия клавиш */
-  handleKeyDown?: (e: React.KeyboardEvent<HTMLElement>) => void;
+  handleKeyDown?: (e: KeyboardEvent<HTMLElement>) => void;
   /** Обработчик клика мыши */
-  handleClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  handleClick?: (e: MouseEvent<HTMLElement>) => void;
   /** Иконка для отображения статуса меню */
-  statusIcon?: React.ReactNode;
+  statusIcon?: ReactNode;
   /** Доступность кнопки */
   disabled?: boolean;
 }
@@ -105,27 +106,27 @@ export interface DropMenuProps
   disabled?: boolean;
   // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /**  Компонент, относительно которого необходимо выравнивать выпадающее меню */
-  alignMenuRef?: React.RefObject<HTMLElement>;
   // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
   /** Элемент, относительно которого позиционируется портал */
   targetElement?: Element;
+  alignMenuRef?: RefObject<HTMLElement>;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
-  renderContentProp: (options: RenderContentProps) => React.ReactNode;
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
   dropContainerStyle?: CSSProperties;
+  renderContentProp: (options: RenderContentProps) => ReactNode;
   /** Видимость выпадающего меню */
   isVisible?: boolean;
   /** Колбек на изменение видимости меню */
   onVisibilityChange?: (isVisible: boolean) => void;
 }
 
-export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
+export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
   (
     {
       dimension = 'm',
@@ -163,8 +164,8 @@ export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
     },
     ref,
   ) => {
-    const [isMenuOpenState, setIsMenuOpenState] = React.useState<boolean>(false);
-    const btnRef = React.useRef<HTMLElement>(null);
+    const [isMenuOpenState, setIsMenuOpenState] = useState<boolean>(false);
+    const btnRef = useRef<HTMLElement>(null);
 
     const isMenuOpen = isVisible ?? isMenuOpenState;
     const setIsMenuOpen = (newMenuOpenState: boolean) => {
@@ -172,7 +173,7 @@ export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
       onVisibilityChange(newMenuOpenState);
     };
 
-    const reverseMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const reverseMenu = (e: MouseEvent<HTMLElement>) => {
       if (isMenuOpen)
         onClose?.(); // TODO: убрать после удаления onClose в DropMenuProps
       else onOpen?.(); // TODO: убрать после удаления onOpen в DropMenuProps
@@ -197,7 +198,7 @@ export const DropMenu = React.forwardRef<HTMLDivElement, DropMenuProps>(
       }
     };
 
-    const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    const handleBtnKeyDown = (e: KeyboardEvent<HTMLElement>) => {
       const code = keyboardKey.getCode(e);
       onKeyDown?.(e);
       switch (code) {
