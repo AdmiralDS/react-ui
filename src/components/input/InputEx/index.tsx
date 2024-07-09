@@ -1,9 +1,10 @@
 import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { ForwardedRef, InputHTMLAttributes, ReactNode } from 'react';
+import type { ForwardedRef, InputHTMLAttributes, ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
+import styled, { css } from 'styled-components';
+
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
-import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -158,7 +159,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   }
 `;
 
-const preventDefault = (e: React.MouseEvent) => e.preventDefault();
+const preventDefault = (e: MouseEvent) => e.preventDefault();
 
 const Container = styled.div<{
   disabled?: boolean;
@@ -201,7 +202,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   menuWidth?: string;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  icons?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -216,7 +217,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
    */
-  alignDropRef?: React.RefObject<HTMLElement>;
+  alignDropRef?: RefObject<HTMLElement>;
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
@@ -231,10 +232,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onPrefixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению префикса */
-  renderPrefixValue?: (props: RenderProps) => React.ReactNode;
+  renderPrefixValue?: (props: RenderProps) => ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   /** Значение суффикса */
   suffixValue?: ReactNode;
@@ -246,10 +247,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onSuffixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению суффикса*/
-  renderSuffixValue?: (props: RenderProps) => React.ReactNode;
+  renderSuffixValue?: (props: RenderProps) => ReactNode;
 
   /** Специальный метод для рендера опции списка суффикса по значению */
-  renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -385,7 +386,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       }
     }, [setTooltipVisible]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       setInnerValueState(e.currentTarget.value);
       props.onChange?.(e);
     };
