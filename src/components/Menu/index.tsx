@@ -86,6 +86,8 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: MenuDimensions;
   /** Активная секция Menu */
   active?: string;
+  /** Секция в состоянии preselected  */
+  preselected?: string;
   /** выбранная секция Menu */
   selected?: string | Array<string>;
   /** выбранная по умолчанию секция Menu */
@@ -144,8 +146,17 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
    */
   defaultIsActive?: boolean;
 
-  /** Клик по меню не преводит к перемещению фокуса */
+  /** Клик по меню не приводит к перемещению фокуса */
   preventFocusSteal?: boolean;
+
+  /** Признак включения режима с использованием состояния preselected */
+  preselectedModeActive?: boolean;
+
+  /** Обработчик события preselected */
+  onPreselectItem?: (id: string) => void;
+
+  /** Обработчик нажатия клавиши на активном меню */
+  onMenuKeyDown?: (e: KeyboardEvent) => void;
 }
 
 export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
@@ -154,13 +165,15 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       model,
       defaultSelected,
       selected,
+      preselected,
       active,
+      onPreselectItem,
       onSelectItem,
       onDeselectItem,
       onActivateItem,
       renderTopPanel,
       renderBottomPanel,
-      dimension = 'l',
+      dimension = 'l' as MenuDimensions,
       multiSelection = false,
       disableSelectedOptionHighlight = false,
       onForwardCycleApprove,
@@ -174,6 +187,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       subMenuRenderDirection,
       preventFocusSteal,
       maxHeight,
+      preselectedModeActive = false,
+      onMenuKeyDown,
+
       ...props
     },
     ref,
@@ -221,6 +237,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       defaultSelected ? valueToArray(defaultSelected) : [],
     );
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
+    const [preselectedState, setPreselectedState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
     const wrapperRef = React.useRef<HTMLDivElement | null>(null);
     const subMenuRef = React.useRef<HTMLDivElement | null>(null);
@@ -234,6 +251,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         : valueToArray(selected);
     const activeId = active === undefined ? activeState : active;
 
+    const preselectedId = preselectedModeActive
+      ? preselected === undefined
+        ? preselectedState
+        : preselected
+      : undefined;
+
     const menuRef = React.useRef<HTMLDivElement | null>(null);
 
     const hasTopPanel = !!renderTopPanel;
@@ -242,6 +265,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     const activateItem = (id?: string) => {
       if (activeId !== id) setActiveState(id);
       onActivateItem?.(id);
+    };
+
+    const preselectItem = (id?: string) => {
+      if (preselectedId !== id) setPreselectedState(id);
+      onPreselectItem?.(id);
     };
 
     const handleClickItem = (id: string) => {
@@ -275,24 +303,36 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         switch (code) {
           case keyboardKey[' ']:
           case keyboardKey.Enter: {
-            if (activeId) handleClickItem(activeId);
+            if (preselectedModeActive && !!preselectedId) {
+              handleClickItem(preselectedId);
+            } else if (activeId) handleClickItem(activeId);
+
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowDown: {
-            const nextId = findNextId(activeId);
-            activateItem(nextId);
+            const currentId = preselectedModeActive ? preselectedId : activeId;
+
+            const nextId = findNextId(currentId);
+            if (preselectedModeActive) preselectItem(nextId);
+            else activateItem(nextId);
+
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowUp: {
-            const previousId = findPreviousId(activeId);
-            activateItem(previousId);
+            const currentId = preselectedModeActive ? preselectedId : activeId;
+
+            const previousId = findPreviousId(currentId);
+            if (preselectedModeActive) preselectItem(previousId);
+            else activateItem(previousId);
+
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowRight: {
-            const item = model.find((item) => item.id === activeId);
+            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const item = model.find((item) => item.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
               setSubmenuVisible(true);
             }
@@ -308,6 +348,11 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
             }
             break;
           }
+
+          default: {
+            onMenuKeyDown?.(e);
+            break;
+          }
         }
       }
 
@@ -315,7 +360,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeId, activeState, currentActiveMenu]);
+    }, [active, activeId, activeState, currentActiveMenu, preselectedId]);
 
     React.useEffect(() => {
       if (defaultIsActive) activateMenu?.(wrapperRef);
@@ -335,8 +380,10 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       const hasSubmenu = !!subItems && subItems.length > 0;
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
+      const preselected = preselectedId !== undefined ? preselectedId === id : undefined;
       const renderProps: RenderOptionProps = {
         hovered,
+        preselected,
         selected,
         onLeave: (e: React.MouseEvent<HTMLDivElement>) => {
           if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
@@ -408,6 +455,23 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         }
       }, 0);
     }, [active, activeState, model]);
+
+    React.useLayoutEffect(() => {
+      setTimeout(() => {
+        const preselectedItem = menuRef.current?.querySelector('[data-preselected="true"]');
+
+        if (preselectedItem) {
+          const scrollEventTime = Date.now();
+          setLastScrollEvent(scrollEventTime);
+
+          preselectedItem?.scrollIntoView({
+            behavior: !lastScrollEvent || scrollEventTime - lastScrollEvent < 150 ? 'auto' : 'smooth',
+            inline: 'center',
+            block: 'nearest',
+          });
+        }
+      }, 0);
+    }, [preselected, preselectedState, model]);
 
     const renderSubMenu = () => {
       const activeItem = model.find((item) => item.id === activeId);

@@ -15,6 +15,8 @@ export interface RenderOptionProps {
   key?: string | number;
   /** Активная секция MenuItems */
   selected?: boolean;
+  /** Секция в состоянии preselected */
+  preselected?: boolean;
   /** Акцентная секция MenuItems */
   hovered?: boolean;
   /** Обработчик клика по item */
@@ -61,6 +63,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       hovered,
       dimension = 'l',
       selected = false,
+      preselected = false,
       selfRef,
       onMouseDown,
       onLeave,
@@ -92,8 +95,10 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       <Item
         ref={resolvedRef}
         $dimension={dimension}
+        $preselected={preselected}
         $selected={selected}
         $hovered={hovered}
+        data-preselected={preselected}
         data-hovered={hovered}
         data-disabled={disabled}
         data-readonly={readOnly}
@@ -117,6 +122,7 @@ MenuItem.displayName = 'MenuItem';
 
 const Item = styled.div<{
   $dimension: ItemDimension;
+  $preselected: boolean;
   $selected?: boolean;
   $hovered?: boolean;
   $width?: number;
