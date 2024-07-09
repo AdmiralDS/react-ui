@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { keyboardKey } from '../common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { DropdownContainerProps } from '#src/components/DropdownContainer';
+import type { DropContainerStyles, DropdownContainerProps } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
@@ -35,19 +35,13 @@ export interface RenderContentProps {
   disabled?: boolean;
 }
 
-export interface DropMenuStyleProps {
+export interface DropMenuStyleProps extends DropContainerStyles {
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /**  Ширина меню */
   menuWidth?: string;
   /** Задает максимальную высоту меню */
   menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export interface DropMenuComponentProps
@@ -80,13 +74,10 @@ export interface DropMenuProps
       | 'onBackwardCycleApprove'
     >,
     Pick<DropdownContainerProps, 'onClickOutside'>,
-    Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+    Omit<HTMLAttributes<HTMLElement>, 'onChange'>,
+    DropMenuStyleProps {
   /** Размер компонента */
   dimension?: Dimension;
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
   /** Состояние загрузки */
   loading?: boolean;
   /** Опции выпадающего списка */
@@ -110,15 +101,7 @@ export interface DropMenuProps
   /** Элемент, относительно которого позиционируется портал */
   targetElement?: Element;
   alignMenuRef?: RefObject<HTMLElement>;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Компонент, для которого необходимо Menu */
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
   renderContentProp: (options: RenderContentProps) => ReactNode;
   /** Видимость выпадающего меню */
   isVisible?: boolean;
