@@ -49,9 +49,16 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /** Список вариантов для отображения в опциях */
   options?: string[];
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Референс на контейнер для правильного позиционирования выпадающего списка */
+  /**
+   * @deprecated Будет удалено в 8.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   *  Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой portalTargetRef
+   */
+  targetElement?: Element | null;
 
   /** Обработчик клика по кнопке поиска */
   onSearchButtonClick?: MouseEventHandler<SVGSVGElement>;
@@ -110,6 +117,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       locale,
       dimension = 'm',
       portalTargetRef,
+      targetElement,
       ...props
     },
     ref,
@@ -249,7 +257,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && !props.readOnly && (
           <SuggestDropdownContainer
-            targetElement={portalTargetRef?.current || inputRef.current}
+            targetElement={targetElement || portalTargetRef?.current || inputRef.current}
             alignSelf={alignDropdown}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}
