@@ -203,10 +203,7 @@ export const DragIcon = styled(DragOutline)<{ $disabled?: boolean }>`
   flex-shrink: 0;
   cursor: ${(p) => (p.$disabled ? 'not-allowed' : 'pointer')};
   & *[fill^='#'] {
-    fill: ${({ theme, $disabled }) =>
-      $disabled
-        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
-        : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
+    fill: ${({ theme }) => `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`};
   }
 `;
 
