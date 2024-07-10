@@ -300,7 +300,8 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   flex: 0 0 auto;
   ${cellStyle}
   ${borderStyle}
-  &:hover {
+  cursor: default;
+  &[data-draggable='true'] {
     cursor: pointer;
   }
   align-items: flex-start;
@@ -329,11 +330,12 @@ export const HeaderCellSpacer = styled.div<{ width?: string }>`
   flex-shrink: 0;
 `;
 
-export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial' }>`
+export const HeaderCellTitle = styled.div<{ $sort: 'asc' | 'desc' | 'initial'; $sortable: boolean }>`
   display: inline-flex;
   align-items: flex-start;
   width: 100%;
   overflow: hidden;
+  ${({ $sortable }) => $sortable && 'cursor: pointer;'}
   &:hover {
     ${SortIcon} *[fill^='#'] {
       fill: ${({ theme, $sort }) =>
@@ -360,18 +362,16 @@ export const TitleContent = styled.div<{ $dimension: TableProps['dimension']; $s
     $sortable ? `calc(100% - ${$dimension === 's' || $dimension === 'm' ? 16 : 20}px)` : '100%'};
 `;
 
-export const Title = styled.div<{ $lineClamp: number }>`
+export const Title = styled.div<{ $lineClamp: number; $withTooltip: boolean }>`
   position: relative;
   width: 100%;
   ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
+  ${({ $withTooltip }) => $withTooltip && 'cursor: pointer;'}
 `;
 
-export const ExtraText = styled.div<{ $dimension: TableProps['dimension']; $lineClamp: number }>`
-  position: relative;
-  width: 100%;
+export const ExtraText = styled(Title)<{ $dimension: TableProps['dimension'] }>`
   margin: 2px 0;
   ${extraTextStyle}
-  ${({ $lineClamp }) => ($lineClamp === 1 ? singleLineTitle : multiLineTitle)}
 `;
 
 const rowWidthStyle = css<{ $rowWidth?: number }>`

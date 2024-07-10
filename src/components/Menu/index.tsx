@@ -153,7 +153,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   preselectedModeActive?: boolean;
 
   /** Обработчик события preselected */
-  onPreselectItem?: (id: string) => void;
+  onPreselectItem?: (id?: string) => void;
 
   /** Обработчик нажатия клавиши на активном меню */
   onMenuKeyDown?: (e: KeyboardEvent) => void;

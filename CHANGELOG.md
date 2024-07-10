@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.7.0](https://github.com/AdmiralDS/react-ui/compare/v8.6.0...v8.7.0) (2024-07-09)
+
+
+### Features
+
+* **Button:** добавлен вариант tertiary ([e46057e](https://github.com/AdmiralDS/react-ui/commit/e46057eff6cb14510c9120699e2c7079dd2e0ef1))
+* **Colors:** добавлены новые токены Opacity ([ff34e28](https://github.com/AdmiralDS/react-ui/commit/ff34e28609ba5f3b148a8545600e7b9503be5951))
+* **Flex:** добавлена возможность введения необходимых значений свойств rowGap и columnGap ([ac69427](https://github.com/AdmiralDS/react-ui/commit/ac69427bf2d739dc54fd91131250430c7283878d))
+* **MenuButton:** добавлен вариант tertiary ([9ffe459](https://github.com/AdmiralDS/react-ui/commit/9ffe4598975a84853426b4bdb4914d1c1f5d2835))
+* **MultiButton:** добавлен вариант tertiary ([98415f1](https://github.com/AdmiralDS/react-ui/commit/98415f1c6ec5b70fcc5837eaee4a26688912cb58))
+* **PaginationOne:**  use Button tertiary instead of custom ([7fde055](https://github.com/AdmiralDS/react-ui/commit/7fde0557d61b6d903ea8b9e3dfe18e336d997fb5))
+
+
+### Bug Fixes
+
+* **Field:** исправлена ширина label при displayInline ([442f91e](https://github.com/AdmiralDS/react-ui/commit/442f91ebd9732043603fbd665360ca235b90de42))
+* **Table:** [#1376](https://github.com/AdmiralDS/react-ui/issues/1376) исправлен тип курсора в заголовках таблицы ([4646372](https://github.com/AdmiralDS/react-ui/commit/46463729a1a92f31503dc99f7811d4acbcfa3e90))
+* **TextInput:** [#1310](https://github.com/AdmiralDS/react-ui/issues/1310) focus should stay in input on clear button click ([d57ca64](https://github.com/AdmiralDS/react-ui/commit/d57ca6427e39a5a8f338263a93653f856b746479))
+
 ## [8.6.0](https://github.com/AdmiralDS/react-ui/compare/v8.5.0...v8.6.0) (2024-07-03)
 
 
