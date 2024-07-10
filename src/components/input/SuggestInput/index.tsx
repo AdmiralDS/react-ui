@@ -125,6 +125,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
     const isControlledComponentValue = undefined !== props.value;
 
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const targetNode = targetElement || portalTargetRef?.current || inputRef.current;
     const [isSuggestPanelOpen, setIsSuggestPanelOpen] = useState<boolean>(false);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [activeOption, setActiveOption] = useState<string | undefined>('');
@@ -256,7 +257,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && !props.readOnly && (
           <SuggestDropdownContainer
-            targetElement={targetElement || portalTargetRef?.current || inputRef.current}
+            targetElement={targetNode}
             alignSelf={alignDropdown}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}

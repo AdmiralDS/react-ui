@@ -341,6 +341,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const targetNode = targetElement || portalTargetRef?.current || containerRef.current;
     const valueWrapperRef = useRef<HTMLDivElement>(null);
     const dropDownRef = useRef<HTMLDivElement | null>(null);
     const mutableState = useRef<{ shouldExtendInputValue: boolean }>({
@@ -762,7 +763,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <DropdownContainer
             ref={dropDownRef}
             tabIndex={-1}
-            targetElement={targetElement || portalTargetRef?.current || containerRef.current}
+            targetElement={targetNode}
             data-dimension={dimension}
             alignSelf={alignDropdown}
             dropContainerCssMixin={dropContainerCssMixin}

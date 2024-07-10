@@ -311,7 +311,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     ref,
   ) => {
     const innerContainerRef = useRef<HTMLDivElement | null>(null);
-    const alignRef = targetElement || alignDropRef?.current || innerContainerRef.current;
+    const targetNode = targetElement || alignDropRef?.current || innerContainerRef.current;
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
@@ -319,7 +319,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-start"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            targetElement={alignRef}
+            targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
             options={prefixValueList}
@@ -342,7 +342,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-end"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            targetElement={alignRef}
+            targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
             options={suffixValueList}

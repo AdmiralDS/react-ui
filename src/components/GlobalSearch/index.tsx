@@ -356,14 +356,14 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   }, [needSubmit]);
 
   const innerContainerRef = useRef<HTMLDivElement | null>(null);
-  const alignRef = targetElement || alignDropRef?.current || innerContainerRef.current;
+  const targetNode = targetElement || alignDropRef?.current || innerContainerRef.current;
   const menuDimension = dimension === 'xl' ? 'l' : dimension;
   const renderPrefix = prefixValueList
     ? (props: RenderProps) => (
         <SuffixSelect
           dropAlign="flex-start"
           dimension={menuDimension}
-          targetElement={alignRef}
+          targetElement={targetNode}
           value={props.value || ''}
           onChange={(value) => onPrefixValueChange?.(value)}
           options={prefixValueList}

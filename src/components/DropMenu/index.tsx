@@ -152,6 +152,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
   ) => {
     const [isMenuOpenState, setIsMenuOpenState] = useState<boolean>(false);
     const btnRef = useRef<HTMLElement>(null);
+    const targetNode = targetElement || alignMenuRef?.current || btnRef.current;
 
     const isMenuOpen = isVisible ?? isMenuOpenState;
     const setIsMenuOpen = (newMenuOpenState: boolean) => {
@@ -229,7 +230,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
             ref={ref}
             role="listbox"
             alignSelf={alignSelf}
-            targetElement={targetElement || alignMenuRef?.current || btnRef.current}
+            targetElement={targetNode}
             onClickOutside={clickOutside}
             $dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}

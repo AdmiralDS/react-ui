@@ -128,7 +128,7 @@ export const SuffixSelect = <T extends ReactNode>({
   const isOpen = props.isOpen === undefined ? isOpenState : props.isOpen;
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const alignContainerRef = targetElement || alignRef?.current || containerRef.current;
+  const targetNode = targetElement || alignRef?.current || containerRef.current;
 
   const handleContainerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault(); // prevent focus stealing from input
@@ -164,7 +164,7 @@ export const SuffixSelect = <T extends ReactNode>({
         <StyledDropdownContainer
           role="listbox"
           alignSelf={dropAlign}
-          targetElement={alignContainerRef}
+          targetElement={targetNode}
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
           className={dropContainerClassName}
