@@ -111,14 +111,12 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>
   maxRowCount?: number | 'none';
 
   /**
-   * @deprecated Будет удалено в 8.x.x версии.
+   * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
    * Взамен используйте параметр targetElement.
    *
    * Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню
-   * В 8.x.x версии данный параметр станет обязательным, заменив собой portalTargetRef
-   */
+  /** Элемент, относительно которого позиционируется выпадающее меню */
   targetElement?: Element | null;
 
   /** Ref внутреннего input компонента */
