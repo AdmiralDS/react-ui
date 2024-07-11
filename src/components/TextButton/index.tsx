@@ -49,7 +49,9 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   /** Размер кнопки */
   dimension?: Dimension;
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 4.16.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр iconStart или iconEnd
+   *
    * Иконка кнопки
    */
   icon?: ReactNode;
@@ -60,7 +62,9 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   /** Текст кнопки */
   text?: string;
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 4.16.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр iconStart или iconEnd
+   *
    * Позиционирование иконки. По умолчанию - слева
    */
   displayRight?: boolean;

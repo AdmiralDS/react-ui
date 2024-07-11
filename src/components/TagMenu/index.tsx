@@ -21,18 +21,30 @@ export interface TagMenuProps
     DropMenuComponentProps {
   /** Опции выпадающего списка */
   items?: Array<MenuModelItemProps>;
-  /** @deprecated use items instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.4.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр items
+   *
    * Опции выпадающего списка */
   options?: Array<TagOptionProps>;
   /** Выбранная опция */
   selected?: TagOptionProps;
-  /** @deprecated use onSelectItem instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр onSelectItem
+   *
    * Колбек на изменение выбранной опции */
   onSelectOption?: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметры isVisible и onVisibilityChange
+   *
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметры isVisible и onVisibilityChange
+   *
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
