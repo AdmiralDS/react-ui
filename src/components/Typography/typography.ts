@@ -74,10 +74,9 @@ export const typography = createTypography();
 
 export function createTypography() {
   /**
-   * @deprecated since version 7.12.1
-   * Will be deleted in version 10.x.x
+   * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
    *
-   * use property 'Header/HL3' instead
+   * Взамен используйте свойство 'Header/HL3'
    */
   return {
     'Main/XXL': css`
@@ -92,10 +91,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Header/H1' instead
+     * Взамен используйте свойство 'Header/H1'
      */
     'Main/XL': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -109,10 +107,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Header/H2' instead
+     * Взамен используйте свойство 'Header/H2'
      */
     'Main/L': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -126,10 +123,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Header/H3' instead
+     * Взамен используйте свойство 'Header/H3'
      */
     'Main/M': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -143,10 +139,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Header/H5' instead
+     * Взамен используйте свойство 'Header/H5'
      */
     'Main/S': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -160,10 +155,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Header/H6' instead
+     * Взамен используйте свойство 'Header/H6'
      */
     'Main/XS-bold': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -177,10 +171,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Subtitle/Subtitle 1' instead
+     * Взамен используйте свойство 'Subtitle/Subtitle 1'
      */
     'Main/XS': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -194,10 +187,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Subtitle/Subtitle 2' instead
+     * Взамен используйте свойство 'Subtitle/Subtitle 2'
      */
     'Additional/L-bold': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -211,10 +203,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Body/Body 1 Long' instead
+     * Взамен используйте свойство 'Body/Body 1 Long'
      */
     'Additional/L': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -228,10 +219,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Body/Body 1 Short' instead
+     * Взамен используйте свойство 'Body/Body 1 Short'
      */
     'Additional/M': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -245,10 +235,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Body/Body 2 Long' instead
+     * Взамен используйте свойство 'Body/Body 2 Long'
      */
     'Additional/S': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -262,10 +251,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Subtitle/Subtitle 3' instead
+     * Взамен используйте свойство 'Subtitle/Subtitle 3'
      */
     'Additional/S-bold': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -279,10 +267,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Body/Body 2 Short' instead
+     * Взамен используйте свойство 'Body/Body 2 Short'
      */
     'Additional/XS': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -296,10 +283,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Button/Button 1' instead
+     * Взамен используйте свойство 'Button/Button 1'
      */
     'Button/M': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -315,10 +301,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Button/Button 2' instead
+     * Взамен используйте свойство 'Button/Button 2'
      */
     'Button/S': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
@@ -334,10 +319,9 @@ export function createTypography() {
       text-rendering: geometricPrecision;
     `,
     /**
-     * @deprecated since version 7.12.1
-     * Will be deleted in version 10.x.x
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
      *
-     * use property 'Caption/Caption 1' instead
+     * Взамен используйте свойство 'Caption/Caption 1'
      */
     'Caption/XS': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});

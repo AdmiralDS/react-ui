@@ -1,5 +1,6 @@
 export interface ZIndex {
-  /** @deprecated do not use */
+  /** @deprecated Помечено как deprecated в версии 5.1.0, будет удалено в версии 9.х.х
+   * Do not use */
   spinner: number;
   tooltip: number;
   notification: number;
