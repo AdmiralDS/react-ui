@@ -139,7 +139,8 @@ const IconWrapper = styled.div<{
 
 type Dimension = 'xs' | 's' | 'm' | 'l' | 'xl';
 /**
- * @deprecated Use alternative values 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4'
+ * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
+ * Используйте альтернативные значения 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4'
  */
 type Appearance = 'white' | 'light' | 'grey' | 'dark';
 export type AvatarAppearance = 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4' | Appearance;

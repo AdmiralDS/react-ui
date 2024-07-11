@@ -52,9 +52,18 @@ type MenuProps = {
 
 // TODO: в дальнейшем удалить параметр name, сделать параметры id и title обязательными
 export interface PaneColumn {
-  /** @deprecated Используйте id для уникального идентификатора колонки и title для заголовка колонки */
+  /**
+   * @deprecated Помечено как deprecated в версии 5.1.0, будет удалено в 9.x.x версии.
+   * Используйте id для уникального идентификатора колонки и title для заголовка колонки
+   **/
   name?: string;
+  /** Уникальный идентификатор колонки
+   * В 9.x.x версии данный параметр станет обязательным, заменив собой name
+   */
   id?: string;
+  /** Заголовок колонки
+   * В 9.x.x версии данный параметр станет обязательным, заменив собой name
+   */
   title?: string;
   visible: boolean;
 }
@@ -86,7 +95,7 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
   onChangeSearchValue?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
-   * @deprecated Будет удалено в 10.x.x версии.
+   * @deprecated Помечено как deprecated в версии 8.4.0, будет удалено в 10.x.x версии.
    * Взамен используйте параметр renderSettingsMenu.
    *
    * Объект, отображаемый в качестве меню настройки
@@ -107,8 +116,12 @@ export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
     inputPlaceholder?: string;
   };
 
-  /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
-   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /**
+   * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в 9.x.x версии.
+   * Взамен используйте  columnsButtonDropContainerStyle.dropContainerCssMixin
+   *
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css
+   **/
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   columnsButtonDropContainerStyle?: DropContainerStyles;

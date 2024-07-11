@@ -34,14 +34,16 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Расположение хинта */
   hintPosition?: HintPositionType;
   /**
-   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * @deprecated Помечено как deprecated в версии 4.11.1, будет удалено в версии 9.х.х.
+   * Взамен используйте rootRef пропсу на DropdownProvider.
+   *
    * Контейнер, в котором будет отрисован тултип через React.createPortal.
    * По умолчанию тултип отрисовывается в document.body
-   * */
+   **/
   container?: never;
   // TODO: Удалить target в 8.x.x версии
   /**
-   * @deprecated Будет удалено в 8.x.x версии.
+   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
    * Взамен используйте параметр targetElement.
    *
    * Ref на элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит
