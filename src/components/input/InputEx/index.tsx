@@ -254,8 +254,12 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  /** @deprecated use columnsButtonDropContainerStyle.dropContainerCssMixin instead
-   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
+  /**
+   * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в 9.x.x версии.
+   * Взамен используйте columnsButtonDropContainerStyle.dropContainerCssMixin
+   *
+   * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css
+   **/
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
   prefixDropContainerStyle?: DropContainerStyles;

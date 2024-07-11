@@ -145,18 +145,30 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   /** Текстовое описание компонента (текст внутри области загрузки файлов).
    * Если к компоненту также нужно добавить label, используйте компонент FileInputField и его проп label*/
   title?: ReactNode;
-  /** @deprecated Используйте взамен проп title
-   * Текст для кнопки при dimension M */
+  /**
+   * @deprecated Помечено как deprecated в версии 3.7.0, будет удалено в 9.x.x версии.
+   * Используйте взамен проп title
+   *
+   * Текст для кнопки при dimension M
+   **/
   description?: ReactNode;
   /** Функция, возвращающая компонент, на который нужно "повесить" файловый инпут */
   renderCustomFileInput?: (option: RenderFileInputProps) => ReactNode;
   /** Список файлов для синхронизации с нативным инпутом */
   files?: Array<File>;
-  /** @deprecated Используйте взамен компонент FileInputField и его проп extraText
-   * Текст будет виден ниже компонента */
+  /**
+   * @deprecated Помечено как deprecated в версии 3.7.0, будет удалено в 9.x.x версии.
+   * Используйте взамен компонент FileInputField и его проп extraText
+   *
+   * Текст будет виден ниже компонента
+   **/
   extraText?: ReactNode;
-  /** @deprecated Используйте взамен компонент FileInputField и его проп status
-   * Установка статуса поля */
+  /**
+   * @deprecated Помечено как deprecated в версии 7.1.0, будет удалено в 9.x.x версии.
+   * Используйте взамен компонент FileInputField и его проп status
+   *
+   * Установка статуса поля
+   **/
   status?: InputStatus;
 }
 

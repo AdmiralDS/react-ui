@@ -22,14 +22,26 @@ export interface MenuButtonProps
   items: Array<MenuModelItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** @deprecated use onSelectItem instead
-   * Колбек на изменение выбранной опции */
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в 10.x.x версии.
+   * Взамен используйте onSelectItem
+   *
+   * Колбек на изменение выбранной опции
+   **/
   onChange?: (id: string) => void;
-  /** @deprecated use onVisibilityChange instead
-   * Колбек на открытие меню */
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в 10.x.x версии.
+   * Взамен используйте onVisibilityChange
+   *
+   * Колбек на открытие меню
+   **/
   onOpen?: () => void;
-  /** @deprecated use onVisibilityChange instead
-   * Колбек на закрытие меню */
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в 10.x.x версии.
+   * Взамен используйте onVisibilityChange
+   *
+   * Колбек на закрытие меню
+   **/
   onClose?: () => void;
   /** Размер компонента */
   dimension?: MenuButtonDimension;

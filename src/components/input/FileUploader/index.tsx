@@ -152,8 +152,9 @@ const FileWrapper = styled.div`
 `;
 
 /**
- * @deprecated Используйте FileInput, FileList, FileItem
- */
+ * @deprecated Помечено как deprecated в версии 3.0.1, будет удалено в 9.x.x версии.
+ * Используйте FileInput, FileList, FileItem
+ **/
 export const FileUploader = React.forwardRef<HTMLInputElement, FileUploaderProps>(
   (
     {

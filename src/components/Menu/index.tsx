@@ -107,15 +107,16 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Позволяет добавить панель внизу под выпадающим списком */
   renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
   /**
-   * Возможность множественного выбора (опции с Checkbox)
+   * @deprecated Помечено как deprecated в версии 4.9.1, будет удалено в 10.x.x версии.
+   * Взамен используйте disableSelectedOptionHighlight
    *
-   * @deprecated use disableSelectedOptionHighlight instead
-   */
+   * Возможность множественного выбора (опции с Checkbox)
+   **/
   multiSelection?: boolean;
   /** Количество строк в меню */
   rowCount?: number;
   /** Возможность отключить подсветку выбранной опции
-   * (например, при множественном выборе, когда у каждой опции есть Checkbox */
+   * (например, при множественном выборе, когда у каждой опции есть Checkbox) */
   disableSelectedOptionHighlight?: boolean;
   onForwardCycleApprove?: () => boolean;
   onBackwardCycleApprove?: () => boolean;

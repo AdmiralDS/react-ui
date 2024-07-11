@@ -25,7 +25,9 @@ export interface EditModeProps
   /** Колбек на изменение значения компонента */
   onChange: ChangeEventHandler<HTMLInputElement>;
   /**
-   * @deprecated Используйте onCancel
+   * @deprecated Помечено как deprecated в версии 6.0.0, будет удалено в 9.x.x версии.
+   * Взамен используйте onCancel
+   *
    * Колбек на нажатие кнопки очистки инпута
    */
   onClear?: () => void;
