@@ -20,7 +20,10 @@ export interface ToastProps {
 }
 
 export interface ToastItemProps {
-  /** @deprecated В дальнейшем для идентификации уведомления будет использоваться render функция.
+  /**
+   * @deprecated Помечено как deprecated в версии 4.4.0, будет удалено в версии 9.х.х.
+   * Взамен для идентификации уведомления используйте render функцию.
+   *
    * Идентификатор уведомления */
   id: ID;
   /** Render функция всплывающего уведомления */
@@ -30,16 +33,25 @@ export interface ToastItemProps {
 export interface IdentifyToastItemProps extends Omit<NotificationProps, 'id'>, IdentifyField {}
 
 export interface IContextProps extends ToastProps {
-  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте addToastItem.
+  /**
+   *  @deprecated Помечено как deprecated в версии 4.4.0, будет удалено в версии 9.х.х.
+   * Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Взамен используйте параметр addToastItem.
+   *
    * Добавление всплывающего уведомления через модель для Notification */
   addToast: (newToast: IdentifyToast) => string;
-  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте removeToastItem.
+  /**
+   * @deprecated Помечено как deprecated в версии 4.4.0, будет удалено в версии 9.х.х.
+   * Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Взамен используйте параметр removeToastItem.
+   *
    * Удаление всплывающего уведомления через модель для Notification */
   removeToast: (removeToast: IdentifyToast) => void;
-  /** @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте removeToastItem.
+  /**
+   * @deprecated Помечено как deprecated в версии 4.4.0, будет удалено в версии 9.х.х.
+   * Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Взамен используйте removeToastItem.
+   *
    * Удаление всплывающего уведомления по идентификатору */
   removeById: (toastId: ID) => void;
   /** Добавление всплывающего уведомления.
