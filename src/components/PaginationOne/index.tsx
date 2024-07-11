@@ -89,8 +89,11 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
 
   /** Задает максимальную высоту выпадающих меню */
   dropMaxHeight?: string | number;
-  /** @deprecated use pageSizeDropContainerStyle.dropContainerCssMixin and
-   * pageNumberDropContainerStyle.dropContainerCssMixin instead.
+  /**
+   * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметры pageSizeDropContainerStyle.dropContainerCssMixin и
+   * pageNumberDropContainerStyle.dropContainerCssMixin.
+   *
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */

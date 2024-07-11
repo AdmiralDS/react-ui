@@ -8,7 +8,9 @@ type FilterProps = {
   /** Функция закрытия меню фильтра */
   closeMenu: () => void;
   /**
-   * @deprecated взамен используйте параметр isFilterActive, задаваемый для столбца
+   * @deprecated Помечено как deprecated в версии 4.3.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр isFilterActive, задаваемый для столбца.
+   *
    * Функция установки состояния фильтра (активный/неактивный).
    * Необходимо для окрашивания иконки фильтра в синий цвет при активном фильтре и в серый при неактивном фильтре.
    */
@@ -80,9 +82,8 @@ export type Column = {
   renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
-// TODO: Удалить в 9.x.x версии
 /**
- * @deprecated Будет удалено в 9.x.x версии.
+ * @deprecated Помечено как deprecated в версии 7.6.0, будет удалено в версии 9.х.х.
  * Взамен используйте для id строк значения типа string
  **/
 export type RowId = string | number;
@@ -97,17 +98,17 @@ export interface TableRow {
   disabled?: boolean;
   /** Чекбокс строки в состоянии disabled */
   checkboxDisabled?: boolean;
-  // TODO: Удалить в 8.x.x версии
   /**
-   * @deprecated Будет удалено в 8.x.x версии.
+   * @deprecated Помечено как deprecated в версии 6.0.0, будет удалено в версии 8.х.х.
    * Взамен используйте параметр status='error'
+   *
    * Строка в состоянии error
    **/
   error?: boolean;
-  // TODO: Удалить в 8.x.x версии
   /**
-   * @deprecated Будет удалено в 8.x.x версии.
+   * @deprecated Помечено как deprecated в версии 6.0.0, будет удалено в версии 8.х.х.
    * Взамен используйте параметр status='success'
+   *
    * Строка в состоянии success
    **/
   success?: boolean;
@@ -214,7 +215,9 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onColumnResize?: (colObj: { name: string; width: string }) => void;
   /**
-   * @deprecated use renderCell prop in Column type
+   * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр renderCell, задаваемый для столбца.
+   *
    * Рендер функция для отрисовки контента ячейки. Входные параметры - объект строки и название столбца
    */
   renderCell?: (row: TableRow, columnName: string) => React.ReactNode;
