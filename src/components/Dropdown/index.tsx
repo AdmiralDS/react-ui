@@ -73,7 +73,8 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 }
 
 /**
- * @deprecated Используйте DropDownContainer
+ * @deprecated Помечено как deprecated в версии 3.0.1, будет удалено в версии 9.х.х.
+ * Взамен используйте DropDownContainer
  */
 export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownProps>>(
   (

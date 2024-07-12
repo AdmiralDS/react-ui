@@ -24,7 +24,8 @@ export interface SelectTreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 
 }
 
 /**
- * @deprecated use Tree component instead
+ * @deprecated Помечено как deprecated в версии 1.2.0, будет удалено в версии 9.х.х.
+ * Взамен используйте Tree
  */
 export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandAll = false, onChange, ...props }) => {
   const [handleGuard, setHandleGuard] = React.useState(false);

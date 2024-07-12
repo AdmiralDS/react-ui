@@ -62,8 +62,10 @@ export interface IContextProps extends ToastProps {
   /** Удаление всплывающего уведомления */
   removeToastItem: (toast: ToastItemProps) => void;
   /**
-   * @deprecated Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
-   * Используйте toastItemList.
+   * @deprecated Помечено как deprecated в версии 4.4.0, будет удалено в версии 9.х.х.
+   * Не рекомендуется использовать в связи с переходом на новую структуру ToastProvider.
+   * Взамен используйте параметр toastItemList.
+   *
    * Список существующих уведомлений
    **/
   toasts: IdentifyToast[];
