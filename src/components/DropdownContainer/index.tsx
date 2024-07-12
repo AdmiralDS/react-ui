@@ -1,7 +1,8 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, HTMLAttributes, PropsWithChildren, RefObject } from 'react';
+import { forwardRef, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
+
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -51,7 +52,7 @@ export interface DropContainerStyles {
   dropContainerStyle?: CSSProperties;
 }
 
-export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DropdownContainerProps extends HTMLAttributes<HTMLDivElement> {
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
@@ -59,7 +60,7 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
    *
    * Ref на элемент, относительно которого позиционируется выпадающее меню
    **/
-  targetRef?: React.RefObject<HTMLElement>;
+  targetRef?: RefObject<HTMLElement>;
   /** Элемент, относительно которого позиционируется выпадающее меню
    * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
    */
@@ -80,7 +81,7 @@ export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElem
   dropContainerCssMixin?: ReturnType<typeof css>;
 }
 
-export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWithChildren<DropdownContainerProps>>(
+export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
   (
     {
       targetRef,
@@ -93,26 +94,26 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
     },
     ref,
   ) => {
-    const containerRef = React.useRef<HTMLDivElement | null>(null);
-    const [displayUpward, setDisplayUpward] = React.useState(false);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [displayUpward, setDisplayUpward] = useState(false);
 
     const targetNode = targetElement ?? targetRef?.current;
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
-    const { rootRef } = React.useContext(DropdownContext);
+    const { rootRef } = useContext(DropdownContext);
 
     const handleClickOutside = (e: Event) => {
       if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
     };
     useClickOutside([containerRef], handleClickOutside);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (containerRef.current !== document.activeElement) {
         containerRef?.current?.focus();
       }
     }, []);
 
-    const checkDropdownPosition = React.useCallback(() => {
+    const checkDropdownPosition = useCallback(() => {
       const node = containerRef.current;
       if (node && targetNode) {
         const rect = node.getBoundingClientRect();
@@ -162,13 +163,13 @@ export const DropdownContainer = React.forwardRef<HTMLDivElement, React.PropsWit
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
-    React.useEffect(() => {
+    useEffect(() => {
       if (containerRef.current) {
         containerRef.current.style.opacity = '1';
       }
     }, []);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       addDropdown?.(containerRef);
       return () => {
         removeDropdown?.(containerRef);

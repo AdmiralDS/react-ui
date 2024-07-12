@@ -1,7 +1,16 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
+import type {
+  CSSProperties,
+  FunctionComponent,
+  MouseEventHandler,
+  KeyboardEvent,
+  ReactNode,
+  RefObject,
+  SVGProps,
+} from 'react';
+import { forwardRef, useEffect, useReducer, useRef, useState, useMemo, Children } from 'react';
 import type { css } from 'styled-components';
 import styled, { useTheme } from 'styled-components';
+
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
 import { keyboardKey } from '../../common/keyboardKey';
@@ -40,12 +49,18 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   /** Список вариантов для отображения в опциях */
   options?: string[];
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Референс на контейнер для правильного позиционирования выпадающего списка */
-  portalTargetRef?: React.RefObject<HTMLElement>;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Референс на контейнер для правильного позиционирования выпадающего списка
+   **/
+  portalTargetRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню */
+  targetElement?: Element | null;
 
   /** Обработчик клика по кнопке поиска */
-  onSearchButtonClick?: React.MouseEventHandler<SVGSVGElement>;
+  onSearchButtonClick?: MouseEventHandler<SVGSVGElement>;
 
   /**
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
@@ -57,7 +72,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   dropMaxHeight?: string | number;
 
   /** Компонент для отображения альтернативной иконки */
-  icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  icon?: FunctionComponent<SVGProps<SVGSVGElement>>;
 
   /** Статус поля */
   status?: InputStatus;
@@ -70,7 +85,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
    **/
   locale?: {
     /** Текст сообщения при отсутствии вариантов для подстановки */
-    emptyMessage?: React.ReactNode;
+    emptyMessage?: ReactNode;
   };
 
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
@@ -81,7 +96,7 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
   dropContainerStyle?: CSSProperties;
 }
 
-export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps>(
+export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
   (
     {
       options,
@@ -101,6 +116,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       locale,
       dimension = 'm',
       portalTargetRef,
+      targetElement,
       ...props
     },
     ref,
@@ -108,14 +124,15 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
     const theme = useTheme() || LIGHT_THEME;
     const isControlledComponentValue = undefined !== props.value;
 
-    const inputRef = React.useRef<HTMLInputElement | null>(null);
-    const [isSuggestPanelOpen, setIsSuggestPanelOpen] = React.useState<boolean>(false);
-    const [isFocused, setIsFocused] = React.useState<boolean>(false);
-    const [activeOption, setActiveOption] = React.useState<string | undefined>('');
-    const [searchText, setSearchText] = React.useState<string>(props.value || '');
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const targetNode = targetElement || portalTargetRef?.current || inputRef.current;
+    const [isSuggestPanelOpen, setIsSuggestPanelOpen] = useState<boolean>(false);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
+    const [activeOption, setActiveOption] = useState<string | undefined>('');
+    const [searchText, setSearchText] = useState<string>(props.value || '');
     const currentSearchText = props.value ?? searchText;
 
-    const [, forceUpdate] = React.useReducer((x) => x + 1, 0);
+    const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
     const menuDimension: MenuDimensions = dimension === 'xl' ? 'l' : dimension;
 
@@ -134,13 +151,13 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       setIsSuggestPanelOpen(false);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (options) {
         setIsSuggestPanelOpen(isFocused);
       }
     }, [isFocused, options]);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
 
       // prevent submit form on Enter press when selection is available
@@ -154,16 +171,16 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     };
 
-    const [blurTrigger, triggerDelayedBlur] = React.useState<undefined | unknown>();
+    const [blurTrigger, triggerDelayedBlur] = useState<undefined | unknown>();
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (blurTrigger) {
         const timeoutID = setTimeout(() => setIsFocused(false), 200);
         return () => clearTimeout(timeoutID);
       }
     }, [blurTrigger, setIsFocused]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       function onInputChange(this: HTMLInputElement) {
         if (!props.onInput && !props.onChange) forceUpdate();
       }
@@ -177,7 +194,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     }, [props.onInput, props.onChange]);
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
@@ -185,7 +202,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
 
     const emptyAtLoading: boolean = (options || []).length === 0 && !!isLoading;
 
-    const model = React.useMemo(() => {
+    const model = useMemo(() => {
       if (options) {
         return options.map((text, index) => ({
           id: text,
@@ -205,7 +222,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       }
     }, [options, dimension, currentSearchText]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (isSuggestPanelOpen) {
         setActiveOption(options ? options[0] : '');
       }
@@ -240,7 +257,7 @@ export const SuggestInput = React.forwardRef<HTMLInputElement, SuggestInputProps
       >
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && !props.readOnly && (
           <SuggestDropdownContainer
-            targetElement={portalTargetRef?.current || inputRef.current}
+            targetElement={targetNode}
             alignSelf={alignDropdown}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}

@@ -1,9 +1,10 @@
 import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { ForwardedRef, InputHTMLAttributes, ReactNode } from 'react';
+import type { ForwardedRef, InputHTMLAttributes, ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
+import styled, { css } from 'styled-components';
+
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { containerHeights, skeletonMixin } from '#src/components/input/Container';
-import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -158,7 +159,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   }
 `;
 
-const preventDefault = (e: React.MouseEvent) => e.preventDefault();
+const preventDefault = (e: MouseEvent) => e.preventDefault();
 
 const Container = styled.div<{
   disabled?: boolean;
@@ -201,7 +202,7 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   menuWidth?: string;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  icons?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -212,11 +213,17 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   /** Ref контейнера компонента */
   containerRef?: ForwardedRef<HTMLDivElement>;
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+  /**
+   * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
-   */
-  alignDropRef?: React.RefObject<HTMLElement>;
+   **/
+  alignDropRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню,
+   * если не указан, выравнивание произойдет относительно контейнера компонента */
+  targetElement?: Element | null;
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
@@ -231,10 +238,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onPrefixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению префикса */
-  renderPrefixValue?: (props: RenderProps) => React.ReactNode;
+  renderPrefixValue?: (props: RenderProps) => ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   /** Значение суффикса */
   suffixValue?: ReactNode;
@@ -246,10 +253,10 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
   onSuffixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению суффикса*/
-  renderSuffixValue?: (props: RenderProps) => React.ReactNode;
+  renderSuffixValue?: (props: RenderProps) => ReactNode;
 
   /** Специальный метод для рендера опции списка суффикса по значению */
-  renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -279,6 +286,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       status,
       containerRef = () => null,
       alignDropRef,
+      targetElement,
       icons,
       children,
       className,
@@ -307,7 +315,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     ref,
   ) => {
     const innerContainerRef = useRef<HTMLDivElement | null>(null);
-    const alignRef = alignDropRef || innerContainerRef;
+    const targetNode = targetElement || alignDropRef?.current || innerContainerRef.current;
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
@@ -315,7 +323,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-start"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            alignRef={alignRef}
+            targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
             options={prefixValueList}
@@ -338,7 +346,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
             dropAlign="flex-end"
             dimension={menuDimension}
             menuWidth={menuWidth}
-            alignRef={alignRef}
+            targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}
             options={suffixValueList}
@@ -389,7 +397,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       }
     }, [setTooltipVisible]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       setInnerValueState(e.currentTarget.value);
       props.onChange?.(e);
     };

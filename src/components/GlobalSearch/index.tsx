@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
-import type { FC, ReactNode } from 'react';
+import type { ChangeEvent, FC, HTMLAttributes, InputHTMLAttributes, ReactNode, RefObject } from 'react';
 import { useEffect, useRef, useState, Children } from 'react';
+
 import type { MenuItemProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -195,7 +196,7 @@ const SubmitButton = styled.div`
   }
 `;
 
-export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
 
@@ -209,7 +210,7 @@ export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLIn
   isLoading?: boolean;
 
   /** Пропсы для кнопки поиска*/
-  submitButtonProps?: React.HTMLAttributes<HTMLDivElement>;
+  submitButtonProps?: HTMLAttributes<HTMLDivElement>;
 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
@@ -224,19 +225,26 @@ export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLIn
   onPrefixValueChange?: (value: ReactNode) => void;
 
   /** Специальный метод для рендера компонента по значению префикса */
-  renderPrefixValue?: (props: RenderProps) => React.ReactNode;
+  renderPrefixValue?: (props: RenderProps) => ReactNode;
 
   /** Специальный метод для рендера опции списка префикса по значению */
-  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => React.ReactNode;
+  renderPrefixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  icons?: ReactNode;
 
-  // TODO: провести рефактор параметра в рамках задачи https://github.com/AdmiralDS/react-ui/issues/1083
-  /** Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
+  /**
+   * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
+   * Взамен используйте параметр targetElement.
+   *
+   * Ref контейнера, относительно которого нужно выравнивать дроп контейнеры,
    * если не указан, выравнивание произойдет относительно контейнера компонента
-   */
-  alignDropRef?: React.RefObject<HTMLElement>;
+   **/
+  alignDropRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню,
+   * если не указан, выравнивание произойдет относительно контейнера компонента
+   **/
+  targetElement?: Element | null;
 
   /** Позволяет добавлять стили и className для выпадающего меню кнопки */
   prefixDropContainerStyle?: DropContainerStyles;
@@ -245,6 +253,7 @@ export interface GlobalSearchProps extends Omit<React.InputHTMLAttributes<HTMLIn
 export const GlobalSearch: FC<GlobalSearchProps> = ({
   dimension,
   alignDropRef,
+  targetElement,
   placeholder,
   id,
   value,
@@ -320,7 +329,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
 
   const iconCount = iconArray.length;
 
-  const handleInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDisplayOptionsVisible(true);
     setTempValue('');
     inputProps.onChange?.(e.target.value);
@@ -347,14 +356,14 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   }, [needSubmit]);
 
   const innerContainerRef = useRef<HTMLDivElement | null>(null);
-  const alignRef = alignDropRef || innerContainerRef;
+  const targetNode = targetElement || alignDropRef?.current || innerContainerRef.current;
   const menuDimension = dimension === 'xl' ? 'l' : dimension;
   const renderPrefix = prefixValueList
     ? (props: RenderProps) => (
         <SuffixSelect
           dropAlign="flex-start"
           dimension={menuDimension}
-          alignRef={alignRef}
+          targetElement={targetNode}
           value={props.value || ''}
           onChange={(value) => onPrefixValueChange?.(value)}
           options={prefixValueList}
@@ -409,7 +418,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
         ref={submitButtonRef}
       />
       {displayOptionsVisible && (
-        <Drop alignSelf="stretch" targetRef={containerRef}>
+        <Drop alignSelf="stretch" targetElement={containerRef.current}>
           <Menu
             dimension={dimension === 'xl' ? 'l' : dimension}
             maxHeight="496px"

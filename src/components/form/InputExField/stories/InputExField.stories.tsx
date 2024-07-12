@@ -85,6 +85,9 @@ export default {
     alignDropRef: {
       control: false,
     },
+    targetElement: {
+      control: false,
+    },
     containerRef: {
       control: false,
     },
