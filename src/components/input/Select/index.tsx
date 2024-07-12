@@ -287,11 +287,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(forcedOpen);
     const [isFocused, setIsFocused] = useState(false);
+    const [preselected, setPreseleceted] = useState<string | undefined>(undefined);
 
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
 
-    const calcRowCount = useMemo<number | 'none'>(() => {
+    const calcRowCount = useMemo<string | number | 'none'>(() => {
       if (maxRowCount !== 'none' && maxRowCount > 0) return maxRowCount;
 
       return idleHeight === 'fixed' ? 1 : 'none';
@@ -301,6 +302,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const externalValue = value ?? defaultValue;
     const selectedArray = useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
+    const isKeyboardEvent = useRef<boolean>(false);
 
     const unmountedSelectedOptions = useRef<Array<string>>([]);
 
@@ -563,6 +565,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       };
     }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
+    useEffect(() => {
+      function handleKeyUp() {
+        isKeyboardEvent.current = false;
+      }
+
+      containerRef.current?.addEventListener('keyup', handleKeyUp);
+      return () => {
+        containerRef.current?.removeEventListener('keyup', handleKeyUp);
+      };
+    }, []);
+
     const onFocus = (evt: FocusEvent<HTMLDivElement>) => {
       if (!isFocused) {
         setIsFocused(true);
@@ -581,6 +594,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const handleNativeControlChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+      if (isKeyboardEvent.current && modeIsSelect) {
+        setPreseleceted(evt.target.value);
+        return;
+      }
+
       const value = multiple ? Array.from(evt.target.selectedOptions).map((option) => option.value) : evt.target.value;
 
       let newSelectedArray: Array<string> = [];
@@ -615,6 +633,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (selectIsUncontrolled) {
         setSelectedValue(multiple ? newSelectedArray : value);
       }
+
       props.onChange?.(evt);
       onSelectedChange?.(multiple ? newSelectedArray : value);
     };
@@ -699,6 +718,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const dropContainerProps = passDropdownDataAttributes(props);
     const menuProps = passMenuDataAttributes(props);
+
+    const handleMenuKeyDown = () => {
+      isKeyboardEvent.current = true;
+    };
 
     return (
       <SelectWrapper
@@ -788,6 +811,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               containerRef={dropDownRef}
               virtualScroll={virtualScroll}
               preventFocusSteal
+              preselectedModeActive={modeIsSelect}
+              preselected={preselected}
+              onPreselectItem={setPreseleceted}
+              onMenuKeyDown={handleMenuKeyDown}
               {...menuProps}
             />
           </DropdownContainer>
