@@ -261,7 +261,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onInputKeyUp,
       onInputKeyUpCapture,
       onInputKeyDownCapture,
-      searchFormat = 'wholly',
+      searchFormat = 'wholly' as SearchFormat,
       onFilterItem = defaultFilterItem,
       virtualScroll,
       title,
@@ -292,13 +292,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
 
-    const calcRowCount = useMemo<string | number | 'none'>(() => {
+    const calcRowCount = useMemo<number | 'none'>(() => {
       if (maxRowCount !== 'none' && maxRowCount > 0) return maxRowCount;
 
       return idleHeight === 'fixed' ? 1 : 'none';
     }, [maxRowCount, idleHeight]);
 
     const fixedHeight = calcRowCount !== 'none';
+    // const maxRowCount = calcRowCount !== 'none' ? calcRowCount ;
 
     const externalValue = value ?? defaultValue;
     const selectedArray = useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);
