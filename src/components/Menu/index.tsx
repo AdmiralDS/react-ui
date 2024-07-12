@@ -239,11 +239,13 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     );
     const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
     const [preselectedState, setPreselectedState] = React.useState<string | undefined>(uncontrolledActiveValue);
-    const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
+    // const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
     const wrapperRef = React.useRef<HTMLDivElement | null>(null);
     const subMenuRef = React.useRef<HTMLDivElement | null>(null);
     const activeItemRef = React.useRef<HTMLDivElement | null>(null);
     const [submenuVisible, setSubmenuVisible] = React.useState<boolean>(false);
+
+    const lastScrollEvent = React.useRef<number | undefined>();
 
     const innerSelected = disableSelectedOptionHighlight
       ? []
@@ -440,39 +442,42 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    React.useLayoutEffect(() => {
-      setTimeout(() => {
-        const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
-
-        if (hoveredItem) {
-          const scrollEventTime = Date.now();
-          setLastScrollEvent(scrollEventTime);
-
-          hoveredItem?.scrollIntoView({
-            behavior: !lastScrollEvent || scrollEventTime - lastScrollEvent < 150 ? 'auto' : 'smooth',
-            inline: 'center',
-            block: 'nearest',
-          });
-        }
-      }, 0);
-    }, [active, activeState, model]);
+    const previousActive = React.useRef<string | undefined>();
+    const previousActiveState = React.useRef<string | undefined>();
+    const previousPreselected = React.useRef<string | undefined>();
+    const previousPreselectedState = React.useRef<string | undefined>();
 
     React.useLayoutEffect(() => {
       setTimeout(() => {
-        const preselectedItem = menuRef.current?.querySelector('[data-preselected="true"]');
+        let itemToScroll;
 
-        if (preselectedItem) {
+        if (previousActive.current !== active || previousActiveState.current !== activeState) {
+          itemToScroll = menuRef.current?.querySelector('[data-hovered="true"]');
+        } else if (
+          previousPreselected.current !== preselected ||
+          previousPreselectedState.current !== preselectedState
+        ) {
+          itemToScroll = menuRef.current?.querySelector('[data-preselected="true"]');
+        }
+
+        if (itemToScroll) {
           const scrollEventTime = Date.now();
-          setLastScrollEvent(scrollEventTime);
+          const lastEventTime = lastScrollEvent.current;
 
-          preselectedItem?.scrollIntoView({
-            behavior: !lastScrollEvent || scrollEventTime - lastScrollEvent < 150 ? 'auto' : 'smooth',
+          itemToScroll?.scrollIntoView({
+            behavior: !lastEventTime || scrollEventTime - lastEventTime < 150 ? 'auto' : 'smooth',
             inline: 'center',
             block: 'nearest',
           });
+
+          lastScrollEvent.current = scrollEventTime;
+          previousActive.current = active;
+          previousActiveState.current = activeState;
+          previousPreselected.current = preselected;
+          previousPreselectedState.current = preselectedState;
         }
       }, 0);
-    }, [preselected, preselectedState, model]);
+    }, [active, activeState, preselected, preselectedState, model]);
 
     const renderSubMenu = () => {
       const activeItem = model.find((item) => item.id === activeId);

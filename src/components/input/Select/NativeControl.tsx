@@ -47,7 +47,7 @@ export const NativeControl = forwardRef<HTMLSelectElement, NativeSelectProps>(
       <NativeSelect ref={refSetter(ref, selectRef)} {...props} onClick={stopPropagation}>
         <option value="" />
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.value}
           </option>
         ))}

@@ -61,7 +61,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
       disabled,
       readOnly,
       hovered,
-      dimension = 'l',
+      dimension = 'l' as ItemDimension,
       selected = false,
       preselected = false,
       selfRef,
