@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 import { Transition } from '#src/components/Table/Row/Transition';
 import { ExpandedRowWrapper, ExpandedRowContent } from '#src/components/Table/style';
@@ -13,7 +13,7 @@ export const ExpandedRow = ({ row, rowRef }: ExpandedRowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setWrapperHeight(row.expanded ? 'auto' : '0px');
   }, []);
 
