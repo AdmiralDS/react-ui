@@ -17,7 +17,7 @@ export type MenuButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost
 export interface MenuButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     DropMenuComponentProps,
-    Omit<ButtonProps, 'onChange'> {
+    Omit<ButtonProps, 'onChange' | 'displayAsSquare'> {
   /** Массив опций */
   items: Array<MenuModelItemProps>;
   /** Выбранная опция */
