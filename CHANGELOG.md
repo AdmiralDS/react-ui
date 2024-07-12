@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.8.0](https://github.com/AdmiralDS/react-ui/compare/v8.7.0...v8.8.0) (2024-07-12)
+
+
+### Features
+
+* **DropMenu:** параметр alignMenuRef помечен как Deprecated ([04c854f](https://github.com/AdmiralDS/react-ui/commit/04c854f8d4f348c968b8855875f2e67b9ce786c7))
+* **GlobalSearch:** параметр alignDropRef помечен как Deprecated ([e4f49ea](https://github.com/AdmiralDS/react-ui/commit/e4f49ea8f10d1530c5e35ff34a182c850765f675))
+* **InputEx:** параметр alignDropRef помечен как Deprecated ([eb873be](https://github.com/AdmiralDS/react-ui/commit/eb873be3346a0a5381d3839f350431a4126bad12))
+* **MenuButton:** удален проп displayAsSquare ([0dd4cf7](https://github.com/AdmiralDS/react-ui/commit/0dd4cf736bca2cf0a2326b7b896c4fe39a4fb342))
+* **Select:** параметр portalTargetRef помечен как Deprecated ([744f3ce](https://github.com/AdmiralDS/react-ui/commit/744f3ce19f8158ca8ef04e44e901e1071f3bf584))
+* **SuggestInput:** параметр portalTargetRef помечен как Deprecated ([e601b6e](https://github.com/AdmiralDS/react-ui/commit/e601b6e4d110d1c4f821a6e2be9faf52596ffc88))
+
+
+### Bug Fixes
+
+* **Table:** [#1387](https://github.com/AdmiralDS/react-ui/issues/1387) исправлен баг с морганием ExpandedRow ([ee25ccf](https://github.com/AdmiralDS/react-ui/commit/ee25ccf5297eb1ef139e30574a45ab7fe61f6533))
+
 ## [8.7.0](https://github.com/AdmiralDS/react-ui/compare/v8.6.0...v8.7.0) (2024-07-09)
 
 
