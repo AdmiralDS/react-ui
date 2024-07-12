@@ -7,7 +7,9 @@ export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
   /**
-   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * @deprecated Помечено как deprecated в версии 4.11.1, будет удалено в версии 9.х.х.
+   * Взамен используйте rootRef пропсу на DropdownProvider
+   *
    * Контейнер, в котором будет отрисован тултип через React.createPortal.
    * По умолчанию тултип отрисовывается в document.body
    */

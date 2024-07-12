@@ -19,9 +19,11 @@ function getHorizontalIconPadding(dimension: Dimension) {
 }
 
 /**
- * @deprecated Используйте iconStart
+ * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
+ * Взамен используйте iconStart или iconEnd
+ *
  * css mixin для установки правильного отступа у иконки
- */
+ **/
 export const PaddingForButtonWithIconLeft = css<{ $displayAsSquare?: boolean }>`
   &[data-dimension='xl'] {
     ${(props) => !props.$displayAsSquare && `padding-left: ${getHorizontalIconPadding('xl')}px;`}
@@ -41,9 +43,11 @@ export const PaddingForButtonWithIconLeft = css<{ $displayAsSquare?: boolean }>`
 `;
 
 /**
- * @deprecated Используйте iconEnd
+ * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
+ * Взамен используйте iconStart или iconEnd
+ *
  * css mixin для установки правильного отступа у иконки
- */
+ **/
 export const PaddingForButtonWithIconRight = css<{ $displayAsSquare?: boolean }>`
   &[data-dimension='xl'] {
     ${(props) => !props.$displayAsSquare && `padding-right: ${getHorizontalIconPadding('xl')}px;`}

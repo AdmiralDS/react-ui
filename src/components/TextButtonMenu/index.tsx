@@ -50,13 +50,22 @@ export interface TextButtonMenuProps
   items: Array<MenuModelItemProps>;
   /** Выбранная опция */
   selected?: string;
-  /** @deprecated use onSelectItem instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр onSelectItem
+   *
    * Колбек на изменение выбранной опции */
   onChange?: (id: string) => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметры isVisible и onVisibilityChange
+   *
    * Колбек на открытие меню */
   onOpen?: () => void;
-  /** @deprecated use isVisible and onVisibilityChange instead
+  /**
+   * @deprecated Помечено как deprecated в версии 3.2.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметры isVisible и onVisibilityChange
+   *
    * Колбек на закрытие меню */
   onClose?: () => void;
   /** Отключение компонента */

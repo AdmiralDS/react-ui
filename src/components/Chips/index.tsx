@@ -42,12 +42,16 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
    * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест) */
   iconEnd?: ReactNode;
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 7.9.0, будет удалено в 9.x.x версии.
+   * Взамен используйте iconStart или iconEnd
+   *
    * Иконка перед текстом Chips'a
    */
   iconBefore?: ReactNode;
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 7.9.0, будет удалено в 9.x.x версии.
+   * Взамен используйте iconStart или iconEnd
+   *
    * Иконка после текста Chips'a.
    * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест)
    */

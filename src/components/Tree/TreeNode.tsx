@@ -31,7 +31,9 @@ export interface TreeNodeRenderOptionProps {
   /** Неопределенное состояние checkbox-а */
   indeterminate?: boolean;
   /**
-   * @deprecated Используйте indent
+   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в версии 9.х.х.
+   * Взамен используйте параметр indent
+   *
    * Уровень дерева item-а
    */
   level?: number;

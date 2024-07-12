@@ -34,7 +34,9 @@ export interface IDateSelectionProps extends IDateBaseProps {
 
 export interface CalendarPropType extends IDateSelectionProps {
   /**
-   * @deprecated Используйте rootRef пропсу на DropdownProvider
+   * @deprecated Помечено как deprecated в версии 4.11.1, будет удалено в версии 9.х.х.
+   * Взамен используйте rootRef пропсу на DropdownProvider.
+   *
    * Контейнер, в котором при необходимости можно отрисовать тултип через ReactDOM.createPortal
    */
   tooltipContainer?: never;

@@ -73,8 +73,11 @@ export interface MenuItemWithCheckboxProps extends MenuItemProps {
   checked?: boolean;
   /** Неопределенное состояние Checkbox */
   indeterminate?: boolean;
-  /** @deprecated will be removed */
-  /** Состояние hovered для Checkbox */
+  /**
+   * @deprecated Помечено как deprecated в версии 4.17.0, будет удалено в 10.x.x версии.
+   *
+   * Состояние hovered для Checkbox
+   **/
   checkboxIsHovered?: boolean;
   /** Ref на Checkbox */
   checkboxRef?: React.RefObject<HTMLInputElement>;

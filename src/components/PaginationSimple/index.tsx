@@ -83,9 +83,10 @@ const Item = styled.button`
 
 export interface PaginationSimpleProps extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
   /**
-   * Общее количество секций
+   * @deprecated Помечено как deprecated в версии 4.8.2, будет удалено в версии 9.х.х.
+   * Взамен используйте children!
    *
-   * @deprecated Do not use! Use children instead!
+   * Общее количество секций
    */
   totalItems?: number;
   /** Номер выбранной секции (нумерация с 0) */

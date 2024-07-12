@@ -79,7 +79,10 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   /** Позволяет определить действия при нажатии на иконку очистки. По умолчанию произойдет очистка выбранных значений */
   onClearIconClick?: () => void;
 
-  /** @deprecated используйте maxRowCount **/
+  /**
+   * @deprecated Помечено как deprecated в версии 3.6.0, будет удалено в 10.x.x версии.
+   * Взамен используйте maxRowCount
+   **/
   idleHeight?: 'full' | 'fixed';
 
   /** Минимальное количество строк поля в режиме multiple */

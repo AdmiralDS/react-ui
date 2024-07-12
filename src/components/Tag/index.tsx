@@ -10,7 +10,8 @@ import { Wrapper, TagCircle, Icon, Text, StatusIcon } from './style';
 export type TagDimension = 'm' | 's';
 
 /**
- * @deprecated Use alternative values 'neutral' | 'success' | 'primary' | 'danger' | 'warning'
+ * @deprecated Помечено как deprecated в версии 4.14.0, будет удалено в версии 9.х.х.
+ * Взамен используйте альтернативные значения 'neutral' | 'success' | 'primary' | 'danger' | 'warning'
  */
 export type DeprecatedTagKind = 'green' | 'blue' | 'red' | 'orange';
 

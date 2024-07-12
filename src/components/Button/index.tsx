@@ -35,7 +35,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   skeleton?: boolean;
 
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
+   * Взамен используйте iconStart или iconEnd
+   *
    * Иконка кнопки
    */
   icon?: ReactNode;
@@ -47,7 +49,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconEnd?: ReactNode;
 
   /**
-   * @deprecated Используйте iconStart или iconEnd
+   * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
+   * Взамен используйте iconStart или iconEnd
+   *
    * Расположение иконки кнопки
    */
   iconPlace?: IconPlace;

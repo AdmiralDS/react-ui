@@ -1,5 +1,8 @@
 export type FileUploadStatus = 'Uploaded' | 'Loading' | 'Error' | 'Queue';
-/** @deprecated use FileUploadingStatus instead */
+/**
+ * @deprecated Помечено как deprecated в версии 4.1.0, будет удалено в версии 9.х.х.
+ * Взамен используйте FileUploadStatus instead
+ **/
 export type Status = FileUploadStatus;
 
 export type Dimension = 'xl' | 'm';

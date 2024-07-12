@@ -1,7 +1,10 @@
 import type { css } from 'styled-components';
 
 export type ButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'white' | 'danger' | 'success';
-/** @deprecated use ButtonAppearance instead */
+/**
+ * @deprecated Помечено как deprecated в версии 4.17.0, будет удалено в 10.x.x версии.
+ * Взамен используйте ButtonAppearance
+ **/
 export type Appearance = ButtonAppearance;
 export type Dimension = 'xl' | 'l' | 'm' | 's';
 

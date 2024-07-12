@@ -54,7 +54,7 @@ export interface DropContainerStyles {
 export interface DropdownContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
-   * @deprecated Будет удалено в 8.x.x версии.
+   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
    * Взамен используйте параметр targetElement.
    *
    * Ref на элемент, относительно которого позиционируется выпадающее меню

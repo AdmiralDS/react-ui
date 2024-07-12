@@ -43,7 +43,8 @@ export interface DropDownMenuProps extends DropdownProps {
 }
 
 /**
- * @deprecated Используйте DropMenu
+ * @deprecated Помечено как deprecated в версии 1.5.0, будет удалено в версии 9.х.х.
+ * Взамен используйте DropMenu
  */
 export const DropDownMenu = React.forwardRef<HTMLDivElement, DropDownMenuProps>(
   ({ children, targetRef, dimension = 'l', alignSelf, onClickOutside, ...props }, ref) => {
