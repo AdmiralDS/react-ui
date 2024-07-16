@@ -129,7 +129,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       if (onExpandedChange) {
         const expandedItems = Object.entries(map)
           .map(([key, item]) => item.node.expanded && key)
-          .filter((id) => !!id);
+          .filter((value): value is string => !!value && typeof value === 'string');
 
         onExpandedChange(expandedItems);
       }
@@ -178,8 +178,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
       if (onCheckedChange) {
         const checkedItems = Object.entries(map)
-          .map(([key, item]) => item.node.checked && key)
-          .filter((id) => !!id);
+          .map(([key, item]) => !!item.node.checked && key)
+          .filter((value): value is string => !!value && typeof value === 'string');
 
         onCheckedChange(checkedItems);
       }
