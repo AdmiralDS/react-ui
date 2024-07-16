@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { T, Tree, TreeNode } from '@admiral-ds/react-ui';
+import { Tree, TreeNode } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 
 const demo1_TreeModel: Array<TreeItemProps> = [
@@ -134,34 +133,21 @@ const demo1_TreeModel: Array<TreeItemProps> = [
   },
 ];
 
-export const TreeWithControlCheckCountTemplate = (props: TreeProps) => {
-  const [dataList, setDataList] = useState<TreeItemProps[]>(demo1_TreeModel);
-  const [countSelected, setCountSelected] = useState(0);
-  const changeTreeValues = (newDataList: Array<TreeItemProps>) => {
-    console.log(newDataList);
-    const findChecked = (arr: Array<TreeItemProps>, checked: Array<string>) => {
-      arr.forEach((el: TreeItemProps) => {
-        if (el?.checked) {
-          checked.push(el.id);
-        }
-        if (Array.isArray(el?.children)) {
-          findChecked(el.children, checked);
-        }
-      });
-
-      return checked;
-    };
-    const checkedList = findChecked(dataList, []);
-    setCountSelected(checkedList.length);
-    setDataList(newDataList);
+export const TreeWithOnChangeHandlerTemplate = (props: TreeProps) => {
+  const handleCheckedChange = (ids: Array<string>) => {
+    console.log('Выбранные элементы:', ids.toString());
+  };
+  const handleExpandedChange = (ids: Array<string>) => {
+    console.log('Развернутые узлы:', ids.toString());
   };
 
   return (
-    <>
-      <T font="Subtitle/Subtitle 1" as="p">
-        Выбрано элементов: {countSelected}
-      </T>
-      <Tree {...props} dimension="s" model={dataList} onChange={changeTreeValues} />
-    </>
+    <Tree
+      {...props}
+      dimension="s"
+      defaultModel={demo1_TreeModel}
+      onCheckedChange={handleCheckedChange}
+      onExpandedChange={handleExpandedChange}
+    />
   );
 };

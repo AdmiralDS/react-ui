@@ -25,6 +25,10 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   defaultModel?: Array<TreeItemProps>;
   /** Признак того, что дерево содержит checkbox-ы */
   withCheckbox?: boolean;
+  /** Обработчик изменения состояния выбранных элементов */
+  onCheckedChange?: (ids: Array<string>) => void;
+  /** Обработчик открытия/закрытия узла дерева */
+  onExpandedChange?: (ids: Array<string>) => void;
 }
 
 const Wrapper = styled.div`
@@ -90,6 +94,8 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       onSelectItem,
       onChange,
       onMouseLeave,
+      onCheckedChange,
+      onExpandedChange,
       ...props
     },
     ref,
@@ -119,6 +125,14 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
     const toggleExpand = (id: string) => {
       map[id].node.expanded = !map[id].node.expanded;
+
+      if (onExpandedChange) {
+        const expandedItems = Object.entries(map)
+          .map(([key, item]) => item.node.expanded && key)
+          .filter((id) => !!id);
+
+        onExpandedChange(expandedItems);
+      }
 
       if (onChange) {
         onChange([...internalModel]);
@@ -161,6 +175,14 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       setChecked(id, !checked);
 
       calculateParentNodeState(map[id]);
+
+      if (onCheckedChange) {
+        const checkedItems = Object.entries(map)
+          .map(([key, item]) => item.node.checked && key)
+          .filter((id) => !!id);
+
+        onCheckedChange(checkedItems);
+      }
 
       if (onChange) {
         onChange([...internalModel]);

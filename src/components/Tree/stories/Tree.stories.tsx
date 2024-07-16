@@ -8,12 +8,14 @@ import { TreeWithCheckboxesTemplate } from './TreeWithCheckboxes.template';
 import { TreeSimpleTemplate } from './TreeSimple.template';
 import { TreeUncontrolledTemplate } from './TreeUncontrolled.template';
 import { TreeWithControlCheckCountTemplate } from './TreeWithControlCheckCount.template';
+import { TreeWithOnChangeHandlerTemplate } from './TreeWithOnChangeHandler.template';
 
 // Imports of text sources
 import TreeWithCheckboxesRaw from './TreeWithCheckboxes.template?raw';
 import TreeSimpleRaw from './TreeSimple.template?raw';
 import TreeUncontrolledRaw from './TreeUncontrolled.template?raw';
 import TreeWithControlCheckCountRaw from './TreeWithControlCheckCount.template?raw';
+import TreeWithOnChangeHandlerRaw from './TreeWithOnChangeHandler.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -153,4 +155,25 @@ export const TreeWithControlCheckCountExample = {
   },
 
   name: 'С контролем количества выбранных',
+};
+
+const TreeWithOnChangeHandlerStory: StoryFn<typeof Tree> = (props) => <TreeWithOnChangeHandlerTemplate {...props} />;
+
+export const TreeWithOnChangeHandlerExample = {
+  render: TreeWithOnChangeHandlerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TreeWithOnChangeHandlerRaw,
+      },
+      description: {
+        story:
+          'События onExpandedChange и onCheckedChange добавлены для упрощения обработки изменений дерева в контролируемом ' +
+          'состоянии',
+      },
+    },
+  },
+
+  name: 'Обработка событий onExpandChange и onCheckedChange',
 };
