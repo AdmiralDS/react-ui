@@ -10,6 +10,7 @@ interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   verticalScroll: boolean;
   scrollbar: number;
   showRowsActions: boolean;
+  bodyRef: any;
 }
 
 export const OverflowMenu: React.FC<OverflowMenuProps> = ({
@@ -19,6 +20,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   verticalScroll,
   scrollbar,
   showRowsActions,
+  bodyRef,
   ...props
 }) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
@@ -31,6 +33,34 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
         if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
       }
     }
+  };
+
+  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: any) => {
+      if (!entry.isIntersecting) {
+        closeMenu();
+      }
+    });
+  };
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, {
+      root: bodyRef.current,
+      threshold: [0, 1.0],
+    });
+
+    if (bodyRef.current && oveflowMenuRef.current) {
+      observer.observe(oveflowMenuRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const closeMenu = () => {
+    const overflowMenuBtn = oveflowMenuRef.current?.querySelector(
+      `button[aria-haspopup='true'][aria-expanded='true']`,
+    ) as HTMLElement;
+    overflowMenuBtn?.click();
   };
 
   return (

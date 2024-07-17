@@ -522,6 +522,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           grey={zebraRows[row.id]?.includes('even')}
           showRowsActions={showRowsActions}
           rowStatusMap={rowStatusMap}
+          bodyRef={scrollBodyRef}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
