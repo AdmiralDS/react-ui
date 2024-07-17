@@ -9,6 +9,7 @@ import {
   ADD_TAB_BUTTON_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 
 const AddTabButtonContainer = styled.div<{ $isHidden?: boolean; $dimension?: TabDimension }>`
@@ -20,14 +21,20 @@ const AddTabButtonContainer = styled.div<{ $isHidden?: boolean; $dimension?: Tab
     height: ${p.$dimension === 'l' ? ADD_TAB_BUTTON_CONTAINER_SIZE_L : ADD_TAB_BUTTON_CONTAINER_SIZE_M}px;
   `}
 `;
+const TooltipedIconPlacement = TooltipHoc(IconPlacement);
 
 export const HorizontalAddTabButton = ({ dimension = 'l', isHidden = false, ...props }: AddTabButtonProps) => {
   const buttonDimension = dimension === 'l' ? 'lBig' : 'mBig';
   return (
     <AddTabButtonContainer $dimension={dimension} $isHidden={isHidden}>
-      <IconPlacement {...props} dimension={buttonDimension} highlightFocus={false}>
+      <TooltipedIconPlacement
+        {...props}
+        dimension={buttonDimension}
+        highlightFocus={false}
+        renderContent={() => `Создать вкладку`}
+      >
         <PlusOutline />
-      </IconPlacement>
+      </TooltipedIconPlacement>
     </AddTabButtonContainer>
   );
 };
