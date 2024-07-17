@@ -53,7 +53,7 @@ interface TabMenuWithOverflowProps extends DropMenuStyleProps {
   renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
 }
 interface TabMenuWithAddTabButtonProps {
-  onAddTab?: (tabId: string) => void;
+  onAddTab?: () => void;
 }
 
 export interface TabMenuIconProps extends TabMenuBaseProps {
