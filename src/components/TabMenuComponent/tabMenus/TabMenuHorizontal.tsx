@@ -39,6 +39,7 @@ export const TabMenuHorizontal = ({
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
+  onAddTab,
   tabsId,
   renderTab,
   renderDropMenuItem,

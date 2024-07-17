@@ -52,6 +52,9 @@ interface TabMenuWithOverflowProps extends DropMenuStyleProps {
   /** Рендер-функция для отрисовки элемента выпадающего списка */
   renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
 }
+interface TabMenuWithAddTabButtonProps {
+  onAddTab?: (tabId: string) => void;
+}
 
 export interface TabMenuIconProps extends TabMenuBaseProps {
   /** Шаг прокрутки при нажатии кнопок вправо/влево */
@@ -63,9 +66,12 @@ export interface HorizontalTabsProps extends TabMenuBaseProps {
   dimension?: TabDimension;
 }
 
-export interface TabMenuHorizontalProps extends TabMenuBaseProps, TabMenuWithOverflowProps {}
+export interface TabMenuHorizontalProps
+  extends TabMenuBaseProps,
+    TabMenuWithOverflowProps,
+    TabMenuWithAddTabButtonProps {}
 
-export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps {
+export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
 }

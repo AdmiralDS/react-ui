@@ -14,6 +14,7 @@ export const TabMenuVertical = ({
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
+  onAddTab,
   tabsId,
   renderTab,
   renderDropMenuItem,

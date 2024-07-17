@@ -36,6 +36,7 @@ export const CardTabMenuHorizontal = ({
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
+  onAddTab,
   tabsId,
   renderTab,
   renderDropMenuItem,
