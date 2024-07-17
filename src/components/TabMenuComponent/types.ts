@@ -69,3 +69,5 @@ export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverf
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
 }
+
+export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {}

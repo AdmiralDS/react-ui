@@ -7,7 +7,7 @@ import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { HorizontalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements';
 
 import { HorizontalCardTabMenuContainer } from '#src/components/TabMenuComponent/containers';
-import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import type { CardTabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
@@ -47,7 +47,7 @@ export const CardTabMenuHorizontal = ({
   dropContainerClassName,
   dropContainerStyle,
   ...props
-}: TabMenuHorizontalProps) => {
+}: CardTabMenuHorizontalProps) => {
   //<editor-fold desc="Управление шириной контейнера">
   const [containerWidth, setContainerWidth] = useState(0);
   const visibleContainerRef = useRef<HTMLDivElement>(null);
