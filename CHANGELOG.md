@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.9.0](https://github.com/AdmiralDS/react-ui/compare/v8.8.0...v8.9.0) (2024-07-16)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлен вариант CardTabMenuHorizontal ([cbf4dd0](https://github.com/AdmiralDS/react-ui/commit/cbf4dd00016fac1c87dfab126b0f629c3d68f0e4))
+* **Tree:** добавлены обработчики событий onCheckedChange и onExpandedChange ([2b5002a](https://github.com/AdmiralDS/react-ui/commit/2b5002ad6d1a7aeee60307277e95fba9a6d092d2)), closes [#1401](https://github.com/AdmiralDS/react-ui/issues/1401)
+
 ## [8.8.0](https://github.com/AdmiralDS/react-ui/compare/v8.7.0...v8.8.0) (2024-07-12)
 
 
