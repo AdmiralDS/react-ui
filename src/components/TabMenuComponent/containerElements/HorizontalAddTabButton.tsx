@@ -25,7 +25,7 @@ export const HorizontalAddTabButton = ({ dimension = 'l', isHidden = false, ...p
   const buttonDimension = dimension === 'l' ? 'lBig' : 'mBig';
   return (
     <AddTabButtonContainer $dimension={dimension} $isHidden={isHidden}>
-      <IconPlacement {...props} dimension={buttonDimension}>
+      <IconPlacement {...props} dimension={buttonDimension} highlightFocus={false}>
         <PlusOutline />
       </IconPlacement>
     </AddTabButtonContainer>
