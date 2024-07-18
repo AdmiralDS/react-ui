@@ -41,13 +41,13 @@ export interface TabCloseIconButtonProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 export const TabCloseIconButton = forwardRef<HTMLDivElement, TabCloseIconButtonProps>(
-  ({ dimension = 'l', disabled, onClick, ...props }) => {
+  ({ dimension = 'l', disabled, onClick, ...props }, ref) => {
     const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
       e.stopPropagation();
       onClick?.(e);
     };
     return (
-      <Wrapper {...props} $dimension={dimension} $disabled={disabled} onClick={handleClick}>
+      <Wrapper {...props} ref={ref} $dimension={dimension} $disabled={disabled} onClick={handleClick}>
         <SmallCloseOutline />
       </Wrapper>
     );
