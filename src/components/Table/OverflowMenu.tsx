@@ -39,7 +39,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
     entries.forEach((entry: any) => {
       if (!entry.isIntersecting) {
         /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая
-         * OverflowMenu, становится невидима, н-р, в ходе скролла тела таблицы */
+         * меню, вышла из области видимости тела таблицы, н-р, в ходе вертикального скролла таблицы */
         closeMenu();
       }
     });
