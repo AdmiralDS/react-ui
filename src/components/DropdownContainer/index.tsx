@@ -1,7 +1,7 @@
 import type { CSSProperties, HTMLAttributes, PropsWithChildren, RefObject } from 'react';
 import { forwardRef, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { css } from 'styled-components';
-import styled from 'styled-components';
+import styled, { css as cssHelper } from 'styled-components';
 
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
@@ -13,12 +13,14 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 const Container = styled.div<{
   $alignSelf?: string;
+  $fixed?: boolean;
   $dropContainerCssMixin?: ReturnType<typeof css>;
 }>`
   pointer-events: initial;
   margin: 8px 0;
   flex: 0 0 auto;
   ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf};` : '')};
+  ${(p) => (p.$fixed ? 'position: fixed; bottom: 0;' : '')};
   max-width: calc(100vw - 32px);
   opacity: 0;
   transition-delay: 200ms;
@@ -96,6 +98,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
   ) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = useState(false);
+    const [displayFixed, setDisplayFixed] = useState(false);
 
     const targetNode = targetElement ?? targetRef?.current;
 
@@ -120,13 +123,26 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
         const targetRect = targetNode.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
+
+        // вертикальное позиционирование
+        // if (rect.top < 0 && viewportHeight - targetRect.bottom - 8 < rect.height) {
+        //   console.log('a');
+        //   setDisplayFixed(true);
+        // } else if (rect.bottom > viewportHeight && targetRect.top - 8 < rect.height) {
+        //   console.log('b');
+        //   setDisplayFixed(true);
+        // } else
         if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
+          // console.log('c');
           if (!displayUpward) setDisplayUpward(true);
+          // setDisplayFixed(false);
         } else if (
           targetRect.bottom + (targetRect.top - rect.top) < viewportHeight - 8 ||
           targetRect.top < viewportHeight - targetRect.bottom
         ) {
+          // console.log('d');
           if (displayUpward) setDisplayUpward(false);
+          // setDisplayFixed(false);
         }
 
         if (alignSelf && alignSelf !== 'auto') return;
@@ -185,6 +201,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
             {...props}
             className={className + ' dropdown-container'}
             $alignSelf={alignSelf}
+            $fixed={displayFixed}
             $dropContainerCssMixin={dropContainerCssMixin}
           />
         </Portal>
