@@ -97,7 +97,7 @@ export const TabMenuHorizontal = ({
       const tabWidth = getTabWidthMap(tabsId, hiddenContainerRef.current.children);
       setTabWidthMap(tabWidth);
     }
-  }, [hiddenContainerRef, containerWidth, horizontalTabs]);
+  }, [hiddenContainerRef, containerWidth, horizontalTabs, tabsId]);
 
   useEffect(() => {
     const newVisibleTabs: string[] = [];
@@ -107,15 +107,15 @@ export const TabMenuHorizontal = ({
       const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
       const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
-      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTabInner)?.width;
+      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width;
       let availableWidth = overflowState
         ? maxWidth -
           (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) -
           (activeTabWidth || 0)
         : maxWidth;
-      tabsId.forEach((tabId, index) => {
-        const tabIsActive = tabId === selectedTabInner;
-        const tabWidth = tabWidthMap[index].width;
+      tabWidthMap.forEach(({ tabId, width }) => {
+        const tabIsActive = tabId === selectedTab;
+        const tabWidth = width;
 
         if (availableWidth >= tabWidth || tabIsActive) {
           addToVisible(tabId);
@@ -136,7 +136,7 @@ export const TabMenuHorizontal = ({
     }
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, selectedTabInner]);
+  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, showAddTabButton, selectedTab]);
 
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
