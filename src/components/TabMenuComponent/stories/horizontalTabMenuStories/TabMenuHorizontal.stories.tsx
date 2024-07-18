@@ -4,9 +4,11 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuHorizontal } from '@admiral-ds/react-ui';
 
 import { TabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalTabMenuStories/TabMenuHorizontalTemplate';
+import { TabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalTabMenuStories/TabMenuHorizontalWithAddButtonTemplate';
 
 // Imports of text sources
 import HorizontalTabMenuRaw from './TabMenuHorizontalTemplate?raw';
+import HorizontalTabMenuWithAddButtonRaw from './TabMenuHorizontalWithAddButtonTemplate?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -94,6 +96,27 @@ export const HorizontalTabMenuExample = {
     },
   },
 
-  name: 'HorizontalTabMenu.',
+  name: 'Горизонтальный вариант TabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalTabMenuWithAddButton.">
+const HorizontalTabMenuWithAddButtonStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuHorizontalWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalTabMenuWithAddButtonExample = {
+  render: HorizontalTabMenuWithAddButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalTabMenuWithAddButtonRaw,
+      },
+    },
+  },
+
+  name: 'Горизонтальный вариант TabMenu с возможностью добавления вкладок.',
 };
 //</editor-fold>

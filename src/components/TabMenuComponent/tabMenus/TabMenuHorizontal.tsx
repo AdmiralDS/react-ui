@@ -6,12 +6,15 @@ import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import {
   ActiveHorizontalTabSelector,
+  HorizontalAddTabButton,
   HorizontalTabOverflowMenu,
 } from '#src/components/TabMenuComponent/containerElements';
 
 import { HorizontalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
 import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
+  ADD_TAB_BUTTON_CONTAINER_SIZE_L,
+  ADD_TAB_BUTTON_CONTAINER_SIZE_M,
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
@@ -72,6 +75,7 @@ export const TabMenuHorizontal = ({
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
+  const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
@@ -107,12 +111,16 @@ export const TabMenuHorizontal = ({
       const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
       const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
-      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width;
-      let availableWidth = overflowState
-        ? maxWidth -
-          (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) -
-          (activeTabWidth || 0)
-        : maxWidth;
+      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width || 0;
+      const overflowWidth = overflowState
+        ? (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) + activeTabWidth
+        : 0;
+      const addTabButtonWidth = showAddTabButton
+        ? dimension === 'l'
+          ? ADD_TAB_BUTTON_CONTAINER_SIZE_L
+          : ADD_TAB_BUTTON_CONTAINER_SIZE_M
+        : 0;
+      let availableWidth = maxWidth - overflowWidth - addTabButtonWidth;
       tabWidthMap.forEach(({ tabId, width }) => {
         const tabIsActive = tabId === selectedTab;
         const tabWidth = width;
@@ -189,6 +197,7 @@ export const TabMenuHorizontal = ({
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
       <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
+        {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
         <HorizontalTabOverflowMenu
           items={overflowMenuItems}
           isHidden={!overflowState}
