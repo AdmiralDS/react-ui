@@ -12,7 +12,7 @@ import {
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-import { getActiveTabWidth, getTabWidthMap } from '#src/components/TabMenuComponent/utils';
+import { getTabWidthMap } from '#src/components/TabMenuComponent/utils';
 
 const HiddenContainer = styled.div`
   visibility: hidden;
@@ -151,34 +151,6 @@ export const CardTabMenuHorizontal = ({
       };
     });
   }, [hiddenTabs, dimension]);
-  //</editor-fold>
-
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
-  const [underlineLeft, setUnderlineLeft] = useState(0);
-  const [underlineWidth, setUnderlineWidth] = useState(0);
-  const getActiveTabLeft = () => {
-    const index = visibleTabs.findIndex((tab) => tab === selectedTab);
-    if (index < 0) return 0;
-    let left = 0;
-    for (let i = 0; i < index; i++) {
-      const tabWidth = tabWidthMap.find((tab) => tab.tabId === visibleTabs[i])?.width || 0;
-      left += tabWidth;
-    }
-    return left;
-  };
-  const getUnderlinePosition = () => {
-    const width = selectedTab ? getActiveTabWidth(tabWidthMap, selectedTab) : 0;
-    const left = getActiveTabLeft();
-    return { left: left, width: width };
-  };
-  const styleUnderline = () => {
-    const { left, width } = getUnderlinePosition();
-    setUnderlineWidth(width);
-    setUnderlineLeft(left);
-  };
-  useEffect(() => {
-    styleUnderline();
-  }, [selectedTab, renderedVisibleTabs]);
   //</editor-fold>
 
   return (
