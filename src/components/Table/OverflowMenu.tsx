@@ -10,7 +10,7 @@ interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   verticalScroll: boolean;
   scrollbar: number;
   showRowsActions: boolean;
-  bodyRef: any;
+  bodyRef: React.RefObject<HTMLElement>;
 }
 
 export const OverflowMenu: React.FC<OverflowMenuProps> = ({
@@ -38,6 +38,8 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry: any) => {
       if (!entry.isIntersecting) {
+        /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая
+         * OverflowMenu, становится невидима, н-р, в ходе скролла тела таблицы */
         closeMenu();
       }
     });

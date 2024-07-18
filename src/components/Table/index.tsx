@@ -529,7 +529,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         </RowWrapper>
       );
 
-      return node ? (renderRowWrapper?.(row, index, node) ?? node) : node;
+      return node ? renderRowWrapper?.(row, index, node) ?? node : node;
     };
 
     const renderEmptyMessage = () => {

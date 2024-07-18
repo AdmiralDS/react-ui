@@ -34,7 +34,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
-  bodyRef: any;
+  /** Ref на тело таблицы */
+  bodyRef: React.RefObject<HTMLElement>;
 }
 
 export const RowWrapper = ({
