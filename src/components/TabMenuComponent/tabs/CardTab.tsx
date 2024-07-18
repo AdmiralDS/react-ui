@@ -21,17 +21,7 @@ const selectedTabBorderMixin2 = css`
     background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   }
 `;
-
 const StyledBaseTab = styled(BaseTab)`
-  background-color: ${(p) =>
-    p.$selected ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})` : `transparent`};
-  border-radius: 4px 4px 0 0;
-  border-color: transparent;
-  border-width: 1px;
-  border-style: solid;
-  ${(p) => p.$selected && selectedTabBorderMixin}
-`;
-const StyledBaseTab2 = styled(BaseTab)`
   background-color: ${(p) =>
     p.$selected ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})` : `transparent`};
   border-radius: 4px 4px 0 0;
@@ -47,7 +37,7 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     };
 
     return (
-      <StyledBaseTab2
+      <StyledBaseTab
         {...props}
         id={idForTab}
         ref={ref}
@@ -59,7 +49,7 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
         onClick={handleTabClick}
       >
         {children}
-      </StyledBaseTab2>
+      </StyledBaseTab>
     );
   },
 );
