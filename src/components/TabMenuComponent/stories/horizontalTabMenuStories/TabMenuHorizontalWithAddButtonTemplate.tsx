@@ -121,13 +121,13 @@ export const TabMenuHorizontalWithAddButtonTemplate = ({
     if (tabs.length > 1) {
       const tabIndex = tabs.findIndex((tab) => tab.tabId === tabId);
 
-      if (tabId === selectedTab) {
-        const newSelectedTab = tabs[0].tabId;
-        setSelectedTab(newSelectedTab);
-      }
-
       const newTabs = [...tabs];
       newTabs.splice(tabIndex, 1);
+
+      if (tabId === selectedTab) {
+        const newSelectedTab = newTabs[0].tabId;
+        setSelectedTab(newSelectedTab);
+      }
 
       setTabs(newTabs);
       setTabsMap(getTabsMap(newTabs));
