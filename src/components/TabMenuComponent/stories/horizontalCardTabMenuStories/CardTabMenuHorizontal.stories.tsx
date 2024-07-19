@@ -4,9 +4,11 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, CardTabMenuHorizontal } from '@admiral-ds/react-ui';
 
 import { CardTabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalTemplate';
+import { CardTabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalWithAddButtonTemplate';
 
 // Imports of text sources
 import HorizontalCardTabMenuRaw from './CardTabMenuHorizontalTemplate?raw';
+import HorizontalCardTabMenuWithAddButtonRaw from './CardTabMenuHorizontalWithAddButtonTemplate?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -94,6 +96,27 @@ export const HorizontalCardTabMenuExample = {
     },
   },
 
-  name: 'HorizontalCardTabMenu.',
+  name: 'CardTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalCardTabMenuWithAddButtonWithAddButton.">
+const HorizontalCardTabMenuWithAddButtonStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CardTabMenuHorizontalWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalCardTabMenuWithAddButtonExample = {
+  render: HorizontalCardTabMenuWithAddButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalCardTabMenuWithAddButtonRaw,
+      },
+    },
+  },
+
+  name: 'CardTabMenu с возможностью добавления вкладок.',
 };
 //</editor-fold>
