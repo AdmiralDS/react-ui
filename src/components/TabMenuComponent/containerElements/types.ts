@@ -9,4 +9,4 @@ interface ElementProps {
 
 export interface TabOverflowMenuProps extends Omit<OverflowMenuProps, 'dimension'>, ElementProps {}
 
-export interface AddTabButtonProps extends Omit<IconPlacementProps, 'dimension'>, ElementProps {}
+export interface AddTabButtonProps extends Omit<IconPlacementProps, 'dimension'>, Omit<ElementProps, 'isHidden'> {}

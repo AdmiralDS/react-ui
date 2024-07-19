@@ -12,9 +12,8 @@ import { IconPlacement } from '#src/components/IconPlacement';
 import { TooltipHoc } from '#src/components/TooltipHOC';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 
-const AddTabButtonContainer = styled.div<{ $isHidden?: boolean; $dimension?: TabDimension }>`
+const AddTabButtonContainer = styled.div<{ $dimension?: TabDimension }>`
   box-sizing: border-box;
-  visibility: ${(p) => (p.$isHidden ? 'hidden' : 'visible')};
   padding: ${(p) => (p.$dimension === 'l' ? ADD_TAB_BUTTON_CONTAINER_PADDING_L : ADD_TAB_BUTTON_CONTAINER_PADDING_M)}px;
   ${(p) => `
     width: ${p.$dimension === 'l' ? ADD_TAB_BUTTON_CONTAINER_SIZE_L : ADD_TAB_BUTTON_CONTAINER_SIZE_M}px;
@@ -23,10 +22,10 @@ const AddTabButtonContainer = styled.div<{ $isHidden?: boolean; $dimension?: Tab
 `;
 const TooltipedIconPlacement = TooltipHoc(IconPlacement);
 
-export const HorizontalAddTabButton = ({ dimension = 'l', isHidden = false, ...props }: AddTabButtonProps) => {
+export const HorizontalAddTabButton = ({ dimension = 'l', ...props }: AddTabButtonProps) => {
   const buttonDimension = dimension === 'l' ? 'lBig' : 'mBig';
   return (
-    <AddTabButtonContainer $dimension={dimension} $isHidden={isHidden}>
+    <AddTabButtonContainer $dimension={dimension}>
       <TooltipedIconPlacement
         {...props}
         dimension={buttonDimension}
@@ -38,4 +37,4 @@ export const HorizontalAddTabButton = ({ dimension = 'l', isHidden = false, ...p
     </AddTabButtonContainer>
   );
 };
-HorizontalAddTabButton.displayName = 'AddTabButton';
+HorizontalAddTabButton.displayName = 'HorizontalAddTabButton';
