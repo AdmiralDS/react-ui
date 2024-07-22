@@ -178,6 +178,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
         disabled={disabled}
         width={width}
         onSelectTab={onSelectTab}
+        onCloseTab={handleCloseTab}
       />
     );
   };
