@@ -34,6 +34,8 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
+  /** Ref на тело таблицы */
+  bodyRef: React.RefObject<HTMLElement>;
 }
 
 export const RowWrapper = ({
@@ -52,6 +54,7 @@ export const RowWrapper = ({
   grey,
   showRowsActions,
   rowStatusMap,
+  bodyRef,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -109,6 +112,7 @@ export const RowWrapper = ({
           scrollbar={scrollbar}
           onClick={handleOverflowMenuClick}
           showRowsActions={showRowsActions}
+          bodyRef={bodyRef}
         />
       )}
       {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
