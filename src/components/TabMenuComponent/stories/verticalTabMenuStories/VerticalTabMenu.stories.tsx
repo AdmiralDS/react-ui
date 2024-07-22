@@ -4,9 +4,11 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuVertical } from '@admiral-ds/react-ui';
 
 import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
+import { VerticalTabMenuWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/verticalTabMenuStories/VerticalTabMenuWithAddButtonTemplate';
 
 // Imports of text sources
 import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
+import VerticalTabMenuWithAddButtonRaw from './VerticalTabMenuWithAddButtonTemplate?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -103,6 +105,27 @@ export const VerticalTabMenuExample = {
     },
   },
 
-  name: 'VerticalTabMenu.',
+  name: 'Вертикальный вариант TabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="VerticalTabWithAddButtonMenu.">
+const VerticalTabMenuWithAddButtonStory: StoryFn<typeof TabMenuVertical> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <VerticalTabMenuWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const VerticalTabMenuWithAddButtonExample = {
+  render: VerticalTabMenuWithAddButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VerticalTabMenuWithAddButtonRaw,
+      },
+    },
+  },
+
+  name: 'Вертикальный вариант TabMenu с возможностью добавления вкладок..',
 };
 //</editor-fold>
