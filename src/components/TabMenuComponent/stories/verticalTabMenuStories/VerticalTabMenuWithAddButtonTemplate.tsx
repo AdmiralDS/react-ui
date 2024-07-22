@@ -114,9 +114,6 @@ const MenuItemWrapper = styled.div`
 const StyledNotificationItem = styled(NotificationItem)`
   flex-shrink: 0;
 `;
-const TabMenuWrapper = styled.div`
-  flex: 1 1 auto;
-`;
 const getTabsMap = (tabs: TabContentProps[]) => {
   return tabs.map((tab) => tab.tabId || '');
 };
@@ -230,22 +227,20 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
           </NotificationItemContent>
         </StyledNotificationItem>
         <Separator height={20} />
-        <TabMenuWrapper>
-          <TabMenuVertical
-            {...props}
-            dimension={dimension}
-            showUnderline={showUnderline}
-            underlinePosition={underlinePosition}
-            selectedTabId={selectedTab}
-            defaultSelectedTabId={defaultSelectedTabId}
-            onSelectTab={handleSelectTab}
-            onAddTab={handleAddTab}
-            tabsId={tabsMap}
-            renderTab={renderTab}
-            renderDropMenuItem={renderDropMenuItem}
-            tabIsDisabled={tabIsDisabled}
-          />
-        </TabMenuWrapper>
+        <TabMenuVertical
+          {...props}
+          dimension={dimension}
+          showUnderline={showUnderline}
+          underlinePosition={underlinePosition}
+          selectedTabId={selectedTab}
+          defaultSelectedTabId={defaultSelectedTabId}
+          onSelectTab={handleSelectTab}
+          onAddTab={handleAddTab}
+          tabsId={tabsMap}
+          renderTab={renderTab}
+          renderDropMenuItem={renderDropMenuItem}
+          tabIsDisabled={tabIsDisabled}
+        />
       </Wrapper>
     </ThemeProvider>
   );

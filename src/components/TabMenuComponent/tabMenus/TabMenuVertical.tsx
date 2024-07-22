@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import styled from 'styled-components';
 
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
@@ -18,6 +19,11 @@ import {
   VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M,
   VERTICAL_TABS_GAP,
 } from '#src/components/TabMenuComponent/constants';
+
+const Wrapper = styled.div`
+  flex: 1 1 auto;
+  overflow: hidden;
+`;
 
 export const TabMenuVertical = ({
   dimension = 'l',
@@ -165,34 +171,36 @@ export const TabMenuVertical = ({
   //</editor-fold>
 
   return (
-    <VerticalTabMenuContainer
-      {...props}
-      ref={containerRef}
-      $underlinePosition={underlinePosition}
-      $showUnderline={showUnderline}
-    >
-      {renderedVisibleTabs}
-      {showAddTabButton && <VerticalAddTabButton dimension={dimension} onClick={onAddTab} />}
-      <VerticalTabOverflowMenu
-        items={overflowMenuItems}
-        onSelectItem={handleSelectTab}
-        selected={selectedTab}
-        dimension={dimension}
-        isHidden={hiddenTabs.length === 0}
-        alignSelf={alignSelf}
-        menuWidth={menuWidth}
-        menuMaxHeight={menuMaxHeight}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
-      />
-      <ActiveVerticalTabSelector
-        $top={`${underlineTop}px`}
-        $height={`${underlineHeight}px`}
-        $transition={true}
+    <Wrapper>
+      <VerticalTabMenuContainer
+        {...props}
+        ref={containerRef}
         $underlinePosition={underlinePosition}
-      />
-    </VerticalTabMenuContainer>
+        $showUnderline={showUnderline}
+      >
+        {renderedVisibleTabs}
+        {showAddTabButton && <VerticalAddTabButton dimension={dimension} onClick={onAddTab} />}
+        <VerticalTabOverflowMenu
+          items={overflowMenuItems}
+          onSelectItem={handleSelectTab}
+          selected={selectedTab}
+          dimension={dimension}
+          isHidden={hiddenTabs.length === 0}
+          alignSelf={alignSelf}
+          menuWidth={menuWidth}
+          menuMaxHeight={menuMaxHeight}
+          dropContainerCssMixin={dropContainerCssMixin}
+          dropContainerClassName={dropContainerClassName}
+          dropContainerStyle={dropContainerStyle}
+        />
+        <ActiveVerticalTabSelector
+          $top={`${underlineTop}px`}
+          $height={`${underlineHeight}px`}
+          $transition={true}
+          $underlinePosition={underlinePosition}
+        />
+      </VerticalTabMenuContainer>
+    </Wrapper>
   );
 };
 TabMenuVertical.displayName = 'TabMenuVertical';
