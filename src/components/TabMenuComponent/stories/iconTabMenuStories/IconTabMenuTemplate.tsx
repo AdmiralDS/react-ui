@@ -3,7 +3,14 @@ import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType, IconTabProps, TabMenuIconProps } from '@admiral-ds/react-ui';
-import { TabMenuIcon, IconTab, TabText } from '@admiral-ds/react-ui';
+import {
+  TabMenuIcon,
+  IconTab,
+  TabText,
+  NotificationItem,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
@@ -25,19 +32,25 @@ const CustomIconTab = forwardRef<HTMLButtonElement, TabContentProps>(
 );
 
 const tabs = [
-  { text: 'Text1', tabId: '1', icon: <MinusCircleOutline /> },
-  { text: 'Text22', tabId: '2', icon: <MinusCircleOutline /> },
-  { text: 'Text333', tabId: '3', icon: <MinusCircleOutline /> },
-  { text: 'Text4444', tabId: '4', icon: <MinusCircleOutline /> },
-  { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
-  { text: 'Text66666', tabId: '6', icon: <MinusCircleOutline /> },
-  { text: 'Text7777', tabId: '7', icon: <MinusCircleOutline /> },
-  { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
-  { text: 'Text99', tabId: '9', icon: <MinusCircleOutline /> },
+  { text: 'Text01', tabId: '1', icon: <MinusCircleOutline /> },
+  { text: 'Text02', tabId: '2', icon: <MinusCircleOutline /> },
+  { text: 'Text03', tabId: '3', icon: <MinusCircleOutline /> },
+  { text: 'Text04', tabId: '4', icon: <MinusCircleOutline /> },
+  { text: 'Text05', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
+  { text: 'Text06', tabId: '6', icon: <MinusCircleOutline /> },
+  { text: 'Text07', tabId: '7', icon: <MinusCircleOutline /> },
+  { text: 'Text08', tabId: '8', icon: <MinusCircleOutline /> },
+  { text: 'Text09', tabId: '9', icon: <MinusCircleOutline /> },
+  { text: 'Text10', tabId: '10', icon: <MinusCircleOutline /> },
+  { text: 'Text11', tabId: '11', icon: <MinusCircleOutline /> },
+  { text: 'Text12', tabId: '12', icon: <MinusCircleOutline /> },
+  { text: 'Text13', tabId: '13', icon: <MinusCircleOutline /> },
 ];
 
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
 const Wrapper = styled.div`
-  width: 325px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -85,6 +98,17 @@ export const IconTabMenuTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
+        <NotificationItem displayStatusIcon>
+          <NotificationItemTitle>Горизонтальное TabMenu</NotificationItemTitle>
+          <NotificationItemContent>
+            Альтернативный вариант табов. Существует в одном размере - 68px по высоте. Может применяться, например, для
+            отображения банковских карт пользователя.
+            <Separator height={8} />
+            Компонент можно использовать без линии снизу. В случае переполнения появляются кнопки “листания” вкладок. В
+            крайних положениях (справа/слева) соответствующие кнопки стрелок исчезают.
+          </NotificationItemContent>
+        </NotificationItem>
+        <Separator height={40} />
         <TabMenuIcon
           {...props}
           showUnderline={showUnderline}
