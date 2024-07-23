@@ -46,7 +46,9 @@ interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Коллбэк для определения, является ли вкладка disabled */
   tabIsDisabled: (tabId: string) => boolean;
 }
-interface TabMenuWithOverflowProps extends Omit<DropMenuComponentProps, 'onSelectItem'>, DropMenuStyleProps {
+interface TabMenuWithOverflowProps
+  extends Omit<DropMenuComponentProps, 'onSelectItem' | 'targetElement'>,
+    DropMenuStyleProps {
   /** Размер компонента */
   dimension?: TabDimension;
   /** Рендер-функция для отрисовки элемента выпадающего списка */

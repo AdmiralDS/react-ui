@@ -52,7 +52,6 @@ export const TabMenuVertical = ({
   renderBottomPanel,
   onForwardCycleApprove,
   onBackwardCycleApprove,
-  targetElement,
   onClickOutside,
   ...props
 }: TabMenuVerticalProps) => {
@@ -72,7 +71,6 @@ export const TabMenuVertical = ({
     renderBottomPanel,
     onForwardCycleApprove,
     onBackwardCycleApprove,
-    targetElement,
     onClickOutside,
   };
   //<editor-fold desc="Управление высотой контейнера">

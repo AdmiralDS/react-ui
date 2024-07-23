@@ -62,7 +62,6 @@ export const TabMenuHorizontal = ({
   renderBottomPanel,
   onForwardCycleApprove,
   onBackwardCycleApprove,
-  targetElement,
   onClickOutside,
   ...props
 }: TabMenuHorizontalProps) => {
@@ -82,7 +81,6 @@ export const TabMenuHorizontal = ({
     renderBottomPanel,
     onForwardCycleApprove,
     onBackwardCycleApprove,
-    targetElement,
     onClickOutside,
   };
   //<editor-fold desc="Управление шириной контейнера">

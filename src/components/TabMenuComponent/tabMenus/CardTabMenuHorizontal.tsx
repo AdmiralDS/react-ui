@@ -58,7 +58,6 @@ export const CardTabMenuHorizontal = ({
   renderBottomPanel,
   onForwardCycleApprove,
   onBackwardCycleApprove,
-  targetElement,
   onClickOutside,
   ...props
 }: CardTabMenuHorizontalProps) => {
@@ -78,7 +77,6 @@ export const CardTabMenuHorizontal = ({
     renderBottomPanel,
     onForwardCycleApprove,
     onBackwardCycleApprove,
-    targetElement,
     onClickOutside,
   };
   //<editor-fold desc="Управление шириной контейнера">
