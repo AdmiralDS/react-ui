@@ -1,4 +1,5 @@
-import { forwardRef, type ReactNode, useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType, RenderOptionProps, TabMenuVerticalProps, VerticalTabProps } from '@admiral-ds/react-ui';
@@ -9,6 +10,7 @@ import {
   TabIcon,
   VerticalTabBadge,
   TabText,
+  TabCloseIconButton,
   NotificationItem,
   NotificationItemContent,
   NotificationItemTitle,
@@ -23,14 +25,29 @@ interface TabContentProps extends VerticalTabProps {
   badge?: number;
   disabled?: boolean;
   icon?: ReactNode;
+  onCloseTab?: (tabId: string) => void;
 }
 
 interface CustomVerticalTabProps extends TabContentProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
   (
-    { dimension = 'l', disabled, selected, onSelectTab, icon, badge, tabId, text, ...props }: CustomVerticalTabProps,
+    {
+      dimension = 'l',
+      disabled,
+      selected,
+      onSelectTab,
+      icon,
+      badge,
+      tabId,
+      text,
+      onCloseTab,
+      ...props
+    }: CustomVerticalTabProps,
     ref,
   ) => {
+    const handleCloseTab = () => {
+      tabId && onCloseTab?.(tabId);
+    };
     return (
       <VerticalTab
         {...props}
@@ -52,25 +69,28 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
             {badge}
           </VerticalTabBadge>
         )}
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
       </VerticalTab>
     );
   },
 );
 
-const tabs = [
+const tabsBase: TabContentProps[] = [
   { text: 'Text1', tabId: '1', badge: 1 },
   { text: 'Text22', tabId: '2', icon: <MinusCircleOutline /> },
   { text: 'Text333', tabId: '3' },
   { text: 'Text4444', tabId: '4', badge: 4 },
-  { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
+  { text: 'Text55555', tabId: '5', icon: <MinusCircleOutline /> },
   { text: 'Text66666', tabId: '6' },
   { text: 'Text7777 is very very very very long', tabId: '7' },
   { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
   { text: 'Text99', tabId: '9' },
 ];
+let tabCount = tabsBase.length;
 
 const Separator = styled.div<{ height: number }>`
   height: ${(p) => p.height}px;
+  flex-shrink: 0;
 `;
 
 const Wrapper = styled.div`
@@ -79,7 +99,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 800px;
+  height: 700px;
   overflow: hidden;
   align-items: center;
 `;
@@ -88,12 +108,17 @@ const MenuItemWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 `;
 const StyledNotificationItem = styled(NotificationItem)`
   flex-shrink: 0;
 `;
+const getTabsMap = (tabs: TabContentProps[]) => {
+  return tabs.map((tab) => tab.tabId || '');
+};
 
-export const VerticalTabMenuTemplate = ({
+export const VerticalTabMenuWithAddButtonTemplate = ({
   dimension = 'l',
   width = TAB_MENU_WIDTH,
   showUnderline = true,
@@ -107,17 +132,34 @@ export const VerticalTabMenuTemplate = ({
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
-  const tabsMap = useMemo(() => {
-    return tabs.map((tab) => tab.tabId);
-  }, [tabs]);
-
+  const [tabs, setTabs] = useState(tabsBase);
+  const [tabsMap, setTabsMap] = useState(getTabsMap(tabs));
   const [selectedTab, setSelectedTab] = useState<string | undefined>(defaultSelectedTabId);
+
   const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
 
   const tabIsDisabled = (tabId: string) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return !!currentTab?.disabled;
   };
+
+  const handleCloseTab = (tabId: string) => {
+    if (tabs.length > 1) {
+      const tabIndex = tabs.findIndex((tab) => tab.tabId === tabId);
+
+      const newTabs = [...tabs];
+      newTabs.splice(tabIndex, 1);
+
+      if (tabId === selectedTab) {
+        const newSelectedTab = newTabs[0].tabId;
+        setSelectedTab(newSelectedTab);
+      }
+
+      setTabs(newTabs);
+      setTabsMap(getTabsMap(newTabs));
+    }
+  };
+
   const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     const text = currentTab?.text || '';
@@ -136,46 +178,56 @@ export const VerticalTabMenuTemplate = ({
         disabled={disabled}
         width={width}
         onSelectTab={onSelectTab}
+        onCloseTab={handleCloseTab}
       />
     );
   };
+
   const renderDropMenuItem = (tabId: string) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return (options: RenderOptionProps) => {
       return (
         <MenuItem dimension={dimension} {...options} key={tabId}>
-          <MenuItemWrapper>{currentTab?.text}</MenuItemWrapper>
+          <MenuItemWrapper>
+            <div>{currentTab?.text}</div>
+            <TabCloseIconButton
+              dimension={dimension}
+              disabled={tabIsDisabled(tabId)}
+              onClick={() => handleCloseTab(tabId)}
+            />
+          </MenuItemWrapper>
         </MenuItem>
       );
     };
+  };
+
+  const handleAddTab = () => {
+    tabCount += 1;
+    const newId = tabCount.toString();
+    const newText = `Text${newId}`;
+    const newTabs = [...tabs, { tabId: newId, text: newText }];
+    setTabs(newTabs);
+    setTabsMap(getTabsMap(newTabs));
+    setSelectedTab(newId);
   };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <StyledNotificationItem displayStatusIcon>
-          <NotificationItemTitle>Вертикальное TabMenu</NotificationItemTitle>
+          <NotificationItemTitle>Удаление, добавление вкладок</NotificationItemTitle>
           <NotificationItemContent>
-            Вариант компонента с вертикальной компоновкой, используется для переключения между вкладками. Существует в
-            двух размерах - L и M. У компонента так же есть два варианта компоновки и переключения позиции табов: справа
-            и слева. Ширина компонента задается пользователем. Опционально можно выключать серую полоску сбоку и
-            управлять её позицией (справа/слева). В закладках можно включать иконки, бэйджи.
+            Рекомендации
+            <li>При нажатии на иконку закрытия — владка и контент под ней удаляются.</li>
+            <li>Если удалить текущую вкладку, то автоматически включится первая из оставшихся вкладок.</li>
+            <li>При удалении не активной вкладки, вы остаетесь там же, где и были.</li>
+            <li>Удалить все вкладки нельзя, должна остаться хотя бы одна вкладка.</li>
             <Separator height={8} />
-            Если название таба длинное, оно уходит под многоточие в зависимости от ширины таб меню. Дефолтная ширина
-            компонента на странице задается пользователем. При адаптации вместе с шириной комопнента уменьшается зона
-            текстового поля, так как она занимает всю ширину компонента.
-            <Separator height={8} />
-            Если вкладки не помещаются в отведенную высоту целиком, то включается Overflow Menu. Размеры выпадающего
-            меню соответствуют размерам Tab Menu — L для L размера и M для M размера В выпадающем меню отображаются
-            вкладки не поместившиеся в основной столбец. При выборе вкладки из меню – она отображается в основном
-            столбце крайней снизу, заменяя собой предыдущую крайнюю вкладку, которая, в свою очередь, «уходит» в меню.
-            Активная вкладка при этом отображается в меню, как выбранная. При увеличении высоты Vertical Tab Menu,
-            скрытые вкладки становятся видимыми, покидая выпадающее меню и наоброт.
-            <Separator height={8} />В связи с особенностями компоновки на мобильных устройствах рекомендуется применять
-            горизонтальную версию компонента Horizontal Tab Menu.
+            Можно включать опцию добавления вкладок. Механика добавления вкладки настраивается пользователем. При
+            переполнении вкладок (есть меню) кнопка добавления вкладки видна всегда.
           </NotificationItemContent>
         </StyledNotificationItem>
-        <Separator height={40} />
+        <Separator height={20} />
         <TabMenuVertical
           {...props}
           dimension={dimension}
@@ -184,6 +236,7 @@ export const VerticalTabMenuTemplate = ({
           selectedTabId={selectedTab}
           defaultSelectedTabId={defaultSelectedTabId}
           onSelectTab={handleSelectTab}
+          onAddTab={handleAddTab}
           tabsId={tabsMap}
           renderTab={renderTab}
           renderDropMenuItem={renderDropMenuItem}

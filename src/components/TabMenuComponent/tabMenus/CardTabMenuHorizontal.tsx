@@ -4,15 +4,17 @@ import styled from 'styled-components';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
-import { HorizontalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements';
+import { HorizontalAddTabButton, HorizontalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements';
 
 import { HorizontalCardTabMenuContainer } from '#src/components/TabMenuComponent/containers';
-import type { TabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
+import type { CardTabMenuHorizontalProps, TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 import {
+  ADD_TAB_BUTTON_CONTAINER_SIZE_L,
+  ADD_TAB_BUTTON_CONTAINER_SIZE_M,
   OVERFLOW_MENU_CONTAINER_SIZE_L,
   OVERFLOW_MENU_CONTAINER_SIZE_M,
 } from '#src/components/TabMenuComponent/constants';
-import { getActiveTabWidth, getTabWidthMap } from '#src/components/TabMenuComponent/utils';
+import { getTabWidthMap } from '#src/components/TabMenuComponent/utils';
 
 const HiddenContainer = styled.div`
   visibility: hidden;
@@ -36,6 +38,7 @@ export const CardTabMenuHorizontal = ({
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
+  onAddTab,
   tabsId,
   renderTab,
   renderDropMenuItem,
@@ -47,7 +50,7 @@ export const CardTabMenuHorizontal = ({
   dropContainerClassName,
   dropContainerStyle,
   ...props
-}: TabMenuHorizontalProps) => {
+}: CardTabMenuHorizontalProps) => {
   //<editor-fold desc="Управление шириной контейнера">
   const [containerWidth, setContainerWidth] = useState(0);
   const visibleContainerRef = useRef<HTMLDivElement>(null);
@@ -68,6 +71,7 @@ export const CardTabMenuHorizontal = ({
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
+  const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
@@ -103,15 +107,19 @@ export const CardTabMenuHorizontal = ({
       const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
       const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
-      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTabInner)?.width;
-      let availableWidth = overflowState
-        ? maxWidth -
-          (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) -
-          (activeTabWidth || 0)
-        : maxWidth;
-      tabsId.forEach((tabId, index) => {
-        const tabIsActive = tabId === selectedTabInner;
-        const tabWidth = tabWidthMap[index].width;
+      const activeTabWidth = tabWidthMap.find((tab) => tab.tabId === selectedTab)?.width || 0;
+      const overflowWidth = overflowState
+        ? (dimension === 'l' ? OVERFLOW_MENU_CONTAINER_SIZE_L : OVERFLOW_MENU_CONTAINER_SIZE_M) + activeTabWidth
+        : 0;
+      const addTabButtonWidth = showAddTabButton
+        ? dimension === 'l'
+          ? ADD_TAB_BUTTON_CONTAINER_SIZE_L
+          : ADD_TAB_BUTTON_CONTAINER_SIZE_M
+        : 0;
+      let availableWidth = maxWidth - overflowWidth - addTabButtonWidth;
+      tabWidthMap.forEach(({ tabId, width }) => {
+        const tabIsActive = tabId === selectedTab;
+        const tabWidth = width;
 
         if (availableWidth >= tabWidth || tabIsActive) {
           addToVisible(tabId);
@@ -132,7 +140,7 @@ export const CardTabMenuHorizontal = ({
     }
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, selectedTabInner]);
+  }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, showAddTabButton, selectedTab]);
 
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
@@ -152,39 +160,12 @@ export const CardTabMenuHorizontal = ({
   }, [hiddenTabs, dimension]);
   //</editor-fold>
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
-  const [underlineLeft, setUnderlineLeft] = useState(0);
-  const [underlineWidth, setUnderlineWidth] = useState(0);
-  const getActiveTabLeft = () => {
-    const index = visibleTabs.findIndex((tab) => tab === selectedTab);
-    if (index < 0) return 0;
-    let left = 0;
-    for (let i = 0; i < index; i++) {
-      const tabWidth = tabWidthMap.find((tab) => tab.tabId === visibleTabs[i])?.width || 0;
-      left += tabWidth;
-    }
-    return left;
-  };
-  const getUnderlinePosition = () => {
-    const width = selectedTab ? getActiveTabWidth(tabWidthMap, selectedTab) : 0;
-    const left = getActiveTabLeft();
-    return { left: left, width: width };
-  };
-  const styleUnderline = () => {
-    const { left, width } = getUnderlinePosition();
-    setUnderlineWidth(width);
-    setUnderlineLeft(left);
-  };
-  useEffect(() => {
-    styleUnderline();
-  }, [selectedTab, renderedVisibleTabs]);
-  //</editor-fold>
-
   return (
     <Wrapper {...props}>
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
       <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
+        {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
         <HorizontalTabOverflowMenu
           items={overflowMenuItems}
           isHidden={!overflowState}
