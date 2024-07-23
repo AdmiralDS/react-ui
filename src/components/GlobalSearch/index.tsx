@@ -7,7 +7,7 @@ import type { ComponentDimension, ExtraProps } from '#src/components/input/types
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { InputBorderedDiv } from '#src/components/input/TextInput';
-import type { DropContainerProps, DropContainerStyles } from '#src/components/DropdownContainer';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
@@ -20,6 +20,7 @@ import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderProps } from '#src/components/input/InputEx';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -198,7 +199,7 @@ const SubmitButton = styled.div`
 
 export interface GlobalSearchProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
-    Omit<DropContainerProps, 'onClickOutside'> {
+    Pick<DropMenuComponentProps, 'targetElement'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
 
