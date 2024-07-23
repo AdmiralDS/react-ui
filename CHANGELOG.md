@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.10.0](https://github.com/AdmiralDS/react-ui/compare/v8.9.0...v8.10.0) (2024-07-23)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлена возможность добавления и удаления вкладок ([24f2f56](https://github.com/AdmiralDS/react-ui/commit/24f2f56a0de5b17fbae3810a7a9e479efbea3985))
+* **TabMenuHorizontal:** добавлена возможность добавления и удаления вкладок ([934bbfc](https://github.com/AdmiralDS/react-ui/commit/934bbfce80f6b6a304d85e61c11a7b114f660289))
+* **TabMenuVertical:** добавлена возможность добавления и удаления вкладок ([580afa9](https://github.com/AdmiralDS/react-ui/commit/580afa96ff3a09dd0647d9db030176432e7e098b))
+
+
+### Bug Fixes
+
+* **Table:** [#1346](https://github.com/AdmiralDS/react-ui/issues/1346) исправлено поведение OverflowMenu при скролле - если кнопка меню при скролле становится невидима, то меню должно закрыться ([e82d0b4](https://github.com/AdmiralDS/react-ui/commit/e82d0b46478e81e5190848ba200ad4ebda66c431))
+
 ## [8.9.0](https://github.com/AdmiralDS/react-ui/compare/v8.8.0...v8.9.0) (2024-07-16)
 
 
