@@ -1,13 +1,13 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import * as React from 'react';
+
 import type { TagVisualProps, TagSizeProps } from '#src/components/Tag';
 import { Tag } from '#src/components/Tag';
-import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import type { css } from 'styled-components';
 import { refSetter } from '../common/utils/refSetter';
 
 export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps {
@@ -18,7 +18,8 @@ export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVi
 export interface TagMenuProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'>,
     TagSizeProps,
-    DropMenuComponentProps {
+    Omit<DropMenuComponentProps, 'targetElement'>,
+    DropMenuStyleProps {
   /** Опции выпадающего списка */
   items?: Array<MenuModelItemProps>;
   /**
@@ -47,18 +48,6 @@ export interface TagMenuProps
    *
    * Колбек на закрытие меню */
   onClose?: () => void;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
@@ -114,33 +103,33 @@ export const TagMenu = React.forwardRef<HTMLButtonElement, TagMenuProps>(
 
     const dropMenuProps = {
       ...passDropdownDataAttributes(props),
+      isVisible,
+      onVisibilityChange,
+      active,
+      onActivateItem,
+      onOpen,
+      onClose,
+      disableSelectedOptionHighlight,
       renderTopPanel,
       renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      onClickOutside,
+      menuWidth,
+      menuMaxHeight,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      alignSelf,
     };
 
     return (
       <DropMenu
+        {...dropMenuProps}
         dimension="m"
-        menuWidth={menuWidth}
-        menuMaxHeight={menuMaxHeight}
         items={model}
         selected={selected?.id}
         onSelectItem={onSelectOption || onSelectItem}
-        active={active}
-        onActivateItem={onActivateItem}
-        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
-        onOpen={onOpen}
-        onClose={onClose}
-        isVisible={isVisible}
-        onVisibilityChange={onVisibilityChange}
-        onClickOutside={onClickOutside}
-        alignSelf={alignSelf}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
-        {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Tag
