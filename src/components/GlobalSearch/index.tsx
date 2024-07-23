@@ -7,7 +7,7 @@ import type { ComponentDimension, ExtraProps } from '#src/components/input/types
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
 import { InputBorderedDiv } from '#src/components/input/TextInput';
-import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import type { DropContainerProps, DropContainerStyles } from '#src/components/DropdownContainer';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { Spinner } from '#src/components/Spinner';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
@@ -196,7 +196,9 @@ const SubmitButton = styled.div`
   }
 `;
 
-export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface GlobalSearchProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
+    Omit<DropContainerProps, 'onClickOutside'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
 
@@ -241,10 +243,6 @@ export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputEle
    * если не указан, выравнивание произойдет относительно контейнера компонента
    **/
   alignDropRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню,
-   * если не указан, выравнивание произойдет относительно контейнера компонента
-   **/
-  targetElement?: Element | null;
 
   /** Позволяет добавлять стили и className для выпадающего меню кнопки */
   prefixDropContainerStyle?: DropContainerStyles;
