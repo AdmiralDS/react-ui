@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode, RefObject, MouseEvent, PropsWithChildren } from 'react';
+import type { ReactNode, RefObject, MouseEvent, PropsWithChildren } from 'react';
 import { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -7,6 +7,7 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/input/InputEx/Menu';
 import { Menu } from '#src/components/input/InputEx/Menu';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
+import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
 const StyledMenu = styled(Menu)<{ $width?: string }>`
   width: ${({ $width }) => ($width ? $width : 'auto')};
@@ -54,7 +55,7 @@ export type RenderPropsType<T> = {
   value: T;
 };
 
-export type SuffixSelectProps<T> = {
+export interface SuffixSelectProps<T> extends DropMenuStyleProps {
   /**
    * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
    * Взамен используйте параметр targetElement.
@@ -64,17 +65,8 @@ export type SuffixSelectProps<T> = {
   /** Элемент, относительно которого позиционируется выпадающее меню */
   targetElement?: Element | null;
 
-  /** задает выравнивание дроп контейнера относительно компонента */
-  dropAlign?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-
   /** Размер Меню */
   dimension?: MenuDimensions;
-
-  /**  Ширина меню */
-  menuWidth?: string;
-
-  /** Задает максимальную высоту дроп контейнера */
-  dropMaxHeight?: string | number;
 
   /** выбранное на данный момент значение */
   value: T;
@@ -97,22 +89,15 @@ export type SuffixSelectProps<T> = {
   disabled?: boolean;
 
   readOnly?: boolean;
-
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
-};
+}
 
 export const SuffixSelect = <T extends ReactNode>({
   alignRef,
   targetElement,
-  dropAlign,
+  alignSelf,
   dimension,
   menuWidth,
-  dropMaxHeight,
+  menuMaxHeight,
   onChange,
   options,
   value,
@@ -163,7 +148,7 @@ export const SuffixSelect = <T extends ReactNode>({
       {isOpen && (
         <StyledDropdownContainer
           role="listbox"
-          alignSelf={dropAlign}
+          alignSelf={alignSelf}
           targetElement={targetNode}
           onClickOutside={clickOutside}
           dropContainerCssMixin={dropContainerCssMixin}
@@ -172,7 +157,7 @@ export const SuffixSelect = <T extends ReactNode>({
         >
           <StyledMenu
             $width={menuWidth}
-            maxHeight={dropMaxHeight}
+            maxHeight={menuMaxHeight}
             options={options}
             selected={value}
             onSelect={handleOnSelect}

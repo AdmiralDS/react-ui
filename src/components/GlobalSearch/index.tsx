@@ -360,7 +360,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   const renderPrefix = prefixValueList
     ? (props: RenderProps) => (
         <SuffixSelect
-          dropAlign="flex-start"
+          alignSelf="flex-start"
           dimension={menuDimension}
           targetElement={targetNode}
           value={props.value || ''}
