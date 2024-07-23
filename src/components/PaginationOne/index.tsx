@@ -1,6 +1,7 @@
 import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
+
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -11,8 +12,8 @@ import { passDropdownDataAttributes } from '#src/components/common/utils/splitDa
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
 import { keyboardKey } from '../common/keyboardKey';
-import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { Button } from '#src/components/Button';
+import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -87,8 +88,20 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
   /** Отображение компонента в упрощенном варианте, применяется в мобильных версиях */
   simple?: boolean;
 
-  /** Задает максимальную высоту выпадающих меню */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
+   * Взамен используйте параметры pageSizeDropContainerStyle.menuMaxHeight и
+   * pageNumberDropContainerStyle.menuMaxHeight.
+   *
+   * Задает максимальную высоту выпадающих меню */
   dropMaxHeight?: string | number;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
+   * Взамен используйте параметры pageSizeDropContainerStyle.menuWidth и
+   * pageNumberDropContainerStyle.menuWidth.
+   *
+   * Позволяет задать ширину выпадающего списка */
+  menuWidth?: string;
   /**
    * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в версии 9.х.х.
    * Взамен используйте параметры pageSizeDropContainerStyle.dropContainerCssMixin и
@@ -96,12 +109,11 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
    *
    * Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: ReturnType<typeof css>;
+
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
-  pageSizeDropContainerStyle?: DropContainerStyles;
+  pageSizeDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
-  pageNumberDropContainerStyle?: DropContainerStyles;
-  /** Позволяет задать ширину выпадающего списка */
-  menuWidth?: string;
+  pageNumberDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
 
   /** Включает окно ввода номера страницы в выпадающем списке */
   showPageNumberInput?: boolean;
@@ -275,13 +287,13 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             onSelectItem={handleSizeChange}
             disabled={pageSizeSelectDisabled}
             aria-label={pageSizeSelectLabel(pageSize, totalItems)}
-            dropMaxHeight={dropMaxHeight}
+            menuMaxHeight={pageSizeDropContainerStyle?.menuMaxHeight || dropMaxHeight}
             dropContainerCssMixin={
               pageSizeDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
             }
             dropContainerClassName={pageSizeDropContainerStyle?.dropContainerClassName}
             dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
-            menuWidth={menuWidth}
+            menuWidth={pageSizeDropContainerStyle?.menuWidth || menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="records-per-page-with-dropdown"
           >
@@ -306,14 +318,14 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             onActivateItem={handlePageInputHover}
             disabled={pageSelectDisabled}
             aria-label={pageSelectLabel(page, totalPages)}
-            dropMaxHeight={dropMaxHeight}
+            menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
             dropContainerCssMixin={
               pageNumberDropContainerStyle?.dropContainerCssMixin ||
               extendMixin(dropContainerCssMixin, showPageNumberInput)
             }
             dropContainerClassName={pageNumberDropContainerStyle?.dropContainerClassName}
             dropContainerStyle={pageNumberDropContainerStyle?.dropContainerStyle}
-            menuWidth={menuWidth}
+            menuWidth={pageNumberDropContainerStyle?.menuWidth || menuWidth}
             dropMenuDataAttributes={dropMenuProps}
             className="current-page-number-with-dropdown"
             isVisible={isVisible}
