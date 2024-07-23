@@ -55,6 +55,7 @@ export interface DropMenuComponentProps
       | 'renderBottomPanel'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
+      | 'targetElement'
     >,
     DropContainerProps {}
 
@@ -112,6 +113,8 @@ export interface DropMenuProps
    * Компонент, относительно которого необходимо выравнивать выпадающее меню
    **/
   alignMenuRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню */
+  targetElement?: Element | null;
   /** Компонент, для которого необходимо Menu */
   renderContentProp: (options: RenderContentProps) => ReactNode;
   /** Видимость выпадающего меню */

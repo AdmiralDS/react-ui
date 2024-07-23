@@ -57,10 +57,6 @@ export interface DropContainerStyles {
   dropContainerStyle?: CSSProperties;
 }
 export interface DropContainerProps {
-  /** Элемент, относительно которого позиционируется выпадающее меню
-   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
-   */
-  targetElement?: Element | null;
   /**
    *  Позволяет обработать событие при клике вне компонента
    */
@@ -79,6 +75,10 @@ export interface DropdownContainerProps
    * Ref на элемент, относительно которого позиционируется выпадающее меню
    **/
   targetRef?: RefObject<HTMLElement>;
+  /** Элемент, относительно которого позиционируется выпадающее меню
+   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
+   */
+  targetElement?: Element | null;
 }
 
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
