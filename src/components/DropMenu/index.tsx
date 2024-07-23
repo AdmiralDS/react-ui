@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { keyboardKey } from '../common/keyboardKey';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { DropContainerStyles, DropdownContainerProps } from '#src/components/DropdownContainer';
+import type { DropContainerProps, DropContainerStyles } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions as Dimension, MenuProps } from '#src/components/Menu';
 import { Menu } from '#src/components/Menu';
@@ -36,8 +36,6 @@ export interface RenderContentProps {
 }
 
 export interface DropMenuStyleProps extends DropContainerStyles {
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /**  Ширина меню */
   menuWidth?: string;
   /** Задает максимальную высоту меню */
@@ -58,7 +56,7 @@ export interface DropMenuComponentProps
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
     >,
-    Pick<DropdownContainerProps, 'onClickOutside'> {}
+    DropContainerProps {}
 
 export interface DropMenuProps
   extends Pick<
@@ -73,7 +71,7 @@ export interface DropMenuProps
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
     >,
-    Pick<DropdownContainerProps, 'onClickOutside'>,
+    DropContainerProps,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'>,
     DropMenuStyleProps {
   /** Размер компонента */
@@ -114,8 +112,6 @@ export interface DropMenuProps
    * Компонент, относительно которого необходимо выравнивать выпадающее меню
    **/
   alignMenuRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню */
-  targetElement?: Element | null;
   /** Компонент, для которого необходимо Menu */
   renderContentProp: (options: RenderContentProps) => ReactNode;
   /** Видимость выпадающего меню */
