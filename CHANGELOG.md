@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.10.1](https://github.com/AdmiralDS/react-ui/compare/v8.10.0...v8.10.1) (2024-07-24)
+
 ## [8.10.0](https://github.com/AdmiralDS/react-ui/compare/v8.9.0...v8.10.0) (2024-07-23)
 
 
