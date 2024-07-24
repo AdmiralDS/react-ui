@@ -54,7 +54,7 @@ export const SearchSelectWithAddButtonTemplate = (props: SelectProps) => {
         value={selectValue}
         onChange={onChange}
         data-menu-id="test-menu"
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
+        renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
               <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />

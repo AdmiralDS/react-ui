@@ -43,7 +43,7 @@ export const SearchSelectMultipleWithApplyTemplate = (props: SelectProps) => {
         placeholder="Placeholder"
         mode="searchSelect"
         onChangeDropDownState={setForcedOpen}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
+        renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
               <Button dimension={'m'} disabled={selectValue.length === 0} onClick={handleApplyButtonClick}>
