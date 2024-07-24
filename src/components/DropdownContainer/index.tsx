@@ -44,6 +44,11 @@ const Portal = styled(PositionInPortal)<{ $reverse: boolean }>`
 `;
 
 export interface DropContainerStyles {
+  /**
+   *  Позволяет выравнивать контейнер с компонентами относительно тарджет компонента
+   *  https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+   */
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
@@ -51,8 +56,17 @@ export interface DropContainerStyles {
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
   dropContainerStyle?: CSSProperties;
 }
+export interface DropContainerProps {
+  /**
+   *  Позволяет обработать событие при клике вне компонента
+   */
+  onClickOutside?: (e: Event) => void;
+}
 
-export interface DropdownContainerProps extends HTMLAttributes<HTMLDivElement> {
+export interface DropdownContainerProps
+  extends HTMLAttributes<HTMLDivElement>,
+    DropContainerProps,
+    Omit<DropContainerStyles, 'dropContainerClassName' | 'dropContainerStyle'> {
   // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
   /**
    * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
@@ -65,20 +79,6 @@ export interface DropdownContainerProps extends HTMLAttributes<HTMLDivElement> {
    * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
    */
   targetElement?: Element | null;
-
-  /**
-   *  Позволяет обработать событие при клике вне компонента
-   */
-  onClickOutside?: (e: Event) => void;
-
-  /**
-   *  Позволяет выравнивать контейнер с компонентами относительно тарджет компонента
-   *  https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
-   */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
 }
 
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(

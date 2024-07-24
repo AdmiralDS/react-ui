@@ -20,6 +20,7 @@ import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderProps } from '#src/components/input/InputEx';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -196,7 +197,9 @@ const SubmitButton = styled.div`
   }
 `;
 
-export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface GlobalSearchProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
+    Pick<DropMenuComponentProps, 'targetElement'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
 
@@ -241,10 +244,6 @@ export interface GlobalSearchProps extends Omit<InputHTMLAttributes<HTMLInputEle
    * если не указан, выравнивание произойдет относительно контейнера компонента
    **/
   alignDropRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню,
-   * если не указан, выравнивание произойдет относительно контейнера компонента
-   **/
-  targetElement?: Element | null;
 
   /** Позволяет добавлять стили и className для выпадающего меню кнопки */
   prefixDropContainerStyle?: DropContainerStyles;
@@ -361,7 +360,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   const renderPrefix = prefixValueList
     ? (props: RenderProps) => (
         <SuffixSelect
-          dropAlign="flex-start"
+          alignSelf="flex-start"
           dimension={menuDimension}
           targetElement={targetNode}
           value={props.value || ''}

@@ -49,8 +49,36 @@ export const CardTabMenuHorizontal = ({
   dropContainerCssMixin,
   dropContainerClassName,
   dropContainerStyle,
+  isVisible,
+  onVisibilityChange,
+  active,
+  onActivateItem,
+  disableSelectedOptionHighlight,
+  renderTopPanel,
+  renderBottomPanel,
+  onForwardCycleApprove,
+  onBackwardCycleApprove,
+  onClickOutside,
   ...props
 }: CardTabMenuHorizontalProps) => {
+  const dropProps = {
+    alignSelf,
+    menuWidth,
+    menuMaxHeight,
+    dropContainerCssMixin,
+    dropContainerClassName,
+    dropContainerStyle,
+    isVisible,
+    onVisibilityChange,
+    active,
+    onActivateItem,
+    disableSelectedOptionHighlight,
+    renderTopPanel,
+    renderBottomPanel,
+    onForwardCycleApprove,
+    onBackwardCycleApprove,
+    onClickOutside,
+  };
   //<editor-fold desc="Управление шириной контейнера">
   const [containerWidth, setContainerWidth] = useState(0);
   const visibleContainerRef = useRef<HTMLDivElement>(null);
@@ -167,17 +195,12 @@ export const CardTabMenuHorizontal = ({
         {renderedVisibleTabs}
         {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
         <HorizontalTabOverflowMenu
+          {...dropProps}
           items={overflowMenuItems}
           isHidden={!overflowState}
           onSelectItem={handleSelectTab}
           selected={selectedTab}
           dimension={dimension}
-          alignSelf={alignSelf}
-          menuWidth={menuWidth}
-          menuMaxHeight={menuMaxHeight}
-          dropContainerCssMixin={dropContainerCssMixin}
-          dropContainerClassName={dropContainerClassName}
-          dropContainerStyle={dropContainerStyle}
         />
       </VisibleContainer>
     </Wrapper>

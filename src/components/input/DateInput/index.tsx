@@ -1,8 +1,7 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
 import { useRef, useState } from 'react';
-import type { css } from 'styled-components';
 import styled from 'styled-components';
+
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import { TextInput } from '#src/components/input/TextInput';
@@ -16,6 +15,8 @@ import { defaultParser } from './defaultParser';
 import { defaultDateRangeInputHandle } from '#src/components/input/DateInput/defaultDateRangeInputHandle';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 const Input = styled(TextInput)`
   min-width: 150px;
@@ -35,7 +36,11 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
-export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, 'onChange' | 'range'> {
+export interface DateInputProps
+  extends TextInputProps,
+    Omit<CalendarPropType, 'onChange' | 'range'>,
+    Pick<DropMenuComponentProps, 'isVisible' | 'onVisibilityChange'>,
+    DropContainerStyles {
   /** Устанавливает тип ввода даты или интервала даты*/
   type?: 'date' | 'date-range';
 
@@ -45,7 +50,12 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
   formatter?: (isoValues: string[], joinString?: string) => string;
   parser?: (stringValue?: string, isDateRangeValue?: boolean) => Date[];
 
-  /** Принудительно выравнивает контейнер календаря относительно компонента, значение по умолчанию 'flex-end' */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте alignSelf
+   *
+   * Принудительно выравнивает контейнер календаря относительно компонента
+   **/
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 
   /** Ref для календаря */
@@ -53,18 +63,6 @@ export interface DateInputProps extends TextInputProps, Omit<CalendarPropType, '
 
   /** Компонент для отображения альтернативной иконки */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
-
-  /** Видимость выпадающего меню */
-  isVisible?: boolean;
-  /** Колбек на изменение видимости меню */
-  onVisibilityChange?: (isVisible: boolean) => void;
 }
 
 export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -79,6 +77,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       validator,
       filterDate,
       alignDropdown = 'auto',
+      alignSelf = 'auto',
       currentActiveView,
       currentActiveViewImportant,
       onMonthSelect,
@@ -196,7 +195,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {isCalendarOpen && !skeleton && (
           <StyledDropdownContainer
             targetElement={inputRef.current}
-            alignSelf={alignDropdown}
+            alignSelf={alignDropdown || alignSelf}
             onClickOutside={handleBlurCalendarContainer}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}

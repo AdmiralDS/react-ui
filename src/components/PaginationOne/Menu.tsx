@@ -1,10 +1,9 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
-import type { css } from 'styled-components';
 import styled from 'styled-components';
+
 import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
@@ -65,31 +64,16 @@ const Icon = styled.div`
 
 export interface MenuButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
-    DropMenuComponentProps {
+    Omit<DropMenuComponentProps, 'targetElement' | 'disableSelectedOptionHighlight'>,
+    Omit<DropMenuStyleProps, 'alignSelf'> {
   /** Массив опций */
   options: Array<number>;
   /** Выбранная опция */
   selected?: string;
   /** Отключение компонента */
   disabled?: boolean;
-  /** Задает максимальную высоту контейнера с опциями */
-  dropMaxHeight: string | number;
-  /** Позволяет добавлять миксин на дроп контейнер созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
-  /** Ширина выпадающего меню */
-  menuWidth?: string;
   /** Data-attributes для DropMenu */
   dropMenuDataAttributes?: Record<string, any>;
-  /** Видимость выпадающего меню */
-  isVisible?: boolean;
-  /** Колбек на изменение видимости меню */
-  onVisibilityChange?: (isVisible: boolean) => void;
-  /** Позволяет обработать событие при клике вне компонента */
-  onClickOutside?: (e: Event) => void;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -102,7 +86,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onSelectItem = () => undefined,
       active,
       onActivateItem = () => undefined,
-      dropMaxHeight,
+      menuMaxHeight,
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
@@ -114,12 +98,32 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onClickOutside,
       onClick,
       renderTopPanel,
+      renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
       ...props
     },
     ref,
   ) => {
+    const dropMenuProps = {
+      ...dropMenuDataAttributes,
+      renderTopPanel,
+      renderBottomPanel,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
+      selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      menuMaxHeight,
+      menuWidth,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+    };
     const model = React.useMemo(() => {
       return options.map((item) => {
         const id = item.toString();
@@ -137,26 +141,11 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
 
     return (
       <DropMenu
+        {...dropMenuProps}
         items={model}
         dimension="s"
-        menuWidth={menuWidth}
         alignSelf={menuWidth ? 'flex-end' : 'stretch'}
-        menuMaxHeight={dropMaxHeight}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
         disabled={disabled}
-        selected={selected}
-        onSelectItem={onSelectItem}
-        active={active}
-        onActivateItem={onActivateItem}
-        isVisible={isVisible}
-        onVisibilityChange={onVisibilityChange}
-        onClickOutside={onClickOutside}
-        renderTopPanel={renderTopPanel}
-        onForwardCycleApprove={onForwardCycleApprove}
-        onBackwardCycleApprove={onBackwardCycleApprove}
-        {...dropMenuDataAttributes}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Button

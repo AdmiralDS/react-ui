@@ -1,13 +1,12 @@
-import type { CSSProperties, HTMLAttributes, ReactNode, Ref } from 'react';
+import type { HTMLAttributes, ReactNode, Ref } from 'react';
 import { forwardRef } from 'react';
-import type { css } from 'styled-components';
 import styled from 'styled-components';
 
 import type { Appearance, Dimension } from '#src/components/TextButton/types';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { TextButton } from '#src/components/TextButton';
 import { IconContainer } from '#src/components/TextButton/commonMixin';
-import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { refSetter } from '../common/utils/refSetter';
@@ -35,7 +34,8 @@ const StyledTextButton = styled(TextButton)<{ $menuOpened?: boolean; appearance?
 
 export interface TextButtonMenuProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
-    DropMenuComponentProps {
+    Omit<DropMenuComponentProps, 'targetElement'>,
+    DropMenuStyleProps {
   /** Внешний вид кнопки */
   appearance?: Appearance;
   /** Размер кнопки */
@@ -70,18 +70,6 @@ export interface TextButtonMenuProps
   onClose?: () => void;
   /** Отключение компонента */
   disabled?: boolean;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -125,36 +113,36 @@ export const TextButtonMenu = forwardRef<HTMLButtonElement, TextButtonMenuProps>
   ) => {
     const dropMenuProps = {
       ...passDropdownDataAttributes(props),
+      isVisible,
+      onVisibilityChange,
+      onSelectItem,
+      active,
+      onActivateItem,
+      onChange,
+      onOpen,
+      onClose,
+      disableSelectedOptionHighlight,
       renderTopPanel,
       renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      onClickOutside,
+      menuWidth,
+      menuMaxHeight,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      alignSelf,
     };
 
     return (
       <DropMenu
+        {...dropMenuProps}
         dimension={dimension}
-        menuWidth={menuWidth}
-        menuMaxHeight={menuMaxHeight}
         loading={loading}
         items={items}
-        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
         selected={selected}
-        onSelectItem={onSelectItem}
-        active={active}
-        onActivateItem={onActivateItem}
-        onChange={onChange}
-        onOpen={onOpen}
-        onClose={onClose}
-        isVisible={isVisible}
-        onVisibilityChange={onVisibilityChange}
-        onClickOutside={onClickOutside}
         disabled={disabled}
-        alignSelf={alignSelf}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
-        {...dropMenuProps}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <StyledTextButton

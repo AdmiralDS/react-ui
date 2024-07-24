@@ -43,8 +43,36 @@ export const TabMenuVertical = ({
   dropContainerCssMixin,
   dropContainerClassName,
   dropContainerStyle,
+  isVisible,
+  onVisibilityChange,
+  active,
+  onActivateItem,
+  disableSelectedOptionHighlight,
+  renderTopPanel,
+  renderBottomPanel,
+  onForwardCycleApprove,
+  onBackwardCycleApprove,
+  onClickOutside,
   ...props
 }: TabMenuVerticalProps) => {
+  const dropProps = {
+    alignSelf,
+    menuWidth,
+    menuMaxHeight,
+    dropContainerCssMixin,
+    dropContainerClassName,
+    dropContainerStyle,
+    isVisible,
+    onVisibilityChange,
+    active,
+    onActivateItem,
+    disableSelectedOptionHighlight,
+    renderTopPanel,
+    renderBottomPanel,
+    onForwardCycleApprove,
+    onBackwardCycleApprove,
+    onClickOutside,
+  };
   //<editor-fold desc="Управление высотой контейнера">
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -181,17 +209,12 @@ export const TabMenuVertical = ({
         {renderedVisibleTabs}
         {showAddTabButton && <VerticalAddTabButton dimension={dimension} onClick={onAddTab} />}
         <VerticalTabOverflowMenu
+          {...dropProps}
           items={overflowMenuItems}
           onSelectItem={handleSelectTab}
           selected={selectedTab}
           dimension={dimension}
           isHidden={hiddenTabs.length === 0}
-          alignSelf={alignSelf}
-          menuWidth={menuWidth}
-          menuMaxHeight={menuMaxHeight}
-          dropContainerCssMixin={dropContainerCssMixin}
-          dropContainerClassName={dropContainerClassName}
-          dropContainerStyle={dropContainerStyle}
         />
         <ActiveVerticalTabSelector
           $top={`${underlineTop}px`}

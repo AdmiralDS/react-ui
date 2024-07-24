@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
 
 import { MenuButton } from './Menu';
 import type { BreadcrumbProps } from './BreadCrumb';
@@ -13,11 +12,11 @@ import {
   Separator,
   Wrapper,
 } from './style';
-import type { css } from 'styled-components';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 type Dimension = 'l' | 'm' | 's';
 
-export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
+export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement>, Omit<DropContainerStyles, 'alignSelf'> {
   /** Массив хлебных крошек */
   items: BreadcrumbProps[];
   /** Размер компонента */
@@ -26,12 +25,6 @@ export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement> {
   mobile?: boolean;
   /** Является ли последняя хлебная крошка активной */
   lastBreadcrumbActive?: boolean;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({

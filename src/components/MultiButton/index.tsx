@@ -1,10 +1,11 @@
-import type { CSSProperties, MouseEvent, HTMLAttributes } from 'react';
+import type { MouseEvent, HTMLAttributes } from 'react';
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+
 import { Button } from '#src/components/Button';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
@@ -94,7 +95,10 @@ interface SeparatorProps {
   $skeleton?: boolean;
 }
 
-export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropMenuComponentProps {
+export interface MultiButtonProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
+    Omit<DropMenuComponentProps, 'targetElement'>,
+    Omit<DropMenuStyleProps, 'menuWidth'> {
   /** Опции выпадающего списка */
   items?: Array<MenuModelItemProps>;
   /** Id выбранной опции списка */
@@ -128,16 +132,6 @@ export interface MultiButtonProps extends Omit<HTMLAttributes<HTMLDivElement>, '
   appearance?: Appearance;
   /** Отключение компонента */
   disabled?: boolean;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -167,6 +161,10 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      renderTopPanel,
+      renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       children,
       ...props
     },
@@ -183,31 +181,37 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       wrapperRef.current?.setAttribute('data-focused', 'false');
     };
 
-    const dropMenuProps = passDropdownDataAttributes(props);
+    const dropMenuProps = {
+      ...passDropdownDataAttributes(props),
+      renderTopPanel,
+      renderBottomPanel,
+      items,
+      onChange,
+      onOpen,
+      onClose,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
+      disableSelectedOptionHighlight,
+      selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      menuMaxHeight,
+      menuWidth,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      alignSelf,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+    };
 
     return (
       <DropMenu
-        dimension={menuDimension}
-        menuWidth={menuWidth}
-        menuMaxHeight={menuMaxHeight}
-        items={items}
-        disableSelectedOptionHighlight={disableSelectedOptionHighlight}
-        selected={selected}
-        onSelectItem={onSelectItem}
-        active={active}
-        onActivateItem={onActivateItem}
-        onChange={onChange}
-        onOpen={onOpen}
-        onClose={onClose}
-        isVisible={isVisible}
-        onVisibilityChange={onVisibilityChange}
-        onClickOutside={onClickOutside}
-        disabled={disabled}
-        alignSelf={alignSelf}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
         {...dropMenuProps}
+        dimension={menuDimension}
+        disabled={disabled}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
             <Wrapper

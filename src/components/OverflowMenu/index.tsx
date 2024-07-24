@@ -1,12 +1,10 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
-import type { css } from 'styled-components';
 
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 import { ReactComponent as MoreVerticalOutline } from '@admiral-ds/icons/build/system/MoreVerticalOutline.svg';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import type { IconPlacementDimension } from '#src/components/IconPlacement';
 import { IconPlacement } from '#src/components/IconPlacement';
@@ -16,7 +14,8 @@ export type OverflowMenuDimension = 'l' | 'm' | 's';
 
 export interface OverflowMenuProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
-    DropMenuComponentProps {
+    Omit<DropMenuComponentProps, 'targetElement'>,
+    DropMenuStyleProps {
   /** Выбранная опция */
   selected?: string;
   /**
@@ -44,18 +43,6 @@ export interface OverflowMenuProps
   dimension?: OverflowMenuDimension;
   /** Отключение компонента */
   disabled?: boolean;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
   /** Ориентация компонента */
   isVertical?: boolean;
   /** Опции выпадающего списка */
@@ -87,11 +74,39 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+      renderTopPanel,
+      renderBottomPanel,
       ...props
     },
     ref,
   ) => {
-    const dropMenuProps = passDropdownDataAttributes(props);
+    const dropMenuProps = {
+      ...passDropdownDataAttributes(props),
+      renderTopPanel,
+      renderBottomPanel,
+      items,
+      onChange,
+      onOpen,
+      onClose,
+      isVisible,
+      onVisibilityChange,
+      onClickOutside,
+      disableSelectedOptionHighlight,
+      selected,
+      onSelectItem,
+      active,
+      onActivateItem,
+      menuMaxHeight,
+      menuWidth,
+      dropContainerCssMixin,
+      dropContainerClassName,
+      dropContainerStyle,
+      alignSelf,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
+    };
 
     const iconPlacementDimension = (dimension?: OverflowMenuDimension): IconPlacementDimension => {
       switch (dimension) {
@@ -109,27 +124,9 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
     return (
       <>
         <DropMenu
-          dimension={dimension}
-          menuWidth={menuWidth}
-          menuMaxHeight={menuMaxHeight}
-          items={items}
-          disableSelectedOptionHighlight={disableSelectedOptionHighlight}
-          selected={selected}
-          onSelectItem={onSelectItem}
-          active={active}
-          onActivateItem={onActivateItem}
-          isVisible={isVisible}
-          onVisibilityChange={onVisibilityChange}
-          onClickOutside={onClickOutside}
-          onChange={onChange}
-          onOpen={onOpen}
-          onClose={onClose}
-          disabled={disabled}
-          alignSelf={alignSelf}
-          dropContainerCssMixin={dropContainerCssMixin}
-          dropContainerClassName={dropContainerClassName}
-          dropContainerStyle={dropContainerStyle}
           {...dropMenuProps}
+          dimension={dimension}
+          disabled={disabled}
           renderContentProp={({ buttonRef, handleKeyDown, handleClick, menuState, disabled }: RenderContentProps) => {
             return (
               <IconPlacement

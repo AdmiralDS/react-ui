@@ -1,13 +1,12 @@
 import * as React from 'react';
-import type { CSSProperties, HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { DropMenuComponentProps, RenderContentProps } from '#src/components/DropMenu';
+import type { DropMenuComponentProps, DropMenuStyleProps, RenderContentProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { uid } from '#src/components/common/uid';
 import type { ButtonProps } from '#src/components/Button';
 import { Button } from '#src/components/Button';
-import type { css } from 'styled-components';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
@@ -16,7 +15,8 @@ export type MenuButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost
 
 export interface MenuButtonProps
   extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
-    DropMenuComponentProps,
+    Omit<DropMenuComponentProps, 'targetElement'>,
+    DropMenuStyleProps,
     Omit<ButtonProps, 'onChange' | 'displayAsSquare'> {
   /** Массив опций */
   items: Array<MenuModelItemProps>;
@@ -53,18 +53,6 @@ export interface MenuButtonProps
   loading?: boolean;
   /** Состояние skeleton */
   skeleton?: boolean;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
@@ -97,6 +85,8 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       className,
       renderTopPanel,
       renderBottomPanel,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       ...props
     },
     ref,
@@ -152,15 +142,17 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       dropContainerClassName,
       dropContainerStyle,
       alignSelf,
+      onForwardCycleApprove,
+      onBackwardCycleApprove,
       renderContentProp,
     };
 
     return (
       <>
         <DropMenu
+          {...dropMenuProps}
           dimension={dimension === 'xl' ? 'l' : dimension}
           disabled={skeleton ? true : disabled}
-          {...dropMenuProps}
         >
           {children}
         </DropMenu>

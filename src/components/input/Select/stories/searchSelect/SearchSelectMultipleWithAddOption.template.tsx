@@ -57,7 +57,7 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
         placeholder="Placeholder"
         mode="searchSelect"
         onInputChange={handleInputChange}
-        renderDropDownBottomPanel={({ dimension = menuPanelContentDimension }) => {
+        renderBottomPanel={({ dimension = menuPanelContentDimension }) => {
           return (
             <MenuActionsPanel dimension={dimension}>
               <TextButton {...addButtonProps} iconStart={<PlusOutline />} onClick={handleAddButtonClick} />
