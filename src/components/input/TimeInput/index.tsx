@@ -1,8 +1,8 @@
 import * as React from 'react';
-import type { CSSProperties, HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 import { useRef, useState } from 'react';
-import type { css } from 'styled-components';
 import styled from 'styled-components';
+
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import type { TextInputProps } from '../TextInput';
 import { TextInput } from '../TextInput';
@@ -12,6 +12,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { getTimeInMinutes, parseStringToTime } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
@@ -93,7 +94,7 @@ const StyledMenuItem = styled(MenuItem)`
 const StyledTextInput = styled(TextInput)`
   min-width: 136px;
 `;
-export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
+export interface TimeInputProps extends Omit<TextInputProps, 'value'>, DropContainerStyles {
   /** Выбранное значение времени */
   value?: string;
   /** Начало временного диапазона */
@@ -109,16 +110,13 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value'> {
   /** Позволяет обрабатывать введенные значения */
   parser?: (time?: string) => string;
   /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте alignSelf
+   *
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
-   */
+   **/
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -133,6 +131,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       icon = TimeSVG,
       icons,
       alignDropdown = 'flex-end',
+      alignSelf = 'flex-end',
       skeleton = false,
       dropContainerCssMixin,
       dropContainerClassName,
@@ -303,7 +302,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         {availableSlots && isOpened && !disabled && !skeleton && (
           <StyledDropdownContainer
             targetElement={inputRef.current}
-            alignSelf={alignDropdown}
+            alignSelf={alignDropdown || alignSelf}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
