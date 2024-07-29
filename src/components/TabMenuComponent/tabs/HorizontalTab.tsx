@@ -11,6 +11,7 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     const idForTab = onSelectTab ? id : uid();
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
+      e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       onSelectTab?.(tabId);
     };
 
