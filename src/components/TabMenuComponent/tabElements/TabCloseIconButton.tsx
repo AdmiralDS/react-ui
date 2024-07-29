@@ -33,6 +33,12 @@ const Wrapper = styled.div<{ $dimension: TabDimension; $disabled?: boolean }>`
       fill: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     }
   }
+
+  &:focus-visible {
+    border-radius: 0;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
+    outline-offset: -2px;
+  }
 `;
 
 export interface TabCloseIconButtonProps extends HTMLAttributes<HTMLDivElement> {
