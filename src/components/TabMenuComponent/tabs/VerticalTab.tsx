@@ -30,6 +30,8 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
     return (
       <BaseTab
         {...props}
+        role="tab"
+        type="button"
         id={idForTab}
         ref={ref}
         data-tabid={tabId}

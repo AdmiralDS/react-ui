@@ -53,7 +53,15 @@ export const TabCloseIconButton = forwardRef<HTMLDivElement, TabCloseIconButtonP
       onClick?.(e);
     };
     return (
-      <Wrapper {...props} ref={ref} $dimension={dimension} $disabled={disabled} onClick={handleClick}>
+      <Wrapper
+        {...props}
+        role="button"
+        tabIndex={0}
+        ref={ref}
+        $dimension={dimension}
+        $disabled={disabled}
+        onClick={handleClick}
+      >
         <SmallCloseOutline />
       </Wrapper>
     );

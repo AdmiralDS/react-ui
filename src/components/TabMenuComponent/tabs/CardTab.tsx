@@ -39,6 +39,8 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     return (
       <StyledBaseTab
         {...props}
+        role="tab"
+        type="button"
         id={idForTab}
         ref={ref}
         data-tabid={tabId}
