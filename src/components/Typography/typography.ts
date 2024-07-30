@@ -73,12 +73,12 @@ export const TYPOGRAPHY: Typography = {
 export const typography = createTypography();
 
 export function createTypography() {
-  /**
-   * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
-   *
-   * Взамен используйте свойство 'Header/HL3'
-   */
   return {
+    /**
+     * @deprecated Помечено как deprecated в версии 7.12.1, будет удалено в версии 10.x.x
+     *
+     * Взамен используйте свойство 'Header/HL3'
+     */
     'Main/XXL': css`
       font-family: var(--admiral-font-family, ${(p) => p.theme.fontFamily});
       font-style: normal;
