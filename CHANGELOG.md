@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.10.2](https://github.com/AdmiralDS/react-ui/compare/v8.10.1...v8.10.2) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Select:**  [#1422](https://github.com/AdmiralDS/react-ui/issues/1422) Select - в состоянии readonly не должен редактироваться через клавиатуру ([ac98241](https://github.com/AdmiralDS/react-ui/commit/ac9824176c18b2f8f5c2a5f0afcf0b0aeaff48ab))
+
 ### [8.10.1](https://github.com/AdmiralDS/react-ui/compare/v8.10.0...v8.10.1) (2024-07-24)
 
 ## [8.10.0](https://github.com/AdmiralDS/react-ui/compare/v8.9.0...v8.10.0) (2024-07-23)
