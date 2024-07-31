@@ -54,7 +54,7 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
             {badge}
           </TabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </HorizontalTab>
     );
   },

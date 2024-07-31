@@ -53,7 +53,7 @@ const CustomHorizontalCardTab = forwardRef<HTMLButtonElement, CustomHorizontalTa
             {badge}
           </TabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </CardTab>
     );
   },

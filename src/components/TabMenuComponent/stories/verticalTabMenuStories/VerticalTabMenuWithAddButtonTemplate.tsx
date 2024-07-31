@@ -69,7 +69,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
             {badge}
           </VerticalTabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </VerticalTab>
     );
   },

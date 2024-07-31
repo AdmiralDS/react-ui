@@ -33,13 +33,13 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
         role="tab"
         type="button"
         id={idForTab}
-        ref={ref}
+        ref={onSelectTab ? ref : undefined}
         data-tabid={tabId}
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
         $width={width}
-        onClick={handleTabClick}
+        onClick={onSelectTab ? handleTabClick : undefined}
       >
         {children}
       </BaseTab>
