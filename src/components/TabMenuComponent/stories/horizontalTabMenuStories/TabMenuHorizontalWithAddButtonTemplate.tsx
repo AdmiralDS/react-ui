@@ -166,7 +166,7 @@ export const TabMenuHorizontalWithAddButtonTemplate = ({
             <TabCloseIconButton
               dimension={dimension}
               disabled={tabIsDisabled(tabId)}
-              onClick={() => handleCloseTab(tabId)}
+              onCloseIconButtonClick={() => handleCloseTab(tabId)}
             />
           </MenuItemWrapper>
         </MenuItem>
