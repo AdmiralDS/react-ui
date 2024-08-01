@@ -51,9 +51,10 @@ const getTextColor = css<{ $appearance: AvatarAppearance | { background?: string
   }}
 `;
 
-const getTypography = css<{ $dimension: Dimension }>`
+const getTypography = css<{ $dimension: AvatarDimension }>`
   ${({ $dimension }) => {
     switch ($dimension) {
+      case 'xxs':
       case 'xs':
       case 's':
         return typography['Caption/Caption 1'];
@@ -69,7 +70,7 @@ const getTypography = css<{ $dimension: Dimension }>`
 
 const Text = styled.span<{
   $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
-  $dimension: Dimension;
+  $dimension: AvatarDimension;
 }>`
   position: absolute;
   top: 50%;
@@ -80,9 +81,11 @@ const Text = styled.span<{
   ${getTypography}
 `;
 
-const getIconSize = css<{ $dimension: Dimension }>`
+const getIconSize = css<{ $dimension: AvatarDimension }>`
   ${({ $dimension }) => {
     switch ($dimension) {
+      case 'xxs':
+        return '16px';
       case 'xs':
         return '16px';
       case 's':
@@ -118,8 +121,30 @@ const getIconColor = css<{ $appearance: AvatarAppearance | { background?: string
   }}
 `;
 
+const getSize = (withActivityRing: boolean, dimension: AvatarDimension) => {
+  let additionalPadding = 0;
+  if (withActivityRing && dimension !== 'xxs') {
+    additionalPadding = 4;
+  }
+  switch (dimension) {
+    case 'xxs':
+      return `${20 + additionalPadding * 2}px`;
+    case 'xs':
+      return `${24 + additionalPadding * 2}px`;
+    case 's':
+      return `${32 + additionalPadding * 2}px`;
+    case 'm':
+      return `${40 + additionalPadding * 2}px`;
+    case 'l':
+      return `${48 + additionalPadding * 2}px`;
+    case 'xl':
+    default:
+      return `${56 + additionalPadding * 2}px`;
+  }
+};
+
 const IconWrapper = styled.div<{
-  $dimension: Dimension;
+  $dimension: AvatarDimension;
   $appearance: AvatarAppearance | { background?: string; text?: string; icon?: string };
 }>`
   position: absolute;
@@ -138,7 +163,8 @@ const IconWrapper = styled.div<{
   }
 `;
 
-type Dimension = 'xs' | 's' | 'm' | 'l' | 'xl';
+export type Dimension = 'xs' | 's' | 'm' | 'l' | 'xl';
+type AvatarDimension = 'xxs' | Dimension;
 /**
  * @deprecated Помечено как deprecated в версии 5.2.0, будет удалено в 9.x.x версии.
  * Используйте альтернативные значения 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4'
@@ -156,7 +182,9 @@ export interface AvatarBaseProps extends HTMLAttributes<HTMLButtonElement> {
   userInitials?: string;
   /** URL аватарки пользователя */
   href?: string;
-  /** Статус пользователя */
+  /** Статус пользователя -
+   * можно выбрать один из четырех исходных вариантов, либо задать свой цвет.
+   **/
   status?: Status | string;
   /** Иконка для отображения */
   icon?: ReactNode;
@@ -164,10 +192,10 @@ export interface AvatarBaseProps extends HTMLAttributes<HTMLButtonElement> {
    * можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов.
    * Параметры background, text и icon являются опциональными, если какие-то из них не заданы,
    * то по умолчанию будут применены те же цвета, что и при appearance='neutral2'
-   * */
+   **/
   appearance?: AvatarAppearance | { background?: string; text?: string; icon?: string };
   /** Размер компонента */
-  dimension?: Dimension;
+  dimension?: AvatarDimension;
   /** Уникальный идентификатор svg маски */
   svgMaskId?: string;
   /** Отображение тултипа */
@@ -209,8 +237,9 @@ export const AvatarBase = forwardRef<HTMLButtonElement, AvatarBaseProps & Avatar
     const hasImage = Boolean(href && loaded === 'loaded');
     const hasIcon = Boolean(Icon && !hasImage);
     const hasAbbr = (!hasImage && !hasIcon) || isMenuAvatar;
+    const avatarDimension = dimension === 'xxs' && (status || group || withActivityRing) ? 'xs' : dimension;
 
-    const maxAbbrLength = dimension === 'xs' ? 1 : 2;
+    const maxAbbrLength = avatarDimension === 'xs' || avatarDimension === 'xxs' ? 1 : 2;
     const defaultUserInitials = userName
       ?.split(' ')
       .map((word) => word.toUpperCase()[0])
@@ -218,31 +247,11 @@ export const AvatarBase = forwardRef<HTMLButtonElement, AvatarBaseProps & Avatar
       .slice(0, maxAbbrLength);
     const initials = userInitials ? userInitials : defaultUserInitials;
     const abbr = isMenuAvatar ? userName : initials;
-
-    const getSize = (withActivityRing: boolean) => {
-      let additionalPadding = 0;
-      if (withActivityRing) {
-        additionalPadding = 4;
-      }
-      switch (dimension) {
-        case 'xs':
-          return `${24 + additionalPadding * 2}px`;
-        case 's':
-          return `${32 + additionalPadding * 2}px`;
-        case 'm':
-          return `${40 + additionalPadding * 2}px`;
-        case 'l':
-          return `${48 + additionalPadding * 2}px`;
-        case 'xl':
-        default:
-          return `${56 + additionalPadding * 2}px`;
-      }
-    };
     const renderAvatarContent = () => (
       <>
         <AvatarSVG
-          dimension={dimension}
-          size={getSize(withActivityRing)}
+          dimension={avatarDimension}
+          size={getSize(withActivityRing, avatarDimension)}
           hasImage={hasImage}
           href={href}
           status={status}
@@ -253,23 +262,28 @@ export const AvatarBase = forwardRef<HTMLButtonElement, AvatarBaseProps & Avatar
           showActivityRing={showActivityRing}
         />
         {hasAbbr && (
-          <Text $dimension={dimension} $appearance={appearance}>
+          <Text $dimension={avatarDimension} $appearance={appearance}>
             {abbr}
           </Text>
         )}
         {hasIcon && (
-          <IconWrapper $dimension={dimension} $appearance={appearance}>
+          <IconWrapper $dimension={avatarDimension} $appearance={appearance}>
             {Icon}
           </IconWrapper>
         )}
       </>
     );
     return showTooltip ? (
-      <WrapperWithTooltip ref={ref} size={getSize(withActivityRing)} renderContent={() => userName} {...props}>
+      <WrapperWithTooltip
+        ref={ref}
+        size={getSize(withActivityRing, avatarDimension)}
+        renderContent={() => userName}
+        {...props}
+      >
         {renderAvatarContent()}
       </WrapperWithTooltip>
     ) : (
-      <Wrapper ref={ref} size={getSize(withActivityRing)} {...props}>
+      <Wrapper ref={ref} size={getSize(withActivityRing, avatarDimension)} {...props}>
         {renderAvatarContent()}
       </Wrapper>
     );

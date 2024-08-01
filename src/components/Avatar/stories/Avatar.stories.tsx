@@ -1,20 +1,16 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import styled from 'styled-components';
 
+import type { AvatarProps } from '@admiral-ds/react-ui';
 import { Avatar } from '@admiral-ds/react-ui';
 
-import { AvatarSingleTemplate } from './AvatarSingle.template';
 import { AvatarPlaygroundTemplate } from './AvatarPlayground.template';
+import { AvatarSingleTemplate } from './AvatarSingle.template';
+import { AvatarXXSTemplate } from './AvatarXXS.template';
 
 // Imports of text sources
-import AvatarSingleRaw from './AvatarSingle.template?raw';
 import AvatarPlaygroundRaw from './AvatarPlayground.template?raw';
-
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-`;
+import AvatarSingleRaw from './AvatarSingle.template?raw';
+import AvatarXXSRaw from './AvatarXXS.template?raw';
 
 export default {
   title: 'Admiral-2.1/Avatar',
@@ -26,9 +22,6 @@ export default {
         code: null,
       },
     },
-    componentSubtitle: (
-      <Desc>Компонент используется для отображения фотографии пользователя, его инициалов или иконки.</Desc>
-    ),
     design: {
       type: 'figma',
       url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
@@ -90,13 +83,15 @@ export const AvatarPlayground = {
     },
   },
 
-  name: 'Playground',
+  name: 'Avatar. Playground',
 };
 
 //</editor-fold>
 
 //<editor-fold desc="Single Avatar">
-const SingleAvatarStory: StoryFn<typeof Avatar> = () => <AvatarSingleTemplate />;
+const SingleAvatarStory: StoryFn<typeof Avatar> = ({ showTooltip, userName }: AvatarProps) => (
+  <AvatarSingleTemplate userName={userName} showTooltip={showTooltip} />
+);
 
 export const SingleAvatar = {
   render: SingleAvatarStory,
@@ -106,17 +101,60 @@ export const SingleAvatar = {
       source: {
         code: AvatarSingleRaw,
       },
-      description: {
-        story: `Компонент используется для отображения фотографии пользователя, его инициалов или иконки. Присутствует 
-        пять размеров компонента.\n\nДопускается использование одной или двух букв для обозначения пользователя (в размере XS 
-        только одна буква). Компоненту и символам в нем можно присваивать любые цвета из палитры.\n\nКомпонент может быть 
-        кликабельным, например, вести в личный кабинет или показывать выпадающее меню с опциями пользователя. При ховере 
-        над аватаром показывается Tooltip с именем пользователя (опционально можно отключить).\n\nМожет отображать статус 
-        пользователя с помощью статусного Бейджа.`,
-      },
+    },
+  },
+  argTypes: {
+    href: {
+      control: false,
+    },
+    appearance: {
+      control: false,
+    },
+    svgMaskId: {
+      control: false,
+    },
+    userInitials: {
+      control: false,
+    },
+    userName: {
+      control: false,
+    },
+    dimension: {
+      control: false,
+    },
+    status: {
+      control: false,
     },
   },
 
-  name: 'Avatar',
+  name: 'Avatar. Типы и размеры',
+};
+//</editor-fold>
+
+//<editor-fold desc="Avatar XXS">
+const AvatarXXSStory: StoryFn<typeof Avatar> = ({ userName, ...props }) => (
+  <AvatarXXSTemplate userName={userName} {...props} />
+);
+
+export const AvatarXXS = {
+  render: AvatarXXSStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AvatarXXSRaw,
+      },
+    },
+  },
+  argTypes: {
+    dimension: {
+      control: false,
+    },
+    status: {
+      control: false,
+    },
+  },
+
+  name: 'Avatar XXS',
 };
 //</editor-fold>
