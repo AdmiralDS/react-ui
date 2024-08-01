@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { FC } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import type { AvatarBaseProps } from '#src/components/AvatarBase';
@@ -86,7 +86,7 @@ const RoundedImage = styled.image`
   clip-path: circle();
 `;
 
-export const AvatarSVG: React.FC<AvatarSVGProps> = ({
+export const AvatarSVG: FC<AvatarSVGProps> = ({
   dimension = 'xl',
   hasImage,
   href,

@@ -1,3 +1,4 @@
+import type { HTMLAttributes, ReactNode } from 'react';
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -146,7 +147,7 @@ type Appearance = 'white' | 'light' | 'grey' | 'dark';
 export type AvatarAppearance = 'neutral1' | 'neutral2' | 'neutral3' | 'neutral4' | Appearance;
 type Status = 'success' | 'danger' | 'warn' | 'inactive';
 
-export interface AvatarBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface AvatarBaseProps extends HTMLAttributes<HTMLButtonElement> {
   /** Имя пользователя, будет использовано внутри тултипа и для генерации инициалов (в случае если не задан параметр userInitials) */
   userName: string;
   /** Инициалы пользователя. По умолчанию вычисляются на основании userName - берутся первые буквы первых
@@ -158,7 +159,7 @@ export interface AvatarBaseProps extends React.HTMLAttributes<HTMLButtonElement>
   /** Статус пользователя */
   status?: Status | string;
   /** Иконка для отображения */
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   /** Внешний вид компонента (цвет заливки, текста, иконки) -
    * можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов.
    * Параметры background, text и icon являются опциональными, если какие-то из них не заданы,
