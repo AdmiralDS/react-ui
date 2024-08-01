@@ -91,9 +91,12 @@ const Content = styled.div`
 
 const MenuItemWrapper = styled.div`
   display: flex;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 `;
 const getTabsMap = (tabs: TabContentProps[]) => {
   return tabs.map((tab) => tab.tabId || '');
