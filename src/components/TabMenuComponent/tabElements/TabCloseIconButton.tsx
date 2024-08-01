@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import type { TabDimension } from '#src/components/TabMenuComponent/types';
 import { HORIZONTAL_TAB_ICON_SIZE_L, HORIZONTAL_TAB_ICON_SIZE_M } from '#src/components/TabMenuComponent/constants';
 import { ReactComponent as SmallCloseOutline } from '@admiral-ds/icons/build/service/SmallCloseOutline.svg';
-import { keyboardKey } from '#src/components/common/keyboardKey';
+import { keyboardKey } from '../../common/keyboardKey';
 
 const Wrapper = styled.div<{ $dimension: TabDimension; $disabled?: boolean }>`
   position: relative;
