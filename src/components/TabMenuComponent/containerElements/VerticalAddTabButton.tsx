@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { TabDimension } from '#src/components/TabMenuComponent/types';
 import type { AddTabButtonProps } from '#src/components/TabMenuComponent/containerElements/types';
 import {
+  FOCUS_VERTICAL_OVERFLOW_MENU_BORDER_OFFSET,
   VERTICAL_ADD_TAB_BUTTON_CONTAINER_PADDING,
   VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_L,
   VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_M,
@@ -20,7 +21,13 @@ const AddTabButtonContainer = styled.div<{ $dimension?: TabDimension }>`
   height: ${(p) =>
     p.$dimension === 'l' ? VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_L : VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_M}px;
 `;
-const TooltipedIconPlacement = TooltipHoc(IconPlacement);
+const StyledIconPlacement = styled(IconPlacement)`
+  &:focus-visible:not(:disabled) {
+    outline-offset: ${FOCUS_VERTICAL_OVERFLOW_MENU_BORDER_OFFSET}px;
+    border-radius: 0;
+  }
+`;
+const TooltipedIconPlacement = TooltipHoc(StyledIconPlacement);
 
 export const VerticalAddTabButton = ({ dimension = 'l', ...props }: AddTabButtonProps) => {
   const buttonDimension = dimension === 'l' ? 'lBig' : 'mBig';

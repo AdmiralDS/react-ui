@@ -41,5 +41,11 @@ export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimen
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: not-allowed;
   }
+
+  &:focus-visible {
+    border-radius: 0;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
+    outline-offset: -2px;
+  }
 `;
 BaseTab.displayName = 'BaseTab';

@@ -69,7 +69,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
             {badge}
           </VerticalTabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </VerticalTab>
     );
   },
@@ -105,6 +105,7 @@ const Wrapper = styled.div`
 `;
 const MenuItemWrapper = styled.div`
   display: flex;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   align-items: center;
@@ -193,7 +194,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
             <TabCloseIconButton
               dimension={dimension}
               disabled={tabIsDisabled(tabId)}
-              onClick={() => handleCloseTab(tabId)}
+              onCloseIconButtonClick={() => handleCloseTab(tabId)}
             />
           </MenuItemWrapper>
         </MenuItem>
