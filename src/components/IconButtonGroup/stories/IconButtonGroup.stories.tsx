@@ -4,9 +4,11 @@ import { useGlobals } from '@storybook/preview-api';
 import { IconButtonGroup, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { IconButtonGroupPlaygroundTemplate } from './IconButtonGroupPlayground.template';
+import { IconButtonGroupTooltipTemplate } from './IconButtonGroupTooltip.template';
 
 // Imports of text sources
 import IconButtonGroupPlaygroundRaw from './IconButtonGroupPlayground.template?raw';
+import IconButtonGroupTooltipRaw from './IconButtonGroupTooltip.template?raw';
 
 export default {
   title: 'Admiral-2.1/IconButtonGroup',
@@ -51,6 +53,27 @@ export const IconButtonGroupPlayground = {
   },
 
   name: 'IconButtonGroup. Playground',
+};
+
+//</editor-fold>
+
+// check css custom props and radius change
+const IconButtonGroupTooltipStory: StoryFn<typeof IconButtonGroup> = (props) => {
+  return <IconButtonGroupTooltipTemplate {...props} />;
+};
+
+export const IconButtonGroupTooltip = {
+  render: IconButtonGroupTooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: IconButtonGroupTooltipRaw,
+      },
+    },
+  },
+
+  name: 'IconButtonGroup. Tooltip',
 };
 
 //</editor-fold>

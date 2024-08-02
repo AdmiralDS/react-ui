@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { IconButton, IconButtonGroup, TextButton, TooltipHoc } from '@admiral-ds/react-ui';
+import { IconButton, IconButtonGroup, TooltipHoc } from '@admiral-ds/react-ui';
 import type { IconButtonGroupProps } from '@admiral-ds/react-ui';
 
 import { ReactComponent as PrintOutline } from '@admiral-ds/icons/build/system/PrintOutline.svg';
@@ -9,23 +9,23 @@ import { ReactComponent as ShareOutline } from '@admiral-ds/icons/build/service/
 import { ReactComponent as EditOutline } from '@admiral-ds/icons/build/system/EditOutline.svg';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 
-const T = TooltipHoc(TextButton);
+const IconButtonWithTooltip = TooltipHoc(IconButton);
 
-export const IconButtonGroupPlaygroundTemplate = (props: IconButtonGroupProps) => (
+export const IconButtonGroupTooltipTemplate = (props: IconButtonGroupProps) => (
   <>
     <IconButtonGroup {...props}>
-      <IconButton>
+      <IconButtonWithTooltip renderContent={() => 'Print'}>
         <PrintOutline />
-      </IconButton>
-      <IconButton>
+      </IconButtonWithTooltip>
+      <IconButtonWithTooltip renderContent={() => 'Share'}>
         <ShareOutline />
-      </IconButton>
-      <IconButton>
+      </IconButtonWithTooltip>
+      <IconButtonWithTooltip renderContent={() => 'Edit'}>
         <EditOutline />
-      </IconButton>
-      <IconButton>
+      </IconButtonWithTooltip>
+      <IconButtonWithTooltip renderContent={() => 'Delete'}>
         <DeleteOutline />
-      </IconButton>
+      </IconButtonWithTooltip>
     </IconButtonGroup>
   </>
 );

@@ -37,22 +37,26 @@ const StyledButton = styled.button<{
   appearance: none;
   vertical-align: middle;
 
+  [role='group'][data-dimension='xl'] &&,
   &[data-dimension='xl'] {
     padding: 0;
     height: 56px;
     width: 56px;
   }
 
+  [role='group'][data-dimension='l'] &&,
   &[data-dimension='l'] {
     height: 48px;
     width: 48px;
   }
 
+  [role='group'][data-dimension='m'] &&,
   &[data-dimension='m'] {
     height: 40px;
     width: 40px;
   }
 
+  [role='group'][data-dimension='s'] &&,
   &[data-dimension='s'] {
     height: 32px;
     width: 32px;
@@ -102,8 +106,14 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-  height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+  /* width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+  height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px; */
+  width: 24px;
+  height: 24px;
+  [data-dimension='s'] & {
+    width: 20px;
+    height: 20px;
+  }
 
   > * {
     display: inline-block;
@@ -123,8 +133,14 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   }
 
   & > svg {
-    width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-    height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+    /* width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+    height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px; */
+    width: 24px;
+    height: 24px;
+    [data-dimension='s'] & {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
 
