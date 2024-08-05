@@ -13,14 +13,14 @@ const T = TooltipHoc(TextButton);
 
 export const IconButtonGroupPlaygroundTemplate = (props: IconButtonGroupProps) => (
   <>
-    <IconButtonGroup {...props}>
-      <IconButton>
+    <IconButtonGroup dimension="s" {...props}>
+      <IconButton dimension="m">
         <PrintOutline />
       </IconButton>
-      <IconButton>
+      <IconButton loading>
         <ShareOutline />
       </IconButton>
-      <IconButton>
+      <IconButton dimension="l">
         <EditOutline />
       </IconButton>
       <IconButton>

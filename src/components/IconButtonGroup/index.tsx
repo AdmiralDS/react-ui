@@ -36,19 +36,9 @@ export interface IconButtonGroupProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const IconButtonGroup = ({ children, dimension = 'xl', ...props }: IconButtonGroupProps) => {
-  // const childrenWithDimension = React.Children.map(children, (child) => {
-  //   // Checking isValidElement is the safe way and avoids a
-  //   // typescript error too.
-  //   if (React.isValidElement(child)) {
-  //     return React.cloneElement(child, { dimension: dimension } as any);
-  //   }
-  //   return child;
-  // });
-
   return (
-    <Wrapper role="group" data-dimension={dimension} {...props}>
+    <Wrapper role="group" data-dimension={dimension} data-buttongroup {...props}>
       {children}
-      {/* {childrenWithDimension} */}
     </Wrapper>
   );
 };
