@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.11.0](https://github.com/AdmiralDS/react-ui/compare/v8.10.2...v8.11.0) (2024-08-05)
+
+
+### Features
+
+* **Avatar:** добавлен вариант XXS ([8f3ba00](https://github.com/AdmiralDS/react-ui/commit/8f3ba005925cd87c41a34ba47e901c229ff3f6d1))
+* **TabCloseIconButton:** добавлен коллбэк на закрытие вкладки ([77f5c08](https://github.com/AdmiralDS/react-ui/commit/77f5c0886c75327e9534eaac45f00cb06ef760e0))
+
+
+### Bug Fixes
+
+* **AvatarGroup, AvatarActivityGroup:** размер добавлен в зависимости ([f7c26a7](https://github.com/AdmiralDS/react-ui/commit/f7c26a7de5c2c277adf462156f22e4cdb753e5f8))
+* **TabMenuVertical:** обновление вкладок после удаления ([6e7e26d](https://github.com/AdmiralDS/react-ui/commit/6e7e26df32c3c3b9df3385f498c2612473296ae3))
+
 ### [8.10.2](https://github.com/AdmiralDS/react-ui/compare/v8.10.1...v8.10.2) (2024-07-30)
 
 
