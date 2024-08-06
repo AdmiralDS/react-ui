@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, IconButtonGroup, TooltipHoc } from '@admiral-ds/react-ui';
+import { IconButton, IconButtonGroup, T } from '@admiral-ds/react-ui';
 import type { IconButtonGroupProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -10,27 +10,48 @@ import { ReactComponent as ShareOutline } from '@admiral-ds/icons/build/service/
 import { ReactComponent as EditOutline } from '@admiral-ds/icons/build/system/EditOutline.svg';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 
-const IconButtonWithTooltip = TooltipHoc(IconButton);
+const Separator = styled.div<{ height?: number }>`
+  height: ${(p) => p.height || 20}px;
+`;
 
-export const IconButtonGroupTooltipTemplate = ({
+export const IconButtonGroupStateTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: IconButtonGroupProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => (
   <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+    <T font="Body/Body 1 Long">Disable (третья иконка)</T>
+    <Separator />
     <IconButtonGroup {...props}>
-      <IconButtonWithTooltip renderContent={() => 'Print'}>
+      <IconButton>
         <PrintOutline />
-      </IconButtonWithTooltip>
-      <IconButtonWithTooltip renderContent={() => 'Share'}>
+      </IconButton>
+      <IconButton>
         <ShareOutline />
-      </IconButtonWithTooltip>
-      <IconButtonWithTooltip renderContent={() => 'Edit'}>
+      </IconButton>
+      <IconButton disabled>
         <EditOutline />
-      </IconButtonWithTooltip>
-      <IconButtonWithTooltip renderContent={() => 'Delete'}>
+      </IconButton>
+      <IconButton>
         <DeleteOutline />
-      </IconButtonWithTooltip>
+      </IconButton>
+    </IconButtonGroup>
+    <Separator height={40} />
+    <T font="Body/Body 1 Long">Loading (третья иконка)</T>
+    <Separator />
+    <IconButtonGroup {...props}>
+      <IconButton>
+        <PrintOutline />
+      </IconButton>
+      <IconButton>
+        <ShareOutline />
+      </IconButton>
+      <IconButton loading>
+        <EditOutline />
+      </IconButton>
+      <IconButton>
+        <DeleteOutline />
+      </IconButton>
     </IconButtonGroup>
   </ThemeProvider>
 );

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import type { FC, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   white-space: nowrap;
   & > button {
     border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
@@ -30,14 +30,13 @@ const Wrapper = styled.div`
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
-export interface IconButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface IconButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
-  children: React.ReactNode;
 }
 
-export const IconButtonGroup = ({ children, dimension = 'xl', ...props }: IconButtonGroupProps) => {
+export const IconButtonGroup: FC<IconButtonGroupProps> = ({ children, dimension = 'xl', className, ...props }) => {
   return (
-    <Wrapper role="group" data-dimension={dimension} data-buttongroup {...props}>
+    <Wrapper role="group" data-dimension={dimension} className={`icon-button-group ` + className} {...props}>
       {children}
     </Wrapper>
   );

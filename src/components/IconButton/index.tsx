@@ -2,6 +2,8 @@ import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
+import { SpinnerIcon, spinnerMixin } from '#src/components/Spinner/SpinnerIcon';
+import { ReactComponent as SpinnerM } from '#src/components/Spinner/svgs/Subtract_m.svg';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { forwardRef } from 'react';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
@@ -37,26 +39,26 @@ const StyledButton = styled.button<{
   appearance: none;
   vertical-align: middle;
 
-  [data-buttongroup][data-dimension='xl'] &&,
+  .icon-button-group[data-dimension='xl'] &&,
   &[data-dimension='xl'] {
     padding: 0;
     height: 56px;
     width: 56px;
   }
 
-  [data-buttongroup][data-dimension='l'] &&,
+  .icon-button-group[data-dimension='l'] &&,
   &[data-dimension='l'] {
     height: 48px;
     width: 48px;
   }
 
-  [data-buttongroup][data-dimension='m'] &&,
+  .icon-button-group[data-dimension='m'] &&,
   &[data-dimension='m'] {
     height: 40px;
     width: 40px;
   }
 
-  [data-buttongroup][data-dimension='s'] &&,
+  .icon-button-group[data-dimension='s'] &&,
   &[data-dimension='s'] {
     height: 32px;
     width: 32px;
@@ -106,11 +108,17 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  /* width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-  height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px; */
-  width: 24px;
-  height: 24px;
-  [data-dimension='s'] & {
+  width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+  height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
+  container: size;
+
+  .icon-button-group[data-dimension='m'] &&,
+  .icon-button-group[data-dimension='l'] &&,
+  .icon-button-group[data-dimension='xl'] && {
+    width: 24px;
+    height: 24px;
+  }
+  .icon-button-group[data-dimension='s'] && {
     width: 20px;
     height: 20px;
   }
@@ -133,14 +141,18 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   }
 
   & > svg {
-    /* width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-    height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px; */
-    width: 24px;
-    height: 24px;
-    [data-dimension='s'] & {
-      width: 20px;
-      height: 20px;
-    }
+    width: 100%;
+    height: 100%;
+    /* spinnerMixin */
+  }
+`;
+
+const StyledSpinner = styled(Spinner)`
+  width: 100%;
+  height: 100%;
+  & > svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -163,7 +175,10 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       if (loading) {
         return (
           <IconButtonContent $dimension={dimension}>
-            <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />
+            {/* <Spinner dimension={dimension === 's' ? 'ms' : 'm'} /> */}
+            <SpinnerIcon />
+            {/* <SpinnerM/>
+            <StyledSpinner dimension={dimension === 's' ? 'ms' : 'm'} /> */}
           </IconButtonContent>
         );
       }
