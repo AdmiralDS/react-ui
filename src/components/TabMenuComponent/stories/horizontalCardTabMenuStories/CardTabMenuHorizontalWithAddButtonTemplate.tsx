@@ -53,7 +53,7 @@ const CustomHorizontalCardTab = forwardRef<HTMLButtonElement, CustomHorizontalTa
             {badge}
           </TabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </CardTab>
     );
   },
@@ -91,9 +91,12 @@ const Content = styled.div`
 
 const MenuItemWrapper = styled.div`
   display: flex;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 `;
 const getTabsMap = (tabs: TabContentProps[]) => {
   return tabs.map((tab) => tab.tabId || '');
@@ -169,7 +172,7 @@ export const CardTabMenuHorizontalWithAddButtonTemplate = ({
             <TabCloseIconButton
               dimension={dimension}
               disabled={tabIsDisabled(tabId)}
-              onClick={() => handleCloseTab(tabId)}
+              onCloseIconButtonClick={() => handleCloseTab(tabId)}
             />
           </MenuItemWrapper>
         </MenuItem>

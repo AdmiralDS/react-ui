@@ -531,6 +531,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     useEffect(() => {
+      // Компонент должен быть не управляемым с клавиатуры если он disabled
+      if (readOnly || disabled) return;
+
       function handleKeyDown(evt: KeyboardEvent) {
         const code = keyboardKey.getCode(evt);
 
@@ -575,7 +578,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return () => {
         containerRef.current?.removeEventListener('keydown', handleKeyDown);
       };
-    }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
+    }, [readOnly, disabled, modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
     useEffect(() => {
       function handleKeyUp() {

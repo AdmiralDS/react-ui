@@ -1,6 +1,22 @@
-import { AvatarActivityGroup } from '@admiral-ds/react-ui';
+import {
+  AvatarActivityGroup,
+  NotificationItem,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '@admiral-ds/react-ui';
 import type { AvatarActivityGroupProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+const StyledNotificationItem = styled(NotificationItem)`
+  width: 100%;
+`;
 
 const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
@@ -24,12 +40,21 @@ const items: AvatarActivityGroupProps['items'] = [
 
 export const AvatarActivityGroupPlaygroundTemplate = ({ onAvatarSelect, ...props }: AvatarActivityGroupProps) => {
   return (
-    <AvatarActivityGroup
-      {...props}
-      items={items}
-      onAvatarSelect={onAvatarSelect || onSelectAvatar}
-      data-dropdown-container-id="avatar-group-with-dropdown"
-      className="avatar-group-class"
-    />
+    <Wrapper>
+      <StyledNotificationItem displayStatusIcon>
+        <NotificationItemTitle>Группировка. Компонент AvatarActivityGroup.</NotificationItemTitle>
+        <NotificationItemContent>
+          Компоненты выстраиваются по горизонтали с отрицательным отступом -10 px и внешней обводкой 2px в цвет фона
+          страницы. При группировке статусы не отображаются.
+        </NotificationItemContent>
+      </StyledNotificationItem>
+      <AvatarActivityGroup
+        {...props}
+        items={items}
+        onAvatarSelect={onAvatarSelect || onSelectAvatar}
+        data-dropdown-container-id="avatar-group-with-dropdown"
+        className="avatar-group-class"
+      />
+    </Wrapper>
   );
 };
