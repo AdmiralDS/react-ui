@@ -12,26 +12,26 @@ exports[`IconButton should render component 1`] = `
   vertical-align: middle;
 }
 
-.icon-button-group[data-dimension='xl'] .c0.c0,
+.icon-button-group[data-dimension='xl'] .c0,
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
 }
 
-.icon-button-group[data-dimension='l'] .c0.c0,
+.icon-button-group[data-dimension='l'] .c0,
 .c0[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
-.icon-button-group[data-dimension='m'] .c0.c0,
+.icon-button-group[data-dimension='m'] .c0,
 .c0[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
-.icon-button-group[data-dimension='s'] .c0.c0,
+.icon-button-group[data-dimension='s'] .c0,
 .c0[data-dimension='s'] {
   height: 32px;
   width: 32px;

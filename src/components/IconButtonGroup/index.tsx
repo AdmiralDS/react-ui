@@ -41,3 +41,5 @@ export const IconButtonGroup: FC<IconButtonGroupProps> = ({ children, dimension 
     </Wrapper>
   );
 };
+
+IconButtonGroup.displayName = 'IconButtonGroup';
