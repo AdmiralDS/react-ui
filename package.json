@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.11.0",
+  "version": "8.12.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -75,7 +75,7 @@
     "@styled/typescript-styled-plugin": "^1.0.1",
     "@svgr/rollup": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
-    "@tanstack/react-query": "^5.51.21",
+    "@tanstack/react-query": "^5.51.23",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^15.0.7",
     "@testing-library/user-event": "^14.5.2",

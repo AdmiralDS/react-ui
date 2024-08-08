@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.12.0](https://github.com/AdmiralDS/react-ui/compare/v8.11.0...v8.12.0) (2024-08-08)
+
+
+### Features
+
+* **IconButtonGroup:** [#1357](https://github.com/AdmiralDS/react-ui/issues/1357) add component IconButtoGroup ([93969c8](https://github.com/AdmiralDS/react-ui/commit/93969c8071733eec709e47c852b59be2bd61def5))
+
 ## [8.11.0](https://github.com/AdmiralDS/react-ui/compare/v8.10.2...v8.11.0) (2024-08-05)
 
 
