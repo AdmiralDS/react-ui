@@ -25,18 +25,22 @@ function getHorizontalIconPadding(dimension: Dimension) {
  * css mixin для установки правильного отступа у иконки
  **/
 export const PaddingForButtonWithIconLeft = css<{ $displayAsSquare?: boolean }>`
+  .button-group[data-dimension='xl'] &&,
   &[data-dimension='xl'] {
     ${(props) => !props.$displayAsSquare && `padding-left: ${getHorizontalIconPadding('xl')}px;`}
   }
 
+  .button-group[data-dimension='l'] &&,
   &[data-dimension='l'] {
     ${(props) => !props.$displayAsSquare && `padding-left: ${getHorizontalIconPadding('l')}px;`}
   }
 
+  .button-group[data-dimension='m'] &&,
   &[data-dimension='m'] {
     ${(props) => !props.$displayAsSquare && `padding-left: ${getHorizontalIconPadding('m')}px;`}
   }
 
+  .button-group[data-dimension='s'] &&,
   &[data-dimension='s'] {
     ${(props) => !props.$displayAsSquare && `padding-left: ${getHorizontalIconPadding('s')}px;`}
   }
@@ -49,18 +53,22 @@ export const PaddingForButtonWithIconLeft = css<{ $displayAsSquare?: boolean }>`
  * css mixin для установки правильного отступа у иконки
  **/
 export const PaddingForButtonWithIconRight = css<{ $displayAsSquare?: boolean }>`
+  .button-group[data-dimension='xl'] &&,
   &[data-dimension='xl'] {
     ${(props) => !props.$displayAsSquare && `padding-right: ${getHorizontalIconPadding('xl')}px;`}
   }
 
+  .button-group[data-dimension='l'] &&,
   &[data-dimension='l'] {
     ${(props) => !props.$displayAsSquare && `padding-right: ${getHorizontalIconPadding('l')}px;`}
   }
 
+  .button-group[data-dimension='m'] &&,
   &[data-dimension='m'] {
     ${(props) => !props.$displayAsSquare && `padding-right: ${getHorizontalIconPadding('m')}px;`}
   }
 
+  .button-group[data-dimension='s'] &&,
   &[data-dimension='s'] {
     ${(props) => !props.$displayAsSquare && `padding-right: ${getHorizontalIconPadding('s')}px;`}
   }
@@ -81,20 +89,24 @@ const defaultDimensionMixin = css<{ $displayAsSquare?: boolean }>`
 export const dimensionMixin = css<{ $displayAsSquare?: boolean }>`
   ${defaultDimensionMixin}
 
+  .button-group[data-dimension='xl'] &&,
   &[data-dimension='xl'] {
     ${defaultDimensionMixin}
   }
 
+  .button-group[data-dimension='l'] &&,
   &[data-dimension='l'] {
     height: 48px;
     ${(props) => (props.$displayAsSquare ? 'width: 48px;' : 'padding: 0 21px;')}
   }
 
+  .button-group[data-dimension='m'] &&,
   &[data-dimension='m'] {
     height: 40px;
     ${(props) => (props.$displayAsSquare ? 'width: 40px;' : 'padding: 0 17px;')}
   }
 
+  .button-group[data-dimension='s'] &&,
   &[data-dimension='s'] {
     height: 32px;
     ${(props) => (props.$displayAsSquare ? 'width: 32px;' : 'padding: 0 13px;')}
