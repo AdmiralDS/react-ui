@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
-import { ReactComponent as Spinner } from './svgs/Subtract.svg';
+import styled, { keyframes } from 'styled-components';
+import { ReactComponent as Spinner } from './Subtract.svg';
 
 const spin = keyframes`
   0% {
@@ -10,7 +10,9 @@ const spin = keyframes`
   }
 `;
 
-export const spinnerMixin = css<{ $inverse?: boolean }>`
+export const SpinnerIcon = styled(Spinner)<{
+  $inverse?: boolean;
+}>`
   animation: ${spin} 1s linear infinite;
   path {
     fill: ${({ $inverse, theme }) =>
@@ -18,46 +20,32 @@ export const spinnerMixin = css<{ $inverse?: boolean }>`
         ? `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`
         : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
   }
-`;
-
-export const SpinnerIcon = styled(Spinner)<{
-  $inverse?: boolean;
-  $svgMixin?: ReturnType<typeof css>;
-}>`
-  ${spinnerMixin}
   width: 100%;
   height: 100%;
-  path {
-    visibility: hidden;
-  }
 
   @container (min-width: 64px) {
-    path[data-dimension='xl'] {
-      visibility: visible;
+    :not(path[data-dimension='xl']) {
+      display: none;
     }
   }
   @container (max-width: 48px) and (min-width: 25px) {
-    path[data-dimension='l'] {
-      visibility: visible;
-      transform: scale(1.33);
+    :not(path[data-dimension='l']) {
+      display: none;
     }
   }
   @container (max-width: 24px) and (min-width: 21px) {
-    path[data-dimension='m'] {
-      visibility: visible;
-      transform: scale(2.66);
+    :not(path[data-dimension='m']) {
+      display: none;
     }
   }
   @container (max-width: 20px) and (min-width: 17px) {
-    path[data-dimension='ms'] {
-      visibility: visible;
-      transform: scale(3.2);
+    :not(path[data-dimension='ms']) {
+      display: none;
     }
   }
   @container (max-width: 16px) {
-    path[data-dimension='s'] {
-      visibility: visible;
-      transform: scale(4);
+    :not(path[data-dimension='s']) {
+      display: none;
     }
   }
 `;

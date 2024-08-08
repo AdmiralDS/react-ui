@@ -1,12 +1,7 @@
 import type { HTMLAttributes } from 'react';
-import * as React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { ReactComponent as SpinnerXL } from './svgs/Subtract_xl.svg';
-import { ReactComponent as SpinnerL } from './svgs/Subtract_l.svg';
-import { ReactComponent as SpinnerM } from './svgs/Subtract_m.svg';
-import { ReactComponent as SpinnerMS } from './svgs/Subtract_ms.svg';
-import { ReactComponent as SpinnerS } from './svgs/Subtract_s.svg';
+import { SpinnerIcon } from './SpinnerIcon';
 
 type Dimension = 'xl' | 'l' | 'm' | 'ms' | 's';
 
@@ -18,22 +13,6 @@ export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   /** Миксин svg иконки */
   svgMixin?: ReturnType<typeof css>;
 }
-
-const getIcon = (dimension: Dimension) => {
-  switch (dimension) {
-    case 's':
-      return SpinnerS;
-    case 'ms':
-      return SpinnerMS;
-    case 'm':
-      return SpinnerM;
-    case 'xl':
-      return SpinnerXL;
-    case 'l':
-    default:
-      return SpinnerL;
-  }
-};
 
 const sizes = css<{ $dimension: Dimension }>`
   width: ${({ $dimension }) => {
@@ -68,48 +47,23 @@ const sizes = css<{ $dimension: Dimension }>`
   }};
 `;
 
-const spin = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
 const SpinnerWrapper = styled.div<{
-  $inverse: boolean;
   $dimension: Dimension;
   $svgMixin?: ReturnType<typeof css>;
 }>`
   position: relative;
-
+  container-type: inline-size;
   ${sizes};
 
   & svg {
     ${(p) => p.$svgMixin || ''}
-    animation: ${spin} 1s linear infinite;
-    path {
-      fill: ${({ $inverse, theme }) =>
-        $inverse
-          ? `var(--admiral-color-Special_StaticWhite, ${theme.color['Special/Static White']})`
-          : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
-    }
   }
 `;
 
 export const Spinner = ({ dimension = 'm', inverse = false, svgMixin, ...props }: SpinnerProps) => {
-  const SpinnerIcon = getIcon(dimension);
   return (
-    <SpinnerWrapper
-      $inverse={inverse}
-      $dimension={dimension}
-      $svgMixin={svgMixin}
-      role="alert"
-      aria-live="assertive"
-      {...props}
-    >
-      <SpinnerIcon />
+    <SpinnerWrapper $dimension={dimension} $svgMixin={svgMixin} role="alert" aria-live="assertive" {...props}>
+      <SpinnerIcon $inverse={inverse} />
     </SpinnerWrapper>
   );
 };
