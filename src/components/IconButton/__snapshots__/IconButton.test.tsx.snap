@@ -12,22 +12,26 @@ exports[`IconButton should render component 1`] = `
   vertical-align: middle;
 }
 
+.icon-button-group[data-dimension='xl'] .c0,
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
   width: 56px;
 }
 
+.icon-button-group[data-dimension='l'] .c0,
 .c0[data-dimension='l'] {
   height: 48px;
   width: 48px;
 }
 
+.icon-button-group[data-dimension='m'] .c0,
 .c0[data-dimension='m'] {
   height: 40px;
   width: 40px;
 }
 
+.icon-button-group[data-dimension='s'] .c0,
 .c0[data-dimension='s'] {
   height: 32px;
   width: 32px;
@@ -74,6 +78,19 @@ exports[`IconButton should render component 1`] = `
   align-items: center;
   width: 24px;
   height: 24px;
+  container-type: inline-size;
+}
+
+.icon-button-group[data-dimension='m'] .c1.c1,
+.icon-button-group[data-dimension='l'] .c1.c1,
+.icon-button-group[data-dimension='xl'] .c1.c1 {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-button-group[data-dimension='s'] .c1.c1 {
+  width: 20px;
+  height: 20px;
 }
 
 .c1 >* {
@@ -91,8 +108,8 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c1>svg {
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  height: 100%;
 }
 
 <div>
