@@ -2,8 +2,7 @@ import type { ButtonHTMLAttributes } from 'react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
-import { SpinnerIcon, spinnerMixin } from '#src/components/Spinner/SpinnerIcon';
-import { ReactComponent as SpinnerM } from '#src/components/Spinner/svgs/Subtract_m.svg';
+import { SpinnerIcon } from '#src/components/Spinner/SpinnerIcon';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { forwardRef } from 'react';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
@@ -110,7 +109,7 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   align-items: center;
   width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
   height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-  container: size;
+  container-type: inline-size;
 
   .icon-button-group[data-dimension='m'] &&,
   .icon-button-group[data-dimension='l'] &&,
@@ -143,7 +142,6 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   & > svg {
     width: 100%;
     height: 100%;
-    /* spinnerMixin */
   }
 `;
 

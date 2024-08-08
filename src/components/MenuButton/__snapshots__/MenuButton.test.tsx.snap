@@ -894,42 +894,45 @@ exports[`MenuButton should render component 1`] = `
 exports[`MenuButton should render component with loading state 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c6 {
+  "baseElement": .c7 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c6 *[fill^='#'] {
+.c7 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c6:hover *[fill^='#'] {
+.c7:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
-.c6[data-disabled] {
+.c7[data-disabled] {
   pointer-events: none;
 }
 
-.c6[data-disabled] *[fill^='#'] {
+.c7[data-disabled] *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c3 {
+  animation: cilQsd 1s linear infinite;
+  width: 100%;
+  height: 100%;
+}
+
+.c3 path {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c1 {
   position: relative;
+  container-type: inline-size;
   width: 24px;
   height: 24px;
 }
 
-.c1 svg {
-  animation: cilQsd 1s linear infinite;
-}
-
-.c1 svg path {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c5 {
+.c6 {
   vertical-align: top;
   display: inline-flex;
   gap: 8px;
@@ -941,26 +944,26 @@ exports[`MenuButton should render component with loading state 1`] = `
   max-width: calc(100% - 2px);
 }
 
-.c5 >* {
+.c6 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
 }
 
-.c5 >.{
+.c6 >.{
   flex: 0 0 auto;
 }
 
-.c5>svg {
+.c6>svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c5 {
+[data-dimension='s'] .c6 {
   height: 20px;
 }
 
-[data-dimension='s'] .c5>svg {
+[data-dimension='s'] .c6>svg {
   width: 20px;
   height: 20px;
 }
@@ -972,7 +975,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   transform: translate(-50%, -50%);
 }
 
-.c3 {
+.c4 {
   display: inline-block;
   width: 2px;
 }
@@ -1302,7 +1305,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c0 .c4 {
+.c0 .c5 {
   visibility: hidden;
 }
 
@@ -1321,13 +1324,15 @@ exports[`MenuButton should render component with loading state 1`] = `
           class="c1 c2"
           role="alert"
         >
-          <div />
+          <div
+            class="c3"
+          />
         </div>
         <div
-          class="c3"
+          class="c4"
         />
         <div
-          class="c4 c5"
+          class="c5 c6"
         >
           <span>
             test
@@ -1337,49 +1342,52 @@ exports[`MenuButton should render component with loading state 1`] = `
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
             />
           </div>
         </div>
       </button>
     </div>
   </body>,
-  "container": .c6 {
+  "container": .c7 {
   transition: transform 0.3s ease-in-out;
   transform: rotate(0deg);
 }
 
-.c6 *[fill^='#'] {
+.c7 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c6:hover *[fill^='#'] {
+.c7:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
-.c6[data-disabled] {
+.c7[data-disabled] {
   pointer-events: none;
 }
 
-.c6[data-disabled] *[fill^='#'] {
+.c7[data-disabled] *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c3 {
+  animation: cilQsd 1s linear infinite;
+  width: 100%;
+  height: 100%;
+}
+
+.c3 path {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
 .c1 {
   position: relative;
+  container-type: inline-size;
   width: 24px;
   height: 24px;
 }
 
-.c1 svg {
-  animation: cilQsd 1s linear infinite;
-}
-
-.c1 svg path {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c5 {
+.c6 {
   vertical-align: top;
   display: inline-flex;
   gap: 8px;
@@ -1391,26 +1399,26 @@ exports[`MenuButton should render component with loading state 1`] = `
   max-width: calc(100% - 2px);
 }
 
-.c5 >* {
+.c6 >* {
   display: inline-block;
   flex: 0 1 auto;
   white-space: nowrap;
 }
 
-.c5 >.{
+.c6 >.{
   flex: 0 0 auto;
 }
 
-.c5>svg {
+.c6>svg {
   width: 24px;
   height: 24px;
 }
 
-[data-dimension='s'] .c5 {
+[data-dimension='s'] .c6 {
   height: 20px;
 }
 
-[data-dimension='s'] .c5>svg {
+[data-dimension='s'] .c6>svg {
   width: 20px;
   height: 20px;
 }
@@ -1422,7 +1430,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   transform: translate(-50%, -50%);
 }
 
-.c3 {
+.c4 {
   display: inline-block;
   width: 2px;
 }
@@ -1752,7 +1760,7 @@ exports[`MenuButton should render component with loading state 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c0 .c4 {
+.c0 .c5 {
   visibility: hidden;
 }
 
@@ -1770,13 +1778,15 @@ exports[`MenuButton should render component with loading state 1`] = `
         class="c1 c2"
         role="alert"
       >
-        <div />
+        <div
+          class="c3"
+        />
       </div>
       <div
-        class="c3"
+        class="c4"
       />
       <div
-        class="c4 c5"
+        class="c5 c6"
       >
         <span>
           test
@@ -1786,7 +1796,7 @@ exports[`MenuButton should render component with loading state 1`] = `
         >
           <div
             aria-hidden="true"
-            class="c6"
+            class="c7"
           />
         </div>
       </div>

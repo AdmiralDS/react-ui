@@ -78,7 +78,7 @@ exports[`IconButton should render component 1`] = `
   align-items: center;
   width: 24px;
   height: 24px;
-  container: size;
+  container-type: inline-size;
 }
 
 .icon-button-group[data-dimension='m'] .c1.c1,
