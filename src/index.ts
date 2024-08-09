@@ -1,5 +1,6 @@
 export * from './components/themes';
 export * from './components/Accordion';
+export * from './components/ActionBar';
 export * from './components/Badge';
 export * from './components/Calendar';
 export * from './components/Calendar/highlightDate';
