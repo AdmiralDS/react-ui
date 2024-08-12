@@ -1,7 +1,15 @@
 import { useMemo } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 
 import type { ActionBarProps, BorderRadiusType, RenderOptionProps } from '@admiral-ds/react-ui';
-import { ActionBar, ActionBarItemWithTooltip, ActionBarDropMenuItem } from '@admiral-ds/react-ui';
+import {
+  ActionBar,
+  ActionBarItemWithTooltip,
+  ActionBarDropMenuItem,
+  NotificationItem,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '@admiral-ds/react-ui';
 
 import {
   SystemSearchOutline,
@@ -16,7 +24,6 @@ import {
   SystemDeleteOutline,
 } from '@admiral-ds/icons';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { ThemeProvider } from 'styled-components';
 
 const items = [
   { itemId: '1', withDivider: false, name: 'Search', icon: <SystemSearchOutline />, disabled: false },
@@ -30,6 +37,15 @@ const items = [
   { itemId: '9', withDivider: false, name: 'Export', icon: <SystemExportOutline />, disabled: false },
   { itemId: '10', withDivider: false, name: 'Delete', icon: <SystemDeleteOutline />, disabled: false },
 ];
+
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 export const ActionBarTemplate = ({
   dimension = 'xl',
@@ -79,14 +95,38 @@ export const ActionBarTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <ActionBar
-        {...props}
-        items={itemsMap}
-        renderActionBarItem={renderActionBarItem}
-        renderDropMenuItem={renderDropMenuItem}
-        itemIsDisabled={itemIsDisabled}
-        dimension={dimension}
-      />
+      <Wrapper>
+        <NotificationItem displayStatusIcon>
+          <NotificationItemTitle>Action Bar</NotificationItemTitle>
+          <NotificationItemContent>
+            Action Bar — это панель действий с возможностью деления на логические группы с помощью разделителя.
+            <Separator height={8} />
+            Опционально или при нехватке места добавляется Overflow Menu. Над каждой кнопкой, входящей в состав
+            компонента, при ховере, появляется Tooltip с подсказкой функции кнопки.
+            <Separator height={8} />
+            Компонент Action Bar представлен в 4х размерах по аналогии с обычными кнопками: XL (56), L (48), M (40), S
+            (32).
+            <Separator height={8} />
+            По дефолту тултип появляется снизу от кнопки при ховере. Можно настроить появление тултипа справа, слева,
+            сверху, в зависимости от расположения Action Bar. В случае, когда это действительно необходимо и смысл
+            кнопки очевиден, опционально можно отключать тултип.
+            <Separator height={8} />
+            Если кнопки не помещаются в доступное горизонтальное пространство, они перемещаются в Dropdown Menu. Размеры
+            выпадающего меню для Action Bar — L для XL и L размера Action Bar, M для M размера и S для размера S. При
+            изменении ширины компонента, кнопки не помещающиеся в ширину Action Bar, перемещаются в Overflow Menu,
+            добавляясь по порядку. Это означает, что последняя кнопка на панели действий также будет последней кнопкой
+            внутри меню.
+          </NotificationItemContent>
+        </NotificationItem>
+        <ActionBar
+          {...props}
+          items={itemsMap}
+          renderActionBarItem={renderActionBarItem}
+          renderDropMenuItem={renderDropMenuItem}
+          itemIsDisabled={itemIsDisabled}
+          dimension={dimension}
+        />
+      </Wrapper>
     </ThemeProvider>
   );
 };
