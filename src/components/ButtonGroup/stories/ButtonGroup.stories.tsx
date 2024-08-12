@@ -28,7 +28,7 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент ButtonGroup состоит из компонентов Button связаных друг с другом, используется для организации схожих
+    Компонент ButtonGroup состоит из компонентов Button, связаных друг с другом, используется для организации схожих
     функций. <Separator /> Компонент представлен в вариантах Primary, Secondary и Tertiary и размерах: XL - высота 56
     px, L - высота 48 px, M - высота 40 px и S - высота 32 px.
   </Desc>

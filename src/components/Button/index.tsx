@@ -4,7 +4,7 @@ import type { css } from 'styled-components';
 import styled from 'styled-components';
 
 import type { ButtonAppearance, Dimension, StyledButtonProps } from './types';
-import { SpinnerIcon } from '../Spinner/SpinnerIcon';
+import { SpinnerIcon } from '#src/components/Spinner/SpinnerIcon';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonIconContainer, dimensionMixin } from './dimensionMixin';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
