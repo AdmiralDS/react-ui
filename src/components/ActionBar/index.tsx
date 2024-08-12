@@ -64,25 +64,32 @@ const getFocusBorderOffset = ($dimension: ActionBarDimension) => {
       return FOCUS_ACTION_BAR_OVERFLOW_MENU_BORDER_OFFSET_XL;
   }
 };
-const StyledOverflowMenu1 = styled(OverflowMenu)<{ $dimension: ActionBarDimension }>`
-  width: ${({ $dimension }) => getActionBarHeight($dimension)}px;
-  height: ${({ $dimension }) => getActionBarHeight($dimension)}px;
-  margin: 0;
-  &:focus-visible:not(:disabled) {
-    outline-offset: 2px;
+
+function getFocusBorderRadius(componentBorderRadius: string) {
+  switch (componentBorderRadius) {
+    case '0':
+      return '0';
+    case '2px':
+      return '6px';
+    case '6px':
+      return '10px';
+    case '8px':
+      return '12px';
+    case '10px':
+      return '14px';
+    case '4px':
+    default:
+      return '8px';
   }
-`;
-/*&:focus-visible:not(:disabled) {
-  outline-offset: ${(p) => getFocusBorderOffset(p.$dimension)}px;
-  border-radius: 1px;
-}*/
+}
+
 const StyledOverflowMenu = styled(OverflowMenu)<{ $dimension: ActionBarDimension }>`
   &:focus-visible:not(:disabled) {
     outline: none;
 
     &:before {
       border: 2px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-      border-radius: ${(p) => `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
+      border-radius: ${(p) => getFocusBorderRadius(mediumGroupBorderRadius(p.theme.shape))};
       content: '';
       display: block;
       position: absolute;
@@ -180,8 +187,8 @@ export const ActionBar = ({
       {hiddenItems.length > 0 && (
         <ActionBarOverflowMenuItem $dimension={dimension}>
           <StyledOverflowMenu
-            items={overflowMenuItems}
             $dimension={dimension}
+            items={overflowMenuItems}
             dimension={dimension === 'xl' ? 'l' : dimension}
           />
         </ActionBarOverflowMenuItem>
