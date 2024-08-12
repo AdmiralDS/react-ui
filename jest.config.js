@@ -6,7 +6,7 @@ module.exports = {
   // `<rootDir>` is a token Jest substitutes
   roots: ['<rootDir>/src'],
 
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: '@happy-dom/jest-environment',
 
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
