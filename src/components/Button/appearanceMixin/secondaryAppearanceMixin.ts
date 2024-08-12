@@ -31,7 +31,9 @@ export const secondaryAppearanceMixin = css`
   &&&:disabled {
     background-color: transparent;
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-    border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    &:not(.button-group > button) {
+      border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    }
     &&& *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
