@@ -83,15 +83,12 @@ describe('Tooltip', () => {
   });
 
   it('should show tooltip when component receives focus', () => {
-    const component = <WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />;
-    const { rerender } = render(component);
+    render(<WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />);
     act(() => {
       fireEvent.focus(screen.getByTestId('wrapped-component'));
       jest.runAllTimers();
     });
-    rerender(component);
-    const styles = window.getComputedStyle(screen.getByText('tooltipText') as HTMLElement);
-    expect(styles.visibility).toBe('visible');
+    expect(screen.queryByText('tooltipText')).toBeInTheDocument();
   });
 
   it('should hide tooltip when mouse leaves component', () => {
@@ -104,18 +101,19 @@ describe('Tooltip', () => {
   });
 
   it('should show tooltip with 1.5 seconds delay if prop "withDelay" is provided', () => {
-    const component = <WrappedComponentWithTooltip renderContent={() => 'tooltipText'} withDelay />;
-    const { rerender } = render(component);
+    render(<WrappedComponentWithTooltip renderContent={() => 'tooltipText'} withDelay />);
     act(() => {
       const mouseenter = new MouseEvent('mouseenter', {
         bubbles: true,
         cancelable: false,
       });
       fireEvent(screen.getByTestId('wrapped-component'), mouseenter);
-      jest.advanceTimersByTime(1500);
-      rerender(component);
     });
-    const styles = window.getComputedStyle(screen.getByText('tooltipText') as HTMLElement);
-    expect(styles.visibility).toBe('visible');
+    expect(screen.queryByText('tooltipText')).not.toBeInTheDocument();
+
+    act(() => {
+      jest.advanceTimersByTime(1500);
+    });
+    expect(screen.queryByText('tooltipText')).toBeInTheDocument();
   });
 });
