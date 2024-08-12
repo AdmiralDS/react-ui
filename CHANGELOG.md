@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.13.0](https://github.com/AdmiralDS/react-ui/compare/v8.12.0...v8.13.0) (2024-08-12)
+
+
+### Features
+
+* **ActionBar:** add new component ([5257f13](https://github.com/AdmiralDS/react-ui/commit/5257f13501103c6fc3fd4862a07bbb8f1257aec7))
+* **ButtonGroup:** [#1358](https://github.com/AdmiralDS/react-ui/issues/1358) добавлен компонент ButtonGroup ([dda87a2](https://github.com/AdmiralDS/react-ui/commit/dda87a28f3115172d9c705e62dd30c9ed4d2cf45))
+
 ## [8.12.0](https://github.com/AdmiralDS/react-ui/compare/v8.11.0...v8.12.0) (2024-08-08)
 
 
