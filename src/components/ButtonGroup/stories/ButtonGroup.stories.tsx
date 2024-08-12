@@ -8,12 +8,14 @@ import { ButtonGroupPlaygroundTemplate } from './ButtonGroupPlayground.template'
 import { ButtonGroupAppearanceTemplate } from './ButtonGroupAppearance.template';
 import { ButtonGroupDimensionTemplate } from './ButtonGroupDimension.template';
 import { ButtonGroupStateTemplate } from './ButtonGroupState.template';
+import { ButtonGroupVariantsTemplate } from './ButtonGroupVariants.template';
 
 // Imports of text sources
 import ButtonGroupPlaygroundRaw from './ButtonGroupPlayground.template?raw';
 import ButtonGroupAppearanceRaw from './ButtonGroupAppearance.template?raw';
 import ButtonGroupDimensionRaw from './ButtonGroupDimension.template?raw';
 import ButtonGroupStateRaw from './ButtonGroupState.template?raw';
+import ButtonGroupVariantsRaw from './ButtonGroupVariants.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -26,13 +28,9 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент ButtonGroup — это группа кнопок-иконок со связанными по смыслу действиями или действиями, лежащими в одном
-    контексте.
-    <Separator />
-    Компонент используется только в сочетании с IconButton c appearance = 'secondary' (серые иконки и обводка). Если
-    нужна вариация синего цвета, то используйте компонент ButtonGroup (находится в разработке).
-    <Separator />
-    Есть 4 размера по аналогии с обычными кнопками: XL (56), L (48), M (40), S (32).
+    Компонент ButtonGroup состоит из компонентов Button связаных друг с другом, используется для организации схожих
+    функций. <Separator /> Компонент представлен в вариантах Primary, Secondary и Tertiary и размерах: XL - высота 56
+    px, L - высота 48 px, M - высота 40 px и S - высота 32 px.
   </Desc>
 );
 
@@ -148,6 +146,28 @@ export const ButtonGroupState = {
   },
 
   name: 'ButtonGroup. Состояния',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="ButtonGroup. Variants">
+const ButtonGroupVariantsStory: StoryFn<typeof ButtonGroup> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ButtonGroupVariantsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const ButtonGroupVariants = {
+  render: ButtonGroupVariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ButtonGroupVariantsRaw,
+      },
+    },
+  },
+
+  name: 'ButtonGroup. Варианты',
 };
 
 //</editor-fold>

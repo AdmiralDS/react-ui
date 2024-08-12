@@ -4,12 +4,14 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: inline-flex;
   white-space: nowrap;
-  & > button {
-    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    flex: 1 0 auto;
+  &[data-appearance='primary'],
+  &[data-appearance='tertiary'] {
+    gap: 1px;
   }
-  & > button:not(:first-child) {
-    margin-left: -1px;
+  &[data-appearance='secondary'] {
+    & > button:not(:first-child) {
+      margin-left: -1px;
+    }
   }
   & > button:first-child {
     border-top-right-radius: 0;
@@ -21,10 +23,6 @@ export const Wrapper = styled.div`
   }
   & > button:not(:first-child):not(:last-child) {
     border-radius: 0;
-  }
-  // обводка элемента при фокусе с клавиатуры должна отображаться поверх соседних кнопок
-  & > button:focus-visible {
-    z-index: 1;
   }
 `;
 
