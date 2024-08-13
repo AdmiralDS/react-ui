@@ -30,9 +30,13 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
   return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string | number; $rowCount: number }>`
-  max-height: ${({ $dimension, $maxHeight, $rowCount }) => {
-    if ($maxHeight) return $maxHeight;
+const menuListHeights = css<{
+  $dimension?: MenuDimensions;
+  $rowCount: number;
+  $hasTopPanel: boolean;
+  $hasBottomPanel: boolean;
+}>`
+  max-height: ${({ $dimension, $rowCount }) => {
     return `min(calc(100vh - 16px), ${getHeight($rowCount, $dimension)}px)`;
   }};
 `;
@@ -41,7 +45,6 @@ const Wrapper = styled.div<{
   $dimension?: MenuDimensions;
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
-  $rowCount: number;
   $maxHeight?: string | number;
 }>`
   padding: 0;
@@ -56,14 +59,19 @@ const Wrapper = styled.div<{
   background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   max-width: calc(100vw - 32px);
   border-color: transparent;
-  ${menuListHeights};
+  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}` : '')};
   &:focus-visible {
     border: 0;
     outline: none;
   }
 `;
 
-const StyledDiv = styled.div<{ $hasTopPanel: boolean; $hasBottomPanel: boolean }>`
+const StyledDiv = styled.div<{
+  $dimension?: MenuDimensions;
+  $rowCount: number;
+  $hasTopPanel: boolean;
+  $hasBottomPanel: boolean;
+}>`
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
@@ -72,6 +80,7 @@ const StyledDiv = styled.div<{ $hasTopPanel: boolean; $hasBottomPanel: boolean }
   border: none;
   overflow-y: auto;
   box-sizing: border-box;
+  ${menuListHeights};
 `;
 
 export interface RenderPanelProps {
@@ -100,7 +109,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onDeselectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<MenuModelItemProps>;
-  /** Задает максимальную высоту меню */
+  /** Задает максимальную высоту меню (с учетом наличия/отсутствия верхней/нижней панели) */
   maxHeight?: string | number;
   /** Позволяет добавить панель сверху над выпадающим списком */
   renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
@@ -113,7 +122,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
    * Возможность множественного выбора (опции с Checkbox)
    **/
   multiSelection?: boolean;
-  /** Количество строк в меню */
+  /** Количество отображаемых пунктов меню */
   rowCount?: number;
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox) */
@@ -528,7 +537,6 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         $dimension={dimension}
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
-        $rowCount={rowCount}
         $maxHeight={maxHeight}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
@@ -536,7 +544,14 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel} {...menuProps}>
+        <StyledDiv
+          ref={menuRef}
+          $dimension={dimension}
+          $rowCount={rowCount}
+          $hasTopPanel={hasTopPanel}
+          $hasBottomPanel={hasBottomPanel}
+          {...menuProps}
+        >
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledDiv>
         {submenuVisible && activeItemRef.current && (
