@@ -30,7 +30,7 @@ export interface VerticalTabProps extends BaseTabProps {
   width?: string | number;
 }
 
-interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement>, DropMenuComponentProps {
+interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Показывать серую полосу снизу */
   showUnderline?: boolean;
   /** ID выбранной вкладки */
@@ -46,11 +46,16 @@ interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement>, DropMenuCompo
   /** Коллбэк для определения, является ли вкладка disabled */
   tabIsDisabled: (tabId: string) => boolean;
 }
-interface TabMenuWithOverflowProps extends DropMenuStyleProps {
+interface TabMenuWithOverflowProps
+  extends Omit<DropMenuComponentProps, 'onSelectItem' | 'targetElement'>,
+    DropMenuStyleProps {
   /** Размер компонента */
   dimension?: TabDimension;
   /** Рендер-функция для отрисовки элемента выпадающего списка */
   renderDropMenuItem: (tabId: string) => ((options: RenderOptionProps) => ReactNode) | ReactNode;
+}
+interface TabMenuWithAddTabButtonProps {
+  onAddTab?: () => void;
 }
 
 export interface TabMenuIconProps extends TabMenuBaseProps {
@@ -63,9 +68,14 @@ export interface HorizontalTabsProps extends TabMenuBaseProps {
   dimension?: TabDimension;
 }
 
-export interface TabMenuHorizontalProps extends TabMenuBaseProps, TabMenuWithOverflowProps {}
+export interface TabMenuHorizontalProps
+  extends TabMenuBaseProps,
+    TabMenuWithOverflowProps,
+    TabMenuWithAddTabButtonProps {}
 
-export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps {
+export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
 }
+
+export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {}

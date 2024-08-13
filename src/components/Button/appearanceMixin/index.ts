@@ -9,26 +9,35 @@ import { successAppearanceMixin } from './successAppearanceMixin';
 import { focusVisibleStyle } from '#src/components/Button/appearanceMixin/focusVisibleStyle';
 
 export const appearanceMixin = css`
-  &[data-appearance~='primary'] {
+  &[data-appearance~='primary']:not(.button-group > button) {
     ${primaryAppearanceMixin}
   }
-  &[data-appearance~='secondary'] {
+  &[data-appearance~='secondary']:not(.button-group > button) {
     ${secondaryAppearanceMixin}
   }
-  &[data-appearance~='tertiary'] {
+  &[data-appearance~='tertiary']:not(.button-group > button) {
     ${tertiaryAppearanceMixin}
   }
-  &[data-appearance~='ghost'] {
+  &[data-appearance~='ghost']:not(.button-group > button) {
     ${ghostAppearanceMixin}
   }
-  &[data-appearance~='white'] {
+  &[data-appearance~='white']:not(.button-group > button) {
     ${whiteAppearanceMixin}
   }
-  &[data-appearance~='danger'] {
+  &[data-appearance~='danger']:not(.button-group > button) {
     ${dangerAppearanceMixin}
   }
-  &[data-appearance~='success'] {
+  &[data-appearance~='success']:not(.button-group > button) {
     ${successAppearanceMixin}
+  }
+  &:is(.button-group[data-appearance='primary'] > button) {
+    ${primaryAppearanceMixin}
+  }
+  &:is(.button-group[data-appearance='secondary'] > button) {
+    ${secondaryAppearanceMixin}
+  }
+  &:is(.button-group[data-appearance='tertiary'] > button) {
+    ${tertiaryAppearanceMixin}
   }
 
   ${focusVisibleStyle}

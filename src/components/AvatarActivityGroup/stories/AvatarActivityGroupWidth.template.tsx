@@ -1,18 +1,28 @@
 import styled from 'styled-components';
 
-import { AvatarActivityGroup, DefaultFontColorName } from '@admiral-ds/react-ui';
+import {
+  AvatarActivityGroup,
+  NotificationItem,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '@admiral-ds/react-ui';
 import type { AvatarActivityGroupProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
-
-const Text = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 8px;
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
+const StyledNotificationItem = styled(NotificationItem)`
+  width: 100%;
+`;
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
+
+const imageURL = 'https://avavatar.ru/images/full/3/Ya4mRgF2LYW9hNdk.jpg';
 
 const onSelectAvatar = (id: string) => {
   // eslint-disable-next-line no-console
@@ -56,8 +66,21 @@ const items2: AvatarActivityGroupProps['items'] = [
 
 export const AvatarActivityGroupWidthTemplate = (props: AvatarActivityGroupProps) => {
   return (
-    <>
-      <Text>Пример AvatarGroup с единым для всех аватаров внешним видом (appearance)</Text>
+    <Wrapper>
+      <StyledNotificationItem displayStatusIcon>
+        <NotificationItemTitle>AvatarActivityGroup.</NotificationItemTitle>
+        <NotificationItemContent>
+          При достижении условного максимума отображаемых аватаров, последним ставится аватар с отображением количества
+          скрытых элементов.
+          <Separator height={8} />
+          Чтобы задать для всех аватаров, входящих в группу, единый внешний вид, достаточно задать для компонента
+          AvatarGroup соответствующее значение параметра appearance. Если для каких-то аватаров нужно задать отличный от
+          остальных внешний вид, необходимо задать параметр appearance непосредственно для компонента Avatar. Параметр
+          appearance, заданный для Avatar, имеет больший приоритет, чем параметр appearance, заданный для AvatarGroup.
+          <Separator height={8} />
+          Пример AvatarActivityGroup с единым для всех аватаров внешним видом (appearance).
+        </NotificationItemContent>
+      </StyledNotificationItem>
       <AvatarActivityGroup
         {...props}
         style={{ width: '300px' }}
@@ -65,8 +88,12 @@ export const AvatarActivityGroupWidthTemplate = (props: AvatarActivityGroupProps
         onAvatarSelect={onSelectAvatar}
         dropContainerClassName="dropContainerClass"
       />
-      <div style={{ height: '40px' }} />
-      <Text>Пример AvatarGroup с различными по внешнему виду (appearance) аватарами</Text>
+      <StyledNotificationItem displayStatusIcon>
+        <NotificationItemTitle>Avatar Group.</NotificationItemTitle>
+        <NotificationItemContent>
+          Пример AvatarActivityGroup с различными по внешнему виду (appearance) аватарами.
+        </NotificationItemContent>
+      </StyledNotificationItem>
       <AvatarActivityGroup
         {...props}
         style={{ width: '300px' }}
@@ -76,6 +103,6 @@ export const AvatarActivityGroupWidthTemplate = (props: AvatarActivityGroupProps
         dropContainerClassName="dropContainerClass"
         dropContainerStyle={{ width: '250px' }}
       />
-    </>
+    </Wrapper>
   );
 };

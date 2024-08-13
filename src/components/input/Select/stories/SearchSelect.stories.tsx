@@ -402,6 +402,13 @@ export const CustomOptionMultiSearchSelect = {
       source: {
         code: SearchSelectCustomOptionMultiRaw,
       },
+      description: {
+        story:
+          'При использовании кастомных опций, реализуемых через Option children, в режиме multiple, необходимо определить ' +
+          'у Option свойство renderChip, так как содержимое Chip и Tooltip формируется в методе renderChip, в противном ' +
+          'случае внутри Chip и Tooltip у компонента Chip будет отображаться тот же child, что указан в качестве дочернего ' +
+          'для Option.',
+      },
     },
   },
 

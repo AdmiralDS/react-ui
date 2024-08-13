@@ -1,14 +1,5 @@
-import type {
-  CSSProperties,
-  FunctionComponent,
-  MouseEventHandler,
-  KeyboardEvent,
-  ReactNode,
-  RefObject,
-  SVGProps,
-} from 'react';
+import type { FunctionComponent, MouseEventHandler, KeyboardEvent, ReactNode, RefObject, SVGProps } from 'react';
 import { forwardRef, useEffect, useReducer, useRef, useState, useMemo, Children } from 'react';
-import type { css } from 'styled-components';
 import styled, { useTheme } from 'styled-components';
 
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
@@ -27,6 +18,7 @@ import type { TextInputProps } from '#src/components/input/TextInput';
 import { TextInput } from '#src/components/input/TextInput';
 import { MessagePanel } from '#src/components/input/SuggestInput/MessagePanel';
 import { SuggestPanel } from '#src/components/input/SuggestInput/SuggestPanel';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 
 const SuggestDropdownContainer = styled(StyledDropdownContainer)`
   overflow-x: hidden;
@@ -40,7 +32,10 @@ export interface SuggestItem {
   searchText: string;
 }
 
-export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
+export interface SuggestInputProps
+  extends Omit<TextInputProps, 'value'>,
+    Omit<DropMenuStyleProps, 'menuWidth'>,
+    Pick<DropMenuComponentProps, 'targetElement'> {
   value?: string;
 
   /** Обработчик выбора опции (дефолтный обработчик подставляет значение опции в поле ввода) */
@@ -56,19 +51,24 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
    * Референс на контейнер для правильного позиционирования выпадающего списка
    **/
   portalTargetRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню */
-  targetElement?: Element | null;
 
   /** Обработчик клика по кнопке поиска */
   onSearchButtonClick?: MouseEventHandler<SVGSVGElement>;
 
   /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте alignSelf
+   *
    * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
-   */
+   **/
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-
-  /** Задает максимальную высоту контейнера с опциями */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
+   * Взамен используйте параметры pageSizeDropContainerStyle.menuMaxHeight и
+   * pageNumberDropContainerStyle.menuMaxHeight.
+   *
+   * Задает максимальную высоту контейнера с опциями */
   dropMaxHeight?: string | number;
 
   /** Компонент для отображения альтернативной иконки */
@@ -87,13 +87,6 @@ export interface SuggestInputProps extends Omit<TextInputProps, 'value'> {
     /** Текст сообщения при отсутствии вариантов для подстановки */
     emptyMessage?: ReactNode;
   };
-
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -104,6 +97,8 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       onOptionSelect,
       alignDropdown = 'stretch',
       dropMaxHeight,
+      alignSelf = 'stretch',
+      menuMaxHeight,
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
@@ -258,7 +253,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
         {options && isSuggestPanelOpen && !skeleton && !emptyAtLoading && !props.readOnly && (
           <SuggestDropdownContainer
             targetElement={targetNode}
-            alignSelf={alignDropdown}
+            alignSelf={alignDropdown || alignSelf}
             data-dimension={dimension}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
@@ -272,7 +267,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
               <Menu
                 model={model}
                 dimension={menuDimension}
-                maxHeight={dropMaxHeight}
+                maxHeight={dropMaxHeight || menuMaxHeight}
                 active={activeOption}
                 onActivateItem={setActiveOption}
                 onSelectItem={handleOptionSelect}

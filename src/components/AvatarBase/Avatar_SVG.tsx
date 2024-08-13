@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { FC } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import type { AvatarBaseProps } from '#src/components/AvatarBase';
@@ -19,6 +19,7 @@ type AvatarSVGProps = {
 };
 
 const IMAGE_SIZE = {
+  xxs: '20px',
   xs: '24px',
   s: '32px',
   m: '40px',
@@ -27,6 +28,7 @@ const IMAGE_SIZE = {
 };
 
 const VIEWBOX = {
+  xxs: '0 0 20 20',
   xs: '0 0 24 24',
   s: '0 0 32 32',
   m: '0 0 40 40',
@@ -35,6 +37,7 @@ const VIEWBOX = {
 };
 
 const ACTIVITY_VIEWBOX = {
+  xxs: '0 0 32 32',
   xs: '0 0 32 32',
   s: '0 0 40 40',
   m: '0 0 48 48',
@@ -43,6 +46,7 @@ const ACTIVITY_VIEWBOX = {
 };
 
 const ACTIVITY_RING = {
+  xxs: '15',
   xs: '15',
   s: '19',
   m: '23',
@@ -51,6 +55,7 @@ const ACTIVITY_RING = {
 };
 
 const CIRCLE = {
+  xxs: '10',
   xs: '12',
   s: '16',
   m: '20',
@@ -59,6 +64,7 @@ const CIRCLE = {
 };
 
 const ACTIVITY_CIRCLE = {
+  xxs: '16',
   xs: '16',
   s: '20',
   m: '24',
@@ -67,6 +73,7 @@ const ACTIVITY_CIRCLE = {
 };
 
 const ELLIPSE = {
+  xxs: { c: '21', r: '3', r2: '5' },
   xs: { c: '21', r: '3', r2: '5' },
   s: { c: '27', r: '5', r2: '7' },
   m: { c: '34', r: '6', r2: '8' },
@@ -75,6 +82,7 @@ const ELLIPSE = {
 };
 
 const ACTIVITY_ELLIPSE = {
+  xxs: { c: '25', r: '3', r2: '5' },
   xs: { c: '25', r: '3', r2: '5' },
   s: { c: '31', r: '5', r2: '7' },
   m: { c: '38', r: '6', r2: '8' },
@@ -86,7 +94,7 @@ const RoundedImage = styled.image`
   clip-path: circle();
 `;
 
-export const AvatarSVG: React.FC<AvatarSVGProps> = ({
+export const AvatarSVG: FC<AvatarSVGProps> = ({
   dimension = 'xl',
   hasImage,
   href,

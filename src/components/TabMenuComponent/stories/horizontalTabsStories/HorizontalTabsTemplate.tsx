@@ -3,7 +3,16 @@ import type { ReactNode } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType, HorizontalTabProps, HorizontalTabsProps } from '@admiral-ds/react-ui';
-import { HorizontalTabs, HorizontalTab, TabIcon, TabBadge, TabText } from '@admiral-ds/react-ui';
+import {
+  HorizontalTabs,
+  HorizontalTab,
+  TabIcon,
+  TabBadge,
+  TabText,
+  NotificationItem,
+  NotificationItemContent,
+  NotificationItemTitle,
+} from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
@@ -58,6 +67,9 @@ const tabs = [
   { text: 'Text99', tabId: '9' },
 ];
 
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,6 +123,15 @@ export const HorizontalTabsTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
+        <NotificationItem displayStatusIcon>
+          <NotificationItemTitle>Горизонтальное TabMenu</NotificationItemTitle>
+          <NotificationItemContent>
+            Компонент настроен таким образом, что если закладки не помещаются в ширину экрана, то они “выходят” за
+            область экрана и их можно прокручивать свайпом, в остальном, поведение такое же, как и у настольной версии.
+            Рекомендуется использовать для мобильной версии.
+          </NotificationItemContent>
+        </NotificationItem>
+        <Separator height={40} />
         <HorizontalTabs
           {...props}
           showUnderline={showUnderline}

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { T, Tree, TreeNode } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
-// import styled from 'styled-components';
-
-// const InfoText = styled.div
 
 const demo1_TreeModel: Array<TreeItemProps> = [
   {

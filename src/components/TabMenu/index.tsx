@@ -1,6 +1,5 @@
 import { createRef, useLayoutEffect, useEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, FC, HTMLAttributes, ReactNode, RefObject, MouseEvent, KeyboardEvent } from 'react';
-import type { css } from 'styled-components';
+import type { FC, HTMLAttributes, ReactNode, RefObject, MouseEvent, KeyboardEvent } from 'react';
 
 import { keyboardKey } from '../common/keyboardKey';
 import { Badge } from '#src/components/Badge';
@@ -22,6 +21,7 @@ import {
 } from '#src/components/TabMenu/style';
 import type { Dimension } from '#src/components/TabMenu/constants';
 import { debounce } from '#src/components/common/utils/debounce';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
 export interface TabProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'content'> {
   /** Контент вкладки */
@@ -42,7 +42,7 @@ type OverflowMenuRefProps = {
   isVisible: boolean;
 };
 
-export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>, DropContainerStyles {
   /** Список вкладок */
   tabs: Array<TabProps>;
   /** Id активной вкладки */
@@ -55,14 +55,6 @@ export interface TabMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCh
   underline?: boolean;
   /** Мобильная версия компонента */
   mobile?: boolean;
-  /** Выравнивание выпадающего меню относительно компонента https://developer.mozilla.org/en-US/docs/Web/CSS/align-self */
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 /**

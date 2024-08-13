@@ -11,20 +11,23 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     const idForTab = onSelectTab ? id : uid();
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
+      e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       onSelectTab?.(tabId);
     };
 
     return (
       <BaseTab
         {...props}
+        role="tab"
+        type="button"
         id={idForTab}
-        ref={ref}
+        ref={onSelectTab ? ref : undefined}
         data-tabid={tabId}
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
         $width="fit-content"
-        onClick={handleTabClick}
+        onClick={onSelectTab ? handleTabClick : undefined}
       >
         {children}
       </BaseTab>

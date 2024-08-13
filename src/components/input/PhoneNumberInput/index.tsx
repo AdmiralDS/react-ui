@@ -1,6 +1,6 @@
 import * as React from 'react';
-import type { CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
+
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { TextInputProps } from '#src/components/input/TextInput';
@@ -23,6 +23,7 @@ import type {
 import getFindCountryFunction from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '../../common/keyboardKey';
@@ -99,18 +100,14 @@ const FlagContainer = styled.div<{ $dimension: Dimension }>`
 // В данном компоненте согласно дизайну не предусмотрена очистка кнопкой
 // https://github.com/AdmiralDS/react-ui/issues/971
 
-export interface PhoneNumberInputProps extends Omit<TextInputProps, 'value | displayClearIcon'> {
+export interface PhoneNumberInputProps
+  extends Omit<TextInputProps, 'value | displayClearIcon'>,
+    Omit<DropContainerStyles, 'alignSelf'> {
   value?: string;
   /** Код ISO A3 страны для определения префикса номера по умолчанию */
   defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 }
 
 const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);

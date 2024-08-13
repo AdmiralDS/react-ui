@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 
@@ -8,20 +7,6 @@ import { HorizontalTabsTemplate } from './HorizontalTabsTemplate';
 
 // Imports of text sources
 import HorizontalTabsRaw from './HorizontalTabsTemplate?raw';
-
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  font-size: 16px;
-  line-height: 24px;
-`;
-
-const Description = () => (
-  <Desc>
-    Компонент настроен таким образом, что если закладки не помещаются в ширину экрана, то они “выходят” за область
-    экрана и их можно прокручивать свайпом, в остальном, поведение такое же, как и у настольной версии. Рекомендуется
-    использовать для мобильной версии.
-  </Desc>
-);
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent/HorizontalTabs',
@@ -33,7 +18,6 @@ export default {
         code: null,
       },
     },
-    componentSubtitle: <Description />,
   },
   argTypes: {
     dimension: {

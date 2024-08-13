@@ -2,6 +2,66 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.13.0](https://github.com/AdmiralDS/react-ui/compare/v8.12.0...v8.13.0) (2024-08-12)
+
+
+### Features
+
+* **ActionBar:** add new component ([5257f13](https://github.com/AdmiralDS/react-ui/commit/5257f13501103c6fc3fd4862a07bbb8f1257aec7))
+* **ButtonGroup:** [#1358](https://github.com/AdmiralDS/react-ui/issues/1358) добавлен компонент ButtonGroup ([dda87a2](https://github.com/AdmiralDS/react-ui/commit/dda87a28f3115172d9c705e62dd30c9ed4d2cf45))
+
+## [8.12.0](https://github.com/AdmiralDS/react-ui/compare/v8.11.0...v8.12.0) (2024-08-08)
+
+
+### Features
+
+* **IconButtonGroup:** [#1357](https://github.com/AdmiralDS/react-ui/issues/1357) add component IconButtoGroup ([93969c8](https://github.com/AdmiralDS/react-ui/commit/93969c8071733eec709e47c852b59be2bd61def5))
+
+## [8.11.0](https://github.com/AdmiralDS/react-ui/compare/v8.10.2...v8.11.0) (2024-08-05)
+
+
+### Features
+
+* **Avatar:** добавлен вариант XXS ([8f3ba00](https://github.com/AdmiralDS/react-ui/commit/8f3ba005925cd87c41a34ba47e901c229ff3f6d1))
+* **TabCloseIconButton:** добавлен коллбэк на закрытие вкладки ([77f5c08](https://github.com/AdmiralDS/react-ui/commit/77f5c0886c75327e9534eaac45f00cb06ef760e0))
+
+
+### Bug Fixes
+
+* **AvatarGroup, AvatarActivityGroup:** размер добавлен в зависимости ([f7c26a7](https://github.com/AdmiralDS/react-ui/commit/f7c26a7de5c2c277adf462156f22e4cdb753e5f8))
+* **TabMenuVertical:** обновление вкладок после удаления ([6e7e26d](https://github.com/AdmiralDS/react-ui/commit/6e7e26df32c3c3b9df3385f498c2612473296ae3))
+
+### [8.10.2](https://github.com/AdmiralDS/react-ui/compare/v8.10.1...v8.10.2) (2024-07-30)
+
+
+### Bug Fixes
+
+* **Select:**  [#1422](https://github.com/AdmiralDS/react-ui/issues/1422) Select - в состоянии readonly не должен редактироваться через клавиатуру ([ac98241](https://github.com/AdmiralDS/react-ui/commit/ac9824176c18b2f8f5c2a5f0afcf0b0aeaff48ab))
+
+### [8.10.1](https://github.com/AdmiralDS/react-ui/compare/v8.10.0...v8.10.1) (2024-07-24)
+
+## [8.10.0](https://github.com/AdmiralDS/react-ui/compare/v8.9.0...v8.10.0) (2024-07-23)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлена возможность добавления и удаления вкладок ([24f2f56](https://github.com/AdmiralDS/react-ui/commit/24f2f56a0de5b17fbae3810a7a9e479efbea3985))
+* **TabMenuHorizontal:** добавлена возможность добавления и удаления вкладок ([934bbfc](https://github.com/AdmiralDS/react-ui/commit/934bbfce80f6b6a304d85e61c11a7b114f660289))
+* **TabMenuVertical:** добавлена возможность добавления и удаления вкладок ([580afa9](https://github.com/AdmiralDS/react-ui/commit/580afa96ff3a09dd0647d9db030176432e7e098b))
+
+
+### Bug Fixes
+
+* **Table:** [#1346](https://github.com/AdmiralDS/react-ui/issues/1346) исправлено поведение OverflowMenu при скролле - если кнопка меню при скролле становится невидима, то меню должно закрыться ([e82d0b4](https://github.com/AdmiralDS/react-ui/commit/e82d0b46478e81e5190848ba200ad4ebda66c431))
+
+## [8.9.0](https://github.com/AdmiralDS/react-ui/compare/v8.8.0...v8.9.0) (2024-07-16)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлен вариант CardTabMenuHorizontal ([cbf4dd0](https://github.com/AdmiralDS/react-ui/commit/cbf4dd00016fac1c87dfab126b0f629c3d68f0e4))
+* **Tree:** добавлены обработчики событий onCheckedChange и onExpandedChange ([2b5002a](https://github.com/AdmiralDS/react-ui/commit/2b5002ad6d1a7aeee60307277e95fba9a6d092d2)), closes [#1401](https://github.com/AdmiralDS/react-ui/issues/1401)
+
 ## [8.8.0](https://github.com/AdmiralDS/react-ui/compare/v8.7.0...v8.8.0) (2024-07-12)
 
 

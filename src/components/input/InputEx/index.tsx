@@ -15,8 +15,8 @@ import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
-import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
+import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 
 export type { RenderPropsType } from '#src/components/input/InputEx/SuffixSelect';
 
@@ -194,11 +194,18 @@ export interface RenderProps {
   disabled?: boolean;
   readOnly?: boolean;
 }
-export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+export interface InputExProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'>,
+    Pick<DropMenuComponentProps, 'targetElement'> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
-  /**  Ширина меню */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
+   * Взамен используйте параметры prefixDropContainerStyle.menuWidth и
+   * suffixDropContainerStyle.menuWidth.
+   *
+   * Ширина меню */
   menuWidth?: string;
 
   /** Иконки для отображения в правом углу поля */
@@ -221,9 +228,6 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
    * если не указан, выравнивание произойдет относительно контейнера компонента
    **/
   alignDropRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню,
-   * если не указан, выравнивание произойдет относительно контейнера компонента */
-  targetElement?: Element | null;
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
@@ -269,9 +273,9 @@ export interface InputExProps extends Omit<InputHTMLAttributes<HTMLInputElement>
    **/
   dropContainerCssMixin?: ReturnType<typeof css>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настройки видимости колонок  */
-  prefixDropContainerStyle?: DropContainerStyles;
+  prefixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
-  suffixDropContainerStyle?: DropContainerStyles;
+  suffixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
 
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
@@ -320,9 +324,10 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     const renderPrefix = prefixValueList
       ? (props: RenderProps) => (
           <SuffixSelect
-            dropAlign="flex-start"
+            alignSelf="flex-start"
             dimension={menuDimension}
-            menuWidth={menuWidth}
+            menuWidth={menuWidth || prefixDropContainerStyle?.menuWidth}
+            menuMaxHeight={prefixDropContainerStyle?.menuMaxHeight}
             targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onPrefixValueChange?.(value)}
@@ -343,9 +348,10 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     const renderSuffix = suffixValueList
       ? (props: RenderProps) => (
           <SuffixSelect
-            dropAlign="flex-end"
+            alignSelf="flex-end"
             dimension={menuDimension}
-            menuWidth={menuWidth}
+            menuWidth={menuWidth || suffixDropContainerStyle?.menuWidth}
+            menuMaxHeight={suffixDropContainerStyle?.menuMaxHeight}
             targetElement={targetNode}
             value={props.value || ''}
             onChange={(value) => onSuffixValueChange?.(value)}

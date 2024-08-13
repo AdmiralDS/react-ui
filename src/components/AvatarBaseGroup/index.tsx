@@ -1,35 +1,25 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, FC, Ref, MouseEvent, KeyboardEvent, HTMLAttributes } from 'react';
-import type { css } from 'styled-components';
+import type { FC, Ref, MouseEvent, KeyboardEvent, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '../common/keyboardKey';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
+import type { DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import type { AvatarBaseProps } from '#src/components/AvatarBase';
+import type { AvatarBaseProps, Dimension } from '#src/components/AvatarBase';
 import { AvatarBase } from '#src/components/AvatarBase';
 
-export interface AvatarBaseGroupProps extends HTMLAttributes<HTMLDivElement> {
+export interface AvatarBaseGroupProps extends HTMLAttributes<HTMLDivElement>, Omit<DropMenuStyleProps, 'alignSelf'> {
   items: Array<AvatarBaseProps>;
   /** Размер компонента */
-  dimension?: AvatarBaseProps['dimension'];
+  dimension?: Dimension;
   /** Внешний вид компонента (цвет заливки и текста) - можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов */
   appearance?: AvatarBaseProps['appearance'];
   /** Колбек на выбор аватара (по клику или нажатию клавиши). Возвращает id выбранного аватара */
   onAvatarSelect?: (id: string) => void;
-  /**  Ширина меню */
-  menuWidth?: string;
-  /** Задает максимальную высоту меню */
-  menuMaxHeight?: string | number;
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
   /** Аватары с опцией activity ring */
   withActivityRing?: boolean;
 }
@@ -103,7 +93,7 @@ export const AvatarBaseGroup: FC<AvatarBaseGroupProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, []);
+  }, [dimension]);
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);

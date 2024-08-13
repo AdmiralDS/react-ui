@@ -8,7 +8,17 @@ import type {
   HorizontalTabProps,
   TabMenuHorizontalProps,
 } from '@admiral-ds/react-ui';
-import { TabMenuHorizontal, HorizontalTab, TabIcon, TabBadge, TabText, MenuItem } from '@admiral-ds/react-ui';
+import {
+  TabMenuHorizontal,
+  HorizontalTab,
+  TabIcon,
+  TabBadge,
+  TabText,
+  MenuItem,
+  NotificationItem,
+  NotificationItemTitle,
+  NotificationItemContent,
+} from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 
@@ -52,6 +62,9 @@ const tabs = [
   { text: 'Text99', tabId: '9' },
 ];
 
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -121,6 +134,40 @@ export const TabMenuHorizontalTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
+        <NotificationItem displayStatusIcon>
+          <NotificationItemTitle>Горизонтальное TabMenu</NotificationItemTitle>
+          <NotificationItemContent>
+            Компонент используется для переключения между вкладками. Существует в двух размерах - 48 и 40 px по высоте.
+            Компонент полностью адаптивен и автоматически меняет ширину ячеек в зависимости от контента. Опционально
+            можно выключать серую полоску снизу. В закладках можно включать иконки, бэйджи. Если вкладки не помещаются в
+            отведенную ширину целиком, то включается Overflow Menu.
+            <Separator height={8} />
+            Размеры выпадающего меню соответствуют размерам Tab Menu — L для L размера и M для M размера. В выпадающем
+            меню отображаются вкладки, не поместившиеся в основной ряд. При выборе вкладки из меню она отображается в
+            основном ряду крайней справа, заменяя собой предыдущую крайнюю вкладку, которая, в свою очередь, «уходит» в
+            меню. Активная вкладка при этом отображается в меню, как выбранная.
+            <Separator height={8} />
+            Рекомендации
+            <li>Одна из вкладок должна быть выбрана по умолчанию, когда пользователь загружает страницу.</li>
+            <li>Рекомендовано делать надписи на вкладках как можно короче - в идеале не более двух слов.</li>
+            <li>Не перегружайте пользователя слишком большим количеством вкладок.</li>
+            <li>
+              Если пользователь переходит на другую панель вкладок, данные формы не должны автоматически сохраняться или
+              отправляться.
+            </li>
+            <li>Избегайте вложения Tab Menu в содержимое другого Tab Menu.</li>
+            <li>
+              Не заставляйте пользователей переключаться между несколькими вкладками для сравнения информации. Каждая
+              панель вкладок должна содержать всю информацию, необходимую пользователю для выполнения своей задачи.
+            </li>
+            <li>
+              Не помещайте кнопки или ссылки в заголовок вкладки. Вкладка уже является ссылкой или кнопкой, поэтому у
+              нее не может быть дочернего элемента, который также является ссылкой или кнопкой.
+            </li>
+            <li>Каждая панель вкладок должна содержать отдельный контент с уникальным URL-адресом.</li>
+          </NotificationItemContent>
+        </NotificationItem>
+        <Separator height={40} />
         <TabMenuHorizontal
           {...props}
           dimension={dimension}

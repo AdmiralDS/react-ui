@@ -3,7 +3,6 @@ import type {
   FocusEvent,
   MouseEvent,
   ChangeEventHandler,
-  CSSProperties,
   InputHTMLAttributes,
   ReactNode,
   RefObject,
@@ -21,7 +20,6 @@ import {
   isValidElement,
   cloneElement,
 } from 'react';
-import type { css } from 'styled-components';
 import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -47,6 +45,7 @@ import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
 import { DisplayValue } from './DisplayValue';
+import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
@@ -56,6 +55,7 @@ import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/compon
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
 
 export type { SearchFormat } from './types';
 
@@ -78,7 +78,10 @@ const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disab
 
 const stopPropagation = (evt: BaseSyntheticEvent) => evt.stopPropagation();
 
-export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'> {
+export interface SelectProps
+  extends Omit<InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
+    DropContainerStyles,
+    Pick<DropMenuComponentProps, 'targetElement' | 'renderTopPanel' | 'renderBottomPanel'> {
   value?: string | string[];
 
   /** Позволяет использовать Select как select */
@@ -119,8 +122,6 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>
    *
    * Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню */
-  targetElement?: Element | null;
 
   /** Ref внутреннего input компонента */
   inputTargetRef?: RefObject<HTMLInputElement>;
@@ -148,15 +149,12 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>
 
   onBlur?: (evt: FocusEvent<HTMLDivElement>) => void;
 
-  /** Принудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте alignSelf
+   *
+   * ППринудительно выравнивает контейнер с опциями относительно компонента, значение по умолчанию 'stretch' */
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-
-  /** Позволяет добавлять миксин для выпадающих меню, созданный с помощью styled css  */
-  dropContainerCssMixin?: ReturnType<typeof css>;
-  /** Позволяет добавлять класс на контейнер выпадающего меню  */
-  dropContainerClassName?: string;
-  /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
 
   /** Состояние skeleton */
   skeleton?: boolean;
@@ -169,10 +167,20 @@ export interface SelectProps extends Omit<InputHTMLAttributes<HTMLSelectElement>
     emptyMessage?: ReactNode;
   };
 
-  /** Позволяет добавить панель внизу под выпадающим списком */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте renderBottomPanel
+   *
+   * Позволяет добавить панель внизу под выпадающим списком
+   **/
   renderDropDownBottomPanel?: (props: RenderPanelProps) => ReactNode;
 
-  /** Позволяет добавить панель сверху над выпадающим списком */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
+   * Взамен используйте renderTopPanel
+   *
+   * Позволяет добавить панель сверху над выпадающим списком
+   **/
   renderDropDownTopPanel?: (props: RenderPanelProps) => ReactNode;
 
   /** Состояние принудительного открытия выпадающего списка опций */
@@ -248,6 +256,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onBlur: onBlurFromProps,
       children,
       alignDropdown = 'stretch',
+      alignSelf = 'stretch',
       skeleton = false,
       locale,
       dropContainerCssMixin,
@@ -255,6 +264,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       dropContainerStyle,
       renderDropDownTopPanel,
       renderDropDownBottomPanel,
+      renderTopPanel,
+      renderBottomPanel,
       forcedOpen = false,
       onChangeDropDownState,
       onInputKeyDown,
@@ -520,6 +531,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     useEffect(() => {
+      // Компонент должен быть не управляемым с клавиатуры если он disabled
+      if (readOnly || disabled) return;
+
       function handleKeyDown(evt: KeyboardEvent) {
         const code = keyboardKey.getCode(evt);
 
@@ -564,7 +578,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       return () => {
         containerRef.current?.removeEventListener('keydown', handleKeyDown);
       };
-    }, [modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
+    }, [readOnly, disabled, modeIsSelect, searchValue, isSearchPanelOpen, selectedOptions]);
 
     useEffect(() => {
       function handleKeyUp() {
@@ -792,7 +806,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             tabIndex={-1}
             targetElement={targetNode}
             data-dimension={dimension}
-            alignSelf={alignDropdown}
+            alignSelf={alignDropdown || alignSelf}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
@@ -807,8 +821,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}
               model={dropDownModel}
-              renderTopPanel={renderDropDownTopPanel}
-              renderBottomPanel={renderDropDownBottomPanel}
+              renderTopPanel={renderDropDownTopPanel || renderTopPanel}
+              renderBottomPanel={renderDropDownBottomPanel || renderBottomPanel}
               containerRef={dropDownRef}
               virtualScroll={virtualScroll}
               preventFocusSteal

@@ -1,11 +1,29 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import styled from 'styled-components';
 
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import { VerticalTabMenuContainer } from '#src/components/TabMenuComponent/containers';
-import { ActiveVerticalTabSelector, VerticalTabOverflowMenu } from '#src/components/TabMenuComponent/containerElements';
+import {
+  ActiveVerticalTabSelector,
+  VerticalAddTabButton,
+  VerticalTabOverflowMenu,
+} from '#src/components/TabMenuComponent/containerElements';
 import type { TabMenuVerticalProps } from '#src/components/TabMenuComponent/types';
-import { BASE_TAB_HEIGHT_L, BASE_TAB_HEIGHT_M, VERTICAL_TABS_GAP } from '#src/components/TabMenuComponent/constants';
+import {
+  BASE_TAB_HEIGHT_L,
+  BASE_TAB_HEIGHT_M,
+  VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_L,
+  VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_M,
+  VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_L,
+  VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M,
+  VERTICAL_TABS_GAP,
+} from '#src/components/TabMenuComponent/constants';
+
+const Wrapper = styled.div`
+  flex: 1 1 auto;
+  overflow: hidden;
+`;
 
 export const TabMenuVertical = ({
   dimension = 'l',
@@ -14,6 +32,7 @@ export const TabMenuVertical = ({
   selectedTabId,
   defaultSelectedTabId,
   onSelectTab,
+  onAddTab,
   tabsId,
   renderTab,
   renderDropMenuItem,
@@ -24,8 +43,36 @@ export const TabMenuVertical = ({
   dropContainerCssMixin,
   dropContainerClassName,
   dropContainerStyle,
+  isVisible,
+  onVisibilityChange,
+  active,
+  onActivateItem,
+  disableSelectedOptionHighlight,
+  renderTopPanel,
+  renderBottomPanel,
+  onForwardCycleApprove,
+  onBackwardCycleApprove,
+  onClickOutside,
   ...props
 }: TabMenuVerticalProps) => {
+  const dropProps = {
+    alignSelf,
+    menuWidth,
+    menuMaxHeight,
+    dropContainerCssMixin,
+    dropContainerClassName,
+    dropContainerStyle,
+    isVisible,
+    onVisibilityChange,
+    active,
+    onActivateItem,
+    disableSelectedOptionHighlight,
+    renderTopPanel,
+    renderBottomPanel,
+    onForwardCycleApprove,
+    onBackwardCycleApprove,
+    onClickOutside,
+  };
   //<editor-fold desc="Управление высотой контейнера">
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -45,17 +92,21 @@ export const TabMenuVertical = ({
 
   useEffect(() => {
     if (containerRef.current) {
-      setMaxTabs(
-        Math.floor(
-          (containerHeight + VERTICAL_TABS_GAP) /
-            ((dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
-        ),
+      const addTabButtonHeight = showAddTabButton
+        ? (dimension === 'l' ? VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_L : VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_M) +
+          VERTICAL_TABS_GAP
+        : 0;
+      const newMaxTabs = Math.floor(
+        (containerHeight + VERTICAL_TABS_GAP - addTabButtonHeight) /
+          ((dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M) + VERTICAL_TABS_GAP),
       );
+      setMaxTabs(newMaxTabs);
     }
-  }, [containerRef, containerHeight, dimension]);
+  }, [containerRef, containerHeight, dimension, tabsId]);
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
+  const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
@@ -69,31 +120,44 @@ export const TabMenuVertical = ({
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
 
   useLayoutEffect(() => {
+    const maxHeight = containerHeight;
     const allTabsVisible = tabsId.length <= maxTabs;
     const newVisibleTabs: string[] = [];
     const newHiddenTabs: string[] = [];
     const addToVisible = (tabId: string) => newVisibleTabs.push(tabId);
     const addToHidden = (tabId: string) => newHiddenTabs.push(tabId);
 
-    let activeTabIsVisible = false;
-    tabsId.forEach((tabId, index) => {
+    const tabHeight = dimension === 'l' ? BASE_TAB_HEIGHT_L : BASE_TAB_HEIGHT_M;
+    const overflowHeight = !allTabsVisible
+      ? (dimension === 'l' ? VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_L : VERTICAL_OVERFLOW_MENU_CONTAINER_SIZE_M) +
+        VERTICAL_TABS_GAP +
+        tabHeight
+      : 0;
+    const addTabButtonHeight = showAddTabButton
+      ? (dimension === 'l' ? VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_L : VERTICAL_ADD_TAB_BUTTON_CONTAINER_SIZE_M) +
+        VERTICAL_TABS_GAP
+      : 0;
+    const availableHeight = maxHeight - overflowHeight - addTabButtonHeight;
+    let availableTabs = Math.floor((availableHeight + VERTICAL_TABS_GAP) / (tabHeight + VERTICAL_TABS_GAP));
+
+    tabsId.forEach((tabId) => {
       const tabIsActive = tabId === selectedTab;
-      if (
-        allTabsVisible ||
-        index < maxTabs - 2 ||
-        (index === maxTabs - 2 && (activeTabIsVisible || tabIsActive)) ||
-        (index > maxTabs - 2 && tabId === selectedTab)
-      ) {
+      if (availableTabs > 0 || tabIsActive) {
         addToVisible(tabId);
-        if (tabIsActive) activeTabIsVisible = true;
       }
-      if (!allTabsVisible && (index > maxTabs - 2 || (index === maxTabs - 2 && !activeTabIsVisible && !tabIsActive))) {
+      if (availableTabs === 0) {
         addToHidden(tabId);
       }
+      if (availableTabs > 0) {
+        if (!tabIsActive) {
+          availableTabs -= 1;
+        }
+      }
     });
+
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [maxTabs, selectedTab]);
+  }, [maxTabs, selectedTab, containerHeight, tabsId]);
 
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];
@@ -135,33 +199,31 @@ export const TabMenuVertical = ({
   //</editor-fold>
 
   return (
-    <VerticalTabMenuContainer
-      {...props}
-      ref={containerRef}
-      $underlinePosition={underlinePosition}
-      $showUnderline={showUnderline}
-    >
-      {renderedVisibleTabs}
-      <VerticalTabOverflowMenu
-        items={overflowMenuItems}
-        onSelectItem={handleSelectTab}
-        selected={selectedTab}
-        dimension={dimension}
-        isHidden={hiddenTabs.length === 0}
-        alignSelf={alignSelf}
-        menuWidth={menuWidth}
-        menuMaxHeight={menuMaxHeight}
-        dropContainerCssMixin={dropContainerCssMixin}
-        dropContainerClassName={dropContainerClassName}
-        dropContainerStyle={dropContainerStyle}
-      />
-      <ActiveVerticalTabSelector
-        $top={`${underlineTop}px`}
-        $height={`${underlineHeight}px`}
-        $transition={true}
+    <Wrapper>
+      <VerticalTabMenuContainer
+        {...props}
+        ref={containerRef}
         $underlinePosition={underlinePosition}
-      />
-    </VerticalTabMenuContainer>
+        $showUnderline={showUnderline}
+      >
+        {renderedVisibleTabs}
+        {showAddTabButton && <VerticalAddTabButton dimension={dimension} onClick={onAddTab} />}
+        <VerticalTabOverflowMenu
+          {...dropProps}
+          items={overflowMenuItems}
+          onSelectItem={handleSelectTab}
+          selected={selectedTab}
+          dimension={dimension}
+          isHidden={hiddenTabs.length === 0}
+        />
+        <ActiveVerticalTabSelector
+          $top={`${underlineTop}px`}
+          $height={`${underlineHeight}px`}
+          $transition={true}
+          $underlinePosition={underlinePosition}
+        />
+      </VerticalTabMenuContainer>
+    </Wrapper>
   );
 };
 TabMenuVertical.displayName = 'TabMenuVertical';
