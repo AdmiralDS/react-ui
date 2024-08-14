@@ -4,10 +4,12 @@ import { ALL_BORDER_RADIUS_VALUES, CardTabMenuHorizontal } from '@admiral-ds/rea
 
 import { CardTabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalTemplate';
 import { CardTabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalWithAddButtonTemplate';
+import { CardTabMenuHorizontalLeadingGapTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalLeadingGapTemplate';
 
 // Imports of text sources
 import HorizontalCardTabMenuRaw from './CardTabMenuHorizontalTemplate?raw';
 import HorizontalCardTabMenuWithAddButtonRaw from './CardTabMenuHorizontalWithAddButtonTemplate?raw';
+import HorizontalCardTabMenuLeadingGapRaw from './CardTabMenuHorizontalLeadingGapTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent/CardTabMenuHorizontal',
@@ -74,6 +76,27 @@ export const HorizontalCardTabMenuExample = {
   },
 
   name: 'CardTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalCardTabMenuLeadingGap.">
+const HorizontalCardTabMenuLeadingGapStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CardTabMenuHorizontalLeadingGapTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalCardTabMenuLeadingGapExample = {
+  render: HorizontalCardTabMenuLeadingGapStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalCardTabMenuLeadingGapRaw,
+      },
+    },
+  },
+
+  name: 'CardTabMenu с отступами.',
 };
 //</editor-fold>
 
