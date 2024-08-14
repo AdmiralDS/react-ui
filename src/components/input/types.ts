@@ -9,8 +9,11 @@ export interface ExtraProps {
   /** Делает высоту компонента больше или меньше обычной */
   $dimension?: ComponentDimension;
 
-  /** Количество иконок отображаемых справа */
-  $iconCount?: number;
+  /** Количество иконок отображаемых в конце */
+  $iconsAfterCount?: number;
+
+  /** Количество иконок отображаемых в начале */
+  $iconsBeforeCount?: number;
 
   $autoHeight?: boolean;
 }
