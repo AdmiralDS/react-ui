@@ -1,4 +1,7 @@
-import * as React from 'react';
+import type { ChangeEvent, InputHTMLAttributes, ReactNode, RefObject, MouseEvent } from 'react';
+import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import styled, { css } from 'styled-components';
+
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -8,7 +11,6 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
@@ -228,14 +230,14 @@ function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
 
-const stopEvent = (e: React.MouseEvent) => e.preventDefault();
+const stopEvent = (e: MouseEvent) => e.preventDefault();
 
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  icons?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -247,7 +249,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   isLoading?: boolean;
 
   /** Ref контейнера компонента */
-  containerRef?: React.RefObject<HTMLDivElement>;
+  containerRef?: RefObject<HTMLDivElement>;
 
   /**
    * Дает возможность изменить значение поля ввода и позицию курсора до момента отображения при следующем цикле рендеринга.
@@ -265,7 +267,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   showTooltip?: boolean;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       dimension = 'm',
@@ -287,17 +289,17 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = containerRef || React.useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const wrapperRef = containerRef || useRef<HTMLDivElement>(null);
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue ?? undefined);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue ?? undefined);
     const innerValue = props.value ?? innerValueState;
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);
         return;
@@ -305,7 +307,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       setOverflowActive(false);
     }, [tooltipVisible, setOverflowActive]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         if (document.activeElement !== inputRef.current) setTooltipVisible(true);
       }
@@ -325,12 +327,12 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       }
     }, [setTooltipVisible]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       setInnerValueState(e.currentTarget.value);
       props.onChange?.(e);
     };
 
-    const [isPasswordVisible, setPasswordVisible] = React.useState(false);
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
       iconArray.push(
@@ -372,7 +374,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     // const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
       function oninput(this: HTMLInputElement) {
