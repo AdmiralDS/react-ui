@@ -15,10 +15,10 @@ const DisplayContainer = styled.div`
 const Desc = styled.div`
   ${typography['Body/Body 1 Long']}
 `;
-interface IconWithHintProps {
+interface InputIcon {
   text: string;
 }
-const InputIcon = ({ text }: IconWithHintProps) => {
+const InputIcon = ({ text }: InputIcon) => {
   const handleClick = () => {
     console.log(`${text} clicked`);
   };
