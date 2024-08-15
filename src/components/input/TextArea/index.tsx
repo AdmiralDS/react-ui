@@ -46,7 +46,8 @@ const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (props.$iconCount ? iconSizeValue(props) + 8 : 0)}px;
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (props.$iconsAfterCount ? iconSizeValue(props) + 8 : 0)}px;
 `;
 
 const disabledColors = css`
@@ -420,13 +421,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           ref={hiddenDivRef}
           $dimension={dimension}
           disabled={props.disabled}
-          $iconCount={iconCount}
+          $iconsAfterCount={iconCount}
         />
         <Text
           ref={refSetter(ref, inputRef)}
           {...props}
           $dimension={dimension}
-          $iconCount={iconCount}
+          $iconsAfterCount={iconCount}
           $autoHeight={autoHeight}
           value={inputData.value}
         />
