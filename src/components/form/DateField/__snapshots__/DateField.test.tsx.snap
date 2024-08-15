@@ -20,28 +20,28 @@ exports[`DateField should render component 1`] = `
   flex-direction: column;
 }
 
-.c10 {
+.c11 {
   display: flex;
   justify-content: space-between;
 }
 
-.c9 {
+.c10 {
   cursor: pointer;
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-[disabled] .c9.c9.c9 {
+[disabled] .c10.c10.c10 {
   pointer-events: none;
 }
 
-[disabled] .c9.c9.c9 *[fill^='#'] {
+[disabled] .c10.c10.c10 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c9:hover *[fill^='#'] {
+.c10:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
@@ -80,6 +80,7 @@ exports[`DateField should render component 1`] = `
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   padding-right: 48px;
+  padding-left: 16px;
 }
 
 .c5.c5.c5:disabled {
@@ -130,10 +131,8 @@ exports[`DateField should render component 1`] = `
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
   display: flex;
   align-items: center;
-  padding-right: 16px;
 }
 
 .c8 svg {
@@ -151,7 +150,12 @@ exports[`DateField should render component 1`] = `
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
-.c8>*:not(:first-child) {
+.c9 {
+  right: 0;
+  padding-right: 16px;
+}
+
+.c9>*:not(:first-child) {
   margin-left: 8px;
 }
 
@@ -187,16 +191,16 @@ exports[`DateField should render component 1`] = `
           class="c6 c7"
         />
         <div
-          class="c8"
+          class="c8 c9"
         >
           <div
-            class="c9"
+            class="c10"
             tabindex="0"
           />
         </div>
       </div>
       <div
-        class="c10"
+        class="c11"
       />
     </div>
   </div>
