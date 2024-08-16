@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.14.0](https://github.com/AdmiralDS/react-ui/compare/v8.13.0...v8.14.0) (2024-08-16)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлен пример с боковыми отступами ([32e5611](https://github.com/AdmiralDS/react-ui/commit/32e56110a770eb3c33a9422a5f576372715b481d))
+* **Menu:** rowCount используется только для определения количества отображаемых в меню опций ([a41a808](https://github.com/AdmiralDS/react-ui/commit/a41a808ec8261fa80e3dcc30509e771c8d1d6273))
+
 ## [8.13.0](https://github.com/AdmiralDS/react-ui/compare/v8.12.0...v8.13.0) (2024-08-12)
 
 
