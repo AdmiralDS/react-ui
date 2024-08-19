@@ -197,6 +197,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollBodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
         }
       });
+      // try to update header scroll width when columns refresh on table size change
+      scrollBodyRef.current?.style.setProperty(`--header-scroll-width`, headerRef.current?.scrollWidth + 'px');
     };
 
     React.useLayoutEffect(() => {
@@ -539,7 +541,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           $underline={showLastRowUnderline}
           $dimension={dimension}
           className="tr"
-          $rowWidth={headerRef.current?.scrollWidth}
+          // $rowWidth={headerRef.current?.scrollWidth}
+          style={{ width: `var(--header-scroll-width, ${headerRef.current?.scrollWidth})` }}
         >
           <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
         </Row>
