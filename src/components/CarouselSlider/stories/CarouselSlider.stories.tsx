@@ -22,12 +22,6 @@ export default {
       options: ['default', 'primary'],
       control: { type: 'radio' },
     },
-    currentItem: {
-      control: false,
-    },
-    onChange: {
-      control: false,
-    },
   },
 } as Meta<typeof CarouselSlider>;
 

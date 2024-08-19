@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-import type { CarouselSliderProps } from '@admiral-ds/react-ui';
+import type { CarouselSliderAppearance, CarouselSliderProps } from '@admiral-ds/react-ui';
 import {
   CarouselSlider,
   CarouselSliderItem,
@@ -8,7 +9,6 @@ import {
   NotificationItemContent,
   NotificationItemTitle,
 } from '@admiral-ds/react-ui';
-import * as React from 'react';
 
 const Separator = styled.div<{ height: number }>`
   height: ${(p) => p.height}px;
@@ -19,18 +19,28 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-export const CarouselSliderPlaygroundTemplate = ({ currentItem = 1, appearance, ...props }: CarouselSliderProps) => {
-  const [current, setCurrent] = React.useState(currentItem);
-
-  React.useEffect(() => {
-    setCurrent(currentItem);
-  }, [currentItem]);
+export const CarouselSliderPlaygroundTemplate = ({
+  appearance,
+  ...props
+}: CarouselSliderProps & { appearance: CarouselSliderAppearance }) => {
+  const [current, setCurrent] = useState(0);
+  const handleCurrentChange = (newValue: number) => {
+    setCurrent(newValue);
+  };
 
   return (
     <Wrapper>
-      <CarouselSlider {...props} appearance={appearance} currentItem={current} onChange={(_, item) => setCurrent(item)}>
+      <CarouselSlider {...props}>
         {[...Array(5).keys()].map((item) => {
-          return <CarouselSliderItem aria-label={`Item ${item}`} key={item} />;
+          return (
+            <CarouselSliderItem
+              aria-label={`Item ${item}`}
+              key={item}
+              appearance={appearance}
+              isCurrent={item === current}
+              onClick={() => handleCurrentChange(item)}
+            />
+          );
         })}
       </CarouselSlider>
       <NotificationItem displayStatusIcon>

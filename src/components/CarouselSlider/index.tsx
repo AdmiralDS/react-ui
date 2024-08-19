@@ -1,14 +1,13 @@
-import type { HTMLAttributes, MouseEvent, KeyboardEvent } from 'react';
-import { Children, useMemo } from 'react';
+import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-
-import { uid } from '#src/components/common/uid';
 
 export type CarouselSliderAppearance = 'default' | 'primary';
 
 export interface CarouselSliderItemProps extends HTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента */
   appearance?: CarouselSliderAppearance;
+  /** Секция является активной */
+  isCurrent?: boolean;
 }
 const primaryAppearanceMixin = css`
   background-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
@@ -23,38 +22,28 @@ const defaultAppearanceMixin = css`
   border: 0.5px solid
     var(--admiral-color-Special_DarkStaticNeutral00, ${(p) => p.theme.color['Special/Dark Static Neutral 80']});
 `;
-const ItemContent = styled.div<{ $appearance?: CarouselSliderAppearance }>`
+const ItemContent = styled.div<{ $appearance?: CarouselSliderAppearance; $isCurrent?: boolean }>`
   box-sizing: border-box;
-  width: 12px;
+  width: ${(p) => (p.$isCurrent ? 28 : 12)}px;
   height: 4px;
   border-radius: 2px;
-
-  [aria-selected='true'] & {
-    width: 28px;
-  }
-  .carousel-slider[data-appearance='primary'] li[aria-selected='true'] & {
-    ${primaryAppearanceSelectedMixin}
-  }
-  .carousel-slider[data-appearance='primary'] li[aria-selected='false'] & {
-    ${primaryAppearanceMixin}
-  }
-  .carousel-slider[data-appearance='default'] & {
-    ${defaultAppearanceMixin}
-  }
+  ${(p) =>
+    p.$appearance === 'default'
+      ? defaultAppearanceMixin
+      : p.$isCurrent
+        ? primaryAppearanceSelectedMixin
+        : primaryAppearanceMixin};
 `;
-const Item = styled.button`
+const Item = styled.button<{ $isCurrent?: boolean }>`
   all: unset;
+  display: block;
   appearance: none;
   cursor: pointer;
 
   box-sizing: border-box;
-  width: 18px;
+  width: ${(p) => (p.$isCurrent ? 34 : 18)}px;
   height: 16px;
   padding: 7px 3px 6px 3px;
-
-  [aria-selected='true'] & {
-    width: 34px;
-  }
 
   &:focus-visible > ${ItemContent} {
     outline-offset: 2px;
@@ -62,59 +51,32 @@ const Item = styled.button`
   }
 `;
 
-const Wrapper = styled.ul`
-  list-style: none;
-  position: relative;
-  display: flex;
-
-  & ${Item}, ${ItemContent} {
-    transition: all 0.9s;
-  }
-`;
-
-export interface CarouselSliderProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
-  /** Внешний вид компонента */
-  appearance?: CarouselSliderAppearance;
-  /** Номер выбранной секции (нумерация с 0) */
-  currentItem: number;
-  /** Колбек на изменение текущей секции */
-  onChange: (event: any, item: number) => void;
-}
-
-export const CarouselSlider = ({
+export const CarouselSliderItem = ({
   appearance = 'default',
-  currentItem,
-  onChange,
-  className = '',
-  children,
+  isCurrent = false,
   ...props
-}: CarouselSliderProps) => {
-  const items = useMemo(() => {
-    const sliderItems = Children.toArray(children);
-    if (sliderItems.length < 2) return [];
-    return sliderItems.map((child, index) => {
-      const id = uid();
-      const handleChange = (event: MouseEvent<HTMLLIElement> | KeyboardEvent<HTMLLIElement>) => onChange(event, index);
-      return (
-        <li aria-selected={currentItem === index} key={id} onClick={handleChange}>
-          {child}
-        </li>
-      );
-    });
-  }, [children, currentItem]);
+}: CarouselSliderItemProps) => {
   return (
-    <Wrapper {...props} data-appearance={appearance} className={`carousel-slider ` + className}>
-      {items}
-    </Wrapper>
-  );
-};
-CarouselSlider.displayName = 'CarouselSlider';
-
-export const CarouselSliderItem = ({ appearance }: CarouselSliderItemProps) => {
-  return (
-    <Item>
-      <ItemContent $appearance={appearance} />
+    <Item {...props} $isCurrent={isCurrent}>
+      <ItemContent $appearance={appearance} $isCurrent={isCurrent} />
     </Item>
   );
 };
 CarouselSliderItem.displayName = 'CarouselSliderItem';
+
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  width: fit-content;
+
+  & ${Item}, ${ItemContent} {
+    transition: width 0.3s ease-in-out;
+  }
+`;
+
+export interface CarouselSliderProps extends HTMLAttributes<HTMLDivElement> {}
+
+export const CarouselSlider = ({ children, ...props }: CarouselSliderProps) => {
+  return <Wrapper {...props}>{children}</Wrapper>;
+};
+CarouselSlider.displayName = 'CarouselSlider';
