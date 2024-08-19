@@ -40,7 +40,7 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
   children,
   dimension = 'xl',
   appearance = 'primary',
-  className,
+  className = '',
   ...props
 }) => {
   return (

@@ -6,16 +6,6 @@ import { uid } from '#src/components/common/uid';
 
 export type CarouselSliderAppearance = 'default' | 'primary';
 
-const Wrapper = styled.ul`
-  list-style: none;
-  position: relative;
-  display: flex;
-
-  & > li {
-    transition: width 0.9s ease-in-out;
-  }
-`;
-
 export interface CarouselSliderItemProps extends HTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента */
   appearance?: CarouselSliderAppearance;
@@ -23,10 +13,10 @@ export interface CarouselSliderItemProps extends HTMLAttributes<HTMLButtonElemen
 const primaryAppearanceMixin = css`
   background-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   border: none;
-
-  li[aria-selected='true'] & {
-    background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-  }
+`;
+const primaryAppearanceSelectedMixin = css`
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  border: none;
 `;
 const defaultAppearanceMixin = css`
   background-color: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
@@ -38,12 +28,14 @@ const ItemContent = styled.div<{ $appearance?: CarouselSliderAppearance }>`
   width: 12px;
   height: 4px;
   border-radius: 2px;
-  transition: width 0.9s ease-in-out;
 
   [aria-selected='true'] & {
     width: 28px;
   }
-  .carousel-slider[data-appearance='primary'] & {
+  .carousel-slider[data-appearance='primary'] li[aria-selected='true'] & {
+    ${primaryAppearanceSelectedMixin}
+  }
+  .carousel-slider[data-appearance='primary'] li[aria-selected='false'] & {
     ${primaryAppearanceMixin}
   }
   .carousel-slider[data-appearance='default'] & {
@@ -54,7 +46,6 @@ const Item = styled.button`
   all: unset;
   appearance: none;
   cursor: pointer;
-  transition: width 0.9s ease-in-out;
 
   box-sizing: border-box;
   width: 18px;
@@ -71,6 +62,16 @@ const Item = styled.button`
   }
 `;
 
+const Wrapper = styled.ul`
+  list-style: none;
+  position: relative;
+  display: flex;
+
+  & ${Item}, ${ItemContent} {
+    transition: all 0.9s;
+  }
+`;
+
 export interface CarouselSliderProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onChange'> {
   /** Внешний вид компонента */
   appearance?: CarouselSliderAppearance;
@@ -84,7 +85,7 @@ export const CarouselSlider = ({
   appearance = 'default',
   currentItem,
   onChange,
-  className,
+  className = '',
   children,
   ...props
 }: CarouselSliderProps) => {
