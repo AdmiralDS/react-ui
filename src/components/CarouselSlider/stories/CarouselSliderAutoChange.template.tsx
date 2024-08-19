@@ -22,6 +22,7 @@ const AppearanceBlock = styled.div`
   display: flex;
   gap: 10px;
   ${typography['Body/Body 2 Short']};
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 
 export const CarouselSliderAutoChangeTemplate = (props: CarouselSliderProps) => {
