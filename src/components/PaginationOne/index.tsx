@@ -227,8 +227,18 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     handleClosePageNumberDropMenu(page.toString());
   };
 
-  const pageIncrement = () => onChange({ page: page + 1, pageSize });
-  const pageDecrement = () => onChange({ page: page - 1, pageSize });
+  const pageIncrement = () => {
+    const newPage = page + 1;
+    setSelectedPageNumber(newPage.toString());
+    setActivePageNumber(newPage.toString());
+    onChange({ page: newPage, pageSize });
+  };
+  const pageDecrement = () => {
+    const newPage = page - 1;
+    setSelectedPageNumber(newPage.toString());
+    setActivePageNumber(newPage.toString());
+    onChange({ page: newPage, pageSize });
+  };
 
   const dropMenuProps = passDropdownDataAttributes(props);
 
