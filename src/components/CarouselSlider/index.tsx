@@ -39,6 +39,7 @@ const Item = styled.button<{ $isCurrent?: boolean }>`
   display: block;
   appearance: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   box-sizing: border-box;
   width: ${(p) => (p.$isCurrent ? 34 : 18)}px;
@@ -67,7 +68,17 @@ CarouselSliderItem.displayName = 'CarouselSliderItem';
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  overflow-x: scroll;
   width: fit-content;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   & ${Item}, ${ItemContent} {
     transition: width 0.3s ease-in-out;
