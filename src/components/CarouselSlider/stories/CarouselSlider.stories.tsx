@@ -17,12 +17,6 @@ export default {
     },
     layout: 'centered',
   },
-  argTypes: {
-    appearance: {
-      options: ['default', 'primary'],
-      control: { type: 'radio' },
-    },
-  },
 } as Meta<typeof CarouselSlider>;
 
 //<editor-fold desc="ButtonGroup. Playground">

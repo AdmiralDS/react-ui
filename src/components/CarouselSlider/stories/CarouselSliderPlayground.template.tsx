@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import type { CarouselSliderAppearance, CarouselSliderProps } from '@admiral-ds/react-ui';
@@ -8,6 +8,8 @@ import {
   NotificationItem,
   NotificationItemContent,
   NotificationItemTitle,
+  Toggle,
+  typography,
 } from '@admiral-ds/react-ui';
 
 const Separator = styled.div<{ height: number }>`
@@ -16,20 +18,35 @@ const Separator = styled.div<{ height: number }>`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 `;
+const AppearanceBlock = styled.div`
+  display: flex;
+  gap: 10px;
+  ${typography['Body/Body 2 Short']};
+`;
 
-export const CarouselSliderPlaygroundTemplate = ({
-  appearance,
-  ...props
-}: CarouselSliderProps & { appearance: CarouselSliderAppearance }) => {
+export const CarouselSliderPlaygroundTemplate = (props: CarouselSliderProps) => {
   const [current, setCurrent] = useState(0);
   const handleCurrentChange = (newValue: number) => {
     setCurrent(newValue);
   };
 
+  const [appearance, setAppearance] = useState<CarouselSliderAppearance>('default');
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    if (checked) setAppearance('primary');
+    else setAppearance('default');
+  }, [checked]);
+
   return (
     <Wrapper>
+      <AppearanceBlock>
+        Default
+        <Toggle dimension="s" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
+        Primary
+      </AppearanceBlock>
       <CarouselSlider {...props}>
         {[...Array(5).keys()].map((item) => {
           return (
