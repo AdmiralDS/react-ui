@@ -34,7 +34,7 @@ export interface IconButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: Dimension;
 }
 
-export const IconButtonGroup: FC<IconButtonGroupProps> = ({ children, dimension = 'xl', className, ...props }) => {
+export const IconButtonGroup: FC<IconButtonGroupProps> = ({ children, dimension = 'xl', className = '', ...props }) => {
   return (
     <Wrapper role="group" data-dimension={dimension} className={`icon-button-group ` + className} {...props}>
       {children}

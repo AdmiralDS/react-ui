@@ -8,25 +8,16 @@ import { PaginationSimplePlaygroundTemplate } from './PaginationSimplePlayground
 // Imports of text sources
 import PaginationSimplePlaygroundRaw from './PaginationSimplePlayground.template?raw';
 
-const Separator = styled.div`
-  height: 20px;
-`;
 const Desc = styled.div`
   font-family: 'VTB Group UI';
   font-size: 16px;
   line-height: 24px;
 `;
 
-const Description = () => (
-  <Desc>
-    Простой вариант компонента, например для “перелистывания” банеров или карточек.
-    <Separator />
-    Перелистывание происходит по заданному вручную таймингу, либо по клику на нужную секцию.
-  </Desc>
-);
+const Description = () => <Desc>Deprecated используйте CarouselSlider.</Desc>;
 
 export default {
-  title: 'Admiral-2.1/PaginationSimple',
+  title: 'Deprecated/PaginationSimple (Deprecated используйте CarouselSlider)',
   decorators: undefined,
   component: PaginationSimple,
   parameters: {
