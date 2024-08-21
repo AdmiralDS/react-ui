@@ -371,8 +371,8 @@ export const ExtraText = styled(Title)<{ $dimension: TableProps['dimension'] }>`
   ${extraTextStyle}
 `;
 
-const rowWidthStyle = css<{ $rowWidth?: number }>`
-  width: ${(p) => `${p.$rowWidth}px`};
+const rowWidthStyle = css<{ $rowWidth?: string }>`
+  width: ${(p) => p.$rowWidth};
 `;
 
 const rowHoverMixin = css`
@@ -395,7 +395,7 @@ export const Row = styled.div<{
   $underline: boolean;
   disabled?: boolean;
   $isGroup?: boolean;
-  $rowWidth?: number;
+  $rowWidth?: string;
   $hover?: boolean;
 }>`
   position: relative;

@@ -187,6 +187,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         }, {})
       : {};
 
+    const updateHeaderScrollWidth = () => {
+      scrollBodyRef.current?.style.setProperty(`--header-scroll-width`, headerRef.current?.scrollWidth + 'px');
+    };
+
     const updateColumnsWidth = () => {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
       hiddenColumns?.forEach((column) => {
@@ -197,8 +201,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           scrollBodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
         }
       });
-      // try to update header scroll width when columns refresh on table size change
-      scrollBodyRef.current?.style.setProperty(`--header-scroll-width`, headerRef.current?.scrollWidth + 'px');
+      updateHeaderScrollWidth();
     };
 
     React.useLayoutEffect(() => {
@@ -269,6 +272,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (scrollBody) {
         scrollBody.addEventListener('scroll', handleScroll);
 
+        // TODO: обдумать возможность замены на ResizeObserver
         const observer = observeRect(scrollBody, (rect: any) => {
           if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
             setVerticalScroll(true);
@@ -518,7 +522,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
-          rowWidth={isGroupRow ? headerRef.current?.scrollWidth : undefined}
+          rowWidth={isGroupRow ? `var(--header-scroll-width, ${headerRef.current?.scrollWidth})` : ''}
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
@@ -541,8 +545,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           $underline={showLastRowUnderline}
           $dimension={dimension}
           className="tr"
-          // $rowWidth={headerRef.current?.scrollWidth}
-          style={{ width: `var(--header-scroll-width, ${headerRef.current?.scrollWidth})` }}
+          $rowWidth={`var(--header-scroll-width, ${headerRef.current?.scrollWidth})`}
         >
           <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
         </Row>

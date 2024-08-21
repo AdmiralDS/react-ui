@@ -27,7 +27,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Ширина вертикальной полосы прокрутки */
   scrollbar: number;
   /** Ширина строки */
-  rowWidth?: number;
+  rowWidth?: string;
   /** Окрашивание строки в серый цвет при greyZebraRows */
   grey?: boolean;
   /** Включение постоянной видимости иконок действий над строками */
