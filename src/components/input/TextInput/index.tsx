@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -153,7 +153,9 @@ const Input = styled.input<ExtraProps>`
 
   [data-disable-copying] & {
     user-select: none;
-    pointer-events: none;
+    &::selection {
+      background-color: transparent;
+    }
   }
 
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -228,8 +230,6 @@ function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
 
-const stopEvent = (e: React.MouseEvent) => e.preventDefault();
-
 export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
@@ -265,7 +265,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   showTooltip?: boolean;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       dimension = 'm',
@@ -287,17 +287,17 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = containerRef || React.useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const wrapperRef = containerRef || useRef<HTMLDivElement>(null);
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = Children.toArray(icons);
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue ?? undefined);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue ?? undefined);
     const innerValue = props.value ?? innerValueState;
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);
         return;
@@ -305,7 +305,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       setOverflowActive(false);
     }, [tooltipVisible, setOverflowActive]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         if (document.activeElement !== inputRef.current) setTooltipVisible(true);
       }
@@ -330,7 +330,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       props.onChange?.(e);
     };
 
-    const [isPasswordVisible, setPasswordVisible] = React.useState(false);
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
       iconArray.push(
@@ -372,7 +372,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 
     // const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
       function oninput(this: HTMLInputElement) {
@@ -408,6 +408,19 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         };
       }
     }, [handleInput, placeholder]);
+
+    // Эффект запрещающий выделение контента инпута с целью копирования
+    useEffect(() => {
+      function select(this: HTMLInputElement) {
+        this.selectionEnd = this.selectionStart;
+      }
+
+      if (disableCopying && inputRef.current) {
+        const node = inputRef.current;
+        node.addEventListener('select', select, true);
+        return () => node.removeEventListener('select', select, true);
+      }
+    }, [disableCopying]);
     return (
       <>
         <StyledContainer
@@ -423,9 +436,6 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           data-status={status}
           $skeleton={skeleton}
           data-disable-copying={disableCopying ? true : undefined}
-          {...(disableCopying && {
-            onMouseDown: stopEvent,
-          })}
         >
           <Input
             ref={refSetter(ref, inputRef)}
