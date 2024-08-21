@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import type { CarouselSliderAppearance, CarouselProps, MenuButtonProps } from '@admiral-ds/react-ui';
+import type { CarouselSliderAppearance, CarouselProps } from '@admiral-ds/react-ui';
 import {
   Carousel,
   CarouselSlider,
@@ -30,8 +30,8 @@ const AppearanceBlock = styled.div`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 `;
 const TestButtonWrapper = styled.div`
-  display: flex;
-  gap: 10px;
+  position: relative;
+  width: 120px;
   height: 80px;
   background-color: var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
 `;
@@ -57,10 +57,8 @@ export const CarouselPlaygroundTemplate = (props: CarouselProps) => {
         Primary
       </AppearanceBlock>
       <TestButtonWrapper>
-        <CarouselButton appearance="default" direction="left" />
-        <CarouselButton appearance="default" direction="right" />
-        <CarouselButton appearance="primary" direction="left" />
-        <CarouselButton appearance="primary" direction="right" />
+        <CarouselButton appearance={appearance} direction="left" />
+        <CarouselButton appearance={appearance} direction="right" />
       </TestButtonWrapper>
       <Carousel {...props}>
         <img src="https://via.placeholder.com/1600x300" alt="placeholder" />

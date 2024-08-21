@@ -9,6 +9,7 @@ const CAROUSEL_BUTTON_CONTENT_SIZE = 40;
 const CAROUSEL_BUTTON_ICON_SIZE = 24;
 
 export type CarouselButtonAppearance = 'default' | 'primary';
+export type CarouselButtonDirection = 'left' | 'right';
 
 const IconWrapper = styled.div<{ $appearance?: CarouselButtonAppearance }>`
   display: flex;
@@ -34,13 +35,15 @@ const IconWrapper = styled.div<{ $appearance?: CarouselButtonAppearance }>`
   }
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ $direction: CarouselButtonDirection }>`
   all: unset;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 
+  position: absolute;
+  ${(p) => (p.$direction === 'left' ? 'left: 0;' : 'right: 0;')}
   width: ${CAROUSEL_BUTTON_WIDTH}px;
   height: 100%;
 
@@ -57,12 +60,13 @@ const StyledButton = styled.button`
 export interface CarouselButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента */
   appearance?: CarouselButtonAppearance;
-  direction: 'left' | 'right';
+  /** Назначение кнопки - назад/вперед */
+  direction: CarouselButtonDirection;
 }
 
 export const CarouselButton = ({ appearance, direction, ...props }: CarouselButtonProps) => {
   return (
-    <StyledButton {...props}>
+    <StyledButton {...props} $direction={direction}>
       <IconWrapper $appearance={appearance}>{direction === 'left' ? <ChevronLeft /> : <ChevronRight />}</IconWrapper>
     </StyledButton>
   );

@@ -2,9 +2,10 @@ import type { HTMLAttributes } from 'react';
 import { Children, useMemo, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { CarouselButton, CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
-import { CarouselSlider, CarouselSliderAppearance, CarouselSliderItem } from '#src/components/CarouselSlider';
-import { DropDownDimensions } from '#src/components/DropDownMenu';
+import type { CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
+import { CarouselButton } from '#src/components/Carousel/CarouselButton';
+import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
+import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
 
 const Content = styled.div`
   position: relative;
@@ -41,14 +42,6 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const StyledCarouselButtonLeft = styled(CarouselButton)`
-  position: absolute;
-  left: 0;
-`;
-const StyledCarouselButtonRight = styled(CarouselButton)`
-  position: absolute;
-  right: 0;
-`;
 const innerSliderPositionMixin = css`
   position: absolute;
   bottom: 0;
@@ -107,8 +100,8 @@ export const Carousel = ({
         <ContentWrapper>
           <Content style={{ transform: `translateX(-${currentIndex * 100}%)` }}>{children}</Content>
         </ContentWrapper>
-        {showPrev && <StyledCarouselButtonLeft appearance={buttonAppearance} direction="left" onClick={prev} />}
-        {showNext && <StyledCarouselButtonRight appearance={buttonAppearance} direction="right" onClick={next} />}
+        {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
+        {showNext && <CarouselButton appearance={buttonAppearance} direction="right" onClick={handleNextClick} />}
       </Wrapper>
       <CarouselSliderWrapper $sliderPosition={sliderPosition}>
         <CarouselSlider>
