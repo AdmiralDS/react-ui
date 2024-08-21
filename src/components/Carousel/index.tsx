@@ -7,10 +7,11 @@ import { CarouselButton } from '#src/components/Carousel/CarouselButton';
 import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
 import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
 
-const Content = styled.div`
+const Content = styled.div<{ $currentItem: number; $contentCssMixin?: ReturnType<typeof css> }>`
   position: relative;
   display: flex;
-  transition: all 250ms linear;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-${(p) => p.$currentItem * 100}%);
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -22,6 +23,7 @@ const Content = styled.div`
     flex-shrink: 0;
     flex-grow: 1;
   }
+  ${(p) => p.$contentCssMixin};
 `;
 const ContentWrapper = styled.div`
   overflow: hidden;
@@ -44,10 +46,14 @@ const Container = styled.div`
 
 const innerSliderPositionMixin = css`
   position: absolute;
+  margin-top: 0;
+  margin-bottom: 10px;
   bottom: 0;
 `;
 const StyledCarouselSlider = styled(CarouselSlider)<{ $sliderPosition: CarouselSliderPosition }>`
   align-self: center;
+  margin-top: 10px;
+  margin-bottom: 0;
   ${(p) => p.$sliderPosition === 'inner' && innerSliderPositionMixin};
 `;
 
@@ -95,6 +101,8 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   sliderPosition?: CarouselSliderPosition;
   /** Внешний вид компонента слайдера */
   sliderAppearance?: CarouselSliderAppearance;
+  /** Позволяет добавлять миксин, созданный с помощью styled css  */
+  contentCssMixin?: ReturnType<typeof css>;
 }
 
 export const Carousel = ({
@@ -108,6 +116,7 @@ export const Carousel = ({
   getNextItem: getPrevNextCustom,
   sliderPosition = 'inner',
   sliderAppearance = 'default',
+  contentCssMixin,
   children,
   ...props
 }: CarouselProps) => {
@@ -143,7 +152,9 @@ export const Carousel = ({
     <Container {...props}>
       <Wrapper>
         <ContentWrapper>
-          <Content style={{ transform: `translateX(-${currenItemInner * 100}%)` }}>{children}</Content>
+          <Content $currentItem={currenItemInner} $contentCssMixin={contentCssMixin}>
+            {items}
+          </Content>
         </ContentWrapper>
         {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
         {showNext && <CarouselButton appearance={buttonAppearance} direction="right" onClick={handleNextClick} />}
