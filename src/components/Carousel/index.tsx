@@ -136,14 +136,14 @@ export const Carousel = ({
     const newItem = getNextItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
   };
-  const showPrev = showButtons ? (infiniteScroll ? true : currentIndex > 0) : false;
-  const showNext = showButtons ? (infiniteScroll ? true : currentIndex < length - 1) : false;
+  const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
+  const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
 
   return (
     <Container {...props}>
       <Wrapper>
         <ContentWrapper>
-          <Content style={{ transform: `translateX(-${currentIndex * 100}%)` }}>{children}</Content>
+          <Content style={{ transform: `translateX(-${currenItemInner * 100}%)` }}>{children}</Content>
         </ContentWrapper>
         {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
         {showNext && <CarouselButton appearance={buttonAppearance} direction="right" onClick={handleNextClick} />}
@@ -155,7 +155,7 @@ export const Carousel = ({
               aria-label={`Item ${item}`}
               key={item}
               appearance={sliderAppearance}
-              isCurrent={item === currentIndex}
+              isCurrent={item === currenItemInner}
               onClick={() => handleCurrentItemChange(item)}
             />
           );
