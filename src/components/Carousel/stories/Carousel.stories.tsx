@@ -3,11 +3,11 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { Carousel } from '@admiral-ds/react-ui';
 
 import { CarouselPlaygroundTemplate } from './CarouselPlayground.template';
-//import { CarouselAutoChangeTemplate } from '#src/components/Carousel/stories/CarouselAutoChange.template';
+import { CarouselAutoChangeTemplate } from '#src/components/Carousel/stories/CarouselAutoChange.template';
 
 // Imports of text sources
 import CarouselPlaygroundRaw from './CarouselPlayground.template?raw';
-//import CarouselAutoChangeRaw from './CarouselAutoChange.template?raw';
+import CarouselAutoChangeRaw from './CarouselAutoChange.template?raw';
 
 export default {
   title: 'Admiral-2.1/Carousel',
@@ -19,6 +19,17 @@ export default {
       },
     },
     layout: 'centered',
+  },
+  argTypes: {
+    defaultItem: {
+      control: false,
+    },
+    currentItem: {
+      control: false,
+    },
+    contentCssMixin: {
+      control: false,
+    },
   },
 } as Meta<typeof Carousel>;
 
@@ -43,7 +54,7 @@ export const CarouselPlayground = {
 
 //</editor-fold>
 
-/*//<editor-fold desc="Carousel. AutoChange">
+//<editor-fold desc="Carousel. AutoChange">
 const CarouselAutoChangeStory: StoryFn<typeof Carousel> = (props) => {
   return <CarouselAutoChangeTemplate {...props} />;
 };
@@ -62,4 +73,4 @@ export const CarouselAutoChange = {
   name: 'Carousel. Автоматическое переключение',
 };
 
-//</editor-fold>*/
+//</editor-fold>

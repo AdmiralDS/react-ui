@@ -1,18 +1,7 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import type { CarouselSliderAppearance, CarouselProps } from '@admiral-ds/react-ui';
-import {
-  Carousel,
-  CarouselSlider,
-  CarouselSliderItem,
-  NotificationItem,
-  NotificationItemContent,
-  NotificationItemTitle,
-  Toggle,
-  typography,
-} from '@admiral-ds/react-ui';
-import { CarouselButton } from '#src/components/Carousel/CarouselButton';
+import type { CarouselProps } from '@admiral-ds/react-ui';
+import { Carousel, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
 
 const Separator = styled.div<{ height: number }>`
   height: ${(p) => p.height}px;
@@ -23,47 +12,25 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
 `;
-const AppearanceBlock = styled.div`
-  display: flex;
-  gap: 10px;
-  ${typography['Body/Body 2 Short']};
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-`;
-const TestButtonWrapper = styled.div`
-  position: relative;
-  width: 120px;
-  height: 80px;
-  background-color: var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
-`;
 
 export const CarouselPlaygroundTemplate = (props: CarouselProps) => {
-  const [current, setCurrent] = useState(0);
-  const handleCurrentChange = (newValue: number) => {
-    setCurrent(newValue);
-  };
-
-  const [appearance, setAppearance] = useState<CarouselSliderAppearance>('default');
-  const [checked, setChecked] = useState(false);
-  useEffect(() => {
-    if (checked) setAppearance('primary');
-    else setAppearance('default');
-  }, [checked]);
-
   return (
     <Wrapper>
-      <AppearanceBlock>
-        Default
-        <Toggle dimension="s" checked={checked} onChange={(event) => setChecked(event.currentTarget.checked)} />
-        Primary
-      </AppearanceBlock>
-      <TestButtonWrapper>
-        <CarouselButton appearance={appearance} direction="left" />
-        <CarouselButton appearance={appearance} direction="right" />
-      </TestButtonWrapper>
       <Carousel {...props}>
-        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
-        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
-        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+        <img key="1" src="https://www.fonstola.ru/images/201304/fonstola.ru_92517.jpg" alt="placeholder" />
+        <img key="2" src="https://masyamba.ru/картинки-котят/33-милый-котенок.jpg" alt="placeholder" />
+        <img key="3" src="https://en.free-wallpapers.su/data/media/2329/big/dog1650.jpg" alt="placeholder" />
+        <img
+          key="4"
+          src="https://furman.top/uploads/posts/2023-08/1691005855_furman-top-p-zastavka-na-rabochii-stol-kotiki-krasivo-36.jpg"
+          alt="placeholder"
+        />
+        <img
+          key="5"
+          src="https://wp-s.ru/wallpapers/5/1/315816524181182/troe-malenkix-shhenkov-xaski.jpg"
+          alt="placeholder"
+        />
+        <img key="6" src="https://www.fonstola.ru/images/201910/fonstola.ru_349629.jpg" alt="placeholder" />
       </Carousel>
       <NotificationItem displayStatusIcon>
         <NotificationItemTitle>Carousel</NotificationItemTitle>
@@ -87,7 +54,7 @@ export const CarouselPlaygroundTemplate = (props: CarouselProps) => {
           Опционально кнопки навигации можно отключать
           <Separator height={8} />
           При использовании для отображения условных карточек со светлым фоном, рекомендуется использовать слайдер
-          снаружи компонента и переключить кнопки навигации в режим «On BG», у кнопок есть соответствующая настройка.
+          снаружи компонента и переключить кнопки навигации на appearance = 'primary'.
           <Separator height={8} />
           Адаптив (Mobile) Компонент адаптируется к ширине экрана по горизонтали, пропорционально уменьшая высоту.
           Возможно «листание» свайпами по области изображения.
