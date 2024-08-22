@@ -322,6 +322,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       handleInput = defaultHandleInput,
       containerRef,
       icons,
+      iconsAfter,
       children,
       className,
       autoHeight,
@@ -334,7 +335,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ) => {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
-    const iconArray = Children.toArray(icons);
+    const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
