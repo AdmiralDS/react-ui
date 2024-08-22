@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import {
@@ -9,9 +8,11 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { TextInputPlaygroundTemplate } from './TextInputPlayground.template';
+import { TextInputWithIconTemplate } from '#src/components/input/TextInput/stories/TextInputWithIcon.template';
 
 // Imports of text sources
 import TextInputPlaygroundRaw from './TextInputPlayground.template?raw';
+import TextInputWithIconRaw from './TextInputWithIcon.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextInput',
@@ -112,3 +113,25 @@ export const TextInputPlayground = {
 
   name: 'Базовый input компонент',
 };
+//</editor-fold>
+
+//<editor-fold desc="Input компонент с иконками">
+const TextInputWithIconStory: StoryFn<typeof TextInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextInputWithIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TextInputWithIcon = {
+  render: TextInputWithIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextInputWithIconRaw,
+      },
+    },
+  },
+
+  name: 'Input компонент с иконками',
+};
+//</editor-fold>
