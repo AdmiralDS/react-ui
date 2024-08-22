@@ -294,7 +294,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={iconArray}
+        iconsAfter={iconArray}
         containerRef={inputContainerRef}
         disabled={disabled}
         dimension={dimension}
