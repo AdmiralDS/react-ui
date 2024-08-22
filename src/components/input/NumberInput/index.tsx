@@ -20,7 +20,8 @@ import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } fro
 import { clearValue, fitToCurrency, validateThousand, getDecimalSeparator, getThousandSeparator } from './utils';
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
 `;
 const preventDefault = (e: MouseEvent) => e.preventDefault();
 
@@ -112,7 +113,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
   }
 `;
 
-export interface NumberInputProps extends TextInputProps {
+export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore'> {
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** префикс (строка, которая выводится перед числовым значением) */
@@ -145,6 +146,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       containerRef,
       status,
       icons,
+      iconsAfter,
       displayClearIcon = false,
       displayPlusMinusIcons = true,
       prefix,
@@ -227,7 +229,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
-    const iconArray = Children.toArray(icons);
+    const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       iconArray.unshift(
@@ -313,7 +315,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         $skeleton={skeleton}
         $status={status}
       >
-        <Content $dimension={props.dimension} $iconCount={iconCount} onKeyDown={handleKeyDown}>
+        <Content $dimension={props.dimension} $iconsAfterCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}
             onChange={handleChange}

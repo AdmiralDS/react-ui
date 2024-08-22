@@ -11,19 +11,8 @@ export const PositionedPortalContainer = styled.div`
 `;
 
 export interface PositionInPortalProps {
-  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
-  /**
-   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement.
-   *
-   * Ref на элемент, относительно которого позиционируется портал
-   **/
-  targetRef?: React.RefObject<HTMLElement>;
-
-  /** Элемент, относительно которого позиционируется портал
-   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
-   */
-  targetElement?: Element | null;
+  /** Элемент, относительно которого позиционируется портал */
+  targetElement: Element | null;
 
   /** Контейнер, внутри которого будет отрисован портал, по умолчанию портал рендерится в document.body */
   rootRef?: React.RefObject<HTMLElement>;
@@ -45,7 +34,6 @@ export interface PositionInPortalProps {
  * чтобы избежать возможных конфликтов стилей.
  */
 export const PositionInPortal = ({
-  targetRef,
   targetElement,
   rootRef,
   fullContainerWidth,
@@ -55,7 +43,7 @@ export const PositionInPortal = ({
 
   React.useEffect(() => {
     const node = positionedPortalContainerRef.current;
-    const targetNode = targetElement ?? targetRef?.current;
+    const targetNode = targetElement;
     if (node && targetNode) {
       const observer = observeRect(targetNode, (rect) => {
         if (rect) {
@@ -72,7 +60,7 @@ export const PositionInPortal = ({
         observer.unobserve();
       };
     }
-  }, [targetRef, targetElement, fullContainerWidth]);
+  }, [targetElement, fullContainerWidth]);
 
   return createPortal(
     <PositionedPortalContainer ref={positionedPortalContainerRef} {...props} />,
