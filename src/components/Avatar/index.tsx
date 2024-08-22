@@ -6,8 +6,16 @@ import { AvatarBase } from '#src/components/AvatarBase';
 export interface AvatarProps extends Omit<AvatarBaseProps, 'withActivityRing' | 'showActivityRing'> {}
 
 export const Avatar = forwardRef<HTMLButtonElement, AvatarProps & AvatarBaseInternalProps>(
-  (props: AvatarProps & AvatarBaseInternalProps, ref) => {
-    return <AvatarBase ref={ref} {...props} withActivityRing={false} showActivityRing={false} />;
+  ({ dimension, ...props }: AvatarProps & AvatarBaseInternalProps, ref) => {
+    return (
+      <AvatarBase
+        ref={ref}
+        {...props}
+        dimension={props.status && dimension === 'xxs' ? 'xs' : dimension}
+        withActivityRing={false}
+        showActivityRing={false}
+      />
+    );
   },
 );
 

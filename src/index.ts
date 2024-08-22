@@ -1,5 +1,6 @@
 export * from './components/themes';
 export * from './components/Accordion';
+export * from './components/ActionBar';
 export * from './components/Badge';
 export * from './components/Calendar';
 export * from './components/Calendar/highlightDate';
@@ -95,5 +96,8 @@ export * from './components/GlobalSearch';
 export * from './components/FloatingButton';
 export * from './components/FloatingButton/FloatingButtonMenu';
 export * from './components/BadgeDot';
+export * from './components/ButtonGroup';
+export * from './components/IconButtonGroup';
+export * from './components/CarouselSlider';
 
 export * from './components/CSSCustomProps';

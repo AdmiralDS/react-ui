@@ -50,16 +50,32 @@ const Tab = styled.button<{ $selected?: boolean }>`
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
+
+  &:focus-visible {
+    border-radius: 0;
+    outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
+    outline-offset: -2px;
+  }
 `;
 export const IconTab = forwardRef<HTMLButtonElement, IconTabProps>(
   ({ children, disabled, selected, onSelectTab, tabId, ...props }: IconTabProps, ref) => {
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
+      e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
       onSelectTab?.(tabId);
     };
 
     return (
-      <Tab {...props} ref={ref} data-tabid={tabId} disabled={disabled} $selected={selected} onClick={handleTabClick}>
+      <Tab
+        {...props}
+        role="tab"
+        type="button"
+        ref={ref}
+        data-tabid={tabId}
+        disabled={disabled}
+        $selected={selected}
+        onClick={handleTabClick}
+      >
         {children}
       </Tab>
     );

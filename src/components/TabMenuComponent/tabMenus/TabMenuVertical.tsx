@@ -102,7 +102,7 @@ export const TabMenuVertical = ({
       );
       setMaxTabs(newMaxTabs);
     }
-  }, [containerRef, containerHeight, dimension]);
+  }, [containerRef, containerHeight, dimension, tabsId]);
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
@@ -157,7 +157,7 @@ export const TabMenuVertical = ({
 
     setVisibleTabs(newVisibleTabs);
     setHiddenTabs(newHiddenTabs);
-  }, [maxTabs, selectedTab, containerHeight]);
+  }, [maxTabs, selectedTab, containerHeight, tabsId]);
 
   const renderedVisibleTabs = useMemo(() => {
     if (visibleTabs.length === 0) return [];

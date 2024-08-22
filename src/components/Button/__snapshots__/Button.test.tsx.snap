@@ -9,8 +9,8 @@ exports[`Button should render component 1`] = `
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  height: 24px;
   max-width: calc(100% - 4px);
+  height: 24px;
 }
 
 .c2 >* {
@@ -28,10 +28,25 @@ exports[`Button should render component 1`] = `
   height: 24px;
 }
 
+.button-group[data-dimension='m'] .c2.c2,
+.button-group[data-dimension='l'] .c2.c2,
+.button-group[data-dimension='xl'] .c2.c2 {
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c2.c2>svg,
+.button-group[data-dimension='l'] .c2.c2>svg,
+.button-group[data-dimension='xl'] .c2.c2>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='s'] .c2.c2,
 [data-dimension='s'] .c2 {
   height: 20px;
 }
 
+.button-group[data-dimension='s'] .c2.c2>svg,
 [data-dimension='s'] .c2>svg {
   width: 20px;
   height: 20px;
@@ -64,266 +79,390 @@ exports[`Button should render component 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c0[data-appearance~='primary'] {
+.c0[data-appearance~='primary']:not(.button-group > button) {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'] *[fill^='#'] {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:hover {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Primary_Primary70, #0046E2);
   border-color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:active {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Primary_Primary80, #0132B0);
   border-color: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'],
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled *[fill^='#'] {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='secondary'] {
+.c0[data-appearance~='secondary']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'] *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:active {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:active *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'],
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
   border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='tertiary'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border: 1px solid transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='ghost'] {
+.c0[data-appearance~='ghost']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: 1px solid transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'] *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:hover {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:hover *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:active {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:active *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'],
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='white'] {
+.c0[data-appearance~='white']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'] *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover {
   background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active {
   background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'],
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
   border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
   color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'].c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'].c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
 }
 
-.c0[data-appearance~='danger'] {
+.c0[data-appearance~='danger']:not(.button-group > button) {
   background-color: var(--admiral-color-Error_Error60Main, #D92020);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'] *[fill^='#'] {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:hover {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Error_Error70, #BA1717);
   border-color: var(--admiral-color-Error_Error70, #BA1717);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:active {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):active {
   background-color: var(--admiral-color-Error_Error80, #981111);
   border-color: var(--admiral-color-Error_Error80, #981111);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'],
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'].c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'].c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled *[fill^='#'] {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='success'] {
+.c0[data-appearance~='success']:not(.button-group > button) {
   background-color: var(--admiral-color-Success_Success50Main, #1BA049);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'] *[fill^='#'] {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:hover {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Success_Success60, #128238);
   border-color: var(--admiral-color-Success_Success60, #128238);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:active {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):active {
   background-color: var(--admiral-color-Success_Success70, #0B682A);
   border-color: var(--admiral-color-Success_Success70, #0B682A);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'],
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'].c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'].c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled *[fill^='#'] {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
@@ -332,6 +471,7 @@ exports[`Button should render component 1`] = `
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
+.button-group[data-dimension='xl'] .c0.c0,
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -345,16 +485,19 @@ exports[`Button should render component 1`] = `
   text-rendering: geometricPrecision;
 }
 
+.button-group[data-dimension='l'] .c0.c0,
 .c0[data-dimension='l'] {
   height: 48px;
   padding: 0 21px;
 }
 
+.button-group[data-dimension='m'] .c0.c0,
 .c0[data-dimension='m'] {
   height: 40px;
   padding: 0 17px;
 }
 
+.button-group[data-dimension='s'] .c0.c0,
 .c0[data-dimension='s'] {
   height: 32px;
   padding: 0 13px;
@@ -396,8 +539,8 @@ exports[`Button should render component with text 1`] = `
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  height: 24px;
   max-width: calc(100% - 4px);
+  height: 24px;
 }
 
 .c2 >* {
@@ -415,10 +558,25 @@ exports[`Button should render component with text 1`] = `
   height: 24px;
 }
 
+.button-group[data-dimension='m'] .c2.c2,
+.button-group[data-dimension='l'] .c2.c2,
+.button-group[data-dimension='xl'] .c2.c2 {
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c2.c2>svg,
+.button-group[data-dimension='l'] .c2.c2>svg,
+.button-group[data-dimension='xl'] .c2.c2>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='s'] .c2.c2,
 [data-dimension='s'] .c2 {
   height: 20px;
 }
 
+.button-group[data-dimension='s'] .c2.c2>svg,
 [data-dimension='s'] .c2>svg {
   width: 20px;
   height: 20px;
@@ -451,266 +609,390 @@ exports[`Button should render component with text 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c0[data-appearance~='primary'] {
+.c0[data-appearance~='primary']:not(.button-group > button) {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'] *[fill^='#'] {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:hover {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Primary_Primary70, #0046E2);
   border-color: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:active {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Primary_Primary80, #0132B0);
   border-color: var(--admiral-color-Primary_Primary80, #0132B0);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'],
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled.c0[data-appearance~='primary'].c0[data-appearance~='primary'].c0[data-appearance~='primary']:disabled *[fill^='#'] {
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='secondary'] {
+.c0[data-appearance~='secondary']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'] *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:hover *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:active {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:active *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'],
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
   border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled.c0[data-appearance~='secondary'].c0[data-appearance~='secondary'].c0[data-appearance~='secondary']:disabled *[fill^='#'] {
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='tertiary'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border: 1px solid transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'] *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:hover *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
   color: var(--admiral-color-Neutral_Neutral90, #23262D);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:active *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #717681);
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'],
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: transparent;
 }
 
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled.c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary'].c0[data-appearance~='tertiary']:disabled *[fill^='#'] {
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='ghost'] {
+.c0[data-appearance~='ghost']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: 1px solid transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'] *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:hover {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:hover *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:active {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
   color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:active *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'],
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: transparent;
 }
 
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled.c0[data-appearance~='ghost'].c0[data-appearance~='ghost'].c0[data-appearance~='ghost']:disabled *[fill^='#'] {
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='white'] {
+.c0[data-appearance~='white']:not(.button-group > button) {
   background-color: transparent;
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'] *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover {
   background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:hover *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active {
   background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:active *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'],
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
   border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
   color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
 }
 
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'].c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'].c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled.c0[data-appearance~='white'].c0[data-appearance~='white'].c0[data-appearance~='white']:disabled *[fill^='#'] {
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
 }
 
-.c0[data-appearance~='danger'] {
+.c0[data-appearance~='danger']:not(.button-group > button) {
   background-color: var(--admiral-color-Error_Error60Main, #D92020);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'] *[fill^='#'] {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:hover {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Error_Error70, #BA1717);
   border-color: var(--admiral-color-Error_Error70, #BA1717);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:active {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):active {
   background-color: var(--admiral-color-Error_Error80, #981111);
   border-color: var(--admiral-color-Error_Error80, #981111);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'],
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'].c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'].c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled.c0[data-appearance~='danger'].c0[data-appearance~='danger'].c0[data-appearance~='danger']:disabled *[fill^='#'] {
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
-.c0[data-appearance~='success'] {
+.c0[data-appearance~='success']:not(.button-group > button) {
   background-color: var(--admiral-color-Success_Success50Main, #1BA049);
   color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
   border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'] *[fill^='#'] {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:hover {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Success_Success60, #128238);
   border-color: var(--admiral-color-Success_Success60, #128238);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:active {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):active {
   background-color: var(--admiral-color-Success_Success70, #0B682A);
   border-color: var(--admiral-color-Success_Success70, #0B682A);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'],
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
   color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
   border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
 }
 
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'].c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'].c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success'][data-appearance~='disabled'] *[fill^='#'],
-.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled.c0[data-appearance~='success'].c0[data-appearance~='success'].c0[data-appearance~='success']:disabled *[fill^='#'] {
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+}
+
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border: 1px solid transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: transparent;
+}
+
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
 }
 
@@ -719,6 +1001,7 @@ exports[`Button should render component with text 1`] = `
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
+.button-group[data-dimension='xl'] .c0.c0,
 .c0[data-dimension='xl'] {
   padding: 0;
   height: 56px;
@@ -732,16 +1015,19 @@ exports[`Button should render component with text 1`] = `
   text-rendering: geometricPrecision;
 }
 
+.button-group[data-dimension='l'] .c0.c0,
 .c0[data-dimension='l'] {
   height: 48px;
   padding: 0 21px;
 }
 
+.button-group[data-dimension='m'] .c0.c0,
 .c0[data-dimension='m'] {
   height: 40px;
   padding: 0 17px;
 }
 
+.button-group[data-dimension='s'] .c0.c0,
 .c0[data-dimension='s'] {
   height: 32px;
   padding: 0 13px;

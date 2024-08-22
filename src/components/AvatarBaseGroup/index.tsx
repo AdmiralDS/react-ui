@@ -9,13 +9,13 @@ import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 import { DropMenu } from '#src/components/DropMenu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import type { AvatarBaseProps } from '#src/components/AvatarBase';
+import type { AvatarBaseProps, Dimension } from '#src/components/AvatarBase';
 import { AvatarBase } from '#src/components/AvatarBase';
 
 export interface AvatarBaseGroupProps extends HTMLAttributes<HTMLDivElement>, Omit<DropMenuStyleProps, 'alignSelf'> {
   items: Array<AvatarBaseProps>;
   /** Размер компонента */
-  dimension?: AvatarBaseProps['dimension'];
+  dimension?: Dimension;
   /** Внешний вид компонента (цвет заливки и текста) - можно выбрать один из четырех исходных вариантов, либо задать свою комбинацию цветов */
   appearance?: AvatarBaseProps['appearance'];
   /** Колбек на выбор аватара (по клику или нажатию клавиши). Возвращает id выбранного аватара */
@@ -93,7 +93,7 @@ export const AvatarBaseGroup: FC<AvatarBaseGroupProps> = ({
         resizeObserver.disconnect();
       };
     }
-  }, []);
+  }, [dimension]);
 
   const visible = items.slice(0, visibleItems);
   const hidden = items.slice(visibleItems, visibleItems + hiddenItems);

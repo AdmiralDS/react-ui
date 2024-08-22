@@ -4,7 +4,7 @@ import type { css } from 'styled-components';
 import styled from 'styled-components';
 
 import type { ButtonAppearance, Dimension, StyledButtonProps } from './types';
-import { Spinner } from '#src/components/Spinner';
+import { SpinnerIcon } from '#src/components/Spinner/SpinnerIcon';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonIconContainer, dimensionMixin } from './dimensionMixin';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -69,7 +69,6 @@ const ButtonContent = styled.div<{ $addPadding: number }>`
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
-  height: 24px;
   max-width: calc(100% - ${(p) => p.$addPadding}px);
 
   > * {
@@ -81,14 +80,24 @@ const ButtonContent = styled.div<{ $addPadding: number }>`
     flex: 0 0 auto;
   }
 
+  height: 24px;
   & > svg {
     width: 24px;
     height: 24px;
   }
 
+  .button-group[data-dimension='m'] &&,
+  .button-group[data-dimension='l'] &&,
+  .button-group[data-dimension='xl'] && {
+    height: 24px;
+    & > svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .button-group[data-dimension='s'] &&,
   [data-dimension='s'] & {
     height: 20px;
-
     & > svg {
       width: 20px;
       height: 20px;
@@ -96,11 +105,23 @@ const ButtonContent = styled.div<{ $addPadding: number }>`
   }
 `;
 
-const StyledSpinner = styled(Spinner)`
+const SpinnerContainer = styled(ButtonIconContainer)`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  container-type: inline-size;
+  .button-group[data-appearance='primary'] & {
+    & path {
+      fill: ${(p) => `var(--admiral-color-Special_StaticWhite, ${p.theme.color['Special/Static White']})`};
+    }
+  }
+  .button-group[data-appearance='secondary'] &,
+  .button-group[data-appearance='tertiary'] & {
+    & path {
+      fill: ${(p) => `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`};
+    }
+  }
 `;
 
 const AdditionalPadding = styled.div`
@@ -128,7 +149,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const spinnerDimension = dimension === 's' ? 'ms' : 'm';
     const spinnerInverse = appearance !== 'secondary' && appearance !== 'tertiary' && appearance !== 'ghost';
     const hasIconStart = !!iconStart || (!!icon && iconPlace === 'left');
     const hasIconEnd = !!iconEnd || (!!icon && iconPlace === 'right');
@@ -147,7 +167,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         $displayAsDisabled={displayAsDisabled}
         {...props}
       >
-        {loading && <StyledSpinner dimension={spinnerDimension} inverse={spinnerInverse} />}
+        {loading && (
+          <SpinnerContainer>
+            <SpinnerIcon $inverse={spinnerInverse} />
+          </SpinnerContainer>
+        )}
         {!displayAsSquare && !hasIconStart && <AdditionalPadding />}
         <ButtonContent $addPadding={additionalPadding}>
           {hasIconStart ? <ButtonIconContainer>{iconStart || icon}</ButtonIconContainer> : null}

@@ -54,7 +54,7 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
             {badge}
           </TabBadge>
         )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onClick={handleCloseTab} />
+        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </HorizontalTab>
     );
   },
@@ -166,7 +166,7 @@ export const TabMenuHorizontalWithAddButtonTemplate = ({
             <TabCloseIconButton
               dimension={dimension}
               disabled={tabIsDisabled(tabId)}
-              onClick={() => handleCloseTab(tabId)}
+              onCloseIconButtonClick={() => handleCloseTab(tabId)}
             />
           </MenuItemWrapper>
         </MenuItem>
