@@ -95,6 +95,10 @@ export interface PaginationSimpleProps extends Omit<React.HTMLAttributes<HTMLULi
   onChange: (event: any, item: number) => void;
 }
 
+/**
+ * @deprecated Помечено как deprecated в версии 8.14.0, будет удалено в версии 10.х.х.
+ * Взамен используйте CarouselSlider
+ **/
 export const PaginationSimple: React.FC<PaginationSimpleProps> = ({ currentItem, onChange, children, ...props }) => {
   return (
     <Wrapper {...props}>
@@ -113,6 +117,10 @@ export const PaginationSimple: React.FC<PaginationSimpleProps> = ({ currentItem,
   );
 };
 
+/**
+ * @deprecated Помечено как deprecated в версии 8.14.0, будет удалено в версии 10.х.х.
+ * Взамен используйте CarouselSlider
+ **/
 export const PaginationSimpleItem: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
     <Item {...props}>

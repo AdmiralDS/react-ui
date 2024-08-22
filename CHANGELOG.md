@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.15.0](https://github.com/AdmiralDS/react-ui/compare/v8.14.0...v8.15.0) (2024-08-20)
+
+
+### Features
+
+* **CarouselSlider:** добавлен новый компонент ([7f59649](https://github.com/AdmiralDS/react-ui/commit/7f59649eb7d0b0f88602334b27dcd869ef28199a))
+
+
+### Bug Fixes
+
+* **PaginationOne:** номер страницы синхронизирован с выпадающим меню ([cafb476](https://github.com/AdmiralDS/react-ui/commit/cafb476cc02ca48c5fc528e7221a6e81aa473e23))
+* **TextInput:**  [#1442](https://github.com/AdmiralDS/react-ui/issues/1442)  запрет на выделение текста при установке пропсы disableCopying ([555e91d](https://github.com/AdmiralDS/react-ui/commit/555e91d290f25b6ba4a491369eb3045ab808c505))
+
+## [8.14.0](https://github.com/AdmiralDS/react-ui/compare/v8.13.0...v8.14.0) (2024-08-16)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлен пример с боковыми отступами ([32e5611](https://github.com/AdmiralDS/react-ui/commit/32e56110a770eb3c33a9422a5f576372715b481d))
+* **Menu:** rowCount используется только для определения количества отображаемых в меню опций ([a41a808](https://github.com/AdmiralDS/react-ui/commit/a41a808ec8261fa80e3dcc30509e771c8d1d6273))
+
 ## [8.13.0](https://github.com/AdmiralDS/react-ui/compare/v8.12.0...v8.13.0) (2024-08-12)
 
 

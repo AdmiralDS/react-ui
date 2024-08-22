@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.13.0",
+  "version": "8.15.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -72,7 +72,6 @@
     "@storybook/blocks": "^7.6.20",
     "@storybook/react": "^7.6.20",
     "@storybook/react-webpack5": "^7.6.20",
-    "@storybook/testing-library": "^0.2.2",
     "@styled/typescript-styled-plugin": "^1.0.1",
     "@svgr/rollup": "^8.1.0",
     "@svgr/webpack": "^8.1.0",
@@ -102,7 +101,7 @@
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
+    "react-router-dom": "^6.26.1",
     "resize-observer-polyfill": "^1.5.1",
     "rollup": "^4.20.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

@@ -1,4 +1,4 @@
-import type { ChangeEvent, InputHTMLAttributes, ReactNode, RefObject, MouseEvent } from 'react';
+import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes } from 'react';
 import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -158,7 +158,9 @@ const Input = styled.input<ExtraProps>`
 
   [data-disable-copying] & {
     user-select: none;
-    pointer-events: none;
+    &::selection {
+      background-color: transparent;
+    }
   }
 
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -243,8 +245,6 @@ const StyledContainer = styled(HeightLimitedContainer)<{
 function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
-
-const stopEvent = (e: MouseEvent) => e.preventDefault();
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
@@ -439,6 +439,19 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         };
       }
     }, [handleInput, placeholder]);
+
+    // Эффект запрещающий выделение контента инпута с целью копирования
+    useEffect(() => {
+      function select(this: HTMLInputElement) {
+        this.selectionEnd = this.selectionStart;
+      }
+
+      if (disableCopying && inputRef.current) {
+        const node = inputRef.current;
+        node.addEventListener('select', select, true);
+        return () => node.removeEventListener('select', select, true);
+      }
+    }, [disableCopying]);
     return (
       <>
         <StyledContainer
@@ -454,9 +467,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           data-status={status}
           $skeleton={skeleton}
           data-disable-copying={disableCopying ? true : undefined}
-          {...(disableCopying && {
-            onMouseDown: stopEvent,
-          })}
         >
           <Input
             ref={refSetter(ref, inputRef)}

@@ -97,7 +97,10 @@ exports[`DateField should render component 1`] = `
 
 [data-disable-copying] .c5 {
   user-select: none;
-  pointer-events: none;
+}
+
+[data-disable-copying] .c5::selection {
+  background-color: transparent;
 }
 
 .c5.c5.c5:user-invalid+.c6 {
