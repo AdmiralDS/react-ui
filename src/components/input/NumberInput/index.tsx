@@ -20,7 +20,8 @@ import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } fro
 import { clearValue, fitToCurrency, validateThousand, getDecimalSeparator, getThousandSeparator } from './utils';
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
 `;
 const preventDefault = (e: MouseEvent) => e.preventDefault();
 
