@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import * as React from 'react';
 import observeRect from '#src/components/common/observeRect';
 import { createPortal } from 'react-dom';
+import type { PropsWithChildren, ReactPortal } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const PositionedPortalContainer = styled.div`
   pointer-events: none;
@@ -38,10 +39,10 @@ export const PositionInPortal = ({
   rootRef,
   fullContainerWidth,
   ...props
-}: React.PropsWithChildren<PositionInPortalProps>) => {
-  const positionedPortalContainerRef = React.useRef<HTMLDivElement>(null);
+}: PropsWithChildren<PositionInPortalProps>): ReactPortal => {
+  const positionedPortalContainerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const node = positionedPortalContainerRef.current;
     const targetNode = targetElement;
     if (node && targetNode) {

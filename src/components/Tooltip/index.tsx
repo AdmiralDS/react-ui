@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 
@@ -7,6 +5,8 @@ import { FakeTarget, Portal, TooltipContainer, TooltipWrapper } from './style';
 import type { TooltipPositionType, InternalTooltipPositionType } from './utils';
 import { getTooltipDirection } from './utils';
 import { DropdownContext } from '../DropdownProvider';
+import type { CSSProperties } from 'react';
+import { forwardRef, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 export type TooltipDimension = 'm' | 's';
 
@@ -31,18 +31,18 @@ export interface ITooltipProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TOOLTIP_DELAY = 1500;
 
-export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
+export const Tooltip = forwardRef<HTMLDivElement, ITooltipProps>(
   ({ dimension = 'm', renderContent, targetElement, tooltipPosition, ...props }, ref) => {
-    const tooltipElementRef = React.useRef<HTMLDivElement | null>(null);
-    const tooltipHeight = React.useRef(0);
-    const { rootRef } = React.useContext(DropdownContext);
+    const tooltipElementRef = useRef<HTMLDivElement | null>(null);
+    const tooltipHeight = useRef(0);
+    const { rootRef } = useContext(DropdownContext);
 
     // Пустая строка, undefined, null и false не будут отображены
-    const emptyContent: boolean = React.useMemo(() => !renderContent() && renderContent() !== 0, [renderContent]);
+    const emptyContent: boolean = useMemo(() => !renderContent() && renderContent() !== 0, [renderContent]);
 
-    const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
-    const [portalFullWidth, setPortalFullWidth] = React.useState(false);
-    const [recalculation, startRecalculation] = React.useState({});
+    const [portalFlexDirection, setPortalFlexDirection] = useState<CSSProperties['flexDirection']>();
+    const [portalFullWidth, setPortalFullWidth] = useState(false);
+    const [recalculation, startRecalculation] = useState({});
 
     const manageTooltip = (scrollbarSize: number) => {
       const target = targetElement;
@@ -97,13 +97,13 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
       }
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
       const scrollbarSize = getScrollbarSize();
       manageTooltip(scrollbarSize);
     }, [renderContent(), targetElement, tooltipPosition, recalculation]);
 
     // During fonts loading tooltip size can be changed and tooltip direction should be recalculated
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       if (tooltipElementRef.current && !emptyContent) {
         const resizeObserver = new ResizeObserver((entries) => {
           entries.forEach((entry) => {
@@ -124,7 +124,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, ITooltipProps>(
 
     // First container render always happens downward and transparent,
     // after size and position settled transparency returns to normal
-    React.useEffect(() => {
+    useEffect(() => {
       if (tooltipElementRef.current && !emptyContent) {
         tooltipElementRef.current.style.opacity = '1';
       }

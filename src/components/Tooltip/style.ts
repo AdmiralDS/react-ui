@@ -4,6 +4,7 @@ import { typography } from '#src/components/Typography';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import type { TooltipDimension } from '#src/components/Tooltip';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
+import type { CSSProperties } from 'react';
 
 const TOOLTIP_PADDING_M = '4px 8px';
 const TOOLTIP_PADDING_S = '2px 6px';
@@ -38,7 +39,7 @@ export const FakeTarget = styled.div`
   flex: 0 0 auto;
 `;
 
-export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: CSSProperties['flexDirection'] }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : '')}
