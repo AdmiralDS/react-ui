@@ -23,6 +23,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     id = uid(),
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     ...restProps
   } = props;
@@ -36,6 +37,7 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     displayInline,
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     ref: fieldRef,
     skeleton,
     'data-field-id': id,

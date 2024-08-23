@@ -32,7 +32,7 @@ export const TextFieldInputTemplate = ({
     setValue(inputValue);
     props.onChange?.(e);
   };
-
+  console.log(`characterCounterVisibilityThreshold: ${props.characterCounterVisibilityThreshold}`);
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
