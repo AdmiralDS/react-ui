@@ -99,5 +99,6 @@ export * from './components/BadgeDot';
 export * from './components/ButtonGroup';
 export * from './components/IconButtonGroup';
 export * from './components/CarouselSlider';
+export * from './components/SegmentedControlv1';
 
 export * from './components/CSSCustomProps';
