@@ -1,3 +1,4 @@
+import type { ReactPortal } from 'react';
 import { useState, useContext, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
@@ -16,7 +17,13 @@ type RowDragProps = {
   rowToGroupMap: GroupRows;
 };
 
-export const RowDrag = ({ rowsDraggable, dimension, onRowDrag, scrollBodyRef, rowToGroupMap }: RowDragProps) => {
+export const RowDrag = ({
+  rowsDraggable,
+  dimension,
+  onRowDrag,
+  scrollBodyRef,
+  rowToGroupMap,
+}: RowDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
   const [rowDragging, setRowDragging] = useState(false);

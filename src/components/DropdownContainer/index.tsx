@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, PropsWithChildren, RefObject } from 'react';
+import type { CSSProperties, HTMLAttributes, PropsWithChildren } from 'react';
 import { forwardRef, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
@@ -67,37 +67,14 @@ export interface DropdownContainerProps
   extends HTMLAttributes<HTMLDivElement>,
     DropContainerProps,
     Omit<DropContainerStyles, 'dropContainerClassName' | 'dropContainerStyle'> {
-  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
-  /**
-   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement.
-   *
-   * Ref на элемент, относительно которого позиционируется выпадающее меню
-   **/
-  targetRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню
-   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
-   */
-  targetElement?: Element | null;
+  /** Элемент, относительно которого позиционируется выпадающее меню */
+  targetElement: Element | null;
 }
 
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
-  (
-    {
-      targetRef,
-      targetElement,
-      onClickOutside = () => null,
-      className = '',
-      alignSelf,
-      dropContainerCssMixin,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ targetElement, onClickOutside = () => null, className = '', alignSelf, dropContainerCssMixin, ...props }, ref) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = useState(false);
-
-    const targetNode = targetElement ?? targetRef?.current;
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
     const { rootRef } = useContext(DropdownContext);
@@ -115,9 +92,9 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
     const checkDropdownPosition = useCallback(() => {
       const node = containerRef.current;
-      if (node && targetNode) {
+      if (node && targetElement) {
         const rect = node.getBoundingClientRect();
-        const targetRect = targetNode.getBoundingClientRect();
+        const targetRect = targetElement.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
         if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
@@ -157,7 +134,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
           }
         }
       }
-    }, [displayUpward, targetRef, targetElement]);
+    }, [displayUpward, targetElement]);
 
     useInterval(checkDropdownPosition, 100);
 
@@ -178,7 +155,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
     return (
       <>
-        <Portal targetElement={targetNode} $reverse={displayUpward} rootRef={rootRef}>
+        <Portal targetElement={targetElement} $reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
           <Container
             ref={refSetter(ref, containerRef)}

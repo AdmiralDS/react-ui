@@ -22,30 +22,4 @@ export const SpinnerIcon = styled(Spinner)<{
   }
   width: 100%;
   height: 100%;
-
-  @container (min-width: 64px) {
-    :not(path[data-dimension='xl']) {
-      display: none;
-    }
-  }
-  @container (max-width: 48px) and (min-width: 25px) {
-    :not(path[data-dimension='l']) {
-      display: none;
-    }
-  }
-  @container (max-width: 24px) and (min-width: 21px) {
-    :not(path[data-dimension='m']) {
-      display: none;
-    }
-  }
-  @container (max-width: 20px) and (min-width: 17px) {
-    :not(path[data-dimension='ms']) {
-      display: none;
-    }
-  }
-  @container (max-width: 16px) {
-    :not(path[data-dimension='s']) {
-      display: none;
-    }
-  }
 `;

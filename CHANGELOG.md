@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.16.0](https://github.com/AdmiralDS/react-ui/compare/v8.15.0...v8.16.0) (2024-08-22)
+
+
+### Features
+
+* **DateInput, NumberInput, SuggestInput, TextArea, TimeInput:** icons помечен deprecated, добавлен iconsAfter ([2eb1245](https://github.com/AdmiralDS/react-ui/commit/2eb124538ba6f8c47c38a155466749d9027c8d78))
+* **InputEx:** добавлена функция включения иконки слева ([67bd518](https://github.com/AdmiralDS/react-ui/commit/67bd518630a6484f6363cbe881fc107752ffa90b))
+* **TextInput:** добавлена функция включения иконки слева ([cda2ef8](https://github.com/AdmiralDS/react-ui/commit/cda2ef88b619b3ac85712216b35bcf9dbe72740b))
+
+
+### Bug Fixes
+
+* **MultiButton:** [#1444](https://github.com/AdmiralDS/react-ui/issues/1444) исправлен баг с неправильной шириной разделителя между кнопками ([c5dd15c](https://github.com/AdmiralDS/react-ui/commit/c5dd15cdd7863f650623708380d6034999f6ad75))
+* **Spinner:** [#1448](https://github.com/AdmiralDS/react-ui/issues/1448) некоректное отображение в styled-components v5 ([803d170](https://github.com/AdmiralDS/react-ui/commit/803d170986002bbd498ed026eb1a0cd46d88005a))
+
+## [8.15.0](https://github.com/AdmiralDS/react-ui/compare/v8.14.0...v8.15.0) (2024-08-20)
+
+
+### Features
+
+* **CarouselSlider:** добавлен новый компонент ([7f59649](https://github.com/AdmiralDS/react-ui/commit/7f59649eb7d0b0f88602334b27dcd869ef28199a))
+
+
+### Bug Fixes
+
+* **PaginationOne:** номер страницы синхронизирован с выпадающим меню ([cafb476](https://github.com/AdmiralDS/react-ui/commit/cafb476cc02ca48c5fc528e7221a6e81aa473e23))
+* **TextInput:**  [#1442](https://github.com/AdmiralDS/react-ui/issues/1442)  запрет на выделение текста при установке пропсы disableCopying ([555e91d](https://github.com/AdmiralDS/react-ui/commit/555e91d290f25b6ba4a491369eb3045ab808c505))
+
 ## [8.14.0](https://github.com/AdmiralDS/react-ui/compare/v8.13.0...v8.14.0) (2024-08-16)
 
 

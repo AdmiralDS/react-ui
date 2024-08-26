@@ -1,5 +1,5 @@
 import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { ForwardedRef, InputHTMLAttributes, ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
+import type { ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -15,6 +15,7 @@ import { SuffixSelect } from '#src/components/input/InputEx/SuffixSelect';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import type { TextInputProps } from '#src/components/input/TextInput';
 import { BorderedDivStyles, InputBorderedDiv } from '#src/components/input/TextInput';
 import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components/DropMenu';
 
@@ -153,7 +154,15 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
       outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
-
+`;
+const IconPanelBefore = styled(IconPanel)`
+  margin-right: 8px;
+  & > *:not(:first-child) {
+    margin-right: 8px;
+  }
+`;
+const IconPanelAfter = styled(IconPanel)`
+  margin-left: 8px;
   & > *:not(:first-child) {
     margin-left: 8px;
   }
@@ -195,11 +204,8 @@ export interface RenderProps {
   readOnly?: boolean;
 }
 export interface InputExProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'>,
+  extends Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
-  /** Делает высоту компонента больше или меньше обычной */
-  dimension?: ComponentDimension;
-
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
    * Взамен используйте параметры prefixDropContainerStyle.menuWidth и
@@ -207,18 +213,6 @@ export interface InputExProps
    *
    * Ширина меню */
   menuWidth?: string;
-
-  /** Иконки для отображения в правом углу поля */
-  icons?: ReactNode;
-
-  /** Отображать иконку очистки поля */
-  displayClearIcon?: boolean;
-
-  /** Статус поля */
-  status?: InputStatus;
-
-  /** Ref контейнера компонента */
-  containerRef?: ForwardedRef<HTMLDivElement>;
 
   /**
    * @deprecated Помечено как deprecated в версии 8.8.0, будет удалено в 10.x.x версии.
@@ -228,9 +222,6 @@ export interface InputExProps
    * если не указан, выравнивание произойдет относительно контейнера компонента
    **/
   alignDropRef?: RefObject<HTMLElement>;
-
-  /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
-  disableCopying?: boolean;
 
   /** Значение префикса */
   prefixValue?: ReactNode;
@@ -262,9 +253,6 @@ export interface InputExProps
   /** Специальный метод для рендера опции списка суффикса по значению */
   renderSuffixOption?: (props: RenderPropsType<ReactNode> & MenuItemProps) => ReactNode;
 
-  /** Состояние skeleton */
-  skeleton?: boolean;
-
   /**
    * @deprecated Помечено как deprecated в версии 4.8.0, будет удалено в 9.x.x версии.
    * Взамен используйте columnsButtonDropContainerStyle.dropContainerCssMixin
@@ -276,9 +264,6 @@ export interface InputExProps
   prefixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
   suffixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
-
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
 }
 
 export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
@@ -292,6 +277,8 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       alignDropRef,
       targetElement,
       icons,
+      iconsBefore,
+      iconsAfter,
       children,
       className,
       style,
@@ -408,10 +395,11 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       props.onChange?.(e);
     };
 
-    const iconArray = Children.toArray(icons);
+    const iconAfterArray = Children.toArray(iconsAfter || icons);
+    const iconBeforeArray = Children.toArray(iconsBefore);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
-      iconArray.unshift(
+      iconAfterArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
           key="clear-icon"
@@ -425,7 +413,8 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       );
     }
 
-    const iconCount = iconArray.length;
+    const iconsAfterCount = iconAfterArray.length;
+    const iconsBeforeCount = iconBeforeArray.length;
 
     return (
       <>
@@ -449,19 +438,25 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
               {prefix}
             </PrefixContainer>
           )}
+          {iconsBeforeCount > 0 && (
+            <IconPanelBefore disabled={props.disabled} $dimension={dimension}>
+              {iconBeforeArray}
+            </IconPanelBefore>
+          )}
           <Input
             ref={refSetter(ref, inputRef)}
             {...props}
             onChange={handleChange}
             placeholder={placeholder}
-            $iconCount={iconCount}
+            $iconsAfterCount={iconsAfterCount}
+            $iconsBeforeCount={iconsBeforeCount}
             $dimension={dimension}
           />
           <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
-          {iconCount > 0 && (
-            <IconPanel disabled={props.disabled} $dimension={dimension}>
-              {iconArray}
-            </IconPanel>
+          {iconsAfterCount > 0 && (
+            <IconPanelAfter disabled={props.disabled} $dimension={dimension}>
+              {iconAfterArray}
+            </IconPanelAfter>
           )}
           {!!suffix && (
             <SuffixContainer $dimension={dimension} disabled={props.disabled}>

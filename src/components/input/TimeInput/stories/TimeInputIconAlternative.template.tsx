@@ -25,7 +25,7 @@ export const TimeInputIconAlternativeTemplate = (props: TimeInputProps) => {
       <TimeInput
         {...props}
         style={{ maxWidth: '320px' }}
-        icons={<InputIconButton icon={GPSOutline} onClick={() => setValue('12:00')} />}
+        iconsAfter={<InputIconButton icon={GPSOutline} onClick={() => setValue('12:00')} />}
         icon={TimeSolid}
         value={localValue}
         onChange={handleChange}

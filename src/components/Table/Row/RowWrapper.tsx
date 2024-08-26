@@ -97,8 +97,6 @@ export const RowWrapper = ({
         disabled={!!row.disabled}
         $status={row.status}
         $rowStatusMap={rowStatusMap}
-        $error={!!row.error}
-        $success={!!row.success}
         $grey={!!grey}
       >
         {children}

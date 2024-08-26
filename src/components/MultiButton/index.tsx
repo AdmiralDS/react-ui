@@ -43,7 +43,8 @@ const MainButton = styled(Button)`
   &[data-appearance~='tertiary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
-  &[data-appearance~='secondary'] {
+  // повышаем специфичность, чтобы перебить изначальные стили border у Button
+  &&&[data-appearance~='secondary'] {
     border-right: none;
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
@@ -57,7 +58,8 @@ const MenuButton = styled(Button)`
   &[data-appearance~='tertiary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
-  &[data-appearance~='secondary'] {
+  // повышаем специфичность, чтобы перебить изначальные стили border у Button
+  &&&[data-appearance~='secondary'] {
     border-left: none;
     border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }

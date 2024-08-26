@@ -53,17 +53,17 @@ describe('Tooltip', () => {
   };
 
   it('should render component', () => {
-    const wrapper = render(<WrappedComponentWithTooltip renderContent={() => ''} />);
+    const wrapper = render(<WrappedComponentWithTooltip targetElement={null} renderContent={() => ''} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render wrapped component', () => {
-    const wrapper = render(<WrappedComponentWithTooltip renderContent={() => ''} />);
+    const wrapper = render(<WrappedComponentWithTooltip targetElement={null} renderContent={() => ''} />);
     expect(wrapper.getByTestId('wrapped-component')).toHaveTextContent('Wrapped component');
   });
 
   it('should render tooltip with provided text when mouse enters component', () => {
-    const component = <WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />;
+    const component = <WrappedComponentWithTooltip targetElement={null} renderContent={() => 'tooltipText'} />;
     const { rerender } = render(component);
     act(() => {
       /**
@@ -83,7 +83,7 @@ describe('Tooltip', () => {
   });
 
   it('should show tooltip when component receives focus', () => {
-    render(<WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />);
+    render(<WrappedComponentWithTooltip targetElement={null} renderContent={() => 'tooltipText'} />);
     act(() => {
       fireEvent.focus(screen.getByTestId('wrapped-component'));
       jest.runAllTimers();
@@ -92,7 +92,7 @@ describe('Tooltip', () => {
   });
 
   it('should hide tooltip when mouse leaves component', () => {
-    render(<WrappedComponentWithTooltip renderContent={() => 'tooltipText'} />);
+    render(<WrappedComponentWithTooltip targetElement={null} renderContent={() => 'tooltipText'} />);
     act(() => {
       fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
       fireEvent.mouseLeave(screen.getByTestId('wrapped-component'));
@@ -101,7 +101,7 @@ describe('Tooltip', () => {
   });
 
   it('should show tooltip with 1.5 seconds delay if prop "withDelay" is provided', () => {
-    render(<WrappedComponentWithTooltip renderContent={() => 'tooltipText'} withDelay />);
+    render(<WrappedComponentWithTooltip targetElement={null} renderContent={() => 'tooltipText'} withDelay />);
     act(() => {
       const mouseenter = new MouseEvent('mouseenter', {
         bubbles: true,

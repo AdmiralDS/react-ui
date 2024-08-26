@@ -423,8 +423,6 @@ export const SimpleRow = styled.div<{
   $showRowsActions: boolean;
   selected?: boolean;
   disabled?: boolean;
-  $error?: boolean;
-  $success?: boolean;
   $grey?: boolean;
   $status?: TableRow['status'];
   $rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];

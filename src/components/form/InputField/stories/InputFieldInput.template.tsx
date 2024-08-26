@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type { MouseEvent, ChangeEvent } from 'react';
 import { useState, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
@@ -16,16 +15,10 @@ const DisplayContainer = styled.div`
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
 of mini units map to fluid grid column widths and row heights.`;
-
-export const InputFieldInputTemplate = ({
-  value = 'Привет',
-  label = 'Label',
-  themeBorderKind,
-  CSSCustomProps,
-  ...props
-}: InputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [localValue, setValue] = useState<string>(String(value) ?? '');
-  const [invalidInputValue, setInvalidInputValue] = useState<string>('Hello');
+interface IconWithHintProps {
+  targetElement?: Element | null;
+}
+const IconWithHint = ({ targetElement }: IconWithHintProps) => {
   const [visible, setVisible] = useState(false);
   const handleVisibilityChange = (isVisible: boolean) => {
     if (!isVisible) {
@@ -38,7 +31,34 @@ export const InputFieldInputTemplate = ({
     setVisible((prevState) => !prevState);
   };
 
-  const informerInputRef = useRef<HTMLDivElement>(null);
+  return (
+    <Hint
+      dimension="s"
+      visible={visible}
+      onVisibilityChange={handleVisibilityChange}
+      visibilityTrigger="click"
+      preventFocusSteal
+      renderContent={() => text}
+      targetElement={targetElement}
+      anchorId="hint_target"
+    >
+      <InputIconButton icon={HelpOutline} onMouseDown={handleIconMouseDown} />
+    </Hint>
+  );
+};
+
+export const InputFieldInputTemplate = ({
+  value = 'Привет',
+  label = 'Label',
+  themeBorderKind,
+  CSSCustomProps,
+  ...props
+}: InputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const [invalidInputValue, setInvalidInputValue] = useState<string>('Hello');
+
+  const informerInputRef1 = useRef<HTMLDivElement>(null);
+  const informerInputRef2 = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -109,22 +129,16 @@ export const InputFieldInputTemplate = ({
           type="password"
         />
         <InputField
-          containerRef={informerInputRef}
+          containerRef={informerInputRef1}
           data-container-id="inputFieldIdNine"
           label="Поле с информером"
-          icons={
-            <Hint
-              visible={visible}
-              onVisibilityChange={handleVisibilityChange}
-              visibilityTrigger="click"
-              preventFocusSteal
-              renderContent={() => text}
-              targetElement={informerInputRef.current}
-              anchorId="hint_target"
-            >
-              <InputIconButton icon={HelpOutline} onMouseDown={handleIconMouseDown} />
-            </Hint>
-          }
+          iconsAfter={<IconWithHint targetElement={informerInputRef1.current} />}
+        />
+        <InputField
+          containerRef={informerInputRef2}
+          data-container-id="inputFieldIdNine"
+          label="Поле с иконкой в начале"
+          iconsBefore={<IconWithHint targetElement={informerInputRef2.current} />}
         />
       </DisplayContainer>
     </ThemeProvider>
