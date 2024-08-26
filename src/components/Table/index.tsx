@@ -188,7 +188,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       : {};
 
     const updateHeaderScrollWidth = () => {
-      scrollBodyRef.current?.style.setProperty(`--header-scroll-width`, headerRef.current?.scrollWidth + 'px');
+      if (scrollBodyRef.current && headerRef.current) {
+        scrollBodyRef.current.style.setProperty(`--header-scroll-width`, headerRef.current.scrollWidth + 'px');
+      }
     };
 
     const updateColumnsWidth = () => {
@@ -511,6 +513,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const rowInGroup = !!rowToGroupMap[row.id];
       const visible = rowInGroup ? groupToRowsMap[rowToGroupMap[row.id]?.groupId]?.expanded : true;
       const isLastRow = isLastVisibleRow({ row, isGroupRow, tableRows, index });
+      const rowWidth = isGroupRow ? `var(--header-scroll-width, ${headerRef.current?.scrollWidth + 'px'})` : undefined;
 
       const node = (isGroupRow || visible) && (
         <RowWrapper
@@ -522,7 +525,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
-          rowWidth={isGroupRow ? `var(--header-scroll-width, ${headerRef.current?.scrollWidth})` : ''}
+          rowWidth={rowWidth}
           verticalScroll={verticalScroll}
           scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
@@ -545,7 +548,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           $underline={showLastRowUnderline}
           $dimension={dimension}
           className="tr"
-          $rowWidth={`var(--header-scroll-width, ${headerRef.current?.scrollWidth})`}
+          $rowWidth={`var(--header-scroll-width, ${headerRef.current?.scrollWidth + 'px'})`}
         >
           <EmptyMessage $dimension={dimension}>{emptyMessage}</EmptyMessage>
         </Row>

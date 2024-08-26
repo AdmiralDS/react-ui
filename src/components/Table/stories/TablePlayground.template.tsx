@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  Table,
-  T,
-  NotificationItem,
-  NotificationItemContent,
-  NotificationItemTitle,
-  Button,
-} from '@admiral-ds/react-ui';
+import { Table, T, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -190,12 +183,12 @@ const columnList: Column[] = [
   {
     name: 'transfer_date',
     title: 'Дата сделки',
-    width: 250,
+    width: 150,
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
-    width: 470,
+    width: 170,
   },
   {
     name: 'currency',
@@ -213,14 +206,6 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
   const handleResize = ({ name, width }: { name: string; width: string }) => {
     const newCols = cols.map((col) => (col.name === name ? { ...col, width } : col));
     setCols(newCols);
-  };
-
-  const handleClick = () => {
-    if (cols.length === 1) {
-      setCols(columnList);
-    } else {
-      setCols(columnList.slice(-1));
-    }
   };
 
   return (
@@ -249,8 +234,7 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
         </NotificationItemContent>
       </NotificationItem>
       <Separator height={40} />
-      <Button onClick={handleClick}>Тык</Button>
-      <Table {...props} rowList={[]} columnList={cols} onColumnResize={handleResize} style={{ width: '600px' }} />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
     </>
   );
 };
