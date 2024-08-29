@@ -280,7 +280,6 @@ export const TableColumnDragDropTemplate = (props: TableProps) => {
         rowList={rowList}
         onColumnResize={handleResize}
         onColumnDrag={handleColumnDrag}
-        displayRowSelectionColumn
       />
       <Separator style={{ height: '40px' }} />
       <T font="Body/Body 2 Long">

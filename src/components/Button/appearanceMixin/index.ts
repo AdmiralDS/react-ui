@@ -30,14 +30,13 @@ export const appearanceMixin = css`
   &[data-appearance~='success']:not(.button-group > button) {
     ${successAppearanceMixin}
   }
-  &:is(.button-group[data-appearance='primary'] > button),
-  &:is(.button-group > button.selected) {
+  &:is(.button-group[data-appearance='primary'] > button) {
     ${primaryAppearanceMixin}
   }
-  &:is(.button-group[data-appearance='secondary'] > button:not(.selected)) {
+  &:is(.button-group[data-appearance='secondary'] > button) {
     ${secondaryAppearanceMixin}
   }
-  &:is(.button-group[data-appearance='tertiary'] > button:not(.selected)) {
+  &:is(.button-group[data-appearance='tertiary'] > button) {
     ${tertiaryAppearanceMixin}
   }
 
