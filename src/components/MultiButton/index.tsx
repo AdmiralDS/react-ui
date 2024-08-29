@@ -134,6 +134,8 @@ export interface MultiButtonProps
   appearance?: Appearance;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Отключение только главной кнопки, без отключения выпадающего меню. */
+  disabledMainButton?: boolean;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -144,6 +146,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       dimension = 'l',
       appearance = 'primary',
       disabled,
+      disabledMainButton,
       items = [],
       onMainButtonClick,
       disableSelectedOptionHighlight,
@@ -228,7 +231,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
-                disabled={disabled}
+                disabled={disabled || disabledMainButton}
                 onClick={onMainButtonClick}
               >
                 {React.Children.toArray(children).map((child, index) =>

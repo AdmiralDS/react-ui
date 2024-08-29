@@ -148,6 +148,22 @@ export const MultiButtonDisabledTemplate = (props: MultiButtonProps) => {
         >
           {itemsDemo[0].render}
         </MultiButton>
+        <Separator />
+        <MultiButton
+          {...props}
+          appearance="primary"
+          disabledMainButton
+          selected={selected3}
+          onSelectItem={(id) => {
+            logSelectedId(id);
+            setSelected3(id);
+          }}
+          items={model}
+          onVisibilityChange={handleVisibilityChange}
+          onMainButtonClick={handleMainButtonClick}
+        >
+          {itemsDemo[0].render}
+        </MultiButton>
       </div>
     </>
   );
