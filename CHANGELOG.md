@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.17.0](https://github.com/AdmiralDS/react-ui/compare/v8.16.0...v8.17.0) (2024-08-30)
+
+
+### Features
+
+* **Multibutton:** добавлен пропс disabledMainButton для избирательного запрещения только MainButton ([afd8150](https://github.com/AdmiralDS/react-ui/commit/afd815012334158bea48f64065aefc234b25dc97))
+
+
+### Bug Fixes
+
+* **GlobalSearch:**  [#1464](https://github.com/AdmiralDS/react-ui/issues/1464) hover в меню не должен приводить к изменению значения в поле ввода ([5638d53](https://github.com/AdmiralDS/react-ui/commit/5638d53d300a643266044f50a2cf6ba2a5fdf2da))
+* **Table:** [#1438](https://github.com/AdmiralDS/react-ui/issues/1438) исправлено поведение горизонтального скролла при смене количества столбцов ([e3b42c6](https://github.com/AdmiralDS/react-ui/commit/e3b42c69177cb03b15db5e156bdd60c0696aa19f))
+* typings of any ([7f9301e](https://github.com/AdmiralDS/react-ui/commit/7f9301ed5ce69dcda9513fae72ce96b64be9fcb4))
+
 ## [8.16.0](https://github.com/AdmiralDS/react-ui/compare/v8.15.0...v8.16.0) (2024-08-22)
 
 
