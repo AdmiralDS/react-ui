@@ -4,11 +4,10 @@ import styled from 'styled-components';
 export * from './SegmentedControlItem';
 
 const FieldSetContainer = styled.fieldset`
+  display: inline-flex;
+  flex-wrap: nowrap;
   border: none;
   padding: 0;
-
-  display: inline-flex;
-  flex-wrap: wrap;
 
   &[data-appearance='filled'] {
     gap: 1px;
@@ -34,29 +33,29 @@ const FieldSetContainer = styled.fieldset`
   }
 `;
 
-export interface SegmentedControlv2Props extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  dimension?: 'xl' | 'l' | 'm' | 's';
-  /** Внешний вид кнопки */
-  appearance?: 'outlined' | 'filles';
+type Dimension = 'xl' | 'l' | 'm' | 's';
+type Appearance = 'outlined' | 'filled';
+
+export interface SegmentedControlProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  /** Размер компонента */
+  dimension?: Dimension;
+  /** Внешний вид компонента */
+  appearance?: Appearance;
+  /** Компонент в состоянии disabled */
   disabled?: boolean;
 }
 
-export const SegmentedControlv2: FC<SegmentedControlv2Props> = ({
+export const SegmentedControl: FC<SegmentedControlProps> = ({
   children,
   dimension = 'xl',
   appearance = 'outlined',
   ...props
 }) => {
   return (
-    <FieldSetContainer
-      {...props}
-      data-appearance={appearance}
-      data-dimension={dimension}
-      data-disabled={props.disabled ? '' : undefined}
-    >
+    <FieldSetContainer role="group" data-appearance={appearance} data-dimension={dimension} {...props}>
       {children}
     </FieldSetContainer>
   );
 };
 
-SegmentedControlv2.displayName = 'SegmentedControlv2';
+SegmentedControl.displayName = 'SegmentedControl';

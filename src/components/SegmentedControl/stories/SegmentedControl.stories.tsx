@@ -2,12 +2,24 @@ import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
-import { SegmentedControlv2, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
+import { SegmentedControl, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
-import { ButtonGroupPlaygroundTemplate } from './SegmentedControlPlayground.template';
+import { SegmentedControlPlaygroundTemplate } from './SegmentedControlPlayground.template';
+import { SegmentedControlAppearanceTemplate } from './SegmentedControlAppearance.template';
+import { SegmentedControlDimensionTemplate } from './SegmentedControlDimension.template';
+import { SegmentedControlCheckboxTemplate } from './SegmentedControlCheckbox.template';
+import { SegmentedControlRadioTemplate } from './SegmentedControlRadio.template';
+import { SegmentedControlVariantsTemplate } from './SegmentedControlVariants.template';
+import { SegmentedControlStateTemplate } from './SegmentedControlState.template';
 
 // Imports of text sources
-import ButtonGroupPlaygroundRaw from './SegmentedControlPlayground.template?raw';
+import SegmentedControlPlaygroundRaw from './SegmentedControlPlayground.template?raw';
+import SegmentedControlAppearanceRaw from './SegmentedControlAppearance.template?raw';
+import SegmentedControlDimensionRaw from './SegmentedControlDimension.template?raw';
+import SegmentedControlCheckboxRaw from './SegmentedControlCheckbox.template?raw';
+import SegmentedControlRadioRaw from './SegmentedControlRadio.template?raw';
+import SegmentedControlVariantsRaw from './SegmentedControlVariants.template?raw';
+import SegmentedControlStateRaw from './SegmentedControlState.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -20,15 +32,18 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент ButtonGroup состоит из компонентов Button, связаных друг с другом, используется для организации схожих
-    функций. <Separator /> Компонент представлен в вариантах Primary, Secondary и Tertiary и размерах: XL - высота 56
-    px, L - высота 48 px, M - высота 40 px и S - высота 32 px.
+    SegmentedControl — компонент для переключения контента, параметров или выбора свойств. Является самым низкоуровневым
+    по отношению к TabMenu, ContentSwitcher и CardTabMenu. Аналог Сhoice Chips. <Separator /> Компонент представлен в
+    вариантах Outlined и Filled и размерах: XL - высота 56 px, L - высота 48 px, M - высота 40 px и S - высота 32 px.
+    <Separator />
+    Компонент может работать в двух режимах:<li>Одиночный выбор — режим Radio Button</li>
+    <li>Множественный выбор — режим Checkbox</li>
   </Desc>
 );
 
 export default {
-  title: 'Admiral-2.1/SegmentedControlv2',
-  component: SegmentedControlv2,
+  title: 'Admiral-2.1/SegmentedControl',
+  component: SegmentedControl,
   parameters: {
     docs: {
       source: {
@@ -52,12 +67,12 @@ export default {
       control: { type: 'radio' },
     },
   },
-} as Meta<typeof SegmentedControlv2>;
+} as Meta<typeof SegmentedControl>;
 
 //<editor-fold desc="ButtonGroup. Playground">
-const ButtonGroupPlaygroundStory: StoryFn<typeof SegmentedControlv2> = (props) => {
+const ButtonGroupPlaygroundStory: StoryFn<typeof SegmentedControl> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <ButtonGroupPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <SegmentedControlPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const ButtonGroupPlayground = {
@@ -66,12 +81,144 @@ export const ButtonGroupPlayground = {
   parameters: {
     docs: {
       source: {
-        code: ButtonGroupPlaygroundRaw,
+        code: SegmentedControlPlaygroundRaw,
       },
     },
   },
 
-  name: 'SegmentedControlv2. Playground',
+  name: 'SegmentedControl. Playground',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. Appearance">
+const SegmentedControlAppearanceStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlAppearanceTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlAppearance = {
+  render: SegmentedControlAppearanceStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlAppearanceRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Стили',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. Dimension">
+const SegmentedControlDimensionStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlDimension = {
+  render: SegmentedControlDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlDimensionRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Размеры',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. Radio">
+const SegmentedControlRadioStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlRadioTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlRadio = {
+  render: SegmentedControlRadioStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlRadioRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Режим radio button',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. Checkbox">
+const SegmentedControlCheckboxStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlCheckboxTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlCheckbox = {
+  render: SegmentedControlCheckboxStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlCheckboxRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Режим checkbox',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. Variants">
+const SegmentedControlVariantsStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlVariantsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlVariants = {
+  render: SegmentedControlVariantsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlVariantsRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Варианты',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SegmentedControl. State">
+const SegmentedControlStateStory: StoryFn<typeof SegmentedControl> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SegmentedControlStateTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SegmentedControlState = {
+  render: SegmentedControlStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SegmentedControlStateRaw,
+      },
+    },
+  },
+
+  name: 'SegmentedControl. Состояния',
 };
 
 //</editor-fold>

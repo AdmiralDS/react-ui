@@ -9,43 +9,44 @@ const Separator = styled.div<{ height?: number }>`
   height: ${(p) => p.height || 20}px;
 `;
 
-export const SegmentedControlPlaygroundTemplate = ({
+export const SegmentedControlCheckboxTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: SegmentedControlProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => (
   <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-    <T font="Body/Body 1 Long">Режим radio button</T>
+    <T font="Body/Body 1 Long">Outlined</T>
     <Separator />
     <SegmentedControl
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
-      <SegmentedControlItem name="first" value="1">
-        Button 1
+      <SegmentedControlItem type="checkbox" name="first" value="1st outlined">
+        Button 56
       </SegmentedControlItem>
-      <SegmentedControlItem name="first" value="2">
-        Button 2
+      <SegmentedControlItem type="checkbox" name="first" value="2nd outlined">
+        Button 56
       </SegmentedControlItem>
-      <SegmentedControlItem name="first" value="3">
-        Button 3
+      <SegmentedControlItem type="checkbox" name="first" value="3rd outlined">
+        Button 56
       </SegmentedControlItem>
     </SegmentedControl>
     <Separator height={40} />
-    <T font="Body/Body 1 Long">Режим checkbox</T>
+    <T font="Body/Body 1 Long">Filled</T>
     <Separator />
     <SegmentedControl
+      appearance="filled"
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
-      <SegmentedControlItem type="checkbox" value="4">
-        Button 4
+      <SegmentedControlItem type="checkbox" name="second" value="1st filled">
+        Button 56
       </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" value="5">
-        Button 5
+      <SegmentedControlItem type="checkbox" name="second" value="2nd filled">
+        Button 56
       </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" value="6">
-        Button 6
+      <SegmentedControlItem type="checkbox" name="second" value="3rd filled">
+        Button 56
       </SegmentedControlItem>
     </SegmentedControl>
   </ThemeProvider>

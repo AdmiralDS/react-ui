@@ -1,36 +1,37 @@
 import { Children, forwardRef } from 'react';
-import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import type { LabelHTMLAttributes, ReactNode, ChangeEventHandler } from 'react';
 import type { css } from 'styled-components';
 
 import { SpinnerIcon } from '#src/components/Spinner/SpinnerIcon';
-import {
-  Wrapper,
-  Input,
-  Button,
-  ButtonContent,
-  AdditionalPadding,
-  SpinnerContainer,
-  ButtonIconContainer,
-} from './style';
+import { Label, Input, Button, ButtonContent, AdditionalPadding, SpinnerContainer, ButtonIconContainer } from './style';
 
-export interface SegmentedControlItemv2Props extends InputHTMLAttributes<HTMLInputElement> {
-  /** Внешний вид кнопки */
-  // appearance?: 'outlined' | 'filled';
+export interface SegmentedControlItemProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
+  /** Тип кнопки */
+  type?: 'radio' | 'checkbox';
 
-  // /** Размер кнопки */
-  // dimension?: 'xl' | 'l' | 'm' | 's';
+  /** Состояние кнопки, выбрана или нет */
+  checked?: boolean;
 
-  /** Оставаясь активной для нажатия, кнопка отображается в заблокированном стиле */
-  // displayAsDisabled?: boolean;
+  /** Состояние кнопки, выбрана или нет по умолчанию */
+  defaultChecked?: boolean;
+
+  /** Значение кнопки */
+  value?: string | readonly string[] | number;
+
+  /** Атрибут name кнопки */
+  name?: string;
+
+  /** Колбек на изменение состояния кнопки (выбрана или нет) */
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+
+  /** Кнопка в состоянии disabled */
+  disabled?: boolean;
 
   /** Отображать кнопку квадратной*/
   displayAsSquare?: boolean;
 
   /** Состояние загрузки */
   loading?: boolean;
-
-  /** Состояние скелетона */
-  skeleton?: boolean;
 
   /** Иконка перед текстом кнопки */
   iconStart?: ReactNode;
@@ -40,33 +41,24 @@ export interface SegmentedControlItemv2Props extends InputHTMLAttributes<HTMLInp
 
   /** Позволяет добавлять миксин для кнопок, созданный с помощью styled css  */
   buttonCssMixin?: ReturnType<typeof css>;
-
-  checked?: boolean;
-  defaultChecked?: boolean;
-  type?: 'radio' | 'checkbox';
-  value?: any;
-  name?: any;
 }
 
-export const SegmentedControlItemv2 = forwardRef<HTMLButtonElement, SegmentedControlItemv2Props>(
+export const SegmentedControlItem = forwardRef<HTMLInputElement, SegmentedControlItemProps>(
   (
     {
-      // appearance = 'outlined',
-      // dimension = 'xl',
-      // type = 'button',
       type = 'radio',
-      loading = false,
-      skeleton = false,
-      iconStart,
-      iconEnd,
-      children,
-      buttonCssMixin,
-      // displayAsDisabled,
-      displayAsSquare,
       checked,
       defaultChecked,
       value,
       name,
+      onChange,
+      disabled,
+      displayAsSquare = false,
+      loading = false,
+      iconStart,
+      iconEnd,
+      buttonCssMixin,
+      children,
       ...props
     },
     ref,
@@ -76,20 +68,18 @@ export const SegmentedControlItemv2 = forwardRef<HTMLButtonElement, SegmentedCon
     const additionalPadding = (!displayAsSquare && !hasIconStart ? 2 : 0) + (!displayAsSquare && !hasIconEnd ? 2 : 0);
 
     return (
-      <Wrapper>
-        <Input checked={checked} defaultChecked={defaultChecked} type={type} value={value} name={name} {...props} />
-        <Button
-          // $appearance={appearance}
-          // $dimension={dimension}
-          // type={type}
-          $loading={loading}
-          // $skeleton={skeleton}
-          $buttonCssMixin={buttonCssMixin}
-          $displayAsSquare={displayAsSquare}
-          // $displayAsDisabled={displayAsDisabled}
-          // {...props}
-          tabIndex={-1}
-        >
+      <Label {...props}>
+        <Input
+          ref={ref}
+          type={type}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          value={value}
+          name={name}
+          onChange={onChange}
+          disabled={disabled || loading}
+        />
+        <Button $loading={loading} $displayAsSquare={displayAsSquare} $buttonCssMixin={buttonCssMixin}>
           {loading && (
             <SpinnerContainer>
               <SpinnerIcon />
@@ -105,7 +95,9 @@ export const SegmentedControlItemv2 = forwardRef<HTMLButtonElement, SegmentedCon
           </ButtonContent>
           {!displayAsSquare && !hasIconEnd && <AdditionalPadding />}
         </Button>
-      </Wrapper>
+      </Label>
     );
   },
 );
+
+SegmentedControlItem.displayName = 'SegmentedControlItem';

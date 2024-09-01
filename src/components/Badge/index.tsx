@@ -3,6 +3,7 @@ import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import type { ButtonAppearance, ButtonProps } from '#src/components/Button';
+import type { SegmentedControlProps } from '#src/components/SegmentedControl';
 
 type Dimension = 'm' | 's';
 export type BadgeAppearance =
@@ -151,4 +152,38 @@ export const ButtonBadge = ({ appearance = 'primary', disabled = false, ...props
     appearance === 'primary' || appearance === 'secondary' || appearance === 'tertiary' || appearance === 'ghost';
   const badgeAppearance = getBadgeAppearance(appearance, disabled);
   return isVisible ? <Badge {...props} dimension="s" appearance={badgeAppearance} /> : null;
+};
+
+interface SegmentedControlBadgeProps
+  extends Omit<BadgeProps, 'appearance' | 'dimension'>,
+    Pick<SegmentedControlProps, 'appearance'> {
+  disabled?: boolean;
+}
+
+const SegmentedBadge = styled(Badge)<{ $disabled?: boolean }>`
+  &:is(input:checked + div *) {
+    background: ${(p) =>
+      p.$disabled
+        ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`
+        : `var(--admiral-color-Special_StaticWhite, ${p.theme.color['Special/Static White']})`};
+    color: ${(p) =>
+      p.$disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`};
+  }
+`;
+
+export const SegmentedControlBadge = ({
+  appearance = 'outlined',
+  disabled = false,
+  ...props
+}: SegmentedControlBadgeProps) => {
+  const badgeAppearance = disabled
+    ? appearance == 'outlined'
+      ? 'lightDisable'
+      : 'whiteDisable'
+    : appearance == 'outlined'
+      ? 'info'
+      : 'white';
+  return <SegmentedBadge {...props} dimension="s" appearance={badgeAppearance} />;
 };

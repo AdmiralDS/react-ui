@@ -6,7 +6,7 @@ export const ButtonIconContainer = styled.div``;
 const defaultDimensionMixin = css<{ $displayAsSquare?: boolean }>`
   padding: 0;
   height: 56px;
-  ${(props) => (props.$displayAsSquare ? 'width: 56px;' : 'padding: 0 29px;')}
+  ${(p) => (p.$displayAsSquare ? 'width: 56px;' : 'padding: 0 29px;')}
   ${ButtonIconContainer} {
     width: 24px;
     height: 24px;
@@ -16,23 +16,25 @@ const defaultDimensionMixin = css<{ $displayAsSquare?: boolean }>`
 `;
 
 export const dimensionMixin = css<{ $displayAsSquare?: boolean }>`
+  ${defaultDimensionMixin}
+
   fieldset[data-dimension='xl'] & {
     ${defaultDimensionMixin}
   }
 
   fieldset[data-dimension='l'] & {
     height: 48px;
-    ${(props) => (props.$displayAsSquare ? 'width: 48px;' : 'padding: 0 21px;')}
+    ${(p) => (p.$displayAsSquare ? 'width: 48px;' : 'padding: 0 21px;')}
   }
 
   fieldset[data-dimension='m'] & {
     height: 40px;
-    ${(props) => (props.$displayAsSquare ? 'width: 40px;' : 'padding: 0 17px;')}
+    ${(p) => (p.$displayAsSquare ? 'width: 40px;' : 'padding: 0 17px;')}
   }
 
   fieldset[data-dimension='s'] & {
     height: 32px;
-    ${(props) => (props.$displayAsSquare ? 'width: 32px;' : 'padding: 0 13px;')}
+    ${(p) => (p.$displayAsSquare ? 'width: 32px;' : 'padding: 0 13px;')}
     ${ButtonIconContainer} {
       width: 20px;
       height: 20px;
@@ -69,6 +71,17 @@ export const outlinedMixin = css`
   }
 `;
 
+export const outlineDisabledMixin = css`
+  & + div {
+    background-color: transparent;
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    border: 1px solid var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+    & *[fill^='#'] {
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    }
+  }
+`;
+
 export const filledMixin = css`
   & + div {
     background-color: var(--admiral-color-Opacity_Neutral8, ${(p) => p.theme.color['Opacity/Neutral 8']});
@@ -97,6 +110,17 @@ export const filledMixin = css`
   }
 `;
 
+export const filledDisabledMixin = css`
+  & + div {
+    background-color: var(--admiral-color-Opacity_Neutral8, ${(p) => p.theme.color['Opacity/Neutral 8']});
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    border: 1px solid transparent;
+    & *[fill^='#'] {
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    }
+  }
+`;
+
 export const checkedMixin = css`
   & + div {
     background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
@@ -113,5 +137,16 @@ export const checkedMixin = css`
   &:active + div {
     background-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
     border-color: var(--admiral-color-Primary_Primary80, ${(p) => p.theme.color['Primary/Primary 80']});
+  }
+`;
+
+export const checkedDisabledMixin = css`
+  & + div {
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    border: 1px solid var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+    & *[fill^='#'] {
+      fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    }
   }
 `;

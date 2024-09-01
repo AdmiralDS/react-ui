@@ -1,20 +1,22 @@
 import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
-import { dimensionMixin, ButtonIconContainer, filledMixin, outlinedMixin, checkedMixin } from './mixins';
+import {
+  dimensionMixin,
+  ButtonIconContainer,
+  filledMixin,
+  filledDisabledMixin,
+  outlinedMixin,
+  outlineDisabledMixin,
+  checkedMixin,
+  checkedDisabledMixin,
+} from './mixins';
 export { ButtonIconContainer } from './mixins';
 
-export const SpinnerContainer = styled(ButtonIconContainer)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  container-type: inline-size;
-  .button-group[data-appearance='primary'] & {
-    & path {
-      fill: ${(p) => `var(--admiral-color-Special_StaticWhite, ${p.theme.color['Special/Static White']})`};
-    }
-  }
+export const Label = styled.label`
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
 `;
 
 export const ButtonContent = styled.div<{ $addPadding: number }>`
@@ -43,7 +45,7 @@ export const ButtonContent = styled.div<{ $addPadding: number }>`
     height: 24px;
   }
 
-  [data-dimension='s'] & {
+  fieldset[data-dimension='s'] & {
     height: 20px;
     & > svg {
       width: 20px;
@@ -52,41 +54,21 @@ export const ButtonContent = styled.div<{ $addPadding: number }>`
   }
 `;
 
-export const AdditionalPadding = styled.div`
-  display: inline-block;
-  width: 2px;
-`;
-
-interface WrapperProps {
-  $appearance?: 'outlined' | 'filled';
-  $dimension?: 'xl' | 'l' | 'm' | 's';
-  $disabled?: boolean;
-  $displayAsDisabled?: boolean;
+export const Button = styled.div<{
   $displayAsSquare?: boolean;
   $loading?: boolean;
   $buttonCssMixin?: ReturnType<typeof css>;
-}
-
-export const Button = styled.div.attrs<
-  WrapperProps & {
-    'data-appearance'?: string;
-  }
->((props) => ({
-  'data-appearance': [props.$appearance, props.$displayAsDisabled ? 'disabled' : undefined]
-    .filter((val) => val !== undefined)
-    .join(' '),
-}))<WrapperProps>`
+}>`
   position: relative;
   box-sizing: border-box;
-  //   display: inline-block;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   white-space: nowrap;
   border: none;
   border-radius: ${(p) => `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
-  appearance: none;
   vertical-align: middle;
-  cursor: ${(p) => (p.$loading ? 'default' : p.$disabled ? 'not-allowed' : 'pointer')};
+  pointer-events: none;
 
   ${dimensionMixin};
   ${(p) => p.$buttonCssMixin};
@@ -96,10 +78,17 @@ export const Button = styled.div.attrs<
   }
 `;
 
-export const Wrapper = styled.label`
-  position: relative;
-  box-sizing: border-box;
+export const SpinnerContainer = styled(ButtonIconContainer)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  container-type: inline-size;
+`;
+
+export const AdditionalPadding = styled.div`
   display: inline-block;
+  width: 2px;
 `;
 
 export const Input = styled.input`
@@ -116,49 +105,28 @@ export const Input = styled.input`
   padding: 0;
   margin: 0;
   opacity: 0;
-
   box-sizing: border-box;
-
-  fieldset:disabled &,
-  &:disabled {
-    cursor: not-allowed;
-    &:checked {
-      & + div {
-        background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
-        color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        border-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
-        & *[fill^='#'] {
-          fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        }
-      }
-    }
-  }
 
   fieldset[data-appearance='outlined']:disabled &,
   fieldset[data-appearance='outlined'] &:disabled {
     &:not(:checked) {
-      & + div {
-        background-color: transparent;
-        color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        & *[fill^='#'] {
-          fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        }
-      }
+      cursor: not-allowed;
+      ${outlineDisabledMixin}
     }
   }
 
   fieldset[data-appearance='filled']:disabled &,
   fieldset[data-appearance='filled'] &:disabled {
     &:not(:checked) {
-      & + div {
-        background-color: var(--admiral-color-Opacity_Neutral8, ${(p) => p.theme.color['Opacity/Neutral 8']});
-        color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        border-color: transparent;
-        & *[fill^='#'] {
-          fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
-        }
-      }
+      cursor: not-allowed;
+      ${filledDisabledMixin}
     }
+  }
+
+  fieldset:disabled &:checked,
+  &:disabled:checked {
+    cursor: not-allowed;
+    ${checkedDisabledMixin}
   }
 
   &:checked:not(:disabled) {
