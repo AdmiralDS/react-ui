@@ -36,13 +36,14 @@ const FieldSetContainer = styled.fieldset`
 type Dimension = 'xl' | 'l' | 'm' | 's';
 type Appearance = 'outlined' | 'filled';
 
-export interface SegmentedControlProps extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+// Согласно дизайну в компоненте SegmentedControl (также как в TabMenu и ContentSwitcher)
+// нет состояния disabled для всего компонента
+
+export interface SegmentedControlProps extends Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, 'disabled'> {
   /** Размер компонента */
   dimension?: Dimension;
   /** Внешний вид компонента */
   appearance?: Appearance;
-  /** Компонент в состоянии disabled */
-  disabled?: boolean;
 }
 
 export const SegmentedControl: FC<SegmentedControlProps> = ({

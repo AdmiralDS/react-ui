@@ -9,7 +9,6 @@ import {
   outlinedMixin,
   outlineDisabledMixin,
   checkedMixin,
-  checkedDisabledMixin,
 } from './mixins';
 export { ButtonIconContainer } from './mixins';
 
@@ -107,26 +106,14 @@ export const Input = styled.input`
   opacity: 0;
   box-sizing: border-box;
 
-  fieldset[data-appearance='outlined']:disabled &,
   fieldset[data-appearance='outlined'] &:disabled {
-    &:not(:checked) {
-      cursor: not-allowed;
-      ${outlineDisabledMixin}
-    }
-  }
-
-  fieldset[data-appearance='filled']:disabled &,
-  fieldset[data-appearance='filled'] &:disabled {
-    &:not(:checked) {
-      cursor: not-allowed;
-      ${filledDisabledMixin}
-    }
-  }
-
-  fieldset:disabled &:checked,
-  &:disabled:checked {
     cursor: not-allowed;
-    ${checkedDisabledMixin}
+    ${outlineDisabledMixin}
+  }
+
+  fieldset[data-appearance='filled'] &:disabled {
+    cursor: not-allowed;
+    ${filledDisabledMixin}
   }
 
   &:checked:not(:disabled) {

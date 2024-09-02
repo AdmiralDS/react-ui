@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { SegmentedControlItem, SegmentedControl, T } from '@admiral-ds/react-ui';
@@ -9,45 +9,94 @@ const Separator = styled.div<{ height?: number }>`
   height: ${(p) => p.height || 20}px;
 `;
 
+const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
 export const SegmentedControlCheckboxTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: SegmentedControlProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => (
-  <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-    <T font="Body/Body 1 Long">Outlined</T>
-    <Separator />
-    <SegmentedControl
-      onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
-      {...props}
-    >
-      <SegmentedControlItem type="checkbox" name="first" value="1st outlined">
-        Button 56
-      </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" name="first" value="2nd outlined">
-        Button 56
-      </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" name="first" value="3rd outlined">
-        Button 56
-      </SegmentedControlItem>
-    </SegmentedControl>
-    <Separator height={40} />
-    <T font="Body/Body 1 Long">Filled</T>
-    <Separator />
-    <SegmentedControl
-      appearance="filled"
-      onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
-      {...props}
-    >
-      <SegmentedControlItem type="checkbox" name="second" value="1st filled">
-        Button 56
-      </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" name="second" value="2nd filled">
-        Button 56
-      </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" name="second" value="3rd filled">
-        Button 56
-      </SegmentedControlItem>
-    </SegmentedControl>
-  </ThemeProvider>
-);
+}: SegmentedControlProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const [selected, setSelected] = useState(
+    new Map([
+      [values[6], false],
+      [values[7], false],
+      [values[8], false],
+    ]),
+  );
+  return (
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long">Неуправляемая группа чекбокс кнопок</T>
+      <Separator />
+      <SegmentedControl
+        onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
+        {...props}
+      >
+        <SegmentedControlItem name="first" value={values[0]} type="checkbox">
+          Button 1
+        </SegmentedControlItem>
+        <SegmentedControlItem name="first" value={values[1]} type="checkbox">
+          Button 2
+        </SegmentedControlItem>
+        <SegmentedControlItem name="first" value={values[2]} type="checkbox">
+          Button 3
+        </SegmentedControlItem>
+      </SegmentedControl>
+      <Separator height={40} />
+      <T font="Body/Body 1 Long">Неуправляемая группа чекбокс кнопок, где 1я и 2я кнопки выбраны по умолчанию</T>
+      <Separator />
+      <SegmentedControl
+        onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
+        {...props}
+      >
+        <SegmentedControlItem name="second" value={values[3]} type="checkbox" defaultChecked>
+          Button 4
+        </SegmentedControlItem>
+        <SegmentedControlItem name="second" value={values[4]} type="checkbox" defaultChecked>
+          Button 5
+        </SegmentedControlItem>
+        <SegmentedControlItem name="second" value={values[5]} type="checkbox">
+          Button 6
+        </SegmentedControlItem>
+      </SegmentedControl>
+      <Separator height={40} />
+      <T font="Body/Body 1 Long">Управляемая группа чекбокс кнопок</T>
+      <Separator />
+      <SegmentedControl
+        onChange={(e) => {
+          setSelected(
+            new Map(selected.set((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).checked)),
+          );
+        }}
+        {...props}
+      >
+        <SegmentedControlItem
+          type="checkbox"
+          name="third"
+          value={values[6]}
+          checked={selected.get(values[6])}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
+        >
+          Button 7
+        </SegmentedControlItem>
+        <SegmentedControlItem
+          type="checkbox"
+          name="third"
+          value={values[7]}
+          checked={selected.get(values[7])}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
+        >
+          Button 8
+        </SegmentedControlItem>
+        <SegmentedControlItem
+          type="checkbox"
+          name="third"
+          value={values[8]}
+          checked={selected.get(values[8])}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
+        >
+          Button 9
+        </SegmentedControlItem>
+      </SegmentedControl>
+    </ThemeProvider>
+  );
+};

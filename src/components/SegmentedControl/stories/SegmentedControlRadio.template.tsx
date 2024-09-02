@@ -55,15 +55,12 @@ export const SegmentedControlRadioTemplate = ({
       <Separator height={40} />
       <T font="Body/Body 1 Long">Управляемая группа радио кнопок</T>
       <Separator />
-      <SegmentedControl {...props}>
+      <SegmentedControl onChange={(e) => setSelected((e.target as HTMLInputElement).value)} {...props}>
         <SegmentedControlItem
           name="third"
           value={values[6]}
           checked={values[6] == selected}
-          onChange={(e) => {
-            setSelected(e.target.value);
-            console.log('Button' + e.target.value + ' selected');
-          }}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 7
         </SegmentedControlItem>
@@ -71,10 +68,7 @@ export const SegmentedControlRadioTemplate = ({
           name="third"
           value={values[7]}
           checked={values[7] == selected}
-          onChange={(e) => {
-            setSelected(e.target.value);
-            console.log('Button' + e.target.value + ' selected');
-          }}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 8
         </SegmentedControlItem>
@@ -82,10 +76,7 @@ export const SegmentedControlRadioTemplate = ({
           name="third"
           value={values[8]}
           checked={values[8] == selected}
-          onChange={(e) => {
-            setSelected(e.target.value);
-            console.log('Button' + e.target.value + ' selected');
-          }}
+          onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 9
         </SegmentedControlItem>

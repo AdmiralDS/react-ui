@@ -61,22 +61,5 @@ export const SegmentedControlStateTemplate = ({
         </SegmentedControl>
       </GroupWrapper>
     ))}
-    <Separator />
-    <T font="Body/Body 1 Long">Disabled (весь компонент)</T>
-    {appearanceMap.map((appearance, index) => (
-      <GroupWrapper key={'fieldset_disabled' + index}>
-        <SegmentedControl appearance={appearance} disabled {...props}>
-          <SegmentedControlItem name={`third${index}`} value={1} defaultChecked>
-            Button 1
-          </SegmentedControlItem>
-          <SegmentedControlItem name={`third${index}`} value={2}>
-            Button 2
-          </SegmentedControlItem>
-          <SegmentedControlItem name={`third${index}`} value={3}>
-            Button 3
-          </SegmentedControlItem>
-        </SegmentedControl>
-      </GroupWrapper>
-    ))}
   </ThemeProvider>
 );
