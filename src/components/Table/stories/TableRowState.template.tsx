@@ -161,7 +161,6 @@ export const TableRowStateTemplate = (props: TableProps) => {
       {...props}
       rowList={rowList}
       columnList={cols}
-      displayRowSelectionColumn
       onColumnResize={handleResize}
       rowBackgroundColorByStatusMap={{
         attention: (color: Color) => color['Attention/Attention 20'],
