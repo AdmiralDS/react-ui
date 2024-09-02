@@ -23,6 +23,7 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     id = uid(),
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     ...restProps
   } = props;
@@ -36,6 +37,7 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     displayInline,
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     ref: inputRef,
     skeleton,
     'data-field-id': id,

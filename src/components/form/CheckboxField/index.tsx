@@ -68,6 +68,7 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
 
     return (
       <CheckboxComponentWrapper
+        style={{}}
         className={className}
         $dimension={dimension}
         disabled={disabled}

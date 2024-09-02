@@ -37,7 +37,7 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
 }
 
 export interface DateInputProps
-  extends TextInputProps,
+  extends Omit<TextInputProps, 'iconsBefore'>,
     Omit<CalendarPropType, 'onChange' | 'range'>,
     Pick<DropMenuComponentProps, 'isVisible' | 'onVisibilityChange'>,
     DropContainerStyles {
@@ -90,6 +90,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       calendarRef,
       icon = CalendarOutlineSVG,
       icons,
+      iconsAfter,
       skeleton = false,
       dropContainerCssMixin,
       dropContainerClassName,
@@ -178,7 +179,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = React.Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
     }
@@ -188,7 +189,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...{ dimension, ...props }}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={iconArray}
+        iconsAfter={iconArray}
         containerRef={inputContainerRef}
         skeleton={skeleton}
       >
