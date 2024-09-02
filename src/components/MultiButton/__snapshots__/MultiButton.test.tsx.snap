@@ -21,7 +21,7 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -72,7 +72,7 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -1173,7 +1173,7 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -1224,7 +1224,7 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -2380,7 +2380,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -2431,7 +2431,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -3534,7 +3534,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -3585,7 +3585,7 @@ exports[`MultiButton should render component with disabled state 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -4743,7 +4743,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -4794,7 +4794,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -5894,7 +5894,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -5945,7 +5945,7 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -7100,7 +7100,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -7151,7 +7151,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -8251,7 +8251,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c4 >.sc-gtLWhw {
+.c4 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
@@ -8302,7 +8302,7 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   white-space: nowrap;
 }
 
-.c8 >.sc-gtLWhw {
+.c8 >.sc-gJhJTp {
   flex: 0 0 auto;
 }
 
