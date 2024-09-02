@@ -9,16 +9,16 @@ const FieldSetContainer = styled.fieldset`
   border: none;
   padding: 0;
 
-  &[data-appearance='filled'] {
-    gap: 1px;
-  }
   &[data-appearance='outlined'] {
     & > label:not(:first-child) {
       margin-left: -1px;
     }
     label:has(input:checked) + label:has(input:checked) {
-      box-shadow: -1px 0 var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
+      box-shadow: -1px 0 var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
+  }
+  &[data-appearance='filled'] {
+    gap: 1px;
   }
   & > label:first-child > div {
     border-top-right-radius: 0;

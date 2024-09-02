@@ -29,13 +29,13 @@ export const SegmentedControlVariantsTemplate = ({
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with iconStart selected')}
           {...props}
         >
-          <SegmentedControlItem name="first" value="1" iconStart={<StarSolid />}>
+          <SegmentedControlItem name={`first${index}`} value="1" iconStart={<StarSolid />}>
             Button 1
           </SegmentedControlItem>
-          <SegmentedControlItem name="first" value="2" iconStart={<StarSolid />}>
+          <SegmentedControlItem name={`first${index}`} value="2" iconStart={<StarSolid />}>
             Button 2
           </SegmentedControlItem>
-          <SegmentedControlItem name="first" value="3" iconStart={<StarSolid />}>
+          <SegmentedControlItem name={`first${index}`} value="3" iconStart={<StarSolid />}>
             Button 3
           </SegmentedControlItem>
         </SegmentedControl>
@@ -50,13 +50,13 @@ export const SegmentedControlVariantsTemplate = ({
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with iconEnd selected')}
           {...props}
         >
-          <SegmentedControlItem name="second" value="1" iconEnd={<StarSolid />}>
+          <SegmentedControlItem name={`second${index}`} value="1" iconEnd={<StarSolid />}>
             Button 1
           </SegmentedControlItem>
-          <SegmentedControlItem name="second" value="2" iconEnd={<StarSolid />}>
+          <SegmentedControlItem name={`second${index}`} value="2" iconEnd={<StarSolid />}>
             Button 2
           </SegmentedControlItem>
-          <SegmentedControlItem name="second" value="3" iconEnd={<StarSolid />}>
+          <SegmentedControlItem name={`second${index}`} value="3" iconEnd={<StarSolid />}>
             Button 3
           </SegmentedControlItem>
         </SegmentedControl>
@@ -71,15 +71,15 @@ export const SegmentedControlVariantsTemplate = ({
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with badge selected')}
           {...props}
         >
-          <SegmentedControlItem name="third" value="1">
+          <SegmentedControlItem name={`third${index}`} value="1">
             Button
             <SegmentedControlBadge appearance={appearance}>5</SegmentedControlBadge>
           </SegmentedControlItem>
-          <SegmentedControlItem name="third" value="2">
+          <SegmentedControlItem name={`third${index}`} value="2">
             Button
             <SegmentedControlBadge appearance={appearance}>5</SegmentedControlBadge>
           </SegmentedControlItem>
-          <SegmentedControlItem name="third" value="3">
+          <SegmentedControlItem name={`third${index}`} value="3">
             Button
             <SegmentedControlBadge appearance={appearance}>5</SegmentedControlBadge>
           </SegmentedControlItem>
@@ -95,9 +95,9 @@ export const SegmentedControlVariantsTemplate = ({
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with icon only selected')}
           {...props}
         >
-          <SegmentedControlItem name="forth" value="1" iconStart={<StarSolid />} displayAsSquare />
-          <SegmentedControlItem name="forth" value="2" iconStart={<StarSolid />} displayAsSquare />
-          <SegmentedControlItem name="forth" value="3" iconStart={<StarSolid />} displayAsSquare />
+          <SegmentedControlItem name={`forth${index}`} value="1" iconStart={<StarSolid />} displayAsSquare />
+          <SegmentedControlItem name={`forth${index}`} value="2" iconStart={<StarSolid />} displayAsSquare />
+          <SegmentedControlItem name={`forth${index}`} value="3" iconStart={<StarSolid />} displayAsSquare />
         </SegmentedControl>
       </GroupWrapper>
     ))}

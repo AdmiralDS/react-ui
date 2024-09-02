@@ -1,8 +1,8 @@
 import { Children, forwardRef } from 'react';
 import type { LabelHTMLAttributes, ReactNode, ChangeEventHandler } from 'react';
 import type { css } from 'styled-components';
-
 import { SpinnerIcon } from '#src/components/Spinner/SpinnerIcon';
+
 import { Label, Input, Button, ButtonContent, AdditionalPadding, SpinnerContainer, ButtonIconContainer } from './style';
 
 export interface SegmentedControlItemProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
@@ -27,7 +27,7 @@ export interface SegmentedControlItemProps extends Omit<LabelHTMLAttributes<HTML
   /** Кнопка в состоянии disabled */
   disabled?: boolean;
 
-  /** Отображать кнопку квадратной*/
+  /** Отображать кнопку квадратной */
   displayAsSquare?: boolean;
 
   /** Состояние загрузки */

@@ -38,13 +38,13 @@ export const SegmentedControlPlaygroundTemplate = ({
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
-      <SegmentedControlItem type="checkbox" value="4">
+      <SegmentedControlItem type="checkbox" name="second" value="4">
         Button 4
       </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" value="5">
+      <SegmentedControlItem type="checkbox" name="second" value="5">
         Button 5
       </SegmentedControlItem>
-      <SegmentedControlItem type="checkbox" value="6">
+      <SegmentedControlItem type="checkbox" name="second" value="6">
         Button 6
       </SegmentedControlItem>
     </SegmentedControl>
