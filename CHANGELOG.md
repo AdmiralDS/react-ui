@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.18.0](https://github.com/AdmiralDS/react-ui/compare/v8.17.0...v8.18.0) (2024-09-03)
+
+
+### Features
+
+* **SegmentedControl:** [#1432](https://github.com/AdmiralDS/react-ui/issues/1432) добавлен новый компонент SegmentedControl ([c3610ae](https://github.com/AdmiralDS/react-ui/commit/c3610aef9bd35688412eba2c442fed33b2f218d2))
+
+
+### Bug Fixes
+
+* **FileInput:** [#1459](https://github.com/AdmiralDS/react-ui/issues/1459) панели выбранных файлов должны быть одного размера по ширине ([2469eee](https://github.com/AdmiralDS/react-ui/commit/2469eee5efc107db8d4f5392a4f14d08c0c378a8))
+* **Hint:** [#1471](https://github.com/AdmiralDS/react-ui/issues/1471) иногда не отображается иконка хинта ([6b5d6fd](https://github.com/AdmiralDS/react-ui/commit/6b5d6fd7f67becf0f5c08a1e5edd2bb9363e3578))
+
 ## [8.17.0](https://github.com/AdmiralDS/react-ui/compare/v8.16.0...v8.17.0) (2024-08-30)
 
 
