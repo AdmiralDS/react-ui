@@ -368,6 +368,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           <ButtonsWrapper>
             <Button
               appearance="tertiary"
+              dimension="m"
               iconStart={<ChevronLeft />}
               displayAsSquare
               aria-label={backwardText}
@@ -376,6 +377,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             />
             <Button
               appearance="tertiary"
+              dimension="m"
               iconStart={<ChevronRight />}
               displayAsSquare
               aria-label={forwardText}
@@ -401,6 +403,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         <ButtonsWrapper>
           <Button
             appearance="tertiary"
+            dimension="m"
             iconStart={<ChevronLeft />}
             displayAsSquare
             aria-label={backwardText}
@@ -409,6 +412,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           />
           <Button
             appearance="tertiary"
+            dimension="m"
             iconStart={<ChevronRight />}
             displayAsSquare
             aria-label={forwardText}
