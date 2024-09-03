@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import type { css } from 'styled-components';
+import styled from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 
 import {
