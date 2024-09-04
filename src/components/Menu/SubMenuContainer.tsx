@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import { PositionInPortal } from '#src/components/PositionInPortal';
@@ -8,6 +7,7 @@ import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { throttle } from '#src/components/common/utils/throttle';
 import type { RenderDirection, SubMenuPosition } from './utils';
 import { getPosition } from './utils';
+import { useContext, useLayoutEffect, useRef, useState } from 'react';
 
 export const AnchorWrapper = styled.div`
   display: inline-block;
@@ -61,16 +61,16 @@ export const SubMenuContainer = ({
   defaultRenderDirection = 'right',
   ...props
 }: SubMenuProps) => {
-  const { rootRef } = React.useContext(DropdownContext);
-  const anchorElementRef = React.useRef<HTMLDivElement | null>(null);
-  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+  const { rootRef } = useContext(DropdownContext);
+  const anchorElementRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   const targetElement: any = target?.current || anchorElementRef.current;
 
-  const [recalculation, startRecalculation] = React.useState<any>(null);
-  const [portalFlexDirection, setPortalFlexDirection] = React.useState('row');
+  const [recalculation, startRecalculation] = useState<any>(null);
+  const [portalFlexDirection, setPortalFlexDirection] = useState('row');
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const [listener, freeResources] = throttle(() => {
       startRecalculation({});
     }, 100);
@@ -87,7 +87,7 @@ export const SubMenuContainer = ({
 
   const { addDropdown, removeDropdown, dropdowns } = useDropdown(wrapperRef);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     addDropdown?.(wrapperRef);
     return () => {
       removeDropdown?.(wrapperRef);
@@ -99,7 +99,7 @@ export const SubMenuContainer = ({
   };
   useClickOutside([wrapperRef], handleClickOutside);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const wrapperElement = wrapperRef.current;
 
     if (targetElement && wrapperElement) {

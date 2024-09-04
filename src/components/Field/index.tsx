@@ -118,6 +118,12 @@ export interface FieldOwnProps {
    */
   displayCharacterCounter?: boolean;
 
+  /** Коэффициент влияющий на появление счетчика при заданном максимальном количестве символов:
+   *  0 - всегда видим
+   *  1 - всегда невидим
+   *  по умолчанию 0.8 - становится видимым при наборе более 80% символов от максимально допустимого количества */
+  characterCounterVisibilityThreshold?: number;
+
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -130,7 +136,17 @@ const PositionedCharacterCounter = styled(CharacterCounter)`
 export interface FieldProps extends FieldOwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
 export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
-  ({ children, maxLength, inputRef, displayCharacterCounter = true, ...props }: FieldProps, ref) => {
+  (
+    {
+      children,
+      maxLength,
+      inputRef,
+      displayCharacterCounter = true,
+      characterCounterVisibilityThreshold = 0.8,
+      ...props
+    }: FieldProps,
+    ref,
+  ) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [hasFocus, setFocus] = React.useState(false);
 
@@ -199,7 +215,11 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
               <>
                 {/* div необходим для сдвига счетчика вправо при отсутствии текста */}
                 <div></div>
-                <PositionedCharacterCounter maxLength={maxLength} inputRef={inputRef} />
+                <PositionedCharacterCounter
+                  maxLength={maxLength}
+                  visibilityThreshold={characterCounterVisibilityThreshold}
+                  inputRef={inputRef}
+                />
               </>
             )}
           </ExtrasContainer>

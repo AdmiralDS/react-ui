@@ -70,6 +70,7 @@ const MyItem = styled.div<{
   hovered?: boolean;
   width?: number;
   $success?: boolean;
+  $dimension?: RenderOptionProps['dimension'];
 }>`
   display: flex;
   align-items: center;
@@ -81,9 +82,18 @@ const MyItem = styled.div<{
   white-space: pre;
   margin: 0;
   cursor: pointer;
-  padding: 12px 16px;
-
-  ${typography['Body/Body 1 Long']}
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 'm':
+        return '8px 16px';
+      case 's':
+        return '6px 12px';
+      case 'l':
+      default:
+        return '12px 16px';
+    }
+  }};
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
   background: ${({ theme, selected }) =>
     selected
@@ -123,6 +133,7 @@ const MyMenuItem = ({
   success = false,
   selfRef = undefined,
   hasSubmenu = false,
+  dimension,
   ...props
 }: MyMenuItemProps) => {
   const handleMouseMove = () => {
@@ -139,6 +150,7 @@ const MyMenuItem = ({
       data-disabled={disabled}
       data-hovered={hovered}
       $success={success}
+      $dimension={dimension}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       {...props}

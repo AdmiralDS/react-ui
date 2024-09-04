@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta } from '@admiral-ds/react-ui';
+import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta, InputIconButton } from '@admiral-ds/react-ui';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps, HighlightFormat } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import styled, { ThemeProvider } from 'styled-components';
@@ -82,6 +83,19 @@ export const BasicExampleTemplate = ({
           <Item {...options} key={item.text + '_history_' + index}>
             <TimeOutline width={options.dimension === 's' ? 20 : 24} />
             <TextBlock>{getHighlightedText(item.text, searchValue)}</TextBlock>
+            {options.hovered && (
+              <InputIconButton
+                icon={CloseOutlineSvg}
+                key="clear-icon"
+                aria-hidden
+                width={options.dimension === 's' ? 20 : 24}
+                onMouseDown={(e) => {
+                  setHistory((old) => old.toSpliced(index, 1));
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              />
+            )}
           </Item>
         ),
       })),
@@ -133,7 +147,9 @@ export const BasicExampleTemplate = ({
   const handleSubmitButtonClick = () => {
     const value = searchValue;
     console.log(`handleSubmitButtonClick ${value}`);
-    setHistory((oldHistory) => [{ value, text: value }, ...oldHistory]);
+    setHistory((oldHistory) =>
+      oldHistory.findIndex((elem) => elem.text === value) < 0 ? [{ value, text: value }, ...oldHistory] : oldHistory,
+    );
   };
 
   const [prefixValue, setPrefixValue] = useState<ReactNode>('prefix One');
