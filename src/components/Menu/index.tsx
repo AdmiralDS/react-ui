@@ -257,6 +257,10 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const lastScrollEvent = useRef<number | undefined>();
 
+    useEffect(() => {
+      setActiveState(uncontrolledActiveValue);
+    }, [model]);
+
     const innerSelected = disableSelectedOptionHighlight
       ? []
       : selected === undefined
@@ -403,18 +407,14 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             setSubmenuVisible(false);
           }
         },
-        onHover: () => {
+        onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(itemProps.disabled ? undefined : id);
           setSubmenuVisible(hasSubmenu);
+          activeItemRef.current = e.target as HTMLDivElement;
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
         hasSubmenu,
-        selfRef: (ref: HTMLDivElement | null) => {
-          if (activeId === id && hasSubmenu) {
-            activeItemRef.current = ref;
-          }
-        },
         disabled: itemProps.disabled,
         containerRef,
         ...itemProps,
@@ -498,6 +498,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         activeItem.subItems.length > 0 && (
           <Menu
             ref={subMenuRef}
+            dimension={dimension}
             parentMenuRef={wrapperRef}
             model={activeItem.subItems}
             subMenuRenderDirection={subMenuRenderDirection}
