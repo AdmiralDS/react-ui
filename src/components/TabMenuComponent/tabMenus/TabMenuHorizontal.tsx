@@ -99,7 +99,7 @@ export const TabMenuHorizontal = ({
         resizeObserver.disconnect();
       };
     }
-  }, []);
+  }, [visibleContainerRef, dimension]);
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
@@ -131,7 +131,7 @@ export const TabMenuHorizontal = ({
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs, tabsId]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const newVisibleTabs: string[] = [];
     const newHiddenTabs: string[] = [];
     if (visibleContainerRef.current && tabWidthMap.length > 0) {
