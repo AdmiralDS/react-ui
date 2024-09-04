@@ -54,7 +54,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   align-items: center;
   margin-right: ${horizontalPaddingValue}px;
 
-  & > svg {
+  & svg {
     display: block;
     width: ${iconSizeValue}px;
   }
