@@ -22,7 +22,7 @@ export interface RenderOptionProps {
   /** Обработчик клика по item */
   onClick?: React.MouseEventHandler<HTMLElement>;
   /** Обработчик наведения мыши на item */
-  onHover?: () => void;
+  onHover?: React.MouseEventHandler<HTMLElement>;
   /** обработчик выхода мыши за пределы item */
   onLeave?: React.MouseEventHandler<HTMLElement>;
   onMouseDown?: React.MouseEventHandler<HTMLElement>;
@@ -30,6 +30,11 @@ export interface RenderOptionProps {
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
   hasSubmenu?: boolean;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.17.0, будет удалено в 10.x.x версии.
+   *
+   * ссылка на элемент, при работе через renderProp
+   */
   selfRef?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
   /** Отключение секции */
   disabled?: boolean;
@@ -73,12 +78,12 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     ref,
   ) => {
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      onHover?.();
+      onHover?.(e);
       props.onMouseMove?.(e);
     };
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      onHover?.();
+      onHover?.(e);
       props.onMouseEnter?.(e);
     };
 

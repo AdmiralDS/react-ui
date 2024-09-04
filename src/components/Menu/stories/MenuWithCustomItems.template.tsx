@@ -121,12 +121,10 @@ const MyMenuItem = ({
   hovered,
   selected = false,
   success = false,
-  selfRef = undefined,
-  hasSubmenu = false,
   ...props
 }: MyMenuItemProps) => {
-  const handleMouseMove = () => {
-    onHover?.();
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    onHover?.(e);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
