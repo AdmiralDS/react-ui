@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { debounce } from '#src/components/common/utils/debounce';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 
 import {
@@ -123,11 +124,20 @@ export const TabMenuHorizontal = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useLayoutEffect(() => {
-    if (hiddenContainerRef.current) {
-      const overflow = checkOverflow(hiddenContainerRef.current);
-      if (overflowState !== overflow) setOverflowState(overflow);
-      const tabWidth = getTabWidthMap(tabsId, hiddenContainerRef.current.children);
-      setTabWidthMap(tabWidth);
+    function setTabWidth() {
+      if (hiddenContainerRef.current) {
+        const overflow = checkOverflow(hiddenContainerRef.current);
+        if (overflowState !== overflow) setOverflowState(overflow);
+        const tabWidth = getTabWidthMap(tabsId, hiddenContainerRef.current.children);
+        setTabWidthMap(tabWidth);
+      }
+    }
+    if (hiddenContainerRef.current?.firstElementChild) {
+      const resizeObserver = new ResizeObserver(debounce(setTabWidth, 100));
+      resizeObserver.observe(hiddenContainerRef.current?.firstElementChild);
+      return () => {
+        resizeObserver.disconnect();
+      };
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs, tabsId]);
 
