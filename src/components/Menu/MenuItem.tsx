@@ -1,5 +1,4 @@
-import type { HTMLAttributes } from 'react';
-import * as React from 'react';
+import { Children, forwardRef } from 'react';
 import styled from 'styled-components';
 import type { ItemDimension } from './menuItemMixins';
 import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './menuItemMixins';
@@ -22,7 +21,7 @@ export interface RenderOptionProps {
   /** Обработчик клика по item */
   onClick?: React.MouseEventHandler<HTMLElement>;
   /** Обработчик наведения мыши на item */
-  onHover?: () => void;
+  onHover?: React.MouseEventHandler<HTMLElement>;
   /** обработчик выхода мыши за пределы item */
   onLeave?: React.MouseEventHandler<HTMLElement>;
   onMouseDown?: React.MouseEventHandler<HTMLElement>;
@@ -30,6 +29,11 @@ export interface RenderOptionProps {
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
   hasSubmenu?: boolean;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.17.0, будет удалено в 10.x.x версии.
+   *
+   * ссылка на элемент, при работе через renderProp
+   */
   selfRef?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null;
   /** Отключение секции */
   disabled?: boolean;
@@ -49,9 +53,9 @@ export interface MenuModelItemProps {
   dimension?: ItemDimension;
 }
 
-export interface MenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {}
+export interface MenuItemProps extends React.HTMLAttributes<HTMLElement>, RenderOptionProps {}
 
-export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
+export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
   (
     {
       children,
@@ -73,12 +77,12 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
     ref,
   ) => {
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      onHover?.();
+      onHover?.(e);
       props.onMouseMove?.(e);
     };
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      onHover?.();
+      onHover?.(e);
       props.onMouseEnter?.(e);
     };
 
@@ -109,7 +113,7 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
         onMouseDown={handleMouseDown}
         {...props}
       >
-        {React.Children.toArray(children).map((child, index) =>
+        {Children.toArray(children).map((child, index) =>
           typeof child === 'string' ? <TextWrapper key={child + index}>{child}</TextWrapper> : child,
         )}
         {hasSubmenu && expandIcon}

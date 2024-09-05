@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.18.1](https://github.com/AdmiralDS/react-ui/compare/v8.18.0...v8.18.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **Menu:** Исправлена ошибка открытия и позиционирования дочернего меню при наведении мышки. ([481ebe4](https://github.com/AdmiralDS/react-ui/commit/481ebe40a49623991d110f070d77092f5759d587))
+* **PaginationOne:** [#1474](https://github.com/AdmiralDS/react-ui/issues/1474) исправлен размер кнопок со стрелками ([b29b74a](https://github.com/AdmiralDS/react-ui/commit/b29b74a50d4812fdf8d576d9d7476dd514912fea))
+
 ## [8.18.0](https://github.com/AdmiralDS/react-ui/compare/v8.17.0...v8.18.0) (2024-09-03)
 
 
