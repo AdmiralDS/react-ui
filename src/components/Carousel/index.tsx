@@ -102,10 +102,6 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   infiniteScroll?: boolean;
   /** Скорость прокрутки в мс */
   animationDuration?: number;
-  /** Расчет номера предыдущей секции при нажатии на кнопку назад */
-  getPrevItem?: (currentItem: number, maxItems: number) => number;
-  /** Расчет номера следующей секции при нажатии на кнопку вперед */
-  getNextItem?: (currentItem: number, maxItems: number) => number;
   /** Расположение слайдера внутри или снаружи компонента */
   sliderPosition?: CarouselSliderPosition;
   /** Внешний вид компонента слайдера */
@@ -122,8 +118,6 @@ export const Carousel = ({
   buttonAppearance = 'default',
   infiniteScroll = false,
   animationDuration = 300,
-  getPrevItem: getPrevItemCustom,
-  getNextItem: getPrevNextCustom,
   sliderPosition = 'inner',
   sliderAppearance = 'default',
   contentCssMixin,
