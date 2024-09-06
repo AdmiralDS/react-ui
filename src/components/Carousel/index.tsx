@@ -1,16 +1,23 @@
-import type { HTMLAttributes } from 'react';
-import { Children, useMemo, useEffect, useState } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { Children, cloneElement, isValidElement, useMemo, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { debounce } from '#src/components/common/utils/debounce';
 
 import type { CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
 import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
 import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
 
-const Content = styled.div<{ $currentItem: number; $contentCssMixin?: ReturnType<typeof css> }>`
+const Content = styled.div<{
+  $currentItem: number;
+  $contentCssMixin?: ReturnType<typeof css>;
+  $showAnimation?: boolean;
+  $animationDuration: number;
+}>`
   position: relative;
   display: flex;
-  transition: all 0.3s ease-in-out;
+  transition: ${(p) => (p.$showAnimation ? `all ${p.$animationDuration}ms ease-in-out` : 'none')};
   transform: translateX(-${(p) => p.$currentItem * 100}%);
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -93,6 +100,8 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   buttonAppearance?: CarouselButtonAppearance;
   /** Бесконечная прокрутка секций (при showButtons кнопки будут видны всегда) */
   infiniteScroll?: boolean;
+  /** Скорость прокрутки в мс */
+  animationDuration?: number;
   /** Расчет номера предыдущей секции при нажатии на кнопку назад */
   getPrevItem?: (currentItem: number, maxItems: number) => number;
   /** Расчет номера следующей секции при нажатии на кнопку вперед */
@@ -112,6 +121,7 @@ export const Carousel = ({
   showButtons = true,
   buttonAppearance = 'default',
   infiniteScroll = false,
+  animationDuration = 300,
   getPrevItem: getPrevItemCustom,
   getNextItem: getPrevNextCustom,
   sliderPosition = 'inner',
@@ -120,6 +130,9 @@ export const Carousel = ({
   children,
   ...props
 }: CarouselProps) => {
+  const getPrevItem = infiniteScroll ? getPrevItemInfinite : getPrevItemFinite;
+  const getNextItem = infiniteScroll ? getNextItemInfinite : getNextItemFinite;
+
   const items = useMemo(() => Children.toArray(children), [children]);
 
   const [length, setLength] = useState(items.length);
@@ -127,23 +140,88 @@ export const Carousel = ({
     setLength(items.length);
   }, [items.length]);
 
+  const itemsToShow = useMemo(() => {
+    const slides: ReactNode[] = [];
+    const preCloneSlides: ReactNode[] = [];
+    const postCloneSlides: ReactNode[] = [];
+    Children.forEach(children, (elem, index) => {
+      if (index === length - 1) {
+        preCloneSlides.push(
+          isValidElement(elem)
+            ? cloneElement(elem, { ...elem.props, key: 'precloned' + elem.key, 'data-index': -1 })
+            : elem,
+        );
+      }
+      slides.push(
+        isValidElement(elem)
+          ? cloneElement(elem, { ...elem.props, key: 'original' + elem.key, 'data-index': index })
+          : elem,
+      );
+      if (index === 0 && infiniteScroll) {
+        postCloneSlides.push(
+          isValidElement(elem)
+            ? cloneElement(elem, { ...elem.props, key: 'postcloned' + elem.key, 'data-index': length })
+            : elem,
+        );
+      }
+    });
+    return preCloneSlides.concat(slides, postCloneSlides);
+  }, [children, length, items]);
+
   const [currentIndex, setCurrentIndex] = useState<number>(defaultItem || 0);
   const currenItemInner = currentItem || currentIndex;
   const handleCurrentItemChange = (newItem: number) => {
     setCurrentIndex(newItem);
     onCurrentItemChange?.(newItem);
   };
-
-  const getPrevItem = getPrevItemCustom || (infiniteScroll ? getPrevItemInfinite : getPrevItemFinite);
-  const getNextItem = getPrevNextCustom || (infiniteScroll ? getNextItemInfinite : getNextItemFinite);
+  const [indexToShow, setIndexToShow] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
+  const handleIndexToShowChange = (step: number) => {
+    setIndexToShow((prevIndex) => {
+      let newIndex = 0;
+      if (step > 0) {
+        if (infiniteScroll) {
+          newIndex = prevIndex + 1;
+        } else {
+          newIndex = getNextItem(currenItemInner, length);
+        }
+      } else if (step < 0) {
+        if (infiniteScroll) {
+          newIndex = prevIndex - 1;
+        } else {
+          newIndex = getPrevItem(currenItemInner, length);
+        }
+      }
+      return newIndex;
+    });
+  };
+  const [showAnimation, setShowAnimation] = useState<boolean>(true);
+  useEffect(() => {
+    if (infiniteScroll) {
+      if (indexToShow === itemsToShow.length - 1 || indexToShow === 0) {
+        setShowAnimation(false);
+        debounce(() => {
+          setIndexToShow(() => {
+            if (indexToShow === 0) {
+              return itemsToShow.length - 2;
+            } else {
+              return 1;
+            }
+          });
+        }, animationDuration + 100);
+        debounce(() => setShowAnimation(true), animationDuration + 200);
+      }
+    }
+  }, [indexToShow]);
 
   const handlePrevClick = () => {
     const newItem = getPrevItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
+    handleIndexToShowChange(-1);
   };
   const handleNextClick = () => {
     const newItem = getNextItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
+    handleIndexToShowChange(1);
   };
   const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
   const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
@@ -152,8 +230,13 @@ export const Carousel = ({
     <Container {...props}>
       <Wrapper>
         <ContentWrapper>
-          <Content $currentItem={currenItemInner} $contentCssMixin={contentCssMixin}>
-            {items}
+          <Content
+            $currentItem={indexToShow}
+            $contentCssMixin={contentCssMixin}
+            $showAnimation={showAnimation}
+            $animationDuration={animationDuration}
+          >
+            {itemsToShow}
           </Content>
         </ContentWrapper>
         {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
