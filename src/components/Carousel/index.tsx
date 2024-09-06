@@ -170,55 +170,64 @@ export const Carousel = ({
   };
   const [indexToShow, setIndexToShow] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
   const handleIndexToShowChange = (step: number) => {
-    setIndexToShow((prevIndex) => {
-      let newIndex = 0;
-      if (step > 0) {
-        if (infiniteScroll) {
-          newIndex = prevIndex + 1;
-        } else {
-          newIndex = getNextItem(currenItemInner, length);
-        }
-      } else if (step < 0) {
-        if (infiniteScroll) {
-          newIndex = prevIndex - 1;
-        } else {
-          newIndex = getPrevItem(currenItemInner, length);
-        }
+    let newIndex = 0;
+    if (step > 0) {
+      if (infiniteScroll) {
+        newIndex = indexToShow + 1;
+      } else {
+        newIndex = getNextItem(currenItemInner, length);
       }
-      return newIndex;
-    });
-  };
-  const [showAnimation, setShowAnimation] = useState<boolean>(true);
-  useEffect(() => {
-    if (infiniteScroll) {
-      if (indexToShow === itemsToShow.length - 1 || indexToShow === 0) {
-        setShowAnimation(false);
-        debounce(() => {
-          setIndexToShow(() => {
-            if (indexToShow === 0) {
-              return itemsToShow.length - 2;
-            } else {
-              return 1;
-            }
-          });
-        }, animationDuration + 100);
-        debounce(() => setShowAnimation(true), animationDuration + 200);
+    } else if (step < 0) {
+      if (infiniteScroll) {
+        newIndex = indexToShow - 1;
+      } else {
+        newIndex = getPrevItem(currenItemInner, length);
       }
     }
-  }, [indexToShow]);
+    console.log(`newIndexToShow:${newIndex}`);
+    setIndexToShow(newIndex);
+
+    const changeIndexToShow = (newIndex: number) => {
+      setIndexToShow(() => {
+        let debouncedIndex = 0;
+        if (newIndex === 0) {
+          debouncedIndex = itemsToShow.length - 2;
+        } else {
+          debouncedIndex = 1;
+        }
+        console.log(`debouncedIndex:${debouncedIndex}`);
+        return debouncedIndex;
+      });
+    };
+
+    console.log('before if');
+    if (newIndex === itemsToShow.length - 1 || newIndex === 0) {
+      console.log('inside if');
+      setTimeout(() => setShowAnimation(false), animationDuration + 50);
+      setTimeout(() => changeIndexToShow(newIndex), animationDuration + 100);
+      setTimeout(() => setShowAnimation(true), animationDuration + 150);
+    }
+    console.log('after if');
+  };
+  const [showAnimation, setShowAnimation] = useState<boolean>(true);
 
   const handlePrevClick = () => {
+    handleIndexToShowChange(-1);
     const newItem = getPrevItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
-    handleIndexToShowChange(-1);
   };
   const handleNextClick = () => {
+    handleIndexToShowChange(1);
     const newItem = getNextItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
-    handleIndexToShowChange(1);
   };
   const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
   const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
+
+  const handleCarouselSliderClick = (item: number) => {
+    handleCurrentItemChange(item);
+    setIndexToShow(infiniteScroll ? item + 1 : item);
+  };
 
   return (
     <Container {...props}>
@@ -244,7 +253,7 @@ export const Carousel = ({
               key={item}
               appearance={sliderAppearance}
               isCurrent={item === currenItemInner}
-              onClick={() => handleCurrentItemChange(item)}
+              onClick={() => handleCarouselSliderClick(item)}
             />
           );
         })}
