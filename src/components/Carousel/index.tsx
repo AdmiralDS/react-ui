@@ -180,21 +180,7 @@ export const Carousel = ({
   const prevValue = usePrevious({ currentItem: currenItemInner });
   const [showAnimation, setShowAnimation] = useState<boolean>(true);
   const [indexToShow, setIndexToShow] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
-  const handleIndexToShowChange = (step: number) => {
-    let newIndex = 0;
-    if (step > 0) {
-      if (infiniteScroll) {
-        newIndex = indexToShow + 1;
-      } else {
-        newIndex = getNextItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
-      }
-    } else if (step < 0) {
-      if (infiniteScroll) {
-        newIndex = indexToShow - 1;
-      } else {
-        newIndex = getPrevItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
-      }
-    }
+  const handleIndexToShowChange = (newIndex: number) => {
     setIndexToShow(newIndex);
   };
   const handleTransitionEnd = () => {
@@ -215,15 +201,27 @@ export const Carousel = ({
     }
   };
 
+  const getPrevContentIndex = () => {
+    if (infiniteScroll) {
+      return indexToShow - 1;
+    } else {
+      return getPrevItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
+    }
+  };
+  const getNextContentIndex = () => {
+    if (infiniteScroll) {
+      return indexToShow + 1;
+    } else {
+      return getNextItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
+    }
+  };
   const handlePrevClick = () => {
-    const newItem = getPrevItem(currenItemInner, length);
-    handleCurrentItemChange(newItem);
-    handleIndexToShowChange(-1);
+    handleCurrentItemChange(getPrevItem(currenItemInner, length));
+    handleIndexToShowChange(getPrevContentIndex());
   };
   const handleNextClick = () => {
-    const newItem = getNextItem(currenItemInner, length);
-    handleCurrentItemChange(newItem);
-    handleIndexToShowChange(1);
+    handleCurrentItemChange(getNextItem(currenItemInner, length));
+    handleIndexToShowChange(getNextContentIndex());
   };
   const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
   const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
