@@ -10,6 +10,7 @@ import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { setVerticalPosition, setHorizontalPosition } from './utils';
 
 const Container = styled.div<{
   $alignSelf?: string;
@@ -97,54 +98,17 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
         const targetRect = targetElement.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
-        if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
-          console.log('upward');
-          if (!displayUpward) setDisplayUpward(true);
-        } else if (
-          targetRect.bottom + (targetRect.top - rect.top) < viewportHeight - 8 ||
-          targetRect.top < viewportHeight - targetRect.bottom
-        ) {
-          console.log('downward');
-          if (displayUpward) setDisplayUpward(false);
-        }
 
-        // const rectHeight = rect.height + 8;
-        // const spaceAboveTarget = targetRect.top;
-        // const spaceUnderTarget = viewportHeight - targetRect.bottom;
-        // if (spaceUnderTarget >= rectHeight) {
-        //   console.log('enough space under');
-        // } else if (spaceAboveTarget >= rectHeight) {
-        //   console.log('enough space above');
-        // } else {
-        //   console.log('fixed');
-        // }
+        const { align, translateX } = setHorizontalPosition(rect, targetRect, viewportWidth);
+        const { upward, translateY } = setVerticalPosition(rect, targetRect, viewportHeight);
+        setDisplayUpward(upward);
 
-        if (alignSelf && alignSelf !== 'auto') return;
-
-        const rectWidth = rect.right - rect.left;
-
-        // впишется ли контейнер во viewport, начиная от левого края target
-        const enoughWidthOnTheRight = viewportWidth - targetRect.left >= rectWidth;
-        // впишется ли контейнер во viewport, если его правой границей будет правый край target
-        const enoughWidthOnTheLeft = targetRect.right - 16 >= rectWidth;
-
-        const containerWiderTarget = rectWidth > targetRect.width;
-
-        if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
-          node.style.alignSelf = 'center';
-          // компенсация сдвига относительно target компонента (targetRect) таким образом, чтобы
-          // контейнер выпадающего меню (rect) вписывался в границы экрана (viewport)
-          const offset = (viewportWidth - rect.width) / 2 - (targetRect.left - (rectWidth - targetRect.width) / 2);
-          node.style.transform = `translateX(${offset}px)`;
+        if (alignSelf && alignSelf !== 'auto') {
+          node.style.transform = `translateY(${translateY})`;
+          return;
         } else {
-          node.style.transform = 'translateX(0)';
-          if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-            node.style.alignSelf = 'flex-end';
-          } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-            node.style.alignSelf = 'flex-start';
-          } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
-            node.style.alignSelf = 'flex-end';
-          }
+          node.style.transform = `translate(${translateX}, ${translateY})`;
+          node.style.alignSelf = align;
         }
       }
     }, [displayUpward, targetElement]);

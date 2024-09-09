@@ -47,7 +47,7 @@ export const SimpleContainerTemplate = ({
         </Button>
         {open && (
           <DropdownContainer
-            alignSelf="flex-end"
+            // alignSelf="flex-end"
             targetElement={targetElement || buttonRef.current}
             onClickOutside={clickOutside}
             className="dropContainerClass"
