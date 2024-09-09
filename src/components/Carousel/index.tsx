@@ -139,7 +139,7 @@ export const Carousel = ({
     const preCloneSlides: ReactNode[] = [];
     const postCloneSlides: ReactNode[] = [];
     Children.forEach(children, (elem, index) => {
-      if (index === length - 1) {
+      if (index === length - 1 && infiniteScroll) {
         preCloneSlides.push(
           isValidElement(elem)
             ? cloneElement(elem, { ...elem.props, key: 'precloned' + elem.key, 'data-index': -1 })
