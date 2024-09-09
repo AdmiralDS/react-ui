@@ -12,3 +12,9 @@ export const HorizontalCardTabMenuContainer = styled.div<{ $showUnderline?: bool
   overflow: hidden;
 `;
 HorizontalCardTabMenuContainer.displayName = 'HorizontalCardTabMenuContainer';
+
+export const CardTabMenuHorizontalLeadingGapWrapper = styled.div<{ $horizontalPaddingSize: number }>`
+  padding: 0 ${(p) => p.$horizontalPaddingSize}px;
+  box-shadow: inset 0 -1px 0 0 ${(p) => `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`};
+`;
+CardTabMenuHorizontalLeadingGapWrapper.displayName = 'CardTabMenuHorizontalLeadingGapWrapper';

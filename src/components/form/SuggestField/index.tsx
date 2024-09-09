@@ -25,6 +25,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     id = uid(),
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     maxLength,
     skeleton,
     ...restProps
@@ -39,6 +40,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     displayInline,
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     maxLength,
     ref: fieldRef,
     inputRef,

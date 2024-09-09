@@ -45,6 +45,11 @@ describe('MultiButton', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render component with disabled only MainButton', () => {
+    const wrapper = render(<Component disabledMainButton />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('should show menu when user clicks on second button', async () => {
     render(<Component />);
     fireEvent.click(screen.getByTestId('multi').childNodes[2]);

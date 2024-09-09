@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { ChangeEvent } from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { TextInput } from '@admiral-ds/react-ui';
@@ -13,7 +13,7 @@ export const TextInputPlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: TextInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

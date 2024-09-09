@@ -125,6 +125,7 @@ const Wrapper = styled.div<{ $dimension: FileInputDimension; $width?: string | n
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 16px;
 `;
 
 const FileInputWrapper = styled.div`

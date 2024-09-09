@@ -57,6 +57,33 @@ export default {
     selectedTabId: {
       control: false,
     },
+    isVisible: {
+      control: false,
+    },
+    active: {
+      control: false,
+    },
+    disableSelectedOptionHighlight: {
+      control: false,
+    },
+    menuWidth: {
+      control: false,
+    },
+    menuMaxHeight: {
+      control: false,
+    },
+    alignSelf: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as Meta<typeof TabMenuVertical>;
 

@@ -2,6 +2,77 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.18.1](https://github.com/AdmiralDS/react-ui/compare/v8.18.0...v8.18.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **Menu:** Исправлена ошибка открытия и позиционирования дочернего меню при наведении мышки. ([481ebe4](https://github.com/AdmiralDS/react-ui/commit/481ebe40a49623991d110f070d77092f5759d587))
+* **PaginationOne:** [#1474](https://github.com/AdmiralDS/react-ui/issues/1474) исправлен размер кнопок со стрелками ([b29b74a](https://github.com/AdmiralDS/react-ui/commit/b29b74a50d4812fdf8d576d9d7476dd514912fea))
+
+## [8.18.0](https://github.com/AdmiralDS/react-ui/compare/v8.17.0...v8.18.0) (2024-09-03)
+
+
+### Features
+
+* **SegmentedControl:** [#1432](https://github.com/AdmiralDS/react-ui/issues/1432) добавлен новый компонент SegmentedControl ([c3610ae](https://github.com/AdmiralDS/react-ui/commit/c3610aef9bd35688412eba2c442fed33b2f218d2))
+
+
+### Bug Fixes
+
+* **FileInput:** [#1459](https://github.com/AdmiralDS/react-ui/issues/1459) панели выбранных файлов должны быть одного размера по ширине ([2469eee](https://github.com/AdmiralDS/react-ui/commit/2469eee5efc107db8d4f5392a4f14d08c0c378a8))
+* **Hint:** [#1471](https://github.com/AdmiralDS/react-ui/issues/1471) иногда не отображается иконка хинта ([6b5d6fd](https://github.com/AdmiralDS/react-ui/commit/6b5d6fd7f67becf0f5c08a1e5edd2bb9363e3578))
+
+## [8.17.0](https://github.com/AdmiralDS/react-ui/compare/v8.16.0...v8.17.0) (2024-08-30)
+
+
+### Features
+
+* **Multibutton:** добавлен пропс disabledMainButton для избирательного запрещения только MainButton ([afd8150](https://github.com/AdmiralDS/react-ui/commit/afd815012334158bea48f64065aefc234b25dc97))
+
+
+### Bug Fixes
+
+* **GlobalSearch:**  [#1464](https://github.com/AdmiralDS/react-ui/issues/1464) hover в меню не должен приводить к изменению значения в поле ввода ([5638d53](https://github.com/AdmiralDS/react-ui/commit/5638d53d300a643266044f50a2cf6ba2a5fdf2da))
+* **Table:** [#1438](https://github.com/AdmiralDS/react-ui/issues/1438) исправлено поведение горизонтального скролла при смене количества столбцов ([e3b42c6](https://github.com/AdmiralDS/react-ui/commit/e3b42c69177cb03b15db5e156bdd60c0696aa19f))
+* typings of any ([7f9301e](https://github.com/AdmiralDS/react-ui/commit/7f9301ed5ce69dcda9513fae72ce96b64be9fcb4))
+
+## [8.16.0](https://github.com/AdmiralDS/react-ui/compare/v8.15.0...v8.16.0) (2024-08-22)
+
+
+### Features
+
+* **DateInput, NumberInput, SuggestInput, TextArea, TimeInput:** icons помечен deprecated, добавлен iconsAfter ([2eb1245](https://github.com/AdmiralDS/react-ui/commit/2eb124538ba6f8c47c38a155466749d9027c8d78))
+* **InputEx:** добавлена функция включения иконки слева ([67bd518](https://github.com/AdmiralDS/react-ui/commit/67bd518630a6484f6363cbe881fc107752ffa90b))
+* **TextInput:** добавлена функция включения иконки слева ([cda2ef8](https://github.com/AdmiralDS/react-ui/commit/cda2ef88b619b3ac85712216b35bcf9dbe72740b))
+
+
+### Bug Fixes
+
+* **MultiButton:** [#1444](https://github.com/AdmiralDS/react-ui/issues/1444) исправлен баг с неправильной шириной разделителя между кнопками ([c5dd15c](https://github.com/AdmiralDS/react-ui/commit/c5dd15cdd7863f650623708380d6034999f6ad75))
+* **Spinner:** [#1448](https://github.com/AdmiralDS/react-ui/issues/1448) некоректное отображение в styled-components v5 ([803d170](https://github.com/AdmiralDS/react-ui/commit/803d170986002bbd498ed026eb1a0cd46d88005a))
+
+## [8.15.0](https://github.com/AdmiralDS/react-ui/compare/v8.14.0...v8.15.0) (2024-08-20)
+
+
+### Features
+
+* **CarouselSlider:** добавлен новый компонент ([7f59649](https://github.com/AdmiralDS/react-ui/commit/7f59649eb7d0b0f88602334b27dcd869ef28199a))
+
+
+### Bug Fixes
+
+* **PaginationOne:** номер страницы синхронизирован с выпадающим меню ([cafb476](https://github.com/AdmiralDS/react-ui/commit/cafb476cc02ca48c5fc528e7221a6e81aa473e23))
+* **TextInput:**  [#1442](https://github.com/AdmiralDS/react-ui/issues/1442)  запрет на выделение текста при установке пропсы disableCopying ([555e91d](https://github.com/AdmiralDS/react-ui/commit/555e91d290f25b6ba4a491369eb3045ab808c505))
+
+## [8.14.0](https://github.com/AdmiralDS/react-ui/compare/v8.13.0...v8.14.0) (2024-08-16)
+
+
+### Features
+
+* **CardTabMenuHorizontal:** добавлен пример с боковыми отступами ([32e5611](https://github.com/AdmiralDS/react-ui/commit/32e56110a770eb3c33a9422a5f576372715b481d))
+* **Menu:** rowCount используется только для определения количества отображаемых в меню опций ([a41a808](https://github.com/AdmiralDS/react-ui/commit/a41a808ec8261fa80e3dcc30509e771c8d1d6273))
+
 ## [8.13.0](https://github.com/AdmiralDS/react-ui/compare/v8.12.0...v8.13.0) (2024-08-12)
 
 

@@ -94,7 +94,7 @@ const StyledMenuItem = styled(MenuItem)`
 const StyledTextInput = styled(TextInput)`
   min-width: 136px;
 `;
-export interface TimeInputProps extends Omit<TextInputProps, 'value'>, DropContainerStyles {
+export interface TimeInputProps extends Omit<TextInputProps, 'value' | 'iconsBefore'>, DropContainerStyles {
   /** Выбранное значение времени */
   value?: string;
   /** Начало временного диапазона */
@@ -130,6 +130,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       parser = parseStringToTime,
       icon = TimeSVG,
       icons,
+      iconsAfter,
       alignDropdown = 'flex-end',
       alignSelf = 'flex-end',
       skeleton = false,
@@ -170,7 +171,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       setIsOpened(!isOpened);
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = React.Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onMouseDown={handleButtonClick} tabIndex={0} />);
     }
@@ -293,7 +294,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={iconArray}
+        iconsAfter={iconArray}
         containerRef={inputContainerRef}
         disabled={disabled}
         dimension={dimension}

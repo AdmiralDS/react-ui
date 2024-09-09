@@ -4,10 +4,12 @@ import { ALL_BORDER_RADIUS_VALUES, CardTabMenuHorizontal } from '@admiral-ds/rea
 
 import { CardTabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalTemplate';
 import { CardTabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalWithAddButtonTemplate';
+import { CardTabMenuHorizontalLeadingGapTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalLeadingGapTemplate';
 
 // Imports of text sources
 import HorizontalCardTabMenuRaw from './CardTabMenuHorizontalTemplate?raw';
 import HorizontalCardTabMenuWithAddButtonRaw from './CardTabMenuHorizontalWithAddButtonTemplate?raw';
+import HorizontalCardTabMenuLeadingGapRaw from './CardTabMenuHorizontalLeadingGapTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent/CardTabMenuHorizontal',
@@ -26,7 +28,7 @@ export default {
       control: { type: 'radio' },
     },
     showUnderline: {
-      control: { type: 'boolean' },
+      control: false,
     },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
@@ -53,6 +55,33 @@ export default {
     selectedTabId: {
       control: false,
     },
+    isVisible: {
+      control: false,
+    },
+    active: {
+      control: false,
+    },
+    disableSelectedOptionHighlight: {
+      control: false,
+    },
+    menuWidth: {
+      control: false,
+    },
+    menuMaxHeight: {
+      control: false,
+    },
+    alignSelf: {
+      control: false,
+    },
+    dropContainerCssMixin: {
+      control: false,
+    },
+    dropContainerClassName: {
+      control: false,
+    },
+    dropContainerStyle: {
+      control: false,
+    },
   },
 } as Meta<typeof CardTabMenuHorizontal>;
 
@@ -74,6 +103,27 @@ export const HorizontalCardTabMenuExample = {
   },
 
   name: 'CardTabMenu.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalCardTabMenuLeadingGap.">
+const HorizontalCardTabMenuLeadingGapStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CardTabMenuHorizontalLeadingGapTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalCardTabMenuLeadingGapExample = {
+  render: HorizontalCardTabMenuLeadingGapStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HorizontalCardTabMenuLeadingGapRaw,
+      },
+    },
+  },
+
+  name: 'CardTabMenu с отступами.',
 };
 //</editor-fold>
 

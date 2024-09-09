@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import type { MenuItemProps, RenderOptionProps } from "#src/components/Menu/MenuItem";
+import type { MenuItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type ActionBarDimension = 'xl' | 'l' | 'm' | 's';
 

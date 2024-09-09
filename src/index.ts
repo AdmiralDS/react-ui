@@ -98,5 +98,7 @@ export * from './components/FloatingButton/FloatingButtonMenu';
 export * from './components/BadgeDot';
 export * from './components/ButtonGroup';
 export * from './components/IconButtonGroup';
+export * from './components/CarouselSlider';
+export * from './components/SegmentedControl';
 
 export * from './components/CSSCustomProps';

@@ -1,6 +1,7 @@
 // https://www.totaltypescript.com/forwardref-with-generic-components
 
-import * as React from 'react';
+import type { ReactNode, RefAttributes, Ref } from 'react';
+import { forwardRef } from 'react';
 
 /**
  * Implements React.forwardRef usable for generic component typining
@@ -8,7 +9,7 @@ import * as React from 'react';
  * @returns
  */
 export function fixedForwardRef<T, P = object>(
-  render: (props: P, ref: React.Ref<T>) => React.ReactNode,
-): (props: P & React.RefAttributes<T>) => React.ReactNode {
-  return React.forwardRef(render) as any;
+  render: (props: P, ref: Ref<T>) => ReactNode,
+): (props: P & RefAttributes<T>) => ReactNode {
+  return forwardRef(render) as any;
 }

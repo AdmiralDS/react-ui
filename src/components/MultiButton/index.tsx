@@ -43,7 +43,8 @@ const MainButton = styled(Button)`
   &[data-appearance~='tertiary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
-  &[data-appearance~='secondary'] {
+  // повышаем специфичность, чтобы перебить изначальные стили border у Button
+  &&&[data-appearance~='secondary'] {
     border-right: none;
     border-radius: ${(p) => (p.skeleton ? 0 : mainButtonBorderRadius)};
   }
@@ -57,7 +58,8 @@ const MenuButton = styled(Button)`
   &[data-appearance~='tertiary'] {
     border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
-  &[data-appearance~='secondary'] {
+  // повышаем специфичность, чтобы перебить изначальные стили border у Button
+  &&&[data-appearance~='secondary'] {
     border-left: none;
     border-radius: ${(p) => (p.skeleton ? 0 : menuButtonBorderRadius)};
   }
@@ -132,6 +134,8 @@ export interface MultiButtonProps
   appearance?: Appearance;
   /** Отключение компонента */
   disabled?: boolean;
+  /** Отключение только главной кнопки, без отключения выпадающего меню. */
+  disabledMainButton?: boolean;
   /** Состояние skeleton */
   skeleton?: boolean;
 }
@@ -142,6 +146,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       dimension = 'l',
       appearance = 'primary',
       disabled,
+      disabledMainButton,
       items = [],
       onMainButtonClick,
       disableSelectedOptionHighlight,
@@ -226,7 +231,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
                 skeleton={skeleton}
                 dimension={dimension}
                 appearance={appearance}
-                disabled={disabled}
+                disabled={disabled || disabledMainButton}
                 onClick={onMainButtonClick}
               >
                 {React.Children.toArray(children).map((child, index) =>

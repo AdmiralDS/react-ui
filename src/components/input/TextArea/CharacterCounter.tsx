@@ -1,5 +1,6 @@
 import { typography } from '#src/components/Typography';
-import * as React from 'react';
+import type { FC, RefObject } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div<{ error?: boolean; transparent?: boolean }>`
@@ -19,16 +20,22 @@ const Container = styled.div<{ error?: boolean; transparent?: boolean }>`
 
 export interface CharacterCounterProps {
   maxLength: number;
-  inputRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement>;
+  /** Коэффициент появления счетчика:
+   *  0 - всегда видим
+   *  1 - всегда невидим
+   *  по умолчанию 0.8 - становится видимым при наборе более 80% символов от максимально допустимого количества */
+  visibilityThreshold?: number;
+  inputRef: RefObject<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export const CharacterCounter: React.FC<CharacterCounterProps> = ({
+export const CharacterCounter: FC<CharacterCounterProps> = ({
   maxLength,
+  visibilityThreshold = 0.8,
   inputRef,
   ...props
 }: CharacterCounterProps) => {
-  const [currentCount, setCurrentCount] = React.useState(0);
-  React.useEffect(() => {
+  const [currentCount, setCurrentCount] = useState(0);
+  useEffect(() => {
     const timer = setInterval(() => {
       const node = inputRef.current;
       if (node) {
@@ -37,8 +44,12 @@ export const CharacterCounter: React.FC<CharacterCounterProps> = ({
     }, 250);
     return () => clearInterval(timer);
   }, [inputRef]);
-  return currentCount > maxLength * 0.8 ? (
-    <Container {...props} error={currentCount >= maxLength} transparent={currentCount < maxLength * 0.8}>
+  return currentCount > maxLength * visibilityThreshold ? (
+    <Container
+      {...props}
+      error={currentCount >= maxLength}
+      transparent={currentCount < maxLength * visibilityThreshold}
+    >
       {currentCount}
       {' / '}
       {maxLength}

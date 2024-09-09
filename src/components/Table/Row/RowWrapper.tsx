@@ -27,7 +27,7 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Ширина вертикальной полосы прокрутки */
   scrollbar: number;
   /** Ширина строки */
-  rowWidth?: number;
+  rowWidth?: string;
   /** Окрашивание строки в серый цвет при greyZebraRows */
   grey?: boolean;
   /** Включение постоянной видимости иконок действий над строками */
@@ -97,8 +97,6 @@ export const RowWrapper = ({
         disabled={!!row.disabled}
         $status={row.status}
         $rowStatusMap={rowStatusMap}
-        $error={!!row.error}
-        $success={!!row.success}
         $grey={!!grey}
       >
         {children}

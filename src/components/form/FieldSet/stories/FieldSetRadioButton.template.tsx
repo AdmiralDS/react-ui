@@ -13,7 +13,7 @@ const Container = styled.div`
 const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
 
 export const FieldSetRadioButtonTemplate = ({ disabled, dimension, ...props }: FieldSetPropsType) => {
-  const [selected, setSelected] = React.useState('');
+  const [selected, setSelected] = React.useState(values[1]);
   return (
     <>
       <Container>
@@ -26,13 +26,13 @@ export const FieldSetRadioButtonTemplate = ({ disabled, dimension, ...props }: F
           disabled={disabled}
           dimension={dimension}
         >
-          <RadioButton value={values[0]} name="test1" defaultChecked={values[0] === selected}>
+          <RadioButton value={values[0]} name="test1" checked={values[0] === selected} onChange={() => {}}>
             First option
           </RadioButton>
-          <RadioButton value={values[1]} name="test1" defaultChecked={values[1] === selected}>
+          <RadioButton value={values[1]} name="test1" checked={values[1] === selected} onChange={() => {}}>
             Second option
           </RadioButton>
-          <RadioButton value={values[2]} name="test1" defaultChecked={values[2] === selected}>
+          <RadioButton value={values[2]} name="test1" checked={values[2] === selected} onChange={() => {}}>
             Third option
           </RadioButton>
         </FieldSet>
