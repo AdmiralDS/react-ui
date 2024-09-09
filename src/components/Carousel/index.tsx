@@ -1,8 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { Children, cloneElement, isValidElement, useMemo, useEffect, useState } from 'react';
+import { Children, cloneElement, isValidElement, useMemo, useEffect, useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
-
-import { debounce } from '#src/components/common/utils/debounce';
 
 import type { CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
@@ -85,6 +83,16 @@ const getPrevItemInfinite = (currentItem: number, maxItems: number) => {
   }
   return maxItems - 1;
 };
+interface PreviousValues {
+  currentItem: number;
+}
+function usePrevious(value: PreviousValues) {
+  const ref = useRef<PreviousValues>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 type CarouselSliderPosition = 'inner' | 'outer';
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
@@ -168,6 +176,9 @@ export const Carousel = ({
     setCurrentIndex(newItem);
     onCurrentItemChange?.(newItem);
   };
+
+  const prevValue = usePrevious({ currentItem: currenItemInner });
+  const [showAnimation, setShowAnimation] = useState<boolean>(true);
   const [indexToShow, setIndexToShow] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
   const handleIndexToShowChange = (step: number) => {
     let newIndex = 0;
@@ -175,51 +186,44 @@ export const Carousel = ({
       if (infiniteScroll) {
         newIndex = indexToShow + 1;
       } else {
-        newIndex = getNextItem(currenItemInner, length);
+        newIndex = getNextItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
       }
     } else if (step < 0) {
       if (infiniteScroll) {
         newIndex = indexToShow - 1;
       } else {
-        newIndex = getPrevItem(currenItemInner, length);
+        newIndex = getPrevItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
       }
     }
-    console.log(`newIndexToShow:${newIndex}`);
     setIndexToShow(newIndex);
-
-    const changeIndexToShow = (newIndex: number) => {
-      setIndexToShow(() => {
-        let debouncedIndex = 0;
-        if (newIndex === 0) {
-          debouncedIndex = itemsToShow.length - 2;
-        } else {
-          debouncedIndex = 1;
-        }
-        console.log(`debouncedIndex:${debouncedIndex}`);
-        return debouncedIndex;
-      });
+  };
+  const handleTransitionEnd = () => {
+    const getNewIndexToShow = (newIndex: number) => {
+      let debouncedIndex = 0;
+      if (newIndex === 0) {
+        debouncedIndex = itemsToShow.length - 2;
+      } else {
+        debouncedIndex = 1;
+      }
+      return debouncedIndex;
     };
 
-    console.log('before if');
-    if (newIndex === itemsToShow.length - 1 || newIndex === 0) {
-      console.log('inside if');
-      setTimeout(() => setShowAnimation(false), animationDuration + 50);
-      setTimeout(() => changeIndexToShow(newIndex), animationDuration + 100);
-      setTimeout(() => setShowAnimation(true), animationDuration + 150);
+    if (indexToShow === itemsToShow.length - 1 || indexToShow === 0) {
+      setShowAnimation(false);
+      setIndexToShow((prevState) => getNewIndexToShow(prevState));
+      setTimeout(() => setShowAnimation(true), 20);
     }
-    console.log('after if');
   };
-  const [showAnimation, setShowAnimation] = useState<boolean>(true);
 
   const handlePrevClick = () => {
-    handleIndexToShowChange(-1);
     const newItem = getPrevItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
+    handleIndexToShowChange(-1);
   };
   const handleNextClick = () => {
-    handleIndexToShowChange(1);
     const newItem = getNextItem(currenItemInner, length);
     handleCurrentItemChange(newItem);
+    handleIndexToShowChange(1);
   };
   const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
   const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
@@ -238,6 +242,7 @@ export const Carousel = ({
             $contentCssMixin={contentCssMixin}
             $showAnimation={showAnimation}
             $animationDuration={animationDuration}
+            onTransitionEnd={handleTransitionEnd}
           >
             {itemsToShow}
           </Content>
