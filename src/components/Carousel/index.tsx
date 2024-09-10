@@ -186,7 +186,7 @@ export const Carousel = ({
   const handleTransitionEnd = () => {
     const getNewIndexToShow = (newIndex: number) => {
       let debouncedIndex = 0;
-      if (newIndex === 0) {
+      if (newIndex <= 0) {
         debouncedIndex = itemsToShow.length - 2;
       } else {
         debouncedIndex = 1;
@@ -194,7 +194,7 @@ export const Carousel = ({
       return debouncedIndex;
     };
 
-    if (indexToShow === itemsToShow.length - 1 || indexToShow === 0) {
+    if (indexToShow >= itemsToShow.length - 1 || indexToShow <= 0) {
       setShowAnimation(false);
       setIndexToShow((prevState) => getNewIndexToShow(prevState));
       setTimeout(() => setShowAnimation(true), 20);

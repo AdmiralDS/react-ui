@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes } from "react";
 import styled from 'styled-components';
 
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -57,7 +57,7 @@ const StyledButton = styled.button<{ $direction: CarouselButtonDirection }>`
   }
 `;
 
-export interface CarouselButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface CarouselButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента */
   appearance?: CarouselButtonAppearance;
   /** Назначение кнопки - назад/вперед */
