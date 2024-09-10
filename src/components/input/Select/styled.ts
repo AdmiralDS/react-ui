@@ -317,7 +317,7 @@ export const EmptyMessageWrapper = styled.div`
   user-select: none;
 `;
 
-export const CustomOptionWrapper = styled(MenuItem)<{ $selected: boolean; $hovered: boolean; $multiple: boolean }>`
+export const CustomOptionWrapper = styled(MenuItem)<{ $selected?: boolean; $hovered?: boolean; $multiple?: boolean }>`
   justify-content: flex-start;
   flex-wrap: nowrap;
   white-space: pre-wrap;
