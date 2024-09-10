@@ -170,47 +170,53 @@ export const Carousel = ({
     return preCloneSlides.concat(slides, postCloneSlides);
   }, [children, length, items]);
 
-  const [currentIndex, setCurrentIndex] = useState<number>(defaultItem || 0);
-  const currenItemInner = currentItem || currentIndex;
+  const [sliderIndex, setSliderIndex] = useState<number>(defaultItem || 0);
+  const currenItemInner = useMemo(() => currentItem || sliderIndex, [currentItem, sliderIndex]);
   const handleCurrentItemChange = (newItem: number) => {
-    setCurrentIndex(newItem);
+    setSliderIndex(newItem);
     onCurrentItemChange?.(newItem);
   };
 
-  const prevValue = usePrevious({ currentItem: currenItemInner });
-  const [showAnimation, setShowAnimation] = useState<boolean>(true);
-  const [indexToShow, setIndexToShow] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
-  const handleIndexToShowChange = (newIndex: number) => {
-    setIndexToShow(newIndex);
-  };
-  const handleTransitionEnd = () => {
+  const updateEdgeContentIndex = () => {
     const getNewIndexToShow = (newIndex: number) => {
       let debouncedIndex = 0;
       if (newIndex <= 0) {
         debouncedIndex = itemsToShow.length - 2;
-      } else {
+      } else if (newIndex >= itemsToShow.length - 1) {
         debouncedIndex = 1;
       }
       return debouncedIndex;
     };
 
-    if (indexToShow >= itemsToShow.length - 1 || indexToShow <= 0) {
+    console.log('before updateEdgeContentIndex', contentIndex);
+    if (contentIndex >= itemsToShow.length - 1 || contentIndex <= 0) {
       setShowAnimation(false);
-      setIndexToShow((prevState) => getNewIndexToShow(prevState));
+      setContentIndex((prevState) => getNewIndexToShow(prevState));
       setTimeout(() => setShowAnimation(true), 20);
     }
+    console.log('after updateEdgeContentIndex', contentIndex);
   };
+
+  const prevValue = usePrevious({ currentItem: currenItemInner });
+  const [showAnimation, setShowAnimation] = useState<boolean>(true);
+  const [contentIndex, setContentIndex] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
+  const handleIndexToShowChange = (newIndex: number) => {
+    setContentIndex(newIndex);
+  };
+  useEffect(() => {
+    setContentIndex(currenItemInner + (infiniteScroll ? 1 : 0));
+  }, [currentItem]);
 
   const getPrevContentIndex = () => {
     if (infiniteScroll) {
-      return indexToShow - 1;
+      return contentIndex - 1;
     } else {
       return getPrevItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
     }
   };
   const getNextContentIndex = () => {
     if (infiniteScroll) {
-      return indexToShow + 1;
+      return contentIndex + 1;
     } else {
       return getNextItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
     }
@@ -228,7 +234,7 @@ export const Carousel = ({
 
   const handleCarouselSliderClick = (item: number) => {
     handleCurrentItemChange(item);
-    setIndexToShow(infiniteScroll ? item + 1 : item);
+    setContentIndex(infiniteScroll ? item + 1 : item);
   };
 
   return (
@@ -236,11 +242,11 @@ export const Carousel = ({
       <Wrapper>
         <ContentWrapper>
           <Content
-            $currentItem={indexToShow}
+            $currentItem={contentIndex}
             $contentCssMixin={contentCssMixin}
             $showAnimation={showAnimation}
             $animationDuration={animationDuration}
-            onTransitionEnd={handleTransitionEnd}
+            onTransitionEnd={updateEdgeContentIndex}
           >
             {itemsToShow}
           </Content>
