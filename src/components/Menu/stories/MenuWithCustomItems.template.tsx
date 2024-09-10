@@ -163,7 +163,7 @@ export const MenuWithCustomItemsTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
-      render: (options: RenderOptionProps) => (
+      render: ({ onLeave, hasSubmenu, ...options }: RenderOptionProps) => (
         <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
       ),
       disabled: item.value === 4,
