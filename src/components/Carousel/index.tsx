@@ -83,16 +83,6 @@ const getPrevItemInfinite = (currentItem: number, maxItems: number) => {
   }
   return maxItems - 1;
 };
-interface PreviousValues {
-  currentItem: number;
-}
-function usePrevious(value: PreviousValues) {
-  const ref = useRef<PreviousValues>();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
 
 type CarouselSliderPosition = 'inner' | 'outer';
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
@@ -171,70 +161,61 @@ export const Carousel = ({
   }, [children, length, items]);
 
   const [sliderIndex, setSliderIndex] = useState<number>(defaultItem || 0);
-  const currenItemInner = useMemo(() => currentItem || sliderIndex, [currentItem, sliderIndex]);
+  const currenSliderIndexInner = useMemo(() => currentItem || sliderIndex, [currentItem, sliderIndex]);
   const handleCurrentItemChange = (newItem: number) => {
-    setSliderIndex(newItem);
     onCurrentItemChange?.(newItem);
+    setSliderIndex(newItem);
   };
 
+  const getNewEdgeContentIndex = (currentContentIndex: number) => {
+    let newContentIndex = 0;
+    if (currentContentIndex <= 0) {
+      newContentIndex = itemsToShow.length - 2;
+    } else if (currentContentIndex >= itemsToShow.length - 1) {
+      newContentIndex = 1;
+    }
+    return newContentIndex;
+  };
   const updateEdgeContentIndex = () => {
-    const getNewIndexToShow = (newIndex: number) => {
-      let debouncedIndex = 0;
-      if (newIndex <= 0) {
-        debouncedIndex = itemsToShow.length - 2;
-      } else if (newIndex >= itemsToShow.length - 1) {
-        debouncedIndex = 1;
-      }
-      return debouncedIndex;
-    };
-
-    console.log('before updateEdgeContentIndex', contentIndex);
-    if (contentIndex >= itemsToShow.length - 1 || contentIndex <= 0) {
+    if (infiniteScroll && (contentIndex >= itemsToShow.length - 1 || contentIndex <= 0)) {
       setShowAnimation(false);
-      setContentIndex((prevState) => getNewIndexToShow(prevState));
+      setContentIndex((prevState) => getNewEdgeContentIndex(prevState));
       setTimeout(() => setShowAnimation(true), 20);
     }
-    console.log('after updateEdgeContentIndex', contentIndex);
   };
 
-  const prevValue = usePrevious({ currentItem: currenItemInner });
   const [showAnimation, setShowAnimation] = useState<boolean>(true);
-  const [contentIndex, setContentIndex] = useState<number>(currenItemInner + (infiniteScroll ? 1 : 0));
-  const handleIndexToShowChange = (newIndex: number) => {
+  const [contentIndex, setContentIndex] = useState<number>(currenSliderIndexInner + (infiniteScroll ? 1 : 0));
+  const handleContentIndexChange = (newIndex: number) => {
     setContentIndex(newIndex);
   };
   useEffect(() => {
-    setContentIndex(currenItemInner + (infiniteScroll ? 1 : 0));
-  }, [currentItem]);
+    let newContentIndex = 0;
+    if (infiniteScroll) {
+      if (contentIndex === itemsToShow.length - 2 && currenSliderIndexInner === 0) {
+        newContentIndex = itemsToShow.length - 1;
+      } else if (contentIndex === 1 && currenSliderIndexInner === length - 1) {
+        newContentIndex = 0;
+      } else {
+        newContentIndex = currenSliderIndexInner + 1;
+      }
+    } else {
+      newContentIndex = currenSliderIndexInner;
+    }
+    handleContentIndexChange(newContentIndex);
+  }, [currenSliderIndexInner]);
 
-  const getPrevContentIndex = () => {
-    if (infiniteScroll) {
-      return contentIndex - 1;
-    } else {
-      return getPrevItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
-    }
-  };
-  const getNextContentIndex = () => {
-    if (infiniteScroll) {
-      return contentIndex + 1;
-    } else {
-      return getNextItem(prevValue?.currentItem || (infiniteScroll ? 1 : 0), length);
-    }
-  };
   const handlePrevClick = () => {
-    handleCurrentItemChange(getPrevItem(currenItemInner, length));
-    handleIndexToShowChange(getPrevContentIndex());
+    handleCurrentItemChange(getPrevItem(currenSliderIndexInner, length));
   };
   const handleNextClick = () => {
-    handleCurrentItemChange(getNextItem(currenItemInner, length));
-    handleIndexToShowChange(getNextContentIndex());
+    handleCurrentItemChange(getNextItem(currenSliderIndexInner, length));
   };
-  const showPrev = showButtons ? (infiniteScroll ? true : currenItemInner > 0) : false;
-  const showNext = showButtons ? (infiniteScroll ? true : currenItemInner < length - 1) : false;
+  const showPrev = showButtons ? (infiniteScroll ? true : currenSliderIndexInner > 0) : false;
+  const showNext = showButtons ? (infiniteScroll ? true : currenSliderIndexInner < length - 1) : false;
 
   const handleCarouselSliderClick = (item: number) => {
     handleCurrentItemChange(item);
-    setContentIndex(infiniteScroll ? item + 1 : item);
   };
 
   return (
@@ -261,7 +242,7 @@ export const Carousel = ({
               aria-label={`Item ${item}`}
               key={item}
               appearance={sliderAppearance}
-              isCurrent={item === currenItemInner}
+              isCurrent={item === currenSliderIndexInner}
               onClick={() => handleCarouselSliderClick(item)}
             />
           );
