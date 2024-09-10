@@ -54,7 +54,7 @@ export const SelectFieldSimpleMultiSearchSelectTemplate = (props: SearchSelectFi
       .map(
         (option) =>
           (selectValue.includes(option) || shouldRender(option, searchValue)) && (
-            <Option key={option} value={option}>
+            <Option key={option} value={`${option}0000`}>
               {`${option}0000`}
             </Option>
           ),
