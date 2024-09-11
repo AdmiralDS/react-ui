@@ -41,7 +41,7 @@ export const CarouselAutoChangeTemplate = (props: CarouselProps) => {
 
   return (
     <Wrapper>
-      <Carousel {...props} currentItem={current} showButtons={false}>
+      <Carousel {...props} currentItem={current}>
         {items}
       </Carousel>
       <NotificationItem displayStatusIcon>
