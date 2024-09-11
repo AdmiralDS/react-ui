@@ -130,12 +130,8 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     const getNextItem = infiniteScroll ? getNextItemInfinite : getNextItemFinite;
 
     //<editor-fold desc="Создание элементов для отрисовки в Content, при infiniteScroll отличается от количества children на 2 из-за дополнительных слайдов в начале и конце">
-    const items = useMemo(() => Children.toArray(children), [children]);
-
-    const [length, setLength] = useState(items.length);
-    useEffect(() => {
-      setLength(items.length);
-    }, [items.length]);
+    const items = Children.toArray(children);
+    const length = items.length;
 
     const contentItems = useMemo(() => {
       const slides: ReactNode[] = [];
