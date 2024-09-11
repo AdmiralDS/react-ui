@@ -138,6 +138,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       const preCloneSlides: ReactNode[] = [];
       const postCloneSlides: ReactNode[] = [];
       Children.forEach(children, (elem, index) => {
+        // При бесконечной прокрутке для "непрерывности" анимации в начало добавляется последний элемент
         if (infiniteScroll && index === length - 1) {
           preCloneSlides.push(
             isValidElement(elem)
@@ -150,6 +151,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
             ? cloneElement(elem, { ...elem.props, key: 'original' + elem.key, 'data-index': index })
             : elem,
         );
+        // При бесконечной прокрутке для "непрерывности" анимации в конец добавляется первый элемент
         if (infiniteScroll && index === 0) {
           postCloneSlides.push(
             isValidElement(elem)
@@ -162,8 +164,9 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     }, [children, length, items, infiniteScroll]);
     //</editor-fold>
 
-    //<editor-fold desc="Индекс для слайдера, также позволяет использовать компонент в контроллируемом варианте">
+    //<editor-fold desc="Индекс для слайдера и кнопок вперед/назад, также позволяет использовать компонент в контроллируемом варианте">
     const [sliderIndex, setSliderIndex] = useState<number>(defaultItem || 0);
+    // Используем либо пропс (контроллируемый режим), либо внутренний стейт (неконтроллируемый режим)
     const currenSliderIndexInner = currentItem ?? sliderIndex;
     const handleCurrentItemChange = (newItem: number) => {
       onCurrentItemChange?.(newItem);
@@ -171,40 +174,52 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     };
     //</editor-fold>
 
-    //<editor-fold desc="Индекс для Content, при infiniteScroll отличается от индекса слайдера на 1 из-за дополнительных слайдов в начале и конце">
-    const [showAnimation, setShowAnimation] = useState<boolean>(true);
+    //<editor-fold desc="Индекс для Content, при infiniteScroll отличается от индекса слайдера на +1 из-за дополнительного слайда в начале">
     const [contentIndex, setContentIndex] = useState<number>(currenSliderIndexInner + (infiniteScroll ? 1 : 0));
     const handleContentIndexChange = (newIndex: number) => {
       setContentIndex(newIndex);
     };
-    // В случае infiniteScroll при достижении крайних значений после окончания transition необходимо пересчитать новый индекс и обновить
+    // В случае infiniteScroll при достижении крайних значений после окончания transition необходимо пересчитать новый индекс, отключить анимацию, обновить индекс, а затем заново включить анимацию
+    const [showAnimation, setShowAnimation] = useState<boolean>(true);
     const getNewEdgeContentIndex = (currentContentIndex: number) => {
       let newContentIndex = 0;
       if (currentContentIndex <= 0) {
+        // При переключении с первого элемента на последний необходимо после окончания анимации подменить индекс контента на последний
         newContentIndex = contentItems.length - 2;
       } else if (currentContentIndex >= contentItems.length - 1) {
+        // При переключении с последнего элемента на первый необходимо после окончания анимации подменить индекс контента на первый
         newContentIndex = 1;
       }
       return newContentIndex;
     };
+    // Обработчик, который срабатывает после окончания отработки transition на Content
     const updateEdgeContentIndex = () => {
+      // Рассматриваем только крайние случаи и только при бесконечной прокрутке
       if (infiniteScroll && (contentIndex >= contentItems.length - 1 || contentIndex <= 0)) {
+        // отключаем анимацию, чтобы не было ненужной прокрутки при смене индекса, которая происходит вследствие изменения "transform: translateX" на Content
         setShowAnimation(false);
+        // меняем индекс контента
         setContentIndex((prevState) => getNewEdgeContentIndex(prevState));
+        // включаем анимацию обратно через timeout, т.к.сеттеры в React выполняются асинхронно
         setTimeout(() => setShowAnimation(true), 20);
       }
     };
+    // Отслеживание изменения индекса слайдера и расчет индекса контента
     useEffect(() => {
       let newContentIndex = 0;
       if (infiniteScroll) {
         if (contentIndex === contentItems.length - 2 && currenSliderIndexInner === 0) {
+          // При бесконечном скролле, когда нужно переключить с последнего элемента на первый, устанавливаем индекс контента на склонированный в конец первый элемент (postClones)
           newContentIndex = contentItems.length - 1;
         } else if (contentIndex === 1 && currenSliderIndexInner === length - 1) {
+          // При бесконечном скролле, когда нужно переключить с первого элемента на последний, устанавливаем индекс контента на склонированный в начало последний элемент (preClones)
           newContentIndex = 0;
         } else {
+          // При бесконечном скролле не в крайних значениях индекс контента на 1 больше индекса слайдера
           newContentIndex = currenSliderIndexInner + 1;
         }
       } else {
+        // Без бесконечного скролла индексы слайдера и контента совпадают
         newContentIndex = currenSliderIndexInner;
       }
       handleContentIndexChange(newContentIndex);
