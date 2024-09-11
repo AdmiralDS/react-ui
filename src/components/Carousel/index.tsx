@@ -146,11 +146,6 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               : elem,
           );
         }
-        slides.push(
-          isValidElement(elem)
-            ? cloneElement(elem, { ...elem.props, key: 'original' + elem.key, 'data-index': index })
-            : elem,
-        );
         // При бесконечной прокрутке для "непрерывности" анимации в конец добавляется первый элемент
         if (infiniteScroll && index === 0) {
           postCloneSlides.push(
@@ -159,6 +154,11 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               : elem,
           );
         }
+        slides.push(
+          isValidElement(elem)
+            ? cloneElement(elem, { ...elem.props, key: 'original' + elem.key, 'data-index': index })
+            : elem,
+        );
       });
       return preCloneSlides.concat(slides, postCloneSlides);
     }, [children, length, items, infiniteScroll]);
