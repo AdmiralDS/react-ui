@@ -99,7 +99,6 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
 
-        const { align, translateX } = setHorizontalPosition(rect, targetRect, viewportWidth);
         const { upward, translateY } = setVerticalPosition(rect, targetRect, viewportHeight);
         setDisplayUpward(upward);
 
@@ -107,11 +106,12 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
           node.style.transform = `translateY(${translateY})`;
           return;
         } else {
+          const { align, translateX } = setHorizontalPosition(rect, targetRect, viewportWidth);
           node.style.transform = `translate(${translateX}, ${translateY})`;
           node.style.alignSelf = align;
         }
       }
-    }, [displayUpward, targetElement]);
+    }, [targetElement]);
 
     useInterval(checkDropdownPosition, 100);
 
