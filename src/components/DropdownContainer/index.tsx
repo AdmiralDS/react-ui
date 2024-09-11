@@ -104,7 +104,6 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
         if (alignSelf && alignSelf !== 'auto') {
           node.style.transform = `translateY(${translateY})`;
-          return;
         } else {
           const { align, translateX } = setHorizontalPosition(rect, targetRect, viewportWidth);
           node.style.transform = `translate(${translateX}, ${translateY})`;

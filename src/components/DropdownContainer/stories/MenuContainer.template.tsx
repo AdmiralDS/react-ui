@@ -100,7 +100,7 @@ export const MenuContainerTemplate = (props: DropdownContainerProps) => {
         </Button>
         {open && (
           <DropdownContainer
-            // alignSelf="flex-start"
+            alignSelf="flex-start"
             targetElement={targetElement || buttonRef.current}
             onClickOutside={clickOutside}
             {...other}
