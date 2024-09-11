@@ -26,7 +26,7 @@ export const SelectFieldCustomOptionMultiSearchSelectTemplate = () => {
     <>
       <SelectField mode="searchSelect" label="label" value={selectValue} multiple={true} onChange={onChange}>
         {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} renderChip={() => String(ind)}>
+          <Option key={ind} value={`${ind}0000`} renderChip={() => `${ind}0000`}>
             <TextWrapper>
               {`${ind}0000`}
               <ExtraText>{`Доп ${ind}`}</ExtraText>

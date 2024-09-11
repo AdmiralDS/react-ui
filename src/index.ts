@@ -102,3 +102,5 @@ export * from './components/CarouselSlider';
 export * from './components/SegmentedControl';
 
 export * from './components/CSSCustomProps';
+
+export * from './components/Scrollbar';
