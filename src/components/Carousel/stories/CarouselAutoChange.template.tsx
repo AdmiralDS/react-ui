@@ -29,19 +29,32 @@ const items = [
 ];
 
 export const CarouselAutoChangeTemplate = (props: CarouselProps) => {
-  const [current, setCurrent] = useState(0);
-  //const handleCurrentItemChange = (newValue: number) => {}
+  const [mouseInCarousel, setMouseInCarousel] = useState(false);
+  const handleMouseEnterCarousel = () => setMouseInCarousel(true);
+  const handleMouseLeaveCarousel = () => setMouseInCarousel(false);
 
+  const [current, setCurrent] = useState(0);
+  const handleCurrentItemChange = (newValue: number) => {
+    setCurrent(newValue);
+  };
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % items.length);
+      if (!mouseInCarousel) {
+        setCurrent((prev) => (prev + 1) % items.length);
+      }
     }, 3000);
     return () => clearInterval(timer);
-  }, [setCurrent]);
+  }, [setCurrent, mouseInCarousel]);
 
   return (
     <Wrapper>
-      <Carousel {...props} currentItem={current}>
+      <Carousel
+        {...props}
+        currentItem={current}
+        onCurrentItemChange={handleCurrentItemChange}
+        onMouseEnter={handleMouseEnterCarousel}
+        onMouseLeave={handleMouseLeaveCarousel}
+      >
         {items}
       </Carousel>
       <NotificationItem displayStatusIcon>
