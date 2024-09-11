@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import type { CarouselProps } from '@admiral-ds/react-ui';
 import { Carousel, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
 
+const Separator = styled.div<{ height: number }>`
+  height: ${(p) => p.height}px;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -62,6 +65,8 @@ export const CarouselAutoChangeTemplate = (props: CarouselProps) => {
         <NotificationItemContent>
           Переключение секций может быть автоматическим через заданный пользователем интервал. Рекомендуемое значение
           интервала равно 3 секундам.
+          <Separator height={8} />В этом случае при наведении курсора на область компонента рекомендуется
+          приостанавливать автоматическую смену до того момента, пока курсор не покинет область компонента.
         </NotificationItemContent>
       </NotificationItem>
     </Wrapper>
