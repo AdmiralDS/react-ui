@@ -23,7 +23,7 @@ export const SearchSelectExpandedHeightMultiTemplate = (props: SelectProps) => {
         maxRowCount={3}
       >
         {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)}>
+          <Option key={ind} value={`${ind}0000`}>
             {`${ind}0000`}
           </Option>
         ))}
