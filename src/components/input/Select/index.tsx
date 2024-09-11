@@ -413,8 +413,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         selectElem.dispatchEvent(new Event('change', { bubbles: true }));
 
         if (!multiple) onCloseSelect();
+
+        if (searchValue && inputRef.current) {
+          changeInputData(inputRef.current, {
+            value: '',
+            selectionEnd: 0,
+            selectionStart: 0,
+          });
+          const currentActiveItem = activeItem;
+          setActiveItem(undefined);
+          setTimeout(() => setActiveItem(currentActiveItem));
+        }
       },
-      [onCloseSelect, multiple],
+      [onCloseSelect, multiple, searchValue, activeItem],
     );
 
     const resetOptions = useCallback(() => {

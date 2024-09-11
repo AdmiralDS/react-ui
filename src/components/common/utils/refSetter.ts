@@ -5,7 +5,9 @@ import type { ForwardedRef } from 'react';
  * Keeps passed refs in sync, by creating ref callback
  * @param refs
  */
-export function refSetter<T extends HTMLElement | null>(...refs: ForwardedRef<T>[]): (instance: T | null) => void {
+export function refSetter<T extends HTMLElement | null>(
+  ...refs: (ForwardedRef<T> | undefined)[]
+): (instance: T | null) => void {
   return (ref) => {
     refs.forEach((someRef) => {
       if (!someRef) return;

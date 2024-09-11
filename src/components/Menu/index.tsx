@@ -1,9 +1,9 @@
 import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-
+import { Scrollbar } from '../Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -31,12 +31,14 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
   return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{
+type MenuListHeightsProps = {
   $dimension?: MenuDimensions;
   $rowCount: number;
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
-}>`
+};
+
+const menuListHeights = css<MenuListHeightsProps>`
   max-height: ${({ $dimension, $rowCount }) => {
     return `min(calc(100vh - 16px), ${getHeight($rowCount, $dimension)}px)`;
   }};
@@ -48,12 +50,15 @@ const Wrapper = styled.div<{
   $hasBottomPanel: boolean;
   $maxHeight?: string | number;
 }>`
+  overflow: hidden;
+  position: relative;
+
   padding: 0;
   ${(p) => (p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   box-sizing: border-box;
   display: flex;
-  overflow: hidden;
+
   flex-direction: column;
   align-items: stretch;
   pointer-events: initial;
@@ -67,12 +72,7 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled.div<{
-  $dimension?: MenuDimensions;
-  $rowCount: number;
-  $hasTopPanel: boolean;
-  $hasBottomPanel: boolean;
-}>`
+const StyledDiv = styled(Scrollbar)<MenuListHeightsProps>`
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
@@ -275,7 +275,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       : undefined;
 
     const menuRef = useRef<HTMLDivElement | null>(null);
-
+    const verticalScrollAriaRef = useRef<HTMLDivElement | null>(null);
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
 
@@ -398,12 +398,18 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
       const preselected = preselectedId !== undefined ? preselectedId === id : undefined;
-      const renderProps: RenderOptionProps = {
+      const renderProps = {
         hovered,
         preselected,
         selected,
         onLeave: (e: MouseEvent<HTMLDivElement>) => {
-          if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
+          const relTarget = e.relatedTarget;
+          if (
+            relTarget &&
+            Object.hasOwn(relTarget, 'nodeName') && // необходимо чтобы проверить действительно ли это Node
+            !subMenuRef.current?.contains(relTarget as Node) &&
+            !verticalScrollAriaRef.current?.contains(relTarget as Node)
+          ) {
             setSubmenuVisible(false);
           }
         },
@@ -416,10 +422,9 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         onClick: () => handleClickItem(id),
         hasSubmenu,
         disabled: itemProps.disabled,
-        containerRef,
         ...itemProps,
-      };
-      if (typeof render === 'function') return render(renderProps);
+      } as const;
+      if (typeof render === 'function') return render({ containerRef, ...renderProps });
 
       return (
         <MenuItem key={`${item.id}-${index}`} {...renderProps}>
@@ -546,16 +551,19 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv
-          ref={menuRef}
-          $dimension={dimension}
-          $rowCount={rowCount}
-          $hasTopPanel={hasTopPanel}
-          $hasBottomPanel={hasBottomPanel}
-          {...menuProps}
-        >
-          {virtualScroll ? renderVirtualChildren() : renderChildren()}
-        </StyledDiv>
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          <StyledDiv
+            scrollBoxRef={menuRef}
+            verticalScrollAriaRef={verticalScrollAriaRef}
+            $dimension={dimension}
+            $rowCount={rowCount}
+            $hasTopPanel={hasTopPanel}
+            $hasBottomPanel={hasBottomPanel}
+            {...menuProps}
+          >
+            {virtualScroll ? renderVirtualChildren() : renderChildren()}
+          </StyledDiv>
+        </div>
         {submenuVisible && activeItemRef.current && (
           <SubMenuContainer
             target={activeItemRef}

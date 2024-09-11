@@ -68,6 +68,9 @@ export const DropDownOption = ({
             dimension={convertDimension(dropDownContext?.dimension)}
             key={itemId}
             {...htmlProps}
+            $selected={options.selected}
+            $hovered={options.hovered}
+            $multiple={dropDownContext?.multiple}
           >
             {defaultOptionRender({ selected: options.selected, hovered: options.hovered })}
           </CustomOptionWrapper>
@@ -79,7 +82,12 @@ export const DropDownOption = ({
 
     dropDownContext?.onDropDownOptionMount?.(item);
     return () => dropDownContext?.onDropDownOptionUnMount?.(item);
-  }, [dropDownContext?.onDropDownOptionMount, dropDownContext?.onDropDownOptionUnMount, dropDownContext?.dimension]);
+  }, [
+    dropDownContext?.onDropDownOptionMount,
+    dropDownContext?.onDropDownOptionUnMount,
+    dropDownContext?.dimension,
+    dropDownContext?.multiple,
+  ]);
 
   return null;
 };

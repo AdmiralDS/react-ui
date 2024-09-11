@@ -53,7 +53,7 @@ export interface MenuModelItemProps {
   dimension?: ItemDimension;
 }
 
-export interface MenuItemProps extends React.HTMLAttributes<HTMLElement>, RenderOptionProps {}
+export type MenuItemProps = React.ComponentPropsWithoutRef<'div'> & RenderOptionProps;
 
 export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
   (
@@ -71,11 +71,11 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       selfRef,
       onMouseDown,
       onLeave,
-      containerRef,
       ...props
     },
     ref,
   ) => {
+    props['containerRef'] = undefined;
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       onHover?.(e);
       props.onMouseMove?.(e);

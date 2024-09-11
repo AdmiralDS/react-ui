@@ -103,3 +103,5 @@ export * from './components/Carousel';
 export * from './components/SegmentedControl';
 
 export * from './components/CSSCustomProps';
+
+export * from './components/Scrollbar';
