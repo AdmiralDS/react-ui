@@ -70,7 +70,7 @@ const widthIcons = css<{ $dimension: ChipDimension }>`
   }};
 `;
 
-const paddings = css<{ $dimension: ChipDimension }>`
+const filledPaddings = css<{ $dimension: ChipDimension }>`
   padding: ${({ $dimension }) => {
     switch ($dimension) {
       case 'm':
@@ -81,6 +81,21 @@ const paddings = css<{ $dimension: ChipDimension }>`
         return '4px 8px';
     }
   }};
+`;
+const outlinedPaddings = css<{ $dimension: ChipDimension }>`
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 'm':
+        return '5px 11px';
+      case 's':
+        return '3px 7px';
+      default:
+        return '3px 7px';
+    }
+  }};
+`;
+const paddings = css<{ $dimension: ChipDimension; $appearance?: ChipAppearance }>`
+  ${({ $appearance }) => ($appearance === 'filled' ? filledPaddings : outlinedPaddings)}
 `;
 
 const chipTypographyHover = css<{
@@ -243,11 +258,14 @@ export const ChipComponentStyled = styled.div<{
     ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : $disabled ? 'not-allowed' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.$withCloseIcon ? `padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) =>
+    p.$withCloseIcon
+      ? `padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
+      : paddings}
   ${(p) =>
     p.$withBadge && !p.$withCloseIcon
-      ? `padding-inline-end: ${p.$dimension === 's' ? 4 : 6}px;
-         padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;`
+      ? `padding-inline-end: ${(p.$dimension === 's' ? 4 : 6) - (p.$appearance === 'outlined' ? 1 : 0)}px;
+         padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
       : ''}
   ${chipTypography}
 `;
