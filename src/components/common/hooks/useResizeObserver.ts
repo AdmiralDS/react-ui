@@ -15,11 +15,11 @@ function useResizeObserver(element: HTMLElement | null, onResize: () => void) {
        */
       const resizeObserver = new ResizeObserver(() => {
         cancelAnimationFrame(rAF);
-        rAF = window.requestAnimationFrame(handleResize);
+        rAF = requestAnimationFrame(handleResize);
       });
       resizeObserver.observe(element);
       return () => {
-        window.cancelAnimationFrame(rAF);
+        cancelAnimationFrame(rAF);
         resizeObserver.unobserve(element);
       };
     }
