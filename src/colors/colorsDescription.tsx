@@ -247,6 +247,12 @@ export const COLORS: ColorsProps = {
       description: 'Статичный Press на темных поверхностях',
       opacity: '12%',
     },
+    'Opacity/Neutral 4': {
+      name: 'Neutral 8',
+      contrast: { light: '-', dark: '-' },
+      description: 'Цвет #000000 в светлой теме или #FFFFFF в темной теме с прозрачностью 4%',
+      opacity: '4%',
+    },
     'Opacity/Neutral 8': {
       name: 'Neutral 8',
       contrast: { light: '-', dark: '-' },
