@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.19.0](https://github.com/AdmiralDS/react-ui/compare/v8.18.1...v8.19.0) (2024-09-12)
+
+
+### Features
+
+* **Carousel:** добавлен новый компонент ([f76d679](https://github.com/AdmiralDS/react-ui/commit/f76d679e9df74c53853c8c40a680c53921d0f2a4))
+* **DropdownContainer:** [#1359](https://github.com/AdmiralDS/react-ui/issues/1359) добавлены варианты позиционирования дропдауна для случаев с ограниченным размером экрана и скроллом ([f488246](https://github.com/AdmiralDS/react-ui/commit/f4882461b23b42dd331f305447057bdacf16a353))
+* **Scrollbar:** добавлен Scrollbar в Menu ([5481ec6](https://github.com/AdmiralDS/react-ui/commit/5481ec6cef6b7b16244fb4378962dece4c3151d5))
+
+
+### Bug Fixes
+
+* **Scrollbar:** native Safari scrollbar still visible ([3faceb7](https://github.com/AdmiralDS/react-ui/commit/3faceb7779f7b0836989024cbdf98ef23975fe28))
+* **Select:** Исправлены несоответствия дизайну по результатам дизайн-ревью ([225e684](https://github.com/AdmiralDS/react-ui/commit/225e6846022ee6601fabf20252d960e3d5d3015c)), closes [#1461](https://github.com/AdmiralDS/react-ui/issues/1461)
+* **TabMenuHorizontal, CardTabMenuHorizontal, TabMenuIcon:** add resize observer for hidden container ([1410c15](https://github.com/AdmiralDS/react-ui/commit/1410c152ae1b7f26b9ccab9bfd31c6c23bf762f6))
+
 ### [8.18.1](https://github.com/AdmiralDS/react-ui/compare/v8.18.0...v8.18.1) (2024-09-04)
 
 
