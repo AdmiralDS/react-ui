@@ -11,7 +11,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border: none;
   border-radius: 16px;
   height: 32px;
@@ -23,7 +23,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c0>* {
@@ -61,7 +61,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 {
@@ -97,7 +97,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border: none;
   border-radius: 16px;
   height: 32px;
@@ -109,7 +109,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c0>* {
@@ -147,7 +147,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 {

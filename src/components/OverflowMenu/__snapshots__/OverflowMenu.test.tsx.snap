@@ -52,7 +52,7 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:not(:disabled):focus-visible {
@@ -147,7 +147,7 @@ exports[`OverflowMenu should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:not(:disabled):focus-visible {

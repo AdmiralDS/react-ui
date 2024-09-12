@@ -29,11 +29,11 @@ exports[`RadioButton should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -65,9 +65,9 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 20px;
   height: 20px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -76,7 +76,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -111,7 +111,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -160,7 +160,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -175,7 +175,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
@@ -239,11 +239,11 @@ fieldset:disabled .c0.c0 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -275,9 +275,9 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 20px;
   height: 20px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -286,7 +286,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -321,7 +321,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -370,7 +370,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -385,7 +385,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
@@ -504,11 +504,11 @@ exports[`RadioButton should render component with required properties 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -540,7 +540,7 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 20px;
   height: 20px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -549,7 +549,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -584,7 +584,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -633,7 +633,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -648,7 +648,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
@@ -708,11 +708,11 @@ fieldset:disabled .c0.c0 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -744,7 +744,7 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 20px;
   height: 20px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -753,7 +753,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -788,7 +788,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -837,7 +837,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -852,7 +852,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
@@ -968,11 +968,11 @@ exports[`RadioButton should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -1004,7 +1004,7 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 18px;
   height: 18px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -1013,7 +1013,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -1048,7 +1048,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -1097,7 +1097,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -1112,7 +1112,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
@@ -1173,11 +1173,11 @@ fieldset:disabled .c0.c0 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset:disabled .c5.c5 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
@@ -1209,7 +1209,7 @@ fieldset[data-dimension='s'] .c5.c5 {
   width: 18px;
   height: 18px;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 fieldset[data-dimension='s'] .c4 {
@@ -1218,7 +1218,7 @@ fieldset[data-dimension='s'] .c4 {
 }
 
 fieldset:disabled .c4 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -1253,7 +1253,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c1:not(:checked):disabled+div>span {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:checked:disabled+div>span {
@@ -1302,7 +1302,7 @@ fieldset[data-dimension='s'] .c2 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -1317,7 +1317,7 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
