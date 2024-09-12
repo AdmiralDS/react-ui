@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, HTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
