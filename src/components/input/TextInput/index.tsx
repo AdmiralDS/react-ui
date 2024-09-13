@@ -79,7 +79,7 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
   border-radius: inherit;
 
   border: 1px solid ${getBorderColor};
-  ${(p) => p.disabled && 'border-color: transparent;'};
+  ${(p) => (p.disabled ? 'border-color: transparent;' : '')};
 `;
 
 const getHoverBorderColor = css<{ $status?: InputStatus }>`
@@ -111,13 +111,18 @@ const getFocusBorder = css<{ $status?: InputStatus }>`
     }};
 `;
 
-export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
+export const BorderedDivStyles = css<{
+  disabled?: boolean;
+  readOnly?: boolean;
+  $isLoading?: boolean;
+  $status?: InputStatus;
+}>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : getFocusBorder)}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : !p.$isLoading ? getFocusBorder : '')}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    border-color: ${(props) => (props.disabled || props.readOnly ? 'transparent' : getHoverBorderColor)};
+    ${(p) => (!p.$isLoading ? `border-color: ${p.disabled || p.readOnly ? 'transparent' : getHoverBorderColor};` : '')}
   }
 `;
 
@@ -182,8 +187,10 @@ const Input = styled.input<ExtraProps>`
     ${disabledColors}
   }
 
+  [data-loading] &&&,
   &&&:disabled {
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   ${extraPadding}
@@ -235,11 +242,12 @@ const IconPanelAfter = styled(IconPanel)`
 const StyledContainer = styled(HeightLimitedContainer)<{
   disabled?: boolean;
   readOnly?: boolean;
+  $isLoading?: boolean;
   $status?: InputStatus;
   $dimension?: ComponentDimension;
 }>`
   ${BorderedDivStyles}
-  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
+  ${(p) => (p.disabled || p.$isLoading ? 'cursor: not-allowed;' : '')}
 `;
 
 function defaultHandleInput(newInputData: InputData | null): InputData {
@@ -461,9 +469,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
+          $isLoading={isLoading}
           $status={status}
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
+          data-loading={isLoading ? true : undefined}
           data-status={status}
           $skeleton={skeleton}
           data-disable-copying={disableCopying ? true : undefined}
