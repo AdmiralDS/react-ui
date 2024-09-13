@@ -11,7 +11,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: none;
   border-radius: 16px;
   height: 32px;
@@ -97,7 +97,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: none;
   border-radius: 16px;
   height: 32px;
