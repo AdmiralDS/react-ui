@@ -51,6 +51,7 @@ export type Color = {
   'Opacity/Dark Static Hover': string;
   'Opacity/Dark Static Focus': string;
   'Opacity/Dark Static Press': string;
+  'Opacity/Neutral 4': string;
   'Opacity/Neutral 8': string;
   'Opacity/Neutral 12': string;
   'Opacity/Neutral 16': string;

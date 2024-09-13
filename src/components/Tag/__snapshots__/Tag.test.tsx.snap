@@ -11,8 +11,8 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   padding: 3px 7px;
   width: 60px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -34,7 +34,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
 }
 
 .c2 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -83,8 +83,8 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   padding: 3px 7px;
   width: 60px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -106,7 +106,7 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
 }
 
 .c2 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -209,8 +209,8 @@ exports[`Tag should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -232,7 +232,7 @@ exports[`Tag should render default component 1`] = `
 }
 
 .c1 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -267,8 +267,8 @@ exports[`Tag should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -290,7 +290,7 @@ exports[`Tag should render default component 1`] = `
 }
 
 .c1 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
