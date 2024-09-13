@@ -79,11 +79,11 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
   border-radius: inherit;
 
   border: 1px solid ${getBorderColor};
-  ${(p) => (p.disabled ? 'border-color: transparent;' : '')};
+  ${(p) => p.disabled && 'border-color: transparent;'};
 `;
 
 const getHoverBorderColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
+  border-color: ${({ $status, theme }) => {
     if (!$status) {
       return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
     }
@@ -93,7 +93,7 @@ const getHoverBorderColor = css<{ $status?: InputStatus }>`
       case 'success':
         return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
     }
-  }}
+  }};
 `;
 
 const getFocusBorder = css<{ $status?: InputStatus }>`
@@ -122,7 +122,7 @@ export const BorderedDivStyles = css<{
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    ${(p) => (!p.$isLoading ? `border-color: ${p.disabled || p.readOnly ? 'transparent' : getHoverBorderColor};` : '')}
+    ${(p) => (!p.$isLoading ? (p.disabled || p.readOnly ? 'transparent' : getHoverBorderColor) : '')};
   }
 `;
 
