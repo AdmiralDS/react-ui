@@ -242,7 +242,7 @@ exports[`Chips should render component with selected prop  1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -328,7 +328,7 @@ exports[`Chips should render component with selected prop  1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -469,7 +469,7 @@ exports[`Chips should render default component 1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -555,7 +555,7 @@ exports[`Chips should render default component 1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
