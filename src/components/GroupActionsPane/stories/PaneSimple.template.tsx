@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { GroupActionsPane, PaneSeparator, typography, TextButton, Button } from '@admiral-ds/react-ui';
@@ -8,6 +7,7 @@ import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/commu
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,8 +51,8 @@ export const PaneSimpleTemplate = ({
   ...props
 }: GroupActionsPaneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const dimension = ['s', 'm'].includes(props.dimension || 'm') ? 's' : 'm';
-  const [columnsVisibility, setColumnsVisibility] = React.useState(columns);
-  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [columnsVisibility, setColumnsVisibility] = useState(columns);
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

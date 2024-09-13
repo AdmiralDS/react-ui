@@ -1,5 +1,4 @@
-import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
 import type { Dimension as ButtonDimension } from '#src/components/TextButton/types';
@@ -68,11 +67,11 @@ export interface PaneColumn {
   visible: boolean;
 }
 
-export interface ActionRenderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ActionRenderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   dimension: ButtonDimension;
 }
 
-export interface GroupActionsPaneProps extends HTMLAttributes<HTMLDivElement> {
+export interface GroupActionsPaneProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер панели */
   dimension?: PaneDimension;
 
@@ -217,7 +216,7 @@ const PaneSeparatorDiv = styled.div<{ $dimension?: 's' | 'm' }>`
 
 export type PaneSeparatorProps = {
   dimension?: 's' | 'm';
-} & HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export const PaneSeparator = forwardRef<HTMLDivElement, PaneSeparatorProps>(({ dimension, ...props }, ref) => {
   return <PaneSeparatorDiv ref={ref} $dimension={dimension} {...props} />;

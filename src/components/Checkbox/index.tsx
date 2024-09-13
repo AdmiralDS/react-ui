@@ -1,5 +1,4 @@
-import type { InputHTMLAttributes } from 'react';
-import * as React from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
@@ -9,7 +8,7 @@ import { keyboardKey } from '../common/keyboardKey';
 
 export * from './CheckboxDimension';
 
-export interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   dimension?: CheckboxDimension;
   indeterminate?: boolean;
   error?: boolean;
@@ -86,7 +85,7 @@ export const Background = styled.div<{ $error?: boolean }>`
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, ${(p) => smallGroupBorderRadius(p.theme.shape)});
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
 
   /* disable inheritance from parent elements */
   line-height: initial;
@@ -213,7 +212,7 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   }
 `;
 
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckBoxProps>(
+export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
   ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, error, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {

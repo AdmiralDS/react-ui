@@ -103,9 +103,8 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
     <ColumnsMenuItem {...props} ref={itemRef} onHover={() => setHovered(true)} onLeave={() => setHovered(false)}>
       <StyledCheckboxField
         checked={visible}
-        onChange={(e: React.FormEvent<HTMLInputElement>) => {
-          e.preventDefault();
-          e.stopPropagation();
+        onChange={() => {
+          /* keep */
         }}
         hovered={hovered}
       />
