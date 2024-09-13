@@ -30,7 +30,7 @@ exports[`DateField should render component 1`] = `
 }
 
 .c10 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [disabled] .c10.c10.c10 {
@@ -38,7 +38,7 @@ exports[`DateField should render component 1`] = `
 }
 
 [disabled] .c10.c10.c10 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c10:hover *[fill^='#'] {
@@ -57,7 +57,7 @@ exports[`DateField should render component 1`] = `
   min-width: 0;
   background: none;
   border-radius: inherit;
-  border: 1px solid var(--admiral-color-Neutral_Neutral40, #9BA0AA);
+  border: 1px solid var(--admiral-color-Neutral_Neutral40, #9EA0A4);
 }
 
 .c5 {
@@ -77,22 +77,22 @@ exports[`DateField should render component 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Long, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   padding-right: 48px;
   padding-left: 16px;
 }
 
 .c5.c5.c5:disabled {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c5::placeholder {
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c5:disabled::placeholder {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 [data-disable-copying] .c5 {
@@ -117,7 +117,7 @@ exports[`DateField should render component 1`] = `
 
 [data-read-only] .c5.c5.c5,
 .c5.c5.c5:disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border-color: transparent;
 }
 
@@ -167,7 +167,7 @@ exports[`DateField should render component 1`] = `
 }
 
 .c3:hover:not(:focus-within)>.c6 {
-  border-color: var(--admiral-color-Neutral_Neutral60, #646973);
+  border-color: var(--admiral-color-Neutral_Neutral60, #67696D);
 }
 
 .c4 {

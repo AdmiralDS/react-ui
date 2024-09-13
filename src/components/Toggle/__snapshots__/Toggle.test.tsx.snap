@@ -64,7 +64,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c4 {
@@ -73,7 +73,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c4:before {
@@ -214,7 +214,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c4 {
@@ -223,7 +223,7 @@ exports[`Toggle should render component with disabled state 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  background: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c4:before {
@@ -419,7 +419,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -428,7 +428,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
@@ -566,7 +566,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -575,7 +575,7 @@ exports[`Toggle should render component with left labelPosition 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
@@ -768,7 +768,7 @@ exports[`Toggle should render component with required properties 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -777,7 +777,7 @@ exports[`Toggle should render component with required properties 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
@@ -915,7 +915,7 @@ exports[`Toggle should render component with required properties 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -924,7 +924,7 @@ exports[`Toggle should render component with required properties 1`] = `
   flex-shrink: 0;
   width: 36px;
   height: 20px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
@@ -1117,7 +1117,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -1126,7 +1126,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   flex-shrink: 0;
   width: 28px;
   height: 16px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
@@ -1264,7 +1264,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c4 {
@@ -1273,7 +1273,7 @@ exports[`Toggle should render component with small dimension 1`] = `
   flex-shrink: 0;
   width: 28px;
   height: 16px;
-  background: var(--admiral-color-Neutral_Neutral50, #717681);
+  background: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:before {
