@@ -14,7 +14,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -37,13 +37,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -57,7 +57,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -120,7 +120,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -143,13 +143,13 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -163,7 +163,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -281,7 +281,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -304,13 +304,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -324,7 +324,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -387,7 +387,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -410,13 +410,13 @@ exports[`Spinner should render component with custom stepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -430,7 +430,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -548,7 +548,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -570,13 +570,13 @@ exports[`Spinner should render component without nextStepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -633,7 +633,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -655,13 +655,13 @@ exports[`Spinner should render component without nextStepName 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -773,7 +773,7 @@ exports[`Spinner should render default component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -796,13 +796,13 @@ exports[`Spinner should render default component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -816,7 +816,7 @@ exports[`Spinner should render default component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -879,7 +879,7 @@ exports[`Spinner should render default component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -902,13 +902,13 @@ exports[`Spinner should render default component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -922,7 +922,7 @@ exports[`Spinner should render default component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -1040,7 +1040,7 @@ exports[`Spinner should render mobile component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -1062,13 +1062,13 @@ exports[`Spinner should render mobile component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -1082,7 +1082,7 @@ exports[`Spinner should render mobile component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -1145,7 +1145,7 @@ exports[`Spinner should render mobile component 1`] = `
   overflow: hidden;
   height: 4px;
   border-radius: 2px;
-  background-color: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c5 {
@@ -1167,13 +1167,13 @@ exports[`Spinner should render mobile component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c3 {
   white-space: nowrap;
   flex-shrink: 0;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);
@@ -1187,7 +1187,7 @@ exports[`Spinner should render mobile component 1`] = `
   width: 100%;
   text-align: left;
   margin-top: 8px;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Caption_Caption1, 400);

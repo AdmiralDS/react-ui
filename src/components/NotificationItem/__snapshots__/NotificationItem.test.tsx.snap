@@ -24,7 +24,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c6[data-appearance='secondary'] {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c6:focus-visible {
@@ -43,7 +43,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 
 .c6:disabled {
   cursor: not-allowed;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c6[data-dimension='m'] {
@@ -115,7 +115,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c7:not(:disabled):focus-visible {
@@ -165,7 +165,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   margin-bottom: 4px;
 }
 
@@ -177,7 +177,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c5 {
@@ -294,7 +294,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c6[data-appearance='secondary'] {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c6:focus-visible {
@@ -313,7 +313,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 
 .c6:disabled {
   cursor: not-allowed;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c6[data-dimension='m'] {
@@ -385,7 +385,7 @@ exports[`NotificationItem should render error components with all properties 1`]
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c7:not(:disabled):focus-visible {
@@ -435,7 +435,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   line-height: var(--admiral-line-height-Subtitle_Subtitle3, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   margin-bottom: 4px;
 }
 
@@ -447,7 +447,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c5 {

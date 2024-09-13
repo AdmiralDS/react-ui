@@ -16,11 +16,11 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 [data-dimension='m'] .c9 {
@@ -65,7 +65,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   margin: 0;
   padding: 0;
   overflow: visible;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
@@ -115,7 +115,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c2 {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c2>.c3 .c8 {
@@ -123,7 +123,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c11 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -152,7 +152,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c0>.c1:first-child .c5 {
@@ -160,7 +160,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c10 {
@@ -307,11 +307,11 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 [data-dimension='m'] .c9 {
@@ -356,7 +356,7 @@ exports[`Spinner should render component with dimension m 1`] = `
   margin: 0;
   padding: 0;
   overflow: visible;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
@@ -406,7 +406,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c2 {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c2>.c3 .c8 {
@@ -414,7 +414,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c11 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -443,7 +443,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c0>.c1:first-child .c5 {
@@ -451,7 +451,7 @@ exports[`Spinner should render component with dimension m 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c10 {
@@ -653,11 +653,11 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 [data-dimension='m'] .c9 {
@@ -702,7 +702,7 @@ exports[`Spinner should render default component 1`] = `
   margin: 0;
   padding: 0;
   overflow: visible;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
@@ -752,7 +752,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c2 {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c2>.c3 .c8 {
@@ -760,7 +760,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c11 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -789,7 +789,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c0>.c1:first-child .c5 {
@@ -797,7 +797,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c10 {
@@ -944,11 +944,11 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-disabled='true'] .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 [data-dimension='m'] .c9 {
@@ -993,7 +993,7 @@ exports[`Spinner should render default component 1`] = `
   margin: 0;
   padding: 0;
   overflow: visible;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Subtitle_Subtitle2, 550);
@@ -1043,7 +1043,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c2 {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c2>.c3 .c8 {
@@ -1051,7 +1051,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c11 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   overflow-y: auto;
   max-height: 100vh;
   padding: 4px 16px 16px 16px;
@@ -1080,7 +1080,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:first-child {
-  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-top: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c0>.c1:first-child .c5 {
@@ -1088,7 +1088,7 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c0>.c1:last-child {
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c10 {
