@@ -121,8 +121,10 @@ exports[`DateField should render component 1`] = `
   border-color: transparent;
 }
 
+[data-loading] .c5.c5.c5,
 .c5.c5.c5:disabled {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .c5 ::-ms-clear,
