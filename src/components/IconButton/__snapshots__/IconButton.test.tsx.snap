@@ -43,7 +43,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:active {
@@ -51,7 +51,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:disabled {
@@ -60,7 +60,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c0:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -104,7 +104,7 @@ exports[`IconButton should render component 1`] = `
 }
 
 .c1 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c1>svg {

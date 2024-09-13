@@ -2,7 +2,7 @@
 
 exports[`ProgressBar should render component 1`] = `
 .c1 {
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -28,7 +28,7 @@ exports[`ProgressBar should render component 1`] = `
   line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 <div>
@@ -53,7 +53,7 @@ exports[`ProgressBar should render component 1`] = `
 
 exports[`ProgressBar should render component with prop appearance=error 1`] = `
 .c1 {
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -104,7 +104,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 
 exports[`ProgressBar should render component with prop percent 1`] = `
 .c1 {
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
   border-radius: 2px;
   min-width: 140px;
   min-height: 4px;
@@ -130,7 +130,7 @@ exports[`ProgressBar should render component with prop percent 1`] = `
   line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 <div>

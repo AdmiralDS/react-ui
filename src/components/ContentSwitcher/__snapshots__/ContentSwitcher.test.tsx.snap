@@ -18,7 +18,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -34,7 +34,7 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c2 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {
@@ -54,8 +54,8 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c0 {
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 2px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 2px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border-radius: 20px;
   display: inline-flex;
   height: 32px;
@@ -112,7 +112,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
   white-space: nowrap;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-appearance~='primary'] .c2.c2 {
@@ -128,7 +128,7 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c2 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 [data-appearance~='primary'] .c2.c2 *[fill^='#'] {
@@ -148,8 +148,8 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c0 {
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 2px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 2px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border-radius: 20px;
   display: inline-flex;
   height: 32px;
