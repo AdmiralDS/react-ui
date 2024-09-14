@@ -36,160 +36,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
+.c10 {
   pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
 }
 
-fieldset[data-dimension='s'] .c7 {
+.c6 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
   width: 20px;
   height: 20px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -274,27 +237,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="1"
           >
-            <input
-              class="c6"
-              data-key="1"
-              id="1"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="1"
+                id="1"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -310,27 +270,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="2"
           >
-            <input
-              class="c6"
-              data-key="2"
-              id="2"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="2"
+                id="2"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -393,160 +350,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
+.c10 {
   pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
 }
 
-fieldset[data-dimension='s'] .c7 {
+.c6 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
   width: 20px;
   height: 20px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -630,27 +550,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="1"
         >
-          <input
-            class="c6"
-            data-key="1"
-            id="1"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div
@@ -666,27 +583,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="2"
         >
-          <input
-            class="c6"
-            data-key="2"
-            id="2"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div
@@ -805,160 +719,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
+.c10 {
   pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
 }
 
-fieldset[data-dimension='s'] .c7 {
+.c6 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
   width: 20px;
   height: 20px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -1043,27 +920,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="1"
           >
-            <input
-              class="c6"
-              data-key="1"
-              id="1"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="1"
+                id="1"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -1079,27 +953,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="2"
           >
-            <input
-              class="c6"
-              data-key="2"
-              id="2"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="2"
+                id="2"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -1162,160 +1033,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
+.c10 {
   pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
 }
 
-fieldset[data-dimension='s'] .c7 {
+.c6 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
   width: 20px;
   height: 20px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -1399,27 +1233,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="1"
         >
-          <input
-            class="c6"
-            data-key="1"
-            id="1"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div
@@ -1435,27 +1266,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="2"
         >
-          <input
-            class="c6"
-            data-key="2"
-            id="2"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div
@@ -1574,160 +1402,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
+.c10 {
+  pointer-events: none;
+}
+
 .c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
   position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
 }
 
-fieldset[data-dimension='s'] .c7 {
-  width: 20px;
-  height: 20px;
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -1812,27 +1603,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="1"
           >
-            <input
-              class="c6"
-              data-key="1"
-              id="1"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="1"
+                id="1"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -1848,27 +1636,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
             class="c4 c5"
             data-field-id="2"
           >
-            <input
-              class="c6"
-              data-key="2"
-              id="2"
-              type="checkbox"
-            />
             <div
-              class="c7"
+              class="c6"
             >
-              <div
-                class="c8"
+              <input
+                class="c7"
+                data-key="2"
+                id="2"
+                type="checkbox"
               />
-              <span
-                class="c9"
+              <div
+                class="c8 c9"
               >
                 <div
                   aria-hidden="true"
                   class="c10"
                   focusable="false"
                 />
-              </span>
+              </div>
             </div>
           </label>
           <div
@@ -1931,160 +1716,123 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
+.c10 {
+  pointer-events: none;
+}
+
 .c6 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c6 ::-ms-check {
-  display: none;
-}
-
-.c6:disabled {
-  cursor: not-allowed;
-}
-
-.c6:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c6:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c6:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c6:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c6:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c6:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c6:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c6:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c6:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c6:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c6:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c7 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
   position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
 }
 
-fieldset[data-dimension='s'] .c7 {
-  width: 20px;
-  height: 20px;
+fieldset[data-dimension='s'] .c6 {
+  width: 16px;
 }
 
-.c8 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c8.c8 {
-  width: 32px;
-  height: 32px;
+fieldset[data-dimension='s'] .c6 {
+  height: 16px;
 }
 
 .c9 {
-  box-sizing: border-box;
   pointer-events: none;
   display: inline-block;
   position: absolute;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-fieldset[data-dimension='s'] .c9.c9 {
-  width: 16px;
-  height: 16px;
-}
-
 .c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-fieldset:disabled .c9.c9 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-}
-
-.c10 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
+.c7 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c7 ::-ms-check {
+  display: none;
+}
+
+.c7:checked+.c8 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c7:disabled {
+  cursor: not-allowed;
   pointer-events: none;
+}
+
+.c7:disabled+.c8 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c7:not(:checked)+.c8 >* {
+  display: none;
+}
+
+.c7:hover:not(:disabled)::after,
+.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c7:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c7:checked:disabled+.c8 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c7:checked:disabled+.c8 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c7:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
 .c3 {
@@ -2168,27 +1916,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="1"
         >
-          <input
-            class="c6"
-            data-key="1"
-            id="1"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="1"
+              id="1"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div
@@ -2204,27 +1949,24 @@ fieldset:disabled .c9.c9 *[fill^='#'] {
           class="c4 c5"
           data-field-id="2"
         >
-          <input
-            class="c6"
-            data-key="2"
-            id="2"
-            type="checkbox"
-          />
           <div
-            class="c7"
+            class="c6"
           >
-            <div
-              class="c8"
+            <input
+              class="c7"
+              data-key="2"
+              id="2"
+              type="checkbox"
             />
-            <span
-              class="c9"
+            <div
+              class="c8 c9"
             >
               <div
                 aria-hidden="true"
                 class="c10"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
         </label>
         <div

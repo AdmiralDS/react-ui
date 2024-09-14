@@ -35,7 +35,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
@@ -177,7 +177,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
@@ -374,7 +374,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
@@ -515,7 +515,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
@@ -711,7 +711,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
@@ -852,7 +852,7 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
