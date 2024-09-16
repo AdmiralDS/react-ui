@@ -183,6 +183,7 @@ export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: Componen
 export const SelectWrapper = styled.div<{
   disabled?: boolean;
   $readonly?: boolean;
+  $isLoading?: boolean;
   $focused: boolean;
   $multiple: boolean;
   $dimension?: ComponentDimension;
@@ -192,7 +193,8 @@ export const SelectWrapper = styled.div<{
   box-sizing: border-box;
   display: flex;
   align-items: ${(p) => (p.$multiple ? 'flex-start' : 'center')};
-  cursor: ${({ disabled, $readonly }) => (disabled ? 'not-allowed' : $readonly ? 'default' : 'pointer')};
+  cursor: ${({ disabled, $readonly, $isLoading }) =>
+    disabled || $isLoading ? 'not-allowed' : $readonly ? 'default' : 'pointer'};
 
   padding: ${({ $dimension, $multiple }) => {
     switch ($dimension) {
@@ -211,13 +213,13 @@ export const SelectWrapper = styled.div<{
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
 
   ${({ disabled, $readonly }) => ($readonly || disabled ? disabledStyle : '')};
-  ${({ $focused, $readonly }) => ($focused && !$readonly ? focusedStyle : '')};
+  ${({ $focused, $readonly, $isLoading }) => ($focused && !$readonly && !$isLoading ? focusedStyle : '')};
 
   & ${BorderedDiv} {
     border-color: ${(p) =>
       p.disabled || p.$readonly
         ? 'transparent'
-        : p.$focused
+        : p.$focused && !p.$isLoading
           ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
           : `var(--admiral-color-Neutral_Neutral40, ${p.theme.color['Neutral/Neutral 40']})`};
   }
@@ -227,6 +229,7 @@ export const SelectWrapper = styled.div<{
       !p.disabled &&
       !p.$readonly &&
       !p.$focused &&
+      !p.$isLoading &&
       `
       border-color: var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']});
     `};
@@ -236,6 +239,7 @@ export const SelectWrapper = styled.div<{
     ${(p) =>
       !p.disabled &&
       !p.$readonly &&
+      !p.$isLoading &&
       `
       ${BorderedDiv} {
       border-color: var(--admiral-color-Success_Success50Main, ${p.theme.color['Success/Success 50 Main']});
@@ -251,6 +255,7 @@ export const SelectWrapper = styled.div<{
     ${(p) =>
       !p.disabled &&
       !p.$readonly &&
+      !p.$isLoading &&
       `
       ${BorderedDiv} {
         border-color: var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});
