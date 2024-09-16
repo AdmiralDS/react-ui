@@ -94,9 +94,6 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
-    isLoading: {
-      control: { type: 'boolean' },
-    },
   },
 } as Meta<typeof EditModeArea>;
 
