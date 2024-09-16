@@ -24,6 +24,9 @@ const OrderedListComponent = styled.ol<{ $dimension: Dimension; $nested: boolean
   }
   li::before {
     content: counters(item, '.');
+    display: inline-flex;
+    height: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
+    margin-inline-end: 8px;
   }
 `;
 
@@ -33,14 +36,21 @@ type ListStyleType = 'bullet' | 'virgule' | 'icon' | 'numbers' | 'letters';
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   dimension?: Dimension;
   nested?: boolean;
-  listStyle?: ListStyleType;
 }
 
-export const List = ({ children, dimension = 'm', nested = false, listStyle = 'bullet', ...props }: ListProps) => {
+export const List = ({ children, dimension = 'm', nested = false, ...props }: ListProps) => {
   return (
     <ListComponent data-dimension={dimension} $dimension={dimension} $nested={nested}>
       {children}
     </ListComponent>
+  );
+};
+
+export const OrderedList = ({ children, dimension = 'm', nested = false, ...props }: ListProps) => {
+  return (
+    <OrderedListComponent data-dimension={dimension} $dimension={dimension} $nested={nested}>
+      {children}
+    </OrderedListComponent>
   );
 };
 

@@ -4,9 +4,11 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { List } from '@admiral-ds/react-ui';
 
 import { ListPlaygroundTemplate } from './ListPlayground.template';
+import { ListOrderedTemplate } from './ListOrdered.template';
 
 // Imports of text sources
 import ListPlaygroundRaw from './ListPlayground.template?raw';
+import ListOrderedRaw from './ListOrdered.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -76,6 +78,25 @@ export const PlaygroundExample = {
   },
 
   name: 'Playground',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Order">
+const OrderStory: StoryFn<typeof List> = (props) => <ListOrderedTemplate {...props} />;
+
+export const OrderExample = {
+  render: OrderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ListOrderedRaw,
+      },
+    },
+  },
+
+  name: 'Order list',
 };
 
 //</editor-fold>
