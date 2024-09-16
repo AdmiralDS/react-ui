@@ -28,7 +28,7 @@ export const SuggestInputPlaygroundTemplate = ({
   ...props
 }: SuggestInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [options, setOptions] = React.useState<string[] | undefined>();
 
   const handleSelectOption = (option: string) => {
