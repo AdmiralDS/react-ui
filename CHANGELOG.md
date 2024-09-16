@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.20.0](https://github.com/AdmiralDS/react-ui/compare/v8.19.0...v8.20.0) (2024-09-13)
+
+
+### Features
+
+* **Chips:** фоновый цвет при appearance=filled изменен на группу Opacity ([13306db](https://github.com/AdmiralDS/react-ui/commit/13306db45c639080a2377b3aad32f789071a3628))
+* **Theme:** добавлен новый токен "Opacity Neutral 4%" ([bb2430c](https://github.com/AdmiralDS/react-ui/commit/bb2430ca827d8ebdd60c85305db97e66743c8f67))
+* **Theme:** обновлены токены палитры в группах Neutral и Special ([317fee9](https://github.com/AdmiralDS/react-ui/commit/317fee9e43e2210ff990df38e3f563d2b8b1ac9a))
+
+
+### Bug Fixes
+
+* **Chips:** исправлены размеры при appearance=outlined ([3872c4d](https://github.com/AdmiralDS/react-ui/commit/3872c4d313c24b603d1bb30425ba4a8be7feaf83))
+
 ## [8.19.0](https://github.com/AdmiralDS/react-ui/compare/v8.18.1...v8.19.0) (2024-09-12)
 
 

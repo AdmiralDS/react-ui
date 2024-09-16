@@ -1,25 +1,19 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 
 import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '../../common/keyboardKey';
 import type { CheckboxComponentDimension } from '#src/components/form/CheckboxField/style';
 import {
-  Check,
-  CheckboxComponentBackground,
   CheckboxComponentHint,
-  CheckboxComponentHover,
   CheckboxComponentLabel,
   CheckboxComponentWrapper,
-  Indeterminate,
-  Input,
-  InputContainer,
 } from '#src/components/form/CheckboxField/style';
+import { Checkbox } from '#src/components/Checkbox';
 
-export interface CheckboxFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Текст будет виден ниже компонента */
-  extraText?: ReactNode;
+  extraText?: React.ReactNode;
   /** Размер компонента */
   dimension?: CheckboxComponentDimension;
   /** Состояние частичного выбора */
@@ -42,12 +36,15 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
       indeterminate = false,
       extraText,
       className,
-      id = uid(),
+      id: passedId,
       name,
       ...props
     },
     ref,
   ) => {
+    //di не должно меняться на каждый ререндер если его не назначили
+    const id = useMemo(() => passedId || uid(), [passedId]);
+
     const fieldContainerProps = {
       'data-field-id': id,
       'data-field-name': name,
@@ -75,30 +72,21 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
         readOnly={readOnly}
         {...fieldContainerProps}
       >
-        <Input
+        <Checkbox
           {...props}
           ref={ref}
           disabled={disabled}
           readOnly={readOnly}
           type="checkbox"
-          $indeterminate={indeterminate}
+          indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
           data-hovered={hovered}
-          $hovered={hovered}
-          $dimension={dimension}
+          hovered={hovered}
+          dimension={dimension}
           id={id}
           name={name}
+          error={error}
         />
-        <InputContainer $dimension={dimension}>
-          <CheckboxComponentHover $dimension={dimension} />
-          <CheckboxComponentBackground $dimension={dimension} $error={error} disabled={disabled || readOnly}>
-            {indeterminate ? (
-              <Indeterminate aria-hidden="true" focusable="false" $dimension={dimension} />
-            ) : (
-              <Check aria-hidden="true" focusable="false" $dimension={dimension} />
-            )}
-          </CheckboxComponentBackground>
-        </InputContainer>
         {children && (
           <CheckboxComponentLabel $dimension={dimension} disabled={disabled}>
             {children}
