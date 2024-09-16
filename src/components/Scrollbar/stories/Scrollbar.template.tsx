@@ -18,8 +18,11 @@ export const ScrollbarTemplate = (props: ScrollbarProps) => {
     <Wrapper>
       <NotificationItem displayStatusIcon style={{ paddingRight: 0 }}>
         <NotificationItemTitle>Scrollbar</NotificationItemTitle>
-        <NotificationItemContent style={{ position: 'relative', overflow: 'hidden', paddingRight: 12 }}>
-          <Scrollbar style={{ maxHeight: 400 }}>
+        <NotificationItemContent
+          style={{ position: 'relative', overflow: 'hidden', paddingRight: 10, paddingBottom: 10 }}
+        >
+          <Scrollbar style={{ maxHeight: 400, width: 300 }}>
+            <div style={{ minWidth: 400 }}></div>
             Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
             <Separator height={8} />
             Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
