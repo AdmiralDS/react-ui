@@ -90,7 +90,7 @@ export const rowBackground = css<{
         : ($rowStatusMap[$status] as any)(theme.color);
     }
     if ($grey) {
-      return `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`;
+      return `var(--admiral-color-Opacity_Neutral4, ${theme.color['Opacity/Neutral 4']})`;
     }
     return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
   }}
