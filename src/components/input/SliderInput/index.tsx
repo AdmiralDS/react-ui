@@ -49,7 +49,7 @@ const Input = styled(NumberInput)`
 // TODO: in next major version rename onChange to OLD_onChange deprecated method,
 // and create new native input onChange with event
 
-export interface SliderInputProps extends Omit<TextInputProps, 'onChange'> {
+export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'isLoading'> {
   /** Колбек на изменение значения компонента
    * (fullStr - строка вместе с префиксом/суффиксом/разделителями,
    * shortStr - строка только с числом без символа разделителя тысяч)
