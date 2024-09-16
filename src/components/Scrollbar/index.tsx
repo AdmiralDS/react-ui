@@ -5,8 +5,8 @@ import observeRect from '../common/observeRect';
 
 const verticalThumbHeghtCSSPropName = '--vertical-thumb-height';
 
-const Content = styled.div`
-  overflow: auto;
+const HiddenNativeScroll = styled.div`
+  overflow: scroll;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -14,6 +14,7 @@ const Content = styled.div`
     display: none;
   }
 `;
+
 const VerticalScrollAria = styled.div`
   position: absolute;
   right: 0;
@@ -39,8 +40,11 @@ const VerticalThumb = styled.div`
 `;
 
 export type ScrollbarProps = React.ComponentPropsWithoutRef<'div'> & {
+  /** Ref на скролируемый контейнер*/
   scrollBoxRef?: React.ForwardedRef<HTMLDivElement>;
+  /** Ref на контейнер сожержащий вертикальный скролбар */
   verticalScrollAriaRef?: React.ForwardedRef<HTMLDivElement>;
+  /** Минимально допустимы размер скролбара */
   minThumbSize?: number;
 };
 export const Scrollbar = ({
@@ -167,9 +171,9 @@ export const Scrollbar = ({
 
   return (
     <>
-      <Content id={scrollAriaId} ref={composedContentRef} {...props}>
+      <HiddenNativeScroll id={scrollAriaId} ref={composedContentRef} {...props}>
         {children}
-      </Content>
+      </HiddenNativeScroll>
       <VerticalScrollAria ref={composedVerticalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <VerticalTrack onClick={handleTrackClick} />
         <VerticalThumb

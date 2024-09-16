@@ -42,13 +42,13 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
     },
     ref,
   ) => {
-    //di не должно меняться на каждый ререндер если его не назначили
+    //id не должно меняться на каждый ререндер если его не назначили
     const id = useMemo(() => passedId || uid(), [passedId]);
 
     const fieldContainerProps = {
       'data-field-id': id,
       'data-field-name': name,
-    } as Record<string, any>;
+    } as Record<string, string | number>;
 
     passFormFieldContainerDataAttributes(props, fieldContainerProps);
 
