@@ -97,9 +97,6 @@ export default {
     skeleton: {
       control: { type: 'boolean' },
     },
-    isLoading: {
-      control: { type: 'boolean' },
-    },
     multilineView: {
       control: { type: 'boolean' },
     },
