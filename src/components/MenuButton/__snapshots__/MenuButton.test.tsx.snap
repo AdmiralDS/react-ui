@@ -16,6 +16,10 @@ exports[`MenuButton should render component 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c3[data-loading] {
+  pointer-events: none;
+}
+
 .c3[data-disabled] {
   pointer-events: none;
 }
@@ -575,6 +579,10 @@ exports[`MenuButton should render component 1`] = `
 
 .c3:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c3[data-loading] {
+  pointer-events: none;
 }
 
 .c3[data-disabled] {
@@ -1193,6 +1201,10 @@ exports[`MenuButton should render component with loading state 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c6[data-loading] {
+  pointer-events: none;
+}
+
 .c6[data-disabled] {
   pointer-events: none;
 }
@@ -1790,6 +1802,10 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c6:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c6[data-loading] {
+  pointer-events: none;
 }
 
 .c6[data-disabled] {
@@ -2446,6 +2462,10 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c4[data-loading] {
+  pointer-events: none;
+}
+
 .c4[data-disabled] {
   pointer-events: none;
 }
@@ -3011,6 +3031,10 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c4:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4[data-loading] {
+  pointer-events: none;
 }
 
 .c4[data-disabled] {
