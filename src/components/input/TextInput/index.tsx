@@ -406,11 +406,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
-      function oninput(this: HTMLInputElement) {
+      function oninput(this: HTMLInputElement, e: Event) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };
 
-        const inputData = handleInput(currentInputData);
+        const inputData = handleInput(currentInputData, e as InputEvent);
 
         if (placeholder && !isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(this, { ...inputData, value: '' });
