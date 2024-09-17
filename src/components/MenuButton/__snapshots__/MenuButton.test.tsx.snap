@@ -1305,7 +1305,8 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: pointer;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1908,7 +1909,8 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: pointer;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -2539,7 +2541,8 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -3110,7 +3113,8 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
