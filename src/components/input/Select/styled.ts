@@ -194,7 +194,7 @@ export const SelectWrapper = styled.div<{
   display: flex;
   align-items: ${(p) => (p.$multiple ? 'flex-start' : 'center')};
   cursor: ${({ disabled, $readonly, $isLoading }) =>
-    disabled || $isLoading ? 'not-allowed' : $readonly ? 'default' : 'pointer'};
+    disabled ? 'not-allowed' : $readonly || $isLoading ? 'default' : 'pointer'};
 
   padding: ${({ $dimension, $multiple }) => {
     switch ($dimension) {

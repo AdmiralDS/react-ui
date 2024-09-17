@@ -69,7 +69,7 @@ const CountryContainer = styled.div<{
   $isLoading?: boolean;
   $skeleton?: boolean;
 }>`
-  cursor: ${({ disabled, $isLoading }) => (disabled || $isLoading ? 'not-allowed' : 'pointer')};
+  cursor: ${({ disabled, $isLoading }) => (disabled ? 'not-allowed' : $isLoading ? 'default' : 'pointer')};
   position: absolute;
   top: 50%;
   left: 16px;

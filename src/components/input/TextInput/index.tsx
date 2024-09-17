@@ -247,7 +247,7 @@ const StyledContainer = styled(HeightLimitedContainer)<{
   $dimension?: ComponentDimension;
 }>`
   ${BorderedDivStyles}
-  ${(p) => (p.disabled || p.$isLoading ? 'cursor: not-allowed;' : '')}
+  ${(p) => (p.disabled ? 'cursor: not-allowed;' : p.$isLoading ? 'cursor: default;' : '')}
 `;
 
 function defaultHandleInput(newInputData: InputData | null): InputData {
