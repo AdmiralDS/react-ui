@@ -61,7 +61,7 @@ export const StickyGroupRow = styled.div`
 export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   background: ${({ theme, $greyHeader }) =>
     $greyHeader
-      ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+      ? `var(--admiral-color-Opacity_Neutral4, ${theme.color['Opacity/Neutral 4']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
   ${TableContainer}[data-shadow='true'] & {
@@ -115,7 +115,7 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
       height: 100%;
       background: ${({ theme, $greyHeader }) =>
         $greyHeader
-          ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+          ? `var(--admiral-color-Opacity_Neutral4, ${theme.color['Opacity/Neutral 4']})`
           : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
       width: ${({ $scrollbar }) => $scrollbar}px;
       border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
@@ -129,7 +129,7 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
     $greyHeader &&
     css`
       & > div.tr {
-        background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
+        background: var(--admiral-color-Opacity_Neutral4, ${(p) => p.theme.color['Opacity/Neutral 4']});
       }
     `}
 `;
