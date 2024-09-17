@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.21.0](https://github.com/AdmiralDS/react-ui/compare/v8.20.0...v8.21.0) (2024-09-17)
+
+
+### Features
+
+* **Menu:** [#1501](https://github.com/AdmiralDS/react-ui/issues/1501) добавить возможность отключать выбор опции через нажатие на пробел или Enter ([aa1d374](https://github.com/AdmiralDS/react-ui/commit/aa1d37439e826a7abbefc2438f160e55348ea5f5))
+* **PhoneNumberInput:** Добавлен функционал placeholder для компонента ([83f6010](https://github.com/AdmiralDS/react-ui/commit/83f60109d714ed44556ecb7cb53d2bddd2e775f4)), closes [#1483](https://github.com/AdmiralDS/react-ui/issues/1483)
+* **Table:** [#1480](https://github.com/AdmiralDS/react-ui/issues/1480) фоновый цвет серых хедера и строк таблицы изменён на группу Opacity ([8e0bb6b](https://github.com/AdmiralDS/react-ui/commit/8e0bb6b25d8e49929f465c9bf34c161109b63d24))
+
+
+### Bug Fixes
+
+* **DateInput:** [#1495](https://github.com/AdmiralDS/react-ui/issues/1495) некорректное поведение при попытке набора буквы ([6ba2be6](https://github.com/AdmiralDS/react-ui/commit/6ba2be6204f2a5517b0b998801515a079fc110e9))
+* **IconButton:** [#1497](https://github.com/AdmiralDS/react-ui/issues/1497) исправлен баг с невидимыми иконками в сторибуке ([3060fdf](https://github.com/AdmiralDS/react-ui/commit/3060fdf31602fa537a52528a84105b378f7dbd20))
+
 ## [8.20.0](https://github.com/AdmiralDS/react-ui/compare/v8.19.0...v8.20.0) (2024-09-13)
 
 

@@ -160,11 +160,6 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       if (code === keyboardKey.Enter && isSuggestPanelOpen) {
         e.preventDefault();
       }
-
-      // prevent selecting option on Space press when Menu is opened
-      if (code === keyboardKey[' '] && isSuggestPanelOpen) {
-        e.stopPropagation();
-      }
     };
 
     const [blurTrigger, triggerDelayedBlur] = useState<undefined | unknown>();
@@ -273,6 +268,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
                 onActivateItem={setActiveOption}
                 onSelectItem={handleOptionSelect}
                 preventFocusSteal
+                disableSelectionOnSpace
               />
             )}
           </SuggestDropdownContainer>
