@@ -36,6 +36,14 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
+function preventUseUnsupportedCharacters(e: React.CompositionEvent<HTMLInputElement>) {
+  const typedChar = e.data;
+  if (typedChar && typedChar.replace(/[^\d_.]/g, '').length === 0) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}
+
 export interface DateInputProps
   extends Omit<TextInputProps, 'iconsBefore'>,
     Omit<CalendarPropType, 'onChange' | 'range'>,
@@ -101,6 +109,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       locale,
       onDateIncreaseDecrease,
       dimension = 'm',
+      onBeforeInput = preventUseUnsupportedCharacters,
       ...props
     },
     ref,
@@ -189,6 +198,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...{ dimension, ...props }}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
+        onBeforeInput={onBeforeInput}
         iconsAfter={iconArray}
         containerRef={inputContainerRef}
         skeleton={skeleton}
