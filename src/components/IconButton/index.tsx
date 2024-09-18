@@ -171,7 +171,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         );
       }
       if (skeleton) {
-        return <IconButtonContent />;
+        return <IconButtonContent $dimension={dimension} />;
       }
       return (
         <IconButtonContent $dimension={dimension} $appearance={appearance}>
