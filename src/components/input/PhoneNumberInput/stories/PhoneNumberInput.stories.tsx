@@ -8,11 +8,13 @@ import { INPUT_STATUS_VALUES, PhoneNumberInput, ALL_BORDER_RADIUS_VALUES } from 
 import { PhoneNumberInputXLTemplate } from './PhoneNumberInputXL.template';
 import { PhoneNumberInputMTemplate } from './PhoneNumberInputM.template';
 import { PhoneNumberInputSTemplate } from './PhoneNumberInputS.template';
+import { PhoneNumberInputWithPlaceholderTemplate } from './PhoneNumberInputWithPlaceholder.template';
 
 // Imports of text sources
 import PhoneNumberInputXLRaw from './PhoneNumberInputXL.template?raw';
 import PhoneNumberInputMRaw from './PhoneNumberInputM.template?raw';
 import PhoneNumberInputSRaw from './PhoneNumberInputS.template?raw';
+import PhoneNumberInputWithPlaceholderRaw from './PhoneNumberInputWithPlaceholder.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -177,4 +179,22 @@ export const PhoneNumberInputS = {
   },
 
   name: 'Phone Number Input. Размер S с заданной страной по умолчанию',
+};
+
+const PhoneNumberInputWithPlaceholderStory: StoryFn<typeof PhoneNumberInput> = (props) => (
+  <PhoneNumberInputWithPlaceholderTemplate {...props} />
+);
+
+export const PhoneNumberInputWithPlaceholder = {
+  render: PhoneNumberInputWithPlaceholderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PhoneNumberInputWithPlaceholderRaw,
+      },
+    },
+  },
+
+  name: 'Phone Number Input. С placeholder',
 };

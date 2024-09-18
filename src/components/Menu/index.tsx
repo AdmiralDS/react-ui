@@ -128,6 +128,13 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox) */
   disableSelectedOptionHighlight?: boolean;
+
+  /** Отключает функцию выбора опции при нажатии на пробел */
+  disableSelectionOnSpace?: boolean;
+
+  /** Отключает функцию выбора опции при нажатии на Enter */
+  disableSelectionOnEnter?: boolean;
+
   onForwardCycleApprove?: () => boolean;
   onBackwardCycleApprove?: () => boolean;
   /** ссылка на контейнер, в котором находится Menu*/
@@ -200,6 +207,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       maxHeight,
       preselectedModeActive = false,
       onMenuKeyDown,
+      disableSelectionOnSpace,
+      disableSelectionOnEnter,
 
       ...props
     },
@@ -318,8 +327,17 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
         const code = keyboardKey.getCode(e);
         switch (code) {
-          case keyboardKey[' ']:
+          case keyboardKey[' ']: {
+            if (disableSelectionOnSpace) break;
+            if (preselectedModeActive && !!preselectedId) {
+              handleClickItem(preselectedId);
+            } else if (activeId) handleClickItem(activeId);
+
+            e.preventDefault();
+            break;
+          }
           case keyboardKey.Enter: {
+            if (disableSelectionOnEnter) break;
             if (preselectedModeActive && !!preselectedId) {
               handleClickItem(preselectedId);
             } else if (activeId) handleClickItem(activeId);
@@ -377,7 +395,15 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeId, activeState, currentActiveMenu, preselectedId]);
+    }, [
+      active,
+      activeId,
+      activeState,
+      currentActiveMenu,
+      preselectedId,
+      disableSelectionOnSpace,
+      disableSelectionOnEnter,
+    ]);
 
     useEffect(() => {
       if (defaultIsActive) activateMenu?.(wrapperRef);

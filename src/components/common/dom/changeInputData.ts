@@ -12,7 +12,7 @@ export function isInputDataDifferent(data1: InputData, data2: InputData): boolea
   );
 }
 
-export type CustomInputHandler = (newInputData: InputData | null) => InputData;
+export type CustomInputHandler = (newInputData: InputData | null, e?: InputEvent) => InputData;
 
 export function changeInputData(input: HTMLInputElement | HTMLTextAreaElement, toChangeData: InputData): void {
   const { value = input.value, selectionStart, selectionEnd } = toChangeData;

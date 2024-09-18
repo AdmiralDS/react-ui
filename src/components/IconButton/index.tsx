@@ -108,7 +108,6 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   align-items: center;
   width: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
   height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-  container-type: inline-size;
 
   .icon-button-group[data-dimension='m'] &&,
   .icon-button-group[data-dimension='l'] &&,
@@ -144,6 +143,10 @@ const IconButtonContent = styled.span<{ $dimension?: Dimension; $appearance?: Ic
   }
 `;
 
+const SpinnerContainer = styled(IconButtonContent)`
+  container-type: inline-size;
+`;
+
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
@@ -162,9 +165,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     const renderContent = () => {
       if (loading) {
         return (
-          <IconButtonContent $dimension={dimension}>
+          <SpinnerContainer $dimension={dimension}>
             <SpinnerIcon />
-          </IconButtonContent>
+          </SpinnerContainer>
         );
       }
       if (skeleton) {

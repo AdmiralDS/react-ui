@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -28,6 +27,7 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { MenuDimensions } from '#src/components/Menu';
 import { keyboardKey } from '../../common/keyboardKey';
 import { ReactComponent as GlobeOutline } from '@admiral-ds/icons/build/category/GlobeOutline.svg';
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 const Chevron = styled(SmallArrowDownOutline)<{ disabled?: boolean }>`
   transition: transform 0.3s;
@@ -112,7 +112,7 @@ export interface PhoneNumberInputProps
 
 const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
 
-export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberInputProps>(
+export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputProps>(
   (
     {
       value = '',
@@ -129,18 +129,18 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
     },
     ref,
   ) => {
-    const [activeIndex, setActiveIndex] = React.useState<number>(-1);
-    const [selectedIndex, setSelectedIndex] = React.useState<number>(-1);
-    const inputContainerRef = React.useRef<HTMLDivElement>(null);
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const [isOpened, setIsOpened] = React.useState<boolean>(false);
+    const [activeIndex, setActiveIndex] = useState<number>(-1);
+    const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+    const inputContainerRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
 
-    const menuDimension: MenuDimensions = React.useMemo(() => {
+    const menuDimension: MenuDimensions = useMemo(() => {
       return dimension === 'xl' ? 'l' : dimension;
     }, [dimension]);
 
-    const countryList = React.useMemo<CountryInfo[]>(() => {
+    const countryList = useMemo<CountryInfo[]>(() => {
       return onlyCountries
         .reduce((acc: CountryPhoneCode[], iso3) => {
           const codes = CountryCodes[iso3];
@@ -162,21 +162,35 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
         .sort((a, b) => a.rusName.localeCompare(b.rusName, 'ru'));
     }, [onlyCountries]);
 
-    const findCountry = React.useMemo<findCountryFunction>(() => getFindCountryFunction(countryList), [countryList]);
+    const getNeedShowPlaceholder = (countryIndex: number): boolean => {
+      const trimmedValue = value.trim();
+      return (
+        !!props.placeholder &&
+        countryIndex > -1 &&
+        (trimmedValue === '+' || (!!selectedIndex && trimmedValue === countryList[countryIndex].code))
+      );
+    };
 
-    const currentCountry = React.useMemo<CountryPhoneCode | null>(() => findCountry(value), [value]);
+    const [showPlaceholder, setShowPlaceholder] = useState<boolean>(getNeedShowPlaceholder(selectedIndex));
+
+    const findCountry = useMemo<findCountryFunction>(() => getFindCountryFunction(countryList), [countryList]);
+
+    const currentCountry = useMemo<CountryPhoneCode | null>(() => findCountry(value), [value]);
     const currentCountryIndex = currentCountry
       ? countryList.findIndex((item) => item.iso3 === currentCountry.iso3 && item.code === currentCountry.code)
       : -1;
     const selectedCountryCode = selectedIndex > -1 ? countryList[selectedIndex].code : null;
     const sameCountryCode = currentCountry?.code === selectedCountryCode;
 
-    if (currentCountryIndex !== selectedIndex && !sameCountryCode) setSelectedIndex(currentCountryIndex);
+    if (currentCountryIndex !== selectedIndex && !sameCountryCode) {
+      setSelectedIndex(currentCountryIndex);
+      setShowPlaceholder(getNeedShowPlaceholder(currentCountryIndex));
+    }
 
     const handleInputRef =
       currentCountryIndex > -1 ? countryList[currentCountryIndex].handleInput : defaultPhoneNumberInputHandler;
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (defaultCountry && selectedIndex === -1) {
         const index = countryList.findIndex((country) => country.iso3 === defaultCountry);
         if (index > -1) {
@@ -261,7 +275,7 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       setIsOpened(false);
     };
 
-    const IconComponent = React.useMemo<JSX.Element | null>(() => {
+    const IconComponent = useMemo<JSX.Element | null>(() => {
       const SvgComponent =
         selectedIndex > -1
           ? (FlagsPack as { [key: ComponentName]: React.ElementType })[countryList[selectedIndex].name]
@@ -269,11 +283,11 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       return <Flag dimension={menuDimension} Component={SvgComponent} />;
     }, [selectedIndex]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       setActiveIndex(isOpened ? selectedIndex : -1);
     }, [isOpened]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (isOpened) {
         setActiveIndex(selectedIndex);
       }
@@ -289,15 +303,32 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
       selectCountry(index);
     };
 
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      const trimmedValue = value.trim();
+      if (
+        props.placeholder &&
+        (trimmedValue === '+' || (!!selectedIndex && trimmedValue === countryList[selectedIndex].code))
+      ) {
+        setShowPlaceholder(true);
+      }
+      props.onBlur?.(e);
+    };
+
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      setShowPlaceholder(false);
+      props.onFocus?.(e);
+    };
+
     return (
       <PhoneContainer ref={containerRef} $dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
         <TextInput
           {...props}
           type="tel"
           ref={refSetter(ref, inputRef)}
-          handleInput={handleInputRef}
+          handleInput={showPlaceholder ? undefined : handleInputRef}
           containerRef={inputContainerRef}
-          value={value}
+          value={showPlaceholder ? '' : value}
+          placeholder={showPlaceholder ? props.placeholder : undefined}
           disabled={disabled}
           dimension={dimension}
           skeleton={skeleton}
@@ -306,6 +337,8 @@ export const PhoneNumberInput = React.forwardRef<HTMLInputElement, PhoneNumberIn
             props.onKeyDown?.(...p);
             handleKeyDown(...p);
           }}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
         >
           {isOpened && !disabled && !skeleton && (
             <PhoneInputDropContainer
