@@ -168,8 +168,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       decimal: userDecimal,
       fillEmptyDecimals,
       step = 1,
-      minValue,
-      maxValue,
+      minValue = Number.NEGATIVE_INFINITY,
+      maxValue = Number.POSITIVE_INFINITY,
       placeholder,
       align = 'left',
       skeleton = false,
@@ -198,49 +198,32 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     useEffect(() => {
       if (innerValue || innerValue === 0) {
-        let minusDsb = false;
-        let plusDsb = false;
-        if (typeof minValue === 'number') {
-          minusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) - step < minValue;
-        }
-        if (typeof maxValue === 'number') {
-          plusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) + step > maxValue;
-        }
-        setMinusDisabled(minusDsb);
-        setPlusDisabled(plusDsb);
+        const num = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.'));
+        setMinusDisabled(num <= minValue);
+        setPlusDisabled(num >= maxValue);
       } else {
-        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- должны быть задизейблены
-        setMinusDisabled(true);
-        setPlusDisabled(true);
+        setMinusDisabled(false);
+        setPlusDisabled(false);
       }
     }, [innerValue]);
 
     const handleMinus = () => {
-      const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
+      const current = inputRef.current?.value || '0';
+      const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
+      const newValue = Math.min(Math.max(num, minValue), maxValue);
       const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
-        if (typeof minValue === 'number') {
-          if (newValue >= minValue) {
-            changeInputData(inputRef.current, { value: newValueStr });
-          }
-        } else {
-          changeInputData(inputRef.current, { value: newValueStr });
-        }
+        changeInputData(inputRef.current, { value: newValueStr });
       }
     };
+
     const handlePlus = () => {
-      const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
+      const current = inputRef.current?.value || '0';
+      const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
+      const newValue = Math.min(Math.max(num, minValue), maxValue);
       const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
       if (inputRef.current) {
-        if (typeof maxValue === 'number') {
-          if (newValue <= maxValue) {
-            changeInputData(inputRef.current, { value: newValueStr });
-          }
-        } else {
-          changeInputData(inputRef.current, { value: newValueStr });
-        }
+        changeInputData(inputRef.current, { value: newValueStr });
       }
     };
 
