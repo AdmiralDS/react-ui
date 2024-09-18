@@ -156,6 +156,9 @@ export default {
     menuMaxHeight: {
       control: false,
     },
+    buttonCssMixin: {
+      control: false,
+    },
     dropContainerCssMixin: {
       control: false,
     },
