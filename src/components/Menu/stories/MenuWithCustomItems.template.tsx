@@ -132,12 +132,10 @@ const MyMenuItem = ({
   selected = false,
   success = false,
   dimension,
+  onLeave,
+  hasSubmenu,
   ...props
 }: MyMenuItemProps) => {
-  // вычищаем лишьние пропсы от попадания на div
-  props.onLeave = undefined;
-  props.hasSubmenu = undefined;
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     onHover?.(e);
   };
