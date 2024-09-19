@@ -1,5 +1,5 @@
 import type { FC, KeyboardEvent, MouseEvent, ReactNode, HTMLAttributes } from 'react';
-import React, { Children, cloneElement, isValidElement } from 'react';
+import { Children, cloneElement, isValidElement } from 'react';
 import styled from 'styled-components';
 import type { TagDimension, TagKind } from '#src/components/Tag';
 

@@ -36,7 +36,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -57,7 +57,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -74,11 +74,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -93,31 +93,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -129,7 +129,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -141,18 +141,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -207,7 +211,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -238,27 +242,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="1"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="1"
                 id="1"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -271,27 +275,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="2"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="2"
                 id="2"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -300,7 +304,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -309,7 +313,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -350,7 +354,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -371,7 +375,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -388,11 +392,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -407,31 +411,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -443,7 +447,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -455,18 +459,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -521,7 +529,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -551,27 +559,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="1"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -584,27 +592,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="2"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -613,7 +621,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -622,7 +630,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -719,7 +727,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -740,7 +748,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -757,11 +765,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -776,31 +784,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -812,7 +820,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -824,18 +832,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -890,7 +902,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -921,27 +933,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="1"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="1"
                 id="1"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -954,27 +966,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="2"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="2"
                 id="2"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -983,7 +995,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -992,7 +1004,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -1033,7 +1045,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -1054,7 +1066,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1071,11 +1083,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1090,31 +1102,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1126,7 +1138,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1138,18 +1150,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -1204,7 +1220,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -1234,27 +1250,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="1"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1267,27 +1283,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="2"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1296,7 +1312,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1305,7 +1321,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
@@ -1402,7 +1418,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -1423,7 +1439,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1440,11 +1456,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1459,31 +1475,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1495,7 +1511,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1507,18 +1523,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -1573,7 +1593,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -1604,27 +1624,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="1"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="1"
                 id="1"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 1
           </div>
@@ -1637,27 +1657,27 @@ fieldset[data-dimension='s'] .c6 {
             data-field-id="2"
           >
             <div
-              class="c6"
+              class="c6 c7"
             >
               <input
-                class="c7"
+                class="c8"
                 data-key="2"
                 id="2"
                 type="checkbox"
               />
               <div
-                class="c8 c9"
+                class="c9 c10"
               >
                 <div
                   aria-hidden="true"
-                  class="c10"
+                  class="c11"
                   focusable="false"
                 />
               </div>
             </div>
           </label>
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 2
           </div>
@@ -1666,7 +1686,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 3
           </div>
@@ -1675,7 +1695,7 @@ fieldset[data-dimension='s'] .c6 {
           class="c1"
         >
           <div
-            class="c11"
+            class="c12"
           >
             Текст заголовка, первый уровень компонента, размер M 40 4
           </div>
@@ -1716,7 +1736,7 @@ fieldset:disabled .c4.c4 {
   cursor: not-allowed;
 }
 
-.c10 {
+.c11 {
   pointer-events: none;
 }
 
@@ -1737,7 +1757,7 @@ fieldset[data-dimension='s'] .c6 {
   height: 16px;
 }
 
-.c9 {
+.c10 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1754,11 +1774,11 @@ fieldset[data-dimension='s'] .c6 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c9 *[fill^='#'] {
+.c10 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c7 {
+.c8 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1773,31 +1793,31 @@ fieldset[data-dimension='s'] .c6 {
   padding: 0;
 }
 
-.c7 ::-ms-check {
+.c8 ::-ms-check {
   display: none;
 }
 
-.c7:checked+.c8 {
+.c8:checked+.c9 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c7:disabled {
+.c8:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c7:disabled+.c8 {
+.c8:disabled+.c9 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c7:not(:checked)+.c8 >* {
+.c8:not(:checked)+.c9 >* {
   display: none;
 }
 
-.c7:hover:not(:disabled)::after,
-.c7:focus:not(:disabled)+.c7:not(:disabled)::after {
+.c8:hover:not(:disabled)::after,
+.c8:focus:not(:disabled)+.c8:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1809,7 +1829,7 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c7:active:not(:disabled):not(:disabled)::after {
+.c8:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1821,18 +1841,22 @@ fieldset[data-dimension='s'] .c6 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c7:checked:disabled+.c8 {
+.c8:checked:disabled+.c9 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c7:checked:disabled+.c8 *[fill^='#'] {
+.c8:checked:disabled+.c9 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c7:focus-visible {
+.c8:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c7 {
+  margin-top: 2px;
 }
 
 .c3 {
@@ -1887,7 +1911,7 @@ fieldset[data-dimension='s'] .c6 {
   flex-shrink: 0;
 }
 
-.c11 {
+.c12 {
   padding-top: 2px;
 }
 
@@ -1917,27 +1941,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="1"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="1"
               id="1"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 1
         </div>
@@ -1950,27 +1974,27 @@ fieldset[data-dimension='s'] .c6 {
           data-field-id="2"
         >
           <div
-            class="c6"
+            class="c6 c7"
           >
             <input
-              class="c7"
+              class="c8"
               data-key="2"
               id="2"
               type="checkbox"
             />
             <div
-              class="c8 c9"
+              class="c9 c10"
             >
               <div
                 aria-hidden="true"
-                class="c10"
+                class="c11"
                 focusable="false"
               />
             </div>
           </div>
         </label>
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 2
         </div>
@@ -1979,7 +2003,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 3
         </div>
@@ -1988,7 +2012,7 @@ fieldset[data-dimension='s'] .c6 {
         class="c1"
       >
         <div
-          class="c11"
+          class="c12"
         >
           Текст заголовка, первый уровень компонента, размер M 40 4
         </div>
