@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
+import { useState } from 'react';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 import styled from 'styled-components';

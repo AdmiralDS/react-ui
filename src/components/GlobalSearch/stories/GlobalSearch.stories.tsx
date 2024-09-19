@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import styled from 'styled-components';
