@@ -1,11 +1,12 @@
 import type { ChangeEvent, MouseEvent, FocusEvent, KeyboardEvent } from 'react';
-import { useState, useRef, useEffect, forwardRef, Children } from 'react';
+import { useState, useRef, useEffect, forwardRef, Children, useMemo } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { TextInputProps } from '#src/components/input/TextInput';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
+import type { CustomInputHandler } from '#src/components/common/dom/changeInputData';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -18,6 +19,8 @@ import { HeightLimitedContainer } from '../Container';
 
 import { AutoSizeInput, BorderedDiv, horizontalPaddingValue, iconSizeValue } from './AutoSizeInput';
 import { clearValue, fitToCurrency, validateThousand, getDecimalSeparator, getThousandSeparator } from './utils';
+import type { NumberInputHandlerCreatorParams } from './createNumberInputHandler';
+import { createNumberInputHandler } from './createNumberInputHandler';
 
 const extraPadding = css<ExtraProps>`
   padding-right: ${(props) =>
@@ -113,7 +116,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
   }
 `;
 
-export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore'> {
+export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore' | 'isLoading'> {
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** префикс (строка, которая выводится перед числовым значением) */
@@ -126,6 +129,16 @@ export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore'> {
   /** разделитель между целым и десятичным. Если значение не задано,
    * то оно определяется согласно локали, в русской локали decimal - это запятая */
   decimal?: string;
+  /**
+   * Данный флаг управляет дозаполнением десятичной части числа нулями при потере инпутом фокуса, либо при нажатии кнопок +/-
+   * По умолчанию fillEmptyDecimals установлен в true
+   *
+   * Подробнее: если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
+   * и fillEmptyDecimals установлен в true, то произойдет проверка того, сколько знаков в числе после разделителя decimal
+   * и если таких знаков меньше, чем precision, недостающее количество будет заполнено нулями.
+   * Например, при precision={3} строка '3.9' превратится в '3.900'
+   */
+  fillEmptyDecimals?: boolean;
   /** Шаг инпута. Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision */
   step?: number;
   /** Минимальное значение. При minValue >= 0, ввод знака минус блокируется */
@@ -136,6 +149,8 @@ export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore'> {
   displayPlusMinusIcons?: boolean;
   /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
   align?: 'left' | 'right';
+  /** Функция высшего порядка для получения функции handleInput */
+  createInputHandler?: (params: NumberInputHandlerCreatorParams) => CustomInputHandler;
 }
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
@@ -154,14 +169,17 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       precision = 2,
       thousand: userThousand,
       decimal: userDecimal,
+      fillEmptyDecimals = true,
       step = 1,
-      minValue,
-      maxValue,
+      minValue = Number.NEGATIVE_INFINITY,
+      maxValue = Number.POSITIVE_INFINITY,
       placeholder,
       align = 'left',
       skeleton = false,
       onChange,
       onBlur,
+      createInputHandler = createNumberInputHandler,
+      handleInput,
       ...props
     },
     ref,
@@ -183,49 +201,32 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     useEffect(() => {
       if (innerValue || innerValue === 0) {
-        let minusDsb = false;
-        let plusDsb = false;
-        if (typeof minValue === 'number') {
-          minusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) - step < minValue;
-        }
-        if (typeof maxValue === 'number') {
-          plusDsb = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.')) + step > maxValue;
-        }
-        setMinusDisabled(minusDsb);
-        setPlusDisabled(plusDsb);
+        const num = Number(clearValue(String(innerValue), precision, decimal).replace(decimal, '.'));
+        setMinusDisabled(num <= minValue);
+        setPlusDisabled(num >= maxValue);
       } else {
-        // Если параметры value, defaultValue не заданы или являются пустыми строками, тогда кнопки +/- должны быть задизейблены
-        setMinusDisabled(true);
-        setPlusDisabled(true);
+        setMinusDisabled(false);
+        setPlusDisabled(false);
       }
     }, [innerValue]);
 
     const handleMinus = () => {
-      const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
-      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
+      const current = inputRef.current?.value || '0';
+      const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
+      const newValue = Math.min(Math.max(num, minValue), maxValue);
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current) {
-        if (typeof minValue === 'number') {
-          if (newValue >= minValue) {
-            changeInputData(inputRef.current, { value: newValueStr });
-          }
-        } else {
-          changeInputData(inputRef.current, { value: newValueStr });
-        }
+        changeInputData(inputRef.current, { value: newValueStr });
       }
     };
+
     const handlePlus = () => {
-      const current = inputRef.current?.value || '';
-      const newValue = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
-      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
+      const current = inputRef.current?.value || '0';
+      const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
+      const newValue = Math.min(Math.max(num, minValue), maxValue);
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current) {
-        if (typeof maxValue === 'number') {
-          if (newValue <= maxValue) {
-            changeInputData(inputRef.current, { value: newValueStr });
-          }
-        } else {
-          changeInputData(inputRef.current, { value: newValueStr });
-        }
+        changeInputData(inputRef.current, { value: newValueStr });
       }
     };
 
@@ -273,7 +274,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
      * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70,' => '70,00' при precision={2}
      */
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);
+      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current && newValue !== event.target.value) {
         changeInputData(inputRef.current, { value: newValue });
       }
@@ -301,6 +302,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       }
     };
 
+    const handler = useMemo(
+      () => (handleInput ? handleInput : createInputHandler({ precision, decimal, thousand, minValue, maxValue })),
+      [precision, decimal, thousand, minValue, maxValue, handleInput],
+    );
+
     return (
       <Wrapper
         ref={containerRef}
@@ -323,14 +329,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             onBlur={handleBlur}
             suffix={suffix}
             prefix={prefix}
-            thousand={thousand}
-            decimal={decimal}
-            precision={precision}
             status={status}
-            minValue={minValue}
             iconCount={iconCount}
             align={align}
             innerValue={innerValue}
+            handleInput={handler}
             {...props}
           />
         </Content>

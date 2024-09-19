@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
@@ -92,9 +91,6 @@ export default {
       control: false,
     },
     skeleton: {
-      control: { type: 'boolean' },
-    },
-    isLoading: {
       control: { type: 'boolean' },
     },
   },

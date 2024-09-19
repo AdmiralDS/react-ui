@@ -16,6 +16,10 @@ export const InputIconButton = styled(AnyIcon)`
   }
   cursor: pointer;
 
+  [data-loading] &&& {
+    pointer-events: none;
+  }
+
   [disabled] &&& {
     pointer-events: none;
     & *[fill^='#'] {

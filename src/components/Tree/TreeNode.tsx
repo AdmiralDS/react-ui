@@ -111,7 +111,7 @@ const RowWrapper = styled.div<{
   align-items: flex-start;
   box-sizing: border-box;
   min-height: ${({ $dimension }) => ($dimension === 'm' ? '40px' : '32px')};
-  ${backgroundColor};
+  ${(p) => !p.disabled && backgroundColor};
   cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   padding: ${(p) =>
     p.$dimension === 'm'

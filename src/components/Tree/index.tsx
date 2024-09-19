@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import React, { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
 import type { Dimension, TreeItemProps, TreeNodeRenderOptionProps } from './TreeNode';
 import styled from 'styled-components';
 
@@ -203,7 +203,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           : !!item.checked;
 
         return (
-          <React.Fragment key={item.id}>
+          <Fragment key={item.id}>
             {item.render({
               checked,
               indeterminate,
@@ -223,7 +223,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               onToggleExpand: () => toggleExpand(item.id),
             } as TreeNodeRenderOptionProps)}
             {item.children && hasChildren && item.expanded && renderChildren(item.children)}
-          </React.Fragment>
+          </Fragment>
         );
       });
     };

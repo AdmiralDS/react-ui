@@ -18,6 +18,10 @@ export const OpenStatusButton = styled(ChevronDownOutline)<{ $isOpen?: boolean; 
       p.appearance === 'white' ? '' : `var(--admiral-color-Primary_Primary70, ${p.theme.color['Primary/Primary 70']})`};
   }
 
+  &[data-loading] {
+    pointer-events: none;
+  }
+
   &[data-disabled] {
     pointer-events: none;
 

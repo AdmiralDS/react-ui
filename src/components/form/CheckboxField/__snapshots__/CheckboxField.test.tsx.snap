@@ -3,7 +3,7 @@
 exports[`CheckboxField should render component with disabled state 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
@@ -24,7 +24,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -41,11 +41,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -60,31 +60,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -96,7 +96,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -108,16 +108,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -155,7 +155,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -172,11 +172,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -184,6 +184,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -194,27 +198,27 @@ fieldset[data-dimension='s'] .c6.c6 {
         disabled=""
       >
         <div
-          class="c1"
+          class="c1 c2"
         >
           <input
-            class="c2"
+            class="c3"
             data-testid="element"
             disabled=""
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c3 c4"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c6"
+          class="c7"
           disabled=""
         >
           text
@@ -222,7 +226,7 @@ fieldset[data-dimension='s'] .c6.c6 {
       </label>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   pointer-events: none;
 }
 
@@ -243,7 +247,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -260,11 +264,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -279,31 +283,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -315,7 +319,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -327,16 +331,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -374,7 +378,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -391,11 +395,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -405,6 +409,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
@@ -412,27 +420,27 @@ fieldset[data-dimension='s'] .c6.c6 {
       disabled=""
     >
       <div
-        class="c1"
+        class="c1 c2"
       >
         <input
-          class="c2"
+          class="c3"
           data-testid="element"
           disabled=""
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c3 c4"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
         disabled=""
       >
         text
@@ -496,7 +504,7 @@ fieldset[data-dimension='s'] .c6.c6 {
 exports[`CheckboxField should render component with required properties 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
@@ -517,7 +525,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -534,11 +542,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -553,31 +561,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -589,7 +597,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -601,16 +609,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -648,7 +656,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -665,11 +673,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -677,6 +685,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -686,33 +698,33 @@ fieldset[data-dimension='s'] .c6.c6 {
         data-field-id="checkboxField"
       >
         <div
-          class="c1"
+          class="c1 c2"
         >
           <input
-            class="c2"
+            class="c3"
             data-testid="element"
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c3 c4"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         >
           text
         </div>
       </label>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   pointer-events: none;
 }
 
@@ -733,7 +745,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -750,11 +762,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -769,31 +781,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -805,7 +817,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -817,16 +829,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -864,7 +876,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -881,11 +893,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -895,32 +907,36 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
       data-field-id="checkboxField"
     >
       <div
-        class="c1"
+        class="c1 c2"
       >
         <input
-          class="c2"
+          class="c3"
           data-testid="element"
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c3 c4"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       >
         text
       </div>
@@ -983,7 +999,7 @@ fieldset[data-dimension='s'] .c6.c6 {
 exports[`CheckboxField should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c6 {
   pointer-events: none;
 }
 
@@ -1004,7 +1020,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1021,11 +1037,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1040,31 +1056,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1076,7 +1092,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1088,16 +1104,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -1135,7 +1151,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1152,11 +1168,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1164,6 +1180,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -1173,33 +1193,33 @@ fieldset[data-dimension='s'] .c6.c6 {
         data-field-id="checkboxField"
       >
         <div
-          class="c1"
+          class="c1 c2"
         >
           <input
-            class="c2"
+            class="c3"
             data-testid="element"
             id="checkboxField"
             type="checkbox"
           />
           <div
-            class="c3 c4"
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         >
           text
         </div>
       </label>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c6 {
   pointer-events: none;
 }
 
@@ -1220,7 +1240,7 @@ fieldset[data-dimension='s'] .c1 {
   height: 16px;
 }
 
-.c4 {
+.c5 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1237,11 +1257,11 @@ fieldset[data-dimension='s'] .c1 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c4 *[fill^='#'] {
+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c2 {
+.c3 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1256,31 +1276,31 @@ fieldset[data-dimension='s'] .c1 {
   padding: 0;
 }
 
-.c2 ::-ms-check {
+.c3 ::-ms-check {
   display: none;
 }
 
-.c2:checked+.c3 {
+.c3:checked+.c4 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c2:disabled {
+.c3:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2:disabled+.c3 {
+.c3:disabled+.c4 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c2:not(:checked)+.c3 >* {
+.c3:not(:checked)+.c4 >* {
   display: none;
 }
 
-.c2:hover:not(:disabled)::after,
-.c2:focus:not(:disabled)+.c2:not(:disabled)::after {
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1292,7 +1312,7 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c2:active:not(:disabled):not(:disabled)::after {
+.c3:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1304,16 +1324,16 @@ fieldset[data-dimension='s'] .c1 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c2:checked:disabled+.c3 {
+.c3:checked:disabled+.c4 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c2:checked:disabled+.c3 *[fill^='#'] {
+.c3:checked:disabled+.c4 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c2:focus-visible {
+.c3:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
@@ -1351,7 +1371,7 @@ fieldset:disabled .c0.c0 {
   cursor: not-allowed;
 }
 
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1368,11 +1388,11 @@ fieldset:disabled .c0.c0 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
+fieldset:disabled .c7.c7 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1382,32 +1402,36 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
       data-field-id="checkboxField"
     >
       <div
-        class="c1"
+        class="c1 c2"
       >
         <input
-          class="c2"
+          class="c3"
           data-testid="element"
           id="checkboxField"
           type="checkbox"
         />
         <div
-          class="c3 c4"
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       >
         text
       </div>

@@ -71,11 +71,11 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       selfRef,
       onMouseDown,
       onLeave,
+      containerRef,
       ...props
     },
     ref,
   ) => {
-    props['containerRef'] = undefined;
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
       onHover?.(e);
       props.onMouseMove?.(e);
