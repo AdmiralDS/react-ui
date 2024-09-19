@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { NumberInput } from '#src/components/input/NumberInput';
@@ -109,19 +109,19 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
       ? userThousand.slice(0, 1)
       : getThousandSeparator(theme.currentLocale);
 
-  const input1Ref = React.useRef<HTMLInputElement>(null);
-  const input2Ref = React.useRef<HTMLInputElement>(null);
+  const input1Ref = useRef<HTMLInputElement>(null);
+  const input2Ref = useRef<HTMLInputElement>(null);
 
-  const [slider1, setSlider1] = React.useState(minValue);
-  const [slider2, setSlider2] = React.useState(maxValue);
-  const [innerInput1State, setInnerInput1State] = React.useState(defaultValue?.[0] || '');
-  const [innerInput2State, setInnerInput2State] = React.useState(defaultValue?.[1] || '');
+  const [slider1, setSlider1] = useState(minValue);
+  const [slider2, setSlider2] = useState(maxValue);
+  const [innerInput1State, setInnerInput1State] = useState(defaultValue?.[0] || '');
+  const [innerInput2State, setInnerInput2State] = useState(defaultValue?.[1] || '');
   const input1 = value?.[0] || innerInput1State;
   const input2 = value?.[1] || innerInput2State;
 
   const getFull = (str: string | number) => fitToCurrency(String(str), precision, decimal, thousand, true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (input1 === '') {
       setSlider1(minValue);
     } else {
@@ -130,7 +130,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     }
   }, [input1, minValue, precision, decimal]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (input2 === '') {
       setSlider2(maxValue);
     } else {
@@ -139,7 +139,7 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
     }
   }, [input2, maxValue, precision, decimal]);
 
-  const handleRangeChange = (event: any, value: [number, number]) => {
+  const handleRangeChange = (_event: TouchEvent | MouseEvent, value: [number, number]) => {
     const [newSld1, newSld2] = value;
     const newSlider1 = newSld1 < minValue ? minValue : newSld1;
     const newSlider2 = newSld2 > maxValue ? maxValue : newSld2;
