@@ -1,11 +1,22 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import acceptFile from 'attr-accept';
 import { FileInput, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
 import type { FileAttributeProps, FileInputProps, InputStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
+
+const filesAreEqual = (file1: File, file2: File) =>
+  file1.name === file2.name &&
+  file1.size === file2.size &&
+  file1.type === file2.type &&
+  file1.lastModified === file2.lastModified;
+
+const accept = ['image/*', '.pdf', 'application/json'];
+const ACCEPT_STR = accept.join(', ');
+const maxFilesNumber = 3;
 
 export const FileInputBaseTemplate = ({
   dimension = 'xl',
@@ -18,22 +29,13 @@ export const FileInputBaseTemplate = ({
   const [fileList, setFileList] = React.useState<File[]>([]);
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
   const [status, setStatus] = React.useState<InputStatus | undefined>(undefined);
-
-  const filesAreEqual = (file1: File, file2: File) =>
-    file1.name === file2.name &&
-    file1.size === file2.size &&
-    file1.type === file2.type &&
-    file1.lastModified === file2.lastModified;
-
-  const accept = ['image/*', '.pdf', 'application/json'];
-  const maxFilesNumber = 3;
-
   const handlePreviewIconClick = (file: File) => {
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
+    userSelectedFileList.forEach((file) => console.log(`change ${file.name}`));
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
     const updatedFileList = fileList.reduce((acc: File[], file) => {
       if (userSelectedFileList.findIndex((userFile) => filesAreEqual(userFile, file)) === -1) {
@@ -110,10 +112,10 @@ export const FileInputBaseTemplate = ({
         dimension={dimension}
         disabled={props.disabled}
         width={width}
-        title={dimension === 'xl' ? `Загрузите не более 3-х файлов типа ${accept.join(', ')}` : 'Добавьте файлы'}
+        title={dimension === 'xl' ? `Загрузите не более 3-х файлов типа ${ACCEPT_STR}` : 'Добавьте файлы'}
         ref={inputRef}
         onInput={handleChange}
-        accept={accept.join(', ')}
+        accept={ACCEPT_STR}
         files={fileList}
         status={status}
       >
