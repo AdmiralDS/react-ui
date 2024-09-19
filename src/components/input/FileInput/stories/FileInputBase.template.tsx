@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import acceptFile from 'attr-accept';
 import { FileInput, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
 import type { FileAttributeProps, FileInputProps, InputStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
