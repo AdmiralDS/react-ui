@@ -5,22 +5,16 @@ export type NumberInputHandlerCreatorParams = {
   precision: number;
   decimal: string;
   thousand: string;
-  fillEmptyDecimals?: boolean;
   minValue?: number;
+  maxValue?: number;
 };
 
-export function createNumberInputHandler({
-  precision,
-  decimal,
-  thousand,
-  fillEmptyDecimals,
-  minValue,
-}: NumberInputHandlerCreatorParams) {
+export function createNumberInputHandler({ precision, decimal, thousand, minValue }: NumberInputHandlerCreatorParams) {
   return function (inputData: InputData | null): InputData {
     const { value, selectionStart } = inputData || {};
     const cursor = selectionStart || 0;
     const init_value = value || '';
-    const newValue = fitToCurrency(init_value, precision, decimal, thousand, fillEmptyDecimals, minValue);
+    const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
 
     if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
       // если пытаемся стереть разделитель thousand, то курсор перескакивает через него

@@ -130,10 +130,13 @@ export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore'> {
    * то оно определяется согласно локали, в русской локали decimal - это запятая */
   decimal?: string;
   /**
-   * если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
-   * и данный флаг fillEmptyDecimals установлен в true, то утилита fitToCurrency проверит, сколько знаков в числе после разделителя decimal
+   * Данный флаг управляет дозаполнением десятичной части числа нулями при потере инпутом фокуса, либо при нажатии кнопок +/-
+   * По умолчанию fillEmptyDecimals установлен в true
+   *
+   * Подробнее: если строка должна быть отформатирована как десятичное число (т.е. precision > 0 и в строке есть decimal)
+   * и fillEmptyDecimals установлен в true, то произойдет проверка того, сколько знаков в числе после разделителя decimal
    * и если таких знаков меньше, чем precision, недостающее количество будет заполнено нулями.
-   * Например, при precision={3} строка '3.9' превратится '3.900'
+   * Например, при precision={3} строка '3.9' превратится в '3.900'
    */
   fillEmptyDecimals?: boolean;
   /** Шаг инпута. Если шаг - это дробное число, то количество знаков в десятичной части step должно быть равно precision */
@@ -166,7 +169,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       precision = 2,
       thousand: userThousand,
       decimal: userDecimal,
-      fillEmptyDecimals,
+      fillEmptyDecimals = true,
       step = 1,
       minValue = Number.NEGATIVE_INFINITY,
       maxValue = Number.POSITIVE_INFINITY,
@@ -211,7 +214,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       const current = inputRef.current?.value || '0';
       const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) - step;
       const newValue = Math.min(Math.max(num, minValue), maxValue);
-      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: newValueStr });
       }
@@ -221,7 +224,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       const current = inputRef.current?.value || '0';
       const num = Number(clearValue(current, precision, decimal).replace(decimal, '.')) + step;
       const newValue = Math.min(Math.max(num, minValue), maxValue);
-      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, true);
+      const newValueStr = fitToCurrency(newValue.toFixed(precision), precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: newValueStr });
       }
@@ -271,7 +274,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
      * Если условие выше несоблюдено, должна быть произведена корректировка значения. Например: '70,' => '70,00' при precision={2}
      */
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, true);
+      const newValue = fitToCurrency(event.target.value, precision, decimal, thousand, fillEmptyDecimals);
       if (inputRef.current && newValue !== event.target.value) {
         changeInputData(inputRef.current, { value: newValue });
       }
@@ -300,9 +303,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const handler = useMemo(
-      () =>
-        handleInput ? handleInput : createInputHandler({ precision, decimal, thousand, fillEmptyDecimals, minValue }),
-      [precision, decimal, thousand, fillEmptyDecimals, minValue, handleInput],
+      () => (handleInput ? handleInput : createInputHandler({ precision, decimal, thousand, minValue, maxValue })),
+      [precision, decimal, thousand, minValue, maxValue, handleInput],
     );
 
     return (
