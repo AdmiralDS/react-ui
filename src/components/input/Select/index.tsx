@@ -758,10 +758,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         disabled={disabled}
         data-disabled={disabled}
         $readonly={readOnly}
+        $isLoading={isLoading}
         $dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onClick={disabled || readOnly ? undefined : handleWrapperClick}
+        onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
@@ -860,6 +861,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <OpenStatusButton
               $isOpen={isSearchPanelOpen}
               data-disabled={disabled ? true : undefined}
+              data-loading={isLoading ? true : undefined}
               onClick={handleSearchPanelToggle}
               aria-hidden
             />

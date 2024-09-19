@@ -33,6 +33,10 @@ exports[`DateField should render component 1`] = `
   fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
+[data-loading] .c10.c10.c10 {
+  pointer-events: none;
+}
+
 [disabled] .c10.c10.c10 {
   pointer-events: none;
 }
@@ -121,8 +125,10 @@ exports[`DateField should render component 1`] = `
   border-color: transparent;
 }
 
+[data-loading] .c5.c5.c5,
 .c5.c5.c5:disabled {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .c5 ::-ms-clear,

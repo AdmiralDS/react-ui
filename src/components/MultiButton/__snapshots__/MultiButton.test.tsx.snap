@@ -1029,6 +1029,10 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c9[data-loading] {
+  pointer-events: none;
+}
+
 .c9[data-disabled] {
   pointer-events: none;
 }
@@ -2179,6 +2183,10 @@ exports[`MultiButton should render component with disabled only MainButton 1`] =
 
 .c9:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9[data-loading] {
+  pointer-events: none;
 }
 
 .c9[data-disabled] {
@@ -3388,6 +3396,10 @@ exports[`MultiButton should render component with disabled state 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c9[data-loading] {
+  pointer-events: none;
+}
+
 .c9[data-disabled] {
   pointer-events: none;
 }
@@ -4540,6 +4552,10 @@ exports[`MultiButton should render component with disabled state 1`] = `
 
 .c9:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9[data-loading] {
+  pointer-events: none;
 }
 
 .c9[data-disabled] {
@@ -5751,6 +5767,10 @@ exports[`MultiButton should render component with primary appearance 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c9[data-loading] {
+  pointer-events: none;
+}
+
 .c9[data-disabled] {
   pointer-events: none;
 }
@@ -6900,6 +6920,10 @@ exports[`MultiButton should render component with primary appearance 1`] = `
 
 .c9:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9[data-loading] {
+  pointer-events: none;
 }
 
 .c9[data-disabled] {
@@ -8108,6 +8132,10 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
+.c9[data-loading] {
+  pointer-events: none;
+}
+
 .c9[data-disabled] {
   pointer-events: none;
 }
@@ -9257,6 +9285,10 @@ exports[`MultiButton should render component with secondary appearance 1`] = `
 
 .c9:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9[data-loading] {
+  pointer-events: none;
 }
 
 .c9[data-disabled] {
