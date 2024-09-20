@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.22.0](https://github.com/AdmiralDS/react-ui/compare/v8.21.0...v8.22.0) (2024-09-19)
+
+
+### Features
+
+* **Button:** обновлено состояние Loading ([309047f](https://github.com/AdmiralDS/react-ui/commit/309047fb9e9683852cedca6ba8e77a82c2fb32d5))
+* **DateInput:** обновлено состояние Loading ([870e716](https://github.com/AdmiralDS/react-ui/commit/870e71686296bf97ea99222e0ec5273111f8bf61))
+* **FileItem:** обновлено состояние disabled ([9e4fc91](https://github.com/AdmiralDS/react-ui/commit/9e4fc91fa96b48b43c6293db088951413b7a1285))
+* **PhoneNumberInput:** обновлено состояние Loading ([25a4857](https://github.com/AdmiralDS/react-ui/commit/25a485776a41eb71360cc005190c6a6b049b976c))
+* **Select:** обновлено состояние Loading ([e62ecdc](https://github.com/AdmiralDS/react-ui/commit/e62ecdcbff462a1c9fb512025557f85bcfbf7e78))
+* **TextInput:** обновлено состояние Loading ([16f2bfa](https://github.com/AdmiralDS/react-ui/commit/16f2bfa9d116b907ac7b9c8d32ad0f8824e8b4e9))
+
+
+### Bug Fixes
+
+* **FileInput:** [#1510](https://github.com/AdmiralDS/react-ui/issues/1510) не фильтрует список файлов при Drag&Drop ([9a66922](https://github.com/AdmiralDS/react-ui/commit/9a66922e55d116e44d870ff155aa6ac33674201c))
+* **NumberInput:** [#1500](https://github.com/AdmiralDS/react-ui/issues/1500) блокируются кнопки +- при иннициализации компонента ([f6b25fa](https://github.com/AdmiralDS/react-ui/commit/f6b25fa4e708b445ea4cb3554e47641a6df438f5))
+* **NumberInput:** [#1505](https://github.com/AdmiralDS/react-ui/issues/1505) добавлен createInputHandler ([1dd3c49](https://github.com/AdmiralDS/react-ui/commit/1dd3c49a5920adfb4510d307ed83ea6a2c2b8cdf))
+* **Three:** [#1507](https://github.com/AdmiralDS/react-ui/issues/1507) чекбокс не отцентрирован вертикально ([61057b6](https://github.com/AdmiralDS/react-ui/commit/61057b6a669d363690e39197753238573795e294))
+* **TreeNode:** обновлено состояние disabled ([fdca896](https://github.com/AdmiralDS/react-ui/commit/fdca896d72a110ae6606cb177f2ae60d082b873c))
+
 ## [8.21.0](https://github.com/AdmiralDS/react-ui/compare/v8.20.0...v8.21.0) (2024-09-17)
 
 

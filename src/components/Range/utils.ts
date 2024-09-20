@@ -38,7 +38,7 @@ const calcValueByPos = (
 };
 
 export const calcValue = (
-  e: any,
+  e: TouchEvent | MouseEvent,
   trackRef: React.RefObject<HTMLDivElement>,
   minValue: number,
   maxValue: number,
@@ -47,7 +47,9 @@ export const calcValue = (
   const trackLeft = trackRef.current?.getBoundingClientRect().left || 0;
   const trackWidth = trackRef.current?.getBoundingClientRect().width || 0;
 
-  let cursorPosition = e.changedTouches ? e.changedTouches[0].pageX : e.pageX;
+  let cursorPosition = (e as TouchEvent).changedTouches
+    ? (e as TouchEvent).changedTouches[0].pageX
+    : (e as MouseEvent).pageX;
   if (cursorPosition <= trackLeft) {
     cursorPosition = trackLeft;
   }

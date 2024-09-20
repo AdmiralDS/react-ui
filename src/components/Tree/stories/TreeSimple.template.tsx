@@ -2,7 +2,6 @@ import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
 import { useState } from 'react';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
-import styled from 'styled-components';
 
 const demo2_TreeModel: Array<TreeItemProps> = [
   {
@@ -54,9 +53,11 @@ const demo2_TreeModel: Array<TreeItemProps> = [
   },
 ];
 
-const StyledTree = styled(Tree)`
-  width: 500px;
-`;
+// Можно и так
+// const StyledTree = styled(Tree)`
+//   width: 500px;
+//   gap: 8px;
+// `;
 
 export const TreeSimpleTemplate = (props: TreeProps) => {
   const [activeItem, setActiveItem] = useState<string | null>('1');
@@ -67,8 +68,9 @@ export const TreeSimpleTemplate = (props: TreeProps) => {
   };
 
   return (
-    <StyledTree
+    <Tree
       {...props}
+      style={{ width: 500, gap: 8 }}
       defaultSelected={'1-1'}
       withCheckbox={false}
       model={demo2_TreeModel}
