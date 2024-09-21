@@ -25,7 +25,7 @@ import { TableRenderCellTemplate } from './TableRenderCell.template';
 import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template';
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
 import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
-
+import { TableBaseHtmlTemplate } from './TableBaseHtml.template';
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
 import TableColumnWidthRaw from './TableColumnWidth.template?raw';
@@ -50,6 +50,7 @@ import TableRenderCellRaw from './TableRenderCell.template?raw';
 import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
 import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
+import TableBaseHtmlRaw from './TableBaseHtml.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -831,3 +832,19 @@ export const DraggableRowsExample = {
   name: 'Table. Drag and Drop строк',
 };
 //</editor-fold>
+
+const BaseHtmlStory: StoryFn<typeof TableBaseHtmlTemplate> = (props) => <TableBaseHtmlTemplate {...props} />;
+export const BaseHtmlExample = {
+  render: BaseHtmlStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TableBaseHtmlRaw,
+      },
+      description: {
+        story: `Функция изменения порядка строк является опциональной. По умолчанию строки таблицы не подлежат перемещению.`,
+      },
+    },
+  },
+  name: 'Table. Базовый HTML table',
+};
