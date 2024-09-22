@@ -14,9 +14,13 @@ const HtmlTable = styled.table`
 
   // стили
   white-space: nowrap;
-  border-spacing: 0;
-  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-spacing: 1px;
   color: ${(p) => p.theme.color['Neutral/Neutral 90']};
+
+  thead {
+    top: 1px;
+  }
+
   th {
     ${(p) => p.theme.typography['Subtitle/Subtitle 3']}
     padding: 10px 12px;
@@ -30,18 +34,7 @@ const HtmlTable = styled.table`
 
   th,
   td {
-    border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
-    border-top-width: 0;
-    border-left-width: 0;
-  }
-
-  th:last-child,
-  td:last-child {
-    border-right-width: 0;
-  }
-
-  tr:last-child td {
-    border-bottom-width: 0;
+    box-shadow: 0 0 0 1px ${(p) => p.theme.color['Neutral/Neutral 20']};
   }
 
   // последняя колонка растягивается в ширину при необходимости
@@ -53,7 +46,7 @@ const HtmlTable = styled.table`
   th:first-child,
   td:first-child {
     position: sticky;
-    left: 0;
+    left: 1px;
     background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
   }
 
@@ -61,13 +54,8 @@ const HtmlTable = styled.table`
   th:nth-child(10),
   td:nth-child(10) {
     position: sticky;
-    right: 0;
+    right: 1px;
     background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
-    border-left-width: 1px;
-  }
-  th:nth-child(9),
-  td:nth-child(9) {
-    border-right-width: 0;
   }
 `;
 
