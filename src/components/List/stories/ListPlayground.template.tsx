@@ -1,35 +1,43 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { List, ListIcon } from '@admiral-ds/react-ui';
-import type { ListProps } from '@admiral-ds/react-ui';
-import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
+import { UnorderedList, ListItem, ListIcon } from '@admiral-ds/react-ui';
+import type { UnorderedListProps } from '@admiral-ds/react-ui';
+import { ReactComponent as TasksOutline } from '@admiral-ds/icons/build/documents/TasksOutline.svg';
+import { ReactComponent as PeopleOutline } from '@admiral-ds/icons/build/system/PeopleOutline.svg';
+import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
 
-export const ListPlaygroundTemplate = (props: ListProps) => {
+export const ListPlaygroundTemplate = (props: UnorderedListProps) => {
   return (
     <>
-      <List {...props} nested={false}>
-        <li>
-          <ListIcon as={PersonSolid} color="red" />
-          Test 1
-        </li>
-        <li>Test 2</li>
-        <li>
-          Test 3
-          <List {...props} nested>
-            <li>Example 1</li>
-            <li>Example 2</li>
-            <li>
+      <UnorderedList {...props} nested={false}>
+        <ListItem markerColor="red">Куриная грудка</ListItem>
+        <ListItem>Мука</ListItem>
+        <ListItem>
+          Чеснок
+          <UnorderedList {...props} nested styleType="virgule">
+            <ListItem>Example 1</ListItem>
+            <ListItem>Example 2</ListItem>
+            <ListItem>
               Example 3
-              <List {...props} nested>
-                <li>Examplee 1</li>
-                <li>Examplee 2</li>
-                <li>Examplee 3</li>
-              </List>
-            </li>
-          </List>
-        </li>
-        <li>Test 4</li>
-      </List>
+              <UnorderedList {...props} nested styleType="icon">
+                <ListItem>
+                  <ListIcon as={TasksOutline} />
+                  Задачи
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={EmailOutline} />
+                  Почта
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={PeopleOutline} />
+                  Встречи
+                </ListItem>
+              </UnorderedList>
+            </ListItem>
+          </UnorderedList>
+        </ListItem>
+        <ListItem>Соевый соус</ListItem>
+      </UnorderedList>
     </>
   );
 };

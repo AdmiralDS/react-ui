@@ -1,31 +1,162 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { OrderedList } from '@admiral-ds/react-ui';
-import type { ListProps } from '@admiral-ds/react-ui';
+import { OrderedList, ListItem } from '@admiral-ds/react-ui';
+import type { OrderedListProps } from '@admiral-ds/react-ui';
 import { ReactComponent as PersonSolid } from '@admiral-ds/icons/build/system/PersonSolid.svg';
 
-export const ListOrderedTemplate = (props: ListProps) => {
+export const ListOrderedTemplate = (props: OrderedListProps) => {
   return (
     <>
-      <OrderedList {...props} nested={false}>
-        <li>Test 1</li>
-        <li>Test 2</li>
-        <li>
-          Test 3
+      <OrderedList {...props}>
+        <ListItem>Обработка запроса</ListItem>
+        <ListItem>
+          Исследование
           <OrderedList {...props} nested>
-            <li>Example 1</li>
-            <li>Example 2</li>
-            <li>
+            <ListItem>Сбор информации</ListItem>
+            <ListItem>Анализ</ListItem>
+          </OrderedList>
+        </ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+        <ListItem>Подведение итогов</ListItem>
+      </OrderedList>
+      <OrderedList {...props} style={{ marginTop: '40px' }}>
+        <ListItem>Test 1</ListItem>
+        <ListItem>Test 2</ListItem>
+        <ListItem>
+          Test 3
+          <OrderedList {...props} nested styleType="letters">
+            <ListItem>Example 1</ListItem>
+            <ListItem>Example 2</ListItem>
+            <ListItem>
               Example 3
               <OrderedList {...props} nested>
-                <li>Examplee 1</li>
-                <li>Examplee 2</li>
-                <li>Examplee 3</li>
+                <ListItem>Examplee 1</ListItem>
+                <ListItem>Examplee 2</ListItem>
+                <ListItem>Examplee 3</ListItem>
               </OrderedList>
-            </li>
+            </ListItem>
           </OrderedList>
-        </li>
-        <li>Test 4</li>
+        </ListItem>
+        <ListItem>Test 4</ListItem>
       </OrderedList>
     </>
   );
