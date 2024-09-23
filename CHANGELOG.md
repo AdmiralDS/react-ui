@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.23.0](https://github.com/AdmiralDS/react-ui/compare/v8.22.0...v8.23.0) (2024-09-23)
+
+
+### Features
+
+* **Typography:** добавлен миксин для стандартных HTML тэгов ([eb3416a](https://github.com/AdmiralDS/react-ui/commit/eb3416a2cb718fea3f7f98b1494c5a2d9f35fcfa))
+
+
+### Bug Fixes
+
+* **Menu:** [#1515](https://github.com/AdmiralDS/react-ui/issues/1515) выпадающее меню иногда позиционируется неверно ([bbe8766](https://github.com/AdmiralDS/react-ui/commit/bbe8766ccf05b0ff1d8cb368e4993af09c7145bf))
+* **Menu:** [#1516](https://github.com/AdmiralDS/react-ui/issues/1516) перестал работать параметр menuMaxHeight ([c04ab70](https://github.com/AdmiralDS/react-ui/commit/c04ab70367d9265a8eb612fc785dc95356f8fc5a))
+
 ## [8.22.0](https://github.com/AdmiralDS/react-ui/compare/v8.21.0...v8.22.0) (2024-09-19)
 
 

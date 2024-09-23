@@ -36,6 +36,7 @@ type MenuListHeightsProps = {
   $rowCount: number;
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
+  $maxHeight?: string | number;
 };
 
 const menuListHeights = css<MenuListHeightsProps>`
@@ -48,7 +49,6 @@ const Wrapper = styled.div<{
   $dimension?: MenuDimensions;
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
-  $maxHeight?: string | number;
 }>`
   overflow: hidden;
   position: relative;
@@ -65,7 +65,6 @@ const Wrapper = styled.div<{
   background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   max-width: calc(100vw - 32px);
   border-color: transparent;
-  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}` : '')};
   &:focus-visible {
     border: 0;
     outline: none;
@@ -82,6 +81,7 @@ const StyledDiv = styled(Scrollbar)<MenuListHeightsProps>`
   overflow-y: auto;
   box-sizing: border-box;
   ${menuListHeights};
+  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}` : '')};
 `;
 
 export interface RenderPanelProps {
@@ -442,7 +442,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(itemProps.disabled ? undefined : id);
           setSubmenuVisible(hasSubmenu);
-          activeItemRef.current = e.target as HTMLDivElement;
+          activeItemRef.current = e.currentTarget as HTMLDivElement;
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
@@ -570,7 +570,6 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         $dimension={dimension}
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
-        $maxHeight={maxHeight}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -585,6 +584,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             $rowCount={rowCount}
             $hasTopPanel={hasTopPanel}
             $hasBottomPanel={hasBottomPanel}
+            $maxHeight={maxHeight}
             {...menuProps}
           >
             {virtualScroll ? renderVirtualChildren() : renderChildren()}
