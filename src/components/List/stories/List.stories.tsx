@@ -1,14 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { List } from '@admiral-ds/react-ui';
+import { OrderedList } from '@admiral-ds/react-ui';
 
 import { ListPlaygroundTemplate } from './ListPlayground.template';
 import { ListOrderedTemplate } from './ListOrdered.template';
+import { ListUnorderedTemplate } from './ListUnordered.template';
+import { ListCustomMarkerTemplate } from './ListCustomMarker.template';
 
 // Imports of text sources
 import ListPlaygroundRaw from './ListPlayground.template?raw';
 import ListOrderedRaw from './ListOrdered.template?raw';
+import ListUnorderedRaw from './ListUnordered.template?raw';
+import ListCustomMarkerRaw from './ListCustomMarker.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -33,7 +37,7 @@ const Description = () => (
 export default {
   title: 'Admiral-2.1/List',
   decorators: undefined,
-  component: List,
+  component: OrderedList,
   parameters: {
     docs: {
       source: {
@@ -61,10 +65,10 @@ export default {
       control: false,
     },
   },
-} as Meta<typeof List>;
+} as Meta<typeof OrderedList>;
 
 //<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof List> = (props) => <ListPlaygroundTemplate {...props} />;
+const PlaygroundStory: StoryFn<typeof OrderedList> = (props) => <ListPlaygroundTemplate {...props} />;
 
 export const PlaygroundExample = {
   render: PlaygroundStory,
@@ -83,7 +87,7 @@ export const PlaygroundExample = {
 //</editor-fold>
 
 //<editor-fold desc="Order">
-const OrderStory: StoryFn<typeof List> = (props) => <ListOrderedTemplate {...props} />;
+const OrderStory: StoryFn<typeof OrderedList> = (props) => <ListOrderedTemplate {...props} />;
 
 export const OrderExample = {
   render: OrderStory,
@@ -97,6 +101,44 @@ export const OrderExample = {
   },
 
   name: 'Order list',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Unorder">
+const UnorderStory: StoryFn<typeof OrderedList> = (props) => <ListUnorderedTemplate {...props} />;
+
+export const UnorderExample = {
+  render: UnorderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ListUnorderedRaw,
+      },
+    },
+  },
+
+  name: 'Unorder list',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Custom">
+const CustomStory: StoryFn<typeof OrderedList> = (props) => <ListCustomMarkerTemplate {...props} />;
+
+export const CustomExample = {
+  render: CustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ListCustomMarkerRaw,
+      },
+    },
+  },
+
+  name: 'Custom marker list',
 };
 
 //</editor-fold>

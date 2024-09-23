@@ -2,11 +2,17 @@ import { forwardRef } from 'react';
 import { OrderedListComponent, UnorderedListComponent, ListItemComponent, Icon } from './style';
 
 type Dimension = 's' | 'm';
+type OrderedStyleType =
+  | 'numbers'
+  | 'lower-letters'
+  | 'upper-letters'
+  | Omit<React.CSSProperties['listStyleType'], 'decimal'>;
+type UnorderedStyleType = 'bullet' | 'virgule' | 'icon' | Omit<React.CSSProperties['listStyleType'], 'disc'>;
 
 export interface UnorderedListProps extends React.HTMLAttributes<HTMLUListElement> {
   dimension?: Dimension;
   nested?: boolean;
-  styleType?: 'bullet' | 'virgule' | 'icon';
+  styleType?: UnorderedStyleType;
   gap?: React.CSSProperties['gap'];
 }
 export const UnorderedList = ({
@@ -35,7 +41,7 @@ UnorderedList.displayName = 'UnorderedList';
 export interface OrderedListProps extends React.HTMLAttributes<HTMLOListElement> {
   dimension?: Dimension;
   nested?: boolean;
-  styleType?: 'numbers' | 'letters';
+  styleType?: OrderedStyleType;
   gap?: React.CSSProperties['gap'];
 }
 
@@ -70,7 +76,7 @@ export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
 export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({ children, markerColor, ...props }, ref) => {
   return (
     <ListItemComponent ref={ref} $markerColor={markerColor} {...props}>
-      {children}
+      <div>{children}</div>
     </ListItemComponent>
   );
 });
