@@ -442,7 +442,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(itemProps.disabled ? undefined : id);
           setSubmenuVisible(hasSubmenu);
-          activeItemRef.current = e.target as HTMLDivElement;
+          activeItemRef.current = e.currentTarget as HTMLDivElement;
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
