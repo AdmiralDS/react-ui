@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.22.0",
+  "version": "8.23.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -103,7 +103,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "resize-observer-polyfill": "^1.5.1",
-    "rollup": "^4.22.0",
+    "rollup": "^4.22.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-tsc-alias": "^1.1.2",
     "standard-version": "^9.5.0",
