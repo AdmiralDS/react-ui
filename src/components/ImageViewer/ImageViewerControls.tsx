@@ -7,6 +7,7 @@ import {
   IMAGE_VIEWER_CONTROLS_HEIGHT,
   IMAGE_VIEWER_CONTROLS_PADDING,
 } from '#src/components/ImageViewer/constants';
+import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
 
 import {
   SystemArrowsHorizontalOutline,
@@ -18,10 +19,6 @@ import {
   SystemArrowLeftOutline,
   SystemArrowRightOutline,
 } from '@admiral-ds/icons';
-
-export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement> {
-  renderPanel?: () => React.ReactNode;
-}
 
 const Divider = styled.div`
   box-sizing: border-box;
