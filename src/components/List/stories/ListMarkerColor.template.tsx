@@ -1,26 +1,32 @@
 import * as React from 'react';
 import { UnorderedList, ListItem, ListIcon } from '@admiral-ds/react-ui';
-import type { UnorderedListProps } from '@admiral-ds/react-ui';
 import { ReactComponent as TasksOutline } from '@admiral-ds/icons/build/documents/TasksOutline.svg';
 import { ReactComponent as PeopleOutline } from '@admiral-ds/icons/build/system/PeopleOutline.svg';
 import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
+import styled from 'styled-components';
 
-export const ListCustomMarkerTemplate = (props: UnorderedListProps) => {
+const ItemWithColoredMarker = styled(ListItem)<{ $color: string }>`
+  &&::before {
+    color: ${(p) => p.$color};
+  }
+`;
+
+export const ListMarkerColorTemplate = () => {
   return (
     <>
-      <UnorderedList {...props} styleType="circle">
+      <UnorderedList>
         <ListItem>Уборка</ListItem>
         <ListItem>
           Покупка продуктов
-          <UnorderedList {...props} nested>
-            <ListItem markerColor="blue">Куриная грудка</ListItem>
-            <ListItem markerColor="red">Сливки</ListItem>
-            <ListItem markerColor="green">Чеснок</ListItem>
+          <UnorderedList>
+            <ItemWithColoredMarker $color="blue">Куриная грудка</ItemWithColoredMarker>
+            <ItemWithColoredMarker $color="red">Сливки</ItemWithColoredMarker>
+            <ItemWithColoredMarker $color="green">Чеснок</ItemWithColoredMarker>
           </UnorderedList>
         </ListItem>
         <ListItem>
           Работа
-          <UnorderedList {...props} nested styleType="icon">
+          <UnorderedList styleType="icon">
             <ListItem>
               <ListIcon as={TasksOutline} color="blue" />
               Задачи

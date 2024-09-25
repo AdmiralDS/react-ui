@@ -1,85 +1,19 @@
 import { forwardRef } from 'react';
-import { OrderedListComponent, UnorderedListComponent, ListItemComponent, Icon } from './style';
+import { ListItemComponent, ListItemContent, Icon } from './style';
 
-type Dimension = 's' | 'm';
-type OrderedStyleType =
-  | 'numbers'
-  | 'lower-letters'
-  | 'upper-letters'
-  | Omit<React.CSSProperties['listStyleType'], 'decimal'>;
-type UnorderedStyleType = 'bullet' | 'virgule' | 'icon' | Omit<React.CSSProperties['listStyleType'], 'disc'>;
+// Компоненты списков вынесены в отдельные файлы для правильной генерации контролов в storybook
+export * from './OrderedList';
+export * from './UnorderedList';
 
-export interface UnorderedListProps extends React.HTMLAttributes<HTMLUListElement> {
-  dimension?: Dimension;
-  nested?: boolean;
-  styleType?: UnorderedStyleType;
-  gap?: React.CSSProperties['gap'];
-}
-export const UnorderedList = ({
-  children,
-  dimension = 'm',
-  nested = false,
-  styleType = 'bullet',
-  gap = '8px',
-  ...props
-}: UnorderedListProps) => {
-  return (
-    <UnorderedListComponent
-      data-dimension={dimension}
-      data-nested={nested}
-      $dimension={dimension}
-      $styleType={styleType}
-      $gap={gap}
-      {...props}
-    >
-      {children}
-    </UnorderedListComponent>
-  );
-};
-UnorderedList.displayName = 'UnorderedList';
-
-export interface OrderedListProps extends React.HTMLAttributes<HTMLOListElement> {
-  dimension?: Dimension;
-  nested?: boolean;
-  styleType?: OrderedStyleType;
-  gap?: React.CSSProperties['gap'];
-}
-
-export const OrderedList = ({
-  children,
-  dimension = 'm',
-  nested = false,
-  styleType = 'numbers',
-  gap = '8px',
-  ...props
-}: OrderedListProps) => {
-  return (
-    <OrderedListComponent
-      data-dimension={dimension}
-      data-nested={nested}
-      $dimension={dimension}
-      $styleType={styleType}
-      $gap={gap}
-      {...props}
-    >
-      {children}
-    </OrderedListComponent>
-  );
-};
-OrderedList.displayName = 'OrderedList';
-
-export interface ListItemProps extends React.HTMLAttributes<HTMLLIElement> {
-  /** Кастомный цвет маркера */
-  markerColor?: string;
-}
-
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(({ children, markerColor, ...props }, ref) => {
-  return (
-    <ListItemComponent ref={ref} $markerColor={markerColor} {...props}>
-      <div>{children}</div>
-    </ListItemComponent>
-  );
-});
+export const ListItem = forwardRef<HTMLLIElement, React.HTMLAttributes<HTMLLIElement>>(
+  ({ children, ...props }, ref) => {
+    return (
+      <ListItemComponent ref={ref} {...props}>
+        <ListItemContent>{children}</ListItemContent>
+      </ListItemComponent>
+    );
+  },
+);
 ListItem.displayName = 'ListItem';
 
 export interface IconProps extends React.SVGAttributes<SVGElement> {

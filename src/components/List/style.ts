@@ -2,119 +2,110 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 type Dimension = 's' | 'm';
-type OrderedStyleType =
-  | 'numbers'
-  | 'lower-letters'
-  | 'upper-letters'
-  | Omit<React.CSSProperties['listStyleType'], 'decimal'>;
-type UnorderedStyleType = 'bullet' | 'virgule' | 'icon' | Omit<React.CSSProperties['listStyleType'], 'disc'>;
+type OrderedStyleType = 'numbers' | 'lower-letters' | 'upper-letters';
+type UnorderedStyleType = 'bullet' | 'virgule' | 'icon';
 
 const cyrillicStyle = css`
-  @counter-style cyrillic-lower {
+  @counter-style lower-cyrillic {
     system: fixed;
     symbols: а б в г д е ж з и к л м н о п р с т у ф х ц ч ш щ ы э ю я;
   }
-  @counter-style cyrillic-upper {
+  @counter-style upper-cyrillic {
     system: fixed;
     symbols: А Б В Г Д Е Ж З И К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ы Э Ю Я;
   }
 `;
 
-function getContent($styleType: OrderedStyleType & UnorderedStyleType) {
+function getContent($styleType: OrderedStyleType | UnorderedStyleType) {
   switch ($styleType) {
-    case 'numbers':
-      return css`
-        content: counters(marker, '.') '.';
-      `;
     case 'lower-letters':
       return css`
         ${cyrillicStyle}
-        content: counter(marker, cyrillic-lower) ')';
+        content: counter(admiral-list-counter, lower-cyrillic) ')';
       `;
     case 'upper-letters':
       return css`
         ${cyrillicStyle}
-        content: counter(marker, cyrillic-upper) ')';
-      `;
-    case 'bullet':
-      return css`
-        content: '•';
-        color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+        content: counter(admiral-list-counter, upper-cyrillic) ')';
       `;
     case 'virgule':
       return css`
         content: '—';
       `;
-    default:
+    case 'numbers':
       return css`
-        content: counter(marker, ${$styleType ?? 'disc'});
+        content: counters(admiral-list-counter, '.') '.';
       `;
+    case 'bullet':
+      return css`
+        content: '•';
+        /** Размер шрифта, при котором достигается необходимый размер точки */
+        font-size: 18px;
+        color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+      `;
+    case 'icon':
+    default:
+      return 'none';
   }
 }
 
-const unorderedMarker = css<{ $dimension: Dimension; $styleType: UnorderedStyleType }>`
-  & > li::before {
-    ${(p) => getContent(p.$styleType)}
-    display: inline-flex;
-    justify-content: center;
-    height: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
-    min-width: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
-    margin-inline-end: 8px;
+const listMixin = css<{
+  $dimension: Dimension;
+  $gap: React.CSSProperties['gap'];
+}>`
+  display: flex;
+  flex-direction: column;
+  gap: ${(p) => p.$gap};
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  counter-reset: admiral-list-counter 0;
+
+  & > li ul,
+  & > li ol {
+    margin-top: ${(p) => p.$gap};
   }
 `;
 
-const listMixin = css<{
-  $dimension: Dimension;
-  $gap: string | number;
-}>`
-  padding-inline-start: ${(p) => (p.$dimension == 'm' ? 32 : 28)}px;
-  list-style: none;
-  counter-reset: marker 0;
-
-  & > li {
-    margin-top: ${(p) => p.$gap};
-  }
-  &[data-nested='false'] {
-    padding: 0;
-    & > li:first-child {
-      margin: 0;
-    }
-  }
+const listMarkerMixin = css<{ $styleType: OrderedStyleType | UnorderedStyleType; $dimension: Dimension }>`
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-inline-end: 8px;
+  ${(p) => getContent(p.$styleType)}
+  height: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
 `;
 
 export const OrderedListComponent = styled.ol<{
   $dimension: Dimension;
   $styleType: OrderedStyleType;
-  $gap: string | number;
+  $gap: React.CSSProperties['gap'];
 }>`
   ${listMixin}
   & > li::before {
-    ${(p) => getContent(p.$styleType)}
-    display: inline-flex;
-    height: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
-    ${(p) =>
-      p.$styleType == 'letters' &&
-      css`
-        width: ${p.$dimension == 'm' ? 24 : 20}px;
-      `}
+    ${listMarkerMixin}
     justify-content: flex-start;
-    margin-inline-end: 8px;
+    min-width: ${(p) => (p.$styleType == 'numbers' ? 'auto' : `${p.$dimension == 'm' ? 24 : 20}px`)};
   }
 `;
 
 export const UnorderedListComponent = styled.ul<{
   $dimension: Dimension;
   $styleType: UnorderedStyleType;
-  $gap: string | number;
+  $gap: React.CSSProperties['gap'];
 }>`
   ${listMixin}
-  ${(p) => p.$styleType !== 'icon' && unorderedMarker}
+  & > li::before {
+    ${listMarkerMixin}
+    justify-content: center;
+    width: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
+  }
 `;
 
-export const ListItemComponent = styled.li<{ $markerColor?: string }>`
+export const ListItemComponent = styled.li`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  counter-increment: marker 1;
+  counter-increment: admiral-list-counter 1;
   display: inline-flex;
+
   ol[data-dimension='m'] &,
   ul[data-dimension='m'] & {
     ${typography['Body/Body 1 Long']}
@@ -123,14 +114,10 @@ export const ListItemComponent = styled.li<{ $markerColor?: string }>`
   ul[data-dimension='s'] & {
     ${typography['Body/Body 2 Long']}
   }
-  ${(p) =>
-    p.$markerColor
-      ? css`
-          &&::before {
-            color: ${p.$markerColor};
-          }
-        `
-      : ''}
+`;
+
+export const ListItemContent = styled.div`
+  display: block;
 `;
 
 export const Icon = styled.svg<{ color?: string }>`

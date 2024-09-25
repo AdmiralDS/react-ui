@@ -1,21 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { OrderedList } from '@admiral-ds/react-ui';
+import { OrderedList, UnorderedList } from '@admiral-ds/react-ui';
+import type { UnorderedListProps } from '@admiral-ds/react-ui';
 
-import { ListPlaygroundTemplate } from './ListPlayground.template';
-import { ListOrderedTemplate } from './ListOrdered.template';
-import { ListUnorderedTemplate } from './ListUnordered.template';
-import { ListCustomMarkerTemplate } from './ListCustomMarker.template';
+import { ListNestedTemplate } from './ListNested.template';
+import { ListMarkerColorTemplate } from './ListMarkerColor.template';
+import { ListMultiLineTemplate } from './ListMultiline.template';
 
 // Imports of text sources
-import ListPlaygroundRaw from './ListPlayground.template?raw';
-import ListOrderedRaw from './ListOrdered.template?raw';
-import ListUnorderedRaw from './ListUnordered.template?raw';
-import ListCustomMarkerRaw from './ListCustomMarker.template?raw';
+import ListNestedRaw from './ListNested.template?raw';
+import ListMarkerColorRaw from './ListMarkerColor.template?raw';
+import ListMultilineRaw from './ListMultiline.template?raw';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height ?? 20}px;
   width: 8px;
 `;
 const Desc = styled.div`
@@ -26,16 +25,21 @@ const Desc = styled.div`
 
 const Description = () => (
   <Desc>
-    Badge — компонент, который обычно дополняет другие компоненты и показывает количественные значения. Например, в
-    компоненте Tabs может показывать количество элементов в закладке. Или показывать количество оповещений в панели
-    нотификации.
+    Компонент для вертикальной группировки связанных по смыслу текстовых пунктов. Представлен в двух вариантах
+    OrderedList и UnorderedList.
     <Separator />
-    Компонент существует в двух размерах — S 16 и M 20 px по высоте.
+    Рекомендации:
+    <Separator />- Используйте список, если у вас есть два и более пунктов.
+    <Separator $height={8} />- Простые списки, разделенные запятыми, могут не нуждаться в разметке, но длинные списки
+    или группы ссылок должны ее иметь.
+    <Separator $height={8} />- Организуйте списки так, чтобы пользователи могли понять взаимосвязь и группировку
+    информации.
+    <Separator $height={8} />- Создавайте структурированные списки. Их легче использовать, чем простые таблицы.
   </Desc>
 );
 
 export default {
-  title: 'Admiral-2.1/List',
+  title: 'Admiral-2.1/List/Общие примеры',
   decorators: undefined,
   component: OrderedList,
   parameters: {
@@ -61,84 +65,85 @@ export default {
       options: ['m', 's'],
       control: { type: 'radio' },
     },
+    styleType: {
+      options: ['bullet', 'virgule', 'icon'],
+      control: { type: 'radio' },
+    },
+    gap: {
+      control: { type: 'text' },
+    },
     theme: {
       control: false,
     },
   },
-} as Meta<typeof OrderedList>;
+} as Meta<UnorderedListProps>;
 
-//<editor-fold desc="Playground">
-const PlaygroundStory: StoryFn<typeof OrderedList> = (props) => <ListPlaygroundTemplate {...props} />;
+//<editor-fold desc="Nested">
+const ListNestedStory: StoryFn = () => <ListNestedTemplate />;
 
-export const PlaygroundExample = {
-  render: PlaygroundStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: ListPlaygroundRaw,
-      },
-    },
-  },
-
-  name: 'Playground',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="Order">
-const OrderStory: StoryFn<typeof OrderedList> = (props) => <ListOrderedTemplate {...props} />;
-
-export const OrderExample = {
-  render: OrderStory,
+export const ListNestedExample = {
+  render: ListNestedStory,
 
   parameters: {
     docs: {
       source: {
-        code: ListOrderedRaw,
+        code: ListNestedRaw,
+      },
+      description: {
+        story: `Списки могут быть вложенными, а разновидности могут смешиваться внутри вложенных группировок.\n\nОтступ
+         слева равен расстоянию от текста до левого края компонента вышестоящего уровня. То есть, 
+         выравнивание идет по краю текста вышестоящего уровня.`,
       },
     },
   },
 
-  name: 'Order list',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="Unorder">
-const UnorderStory: StoryFn<typeof OrderedList> = (props) => <ListUnorderedTemplate {...props} />;
-
-export const UnorderExample = {
-  render: UnorderStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: ListUnorderedRaw,
-      },
-    },
-  },
-
-  name: 'Unorder list',
+  name: 'Вложенные списки',
 };
 
 //</editor-fold>
 
 //<editor-fold desc="Custom">
-const CustomStory: StoryFn<typeof OrderedList> = (props) => <ListCustomMarkerTemplate {...props} />;
+const ListMarkerColorStory: StoryFn<typeof UnorderedList> = () => <ListMarkerColorTemplate />;
 
-export const CustomExample = {
-  render: CustomStory,
+export const ListMarkerColorExample = {
+  render: ListMarkerColorStory,
 
   parameters: {
     docs: {
       source: {
-        code: ListCustomMarkerRaw,
+        code: ListMarkerColorRaw,
+      },
+      description: {
+        story: `Пользователь может кастомизировать цвет маркеров и иконок самостоятельно, 
+        как это продемонстрировано в данном примере.`,
       },
     },
   },
 
-  name: 'Custom marker list',
+  name: 'Кастомный цвет маркера',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="MultiLine">
+const ListMultiLineStory: StoryFn<typeof UnorderedList> = () => <ListMultiLineTemplate />;
+
+export const ListMultiLineExample = {
+  render: ListMultiLineStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ListMultilineRaw,
+      },
+      description: {
+        story: `Пользователь может настроить необходимую ширину компонента самостоятельно, например,
+        через атрибут style. По умолчанию компонент подстраивается под размеры родительского элемента.`,
+      },
+    },
+  },
+
+  name: 'Многострочность и регулировка ширины списка',
 };
 
 //</editor-fold>
