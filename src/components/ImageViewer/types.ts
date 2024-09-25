@@ -1,3 +1,5 @@
+import type { css } from 'styled-components';
+
 export type ImageMiniatureDimension = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ImageViewerAppearance = 'single' | 'multiple';
 
@@ -5,18 +7,23 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   renderPanel?: () => React.ReactNode;
 }
 
-export interface ImageMiniatureProps {
+export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** Image path */
   src: string;
-  /** Image description */
-  alt?: string;
-  /** Image miniature size */
-  dimension?: ImageMiniatureDimension;
-  /** Load failed callback */
-  onError?: (event: Event) => void;
 }
 
-export interface ImageViewerProps extends Omit<ImageViewerControlsProps, 'onError'>, ImageMiniatureProps {
+export interface ImageMiniatureProps extends ImageProps {
+  /** Image miniature size */
+  dimension?: ImageMiniatureDimension;
+}
+
+export interface ImageViewerProps {
+  /** Preview items */
+  items: string[] | ImageProps[];
   /** Show one item or multiple */
   appearance?: ImageViewerAppearance;
+  /** Image miniature size */
+  dimension?: ImageMiniatureDimension;
+  /** Preview group css mixin */
+  previewGroupMixin?: ReturnType<typeof css>;
 }

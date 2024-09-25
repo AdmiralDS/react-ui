@@ -26,7 +26,18 @@ export default {
     },
     layout: 'centered',
   },
-  argTypes: {},
+  argTypes: {
+    items: {
+      control: false,
+    },
+    previewGroupMixin: {
+      control: false,
+    },
+    dimension: {
+      options: ['xxs', 'xs', 's', 'm', 'l', 'xl'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta<typeof ImageViewer>;
 
 //<editor-fold desc="ImageViewer. Playground">

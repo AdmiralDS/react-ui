@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { type css } from 'styled-components';
 
-//import { ImageViewerControls } from '#src/components/ImageViewer/ImageViewerControls';
 import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
-import type { ImageViewerProps } from '#src/components/ImageViewer/types';
+import type { ImageMiniatureDimension, ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
-const Wrapper = styled.div`
+export * from './types';
+
+const Wrapper = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
   box-sizing: border-box;
   height: 300px;
   width: 500px;
@@ -14,27 +15,30 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 10px;
+
+  ${(p) => p.$cssMixin}
 `;
 
+const renderItem = (item: string | ImageProps, dimension: ImageMiniatureDimension) => {
+  return typeof item === 'string' ? (
+    <ImageMiniature src={item} dimension={dimension} />
+  ) : (
+    <ImageMiniature dimension={dimension} {...item} />
+  );
+};
+
 export const ImageViewer = ({
+  items,
   dimension = 'm',
   appearance = 'single',
-  renderPanel,
-  children,
+  previewGroupMixin,
   ...props
 }: ImageViewerProps) => {
-  return (
-    <Wrapper {...props}>
-      <ImageMiniature
-        src="https://avatars.mds.yandex.net/i?id=5b90edeb3a4635e999b9331f3e5b34df_l-4551895-images-thumbs&n=13"
-        alt="Cute corgie"
-        dimension={dimension}
-      />
-      <ImageMiniature
-        src="ndex.net/i?id=5b90edeb3a4635e999b9331f3e5b34df_l-4551895-images-thumbs&n=13"
-        alt="Cute corgie"
-        dimension={dimension}
-      />
-    </Wrapper>
-  );
+  const miniatures =
+    appearance === 'single'
+      ? renderItem(items[0], dimension)
+      : items.map((item) => {
+          return renderItem(item, dimension);
+        });
+  return <Wrapper {...props}>{miniatures}</Wrapper>;
 };

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -14,7 +15,6 @@ import {
 import type { ImageMiniatureDimension, ImageMiniatureProps } from '#src/components/ImageViewer/types';
 
 import { CategoryGalleryOutline, ServiceEyeOutline } from '@admiral-ds/icons';
-import { useEffect, useRef, useState } from 'react';
 
 function getImageMiniatureSize(dimension: ImageMiniatureDimension) {
   switch (dimension) {
@@ -111,15 +111,15 @@ const StyledImg = styled.img`
   width: 100%;
 `;
 
-export const ImageMiniature = ({ src, alt, dimension = 'm', onError, ...props }: ImageMiniatureProps) => {
+export const ImageMiniature = ({ src, dimension = 'm', onError, ...props }: ImageMiniatureProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   useEffect(() => {
-    function errorEventListener(e: Event) {
+    const errorEventListener = (e: any) => {
       setErrorOnLoadImg(true);
       onError?.(e);
-    }
+    };
     const imgNode = imgRef.current;
     if (imgNode) {
       imgNode.addEventListener('error', errorEventListener);
@@ -128,8 +128,8 @@ export const ImageMiniature = ({ src, alt, dimension = 'm', onError, ...props }:
   }, []);
 
   return (
-    <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg}>
-      <StyledImg ref={imgRef} src={src} alt={alt} />
+    <Wrapper $dimension={dimension} $errorOnLoadImg={errorOnLoadImg}>
+      <StyledImg {...props} ref={imgRef} src={src} />
       {errorOnLoadImg ? (
         <ErrorOnLoadBlock $isVisible={errorOnLoadImg}>
           <StyledCategoryGalleryOutline />

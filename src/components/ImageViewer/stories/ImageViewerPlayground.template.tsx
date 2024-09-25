@@ -1,8 +1,8 @@
 import styled, { ThemeProvider } from 'styled-components';
 
 import { ImageViewer, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
-import type { ImageViewerProps, BorderRadiusType } from '@admiral-ds/react-ui';
-import { ReactComponent as CloseOutline } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import type { ImageProps, ImageViewerProps, BorderRadiusType } from '@admiral-ds/react-ui';
+
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Separator = styled.div<{ height: number }>`
@@ -14,6 +14,23 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 10px;
 `;
+
+const handleError = (e: any) => {
+  console.log('error', e);
+};
+
+const items: ImageProps[] = [
+  {
+    src: 'https://avatars.mds.yandex.net/i?id=5b90edeb3a4635e999b9331f3e5b34df_l-4551895-images-thumbs&n=13',
+    alt: 'Cute corgie',
+    onError: handleError,
+  },
+  {
+    src: 'ds.yandex.net/i?id=5b90edeb3a4635e999b9331f3e5b34df_l-4551895-images-thumbs&n=13',
+    alt: 'Cute corgie',
+    onError: handleError,
+  },
+];
 
 export const ImageViewerPlaygroundTemplate = ({
   themeBorderKind,
@@ -32,7 +49,7 @@ export const ImageViewerPlaygroundTemplate = ({
             Основные функции:
           </NotificationItemContent>
         </NotificationItem>
-        <ImageViewer {...props}></ImageViewer>
+        <ImageViewer {...props} items={items}></ImageViewer>
       </Wrapper>
     </ThemeProvider>
   );
