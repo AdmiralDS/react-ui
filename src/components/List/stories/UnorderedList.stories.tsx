@@ -47,10 +47,6 @@ export default {
       options: ['m', 's'],
       control: { type: 'radio' },
     },
-    listStyle: {
-      options: ['bullet', 'virgule', 'icon'],
-      control: { type: 'radio' },
-    },
     gap: {
       control: { type: 'text' },
     },

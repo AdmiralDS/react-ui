@@ -47,10 +47,6 @@ export default {
       options: ['m', 's'],
       control: { type: 'radio' },
     },
-    listStyle: {
-      options: ['numbers', 'lower-letters', 'upper-letters'],
-      control: { type: 'radio' },
-    },
     gap: {
       control: { type: 'text' },
     },

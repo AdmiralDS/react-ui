@@ -45,7 +45,7 @@ function getContent($styleType: OrderedStyleType | UnorderedStyleType) {
       `;
     case 'icon':
     default:
-      return 'none';
+      return 'content: none;';
   }
 }
 
