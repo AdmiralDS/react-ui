@@ -11,7 +11,15 @@ export const ConstantOptionWrapper = (props: OptionProps) => {
   return <ConstantOption {...props} />;
 };
 
-const ConstantOption = ({ disabled = false, value, children, renderOption, renderChip, ...restProps }: OptionProps) => {
+const ConstantOption = ({
+  disabled = false,
+  id,
+  value,
+  children,
+  renderOption,
+  renderChip,
+  ...restProps
+}: OptionProps) => {
   const selectContext = useConstantSelectContext();
   const optionGroupContext = useOptionGroupContext();
 
@@ -31,13 +39,14 @@ const ConstantOption = ({ disabled = false, value, children, renderOption, rende
 
   const option = React.useMemo(
     () => ({
+      id,
       value,
       disabled: optionIsDisabled,
       children: resultChildren,
       renderChip: resultRenderChip,
       ...dataProps,
     }),
-    [value, optionIsDisabled, resultChildren, resultRenderChip],
+    [id, value, optionIsDisabled, resultChildren, resultRenderChip],
   );
 
   React.useEffect(() => {

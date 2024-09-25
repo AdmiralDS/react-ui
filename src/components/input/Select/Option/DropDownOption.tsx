@@ -52,7 +52,7 @@ export const DropDownOption = ({
     dropDownContext?.multiple ? multipleOptionRender(props) : children;
 
   React.useEffect(() => {
-    const itemId = id ?? value;
+    const itemId = id || value;
 
     const item: SelectItemProps = {
       id: value,
