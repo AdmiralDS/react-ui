@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   IMAGE_MINIATURE_ICON_SIZE_L_XL,
@@ -45,51 +45,53 @@ function getImageMiniatureIconSize(dimension: ImageMiniatureDimension) {
       return IMAGE_MINIATURE_ICON_SIZE_L_XL;
   }
 }
-const StyledCategoryGalleryOutline = styled(CategoryGalleryOutline)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 
+const StyledCategoryGalleryOutline = styled(CategoryGalleryOutline)`
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
 const StyledServiceEyeOutline = styled(ServiceEyeOutline)`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
   & *[fill^='#'] {
     fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }
 `;
-const ErrorOnLoadBlock = styled.div<{ $isVisible: boolean }>`
-  visibility: ${(p) => (p.$isVisible ? 'visible' : 'hidden')};
+const blockPositionCss = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+`;
+const ErrorOnLoadBlock = styled.div<{ $isVisible: boolean }>`
+  ${blockPositionCss};
+  visibility: ${(p) => (p.$isVisible ? 'visible' : 'hidden')};
   background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
 `;
 const HoverEffectBlock = styled.div`
+  ${blockPositionCss};
   visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background-color: var(--admiral-color-Opacity_Modal, ${(p) => p.theme.color['Opacity/Modal']});
 `;
 
-const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension }>`
+const hoverStyle = css`
+  &:hover {
+    & ${HoverEffectBlock} {
+      visibility: visible;
+    }
+  }
+`;
+
+const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension; $errorOnLoadImg: boolean }>`
   width: ${(p) => getImageMiniatureSize(p.$dimension)}px;
   height: ${(p) => getImageMiniatureSize(p.$dimension)}px;
   border-radius: 4px;
   position: relative;
-  cursor: pointer;
+  cursor: ${(p) => (p.$errorOnLoadImg ? 'not-allowed' : 'pointer')};
   overflow: hidden;
 
   display: flex;
@@ -101,16 +103,7 @@ const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension }>`
     height: ${(p) => getImageMiniatureIconSize(p.$dimension)}px;
   }
 
-  &:hover {
-    & ${ErrorOnLoadBlock} {
-      & svg {
-        visibility: hidden;
-      }
-    }
-    & ${HoverEffectBlock} {
-      visibility: visible;
-    }
-  }
+  ${(p) => !p.$errorOnLoadImg && hoverStyle}
 `;
 const StyledImg = styled.img`
   object-fit: cover;
@@ -118,12 +111,14 @@ const StyledImg = styled.img`
   width: 100%;
 `;
 
-export const ImageMiniature = ({ src, alt, dimension = 'm', ...props }: ImageMiniatureProps) => {
+export const ImageMiniature = ({ src, alt, dimension = 'm', onError, ...props }: ImageMiniatureProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
+
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   useEffect(() => {
-    function errorEventListener() {
+    function errorEventListener(e: Event) {
       setErrorOnLoadImg(true);
+      onError?.(e);
     }
     const imgNode = imgRef.current;
     if (imgNode) {
@@ -131,17 +126,19 @@ export const ImageMiniature = ({ src, alt, dimension = 'm', ...props }: ImageMin
       return () => imgNode.removeEventListener('error', errorEventListener);
     }
   }, []);
+
   return (
-    <Wrapper {...props} $dimension={dimension}>
+    <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg}>
       <StyledImg ref={imgRef} src={src} alt={alt} />
-      {errorOnLoadImg && (
+      {errorOnLoadImg ? (
         <ErrorOnLoadBlock $isVisible={errorOnLoadImg}>
           <StyledCategoryGalleryOutline />
         </ErrorOnLoadBlock>
+      ) : (
+        <HoverEffectBlock>
+          <StyledServiceEyeOutline />
+        </HoverEffectBlock>
       )}
-      <HoverEffectBlock>
-        <StyledServiceEyeOutline />
-      </HoverEffectBlock>
     </Wrapper>
   );
 };
