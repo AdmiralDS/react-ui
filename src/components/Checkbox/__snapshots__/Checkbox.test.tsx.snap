@@ -35,10 +35,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -75,8 +75,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {
@@ -177,10 +177,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -217,8 +217,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {
@@ -374,10 +374,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -414,8 +414,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {
@@ -515,10 +515,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -555,8 +555,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {
@@ -711,10 +711,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -751,8 +751,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {
@@ -852,10 +852,10 @@ fieldset[data-dimension='s'] .c0 {
   bottom: 0;
   border-radius: var(--admiral-border-radius-Small, 4px);
   outline: 0;
-  transition: background 0.1s ease-in;
+  transition: background-color 0.1s ease-in;
   line-height: initial;
   background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3 *[fill^='#'] {
@@ -892,8 +892,8 @@ fieldset[data-dimension='s'] .c0 {
 }
 
 .c1:disabled+.c2 {
-  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c1:not(:checked)+.c2 >* {

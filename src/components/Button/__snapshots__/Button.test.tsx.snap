@@ -101,14 +101,14 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -144,59 +144,59 @@ exports[`Button should render component 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -232,13 +232,13 @@ exports[`Button should render component 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -273,13 +273,13 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -304,14 +304,14 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -336,14 +336,14 @@ exports[`Button should render component 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -368,14 +368,14 @@ exports[`Button should render component 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -411,59 +411,59 @@ exports[`Button should render component 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -631,14 +631,14 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -674,59 +674,59 @@ exports[`Button should render component with text 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -762,13 +762,13 @@ exports[`Button should render component with text 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -803,13 +803,13 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -834,14 +834,14 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -866,14 +866,14 @@ exports[`Button should render component with text 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -898,14 +898,14 @@ exports[`Button should render component with text 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -941,59 +941,59 @@ exports[`Button should render component with text 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {

@@ -1,5 +1,4 @@
-import type { HTMLAttributes, MouseEvent, KeyboardEvent, ReactNode } from 'react';
-import * as React from 'react';
+import { forwardRef, useState, useMemo, useRef, useEffect, useLayoutEffect } from 'react';
 
 import { Tooltip } from '#src/components/Tooltip';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
@@ -23,7 +22,7 @@ export type ChipAppearance = 'filled' | 'outlined';
 
 const defaultRenderContent = () => '';
 
-export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChipsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ChipDimension;
   /** Отключение чипса */
@@ -35,19 +34,19 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
   /** Добавляет иконку для удаления чипсов */
   onClose?: () => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
-  renderContentTooltip?: () => ReactNode;
+  renderContentTooltip?: () => React.ReactNode;
   /** Иконка перед текстом Chips'a */
-  iconStart?: ReactNode;
+  iconStart?: React.ReactNode;
   /** Иконка после текста Chips'a.
    * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест) */
-  iconEnd?: ReactNode;
+  iconEnd?: React.ReactNode;
   /**
    * @deprecated Помечено как deprecated в версии 7.9.0, будет удалено в 9.x.x версии.
    * Взамен используйте iconStart или iconEnd
    *
    * Иконка перед текстом Chips'a
    */
-  iconBefore?: ReactNode;
+  iconBefore?: React.ReactNode;
   /**
    * @deprecated Помечено как deprecated в версии 7.9.0, будет удалено в 9.x.x версии.
    * Взамен используйте iconStart или iconEnd
@@ -55,12 +54,12 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
    * Иконка после текста Chips'a.
    * Отображается, если не прокинут метод onClose, иначе отображется иконка закрытия (крест)
    */
-  iconAfter?: ReactNode;
+  iconAfter?: React.ReactNode;
   /** Число, которое будет отображено в компоненте Badge справа от content */
   badge?: number;
 }
 
-export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
+export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
   (
     {
       dimension = 'm',
@@ -80,11 +79,11 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
     ref,
   ) => {
     const defaultChip = selected !== undefined;
-    const [overflow, setOverflow] = React.useState(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState(false);
+    const [overflow, setOverflow] = useState(false);
+    const [tooltipVisible, setTooltipVisible] = useState(false);
     const withCloseIcon = !!onClose;
     const withBadge = !!badge;
-    const badgeAppearance: BadgeAppearance = React.useMemo(() => {
+    const badgeAppearance: BadgeAppearance = useMemo(() => {
       if (selected && !disabled) return 'whiteBlue';
       if (disabled) {
         if (selected || appearance === 'filled') return 'whiteDisable';
@@ -94,16 +93,16 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
       return 'info';
     }, [appearance, selected, disabled]);
 
-    const chipRef = React.useRef<HTMLDivElement | null>(null);
-    const refItems = React.useRef<HTMLDivElement | null>(null);
+    const chipRef = useRef<HTMLDivElement | null>(null);
+    const refItems = useRef<HTMLDivElement | null>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (refItems.current && checkOverflow(refItems.current) !== overflow) {
         setOverflow(checkOverflow(refItems.current));
       }
     }, [tooltipVisible, setOverflow]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         setTooltipVisible(true);
       }
@@ -125,12 +124,12 @@ export const Chips = React.forwardRef<HTMLDivElement, ChipsProps>(
       }
     }, [setTooltipVisible]);
 
-    const handleClickCloseIcon = (e: MouseEvent) => {
+    const handleClickCloseIcon = (e: React.MouseEvent) => {
       e.stopPropagation();
       onClose?.();
     };
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (!disabled) {
         const code = keyboardKey.getCode(e);
         if (code === keyboardKey.Enter || code === keyboardKey[' ']) {

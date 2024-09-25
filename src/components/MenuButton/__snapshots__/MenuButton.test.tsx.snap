@@ -9,11 +9,15 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c3[data-loading] {
+  pointer-events: none;
 }
 
 .c3[data-disabled] {
@@ -21,7 +25,7 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -124,14 +128,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -167,59 +171,59 @@ exports[`MenuButton should render component 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -255,13 +259,13 @@ exports[`MenuButton should render component 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -296,13 +300,13 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -327,14 +331,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -359,14 +363,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -391,14 +395,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -434,59 +438,59 @@ exports[`MenuButton should render component 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -570,11 +574,15 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c3:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c3[data-loading] {
+  pointer-events: none;
 }
 
 .c3[data-disabled] {
@@ -582,7 +590,7 @@ exports[`MenuButton should render component 1`] = `
 }
 
 .c3[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -685,14 +693,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -728,59 +736,59 @@ exports[`MenuButton should render component 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -816,13 +824,13 @@ exports[`MenuButton should render component 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -857,13 +865,13 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -888,14 +896,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -920,14 +928,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -952,14 +960,14 @@ exports[`MenuButton should render component 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -995,59 +1003,59 @@ exports[`MenuButton should render component 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -1186,11 +1194,15 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c6:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c6[data-loading] {
+  pointer-events: none;
 }
 
 .c6[data-disabled] {
@@ -1198,7 +1210,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -1293,7 +1305,8 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: pointer;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1328,14 +1341,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -1371,59 +1384,59 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -1459,13 +1472,13 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -1500,13 +1513,13 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -1531,14 +1544,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -1563,14 +1576,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -1595,14 +1608,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -1638,59 +1651,59 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -1785,11 +1798,15 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c6:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c6[data-loading] {
+  pointer-events: none;
 }
 
 .c6[data-disabled] {
@@ -1797,7 +1814,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c6[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c2 {
@@ -1892,7 +1909,8 @@ exports[`MenuButton should render component with loading state 1`] = `
   border-radius: var(--admiral-border-radius-Medium, 4px);
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: pointer;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -1927,14 +1945,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -1970,59 +1988,59 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -2058,13 +2076,13 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -2099,13 +2117,13 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -2130,14 +2148,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -2162,14 +2180,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -2194,14 +2212,14 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -2237,59 +2255,59 @@ exports[`MenuButton should render component with loading state 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -2439,11 +2457,15 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4[data-loading] {
+  pointer-events: none;
 }
 
 .c4[data-disabled] {
@@ -2451,7 +2473,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c3 {
@@ -2519,7 +2541,8 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -2530,7 +2553,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: ioAouA 2s ease infinite;
+  animation: gTXsAI 2s ease infinite;
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button) {
@@ -2555,14 +2578,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -2598,59 +2621,59 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -2686,13 +2709,13 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -2727,13 +2750,13 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -2758,14 +2781,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -2790,14 +2813,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -2822,14 +2845,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -2865,59 +2888,59 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {
@@ -3006,11 +3029,15 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c4:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4[data-loading] {
+  pointer-events: none;
 }
 
 .c4[data-disabled] {
@@ -3018,7 +3045,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 }
 
 .c4[data-disabled] *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c3 {
@@ -3086,7 +3113,8 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   border-radius: 0;
   appearance: none;
   vertical-align: middle;
-  cursor: default;
+  cursor: not-allowed;
+  pointer-events: none;
   padding: 0;
   height: 56px;
   padding: 0 29px;
@@ -3097,7 +3125,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: ioAouA 2s ease infinite;
+  animation: gTXsAI 2s ease infinite;
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button) {
@@ -3122,14 +3150,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled.c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button).c0[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button) {
@@ -3165,59 +3193,59 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled.c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button).c0[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled.c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button).c0[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button) {
@@ -3253,13 +3281,13 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled.c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button).c0[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button) {
@@ -3294,13 +3322,13 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled {
-  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #4E535D     );
-  color: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled.c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button).c0[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Special_DarkStaticNeutral30, #4E535D);
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button) {
@@ -3325,14 +3353,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled.c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button).c0[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button) {
@@ -3357,14 +3385,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled.c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button).c0[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button) {
@@ -3389,14 +3417,14 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled {
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  border-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled.c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button).c0:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button) {
@@ -3432,59 +3460,59 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled {
   background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled.c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button).c0:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button) {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border: 1px solid transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover {
   background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active {
   background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled {
   background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   border-color: transparent;
 }
 
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
 .c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled.c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button).c0:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c0:focus-visible {

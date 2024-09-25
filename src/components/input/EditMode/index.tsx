@@ -21,7 +21,7 @@ const stopEvent = (e: MouseEvent) => e.preventDefault();
 
 export interface EditModeProps
   extends EditModeComponentProps,
-    Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value'> {
+    Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
   /** Колбек на изменение значения компонента */
   onChange: ChangeEventHandler<HTMLInputElement>;
   /**

@@ -1,24 +1,24 @@
-import type {
+import {
   BaseSyntheticEvent,
-  FocusEvent,
-  MouseEvent,
+  ChangeEvent,
   ChangeEventHandler,
+  FocusEvent,
   InputHTMLAttributes,
+  KeyboardEventHandler,
+  MouseEvent,
   ReactNode,
   RefObject,
-  KeyboardEventHandler,
-  ChangeEvent,
 } from 'react';
 import {
+  Children,
+  cloneElement,
   forwardRef,
-  useState,
+  isValidElement,
+  useCallback,
+  useEffect,
   useMemo,
   useRef,
-  useEffect,
-  useCallback,
-  Children,
-  isValidElement,
-  cloneElement,
+  useState,
 } from 'react';
 import styled, { useTheme } from 'styled-components';
 
@@ -33,13 +33,13 @@ import { ConstantSelectProvider } from './useSelectContext';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
+  EmptyMessageWrapper,
   IconPanel,
   Input,
   OptionWrapper,
   SelectWrapper,
-  ValueWrapper,
   StyledMenu,
-  EmptyMessageWrapper,
+  ValueWrapper,
 } from './styled';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -51,11 +51,12 @@ import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
+import type { IConstantOption, SearchFormat, SelectItemProps } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
 export type { SearchFormat } from './types';
 
@@ -221,6 +222,8 @@ export interface SelectProps
   forceHideOverflowTooltip?: boolean;
   /** Событие, которое вызывается при изменении выбранных опций/опции */
   onSelectedChange?: (value: string | Array<string>) => void;
+  /** Признак поднятия выбранных опций вверх списка */
+  moveSelectedOnTop?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -278,6 +281,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       title,
       forceHideOverflowTooltip = false,
       onSelectedChange,
+      moveSelectedOnTop,
       ...props
     },
     ref,
@@ -339,13 +343,47 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       }
     }, [constantOptions, selectedValue, multiple]);
 
+    const prevIsSearchPanelOpen = usePrevious<boolean>(isSearchPanelOpen);
+    const [itemsOnTop, setItemsOnTop] = useState<Array<SelectItemProps>>([]);
+
+    useEffect(() => {
+      if ((!multiple || !moveSelectedOnTop) && itemsOnTop.length > 0) {
+        setItemsOnTop([]);
+      }
+
+      if (multiple && moveSelectedOnTop && prevIsSearchPanelOpen !== isSearchPanelOpen && isSearchPanelOpen) {
+        const selected = selectedOptions.map((item) => item.value);
+
+        const items =
+          selected.length > 0
+            ? selected.reduce<Array<SelectItemProps>>((acc, value) => {
+                const modelItem = dropDownItems.find((item) => item.value === value);
+
+                if (modelItem) acc.push(modelItem);
+                return acc;
+              }, [])
+            : [];
+        setItemsOnTop(items);
+      }
+    }, [dropDownItems, isSearchPanelOpen, selectedOptions, multiple, moveSelectedOnTop]);
+
     const dropDownModel = useMemo<Array<MenuModelItemProps>>(() => {
+      const selected = itemsOnTop.map((item) => item.value);
+
       const filteredItems = dropDownItems.filter((item) => {
         return onFilterItem(item.value, searchValue, searchFormat);
       });
 
-      return filteredItems.length
-        ? filteredItems
+      const resultItems = filteredItems.reduce<Array<MenuModelItemProps>>(
+        (acc, item) => {
+          if (!selected.includes(item.value)) acc.push(item);
+          return acc;
+        },
+        [...itemsOnTop],
+      );
+
+      return resultItems.length
+        ? resultItems
         : [
             {
               id: 'emptyMessage',
@@ -353,7 +391,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               disabled: true,
             },
           ];
-    }, [isLoading, dropDownItems, dimension, searchValue]);
+    }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
@@ -758,10 +796,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         disabled={disabled}
         data-disabled={disabled}
         $readonly={readOnly}
+        $isLoading={isLoading}
         $dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onClick={disabled || readOnly ? undefined : handleWrapperClick}
+        onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
@@ -860,6 +899,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <OpenStatusButton
               $isOpen={isSearchPanelOpen}
               data-disabled={disabled ? true : undefined}
+              data-loading={isLoading ? true : undefined}
               onClick={handleSearchPanelToggle}
               aria-hidden
             />

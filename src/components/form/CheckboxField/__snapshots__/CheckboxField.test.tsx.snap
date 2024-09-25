@@ -3,7 +3,126 @@
 exports[`CheckboxField should render component with disabled state 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: not-allowed;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -18,7 +137,7 @@ exports[`CheckboxField should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -32,167 +151,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -206,14 +169,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -221,6 +184,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -230,32 +197,28 @@ fieldset[data-dimension='s'] .c6.c6 {
         data-field-id="checkboxField"
         disabled=""
       >
-        <input
-          class="c1"
-          data-testid="element"
-          disabled=""
-          id="checkboxField"
-          type="checkbox"
-        />
         <div
-          class="c2"
+          class="c1 c2"
         >
-          <div
+          <input
             class="c3"
-          />
-          <span
-            class="c4"
+            data-testid="element"
             disabled=""
+            id="checkboxField"
+            type="checkbox"
+          />
+          <div
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c6"
+          class="c7"
           disabled=""
         >
           text
@@ -263,7 +226,126 @@ fieldset[data-dimension='s'] .c6.c6 {
       </label>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: not-allowed;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -278,7 +360,7 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -292,167 +374,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -466,14 +392,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -483,38 +409,38 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
       data-field-id="checkboxField"
       disabled=""
     >
-      <input
-        class="c1"
-        data-testid="element"
-        disabled=""
-        id="checkboxField"
-        type="checkbox"
-      />
       <div
-        class="c2"
+        class="c1 c2"
       >
-        <div
+        <input
           class="c3"
-        />
-        <span
-          class="c4"
+          data-testid="element"
           disabled=""
+          id="checkboxField"
+          type="checkbox"
+        />
+        <div
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
-        </span>
+        </div>
       </div>
       <div
-        class="c6"
+        class="c7"
         disabled=""
       >
         text
@@ -578,7 +504,126 @@ fieldset[data-dimension='s'] .c6.c6 {
 exports[`CheckboxField should render component with required properties 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -593,7 +638,7 @@ exports[`CheckboxField should render component with required properties 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -607,167 +652,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -781,14 +670,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -796,6 +685,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -804,37 +697,153 @@ fieldset[data-dimension='s'] .c6.c6 {
         class="c0"
         data-field-id="checkboxField"
       >
-        <input
-          class="c1"
-          data-testid="element"
-          id="checkboxField"
-          type="checkbox"
-        />
         <div
-          class="c2"
+          class="c1 c2"
         >
-          <div
+          <input
             class="c3"
+            data-testid="element"
+            id="checkboxField"
+            type="checkbox"
           />
-          <span
-            class="c4"
+          <div
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         >
           text
         </div>
       </label>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -849,7 +858,7 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -863,167 +872,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1037,14 +890,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1054,35 +907,36 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
       data-field-id="checkboxField"
     >
-      <input
-        class="c1"
-        data-testid="element"
-        id="checkboxField"
-        type="checkbox"
-      />
       <div
-        class="c2"
+        class="c1 c2"
       >
-        <div
+        <input
           class="c3"
+          data-testid="element"
+          id="checkboxField"
+          type="checkbox"
         />
-        <span
-          class="c4"
+        <div
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
-        </span>
+        </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       >
         text
       </div>
@@ -1145,7 +999,126 @@ fieldset[data-dimension='s'] .c6.c6 {
 exports[`CheckboxField should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -1160,7 +1133,7 @@ exports[`CheckboxField should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -1174,167 +1147,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1348,14 +1165,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1363,6 +1180,10 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c2 {
+  margin-top: 2px;
 }
 
 <body>
@@ -1371,37 +1192,153 @@ fieldset[data-dimension='s'] .c6.c6 {
         class="c0"
         data-field-id="checkboxField"
       >
-        <input
-          class="c1"
-          data-testid="element"
-          id="checkboxField"
-          type="checkbox"
-        />
         <div
-          class="c2"
+          class="c1 c2"
         >
-          <div
+          <input
             class="c3"
+            data-testid="element"
+            id="checkboxField"
+            type="checkbox"
           />
-          <span
-            class="c4"
+          <div
+            class="c4 c5"
           >
             <div
               aria-hidden="true"
-              class="c5"
+              class="c6"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c6"
+          class="c7"
         >
           text
         </div>
       </label>
     </div>
   </body>,
-  "container": .c0 {
+  "container": .c6 {
+  pointer-events: none;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c1 {
+  height: 16px;
+}
+
+.c5 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c3 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c3 ::-ms-check {
+  display: none;
+}
+
+.c3:checked+.c4 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c3:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c3:disabled+.c4 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c3:not(:checked)+.c4 >* {
+  display: none;
+}
+
+.c3:hover:not(:disabled)::after,
+.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c3:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c3:checked:disabled+.c4 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c3:checked:disabled+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c3:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0 {
   display: inline-flex;
   align-items: flex-start;
   position: relative;
@@ -1416,7 +1353,7 @@ fieldset[data-dimension='s'] .c6.c6 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c0.c0 {
@@ -1430,167 +1367,11 @@ fieldset[data-dimension='s'] .c0.c0 {
 }
 
 fieldset:disabled .c0.c0 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c1 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c1 ::-ms-check {
-  display: none;
-}
-
-.c1:disabled {
-  cursor: not-allowed;
-}
-
-.c1:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c1:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c1:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c1:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c1:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c1:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c1:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c1:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c1:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c1:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c1:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c2 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c2 {
-  width: 20px;
-  height: 20px;
-}
-
-.c3 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c3.c3 {
-  width: 32px;
-  height: 32px;
-}
-
-.c4 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 16px;
-  height: 16px;
-}
-
-.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c4.c4 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c5 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c6 {
+.c7 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1604,14 +1385,14 @@ fieldset:disabled .c4.c4 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c6.c6 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c7.c7 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c6.c6 {
+fieldset[data-dimension='s'] .c7.c7 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1621,35 +1402,36 @@ fieldset[data-dimension='s'] .c6.c6 {
   text-rendering: geometricPrecision;
 }
 
+.c2 {
+  margin-top: 2px;
+}
+
 <div>
     <label
       class="c0"
       data-field-id="checkboxField"
     >
-      <input
-        class="c1"
-        data-testid="element"
-        id="checkboxField"
-        type="checkbox"
-      />
       <div
-        class="c2"
+        class="c1 c2"
       >
-        <div
+        <input
           class="c3"
+          data-testid="element"
+          id="checkboxField"
+          type="checkbox"
         />
-        <span
-          class="c4"
+        <div
+          class="c4 c5"
         >
           <div
             aria-hidden="true"
-            class="c5"
+            class="c6"
             focusable="false"
           />
-        </span>
+        </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       >
         text
       </div>

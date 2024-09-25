@@ -14,6 +14,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    'import/no-named-as-default': 0, // для совместимости с styled-components v5
     '@typescript-eslint/no-explicit-any': 1,
     'no-console': 1, // Means warning
     'prettier/prettier': 2, // Means error,
@@ -27,9 +28,23 @@ module.exports = {
         fixStyle: 'separate-type-imports',
       },
     ],
-    'import/default': 0,
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
   },
   settings: {
+    'import/ignore': [
+      '.(scss|less|css)$', // can't parse unprocessed CSS modules, either
+    ],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.js', '.jsx'],
     },

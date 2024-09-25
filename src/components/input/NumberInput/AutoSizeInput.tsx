@@ -7,7 +7,9 @@ import { typography } from '#src/components/Typography';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { fitToCurrency } from './utils';
+function defaultHandleInput(newInputData: InputData | null): InputData {
+  return newInputData || {};
+}
 
 const Prefix = styled.div<{ disabled?: boolean; $align?: 'left' | 'right' }>`
   display: flex;
@@ -179,18 +181,10 @@ const HiddenContent = styled.div<{ $dimension?: ComponentDimension; $iconCount?:
 `;
 
 export interface InputProps extends TextInputProps {
-  /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
-  precision?: number;
   /** префикс (строка, которая выводится перед числовым значением) */
   prefix?: string;
   /** суффикс (строка, которая выводится после числового значения) */
   suffix?: string;
-  /** разделитель между тысячами */
-  thousand: string;
-  /** разделитель между целым и десятичным */
-  decimal: string;
-  /** Минимальное значение */
-  minValue?: number;
   /** Количество иконок */
   iconCount?: number;
   /** Выравнивание контента. По умолчанию выравнивание происходит по левому краю */
@@ -205,16 +199,13 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       dimension,
       placeholder,
       type,
-      precision = 2,
       prefix,
       suffix,
-      thousand,
-      decimal,
       status,
-      minValue,
       iconCount,
       align,
       innerValue,
+      handleInput = defaultHandleInput,
       ...props
     },
     ref,
@@ -260,47 +251,6 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
-    const handleInput = (inputData: InputData | null): InputData => {
-      const { value, selectionStart } = inputData || {};
-      const cursor = selectionStart || 0;
-      const init_value = value || '';
-      const newValue = fitToCurrency(init_value, precision, decimal, thousand, undefined, minValue);
-
-      if (thousand && init_value.charAt(cursor - 1) === thousand && newValue.length === init_value.length) {
-        // если пытаемся стереть разделитель thousand, то курсор перескакивает через него
-        return {
-          ...inputData,
-          value: newValue,
-          selectionStart: cursor - 1,
-          selectionEnd: cursor - 1,
-        };
-      }
-      if (precision && init_value.length > newValue.length && init_value.indexOf(newValue) == 0) {
-        // если пытаемся в уже заполненную десятичную часть (кол-во знаков в десятичной части равно precision) ввести новую цифру,
-        // то эта цифра должна заменить собой соседнюю цифру
-
-        const start = newValue.slice(0, cursor);
-        const diff = newValue.length - start.length;
-        const end = diff > 0 ? init_value.slice(-diff) : '';
-
-        const updValue = start + end;
-
-        return {
-          ...inputData,
-          value: updValue,
-          selectionStart: cursor,
-          selectionEnd: cursor,
-        };
-      } else {
-        return {
-          ...inputData,
-          value: newValue,
-          selectionStart: newValue.length - init_value.length + cursor,
-          selectionEnd: newValue.length - init_value.length + cursor,
-        };
-      }
-    };
-
     useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
@@ -336,7 +286,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
           node.removeEventListener('input', oninput);
         };
       }
-    }, [inputRef.current, placeholder, precision, decimal, thousand, minValue]);
+    }, [handleInput, inputRef.current, placeholder]);
 
     useLayoutEffect(() => {
       updateHiddenContent(innerValue);

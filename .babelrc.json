@@ -12,5 +12,13 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
-  "plugins": ["babel-plugin-styled-components"]
+  "plugins": [
+    "babel-plugin-styled-components",
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "runtime": "automatic" // defaults to classic
+      }
+    ]
+  ]
 }

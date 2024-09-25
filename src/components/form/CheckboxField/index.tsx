@@ -1,25 +1,19 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
-import { forwardRef } from 'react';
-
+import { forwardRef, useMemo } from 'react';
+import styled from 'styled-components';
 import { passFormFieldContainerDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
 import { keyboardKey } from '../../common/keyboardKey';
 import type { CheckboxComponentDimension } from '#src/components/form/CheckboxField/style';
 import {
-  Check,
-  CheckboxComponentBackground,
   CheckboxComponentHint,
-  CheckboxComponentHover,
   CheckboxComponentLabel,
   CheckboxComponentWrapper,
-  Indeterminate,
-  Input,
-  InputContainer,
 } from '#src/components/form/CheckboxField/style';
+import { Checkbox } from '#src/components/Checkbox';
 
-export interface CheckboxFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Текст будет виден ниже компонента */
-  extraText?: ReactNode;
+  extraText?: React.ReactNode;
   /** Размер компонента */
   dimension?: CheckboxComponentDimension;
   /** Состояние частичного выбора */
@@ -29,7 +23,9 @@ export interface CheckboxFieldProps extends InputHTMLAttributes<HTMLInputElement
   /** Состояние hover */
   hovered?: boolean;
 }
-
+const StyledChekbox = styled(Checkbox)`
+  margin-top: 2px;
+`;
 export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
   (
     {
@@ -42,12 +38,16 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
       indeterminate = false,
       extraText,
       className,
-      id = uid(),
+      id: passedId,
       name,
+      style,
       ...props
     },
     ref,
   ) => {
+    //di не должно меняться на каждый ререндер если его не назначили
+    const id = useMemo(() => passedId || uid(), [passedId]);
+
     const fieldContainerProps = {
       'data-field-id': id,
       'data-field-name': name,
@@ -68,37 +68,28 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
 
     return (
       <CheckboxComponentWrapper
-        style={{}}
         className={className}
         $dimension={dimension}
         disabled={disabled}
         readOnly={readOnly}
+        style={style}
         {...fieldContainerProps}
       >
-        <Input
+        <StyledChekbox
           {...props}
           ref={ref}
           disabled={disabled}
           readOnly={readOnly}
           type="checkbox"
-          $indeterminate={indeterminate}
+          indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
           data-hovered={hovered}
-          $hovered={hovered}
-          $dimension={dimension}
+          hovered={hovered}
+          dimension={dimension}
           id={id}
           name={name}
+          error={error}
         />
-        <InputContainer $dimension={dimension}>
-          <CheckboxComponentHover $dimension={dimension} />
-          <CheckboxComponentBackground $dimension={dimension} $error={error} disabled={disabled || readOnly}>
-            {indeterminate ? (
-              <Indeterminate aria-hidden="true" focusable="false" $dimension={dimension} />
-            ) : (
-              <Check aria-hidden="true" focusable="false" $dimension={dimension} />
-            )}
-          </CheckboxComponentBackground>
-        </InputContainer>
         {children && (
           <CheckboxComponentLabel $dimension={dimension} disabled={disabled}>
             {children}

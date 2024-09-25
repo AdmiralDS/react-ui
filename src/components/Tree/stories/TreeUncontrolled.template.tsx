@@ -1,4 +1,3 @@
-import React from 'react';
 import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';

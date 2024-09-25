@@ -11,7 +11,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: none;
   border-radius: 16px;
   height: 32px;
@@ -23,7 +23,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c0>* {
@@ -61,7 +61,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 {
@@ -97,7 +97,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   max-width: 190px;
   user-select: none;
   cursor: default;
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: none;
   border-radius: 16px;
   height: 32px;
@@ -109,7 +109,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 .c0>* {
@@ -147,7 +147,7 @@ exports[`Chips should render component with appearanceTypeFilled prop  1`] = `
 }
 
 .c1 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 {
@@ -242,7 +242,7 @@ exports[`Chips should render component with selected prop  1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -328,7 +328,7 @@ exports[`Chips should render component with selected prop  1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -469,7 +469,7 @@ exports[`Chips should render default component 1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
@@ -555,7 +555,7 @@ exports[`Chips should render default component 1`] = `
   border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
   border-radius: 16px;
   height: 32px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Long, 400);

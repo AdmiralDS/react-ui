@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 
@@ -107,12 +106,12 @@ export const Demo2_Tree = {
         code: TreeSimpleRaw,
       },
       description: {
-        story: 'Дерево без checkbox',
+        story: 'Дерево без checkbox c заданной кастомной шириной в 500px и расстоянием между строками 8px',
       },
     },
   },
 
-  name: 'Дерево без checkbox',
+  name: 'Дерево без checkbox c кастомизацией размеров',
 };
 
 const TreeUncontrolledStory: StoryFn<typeof Tree> = (props) => <TreeUncontrolledTemplate {...props} />;
