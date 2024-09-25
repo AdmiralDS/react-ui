@@ -43,6 +43,10 @@ export default {
       control: false,
     },
 
+    moveSelectedOnTop: {
+      control: { type: 'boolean' },
+    },
+
     readOnly: {
       control: { type: 'boolean' },
     },
