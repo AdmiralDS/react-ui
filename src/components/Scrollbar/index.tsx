@@ -41,6 +41,15 @@ const HorizontalScrollAria = styled.div`
   height: 10px;
 `;
 
+const HorizontalScrollThumbZone = styled.div`
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  border-inline: 4px solid transparent;
+`;
+
 const HorizontalTrack = styled.div`
   box-sizing: border-box;
   height: 100%;
@@ -52,8 +61,8 @@ const HorizontalTrack = styled.div`
 `;
 
 const HorizontalThumb = styled.div`
-  position: absolute;
-  top: 0;
+  pointer-events: all;
+  position: relative;
   height: 6px;
   border-radius: 6px;
   background-color: ${(p) => p.theme.color['Opacity/Neutral 16']};
@@ -106,6 +115,7 @@ export const Scrollbar = ({
   const [verticalScrollAreaNode, setVerticalScrollAreaNode] = useState<HTMLDivElement | null>(null);
   const [verticalScrollThumbZoneNode, setVerticalScrollThumbZoneNode] = useState<HTMLDivElement | null>(null);
   const [horizontalScrollAreaNode, setHorizontalScrollAreaNode] = useState<HTMLDivElement | null>(null);
+  const [horizontalScrollThumbZoneNode, setHorizontalScrollThumbZoneNode] = useState<HTMLDivElement | null>(null);
 
   const [verticalThumbNode, setVerticalThumbNode] = useState<HTMLDivElement | null>(null);
   const [horizontalThumbNode, setHorizontalThumbNode] = useState<HTMLDivElement | null>(null);
@@ -131,15 +141,16 @@ export const Scrollbar = ({
     setHorizontalScrollAreaNode(node),
   );
 
-  function calcVerticalThumbHeight(node: Element, verticalScrollAreaNode: Element) {
+  function calcVerticalThumbHeight(node: Element, verticalScrollThumbZoneNode: Element) {
     const { clientHeight, scrollHeight } = node;
-    const { clientHeight: verticalScrollAreaheight } = verticalScrollAreaNode;
-    return Math.max(Math.round((clientHeight * verticalScrollAreaheight) / scrollHeight), minThumbSize);
+    const { clientHeight: verticalThumbScrollHeight } = verticalScrollThumbZoneNode;
+    return Math.max(Math.round((clientHeight * verticalThumbScrollHeight) / scrollHeight), minThumbSize);
   }
 
-  function calcHorizontalThumbWidth(node: Element) {
+  function calcHorizontalThumbWidth(node: Element, horizontalScrollThumbZoneNode: Element) {
     const { clientWidth, scrollWidth } = node;
-    return Math.max(Math.round((clientWidth * clientWidth) / scrollWidth), minThumbSize);
+    const { clientWidth: horizontalThumbScrollWidth } = horizontalScrollThumbZoneNode;
+    return Math.max(Math.round((clientWidth * horizontalThumbScrollWidth) / scrollWidth), minThumbSize);
   }
 
   function isVerticalOverflow(node: Element) {
@@ -159,11 +170,12 @@ export const Scrollbar = ({
       horizontalThumbNode &&
       verticalScrollAreaNode &&
       horizontalScrollAreaNode &&
-      verticalScrollThumbZoneNode
+      verticalScrollThumbZoneNode &&
+      horizontalScrollThumbZoneNode
     ) {
       const { observe, unobserve } = observeRect(contentNode, () => {
         const verticalThumbHeight = calcVerticalThumbHeight(contentNode, verticalScrollThumbZoneNode);
-        const horizontalThumbWidth = calcHorizontalThumbWidth(contentNode);
+        const horizontalThumbWidth = calcHorizontalThumbWidth(contentNode, horizontalScrollThumbZoneNode);
 
         verticalThumbNode.style.setProperty(verticalThumbHeghtCSSPropName, `${verticalThumbHeight}px`);
         horizontalThumbNode.style.setProperty(horizontalThumbWidthCSSPropName, `${horizontalThumbWidth}px`);
@@ -176,8 +188,9 @@ export const Scrollbar = ({
         horizontalScrollAreaNode.style.setProperty('display', isXOverflow ? null : 'none');
         horizontalScrollAreaNode.style.setProperty('right', isYOverflow ? '10px' : null);
 
-        const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = contentNode;
-
+        const { scrollTop, scrollLeft, scrollHeight, scrollWidth } = contentNode;
+        const { clientHeight } = verticalScrollThumbZoneNode;
+        const { clientWidth } = horizontalScrollThumbZoneNode;
         const newTop = Math.round(
           Math.min((scrollTop / scrollHeight) * clientHeight, clientHeight - verticalThumbHeight),
         );
@@ -198,6 +211,7 @@ export const Scrollbar = ({
     verticalScrollAreaNode,
     horizontalScrollAreaNode,
     verticalScrollThumbZoneNode,
+    horizontalScrollThumbZoneNode,
   ]);
 
   function handleVerticalThumbMousedown(e: React.MouseEvent<HTMLDivElement>) {
@@ -328,13 +342,15 @@ export const Scrollbar = ({
       </VerticalScrollAria>
       <HorizontalScrollAria ref={composedHorizontalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <HorizontalTrack onClick={handleHorizontalTrackClick} />
-        <HorizontalThumb
-          ref={setHorizontalThumbNode}
-          onMouseDown={handleHorizontalThumbMousedown}
-          style={{
-            cursor: isHorizontalDragging ? 'grabbing' : 'grab',
-          }}
-        />
+        <HorizontalScrollThumbZone ref={(node) => setHorizontalScrollThumbZoneNode(node)}>
+          <HorizontalThumb
+            ref={setHorizontalThumbNode}
+            onMouseDown={handleHorizontalThumbMousedown}
+            style={{
+              cursor: isHorizontalDragging ? 'grabbing' : 'grab',
+            }}
+          />
+        </HorizontalScrollThumbZone>
       </HorizontalScrollAria>
     </>
   );
