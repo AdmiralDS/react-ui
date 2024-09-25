@@ -21,7 +21,16 @@ const VerticalScrollAria = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
+
   width: 10px;
+`;
+
+const VerticalScrollThumbZone = styled.div`
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-block: 4px solid transparent;
 `;
 
 const HorizontalScrollAria = styled.div`
@@ -62,8 +71,8 @@ const VerticalTrack = styled.div`
 `;
 
 const VerticalThumb = styled.div`
-  position: absolute;
-  left: 0;
+  pointer-events: all;
+  position: relative;
   width: 6px;
   border-radius: 6px;
   background-color: ${(p) => p.theme.color['Opacity/Neutral 16']};
@@ -95,6 +104,7 @@ export const Scrollbar = ({
   const [contentNode, setContenetNode] = useState<HTMLDivElement | null>(null);
 
   const [verticalScrollAreaNode, setVerticalScrollAreaNode] = useState<HTMLDivElement | null>(null);
+  const [verticalScrollThumbZoneNode, setVerticalScrollThumbZoneNode] = useState<HTMLDivElement | null>(null);
   const [horizontalScrollAreaNode, setHorizontalScrollAreaNode] = useState<HTMLDivElement | null>(null);
 
   const [verticalThumbNode, setVerticalThumbNode] = useState<HTMLDivElement | null>(null);
@@ -121,9 +131,10 @@ export const Scrollbar = ({
     setHorizontalScrollAreaNode(node),
   );
 
-  function calcVerticalThumbHeight(node: Element) {
+  function calcVerticalThumbHeight(node: Element, verticalScrollAreaNode: Element) {
     const { clientHeight, scrollHeight } = node;
-    return Math.max(Math.round((clientHeight * clientHeight) / scrollHeight), minThumbSize);
+    const { clientHeight: verticalScrollAreaheight } = verticalScrollAreaNode;
+    return Math.max(Math.round((clientHeight * verticalScrollAreaheight) / scrollHeight), minThumbSize);
   }
 
   function calcHorizontalThumbWidth(node: Element) {
@@ -142,9 +153,16 @@ export const Scrollbar = ({
   }
 
   useLayoutEffect(() => {
-    if (contentNode && verticalThumbNode && horizontalThumbNode && verticalScrollAreaNode && horizontalScrollAreaNode) {
+    if (
+      contentNode &&
+      verticalThumbNode &&
+      horizontalThumbNode &&
+      verticalScrollAreaNode &&
+      horizontalScrollAreaNode &&
+      verticalScrollThumbZoneNode
+    ) {
       const { observe, unobserve } = observeRect(contentNode, () => {
-        const verticalThumbHeight = calcVerticalThumbHeight(contentNode);
+        const verticalThumbHeight = calcVerticalThumbHeight(contentNode, verticalScrollThumbZoneNode);
         const horizontalThumbWidth = calcHorizontalThumbWidth(contentNode);
 
         verticalThumbNode.style.setProperty(verticalThumbHeghtCSSPropName, `${verticalThumbHeight}px`);
@@ -173,7 +191,14 @@ export const Scrollbar = ({
       observe();
       return unobserve;
     }
-  }, [contentNode, verticalThumbNode, horizontalThumbNode, verticalScrollAreaNode, horizontalScrollAreaNode]);
+  }, [
+    contentNode,
+    verticalThumbNode,
+    horizontalThumbNode,
+    verticalScrollAreaNode,
+    horizontalScrollAreaNode,
+    verticalScrollThumbZoneNode,
+  ]);
 
   function handleVerticalThumbMousedown(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -291,13 +316,15 @@ export const Scrollbar = ({
       </HiddenNativeScroll>
       <VerticalScrollAria ref={composedVerticalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <VerticalTrack onClick={handleVerticalTrackClick} />
-        <VerticalThumb
-          ref={setVerticalThumbNode}
-          onMouseDown={handleVerticalThumbMousedown}
-          style={{
-            cursor: isVerticalDragging ? 'grabbing' : 'grab',
-          }}
-        />
+        <VerticalScrollThumbZone ref={(node) => setVerticalScrollThumbZoneNode(node)}>
+          <VerticalThumb
+            ref={setVerticalThumbNode}
+            onMouseDown={handleVerticalThumbMousedown}
+            style={{
+              cursor: isVerticalDragging ? 'grabbing' : 'grab',
+            }}
+          />
+        </VerticalScrollThumbZone>
       </VerticalScrollAria>
       <HorizontalScrollAria ref={composedHorizontalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <HorizontalTrack onClick={handleHorizontalTrackClick} />
