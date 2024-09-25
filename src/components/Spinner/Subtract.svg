@@ -1,27 +1,27 @@
 <svg fill="none" xmlns="http://www.w3.org/2000/svg">
 <style>
 @container (min-width: 64px) {
-  svg :not(path.spinner-icon[data-dimension='xl']) {
+  svg path.spinner-icon:not([data-dimension='xl']) {
     display: none;
   }
 }
 @container (max-width: 48px) and (min-width: 25px) {
-  svg :not(path.spinner-icon[data-dimension='l']) {
+  svg path.spinner-icon:not([data-dimension='l']) {
     display: none;
   }
 }
 @container (max-width: 24px) and (min-width: 21px) {
-  svg :not(path.spinner-icon[data-dimension='m']) {
+  svg path.spinner-icon:not([data-dimension='m']) {
     display: none;
   }
 }
 @container (max-width: 20px) and (min-width: 17px) {
-  svg :not(path.spinner-icon[data-dimension='ms']) {
+  svg path.spinner-icon:not([data-dimension='ms']) {
     display: none;
   }
 }
 @container (max-width: 16px) {
-  svg :not(path.spinner-icon[data-dimension='s']) {
+  svg path.spinner-icon:not([data-dimension='s']) {
     display: none;
   }
 }

@@ -206,7 +206,8 @@ const StyledButton = styled.button.attrs<
     p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
   appearance: none;
   vertical-align: middle;
-  cursor: ${(p) => (p.$loading || p.$skeleton ? 'default' : p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  ${(p) => (p.$loading || p.$skeleton) && 'pointer-events: none'};
 
   ${appearanceMixin};
   ${dimensionMixin};

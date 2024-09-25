@@ -96,9 +96,6 @@ export default {
     showTooltip: {
       control: { type: 'boolean' },
     },
-    isLoading: {
-      control: { type: 'boolean' },
-    },
     icons: {
       control: false,
     },

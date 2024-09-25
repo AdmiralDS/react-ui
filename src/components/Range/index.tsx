@@ -150,12 +150,12 @@ export const Range = ({
     }
   };
 
-  const onSliderClick = (e: any, slider: 'first' | 'second') => {
+  const onSliderClick = (_e: any, slider: 'first' | 'second') => {
     slider === 'first' ? setDrag(true) : setDrag2(true);
     setAnimation(true);
   };
 
-  const handleSliderMouseUp = (e: any) => {
+  const handleSliderMouseUp = (e: TouchEvent | MouseEvent) => {
     const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
     onRangeMouseUp?.();
     if (isDraging && calcVal > value[1]) {

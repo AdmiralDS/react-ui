@@ -52,7 +52,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -69,11 +69,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -83,7 +83,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -104,7 +104,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -121,11 +121,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -140,31 +140,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -176,7 +176,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -188,18 +188,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -214,26 +218,26 @@ fieldset[data-dimension='s'] .c2 {
           disabled=""
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               disabled=""
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Москва
@@ -245,26 +249,26 @@ fieldset[data-dimension='s'] .c2 {
           disabled=""
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               disabled=""
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Воронеж
@@ -276,26 +280,26 @@ fieldset[data-dimension='s'] .c2 {
           disabled=""
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               disabled=""
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Самара
@@ -353,7 +357,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -370,11 +374,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -384,7 +388,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -405,7 +409,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -422,11 +426,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -441,31 +445,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -477,7 +481,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -489,18 +493,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -514,26 +522,26 @@ fieldset[data-dimension='s'] .c2 {
         disabled=""
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             disabled=""
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Москва
@@ -545,26 +553,26 @@ fieldset[data-dimension='s'] .c2 {
         disabled=""
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             disabled=""
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Воронеж
@@ -576,26 +584,26 @@ fieldset[data-dimension='s'] .c2 {
         disabled=""
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             disabled=""
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Самара
@@ -709,7 +717,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -726,11 +734,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -740,7 +748,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -761,7 +769,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -778,11 +786,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -797,31 +805,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -833,7 +841,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -845,18 +853,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -870,25 +882,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -898,25 +910,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -926,25 +938,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -1001,7 +1013,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1018,11 +1030,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1032,7 +1044,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -1053,7 +1065,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1070,11 +1082,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1089,31 +1101,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1125,7 +1137,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1137,18 +1149,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -1161,25 +1177,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -1189,25 +1205,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -1217,25 +1233,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>
@@ -1348,7 +1364,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1365,11 +1381,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1379,7 +1395,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -1400,7 +1416,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1417,11 +1433,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1436,31 +1452,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1472,7 +1488,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1484,18 +1500,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -1508,25 +1528,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -1536,25 +1556,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -1564,25 +1584,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -1639,7 +1659,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1656,11 +1676,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1670,7 +1690,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -1691,7 +1711,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -1708,11 +1728,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -1727,31 +1747,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1763,7 +1783,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -1775,18 +1795,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -1798,25 +1822,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -1826,25 +1850,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -1854,25 +1878,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>
@@ -1985,7 +2009,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -2002,11 +2026,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2016,7 +2040,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -2037,7 +2061,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -2054,11 +2078,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -2073,31 +2097,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2109,7 +2133,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2121,18 +2145,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -2145,25 +2173,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldMoscow"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldMoscow"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -2173,25 +2201,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldVoronezh"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldVoronezh"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -2201,25 +2229,25 @@ fieldset[data-dimension='s'] .c2 {
           data-field-id="checkboxFieldSamara"
         >
           <div
-            class="c2"
+            class="c2 c3"
           >
             <input
-              class="c3"
+              class="c4"
               id="checkboxFieldSamara"
               type="checkbox"
             />
             <div
-              class="c4 c5"
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
             </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -2276,7 +2304,7 @@ fieldset:disabled .c1.c1 {
   cursor: not-allowed;
 }
 
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -2293,11 +2321,11 @@ fieldset:disabled .c1.c1 {
   color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
+fieldset:disabled .c8.c8 {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2307,7 +2335,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   text-rendering: geometricPrecision;
 }
 
-.c6 {
+.c7 {
   pointer-events: none;
 }
 
@@ -2328,7 +2356,7 @@ fieldset[data-dimension='s'] .c2 {
   height: 16px;
 }
 
-.c5 {
+.c6 {
   pointer-events: none;
   display: inline-block;
   position: absolute;
@@ -2345,11 +2373,11 @@ fieldset[data-dimension='s'] .c2 {
   border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5 *[fill^='#'] {
+.c6 *[fill^='#'] {
   fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
 }
 
-.c3 {
+.c4 {
   appearance: none;
   width: 100%;
   height: 100%;
@@ -2364,31 +2392,31 @@ fieldset[data-dimension='s'] .c2 {
   padding: 0;
 }
 
-.c3 ::-ms-check {
+.c4 ::-ms-check {
   display: none;
 }
 
-.c3:checked+.c4 {
+.c4:checked+.c5 {
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
   border: none;
 }
 
-.c3:disabled {
+.c4:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c3:disabled+.c4 {
+.c4:disabled+.c5 {
   border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
 }
 
-.c3:not(:checked)+.c4 >* {
+.c4:not(:checked)+.c5 >* {
   display: none;
 }
 
-.c3:hover:not(:disabled)::after,
-.c3:focus:not(:disabled)+.c3:not(:disabled)::after {
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2400,7 +2428,7 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c3:active:not(:disabled):not(:disabled)::after {
+.c4:active:not(:disabled):not(:disabled)::after {
   content: '';
   position: absolute;
   left: 50%;
@@ -2412,18 +2440,22 @@ fieldset[data-dimension='s'] .c2 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c3:checked:disabled+.c4 {
+.c4:checked:disabled+.c5 {
   background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
   border: none;
 }
 
-.c3:checked:disabled+.c4 *[fill^='#'] {
+.c4:checked:disabled+.c5 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
 }
 
-.c3:focus-visible {
+.c4:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -2435,25 +2467,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldMoscow"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldMoscow"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -2463,25 +2495,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldVoronezh"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldVoronezh"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -2491,25 +2523,25 @@ fieldset[data-dimension='s'] .c2 {
         data-field-id="checkboxFieldSamara"
       >
         <div
-          class="c2"
+          class="c2 c3"
         >
           <input
-            class="c3"
+            class="c4"
             id="checkboxFieldSamara"
             type="checkbox"
           />
           <div
-            class="c4 c5"
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
           </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>

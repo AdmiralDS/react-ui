@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.23.0](https://github.com/AdmiralDS/react-ui/compare/v8.22.0...v8.23.0) (2024-09-23)
+
+
+### Features
+
+* **Typography:** добавлен миксин для стандартных HTML тэгов ([eb3416a](https://github.com/AdmiralDS/react-ui/commit/eb3416a2cb718fea3f7f98b1494c5a2d9f35fcfa))
+
+
+### Bug Fixes
+
+* **Menu:** [#1515](https://github.com/AdmiralDS/react-ui/issues/1515) выпадающее меню иногда позиционируется неверно ([bbe8766](https://github.com/AdmiralDS/react-ui/commit/bbe8766ccf05b0ff1d8cb368e4993af09c7145bf))
+* **Menu:** [#1516](https://github.com/AdmiralDS/react-ui/issues/1516) перестал работать параметр menuMaxHeight ([c04ab70](https://github.com/AdmiralDS/react-ui/commit/c04ab70367d9265a8eb612fc785dc95356f8fc5a))
+
+## [8.22.0](https://github.com/AdmiralDS/react-ui/compare/v8.21.0...v8.22.0) (2024-09-19)
+
+
+### Features
+
+* **Button:** обновлено состояние Loading ([309047f](https://github.com/AdmiralDS/react-ui/commit/309047fb9e9683852cedca6ba8e77a82c2fb32d5))
+* **DateInput:** обновлено состояние Loading ([870e716](https://github.com/AdmiralDS/react-ui/commit/870e71686296bf97ea99222e0ec5273111f8bf61))
+* **FileItem:** обновлено состояние disabled ([9e4fc91](https://github.com/AdmiralDS/react-ui/commit/9e4fc91fa96b48b43c6293db088951413b7a1285))
+* **PhoneNumberInput:** обновлено состояние Loading ([25a4857](https://github.com/AdmiralDS/react-ui/commit/25a485776a41eb71360cc005190c6a6b049b976c))
+* **Select:** обновлено состояние Loading ([e62ecdc](https://github.com/AdmiralDS/react-ui/commit/e62ecdcbff462a1c9fb512025557f85bcfbf7e78))
+* **TextInput:** обновлено состояние Loading ([16f2bfa](https://github.com/AdmiralDS/react-ui/commit/16f2bfa9d116b907ac7b9c8d32ad0f8824e8b4e9))
+
+
+### Bug Fixes
+
+* **FileInput:** [#1510](https://github.com/AdmiralDS/react-ui/issues/1510) не фильтрует список файлов при Drag&Drop ([9a66922](https://github.com/AdmiralDS/react-ui/commit/9a66922e55d116e44d870ff155aa6ac33674201c))
+* **NumberInput:** [#1500](https://github.com/AdmiralDS/react-ui/issues/1500) блокируются кнопки +- при иннициализации компонента ([f6b25fa](https://github.com/AdmiralDS/react-ui/commit/f6b25fa4e708b445ea4cb3554e47641a6df438f5))
+* **NumberInput:** [#1505](https://github.com/AdmiralDS/react-ui/issues/1505) добавлен createInputHandler ([1dd3c49](https://github.com/AdmiralDS/react-ui/commit/1dd3c49a5920adfb4510d307ed83ea6a2c2b8cdf))
+* **Three:** [#1507](https://github.com/AdmiralDS/react-ui/issues/1507) чекбокс не отцентрирован вертикально ([61057b6](https://github.com/AdmiralDS/react-ui/commit/61057b6a669d363690e39197753238573795e294))
+* **TreeNode:** обновлено состояние disabled ([fdca896](https://github.com/AdmiralDS/react-ui/commit/fdca896d72a110ae6606cb177f2ae60d082b873c))
+
+## [8.21.0](https://github.com/AdmiralDS/react-ui/compare/v8.20.0...v8.21.0) (2024-09-17)
+
+
+### Features
+
+* **Menu:** [#1501](https://github.com/AdmiralDS/react-ui/issues/1501) добавить возможность отключать выбор опции через нажатие на пробел или Enter ([aa1d374](https://github.com/AdmiralDS/react-ui/commit/aa1d37439e826a7abbefc2438f160e55348ea5f5))
+* **PhoneNumberInput:** Добавлен функционал placeholder для компонента ([83f6010](https://github.com/AdmiralDS/react-ui/commit/83f60109d714ed44556ecb7cb53d2bddd2e775f4)), closes [#1483](https://github.com/AdmiralDS/react-ui/issues/1483)
+* **Table:** [#1480](https://github.com/AdmiralDS/react-ui/issues/1480) фоновый цвет серых хедера и строк таблицы изменён на группу Opacity ([8e0bb6b](https://github.com/AdmiralDS/react-ui/commit/8e0bb6b25d8e49929f465c9bf34c161109b63d24))
+
+
+### Bug Fixes
+
+* **DateInput:** [#1495](https://github.com/AdmiralDS/react-ui/issues/1495) некорректное поведение при попытке набора буквы ([6ba2be6](https://github.com/AdmiralDS/react-ui/commit/6ba2be6204f2a5517b0b998801515a079fc110e9))
+* **IconButton:** [#1497](https://github.com/AdmiralDS/react-ui/issues/1497) исправлен баг с невидимыми иконками в сторибуке ([3060fdf](https://github.com/AdmiralDS/react-ui/commit/3060fdf31602fa537a52528a84105b378f7dbd20))
+
 ## [8.20.0](https://github.com/AdmiralDS/react-ui/compare/v8.19.0...v8.20.0) (2024-09-13)
 
 

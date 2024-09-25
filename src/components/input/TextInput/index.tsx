@@ -83,7 +83,7 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
 `;
 
 const getHoverBorderColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
+  border-color: ${({ $status, theme }) => {
     if (!$status) {
       return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
     }
@@ -93,7 +93,7 @@ const getHoverBorderColor = css<{ $status?: InputStatus }>`
       case 'success':
         return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
     }
-  }}
+  }};
 `;
 
 const getFocusBorder = css<{ $status?: InputStatus }>`
@@ -111,13 +111,18 @@ const getFocusBorder = css<{ $status?: InputStatus }>`
     }};
 `;
 
-export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
+export const BorderedDivStyles = css<{
+  disabled?: boolean;
+  readOnly?: boolean;
+  $isLoading?: boolean;
+  $status?: InputStatus;
+}>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : getFocusBorder)}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : !p.$isLoading ? getFocusBorder : '')}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    border-color: ${(props) => (props.disabled || props.readOnly ? 'transparent' : getHoverBorderColor)};
+    ${(p) => (!p.$isLoading ? (p.disabled || p.readOnly ? 'transparent' : getHoverBorderColor) : '')};
   }
 `;
 
@@ -182,8 +187,10 @@ const Input = styled.input<ExtraProps>`
     ${disabledColors}
   }
 
+  [data-loading] &&&,
   &&&:disabled {
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   ${extraPadding}
@@ -235,11 +242,12 @@ const IconPanelAfter = styled(IconPanel)`
 const StyledContainer = styled(HeightLimitedContainer)<{
   disabled?: boolean;
   readOnly?: boolean;
+  $isLoading?: boolean;
   $status?: InputStatus;
   $dimension?: ComponentDimension;
 }>`
   ${BorderedDivStyles}
-  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
+  ${(p) => (p.disabled ? 'cursor: not-allowed;' : p.$isLoading ? 'cursor: default;' : '')}
 `;
 
 function defaultHandleInput(newInputData: InputData | null): InputData {
@@ -461,9 +469,11 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
+          $isLoading={isLoading}
           $status={status}
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
+          data-loading={isLoading ? true : undefined}
           data-status={status}
           $skeleton={skeleton}
           data-disable-copying={disableCopying ? true : undefined}

@@ -1,4 +1,3 @@
-import type { HTMLAttributes, ReactNode, KeyboardEvent } from 'react';
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
@@ -7,11 +6,11 @@ import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
 
-export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: number;
   /** Коллбек на изменение состояния */
-  onChange: (event: any, value: number) => void;
+  onChange: (event: React.SyntheticEvent, value: number) => void;
   /** Минимальное значение */
   minValue?: number;
   /** Максимальное значение */
@@ -33,7 +32,7 @@ export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   /** Массив отметок */
   tickMarks?: number[];
   /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
-  renderTickMark?: (mark: string) => ReactNode;
+  renderTickMark?: (mark: string) => React.ReactNode;
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -180,7 +179,7 @@ export const Slider = ({
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const code = keyboardKey.getCode(e);
     switch (code) {
       case keyboardKey.ArrowLeft:
