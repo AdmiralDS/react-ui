@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
 const Spacer = styled.div`
   display: flex;
@@ -28,13 +29,6 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface PreviousValues {
   activeId?: string;
-}
-function usePrevious(value: PreviousValues) {
-  const ref = React.useRef<PreviousValues>();
-  React.useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
 }
 
 interface Partition {
@@ -66,7 +60,7 @@ export const VirtualBody = ({
     bottomPadding: '',
     needAddListener: false,
   });
-  const prevValue = usePrevious({ activeId });
+  const prevValue = usePrevious<PreviousValues>({ activeId });
 
   const handleScroll = React.useCallback(
     (e: Event) => {
