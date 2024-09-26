@@ -14,7 +14,8 @@ import {
 } from '#src/components/ImageViewer/constants';
 import type { ImageMiniatureDimension, ImageMiniatureProps } from '#src/components/ImageViewer/types';
 
-import { CategoryGalleryOutline, ServiceEyeOutline } from '@admiral-ds/icons';
+import { ReactComponent as GalleryOutline } from '@admiral-ds/icons/build/category/GalleryOutline.svg';
+import { ReactComponent as EyeOutline } from '@admiral-ds/icons/build/service/EyeOutline.svg';
 
 function getImageMiniatureSize(dimension: ImageMiniatureDimension) {
   switch (dimension) {
@@ -46,12 +47,12 @@ function getImageMiniatureIconSize(dimension: ImageMiniatureDimension) {
   }
 }
 
-const StyledCategoryGalleryOutline = styled(CategoryGalleryOutline)`
+const StyledCategoryGalleryOutline = styled(GalleryOutline)`
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
-const StyledServiceEyeOutline = styled(ServiceEyeOutline)`
+const StyledServiceEyeOutline = styled(EyeOutline)`
   & *[fill^='#'] {
     fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});
   }

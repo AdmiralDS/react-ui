@@ -9,16 +9,14 @@ import {
 } from '#src/components/ImageViewer/constants';
 import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
 
-import {
-  SystemArrowsHorizontalOutline,
-  SystemArrowsVerticalOutline,
-  DocumentsRotateLeftOutline,
-  DocumentsRotateRightOutline,
-  SystemZoomOutOutline,
-  SystemZoomInOutline,
-  SystemArrowLeftOutline,
-  SystemArrowRightOutline,
-} from '@admiral-ds/icons';
+import { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/documents/RotateLeftOutline.svg';
+import { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
+import { ReactComponent as ArrowsHorizontalOutline } from '@admiral-ds/icons/build/system/ArrowsHorizontalOutline.svg';
+import { ReactComponent as ArrowsVerticalOutline } from '@admiral-ds/icons/build/system/ArrowsVerticalOutline.svg';
+import { ReactComponent as ZoomOutOutline } from '@admiral-ds/icons/build/system/ZoomOutOutline.svg';
+import { ReactComponent as ZoomInOutline } from '@admiral-ds/icons/build/system/ZoomInOutline.svg';
+import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
+import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
 const Divider = styled.div`
   box-sizing: border-box;
@@ -87,29 +85,29 @@ export const ImageViewerControls = ({ renderPanel, ...props }: ImageViewerContro
   return (
     <Wrapper {...props}>
       <ControlButton>
-        <SystemArrowsHorizontalOutline />
+        <ArrowsHorizontalOutline />
       </ControlButton>
       <ControlButton>
-        <SystemArrowsVerticalOutline />
+        <ArrowsVerticalOutline />
       </ControlButton>
       <ControlButton>
-        <DocumentsRotateLeftOutline />
+        <RotateLeftOutline />
       </ControlButton>
       <ControlButton>
-        <DocumentsRotateRightOutline />
+        <RotateRightOutline />
       </ControlButton>
       <ControlButton>
-        <SystemZoomOutOutline />
+        <ZoomOutOutline />
       </ControlButton>
       <ControlButton>
-        <SystemZoomInOutline />
+        <ZoomInOutline />
       </ControlButton>
       <Divider />
       <ControlButton disabled>
-        <SystemArrowLeftOutline />
+        <ArrowLeftOutline />
       </ControlButton>
       <ControlButton>
-        <SystemArrowRightOutline />
+        <ArrowRightOutline />
       </ControlButton>
     </Wrapper>
   );
