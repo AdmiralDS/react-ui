@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import {
   IMAGE_VIEWER_CONTROL_BUTTON_SIZE,
@@ -8,6 +8,9 @@ import {
   IMAGE_VIEWER_CONTROLS_PADDING,
 } from '#src/components/ImageViewer/constants';
 import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
+
+import { LIGHT_THEME } from '#src/components/themes';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 import { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/documents/RotateLeftOutline.svg';
 import { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
@@ -70,6 +73,7 @@ const ControlButton = styled.button`
     }
   }
 `;
+const TooltipedControlButton = TooltipHoc(ControlButton);
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -81,34 +85,51 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-export const ImageViewerControls = ({ renderPanel, ...props }: ImageViewerControlsProps) => {
-  return (
-    <Wrapper {...props}>
-      <ControlButton>
-        <ArrowsHorizontalOutline />
-      </ControlButton>
-      <ControlButton>
-        <ArrowsVerticalOutline />
-      </ControlButton>
-      <ControlButton>
-        <RotateLeftOutline />
-      </ControlButton>
-      <ControlButton>
-        <RotateRightOutline />
-      </ControlButton>
-      <ControlButton>
-        <ZoomOutOutline />
-      </ControlButton>
-      <ControlButton>
-        <ZoomInOutline />
-      </ControlButton>
-      <Divider />
-      <ControlButton disabled>
-        <ArrowLeftOutline />
-      </ControlButton>
-      <ControlButton>
-        <ArrowRightOutline />
-      </ControlButton>
-    </Wrapper>
-  );
+export const ImageViewerControls = ({ showTooltip = true, locale, ...props }: ImageViewerControlsProps) => {
+  const theme = useTheme() || LIGHT_THEME;
+  const {
+    flipHorizontallyText: theme_flipHorizontallyText,
+    flipVerticallyText: theme_flipVerticallyText,
+    rotateLeftText: theme_rotateLeftText,
+    rotateRightText: theme_rotateRightText,
+    zoomOutText: theme_zoomOutText,
+    zoomInText: theme_zoomInText,
+    backwardText: theme_backwardText,
+    forwardText: theme_forwardText,
+  } = theme.locales[theme.currentLocale].imageViewer;
+
+  const flipHorizontallyText = locale?.flipHorizontallyText || theme_flipHorizontallyText;
+  const flipVerticallyText = locale?.flipVerticallyText || theme_flipVerticallyText;
+  const rotateLeftText = locale?.rotateLeftText || theme_rotateLeftText;
+  const rotateRightText = locale?.rotateRightText || theme_rotateRightText;
+  const zoomOutText = locale?.zoomOutText || theme_zoomOutText;
+  const zoomInText = locale?.zoomInText || theme_zoomInText;
+  const backwardText = locale?.backwardText || theme_backwardText;
+  const forwardText = locale?.forwardText || theme_forwardText;
+
+  const buttons = [
+    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText },
+    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText },
+    { icon: <RotateLeftOutline />, text: rotateLeftText },
+    { icon: <RotateRightOutline />, text: rotateRightText },
+    { icon: <ZoomOutOutline />, text: zoomOutText },
+    { icon: <ZoomInOutline />, text: zoomInText },
+    { icon: <ArrowLeftOutline />, text: backwardText },
+    { icon: <ArrowRightOutline />, text: forwardText },
+  ];
+
+  const items = buttons.map(({ icon, text }, index) => {
+    return (
+      <>
+        {index === 6 ? <Divider /> : null}
+        {showTooltip ? (
+          <TooltipedControlButton renderContent={() => text}>{icon}</TooltipedControlButton>
+        ) : (
+          <ControlButton>{icon}</ControlButton>
+        )}
+      </>
+    );
+  });
+
+  return <Wrapper {...props}>{items}</Wrapper>;
 };

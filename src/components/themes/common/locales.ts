@@ -29,6 +29,16 @@ export interface Locale {
   hint: {
     closeButtonAriaLabel: string;
   };
+  imageViewer: {
+    flipHorizontallyText: string;
+    flipVerticallyText: string;
+    rotateLeftText: string;
+    rotateRightText: string;
+    zoomOutText: string;
+    zoomInText: string;
+    backwardText: string;
+    forwardText: string;
+  };
   modal: {
     closeButtonAriaLabel: string;
   };
@@ -83,6 +93,16 @@ const ruLocale: Locale = {
   },
   hint: {
     closeButtonAriaLabel: 'Закрыть подсказку',
+  },
+  imageViewer: {
+    flipHorizontallyText: 'Отразить по горизонтали',
+    flipVerticallyText: 'Отразить по вертикали',
+    rotateLeftText: 'Повернуть влево',
+    rotateRightText: 'Повернуть вправо',
+    zoomOutText: 'Уменьшить',
+    zoomInText: 'Увеличить',
+    backwardText: 'Назад',
+    forwardText: 'Вперед',
   },
   modal: {
     closeButtonAriaLabel: 'Закрыть модальное окно',
@@ -139,6 +159,16 @@ const enLocale: Locale = {
   },
   hint: {
     closeButtonAriaLabel: 'Close the hint',
+  },
+  imageViewer: {
+    flipHorizontallyText: 'Flip horizontally',
+    flipVerticallyText: 'Flip vertically',
+    rotateLeftText: 'Rotate left',
+    rotateRightText: 'Rotate right',
+    zoomInText: 'Zoom in',
+    zoomOutText: 'Zoom out',
+    backwardText: 'Back',
+    forwardText: 'Forward',
   },
   modal: {
     closeButtonAriaLabel: 'Close the modal window',

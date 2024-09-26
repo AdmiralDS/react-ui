@@ -40,6 +40,16 @@ export const LocaleThemeNewLocaleTemplate = () => {
       hint: {
         closeButtonAriaLabel: 'Tipp schließen',
       },
+      imageViewer: {
+        flipHorizontallyText: 'Horizontal spiegeln',
+        flipVerticallyText: 'Vertikal spiegeln',
+        rotateLeftText: 'Nach links drehen',
+        rotateRightText: 'Nach rechts drehen',
+        zoomInText: 'Heranzoomen',
+        zoomOutText: 'Herauszoomen',
+        backwardText: 'Zurück',
+        forwardText: 'Weiterleiten',
+      },
       modal: {
         closeButtonAriaLabel: 'Modales Fenster schließen',
       },
