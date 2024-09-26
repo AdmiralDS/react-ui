@@ -7,6 +7,11 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   renderPanel?: () => React.ReactNode;
 }
 
+export interface ImageCounterProps {
+  total: number;
+  current: number;
+}
+
 export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   /** Image path */
   src: string;
