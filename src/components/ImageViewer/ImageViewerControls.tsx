@@ -95,10 +95,20 @@ const Wrapper = styled.div`
   gap: 8px;
 `;
 
+const getPrev = (current: number, total: number) => {
+  const newIndex = current - 1;
+  return newIndex > 0 ? newIndex : 0;
+};
+const getNext = (current: number, total: number) => {
+  const newIndex = current + 1;
+  return newIndex < total ? newIndex : total - 1;
+};
+
 export const ImageViewerControls = ({
   showTooltip = true,
   showCounter,
   showNavigation = true,
+  onNavButtonClick,
   current,
   total,
   locale,
@@ -125,37 +135,43 @@ export const ImageViewerControls = ({
   const backwardText = locale?.backwardText || theme_backwardText;
   const forwardText = locale?.forwardText || theme_forwardText;
 
+  const emptyHandler = () => {
+    return;
+  };
   const buttons = [
-    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText },
-    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText },
-    { icon: <RotateLeftOutline />, text: rotateLeftText },
-    { icon: <RotateRightOutline />, text: rotateRightText },
-    { icon: <ZoomOutOutline />, text: zoomOutText },
-    { icon: <ZoomInOutline />, text: zoomInText },
-    { icon: <ArrowLeftOutline />, text: backwardText },
-    { icon: <ArrowRightOutline />, text: forwardText },
+    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: emptyHandler },
+    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: emptyHandler },
+    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: emptyHandler },
+    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler },
+    { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: emptyHandler },
+    { icon: <ZoomInOutline />, text: zoomInText, handleClick: emptyHandler },
+    { icon: <ArrowLeftOutline />, text: backwardText, handleClick: () => onNavButtonClick(getPrev(current, total)) },
+    { icon: <ArrowRightOutline />, text: forwardText, handleClick: () => onNavButtonClick(getNext(current, total)) },
   ];
 
-  const renderButton = (icon: React.ReactNode, text: string) => {
+  const renderButton = (icon: React.ReactNode, text: string, handleClick: () => void) => {
     return showTooltip ? (
-      <TooltipedControlButton renderContent={() => text}>{icon}</TooltipedControlButton>
+      <TooltipedControlButton renderContent={() => text} onClick={handleClick}>
+        {icon}
+      </TooltipedControlButton>
     ) : (
-      <ControlButton>{icon}</ControlButton>
+      <ControlButton onClick={handleClick}>{icon}</ControlButton>
     );
   };
 
-  const items = buttons.map(({ icon, text }, index) => {
+  const items = buttons.map(({ icon, text, handleClick }, index) => {
     return (
       <>
         {showNavigation && index === 6 ? <Divider /> : null}
-        {(showNavigation || (!showNavigation && index < 6)) && renderButton(icon, text)}
+        {(showNavigation || (!showNavigation && index < 6)) && renderButton(icon, text, handleClick)}
       </>
     );
   });
+  const counterIsVisible = !!showCounter && total > 1;
 
   return (
     <Wrapper {...props}>
-      {!!showCounter && current && total && <ImageCounter current={current} total={total} />}
+      {counterIsVisible && <ImageCounter current={current} total={total} />}
       <ButtonsWrapper>{items}</ButtonsWrapper>
     </Wrapper>
   );

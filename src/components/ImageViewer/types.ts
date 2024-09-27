@@ -7,9 +7,9 @@ export interface ImagePreviewProps {
   /** Preview items */
   item: string | ImageProps;
   /** Текущий номер */
-  current?: number;
+  current: number;
   /** Общее количество */
-  total?: number;
+  total: number;
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
   /** Отображение счетчика */
@@ -24,6 +24,7 @@ export interface ImagePreviewProps {
    * 3) при клике извне и closeOnOutsideClick равным true
    */
   onClose?: () => void;
+  onNavButtonClick: (newIndex: number) => void;
 }
 
 export interface ImageCounterProps {
@@ -41,9 +42,10 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   /** Отображение кнопок вперед/назад */
   showNavigation?: boolean;
   /** Текущий номер */
-  current?: number;
+  current: number;
   /** Общее количество */
-  total?: number;
+  total: number;
+  onNavButtonClick: (newIndex: number) => void;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/

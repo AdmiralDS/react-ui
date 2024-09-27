@@ -9,6 +9,6 @@ const Wrapper = styled.div`
 `;
 
 export const ImageCounter = ({ total, current }: ImageCounterProps) => {
-  const text = `${current} / ${total}`;
+  const text = `${current + 1} / ${total}`;
   return <Wrapper>{text}</Wrapper>;
 };

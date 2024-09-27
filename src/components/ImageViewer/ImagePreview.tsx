@@ -46,6 +46,7 @@ export const ImagePreview = ({
   total,
   container,
   onClose,
+  onNavButtonClick,
   showCounter,
   showTooltip,
   showNavigation,
@@ -85,6 +86,7 @@ export const ImagePreview = ({
         showCounter={showCounter}
         showTooltip={showTooltip}
         showNavigation={showNavigation}
+        onNavButtonClick={onNavButtonClick}
       />
       {renderItem(item)}
     </Overlay>,

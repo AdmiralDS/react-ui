@@ -3,7 +3,7 @@ import styled, { type css } from 'styled-components';
 
 import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
-import type { ImageMiniatureDimension, ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
+import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
 export * from './types';
 
@@ -59,10 +59,11 @@ export const ImageViewer = ({
           showTooltip
           showNavigation={items.length > 1}
           total={items.length}
-          current={current + 1}
+          current={current}
           onClose={() => {
             setOpened(false);
           }}
+          onNavButtonClick={(newIndex) => setCurrent(newIndex)}
         />
       )}
     </Wrapper>
