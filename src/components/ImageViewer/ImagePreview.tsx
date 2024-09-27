@@ -2,10 +2,12 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
-import type { ImagePreviewProps } from './types';
+import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerControls } from '#src/components/ImageViewer/ImageViewerControls';
 import * as React from 'react';
+import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
+import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 
 const Overlay = styled.div`
   display: flex;
@@ -33,17 +35,33 @@ const Controls = styled(ImageViewerControls)`
   left: 50%;
   transform: translate(-50%);
 `;
+const StyledImage = styled.img`
+  max-width: 100%;
+  max-height: 70%;
+`;
 
 export const ImagePreview = ({
+  item,
   current,
   total,
   container,
   onClose,
   showCounter,
   showTooltip,
+  showNavigation,
   ...props
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      // prevent browser-specific escape key behavior (Safari exits fullscreen)
+      event.preventDefault();
+      // prevent other overlays from closing
+      event.stopPropagation();
+      onClose?.();
+    }
+  };
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     event.target === overlayRef.current && onClose?.();
@@ -54,10 +72,21 @@ export const ImagePreview = ({
     onClose?.();
   };
 
+  const renderItem = (item: string | ImageProps) => {
+    return typeof item === 'string' ? <StyledImage src={item} /> : <StyledImage {...item} />;
+  };
+
   return createPortal(
-    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown}>
+    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       <CloseButton onClick={handleCloseBtnClick} />
-      <Controls current={current} total={total} showCounter={showCounter} showTooltip={showTooltip} />
+      <Controls
+        current={current}
+        total={total}
+        showCounter={showCounter}
+        showTooltip={showTooltip}
+        showNavigation={showNavigation}
+      />
+      {renderItem(item)}
     </Overlay>,
     container || document.body,
   );

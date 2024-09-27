@@ -98,6 +98,7 @@ const Wrapper = styled.div`
 export const ImageViewerControls = ({
   showTooltip = true,
   showCounter,
+  showNavigation = true,
   current,
   total,
   locale,
@@ -135,15 +136,19 @@ export const ImageViewerControls = ({
     { icon: <ArrowRightOutline />, text: forwardText },
   ];
 
+  const renderButton = (icon: React.ReactNode, text: string) => {
+    return showTooltip ? (
+      <TooltipedControlButton renderContent={() => text}>{icon}</TooltipedControlButton>
+    ) : (
+      <ControlButton>{icon}</ControlButton>
+    );
+  };
+
   const items = buttons.map(({ icon, text }, index) => {
     return (
       <>
-        {index === 6 ? <Divider /> : null}
-        {showTooltip ? (
-          <TooltipedControlButton renderContent={() => text}>{icon}</TooltipedControlButton>
-        ) : (
-          <ControlButton>{icon}</ControlButton>
-        )}
+        {showNavigation && index === 6 ? <Divider /> : null}
+        {(showNavigation || (!showNavigation && index < 6)) && renderButton(icon, text)}
       </>
     );
   });

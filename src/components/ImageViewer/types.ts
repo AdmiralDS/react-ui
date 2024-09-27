@@ -4,14 +4,18 @@ export type ImageMiniatureDimension = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ImageViewerAppearance = 'single' | 'multiple';
 
 export interface ImagePreviewProps {
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
+  /** Preview items */
+  item: string | ImageProps;
   /** Текущий номер */
   current?: number;
   /** Общее количество */
   total?: number;
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
   /** Отображение счетчика */
   showCounter?: boolean;
+  /** Отображение кнопок вперед/назад */
+  showNavigation?: boolean;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
   container?: Element;
   /** Обработчик закрытия компонента. Срабатывает:
@@ -34,6 +38,8 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   showTooltip?: boolean;
   /** Отображение счетчика */
   showCounter?: boolean;
+  /** Отображение кнопок вперед/назад */
+  showNavigation?: boolean;
   /** Текущий номер */
   current?: number;
   /** Общее количество */

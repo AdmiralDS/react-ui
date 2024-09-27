@@ -26,6 +26,11 @@ const items: ImageProps[] = [
     onError: handleError,
   },
   {
+    src: 'https://otvet.imgsmail.ru/download/97444257_e4a38eccad081ceb92cb3f8a1594218e_800.jpg',
+    alt: 'Cute norwitch',
+    onError: handleError,
+  },
+  {
     src: 'ds.yandex.net/i?id=5b90edeb3a4635e999b9331f3e5b34df_l-4551895-images-thumbs&n=13',
     alt: 'Cute corgie',
     onError: handleError,

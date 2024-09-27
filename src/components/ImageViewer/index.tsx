@@ -45,18 +45,21 @@ export const ImageViewer = ({
 
   const miniatures =
     appearance === 'single'
-      ? renderItem(items[0], 1)
+      ? renderItem(items[0], 0)
       : items.map((item, index) => {
-          return renderItem(item, index + 1);
+          return renderItem(item, index);
         });
   return (
     <Wrapper {...props}>
       {miniatures}
       {opened && (
         <ImagePreview
+          item={items[current]}
           showCounter
+          showTooltip
+          showNavigation={items.length > 1}
           total={items.length}
-          current={current}
+          current={current + 1}
           onClose={() => {
             setOpened(false);
           }}
