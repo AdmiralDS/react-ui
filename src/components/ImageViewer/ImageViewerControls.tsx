@@ -8,6 +8,7 @@ import {
   IMAGE_VIEWER_CONTROLS_PADDING,
 } from '#src/components/ImageViewer/constants';
 import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
+import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { TooltipHoc } from '#src/components/TooltipHOC';
@@ -20,7 +21,6 @@ import { ReactComponent as ZoomOutOutline } from '@admiral-ds/icons/build/system
 import { ReactComponent as ZoomInOutline } from '@admiral-ds/icons/build/system/ZoomInOutline.svg';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
-import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 
 const Divider = styled.div`
   box-sizing: border-box;
@@ -108,9 +108,9 @@ export const ImageViewerControls = ({
   showTooltip = true,
   showCounter,
   showNavigation = true,
-  onNavButtonClick,
-  current,
-  total,
+  onActiveImgChange,
+  activeImg,
+  totalImg,
   locale,
   ...props
 }: ImageViewerControlsProps) => {
@@ -145,8 +145,16 @@ export const ImageViewerControls = ({
     { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler },
     { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: emptyHandler },
     { icon: <ZoomInOutline />, text: zoomInText, handleClick: emptyHandler },
-    { icon: <ArrowLeftOutline />, text: backwardText, handleClick: () => onNavButtonClick(getPrev(current, total)) },
-    { icon: <ArrowRightOutline />, text: forwardText, handleClick: () => onNavButtonClick(getNext(current, total)) },
+    {
+      icon: <ArrowLeftOutline />,
+      text: backwardText,
+      handleClick: () => onActiveImgChange(getPrev(activeImg, totalImg)),
+    },
+    {
+      icon: <ArrowRightOutline />,
+      text: forwardText,
+      handleClick: () => onActiveImgChange(getNext(activeImg, totalImg)),
+    },
   ];
 
   const renderButton = (icon: React.ReactNode, text: string, handleClick: () => void) => {
@@ -167,11 +175,11 @@ export const ImageViewerControls = ({
       </>
     );
   });
-  const counterIsVisible = !!showCounter && total > 1;
+  const counterIsVisible = !!showCounter && totalImg > 1;
 
   return (
     <Wrapper {...props}>
-      {counterIsVisible && <ImageCounter current={current} total={total} />}
+      {counterIsVisible && <ImageCounter activeImg={activeImg} totalImg={totalImg} />}
       <ButtonsWrapper>{items}</ButtonsWrapper>
     </Wrapper>
   );

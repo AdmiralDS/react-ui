@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   ${typography['Body/Body 2 Long']};
 `;
 
-export const ImageCounter = ({ total, current }: ImageCounterProps) => {
-  const text = `${current + 1} / ${total}`;
+export const ImageCounter = ({ totalImg, activeImg }: ImageCounterProps) => {
+  const text = `${activeImg + 1} / ${totalImg}`;
   return <Wrapper>{text}</Wrapper>;
 };

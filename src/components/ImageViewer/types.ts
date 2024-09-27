@@ -3,49 +3,32 @@ import type { css } from 'styled-components';
 export type ImageMiniatureDimension = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ImageViewerAppearance = 'single' | 'multiple';
 
-export interface ImagePreviewProps {
-  /** Preview items */
-  item: string | ImageProps;
-  /** Текущий номер */
-  current: number;
-  /** Общее количество */
-  total: number;
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
-  /** Отображение счетчика */
-  showCounter?: boolean;
-  /** Отображение кнопок вперед/назад */
-  showNavigation?: boolean;
-  /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
-  container?: Element;
-  /** Обработчик закрытия компонента. Срабатывает:
-   * 1) при клике на крестик в верхнем правому углу
-   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
-   * 3) при клике извне и closeOnOutsideClick равным true
-   */
-  onClose?: () => void;
-  onNavButtonClick: (newIndex: number) => void;
+export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  /** Путь для элемента */
+  src: string;
+}
+
+export interface ImageMiniatureProps extends ImageProps {
+  /** Размер миниатюры элемента */
+  dimension?: ImageMiniatureDimension;
 }
 
 export interface ImageCounterProps {
   /** Текущий номер */
-  current: number;
+  activeImg: number;
   /** Общее количество */
-  total: number;
+  totalImg: number;
 }
 
-export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement>, ImageCounterProps {
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
   /** Отображение счетчика */
   showCounter?: boolean;
   /** Отображение кнопок вперед/назад */
   showNavigation?: boolean;
-  /** Текущий номер */
-  current: number;
-  /** Общее количество */
-  total: number;
-  onNavButtonClick: (newIndex: number) => void;
+  /** Обработчик смены элемента, открытого для просмотра */
+  onActiveImgChange: (newIndex: number) => void;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -69,23 +52,28 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   };
 }
 
-export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
-  /** Image path */
-  src: string;
+export interface ImagePreviewProps extends ImageViewerControlsProps {
+  /** Элемент для просмотра */
+  item: string | ImageProps;
+  /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
+  container?: Element;
+  /** Обработчик закрытия компонента. Срабатывает:
+   * 1) при клике на крестик в верхнем правому углу
+   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
+   * 3) при клике извне и closeOnOutsideClick равным true
+   */
+  onClose?: () => void;
 }
 
-export interface ImageMiniatureProps extends ImageProps {
-  /** Image miniature size */
-  dimension?: ImageMiniatureDimension;
-}
-
-export interface ImageViewerProps {
-  /** Preview items */
+export interface ImageViewerProps
+  extends Pick<ImageMiniatureProps, 'dimension'>,
+    Omit<ImagePreviewProps, 'item' | 'totalImg'> {
+  /** Массив элементов для просмотра */
   items: string[] | ImageProps[];
-  /** Show one item or multiple */
+  /** Индекс элемента для просмотра по умолчанию, также используется для выбора элемента при appearance=single */
+  defaultActiveImg?: number;
+  /** Показ миниатюр всех элементов или только одного */
   appearance?: ImageViewerAppearance;
-  /** Image miniature size */
-  dimension?: ImageMiniatureDimension;
-  /** Preview group css mixin */
+  /** Миксин для стилизации отображения миниатюр */
   previewGroupMixin?: ReturnType<typeof css>;
 }

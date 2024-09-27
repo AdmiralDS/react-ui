@@ -7,7 +7,7 @@ import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/t
 
 export * from './types';
 
-const Wrapper = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
+const Wrapper = styled.div<{ $previewGroupMixin?: ReturnType<typeof css> }>`
   box-sizing: border-box;
   height: 300px;
   width: 500px;
@@ -18,22 +18,41 @@ const Wrapper = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
   justify-content: center;
   gap: 10px;
 
-  ${(p) => p.$cssMixin}
+  ${(p) => p.$previewGroupMixin}
 `;
 
 export const ImageViewer = ({
   items,
-  dimension = 'm',
+  defaultActiveImg = 0,
   appearance = 'single',
   previewGroupMixin,
+  dimension = 'm',
+  container,
+  onClose,
+  showTooltip = true,
+  showCounter = true,
+  showNavigation = true,
+  onActiveImgChange,
+  locale,
+  activeImg,
   ...props
 }: ImageViewerProps) => {
-  const [current, setCurrent] = useState(0);
+  const [activeImgState, setActiveImgState] = useState(defaultActiveImg);
+  const activeImgInner = activeImg ?? activeImgState;
+  const handleActiveChange = (newIndex: number) => {
+    setActiveImgState(newIndex);
+    onActiveImgChange?.(newIndex);
+  };
+
   const [opened, setOpened] = useState(false);
+  const handleClose = () => {
+    setOpened(false);
+    onClose?.();
+  };
 
   const renderItem = (item: string | ImageProps, index: number) => {
     const handleMouseDown = () => {
-      setCurrent(index);
+      setActiveImgState(index);
       setOpened(true);
     };
     return typeof item === 'string' ? (
@@ -45,25 +64,26 @@ export const ImageViewer = ({
 
   const miniatures =
     appearance === 'single'
-      ? renderItem(items[0], 0)
+      ? renderItem(items[defaultActiveImg], defaultActiveImg)
       : items.map((item, index) => {
           return renderItem(item, index);
         });
+
   return (
-    <Wrapper {...props}>
+    <Wrapper {...props} $previewGroupMixin={previewGroupMixin}>
       {miniatures}
       {opened && (
         <ImagePreview
-          item={items[current]}
-          showCounter
-          showTooltip
-          showNavigation={items.length > 1}
-          total={items.length}
-          current={current}
-          onClose={() => {
-            setOpened(false);
-          }}
-          onNavButtonClick={(newIndex) => setCurrent(newIndex)}
+          item={items[activeImgInner]}
+          container={container}
+          onClose={handleClose}
+          showTooltip={showTooltip}
+          showCounter={showCounter && items.length > 1}
+          showNavigation={showNavigation && items.length > 1}
+          onActiveImgChange={handleActiveChange}
+          locale={locale}
+          activeImg={activeImgInner}
+          totalImg={items.length}
         />
       )}
     </Wrapper>

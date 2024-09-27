@@ -5,9 +5,6 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerControls } from '#src/components/ImageViewer/ImageViewerControls';
-import * as React from 'react';
-import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
-import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 
 const Overlay = styled.div`
   display: flex;
@@ -42,14 +39,15 @@ const StyledImage = styled.img`
 
 export const ImagePreview = ({
   item,
-  current,
-  total,
   container,
   onClose,
-  onNavButtonClick,
-  showCounter,
   showTooltip,
+  showCounter,
   showNavigation,
+  onActiveImgChange,
+  locale,
+  activeImg,
+  totalImg,
   ...props
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -81,12 +79,13 @@ export const ImagePreview = ({
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       <CloseButton onClick={handleCloseBtnClick} />
       <Controls
-        current={current}
-        total={total}
-        showCounter={showCounter}
+        activeImg={activeImg}
+        totalImg={totalImg}
         showTooltip={showTooltip}
+        showCounter={showCounter}
         showNavigation={showNavigation}
-        onNavButtonClick={onNavButtonClick}
+        onActiveImgChange={onActiveImgChange}
+        locale={locale}
       />
       {renderItem(item)}
     </Overlay>,
