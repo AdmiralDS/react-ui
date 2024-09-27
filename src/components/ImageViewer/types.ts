@@ -3,9 +3,41 @@ import type { css } from 'styled-components';
 export type ImageMiniatureDimension = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type ImageViewerAppearance = 'single' | 'multiple';
 
+export interface ImagePreviewProps {
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
+  /** Текущий номер */
+  current?: number;
+  /** Общее количество */
+  total?: number;
+  /** Отображение счетчика */
+  showCounter?: boolean;
+  /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
+  container?: Element;
+  /** Обработчик закрытия компонента. Срабатывает:
+   * 1) при клике на крестик в верхнем правому углу
+   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
+   * 3) при клике извне и closeOnOutsideClick равным true
+   */
+  onClose?: () => void;
+}
+
+export interface ImageCounterProps {
+  /** Текущий номер */
+  current: number;
+  /** Общее количество */
+  total: number;
+}
+
 export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
+  /** Отображение счетчика */
+  showCounter?: boolean;
+  /** Текущий номер */
+  current?: number;
+  /** Общее количество */
+  total?: number;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -27,13 +59,6 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
     /** Текст, описывающий кнопку переключения вперед */
     forwardText: string;
   };
-}
-
-export interface ImageCounterProps {
-  /** Текущий номер */
-  current: number;
-  /** Общее количество */
-  total: number;
 }
 
 export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {

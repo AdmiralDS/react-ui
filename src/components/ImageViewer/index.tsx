@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import styled, { type css } from 'styled-components';
 
 import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
+import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
 import type { ImageMiniatureDimension, ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
 export * from './types';
@@ -19,14 +21,6 @@ const Wrapper = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
   ${(p) => p.$cssMixin}
 `;
 
-const renderItem = (item: string | ImageProps, dimension: ImageMiniatureDimension) => {
-  return typeof item === 'string' ? (
-    <ImageMiniature src={item} dimension={dimension} />
-  ) : (
-    <ImageMiniature dimension={dimension} {...item} />
-  );
-};
-
 export const ImageViewer = ({
   items,
   dimension = 'm',
@@ -34,11 +28,40 @@ export const ImageViewer = ({
   previewGroupMixin,
   ...props
 }: ImageViewerProps) => {
+  const [current, setCurrent] = useState(0);
+  const [opened, setOpened] = useState(false);
+
+  const renderItem = (item: string | ImageProps, index: number) => {
+    const handleMouseDown = () => {
+      setCurrent(index);
+      setOpened(true);
+    };
+    return typeof item === 'string' ? (
+      <ImageMiniature src={item} dimension={dimension} onMouseDown={handleMouseDown} />
+    ) : (
+      <ImageMiniature {...item} dimension={dimension} onMouseDown={handleMouseDown} />
+    );
+  };
+
   const miniatures =
     appearance === 'single'
-      ? renderItem(items[0], dimension)
-      : items.map((item) => {
-          return renderItem(item, dimension);
+      ? renderItem(items[0], 1)
+      : items.map((item, index) => {
+          return renderItem(item, index + 1);
         });
-  return <Wrapper {...props}>{miniatures}</Wrapper>;
+  return (
+    <Wrapper {...props}>
+      {miniatures}
+      {opened && (
+        <ImagePreview
+          showCounter
+          total={items.length}
+          current={current}
+          onClose={() => {
+            setOpened(false);
+          }}
+        />
+      )}
+    </Wrapper>
+  );
 };

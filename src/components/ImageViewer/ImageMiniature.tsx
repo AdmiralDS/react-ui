@@ -112,7 +112,7 @@ const StyledImg = styled.img`
   width: 100%;
 `;
 
-export const ImageMiniature = ({ src, dimension = 'm', onError, ...props }: ImageMiniatureProps) => {
+export const ImageMiniature = ({ src, dimension = 'm', onError, onMouseDown, ...props }: ImageMiniatureProps) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
@@ -129,7 +129,7 @@ export const ImageMiniature = ({ src, dimension = 'm', onError, ...props }: Imag
   }, []);
 
   return (
-    <Wrapper $dimension={dimension} $errorOnLoadImg={errorOnLoadImg}>
+    <Wrapper $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
       <StyledImg {...props} ref={imgRef} src={src} />
       {errorOnLoadImg ? (
         <ErrorOnLoadBlock $isVisible={errorOnLoadImg}>

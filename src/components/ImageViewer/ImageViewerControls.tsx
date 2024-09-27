@@ -20,6 +20,7 @@ import { ReactComponent as ZoomOutOutline } from '@admiral-ds/icons/build/system
 import { ReactComponent as ZoomInOutline } from '@admiral-ds/icons/build/system/ZoomInOutline.svg';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 
 const Divider = styled.div`
   box-sizing: border-box;
@@ -75,7 +76,7 @@ const ControlButton = styled.button`
 `;
 const TooltipedControlButton = TooltipHoc(ControlButton);
 
-const Wrapper = styled.div`
+const ButtonsWrapper = styled.div`
   box-sizing: border-box;
   border-radius: ${IMAGE_VIEWER_CONTROLS_BORDER_RADIUS}px;
   height: ${IMAGE_VIEWER_CONTROLS_HEIGHT}px;
@@ -85,7 +86,23 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-export const ImageViewerControls = ({ showTooltip = true, locale, ...props }: ImageViewerControlsProps) => {
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
+
+export const ImageViewerControls = ({
+  showTooltip = true,
+  showCounter,
+  current,
+  total,
+  locale,
+  ...props
+}: ImageViewerControlsProps) => {
   const theme = useTheme() || LIGHT_THEME;
   const {
     flipHorizontallyText: theme_flipHorizontallyText,
@@ -131,5 +148,10 @@ export const ImageViewerControls = ({ showTooltip = true, locale, ...props }: Im
     );
   });
 
-  return <Wrapper {...props}>{items}</Wrapper>;
+  return (
+    <Wrapper {...props}>
+      {!!showCounter && current && total && <ImageCounter current={current} total={total} />}
+      <ButtonsWrapper>{items}</ButtonsWrapper>
+    </Wrapper>
+  );
 };
