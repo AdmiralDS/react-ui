@@ -94,10 +94,6 @@ export const ImageViewerToolbar = ({
   const backwardText = locale?.backwardText || theme_backwardText;
   const forwardText = locale?.forwardText || theme_forwardText;
 
-  const emptyHandler = () => {
-    return;
-  };
-
   const handleActiveImgChange = (newIndex: number) => {
     actions.onActiveImgChange?.(newIndex);
   };
@@ -110,8 +106,8 @@ export const ImageViewerToolbar = ({
   const buttons = [
     { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: actions.onFlipX, disabled: false },
     { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: actions.onFlipY, disabled: false },
-    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: emptyHandler, disabled: false },
-    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler, disabled: false },
+    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: actions.onRotateLeft, disabled: false },
+    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: actions.onRotateRight, disabled: false },
     { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: actions.onZoomOut, disabled: zoomOutDisabled },
     { icon: <ZoomInOutline />, text: zoomInText, handleClick: actions.onZoomIn, disabled: zoomInDisabled },
     {

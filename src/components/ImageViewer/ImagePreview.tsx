@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
-import type { ImagePreviewProps, ImageProps, TransformType } from './types';
+import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
 
@@ -32,22 +32,12 @@ const Toolbar = styled(ImageViewerToolbar)`
   left: 50%;
   transform: translate(-50%);
 `;
-const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolean }>`
+const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolean; $rotate: number }>`
   max-width: 100%;
   max-height: 70%;
-  transform: ${(p) => `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)})`};
+  transform: ${(p) =>
+    `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
 `;
-const defaultTransform: TransformType = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  flipX: false,
-  flipY: false,
-};
-const emptyHandler = () => {
-  return;
-};
 
 export const ImagePreview = ({
   item,
@@ -133,11 +123,19 @@ export const ImagePreview = ({
     setFlipY((prevState) => !prevState);
   };
 
+  const [rotate, setRotate] = useState(0);
+  const handleRotateLeft = () => {
+    setRotate((prevState) => prevState - 90);
+  };
+  const handleRotateRight = () => {
+    setRotate((prevState) => prevState + 90);
+  };
+
   const renderItem = (item: string | ImageProps) => {
     return typeof item === 'string' ? (
-      <StyledImage src={item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} />
+      <StyledImage src={item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} $rotate={rotate} />
     ) : (
-      <StyledImage {...item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} />
+      <StyledImage {...item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} $rotate={rotate} />
     );
   };
 
@@ -155,15 +153,15 @@ export const ImagePreview = ({
           onActiveImgChange: onActiveChange,
           onFlipX: handleFlipXChange,
           onFlipY: handleFlipYChange,
-          onRotateLeft: emptyHandler,
-          onRotateRight: emptyHandler,
+          onRotateLeft: handleRotateLeft,
+          onRotateRight: handleRotateRight,
           onZoomOut: handleZoomOut,
           onZoomIn: handleZoomIn,
           onClose: handleClose,
         }}
         minScale={minScale}
         maxScale={maxScale}
-        transform={{ ...defaultTransform, scale, flipX, flipY }}
+        transform={{ x: 0, y: 0, rotate, scale, flipX, flipY }}
         locale={locale}
       />
     </Overlay>,
