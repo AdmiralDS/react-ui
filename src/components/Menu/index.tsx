@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Scrollbar } from '../Scrollbar';
+import { hideNativeScrollbars, Scrollbars } from '#src/components/Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
@@ -71,14 +71,15 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled(Scrollbar)<MenuListHeightsProps>`
+const StyledDiv = styled.div<MenuListHeightsProps>`
+  ${hideNativeScrollbars}
+  position: relative;
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
   appearance: none;
   flex: 1 1 auto;
   border: none;
-  overflow-y: auto;
   box-sizing: border-box;
   ${menuListHeights};
   ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}` : '')};
@@ -284,6 +285,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       : undefined;
 
     const menuRef = useRef<HTMLDivElement | null>(null);
+    const [menuNode, setMenuNode] = useState<HTMLElement | null>(null);
     const verticalScrollAriaRef = useRef<HTMLDivElement | null>(null);
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
@@ -576,20 +578,20 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
-          <StyledDiv
-            scrollBoxRef={menuRef}
-            verticalScrollAriaRef={verticalScrollAriaRef}
-            $dimension={dimension}
-            $rowCount={rowCount}
-            $hasTopPanel={hasTopPanel}
-            $hasBottomPanel={hasBottomPanel}
-            $maxHeight={maxHeight}
-            {...menuProps}
-          >
-            {virtualScroll ? renderVirtualChildren() : renderChildren()}
-          </StyledDiv>
-        </div>
+
+        <StyledDiv
+          ref={refSetter(menuRef, (node) => setMenuNode(node))}
+          $dimension={dimension}
+          $rowCount={rowCount}
+          $hasTopPanel={hasTopPanel}
+          $hasBottomPanel={hasBottomPanel}
+          $maxHeight={maxHeight}
+          {...menuProps}
+        >
+          {virtualScroll ? renderVirtualChildren() : renderChildren()}
+          <Scrollbars contentNode={menuNode} verticalScrollAriaRef={verticalScrollAriaRef} />
+        </StyledDiv>
+
         {submenuVisible && activeItemRef.current && (
           <SubMenuContainer
             target={activeItemRef}

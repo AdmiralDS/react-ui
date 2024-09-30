@@ -1,14 +1,15 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import styled, { css } from 'styled-components';
 import { useComposedRefs } from '../common/hooks/useComposedRefs';
 import observeRect from '../common/observeRect';
+import { fixedForwardRef } from '../common/fixedForwardRef';
 
 const verticalThumbHeghtCSSPropName = '--vertical-thumb-height';
+const verticalContentScrollCSSPropName = '--vertical-content-scroll';
 const horizontalThumbWidthCSSPropName = '--horizontal-thumb-width';
-
-const HiddenNativeScroll = styled.div`
+const horizontalContentScrollCSSPropName = '--horizontal-content-scroll';
+export const hideNativeScrollbars = css`
   overflow: scroll;
-
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -16,13 +17,27 @@ const HiddenNativeScroll = styled.div`
   }
 `;
 
-const VerticalScrollAria = styled.div`
+const HiddenNativeScroll = styled.div`
+  position: relative;
+  ${hideNativeScrollbars}
+`;
+
+const VerticalContainer = styled.div`
   position: absolute;
-  right: 0;
   top: 0;
   bottom: 0;
-
+  right: 0;
   width: 10px;
+  transform: translate(var(${horizontalContentScrollCSSPropName}, 0), var(${verticalContentScrollCSSPropName}, 0));
+`;
+
+const HorizontalContainer = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 10px;
+  transform: translate(var(${horizontalContentScrollCSSPropName}, 0), var(${verticalContentScrollCSSPropName}, 0));
 `;
 
 const VerticalScrollThumbZone = styled.div`
@@ -31,14 +46,6 @@ const VerticalScrollThumbZone = styled.div`
   top: 0;
   bottom: 0;
   border-block: 4px solid transparent;
-`;
-
-const HorizontalScrollAria = styled.div`
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  height: 10px;
 `;
 
 const HorizontalScrollThumbZone = styled.div`
@@ -88,9 +95,12 @@ const VerticalThumb = styled.div`
   height: var(${verticalThumbHeghtCSSPropName}, 20px);
 `;
 
-export type ScrollbarProps = React.ComponentPropsWithoutRef<'div'> & {
-  /** Ref на скролируемый контейнер*/
-  scrollBoxRef?: React.ForwardedRef<HTMLDivElement>;
+export type ScrollenabledProps<T extends React.ElementType = 'div'> = React.ComponentPropsWithoutRef<T> &
+  ScrollbarProps & {
+    as?: T;
+  };
+
+export type ScrollbarProps = {
   /** Ref на контейнер сожержащий вертикальный скролбар */
   verticalScrollAriaRef?: React.ForwardedRef<HTMLDivElement>;
   /** Ref на контейнер сожержащий горизонтальный скролбар */
@@ -98,19 +108,41 @@ export type ScrollbarProps = React.ComponentPropsWithoutRef<'div'> & {
   /** Минимально допустимы размер скролбара */
   minThumbSize?: number;
 };
-export const Scrollbar = ({
-  children,
-  scrollBoxRef,
+
+export const Scrollenabled = fixedForwardRef<HTMLDivElement, ScrollenabledProps>(
+  ({ as = 'div', children, verticalScrollAriaRef, horizontalScrollAriaRef, id, minThumbSize = 20, ...props }, ref) => {
+    const scrollAriaId = useMemo(() => (id ? id : `scroll-aria-${Math.random().toString(36).substring(2, 12)}`), [id]);
+
+    const [contentNode, setContenetNode] = useState<HTMLDivElement | null>(null);
+
+    const composedContentRef = useComposedRefs(ref, (node) => setContenetNode(node));
+
+    return (
+      <HiddenNativeScroll as={as} id={scrollAriaId} ref={composedContentRef} {...props}>
+        {children}
+        <Scrollbars
+          {...{
+            contentNode,
+            verticalScrollAriaRef,
+            horizontalScrollAriaRef,
+            minThumbSize,
+          }}
+        />
+      </HiddenNativeScroll>
+    );
+  },
+);
+
+export const Scrollbars = ({
   verticalScrollAriaRef,
   horizontalScrollAriaRef,
-
+  contentNode,
   minThumbSize = 20,
-  ...props
-}: ScrollbarProps) => {
-  const scrollAriaId = useMemo(() => `scroll-aria-${Math.random().toString(36).substring(2, 12)}`, []);
-
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentNode, setContenetNode] = useState<HTMLDivElement | null>(null);
+}: ScrollbarProps & { contentNode?: HTMLElement | null }) => {
+  const scrollAriaId = useMemo(
+    () => (contentNode?.id ? contentNode?.id : `scroll-aria-${Math.random().toString(36).substring(2, 12)}`),
+    [contentNode?.id],
+  );
 
   const [verticalScrollAreaNode, setVerticalScrollAreaNode] = useState<HTMLDivElement | null>(null);
   const [verticalScrollThumbZoneNode, setVerticalScrollThumbZoneNode] = useState<HTMLDivElement | null>(null);
@@ -130,8 +162,6 @@ export const Scrollbar = ({
 
   const [scrollYNedded, setScrollYNeeded] = useState<number>(0);
   const [scrollXNedded, setScrollXNeeded] = useState<number>(0);
-
-  const composedContentRef = useComposedRefs(contentRef, (node) => setContenetNode(node), scrollBoxRef);
 
   const composedVerticalScrollAreaRef = useComposedRefs(verticalScrollAriaRef, (node) =>
     setVerticalScrollAreaNode(node),
@@ -173,33 +203,39 @@ export const Scrollbar = ({
       verticalScrollThumbZoneNode &&
       horizontalScrollThumbZoneNode
     ) {
-      const { observe, unobserve } = observeRect(contentNode, () => {
-        const verticalThumbHeight = calcVerticalThumbHeight(contentNode, verticalScrollThumbZoneNode);
-        const horizontalThumbWidth = calcHorizontalThumbWidth(contentNode, horizontalScrollThumbZoneNode);
+      const { observe, unobserve } = observeRect(contentNode, (rect) => {
+        if (rect) {
+          const isYOverflow = isVerticalOverflow(contentNode);
+          const isXOverflow = isHorizontalOverflow(contentNode);
+          const verticalScroll = Math.min(Math.max(0, rect.scrollTop), rect.scrollHeight - rect.height);
+          const horizontalSroll = Math.min(Math.max(0, rect.scrollLeft), rect.scrollWidth - rect.width);
 
-        verticalThumbNode.style.setProperty(verticalThumbHeghtCSSPropName, `${verticalThumbHeight}px`);
-        horizontalThumbNode.style.setProperty(horizontalThumbWidthCSSPropName, `${horizontalThumbWidth}px`);
+          contentNode.style.setProperty(verticalContentScrollCSSPropName, `${verticalScroll}px`);
+          contentNode.style.setProperty(horizontalContentScrollCSSPropName, `${horizontalSroll}px`);
 
-        const isYOverflow = isVerticalOverflow(contentNode);
-        const isXOverflow = isHorizontalOverflow(contentNode);
-        verticalScrollAreaNode.style.setProperty('display', isYOverflow ? null : 'none');
-        verticalScrollAreaNode.style.setProperty('bottom', isXOverflow ? '10px' : null);
+          verticalScrollAreaNode.style.setProperty('display', isYOverflow ? null : 'none');
+          verticalScrollAreaNode.style.setProperty('bottom', isXOverflow ? '10px' : null);
 
-        horizontalScrollAreaNode.style.setProperty('display', isXOverflow ? null : 'none');
-        horizontalScrollAreaNode.style.setProperty('right', isYOverflow ? '10px' : null);
+          horizontalScrollAreaNode.style.setProperty('display', isXOverflow ? null : 'none');
+          horizontalScrollAreaNode.style.setProperty('right', isYOverflow ? '10px' : null);
 
-        const { scrollTop, scrollLeft, scrollHeight, scrollWidth } = contentNode;
-        const { clientHeight } = verticalScrollThumbZoneNode;
-        const { clientWidth } = horizontalScrollThumbZoneNode;
-        const newTop = Math.round(
-          Math.min((scrollTop / scrollHeight) * clientHeight, clientHeight - verticalThumbHeight),
-        );
-        const newLeft = Math.round(
-          Math.min((scrollLeft / scrollWidth) * clientWidth, clientWidth - horizontalThumbWidth),
-        );
+          const verticalThumbHeight = calcVerticalThumbHeight(contentNode, verticalScrollThumbZoneNode);
+          const horizontalThumbWidth = calcHorizontalThumbWidth(contentNode, horizontalScrollThumbZoneNode);
+          verticalThumbNode.style.setProperty(verticalThumbHeghtCSSPropName, `${verticalThumbHeight}px`);
+          horizontalThumbNode.style.setProperty(horizontalThumbWidthCSSPropName, `${horizontalThumbWidth}px`);
+          const { scrollTop, scrollLeft, scrollHeight, scrollWidth } = contentNode;
+          const { clientHeight } = verticalScrollThumbZoneNode;
+          const { clientWidth } = horizontalScrollThumbZoneNode;
+          const newTop = Math.round(
+            Math.min((scrollTop / scrollHeight) * clientHeight, clientHeight - verticalThumbHeight),
+          );
+          const newLeft = Math.round(
+            Math.min((scrollLeft / scrollWidth) * clientWidth, clientWidth - horizontalThumbWidth),
+          );
 
-        verticalThumbNode.style.top = `${newTop}px`;
-        horizontalThumbNode.style.left = `${newLeft}px`;
+          verticalThumbNode.style.top = `${newTop}px`;
+          horizontalThumbNode.style.left = `${newLeft}px`;
+        }
       });
       observe();
       return unobserve;
@@ -325,10 +361,7 @@ export const Scrollbar = ({
 
   return (
     <>
-      <HiddenNativeScroll id={scrollAriaId} ref={composedContentRef} {...props}>
-        {children}
-      </HiddenNativeScroll>
-      <VerticalScrollAria ref={composedVerticalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
+      <VerticalContainer ref={composedVerticalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <VerticalTrack onClick={handleVerticalTrackClick} />
         <VerticalScrollThumbZone ref={(node) => setVerticalScrollThumbZoneNode(node)}>
           <VerticalThumb
@@ -339,8 +372,8 @@ export const Scrollbar = ({
             }}
           />
         </VerticalScrollThumbZone>
-      </VerticalScrollAria>
-      <HorizontalScrollAria ref={composedHorizontalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
+      </VerticalContainer>
+      <HorizontalContainer ref={composedHorizontalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
         <HorizontalTrack onClick={handleHorizontalTrackClick} />
         <HorizontalScrollThumbZone ref={(node) => setHorizontalScrollThumbZoneNode(node)}>
           <HorizontalThumb
@@ -351,7 +384,7 @@ export const Scrollbar = ({
             }}
           />
         </HorizontalScrollThumbZone>
-      </HorizontalScrollAria>
+      </HorizontalContainer>
     </>
   );
 };

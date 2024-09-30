@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-
-import type { ScrollbarProps } from '@admiral-ds/react-ui';
-import { NotificationItem, NotificationItemContent, NotificationItemTitle, Scrollbar } from '@admiral-ds/react-ui';
+import { NotificationItem, NotificationItemTitle, hideNativeScrollbars, Scrollbars } from '@admiral-ds/react-ui';
+import { useState } from 'react';
 
 const Separator = styled.div<{ height: number }>`
   height: ${(p) => p.height}px;
@@ -13,42 +12,52 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-export const ScrollbarTemplate = (props: ScrollbarProps) => {
+const NotificationItemContent = styled.div`
+  ${hideNativeScrollbars}
+  position: relative;
+  max-height: 300px;
+  max-width: 300px;
+  flex: 1 1 auto;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  ${(p) => p.theme.typography['Body/Body 2 Long']}
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
+`;
+
+export const ScrollbarTemplate = () => {
+  const [contentNode, setContentNode] = useState<HTMLDivElement | null>(null);
   return (
     <Wrapper>
       <NotificationItem displayStatusIcon style={{ paddingRight: 0 }}>
         <NotificationItemTitle>Scrollbar</NotificationItemTitle>
-        <NotificationItemContent
-          style={{ position: 'relative', overflow: 'hidden', paddingRight: 10, paddingBottom: 10 }}
-        >
-          <Scrollbar style={{ maxHeight: 400, width: 300 }}>
-            <div style={{ minWidth: 400 }}></div>
-            Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
-            <Separator height={8} />
-            Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
-            образом был огрничен в размерах
-            <Separator height={8} />
-            Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
-            <Separator height={8} />
-            Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
-            образом был огрничен в размерах
-            <Separator height={8} />
-            Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
-            <Separator height={8} />
-            Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
-            образом был огрничен в размерах
-            <Separator height={8} />
-            Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
-            <Separator height={8} />
-            Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
-            образом был огрничен в размерах
-            <Separator height={8} />
-            Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
-            <Separator height={8} />
-            Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
-            образом был огрничен в размерах
-            <Separator height={8} />
-          </Scrollbar>
+        <NotificationItemContent ref={setContentNode}>
+          <div style={{ width: 400, height: 1 }} title="Блок для переполнения ширины"></div>
+          Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
+          <Separator height={8} />
+          Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
+          образом был огрничен в размерах
+          <Separator height={8} />
+          Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
+          <Separator height={8} />
+          Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
+          образом был огрничен в размерах
+          <Separator height={8} />
+          Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
+          <Separator height={8} />
+          Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
+          образом был огрничен в размерах
+          <Separator height={8} />
+          Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
+          <Separator height={8} />
+          Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
+          образом был огрничен в размерах
+          <Separator height={8} />
+          Scrollbar – компонент для отображения скролбаров, одинаково выглядящих на всех платформах.
+          <Separator height={8} />
+          Автоматически появляется при переполнении контейнера. Для этого необходимо что-бы на компонент тем или иным
+          образом был огрничен в размерах
+          <Separator height={8} />
+          <Scrollbars contentNode={contentNode} />
         </NotificationItemContent>
       </NotificationItem>
     </Wrapper>

@@ -13,7 +13,7 @@ import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/I
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
-import { Scrollbar } from '#src/components/Scrollbar';
+import { Scrollenabled } from '#src/components/Scrollbar';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -76,7 +76,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const ScrollableContent = styled(Scrollbar)<{ $mobile: boolean }>`
+const ScrollableContent = styled(Scrollenabled)<{ $mobile: boolean }>`
   padding-block: 8px;
   padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
 `;

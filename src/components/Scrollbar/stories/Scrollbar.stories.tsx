@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 
-import { Scrollbar } from '@admiral-ds/react-ui';
+import { Scrollenabled } from '@admiral-ds/react-ui';
 
 import { ScrollbarTemplate } from './Scrollbar.template';
 
@@ -8,7 +8,7 @@ import ScrollbarTemplateRaw from './Scrollbar.template?raw';
 
 export default {
   title: 'Admiral-2.1/Scrollbar',
-  component: Scrollbar,
+  component: Scrollenabled,
   parameters: {
     docs: {
       source: {
@@ -25,9 +25,9 @@ export default {
       control: false,
     },
   },
-} as Meta<typeof Scrollbar>;
+} as Meta<typeof Scrollenabled>;
 
-const CarouselPlaygroundStory: StoryFn<typeof Scrollbar> = (props) => {
+const CarouselPlaygroundStory: StoryFn<typeof Scrollenabled> = (props) => {
   return <ScrollbarTemplate {...props} />;
 };
 
