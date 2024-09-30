@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 import {
-  IMAGE_VIEWER_CONTROL_BUTTON_SIZE,
-  IMAGE_VIEWER_CONTROL_ICON_SIZE,
+  IMAGE_VIEWER_TOOLBAR_BUTTON_SIZE,
+  IMAGE_VIEWER_TOOLBAR_ICON_SIZE,
 } from '#src/components/ImageViewer/constants';
 
 import { TooltipHoc } from '#src/components/TooltipHOC';
 
-export interface ImageViewerControlButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ImageViewerToolbarButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
   /** Текст для tooltip */
@@ -16,23 +16,23 @@ export interface ImageViewerControlButtonProps extends React.ButtonHTMLAttribute
   icon: React.ReactNode;
 }
 
-const ControlButton = styled.button`
+const ToolbarButton = styled.button`
   all: unset;
   appearance: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
   box-sizing: border-box;
-  width: ${IMAGE_VIEWER_CONTROL_BUTTON_SIZE}px;
-  height: ${IMAGE_VIEWER_CONTROL_BUTTON_SIZE}px;
+  width: ${IMAGE_VIEWER_TOOLBAR_BUTTON_SIZE}px;
+  height: ${IMAGE_VIEWER_TOOLBAR_BUTTON_SIZE}px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   & svg {
-    width: ${IMAGE_VIEWER_CONTROL_ICON_SIZE}px;
-    height: ${IMAGE_VIEWER_CONTROL_ICON_SIZE}px;
+    width: ${IMAGE_VIEWER_TOOLBAR_ICON_SIZE}px;
+    height: ${IMAGE_VIEWER_TOOLBAR_ICON_SIZE}px;
     & *[fill^='#'] {
       fill: var(--admiral-color-Special_DarkStaticNeutral70, ${(p) => p.theme.color['Special/Dark Static Neutral 70']});
     }
@@ -57,19 +57,19 @@ const ControlButton = styled.button`
     }
   }
 `;
-const TooltipedControlButton = TooltipHoc(ControlButton);
+const TooltipedToolbarButton = TooltipHoc(ToolbarButton);
 
-export const ImageViewerControlButton = ({
+export const ImageViewerToolbarButton = ({
   showTooltip = true,
   text = '',
   icon,
   ...props
-}: ImageViewerControlButtonProps) => {
+}: ImageViewerToolbarButtonProps) => {
   return showTooltip ? (
-    <TooltipedControlButton {...props} renderContent={() => text}>
+    <TooltipedToolbarButton {...props} renderContent={() => text}>
       {icon}
-    </TooltipedControlButton>
+    </TooltipedToolbarButton>
   ) : (
-    <ControlButton {...props}>{icon}</ControlButton>
+    <ToolbarButton {...props}>{icon}</ToolbarButton>
   );
 };

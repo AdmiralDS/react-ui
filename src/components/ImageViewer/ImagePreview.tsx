@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 import type { ImagePreviewProps, ImageProps, TransformType } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
-import { ImageViewerControls } from '#src/components/ImageViewer/ImageViewerControls';
+import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
 
 const Overlay = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const CloseButton = styled(ImageViewerCloseButton)`
   right: 22px;
   top: 18px;
 `;
-const Controls = styled(ImageViewerControls)`
+const Toolbar = styled(ImageViewerToolbar)`
   position: absolute;
   bottom: 24px;
   left: 50%;
@@ -129,7 +129,7 @@ export const ImagePreview = ({
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       {renderItem(item)}
       <CloseButton onClick={handleCloseBtnClick} />
-      <Controls
+      <Toolbar
         activeImg={activeImg}
         totalImg={totalImg}
         showTooltip={showTooltip}

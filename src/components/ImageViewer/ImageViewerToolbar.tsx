@@ -1,13 +1,13 @@
 import styled, { useTheme } from 'styled-components';
 
 import {
-  IMAGE_VIEWER_CONTROLS_BORDER_RADIUS,
-  IMAGE_VIEWER_CONTROLS_HEIGHT,
-  IMAGE_VIEWER_CONTROLS_PADDING,
+  IMAGE_VIEWER_TOOLBAR_BORDER_RADIUS,
+  IMAGE_VIEWER_TOOLBAR_HEIGHT,
+  IMAGE_VIEWER_TOOLBAR_PADDING,
 } from '#src/components/ImageViewer/constants';
 import type { ImageViewerToolbarProps } from '#src/components/ImageViewer/types';
 import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
-import { ImageViewerControlButton } from '#src/components/ImageViewer/ImageViewerControlButton';
+import { ImageViewerToolbarButton } from '#src/components/ImageViewer/ImageViewerToolbarButton';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { uid } from '#src/components/common/uid';
@@ -35,9 +35,9 @@ const Divider = styled.div`
 
 const ButtonsWrapper = styled.div`
   box-sizing: border-box;
-  border-radius: ${IMAGE_VIEWER_CONTROLS_BORDER_RADIUS}px;
-  height: ${IMAGE_VIEWER_CONTROLS_HEIGHT}px;
-  padding: ${IMAGE_VIEWER_CONTROLS_PADDING};
+  border-radius: ${IMAGE_VIEWER_TOOLBAR_BORDER_RADIUS}px;
+  height: ${IMAGE_VIEWER_TOOLBAR_HEIGHT}px;
+  padding: ${IMAGE_VIEWER_TOOLBAR_PADDING};
   background-color: var(--admiral-color-Opacity_Modal, ${(p) => p.theme.color['Opacity/Modal']});
 
   display: flex;
@@ -61,7 +61,7 @@ const getNext = (current: number, total: number) => {
   return newIndex < total ? newIndex : total - 1;
 };
 
-export const ImageViewerControls = ({
+export const ImageViewerToolbar = ({
   showTooltip = true,
   showCounter,
   showNavigation = true,
@@ -135,7 +135,7 @@ export const ImageViewerControls = ({
       <>
         {showNavigation && index === 6 ? <Divider /> : null}
         {(showNavigation || (!showNavigation && index < 6)) && (
-          <ImageViewerControlButton
+          <ImageViewerToolbarButton
             key={uid()}
             showTooltip={showTooltip}
             icon={icon}
