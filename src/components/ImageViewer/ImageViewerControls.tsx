@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import {
-  IMAGE_VIEWER_CONTROL_BUTTON_SIZE,
-  IMAGE_VIEWER_CONTROL_ICON_SIZE,
   IMAGE_VIEWER_CONTROLS_BORDER_RADIUS,
   IMAGE_VIEWER_CONTROLS_HEIGHT,
   IMAGE_VIEWER_CONTROLS_PADDING,
 } from '#src/components/ImageViewer/constants';
 import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
 import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
+import { ImageViewerControlButton } from '#src/components/ImageViewer/ImageViewerControlButton';
 
 import { LIGHT_THEME } from '#src/components/themes';
-import { TooltipHoc } from '#src/components/TooltipHOC';
 import { uid } from '#src/components/common/uid';
 
 import { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/documents/RotateLeftOutline.svg';
@@ -34,68 +31,6 @@ const Divider = styled.div`
     ${(p) => p.theme.color['Special/Dark Static Neutral 50']}
   );
 `;
-
-const ControlButton = styled.button`
-  all: unset;
-  appearance: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-
-  box-sizing: border-box;
-  width: ${IMAGE_VIEWER_CONTROL_BUTTON_SIZE}px;
-  height: ${IMAGE_VIEWER_CONTROL_BUTTON_SIZE}px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  & svg {
-    width: ${IMAGE_VIEWER_CONTROL_ICON_SIZE}px;
-    height: ${IMAGE_VIEWER_CONTROL_ICON_SIZE}px;
-    & *[fill^='#'] {
-      fill: var(--admiral-color-Special_DarkStaticNeutral70, ${(p) => p.theme.color['Special/Dark Static Neutral 70']});
-    }
-  }
-
-  &:hover {
-    & *[fill^='#'] {
-      fill: var(--admiral-color-Special_DarkStaticNeutral80, ${(p) => p.theme.color['Special/Dark Static Neutral 80']});
-    }
-  }
-
-  &:active {
-    & *[fill^='#'] {
-      fill: var(--admiral-color-Special_DarkStaticNeutral90, ${(p) => p.theme.color['Special/Dark Static Neutral 90']});
-    }
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    & *[fill^='#'] {
-      fill: var(--admiral-color-Special_DarkStaticNeutral50, ${(p) => p.theme.color['Special/Dark Static Neutral 50']});
-    }
-  }
-`;
-const TooltipedControlButton = TooltipHoc(ControlButton);
-
-interface ImageViewerControlButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Отображение тултипа, по умолчанию true */
-  showTooltip?: boolean;
-  /** Текст для tooltip */
-  text?: string;
-  /** Иконка для отображения */
-  icon: React.ReactNode;
-}
-
-const ImageViewerControlutton = ({ showTooltip = true, text = '', icon, ...props }: ImageViewerControlButtonProps) => {
-  return showTooltip ? (
-    <TooltipedControlButton {...props} renderContent={() => text}>
-      {icon}
-    </TooltipedControlButton>
-  ) : (
-    <ControlButton {...props}>{icon}</ControlButton>
-  );
-};
 
 const ButtonsWrapper = styled.div`
   box-sizing: border-box;
@@ -193,7 +128,7 @@ export const ImageViewerControls = ({
       <>
         {showNavigation && index === 6 ? <Divider /> : null}
         {(showNavigation || (!showNavigation && index < 6)) && (
-          <ImageViewerControlutton
+          <ImageViewerControlButton
             key={uid()}
             showTooltip={showTooltip}
             icon={icon}
