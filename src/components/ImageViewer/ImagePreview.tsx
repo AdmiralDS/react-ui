@@ -90,20 +90,6 @@ export const ImagePreview = ({
     handleClose();
   };
 
-  useEffect(() => {
-    const loadEventListener = (e: any) => {
-      const { naturalWidth, naturalHeight, width, height } = e.target;
-      console.log(
-        `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
-      );
-    };
-    const imgNode = imgRef.current;
-    if (imgNode) {
-      imgNode.addEventListener('load', loadEventListener);
-      return () => imgNode.removeEventListener('error', loadEventListener);
-    }
-  }, []);
-
   const [scale, setScale] = useState(1);
   const handleScaleChange = (newScale: number) => {
     setScale(newScale);
@@ -116,6 +102,27 @@ export const ImagePreview = ({
     const newScale = scale - scaleStep;
     handleScaleChange(newScale < minScale ? minScale : newScale);
   };
+
+  useEffect(() => {
+    const loadEventListener = (e: any) => {
+      const { naturalWidth, naturalHeight, width, height } = e.target;
+      console.log(
+        `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
+      );
+    };
+    const dblclickEventListener = () => {
+      setScale(1);
+    };
+    const imgNode = imgRef.current;
+    if (imgNode) {
+      imgNode.addEventListener('load', loadEventListener);
+      imgNode.addEventListener('dblclick', dblclickEventListener);
+      return () => {
+        imgNode.removeEventListener('error', loadEventListener);
+        imgNode.removeEventListener('dblclick', dblclickEventListener);
+      };
+    }
+  }, []);
 
   const renderItem = (item: string | ImageProps) => {
     return typeof item === 'string' ? (
