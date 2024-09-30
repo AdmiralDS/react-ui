@@ -79,12 +79,14 @@ export const OrderedListComponent = styled.ol<{
   $dimension: Dimension;
   $styleType: OrderedStyleType;
   $gap: React.CSSProperties['gap'];
+  $markerCssMixin?: ReturnType<typeof css>;
 }>`
   ${listMixin}
   & > li::before {
     ${listMarkerMixin}
     justify-content: flex-start;
     min-width: ${(p) => (p.$styleType == 'numbers' ? 'auto' : `${p.$dimension == 'm' ? 24 : 20}px`)};
+    ${(p) => p.$markerCssMixin}
   }
 `;
 
@@ -92,12 +94,14 @@ export const UnorderedListComponent = styled.ul<{
   $dimension: Dimension;
   $styleType: UnorderedStyleType;
   $gap: React.CSSProperties['gap'];
+  $markerCssMixin?: ReturnType<typeof css>;
 }>`
   ${listMixin}
   & > li::before {
     ${listMarkerMixin}
     justify-content: center;
     width: ${(p) => (p.$dimension == 'm' ? 24 : 20)}px;
+    ${(p) => p.$markerCssMixin}
   }
 `;
 
