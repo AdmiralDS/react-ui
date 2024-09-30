@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import {
@@ -12,6 +13,7 @@ import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { TooltipHoc } from '#src/components/TooltipHOC';
+import { uid } from '#src/components/common/uid';
 
 import { ReactComponent as RotateLeftOutline } from '@admiral-ds/icons/build/documents/RotateLeftOutline.svg';
 import { ReactComponent as RotateRightOutline } from '@admiral-ds/icons/build/documents/RotateRightOutline.svg';
@@ -76,6 +78,25 @@ const ControlButton = styled.button`
 `;
 const TooltipedControlButton = TooltipHoc(ControlButton);
 
+interface ImageViewerControlButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
+  /** Текст для tooltip */
+  text?: string;
+  /** Иконка для отображения */
+  icon: React.ReactNode;
+}
+
+const ImageViewerControlutton = ({ showTooltip = true, text = '', icon, ...props }: ImageViewerControlButtonProps) => {
+  return showTooltip ? (
+    <TooltipedControlButton {...props} renderContent={() => text}>
+      {icon}
+    </TooltipedControlButton>
+  ) : (
+    <ControlButton {...props}>{icon}</ControlButton>
+  );
+};
+
 const ButtonsWrapper = styled.div`
   box-sizing: border-box;
   border-radius: ${IMAGE_VIEWER_CONTROLS_BORDER_RADIUS}px;
@@ -138,40 +159,49 @@ export const ImageViewerControls = ({
   const emptyHandler = () => {
     return;
   };
+
+  const handleActiveImgChange = (newIndex: number) => {
+    onActiveImgChange(newIndex);
+  };
+
+  const prevDisabled = activeImg <= 0;
+  const nextDisabled = activeImg >= totalImg - 1;
+
   const buttons = [
-    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: emptyHandler },
-    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: emptyHandler },
-    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: emptyHandler },
-    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler },
-    { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: emptyHandler },
-    { icon: <ZoomInOutline />, text: zoomInText, handleClick: emptyHandler },
+    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: emptyHandler, disabled: false },
+    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: emptyHandler, disabled: false },
+    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: emptyHandler, disabled: false },
+    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler, disabled: false },
+    { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: emptyHandler, disabled: false },
+    { icon: <ZoomInOutline />, text: zoomInText, handleClick: emptyHandler, disabled: false },
     {
       icon: <ArrowLeftOutline />,
       text: backwardText,
-      handleClick: () => onActiveImgChange(getPrev(activeImg, totalImg)),
+      handleClick: () => handleActiveImgChange(getPrev(activeImg, totalImg)),
+      disabled: prevDisabled,
     },
     {
       icon: <ArrowRightOutline />,
       text: forwardText,
-      handleClick: () => onActiveImgChange(getNext(activeImg, totalImg)),
+      handleClick: () => handleActiveImgChange(getNext(activeImg, totalImg)),
+      disabled: nextDisabled,
     },
   ];
 
-  const renderButton = (icon: React.ReactNode, text: string, handleClick: () => void) => {
-    return showTooltip ? (
-      <TooltipedControlButton renderContent={() => text} onClick={handleClick}>
-        {icon}
-      </TooltipedControlButton>
-    ) : (
-      <ControlButton onClick={handleClick}>{icon}</ControlButton>
-    );
-  };
-
-  const items = buttons.map(({ icon, text, handleClick }, index) => {
+  const items = buttons.map(({ icon, text, handleClick, disabled }, index) => {
     return (
       <>
         {showNavigation && index === 6 ? <Divider /> : null}
-        {(showNavigation || (!showNavigation && index < 6)) && renderButton(icon, text, handleClick)}
+        {(showNavigation || (!showNavigation && index < 6)) && (
+          <ImageViewerControlutton
+            key={uid()}
+            showTooltip={showTooltip}
+            icon={icon}
+            text={text}
+            onClick={handleClick}
+            disabled={disabled}
+          />
+        )}
       </>
     );
   });
