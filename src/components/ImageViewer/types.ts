@@ -20,6 +20,38 @@ export interface ImageCounterProps {
   totalImg: number;
 }
 
+export interface ToolbarActionProps {
+  /** Обработчик смены элемента, открытого для просмотра */
+  onActiveImgChange?: (index: number) => void;
+  /** Обработчик отражения элемента по вертикали */
+  onFlipY: () => void;
+  /** Обработчик отражения элемента по горизонтали */
+  onFlipX: () => void;
+  /** Обработчик поворота элемента влево */
+  onRotateLeft: () => void;
+  /** Обработчик поворота элемента вправо */
+  onRotateRight: () => void;
+  /** Обработчик увеличения элемента */
+  onZoomOut: () => void;
+  /** Обработчик уменьшения элемента */
+  onZoomIn: () => void;
+  /** Обработчик закрытия компонента. Срабатывает:
+   * 1) при клике на крестик в верхнем правому углу
+   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
+   * 3) при клике извне и closeOnOutsideClick равным true
+   */
+  onClose: () => void;
+}
+
+export interface TransformType {
+  x: number;
+  y: number;
+  rotate: number;
+  scale: number;
+  flipX: boolean;
+  flipY: boolean;
+}
+
 export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement>, ImageCounterProps {
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
@@ -27,8 +59,14 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   showCounter?: boolean;
   /** Отображение кнопок вперед/назад */
   showNavigation?: boolean;
-  /** Обработчик смены элемента, открытого для просмотра */
-  onActiveImgChange: (newIndex: number) => void;
+  /** Обработчики панели инструментов */
+  actions: ToolbarActionProps;
+  /** Параметры отображения элемента */
+  transform: TransformType;
+  /** Минимальный размер уменьшения — 70% высоты экрана, либо 1:1, если картинка при таком масштабе занимает менее 70% высоты экрана. */
+  minScale: number;
+  /** Максимальный размер увеличения, по умолчанию x10 от исходного разрешения картинки.  */
+  maxScale: number;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -57,12 +95,8 @@ export interface ImagePreviewProps extends ImageViewerControlsProps {
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
   container?: Element;
-  /** Обработчик закрытия компонента. Срабатывает:
-   * 1) при клике на крестик в верхнем правому углу
-   * 2) при нажатии Escape и closeOnEscapeKeyDown равным true
-   * 3) при клике извне и closeOnOutsideClick равным true
-   */
-  onClose?: () => void;
+  /** Шаг для изменения масштаба, по умолчанию 0,5 */
+  scaleStep?: number;
 }
 
 export interface ImageViewerProps

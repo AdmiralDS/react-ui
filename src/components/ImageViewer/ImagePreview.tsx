@@ -32,19 +32,23 @@ const Controls = styled(ImageViewerControls)`
   left: 50%;
   transform: translate(-50%);
 `;
-const StyledImage = styled.img`
+const StyledImage = styled.img<{ $scale: number }>`
   max-width: 100%;
   max-height: 70%;
+  transform: ${(p) => `scale(${p.$scale}, ${p.$scale})`};
 `;
 
 export const ImagePreview = ({
   item,
   container,
-  onClose,
+  minScale,
+  maxScale,
+  scaleStep,
   showTooltip,
   showCounter,
   showNavigation,
-  onActiveImgChange,
+  actions,
+  transform,
   locale,
   activeImg,
   totalImg,
@@ -58,25 +62,30 @@ export const ImagePreview = ({
       event.preventDefault();
       // prevent other overlays from closing
       event.stopPropagation();
-      onClose?.();
+      actions.onClose?.();
     }
   };
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.target === overlayRef.current && onClose?.();
+    event.target === overlayRef.current && actions.onClose?.();
   };
 
   const handleCloseBtnClick = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    onClose?.();
+    actions.onClose?.();
   };
 
   const renderItem = (item: string | ImageProps) => {
-    return typeof item === 'string' ? <StyledImage src={item} /> : <StyledImage {...item} />;
+    return typeof item === 'string' ? (
+      <StyledImage src={item} $scale={transform.scale} />
+    ) : (
+      <StyledImage {...item} $scale={transform.scale} />
+    );
   };
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
+      {renderItem(item)}
       <CloseButton onClick={handleCloseBtnClick} />
       <Controls
         activeImg={activeImg}
@@ -84,10 +93,12 @@ export const ImagePreview = ({
         showTooltip={showTooltip}
         showCounter={showCounter}
         showNavigation={showNavigation}
-        onActiveImgChange={onActiveImgChange}
+        actions={actions}
+        minScale={minScale}
+        maxScale={maxScale}
+        transform={transform}
         locale={locale}
       />
-      {renderItem(item)}
     </Overlay>,
     container || document.body,
   );

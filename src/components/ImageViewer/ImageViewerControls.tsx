@@ -20,6 +20,7 @@ import { ReactComponent as ZoomOutOutline } from '@admiral-ds/icons/build/system
 import { ReactComponent as ZoomInOutline } from '@admiral-ds/icons/build/system/ZoomInOutline.svg';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
+import { useMemo } from 'react';
 
 const Divider = styled.div`
   box-sizing: border-box;
@@ -64,7 +65,11 @@ export const ImageViewerControls = ({
   showTooltip = true,
   showCounter,
   showNavigation = true,
-  onActiveImgChange,
+  actions,
+  transform,
+  //scale,
+  minScale,
+  maxScale,
   activeImg,
   totalImg,
   locale,
@@ -96,19 +101,21 @@ export const ImageViewerControls = ({
   };
 
   const handleActiveImgChange = (newIndex: number) => {
-    onActiveImgChange(newIndex);
+    actions.onActiveImgChange?.(newIndex);
   };
 
   const prevDisabled = activeImg <= 0;
   const nextDisabled = activeImg >= totalImg - 1;
+  const zoomOutDisabled = transform.scale <= minScale;
+  const zoomInDisabled = transform.scale >= maxScale;
 
   const buttons = [
     { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: emptyHandler, disabled: false },
     { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: emptyHandler, disabled: false },
     { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: emptyHandler, disabled: false },
     { icon: <RotateRightOutline />, text: rotateRightText, handleClick: emptyHandler, disabled: false },
-    { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: emptyHandler, disabled: false },
-    { icon: <ZoomInOutline />, text: zoomInText, handleClick: emptyHandler, disabled: false },
+    { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: actions.onZoomOut, disabled: zoomOutDisabled },
+    { icon: <ZoomInOutline />, text: zoomInText, handleClick: actions.onZoomIn, disabled: zoomInDisabled },
     {
       icon: <ArrowLeftOutline />,
       text: backwardText,
