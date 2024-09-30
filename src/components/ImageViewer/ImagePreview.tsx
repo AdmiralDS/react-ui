@@ -32,10 +32,10 @@ const Toolbar = styled(ImageViewerToolbar)`
   left: 50%;
   transform: translate(-50%);
 `;
-const StyledImage = styled.img<{ $scale: number }>`
+const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolean }>`
   max-width: 100%;
   max-height: 70%;
-  transform: ${(p) => `scale(${p.$scale}, ${p.$scale})`};
+  transform: ${(p) => `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)})`};
 `;
 const defaultTransform: TransformType = {
   x: 0,
@@ -124,11 +124,20 @@ export const ImagePreview = ({
     }
   }, []);
 
+  const [flipX, setFlipX] = useState(false);
+  const [flipY, setFlipY] = useState(false);
+  const handleFlipXChange = () => {
+    setFlipX((prevState) => !prevState);
+  };
+  const handleFlipYChange = () => {
+    setFlipY((prevState) => !prevState);
+  };
+
   const renderItem = (item: string | ImageProps) => {
     return typeof item === 'string' ? (
-      <StyledImage src={item} ref={imgRef} $scale={scale} />
+      <StyledImage src={item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} />
     ) : (
-      <StyledImage {...item} ref={imgRef} $scale={scale} />
+      <StyledImage {...item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} />
     );
   };
 
@@ -144,8 +153,8 @@ export const ImagePreview = ({
         showNavigation={showNavigation}
         actions={{
           onActiveImgChange: onActiveChange,
-          onFlipX: emptyHandler,
-          onFlipY: emptyHandler,
+          onFlipX: handleFlipXChange,
+          onFlipY: handleFlipYChange,
           onRotateLeft: emptyHandler,
           onRotateRight: emptyHandler,
           onZoomOut: handleZoomOut,
@@ -154,7 +163,7 @@ export const ImagePreview = ({
         }}
         minScale={minScale}
         maxScale={maxScale}
-        transform={{ ...defaultTransform, scale }}
+        transform={{ ...defaultTransform, scale, flipX, flipY }}
         locale={locale}
       />
     </Overlay>,
