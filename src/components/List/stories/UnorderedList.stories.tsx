@@ -50,9 +50,6 @@ export default {
     gap: {
       control: { type: 'text' },
     },
-    theme: {
-      control: false,
-    },
   },
 } as Meta<typeof UnorderedList>;
 
