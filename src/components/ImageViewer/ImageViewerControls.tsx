@@ -5,7 +5,7 @@ import {
   IMAGE_VIEWER_CONTROLS_HEIGHT,
   IMAGE_VIEWER_CONTROLS_PADDING,
 } from '#src/components/ImageViewer/constants';
-import type { ImageViewerControlsProps } from '#src/components/ImageViewer/types';
+import type { ImageViewerToolbarProps } from '#src/components/ImageViewer/types';
 import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 import { ImageViewerControlButton } from '#src/components/ImageViewer/ImageViewerControlButton';
 
@@ -74,7 +74,7 @@ export const ImageViewerControls = ({
   totalImg,
   locale,
   ...props
-}: ImageViewerControlsProps) => {
+}: ImageViewerToolbarProps) => {
   const theme = useTheme() || LIGHT_THEME;
   const {
     flipHorizontallyText: theme_flipHorizontallyText,

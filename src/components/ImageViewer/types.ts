@@ -52,7 +52,7 @@ export interface TransformType {
   flipY: boolean;
 }
 
-export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivElement>, ImageCounterProps {
+export interface ImageViewerToolbarProps extends React.HTMLAttributes<HTMLDivElement>, ImageCounterProps {
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
   /** Отображение счетчика */
@@ -90,7 +90,7 @@ export interface ImageViewerControlsProps extends React.HTMLAttributes<HTMLDivEl
   };
 }
 
-export interface ImagePreviewProps extends ImageViewerControlsProps {
+export interface ImagePreviewProps extends ImageViewerToolbarProps {
   /** Элемент для просмотра */
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
