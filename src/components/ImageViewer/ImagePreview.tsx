@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -55,6 +55,7 @@ export const ImagePreview = ({
   ...props
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
@@ -77,11 +78,25 @@ export const ImagePreview = ({
 
   const renderItem = (item: string | ImageProps) => {
     return typeof item === 'string' ? (
-      <StyledImage src={item} $scale={transform.scale} />
+      <StyledImage src={item} ref={imgRef} $scale={transform.scale} />
     ) : (
-      <StyledImage {...item} $scale={transform.scale} />
+      <StyledImage {...item} ref={imgRef} $scale={transform.scale} />
     );
   };
+
+  useEffect(() => {
+    const loadEventListener = (e: any) => {
+      const { naturalWidth, naturalHeight, width, height } = e.target;
+      console.log(
+        `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
+      );
+    };
+    const imgNode = imgRef.current;
+    if (imgNode) {
+      imgNode.addEventListener('load', loadEventListener);
+      return () => imgNode.removeEventListener('error', loadEventListener);
+    }
+  }, []);
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
