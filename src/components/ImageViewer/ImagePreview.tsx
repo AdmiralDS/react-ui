@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
-import type { ImagePreviewProps, ImageProps } from './types';
+import type { ImagePreviewProps, ImageProps, TransformType } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerControls } from '#src/components/ImageViewer/ImageViewerControls';
 
@@ -37,51 +37,57 @@ const StyledImage = styled.img<{ $scale: number }>`
   max-height: 70%;
   transform: ${(p) => `scale(${p.$scale}, ${p.$scale})`};
 `;
+const defaultTransform: TransformType = {
+  x: 0,
+  y: 0,
+  rotate: 0,
+  scale: 1,
+  flipX: false,
+  flipY: false,
+};
+const emptyHandler = () => {
+  return;
+};
 
 export const ImagePreview = ({
   item,
   container,
-  minScale,
-  maxScale,
-  scaleStep,
+  minScale = 0,
+  maxScale = 10,
+  scaleStep = 0.5,
   showTooltip,
   showCounter,
   showNavigation,
-  actions,
-  transform,
   locale,
   activeImg,
   totalImg,
+  onVisibleChange,
+  onActiveChange,
   ...props
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
+  const handleClose = () => {
+    onVisibleChange?.(false);
+  };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Escape') {
       // prevent browser-specific escape key behavior (Safari exits fullscreen)
       event.preventDefault();
       // prevent other overlays from closing
       event.stopPropagation();
-      actions.onClose?.();
+      handleClose();
     }
   };
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.target === overlayRef.current && actions.onClose?.();
+    event.target === overlayRef.current && handleClose();
   };
 
   const handleCloseBtnClick = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    actions.onClose?.();
-  };
-
-  const renderItem = (item: string | ImageProps) => {
-    return typeof item === 'string' ? (
-      <StyledImage src={item} ref={imgRef} $scale={transform.scale} />
-    ) : (
-      <StyledImage {...item} ref={imgRef} $scale={transform.scale} />
-    );
+    handleClose();
   };
 
   useEffect(() => {
@@ -98,6 +104,27 @@ export const ImagePreview = ({
     }
   }, []);
 
+  const [scale, setScale] = useState(1);
+  const handleScaleChange = (newScale: number) => {
+    setScale(newScale);
+  };
+  const handleZoomIn = () => {
+    const newScale = scale + scaleStep;
+    handleScaleChange(newScale > maxScale ? maxScale : newScale);
+  };
+  const handleZoomOut = () => {
+    const newScale = scale - scaleStep;
+    handleScaleChange(newScale < minScale ? minScale : newScale);
+  };
+
+  const renderItem = (item: string | ImageProps) => {
+    return typeof item === 'string' ? (
+      <StyledImage src={item} ref={imgRef} $scale={scale} />
+    ) : (
+      <StyledImage {...item} ref={imgRef} $scale={scale} />
+    );
+  };
+
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       {renderItem(item)}
@@ -108,10 +135,19 @@ export const ImagePreview = ({
         showTooltip={showTooltip}
         showCounter={showCounter}
         showNavigation={showNavigation}
-        actions={actions}
+        actions={{
+          onActiveImgChange: onActiveChange,
+          onFlipX: emptyHandler,
+          onFlipY: emptyHandler,
+          onRotateLeft: emptyHandler,
+          onRotateRight: emptyHandler,
+          onZoomOut: handleZoomOut,
+          onZoomIn: handleZoomIn,
+          onClose: handleClose,
+        }}
         minScale={minScale}
         maxScale={maxScale}
-        transform={transform}
+        transform={{ ...defaultTransform, scale }}
         locale={locale}
       />
     </Overlay>,

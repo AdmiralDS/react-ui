@@ -3,7 +3,7 @@ import styled, { type css } from 'styled-components';
 
 import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
-import type { ImageProps, ImageViewerProps, TransformType } from '#src/components/ImageViewer/types';
+import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
 export * from './types';
 
@@ -20,14 +20,6 @@ const Wrapper = styled.div<{ $previewGroupMixin?: ReturnType<typeof css> }>`
 
   ${(p) => p.$previewGroupMixin}
 `;
-const defaultTransform: TransformType = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  flipX: false,
-  flipY: false,
-};
 
 export const ImageViewer = ({
   items,
@@ -42,43 +34,31 @@ export const ImageViewer = ({
   showTooltip = true,
   showCounter = true,
   showNavigation = true,
-  actions,
-  transform = defaultTransform,
   locale,
   activeImg,
+  onActiveChange,
+  visible,
+  onVisibleChange,
   ...props
 }: ImageViewerProps) => {
   const [activeImgState, setActiveImgState] = useState(defaultActiveImg);
   const activeImgInner = activeImg ?? activeImgState;
   const handleActiveChange = (newIndex: number) => {
     setActiveImgState(newIndex);
-    actions.onActiveImgChange?.(newIndex);
-  };
-  const [scaleState, setScaleState] = useState(1);
-  const scaleInner = scaleState;
-  //const scaleInner = transform.scale ?? scaleState;
-  const handleScaleChange = (newScale: number) => {
-    setScaleState(newScale);
-  };
-  const handleZoomIn = () => {
-    const newScale = scaleInner + scaleStep;
-    handleScaleChange(newScale > maxScale ? maxScale : newScale);
-  };
-  const handleZoomOut = () => {
-    const newScale = scaleInner - scaleStep;
-    handleScaleChange(newScale < minScale ? minScale : newScale);
+    onActiveChange?.(newIndex);
   };
 
-  const [opened, setOpened] = useState(false);
-  const handleClose = () => {
-    setOpened(false);
-    actions.onClose?.();
+  const [visibleState, setVisibleState] = useState(false);
+  const visibleInner = visible ?? visibleState;
+  const handleVisibleChange = (newState: boolean) => {
+    setVisibleState(newState);
+    onVisibleChange?.(newState);
   };
 
   const renderItem = (item: string | ImageProps, index: number) => {
     const handleMouseDown = () => {
       setActiveImgState(index);
-      setOpened(true);
+      setVisibleState(true);
     };
     return typeof item === 'string' ? (
       <ImageMiniature src={item} dimension={dimension} onMouseDown={handleMouseDown} />
@@ -97,7 +77,7 @@ export const ImageViewer = ({
   return (
     <Wrapper {...props} $previewGroupMixin={previewGroupMixin}>
       {miniatures}
-      {opened && (
+      {visibleInner && (
         <ImagePreview
           item={items[activeImgInner]}
           container={container}
@@ -107,20 +87,11 @@ export const ImageViewer = ({
           showTooltip={showTooltip}
           showCounter={showCounter && items.length > 1}
           showNavigation={showNavigation && items.length > 1}
-          actions={{
-            ...actions,
-            onActiveImgChange: handleActiveChange,
-            onZoomIn: handleZoomIn,
-            onZoomOut: handleZoomOut,
-            onClose: handleClose,
-          }}
-          transform={{
-            ...transform,
-            scale: scaleInner,
-          }}
           locale={locale}
           activeImg={activeImgInner}
           totalImg={items.length}
+          onVisibleChange={handleVisibleChange}
+          onActiveChange={handleActiveChange}
         />
       )}
     </Wrapper>

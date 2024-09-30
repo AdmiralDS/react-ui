@@ -90,13 +90,17 @@ export interface ImageViewerToolbarProps extends React.HTMLAttributes<HTMLDivEle
   };
 }
 
-export interface ImagePreviewProps extends ImageViewerToolbarProps {
+export interface ImagePreviewProps extends Omit<ImageViewerToolbarProps, 'transform' | 'actions'> {
   /** Элемент для просмотра */
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
   container?: Element;
   /** Шаг для изменения масштаба, по умолчанию 0,5 */
   scaleStep?: number;
+  /** Обработчик изменения видимости окна просмотра элемента */
+  onVisibleChange?: (newState: boolean) => void;
+  /** Обработчик смены элемента, открытого для просмотра */
+  onActiveChange?: (index: number) => void;
 }
 
 export interface ImageViewerProps
@@ -110,4 +114,6 @@ export interface ImageViewerProps
   appearance?: ImageViewerAppearance;
   /** Миксин для стилизации отображения миниатюр */
   previewGroupMixin?: ReturnType<typeof css>;
+  /** Состояние видимости просмотра элемента */
+  visible?: boolean;
 }
