@@ -90,7 +90,8 @@ export interface ImageViewerToolbarProps extends React.HTMLAttributes<HTMLDivEle
   };
 }
 
-export interface ImagePreviewProps extends Omit<ImageViewerToolbarProps, 'transform' | 'actions'> {
+export interface ImagePreviewProps
+  extends Omit<ImageViewerToolbarProps, 'transform' | 'actions' | 'minScale' | 'maxScale'> {
   /** Элемент для просмотра */
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
@@ -101,6 +102,10 @@ export interface ImagePreviewProps extends Omit<ImageViewerToolbarProps, 'transf
   onVisibleChange?: (newState: boolean) => void;
   /** Обработчик смены элемента, открытого для просмотра */
   onActiveChange?: (index: number) => void;
+  /** Минимальный размер уменьшения — 70% высоты экрана, либо 1:1, если картинка при таком масштабе занимает менее 70% высоты экрана. */
+  minScale?: number;
+  /** Максимальный размер увеличения, по умолчанию x10 от исходного разрешения картинки.  */
+  maxScale?: number;
 }
 
 export interface ImageViewerProps

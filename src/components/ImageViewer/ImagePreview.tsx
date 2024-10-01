@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -33,8 +33,10 @@ const Toolbar = styled(ImageViewerToolbar)`
   transform: translate(-50%);
 `;
 const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolean; $rotate: number }>`
+  outline: none;
   max-width: 100%;
   max-height: 70%;
+  transition: all 0.3s ease-in-out;
   transform: ${(p) =>
     `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
 `;
@@ -42,7 +44,7 @@ const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolea
 export const ImagePreview = ({
   item,
   container,
-  minScale = 0,
+  minScale,
   maxScale = 10,
   scaleStep = 0.5,
   showTooltip,
@@ -90,26 +92,31 @@ export const ImagePreview = ({
   };
   const handleZoomOut = () => {
     const newScale = scale - scaleStep;
-    handleScaleChange(newScale < minScale ? minScale : newScale);
+    handleScaleChange(newScale < minScaleInner ? minScaleInner : newScale);
   };
 
-  useEffect(() => {
+  const [minScaleState, setMinScaleState] = useState(1.0);
+  const minScaleInner = minScale ?? minScaleState;
+  const [realScaleState, setRealScaleState] = useState(1.0);
+  const handleDoubleClick = () => {
+    setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
+  };
+  useLayoutEffect(() => {
     const loadEventListener = (e: any) => {
       const { naturalWidth, naturalHeight, width, height } = e.target;
+      e.target.focus();
+      setMinScaleState(+(height / naturalHeight).toFixed(1));
+      setRealScaleState(+(naturalHeight / height).toFixed(1));
       console.log(
         `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
       );
     };
-    const dblclickEventListener = () => {
-      setScale(1);
-    };
+
     const imgNode = imgRef.current;
     if (imgNode) {
       imgNode.addEventListener('load', loadEventListener);
-      imgNode.addEventListener('dblclick', dblclickEventListener);
       return () => {
-        imgNode.removeEventListener('error', loadEventListener);
-        imgNode.removeEventListener('dblclick', dblclickEventListener);
+        imgNode.removeEventListener('load', loadEventListener);
       };
     }
   }, []);
@@ -133,9 +140,27 @@ export const ImagePreview = ({
 
   const renderItem = (item: string | ImageProps) => {
     return typeof item === 'string' ? (
-      <StyledImage src={item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} $rotate={rotate} />
+      <StyledImage
+        tabIndex={-1}
+        src={item}
+        ref={imgRef}
+        $scale={scale}
+        $flipX={flipX}
+        $flipY={flipY}
+        $rotate={rotate}
+        onDoubleClick={handleDoubleClick}
+      />
     ) : (
-      <StyledImage {...item} ref={imgRef} $scale={scale} $flipX={flipX} $flipY={flipY} $rotate={rotate} />
+      <StyledImage
+        {...item}
+        tabIndex={-1}
+        ref={imgRef}
+        $scale={scale}
+        $flipX={flipX}
+        $flipY={flipY}
+        $rotate={rotate}
+        onDoubleClick={handleDoubleClick}
+      />
     );
   };
 
@@ -159,7 +184,7 @@ export const ImagePreview = ({
           onZoomIn: handleZoomIn,
           onClose: handleClose,
         }}
-        minScale={minScale}
+        minScale={minScaleInner}
         maxScale={maxScale}
         transform={{ x: 0, y: 0, rotate, scale, flipX, flipY }}
         locale={locale}
