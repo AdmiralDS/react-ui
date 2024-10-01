@@ -28,7 +28,7 @@ export const Filter = React.forwardRef<HTMLButtonElement, FilterCompProps>(
       onFilterMenuOpen,
       onFilterMenuClose,
       isFilterActive: filterActive,
-      filterMenuAlignSelf = 'flex-end',
+      filterMenuAlignSelf = 'auto',
       filterMenuCssMixin,
       filterMenuClassName,
       filterMenuStyle,

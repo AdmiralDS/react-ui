@@ -102,6 +102,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  max-width: 300px;
 `;
 
 const ButtonWrapper = styled.div`
