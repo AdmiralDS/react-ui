@@ -35,15 +35,20 @@ const rowHeightStyle = css<{
   $opened?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
+  $idleHeight: 'full' | 'fixed';
 }>`
   min-height: ${({ $multiple, $minRowCount }) => {
-    if (!$multiple || !$minRowCount) return 'none';
+    if (!$multiple || !$minRowCount) return 'auto';
 
     return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ $multiple, $maxRowCount, $opened }) => {
-    if (!$multiple || !$maxRowCount || $opened) return 'none';
+  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight }) => {
+    if (!$multiple) return 'none';
+
+    if (!$maxRowCount) {
+      return !$opened && $idleHeight === 'fixed' ? `${ROW_HEIGHT}px` : 'none';
+    }
 
     return `${ROW_HEIGHT * $maxRowCount + ($maxRowCount - 1) * 4}px`;
   }};
@@ -62,6 +67,7 @@ export const ValueWrapper = styled.div<{
   $multiple?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
+  $idleHeight: 'full' | 'fixed';
   $isEmpty?: boolean;
   $opened?: boolean;
 }>`
