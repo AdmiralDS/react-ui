@@ -503,9 +503,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           readOnly={readOnly}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
+          isOptionsListOpen={isSearchPanelOpen}
+          hasMaxHeight={!!maxRowCount && maxRowCount !== 'none'}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
+      [
+        selectedOptions,
+        shouldFixMultiSelectHeight,
+        disabled,
+        readOnly,
+        handleOptionSelect,
+        isSearchPanelOpen,
+        maxRowCount,
+      ],
     );
 
     const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
@@ -825,7 +835,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           $dimension={dimension}
           $multiple={multiple}
           $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
-          $maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
+          $maxRowCount={maxRowCount !== 'none' ? maxRowCount : undefined}
+          $idleHeight={idleHeight}
           $opened={isSearchPanelOpen}
           $isEmpty={isEmpty}
         >
