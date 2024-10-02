@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -40,6 +40,35 @@ const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolea
   transform: ${(p) =>
     `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
 `;
+
+interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  item: string | ImageProps;
+  scale: number;
+  flipX: boolean;
+  flipY: boolean;
+  rotate: number;
+}
+const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
+  ({ item, scale, flipX, flipY, rotate, ...props }, ref) => {
+    const itemSrc = typeof item === 'string' ? item : item.src;
+    const itemProps = typeof item === 'string' ? undefined : item;
+    return (
+      <StyledImage
+        {...itemProps}
+        {...props}
+        src={itemSrc}
+        draggable="true"
+        tabIndex={-1}
+        ref={ref}
+        $scale={scale}
+        $flipX={flipX}
+        $flipY={flipY}
+        $rotate={rotate}
+        //onDoubleClick={handleDoubleClick}
+      />
+    );
+  },
+);
 
 export const ImagePreview = ({
   item,
@@ -138,35 +167,17 @@ export const ImagePreview = ({
     setRotate((prevState) => prevState + 90);
   };
 
-  const renderItem = (item: string | ImageProps) => {
-    return typeof item === 'string' ? (
-      <StyledImage
-        tabIndex={-1}
-        src={item}
-        ref={imgRef}
-        $scale={scale}
-        $flipX={flipX}
-        $flipY={flipY}
-        $rotate={rotate}
-        onDoubleClick={handleDoubleClick}
-      />
-    ) : (
-      <StyledImage
-        {...item}
-        tabIndex={-1}
-        ref={imgRef}
-        $scale={scale}
-        $flipX={flipX}
-        $flipY={flipY}
-        $rotate={rotate}
-        onDoubleClick={handleDoubleClick}
-      />
-    );
-  };
-
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
-      {renderItem(item)}
+      <ImageView
+        item={item}
+        ref={imgRef}
+        scale={scale}
+        flipX={flipX}
+        flipY={flipY}
+        rotate={rotate}
+        onDoubleClick={handleDoubleClick}
+      />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
         activeImg={activeImg}
