@@ -1,4 +1,4 @@
-import {
+import type {
   BaseSyntheticEvent,
   ChangeEvent,
   ChangeEventHandler,
@@ -8,8 +8,6 @@ import {
   MouseEvent,
   ReactNode,
   RefObject,
-} from 'react';
-import {
   Children,
   cloneElement,
   forwardRef,

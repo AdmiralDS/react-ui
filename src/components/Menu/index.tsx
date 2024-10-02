@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { hideNativeScrollbars, Scrollbars } from '#src/components/Scrollbar';
+import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
@@ -72,7 +72,7 @@ const Wrapper = styled.div<{
 `;
 
 const StyledDiv = styled.div<MenuListHeightsProps>`
-  ${hideNativeScrollbars}
+  ${hideNativeScrollbarsCss}
   position: relative;
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
@@ -589,7 +589,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           {...menuProps}
         >
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
-          <Scrollbars contentNode={menuNode} verticalScrollAriaRef={verticalScrollAriaRef} />
+          <Scrollbars contentNode={menuNode} verticalScrollProps={{ ref: verticalScrollAriaRef }} />
         </StyledDiv>
 
         {submenuVisible && activeItemRef.current && (

@@ -8,7 +8,8 @@ const verticalThumbHeghtCSSPropName = '--vertical-thumb-height';
 const verticalContentScrollCSSPropName = '--vertical-content-scroll';
 const horizontalThumbWidthCSSPropName = '--horizontal-thumb-width';
 const horizontalContentScrollCSSPropName = '--horizontal-content-scroll';
-export const hideNativeScrollbars = css`
+
+export const hideNativeScrollbarsCss = css`
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -17,9 +18,14 @@ export const hideNativeScrollbars = css`
   }
 `;
 
-const HiddenNativeScroll = styled.div`
+const Container = styled.div`
   position: relative;
-  ${hideNativeScrollbars}
+  display: flex;
+  overflow: hidden;
+`;
+
+const HiddenNativeScroll = styled.div`
+  ${hideNativeScrollbarsCss}
 `;
 
 const VerticalContainer = styled.div`
@@ -95,47 +101,57 @@ const VerticalThumb = styled.div`
   height: var(${verticalThumbHeghtCSSPropName}, 20px);
 `;
 
-export type ScrollenabledProps<T extends React.ElementType = 'div'> = React.ComponentPropsWithoutRef<T> &
+export type ScrollContainerProps<T extends React.ElementType = 'div'> = React.ComponentPropsWithoutRef<T> &
   ScrollbarProps & {
-    as?: T;
+    /** Props для контейнера контента */
+    contentBlockProps?: React.ComponentPropsWithRef<typeof HiddenNativeScroll>;
   };
 
 export type ScrollbarProps = {
-  /** Ref на контейнер сожержащий вертикальный скролбар */
-  verticalScrollAriaRef?: React.ForwardedRef<HTMLDivElement>;
-  /** Ref на контейнер сожержащий горизонтальный скролбар */
-  horizontalScrollAriaRef?: React.ForwardedRef<HTMLDivElement>;
-  /** Минимально допустимы размер скролбара */
+  /** Props для контейнера сожержащий вертикальный скролбар */
+  verticalScrollProps?: React.ComponentPropsWithRef<typeof VerticalContainer>;
+  /** Props для контейнера сожержащий горизонтальный скролбар */
+  horizontalScrollProps?: React.ComponentPropsWithRef<typeof HorizontalContainer>;
+  /** Минимально допустимая длинна скролбара в пикселях */
   minThumbSize?: number;
 };
 
-export const Scrollenabled = fixedForwardRef<HTMLDivElement, ScrollenabledProps>(
-  ({ as = 'div', children, verticalScrollAriaRef, horizontalScrollAriaRef, id, minThumbSize = 20, ...props }, ref) => {
-    const scrollAriaId = useMemo(() => (id ? id : `scroll-aria-${Math.random().toString(36).substring(2, 12)}`), [id]);
+export const ScrollContainer = fixedForwardRef<HTMLDivElement, ScrollContainerProps>(
+  (
+    { children, verticalScrollProps, horizontalScrollProps, minThumbSize = 20, contentBlockProps = {}, ...props },
+    ref,
+  ) => {
+    const scrollAriaId = useMemo(
+      () =>
+        contentBlockProps.id ? contentBlockProps.id : `scroll-aria-${Math.random().toString(36).substring(2, 12)}`,
+      [contentBlockProps.id],
+    );
 
-    const [contentNode, setContenetNode] = useState<HTMLDivElement | null>(null);
+    const [contentNode, setContenetNode] = useState<HTMLElement | null>(null);
 
-    const composedContentRef = useComposedRefs(ref, (node) => setContenetNode(node));
+    const composedContentRef = useComposedRefs(contentBlockProps.ref, (node) => setContenetNode(node));
 
     return (
-      <HiddenNativeScroll as={as} id={scrollAriaId} ref={composedContentRef} {...props}>
-        {children}
+      <Container ref={ref} {...props}>
+        <HiddenNativeScroll {...contentBlockProps} id={scrollAriaId} ref={composedContentRef}>
+          {children}
+        </HiddenNativeScroll>
         <Scrollbars
           {...{
             contentNode,
-            verticalScrollAriaRef,
-            horizontalScrollAriaRef,
+            verticalScrollProps,
+            horizontalScrollProps,
             minThumbSize,
           }}
         />
-      </HiddenNativeScroll>
+      </Container>
     );
   },
 );
 
 export const Scrollbars = ({
-  verticalScrollAriaRef,
-  horizontalScrollAriaRef,
+  verticalScrollProps = {},
+  horizontalScrollProps = {},
   contentNode,
   minThumbSize = 20,
 }: ScrollbarProps & { contentNode?: HTMLElement | null }) => {
@@ -163,11 +179,11 @@ export const Scrollbars = ({
   const [scrollYNedded, setScrollYNeeded] = useState<number>(0);
   const [scrollXNedded, setScrollXNeeded] = useState<number>(0);
 
-  const composedVerticalScrollAreaRef = useComposedRefs(verticalScrollAriaRef, (node) =>
+  const composedVerticalScrollAreaRef = useComposedRefs(verticalScrollProps.ref, (node) =>
     setVerticalScrollAreaNode(node),
   );
 
-  const composedHorizontalScrollAreaRef = useComposedRefs(horizontalScrollAriaRef, (node) =>
+  const composedHorizontalScrollAreaRef = useComposedRefs(horizontalScrollProps.ref, (node) =>
     setHorizontalScrollAreaNode(node),
   );
 
@@ -361,7 +377,12 @@ export const Scrollbars = ({
 
   return (
     <>
-      <VerticalContainer ref={composedVerticalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
+      <VerticalContainer
+        {...verticalScrollProps}
+        ref={composedVerticalScrollAreaRef}
+        role="scrollbar"
+        aria-controls={scrollAriaId}
+      >
         <VerticalTrack onClick={handleVerticalTrackClick} />
         <VerticalScrollThumbZone ref={(node) => setVerticalScrollThumbZoneNode(node)}>
           <VerticalThumb
@@ -373,7 +394,12 @@ export const Scrollbars = ({
           />
         </VerticalScrollThumbZone>
       </VerticalContainer>
-      <HorizontalContainer ref={composedHorizontalScrollAreaRef} role="scrollbar" aria-controls={scrollAriaId}>
+      <HorizontalContainer
+        {...horizontalScrollProps}
+        ref={composedHorizontalScrollAreaRef}
+        role="scrollbar"
+        aria-controls={scrollAriaId}
+      >
         <HorizontalTrack onClick={handleHorizontalTrackClick} />
         <HorizontalScrollThumbZone ref={(node) => setHorizontalScrollThumbZoneNode(node)}>
           <HorizontalThumb

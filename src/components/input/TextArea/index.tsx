@@ -10,7 +10,7 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
-import { hideNativeScrollbars, Scrollbars } from '#src/components/Scrollbar';
+import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -161,7 +161,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
 `;
 
 const HiddenSpanContainer = styled.div<TextBlockProps>`
-  ${hideNativeScrollbars}
+  ${hideNativeScrollbarsCss}
   ${textBlockStyleMixin}
 
   [data-disable-copying] & {
@@ -170,7 +170,7 @@ const HiddenSpanContainer = styled.div<TextBlockProps>`
 `;
 
 const Text = styled.textarea<ExtraProps>`
-  ${hideNativeScrollbars}
+  ${hideNativeScrollbarsCss}
   position: absolute;
   top: 0;
   left: 0;
