@@ -1,6 +1,6 @@
 import { findIndexOf, restoreContainer } from './utils';
 
-interface Modal {
+export interface Modal {
   containerEl: Element;
   modalEl: Element;
 }
