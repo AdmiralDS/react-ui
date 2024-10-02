@@ -38,6 +38,8 @@ const demo1_TreeModel: Array<TreeItemProps> = [
               />
             ),
             id: '2-2',
+            disabled: true,
+            checked: true,
           },
           {
             render: (options: TreeNodeRenderOptionProps) => (
@@ -49,6 +51,8 @@ const demo1_TreeModel: Array<TreeItemProps> = [
               />
             ),
             id: '2-3',
+            disabled: true,
+            checked: false,
           },
           {
             render: (options: TreeNodeRenderOptionProps) => (
