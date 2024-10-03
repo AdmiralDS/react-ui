@@ -6,7 +6,7 @@ import { MultiButton } from '../MultiButton';
 import { LIGHT_THEME } from '../themes';
 
 describe('MultiButton', () => {
-  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  HTMLElement.prototype.scrollIntoView = jest.fn();
 
   jest.useFakeTimers();
   beforeEach(() => {

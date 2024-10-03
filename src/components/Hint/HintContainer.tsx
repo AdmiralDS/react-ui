@@ -89,16 +89,16 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
         : throttle(() => {
             startRecalculation({});
           }, 150);
-      window.addEventListener('resize', listener);
-      window.addEventListener('scroll', listener);
+      addEventListener('resize', listener);
+      addEventListener('scroll', listener);
 
       /**  если у anchorElement есть родительский элемент, который имеет собственный скролл,
        * необходимо повесить на этого родителя обработчик скролла */
       scrollableParents.forEach((el) => el.addEventListener('scroll', listener));
 
       return () => {
-        window.removeEventListener('resize', listener);
-        window.removeEventListener('scroll', listener);
+        removeEventListener('resize', listener);
+        removeEventListener('scroll', listener);
         scrollableParents.forEach((el) => el.removeEventListener('scroll', listener));
         freeResources();
       };

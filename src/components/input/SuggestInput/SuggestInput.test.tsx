@@ -11,7 +11,7 @@ const options = ['one', 'two', 'three'];
 describe('SuggestInput', () => {
   test('should check hotkey is work', async () => {
     const user = userEvent.setup();
-    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    HTMLElement.prototype.scrollIntoView = jest.fn();
     render(
       <ThemeProvider theme={LIGHT_THEME}>
         <DropdownProvider>
@@ -38,7 +38,7 @@ describe('SuggestInput', () => {
   });
 
   test('should check SuggestionInput hotkey not fire submit form', async () => {
-    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    HTMLElement.prototype.scrollIntoView = jest.fn();
     const submit = jest.fn();
     const user = userEvent.setup();
     const { getByPlaceholderText } = render(

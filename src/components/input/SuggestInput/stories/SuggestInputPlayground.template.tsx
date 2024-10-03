@@ -51,12 +51,12 @@ export const SuggestInputPlaygroundTemplate = ({
   // Имитация запросов на бакэнд
   React.useEffect(() => {
     if (isLoading) {
-      const timeout = window.setTimeout(() => {
+      const timeout = setTimeout(() => {
         setIsLoading(false);
         setOptions([...OPTIONS]);
       }, 3000);
       return () => {
-        window.clearTimeout(timeout);
+        clearTimeout(timeout);
       };
     }
   }, [isLoading]);

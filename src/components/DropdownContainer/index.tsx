@@ -96,8 +96,8 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
       if (node && targetElement) {
         const rect = node.getBoundingClientRect();
         const targetRect = targetElement.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
+        const viewportHeight = globalThis.innerHeight;
+        const viewportWidth = globalThis.innerWidth;
 
         const { upward, translateY } = setVerticalPosition(rect, targetRect, viewportHeight);
         if (displayUpward !== upward) setDisplayUpward(upward);

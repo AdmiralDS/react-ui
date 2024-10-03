@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { OrderedListComponent } from './style';
-import { css } from 'styled-components';
+import type { css } from 'styled-components';
 
 type Dimension = 's' | 'm';
 type OrderedStyleType = 'numbers' | 'lower-letters' | 'upper-letters';
