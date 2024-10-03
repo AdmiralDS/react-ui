@@ -110,10 +110,10 @@ export const Hint: React.FC<HintProps> = ({
         setMobile(false);
       }
     };
-    window.addEventListener('resize', listener);
+    addEventListener('resize', listener);
 
     return () => {
-      window.removeEventListener('resize', listener);
+      removeEventListener('resize', listener);
     };
   });
 

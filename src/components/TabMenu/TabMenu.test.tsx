@@ -53,7 +53,7 @@ beforeAll(() => {
     value: ResizeObserver,
   });
 
-  Object.defineProperties(window.HTMLElement.prototype, {
+  Object.defineProperties(HTMLElement.prototype, {
     getBoundingClientRect: {
       // если установить в true, то можно будет перезадавать это свойство в отдельных тестах
       configurable: true,
@@ -86,7 +86,7 @@ beforeAll(() => {
     },
   });
 
-  Object.defineProperty(window.HTMLElement.prototype, 'scrollIntoView', {
+  Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
     value: () => undefined,
     configurable: true,
     writable: true,
