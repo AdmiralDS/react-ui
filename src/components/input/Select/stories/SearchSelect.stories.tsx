@@ -387,6 +387,12 @@ export const ExpandedHeightMultiSearchSelect = {
       source: {
         code: SearchSelectExpandedHeightMultiRaw,
       },
+      description: {
+        story:
+          'Для ограничения высоты Select в режиме multiple необходимо использовать свойства maxRowCount и minRowCount. ' +
+          'В примере стоит ограничение maxRowCount=3. Ограничение работает для Select как в состоянии focused, так и в ' +
+          'состоянии, когда компонент не находится в фокусе',
+      },
     },
   },
 

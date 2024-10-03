@@ -16,11 +16,11 @@ describe('Tooltip', () => {
   const WrappedComponentWithTooltip = ({ renderContent, withDelay }: ITooltipProps & { withDelay?: boolean }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const [visible, setVisible] = React.useState(false);
-    const [timer, setTimer] = React.useState<number>();
+    const [timer, setTimer] = React.useState<ReturnType<typeof setTimeout>>();
 
     React.useEffect(() => {
       function show() {
-        setTimer(window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
+        setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
       }
       function hide() {
         clearTimeout(timer);

@@ -12,8 +12,8 @@ import { useEffect, useRef } from 'react';
 export function useTimeout(
   callback: React.EffectCallback,
   delay: number | null,
-): React.MutableRefObject<number | null> {
-  const timeoutRef = useRef<number | null>(null);
+): React.MutableRefObject<ReturnType<typeof setTimeout> | null> {
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const callbackRef = useRef(callback);
 
   // Remember the latest callback:
@@ -32,10 +32,10 @@ export function useTimeout(
 
   useEffect(() => {
     if (typeof delay === 'number') {
-      timeoutRef.current = window.setTimeout(() => callbackRef.current(), delay);
+      timeoutRef.current = setTimeout(() => callbackRef.current(), delay);
 
       // Clear timeout if the components is unmounted or the delay changes:
-      return () => window.clearTimeout(timeoutRef.current || 0);
+      return () => clearTimeout(timeoutRef.current || 0);
     }
   }, [delay]);
 

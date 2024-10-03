@@ -16,7 +16,7 @@ export const TooltipDelayTemplate = ({
 
   React.useEffect(() => {
     function show() {
-      setTimer(window.setTimeout(() => setVisible(true), TOOLTIP_DELAY));
+      setTimer(setTimeout(() => setVisible(true), TOOLTIP_DELAY));
     }
     function hide() {
       clearTimeout(timer);

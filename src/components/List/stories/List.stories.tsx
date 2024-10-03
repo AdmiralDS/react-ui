@@ -1,17 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
-import { OrderedList, UnorderedList } from '@admiral-ds/react-ui';
-import type { UnorderedListProps } from '@admiral-ds/react-ui';
+import { OrderedList } from '@admiral-ds/react-ui';
+import type { UnorderedListProps, UnorderedList } from '@admiral-ds/react-ui';
 
 import { ListNestedTemplate } from './ListNested.template';
 import { ListMarkerColorTemplate } from './ListMarkerColor.template';
 import { ListMultiLineTemplate } from './ListMultiline.template';
+import { ListMarkerCustomTemplate } from './ListMarkerCustom.template';
 
 // Imports of text sources
 import ListNestedRaw from './ListNested.template?raw';
 import ListMarkerColorRaw from './ListMarkerColor.template?raw';
 import ListMultilineRaw from './ListMultiline.template?raw';
+import ListMarkerCustomRaw from './ListMarkerCustom.template?raw';
 
 const Separator = styled.div<{ $height?: number }>`
   height: ${(p) => p.$height ?? 20}px;
@@ -72,9 +74,6 @@ export default {
     gap: {
       control: { type: 'text' },
     },
-    theme: {
-      control: false,
-    },
   },
 } as Meta<UnorderedListProps>;
 
@@ -121,6 +120,32 @@ export const ListMarkerColorExample = {
   },
 
   name: 'Кастомный цвет маркера',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Custom marker">
+const ListMarkerCustomStory: StoryFn<typeof UnorderedList> = () => <ListMarkerCustomTemplate />;
+
+export const ListMarkerCustomExample = {
+  render: ListMarkerCustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ListMarkerCustomRaw,
+      },
+      description: {
+        story: `Пользователь может кастомизировать внешний вид и контент маркеров в списках с помощью параметра
+        markerCssMixin, задаваемого для компонентов OrderedList и UnorderedList.\n\n\ В компонентах 
+        OrderedList и UnorderedList также специально введен css счётчик с именем admiral-list-counter. Пользователи
+        могут опираться на значение данного счетчика для задания контента маркеров с использованием css
+        функций counter() и counters().`,
+      },
+    },
+  },
+
+  name: 'Кастомизация маркеров',
 };
 
 //</editor-fold>

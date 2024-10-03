@@ -1,18 +1,27 @@
 // inspired by https://github.com/reach/observe-rect
+export type Rect = Omit<DOMRect, 'toJSON'> & {
+  scrollHeight: number;
+  scrollLeft: number;
+  scrollTop: number;
+  scrollWidth: number;
+};
+
 export type RectProps = {
   rafId?: number;
-  rect?: DOMRect;
+  rect?: Rect;
   isObserving?: boolean;
 };
 
-const props: (keyof DOMRect)[] = ['bottom', 'height', 'left', 'right', 'top', 'width'];
+const objectKeys = <T extends object>(obj: T) => {
+  return Object.keys(obj) as Array<keyof T>;
+};
 
-const rectChanged = (a: DOMRect = {} as DOMRect, b: DOMRect = {} as DOMRect) =>
-  props.some((prop) => a[prop] !== b[prop]);
+const rectChanged = (a: Rect, b: Rect) => objectKeys(a).some((prop) => a[prop] !== b[prop]);
 
+/** использовать только внутри useEffect или useLayoutEffect */
 export default function observeRect(
   node: Element,
-  cb: (rect: DOMRect | undefined) => void,
+  cb: (rect: Rect | undefined) => void,
 ): { observe: () => void; unobserve: () => void } {
   const state: RectProps = {};
   return {
@@ -20,14 +29,28 @@ export default function observeRect(
       if (state.rafId) cancelAnimationFrame(state.rafId);
       const run = () => {
         if (state.isObserving) {
+          const { scrollHeight, scrollLeft, scrollTop, scrollWidth } = node;
           const { bottom, height, left, right, top, width, x, y } = node.getBoundingClientRect();
 
           //IE fix: The returned object lacks x & y values
-          const newRect = { bottom, height, left, right, top, width, x: x || left, y: y || top } as DOMRect;
+          const newRect = {
+            bottom,
+            height,
+            left,
+            right,
+            top,
+            width,
+            x: x || left,
+            y: y || top,
+            scrollHeight,
+            scrollLeft,
+            scrollTop,
+            scrollWidth,
+          } as const;
 
-          if (rectChanged(newRect, state.rect)) {
+          if (rectChanged(newRect, state.rect || ({} as Rect))) {
             state.rect = newRect;
-            cb(state.rect);
+            cb(newRect);
           }
           state.rafId = requestAnimationFrame(run);
         }
