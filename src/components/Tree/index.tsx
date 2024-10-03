@@ -162,8 +162,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const toggleCheck = (id: string | number) => {
       const hasChildren = itemHasChildren(map[id].node);
 
+      // При расчете indeterminate учитывается только не disabled опции, это связано с тем, что при переключении
+      // родительского узла невозможно сбросить состояние checked
       const indeterminate =
-        map[id].dependencies?.some((depId: number | string) => map[depId].node.checked) &&
+        map[id].dependencies?.some((depId: number | string) => !map[depId].node.disabled && map[depId].node.checked) &&
         map[id].dependencies?.some((depId: number | string) => !map[depId].node.checked);
 
       const checked = hasChildren

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.24.0](https://github.com/AdmiralDS/react-ui/compare/v8.23.0...v8.24.0) (2024-10-02)
+
+
+### Features
+
+* **List:** [#1414](https://github.com/AdmiralDS/react-ui/issues/1414) добавлены компоненты OrderedList и UnorderedList ([f78a68e](https://github.com/AdmiralDS/react-ui/commit/f78a68e52b3b8b1c2d2da3589298b271f38c054e))
+* **List:** [#1521](https://github.com/AdmiralDS/react-ui/issues/1521) добавлена возможность кастомизации маркеров через параметр markerCssMixin ([e8b3bd0](https://github.com/AdmiralDS/react-ui/commit/e8b3bd0efd784c6d22b2f5d01bc649c328870ff8))
+* **Select:** Добавлена опциональная возможность ограниченная высоты компонента состоянии multiple ([7c607f8](https://github.com/AdmiralDS/react-ui/commit/7c607f871ea369c47896552bc072f276d328d709)), closes [#1305](https://github.com/AdmiralDS/react-ui/issues/1305)
+* **Select:** Добавлена опциональная возможность отображения выбранных опций вверху списка для режима multiple ([7351a3b](https://github.com/AdmiralDS/react-ui/commit/7351a3be52aacdd4b4bbef037f29fab413d25354)), closes [#1484](https://github.com/AdmiralDS/react-ui/issues/1484)
+* **Tree:** Не реагирует на изменения, если в дочерних элементах есть чекбокс со статусом disabled ([c3b58eb](https://github.com/AdmiralDS/react-ui/commit/c3b58eb450d473deb2816280bffe164eeb3649d7)), closes [#1523](https://github.com/AdmiralDS/react-ui/issues/1523)
+
 ## [8.23.0](https://github.com/AdmiralDS/react-ui/compare/v8.22.0...v8.23.0) (2024-09-23)
 
 

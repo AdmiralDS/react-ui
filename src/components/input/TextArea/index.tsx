@@ -1,5 +1,5 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
-import { useEffect, forwardRef, useRef, Children, useLayoutEffect } from 'react';
+import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
@@ -10,6 +10,7 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
+import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -160,8 +161,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
 `;
 
 const HiddenSpanContainer = styled.div<TextBlockProps>`
-  overflow-x: hidden;
-  overflow-y: auto;
+  ${hideNativeScrollbarsCss}
   ${textBlockStyleMixin}
 
   [data-disable-copying] & {
@@ -170,6 +170,7 @@ const HiddenSpanContainer = styled.div<TextBlockProps>`
 `;
 
 const Text = styled.textarea<ExtraProps>`
+  ${hideNativeScrollbarsCss}
   position: absolute;
   top: 0;
   left: 0;
@@ -180,8 +181,6 @@ const Text = styled.textarea<ExtraProps>`
   flex: 1 1 auto;
   min-width: 10px;
   background: transparent;
-  overflow-y: auto;
-  overflow-x: hidden;
 
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
@@ -334,6 +333,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     ref,
   ) => {
     const inputRef = useRef<HTMLTextAreaElement>(null);
+    const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
 
@@ -425,13 +425,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           $iconsAfterCount={iconCount}
         />
         <Text
-          ref={refSetter(ref, inputRef)}
+          ref={refSetter(ref, inputRef, (node) => setContentNode(node))}
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
           $autoHeight={autoHeight}
           value={inputData.value}
         />
+        <Scrollbars contentNode={contentNode} />
         <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} $dimension={dimension}>

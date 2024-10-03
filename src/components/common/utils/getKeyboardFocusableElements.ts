@@ -2,12 +2,14 @@
 
 /**
  * Gets keyboard-focusable elements within a specified element
- * @param {HTMLElement} [element=document] element
+ * @param {HTMLElement | null} [element=document] element
  * @return {Array<Element>}
  */
 
-export function getKeyboardFocusableElements(element = document): Element[] {
+export function getKeyboardFocusableElements(element: HTMLElement | Document | null): Element[] {
   return [
-    ...element.querySelectorAll('a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'),
+    ...(element ?? document).querySelectorAll(
+      'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])',
+    ),
   ].filter((el) => !el.hasAttribute('disabled'));
 }

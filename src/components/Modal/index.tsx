@@ -1,21 +1,19 @@
+import { createPortal } from 'react-dom';
+import styled, { css, useTheme } from 'styled-components';
+import { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '#src/components/Typography';
-import * as React from 'react';
-import { createPortal } from 'react-dom';
-import styled, { css, useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { manager } from './manager';
 import { largeGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { CloseIconPlacementButton } from '#src/components/IconPlacement';
-import type { CSSProperties, FC } from 'react';
 import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
-import { debounce } from '#src/components/common/utils/debounce';
-import { resizePaddings } from '../common/dom/resizePaddings';
+import { ScrollContainer } from '#src/components/Scrollbar';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -71,10 +69,14 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   }};
 `;
 
-const Content = styled.div<{ $mobile: boolean }>`
-  overflow-y: auto;
-  outline: none;
-  scrollbar-gutter: stable;
+const Container = styled.div`
+  display: flex;
+  overflow: hidden;
+  flex: 1 1 auto;
+  position: relative;
+`;
+
+const ScrollableContent = styled(ScrollContainer)<{ $mobile: boolean }>`
   padding-block: 8px;
   padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
 `;
@@ -163,7 +165,7 @@ const CloseButton = styled(CloseIconPlacementButton)<{ $mobile?: boolean }>`
 
 export const emptyOverlayStyledCss = css``;
 
-const ModalContext = React.createContext({ mobile: false, displayCloseIcon: true } as {
+const ModalContext = createContext({ mobile: false, displayCloseIcon: true } as {
   mobile: boolean;
   displayCloseIcon: boolean;
 });
@@ -197,7 +199,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Позволяет добавлять класс на подложку модального окна  */
   overlayClassName?: string;
   /** Позволяет добавлять стили на подложку модального окна  */
-  overlayStyle?: CSSProperties;
+  overlayStyle?: React.CSSProperties;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -207,7 +209,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   };
 }
 
-export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   (
     {
       overlayStyledCss = emptyOverlayStyledCss,
@@ -229,33 +231,30 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
-    const modal = React.useRef<any>({});
-    const modalRef: any = React.useRef<HTMLDivElement>(null);
-    const overlayRef = React.useRef<HTMLDivElement>(null);
-    const previousFocusedElement: any = React.useRef(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const overlayRef = useRef<HTMLDivElement | null>(null);
+    const previousFocusedElement = useRef<Element | null>(null);
 
-    const getModal = () => {
-      modal.current.modalEl = modalRef.current;
-      modal.current.containerEl = container || document.body;
-      return modal.current;
-    };
-
-    React.useLayoutEffect(() => {
-      previousFocusedElement.current = document.activeElement;
-      // set focus inside modalComponent
-      modalRef.current?.focus();
-
-      manager.add(getModal(), container || document.body);
+    useEffect(() => {
       if (modalRef.current) {
-        manager.mount(getModal());
-      }
-      return () => {
-        // return focus on close/unmount of modal
-        previousFocusedElement.current?.focus();
+        previousFocusedElement.current = document.activeElement;
+        // set focus inside modalComponent
+        modalRef.current.focus();
+        const modal = {
+          containerEl: container || document.body,
+          modalEl: modalRef.current,
+        };
+        manager.add(modal, container || document.body);
+        manager.mount(modal);
 
-        manager.remove(getModal());
-      };
-    }, []);
+        return () => {
+          // return focus on close/unmount of modal
+          (previousFocusedElement.current as HTMLElement).focus();
+
+          manager.remove(modal);
+        };
+      }
+    }, [container]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
@@ -331,7 +330,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
 Modal.displayName = 'Modal';
 
 export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
-  const { mobile, displayCloseIcon } = React.useContext(ModalContext);
+  const { mobile, displayCloseIcon } = useContext(ModalContext);
   const asProp = mobile ? 'h6' : 'h5';
   return (
     <Title $mobile={mobile} $displayCloseIcon={displayCloseIcon} as={asProp} {...props}>
@@ -341,30 +340,19 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
 };
 
 export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const contentRef = React.useRef<HTMLDivElement | null>(null);
-  const mobile = React.useContext(ModalContext).mobile;
-
-  React.useLayoutEffect(() => {
-    const node = contentRef.current;
-    if (node) {
-      resizePaddings(node);
-      const resizeObserver = new ResizeObserver(debounce(() => resizePaddings(node), 250));
-      resizeObserver.observe(node);
-      return () => {
-        resizeObserver.unobserve(node);
-      };
-    }
-  }, []);
+  const mobile = useContext(ModalContext).mobile;
 
   return (
-    <Content tabIndex={-1} ref={contentRef} $mobile={mobile} {...props}>
-      {children}
-    </Content>
+    <Container>
+      <ScrollableContent tabIndex={-1} $mobile={mobile} {...props}>
+        {children}
+      </ScrollableContent>
+    </Container>
   );
 };
 
-export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
-  const mobile = React.useContext(ModalContext).mobile;
+export const ModalButtonPanel = ({ children, ...props }: React.ComponentPropsWithoutRef<'div'>) => {
+  const mobile = useContext(ModalContext).mobile;
   return (
     <ButtonPanel $mobile={mobile} {...props}>
       {children}
@@ -372,8 +360,8 @@ export const ModalButtonPanel: React.FC<React.HTMLAttributes<HTMLDivElement>> = 
   );
 };
 
-export const ModalStatusIcon: FC<ModalStatusIconProps> = ({ status }) => {
-  const mobile = React.useContext(ModalContext).mobile;
+export const ModalStatusIcon: React.FC<ModalStatusIconProps> = ({ status }) => {
+  const mobile = useContext(ModalContext).mobile;
   return (
     <ModalStatusIconWrapper $status={status} $mobile={mobile}>
       {getModalIcon(status)}

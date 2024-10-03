@@ -89,12 +89,6 @@ const NotificationItemWrapper = styled.div<{
   ${backGroundColorMixin};
 `;
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 2px 0;
-`;
-
 const Title = styled.div`
   ${typography['Subtitle/Subtitle 3']}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
@@ -175,7 +169,7 @@ export const NotificationItem = ({
           <NotificationIcon />
         </IconWrapper>
       )}
-      <Content>{children}</Content>
+      {children}
       {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
     </NotificationItemWrapper>
   );

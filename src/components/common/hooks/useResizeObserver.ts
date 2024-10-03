@@ -1,8 +1,14 @@
 import { useLayoutEffect } from 'react';
 import { useCallbackRef } from './useCallbackRef';
 
-function useResizeObserver(element: HTMLElement | null, onResize: () => void) {
-  const handleResize = useCallbackRef(onResize);
+function useResizeObserver(
+  element: HTMLElement | null,
+  onResize: (params: { entries: ResizeObserverEntry[]; observer: ResizeObserver; time: DOMHighResTimeStamp }) => void,
+) {
+  const handleResize = useCallbackRef(
+    (entries: ResizeObserverEntry[], observer: ResizeObserver) => (time: DOMHighResTimeStamp) =>
+      onResize({ entries, observer, time }),
+  );
   useLayoutEffect(() => {
     let rAF = 0;
     if (element) {
@@ -13,13 +19,13 @@ function useResizeObserver(element: HTMLElement | null, onResize: () => void) {
        * `requestAnimationFrame` to ensure we don't deliver unnecessary observations.
        * Further reading: https://github.com/WICG/resize-observer/issues/38
        */
-      const resizeObserver = new ResizeObserver(() => {
+      const resizeObserver = new ResizeObserver((entries, observer) => {
         cancelAnimationFrame(rAF);
-        rAF = window.requestAnimationFrame(handleResize);
+        rAF = requestAnimationFrame(handleResize(entries, observer));
       });
       resizeObserver.observe(element);
       return () => {
-        window.cancelAnimationFrame(rAF);
+        cancelAnimationFrame(rAF);
         resizeObserver.unobserve(element);
       };
     }
