@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.24.1](https://github.com/AdmiralDS/react-ui/compare/v8.24.0...v8.24.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* [#1514](https://github.com/AdmiralDS/react-ui/issues/1514) убран референс на глобальный объект window ([d85af45](https://github.com/AdmiralDS/react-ui/commit/d85af452d9054482313b2f369208431f065eb78e))
+* **CharacterCounter:** [#1534](https://github.com/AdmiralDS/react-ui/issues/1534) если коэффициэнт появления индикатора установлен в 0, то индикатор должен быть всегда видимым ([7d1a938](https://github.com/AdmiralDS/react-ui/commit/7d1a938259f8d049343d8baa22f6e54825dddbea))
+* **Table:** [#1519](https://github.com/AdmiralDS/react-ui/issues/1519) дефолтное значение для filterMenuAlignSelf изменено на auto ([6babc98](https://github.com/AdmiralDS/react-ui/commit/6babc98078cac204ebf6864f286f3830dd22faa3))
+* **Table:** [#1519](https://github.com/AdmiralDS/react-ui/issues/1519) фоновый цвет серых хедера и строк таблицы изменён на группу Neutral ([41c7dbb](https://github.com/AdmiralDS/react-ui/commit/41c7dbb068de2c52ff449bf1b3d04b65843e33ca))
+
 ## [8.24.0](https://github.com/AdmiralDS/react-ui/compare/v8.23.0...v8.24.0) (2024-10-02)
 
 
