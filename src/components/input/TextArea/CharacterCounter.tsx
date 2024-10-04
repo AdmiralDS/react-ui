@@ -44,7 +44,7 @@ export const CharacterCounter: FC<CharacterCounterProps> = ({
     }, 250);
     return () => clearInterval(timer);
   }, [inputRef]);
-  return currentCount > maxLength * visibilityThreshold ? (
+  return currentCount >= maxLength * visibilityThreshold ? (
     <Container
       {...props}
       error={currentCount >= maxLength}
