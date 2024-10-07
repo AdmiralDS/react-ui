@@ -5,15 +5,15 @@ export const useMountTransition = (isMounted: boolean, unmountDelay: number) => 
   const [hasTransitionedIn, setHasTransitionedIn] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     if (isMounted && !hasTransitionedIn) {
       setHasTransitionedIn(true);
     } else if (!isMounted && hasTransitionedIn) {
-      timeoutId = window.setTimeout(() => setHasTransitionedIn(false), unmountDelay);
+      timeoutId = setTimeout(() => setHasTransitionedIn(false), unmountDelay);
     }
     return () => {
-      window.clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
     };
   }, [unmountDelay, isMounted, hasTransitionedIn]);
 

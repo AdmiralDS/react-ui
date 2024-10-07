@@ -36,11 +36,11 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     const anchorElementRef = React.useRef<any>(null);
     const [visible, setVisible] = React.useState(false);
     const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const [timer, setTimer] = React.useState<number>();
+    const [timer, setTimer] = React.useState<ReturnType<typeof setTimeout>>();
 
     React.useEffect(() => {
       function show() {
-        setTimer(window.setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
+        setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
       }
       function hide() {
         clearTimeout(timer);

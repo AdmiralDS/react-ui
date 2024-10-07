@@ -75,12 +75,12 @@ export const SubMenuContainer = ({
       startRecalculation({});
     }, 100);
 
-    window.addEventListener('resize', listener);
-    window.addEventListener('scroll', listener);
+    addEventListener('resize', listener);
+    addEventListener('scroll', listener);
 
     return () => {
-      window.removeEventListener('resize', listener);
-      window.removeEventListener('scroll', listener);
+      removeEventListener('resize', listener);
+      removeEventListener('scroll', listener);
       freeResources();
     };
   });

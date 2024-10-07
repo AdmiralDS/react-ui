@@ -23,7 +23,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) > hintRect.height;
       const isEnoughOnRight =
         document.documentElement.clientWidth - anchorElementRect.right > hintRect.width - anchorElementRect.width;
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnRight;
@@ -34,7 +34,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) > hintRect.height;
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width - anchorElementRect.width;
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnLeft;
     },
@@ -43,7 +43,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     /** проверяем, что хинту хватит места сверху и справа */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + globalThis.scrollY > hintRect.height;
       const isEnoughOnRight =
         document.documentElement.clientWidth - anchorElementRect.right > hintRect.width - anchorElementRect.width;
       return isEnoughOnRight && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
@@ -53,7 +53,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     /** проверяем, что хинту хватит места сверху и слева */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + globalThis.scrollY > hintRect.height;
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width - anchorElementRect.width;
       return isEnoughOnLeft && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
     },
@@ -64,7 +64,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.top + globalThis.scrollY) > hintRect.height;
       return isEnoughOnLeft && (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom);
     },
   },
@@ -73,7 +73,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnLeft = anchorElementRect.left > hintRect.width;
       const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.bottom + globalThis.scrollY > hintRect.height;
       return isEnoughOnLeft && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
     },
   },
@@ -83,7 +83,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
       const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.top > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.top + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.top + globalThis.scrollY) > hintRect.height;
       return isEnoughOnRight && (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom);
     },
   },
@@ -92,7 +92,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnRight = document.documentElement.clientWidth - anchorElementRect.right > hintRect.width;
       const isEnoughOnTop = anchorElementRect.bottom > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.bottom + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.bottom + globalThis.scrollY > hintRect.height;
       return isEnoughOnRight && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
     },
   },
@@ -101,7 +101,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) > hintRect.height;
 
       const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > hintRect.width / 2;
       const isEnoughOnRight =
@@ -115,7 +115,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     /** проверяем, что хинту хватит места сверху и по центру anchorElementRect */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + globalThis.scrollY > hintRect.height;
 
       const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > hintRect.width / 2;
       const isEnoughOnRight =
@@ -132,13 +132,13 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
 
       const isEnoughOnTop = anchorElementRect.top > (hintRect.height - anchorElementRect.height) / 2;
       const isEnoughOnTopWithScroll =
-        anchorElementRect.top + window.screenY > (hintRect.height - anchorElementRect.height) / 2;
+        anchorElementRect.top + globalThis.screenY > (hintRect.height - anchorElementRect.height) / 2;
 
       const isEnoughOnBottom =
         document.documentElement.clientHeight - anchorElementRect.bottom >
         (hintRect.height - anchorElementRect.height) / 2;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) >
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) >
         (hintRect.height - anchorElementRect.height) / 2;
 
       return (
@@ -155,13 +155,13 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
 
       const isEnoughOnTop = anchorElementRect.top > (hintRect.height - anchorElementRect.height) / 2;
       const isEnoughOnTopWithScroll =
-        anchorElementRect.top + window.screenY > (hintRect.height - anchorElementRect.height) / 2;
+        anchorElementRect.top + globalThis.screenY > (hintRect.height - anchorElementRect.height) / 2;
 
       const isEnoughOnBottom =
         document.documentElement.clientHeight - anchorElementRect.bottom >
         (hintRect.height - anchorElementRect.height) / 2;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) >
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) >
         (hintRect.height - anchorElementRect.height) / 2;
 
       return (
@@ -176,7 +176,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean, viewportScrollHeight: number) => {
       const isEnoughOnBottom = document.documentElement.clientHeight - anchorElementRect.bottom > hintRect.height;
       const isEnoughOnBottomWithScroll =
-        viewportScrollHeight - (anchorElementRect.bottom + window.scrollY) > hintRect.height;
+        viewportScrollHeight - (anchorElementRect.bottom + globalThis.scrollY) > hintRect.height;
       const isEnoughOnCenter = hintRect.width < document.documentElement.clientWidth;
       return (withScroll ? isEnoughOnBottomWithScroll : isEnoughOnBottom) && isEnoughOnCenter;
     },
@@ -185,7 +185,7 @@ const POSITION_MAPPER: Record<InternalHintPositionType, CalculationResult> = {
     /** проверяем, что хинту хватит места сверху и по центру страницы */
     check: (anchorElementRect: DOMRect, hintRect: DOMRect, withScroll: boolean) => {
       const isEnoughOnTop = anchorElementRect.top > hintRect.height;
-      const isEnoughOnTopWithScroll = anchorElementRect.top + window.scrollY > hintRect.height;
+      const isEnoughOnTopWithScroll = anchorElementRect.top + globalThis.scrollY > hintRect.height;
       const isEnoughOnCenter = hintRect.width < document.documentElement.clientWidth;
       return isEnoughOnCenter && (withScroll ? isEnoughOnTopWithScroll : isEnoughOnTop);
     },

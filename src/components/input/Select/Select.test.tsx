@@ -58,7 +58,7 @@ const SelectComponent = ({
 
 describe('SearchSelect', () => {
   beforeAll(() => {
-    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    HTMLElement.prototype.scrollIntoView = jest.fn();
 
     class IntersectionObserver {
       observe = jest.fn();
