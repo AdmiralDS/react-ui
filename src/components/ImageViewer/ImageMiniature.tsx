@@ -112,7 +112,9 @@ const StyledImg = styled.img`
   width: 100%;
 `;
 
-export const ImageMiniature = ({ src, dimension = 'm', onError, onMouseDown, ...props }: ImageMiniatureProps) => {
+export const ImageMiniature = ({ item, dimension = 'm', onError, onMouseDown, ...props }: ImageMiniatureProps) => {
+  const itemSrc = typeof item === 'string' ? item : item.src;
+  const itemProps = typeof item === 'string' ? undefined : item;
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
@@ -129,8 +131,8 @@ export const ImageMiniature = ({ src, dimension = 'm', onError, onMouseDown, ...
   }, []);
 
   return (
-    <Wrapper $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
-      <StyledImg {...props} ref={imgRef} src={src} />
+    <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
+      <StyledImg {...itemProps} ref={imgRef} src={itemSrc} />
       {errorOnLoadImg ? (
         <ErrorOnLoadBlock $isVisible={errorOnLoadImg}>
           <StyledCategoryGalleryOutline />

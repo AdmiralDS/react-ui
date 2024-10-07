@@ -103,13 +103,15 @@ export const ImageViewerToolbar = ({
   const zoomOutDisabled = transform.scale <= minScale;
   const zoomInDisabled = transform.scale >= maxScale;
 
-  const buttons = [
+  const actionButtons = [
     { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: actions.onFlipX, disabled: false },
     { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: actions.onFlipY, disabled: false },
     { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: actions.onRotateLeft, disabled: false },
     { icon: <RotateRightOutline />, text: rotateRightText, handleClick: actions.onRotateRight, disabled: false },
     { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: actions.onZoomOut, disabled: zoomOutDisabled },
     { icon: <ZoomInOutline />, text: zoomInText, handleClick: actions.onZoomIn, disabled: zoomInDisabled },
+  ];
+  const navigationButtons = [
     {
       icon: <ArrowLeftOutline />,
       text: backwardText,
@@ -124,21 +126,28 @@ export const ImageViewerToolbar = ({
     },
   ];
 
-  const items = buttons.map(({ icon, text, handleClick, disabled }, index) => {
+  const actionItems = actionButtons.map(({ icon, text, handleClick, disabled }) => {
     return (
-      <>
-        {showNavigation && index === 6 ? <Divider /> : null}
-        {(showNavigation || (!showNavigation && index < 6)) && (
-          <ImageViewerToolbarButton
-            key={uid()}
-            showTooltip={showTooltip}
-            icon={icon}
-            text={text}
-            onClick={handleClick}
-            disabled={disabled}
-          />
-        )}
-      </>
+      <ImageViewerToolbarButton
+        key={uid()}
+        showTooltip={showTooltip}
+        icon={icon}
+        text={text}
+        onClick={handleClick}
+        disabled={disabled}
+      />
+    );
+  });
+  const navigationItems = navigationButtons.map(({ icon, text, handleClick, disabled }) => {
+    return (
+      <ImageViewerToolbarButton
+        key={uid()}
+        showTooltip={showTooltip}
+        icon={icon}
+        text={text}
+        onClick={handleClick}
+        disabled={disabled}
+      />
     );
   });
   const counterIsVisible = !!showCounter && totalImg > 1;
@@ -146,7 +155,15 @@ export const ImageViewerToolbar = ({
   return (
     <Wrapper {...props}>
       {counterIsVisible && <ImageCounter activeImg={activeImg} totalImg={totalImg} />}
-      <ButtonsWrapper>{items}</ButtonsWrapper>
+      <ButtonsWrapper>
+        {actionItems}
+        {showNavigation && (
+          <>
+            <Divider />
+            {navigationItems}
+          </>
+        )}
+      </ButtonsWrapper>
     </Wrapper>
   );
 };

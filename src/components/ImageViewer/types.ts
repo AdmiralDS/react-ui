@@ -8,7 +8,9 @@ export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElemen
   src: string;
 }
 
-export interface ImageMiniatureProps extends ImageProps {
+export interface ImageMiniatureProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Элемент для просмотра */
+  item: string | ImageProps;
   /** Размер миниатюры элемента */
   dimension?: ImageMiniatureDimension;
 }

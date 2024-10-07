@@ -5,6 +5,8 @@ import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
 import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
+import { uid } from '#src/components/common/uid';
+
 export * from './types';
 
 const Wrapper = styled.div<{ $previewGroupMixin?: ReturnType<typeof css> }>`
@@ -56,15 +58,12 @@ export const ImageViewer = ({
   };
 
   const renderItem = (item: string | ImageProps, index: number) => {
+    const itemKey = uid();
     const handleMouseDown = () => {
       setActiveImgState(index);
       setVisibleState(true);
     };
-    return typeof item === 'string' ? (
-      <ImageMiniature src={item} dimension={dimension} onMouseDown={handleMouseDown} />
-    ) : (
-      <ImageMiniature {...item} dimension={dimension} onMouseDown={handleMouseDown} />
-    );
+    return <ImageMiniature item={item} dimension={dimension} onMouseDown={handleMouseDown} key={itemKey} />;
   };
 
   const miniatures =
