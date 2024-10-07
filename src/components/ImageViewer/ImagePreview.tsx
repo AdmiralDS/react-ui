@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
+import { getClientSize, getFixScaleEleTransPosition } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
 
 const Overlay = styled.div`
   display: flex;
@@ -32,13 +33,20 @@ const Toolbar = styled(ImageViewerToolbar)`
   left: 50%;
   transform: translate(-50%);
 `;
-const StyledImage = styled.img<{ $scale: number; $flipX: boolean; $flipY: boolean; $rotate: number }>`
+const StyledImage = styled.img<{
+  $scale: number;
+  $flipX: boolean;
+  $flipY: boolean;
+  $rotate: number;
+  $x: number;
+  $y: number;
+}>`
   outline: none;
   max-width: 100%;
   max-height: 70%;
   transition: all 0.3s ease-in-out;
   transform: ${(p) =>
-    `scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
+    `translate(${p.$x}px, ${p.$y}px) scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
 `;
 
 interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
@@ -47,23 +55,27 @@ interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>,
   flipX: boolean;
   flipY: boolean;
   rotate: number;
+  x: number;
+  y: number;
 }
 const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
-  ({ item, scale, flipX, flipY, rotate, ...props }, ref) => {
+  ({ item, scale, flipX, flipY, rotate, x, y, ...props }, ref) => {
     const itemSrc = typeof item === 'string' ? item : item.src;
     const itemProps = typeof item === 'string' ? undefined : item;
+
     return (
       <StyledImage
         {...itemProps}
         {...props}
         src={itemSrc}
-        draggable="true"
         tabIndex={-1}
         ref={ref}
         $scale={scale}
         $flipX={flipX}
         $flipY={flipY}
         $rotate={rotate}
+        $x={x}
+        $y={y}
         //onDoubleClick={handleDoubleClick}
       />
     );
@@ -167,6 +179,86 @@ export const ImagePreview = ({
     setRotate((prevState) => prevState + 90);
   };
 
+  const [isMoving, setMoving] = useState(false);
+  const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const startPositionInfo = useRef({
+    diffX: 0,
+    diffY: 0,
+    transformX: 0,
+    transformY: 0,
+  });
+
+  const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
+    // Only allow main button
+    if (event.button !== 0 || !imgRef.current) return;
+    event.preventDefault();
+    event.stopPropagation();
+    startPositionInfo.current = {
+      diffX: event.pageX - coordinates.x,
+      diffY: event.pageY - coordinates.y,
+      transformX: coordinates.x,
+      transformY: coordinates.y,
+    };
+    console.log('startPositionInfo', startPositionInfo);
+    console.log(imgRef.current.getBoundingClientRect());
+    setMoving(true);
+  };
+  const handleImgMouseMove: React.MouseEventHandler<HTMLImageElement> = (event) => {
+    if (isMoving && imgRef.current) {
+      requestAnimationFrame(() =>
+        setCoordinates({
+          x: event.pageX - startPositionInfo.current.diffX,
+          y: event.pageY - startPositionInfo.current.diffY,
+        }),
+      );
+    }
+  };
+  const handleImgMouseUp: React.MouseEventHandler<HTMLImageElement> = () => {
+    if (isMoving && imgRef.current) {
+      setMoving(false);
+
+      /** No need to restore the position when the picture is not moved, So as not to interfere with the click */
+      const { transformX, transformY } = startPositionInfo.current;
+      const hasChangedPosition = coordinates.x !== transformX && coordinates.y !== transformY;
+      if (!hasChangedPosition) return;
+
+      console.log('coordinates', coordinates);
+      const width = imgRef.current.offsetWidth * scale;
+      const height = imgRef.current.offsetHeight * scale;
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      const { left, right, top, bottom } = imgRef.current.getBoundingClientRect();
+      console.log(imgRef.current.getBoundingClientRect());
+      const isRotate = rotate % 180 !== 0;
+      const { width: clientWidth, height: clientHeight } = getClientSize();
+
+      let x: number, y: number;
+      const ww = isRotate ? height : width;
+      const hh = isRotate ? width : height;
+      if (width <= clientWidth && height <= clientHeight) {
+        x = 0;
+        y = 0;
+      } else {
+        x = coordinates.x;
+        y = coordinates.y;
+        if (bottom < clientHeight || right < clientWidth || left > 0 || top > 0) {
+          console.log('bottom/right/left/top');
+          if (bottom < clientHeight) {
+            y += (clientHeight - bottom) / scale;
+          } else if (top > 0) {
+            y -= top / scale;
+          }
+          if (right < clientWidth) {
+            x += (clientWidth - right) / scale;
+          } else if (left > 0) {
+            x -= left / scale;
+          }
+        }
+      }
+
+      requestAnimationFrame(() => setCoordinates({ x, y }));
+    }
+  };
+
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       <ImageView
@@ -176,7 +268,12 @@ export const ImagePreview = ({
         flipX={flipX}
         flipY={flipY}
         rotate={rotate}
+        x={coordinates.x}
+        y={coordinates.y}
         onDoubleClick={handleDoubleClick}
+        onMouseDown={handleImgMouseDown}
+        onMouseMove={handleImgMouseMove}
+        onMouseUp={handleImgMouseUp}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
@@ -197,7 +294,7 @@ export const ImagePreview = ({
         }}
         minScale={minScaleInner}
         maxScale={maxScale}
-        transform={{ x: 0, y: 0, rotate, scale, flipX, flipY }}
+        transform={{ x: coordinates.x, y: coordinates.y, rotate, scale, flipX, flipY }}
         locale={locale}
       />
     </Overlay>,
