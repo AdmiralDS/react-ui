@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { getClientSize, getFixScaleEleTransPosition } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
+import { getClientSize } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
 
 const Overlay = styled.div`
   display: flex;
@@ -33,7 +33,8 @@ const Toolbar = styled(ImageViewerToolbar)`
   left: 50%;
   transform: translate(-50%);
 `;
-const StyledImage = styled.img<{
+
+const StyledImage1 = styled.img<{
   $scale: number;
   $flipX: boolean;
   $flipY: boolean;
@@ -47,6 +48,36 @@ const StyledImage = styled.img<{
   transition: all 0.3s ease-in-out;
   transform: ${(p) =>
     `translate(${p.$x}px, ${p.$y}px) scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
+`;
+const StyledImage = styled.img<{
+  $scale: number;
+  $flipX: boolean;
+  $flipY: boolean;
+  $rotate: number;
+  $x: number;
+  $y: number;
+}>`
+  outline: none;
+  max-width: 100%;
+  max-height: 70%;
+  transition: all 0.3s ease-in-out;
+`;
+const StyledImage2 = styled.img.attrs<{
+  $scale: number;
+  $flipX: boolean;
+  $flipY: boolean;
+  $rotate: number;
+  $x: number;
+  $y: number;
+}>((props) => ({
+  style: {
+    transform: `translate(${props.$x}px, ${props.$y}px) scale(${props.$flipX ? '-' : ''}${props.$scale}, ${props.$flipY ? '-' : ''}${props.$scale}) rotate(${props.$rotate})deg)`,
+  },
+}))`
+  outline: none;
+  max-width: 100%;
+  max-height: 70%;
+  transition: all 0.3s ease-in-out;
 `;
 
 interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
@@ -181,6 +212,9 @@ export const ImagePreview = ({
 
   const [isMoving, setMoving] = useState(false);
   const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const handleChangeCoordinates = (x: number, y: number) => {
+    setCoordinates({ x, y });
+  };
   const startPositionInfo = useRef({
     diffX: 0,
     diffY: 0,
@@ -205,6 +239,10 @@ export const ImagePreview = ({
   };
   const handleImgMouseMove: React.MouseEventHandler<HTMLImageElement> = (event) => {
     if (isMoving && imgRef.current) {
+      /*setCoordinates({
+        x: event.pageX - startPositionInfo.current.diffX,
+        y: event.pageY - startPositionInfo.current.diffY,
+      });*/
       requestAnimationFrame(() =>
         setCoordinates({
           x: event.pageX - startPositionInfo.current.diffX,
@@ -255,6 +293,7 @@ export const ImagePreview = ({
         }
       }
 
+      //setCoordinates({ x, y });
       requestAnimationFrame(() => setCoordinates({ x, y }));
     }
   };
@@ -274,6 +313,11 @@ export const ImagePreview = ({
         onMouseDown={handleImgMouseDown}
         onMouseMove={handleImgMouseMove}
         onMouseUp={handleImgMouseUp}
+        style={{
+          transform: `translate(${coordinates.x}px, ${coordinates.y}px) scale(${
+            flipX ? '-' : ''
+          }${scale}, ${flipY ? '-' : ''}${scale}) rotate(${rotate}deg)`,
+        }}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
