@@ -1,4 +1,4 @@
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -134,6 +134,7 @@ export const ImagePreview = ({
   const handleDoubleClick = () => {
     setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
   };
+
   useLayoutEffect(() => {
     const loadEventListener = (e: any) => {
       const { naturalWidth, naturalHeight, width, height } = e.target;
@@ -196,7 +197,7 @@ export const ImagePreview = ({
     console.log(imgRef.current.getBoundingClientRect());
     setMoving(true);
   };
-  const handleImgMouseMove: React.MouseEventHandler<HTMLImageElement> = (event) => {
+  const handleImgMouseMove = (event: MouseEvent) => {
     if (isMoving && imgRef.current) {
       requestAnimationFrame(() => {
         setCoordinates({
@@ -207,7 +208,7 @@ export const ImagePreview = ({
     }
   };
 
-  const handleImgMouseUp: React.MouseEventHandler<HTMLImageElement> = () => {
+  const handleImgMouseUp = () => {
     if (isMoving && imgRef.current) {
       setMoving(false);
 
@@ -252,6 +253,15 @@ export const ImagePreview = ({
       setCoordinates({ x, y });
     }
   };
+  useEffect(() => {
+    document.addEventListener('mousemove', handleImgMouseMove);
+    document.addEventListener('mouseup', handleImgMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleImgMouseMove);
+      document.removeEventListener('mouseup', handleImgMouseUp);
+    };
+  }, [isMoving, coordinates.x, coordinates.y, rotate]);
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
@@ -266,8 +276,6 @@ export const ImagePreview = ({
         y={coordinates.y}
         onDoubleClick={handleDoubleClick}
         onMouseDown={handleImgMouseDown}
-        onMouseMove={handleImgMouseMove}
-        onMouseUp={handleImgMouseUp}
         transitionEnabled={!isMoving}
       />
       <CloseButton onClick={handleCloseBtnClick} />
