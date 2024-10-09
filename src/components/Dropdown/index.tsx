@@ -186,8 +186,8 @@ export const Dropdown = React.forwardRef<HTMLDivElement, React.PropsWithChildren
       if (node && targetNode) {
         const rect = node.getBoundingClientRect();
         const targetRect = targetNode.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
+        const viewportHeight = globalThis.innerHeight;
+        const viewportWidth = globalThis.innerWidth;
         if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
           if (!displayUpward) setDisplayUpward(true);
         } else if (

@@ -35,15 +35,20 @@ const rowHeightStyle = css<{
   $opened?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
+  $idleHeight: 'full' | 'fixed';
 }>`
   min-height: ${({ $multiple, $minRowCount }) => {
-    if (!$multiple || !$minRowCount) return 'none';
+    if (!$multiple || !$minRowCount) return 'auto';
 
     return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ $multiple, $maxRowCount, $opened }) => {
-    if (!$multiple || !$maxRowCount || $opened) return 'none';
+  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight }) => {
+    if (!$multiple) return 'none';
+
+    if (!$maxRowCount) {
+      return !$opened && $idleHeight === 'fixed' ? `${ROW_HEIGHT}px` : 'none';
+    }
 
     return `${ROW_HEIGHT * $maxRowCount + ($maxRowCount - 1) * 4}px`;
   }};
@@ -62,6 +67,7 @@ export const ValueWrapper = styled.div<{
   $multiple?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
+  $idleHeight: 'full' | 'fixed';
   $isEmpty?: boolean;
   $opened?: boolean;
 }>`
@@ -183,6 +189,7 @@ export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: Componen
 export const SelectWrapper = styled.div<{
   disabled?: boolean;
   $readonly?: boolean;
+  $isLoading?: boolean;
   $focused: boolean;
   $multiple: boolean;
   $dimension?: ComponentDimension;
@@ -192,7 +199,8 @@ export const SelectWrapper = styled.div<{
   box-sizing: border-box;
   display: flex;
   align-items: ${(p) => (p.$multiple ? 'flex-start' : 'center')};
-  cursor: ${({ disabled, $readonly }) => (disabled ? 'not-allowed' : $readonly ? 'default' : 'pointer')};
+  cursor: ${({ disabled, $readonly, $isLoading }) =>
+    disabled ? 'not-allowed' : $readonly || $isLoading ? 'default' : 'pointer'};
 
   padding: ${({ $dimension, $multiple }) => {
     switch ($dimension) {
@@ -211,13 +219,13 @@ export const SelectWrapper = styled.div<{
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
 
   ${({ disabled, $readonly }) => ($readonly || disabled ? disabledStyle : '')};
-  ${({ $focused, $readonly }) => ($focused && !$readonly ? focusedStyle : '')};
+  ${({ $focused, $readonly, $isLoading }) => ($focused && !$readonly && !$isLoading ? focusedStyle : '')};
 
   & ${BorderedDiv} {
     border-color: ${(p) =>
       p.disabled || p.$readonly
         ? 'transparent'
-        : p.$focused
+        : p.$focused && !p.$isLoading
           ? `var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`
           : `var(--admiral-color-Neutral_Neutral40, ${p.theme.color['Neutral/Neutral 40']})`};
   }
@@ -227,6 +235,7 @@ export const SelectWrapper = styled.div<{
       !p.disabled &&
       !p.$readonly &&
       !p.$focused &&
+      !p.$isLoading &&
       `
       border-color: var(--admiral-color-Neutral_Neutral60, ${p.theme.color['Neutral/Neutral 60']});
     `};
@@ -236,6 +245,7 @@ export const SelectWrapper = styled.div<{
     ${(p) =>
       !p.disabled &&
       !p.$readonly &&
+      !p.$isLoading &&
       `
       ${BorderedDiv} {
       border-color: var(--admiral-color-Success_Success50Main, ${p.theme.color['Success/Success 50 Main']});
@@ -251,6 +261,7 @@ export const SelectWrapper = styled.div<{
     ${(p) =>
       !p.disabled &&
       !p.$readonly &&
+      !p.$isLoading &&
       `
       ${BorderedDiv} {
         border-color: var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});
@@ -317,8 +328,9 @@ export const EmptyMessageWrapper = styled.div`
   user-select: none;
 `;
 
-export const CustomOptionWrapper = styled(MenuItem)`
+export const CustomOptionWrapper = styled(MenuItem)<{ $selected?: boolean; $hovered?: boolean; $multiple?: boolean }>`
   justify-content: flex-start;
   flex-wrap: nowrap;
   white-space: pre-wrap;
+  ${(props) => props.$selected && !props.$hovered && props.$multiple && 'background-color: transparent;'}
 `;

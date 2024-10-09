@@ -1,4 +1,3 @@
-import type { CSSProperties, FormEvent, HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 import { useMemo, useRef, useState, useLayoutEffect, forwardRef } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
@@ -24,18 +23,18 @@ export interface RenderOptionProps {
   /** Отключение секции */
   disabled?: boolean;
   /** Обработчик клика по item */
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /** Обработчик наведения мыши на item */
-  onHover?: () => void;
+  onHover?: React.MouseEventHandler<HTMLElement>;
 }
 
 export interface ItemProps {
   id: string;
-  render: (options: RenderOptionProps) => ReactNode;
+  render: (options: RenderOptionProps) => React.ReactNode;
   disabled?: boolean;
 }
 
-export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, RenderOptionProps {
+export interface ColumnsButtonProps extends React.HTMLAttributes<HTMLButtonElement>, RenderOptionProps {
   columns?: Array<PaneColumn>;
   onColumnsChange?: (columns: Array<PaneColumn>) => void;
   buttonDimension?: 's' | 'l';
@@ -45,7 +44,7 @@ export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement>, R
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
+  dropContainerStyle?: React.CSSProperties;
 }
 
 const ColumnsMenu = styled(Menu)`
@@ -104,9 +103,8 @@ const ColumnMenuItem = ({ visible, title, ...props }: any) => {
     <ColumnsMenuItem {...props} ref={itemRef} onHover={() => setHovered(true)} onLeave={() => setHovered(false)}>
       <StyledCheckboxField
         checked={visible}
-        onChange={(e: FormEvent<HTMLInputElement>) => {
-          e.preventDefault();
-          e.stopPropagation();
+        onChange={() => {
+          /* keep */
         }}
         hovered={hovered}
       />

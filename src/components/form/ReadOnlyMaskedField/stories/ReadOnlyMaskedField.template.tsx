@@ -63,7 +63,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
           value={cardNumber}
           readOnly
           label="Номер карты"
-          icons={
+          iconsAfter={
             <InputIconButton
               icon={Icon(isCardNumberVisible)}
               key="eye-icon"
@@ -82,7 +82,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
           readOnly
           label="Дата рождения"
           id={'birth date'}
-          icons={
+          iconsAfter={
             <InputIconButton
               icon={Icon(isBirthDateVisible)}
               key="eye-icon"
@@ -100,7 +100,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
           value={email}
           readOnly
           label="Электронная почта"
-          icons={
+          iconsAfter={
             <InputIconButton
               icon={Icon(isEmailVisible)}
               key="eye-icon"
@@ -118,7 +118,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
           value={surname}
           readOnly
           label="Фамилия"
-          icons={
+          iconsAfter={
             <InputIconButton
               icon={Icon(isSurnameVisible)}
               key="eye-icon"
@@ -137,7 +137,7 @@ export const ReadOnlyMaskedFieldTemplate = ({
           value={phoneNumber}
           readOnly
           label="Телефон"
-          icons={
+          iconsAfter={
             <InputIconButton
               icon={Icon(isPhoneNumberVisible)}
               key="eye-icon"

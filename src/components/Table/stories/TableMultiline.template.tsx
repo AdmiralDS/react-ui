@@ -132,14 +132,5 @@ export const TableMultilineTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return (
-    <Table
-      {...props}
-      rowList={rowList}
-      columnList={cols}
-      headerLineClamp={2}
-      displayRowSelectionColumn
-      onColumnResize={handleResize}
-    />
-  );
+  return <Table {...props} rowList={rowList} columnList={cols} headerLineClamp={2} onColumnResize={handleResize} />;
 };

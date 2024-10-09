@@ -57,10 +57,10 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * места слева и справа) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
         const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > tooltipRect.width / 2;
         const isEnoughOnRight =
-          window.innerWidth - anchorElementRect.right - scrollbarSize + anchorElementRect.width / 2 >
+          globalThis.innerWidth - anchorElementRect.right - scrollbarSize + anchorElementRect.width / 2 >
           tooltipRect.width / 2;
         return isEnoughOnBottom && isEnoughOnLeft && isEnoughOnRight;
       },
@@ -73,7 +73,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
         const isEnoughOnTop = anchorElementRect.top > GAP + tooltipRect.height;
         const isEnoughOnLeft = anchorElementRect.left + anchorElementRect.width / 2 > tooltipRect.width / 2;
         const isEnoughOnRight =
-          window.innerWidth - anchorElementRect.right - scrollbarSize + anchorElementRect.width / 2 >
+          globalThis.innerWidth - anchorElementRect.right - scrollbarSize + anchorElementRect.width / 2 >
           tooltipRect.width / 2;
         return isEnoughOnTop && isEnoughOnLeft && isEnoughOnRight;
       },
@@ -86,7 +86,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
         const isEnoughOnLeft = anchorElementRect.left > GAP + tooltipRect.width;
         const isEnoughOnTop = anchorElementRect.top > (tooltipRect.height - anchorElementRect.height) / 2;
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize >
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize >
           (tooltipRect.height - anchorElementRect.height) / 2;
         return isEnoughOnLeft && isEnoughOnBottom && isEnoughOnTop;
       },
@@ -96,10 +96,11 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * высоты вызвавшего элемента (anchorElement), то нужно убедиться, что тултипу хватит
        * места сверху и снизу) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
-        const isEnoughOnRight = window.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
+        const isEnoughOnRight =
+          globalThis.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
         const isEnoughOnTop = anchorElementRect.top > (tooltipRect.height - anchorElementRect.height) / 2;
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize >
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize >
           (tooltipRect.height - anchorElementRect.height) / 2;
         return isEnoughOnRight && isEnoughOnBottom && isEnoughOnTop;
       },
@@ -109,8 +110,8 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * (то есть тултип будет выровнен по левому краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
-        const isEnoughOnRight = window.innerWidth - anchorElementRect.left - scrollbarSize > tooltipRect.width;
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
+        const isEnoughOnRight = globalThis.innerWidth - anchorElementRect.left - scrollbarSize > tooltipRect.width;
         return isEnoughOnBottom && isEnoughOnRight;
       },
     },
@@ -119,7 +120,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * (то есть тултип будет выровнен по правому краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
         const isEnoughOnLeft = anchorElementRect.right > tooltipRect.width;
         return isEnoughOnBottom && isEnoughOnLeft;
       },
@@ -129,7 +130,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * (то есть тултип будет выровнен по левому краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnTop = anchorElementRect.top > GAP + tooltipRect.height;
-        const isEnoughOnRight = window.innerWidth - anchorElementRect.left - scrollbarSize > tooltipRect.width;
+        const isEnoughOnRight = globalThis.innerWidth - anchorElementRect.left - scrollbarSize > tooltipRect.width;
         return isEnoughOnTop && isEnoughOnRight;
       },
     },
@@ -147,7 +148,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
        * (то есть тултип будет выровнен по верхнему краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnLeft = anchorElementRect.left > GAP + tooltipRect.width;
-        const isEnoughOnBottom = window.innerHeight - anchorElementRect.top - scrollbarSize > tooltipRect.height;
+        const isEnoughOnBottom = globalThis.innerHeight - anchorElementRect.top - scrollbarSize > tooltipRect.height;
         return isEnoughOnLeft && isEnoughOnBottom;
       },
     },
@@ -164,8 +165,9 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
       /** проверяем, что тултипу хватит места справа и по высоте снизу
        * (то есть тултип будет выровнен по верхнему краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
-        const isEnoughOnRight = window.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
-        const isEnoughOnBottom = window.innerHeight - anchorElementRect.top - scrollbarSize > tooltipRect.height;
+        const isEnoughOnRight =
+          globalThis.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
+        const isEnoughOnBottom = globalThis.innerHeight - anchorElementRect.top - scrollbarSize > tooltipRect.height;
         return isEnoughOnRight && isEnoughOnBottom;
       },
     },
@@ -173,7 +175,8 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
       /** проверяем, что тултипу хватит места справа и по высоте сверху
        * (то есть тултип будет выровнен по нижнему краю вызвавшего элемента (anchorElement)) */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
-        const isEnoughOnRight = window.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
+        const isEnoughOnRight =
+          globalThis.innerWidth - anchorElementRect.right - scrollbarSize > GAP + tooltipRect.width;
         const isEnoughOnTop = anchorElementRect.bottom > tooltipRect.height;
         return isEnoughOnRight && isEnoughOnTop;
       },
@@ -182,8 +185,8 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
       /** проверяем, что тултипу хватит места снизу и по центру */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnBottom =
-          window.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
-        const isEnoughOnCenter = window.innerWidth - scrollbarSize >= tooltipRect.width;
+          globalThis.innerHeight - anchorElementRect.bottom - scrollbarSize > GAP + tooltipRect.height;
+        const isEnoughOnCenter = globalThis.innerWidth - scrollbarSize >= tooltipRect.width;
         return isEnoughOnBottom && isEnoughOnCenter;
       },
     },
@@ -191,7 +194,7 @@ function getPositionMapper(scrollbarSize: number): Record<InternalTooltipPositio
       /** проверяем, что тултипу хватит места сверху и по центру */
       check: (anchorElementRect: DOMRect, tooltipRect: DOMRect) => {
         const isEnoughOnTop = anchorElementRect.top > GAP + tooltipRect.height;
-        const isEnoughOnCenter = window.innerWidth - scrollbarSize >= tooltipRect.width;
+        const isEnoughOnCenter = globalThis.innerWidth - scrollbarSize >= tooltipRect.width;
         return isEnoughOnTop && isEnoughOnCenter;
       },
     },

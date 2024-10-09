@@ -1,3 +1,4 @@
+import type { ReactPortal } from 'react';
 import { useState, useContext, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
@@ -27,7 +28,7 @@ export const ColumnDrag = ({
   scrollBodyRef,
   normalColumnsWrapperRef,
   stickyColumnsWrapperRef,
-}: ColumnDragProps) => {
+}: ColumnDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
   const [columnDragging, setColumnDragging] = useState(false);

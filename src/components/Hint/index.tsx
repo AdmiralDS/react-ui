@@ -1,5 +1,6 @@
 import * as React from 'react';
 import type { css } from 'styled-components';
+
 import type { RefCallback, RefObject } from '#src/components/common/utils/handleRef';
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
@@ -41,14 +42,6 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
    * По умолчанию тултип отрисовывается в document.body
    **/
   container?: never;
-  // TODO: Удалить target в 8.x.x версии
-  /**
-   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement.
-   *
-   * Ref на элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит
-   **/
-  target?: React.MutableRefObject<Element | null | undefined>;
   /** Элемент, относительно которого будет позиционироваться хинт, если позиционирование относительно children не подходит */
   targetElement?: Element | null;
   /** Триггер появления компонента (событие, которое вызывает появление хинта) */
@@ -79,7 +72,6 @@ export const Hint: React.FC<HintProps> = ({
   onVisibilityChange,
   renderContent,
   hintPosition,
-  target,
   targetElement: userTargetElement,
   visibilityTrigger = 'hover',
   dimension = 'l',
@@ -98,7 +90,7 @@ export const Hint: React.FC<HintProps> = ({
   const content = renderContent();
   const anchorId = anchorIdProp || uid();
 
-  const targetElement = userTargetElement || target?.current || anchorElementRef.current;
+  const targetElement = userTargetElement || anchorElementRef.current;
 
   const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
@@ -118,10 +110,10 @@ export const Hint: React.FC<HintProps> = ({
         setMobile(false);
       }
     };
-    window.addEventListener('resize', listener);
+    addEventListener('resize', listener);
 
     return () => {
-      window.removeEventListener('resize', listener);
+      removeEventListener('resize', listener);
     };
   });
 
@@ -230,7 +222,7 @@ export const Hint: React.FC<HintProps> = ({
         }
       }
     }
-  }, [target, userTargetElement, hintPosition, visible, recalculation, dimension, content, isMobile]);
+  }, [userTargetElement, hintPosition, visible, recalculation, dimension, content, isMobile]);
 
   const attachRef = (node: HTMLDivElement) => handleRef(node, hintRef, hintElementRef);
   const scrollableParents = React.useMemo(

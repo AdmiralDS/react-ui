@@ -62,11 +62,8 @@ export const fullWidthPositionMixin = css`
 `;
 
 export const halfWidthPositionMixin = css`
-  flex: 1 1 36%;
-
-  &:nth-of-type(odd) {
-    margin-left: 16px;
-  }
+  flex: 1 1 auto;
+  max-width: calc(50% - 8px);
 `;
 
 export const titleXL = css`

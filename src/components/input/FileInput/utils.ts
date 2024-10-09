@@ -35,7 +35,7 @@ export const formatFileSize = (bytes: number): string => {
  * @param acceptedFiles {string}
  * @returns {boolean}
  */
-export function acceptFile(file: File, acceptedFiles: string): boolean {
+export function acceptFile(file: File, acceptedFiles?: string): boolean {
   if (file && acceptedFiles) {
     const acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');
     const fileName = file.name || '';

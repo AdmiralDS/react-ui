@@ -11,7 +11,7 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   user-select: none;
 }
 
@@ -34,7 +34,7 @@ exports[`CheckboxGroup should render component with disabled state 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -48,167 +48,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -222,14 +66,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -237,6 +81,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: not-allowed;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -250,31 +217,27 @@ fieldset[data-dimension='s'] .c7.c7 {
           data-field-id="checkboxFieldMoscow"
           disabled=""
         >
-          <input
-            class="c2"
-            disabled=""
-            id="checkboxFieldMoscow"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
-            />
-            <span
-              class="c5"
               disabled=""
+              id="checkboxFieldMoscow"
+              type="checkbox"
+            />
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Москва
@@ -285,31 +248,27 @@ fieldset[data-dimension='s'] .c7.c7 {
           data-field-id="checkboxFieldVoronezh"
           disabled=""
         >
-          <input
-            class="c2"
-            disabled=""
-            id="checkboxFieldVoronezh"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
-            />
-            <span
-              class="c5"
               disabled=""
+              id="checkboxFieldVoronezh"
+              type="checkbox"
+            />
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Воронеж
@@ -320,31 +279,27 @@ fieldset[data-dimension='s'] .c7.c7 {
           data-field-id="checkboxFieldSamara"
           disabled=""
         >
-          <input
-            class="c2"
-            disabled=""
-            id="checkboxFieldSamara"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
-            />
-            <span
-              class="c5"
               disabled=""
+              id="checkboxFieldSamara"
+              type="checkbox"
+            />
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
             disabled=""
           >
             Самара
@@ -361,7 +316,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   user-select: none;
 }
 
@@ -384,7 +339,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -398,167 +353,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -572,14 +371,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -587,6 +386,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: not-allowed;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -599,31 +521,27 @@ fieldset[data-dimension='s'] .c7.c7 {
         data-field-id="checkboxFieldMoscow"
         disabled=""
       >
-        <input
-          class="c2"
-          disabled=""
-          id="checkboxFieldMoscow"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
-          />
-          <span
-            class="c5"
             disabled=""
+            id="checkboxFieldMoscow"
+            type="checkbox"
+          />
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Москва
@@ -634,31 +552,27 @@ fieldset[data-dimension='s'] .c7.c7 {
         data-field-id="checkboxFieldVoronezh"
         disabled=""
       >
-        <input
-          class="c2"
-          disabled=""
-          id="checkboxFieldVoronezh"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
-          />
-          <span
-            class="c5"
             disabled=""
+            id="checkboxFieldVoronezh"
+            type="checkbox"
+          />
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Воронеж
@@ -669,31 +583,27 @@ fieldset[data-dimension='s'] .c7.c7 {
         data-field-id="checkboxFieldSamara"
         disabled=""
       >
-        <input
-          class="c2"
-          disabled=""
-          id="checkboxFieldSamara"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
-          />
-          <span
-            class="c5"
             disabled=""
+            id="checkboxFieldSamara"
+            type="checkbox"
+          />
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
           disabled=""
         >
           Самара
@@ -766,7 +676,7 @@ exports[`CheckboxGroup should render component with label 1`] = `
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -789,7 +699,7 @@ exports[`CheckboxGroup should render component with label 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -803,167 +713,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -977,14 +731,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -992,6 +746,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -1004,29 +881,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldMoscow"
         >
-          <input
-            class="c2"
-            id="checkboxFieldMoscow"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldMoscow"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -1035,29 +909,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
-          <input
-            class="c2"
-            id="checkboxFieldVoronezh"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldVoronezh"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -1066,29 +937,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldSamara"
         >
-          <input
-            class="c2"
-            id="checkboxFieldSamara"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldSamara"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -1104,7 +972,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -1127,7 +995,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1141,167 +1009,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1315,14 +1027,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1330,6 +1042,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -1341,29 +1176,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldMoscow"
       >
-        <input
-          class="c2"
-          id="checkboxFieldMoscow"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldMoscow"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -1372,29 +1204,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
-        <input
-          class="c2"
-          id="checkboxFieldVoronezh"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldVoronezh"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -1403,29 +1232,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldSamara"
       >
-        <input
-          class="c2"
-          id="checkboxFieldSamara"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldSamara"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>
@@ -1497,7 +1323,7 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   line-height: 16px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -1520,7 +1346,7 @@ exports[`CheckboxGroup should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1534,167 +1360,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -1708,14 +1378,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1723,6 +1393,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -1734,29 +1527,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldMoscow"
         >
-          <input
-            class="c2"
-            id="checkboxFieldMoscow"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldMoscow"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -1765,29 +1555,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
-          <input
-            class="c2"
-            id="checkboxFieldVoronezh"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldVoronezh"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -1796,29 +1583,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldSamara"
         >
-          <input
-            class="c2"
-            id="checkboxFieldSamara"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldSamara"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -1834,7 +1618,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: 16px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -1857,7 +1641,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -1871,167 +1655,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 16px;
-  height: 16px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -2045,14 +1673,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2060,6 +1688,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 16px;
+  height: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -2070,29 +1821,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldMoscow"
       >
-        <input
-          class="c2"
-          id="checkboxFieldMoscow"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldMoscow"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -2101,29 +1849,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
-        <input
-          class="c2"
-          id="checkboxFieldVoronezh"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldVoronezh"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -2132,29 +1877,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldSamara"
       >
-        <input
-          class="c2"
-          id="checkboxFieldSamara"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldSamara"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>
@@ -2226,7 +1968,7 @@ exports[`CheckboxGroup should render components 1`] = `
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -2249,7 +1991,7 @@ exports[`CheckboxGroup should render components 1`] = `
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -2263,167 +2005,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -2437,14 +2023,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2452,6 +2038,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <body>
@@ -2463,29 +2172,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldMoscow"
         >
-          <input
-            class="c2"
-            id="checkboxFieldMoscow"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldMoscow"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Москва
           </div>
@@ -2494,29 +2200,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldVoronezh"
         >
-          <input
-            class="c2"
-            id="checkboxFieldVoronezh"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldVoronezh"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Воронеж
           </div>
@@ -2525,29 +2228,26 @@ fieldset[data-dimension='s'] .c7.c7 {
           class="c1"
           data-field-id="checkboxFieldSamara"
         >
-          <input
-            class="c2"
-            id="checkboxFieldSamara"
-            type="checkbox"
-          />
           <div
-            class="c3"
+            class="c2 c3"
           >
-            <div
+            <input
               class="c4"
+              id="checkboxFieldSamara"
+              type="checkbox"
             />
-            <span
-              class="c5"
+            <div
+              class="c5 c6"
             >
               <div
                 aria-hidden="true"
-                class="c6"
+                class="c7"
                 focusable="false"
               />
-            </span>
+            </div>
           </div>
           <div
-            class="c7"
+            class="c8"
           >
             Самара
           </div>
@@ -2563,7 +2263,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: 20px;
   font-weight: normal;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -2586,7 +2286,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
 fieldset[data-dimension='s'] .c1.c1 {
@@ -2600,167 +2300,11 @@ fieldset[data-dimension='s'] .c1.c1 {
 }
 
 fieldset:disabled .c1.c1 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
-.c2 {
-  appearance: none;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  box-sizing: border-box;
-}
-
-.c2 ::-ms-check {
-  display: none;
-}
-
-.c2:disabled {
-  cursor: not-allowed;
-}
-
-.c2:disabled:not(:checked)+div>span {
-  border-color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
-  background-color: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c2:disabled:checked+div>span {
-  border-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
-}
-
-.c2:disabled:checked+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-.c2:disabled:checked+div>span>svg {
-  visibility: visible;
-}
-
-.c2:checked:not(:disabled)+div>span {
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
-}
-
-.c2:checked:not(:disabled)+div>span *[fill^='#'] {
-  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
-}
-
-.c2:checked:not(:disabled)+div>span>svg {
-  visibility: visible;
-}
-
-.c2:not(:disabled):focus-visible+div {
-  outline-offset: 2px;
-  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
-}
-
-.c2:not(:disabled):hover:not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):hover:not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled)+div>div {
-  visibility: visible;
-}
-
-.c2:not(:disabled):active:not(:disabled):not(:disabled):focus-visible+div {
-  outline: none;
-}
-
-.c2:not(:disabled):active:not(:disabled)+div>div {
-  background: var(--admiral-color-Opacity_Press, #0000001F);
-}
-
-.c3 {
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  position: relative;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-}
-
-fieldset[data-dimension='s'] .c3 {
-  width: 20px;
-  height: 20px;
-}
-
-.c4 {
-  visibility: hidden;
-  pointer-events: none;
-  position: absolute;
-  background: var(--admiral-color-Opacity_Hover, #0000000D);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
-}
-
-fieldset[data-dimension='s'] .c4.c4 {
-  width: 32px;
-  height: 32px;
-}
-
-.c5 {
-  box-sizing: border-box;
-  pointer-events: none;
-  display: inline-block;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: var(--admiral-border-radius-Small, 4px);
-  width: 20px;
-  height: 20px;
-  outline: 0;
-  transition: background 0.1s ease-in;
-  line-height: initial;
-  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-  border: 1px solid var(--admiral-color-Neutral_Neutral50, #717681);
-}
-
-fieldset[data-dimension='s'] .c5.c5 {
-  width: 16px;
-  height: 16px;
-}
-
-.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
-}
-
-fieldset:disabled .c5.c5 *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-}
-
-.c6 {
-  visibility: hidden;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.c7 {
+.c8 {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -2774,14 +2318,14 @@ fieldset:disabled .c5.c5 *[fill^='#'] {
   line-height: var(--admiral-line-height-Body_Body1Short, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
 }
 
-fieldset:disabled .c7.c7 {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+fieldset:disabled .c8.c8 {
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-fieldset[data-dimension='s'] .c7.c7 {
+fieldset[data-dimension='s'] .c8.c8 {
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2789,6 +2333,129 @@ fieldset[data-dimension='s'] .c7.c7 {
   line-height: var(--admiral-line-height-Body_Body2Short, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
+}
+
+.c7 {
+  pointer-events: none;
+}
+
+.c2 {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: visible;
+  width: 20px;
+  height: 20px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  width: 16px;
+}
+
+fieldset[data-dimension='s'] .c2 {
+  height: 16px;
+}
+
+.c6 {
+  pointer-events: none;
+  display: inline-block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  outline: 0;
+  transition: background-color 0.1s ease-in;
+  line-height: initial;
+  background-color: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+  border: 1px solid var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6 *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4 {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--admiral-border-radius-Small, 4px);
+  margin: 0;
+  padding: 0;
+}
+
+.c4 ::-ms-check {
+  display: none;
+}
+
+.c4:checked+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c4:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.c4:disabled+.c5 {
+  border: 1px solid var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:not(:checked)+.c5 >* {
+  display: none;
+}
+
+.c4:hover:not(:disabled)::after,
+.c4:focus:not(:disabled)+.c4:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+}
+
+.c4:active:not(:disabled):not(:disabled)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+}
+
+.c4:checked:disabled+.c5 {
+  background-color: var(--admiral-color-Primary_Primary30, #A7C7FF);
+  border: none;
+}
+
+.c4:checked:disabled+.c5 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral00, #FFFFFF);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c3 {
+  margin-top: 2px;
 }
 
 <div>
@@ -2799,29 +2466,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldMoscow"
       >
-        <input
-          class="c2"
-          id="checkboxFieldMoscow"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldMoscow"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Москва
         </div>
@@ -2830,29 +2494,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldVoronezh"
       >
-        <input
-          class="c2"
-          id="checkboxFieldVoronezh"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldVoronezh"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Воронеж
         </div>
@@ -2861,29 +2522,26 @@ fieldset[data-dimension='s'] .c7.c7 {
         class="c1"
         data-field-id="checkboxFieldSamara"
       >
-        <input
-          class="c2"
-          id="checkboxFieldSamara"
-          type="checkbox"
-        />
         <div
-          class="c3"
+          class="c2 c3"
         >
-          <div
+          <input
             class="c4"
+            id="checkboxFieldSamara"
+            type="checkbox"
           />
-          <span
-            class="c5"
+          <div
+            class="c5 c6"
           >
             <div
               aria-hidden="true"
-              class="c6"
+              class="c7"
               focusable="false"
             />
-          </span>
+          </div>
         </div>
         <div
-          class="c7"
+          class="c8"
         >
           Самара
         </div>

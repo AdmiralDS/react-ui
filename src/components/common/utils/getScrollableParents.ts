@@ -4,7 +4,7 @@ export const getScrollableParents = (parent: Element | null | undefined) => {
   if (parent) {
     let currentParent = parent;
     while (currentParent) {
-      const computedStyle = window.getComputedStyle(currentParent);
+      const computedStyle = getComputedStyle(currentParent);
       if (
         computedStyle.getPropertyValue('overflow') === 'auto' ||
         computedStyle.getPropertyValue('overflow') === 'scroll' ||

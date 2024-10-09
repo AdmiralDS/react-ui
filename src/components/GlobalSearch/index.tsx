@@ -21,6 +21,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import type { RenderProps } from '#src/components/input/InputEx';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { keyboardKey } from '../common/keyboardKey';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -280,6 +281,16 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const submitButtonRef = useRef<HTMLDivElement>(null);
   const inputProps = { placeholder, id, value, defaultValue, onChange };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    const code = keyboardKey.getCode(e);
+
+    // permits enter space in input
+    if (code === keyboardKey[' ']) {
+      e.stopPropagation();
+    }
+  };
+
   useEffect(() => {
     if (inFocus) {
       const listener = (event: KeyboardEvent) => {
@@ -396,12 +407,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
           {prefix}
         </PrefixContainer>
       )}
-      <Input
-        {...inputProps}
-        value={tempValue === '' ? inputProps.value : tempValue}
-        onChange={handleInputOnChange}
-        ref={inputRef}
-      />
+      <Input {...inputProps} onChange={handleInputOnChange} onKeyDown={handleKeyDown} ref={inputRef} />
       {iconCount > 0 ? (
         <IconPanel disabled={props.disabled} $dimension={dimension}>
           {iconArray}

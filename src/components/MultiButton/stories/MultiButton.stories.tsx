@@ -78,6 +78,9 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
+    disabledMainButton: {
+      control: { type: 'boolean' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

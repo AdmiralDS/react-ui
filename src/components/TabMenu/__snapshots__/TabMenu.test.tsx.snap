@@ -52,7 +52,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c7:not(:disabled):focus-visible {
@@ -134,7 +134,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -171,7 +171,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 [data-badge] {
@@ -187,12 +187,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:disabled {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c13 {
@@ -205,7 +205,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -242,7 +242,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c13 [data-badge] {
@@ -258,12 +258,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:disabled {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
 .c13:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c1 {
@@ -294,7 +294,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c8 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 <body>
@@ -477,7 +477,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c7:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c7:not(:disabled):focus-visible {
@@ -559,7 +559,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -596,7 +596,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c2 [data-badge] {
@@ -612,12 +612,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c2:disabled {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
 .c2:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c13 {
@@ -630,7 +630,7 @@ exports[`TabMenu should render default component 1`] = `
   background: transparent;
   appearance: none;
   border: none;
-  color: var(--admiral-color-Neutral_Neutral50, #717681);
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Long, 400);
@@ -667,7 +667,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 .c13 [data-badge] {
@@ -683,12 +683,12 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c13:disabled {
-  color: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
   cursor: not-allowed;
 }
 
 .c13:disabled *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral30, #B0B5BD);
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
 .c1 {
@@ -719,7 +719,7 @@ exports[`TabMenu should render default component 1`] = `
 }
 
 .c8 svg *[fill^='#'] {
-  fill: var(--admiral-color-Neutral_Neutral50, #717681);
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
 <div>

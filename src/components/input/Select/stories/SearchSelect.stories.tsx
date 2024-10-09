@@ -20,6 +20,7 @@ import { SearchSelectCustomChipMultiTemplate } from './searchSelect/SearchSelect
 import { SearchSelectExternalFilterTemplate } from './searchSelect/SearchSelectExternalFilter.template';
 import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVirtualScroll.template';
 import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSelectWithOnChangeHandler.template';
+import { SearchSelectWithSelectedOnTopTemplate } from './searchSelect/SearchSelectWithSelectedOnTop.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
@@ -39,6 +40,7 @@ import SearchSelectCustomChipMultiRaw from './searchSelect/SearchSelectCustomChi
 import SearchSelectExternalFilterRaw from './searchSelect/SearchSelectExternalFilter.template?raw';
 import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScroll.template?raw';
 import SearchSelectWithOnClickHandlerTemplateRaw from './searchSelect/SearchSelectWithOnChangeHandler.template?raw';
+import SearchSelectWithSelectedOnTopTemplateRaw from './searchSelect/SearchSelectWithSelectedOnTop.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -68,6 +70,10 @@ export default {
 
     multiple: {
       control: false,
+    },
+
+    moveSelectedOnTop: {
+      control: { type: 'boolean' },
     },
 
     readOnly: {
@@ -381,6 +387,12 @@ export const ExpandedHeightMultiSearchSelect = {
       source: {
         code: SearchSelectExpandedHeightMultiRaw,
       },
+      description: {
+        story:
+          'Для ограничения высоты Select в режиме multiple необходимо использовать свойства maxRowCount и minRowCount. ' +
+          'В примере стоит ограничение maxRowCount=3. Ограничение работает для Select как в состоянии focused, так и в ' +
+          'состоянии, когда компонент не находится в фокусе',
+      },
     },
   },
 
@@ -477,6 +489,7 @@ export const VirtualScroll = {
   name: 'VirtualScroll',
 };
 //</editor-fold>
+
 // <editor-fold desc="Внешняя фильтрация">
 const WithOnChangeHandlerStory: StoryFn<typeof Select> = (props) => (
   <SearchSelectWithOnChangeHandlerTemplate {...props} />
@@ -502,5 +515,33 @@ export const WithOnChangeHandler = {
   },
 
   name: 'Multiple с обработчиком события onChange',
+};
+//</editor-fold>
+
+// <editor-fold desc="Поднятие выбранных опций вверх списка">
+const WithSelectedOnTopStory: StoryFn<typeof Select> = (props) => <SearchSelectWithSelectedOnTopTemplate {...props} />;
+
+export const WithSelectedOnTop = {
+  render: WithSelectedOnTopStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithSelectedOnTopTemplateRaw,
+      },
+      args: {
+        moveSelectedOnTop: true,
+      },
+      description: {
+        story:
+          'Для вывода ранее выбранных пунктов сверху списка необходимо включить свойство moveSelectedOnTop\n' +
+          '- Непосредственно при выборе (или отмене выбора) перестроение не происходит\n' +
+          '- Выбранные строки отображаются сверху списка при повторном открытии меню\n' +
+          '- Выбранные строки сортируются в том же порядке, что и чипсы в поле ввода, то есть в порядке очередности выбора',
+      },
+    },
+  },
+
+  name: 'Multiple с поднятием выбранных опций вверх списка',
 };
 //</editor-fold>

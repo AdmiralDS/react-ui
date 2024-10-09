@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, PropsWithChildren, RefObject } from 'react';
+import type { CSSProperties, HTMLAttributes, PropsWithChildren } from 'react';
 import { forwardRef, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import { setVerticalPosition, setHorizontalPosition } from './utils';
 
 const Container = styled.div<{
   $alignSelf?: string;
@@ -67,37 +68,14 @@ export interface DropdownContainerProps
   extends HTMLAttributes<HTMLDivElement>,
     DropContainerProps,
     Omit<DropContainerStyles, 'dropContainerClassName' | 'dropContainerStyle'> {
-  // TODO: Удалить targetRef в 8.x.x версии, сделать targetElement обязательным параметром
-  /**
-   * @deprecated Помечено как deprecated в версии 6.1.0, будет удалено в 8.x.x версии.
-   * Взамен используйте параметр targetElement.
-   *
-   * Ref на элемент, относительно которого позиционируется выпадающее меню
-   **/
-  targetRef?: RefObject<HTMLElement>;
-  /** Элемент, относительно которого позиционируется выпадающее меню
-   * В 8.x.x версии данный параметр станет обязательным, заменив собой targetRef
-   */
-  targetElement?: Element | null;
+  /** Элемент, относительно которого позиционируется выпадающее меню */
+  targetElement: Element | null;
 }
 
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
-  (
-    {
-      targetRef,
-      targetElement,
-      onClickOutside = () => null,
-      className = '',
-      alignSelf,
-      dropContainerCssMixin,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ targetElement, onClickOutside = () => null, className = '', alignSelf, dropContainerCssMixin, ...props }, ref) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = useState(false);
-
-    const targetNode = targetElement ?? targetRef?.current;
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
     const { rootRef } = useContext(DropdownContext);
@@ -115,49 +93,24 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
     const checkDropdownPosition = useCallback(() => {
       const node = containerRef.current;
-      if (node && targetNode) {
+      if (node && targetElement) {
         const rect = node.getBoundingClientRect();
-        const targetRect = targetNode.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
-        if (viewportHeight - rect.bottom < 0 && targetRect.top > viewportHeight - targetRect.bottom) {
-          if (!displayUpward) setDisplayUpward(true);
-        } else if (
-          targetRect.bottom + (targetRect.top - rect.top) < viewportHeight - 8 ||
-          targetRect.top < viewportHeight - targetRect.bottom
-        ) {
-          if (displayUpward) setDisplayUpward(false);
-        }
+        const targetRect = targetElement.getBoundingClientRect();
+        const viewportHeight = globalThis.innerHeight;
+        const viewportWidth = globalThis.innerWidth;
 
-        if (alignSelf && alignSelf !== 'auto') return;
+        const { upward, translateY } = setVerticalPosition(rect, targetRect, viewportHeight);
+        if (displayUpward !== upward) setDisplayUpward(upward);
 
-        const rectWidth = rect.right - rect.left;
-
-        // впишется ли контейнер во viewport, начиная от левого края target
-        const enoughWidthOnTheRight = viewportWidth - targetRect.left >= rectWidth;
-        // впишется ли контейнер во viewport, если его правой границей будет правый край target
-        const enoughWidthOnTheLeft = targetRect.right - 16 >= rectWidth;
-
-        const containerWiderTarget = rectWidth > targetRect.width;
-
-        if (!enoughWidthOnTheLeft && !enoughWidthOnTheRight) {
-          node.style.alignSelf = 'center';
-          // компенсация сдвига относительно target компонента (targetRect) таким образом, чтобы
-          // контейнер выпадающего меню (rect) вписывался в границы экрана (viewport)
-          const offset = (viewportWidth - rect.width) / 2 - (targetRect.left - (rectWidth - targetRect.width) / 2);
-          node.style.transform = `translateX(${offset}px)`;
+        if (alignSelf && alignSelf !== 'auto') {
+          node.style.transform = `translateY(${translateY})`;
         } else {
-          node.style.transform = 'translateX(0)';
-          if (enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-            node.style.alignSelf = 'flex-end';
-          } else if (containerWiderTarget && !enoughWidthOnTheLeft && enoughWidthOnTheRight) {
-            node.style.alignSelf = 'flex-start';
-          } else if (containerWiderTarget && !enoughWidthOnTheRight && enoughWidthOnTheLeft) {
-            node.style.alignSelf = 'flex-end';
-          }
+          const { align, translateX } = setHorizontalPosition(rect, targetRect, viewportWidth);
+          node.style.transform = `translate(${translateX}, ${translateY})`;
+          node.style.alignSelf = align;
         }
       }
-    }, [displayUpward, targetRef, targetElement]);
+    }, [displayUpward, targetElement]);
 
     useInterval(checkDropdownPosition, 100);
 
@@ -178,7 +131,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
     return (
       <>
-        <Portal targetElement={targetNode} $reverse={displayUpward} rootRef={rootRef}>
+        <Portal targetElement={targetElement} $reverse={displayUpward} rootRef={rootRef}>
           <FakeTarget />
           <Container
             ref={refSetter(ref, containerRef)}

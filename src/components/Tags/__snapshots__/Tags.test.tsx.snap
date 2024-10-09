@@ -17,8 +17,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: 50px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -26,8 +26,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c1:focus-visible {
@@ -53,8 +53,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: auto;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -62,8 +62,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c4:focus-visible {
@@ -82,7 +82,7 @@ exports[`Tags should render default component 1`] = `
 }
 
 .c3 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -180,8 +180,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: 50px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -189,8 +189,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c1:focus-visible {
@@ -216,8 +216,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: auto;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #E5E7EB);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -225,8 +225,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D5D8DE);
-  background: var(--admiral-color-Neutral_Neutral20, #D5D8DE);
+  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
 }
 
 .c4:focus-visible {
@@ -245,7 +245,7 @@ exports[`Tags should render default component 1`] = `
 }
 
 .c3 {
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
   overflow: hidden;
   text-overflow: ellipsis;

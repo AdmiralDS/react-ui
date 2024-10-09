@@ -10,6 +10,7 @@ import { MenuButtonOptionsTemplate } from './MenuButtonOptions.template';
 import { MenuButtonVariantsTemplate } from './MenuButtonVariants.template';
 import { MenuButtonWithBottomPanelTemplate } from './MenuButtonWithBottomPanel.template';
 import { MenuButtonWithTopPanelTemplate } from './MenuButtonWithTopPanel.template';
+import { MenuButtonMultiLevelTemplate } from './MenuButtonMultiLevel.template';
 
 // Imports of text sources
 import MenuButtonIconRaw from './MenuButtonIcon.template?raw';
@@ -18,6 +19,7 @@ import MenuButtonOptionsRaw from './MenuButtonOptions.template?raw';
 import MenuButtonVariantsRaw from './MenuButtonVariants.template?raw';
 import MenuButtonWithBottomPanelRaw from './MenuButtonWithBottomPanel.template?raw';
 import MenuButtonWithTopPanelRaw from './MenuButtonWithTopPanel.template?raw';
+import MenuButtonMultiLevelRaw from './MenuButtonMultiLevel.template?raw';
 
 export default {
   title: 'Admiral-2.1/MenuButton',
@@ -156,6 +158,9 @@ export default {
     menuMaxHeight: {
       control: false,
     },
+    buttonCssMixin: {
+      control: false,
+    },
     dropContainerCssMixin: {
       control: false,
     },
@@ -286,5 +291,26 @@ export const MenuButtonWithTopPanel = {
   },
 
   name: 'MenuButton с чекбоксами и верхней панелью в выпадающем меню',
+};
+//</editor-fold>
+
+//<editor-fold desc="MenuButton с многоуровневым меню">
+const MenuButtonMultiLevelStory: StoryFn<typeof MenuButton> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuButtonMultiLevelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const MenuButtonMultiLevel = {
+  render: MenuButtonMultiLevelStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MenuButtonMultiLevelRaw,
+      },
+    },
+  },
+
+  name: 'MenuButton с многоуровневым меню',
 };
 //</editor-fold>

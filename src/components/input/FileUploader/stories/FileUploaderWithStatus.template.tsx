@@ -27,7 +27,7 @@ export const FileUploaderWithStatusTemplate = (props: FileUploaderProps) => {
   /** Для имитации загрузки файлов */
   React.useEffect(() => {
     if (isLoading && files) {
-      const timeout = window.setTimeout(() => {
+      const timeout = setTimeout(() => {
         setIsLoading(false);
         const updatedFiles = files.map((file) => ({
           ...file,
@@ -37,7 +37,7 @@ export const FileUploaderWithStatusTemplate = (props: FileUploaderProps) => {
         setFiles(updatedFiles);
       }, 3000);
       return () => {
-        window.clearTimeout(timeout);
+        clearTimeout(timeout);
       };
     }
   }, [isLoading, files]);

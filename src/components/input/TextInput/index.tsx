@@ -1,4 +1,7 @@
-import * as React from 'react';
+import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes } from 'react';
+import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import styled, { css } from 'styled-components';
+
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -8,7 +11,6 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as EyeCloseOutlineSvg } from '@admiral-ds/icons/build/service/EyeCloseOutline.svg';
 import { ReactComponent as EyeOutlineSvg } from '@admiral-ds/icons/build/service/EyeOutline.svg';
-import styled, { css } from 'styled-components';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Spinner } from '#src/components/Spinner';
@@ -37,7 +39,10 @@ const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
+  padding-left: ${(props) =>
+    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsBeforeCount ?? 0)}px;
 `;
 
 const disabledColors = css`
@@ -78,7 +83,7 @@ export const InputBorderedDiv = styled.div<{ disabled?: boolean; $status?: Input
 `;
 
 const getHoverBorderColor = css<{ $status?: InputStatus }>`
-  ${({ $status, theme }) => {
+  border-color: ${({ $status, theme }) => {
     if (!$status) {
       return `var(--admiral-color-Neutral_Neutral60, ${theme.color['Neutral/Neutral 60']})`;
     }
@@ -88,7 +93,7 @@ const getHoverBorderColor = css<{ $status?: InputStatus }>`
       case 'success':
         return `var(--admiral-color-Success_Success60, ${theme.color['Success/Success 60']})`;
     }
-  }}
+  }};
 `;
 
 const getFocusBorder = css<{ $status?: InputStatus }>`
@@ -106,13 +111,18 @@ const getFocusBorder = css<{ $status?: InputStatus }>`
     }};
 `;
 
-export const BorderedDivStyles = css<{ disabled?: boolean; readOnly?: boolean; $status?: InputStatus }>`
+export const BorderedDivStyles = css<{
+  disabled?: boolean;
+  readOnly?: boolean;
+  $isLoading?: boolean;
+  $status?: InputStatus;
+}>`
   &:focus-within:not(:disabled) > ${InputBorderedDiv} {
-    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : getFocusBorder)}
+    ${(p) => (p.disabled || p.readOnly ? 'border-color: transparent' : !p.$isLoading ? getFocusBorder : '')}
   }
 
   &:hover:not(:focus-within) > ${InputBorderedDiv} {
-    border-color: ${(props) => (props.disabled || props.readOnly ? 'transparent' : getHoverBorderColor)};
+    ${(p) => (!p.$isLoading ? (p.disabled || p.readOnly ? 'transparent' : getHoverBorderColor) : '')};
   }
 `;
 
@@ -153,7 +163,9 @@ const Input = styled.input<ExtraProps>`
 
   [data-disable-copying] & {
     user-select: none;
-    pointer-events: none;
+    &::selection {
+      background-color: transparent;
+    }
   }
 
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -175,8 +187,10 @@ const Input = styled.input<ExtraProps>`
     ${disabledColors}
   }
 
+  [data-loading] &&&,
   &&&:disabled {
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   ${extraPadding}
@@ -187,12 +201,9 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
 
   display: flex;
   align-items: center;
-
-  padding-right: ${horizontalPaddingValue}px;
 
   & svg {
     border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
@@ -208,6 +219,20 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
       outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
     }
   }
+`;
+const IconPanelBefore = styled(IconPanel)`
+  left: 0;
+
+  padding-left: ${horizontalPaddingValue}px;
+
+  & > *:not(:first-child) {
+    margin-right: 8px;
+  }
+`;
+const IconPanelAfter = styled(IconPanel)`
+  right: 0;
+
+  padding-right: ${horizontalPaddingValue}px;
 
   & > *:not(:first-child) {
     margin-left: 8px;
@@ -217,25 +242,35 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
 const StyledContainer = styled(HeightLimitedContainer)<{
   disabled?: boolean;
   readOnly?: boolean;
+  $isLoading?: boolean;
   $status?: InputStatus;
   $dimension?: ComponentDimension;
 }>`
   ${BorderedDivStyles}
-  ${({ disabled }) => (disabled ? 'cursor: not-allowed;' : '')}
+  ${(p) => (p.disabled ? 'cursor: not-allowed;' : p.$isLoading ? 'cursor: default;' : '')}
 `;
 
 function defaultHandleInput(newInputData: InputData | null): InputData {
   return newInputData || {};
 }
 
-const stopEvent = (e: React.MouseEvent) => e.preventDefault();
-
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
-  /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.13.0, будет удалено в 10.x.x версии.
+   * Взамен используйте iconsAfter
+   *
+   * Иконки для отображения в правом углу поля
+   **/
+  icons?: ReactNode;
+
+  /** Иконки для отображения в начале поля */
+  iconsBefore?: ReactNode;
+
+  /** Иконки для отображения в конце поля */
+  iconsAfter?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -247,7 +282,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   isLoading?: boolean;
 
   /** Ref контейнера компонента */
-  containerRef?: React.RefObject<HTMLDivElement>;
+  containerRef?: RefObject<HTMLDivElement>;
 
   /**
    * Дает возможность изменить значение поля ввода и позицию курсора до момента отображения при следующем цикле рендеринга.
@@ -265,7 +300,7 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   showTooltip?: boolean;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       dimension = 'm',
@@ -276,6 +311,8 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       handleInput = defaultHandleInput,
       containerRef,
       icons,
+      iconsBefore,
+      iconsAfter,
       children,
       className,
       style,
@@ -287,17 +324,18 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const wrapperRef = containerRef || React.useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const wrapperRef = containerRef || useRef<HTMLDivElement>(null);
 
-    const iconArray = React.Children.toArray(icons);
+    const iconAfterArray = Children.toArray(iconsAfter || icons);
+    const iconBeforeArray = Children.toArray(iconsBefore);
 
-    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
-    const [innerValueState, setInnerValueState] = React.useState(props.defaultValue ?? undefined);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const [innerValueState, setInnerValueState] = useState(props.defaultValue ?? undefined);
     const innerValue = props.value ?? innerValueState;
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (checkOverflow(inputRef.current)) {
         setOverflowActive(true);
         return;
@@ -305,7 +343,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       setOverflowActive(false);
     }, [tooltipVisible, setOverflowActive]);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function show() {
         if (document.activeElement !== inputRef.current) setTooltipVisible(true);
       }
@@ -325,15 +363,15 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
       }
     }, [setTooltipVisible]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       setInnerValueState(e.currentTarget.value);
       props.onChange?.(e);
     };
 
-    const [isPasswordVisible, setPasswordVisible] = React.useState(false);
+    const [isPasswordVisible, setPasswordVisible] = useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
-      iconArray.push(
+      iconAfterArray.push(
         <InputIconButton
           icon={Icon}
           key="eye-icon"
@@ -346,7 +384,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
-      iconArray.unshift(
+      iconAfterArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
           key="clear-icon"
@@ -365,21 +403,22 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
+      iconAfterArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
     }
 
-    const iconCount = iconArray.length;
+    const iconsBeforeCount = iconBeforeArray.length;
+    const iconsAfterCount = iconAfterArray.length;
 
     // const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       const nullHandledValue = handleInput(null);
 
-      function oninput(this: HTMLInputElement) {
+      function oninput(this: HTMLInputElement, e: Event) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };
 
-        const inputData = handleInput(currentInputData);
+        const inputData = handleInput(currentInputData, e as InputEvent);
 
         if (placeholder && !isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(this, { ...inputData, value: '' });
@@ -408,6 +447,19 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         };
       }
     }, [handleInput, placeholder]);
+
+    // Эффект запрещающий выделение контента инпута с целью копирования
+    useEffect(() => {
+      function select(this: HTMLInputElement) {
+        this.selectionEnd = this.selectionStart;
+      }
+
+      if (disableCopying && inputRef.current) {
+        const node = inputRef.current;
+        node.addEventListener('select', select, true);
+        return () => node.removeEventListener('select', select, true);
+      }
+    }, [disableCopying]);
     return (
       <>
         <StyledContainer
@@ -417,15 +469,14 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
           ref={wrapperRef}
           disabled={props.disabled}
           readOnly={props.readOnly}
+          $isLoading={isLoading}
           $status={status}
           data-disabled={props.disabled ? true : undefined}
           data-read-only={props.readOnly ? true : undefined}
+          data-loading={isLoading ? true : undefined}
           data-status={status}
           $skeleton={skeleton}
           data-disable-copying={disableCopying ? true : undefined}
-          {...(disableCopying && {
-            onMouseDown: stopEvent,
-          })}
         >
           <Input
             ref={refSetter(ref, inputRef)}
@@ -433,14 +484,20 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             onChange={handleChange}
             placeholder={placeholder}
             $dimension={dimension}
-            $iconCount={iconCount}
+            $iconsAfterCount={iconsAfterCount}
+            $iconsBeforeCount={iconsBeforeCount}
             type={type === 'password' && isPasswordVisible ? 'text' : type}
           />
           <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
-          {iconCount > 0 && (
-            <IconPanel disabled={props.disabled} $dimension={dimension}>
-              {iconArray}
-            </IconPanel>
+          {iconsBeforeCount > 0 && (
+            <IconPanelBefore disabled={props.disabled} $dimension={dimension}>
+              {iconBeforeArray}
+            </IconPanelBefore>
+          )}
+          {iconsAfterCount > 0 && (
+            <IconPanelAfter disabled={props.disabled} $dimension={dimension}>
+              {iconAfterArray}
+            </IconPanelAfter>
           )}
           {children}
         </StyledContainer>

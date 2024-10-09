@@ -70,7 +70,7 @@ const widthIcons = css<{ $dimension: ChipDimension }>`
   }};
 `;
 
-const paddings = css<{ $dimension: ChipDimension }>`
+const filledPaddings = css<{ $dimension: ChipDimension }>`
   padding: ${({ $dimension }) => {
     switch ($dimension) {
       case 'm':
@@ -81,6 +81,21 @@ const paddings = css<{ $dimension: ChipDimension }>`
         return '4px 8px';
     }
   }};
+`;
+const outlinedPaddings = css<{ $dimension: ChipDimension }>`
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 'm':
+        return '5px 11px';
+      case 's':
+        return '3px 7px';
+      default:
+        return '3px 7px';
+    }
+  }};
+`;
+const paddings = css<{ $dimension: ChipDimension; $appearance?: ChipAppearance }>`
+  ${({ $appearance }) => ($appearance === 'filled' ? filledPaddings : outlinedPaddings)}
 `;
 
 const chipTypographyHover = css<{
@@ -139,7 +154,7 @@ const actionsMixin = css<{
         return `background-color: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});`;
       }
       if ($appearance === 'filled') {
-        return `background-color: var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`;
+        return `background-color: var(--admiral-color-Opacity_Neutral12, ${theme.color['Opacity/Neutral 12']});`;
       } else if (!$withCloseIcon) {
         return `background-color: var(--admiral-color-Opacity_Hover, ${theme.color['Opacity/Hover']});`;
       }
@@ -156,7 +171,7 @@ const actionsMixin = css<{
         return `background-color: var(--admiral-color-Primary_Primary80, ${theme.color['Primary/Primary 80']});`;
       }
       if ($appearance === 'filled') {
-        return `background-color: var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']});`;
+        return `background-color: var(--admiral-color-Opacity_Neutral16, ${theme.color['Opacity/Neutral 16']});`;
       } else if (!$withCloseIcon) {
         return `background-color: var(--admiral-color-Opacity_Press, ${theme.color['Opacity/Press']});`;
       }
@@ -185,7 +200,7 @@ const colorsBorderAndBackground = css<{
       return `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`;
     }
     return $appearance === 'filled'
-      ? `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`
+      ? `var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']})`
       : 'transparent';
   }};
 
@@ -243,11 +258,14 @@ export const ChipComponentStyled = styled.div<{
     ($defaultChip || $withTooltip) && !$disabled ? 'pointer' : $disabled ? 'not-allowed' : 'default'};
   ${colorsBorderAndBackground}
   ${heights}
-  ${(p) => (p.$withCloseIcon ? `padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;` : paddings)}
+  ${(p) =>
+    p.$withCloseIcon
+      ? `padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
+      : paddings}
   ${(p) =>
     p.$withBadge && !p.$withCloseIcon
-      ? `padding-inline-end: ${p.$dimension === 's' ? 4 : 6}px;
-         padding-inline-start: ${p.$dimension === 's' ? 8 : 12}px;`
+      ? `padding-inline-end: ${(p.$dimension === 's' ? 4 : 6) - (p.$appearance === 'outlined' ? 1 : 0)}px;
+         padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
       : ''}
   ${chipTypography}
 `;

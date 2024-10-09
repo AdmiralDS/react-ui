@@ -18,18 +18,18 @@ export const SelectMultiTemplate = (props: SelectProps) => {
     <>
       <Select
         {...props}
-        defaultValue={selectValue}
+        // defaultValue={selectValue}
         multiple={true}
         onSelectedChange={handleSelectedChange}
         dimension="xl"
         displayClearIcon={true}
         placeholder="Placeholder"
       >
-        <Option value="big">
+        <Option id={'big'} value="big">
           Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
         </Option>
         {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option key={ind} value={String(ind)} disabled={[1, 3].includes(ind)}>
+          <Option id={ind.toString()} key={ind} value={`${ind}0000`} disabled={[1, 3].includes(ind)}>
             {`${ind}0000`}
           </Option>
         ))}

@@ -21,6 +21,7 @@ import {
 import type { InputStatus } from '#src/components/input/types';
 import { ExtraTextContainer } from '#src/components/Field';
 import { Label } from '#src/components/Label';
+import { acceptFile } from './utils';
 
 export { fullWidthPositionMixin, halfWidthPositionMixin } from './style';
 
@@ -125,6 +126,7 @@ const Wrapper = styled.div<{ $dimension: FileInputDimension; $width?: string | n
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 16px;
 `;
 
 const FileInputWrapper = styled.div`
@@ -224,6 +226,36 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     const handleDragLeave = () => {
       setDragOver(false);
     };
+
+    // https://stackoverflow.com/questions/49001554/file-field-accept-attribute-not-working-properly-when-drag-and-drop-file-into
+    useEffect(() => {
+      const inputNode = inputRef.current;
+
+      function handleDrop(this: HTMLInputElement, e: DragEvent) {
+        const files = Array.from(e.dataTransfer?.files || []);
+        if (files.length > 0) {
+          e.preventDefault();
+          const filteredFiles = files.filter((file) => acceptFile(file, props.accept));
+          const dt = new DataTransfer();
+          filteredFiles.forEach((file) => dt.items.add(file));
+          this.files = dt.files;
+
+          let event;
+          if (typeof Event === 'function') {
+            event = new Event('input', { bubbles: true });
+          } else {
+            event = document.createEvent('Event');
+            event.initEvent('input', true, true);
+          }
+
+          this.dispatchEvent(event);
+        }
+      }
+      if (inputNode) {
+        inputNode.addEventListener('drop', handleDrop);
+      }
+    }, [props.accept]);
+
     return (
       <Wrapper $dimension={dimension} $width={width} data-status={status}>
         <FileInputWrapper>

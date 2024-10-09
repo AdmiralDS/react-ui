@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import React, { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, Fragment, useEffect, useMemo, useState } from 'react';
 import type { Dimension, TreeItemProps, TreeNodeRenderOptionProps } from './TreeNode';
 import styled from 'styled-components';
 
@@ -162,8 +162,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     const toggleCheck = (id: string | number) => {
       const hasChildren = itemHasChildren(map[id].node);
 
+      // При расчете indeterminate учитывается только не disabled опции, это связано с тем, что при переключении
+      // родительского узла невозможно сбросить состояние checked
       const indeterminate =
-        map[id].dependencies?.some((depId: number | string) => map[depId].node.checked) &&
+        map[id].dependencies?.some((depId: number | string) => !map[depId].node.disabled && map[depId].node.checked) &&
         map[id].dependencies?.some((depId: number | string) => !map[depId].node.checked);
 
       const checked = hasChildren
@@ -203,7 +205,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
           : !!item.checked;
 
         return (
-          <React.Fragment key={item.id}>
+          <Fragment key={item.id}>
             {item.render({
               checked,
               indeterminate,
@@ -223,7 +225,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
               onToggleExpand: () => toggleExpand(item.id),
             } as TreeNodeRenderOptionProps)}
             {item.children && hasChildren && item.expanded && renderChildren(item.children)}
-          </React.Fragment>
+          </Fragment>
         );
       });
     };

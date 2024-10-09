@@ -9,16 +9,16 @@ export const lightThemeText = `
 
   /* Neutral */
   --admiral-color-Neutral_Neutral00: #FFFFFF;
-  --admiral-color-Neutral_Neutral05: #F3F4F6;
-  --admiral-color-Neutral_Neutral10: #E5E7EB;
-  --admiral-color-Neutral_Neutral20: #D5D8DE;
-  --admiral-color-Neutral_Neutral30: #B0B5BD;
-  --admiral-color-Neutral_Neutral40: #9BA0AA;
-  --admiral-color-Neutral_Neutral50: #717681;
-  --admiral-color-Neutral_Neutral60: #646973;
-  --admiral-color-Neutral_Neutral70: #4F525A;
-  --admiral-color-Neutral_Neutral80: #35383F;
-  --admiral-color-Neutral_Neutral90: #23262D;
+  --admiral-color-Neutral_Neutral05: #F5F5F6;
+  --admiral-color-Neutral_Neutral10: #EAEBEC;
+  --admiral-color-Neutral_Neutral20: #D7D8DA;
+  --admiral-color-Neutral_Neutral30: #B2B5B8;
+  --admiral-color-Neutral_Neutral40: #9EA0A4;
+  --admiral-color-Neutral_Neutral50: #74767B;
+  --admiral-color-Neutral_Neutral60: #67696D;
+  --admiral-color-Neutral_Neutral70: #515256;
+  --admiral-color-Neutral_Neutral80: #37383B;
+  --admiral-color-Neutral_Neutral90: #252629;
 
   /* Primary */
   --admiral-color-Primary_Primary10: #EDF5FF;
@@ -33,15 +33,15 @@ export const lightThemeText = `
   /* Special */
   --admiral-color-Special_StaticWhite: #FFFFFF;
   --admiral-color-Special_ElevatedBG: #FFFFFF;
-  --admiral-color-Special_DarkStaticNeutral00: #121316;
-  --admiral-color-Special_DarkStaticNeutral05: #1C1E22;
-  --admiral-color-Special_DarkStaticNeutral10: #282A2F;
-  --admiral-color-Special_DarkStaticNeutral20: #383C44;
-  --admiral-color-Special_DarkStaticNeutral30: #4E535D;
-  --admiral-color-Special_DarkStaticNeutral50: #7F8692;
-  --admiral-color-Special_DarkStaticNeutral70: #A6ABB4;
-  --admiral-color-Special_DarkStaticNeutral80: #C7CAD1;
-  --admiral-color-Special_DarkStaticNeutral90: #E2E5E9;
+  --admiral-color-Special_DarkStaticNeutral00: #131314;
+  --admiral-color-Special_DarkStaticNeutral05: #1B1C1D;
+  --admiral-color-Special_DarkStaticNeutral10: #252627;
+  --admiral-color-Special_DarkStaticNeutral20: #3B3C3E;
+  --admiral-color-Special_DarkStaticNeutral30: #515357;
+  --admiral-color-Special_DarkStaticNeutral50: #82868B;
+  --admiral-color-Special_DarkStaticNeutral70: #A8ABAF;
+  --admiral-color-Special_DarkStaticNeutral80: #C9CACD;
+  --admiral-color-Special_DarkStaticNeutral90: #E3E5E7;
   --admiral-color-Special_DarkStaticPrimary60: #3984FF;
   --admiral-color-Special_DarkStaticPrimary70: #5290FF;
   --admiral-color-Special_DarkStaticPrimary80: #689FFF;
@@ -56,6 +56,7 @@ export const lightThemeText = `
   --admiral-color-Opacity_DarkStaticHover: #FFFFFF0F;
   --admiral-color-Opacity_DarkStaticFocus: #FFFFFF17;
   --admiral-color-Opacity_DarkStaticPress: #FFFFFF1F;
+  --admiral-color-Opacity_Neutral4: #0000000A;
   --admiral-color-Opacity_Neutral8: #00000014;
   --admiral-color-Opacity_Neutral12: #0000001F;
   --admiral-color-Opacity_Neutral16: #00000029;

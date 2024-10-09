@@ -1,30 +1,19 @@
-import type {
-  BaseSyntheticEvent,
-  FocusEvent,
-  MouseEvent,
-  ChangeEventHandler,
-  InputHTMLAttributes,
-  ReactNode,
-  RefObject,
-  KeyboardEventHandler,
-  ChangeEvent,
-} from 'react';
 import {
+  Children,
+  cloneElement,
   forwardRef,
-  useState,
+  isValidElement,
+  useCallback,
+  useEffect,
   useMemo,
   useRef,
-  useEffect,
-  useCallback,
-  Children,
-  isValidElement,
-  cloneElement,
+  useState,
 } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { keyboardKey } from '../../common/keyboardKey';
+import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -33,13 +22,13 @@ import { ConstantSelectProvider } from './useSelectContext';
 import { MultipleSelectChips } from './MultipleSelectChips';
 import {
   BorderedDiv,
+  EmptyMessageWrapper,
   IconPanel,
   Input,
   OptionWrapper,
   SelectWrapper,
-  ValueWrapper,
   StyledMenu,
-  EmptyMessageWrapper,
+  ValueWrapper,
 } from './styled';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
@@ -51,11 +40,12 @@ import type { RenderPanelProps } from '#src/components/Menu';
 import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
-import type { SearchFormat, SelectItemProps, IConstantOption } from '#src/components/input/Select/types';
+import type { IConstantOption, SearchFormat, SelectItemProps } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
+import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
 export type { SearchFormat } from './types';
 
@@ -76,10 +66,10 @@ export const DropDownText = styled(OptionWrapper)`
 type PartialOption = { value: string; disabled: boolean } & IConstantOption;
 const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disabled }) => !disabled)?.value;
 
-const stopPropagation = (evt: BaseSyntheticEvent) => evt.stopPropagation();
+const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();
 
 export interface SelectProps
-  extends Omit<InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
+  extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
     DropContainerStyles,
     Pick<DropMenuComponentProps, 'targetElement' | 'renderTopPanel' | 'renderBottomPanel'> {
   value?: string | string[];
@@ -121,21 +111,21 @@ export interface SelectProps
    * Взамен используйте параметр targetElement.
    *
    * Референс на контейнер для правильного позиционирования выпадающего списка */
-  portalTargetRef?: RefObject<HTMLElement>;
+  portalTargetRef?: React.RefObject<HTMLElement>;
 
   /** Ref внутреннего input компонента */
-  inputTargetRef?: RefObject<HTMLInputElement>;
+  inputTargetRef?: React.RefObject<HTMLInputElement>;
 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
   /** Иконки для отображения в правом углу поля */
-  icons?: ReactNode;
+  icons?: React.ReactNode;
 
   /** Статус поля */
   status?: InputStatus;
 
-  renderSelectValue?: (value: string | string[] | undefined, searchText: string) => ReactNode;
+  renderSelectValue?: (value: string | string[] | undefined, searchText: string) => React.ReactNode;
 
   /**  Значение введенное пользователем для поиска */
   inputValue?: string;
@@ -143,11 +133,11 @@ export interface SelectProps
   /** первоначальное значение в строке поиска без переведения строки в контролируемый компонент */
   defaultInputValue?: string;
 
-  onInputChange?: ChangeEventHandler<HTMLInputElement>;
+  onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
 
-  onFocus?: (evt: FocusEvent<HTMLDivElement>) => void;
+  onFocus?: (evt: React.FocusEvent<HTMLDivElement>) => void;
 
-  onBlur?: (evt: FocusEvent<HTMLDivElement>) => void;
+  onBlur?: (evt: React.FocusEvent<HTMLDivElement>) => void;
 
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
@@ -164,7 +154,7 @@ export interface SelectProps
    **/
   locale?: {
     /** Сообщение, отображаемое при пустом наборе опций */
-    emptyMessage?: ReactNode;
+    emptyMessage?: React.ReactNode;
   };
 
   /**
@@ -173,7 +163,7 @@ export interface SelectProps
    *
    * Позволяет добавить панель внизу под выпадающим списком
    **/
-  renderDropDownBottomPanel?: (props: RenderPanelProps) => ReactNode;
+  renderDropDownBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
 
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
@@ -181,7 +171,7 @@ export interface SelectProps
    *
    * Позволяет добавить панель сверху над выпадающим списком
    **/
-  renderDropDownTopPanel?: (props: RenderPanelProps) => ReactNode;
+  renderDropDownTopPanel?: (props: RenderPanelProps) => React.ReactNode;
 
   /** Состояние принудительного открытия выпадающего списка опций */
   forcedOpen?: boolean;
@@ -190,16 +180,16 @@ export interface SelectProps
   onChangeDropDownState?: (opened: boolean) => void;
 
   /** Inner input keyboard event handler */
-  onInputKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyUpCapture?: KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyUpCapture?: React.KeyboardEventHandler<HTMLInputElement>;
 
   /** Inner input keyboard event handler */
-  onInputKeyDownCapture?: KeyboardEventHandler<HTMLInputElement>;
+  onInputKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
 
   /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
@@ -221,6 +211,8 @@ export interface SelectProps
   forceHideOverflowTooltip?: boolean;
   /** Событие, которое вызывается при изменении выбранных опций/опции */
   onSelectedChange?: (value: string | Array<string>) => void;
+  /** Признак поднятия выбранных опций вверх списка */
+  moveSelectedOnTop?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -278,6 +270,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       title,
       forceHideOverflowTooltip = false,
       onSelectedChange,
+      moveSelectedOnTop,
       ...props
     },
     ref,
@@ -339,13 +332,47 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       }
     }, [constantOptions, selectedValue, multiple]);
 
+    const prevIsSearchPanelOpen = usePrevious<boolean>(isSearchPanelOpen);
+    const [itemsOnTop, setItemsOnTop] = useState<Array<SelectItemProps>>([]);
+
+    useEffect(() => {
+      if ((!multiple || !moveSelectedOnTop) && itemsOnTop.length > 0) {
+        setItemsOnTop([]);
+      }
+
+      if (multiple && moveSelectedOnTop && prevIsSearchPanelOpen !== isSearchPanelOpen && isSearchPanelOpen) {
+        const selected = selectedOptions.map((item) => item.value);
+
+        const items =
+          selected.length > 0
+            ? selected.reduce<Array<SelectItemProps>>((acc, value) => {
+                const modelItem = dropDownItems.find((item) => item.value === value);
+
+                if (modelItem) acc.push(modelItem);
+                return acc;
+              }, [])
+            : [];
+        setItemsOnTop(items);
+      }
+    }, [dropDownItems, isSearchPanelOpen, selectedOptions, multiple, moveSelectedOnTop]);
+
     const dropDownModel = useMemo<Array<MenuModelItemProps>>(() => {
+      const selected = itemsOnTop.map((item) => item.value);
+
       const filteredItems = dropDownItems.filter((item) => {
         return onFilterItem(item.value, searchValue, searchFormat);
       });
 
-      return filteredItems.length
-        ? filteredItems
+      const resultItems = filteredItems.reduce<Array<MenuModelItemProps>>(
+        (acc, item) => {
+          if (!selected.includes(item.value)) acc.push(item);
+          return acc;
+        },
+        [...itemsOnTop],
+      );
+
+      return resultItems.length
+        ? resultItems
         : [
             {
               id: 'emptyMessage',
@@ -353,7 +380,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               disabled: true,
             },
           ];
-    }, [isLoading, dropDownItems, dimension, searchValue]);
+    }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
@@ -413,8 +440,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         selectElem.dispatchEvent(new Event('change', { bubbles: true }));
 
         if (!multiple) onCloseSelect();
+
+        if (searchValue && inputRef.current) {
+          changeInputData(inputRef.current, {
+            value: '',
+            selectionEnd: 0,
+            selectionStart: 0,
+          });
+          const currentActiveItem = activeItem;
+          setActiveItem(undefined);
+          setTimeout(() => setActiveItem(currentActiveItem));
+        }
       },
-      [onCloseSelect, multiple],
+      [onCloseSelect, multiple, searchValue, activeItem],
     );
 
     const resetOptions = useCallback(() => {
@@ -454,9 +492,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           readOnly={readOnly}
           onChipRemove={handleOptionSelect}
           onChipClick={stopPropagation}
+          isOptionsListOpen={isSearchPanelOpen}
+          hasMaxHeight={!!maxRowCount && maxRowCount !== 'none'}
         />
       ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, readOnly, handleOptionSelect],
+      [
+        selectedOptions,
+        shouldFixMultiSelectHeight,
+        disabled,
+        readOnly,
+        handleOptionSelect,
+        isSearchPanelOpen,
+        maxRowCount,
+      ],
     );
 
     const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
@@ -485,13 +533,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       setIsSearchPanelOpen((prev) => !prev);
     };
 
-    const mutateAndExtendTargetInputValue = (evt: ChangeEvent<HTMLInputElement>) => {
+    const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
       evt.target.value = `${visibleValue}${evt.target.value}`;
       mutableState.current.shouldExtendInputValue = false;
     };
 
-    const onLocalInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const onLocalInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!multiple) setShouldRenderSelectValue(false);
       mutateAndExtendTargetInputValue(evt);
       if (inputValue === undefined) setSearchValue(evt.target.value);
@@ -591,14 +639,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       };
     }, []);
 
-    const onFocus = (evt: FocusEvent<HTMLDivElement>) => {
+    const onFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
       if (!isFocused) {
         setIsFocused(true);
         onFocusFromProps?.(evt);
       }
     };
 
-    const handleWrapperBlur = (evt: FocusEvent<HTMLDivElement>) => {
+    const handleWrapperBlur = (evt: React.FocusEvent<HTMLDivElement>) => {
       // если фокус переходит не на инпут, содержащийся внутри компонента
       if (!evt.currentTarget.contains(evt.relatedTarget) && !dropDownRef.current?.contains(evt.relatedTarget)) {
         setIsFocused(false);
@@ -608,7 +656,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const handleNativeControlChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+    const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
       if (isKeyboardEvent.current && modeIsSelect) {
         setPreseleceted(evt.target.value);
         return;
@@ -677,7 +725,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (!selectIsUncontrolled) setSelectedValue(value);
     }, [value, selectIsUncontrolled]);
 
-    const handleWrapperClick = (e: MouseEvent) => {
+    const handleWrapperClick = (e: React.MouseEvent) => {
       if (e.target && dropDownRef.current?.contains(e.target as Node)) return;
 
       const passClick = !modeIsSelect && isSearchPanelOpen;
@@ -747,10 +795,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         disabled={disabled}
         data-disabled={disabled}
         $readonly={readOnly}
+        $isLoading={isLoading}
         $dimension={dimension}
         ref={containerRef}
         data-status={status}
-        onClick={disabled || readOnly ? undefined : handleWrapperClick}
+        onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
@@ -775,7 +824,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           $dimension={dimension}
           $multiple={multiple}
           $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
-          $maxRowCount={calcRowCount !== 'none' ? calcRowCount : undefined}
+          $maxRowCount={maxRowCount !== 'none' ? maxRowCount : undefined}
+          $idleHeight={idleHeight}
           $opened={isSearchPanelOpen}
           $isEmpty={isEmpty}
         >
@@ -849,6 +899,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <OpenStatusButton
               $isOpen={isSearchPanelOpen}
               data-disabled={disabled ? true : undefined}
+              data-loading={isLoading ? true : undefined}
               onClick={handleSearchPanelToggle}
               aria-hidden
             />

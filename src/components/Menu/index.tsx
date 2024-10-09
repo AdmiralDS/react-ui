@@ -1,8 +1,9 @@
-import type { HTMLAttributes } from 'react';
-import * as React from 'react';
+import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import type { RenderOptionProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
+import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
 import { VirtualBody } from '#src/components/Menu/VirtualBody';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -30,9 +31,16 @@ const getHeight = (rowCount: number, dimension?: MenuDimensions) => {
   return getItemHeight(dimension) * rowCount + 16;
 };
 
-const menuListHeights = css<{ $dimension?: MenuDimensions; $maxHeight?: string | number; $rowCount: number }>`
-  max-height: ${({ $dimension, $maxHeight, $rowCount }) => {
-    if ($maxHeight) return $maxHeight;
+type MenuListHeightsProps = {
+  $dimension?: MenuDimensions;
+  $rowCount: number;
+  $hasTopPanel: boolean;
+  $hasBottomPanel: boolean;
+  $maxHeight?: string | number;
+};
+
+const menuListHeights = css<MenuListHeightsProps>`
+  max-height: ${({ $dimension, $rowCount }) => {
     return `min(calc(100vh - 16px), ${getHeight($rowCount, $dimension)}px)`;
   }};
 `;
@@ -41,37 +49,40 @@ const Wrapper = styled.div<{
   $dimension?: MenuDimensions;
   $hasTopPanel: boolean;
   $hasBottomPanel: boolean;
-  $rowCount: number;
-  $maxHeight?: string | number;
 }>`
+  overflow: hidden;
+  position: relative;
+
   padding: 0;
   ${(p) => (p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   box-sizing: border-box;
   display: flex;
-  overflow: hidden;
+
   flex-direction: column;
   align-items: stretch;
   pointer-events: initial;
   background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
   max-width: calc(100vw - 32px);
   border-color: transparent;
-  ${menuListHeights};
   &:focus-visible {
     border: 0;
     outline: none;
   }
 `;
 
-const StyledDiv = styled.div<{ $hasTopPanel: boolean; $hasBottomPanel: boolean }>`
+const StyledDiv = styled.div<MenuListHeightsProps>`
+  ${hideNativeScrollbarsCss}
+  position: relative;
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
   margin: 0;
   appearance: none;
   flex: 1 1 auto;
   border: none;
-  overflow-y: auto;
   box-sizing: border-box;
+  ${menuListHeights};
+  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}` : '')};
 `;
 
 export interface RenderPanelProps {
@@ -100,12 +111,12 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onDeselectItem?: (id: string) => void;
   /** Модель данных, с рендер-пропсами*/
   model: Array<MenuModelItemProps>;
-  /** Задает максимальную высоту меню */
+  /** Задает максимальную высоту меню (с учетом наличия/отсутствия верхней/нижней панели) */
   maxHeight?: string | number;
   /** Позволяет добавить панель сверху над выпадающим списком */
-  renderTopPanel?: (props: RenderPanelProps) => React.ReactNode;
+  renderTopPanel?: (props: RenderPanelProps) => ReactNode;
   /** Позволяет добавить панель внизу под выпадающим списком */
-  renderBottomPanel?: (props: RenderPanelProps) => React.ReactNode;
+  renderBottomPanel?: (props: RenderPanelProps) => ReactNode;
   /**
    * @deprecated Помечено как deprecated в версии 4.9.1, будет удалено в 10.x.x версии.
    * Взамен используйте disableSelectedOptionHighlight
@@ -113,15 +124,22 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
    * Возможность множественного выбора (опции с Checkbox)
    **/
   multiSelection?: boolean;
-  /** Количество строк в меню */
+  /** Количество отображаемых пунктов меню */
   rowCount?: number;
   /** Возможность отключить подсветку выбранной опции
    * (например, при множественном выборе, когда у каждой опции есть Checkbox) */
   disableSelectedOptionHighlight?: boolean;
+
+  /** Отключает функцию выбора опции при нажатии на пробел */
+  disableSelectionOnSpace?: boolean;
+
+  /** Отключает функцию выбора опции при нажатии на Enter */
+  disableSelectionOnEnter?: boolean;
+
   onForwardCycleApprove?: () => boolean;
   onBackwardCycleApprove?: () => boolean;
   /** ссылка на контейнер, в котором находится Menu*/
-  containerRef?: React.RefObject<HTMLElement>;
+  containerRef?: RefObject<HTMLElement>;
   /** Включение виртуального скролла для меню.
    * Максимальная высота меню рассчитывается исходя из высоты 1 пункта, если параметр 'auto', то в расчет идет
    * высота согласно dimension
@@ -138,7 +156,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   subMenuRenderDirection?: RenderDirection;
   /** @internal
    * Ссылка на родительское меню для subMenu */
-  parentMenuRef?: React.RefObject<HTMLElement>;
+  parentMenuRef?: RefObject<HTMLElement>;
   /** @internal
    * Обработчик события при попытке закрыть subMenu */
   onCloseQuery?: () => void;
@@ -160,7 +178,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   onMenuKeyDown?: (e: KeyboardEvent) => void;
 }
 
-export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
+export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
   (
     {
       model,
@@ -190,6 +208,8 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       maxHeight,
       preselectedModeActive = false,
       onMenuKeyDown,
+      disableSelectionOnSpace,
+      disableSelectionOnEnter,
 
       ...props
     },
@@ -234,18 +254,22 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
-    const [selectedState, setSelectedState] = React.useState<Array<string>>(
+    const [selectedState, setSelectedState] = useState<Array<string>>(
       defaultSelected ? valueToArray(defaultSelected) : [],
     );
-    const [activeState, setActiveState] = React.useState<string | undefined>(uncontrolledActiveValue);
-    const [preselectedState, setPreselectedState] = React.useState<string | undefined>(uncontrolledActiveValue);
-    // const [lastScrollEvent, setLastScrollEvent] = React.useState<number>();
-    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
-    const subMenuRef = React.useRef<HTMLDivElement | null>(null);
-    const activeItemRef = React.useRef<HTMLDivElement | null>(null);
-    const [submenuVisible, setSubmenuVisible] = React.useState<boolean>(false);
+    const [activeState, setActiveState] = useState<string | undefined>(uncontrolledActiveValue);
+    const [preselectedState, setPreselectedState] = useState<string | undefined>(uncontrolledActiveValue);
 
-    const lastScrollEvent = React.useRef<number | undefined>();
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const subMenuRef = useRef<HTMLDivElement | null>(null);
+    const activeItemRef = useRef<HTMLDivElement | null>(null);
+    const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
+
+    const lastScrollEvent = useRef<number | undefined>();
+
+    useEffect(() => {
+      setActiveState(uncontrolledActiveValue);
+    }, [model]);
 
     const innerSelected = disableSelectedOptionHighlight
       ? []
@@ -260,8 +284,9 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         : preselected
       : undefined;
 
-    const menuRef = React.useRef<HTMLDivElement | null>(null);
-
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    const [menuNode, setMenuNode] = useState<HTMLElement | null>(null);
+    const verticalScrollAriaRef = useRef<HTMLDivElement | null>(null);
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
 
@@ -298,14 +323,23 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
 
     const { currentActiveMenu, activateMenu, deactivateMenu } = useDropdown(wrapperRef);
 
-    React.useEffect(() => {
+    useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
         if (currentActiveMenu?.current !== wrapperRef.current) return;
 
         const code = keyboardKey.getCode(e);
         switch (code) {
-          case keyboardKey[' ']:
+          case keyboardKey[' ']: {
+            if (disableSelectionOnSpace) break;
+            if (preselectedModeActive && !!preselectedId) {
+              handleClickItem(preselectedId);
+            } else if (activeId) handleClickItem(activeId);
+
+            e.preventDefault();
+            break;
+          }
           case keyboardKey.Enter: {
+            if (disableSelectionOnEnter) break;
             if (preselectedModeActive && !!preselectedId) {
               handleClickItem(preselectedId);
             } else if (activeId) handleClickItem(activeId);
@@ -363,9 +397,17 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
-    }, [active, activeId, activeState, currentActiveMenu, preselectedId]);
+    }, [
+      active,
+      activeId,
+      activeState,
+      currentActiveMenu,
+      preselectedId,
+      disableSelectionOnSpace,
+      disableSelectionOnEnter,
+    ]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (defaultIsActive) activateMenu?.(wrapperRef);
 
       return () => {
@@ -384,32 +426,33 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
       const preselected = preselectedId !== undefined ? preselectedId === id : undefined;
-      const renderProps: RenderOptionProps = {
+      const renderProps = {
         hovered,
         preselected,
         selected,
-        onLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-          if (!subMenuRef.current?.contains(e.relatedTarget as Node)) {
+        onLeave: (e: MouseEvent<HTMLDivElement>) => {
+          const relTarget = e.relatedTarget;
+          if (
+            relTarget &&
+            Object.hasOwn(relTarget, 'nodeName') && // необходимо чтобы проверить действительно ли это Node
+            !subMenuRef.current?.contains(relTarget as Node) &&
+            !verticalScrollAriaRef.current?.contains(relTarget as Node)
+          ) {
             setSubmenuVisible(false);
           }
         },
-        onHover: () => {
+        onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(itemProps.disabled ? undefined : id);
           setSubmenuVisible(hasSubmenu);
+          activeItemRef.current = e.currentTarget as HTMLDivElement;
         },
-        onMouseDown: preventFocusSteal ? (e: React.MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
+        onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
         hasSubmenu,
-        selfRef: (ref: HTMLDivElement | null) => {
-          if (activeId === id && hasSubmenu) {
-            activeItemRef.current = ref;
-          }
-        },
         disabled: itemProps.disabled,
-        containerRef,
         ...itemProps,
-      };
-      if (typeof render === 'function') return render(renderProps);
+      } as const;
+      if (typeof render === 'function') return render({ containerRef, ...renderProps });
 
       return (
         <MenuItem key={`${item.id}-${index}`} {...renderProps}>
@@ -442,12 +485,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    const previousActive = React.useRef<string | undefined>();
-    const previousActiveState = React.useRef<string | undefined>();
-    const previousPreselected = React.useRef<string | undefined>();
-    const previousPreselectedState = React.useRef<string | undefined>();
+    const previousActive = useRef<string | undefined>();
+    const previousActiveState = useRef<string | undefined>();
+    const previousPreselected = useRef<string | undefined>();
+    const previousPreselectedState = useRef<string | undefined>();
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       setTimeout(() => {
         let itemToScroll;
 
@@ -488,6 +531,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         activeItem.subItems.length > 0 && (
           <Menu
             ref={subMenuRef}
+            dimension={dimension}
             parentMenuRef={wrapperRef}
             model={activeItem.subItems}
             subMenuRenderDirection={subMenuRenderDirection}
@@ -501,7 +545,7 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseEnter = (e: MouseEvent<HTMLDivElement>) => {
       if (currentActiveMenu !== wrapperRef) activateMenu?.(wrapperRef);
       props.onMouseEnter?.(e);
     };
@@ -510,12 +554,12 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
       setSubmenuVisible(false);
     };
 
-    const handleFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+    const handleFocus = (e: FocusEvent<HTMLDivElement>) => {
       if (currentActiveMenu !== wrapperRef) activateMenu?.(wrapperRef);
       props.onFocus?.(e);
     };
 
-    const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    const handleBlur = (e: FocusEvent<HTMLDivElement>) => {
       if (currentActiveMenu === wrapperRef) deactivateMenu?.(wrapperRef);
       props.onBlur?.(e);
     };
@@ -528,17 +572,26 @@ export const Menu = React.forwardRef<HTMLDivElement | null, MenuProps>(
         $dimension={dimension}
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
-        $rowCount={rowCount}
-        $maxHeight={maxHeight}
         onMouseEnter={handleMouseEnter}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
-        <StyledDiv ref={menuRef} $hasTopPanel={hasTopPanel} $hasBottomPanel={hasBottomPanel} {...menuProps}>
+
+        <StyledDiv
+          ref={refSetter(menuRef, (node) => setMenuNode(node))}
+          $dimension={dimension}
+          $rowCount={rowCount}
+          $hasTopPanel={hasTopPanel}
+          $hasBottomPanel={hasBottomPanel}
+          $maxHeight={maxHeight}
+          {...menuProps}
+        >
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
+          <Scrollbars contentNode={menuNode} verticalScrollProps={{ ref: verticalScrollAriaRef }} />
         </StyledDiv>
+
         {submenuVisible && activeItemRef.current && (
           <SubMenuContainer
             target={activeItemRef}

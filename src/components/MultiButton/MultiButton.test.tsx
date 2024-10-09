@@ -6,7 +6,7 @@ import { MultiButton } from '../MultiButton';
 import { LIGHT_THEME } from '../themes';
 
 describe('MultiButton', () => {
-  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  HTMLElement.prototype.scrollIntoView = jest.fn();
 
   jest.useFakeTimers();
   beforeEach(() => {
@@ -42,6 +42,11 @@ describe('MultiButton', () => {
 
   it('should render component with disabled state', () => {
     const wrapper = render(<Component disabled />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render component with disabled only MainButton', () => {
+    const wrapper = render(<Component disabledMainButton />);
     expect(wrapper).toMatchSnapshot();
   });
 

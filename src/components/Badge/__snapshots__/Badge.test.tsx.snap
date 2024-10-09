@@ -19,8 +19,8 @@ exports[`Badge should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -50,8 +50,8 @@ exports[`Badge should render component with small dimension 1`] = `
   line-height: var(--admiral-line-height-Caption_Caption1, 16px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -136,8 +136,8 @@ exports[`Badge should render default component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 
@@ -167,8 +167,8 @@ exports[`Badge should render default component 1`] = `
   line-height: var(--admiral-line-height-Body_Body2Long, 20px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  background: var(--admiral-color-Neutral_Neutral10, #E5E7EB);
-  color: var(--admiral-color-Neutral_Neutral90, #23262D);
+  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
   user-select: none;
 }
 

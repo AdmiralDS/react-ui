@@ -31,13 +31,14 @@ const disabledStyles = css`
 `;
 
 const Container = styled.div<{
+  disabled?: boolean;
   $dimension?: FileInputDimension;
   $filesLayoutCssMixin?: ReturnType<typeof css>;
 }>`
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
   overflow: hidden;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'default')};
   ${(p) => p.$filesLayoutCssMixin}
 `;
 
@@ -318,9 +319,10 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
         onPreviewIconClick?.(fileId);
       }
     };
+    const disabled = status === 'Queue';
 
     return (
-      <Container ref={ref} $dimension={dimension} $filesLayoutCssMixin={filesLayoutCssMixin}>
+      <Container ref={ref} disabled={disabled} $dimension={dimension} $filesLayoutCssMixin={filesLayoutCssMixin}>
         <PreviewWrapper {...props} ref={previewWrapperRef} $status={status} $dimension={dimension}>
           <FileInfoBlock $dimension={dimension}>
             {dimension === 'xl' && (
@@ -356,7 +358,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
             {onCloseIconClick && (
               <CloseButton
                 dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
-                disabled={status === 'Queue'}
+                disabled={disabled}
                 onClick={handleCloseIconClick}
               />
             )}

@@ -33,7 +33,7 @@ export interface SuggestItem {
 }
 
 export interface SuggestInputProps
-  extends Omit<TextInputProps, 'value'>,
+  extends Omit<TextInputProps, 'value' | 'iconsBefore'>,
     Omit<DropMenuStyleProps, 'menuWidth'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
   value?: string;
@@ -104,6 +104,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       dropContainerStyle,
       onSearchButtonClick = () => undefined,
       icons,
+      iconsAfter,
       icon = SearchOutlineSVG,
       skeleton = false,
       status,
@@ -159,11 +160,6 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       if (code === keyboardKey.Enter && isSuggestPanelOpen) {
         e.preventDefault();
       }
-
-      // prevent selecting option on Space press when Menu is opened
-      if (code === keyboardKey[' '] && isSuggestPanelOpen) {
-        e.stopPropagation();
-      }
     };
 
     const [blurTrigger, triggerDelayedBlur] = useState<undefined | unknown>();
@@ -189,7 +185,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       }
     }, [props.onInput, props.onChange]);
 
-    const iconArray = Children.toArray(icons);
+    const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
@@ -227,7 +223,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       <TextInput
         {...props}
         ref={refSetter(ref, inputRef)}
-        icons={iconArray}
+        iconsAfter={iconArray}
         status={status}
         skeleton={skeleton}
         isLoading={isLoading}
@@ -272,6 +268,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
                 onActivateItem={setActiveOption}
                 onSelectItem={handleOptionSelect}
                 preventFocusSteal
+                disableSelectionOnSpace
               />
             )}
           </SuggestDropdownContainer>

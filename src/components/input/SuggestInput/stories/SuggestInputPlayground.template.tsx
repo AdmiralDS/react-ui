@@ -28,7 +28,7 @@ export const SuggestInputPlaygroundTemplate = ({
   ...props
 }: SuggestInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [options, setOptions] = React.useState<string[] | undefined>();
 
   const handleSelectOption = (option: string) => {
@@ -51,12 +51,12 @@ export const SuggestInputPlaygroundTemplate = ({
   // Имитация запросов на бакэнд
   React.useEffect(() => {
     if (isLoading) {
-      const timeout = window.setTimeout(() => {
+      const timeout = setTimeout(() => {
         setIsLoading(false);
         setOptions([...OPTIONS]);
       }, 3000);
       return () => {
-        window.clearTimeout(timeout);
+        clearTimeout(timeout);
       };
     }
   }, [isLoading]);

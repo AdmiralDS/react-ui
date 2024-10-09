@@ -1,14 +1,16 @@
+import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
+import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
-import type { ForwardedRef, TextareaHTMLAttributes } from 'react';
-import * as React from 'react';
-import styled, { css } from 'styled-components';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
+import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -45,7 +47,8 @@ const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
 };
 
 const extraPadding = css<ExtraProps>`
-  padding-right: ${(props) => horizontalPaddingValue(props) + (props.$iconCount ? iconSizeValue(props) + 8 : 0)}px;
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (props.$iconsAfterCount ? iconSizeValue(props) + 8 : 0)}px;
 `;
 
 const disabledColors = css`
@@ -158,8 +161,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
 `;
 
 const HiddenSpanContainer = styled.div<TextBlockProps>`
-  overflow-x: hidden;
-  overflow-y: auto;
+  ${hideNativeScrollbarsCss}
   ${textBlockStyleMixin}
 
   [data-disable-copying] & {
@@ -168,6 +170,7 @@ const HiddenSpanContainer = styled.div<TextBlockProps>`
 `;
 
 const Text = styled.textarea<ExtraProps>`
+  ${hideNativeScrollbarsCss}
   position: absolute;
   top: 0;
   left: 0;
@@ -178,8 +181,6 @@ const Text = styled.textarea<ExtraProps>`
   flex: 1 1 auto;
   min-width: 10px;
   background: transparent;
-  overflow-y: auto;
-  overflow-x: hidden;
 
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
@@ -226,7 +227,7 @@ function defaultHandleInput(newInputData: InputData): InputData {
   return newInputData;
 }
 
-const stopEvent = (e: React.MouseEvent) => e.preventDefault();
+const stopEvent = (e: MouseEvent) => e.preventDefault();
 
 interface TextBlockProps extends ExtraProps {
   disabled?: boolean;
@@ -273,8 +274,16 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
-  /** Иконки для отображения в правом углу поля */
-  icons?: React.ReactNode;
+  /**
+   * @deprecated Помечено как deprecated в версии 8.13.0, будет удалено в 10.x.x версии.
+   * Взамен используйте iconsAfter
+   *
+   * Иконки для отображения в правом углу поля
+   **/
+  icons?: ReactNode;
+
+  /** Иконки для отображения в конце поля */
+  iconsAfter?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -301,7 +310,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   skeleton?: boolean;
 }
 
-export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       rows = 3,
@@ -312,6 +321,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       handleInput = defaultHandleInput,
       containerRef,
       icons,
+      iconsAfter,
       children,
       className,
       autoHeight,
@@ -322,9 +332,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     },
     ref,
   ) => {
-    const inputRef = React.useRef<HTMLTextAreaElement>(null);
-    const hiddenDivRef = React.useRef<HTMLDivElement>(null);
-    const iconArray = React.Children.toArray(icons);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
+    const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
+    const hiddenDivRef = useRef<HTMLDivElement>(null);
+    const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly && displayClearIcon) {
       iconArray.unshift(
@@ -345,7 +356,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
         const { value, selectionStart, selectionEnd } = this;
         const currentInputData = { value, selectionStart, selectionEnd };
@@ -369,7 +380,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
         const { value } = this;
         const hiddenDiv = hiddenDivRef.current;
@@ -411,16 +422,17 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           ref={hiddenDivRef}
           $dimension={dimension}
           disabled={props.disabled}
-          $iconCount={iconCount}
+          $iconsAfterCount={iconCount}
         />
         <Text
-          ref={refSetter(ref, inputRef)}
+          ref={refSetter(ref, inputRef, (node) => setContentNode(node))}
           {...props}
           $dimension={dimension}
-          $iconCount={iconCount}
+          $iconsAfterCount={iconCount}
           $autoHeight={autoHeight}
           value={inputData.value}
         />
+        <Scrollbars contentNode={contentNode} />
         <BorderedDiv />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} $dimension={dimension}>

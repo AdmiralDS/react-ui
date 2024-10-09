@@ -36,8 +36,16 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
+function preventUseUnsupportedCharacters(e: React.CompositionEvent<HTMLInputElement>) {
+  const typedChar = e.data;
+  if (typedChar && typedChar.replace(/[^\d_.]/g, '').length === 0) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}
+
 export interface DateInputProps
-  extends TextInputProps,
+  extends Omit<TextInputProps, 'iconsBefore'>,
     Omit<CalendarPropType, 'onChange' | 'range'>,
     Pick<DropMenuComponentProps, 'isVisible' | 'onVisibilityChange'>,
     DropContainerStyles {
@@ -90,6 +98,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       calendarRef,
       icon = CalendarOutlineSVG,
       icons,
+      iconsAfter,
       skeleton = false,
       dropContainerCssMixin,
       dropContainerClassName,
@@ -100,6 +109,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       locale,
       onDateIncreaseDecrease,
       dimension = 'm',
+      onBeforeInput = preventUseUnsupportedCharacters,
       ...props
     },
     ref,
@@ -178,7 +188,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
-    const iconArray = React.Children.toArray(icons);
+    const iconArray = React.Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
     }
@@ -188,7 +198,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
         {...{ dimension, ...props }}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
-        icons={iconArray}
+        onBeforeInput={onBeforeInput}
+        iconsAfter={iconArray}
         containerRef={inputContainerRef}
         skeleton={skeleton}
       >

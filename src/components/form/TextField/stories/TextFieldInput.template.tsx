@@ -32,11 +32,11 @@ export const TextFieldInputTemplate = ({
     setValue(inputValue);
     props.onChange?.(e);
   };
-
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
         <TextField
+          placeholder="Место для ввода текста"
           data-container-id="textFieldIdOne"
           {...props}
           value={localValue}

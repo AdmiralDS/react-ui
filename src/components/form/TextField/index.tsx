@@ -25,6 +25,7 @@ export const TextField = React.forwardRef<HTMLTextAreaElement, TextFieldProps>((
     id = uid(),
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     ...restProps
   } = props;
@@ -40,6 +41,7 @@ export const TextField = React.forwardRef<HTMLTextAreaElement, TextFieldProps>((
     maxLength,
     inputRef,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,

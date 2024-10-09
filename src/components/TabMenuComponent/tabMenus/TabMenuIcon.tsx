@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { debounce } from '#src/components/common/utils/debounce';
+
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 
@@ -84,9 +86,18 @@ export const TabMenuIcon = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useEffect(() => {
-    if (scrollingContainerRef.current) {
-      const tabWidth = getTabWidthMap(tabsId, scrollingContainerRef.current.children);
-      setTabWidthMap(tabWidth);
+    function setTabWidth() {
+      if (scrollingContainerRef.current) {
+        const tabWidth = getTabWidthMap(tabsId, scrollingContainerRef.current.children);
+        setTabWidthMap(tabWidth);
+      }
+    }
+    if (scrollingContainerRef.current?.firstElementChild) {
+      const resizeObserver = new ResizeObserver(debounce(setTabWidth, 100));
+      resizeObserver.observe(scrollingContainerRef.current?.firstElementChild);
+      return () => {
+        resizeObserver.disconnect();
+      };
     }
   }, [scrollingContainerRef, iconTabs]);
   //</editor-fold>

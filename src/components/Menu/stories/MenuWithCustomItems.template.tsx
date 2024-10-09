@@ -1,8 +1,7 @@
-import * as React from 'react';
 import styled from 'styled-components';
-import type { HTMLAttributes } from 'react';
 import { Menu, typography, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import type { MenuModelItemProps, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
+import { useMemo } from 'react';
 
 type StoryItem = {
   id: string;
@@ -48,7 +47,7 @@ const STORY_ITEMS: Array<StoryItem> = [
     label: 'Option seven',
     value: 6,
   },
-];
+] as const;
 
 const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
 
@@ -59,10 +58,11 @@ const Wrapper = styled.div`
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
 `;
 
-interface MyMenuItemProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
-  text: string;
-  success?: boolean;
-}
+type MyMenuItemProps = React.ComponentPropsWithoutRef<'div'> &
+  RenderOptionProps & {
+    text: string;
+    success?: boolean;
+  };
 
 //<editor-fold desc="MyMenuItem">
 const MyItem = styled.div<{
@@ -70,6 +70,7 @@ const MyItem = styled.div<{
   hovered?: boolean;
   width?: number;
   $success?: boolean;
+  $dimension?: RenderOptionProps['dimension'];
 }>`
   display: flex;
   align-items: center;
@@ -81,9 +82,18 @@ const MyItem = styled.div<{
   white-space: pre;
   margin: 0;
   cursor: pointer;
-  padding: 12px 16px;
-
-  ${typography['Body/Body 1 Long']}
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 'm':
+        return '8px 16px';
+      case 's':
+        return '6px 12px';
+      case 'l':
+      default:
+        return '12px 16px';
+    }
+  }};
+  ${({ $dimension }) => ($dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
 
   background: ${({ theme, selected }) =>
     selected
@@ -121,12 +131,13 @@ const MyMenuItem = ({
   hovered,
   selected = false,
   success = false,
-  selfRef = undefined,
-  hasSubmenu = false,
+  dimension,
+  onLeave,
+  hasSubmenu,
   ...props
 }: MyMenuItemProps) => {
-  const handleMouseMove = () => {
-    onHover?.();
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    onHover?.(e);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -139,6 +150,7 @@ const MyMenuItem = ({
       data-disabled={disabled}
       data-hovered={hovered}
       $success={success}
+      $dimension={dimension}
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       {...props}
@@ -150,12 +162,10 @@ const MyMenuItem = ({
 //</editor-fold>
 
 export const MenuWithCustomItemsTemplate = (props: MenuProps) => {
-  const model = React.useMemo(() => {
-    return STORY_ITEMS.map((item) => ({
+  const model = useMemo(() => {
+    return STORY_ITEMS.map<MenuModelItemProps>((item) => ({
       id: item.id,
-      render: (options: RenderOptionProps) => (
-        <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />
-      ),
+      render: (options) => <MyMenuItem success={item.id === '3'} {...options} key={item.id} text={item.label} />,
       disabled: item.value === 4,
     }));
   }, []);
