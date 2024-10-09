@@ -34,51 +34,11 @@ const Toolbar = styled(ImageViewerToolbar)`
   transform: translate(-50%);
 `;
 
-const StyledImage1 = styled.img<{
-  $scale: number;
-  $flipX: boolean;
-  $flipY: boolean;
-  $rotate: number;
-  $x: number;
-  $y: number;
-}>`
-  outline: none;
-  max-width: 100%;
-  max-height: 70%;
-  transition: all 0.3s ease-in-out;
-  transform: ${(p) =>
-    `translate(${p.$x}px, ${p.$y}px) scale(${p.$scale * (p.$flipX ? -1 : 1)}, ${p.$scale * (p.$flipY ? -1 : 1)}) rotate(${p.$rotate}deg)`};
-`;
-const StyledImage = styled.img<{
-  $scale: number;
-  $flipX: boolean;
-  $flipY: boolean;
-  $rotate: number;
-  $x: number;
-  $y: number;
-  $transitionEnabled: boolean;
-}>`
+const StyledImage = styled.img<{ $transitionEnabled: boolean }>`
   outline: none;
   max-width: 100%;
   max-height: 70%;
   transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
-`;
-const StyledImage2 = styled.img.attrs<{
-  $scale: number;
-  $flipX: boolean;
-  $flipY: boolean;
-  $rotate: number;
-  $x: number;
-  $y: number;
-}>((props) => ({
-  style: {
-    transform: `translate(${props.$x}px, ${props.$y}px) scale(${props.$flipX ? '-' : ''}${props.$scale}, ${props.$flipY ? '-' : ''}${props.$scale}) rotate(${props.$rotate})deg)`,
-  },
-}))`
-  outline: none;
-  max-width: 100%;
-  max-height: 70%;
-  transition: all 0.3s ease-in-out;
 `;
 
 interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
@@ -103,14 +63,12 @@ const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
         src={itemSrc}
         tabIndex={-1}
         ref={ref}
-        $scale={scale}
-        $flipX={flipX}
-        $flipY={flipY}
-        $rotate={rotate}
-        $x={x}
-        $y={y}
         $transitionEnabled={transitionEnabled}
-        //onDoubleClick={handleDoubleClick}
+        style={{
+          transform: `translate(${x}px, ${y}px) scale(${
+            flipX ? '-' : ''
+          }${scale}, ${flipY ? '-' : ''}${scale}) rotate(${rotate}deg)`,
+        }}
       />
     );
   },
@@ -215,9 +173,7 @@ export const ImagePreview = ({
 
   const [isMoving, setMoving] = useState(false);
   const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const handleChangeCoordinates = (x: number, y: number) => {
-    setCoordinates({ x, y });
-  };
+
   const startPositionInfo = useRef({
     diffX: 0,
     diffY: 0,
@@ -313,11 +269,6 @@ export const ImagePreview = ({
         onMouseMove={handleImgMouseMove}
         onMouseUp={handleImgMouseUp}
         transitionEnabled={!isMoving}
-        style={{
-          transform: `translate(${coordinates.x}px, ${coordinates.y}px) scale(${
-            flipX ? '-' : ''
-          }${scale}, ${flipY ? '-' : ''}${scale}) rotate(${rotate}deg)`,
-        }}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
