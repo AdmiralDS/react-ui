@@ -56,11 +56,12 @@ const StyledImage = styled.img<{
   $rotate: number;
   $x: number;
   $y: number;
+  $transitionEnabled: boolean;
 }>`
   outline: none;
   max-width: 100%;
   max-height: 70%;
-  transition: all 0.3s ease-in-out;
+  transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
 `;
 const StyledImage2 = styled.img.attrs<{
   $scale: number;
@@ -88,9 +89,10 @@ interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>,
   rotate: number;
   x: number;
   y: number;
+  transitionEnabled: boolean;
 }
 const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
-  ({ item, scale, flipX, flipY, rotate, x, y, ...props }, ref) => {
+  ({ item, scale, flipX, flipY, rotate, x, y, transitionEnabled, ...props }, ref) => {
     const itemSrc = typeof item === 'string' ? item : item.src;
     const itemProps = typeof item === 'string' ? undefined : item;
 
@@ -107,6 +109,7 @@ const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
         $rotate={rotate}
         $x={x}
         $y={y}
+        $transitionEnabled={transitionEnabled}
         //onDoubleClick={handleDoubleClick}
       />
     );
@@ -239,18 +242,15 @@ export const ImagePreview = ({
   };
   const handleImgMouseMove: React.MouseEventHandler<HTMLImageElement> = (event) => {
     if (isMoving && imgRef.current) {
-      /*setCoordinates({
-        x: event.pageX - startPositionInfo.current.diffX,
-        y: event.pageY - startPositionInfo.current.diffY,
-      });*/
-      requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
         setCoordinates({
           x: event.pageX - startPositionInfo.current.diffX,
           y: event.pageY - startPositionInfo.current.diffY,
-        }),
-      );
+        });
+      });
     }
   };
+
   const handleImgMouseUp: React.MouseEventHandler<HTMLImageElement> = () => {
     if (isMoving && imgRef.current) {
       setMoving(false);
@@ -293,8 +293,8 @@ export const ImagePreview = ({
         }
       }
 
-      //setCoordinates({ x, y });
-      requestAnimationFrame(() => setCoordinates({ x, y }));
+      setCoordinates({ x, y });
+      // requestAnimationFrame(() => setCoordinates({ x, y }));
     }
   };
 
@@ -313,6 +313,7 @@ export const ImagePreview = ({
         onMouseDown={handleImgMouseDown}
         onMouseMove={handleImgMouseMove}
         onMouseUp={handleImgMouseUp}
+        transitionEnabled={!isMoving}
         style={{
           transform: `translate(${coordinates.x}px, ${coordinates.y}px) scale(${
             flipX ? '-' : ''
