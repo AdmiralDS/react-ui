@@ -261,7 +261,7 @@ export const ImagePreview = ({
       document.removeEventListener('mousemove', handleImgMouseMove);
       document.removeEventListener('mouseup', handleImgMouseUp);
     };
-  }, [isMoving, coordinates.x, coordinates.y, rotate]);
+  }, [isMoving, coordinates, rotate]);
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
