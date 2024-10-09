@@ -294,7 +294,6 @@ export const ImagePreview = ({
       }
 
       setCoordinates({ x, y });
-      // requestAnimationFrame(() => setCoordinates({ x, y }));
     }
   };
 
