@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.24.2](https://github.com/AdmiralDS/react-ui/compare/v8.24.1...v8.24.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* **Table:** [#1451](https://github.com/AdmiralDS/react-ui/issues/1451) исправлен баг с возникающими скачками при drag and drop столбцов ([e68113e](https://github.com/AdmiralDS/react-ui/commit/e68113ebde7ce877f3419071cf64d330cdceacf5))
+
 ### [8.24.1](https://github.com/AdmiralDS/react-ui/compare/v8.24.0...v8.24.1) (2024-10-04)
 
 
