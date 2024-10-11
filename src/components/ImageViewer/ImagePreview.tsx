@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { getClientSize } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
+import { fixPoint, getClientSize } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
 
 const Overlay = styled.div`
   display: flex;
@@ -182,6 +182,18 @@ export const ImagePreview = ({
     transformY: 0,
   });
 
+  const clearImgTransformStates = () => {
+    setCoordinates({ x: 0, y: 0 });
+    setScale(1);
+    setFlipX(false);
+    setFlipY(false);
+    setRotate(0);
+  };
+  const handleActiveChange = (index: number) => {
+    clearImgTransformStates();
+    onActiveChange?.(index);
+  };
+
   const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
     // Only allow main button
     if (event.button !== 0 || !imgRef.current) return;
@@ -197,6 +209,7 @@ export const ImagePreview = ({
     console.log(imgRef.current.getBoundingClientRect());
     setMoving(true);
   };
+
   const handleImgMouseMove = (event: MouseEvent) => {
     if (isMoving && imgRef.current) {
       requestAnimationFrame(() => {
@@ -233,21 +246,10 @@ export const ImagePreview = ({
         x = 0;
         y = 0;
       } else {
-        x = coordinates.x;
-        y = coordinates.y;
-        if (bottom < clientHeight || right < clientWidth || left > 0 || top > 0) {
-          console.log('bottom/right/left/top');
-          if (bottom < clientHeight) {
-            y += (clientHeight - bottom) / scale;
-          } else if (top > 0) {
-            y -= top / scale;
-          }
-          if (right < clientWidth) {
-            x += (clientWidth - right) / scale;
-          } else if (left > 0) {
-            x -= left / scale;
-          }
-        }
+        // расчет горизонтального сдвига
+        x = fixPoint(left, width, clientWidth) ?? coordinates.x;
+        // расчет вертикального сдвига
+        y = fixPoint(top, height, clientHeight) ?? coordinates.y;
       }
 
       setCoordinates({ x, y });
@@ -286,7 +288,7 @@ export const ImagePreview = ({
         showCounter={showCounter}
         showNavigation={showNavigation}
         actions={{
-          onActiveImgChange: onActiveChange,
+          onActiveImgChange: handleActiveChange,
           onFlipX: handleFlipXChange,
           onFlipY: handleFlipYChange,
           onRotateLeft: handleRotateLeft,

@@ -7,21 +7,19 @@ export function getClientSize() {
   };
 }
 
-function fixPoint(start: number, size: number, clientSize: number) {
-  const startAddWidth = start + size;
+export function fixPoint(start: number, size: number, clientSize: number) {
+  const end = start + size;
   const offsetStart = (size - clientSize) / 2;
 
   if (size > clientSize) {
     if (start > 0) {
       return offsetStart;
     }
-    if (start < 0) {
-      if (startAddWidth < clientSize) {
-        return -offsetStart;
-      } else {
-        return start < 0 ? offsetStart : -offsetStart;
-      }
+    if (start < 0 && end < clientSize) {
+      return -offsetStart;
     }
+  } else if (start < 0 || end > clientSize) {
+    return start < 0 ? offsetStart : -offsetStart;
   }
   return undefined;
 }
