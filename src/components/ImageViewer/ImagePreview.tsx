@@ -39,6 +39,11 @@ const StyledImage = styled.img<{ $transitionEnabled: boolean }>`
   max-width: 100%;
   max-height: 70%;
   transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
