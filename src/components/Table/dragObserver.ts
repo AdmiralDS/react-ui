@@ -1,3 +1,5 @@
+import { throttle } from '#src/components/common/utils/throttle';
+
 type Direction = 'horizontal' | 'vertical';
 type Options = {
   mirrorRef: React.RefObject<HTMLElement>;
@@ -62,6 +64,8 @@ export function dragObserver(
     dragging: false,
   };
 
+  const [drag, freeResources] = throttle(handleDrag, 10);
+
   events();
 
   return drake;
@@ -89,6 +93,7 @@ export function dragObserver(
   function destroy() {
     events(true);
     release({});
+    freeResources();
   }
 
   function preventGrabbed(e: any) {
@@ -126,7 +131,7 @@ export function dragObserver(
     if (_item) {
       _item.dataset.dragover = 'true';
       renderMirrorImage();
-      drag(e);
+      handleDrag(e);
     }
   }
 
@@ -251,7 +256,7 @@ export function dragObserver(
     }
   }
 
-  function drag(e: Event) {
+  function handleDrag(e: Event) {
     if (!_mirror) {
       return;
     }
