@@ -1,4 +1,4 @@
-export function getClientSize() {
+function getClientSize() {
   const width = document.documentElement.clientWidth;
   const height = window.innerHeight || document.documentElement.clientHeight;
   return {
@@ -7,7 +7,7 @@ export function getClientSize() {
   };
 }
 
-export function fixPoint(start: number, size: number, clientSize: number) {
+function fixPoint(start: number, size: number, clientSize: number) {
   const end = start + size;
   const offsetStart = (size - clientSize) / 2;
 
@@ -24,34 +24,28 @@ export function fixPoint(start: number, size: number, clientSize: number) {
   return undefined;
 }
 
-/**
- * Fix positon x,y point when
- *
- * Ele width && height < client
- * - left | top > 0 -> Back 0
- *
- * - Ele width | height > clientWidth | clientHeight
- * - left | top + width | height < clientWidth | clientHeight -> Back left | top + width | height === clientWidth | clientHeight
- *
- * Regardless of other
- */
-export function getFixScaleEleTransPosition(
+export function updatePosition(
   width: number,
   height: number,
   left: number,
   top: number,
-): null | { x: number; y: number } {
+  rotate: number,
+  coordinates: { x: number; y: number },
+): { x: number; y: number } {
   const { width: clientWidth, height: clientHeight } = getClientSize();
+  const isRotate = rotate % 180 !== 0;
 
-  let x, y;
+  let x: number, y: number;
 
   if (width <= clientWidth && height <= clientHeight) {
     x = 0;
     y = 0;
-  } else if (width > clientWidth || height > clientHeight) {
-    x = fixPoint(left, width, clientWidth);
-    y = fixPoint(top, height, clientHeight);
+  } else {
+    // расчет горизонтального сдвига
+    x = fixPoint(left, isRotate ? height : width, clientWidth) ?? coordinates.x;
+    // расчет вертикального сдвига
+    y = fixPoint(top, isRotate ? width : height, clientHeight) ?? coordinates.y;
   }
 
-  return x !== undefined && y !== undefined ? { x, y } : null;
+  return { x, y };
 }

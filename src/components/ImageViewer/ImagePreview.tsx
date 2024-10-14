@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { fixPoint, getClientSize } from '#src/components/ImageViewer/getFixScaleEleTransPosition';
+import { updatePosition } from '#src/components/ImageViewer/updatePosition';
 
 const Overlay = styled.div`
   display: flex;
@@ -229,23 +229,10 @@ export const ImagePreview = ({
       const width = imgRef.current.offsetWidth * scale;
       const height = imgRef.current.offsetHeight * scale;
       const { left, top } = imgRef.current.getBoundingClientRect();
-      const isRotate = rotate % 180 !== 0;
-      const { width: clientWidth, height: clientHeight } = getClientSize();
 
-      let x: number, y: number;
-      const ww = isRotate ? height : width;
-      const hh = isRotate ? width : height;
-      if (width <= clientWidth && height <= clientHeight) {
-        x = 0;
-        y = 0;
-      } else {
-        // расчет горизонтального сдвига
-        x = fixPoint(left, ww, clientWidth) ?? coordinates.x;
-        // расчет вертикального сдвига
-        y = fixPoint(top, hh, clientHeight) ?? coordinates.y;
-      }
+      const updated = updatePosition(width, height, left, top, rotate, coordinates);
       requestAnimationFrame(() => {
-        setCoordinates({ x, y });
+        setCoordinates(updated);
       });
     }
   };
