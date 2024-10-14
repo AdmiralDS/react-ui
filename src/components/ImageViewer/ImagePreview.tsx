@@ -141,9 +141,9 @@ export const ImagePreview = ({
       e.target.focus();
       setMinScaleState(+(height / naturalHeight).toFixed(1));
       setRealScaleState(+(naturalHeight / height).toFixed(1));
-      console.log(
+      /*console.log(
         `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
-      );
+      );*/
     };
 
     const imgNode = imgRef.current;
@@ -205,18 +205,14 @@ export const ImagePreview = ({
       transformX: coordinates.x,
       transformY: coordinates.y,
     };
-    console.log('startPositionInfo', startPositionInfo);
-    console.log(imgRef.current.getBoundingClientRect());
     setMoving(true);
   };
 
   const handleImgMouseMove = (event: MouseEvent) => {
     if (isMoving && imgRef.current) {
-      requestAnimationFrame(() => {
-        setCoordinates({
-          x: event.pageX - startPositionInfo.current.diffX,
-          y: event.pageY - startPositionInfo.current.diffY,
-        });
+      setCoordinates({
+        x: event.pageX - startPositionInfo.current.diffX,
+        y: event.pageY - startPositionInfo.current.diffY,
       });
     }
   };
@@ -230,12 +226,9 @@ export const ImagePreview = ({
       const hasChangedPosition = coordinates.x !== transformX && coordinates.y !== transformY;
       if (!hasChangedPosition) return;
 
-      console.log('coordinates', coordinates);
       const width = imgRef.current.offsetWidth * scale;
       const height = imgRef.current.offsetHeight * scale;
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      const { left, right, top, bottom } = imgRef.current.getBoundingClientRect();
-      console.log(imgRef.current.getBoundingClientRect());
+      const { left, top } = imgRef.current.getBoundingClientRect();
       const isRotate = rotate % 180 !== 0;
       const { width: clientWidth, height: clientHeight } = getClientSize();
 
@@ -247,12 +240,13 @@ export const ImagePreview = ({
         y = 0;
       } else {
         // расчет горизонтального сдвига
-        x = fixPoint(left, width, clientWidth) ?? coordinates.x;
+        x = fixPoint(left, ww, clientWidth) ?? coordinates.x;
         // расчет вертикального сдвига
-        y = fixPoint(top, height, clientHeight) ?? coordinates.y;
+        y = fixPoint(top, hh, clientHeight) ?? coordinates.y;
       }
-
-      setCoordinates({ x, y });
+      requestAnimationFrame(() => {
+        setCoordinates({ x, y });
+      });
     }
   };
   useEffect(() => {
