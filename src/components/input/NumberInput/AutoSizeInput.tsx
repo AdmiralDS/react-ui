@@ -191,6 +191,10 @@ export interface InputProps extends TextInputProps {
   align?: 'left' | 'right';
   /** Внутреннее значение инпута */
   innerValue: TextInputProps['value'];
+  /** Скрыть пробел после префикса */
+  hideSpaceAfterPrefix?: boolean;
+  /** Скрыть пробел перед суффиксом */
+  hideSpaceBeforeSuffix?: boolean;
 }
 
 export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
@@ -205,6 +209,8 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
       iconCount,
       align,
       innerValue,
+      hideSpaceAfterPrefix = false,
+      hideSpaceBeforeSuffix = false,
       handleInput = defaultHandleInput,
       ...props
     },
@@ -336,13 +342,15 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         <HiddenContent $iconCount={iconCount} $dimension={dimension}>
           {prefix && showPrefixSuffix && (
             <Prefix ref={prefixRef} disabled={props.disabled} $align={align}>
-              {prefix}&nbsp;
+              {prefix}
+              {!hideSpaceAfterPrefix && <>&nbsp;</>}
             </Prefix>
           )}
           <Sizer ref={sizerRef} $hasPrefix={!!prefix} $align={align} />
           {suffix && showPrefixSuffix && (
             <Suffix ref={suffixRef} disabled={props.disabled} $align={align}>
-              &nbsp;{suffix}
+              {!hideSpaceBeforeSuffix && <>&nbsp;</>}
+              {suffix}
             </Suffix>
           )}
         </HiddenContent>

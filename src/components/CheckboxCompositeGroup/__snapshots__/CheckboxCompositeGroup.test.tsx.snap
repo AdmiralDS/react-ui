@@ -119,6 +119,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -606,6 +607,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -1148,6 +1150,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -1618,6 +1621,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -2143,6 +2147,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 16px;
   height: 16px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -2613,6 +2618,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 16px;
   height: 16px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -3138,6 +3144,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
@@ -3608,6 +3615,7 @@ fieldset[data-dimension='s'] .c8.c8 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c2 {
