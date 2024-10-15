@@ -98,6 +98,35 @@ export const ImagePreview = ({
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
+  const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
+  useLayoutEffect(() => {
+    const loadEventListener = (e: any) => {
+      e.target.focus();
+      setImgNaturalHeight(e.target.naturalHeight);
+    };
+
+    const imgNode = imgRef.current;
+    if (imgNode) {
+      imgNode.addEventListener('load', loadEventListener);
+      return () => {
+        imgNode.removeEventListener('load', loadEventListener);
+      };
+    }
+  }, []);
+
+  const [imgRenderedHeight, setImgRenderedHeight] = useState(0);
+  useLayoutEffect(() => {
+    if (imgRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        entries.forEach((entry) => setImgRenderedHeight(entry.contentRect.height || 0));
+      });
+      resizeObserver.observe(imgRef.current);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, []);
+
   const handleClose = () => {
     onVisibleChange?.(false);
   };
@@ -133,32 +162,15 @@ export const ImagePreview = ({
     handleScaleChange(newScale < minScaleInner ? minScaleInner : newScale);
   };
 
-  const [minScaleState, setMinScaleState] = useState(1.0);
-  const minScaleInner = minScale ?? minScaleState;
+  const minScaleInner = minScale ?? 1;
   const [realScaleState, setRealScaleState] = useState(1.0);
   const handleDoubleClick = () => {
     setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
   };
 
   useLayoutEffect(() => {
-    const loadEventListener = (e: any) => {
-      const { naturalWidth, naturalHeight, width, height } = e.target;
-      e.target.focus();
-      setMinScaleState(+(height / naturalHeight).toFixed(1));
-      setRealScaleState(+(naturalHeight / height).toFixed(1));
-      /*console.log(
-        `Natural size: ${naturalWidth} x ${naturalHeight} pixels\nDisplayed size: ${width} x ${height} pixels`,
-      );*/
-    };
-
-    const imgNode = imgRef.current;
-    if (imgNode) {
-      imgNode.addEventListener('load', loadEventListener);
-      return () => {
-        imgNode.removeEventListener('load', loadEventListener);
-      };
-    }
-  }, []);
+    setRealScaleState(+(imgNaturalHeight / imgRenderedHeight).toFixed(1));
+  }, [imgRenderedHeight, imgNaturalHeight]);
 
   const [flipX, setFlipX] = useState(false);
   const [flipY, setFlipY] = useState(false);
