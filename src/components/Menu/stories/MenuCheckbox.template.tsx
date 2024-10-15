@@ -58,31 +58,26 @@ export const MenuCheckboxTemplate = ({
   CSSCustomProps,
   ...props
 }: MenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [selected, setSelected] = React.useState<string | undefined>();
-  const [checkedOptions, setCheckedOptions] = React.useState<Array<string>>([]);
-
+  const [checkedOptions, setCheckedOptions] = React.useState<Record<string, boolean>>({});
+  const [active, setActive] = React.useState<string | undefined>();
   const model = React.useMemo<Array<MenuModelItemProps>>(() => {
     return storyItems.map(({ id, label, ...itemProps }) => ({
       id: id,
       ...itemProps,
       render: (options: RenderOptionProps) => (
-        <MenuItemWithCheckbox checked={checkedOptions.includes(id)} dimension={props.dimension} {...options} key={id}>
+        <MenuItemWithCheckbox checked={checkedOptions[id]} dimension={props.dimension} {...options} key={id}>
           {label}
         </MenuItemWithCheckbox>
       ),
     }));
-  }, [props.dimension, checkedOptions, selected]);
+  }, [props.dimension, checkedOptions]);
 
   const handleSelectItem = (id: string) => {
     console.log(`Option ${id} clicked`);
-    setSelected(id);
-    const index = checkedOptions.findIndex((item) => item === id);
-    if (index < 0) {
-      checkedOptions.push(id);
-    } else {
-      checkedOptions.splice(index, 1);
-    }
-    setCheckedOptions([...checkedOptions]);
+    setCheckedOptions((cheked) => {
+      cheked[id] = !cheked[id];
+      return { ...cheked };
+    });
   };
 
   return (
@@ -90,9 +85,11 @@ export const MenuCheckboxTemplate = ({
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}
+          active={active}
+          onActivateItem={setActive}
           defaultIsActive={false}
+          preselectedModeActive={false}
           model={model}
-          selected={selected}
           onSelectItem={handleSelectItem}
           disableSelectedOptionHighlight={true}
         />

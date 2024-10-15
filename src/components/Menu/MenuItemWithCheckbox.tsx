@@ -90,7 +90,7 @@ export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWit
       <CheckboxGroupMenuItem dimension={dimension} $level={level} ref={ref} {...props}>
         <CheckboxField
           dimension={dimension === 's' ? 's' : 'm'}
-          checked={checked}
+          checked={!!checked} // важно
           indeterminate={indeterminate}
           hovered={props.hovered}
           disabled={props.disabled}

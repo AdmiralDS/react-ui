@@ -72,6 +72,7 @@ const Container = styled.div<{
   overflow: visible;
   ${width};
   ${height};
+  flex: 0 0 auto; // при вставке во flex контейнер не должны изменяться размеры
 `;
 
 export const Background = styled.div<{ $error?: boolean }>`
