@@ -97,19 +97,32 @@ export const ImagePreview = ({
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const [needUpdateCoordinates, setNeedUpdateCoordinates] = useState(false);
+  const handleNeedUpdateCoordinatesChange = (newState: boolean) => {
+    setTimeout(() => setNeedUpdateCoordinates(newState), 250);
+  };
+  useEffect(() => {
+    console.log('needUpdateCoordinates', needUpdateCoordinates);
+  }, [needUpdateCoordinates]);
 
+  const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
   useLayoutEffect(() => {
     const loadEventListener = (e: any) => {
       e.target.focus();
       setImgNaturalHeight(e.target.naturalHeight);
     };
+    const errorEventListener = () => {
+      setErrorOnLoadImg(true);
+    };
 
     const imgNode = imgRef.current;
     if (imgNode) {
       imgNode.addEventListener('load', loadEventListener);
+      imgNode.addEventListener('error', errorEventListener);
       return () => {
         imgNode.removeEventListener('load', loadEventListener);
+        imgNode.removeEventListener('error', errorEventListener);
       };
     }
   }, []);
@@ -160,6 +173,7 @@ export const ImagePreview = ({
   const handleZoomOut = () => {
     const newScale = scale - scaleStep;
     handleScaleChange(newScale < minScaleInner ? minScaleInner : newScale);
+    handleNeedUpdateCoordinatesChange(true);
   };
 
   const minScaleInner = minScale ?? 1;
@@ -184,9 +198,11 @@ export const ImagePreview = ({
   const [rotate, setRotate] = useState(0);
   const handleRotateLeft = () => {
     setRotate((prevState) => prevState - 90);
+    handleNeedUpdateCoordinatesChange(true);
   };
   const handleRotateRight = () => {
     setRotate((prevState) => prevState + 90);
+    handleNeedUpdateCoordinatesChange(true);
   };
 
   const [isMoving, setMoving] = useState(false);
@@ -262,6 +278,17 @@ export const ImagePreview = ({
       document.removeEventListener('mouseup', handleImgMouseUp);
     };
   }, [isMoving, coordinates, rotate]);
+  useEffect(() => {
+    if (needUpdateCoordinates && !isMoving && imgRef.current) {
+      const width = imgRef.current.offsetWidth * scale;
+      const height = imgRef.current.offsetHeight * scale;
+      const imgRect = imgRef.current.getBoundingClientRect();
+
+      const updated = updatePosition(width, height, imgRect.left, imgRect.top, rotate, coordinates);
+      setCoordinates(updated);
+      setNeedUpdateCoordinates(false);
+    }
+  }, [needUpdateCoordinates]);
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
