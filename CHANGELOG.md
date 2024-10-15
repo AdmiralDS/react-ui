@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.25.0](https://github.com/AdmiralDS/react-ui/compare/v8.24.2...v8.25.0) (2024-10-15)
+
+
+### Features
+
+* **NumberInput:** [#1540](https://github.com/AdmiralDS/react-ui/issues/1540) добавлена возможность скрытия пробелов после префикса и перед суффиксом ([1d6947f](https://github.com/AdmiralDS/react-ui/commit/1d6947fab99db68f415d5ed1cea1977940533b32))
+
+
+### Bug Fixes
+
+* **Menu:** [#1539](https://github.com/AdmiralDS/react-ui/issues/1539) дважды проходит клик по MenuItemWithCheckbox ([9596c4c](https://github.com/AdmiralDS/react-ui/commit/9596c4cc3bede4ab9566c531629ed676facb339c))
+
 ### [8.24.2](https://github.com/AdmiralDS/react-ui/compare/v8.24.1...v8.24.2) (2024-10-11)
 
 
