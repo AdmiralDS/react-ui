@@ -101,9 +101,6 @@ export const ImagePreview = ({
   const handleNeedUpdateCoordinatesChange = (newState: boolean) => {
     setTimeout(() => setNeedUpdateCoordinates(newState), 250);
   };
-  useEffect(() => {
-    console.log('needUpdateCoordinates', needUpdateCoordinates);
-  }, [needUpdateCoordinates]);
 
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
