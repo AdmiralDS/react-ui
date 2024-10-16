@@ -34,12 +34,13 @@ const Toolbar = styled(ImageViewerToolbar)`
   transform: translate(-50%);
 `;
 
-const StyledImage = styled.img<{ $transitionEnabled: boolean }>`
+const StyledImage = styled.img<{ $transitionEnabled: boolean; $isVisible?: boolean }>`
   outline: none;
   max-width: 100%;
   max-height: 70%;
   transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
   cursor: grab;
+  display: ${(p) => (p.$isVisible ? 'block' : 'none')};
 
   &:active {
     cursor: grabbing;
@@ -55,9 +56,10 @@ interface ImageViewProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>,
   x: number;
   y: number;
   transitionEnabled: boolean;
+  isVisible?: boolean;
 }
 const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
-  ({ item, scale, flipX, flipY, rotate, x, y, transitionEnabled, ...props }, ref) => {
+  ({ item, scale, flipX, flipY, rotate, x, y, transitionEnabled, isVisible = true, ...props }, ref) => {
     const itemSrc = typeof item === 'string' ? item : item.src;
     const itemProps = typeof item === 'string' ? undefined : item;
 
@@ -69,6 +71,7 @@ const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
         tabIndex={-1}
         ref={ref}
         $transitionEnabled={transitionEnabled}
+        $isVisible={isVisible}
         style={{
           transform: `translate(${x}px, ${y}px) scale(${
             flipX ? '-' : ''
@@ -84,6 +87,7 @@ export const ImagePreview = ({
   container,
   minScale,
   maxScale = 10,
+  errorMiniature,
   scaleStep = 0.5,
   showTooltip,
   showCounter,
@@ -102,8 +106,8 @@ export const ImagePreview = ({
     setTimeout(() => setNeedUpdateCoordinates(newState), 250);
   };
 
-  const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
+  const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   useLayoutEffect(() => {
     const loadEventListener = (e: any) => {
       e.target.focus();
@@ -122,7 +126,7 @@ export const ImagePreview = ({
         imgNode.removeEventListener('error', errorEventListener);
       };
     }
-  }, []);
+  }, [activeImg]);
 
   const [imgRenderedHeight, setImgRenderedHeight] = useState(0);
   useLayoutEffect(() => {
@@ -222,6 +226,7 @@ export const ImagePreview = ({
   const handleActiveChange = (index: number) => {
     clearImgTransformStates();
     onActiveChange?.(index);
+    setErrorOnLoadImg(false);
   };
 
   const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
@@ -289,6 +294,7 @@ export const ImagePreview = ({
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
+      {errorOnLoadImg && errorMiniature}
       <ImageView
         item={item}
         ref={imgRef}
@@ -301,6 +307,7 @@ export const ImagePreview = ({
         onDoubleClick={handleDoubleClick}
         onMouseDown={handleImgMouseDown}
         transitionEnabled={!isMoving}
+        isVisible={!errorOnLoadImg}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
@@ -319,6 +326,7 @@ export const ImagePreview = ({
           onZoomIn: handleZoomIn,
           onClose: handleClose,
         }}
+        actionsDisabled={errorOnLoadImg}
         minScale={minScaleInner}
         maxScale={maxScale}
         transform={{ x: coordinates.x, y: coordinates.y, rotate, scale, flipX, flipY }}

@@ -68,10 +68,34 @@ const blockPositionCss = css`
   right: 0;
   bottom: 0;
 `;
-const ErrorOnLoadBlock = styled.div<{ $isVisible: boolean }>`
-  ${blockPositionCss};
-  visibility: ${(p) => (p.$isVisible ? 'visible' : 'hidden')};
+const ErrorOnLoadBlock = styled.div<{ $dimension: ImageMiniatureDimension }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: ${(p) => getImageMiniatureSize(p.$dimension)}px;
+  height: ${(p) => getImageMiniatureSize(p.$dimension)}px;
+  border-radius: 4px;
+
   background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+
+  & svg {
+    width: ${(p) => getImageMiniatureIconSize(p.$dimension)}px;
+    height: ${(p) => getImageMiniatureIconSize(p.$dimension)}px;
+  }
+`;
+interface ErrorMiniatureProps extends React.HTMLAttributes<HTMLDivElement> {
+  dimension?: ImageMiniatureDimension;
+}
+export const ErrorMiniature = ({ dimension = 'm', ...props }: ErrorMiniatureProps) => {
+  return (
+    <ErrorOnLoadBlock {...props} $dimension={dimension}>
+      <StyledCategoryGalleryOutline />
+    </ErrorOnLoadBlock>
+  );
+};
+const StyledErrorMiniature = styled(ErrorMiniature)`
+  ${blockPositionCss};
 `;
 const HoverEffectBlock = styled.div`
   ${blockPositionCss};
@@ -134,9 +158,7 @@ export const ImageMiniature = ({ item, dimension = 'm', onError, onMouseDown, ..
     <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
       <StyledImg {...itemProps} ref={imgRef} src={itemSrc} />
       {errorOnLoadImg ? (
-        <ErrorOnLoadBlock $isVisible={errorOnLoadImg}>
-          <StyledCategoryGalleryOutline />
-        </ErrorOnLoadBlock>
+        <StyledErrorMiniature dimension={dimension} />
       ) : (
         <HoverEffectBlock>
           <StyledServiceEyeOutline />

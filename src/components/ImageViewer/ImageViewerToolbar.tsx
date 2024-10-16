@@ -65,6 +65,7 @@ export const ImageViewerToolbar = ({
   showCounter,
   showNavigation = true,
   actions,
+  actionsDisabled = false,
   transform,
   minScale,
   maxScale,
@@ -100,14 +101,29 @@ export const ImageViewerToolbar = ({
 
   const prevDisabled = activeImg <= 0;
   const nextDisabled = activeImg >= totalImg - 1;
-  const zoomOutDisabled = transform.scale <= minScale;
-  const zoomInDisabled = transform.scale >= maxScale;
+  const zoomOutDisabled = actionsDisabled || transform.scale <= minScale;
+  const zoomInDisabled = actionsDisabled || transform.scale >= maxScale;
 
   const actionButtons = [
-    { icon: <ArrowsHorizontalOutline />, text: flipHorizontallyText, handleClick: actions.onFlipX, disabled: false },
-    { icon: <ArrowsVerticalOutline />, text: flipVerticallyText, handleClick: actions.onFlipY, disabled: false },
-    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: actions.onRotateLeft, disabled: false },
-    { icon: <RotateRightOutline />, text: rotateRightText, handleClick: actions.onRotateRight, disabled: false },
+    {
+      icon: <ArrowsHorizontalOutline />,
+      text: flipHorizontallyText,
+      handleClick: actions.onFlipX,
+      disabled: actionsDisabled,
+    },
+    {
+      icon: <ArrowsVerticalOutline />,
+      text: flipVerticallyText,
+      handleClick: actions.onFlipY,
+      disabled: actionsDisabled,
+    },
+    { icon: <RotateLeftOutline />, text: rotateLeftText, handleClick: actions.onRotateLeft, disabled: actionsDisabled },
+    {
+      icon: <RotateRightOutline />,
+      text: rotateRightText,
+      handleClick: actions.onRotateRight,
+      disabled: actionsDisabled,
+    },
     { icon: <ZoomOutOutline />, text: zoomOutText, handleClick: actions.onZoomOut, disabled: zoomOutDisabled },
     { icon: <ZoomInOutline />, text: zoomInText, handleClick: actions.onZoomIn, disabled: zoomInDisabled },
   ];

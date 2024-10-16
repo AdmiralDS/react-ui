@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled, { type css } from 'styled-components';
 
-import { ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
+import { ErrorMiniature, ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
 import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
@@ -66,12 +66,13 @@ export const ImageViewer = ({
     return <ImageMiniature item={item} dimension={dimension} onMouseDown={handleMouseDown} key={itemKey} />;
   };
 
-  const miniatures =
-    appearance === 'single'
+  const miniatures = useMemo(() => {
+    return appearance === 'single'
       ? renderItem(items[defaultActiveImg], defaultActiveImg)
       : items.map((item, index) => {
           return renderItem(item, index);
         });
+  }, [items, appearance]);
 
   return (
     <Wrapper {...props} $previewGroupMixin={previewGroupMixin}>
@@ -82,6 +83,7 @@ export const ImageViewer = ({
           container={container}
           minScale={minScale}
           maxScale={maxScale}
+          errorMiniature={<ErrorMiniature dimension={dimension} />}
           scaleStep={scaleStep}
           showTooltip={showTooltip}
           showCounter={showCounter && items.length > 1}
