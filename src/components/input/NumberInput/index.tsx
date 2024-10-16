@@ -151,6 +151,10 @@ export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore' | '
   align?: 'left' | 'right';
   /** Функция высшего порядка для получения функции handleInput */
   createInputHandler?: (params: NumberInputHandlerCreatorParams) => CustomInputHandler;
+  /** Скрыть пробел после префикса */
+  hideSpaceAfterPrefix?: boolean;
+  /** Скрыть пробел перед суффиксом */
+  hideSpaceBeforeSuffix?: boolean;
 }
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
