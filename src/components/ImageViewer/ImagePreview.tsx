@@ -236,6 +236,10 @@ export const ImagePreview = ({
       if (activeImg < totalImg - 1) {
         handleActiveChange(getNext(activeImg, totalImg));
       }
+    } else if (event.key === 'ArrowUp') {
+      handleZoomIn();
+    } else if (event.key === 'ArrowDown') {
+      handleZoomOut();
     }
   };
 
