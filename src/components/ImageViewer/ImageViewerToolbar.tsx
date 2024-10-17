@@ -8,6 +8,7 @@ import {
 import type { ImageViewerToolbarProps } from '#src/components/ImageViewer/types';
 import { ImageCounter } from '#src/components/ImageViewer/ImageCounter';
 import { ImageViewerToolbarButton } from '#src/components/ImageViewer/ImageViewerToolbarButton';
+import { getNext, getPrev } from '#src/components/ImageViewer/utils';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { uid } from '#src/components/common/uid';
@@ -50,15 +51,6 @@ const Wrapper = styled.div`
   justify-content: center;
   gap: 8px;
 `;
-
-const getPrev = (current: number, total: number) => {
-  const newIndex = current - 1;
-  return newIndex > 0 ? newIndex : 0;
-};
-const getNext = (current: number, total: number) => {
-  const newIndex = current + 1;
-  return newIndex < total ? newIndex : total - 1;
-};
 
 export const ImageViewerToolbar = ({
   showTooltip = true,

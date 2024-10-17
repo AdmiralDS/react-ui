@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { updatePosition } from '#src/components/ImageViewer/updatePosition';
+import { getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
 
 const Overlay = styled.div`
   display: flex;
@@ -110,11 +110,12 @@ export const ImagePreview = ({
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   useLayoutEffect(() => {
     const loadEventListener = (e: any) => {
-      e.target.focus();
       setImgNaturalHeight(e.target.naturalHeight);
+      overlayRef.current?.focus();
     };
     const errorEventListener = () => {
       setErrorOnLoadImg(true);
+      overlayRef.current?.focus();
     };
 
     const imgNode = imgRef.current;
@@ -143,15 +144,6 @@ export const ImagePreview = ({
 
   const handleClose = () => {
     onVisibleChange?.(false);
-  };
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
-      // prevent browser-specific escape key behavior (Safari exits fullscreen)
-      event.preventDefault();
-      // prevent other overlays from closing
-      event.stopPropagation();
-      handleClose();
-    }
   };
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -229,6 +221,24 @@ export const ImagePreview = ({
     setErrorOnLoadImg(false);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Escape') {
+      // prevent browser-specific escape key behavior (Safari exits fullscreen)
+      event.preventDefault();
+      // prevent other overlays from closing
+      event.stopPropagation();
+      handleClose();
+    } else if (event.key === 'ArrowLeft') {
+      if (activeImg > 0) {
+        handleActiveChange(getPrev(activeImg, totalImg));
+      }
+    } else if (event.key === 'ArrowRight') {
+      if (activeImg < totalImg - 1) {
+        handleActiveChange(getNext(activeImg, totalImg));
+      }
+    }
+  };
+
   const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
     // Only allow main button
     if (event.button !== 0 || !imgRef.current) return;
@@ -293,7 +303,13 @@ export const ImagePreview = ({
   }, [needUpdateCoordinates]);
 
   return createPortal(
-    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
+    <Overlay
+      ref={overlayRef}
+      tabIndex={-1}
+      onMouseDown={handleMouseDown}
+      onKeyDown={handleKeyDown}
+      onBlur={(e) => console.log(e)}
+    >
       {errorOnLoadImg && errorMiniature}
       <ImageView
         item={item}

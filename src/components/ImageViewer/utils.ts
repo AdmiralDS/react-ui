@@ -49,3 +49,12 @@ export function updatePosition(
 
   return { x, y };
 }
+
+export const getPrev = (current: number, total: number) => {
+  const newIndex = current - 1;
+  return newIndex > 0 ? newIndex : 0;
+};
+export const getNext = (current: number, total: number) => {
+  const newIndex = current + 1;
+  return newIndex < total ? newIndex : total - 1;
+};
