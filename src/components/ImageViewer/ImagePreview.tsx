@@ -6,6 +6,7 @@ import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
 import { getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
+import { IMAGE_SCALE_PRECISION } from '#src/components/ImageViewer/constants';
 
 import { keyboardKey } from '../common/keyboardKey';
 
@@ -131,11 +132,16 @@ export const ImagePreview = ({
     }
   }, [activeImg]);
 
+  const [imgRenderedWidth, setImgRenderedWidth] = useState(0);
   const [imgRenderedHeight, setImgRenderedHeight] = useState(0);
   useLayoutEffect(() => {
+    function setRenderedImgSize(width: number, height: number) {
+      setImgRenderedWidth(width);
+      setImgRenderedHeight(height);
+    }
     if (imgRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach((entry) => setImgRenderedHeight(entry.contentRect.height || 0));
+        entries.forEach((entry) => setRenderedImgSize(entry.contentRect.width || 0, entry.contentRect.height || 0));
       });
       resizeObserver.observe(imgRef.current);
       return () => {
@@ -173,12 +179,27 @@ export const ImagePreview = ({
 
   const minScaleInner = minScale ?? 1;
   const [realScaleState, setRealScaleState] = useState(1.0);
+  const [fullScaleState, setFullScaleState] = useState(1.0);
   const handleDoubleClick = () => {
     setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
   };
+  const handleFkeyDown = () => {
+    setScale((prevState) => (prevState === fullScaleState ? 1 : fullScaleState));
+  };
 
   useLayoutEffect(() => {
-    setRealScaleState(+(imgNaturalHeight / imgRenderedHeight).toFixed(1));
+    setRealScaleState(+(imgNaturalHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION));
+    setFullScaleState(() => {
+      if (overlayRef.current) {
+        const { width: overlayWidth, height: overlayHeight } = overlayRef.current.getBoundingClientRect();
+
+        return Math.min(
+          +(overlayWidth / imgRenderedWidth).toFixed(IMAGE_SCALE_PRECISION),
+          +(overlayHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION),
+        );
+      }
+      return 1;
+    });
   }, [imgRenderedHeight, imgNaturalHeight]);
 
   const [flipX, setFlipX] = useState(false);
@@ -235,7 +256,7 @@ export const ImagePreview = ({
       if (activeImg > 0) {
         handleActiveChange(getPrev(activeImg, totalImg));
       }
-    } else if (code === keyboardKey.ArrowRight) {
+    } else if (code === keyboardKey.ArrowRight || code === keyboardKey[' ']) {
       if (activeImg < totalImg - 1) {
         handleActiveChange(getNext(activeImg, totalImg));
       }
@@ -243,6 +264,12 @@ export const ImagePreview = ({
       handleZoomIn();
     } else if (code === keyboardKey.ArrowDown) {
       handleZoomOut();
+    } else if (code === keyboardKey.Enter) {
+      handleDoubleClick();
+    } else if (code === keyboardKey.F) {
+      event.preventDefault();
+      event.stopPropagation();
+      handleFkeyDown();
     }
   };
 
