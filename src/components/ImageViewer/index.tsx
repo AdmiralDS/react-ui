@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import styled, { type css } from 'styled-components';
 
-import { ErrorMiniature, ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
+import { EmptyMiniature, ImageMiniature } from '#src/components/ImageViewer/ImageMiniature';
 import { ImagePreview } from '#src/components/ImageViewer/ImagePreview';
 import type { ImageProps, ImageViewerProps } from '#src/components/ImageViewer/types';
 
@@ -83,7 +83,7 @@ export const ImageViewer = ({
           container={container}
           minScale={minScale}
           maxScale={maxScale}
-          errorMiniature={<ErrorMiniature dimension={dimension} />}
+          errorMiniature={<EmptyMiniature dimension={dimension} />}
           scaleStep={scaleStep}
           showTooltip={showTooltip}
           showCounter={showCounter && items.length > 1}

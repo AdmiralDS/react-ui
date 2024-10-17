@@ -87,14 +87,14 @@ const ErrorOnLoadBlock = styled.div<{ $dimension: ImageMiniatureDimension }>`
 interface ErrorMiniatureProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension?: ImageMiniatureDimension;
 }
-export const ErrorMiniature = ({ dimension = 'm', ...props }: ErrorMiniatureProps) => {
+export const EmptyMiniature = ({ dimension = 'm', ...props }: ErrorMiniatureProps) => {
   return (
     <ErrorOnLoadBlock {...props} $dimension={dimension}>
       <StyledCategoryGalleryOutline />
     </ErrorOnLoadBlock>
   );
 };
-const StyledErrorMiniature = styled(ErrorMiniature)`
+const StyledEmptyMiniature = styled(EmptyMiniature)`
   ${blockPositionCss};
 `;
 const HoverEffectBlock = styled.div`
@@ -158,7 +158,7 @@ export const ImageMiniature = ({ item, dimension = 'm', onError, onMouseDown, ..
     <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
       <StyledImg {...itemProps} ref={imgRef} src={itemSrc} />
       {errorOnLoadImg ? (
-        <StyledErrorMiniature dimension={dimension} />
+        <StyledEmptyMiniature dimension={dimension} />
       ) : (
         <HoverEffectBlock>
           <StyledServiceEyeOutline />
