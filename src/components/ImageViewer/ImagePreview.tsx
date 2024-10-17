@@ -7,6 +7,8 @@ import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerC
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
 import { getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
 
+import { keyboardKey } from '../common/keyboardKey';
+
 const Overlay = styled.div`
   display: flex;
   align-items: center;
@@ -222,23 +224,24 @@ export const ImagePreview = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Escape') {
+    const code = keyboardKey.getCode(event);
+    if (code === keyboardKey.Escape) {
       // prevent browser-specific escape key behavior (Safari exits fullscreen)
       event.preventDefault();
       // prevent other overlays from closing
       event.stopPropagation();
       handleClose();
-    } else if (event.key === 'ArrowLeft') {
+    } else if (code === keyboardKey.ArrowLeft) {
       if (activeImg > 0) {
         handleActiveChange(getPrev(activeImg, totalImg));
       }
-    } else if (event.key === 'ArrowRight') {
+    } else if (code === keyboardKey.ArrowRight) {
       if (activeImg < totalImg - 1) {
         handleActiveChange(getNext(activeImg, totalImg));
       }
-    } else if (event.key === 'ArrowUp') {
+    } else if (code === keyboardKey.ArrowUp) {
       handleZoomIn();
-    } else if (event.key === 'ArrowDown') {
+    } else if (code === keyboardKey.ArrowDown) {
       handleZoomOut();
     }
   };
