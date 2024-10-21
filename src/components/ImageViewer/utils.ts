@@ -18,6 +18,8 @@ function fixPoint(start: number, size: number, clientSize: number) {
     if (start < 0 && end < clientSize) {
       return -offsetStart;
     }
+  } else if (start > 0 && end < clientSize) {
+    return 0;
   } else if (start < 0 || end > clientSize) {
     return start < 0 ? offsetStart : -offsetStart;
   }
