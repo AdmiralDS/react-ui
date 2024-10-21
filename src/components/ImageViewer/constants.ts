@@ -16,3 +16,7 @@ export const IMAGE_MINIATURE_ICON_SIZE_S_M = 24;
 export const IMAGE_MINIATURE_ICON_SIZE_L_XL = 40;
 
 export const IMAGE_SCALE_PRECISION = 5;
+/** Scale the ratio base */
+export const BASE_SCALE_RATIO = 1;
+/** The maximum zoom ratio when the mouse zooms in, adjustable */
+export const WHEEL_MAX_SCALE_RATIO = 1;

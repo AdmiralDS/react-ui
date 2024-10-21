@@ -5,8 +5,8 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
-import { IMAGE_SCALE_PRECISION } from '#src/components/ImageViewer/constants';
+import { getClientSize, getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
+import { BASE_SCALE_RATIO, IMAGE_SCALE_PRECISION, WHEEL_MAX_SCALE_RATIO } from '#src/components/ImageViewer/constants';
 
 import { keyboardKey } from '../common/keyboardKey';
 
@@ -88,7 +88,7 @@ const ImageView = forwardRef<HTMLImageElement, ImageViewProps>(
 export const ImagePreview = ({
   item,
   container,
-  minScale,
+  minScale = 1,
   maxScale = 10,
   errorMiniature,
   scaleStep = 0.5,
@@ -168,13 +168,10 @@ export const ImagePreview = ({
     setScale(newScale);
   };
   const handleZoomIn = () => {
-    const newScale = scale + scaleStep;
-    handleScaleChange(newScale > maxScale ? maxScale : newScale);
+    handleZoomChange(BASE_SCALE_RATIO + scaleStep);
   };
   const handleZoomOut = () => {
-    const newScale = scale - scaleStep;
-    handleScaleChange(newScale < minScaleInner ? minScaleInner : newScale);
-    handleNeedUpdateCoordinatesChange(true);
+    handleZoomChange(BASE_SCALE_RATIO / (BASE_SCALE_RATIO + scaleStep));
   };
 
   const minScaleInner = minScale ?? 1;
@@ -315,6 +312,71 @@ export const ImagePreview = ({
       });
     }
   };
+  /** Scale according to the position of centerX and centerY */
+  const handleZoomChange = (ratio: number, centerX?: number, centerY?: number, isTouch?: boolean) => {
+    if (imgRef.current) {
+      const { width, height, offsetWidth, offsetHeight, offsetLeft, offsetTop } = imgRef.current;
+
+      let newRatio = ratio;
+      let newScale = scale * ratio;
+      if (newScale > maxScale) {
+        newScale = maxScale;
+        newRatio = maxScale / scale;
+      } else if (newScale < minScale) {
+        // For mobile interactions, allow scaling down to the minimum scale.
+        newScale = isTouch ? newScale : minScale;
+        newRatio = newScale / scale;
+      }
+
+      /** Default center point scaling */
+      const mergedCenterX = centerX ?? innerWidth / 2;
+      const mergedCenterY = centerY ?? innerHeight / 2;
+
+      const diffRatio = newRatio - 1;
+      /** Deviation calculated from image size */
+      const diffImgX = diffRatio * width * 0.5;
+      const diffImgY = diffRatio * height * 0.5;
+      /** The difference between the click position and the edge of the document */
+      const diffOffsetLeft = diffRatio * (mergedCenterX - coordinates.x - offsetLeft);
+      const diffOffsetTop = diffRatio * (mergedCenterY - coordinates.y - offsetTop);
+      /** Final positioning */
+      let newX = coordinates.x - (diffOffsetLeft - diffImgX);
+      let newY = coordinates.y - (diffOffsetTop - diffImgY);
+
+      /**
+       * When zooming the image
+       * When the image size is smaller than the width and height of the window, the position is initialized
+       */
+      if (ratio < 1 && newScale === 1) {
+        const mergedWidth = offsetWidth * newScale;
+        const mergedHeight = offsetHeight * newScale;
+        const { width: clientWidth, height: clientHeight } = getClientSize();
+        if (mergedWidth <= clientWidth && mergedHeight <= clientHeight) {
+          newX = 0;
+          newY = 0;
+        }
+      }
+
+      handleScaleChange(newScale);
+      setCoordinates({ x: newX, y: newY });
+      handleNeedUpdateCoordinatesChange(true);
+    }
+  };
+
+  const onWheel = (event: React.WheelEvent<HTMLImageElement>) => {
+    if (event.deltaY == 0) return;
+
+    // Scale ratio depends on the deltaY size
+    const scaleRatio = Math.abs(event.deltaY / 100);
+    // Limit the maximum scale ratio
+    const mergedScaleRatio = Math.min(scaleRatio, WHEEL_MAX_SCALE_RATIO);
+    // Scale the ratio each time
+    let ratio = BASE_SCALE_RATIO + mergedScaleRatio * scaleStep;
+    if (event.deltaY > 0) {
+      ratio = BASE_SCALE_RATIO / ratio;
+    }
+    handleZoomChange(ratio, event.clientX, event.clientY);
+  };
   useEffect(() => {
     document.addEventListener('mousemove', handleImgMouseMove);
     document.addEventListener('mouseup', handleImgMouseUp);
@@ -337,13 +399,7 @@ export const ImagePreview = ({
   }, [needUpdateCoordinates]);
 
   return createPortal(
-    <Overlay
-      ref={overlayRef}
-      tabIndex={-1}
-      onMouseDown={handleMouseDown}
-      onKeyDown={handleKeyDown}
-      onBlur={(e) => console.log(e)}
-    >
+    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       {errorOnLoadImg && errorMiniature}
       <ImageView
         item={item}
@@ -358,6 +414,7 @@ export const ImagePreview = ({
         onMouseDown={handleImgMouseDown}
         transitionEnabled={!isMoving}
         isVisible={!errorOnLoadImg}
+        onWheel={onWheel}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
