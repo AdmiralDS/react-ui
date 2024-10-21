@@ -69,13 +69,6 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
   }};
 `;
 
-const Container = styled.div`
-  display: flex;
-  overflow: hidden;
-  flex: 1 1 auto;
-  position: relative;
-`;
-
 const ScrollableContent = styled(ScrollContainer)<{ $mobile: boolean }>`
   padding-block: 8px;
   padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
@@ -339,15 +332,12 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
-export const ModalContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
+export const ModalContent = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof ScrollContainer>) => {
   const mobile = useContext(ModalContext).mobile;
-
   return (
-    <Container>
-      <ScrollableContent tabIndex={-1} $mobile={mobile} {...props}>
-        {children}
-      </ScrollableContent>
-    </Container>
+    <ScrollableContent tabIndex={-1} $mobile={mobile} {...props}>
+      {children}
+    </ScrollableContent>
   );
 };
 
