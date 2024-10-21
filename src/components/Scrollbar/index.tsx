@@ -21,6 +21,7 @@ export const hideNativeScrollbarsCss = css`
 const Container = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   overflow: hidden;
 `;
 
