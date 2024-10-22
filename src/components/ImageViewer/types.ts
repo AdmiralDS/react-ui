@@ -110,6 +110,7 @@ export interface ImagePreviewProps
   minScale?: number;
   /** Максимальный размер увеличения, по умолчанию x10 от исходного разрешения картинки.  */
   maxScale?: number;
+  /** Элемент для отображения при ошибке загрузки */
   errorMiniature?: React.ReactNode;
 }
 
