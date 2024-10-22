@@ -116,7 +116,7 @@ const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension; $errorOnLoadIm
   height: ${(p) => getImageMiniatureSize(p.$dimension)}px;
   border-radius: 4px;
   position: relative;
-  cursor: ${(p) => (p.$errorOnLoadImg ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
   overflow: hidden;
 
   display: flex;
@@ -128,7 +128,7 @@ const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension; $errorOnLoadIm
     height: ${(p) => getImageMiniatureIconSize(p.$dimension)}px;
   }
 
-  ${(p) => !p.$errorOnLoadImg && hoverStyle}
+  ${hoverStyle}
 `;
 const StyledImg = styled.img`
   object-fit: cover;
