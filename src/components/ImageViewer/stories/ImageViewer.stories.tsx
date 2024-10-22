@@ -33,6 +33,15 @@ export default {
     previewGroupMixin: {
       control: false,
     },
+    locale: {
+      control: false,
+    },
+    container: {
+      control: false,
+    },
+    errorMiniature: {
+      control: false,
+    },
     dimension: {
       options: ['xxs', 'xs', 's', 'm', 'l', 'xl'],
       control: { type: 'radio' },
