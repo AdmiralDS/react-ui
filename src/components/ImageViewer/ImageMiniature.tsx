@@ -119,6 +119,7 @@ const Wrapper = styled.div<{ $dimension: ImageMiniatureDimension; $errorOnLoadIm
   cursor: pointer;
   overflow: hidden;
 
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;

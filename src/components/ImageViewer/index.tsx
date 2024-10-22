@@ -11,9 +11,6 @@ export * from './types';
 
 const Wrapper = styled.div<{ $previewGroupMixin?: ReturnType<typeof css> }>`
   box-sizing: border-box;
-  height: 300px;
-  width: 500px;
-  background-color: var(--admiral-color-Opacity_Modal, ${(p) => p.theme.color['Opacity/Modal']});
 
   display: flex;
   align-items: center;
