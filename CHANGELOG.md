@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.25.2](https://github.com/AdmiralDS/react-ui/compare/v8.25.1...v8.25.2) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Modal:** [#1545](https://github.com/AdmiralDS/react-ui/issues/1545) контейнер модалки должен быть максимальной ширины, даже если он пустой ([3cfa981](https://github.com/AdmiralDS/react-ui/commit/3cfa981d354065363da27279502475e4a8469004))
+
 ### [8.25.1](https://github.com/AdmiralDS/react-ui/compare/v8.25.0...v8.25.1) (2024-10-18)
 
 ## [8.25.0](https://github.com/AdmiralDS/react-ui/compare/v8.24.2...v8.25.0) (2024-10-15)

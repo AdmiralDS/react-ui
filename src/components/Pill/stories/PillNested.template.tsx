@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, Pills, refSetter, smallGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Shape, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';

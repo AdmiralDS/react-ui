@@ -63,7 +63,7 @@ export const TableLoadOnScrollTemplate = (props: TableProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
 
   const rows = React.useMemo(() => {
-    const array = Array.from({ length: rowsAmount }, (v, k) => {
+    const array = Array.from({ length: rowsAmount }, (_, k) => {
       return `${k + 1}0000`;
     }).map((item, index) => ({
       id: item,

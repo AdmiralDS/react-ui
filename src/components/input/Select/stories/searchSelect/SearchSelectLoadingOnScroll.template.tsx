@@ -47,7 +47,7 @@ export const LoadOnScrollTemplate = (props: SelectProps) => {
   const [count, setCount] = React.useState<number>(8);
 
   const renderOptions = React.useMemo(() => {
-    const array = Array.from({ length: count }, (v, k) => {
+    const array = Array.from({ length: count }, (_, k) => {
       return `${k}0000`;
     }).map((item, index) => (
       <Option value={item} key={`${index}/${count}`}>

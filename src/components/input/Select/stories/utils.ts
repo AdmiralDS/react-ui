@@ -8,12 +8,12 @@ export async function wait(ms: number) {
 
 export const createOptions = (length: number) => {
   return MULTISELECT_OPTIONS.concat(
-    Array.from({ length }).map((option, index) => ({ text: `${index}0000`, value: String(index) })),
+    Array.from({ length }).map((_, index) => ({ text: `${index}0000`, value: String(index) })),
   );
 };
 
 export const createClearOptions = (length: number) => {
-  return Array.from({ length }).map((option, index) => ({ text: `${index}0000`, value: String(index) }));
+  return Array.from({ length }).map((_, index) => ({ text: `${index}0000`, value: String(index) }));
 };
 
 export const formDataToObject = (data: FormData) => {

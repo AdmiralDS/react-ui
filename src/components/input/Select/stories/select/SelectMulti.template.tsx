@@ -4,7 +4,7 @@ import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
 export const SelectMultiTemplate = (props: SelectProps) => {
-  const [selectValue, setSelectValue] = React.useState<string[]>(
+  const [_, setSelectValue] = React.useState<string[]>(
     Array.from({ length: 20 })
       .map((_, ind) => String(ind))
       .slice(0, 10),
@@ -18,7 +18,6 @@ export const SelectMultiTemplate = (props: SelectProps) => {
     <>
       <Select
         {...props}
-        // defaultValue={selectValue}
         multiple={true}
         onSelectedChange={handleSelectedChange}
         dimension="xl"

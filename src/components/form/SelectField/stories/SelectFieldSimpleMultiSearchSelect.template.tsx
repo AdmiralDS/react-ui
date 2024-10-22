@@ -11,7 +11,7 @@ const Separator = styled.div`
 
 type SearchFormat = 'word' | 'wholly';
 
-const createOptions = (length: number) => Array.from({ length }).map((option, index) => String(index));
+const createOptions = (length: number) => Array.from({ length }).map((_, index) => String(index));
 
 const shouldRender = (text = '', searchValue = '', searchFormat: SearchFormat = 'wholly') => {
   const strings = searchFormat === 'word' ? searchValue.split(' ') : [searchValue];
