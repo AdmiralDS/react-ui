@@ -32,6 +32,7 @@ export const ImageViewer = ({
   container,
   minScale,
   maxScale,
+  errorMiniature,
   scaleStep,
   showTooltip = true,
   showCounter = true,
@@ -72,7 +73,7 @@ export const ImageViewer = ({
       : items.map((item, index) => {
           return renderItem(item, index);
         });
-  }, [items, appearance]);
+  }, [items, appearance, dimension, previewGroupMixin, errorMiniature]);
 
   return (
     <Wrapper {...props} $previewGroupMixin={previewGroupMixin}>
@@ -83,7 +84,7 @@ export const ImageViewer = ({
           container={container}
           minScale={minScale}
           maxScale={maxScale}
-          errorMiniature={<EmptyMiniature dimension={dimension} />}
+          errorMiniature={errorMiniature ?? <EmptyMiniature dimension={dimension} />}
           scaleStep={scaleStep}
           showTooltip={showTooltip}
           showCounter={showCounter && items.length > 1}
