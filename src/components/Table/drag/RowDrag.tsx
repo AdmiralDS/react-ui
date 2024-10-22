@@ -138,7 +138,7 @@ export const RowDrag = ({
           updateDragItem,
           dimension,
           direction: 'vertical',
-          invalid: (el: HTMLElement, initEl: HTMLElement) => {
+          invalid: (_: HTMLElement, initEl: HTMLElement) => {
             const validDrag =
               initEl.getAttribute('data-dragicon') || initEl.parentElement?.getAttribute('data-dragicon');
             return !validDrag;

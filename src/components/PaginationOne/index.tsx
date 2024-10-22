@@ -176,7 +176,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const forwardText = locale?.forwardText || theme_forwardText;
 
   const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
-  const pages = Array.from({ length: totalPages }, (v, k) => k + 1);
+  const pages = Array.from({ length: totalPages }, (_, k) => k + 1);
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 

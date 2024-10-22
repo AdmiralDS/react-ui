@@ -1,4 +1,3 @@
-import type { RefObject } from 'react';
 import type { TabWidthMapProps } from '#src/components/TabMenuComponent/types';
 
 export const getActiveTabWidth = (tabWidthMap: TabWidthMapProps[], selectedTabId: string) => {
