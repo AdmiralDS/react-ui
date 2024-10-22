@@ -4,15 +4,15 @@ import { useGlobals } from '@storybook/preview-api';
 import { ImageViewer } from '@admiral-ds/react-ui';
 
 import { ImageViewerPlaygroundTemplate } from './ImageViewerPlayground.template';
+import { ImageViewerMobileTemplate } from './ImageViewerMobile.template';
 //import { ImageViewerVariantsTemplate } from './ImageViewerVariants.template';
 //import { ImageViewerAppearanceTemplate } from './ImageViewerAppearance.template';
-//import { ImageViewerSizesTemplate } from './ImageViewerSizes.template';
 
 // Imports of text sources
 import ImageViewerPlaygroundRaw from './ImageViewerPlayground.template?raw';
+import ImageViewerMobileRaw from './ImageViewerMobile.template?raw';
 //import ImageViewerVariantsRaw from './ImageViewerVariants.template?raw';
 //import ImageViewerAppearanceRaw from './ImageViewerAppearance.template?raw';
-//import ImageViewerSizesRaw from './ImageViewerSizes.template?raw';
 
 export default {
   title: 'Admiral-2.1/ImageViewer',
@@ -71,27 +71,27 @@ export const ImageViewerPlayground = {
 
 //</editor-fold>
 
-/*//<editor-fold desc="ImageViewer. Размеры">
-const ImageViewerSizesStory: StoryFn<typeof ImageViewer> = (props) => {
+//<editor-fold desc="ImageViewer. Размеры">
+const ImageViewerMobileStory: StoryFn<typeof ImageViewer> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <ImageViewerSizesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <ImageViewerMobileTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const ImageViewerSizes = {
-  render: ImageViewerSizesStory,
+export const ImageViewerMobile = {
+  render: ImageViewerMobileStory,
 
   parameters: {
     docs: {
       source: {
-        code: ImageViewerSizesRaw,
+        code: ImageViewerMobileRaw,
       },
     },
   },
 
-  name: 'ImageViewer. Размеры',
+  name: 'ImageViewer. Mobile',
 };
 
-//</editor-fold>*/
+//</editor-fold>
 
 /*//<editor-fold desc="ImageViewer. Appearance">
 const ImageViewerAppearanceStory: StoryFn<typeof ImageViewer> = (props) => {

@@ -99,7 +99,7 @@ export interface ImagePreviewProps
   /** Элемент для просмотра */
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
-  container?: Element;
+  container?: Element | null;
   /** Шаг для изменения масштаба, по умолчанию 0,5 */
   scaleStep?: number;
   /** Обработчик изменения видимости окна просмотра элемента */
