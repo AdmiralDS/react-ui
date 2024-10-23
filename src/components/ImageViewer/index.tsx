@@ -25,6 +25,7 @@ export const ImageViewer = ({
   defaultActiveImg = 0,
   appearance = 'single',
   previewGroupMixin,
+  mobile = false,
   dimension = 'm',
   container,
   minScale,
@@ -85,7 +86,7 @@ export const ImageViewer = ({
           scaleStep={scaleStep}
           showTooltip={showTooltip}
           showCounter={showCounter && items.length > 1}
-          showNavigation={showNavigation && items.length > 1}
+          showNavigation={showNavigation && !mobile && items.length > 1}
           locale={locale}
           activeImg={activeImgInner}
           totalImg={items.length}

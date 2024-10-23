@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { ImageViewer, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
@@ -45,8 +45,15 @@ const HomeIndicator = styled.div`
   border-radius: 4px;
 `;
 const PageContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   flex-grow: 5;
+
+  transform: translateX(0);
+  overflow: hidden;
 `;
 
 const handleError = (e: any) => {
@@ -81,7 +88,7 @@ export const ImageViewerMobileTemplate = ({
   CSSCustomProps,
   ...props
 }: ImageViewerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(null);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -97,8 +104,8 @@ export const ImageViewerMobileTemplate = ({
         </NotificationItem>
         <MobileWrapper>
           <Service />
-          <PageContent ref={containerRef}>
-            <ImageViewer {...props} container={containerRef.current} items={items} />
+          <PageContent ref={(node) => setContainerNode(node)}>
+            <ImageViewer {...props} container={containerNode} items={items} mobile />
           </PageContent>
           <HomeIndicator />
         </MobileWrapper>

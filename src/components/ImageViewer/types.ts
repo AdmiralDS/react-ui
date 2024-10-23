@@ -125,6 +125,8 @@ export interface ImageViewerProps
   appearance?: ImageViewerAppearance;
   /** Миксин для стилизации отображения миниатюр */
   previewGroupMixin?: ReturnType<typeof css>;
+  /** Мобильное отображение компонента */
+  mobile?: boolean;
   /** Состояние видимости просмотра элемента */
   visible?: boolean;
 }
