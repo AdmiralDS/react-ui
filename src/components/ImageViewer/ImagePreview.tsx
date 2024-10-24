@@ -104,11 +104,13 @@ export const ImagePreview = ({
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  // Стейт для отложенного запуска пересчета координат после поворота или изменения масштаба, чтобы ImageView успел перерендериться
   const [needUpdateCoordinates, setNeedUpdateCoordinates] = useState(false);
   const handleNeedUpdateCoordinatesChange = (newState: boolean) => {
     setTimeout(() => setNeedUpdateCoordinates(newState), 250);
   };
 
+  //<editor-fold desc="Получение данных о загрузке изображения">
   const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
   useLayoutEffect(() => {
@@ -131,7 +133,9 @@ export const ImagePreview = ({
       };
     }
   }, [activeImg]);
+  //</editor-fold>
 
+  //<editor-fold desc="Отслеживание начальных (отрендеренных) размеров изображения">
   const [imgRenderedWidth, setImgRenderedWidth] = useState(0);
   const [imgRenderedHeight, setImgRenderedHeight] = useState(0);
   useLayoutEffect(() => {
@@ -149,7 +153,9 @@ export const ImagePreview = ({
       };
     }
   }, []);
+  //</editor-fold>
 
+  //<editor-fold desc="Обработчики действий для закрытия режима просмотра">
   const handleClose = () => {
     onVisibleChange?.(false);
   };
@@ -162,7 +168,9 @@ export const ImagePreview = ({
     event.stopPropagation();
     handleClose();
   };
+  //</editor-fold>
 
+  //<editor-fold desc="Остлеживание текущего масштаба">
   const [scale, setScale] = useState(1);
   const handleScaleChange = (newScale: number) => {
     setScale(newScale);
@@ -173,13 +181,19 @@ export const ImagePreview = ({
   const handleZoomOut = () => {
     handleZoomChange(BASE_SCALE_RATIO / (BASE_SCALE_RATIO + scaleStep));
   };
+  //</editor-fold>
 
+  //<editor-fold desc="Определение значений масштаба 1:1 и "на весь экран"">
   const minScaleInner = minScale ?? 1;
+  // Масштаб для увеличения изображения в изначальный размер (intrinsic size of an image)
   const [realScaleState, setRealScaleState] = useState(1.0);
+  // Масштаб для увеличения изображения на весь экран (100% ширины или высоты)
   const [fullScaleState, setFullScaleState] = useState(1.0);
+  // Устанавливает масштаб до размера 1:1 и обратно в 1
   const handleDoubleClick = () => {
     setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
   };
+  // Устанавливает масштаб на весь экран и обратно в 1
   const handleFkeyDown = () => {
     setScale((prevState) => (prevState === fullScaleState ? 1 : fullScaleState));
   };
@@ -198,7 +212,9 @@ export const ImagePreview = ({
       return 1;
     });
   }, [imgRenderedHeight, imgNaturalHeight]);
+  //</editor-fold>
 
+  //<editor-fold desc="Стейты для отражения изображения по горизонтали и вертикали">
   const [flipX, setFlipX] = useState(false);
   const [flipY, setFlipY] = useState(false);
   const handleFlipXChange = () => {
@@ -207,7 +223,9 @@ export const ImagePreview = ({
   const handleFlipYChange = () => {
     setFlipY((prevState) => !prevState);
   };
+  //</editor-fold>
 
+  //<editor-fold desc="Обработка поворота изображения">
   const [rotate, setRotate] = useState(0);
   const handleRotateLeft = () => {
     setRotate((prevState) => prevState - 90);
@@ -217,17 +235,21 @@ export const ImagePreview = ({
     setRotate((prevState) => prevState + 90);
     handleNeedUpdateCoordinatesChange(true);
   };
+  //</editor-fold>
 
+  //<editor-fold desc="Обработка перемещения изображения внутри зоны просмотра">
+  // Показывает, что изображение находится в процессе перемещения, ЛКМ зажата
   const [isMoving, setMoving] = useState(false);
+  // Координаты для сдвига изображения
   const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-
+  // Информация о произошедшем сдвиге
   const startPositionInfo = useRef({
     diffX: 0,
     diffY: 0,
     transformX: 0,
     transformY: 0,
   });
-
+  // Очистка всех состояний трансформации изображения
   const clearImgTransformStates = () => {
     setCoordinates({ x: 0, y: 0 });
     setScale(1);
@@ -235,12 +257,13 @@ export const ImagePreview = ({
     setFlipY(false);
     setRotate(0);
   };
+  // Обработчик смены изображения внутри режима просмотра
   const handleActiveChange = (index: number) => {
     clearImgTransformStates();
     onActiveChange?.(index);
     setErrorOnLoadImg(false);
   };
-
+  // Обработка клавиатурных команд для перелистывания изображений и изменения масштаба
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Escape) {
@@ -269,7 +292,7 @@ export const ImagePreview = ({
       handleFkeyDown();
     }
   };
-
+  // Начало перетаскивания изображения
   const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
     // Only allow main button
     if (event.button !== 0 || !imgRef.current) return;
@@ -283,16 +306,17 @@ export const ImagePreview = ({
     };
     setMoving(true);
   };
-
+  // Движение изображаения при зажатой ЛКМ
   const handleImgMouseMove = (event: MouseEvent) => {
     if (isMoving && imgRef.current) {
+      // При перемещении установка новых координат идет напрямую через анимацию css
       setCoordinates({
         x: event.pageX - startPositionInfo.current.diffX,
         y: event.pageY - startPositionInfo.current.diffY,
       });
     }
   };
-
+  // Окончательное позиционирование изображения
   const handleImgMouseUp = () => {
     if (isMoving && imgRef.current) {
       setMoving(false);
@@ -307,11 +331,14 @@ export const ImagePreview = ({
       const { left, top } = imgRef.current.getBoundingClientRect();
 
       const updated = updatePosition(width, height, left, top, rotate, coordinates);
+      // При заверешении перемещения анимации css отключается и происходит через requestAnimationFrame
+      // Одновременно использовать и анимацию css и requestAnimationFrame нельзя, они начинают конфликтовать между собой
       requestAnimationFrame(() => {
         setCoordinates(updated);
       });
     }
   };
+  // Расчет изменения масштаба с учетом установки определенного центра изображения, относительно которого необходимо рассчитать конечное положение
   /** Scale according to the position of centerX and centerY */
   const handleZoomChange = (ratio: number, centerX?: number, centerY?: number, isTouch?: boolean) => {
     if (imgRef.current) {
@@ -362,7 +389,7 @@ export const ImagePreview = ({
       handleNeedUpdateCoordinatesChange(true);
     }
   };
-
+  // Обработка изменения масштаба по колесику мыши
   const onWheel = (event: React.WheelEvent<HTMLImageElement>) => {
     if (event.deltaY == 0) return;
 
@@ -377,6 +404,7 @@ export const ImagePreview = ({
     }
     handleZoomChange(ratio, event.clientX, event.clientY);
   };
+  // Listeners mousemove и mouseup добавлены на document, иначе при выходе за рамки изображения они перестанут работать
   useEffect(() => {
     document.addEventListener('mousemove', handleImgMouseMove);
     document.addEventListener('mouseup', handleImgMouseUp);
@@ -386,6 +414,7 @@ export const ImagePreview = ({
       document.removeEventListener('mouseup', handleImgMouseUp);
     };
   }, [isMoving, coordinates, rotate]);
+  // Отложенная корректировка координат для позиционирования изображения (центрирование при размерах меньше или "прилипание к краям")
   useEffect(() => {
     if (needUpdateCoordinates && !isMoving && imgRef.current) {
       const width = imgRef.current.offsetWidth * scale;
@@ -397,6 +426,7 @@ export const ImagePreview = ({
       setNeedUpdateCoordinates(false);
     }
   }, [needUpdateCoordinates]);
+  //</editor-fold>
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
