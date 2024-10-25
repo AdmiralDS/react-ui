@@ -1,11 +1,20 @@
-import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import { getClientSize, getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
+import type { TouchPointInfoType } from '#src/components/ImageViewer/utils';
+import {
+  getCenter,
+  getClientSize,
+  getDistance,
+  getNext,
+  getPrev,
+  getSwipeType,
+  updatePosition,
+} from '#src/components/ImageViewer/utils';
 import { BASE_SCALE_RATIO, IMAGE_SCALE_PRECISION, WHEEL_MAX_SCALE_RATIO } from '#src/components/ImageViewer/constants';
 
 import { keyboardKey } from '../common/keyboardKey';
@@ -428,6 +437,162 @@ export const ImagePreview = ({
   }, [needUpdateCoordinates]);
   //</editor-fold>
 
+  //<editor-fold desc="Обработчики touch событий">
+  const [isTouching, setIsTouching] = useState(false);
+  const touchPointInfo = useRef<TouchPointInfoType>({
+    point1: { x: 0, y: 0 },
+    point2: { x: 0, y: 0 },
+    eventType: 'none',
+    startEl: undefined,
+    timeDown: undefined,
+    xDown: undefined,
+    yDown: undefined,
+    xDiff: undefined,
+    yDiff: undefined,
+    touchCount: undefined,
+  });
+
+  const updateTouchPointInfo = (values: Partial<TouchPointInfoType>) => {
+    touchPointInfo.current = {
+      ...touchPointInfo.current,
+      ...values,
+    };
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLImageElement>) => {
+    event.stopPropagation();
+    setIsTouching(true);
+
+    const { touches = [] } = event;
+    updateTouchPointInfo({
+      startEl: event.target,
+      timeDown: Date.now(),
+      touchCount: touches.length,
+    });
+    if (touches.length > 1) {
+      // touch zoom
+      updateTouchPointInfo({
+        point1: { x: touches[0].clientX, y: touches[0].clientY },
+        point2: { x: touches[1].clientX, y: touches[1].clientY },
+        eventType: 'touchZoom',
+      });
+    } else {
+      // touch move
+      updateTouchPointInfo({
+        point1: {
+          x: touches[0].clientX - coordinates.x,
+          y: touches[0].clientY - coordinates.y,
+        },
+        eventType: 'move',
+        xDown: event.touches[0].clientX,
+        yDown: event.touches[0].clientY,
+        xDiff: 0,
+        yDiff: 0,
+      });
+    }
+  };
+  const handleTouchMove = (event: React.TouchEvent<HTMLImageElement>) => {
+    const { touches = [] } = event;
+    const { point1, point2, eventType, xDown, yDown } = touchPointInfo.current;
+
+    if (touches.length > 1 && eventType === 'touchZoom') {
+      // touch zoom
+      const newPoint1 = {
+        x: touches[0].clientX,
+        y: touches[0].clientY,
+      };
+      const newPoint2 = {
+        x: touches[1].clientX,
+        y: touches[1].clientY,
+      };
+      const [centerX, centerY] = getCenter(point1, point2, newPoint1, newPoint2);
+      const ratio = getDistance(newPoint1, newPoint2) / getDistance(point1, point2);
+
+      handleZoomChange(ratio, centerX, centerY, true);
+      updateTouchPointInfo({
+        point1: newPoint1,
+        point2: newPoint2,
+        eventType: 'touchZoom',
+      });
+    } else if (eventType === 'move') {
+      // touch move
+      setCoordinates({
+        x: touches[0].clientX - point1.x,
+        y: touches[0].clientY - point1.y,
+      });
+      updateTouchPointInfo({ eventType: 'move' });
+      if (xDown && yDown) {
+        const xUp = touches[0].clientX;
+        const yUp = touches[0].clientY;
+        updateTouchPointInfo({
+          xDiff: xDown - xUp,
+          yDiff: yDown - yUp,
+        });
+      }
+    }
+  };
+  const handleTouchEnd = (event: React.TouchEvent<HTMLImageElement>) => {
+    if (isTouching && imgRef.current) {
+      if (isTouching) {
+        setIsTouching(false);
+      }
+      const { eventType, startEl, timeDown, xDiff, yDiff, xDown, yDown } = touchPointInfo.current;
+
+      if (eventType === 'move') {
+        const timeUp = Date.now();
+        const type = getSwipeType(startEl, event.target, timeDown, timeUp, xDown, yDown, xDiff, yDiff);
+
+        if (type === 'swiped-left' && activeImg < totalImg - 1) {
+          console.log(type);
+          handleActiveChange(getNext(activeImg, totalImg));
+        } else if (type === 'swiped-right' && activeImg > 0) {
+          console.log(type);
+          handleActiveChange(getPrev(activeImg, totalImg));
+        } else {
+          const width = imgRef.current.offsetWidth * scale;
+          const height = imgRef.current.offsetHeight * scale;
+          const { left, top } = imgRef.current.getBoundingClientRect();
+
+          const updated = updatePosition(width, height, left, top, rotate, coordinates);
+          // При заверешении перемещения анимации css отключается и происходит через requestAnimationFrame
+          // Одновременно использовать и анимацию css и requestAnimationFrame нельзя, они начинают конфликтовать между собой
+          requestAnimationFrame(() => {
+            setCoordinates(updated);
+          });
+        }
+      } /*else if (eventType === 'touchZoom') {
+        if (minScale > scale) {
+          /!** When the scaling ratio is less than the minimum scaling ratio, reset the scaling ratio *!/
+          return updateTransform({ x: 0, y: 0, scale: minScale }, 'touchZoom');
+        }
+      }*/
+
+      updateTouchPointInfo({
+        eventType: 'none',
+        startEl: undefined,
+        timeDown: undefined,
+        xDown: undefined,
+        yDown: undefined,
+        xDiff: undefined,
+        yDiff: undefined,
+        touchCount: undefined,
+      });
+
+      /* const width = imgRef.current.offsetWidth * scale;
+      const height = imgRef.current.offsetHeight * scale;
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      const { left, top } = imgRef.current.getBoundingClientRect();
+      const isRotate = rotate % 180 !== 0;
+
+      const fixState = getFixScaleEleTransPosition(isRotate ? height : width, isRotate ? width : height, left, top);
+
+      if (fixState) {
+        updateTransform({ ...fixState }, 'dragRebound');
+      }*/
+    }
+  };
+  //</editor-fold>
+
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
       {errorOnLoadImg && errorMiniature}
@@ -445,6 +610,9 @@ export const ImagePreview = ({
         transitionEnabled={!isMoving}
         isVisible={!errorOnLoadImg}
         onWheel={onWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
