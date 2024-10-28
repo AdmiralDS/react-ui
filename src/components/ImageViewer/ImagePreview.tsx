@@ -349,7 +349,7 @@ export const ImagePreview = ({
   };
   // Расчет изменения масштаба с учетом установки определенного центра изображения, относительно которого необходимо рассчитать конечное положение
   /** Scale according to the position of centerX and centerY */
-  const handleZoomChange = (ratio: number, centerX?: number, centerY?: number, isTouch?: boolean) => {
+  const handleZoomChange = (ratio: number, centerX?: number, centerY?: number) => {
     if (imgRef.current) {
       const { width, height, offsetWidth, offsetHeight, offsetLeft, offsetTop } = imgRef.current;
 
@@ -359,8 +359,7 @@ export const ImagePreview = ({
         newScale = maxScale;
         newRatio = maxScale / scale;
       } else if (newScale < minScale) {
-        // For mobile interactions, allow scaling down to the minimum scale.
-        newScale = isTouch ? newScale : minScale;
+        newScale = minScale;
         newRatio = newScale / scale;
       }
 
@@ -508,19 +507,19 @@ export const ImagePreview = ({
       const [centerX, centerY] = getCenter(point1, point2, newPoint1, newPoint2);
       const ratio = getDistance(newPoint1, newPoint2) / getDistance(point1, point2);
 
-      handleZoomChange(ratio, centerX, centerY, true);
+      handleZoomChange(ratio, centerX, centerY);
       updateTouchPointInfo({
         point1: newPoint1,
         point2: newPoint2,
         eventType: 'touchZoom',
       });
     } else if (eventType === 'move') {
+      updateTouchPointInfo({ eventType: 'move' });
       // touch move
       setCoordinates({
         x: touches[0].clientX - point1.x,
         y: touches[0].clientY - point1.y,
       });
-      updateTouchPointInfo({ eventType: 'move' });
       if (xDown && yDown) {
         const xUp = touches[0].clientX;
         const yUp = touches[0].clientY;
@@ -533,9 +532,8 @@ export const ImagePreview = ({
   };
   const handleTouchEnd = (event: React.TouchEvent<HTMLImageElement>) => {
     if (isTouching && imgRef.current) {
-      if (isTouching) {
-        setIsTouching(false);
-      }
+      setIsTouching(false);
+
       const { eventType, startEl, timeDown, xDiff, yDiff, xDown, yDown } = touchPointInfo.current;
 
       if (eventType === 'move') {
@@ -560,12 +558,7 @@ export const ImagePreview = ({
             setCoordinates(updated);
           });
         }
-      } /*else if (eventType === 'touchZoom') {
-        if (minScale > scale) {
-          /!** When the scaling ratio is less than the minimum scaling ratio, reset the scaling ratio *!/
-          return updateTransform({ x: 0, y: 0, scale: minScale }, 'touchZoom');
-        }
-      }*/
+      }
 
       updateTouchPointInfo({
         eventType: 'none',
@@ -577,18 +570,6 @@ export const ImagePreview = ({
         yDiff: undefined,
         touchCount: undefined,
       });
-
-      /* const width = imgRef.current.offsetWidth * scale;
-      const height = imgRef.current.offsetHeight * scale;
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      const { left, top } = imgRef.current.getBoundingClientRect();
-      const isRotate = rotate % 180 !== 0;
-
-      const fixState = getFixScaleEleTransPosition(isRotate ? height : width, isRotate ? width : height, left, top);
-
-      if (fixState) {
-        updateTransform({ ...fixState }, 'dragRebound');
-      }*/
     }
   };
   //</editor-fold>
