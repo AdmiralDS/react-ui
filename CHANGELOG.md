@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.25.3](https://github.com/AdmiralDS/react-ui/compare/v8.25.2...v8.25.3) (2024-10-28)
+
+
+### Bug Fixes
+
+* **BadgeDot:** [#1552](https://github.com/AdmiralDS/react-ui/issues/1552) исправлен баг с отсутствием размеров у компонента ([51733f7](https://github.com/AdmiralDS/react-ui/commit/51733f77abb292f1958f647488e92d2706e512b0))
+
 ### [8.25.2](https://github.com/AdmiralDS/react-ui/compare/v8.25.1...v8.25.2) (2024-10-22)
 
 

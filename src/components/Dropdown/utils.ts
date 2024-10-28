@@ -40,7 +40,7 @@ export const nextItem = (
   parent: Element | null,
   child: Element | null,
   stop?: boolean,
-  onMenuReachTop?: () => void,
+  _onMenuReachTop?: () => void,
   onMenuReachBottom?: () => void,
 ): Element | null | undefined | ChildNode => {
   if (child?.nextElementSibling) {
