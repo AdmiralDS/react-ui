@@ -541,9 +541,11 @@ export const ImagePreview = ({
         const type = getSwipeType(startEl, event.target, timeDown, timeUp, xDown, yDown, xDiff, yDiff);
 
         if (type === 'swiped-left' && activeImg < totalImg - 1) {
+          // eslint-disable-next-line no-console
           console.log(type);
           handleActiveChange(getNext(activeImg, totalImg));
         } else if (type === 'swiped-right' && activeImg > 0) {
+          // eslint-disable-next-line no-console
           console.log(type);
           handleActiveChange(getPrev(activeImg, totalImg));
         } else {
