@@ -11,5 +11,6 @@ import { forwardRef } from 'react';
 export function fixedForwardRef<T, P = object>(
   render: (props: P, ref: Ref<T>) => ReactNode,
 ): (props: P & RefAttributes<T>) => ReactNode {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return forwardRef(render) as any;
 }

@@ -48,6 +48,7 @@ const calcValueByPos = (
 };
 
 export const calcValue = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   e: any,
   trackRef: React.RefObject<HTMLDivElement>,
   minValue: number,

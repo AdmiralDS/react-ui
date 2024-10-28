@@ -1,6 +1,7 @@
 export const moveFocus = (
   parent: HTMLDivElement | null,
   currentFocus: Element | null,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   calcNextFocus: (parent: HTMLDivElement | null, child: Element | null) => any,
 ): void => {
   let wrappedOnce = false;

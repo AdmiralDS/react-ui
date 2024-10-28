@@ -6,6 +6,7 @@ import { OverflowMenuWrapper } from './style';
 interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: TableProps['dimension'];
   tableWidth: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   row: any;
   verticalScroll: boolean;
   scrollbar: number;
@@ -36,6 +37,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   };
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     entries.forEach((entry: any) => {
       if (!entry.isIntersecting) {
         /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая

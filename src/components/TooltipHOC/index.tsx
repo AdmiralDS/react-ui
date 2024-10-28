@@ -23,9 +23,11 @@ export interface TooltipHocProps {
 }
 
 type WrappedComponentProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   forwardedRef?: any;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
     const { forwardedRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedCompProps } =
@@ -33,6 +35,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     // Пустая строка, undefined, null и false не будут отображены
     const emptyContent = !renderContent() && renderContent() !== 0;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const anchorElementRef = React.useRef<any>(null);
     const [visible, setVisible] = React.useState(false);
     const [node, setNode] = React.useState<HTMLElement | null>(null);
@@ -77,6 +80,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return React.forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
     return <WrappedComponent forwardedRef={ref} {...props} />;
   });

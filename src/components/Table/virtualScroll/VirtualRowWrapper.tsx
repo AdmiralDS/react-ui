@@ -7,6 +7,7 @@ type VirtualRowWrapperProps = {
   id: RowId | number;
   children: ReactNode;
   cacheRef: MutableRefObject<Cache>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setCache: any;
 };
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 const linkText = 'Link TextInput';
 
 describe('Link', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Link href="#" {...props}>

@@ -24,6 +24,7 @@ describe('MultiButton', () => {
       { id: '3', render: 'three' },
     ],
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <MultiButton {...props} {...requiredProps} data-testid="multi" />

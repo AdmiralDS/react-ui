@@ -68,6 +68,7 @@ export const PaneSimpleTemplate = ({
     console.log('Search input left');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderSettingsMenu = ({ closeMenu }: any) => (
     <SettingsMenu>
       Здесь могут быть опции с настройками и кнопки для применения/сбрасывания настроек

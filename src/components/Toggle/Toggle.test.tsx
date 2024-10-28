@@ -15,6 +15,7 @@ describe('Toggle', () => {
     'data-testid': 'element',
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Toggle {...requiredProps} {...props}>

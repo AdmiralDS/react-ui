@@ -92,6 +92,7 @@ export const Hint: React.FC<HintProps> = ({
 
   const targetElement = userTargetElement || anchorElementRef.current;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [recalculation, startRecalculation] = React.useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
@@ -230,6 +231,7 @@ export const Hint: React.FC<HintProps> = ({
     [anchorElementRef.current],
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleKeyDown = (event: any) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Enter || code === keyboardKey[' ']) {

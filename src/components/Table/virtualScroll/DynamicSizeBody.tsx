@@ -22,7 +22,9 @@ type Cache = {
 interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
   renderAhead?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowList: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderRow: (row: any, index: number) => ReactNode;
   renderEmptyMessage?: () => ReactNode;
   estimatedRowHeight?: (index: number) => number;
@@ -49,6 +51,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     const getItemKey = useCallback((index: number) => rowNodes[index].id, [rowNodes]);
 
     useEffect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
           setScrollTop(e.target.scrollTop);

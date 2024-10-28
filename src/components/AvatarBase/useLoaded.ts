@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useLoaded = (src: any) => {
   const [loaded, setLoaded] = React.useState<'loaded' | 'error' | boolean>(false);
 

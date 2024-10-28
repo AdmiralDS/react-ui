@@ -47,6 +47,7 @@ interface TickMarksProps {
   precision?: number;
   thousand?: string;
   tickMarks: number[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onPointClick: (e: any, value: number) => void;
   renderTickMark?: (mark: string) => React.ReactNode;
 }
@@ -76,6 +77,7 @@ export const TickMarks = ({
       {items.map((value, index) => {
         const key = value.toString() + index;
         const position = ((value - minValue) / range) * 100;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let style: any = {};
         style = index === 0 ? { left: 0 } : style;
         style = index === tickMarks.length - 1 ? { right: 0 } : style;
@@ -83,6 +85,7 @@ export const TickMarks = ({
           <Wrapper
             key={key}
             $position={position}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onMouseDown={(e: any) => {
               onPointClick(e, value);
             }}

@@ -310,6 +310,7 @@ export const SimpleWithSpecialDatesTemplate = ({
         range
         startDate={selected}
         endDate={endDate}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value[0]);
           setEndDate(value[1]);
@@ -322,6 +323,7 @@ export const SimpleWithSpecialDatesTemplate = ({
       <Calendar
         {...props}
         selected={selected}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}

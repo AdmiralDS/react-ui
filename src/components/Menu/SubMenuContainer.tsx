@@ -14,6 +14,7 @@ export const AnchorWrapper = styled.div`
   position: relative;
   cursor: pointer;
 `;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
   display: flex;
   flex-wrap: nowrap;
@@ -65,8 +66,10 @@ export const SubMenuContainer = ({
   const anchorElementRef = useRef<HTMLDivElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const targetElement: any = target?.current || anchorElementRef.current;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [recalculation, startRecalculation] = useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = useState('row');
 

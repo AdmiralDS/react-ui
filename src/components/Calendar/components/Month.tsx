@@ -25,8 +25,10 @@ export const Month: FC<IMonthCalendarProps> = ({
 }) => {
   const theme = useTheme() || LIGHT_THEME;
   const weeks: Array<Date> = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseEnter = (day: Date, event: any) => onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
 
   let weekIndex = 0;

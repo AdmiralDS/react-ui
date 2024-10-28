@@ -5,7 +5,9 @@ import type { EditModeAreaFieldProps } from '@admiral-ds/react-ui';
 
 export const EditModeAreaFieldErrorStateTemplate = ({ value = 'Admin', ...props }: EditModeAreaFieldProps) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [status, setStatus] = React.useState<any>(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [extraText, setExtraText] = React.useState<any>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

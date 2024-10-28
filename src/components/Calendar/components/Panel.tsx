@@ -74,10 +74,12 @@ export const Panel: FC<IPanelProps> = ({
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const monthMouseDownHandle = (event: any) => {
     event.preventDefault();
     monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const yearMouseDownHandle = (event: any) => {
     event.preventDefault();
     yearsView ? onYearsViewHide(event) : onYearsViewShow(event);

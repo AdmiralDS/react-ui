@@ -24,7 +24,9 @@ export const Week: FC<IWeekCalendarProps> = ({
   highlightSpecialDay,
 }) => {
   const theme = useTheme() || LIGHT_THEME;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
   const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (

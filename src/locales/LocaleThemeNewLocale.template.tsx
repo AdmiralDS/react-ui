@@ -87,6 +87,7 @@ export const LocaleThemeNewLocaleTemplate = () => {
         <Label>Calendar in 'de' locale</Label>
         <Calendar
           selected={selected}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(value: any) => {
             setSelected(value);
           }}

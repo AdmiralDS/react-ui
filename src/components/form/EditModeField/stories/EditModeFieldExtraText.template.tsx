@@ -5,6 +5,7 @@ import type { EditModeFieldProps } from '@admiral-ds/react-ui';
 
 export const EditModeFieldExtraTextTemplate = ({ value = 'Admin', ...props }: EditModeFieldProps) => {
   const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [extraText, setExtraText] = React.useState<any>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

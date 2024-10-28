@@ -169,6 +169,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     const handleDayMouseEnter = (day: Date) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleDayClick = (day: Date, event: any) => {
       let date = day;
       if (range || !equal(selected, date)) {

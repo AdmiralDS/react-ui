@@ -43,6 +43,7 @@ export const RowDrag = ({
 
   useEffect(() => {
     if (rowMirrorRef.current && rowDragging && rowsDraggable) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const observer = observeRect(rowMirrorRef.current, (rect: any) => {
         const topCoord = scrollBodyRef.current?.getBoundingClientRect().top || 0;
         const bottomCoord = scrollBodyRef.current?.getBoundingClientRect().bottom || 0;

@@ -9,6 +9,7 @@ import { SortIcon } from './SortIcon';
 const DEFAULT_COLUMN_WIDTH = 100;
 
 type HeaderCellType = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   column: any;
   index: number;
   columnsAmount: number;

@@ -24,6 +24,7 @@ export function getTooltipDirection(
   tooltipElement: HTMLElement,
   scrollbarSize: number,
   tooltipPosition?: TooltipPositionType,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
   const anchorElementRect: DOMRect = anchorElement.getBoundingClientRect();
   const tooltipRect: DOMRect = tooltipElement.getBoundingClientRect();

@@ -4,6 +4,7 @@ import type { ReactElement } from 'react';
 type Status = 'entering' | 'entered' | 'exiting' | 'exited';
 
 type TransitionProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: React.ReactNode | ((status: Status, props: any) => React.ReactNode);
   /** Show the component; triggers the enter or exit states */
   in: boolean;
@@ -37,6 +38,7 @@ export const Transition = ({
 }: TransitionProps) => {
   const [status, setStatus] = useState<Status>(_in ? 'entered' : 'exited');
   const statusRef = useRef(_in ? 'entered' : 'exited');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const timer = useRef<any>(0);
 
   useEffect(() => {

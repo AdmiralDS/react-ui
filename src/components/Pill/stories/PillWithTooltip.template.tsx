@@ -36,6 +36,7 @@ const LabelWrapper = styled.div`
 export const PillWithTooltipTemplate = ({
   themeBorderKind,
   CSSCustomProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 

@@ -79,6 +79,7 @@ export type Column = {
    * @param row - объект строки
    * @param rowIdx - индекс строки
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
 };
 
@@ -111,6 +112,7 @@ export interface TableRow {
   /** Строки таблицы, находящиеся в группе */
   groupRows?: Array<string>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   expandedRowRender?: (row: any) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
    * Входные параметры: сама строка, колбек onVisibilityChange.
@@ -122,6 +124,7 @@ export interface TableRow {
    * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   overflowMenuRender?: (row: any, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
   /** Функция рендера одиночного действия над строкой.
    * Одиночное действие отображается в виде иконки при ховере на строку
@@ -130,6 +133,7 @@ export interface TableRow {
    * В качестве результата функция должна возвращать компонент RowAction,
    * внутрь которого нужно передать произвольную иконку для отображения действия.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   actionRender?: (row: any) => React.ReactNode;
   /**
    * Метод для переопределения стандартного вида заголовка группы

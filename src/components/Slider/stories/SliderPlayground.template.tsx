@@ -12,6 +12,7 @@ export const SliderPlaygroundTemplate = (args: SliderProps) => {
       <Slider
         {...args}
         value={rangeValue}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(e: any, value: number) => {
           // eslint-disable-next-line no-console
           console.log({ event: e.type, value });

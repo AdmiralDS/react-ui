@@ -34,6 +34,7 @@ export const SuggestFieldExampleTemplate = ({
 
       return acc;
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     {} as Record<any, any>,
   );
 

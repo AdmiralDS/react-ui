@@ -19,7 +19,7 @@ export const StepperPlaygroundTemplate = ({ lineClamp, activeStep, orientation, 
       <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} {...args}>
         {steps.map(({ content, ...step }) => {
           return (
-            // eslint-disable-next-line no-console
+            // eslint-disable-next-line no-console, @typescript-eslint/no-explicit-any
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>

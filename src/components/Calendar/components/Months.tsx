@@ -15,6 +15,7 @@ export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected,
     <>
       {months.map((month, index) => {
         const disabled = !!validator?.invalidMonth(index, viewDate.getFullYear());
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const handleClick = (e: any) => {
           e.preventDefault();
           const day = startOfMonth(setMonth(viewDate, index));

@@ -64,6 +64,7 @@ const res_de = {
   A: ['Uhr nachmittags', 'Uhr morgens'],
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const A_enUS = (d: Date) => res_enUS.A[((d.getHours() > 11) as any) | 0];
 const A_ru = (d: Date) => {
   const h = d.getHours();
@@ -77,6 +78,7 @@ const A_ru = (d: Date) => {
   return res_ru.A[3]; // вечера
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const formatter = (res: any) => ({
   YYYY: (d: Date) => ('000' + d.getFullYear()).slice(-4),
   YY: (d: Date) => ('0' + d.getFullYear()).slice(-2),
@@ -101,10 +103,13 @@ const formatter = (res: any) => ({
   dddd: (d: Date) => res.dddd[d.getDay()],
   ddd: (d: Date) => res.ddd[d.getDay()],
   dd: (d: Date) => res.dd[d.getDay()],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Z: (d: any) => (d.utc ? '+0000' : /[+-]\d{4}/.exec(d.toTimeString())?.[0]),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: (str: any) => str,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parser = (res: any) => ({
   YYYY: function (str: string) {
     return this.exec(/^\d{4}/, str);
@@ -179,13 +184,16 @@ const parser = (res: any) => ({
     result.value = ((result.value / 100) | 0) * -60 - (result.value % 100);
     return result;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   h12: function (h: any, a: any) {
     return (h === 12 ? 0 : h) + a * 12;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   exec: function (re: any, str: any) {
     const result = (re.exec(str) || [''])[0];
     return { value: result | 0, length: result.length };
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   find: function (array: any, str: any) {
     let index = -1,
       length = 0;
@@ -199,9 +207,11 @@ const parser = (res: any) => ({
     }
     return { value: index, length: length };
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pre: (str: any) => str,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const locales: any = {
   enUS: {
     res: res_enUS,

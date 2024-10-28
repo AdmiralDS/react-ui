@@ -117,6 +117,7 @@ export const Slider = ({
     }
   }, [setRangeWidth]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateSlider = (e: any) => {
     const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
     if (newValue !== value) {
@@ -145,6 +146,7 @@ export const Slider = ({
     };
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSliderClick = (e: any) => {
     e.stopPropagation();
     e.type === 'mousedown' ? props.onMouseDown?.(e) : props.onTouchStart?.(e);
@@ -152,6 +154,7 @@ export const Slider = ({
     setAnimation(true);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onPointClick = (e: any, newValue: number) => {
     e.stopPropagation();
     props.onMouseDown?.(e);
@@ -161,6 +164,7 @@ export const Slider = ({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onTrackClick = (e: any) => {
     setAnimation(true);
     if (!tickMarks) setDrag(true);
@@ -170,6 +174,7 @@ export const Slider = ({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleMouseUp = (e: any) => {
     setDrag(false);
     setAnimation(true);

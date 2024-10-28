@@ -258,6 +258,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
         onClose?.();
       } else if (event.key === 'Tab') {
         // focus trap
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const focusableEls: any = getKeyboardFocusableElements(modalRef.current);
         if (event.shiftKey) {
           /* shift + tab */

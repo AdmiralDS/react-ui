@@ -47,6 +47,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);

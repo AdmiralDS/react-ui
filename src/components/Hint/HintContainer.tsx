@@ -15,9 +15,11 @@ export interface HintContainerPropsType extends Omit<React.HTMLAttributes<HTMLDi
   dimension: 's' | 'm' | 'l';
   content: React.ReactNode;
   scrollableParents: Array<Element>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   anchorElementRef: any;
   anchorId: string;
   hideHint: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   startRecalculation: React.Dispatch<React.SetStateAction<any>>;
   locale?: {
     closeButtonAriaLabel?: string;
@@ -50,12 +52,17 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].hint.closeButtonAriaLabel;
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hintRef: any = React.useRef(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const previousFocusedElement: any = React.useRef(null);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [firstFocusableChild, setFirstFocusableChild] = React.useState<any>();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [lastFocusableChild, setLastFocusableChild] = React.useState<any>();
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintRef);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleClickOutside = (e: any) => {
       if (useDropdownsClickOutside(e, dropdowns)) hideHint();
     };
@@ -77,6 +84,7 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
         const focusableEls = getKeyboardFocusableElements(hintRef.current);
         setFirstFocusableChild(focusableEls[0]);
         setLastFocusableChild(focusableEls[focusableEls.length - 1]);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (focusableEls[0] as any)?.focus();
       }
     }, [visibilityTrigger, content, preventFocusSteal]);

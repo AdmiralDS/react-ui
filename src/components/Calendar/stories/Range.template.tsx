@@ -13,6 +13,7 @@ export const RangeTemplate = (props: CalendarPropType) => {
         range
         startDate={startDate}
         endDate={endDate}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setStartDate(value[0]);
           setEndDate(value[1]);

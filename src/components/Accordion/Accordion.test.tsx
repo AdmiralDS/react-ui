@@ -6,6 +6,7 @@ import { LIGHT_THEME } from '#src/components/themes';
 import { Accordion, AccordionItem } from '.';
 
 describe('Spinner', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Comp = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Accordion {...props}>

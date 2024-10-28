@@ -15,6 +15,7 @@ export const Years: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, 
     <>
       {years.map((year) => {
         const disabled = !!validator?.invalidYear(year);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const handleClick = (e: any) => {
           e.preventDefault();
           const day = startOfYear(setYear(viewDate, year));

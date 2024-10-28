@@ -89,6 +89,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     entries.forEach((entry: any) => {
       const target = entry.target;
       const targetNumber = target.dataset.number;

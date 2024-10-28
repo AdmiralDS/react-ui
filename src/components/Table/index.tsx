@@ -257,6 +257,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         }
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function handleScroll(e: any) {
         if (e.target === scrollBodyRef.current) {
           requestAnimationFrame(function () {
@@ -275,6 +276,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         scrollBody.addEventListener('scroll', handleScroll);
 
         // TODO: обдумать возможность замены на ResizeObserver
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const observer = observeRect(scrollBody, (rect: any) => {
           if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
             setVerticalScroll(true);
@@ -427,12 +429,14 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       const render = () => {
         if (col.renderCell) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           return col.renderCell((row as any)[col.name], row, idx);
         }
         if (renderCell) {
           return renderCell(row, col.name);
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return <CellTextContent $cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
       };
 

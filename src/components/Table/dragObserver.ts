@@ -13,6 +13,7 @@ type Options = {
    * id - уникальный идентификатор, по которому можно извлечь перетаскиваемый элемент,
    * seacrhInGroup - признак того, нужно ли проводить дополнительный поиск внутри группы (актуально при drag&drop строк,
    * если строка перемещена в свернутую группу, то сама строка не рендерится на экране, и все вычисления нужно производить относительно заголовка группы) */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateDragItem?: (id: any, seacrhInGroup?: boolean) => HTMLElement | null;
   /** Проверяет возможность перемещения el в target-контейнер из source-контейнера, где el будет встроен перед элементом sibling */
   accepts?: (
@@ -43,6 +44,7 @@ export function dragObserver(
   let _initialSibling: HTMLElement | null; // reference sibling when grabbed
   let _currentSibling: HTMLElement | null; // reference sibling now
   let _lastDropTarget: HTMLElement | null = null; // last container item was over
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let _grabbed: any; // holds mousedown context until first mousemove
   let _mirrorContainerStyle: string; // initial style of mirror container
   let _currentTarget: HTMLElement | null = null; // target over which cursor is now located
@@ -96,12 +98,14 @@ export function dragObserver(
     freeResources();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function preventGrabbed(e: any) {
     if (_grabbed) {
       e.preventDefault();
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function grab(e: any) {
     const context = canStart(e.target);
     if (!context) {
@@ -114,6 +118,7 @@ export function dragObserver(
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function startBecauseMouseMoved(e: any) {
     if (!_grabbed) {
       return;
@@ -163,6 +168,7 @@ export function dragObserver(
     return { item, source };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function start(context: any) {
     _source = context.source;
     _item = context.item;
@@ -187,6 +193,7 @@ export function dragObserver(
     movements(true);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function release(e: any) {
     ungrab();
     if (!drake.dragging) {
@@ -221,6 +228,7 @@ export function dragObserver(
     _itemId = '';
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function isInitialPlacement(target: any, s?: any) {
     let sibling;
     if (typeof s !== 'undefined') {
@@ -233,6 +241,7 @@ export function dragObserver(
     return target === _source && sibling === _initialSibling;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function findDropTarget(elementBehindCursor: any, clientX: number, clientY: number) {
     let target = elementBehindCursor;
     while (target && !accepted()) {
@@ -337,6 +346,7 @@ export function dragObserver(
     return updatedItem?.nextElementSibling;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getItemRect(): any {
     const updatedItem = o.updateDragItem?.(_itemId, true) || _item;
     return updatedItem ? updatedItem.getBoundingClientRect() : {};
@@ -377,6 +387,7 @@ export function dragObserver(
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getImmediateChild(dropTarget: any, target: any) {
     let immediate = target;
     while (immediate !== dropTarget && getParent(immediate) !== dropTarget) {
@@ -388,6 +399,7 @@ export function dragObserver(
     return immediate;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getReference(dropTarget: any, target: any, x: number, y: number) {
     const horizontal = o.direction === 'horizontal';
     const itemRight = getItemRect()?.right;
@@ -489,10 +501,12 @@ function always() {
 function invalidTarget() {
   return false;
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getParent(el: any) {
   return el.parentNode === document ? null : el.parentNode;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getEventHost(e: any) {
   if (e.targetTouches && e.targetTouches.length) {
     return e.targetTouches[0];
@@ -504,6 +518,7 @@ function getEventHost(e: any) {
   return e;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getCoord(coord: 'pageX' | 'pageY' | 'clientX' | 'clientY', e: any) {
   const host = getEventHost(e);
   return host[coord];

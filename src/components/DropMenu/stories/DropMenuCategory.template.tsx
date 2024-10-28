@@ -104,6 +104,7 @@ const CATEGORIES = [
 
 export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
   const model = React.useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return CATEGORIES.reduce((acc: any, item: any) => {
       acc.push({
         id: item.id,
@@ -114,6 +115,7 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
         ),
       });
       return acc.concat(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         item.content.map((subitem: any) => {
           return {
             id: subitem.id,

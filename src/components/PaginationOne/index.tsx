@@ -124,12 +124,16 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
     /** Текст, описывающий сколько записей размещено на одной странице */
     itemsPerPageText?: string;
     /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageSelectLabel?: (...props: any) => string;
     /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageSizeSelectLabel?: (...props: any) => string;
     /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     itemRangeText?: (...props: any) => string;
     /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageRangeText?: (...props: any) => string;
     /** Текст, описывающий кнопку переключения назад (атрибут aria-label) */
     backwardText?: string;

@@ -38,6 +38,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     'data-field-name': name,
     displayInline,
     disabled,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);

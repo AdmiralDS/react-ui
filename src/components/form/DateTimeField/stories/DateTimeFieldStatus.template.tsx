@@ -39,15 +39,18 @@ export const DateTimeFieldStatusTemplate = ({
     readOnly,
     skeleton,
     ...props,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
   const baseDateTimeProps = {
     disabled,
     readOnly,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
   const dateTimeProps = {
     dimension,
     skeleton,
     ...baseDateTimeProps,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
 
   const [dateTimeStatus, setDateTimeStatus] = React.useState<InputStatus | undefined>(status);

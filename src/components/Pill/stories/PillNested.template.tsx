@@ -231,6 +231,7 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
 export const PillNestedTemplate = ({
   themeBorderKind,
   CSSCustomProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>

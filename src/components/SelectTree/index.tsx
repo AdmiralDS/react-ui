@@ -39,6 +39,7 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChangeList = (type: string, e: any) => {
     const checked = e.target.checked;
     const key = (e.target as HTMLElement).getAttribute('data-key');

@@ -10,6 +10,7 @@ export interface RangeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChan
   /** Значение компонента */
   value: NumberRange;
   /** Коллбек на изменение состояния */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (event: any, value: NumberRange) => void;
   /** Колбек, который срабатывает по окончании изменения значения (по окончании перетаскивания ползунка или клика на полосу диапазона) */
   onRangeMouseUp?: () => void;
@@ -99,6 +100,7 @@ export const Range = ({
     }
   }, [setRangeWidth]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [moveListener, freeResources] = throttle((e: any) => {
     updateSlider(e);
   }, 50);
@@ -121,6 +123,7 @@ export const Range = ({
     };
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateSlider = (e: any) => {
     setAnimation(false);
 
@@ -150,6 +153,7 @@ export const Range = ({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSliderClick = (_e: any, slider: 'first' | 'second') => {
     slider === 'first' ? setDrag(true) : setDrag2(true);
     setAnimation(true);
@@ -181,6 +185,7 @@ export const Range = ({
     setDrag2(false);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onTrackClick = (e: any) => {
     const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
 

@@ -34,6 +34,7 @@ const ConstantOption = ({
     [renderOption, disabled, value, children],
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataProps = {} as Record<string, any>;
   passDataAttributes(restProps, dataProps, 'data', false);
 

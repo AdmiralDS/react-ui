@@ -51,9 +51,11 @@ export default {
     },
     componentSubtitle: <Description />,
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as Meta<any>;
 
 //<editor-fold desc="Theme Current Locale">
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const LocaleThemeCurrentLocaleStory: StoryFn<any> = () => <LocaleThemeCurrentLocaleTemplate />;
 
 export const ThemeCurrentLocale = {
@@ -72,6 +74,7 @@ export const ThemeCurrentLocale = {
 //</editor-fold>
 
 //<editor-fold desc="Theme new Locale">
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const LocaleThemeNewLocaleStory: StoryFn<any> = () => <LocaleThemeNewLocaleTemplate />;
 
 export const ThemeNewLocale = {
@@ -97,6 +100,7 @@ export const ThemeNewLocale = {
 //</editor-fold>
 
 //<editor-fold desc="Locale Prop">
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const LocalePropStory: StoryFn<any> = () => <LocalePropTemplate />;
 
 export const ComponentProp = {

@@ -164,6 +164,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
 
     const labelProps = { htmlFor: id ?? defaultID, children: label, required, disabled };

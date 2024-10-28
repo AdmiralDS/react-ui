@@ -185,6 +185,7 @@ export const TableSortTemplate = (props: TableProps) => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const compare = (a: any, b: any, colName: string, sort: 'asc' | 'desc', colType?: string) => {
     if (sort === 'asc') {
       switch (colType) {
@@ -212,6 +213,7 @@ export const TableSortTemplate = (props: TableProps) => {
       setRows([...rowList]);
     } else {
       const names = Object.keys(sortColumns);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newRows = [...rows].sort((a: any, b: any) => {
         const result = compare(a, b, names[0], sortColumns[names[0]].sort, sortColumns[names[0]].type);
 
