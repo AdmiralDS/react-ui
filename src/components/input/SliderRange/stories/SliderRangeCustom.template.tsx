@@ -4,6 +4,7 @@ import { SliderRange } from '@admiral-ds/react-ui';
 export const SliderRangeCustomTemplate = () => {
   return (
     <SliderRange
+      // eslint-disable-next-line no-console
       onChange={(value: any) => console.log(value)}
       minValue={10}
       maxValue={100}

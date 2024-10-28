@@ -20,6 +20,7 @@ interface InputIcon {
 }
 const InputIcon = ({ text }: InputIcon) => {
   const handleClick = () => {
+    // eslint-disable-next-line no-console
     console.log(`${text} clicked`);
   };
   return <InputIconButton icon={HelpOutline} onClick={handleClick} />;

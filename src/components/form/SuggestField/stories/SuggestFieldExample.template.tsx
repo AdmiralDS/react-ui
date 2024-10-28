@@ -50,11 +50,13 @@ export const SuggestFieldExampleTemplate = ({
       setOptions([]);
     }
 
+    // eslint-disable-next-line no-console
     console.log(`>>> onChange: ${inputValue}`);
     setValue(inputValue);
   };
 
   const handleOptionSelect = (value: string) => {
+    // eslint-disable-next-line no-console
     console.log(`>>> onOptionSelect: ${value}`);
   };
 

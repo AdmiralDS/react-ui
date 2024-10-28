@@ -17,6 +17,7 @@ export const SliderInputControlledTemplate = ({
         {...props}
         value={slider1}
         onChange={(full, short, event) => {
+          // eslint-disable-next-line no-console
           console.log({ full, short, event });
           setSlider1(event.target.value);
         }}

@@ -8,6 +8,7 @@ export const SliderSimpleTemplate = () => {
       <Slider
         value={rangeValue}
         onChange={(e: any, value: number) => {
+          // eslint-disable-next-line no-console
           console.log({ event: e.type, value });
           setRangeValue(value);
         }}

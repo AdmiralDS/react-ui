@@ -59,10 +59,12 @@ export const PaneSimpleTemplate = ({
   };
 
   const handleSearchEnter = () => {
+    // eslint-disable-next-line no-console
     console.log('Search input opened');
   };
 
   const handleSearchLeave = () => {
+    // eslint-disable-next-line no-console
     console.log('Search input left');
   };
 

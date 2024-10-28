@@ -6,7 +6,7 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 export const createItems = (length: number, level: number = 1) => {
   const title = level > 1 ? 'SubItem' : 'Item';
-  return Array.from({ length }).map((option, index) => ({ label: `${title} ${index}0000`, id: `${level}-${index}` }));
+  return Array.from({ length }).map((_option, index) => ({ label: `${title} ${index}0000`, id: `${level}-${index}` }));
 };
 
 type ModelItems = { label: string; id: string; subItems?: Array<ModelItems> };

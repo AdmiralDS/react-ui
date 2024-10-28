@@ -34,6 +34,7 @@ const Separator = styled.div`
 const toastStatuses: NotificationItemStatus[] = ['info', 'error', 'success', 'warning'];
 
 const handleTextButtonClick = () => {
+  // eslint-disable-next-line no-console
   console.log('TextButton click');
 };
 
@@ -52,6 +53,7 @@ const MessageForm = () => {
     const renderFunction = (id: ID) => {
       const handleCloseToast = () => {
         removeToastItem({ id, renderToast: renderFunction });
+        // eslint-disable-next-line no-console
         console.log('Toast is closed');
         setToastIdStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderFunction));
       };

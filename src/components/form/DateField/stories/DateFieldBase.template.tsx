@@ -23,11 +23,13 @@ export const DateFieldBaseTemplate = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
+    // eslint-disable-next-line no-console
     console.log(`handleChange ${inputValue}`);
     setValue(inputValue);
   };
 
   const handleFormBlur = (e: React.FocusEvent<HTMLFormElement>) => {
+    // eslint-disable-next-line no-console
     console.log(`form blur:
     current target: ${e.currentTarget.id}
     target: ${e.target.id}
@@ -36,6 +38,7 @@ export const DateFieldBaseTemplate = ({
   };
 
   const handleFormFocus = (e: React.FocusEvent<HTMLFormElement>) => {
+    // eslint-disable-next-line no-console
     console.log(`form focus:
     current target: ${e.currentTarget.id}
     target: ${e.target.id}

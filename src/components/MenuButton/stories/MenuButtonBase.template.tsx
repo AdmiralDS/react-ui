@@ -7,13 +7,16 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
 
 const logSelectedId = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 

@@ -50,7 +50,7 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
 export const MenuButtonWithBottomPanelTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-  ...props
+  ..._props
 }: MenuButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
   const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
@@ -73,6 +73,7 @@ export const MenuButtonWithBottomPanelTemplate = ({
   };
 
   const handleSelectItem = (id: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Option ${id} clicked`);
     const updatedInnerState = [...innerState];
     const itemToUpdate = updatedInnerState.find((item) => item.id === id);
@@ -84,6 +85,7 @@ export const MenuButtonWithBottomPanelTemplate = ({
   };
 
   const handleMenuVisibilityChange = (visible: boolean) => {
+    // eslint-disable-next-line no-console
     console.log('user menu visibilty change');
     setMenuVisible(visible);
   };

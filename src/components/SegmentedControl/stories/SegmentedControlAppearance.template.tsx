@@ -18,6 +18,7 @@ export const SegmentedControlAppearanceTemplate = ({
     <T font="Body/Body 1 Long">Outlined</T>
     <Separator />
     <SegmentedControl
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
@@ -36,6 +37,7 @@ export const SegmentedControlAppearanceTemplate = ({
     <Separator />
     <SegmentedControl
       appearance="filled"
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >

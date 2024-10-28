@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Tag, Tags } from '@admiral-ds/react-ui';
 
+// eslint-disable-next-line no-console
 const clickHandler = () => console.log('click active tag');
 
 export const TagTooltipTemplate = () => {

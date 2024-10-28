@@ -241,7 +241,9 @@ export const TableFilterTemplate = (props: TableProps) => {
             ...col,
             isFilterActive: numFilterActive,
             renderFilter: renderNumFilter,
+            // eslint-disable-next-line no-console
             onFilterMenuClose: () => console.log('filter menu close'),
+            // eslint-disable-next-line no-console
             onFilterMenuOpen: () => console.log('filter menu open'),
             onFilterMenuClickOutside,
           };

@@ -62,6 +62,7 @@ export const DrawerNonClosableTemplate = ({
         <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
         <DrawerForm
           onYesClick={(p) => {
+            // eslint-disable-next-line no-console
             console.log(`value ${p.inputValue}`);
             setOpened(false);
           }}

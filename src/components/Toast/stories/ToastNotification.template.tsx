@@ -63,6 +63,7 @@ const NotificationEmitter = () => {
     const renderToast = (id: ID) => {
       const handleOnClose = () => {
         removeToastItem({ id, renderToast });
+        // eslint-disable-next-line no-console
         console.log('Toast is closed');
         setToastStack((prevToastIdStack) => prevToastIdStack.filter((toast) => toast.renderToast !== renderToast));
       };

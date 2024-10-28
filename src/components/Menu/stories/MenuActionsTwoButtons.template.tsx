@@ -92,6 +92,7 @@ export const MenuActionsTwoButtonsTemplate = ({
                 <Button
                   dimension={'s'}
                   onClick={() => {
+                    // eslint-disable-next-line no-console
                     console.log('Button 1 clicked');
                   }}
                 >
@@ -101,6 +102,7 @@ export const MenuActionsTwoButtonsTemplate = ({
                   dimension={'s'}
                   appearance="secondary"
                   onClick={() => {
+                    // eslint-disable-next-line no-console
                     console.log('Button 2 clicked');
                   }}
                 >

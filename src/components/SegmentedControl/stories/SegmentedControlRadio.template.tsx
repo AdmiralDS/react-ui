@@ -22,6 +22,7 @@ export const SegmentedControlRadioTemplate = ({
       <T font="Body/Body 1 Long">Неуправляемая группа радио кнопок</T>
       <Separator />
       <SegmentedControl
+        // eslint-disable-next-line no-console
         onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
         {...props}
       >
@@ -39,6 +40,7 @@ export const SegmentedControlRadioTemplate = ({
       <T font="Body/Body 1 Long">Неуправляемая группа радио кнопок, где 1я кнопка выбрана по умолчанию</T>
       <Separator />
       <SegmentedControl
+        // eslint-disable-next-line no-console
         onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
         {...props}
       >
@@ -60,6 +62,7 @@ export const SegmentedControlRadioTemplate = ({
           name="third"
           value={values[6]}
           checked={values[6] == selected}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 7
@@ -68,6 +71,7 @@ export const SegmentedControlRadioTemplate = ({
           name="third"
           value={values[7]}
           checked={values[7] == selected}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 8
@@ -76,6 +80,7 @@ export const SegmentedControlRadioTemplate = ({
           name="third"
           value={values[8]}
           checked={values[8] == selected}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 9

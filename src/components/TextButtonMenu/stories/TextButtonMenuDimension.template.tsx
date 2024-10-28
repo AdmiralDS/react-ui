@@ -23,6 +23,7 @@ const Separator = styled.div`
   width: 20px;
 `;
 const logSelectedId = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 

@@ -25,12 +25,15 @@ export const SimpleWithChangeViewDateTemplate = ({ ...props }: CalendarPropType)
           setSelected(value);
         }}
         onDateIncreaseDecrease={(value: any) => {
+          // eslint-disable-next-line no-console
           console.log('onIncreaseDecreaseDate', value);
         }}
         onViewEnter={(view: ViewScreenType) => {
+          // eslint-disable-next-line no-console
           console.log('onViewEnter', view);
         }}
         onViewLeave={(view: ViewScreenType) => {
+          // eslint-disable-next-line no-console
           console.log('onViewLeave', view);
         }}
       />
