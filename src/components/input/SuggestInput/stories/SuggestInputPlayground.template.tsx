@@ -33,6 +33,7 @@ export const SuggestInputPlaygroundTemplate = ({
 
   const handleSelectOption = (option: string) => {
     setValue(option);
+    // eslint-disable-next-line no-console
     console.log(`Selected option - ${option}`);
   };
 
@@ -72,6 +73,7 @@ export const SuggestInputPlaygroundTemplate = ({
         options={options}
         isLoading={isLoading}
         onSearchButtonClick={() => {
+          // eslint-disable-next-line no-console
           console.log('search button click');
         }}
         displayClearIcon

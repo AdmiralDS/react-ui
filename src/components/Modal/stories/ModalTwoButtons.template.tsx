@@ -99,6 +99,7 @@ export const ModalTwoButtonsTemplate = ({
           <ModalTitle id="modal-title">Modal title</ModalTitle>
           <ModalForm
             onYesClick={(p) => {
+              // eslint-disable-next-line no-console
               console.log(`value ${p.inputValue}`);
               setOpened(false);
             }}

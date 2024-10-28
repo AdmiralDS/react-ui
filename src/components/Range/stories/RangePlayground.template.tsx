@@ -11,6 +11,7 @@ export const RangePlaygroundTemplate = (args: RangeProps) => {
         {...args}
         value={rangeValue}
         onChange={(e: any, value: [number, number]) => {
+          // eslint-disable-next-line no-console
           console.log({ e, value });
           setRangeValue(value);
         }}

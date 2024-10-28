@@ -24,6 +24,7 @@ export const StepperClickPropTemplate = () => {
       <Stepper activeStep={2}>
         {steps.map(({ content, ...step }) => {
           return (
+            // eslint-disable-next-line no-console
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
@@ -34,6 +35,7 @@ export const StepperClickPropTemplate = () => {
       <Stepper activeStep={2} orientation="vertical" style={{ width: '225px' }}>
         {steps.map(({ content, ...step }) => {
           return (
+            // eslint-disable-next-line no-console
             <Step {...step} onClick={(step: any) => console.log(step.index)}>
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>

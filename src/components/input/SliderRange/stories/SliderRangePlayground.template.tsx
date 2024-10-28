@@ -11,6 +11,7 @@ export const SliderRangePlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: SliderRangeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  // eslint-disable-next-line no-console
   const handleChange = (value: any) => console.log(value);
 
   return (

@@ -128,7 +128,9 @@ const StyledPillIcon = styled.div<{ $status?: Status }>`
   }
 `;
 
+// eslint-disable-next-line no-console
 const leftPillClicked = () => console.log('Left nested pill clicked');
+// eslint-disable-next-line no-console
 const rightPillClicked = () => console.log('Right nested pill clicked');
 const itemsLeft: Array<PillOptionProps> = [
   {

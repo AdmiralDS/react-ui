@@ -86,6 +86,7 @@ export const PaneSimpleExample = {
     submitButtonProps: {
       children: 'Найти',
       onClick() {
+        // eslint-disable-next-line no-console
         console.log('Button cliked or Enter key was pressed. Run your function.');
       },
     },

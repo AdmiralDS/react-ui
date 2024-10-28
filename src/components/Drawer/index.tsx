@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, KeyboardEvent, MouseEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import styled, { css, useTheme, keyframes } from 'styled-components';
 
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
@@ -260,7 +260,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       onClose?.();
     };
 
-    return ReactDOM.createPortal(
+    return createPortal(
       <Overlay
         ref={overlayRef}
         tabIndex={-1}

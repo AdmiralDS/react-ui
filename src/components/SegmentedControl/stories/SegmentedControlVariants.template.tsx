@@ -26,6 +26,7 @@ export const SegmentedControlVariantsTemplate = ({
       <GroupWrapper key={'iconStart_' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with iconStart selected')}
           {...props}
         >
@@ -47,6 +48,7 @@ export const SegmentedControlVariantsTemplate = ({
       <GroupWrapper key={'iconEnd_' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with iconEnd selected')}
           {...props}
         >
@@ -68,6 +70,7 @@ export const SegmentedControlVariantsTemplate = ({
       <GroupWrapper key={'badge_' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with badge selected')}
           {...props}
         >
@@ -92,6 +95,7 @@ export const SegmentedControlVariantsTemplate = ({
       <GroupWrapper key={'iconOnly_' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' with icon only selected')}
           {...props}
         >

@@ -57,10 +57,13 @@ const Desc = styled.div`
 `;
 
 const handleVisibilityChangeControlledState = (isVisible: boolean) => {
+  // eslint-disable-next-line no-console
   console.log('onVisibilityChange with controlled state');
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
@@ -107,12 +110,14 @@ export const DropMenuTooltipTemplate = (props: DropMenuProps) => {
   };
 
   const handleSelectItem = (id: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Option ${id} clicked`);
     setSelected(id);
     handleVisibilityChange(false);
   };
 
   const handleClickOutside = () => {
+    // eslint-disable-next-line no-console
     console.log('handleClickOutside from stories');
     handleVisibilityChange(false);
   };

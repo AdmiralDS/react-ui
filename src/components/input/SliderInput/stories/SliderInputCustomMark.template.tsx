@@ -14,6 +14,7 @@ export const SliderInputCustomMarkTemplate = ({
       <SliderInput
         {...props}
         defaultValue="15 000"
+        // eslint-disable-next-line no-console
         onChange={(full, short, event) => console.log({ full, short, event })}
         renderTickMark={(mark: string) => mark + ' ₽'}
         tickMarks={[5000, 10000, 15000]}

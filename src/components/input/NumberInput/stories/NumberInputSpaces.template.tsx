@@ -13,6 +13,7 @@ export const NumberInputSpacesTemplate = ({
       <NumberInput
         {...props}
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
         }}
         defaultValue="30"
@@ -24,6 +25,7 @@ export const NumberInputSpacesTemplate = ({
       <NumberInput
         {...props}
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
         }}
         defaultValue="1"

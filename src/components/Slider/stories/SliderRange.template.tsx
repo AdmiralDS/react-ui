@@ -10,6 +10,7 @@ export const SliderRangeTemplate = () => {
         value={rangeValue}
         maxValue={100}
         onChange={(e: any, value: number) => {
+          // eslint-disable-next-line no-console
           console.log({ event: e.type, value });
           setRangeValue(value);
         }}

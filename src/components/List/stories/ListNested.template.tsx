@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { OrderedList, UnorderedList, ListItem } from '@admiral-ds/react-ui';
-import type { OrderedListProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const Layout = styled.div`

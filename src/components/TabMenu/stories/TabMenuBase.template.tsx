@@ -49,6 +49,7 @@ const tabs = [
 ];
 
 const onChangeTab = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 

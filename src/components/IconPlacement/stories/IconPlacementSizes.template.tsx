@@ -22,6 +22,7 @@ const WrapperVertical = styled.div`
   gap: 20px;
 `;
 
+// eslint-disable-next-line no-console
 const handleClick = () => console.log('IconPlacement clicked');
 
 export const IconPlacementSizesTemplate = (

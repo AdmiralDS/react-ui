@@ -68,7 +68,7 @@ const getNextItemFinite = (currentItem: number, maxItems: number) => {
   }
   return currentItem;
 };
-const getPrevItemFinite = (currentItem: number, maxItems: number) => {
+const getPrevItemFinite = (currentItem: number, _maxItems: number) => {
   if (currentItem > 0) {
     return currentItem - 1;
   }

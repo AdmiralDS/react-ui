@@ -98,6 +98,7 @@ const rowList: RowData[] = [
     currency: 'RUB',
     rate: 6,
     actionRender: () => (
+      // eslint-disable-next-line no-console
       <TooltipedRowAction renderContent={() => `Delete`} onClick={() => console.log('row action happens')}>
         <DeleteOutline />
       </TooltipedRowAction>
@@ -111,6 +112,7 @@ const rowList: RowData[] = [
     currency: 'RUB',
     rate: 1,
     actionRender: () => (
+      // eslint-disable-next-line no-console
       <TooltipedRowAction renderContent={() => `Delete`} onClick={() => console.log('row action happens')}>
         <DeleteOutline />
       </TooltipedRowAction>

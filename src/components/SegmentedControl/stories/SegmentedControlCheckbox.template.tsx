@@ -28,6 +28,7 @@ export const SegmentedControlCheckboxTemplate = ({
       <T font="Body/Body 1 Long">Неуправляемая группа чекбокс кнопок</T>
       <Separator />
       <SegmentedControl
+        // eslint-disable-next-line no-console
         onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
         {...props}
       >
@@ -45,6 +46,7 @@ export const SegmentedControlCheckboxTemplate = ({
       <T font="Body/Body 1 Long">Неуправляемая группа чекбокс кнопок, где 1я и 2я кнопки выбраны по умолчанию</T>
       <Separator />
       <SegmentedControl
+        // eslint-disable-next-line no-console
         onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
         {...props}
       >
@@ -74,6 +76,7 @@ export const SegmentedControlCheckboxTemplate = ({
           name="third"
           value={values[6]}
           checked={selected.get(values[6])}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 7
@@ -83,6 +86,7 @@ export const SegmentedControlCheckboxTemplate = ({
           name="third"
           value={values[7]}
           checked={selected.get(values[7])}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 8
@@ -92,6 +96,7 @@ export const SegmentedControlCheckboxTemplate = ({
           name="third"
           value={values[8]}
           checked={selected.get(values[8])}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + e.target.value + ' selected')}
         >
           Button 9

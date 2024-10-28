@@ -12,13 +12,16 @@ const ActionPanelFlex = css`
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
 
 const logSelectedId = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 
@@ -78,6 +81,7 @@ export const MenuButtonOptionsTemplate = (props: MenuButtonProps) => {
               <Button
                 dimension={'s'}
                 onClick={() => {
+                  // eslint-disable-next-line no-console
                   console.log('Button 1 clicked');
                 }}
               >
@@ -87,6 +91,7 @@ export const MenuButtonOptionsTemplate = (props: MenuButtonProps) => {
                 dimension={'s'}
                 appearance="secondary"
                 onClick={() => {
+                  // eslint-disable-next-line no-console
                   console.log('Button 2 clicked');
                 }}
               >

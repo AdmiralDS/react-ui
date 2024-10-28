@@ -32,6 +32,7 @@ export const FloatingButtonMenuModesTemplate = ({ icon, ...props }: FloatingButt
       <FloatingButtonMenu
         icon={icon ?? <EmailOutline />}
         isOpen={open}
+        // eslint-disable-next-line no-console
         onOpenChange={(isOpen) => console.log(isOpen ? 'Open menu1' : 'Close menu1')}
         containerStyle={{ left: props.mobile ? '16px' : '28px' }}
         {...props}
@@ -48,6 +49,7 @@ export const FloatingButtonMenuModesTemplate = ({ icon, ...props }: FloatingButt
       </T>
       <FloatingButtonMenu
         icon={icon ?? <EmailOutline />}
+        // eslint-disable-next-line no-console
         onOpenChange={(isOpen) => console.log(isOpen ? 'Open menu2' : 'Close menu2')}
         {...props}
       >

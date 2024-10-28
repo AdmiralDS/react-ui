@@ -25,18 +25,22 @@ export const SimpleWithSetActiveViewWithoutDayTemplate = ({ ...props }: Calendar
         currentActiveView={currentActiveView}
         currentActiveViewImportant={true}
         onDateIncreaseDecrease={(date: any) => {
+          // eslint-disable-next-line no-console
           console.log(date, 'onIncreaseDecreaseDate');
           setSelected(date);
         }}
         onChange={(value: any) => {
           setSelected(value);
+          // eslint-disable-next-line no-console
           console.log(value, 'onChange');
         }}
         onViewMonthSelect={() => {
+          // eslint-disable-next-line no-console
           console.log('onViewMonthSelect');
           setCurrentActiveView('MONTH');
         }}
         onViewYearSelect={() => {
+          // eslint-disable-next-line no-console
           console.log('onViewYearSelect');
           setCurrentActiveView('YEAR');
         }}

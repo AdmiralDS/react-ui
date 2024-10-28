@@ -13,6 +13,7 @@ export const NumberInputCustomisedTemplate = ({
       <NumberInput
         {...props}
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
         }}
         suffix="$"

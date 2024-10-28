@@ -59,10 +59,13 @@ const Desc = styled.div`
 `;
 
 const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
+  // eslint-disable-next-line no-console
   console.log('onVisibilityChange with uncontrolled state');
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
@@ -101,6 +104,7 @@ export const DropMenuSimpleTemplate = ({
           {...props}
           items={model}
           onSelectItem={(id) => {
+            // eslint-disable-next-line no-console
             console.log(`selected: ${id}`);
             setSelected(id);
           }}

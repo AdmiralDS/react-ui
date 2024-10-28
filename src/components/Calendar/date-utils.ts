@@ -170,7 +170,7 @@ const dayInRange = (day: Date, startDate: Date, endDate: Date): boolean => {
 
   try {
     valid = isWithinInterval(day, { start, end });
-  } catch (err) {
+  } catch (_err) {
     valid = false;
   }
   return valid;
