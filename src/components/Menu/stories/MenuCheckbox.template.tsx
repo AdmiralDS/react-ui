@@ -73,6 +73,7 @@ export const MenuCheckboxTemplate = ({
   }, [props.dimension, checkedOptions]);
 
   const handleSelectItem = (id: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Option ${id} clicked`);
     setCheckedOptions((cheked) => {
       cheked[id] = !cheked[id];

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Tag, Tags } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 
+// eslint-disable-next-line no-console
 const clickHandler = () => console.log('click active tag');
 
 export const TagIconTemplate = () => {

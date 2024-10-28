@@ -137,6 +137,7 @@ export const MenuActionsAddUserValueTemplate = ({
           model={model}
           active={active}
           onActivateItem={setActive}
+          // eslint-disable-next-line no-console
           onSelectItem={(id) => console.log(`Selected id: ${id}`)}
           renderTopPanel={({ dimension = menuPanelContentDimension }) => {
             return (

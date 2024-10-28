@@ -73,6 +73,7 @@ export const MenuButtonWithBottomPanelTemplate = ({
   };
 
   const handleSelectItem = (id: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Option ${id} clicked`);
     const updatedInnerState = [...innerState];
     const itemToUpdate = updatedInnerState.find((item) => item.id === id);
@@ -84,6 +85,7 @@ export const MenuButtonWithBottomPanelTemplate = ({
   };
 
   const handleMenuVisibilityChange = (visible: boolean) => {
+    // eslint-disable-next-line no-console
     console.log('user menu visibilty change');
     setMenuVisible(visible);
   };

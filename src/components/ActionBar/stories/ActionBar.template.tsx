@@ -62,6 +62,7 @@ export const ActionBarTemplate = ({
 
   const renderActionBarItem = (itemId: string) => {
     const item = items.find((item) => item.itemId === itemId) || items[0];
+    // eslint-disable-next-line no-console
     const handleClick = () => console.log(`${item.name} clicked`);
     return (
       <ActionBarItemWithTooltip
@@ -78,6 +79,7 @@ export const ActionBarTemplate = ({
   };
   const renderDropMenuItem = (itemId: string) => {
     const item = items.find((item) => item.itemId === itemId) || items[0];
+    // eslint-disable-next-line no-console
     const handleClick = () => console.log(`${item.name} clicked`);
     return (options: RenderOptionProps) => {
       return (

@@ -16,6 +16,7 @@ export const NumberInputPlaygroundTemplate = ({
         placeholder="От 0 ₽"
         defaultValue="2,00"
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
         }}
         {...props}

@@ -42,10 +42,12 @@ export const SimpleWithSetActiveViewDateTemplate = ({ ...props }: CalendarPropTy
           setSelected(data as Date);
         }}
         onViewMonthSelect={() => {
+          // eslint-disable-next-line no-console
           console.log('onViewMonthSelect');
           setCurrentActiveView('MONTH');
         }}
         onViewYearSelect={() => {
+          // eslint-disable-next-line no-console
           console.log('onViewYearSelect');
           setCurrentActiveView('YEAR');
         }}

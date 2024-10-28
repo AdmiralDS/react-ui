@@ -18,6 +18,7 @@ export const SegmentedControlDimensionTemplate = ({
     <T font="Body/Body 1 Long">Dimension XL</T>
     <Separator />
     <SegmentedControl
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
@@ -36,6 +37,7 @@ export const SegmentedControlDimensionTemplate = ({
     <Separator />
     <SegmentedControl
       dimension="l"
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
@@ -54,6 +56,7 @@ export const SegmentedControlDimensionTemplate = ({
     <Separator />
     <SegmentedControl
       dimension="m"
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
@@ -72,6 +75,7 @@ export const SegmentedControlDimensionTemplate = ({
     <Separator />
     <SegmentedControl
       dimension="s"
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >

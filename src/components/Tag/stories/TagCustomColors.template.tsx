@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Tag, Tags, LIGHT_THEME } from '@admiral-ds/react-ui';
 import { useTheme } from 'styled-components';
 
+// eslint-disable-next-line no-console
 const clickHandler = () => console.log('click active tag');
 
 export const TagCustomColorsTemplate = () => {

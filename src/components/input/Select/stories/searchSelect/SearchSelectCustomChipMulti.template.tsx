@@ -22,6 +22,7 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   const onOpenModal = () => setModalOpened(true);
 
   const onChipClose = (data: any) => {
+    // eslint-disable-next-line no-console
     console.log(data);
     setValueToDelete(data.value);
     onOpenModal();

@@ -7,6 +7,7 @@ export const SliderRangeControlledTemplate = () => {
     <SliderRange
       value={value}
       onChange={(value: any) => {
+        // eslint-disable-next-line no-console
         console.log(value);
         setValue([value[0].str, value[1].str]);
       }}

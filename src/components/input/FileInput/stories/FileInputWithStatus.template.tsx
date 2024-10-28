@@ -80,6 +80,7 @@ export const FileInputWithStatusTemplate = (props: FileInputProps) => {
     file1.lastModified === file2.lastModified;
 
   const handlePreviewIconClick = (file: File) => {
+    // eslint-disable-next-line no-console
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 

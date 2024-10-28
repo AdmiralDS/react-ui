@@ -31,6 +31,7 @@ export const AccordionPlaygroundTemplate = (props: AccordionProps) => {
         <AccordionItem
           id="accordion1-item1"
           title="Первый пункт"
+          // eslint-disable-next-line no-console
           onClick={(title, expanded, event) => console.log({ title, expanded, event })}
         >
           Контент первого пункта
@@ -38,6 +39,7 @@ export const AccordionPlaygroundTemplate = (props: AccordionProps) => {
         <AccordionItem
           id="accordion1-item2"
           title="Второй пункт"
+          // eslint-disable-next-line no-console
           onClick={(title, expanded, event) => console.log({ title, expanded, event })}
         >
           Аккордеон — это вертикальный список заголовков, которые, при нажатии, показывают контент находящийся под ними.
@@ -78,6 +80,7 @@ export const AccordionPlaygroundTemplate = (props: AccordionProps) => {
           id="accordion1-item3"
           defaultExpanded
           title="Третий пункт"
+          // eslint-disable-next-line no-console
           onClick={(title, expanded, event) => console.log({ title, expanded, event })}
         >
           Будущее игр никогда не было таким вдохновляющим. Творчество в играх процветает. Новые сервисы позволяют

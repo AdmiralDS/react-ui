@@ -18,6 +18,7 @@ export const SegmentedControlPlaygroundTemplate = ({
     <T font="Body/Body 1 Long">Режим radio button</T>
     <Separator />
     <SegmentedControl
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >
@@ -35,6 +36,7 @@ export const SegmentedControlPlaygroundTemplate = ({
     <T font="Body/Body 1 Long">Режим checkbox</T>
     <Separator />
     <SegmentedControl
+      // eslint-disable-next-line no-console
       onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
       {...props}
     >

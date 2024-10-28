@@ -30,6 +30,7 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
   };
 
   const handleSelectedChange = (value: string | Array<string>) => {
+    // eslint-disable-next-line no-console
     console.log(value);
   };
 

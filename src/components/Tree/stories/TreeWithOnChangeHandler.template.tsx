@@ -135,9 +135,12 @@ const demo1_TreeModel: Array<TreeItemProps> = [
 
 export const TreeWithOnChangeHandlerTemplate = (props: TreeProps) => {
   const handleCheckedChange = (ids: Array<string>) => {
+    // eslint-disable-next-line no-console
     console.log('Выбранные элементы:', ids.toString());
+    // eslint-disable-next-line no-console
   };
   const handleExpandedChange = (ids: Array<string>) => {
+    // eslint-disable-next-line no-console
     console.log('Развернутые узлы:', ids.toString());
   };
 

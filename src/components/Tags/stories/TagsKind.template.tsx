@@ -4,6 +4,9 @@ import type { TagsProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
+// eslint-disable-next-line no-console
+const handleClickDangerTag = () => console.log('click danger tag');
+
 export const TagsKindTemplate = ({
   kind = 'success',
   themeBorderKind,
@@ -17,6 +20,7 @@ export const TagsKindTemplate = ({
           dimension={props.dimension}
           width={50}
           kind={kind}
+          // eslint-disable-next-line no-console
           onClick={(event) => console.log(`click tag with id: ${event.currentTarget.id}`)}
         >
           <Tag id="1">Tag in group</Tag>
@@ -31,7 +35,7 @@ export const TagsKindTemplate = ({
           <Tag id="6" kind="primary">
             Primary
           </Tag>
-          <Tag id="7" kind="danger" width="auto" onClick={() => console.log('click danger tag')}>
+          <Tag id="7" kind="danger" width="auto" onClick={handleClickDangerTag}>
             Danger
           </Tag>
           <Tag id="8" kind="warning">

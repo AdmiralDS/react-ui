@@ -29,11 +29,13 @@ export const FileInputBaseTemplate = ({
   const [fileAttributesMap, setFileAttributesMap] = React.useState(new Map<File, FileAttributeProps>());
   const [status, setStatus] = React.useState<InputStatus | undefined>(undefined);
   const handlePreviewIconClick = (file: File) => {
+    // eslint-disable-next-line no-console
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const userSelectedFileList = Array.from(e.target.files || []);
+    // eslint-disable-next-line no-console
     userSelectedFileList.forEach((file) => console.log(`change ${file.name}`));
     const updatedFileAttributesMap = new Map<File, FileAttributeProps>(fileAttributesMap);
     const updatedFileList = fileList.reduce((acc: File[], file) => {
