@@ -177,12 +177,9 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const drawer = useRef<any>({});
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const drawerRef: any = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const previousFocusedElement: any = useRef(null);
 
     useEffect(() => {
@@ -238,7 +235,6 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         onClose?.();
       } else if (event.key === 'Tab') {
         // focus trap
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const focusableEls: any = getKeyboardFocusableElements(drawerRef.current);
         if (event.shiftKey) {
           /* shift + tab */

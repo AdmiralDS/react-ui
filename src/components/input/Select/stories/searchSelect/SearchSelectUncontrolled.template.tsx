@@ -8,7 +8,6 @@ import { Form, FormValuesWrapper } from '#src/components/input/Select/stories/st
 import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
 
 export const SearchSelectUncontrolledTemplate = (props: SelectProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [submitValues, setSubmitValues] = React.useState<null | Record<string, any>>(null);
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {

@@ -67,7 +67,6 @@ const TextWrapper = styled.span`
   text-overflow: ellipsis;
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ColumnMenuItem = ({ visible, title, ...props }: any) => {
   const itemRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLSpanElement | null>(null);

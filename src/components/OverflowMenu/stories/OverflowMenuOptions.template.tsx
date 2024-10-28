@@ -30,7 +30,6 @@ const logSelectedId = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const items: Array<any> = [
   {
     id: '1',

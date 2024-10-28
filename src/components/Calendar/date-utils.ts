@@ -214,7 +214,6 @@ const equal = (date1?: Date | null, date2?: Date | null) => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getFormattedValue = (date: Date | null, options: any, localeName: string) => {
   return new Intl.DateTimeFormat(localeName, options).format(date || new Date());
 };
@@ -256,7 +255,6 @@ const setMonth = (date: Date, month: number): Date => {
 };
 
 const setYear = (date: Date, year: number) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (isNaN(date as any)) {
     return new Date(NaN);
   }
@@ -306,7 +304,6 @@ const startOfWeek = (current: Date, weekStartsOn: number): Date => {
 
 const subMonths = (date: Date, amount: number): Date => addMonths(date, -amount);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const valid = (date: any): boolean => !isNaN(date as any);
 
 const getMonthList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {

@@ -13,7 +13,6 @@ const Sect = styled.div`
   }
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Section = ({ title, children }: any) => (
   <Sect>
     <label>

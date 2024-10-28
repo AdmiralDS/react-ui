@@ -21,11 +21,9 @@ export const SimpleWithChangeViewDateTemplate = ({ ...props }: CalendarPropType)
       <Calendar
         {...props}
         selected={selected}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onDateIncreaseDecrease={(value: any) => {
           // eslint-disable-next-line no-console
           console.log('onIncreaseDecreaseDate', value);

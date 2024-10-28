@@ -18,7 +18,6 @@ export const SimpleWithFilterDateTemplate = ({ range, ...props }: CalendarPropTy
         startDate={selected}
         endDate={endDate}
         filterDate={isWeekday}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value[0]);
           setEndDate(value[1]);
@@ -31,7 +30,6 @@ export const SimpleWithFilterDateTemplate = ({ range, ...props }: CalendarPropTy
         {...props}
         filterDate={isWeekday}
         selected={selected}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}

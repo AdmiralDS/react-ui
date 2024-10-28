@@ -21,7 +21,6 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   };
   const onOpenModal = () => setModalOpened(true);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onChipClose = (data: any) => {
     // eslint-disable-next-line no-console
     console.log(data);

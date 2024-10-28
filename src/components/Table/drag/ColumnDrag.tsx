@@ -49,7 +49,6 @@ export const ColumnDrag = ({
 
   useEffect(() => {
     if (columnMirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const observer = observeRect(columnMirrorRef.current, (rect: any) => {
         const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
         const leftCoord =

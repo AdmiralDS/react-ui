@@ -73,7 +73,6 @@ export interface MenuButtonProps
   /** Отключение компонента */
   disabled?: boolean;
   /** Data-attributes для DropMenu */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dropMenuDataAttributes?: Record<string, any>;
 }
 

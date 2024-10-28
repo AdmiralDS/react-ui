@@ -98,10 +98,8 @@ export const TFontsDemoTemplate = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            NEW_FONTS.map((item: any, index: number) => {
-              const text = `
+          {NEW_FONTS.map((item: any, index: number) => {
+            const text = `
             import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
@@ -119,38 +117,34 @@ export const TFontsDemoTemplate = () => {
               );
              }
             `;
-              return (
-                <tr key={index}>
-                  <td data-label="Style">
-                    <T font={item.name} as="div">
-                      {item.name}
-                    </T>
-                    <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
-                  </td>
-                  <td data-label="Props">
-                    <FontDesc>
-                      <tbody>
-                        <tr>
-                          <td>Шрифт:</td>
-                          <td>{theme.fontFamily}</td>
+            return (
+              <tr key={index}>
+                <td data-label="Style">
+                  <T font={item.name} as="div">
+                    {item.name}
+                  </T>
+                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
+                </td>
+                <td data-label="Props">
+                  <FontDesc>
+                    <tbody>
+                      <tr>
+                        <td>Шрифт:</td>
+                        <td>{theme.fontFamily}</td>
+                      </tr>
+                      {item.style.map((st: any, index: number) => (
+                        <tr key={index}>
+                          <td>{st.name}</td>
+                          <td>{st.value}</td>
                         </tr>
-                        {
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          item.style.map((st: any, index: number) => (
-                            <tr key={index}>
-                              <td>{st.name}</td>
-                              <td>{st.value}</td>
-                            </tr>
-                          ))
-                        }
-                      </tbody>
-                    </FontDesc>
-                  </td>
-                  <td data-label="Manual">{item.description}</td>
-                </tr>
-              );
-            })
-          }
+                      ))}
+                    </tbody>
+                  </FontDesc>
+                </td>
+                <td data-label="Manual">{item.description}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
       <Separator />
@@ -166,10 +160,8 @@ export const TFontsDemoTemplate = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            FONTS.map((item: any, index: number) => {
-              const text = `
+          {FONTS.map((item: any, index: number) => {
+            const text = `
             import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
@@ -187,38 +179,34 @@ export const TFontsDemoTemplate = () => {
               );
              }
             `;
-              return (
-                <tr key={index}>
-                  <td data-label="Style">
-                    <T font={item.name} as="div">
-                      {item.name}
-                    </T>
-                    <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
-                  </td>
-                  <td data-label="Props">
-                    <FontDesc>
-                      <tbody>
-                        <tr>
-                          <td>Шрифт:</td>
-                          <td>{theme.fontFamily}</td>
+            return (
+              <tr key={index}>
+                <td data-label="Style">
+                  <T font={item.name} as="div">
+                    {item.name}
+                  </T>
+                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
+                </td>
+                <td data-label="Props">
+                  <FontDesc>
+                    <tbody>
+                      <tr>
+                        <td>Шрифт:</td>
+                        <td>{theme.fontFamily}</td>
+                      </tr>
+                      {item.style.map((st: any, index: number) => (
+                        <tr key={index}>
+                          <td>{st.name}</td>
+                          <td>{st.value}</td>
                         </tr>
-                        {
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          item.style.map((st: any, index: number) => (
-                            <tr key={index}>
-                              <td>{st.name}</td>
-                              <td>{st.value}</td>
-                            </tr>
-                          ))
-                        }
-                      </tbody>
-                    </FontDesc>
-                  </td>
-                  <td data-label="Manual">{item.description}</td>
-                </tr>
-              );
-            })
-          }
+                      ))}
+                    </tbody>
+                  </FontDesc>
+                </td>
+                <td data-label="Manual">{item.description}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Wrapper>

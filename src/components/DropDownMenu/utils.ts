@@ -1,7 +1,6 @@
 export const moveFocus = (
   parent: HTMLUListElement | null,
   currentFocus: Element | null,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   calcNextFocus: (parent: HTMLUListElement | null, child: Element | null, stop?: boolean) => any,
   stop?: boolean,
 ): void => {

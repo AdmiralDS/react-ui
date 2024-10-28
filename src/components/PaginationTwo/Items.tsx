@@ -104,7 +104,6 @@ const NextButton = styled(Button)`
 `;
 
 type PageProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick: (event: any) => void;
   page: number | null;
   selected: boolean;

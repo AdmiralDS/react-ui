@@ -65,7 +65,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     React.useEffect(() => {
       const button = btnRef.current;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function handleMove(e: any) {
         // block column drag when mouse moves above filter icon
         e.stopPropagation();

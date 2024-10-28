@@ -30,7 +30,6 @@ export const LocaleThemeCurrentLocaleTemplate = () => {
       <Label>Calendar in 'ru' locale</Label>
       <Calendar
         selected={selected}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}
@@ -39,7 +38,6 @@ export const LocaleThemeCurrentLocaleTemplate = () => {
         <Label>Calendar in 'en-US' locale</Label>
         <Calendar
           selected={selected2}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={(value: any) => {
             setSelected2(value);
           }}

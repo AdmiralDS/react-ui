@@ -34,7 +34,6 @@ describe('OverflowMenu', () => {
       ),
     })),
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <OverflowMenu {...props} {...requiredProps} data-testid="btn" />

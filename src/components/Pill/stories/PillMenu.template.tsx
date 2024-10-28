@@ -182,7 +182,6 @@ const items: Array<PillOptionProps> = [
 export const PillMenuTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <>

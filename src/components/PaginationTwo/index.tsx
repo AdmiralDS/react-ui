@@ -49,7 +49,6 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** Текущая страница */
   page: number;
   /** Колбек на изменение текущей страницы */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (event: any, page: number) => void;
   /** Количество страниц*/
   count?: number;
@@ -124,7 +123,6 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlePageClick = (event: any, value: any) => {
     if (value !== page) {
       onChange?.(event, value);
@@ -136,7 +134,6 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const items = itemList.map((item) => {
     return typeof item === 'number'
       ? {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onClick: (event: any) => {
             handlePageClick(event, item);
           },
@@ -146,7 +143,6 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
           disabled: disabledPages.indexOf(item) > -1,
         }
       : {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onClick: (event: any) => {
             handlePageClick(event, buttonPage(item));
           },
@@ -157,7 +153,6 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
         };
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onInputSubmit = (event: any, value: string) => {
     const parsed = parseInt(value, 10);
     setInputValue('');

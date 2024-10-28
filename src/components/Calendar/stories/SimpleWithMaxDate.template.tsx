@@ -16,7 +16,6 @@ export const SimpleWithMaxDateTemplate = ({ range, ...props }: CalendarPropType)
         startDate={selected}
         endDate={endDate}
         maxDate={tomorrow}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value[0]);
           setEndDate(value[1]);
@@ -29,7 +28,6 @@ export const SimpleWithMaxDateTemplate = ({ range, ...props }: CalendarPropType)
         {...props}
         maxDate={tomorrow}
         selected={selected}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}

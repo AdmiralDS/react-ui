@@ -45,7 +45,6 @@ const compile = (formatString: string): string[] => {
 
 const format = (dateObj: Date, arg: string | string[], locale: LocaleType, utc?: boolean): string => {
   const pattern = typeof arg === 'string' ? compile(arg) : arg;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const d: any = addMinutes(dateObj, utc ? dateObj.getTimezoneOffset() : 0);
   const formatter = locales[locale].formatter;
   let str = '';
@@ -73,9 +72,7 @@ const addMilliseconds = (dateObj: Date, milliseconds: number): Date => {
 const preparse = (dateString: string, arg: string | string[], locale: LocaleType) => {
   let offset = 0;
   const pattern = typeof arg === 'string' ? compile(arg) : arg,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dt: any = { Y: 1970, M: 1, D: 1, H: 0, A: 0, h: 0, m: 0, s: 0, S: 0, Z: 0, _index: 0, _length: 0, _match: 0 },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     comment: any = /\[(.*)]/,
     parser = locales[locale].parser;
 
@@ -107,9 +104,7 @@ const preparse = (dateString: string, arg: string | string[], locale: LocaleType
   return dt;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isValid = (arg1: any, arg2: string | string[], locale: LocaleType): boolean => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dt: any = typeof arg1 === 'string' ? preparse(arg1, arg2, locale) : arg1,
     last = [31, (28 + Number(isLeapYear(dt.Y))) | 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][dt.M - 1];
 

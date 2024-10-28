@@ -87,8 +87,7 @@ export const rowBackground = css<{
     if ($status && $rowStatusMap?.[$status]) {
       return typeof $rowStatusMap[$status] === 'string'
         ? $rowStatusMap[$status]
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ($rowStatusMap[$status] as any)(theme.color);
+        : ($rowStatusMap[$status] as any)(theme.color);
     }
     if ($grey) {
       return `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`;

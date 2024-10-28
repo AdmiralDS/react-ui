@@ -136,7 +136,6 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
           if (withCloseIcon) {
             onClose?.();
           } else {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             props.onClick?.(e as any);
           }
         }

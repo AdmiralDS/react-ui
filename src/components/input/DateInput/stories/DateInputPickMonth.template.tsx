@@ -74,7 +74,6 @@ function dateInputHandle(inputData: InputData | null): InputData {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isValidDate(d: any) {
   return d instanceof Date && !isNaN(d.getTime());
 }

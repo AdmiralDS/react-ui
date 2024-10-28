@@ -82,7 +82,6 @@ const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status
 export const PillSimpleTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <>

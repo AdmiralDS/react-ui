@@ -7,7 +7,6 @@ export const moveFocus = (
     stop?: boolean,
     onMenuReachTop?: () => void,
     onMenuReachBottom?: () => void,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) => any,
   stop?: boolean,
   menuFocus?: boolean,

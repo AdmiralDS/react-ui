@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function useCallbackRef<T extends (...args: any[]) => any>(callback: T | undefined): T {
   const callbackRef = useRef(callback);
 

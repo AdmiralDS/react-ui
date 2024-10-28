@@ -250,7 +250,6 @@ export const TabMenu: FC<TabMenuProps> = ({
   useLayoutEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       const updatedEntries: { [index: number | string]: boolean } = {};
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       entries.forEach((entry: any) => {
         const target = entry.target;
         const targetNumber = target.dataset.number;

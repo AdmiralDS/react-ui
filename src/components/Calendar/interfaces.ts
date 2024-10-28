@@ -48,7 +48,6 @@ export interface CalendarPropType extends IDateSelectionProps {
   currentActiveViewImportant?: boolean;
 
   /** Коллбэк срабатывает при клике на стрелках переключения дат */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onDateIncreaseDecrease?: (date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>) => void;
 
   /** Коллбэк при изменении месяца */
@@ -73,7 +72,6 @@ export interface CalendarPropType extends IDateSelectionProps {
   highlightSpecialDay?: (date: Date) => ReturnType<typeof css> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
 
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,

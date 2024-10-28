@@ -35,7 +35,6 @@ export const Accordion: FC<AccordionProps> = ({
 }) => {
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let focusedOption: any = ((accordionRef.current && accordionRef.current.ownerDocument) || document).activeElement;
     // если фокус находится на AccordionItem Title, то можно переключаться между accordion items с помощью ArrowDown, ArrowUp, Home, End
     if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'button') {

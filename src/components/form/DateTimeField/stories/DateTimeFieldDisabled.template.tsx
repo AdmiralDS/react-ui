@@ -39,19 +39,16 @@ export const DateTimeFieldDisabledTemplate = ({
     readOnly,
     skeleton,
     ...props,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
   const baseDateTimeProps = {
     status,
     disabled,
     readOnly,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
   const dateTimeProps = {
     dimension,
     skeleton,
     ...baseDateTimeProps,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Record<string, any>;
 
   return (

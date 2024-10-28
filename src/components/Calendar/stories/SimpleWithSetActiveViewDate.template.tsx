@@ -51,7 +51,6 @@ export const SimpleWithSetActiveViewDateTemplate = ({ ...props }: CalendarPropTy
           console.log('onViewYearSelect');
           setCurrentActiveView('YEAR');
         }}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(value: any) => {
           setSelected(value);
         }}

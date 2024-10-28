@@ -53,7 +53,6 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const clientXRef = React.useRef(0);
   const [isTaken, setTaken] = React.useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleResize = (e: any) => {
     e.preventDefault();
     const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
@@ -66,7 +65,6 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     clientXRef.current = clientX;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     e.preventDefault();
     // block column drag

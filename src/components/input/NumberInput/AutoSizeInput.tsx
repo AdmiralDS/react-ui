@@ -223,14 +223,12 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
     const prefixRef = useRef<HTMLDivElement>(null);
     const suffixRef = useRef<HTMLDivElement>(null);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updateHiddenContent = (newValue: any) => {
       if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
       }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updatePrefixSuffixState = (newValue: any) => {
       if (newValue) {
         setPrefixSuffix(true);

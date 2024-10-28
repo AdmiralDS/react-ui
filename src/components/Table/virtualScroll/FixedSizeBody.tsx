@@ -7,9 +7,7 @@ interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   height: number;
   childHeight: number;
   renderAhead?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowList: any[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
 }
@@ -20,7 +18,6 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
           setScrollTop(e.target.scrollTop);

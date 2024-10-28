@@ -121,7 +121,6 @@ export const TableFilterTemplate = (props: TableProps) => {
   const [numFilterActive, setNumFilterActive] = React.useState(false);
   const [dateFilterActive, setDateFilterActive] = React.useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderNumFilter = ({ closeMenu }: any, column: any) => (
     <Wrapper>
       <FieldSet
@@ -145,13 +144,11 @@ export const TableFilterTemplate = (props: TableProps) => {
             setNumFilterActive(true);
             if (selected === '1') {
               const newRows = rowList.filter(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) > 1000000000,
               );
               setRows(newRows);
             } else {
               const newRows = rowList.filter(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (row) => Number(((row as any)[column.name] as string).replace(/\D/g, '')) < 1000000000,
               );
               setRows(newRows);
@@ -175,13 +172,11 @@ export const TableFilterTemplate = (props: TableProps) => {
     </Wrapper>
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderDateFilter = ({ closeMenu }: any, column: any) => (
     <Wrapper>
       <DateField
         label="Выберите дату:"
         value={selectedDate}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(e: any) => {
           setSelectedDate((e.target as HTMLInputElement).value);
         }}
@@ -192,7 +187,6 @@ export const TableFilterTemplate = (props: TableProps) => {
           onClick={() => {
             closeMenu();
             setDateFilterActive(true);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const newRows = rowList.filter((row) => (row as any)[column.name] === selectedDate);
             setRows(newRows);
           }}
@@ -214,7 +208,6 @@ export const TableFilterTemplate = (props: TableProps) => {
     </Wrapper>
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFilterMenuClickOutside = ({ closeMenu }: any) => closeMenu();
 
   const handleResize = ({ name, width }: { name: string; width: string }) => {
@@ -257,7 +250,6 @@ export const TableFilterTemplate = (props: TableProps) => {
         } else if (index === 4) {
           return {
             ...col,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             cellAlign: 'right' as any,
             renderFilter: () => <Wrapper>Пример отображения фильтра в колонке с выравниванием по правому краю</Wrapper>,
             onFilterMenuClickOutside,

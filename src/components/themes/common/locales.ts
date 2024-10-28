@@ -34,13 +34,9 @@ export interface Locale {
   };
   paginationOne: {
     itemsPerPageText: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageSelectLabel: (...props: any) => string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageSizeSelectLabel: (...props: any) => string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     itemRangeText: (...props: any) => string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pageRangeText: (props: any) => string;
     backwardText: string;
     forwardText: string;

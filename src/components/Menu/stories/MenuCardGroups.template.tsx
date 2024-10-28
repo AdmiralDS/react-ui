@@ -81,7 +81,6 @@ const StyledAdditionalText = styled.div`
 
 export const MenuCardGroupsTemplate = (props: MenuProps) => {
   const model = React.useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return category.reduce((acc: any, item: any) => {
       acc.push({
         id: item.id,
@@ -92,7 +91,6 @@ export const MenuCardGroupsTemplate = (props: MenuProps) => {
         ),
       });
       return acc.concat(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         item.content.map((subitem: any) => {
           return {
             id: subitem.id,

@@ -22,7 +22,6 @@ describe('MenuButton', () => {
     },
     items: options,
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <MenuButton {...props} {...requiredProps} data-testid="btn">

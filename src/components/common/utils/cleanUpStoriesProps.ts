@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const cleanUpProps = (props: any) =>
   (Object.keys(props) as Array<keyof typeof props>).reduce(
     (acc, key) => {
@@ -6,6 +5,5 @@ export const cleanUpProps = (props: any) =>
 
       return acc;
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     {} as Record<any, any>,
   );

@@ -7,7 +7,6 @@ import { LIGHT_THEME } from '#src/components/themes';
 import { Badge } from '.';
 
 describe('Badge', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Component = (props: any) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Badge {...props}>5</Badge>

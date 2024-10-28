@@ -14,7 +14,6 @@ export const SortIcon = ({ sort, sortOrder, multipleSort, iconSize }: SortProps)
 
   useEffect(() => {
     const sortIcon = sortRef.current;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function handleMove(e: any) {
       // block column drag when mouse moves above sort icon
       e.stopPropagation();
