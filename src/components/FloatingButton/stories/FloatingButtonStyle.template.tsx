@@ -11,7 +11,7 @@ const Container = styled.div<{ $reduceMargin?: boolean }>`
   transform: scale(1);
 `;
 
-export const FloatingButtonStyleTemplate = (props: FloatingButtonProps) => {
+export const FloatingButtonStyleTemplate = (_props: FloatingButtonProps) => {
   return (
     <>
       <T font="Body/Body 1 Short" as="div">

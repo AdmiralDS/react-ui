@@ -50,7 +50,7 @@ const itemsWithCheckbox: Array<ItemWithCheckbox> = [
 export const MenuButtonWithBottomPanelTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-  ...props
+  ..._props
 }: MenuButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [innerState, setInnerState] = React.useState<Array<ItemWithCheckbox>>(itemsWithCheckbox.map((item) => item));
   const [activeOption, setActiveOption] = React.useState<string | undefined>(innerState[0].id);
