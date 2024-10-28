@@ -94,12 +94,12 @@ export const ImageViewerMobileTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
         <NotificationItem displayStatusIcon>
-          <NotificationItemTitle>ImageViewer</NotificationItemTitle>
+          <NotificationItemTitle>ImageViewer. Адаптив (Mobile)</NotificationItemTitle>
           <NotificationItemContent>
-            Компонент для просмотра изображений. Помимо основного, есть компонент Image Miniature для отображения
-            миниатюр изображений.
-            <Separator height={8} />
-            Основные функции:
+            Отличия от десктопной версии. При использовании на мобильных устройствах изображение по дефолту занимет 100%
+            ширины экрана, но не более 70% высоты. Если используется несколько изображений, то кнопки масштабирования
+            отключаются, листание изображений происходит свайпами по экрану при дефолтном масштабе картинки. «Щипком»
+            можно масштабировать картинку.
           </NotificationItemContent>
         </NotificationItem>
         <MobileWrapper>
