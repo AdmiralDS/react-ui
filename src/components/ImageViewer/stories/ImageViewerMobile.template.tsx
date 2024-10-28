@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { ImageViewer, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
@@ -8,9 +8,6 @@ import { ReactComponent as Service } from './Service.svg';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-const Separator = styled.div<{ height: number }>`
-  height: ${(p) => p.height}px;
-`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,7 +53,7 @@ const PageContent = styled.div`
   overflow: hidden;
 `;
 
-const handleError = (e: any) => {
+const handleError: React.ReactEventHandler<HTMLImageElement> = (e) => {
   // eslint-disable-next-line no-console
   console.log('error', e);
 };

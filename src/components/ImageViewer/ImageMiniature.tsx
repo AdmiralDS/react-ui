@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -143,21 +143,15 @@ export const ImageMiniature = ({ item, dimension = 'm', onError, onMouseDown, ..
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
-  useEffect(() => {
-    const errorEventListener = (e: any) => {
-      setErrorOnLoadImg(true);
-      onError?.(e);
-    };
-    const imgNode = imgRef.current;
-    if (imgNode) {
-      imgNode.addEventListener('error', errorEventListener);
-      return () => imgNode.removeEventListener('error', errorEventListener);
-    }
-  }, []);
+
+  const handleImgError: React.ReactEventHandler<HTMLImageElement> = (e) => {
+    setErrorOnLoadImg(true);
+    onError?.(e);
+  };
 
   return (
     <Wrapper {...props} $dimension={dimension} $errorOnLoadImg={errorOnLoadImg} onMouseDown={onMouseDown}>
-      <StyledImg {...itemProps} ref={imgRef} src={itemSrc} />
+      <StyledImg {...itemProps} ref={imgRef} src={itemSrc} onError={handleImgError} />
       {errorOnLoadImg ? (
         <StyledEmptyMiniature dimension={dimension} />
       ) : (

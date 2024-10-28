@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-const handleError = (e: any) => {
+const handleError: React.ReactEventHandler<HTMLImageElement> = (e) => {
   // eslint-disable-next-line no-console
   console.log('error', e);
 };

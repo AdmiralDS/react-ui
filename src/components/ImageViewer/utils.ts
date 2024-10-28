@@ -54,7 +54,7 @@ export function updatePosition(
   return { x, y };
 }
 
-export const getPrev = (current: number, total: number) => {
+export const getPrev = (current: number, _total: number) => {
   const newIndex = current - 1;
   return newIndex > 0 ? newIndex : 0;
 };

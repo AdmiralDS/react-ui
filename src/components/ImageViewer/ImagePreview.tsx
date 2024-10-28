@@ -109,7 +109,6 @@ export const ImagePreview = ({
   totalImg,
   onVisibleChange,
   onActiveChange,
-  ...props
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -122,26 +121,16 @@ export const ImagePreview = ({
   //<editor-fold desc="Получение данных о загрузке изображения">
   const [imgNaturalHeight, setImgNaturalHeight] = useState(0);
   const [errorOnLoadImg, setErrorOnLoadImg] = useState(false);
-  useLayoutEffect(() => {
-    const loadEventListener = (e: any) => {
-      setImgNaturalHeight(e.target.naturalHeight);
-      overlayRef.current?.focus();
-    };
-    const errorEventListener = () => {
-      setErrorOnLoadImg(true);
-      overlayRef.current?.focus();
-    };
 
-    const imgNode = imgRef.current;
-    if (imgNode) {
-      imgNode.addEventListener('load', loadEventListener);
-      imgNode.addEventListener('error', errorEventListener);
-      return () => {
-        imgNode.removeEventListener('load', loadEventListener);
-        imgNode.removeEventListener('error', errorEventListener);
-      };
-    }
-  }, [activeImg]);
+  const handleImgLoad: React.ReactEventHandler<HTMLImageElement> = (e) => {
+    const imgNode = e.target as HTMLImageElement;
+    setImgNaturalHeight(imgNode.naturalHeight);
+    overlayRef.current?.focus();
+  };
+  const handleImgError = () => {
+    setErrorOnLoadImg(true);
+    overlayRef.current?.focus();
+  };
   //</editor-fold>
 
   //<editor-fold desc="Отслеживание начальных (отрендеренных) размеров изображения">
@@ -596,6 +585,8 @@ export const ImagePreview = ({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onLoad={handleImgLoad}
+        onError={handleImgError}
       />
       <CloseButton onClick={handleCloseBtnClick} />
       <Toolbar
