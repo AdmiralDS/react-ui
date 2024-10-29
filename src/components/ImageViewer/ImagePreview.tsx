@@ -188,28 +188,36 @@ export const ImagePreview = ({
   // Масштаб для увеличения изображения на весь экран (100% ширины или высоты)
   const [fullScaleState, setFullScaleState] = useState(1.0);
   // Устанавливает масштаб до размера 1:1 и обратно в 1
-  const handleDoubleClick = () => {
-    setScale((prevState) => (prevState === realScaleState ? 1 : realScaleState));
+  const handleDoubleClick: React.MouseEventHandler<HTMLImageElement> = (event) => {
+    handleZoomChange(
+      scale === realScaleState ? BASE_SCALE_RATIO / realScaleState : realScaleState / scale,
+      event.clientX,
+      event.clientY,
+    );
+  };
+  const handleEnterKeyDown = () => {
+    handleZoomChange(scale === realScaleState ? BASE_SCALE_RATIO / realScaleState : realScaleState / scale);
   };
   // Устанавливает масштаб на весь экран и обратно в 1
   const handleFkeyDown = () => {
-    setScale((prevState) => (prevState === fullScaleState ? 1 : fullScaleState));
+    handleZoomChange(scale === fullScaleState ? BASE_SCALE_RATIO / fullScaleState : fullScaleState / scale);
   };
 
-  useLayoutEffect(() => {
-    setRealScaleState(+(imgNaturalHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION));
-    setFullScaleState(() => {
-      if (overlayRef.current) {
-        const { width: overlayWidth, height: overlayHeight } = overlayRef.current.getBoundingClientRect();
+  const getFullScale = () => {
+    if (overlayRef.current) {
+      const { width: overlayWidth, height: overlayHeight } = overlayRef.current.getBoundingClientRect();
 
-        return Math.min(
-          +(overlayWidth / imgRenderedWidth).toFixed(IMAGE_SCALE_PRECISION),
-          +(overlayHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION),
-        );
-      }
-      return 1;
-    });
-  }, [imgRenderedHeight, imgNaturalHeight]);
+      return Math.min(
+        +(overlayWidth / imgRenderedWidth).toFixed(IMAGE_SCALE_PRECISION),
+        +(overlayHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION),
+      );
+    }
+    return 1;
+  };
+  useEffect(() => {
+    setRealScaleState(+(imgNaturalHeight / imgRenderedHeight).toFixed(IMAGE_SCALE_PRECISION));
+    setFullScaleState(getFullScale());
+  }, [imgRenderedWidth, imgRenderedHeight, imgNaturalHeight]);
   //</editor-fold>
 
   //<editor-fold desc="Стейты для отражения изображения по горизонтали и вертикали">
@@ -262,11 +270,11 @@ export const ImagePreview = ({
     setErrorOnLoadImg(false);
   };
   // Обработка клавиатурных команд для перелистывания изображений и изменения масштаба
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     const code = keyboardKey.getCode(event);
+    event.preventDefault();
     if (code === keyboardKey.Escape) {
       // prevent browser-specific escape key behavior (Safari exits fullscreen)
-      event.preventDefault();
       // prevent other overlays from closing
       event.stopPropagation();
       handleClose();
@@ -283,13 +291,19 @@ export const ImagePreview = ({
     } else if (code === keyboardKey.ArrowDown) {
       handleZoomOut();
     } else if (code === keyboardKey.Enter) {
-      handleDoubleClick();
+      handleEnterKeyDown();
     } else if (code === keyboardKey.F) {
-      event.preventDefault();
       event.stopPropagation();
       handleFkeyDown();
     }
   };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeImg, scale, fullScaleState, realScaleState]);
   // Начало перетаскивания изображения
   const handleImgMouseDown: React.MouseEventHandler<HTMLImageElement> = (event) => {
     // Only allow main button
@@ -566,7 +580,7 @@ export const ImagePreview = ({
   //</editor-fold>
 
   return createPortal(
-    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown} onKeyDown={handleKeyDown}>
+    <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown}>
       {errorOnLoadImg && errorMiniature}
       <ImageView
         item={item}
