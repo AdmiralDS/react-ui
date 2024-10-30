@@ -1,7 +1,13 @@
 import styled, { ThemeProvider } from 'styled-components';
 
 import { ImageViewer, NotificationItem, NotificationItemContent, NotificationItemTitle } from '@admiral-ds/react-ui';
-import type { ImageProps, ImageViewerProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type {
+  ImageProps,
+  ImageViewerProps,
+  BorderRadiusType,
+  TransformAction,
+  TransformType,
+} from '@admiral-ds/react-ui';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -43,6 +49,10 @@ const items: ImageProps[] = [
   },
 ];
 
+const handleTransform = (info: { transform: TransformType; action: TransformAction }) => {
+  console.log(info);
+};
+
 export const ImageViewerPlaygroundTemplate = ({
   themeBorderKind,
   CSSCustomProps,
@@ -51,7 +61,7 @@ export const ImageViewerPlaygroundTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Wrapper>
-        <ImageViewer {...props} items={items}></ImageViewer>
+        <ImageViewer {...props} items={items} onTransform={handleTransform}></ImageViewer>
         <NotificationItem displayStatusIcon>
           <NotificationItemTitle>ImageViewer</NotificationItemTitle>
           <NotificationItemContent>
