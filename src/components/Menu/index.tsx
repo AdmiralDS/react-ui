@@ -442,7 +442,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           }
         },
         onHover: (e: MouseEvent<HTMLDivElement>) => {
-          activateItem(itemProps.disabled ? undefined : id);
+          activateItem(id);
           setSubmenuVisible(hasSubmenu);
           activeItemRef.current = e.currentTarget as HTMLDivElement;
         },
@@ -506,7 +506,6 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         if (itemToScroll) {
           const scrollEventTime = Date.now();
           const lastEventTime = lastScrollEvent.current;
-
           itemToScroll?.scrollIntoView({
             behavior: !lastEventTime || scrollEventTime - lastEventTime < 150 ? 'auto' : 'smooth',
             inline: 'center',
