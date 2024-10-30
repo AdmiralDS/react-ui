@@ -24,8 +24,9 @@ export const Week: FC<IWeekCalendarProps> = ({
   highlightSpecialDay,
 }) => {
   const theme = useTheme() || LIGHT_THEME;
-  const handleMouseEnter = (day: Date, e: any) => onMouseEnter && onMouseEnter(day, e);
-  const handleDayClick = (day: Date, e: any) => onClick && onClick(day, e);
+  const handleMouseEnter = (day: Date, e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+    onMouseEnter && onMouseEnter(day, e);
+  const handleDayClick = (day: Date, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onClick && onClick(day, e);
   const weekStart = startOfWeek(day, theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);
   return (
     <WeekComponent>
