@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 
@@ -109,6 +109,7 @@ export const ImagePreview = ({
   totalImg,
   onVisibleChange,
   onActiveChange,
+  onTransform,
 }: ImagePreviewProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -172,6 +173,7 @@ export const ImagePreview = ({
   const [scale, setScale] = useState(1);
   const handleScaleChange = (newScale: number) => {
     setScale(newScale);
+    onTransform?.({ transform: { ...transform, scale: newScale }, action: 'zoomChange' });
   };
   const handleZoomIn = () => {
     handleZoomChange(BASE_SCALE_RATIO + scaleStep);
@@ -224,9 +226,11 @@ export const ImagePreview = ({
   const [flipX, setFlipX] = useState(false);
   const [flipY, setFlipY] = useState(false);
   const handleFlipXChange = () => {
+    onTransform?.({ transform: { ...transform, flipX: !flipX }, action: 'flipX' });
     setFlipX((prevState) => !prevState);
   };
   const handleFlipYChange = () => {
+    onTransform?.({ transform: { ...transform, flipY: !flipY }, action: 'flipY' });
     setFlipY((prevState) => !prevState);
   };
   //</editor-fold>
@@ -234,11 +238,13 @@ export const ImagePreview = ({
   //<editor-fold desc="Обработка поворота изображения">
   const [rotate, setRotate] = useState(0);
   const handleRotateLeft = () => {
+    onTransform?.({ transform: { ...transform, rotate: rotate - 90 }, action: 'rotateLeft' });
     setRotate((prevState) => prevState - 90);
     handleNeedUpdateCoordinatesChange(true);
   };
   const handleRotateRight = () => {
     setRotate((prevState) => prevState + 90);
+    onTransform?.({ transform: { ...transform, rotate: rotate + 90 }, action: 'rotateRight' });
     handleNeedUpdateCoordinatesChange(true);
   };
   //</editor-fold>
@@ -262,6 +268,7 @@ export const ImagePreview = ({
     setFlipX(false);
     setFlipY(false);
     setRotate(0);
+    onTransform?.({ transform: { x: 0, y: 0, scale: 1, rotate: 0, flipX: false, flipY: false }, action: 'reset' });
   };
   // Обработчик смены изображения внутри режима просмотра
   const handleActiveChange = (index: number) => {
@@ -321,11 +328,11 @@ export const ImagePreview = ({
   // Движение изображаения при зажатой ЛКМ
   const handleImgMouseMove = (event: MouseEvent) => {
     if (isMoving && imgRef.current) {
+      const newX = event.pageX - startPositionInfo.current.diffX;
+      const newY = event.pageY - startPositionInfo.current.diffY;
       // При перемещении установка новых координат идет напрямую через анимацию css
-      setCoordinates({
-        x: event.pageX - startPositionInfo.current.diffX,
-        y: event.pageY - startPositionInfo.current.diffY,
-      });
+      setCoordinates({ x: newX, y: newY });
+      onTransform?.({ transform: { ...transform, x: newX, y: newY }, action: 'move' });
     }
   };
   // Окончательное позиционирование изображения
@@ -345,9 +352,12 @@ export const ImagePreview = ({
       const updated = updatePosition(width, height, left, top, rotate, coordinates);
       // При заверешении перемещения анимации css отключается и происходит через requestAnimationFrame
       // Одновременно использовать и анимацию css и requestAnimationFrame нельзя, они начинают конфликтовать между собой
-      requestAnimationFrame(() => {
-        setCoordinates(updated);
-      });
+      if (updated.x !== coordinates.x || updated.y !== coordinates.y) {
+        requestAnimationFrame(() => {
+          setCoordinates(updated);
+        });
+        onTransform?.({ transform: { ...transform, x: updated.x, y: updated.y }, action: 'move' });
+      }
     }
   };
   // Расчет изменения масштаба с учетом установки определенного центра изображения, относительно которого необходимо рассчитать конечное положение
@@ -397,6 +407,9 @@ export const ImagePreview = ({
 
       handleScaleChange(newScale);
       setCoordinates({ x: newX, y: newY });
+      if (coordinates.x !== newX || coordinates.y !== newY) {
+        onTransform?.({ transform: { ...transform, x: newX, y: newY }, action: 'move' });
+      }
       handleNeedUpdateCoordinatesChange(true);
     }
   };
@@ -433,7 +446,10 @@ export const ImagePreview = ({
       const imgRect = imgRef.current.getBoundingClientRect();
 
       const updated = updatePosition(width, height, imgRect.left, imgRect.top, rotate, coordinates);
-      setCoordinates(updated);
+      if (updated.x !== coordinates.x || updated.y !== coordinates.y) {
+        setCoordinates(updated);
+        onTransform?.({ transform: { ...transform, x: updated.x, y: updated.y }, action: 'move' });
+      }
       setNeedUpdateCoordinates(false);
     }
   }, [needUpdateCoordinates]);
@@ -518,11 +534,11 @@ export const ImagePreview = ({
       });
     } else if (eventType === 'move') {
       updateTouchPointInfo({ eventType: 'move' });
+      const newX = touches[0].clientX - point1.x;
+      const newY = touches[0].clientY - point1.y;
       // touch move
-      setCoordinates({
-        x: touches[0].clientX - point1.x,
-        y: touches[0].clientY - point1.y,
-      });
+      setCoordinates({ x: newX, y: newY });
+      onTransform?.({ transform: { ...transform, x: newX, y: newY }, action: 'move' });
       if (xDown && yDown) {
         const xUp = touches[0].clientX;
         const yUp = touches[0].clientY;
@@ -559,9 +575,12 @@ export const ImagePreview = ({
           const updated = updatePosition(width, height, left, top, rotate, coordinates);
           // При заверешении перемещения анимации css отключается и происходит через requestAnimationFrame
           // Одновременно использовать и анимацию css и requestAnimationFrame нельзя, они начинают конфликтовать между собой
-          requestAnimationFrame(() => {
-            setCoordinates(updated);
-          });
+          if (updated.x !== coordinates.x || updated.y !== coordinates.y) {
+            requestAnimationFrame(() => {
+              setCoordinates(updated);
+            });
+            onTransform?.({ transform, action: 'move' });
+          }
         }
       }
 
@@ -578,6 +597,9 @@ export const ImagePreview = ({
     }
   };
   //</editor-fold>
+  const transform = useMemo(() => {
+    return { x: coordinates.x, y: coordinates.y, rotate, scale, flipX, flipY };
+  }, [coordinates, rotate, scale, flipX, flipY]);
 
   return createPortal(
     <Overlay ref={overlayRef} tabIndex={-1} onMouseDown={handleMouseDown}>
@@ -622,7 +644,7 @@ export const ImagePreview = ({
         actionsDisabled={errorOnLoadImg}
         minScale={minScaleInner}
         maxScale={maxScale}
-        transform={{ x: coordinates.x, y: coordinates.y, rotate, scale, flipX, flipY }}
+        transform={transform}
         locale={locale}
       />
     </Overlay>,

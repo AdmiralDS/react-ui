@@ -53,6 +53,15 @@ export interface TransformType {
   flipX: boolean;
   flipY: boolean;
 }
+export type TransformAction =
+  | 'flipY'
+  | 'flipX'
+  | 'rotateLeft'
+  | 'rotateRight'
+  | 'zoomChange'
+  | 'move'
+  | 'touchZoom'
+  | 'reset';
 
 export interface ImageViewerToolbarProps extends React.HTMLAttributes<HTMLDivElement>, ImageCounterProps {
   /** Отображение тултипа, по умолчанию true */
@@ -112,6 +121,8 @@ export interface ImagePreviewProps
   maxScale?: number;
   /** Элемент для отображения при ошибке загрузки */
   errorMiniature?: React.ReactNode;
+  /** Обработчик на изменение состояния изображения */
+  onTransform?: (info: { transform: TransformType; action: TransformAction }) => void;
 }
 
 export interface ImageViewerProps

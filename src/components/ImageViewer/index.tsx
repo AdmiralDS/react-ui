@@ -40,6 +40,7 @@ export const ImageViewer = ({
   onActiveChange,
   visible,
   onVisibleChange,
+  onTransform,
   ...props
 }: ImageViewerProps) => {
   const [activeImgState, setActiveImgState] = useState(defaultActiveImg);
@@ -92,6 +93,7 @@ export const ImageViewer = ({
           totalImg={items.length}
           onVisibleChange={handleVisibleChange}
           onActiveChange={handleActiveChange}
+          onTransform={onTransform}
         />
       )}
     </Wrapper>
