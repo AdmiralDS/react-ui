@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.25.4](https://github.com/AdmiralDS/react-ui/compare/v8.25.3...v8.25.4) (2024-10-30)
+
+
+### Bug Fixes
+
+* **Menu:** [#1555](https://github.com/AdmiralDS/react-ui/issues/1555) срабатывает автоскролл при ховере над задизейбленной опцией ([fec09c3](https://github.com/AdmiralDS/react-ui/commit/fec09c3b9b5800cd15bcce70e1b86fff21fe4a57))
+* **TextArea:** [#1556](https://github.com/AdmiralDS/react-ui/issues/1556) кнопка очистки должна быть видимой только при заполненном поле ([7bb09a5](https://github.com/AdmiralDS/react-ui/commit/7bb09a51b72a9c29003669bc21d1ae510ea68fc6))
+
 ### [8.25.3](https://github.com/AdmiralDS/react-ui/compare/v8.25.2...v8.25.3) (2024-10-28)
 
 
