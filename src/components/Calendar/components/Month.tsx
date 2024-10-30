@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-import * as React from 'react';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -9,7 +7,7 @@ import type { IMonthCalendarProps } from '../interfaces';
 
 const FIXED_WEEK_COUNT = 6;
 
-export const Month: FC<IMonthCalendarProps> = ({
+export const Month: React.FC<IMonthCalendarProps> = ({
   day,
   startDate,
   endDate,
@@ -25,9 +23,10 @@ export const Month: FC<IMonthCalendarProps> = ({
 }) => {
   const theme = useTheme() || LIGHT_THEME;
   const weeks: Array<Date> = [];
-  const handleMouseEnter = (day: Date, event: any) => onMouseEnter && onMouseEnter(day, event);
+  const handleMouseEnter = (day: Date, event: React.MouseEvent<HTMLDivElement>) =>
+    onMouseEnter && onMouseEnter(day, event);
   const handleMouseLeave = () => onMouseLeave && onMouseLeave();
-  const handleDayClick = (day: Date, event: any) => onClick && onClick(day, event);
+  const handleDayClick = (day: Date, event: React.MouseEvent<HTMLDivElement>) => onClick && onClick(day, event);
 
   let weekIndex = 0;
   let weekStart = startOfWeek(startOfMonth(day), theme.locales[theme.currentLocale].firstDayOfWeek ?? 1);

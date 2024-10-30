@@ -5,7 +5,7 @@ export const SliderRangeCustomTemplate = () => {
   return (
     <SliderRange
       // eslint-disable-next-line no-console
-      onChange={(value: any) => console.log(value)}
+      onChange={(value: [{ str: string; num: number }, { str: string; num: number }]) => console.log(value)}
       minValue={10}
       maxValue={100}
       prefix={['From', 'To']}

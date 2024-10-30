@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-import * as React from 'react';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
@@ -8,14 +6,14 @@ import { MonthComponent } from '../styled/MonthComponent';
 import type { IYearsCalendarProps } from '../interfaces';
 import { capitalizeFirstLetter } from '../constants';
 
-export const Months: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, validator, onClick }) => {
+export const Months: React.FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, validator, onClick }) => {
   const theme = useTheme() || LIGHT_THEME;
   const months = getMonthList(theme.currentLocale || 'ru');
   return (
     <>
       {months.map((month, index) => {
         const disabled = !!validator?.invalidMonth(index, viewDate.getFullYear());
-        const handleClick = (e: any) => {
+        const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
           e.preventDefault();
           const day = startOfMonth(setMonth(viewDate, index));
           !disabled && onClick && onClick(day, e);
