@@ -50,6 +50,7 @@ const items: ImageProps[] = [
 ];
 
 const handleTransform = (info: { transform: TransformType; action: TransformAction }) => {
+  // eslint-disable-next-line no-console
   console.log(info);
 };
 
