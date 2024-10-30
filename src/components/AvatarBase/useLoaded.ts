@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const useLoaded = (src: any) => {
+export const useLoaded = (src: string | undefined) => {
   const [loaded, setLoaded] = React.useState<'loaded' | 'error' | boolean>(false);
 
   React.useEffect(() => {

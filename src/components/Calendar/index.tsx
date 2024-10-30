@@ -169,7 +169,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarPropType>(
     const handleDayMouseEnter = (day: Date) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
 
-    const handleDayClick = (day: Date, event: any) => {
+    const handleDayClick = (day: Date, event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       let date = day;
       if (range || !equal(selected, date)) {
         date = changeTime(date, selected);
