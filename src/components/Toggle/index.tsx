@@ -9,10 +9,6 @@ import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#s
 import { keyboardKey } from '../common/keyboardKey';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
-  // /** Состояние компонента */
-  // checked?: boolean;
-  // /** Колбек на изменение состояния компонента */
-  // onChange?: ChangeEventHandler<HTMLInputElement>;
   /** Расположение подписи */
   labelPosition?: LabelPosition;
   /** Размер компонента */
