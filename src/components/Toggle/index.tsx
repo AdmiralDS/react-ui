@@ -129,6 +129,8 @@ const Slider = styled.span<{
   $faded?: boolean;
 }>`
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: ${BORDER_RADIUS};
   flex-shrink: 0;
   ${sizes}
