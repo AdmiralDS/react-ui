@@ -175,17 +175,17 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
               </IconStartWrapperStyled>
             )}
             <ChipChildrenWrapperStyled ref={refItems}>{children}</ChipChildrenWrapperStyled>
+            {typeof badge !== 'undefined' && (
+              <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
+                {badge}
+              </StyledBadge>
+            )}
             {!onClose && (iconEnd || iconAfter) && (
               <IconEndWrapperStyled $dimension={dimension}>
                 <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
                   {iconEnd ? iconEnd : iconAfter}
                 </IconWrapperStyled>
               </IconEndWrapperStyled>
-            )}
-            {!onClose && typeof badge !== 'undefined' && (
-              <StyledBadge data-badge dimension={dimension} appearance={badgeAppearance}>
-                {badge}
-              </StyledBadge>
             )}
             {onClose && (
               <CloseIconButton
