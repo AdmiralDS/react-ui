@@ -2,6 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
+import type { MultiButtonProps } from '../MultiButton';
 import { MultiButton } from '../MultiButton';
 import { LIGHT_THEME } from '../themes';
 
@@ -24,7 +25,7 @@ describe('MultiButton', () => {
       { id: '3', render: 'three' },
     ],
   };
-  const Component = (props: any) => (
+  const Component = (props: MultiButtonProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <MultiButton {...props} {...requiredProps} data-testid="multi" />
     </ThemeProvider>

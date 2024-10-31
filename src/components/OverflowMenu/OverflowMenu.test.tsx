@@ -2,6 +2,7 @@ import * as React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
+import type { OverflowMenuProps } from '#src/components/OverflowMenu';
 import { OverflowMenu } from '#src/components/OverflowMenu';
 import { LIGHT_THEME } from '#src/components/themes';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
@@ -34,7 +35,7 @@ describe('OverflowMenu', () => {
       ),
     })),
   };
-  const Component = (props: any) => (
+  const Component = (props: OverflowMenuProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <OverflowMenu {...props} {...requiredProps} data-testid="btn" />
     </ThemeProvider>

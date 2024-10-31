@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
+import type { MenuButtonProps } from '../MenuButton';
 import { MenuButton } from '../MenuButton';
 import { LIGHT_THEME } from '../themes';
 
@@ -22,7 +23,7 @@ describe('MenuButton', () => {
     },
     items: options,
   };
-  const Component = (props: any) => (
+  const Component = (props: MenuButtonProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <MenuButton {...props} {...requiredProps} data-testid="btn">
         test

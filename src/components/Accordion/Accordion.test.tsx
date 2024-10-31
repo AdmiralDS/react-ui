@@ -3,10 +3,11 @@ import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 
+import type { AccordionProps } from '.';
 import { Accordion, AccordionItem } from '.';
 
 describe('Spinner', () => {
-  const Comp = (props: any) => (
+  const Comp = (props: AccordionProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Accordion {...props}>
         <AccordionItem id="AccordionItem_1" title="Первый пункт">
