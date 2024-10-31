@@ -127,7 +127,7 @@ export const ColumnDrag = ({
           accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
             // column can be dragged only inside parent container
             if (target !== source) return false;
-            // can not place column before CheckboxCell or ExnandCell
+            // can not place column before CheckboxCell or ExpandCell
             if (sibling?.dataset.droppable == 'false') return false;
             return true;
           },
