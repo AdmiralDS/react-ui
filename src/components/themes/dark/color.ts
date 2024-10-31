@@ -2,8 +2,8 @@ import type { Color } from '../common/color';
 
 export const COLOR: Color = {
   //<editor-fold desc="Neutral">
-  'Neutral/Neutral 00': '#131314',
-  'Neutral/Neutral 05': '#1B1C1D',
+  'Neutral/Neutral 00': '#1B1C1D',
+  'Neutral/Neutral 05': '#131314',
   'Neutral/Neutral 10': '#252627',
   'Neutral/Neutral 20': '#3B3C3E',
   'Neutral/Neutral 30': '#515357',
