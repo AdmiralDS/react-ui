@@ -6,32 +6,25 @@ import { Calendar } from '@admiral-ds/react-ui';
 export const SimpleWithMaxDateTemplate = ({ range, ...props }: CalendarPropType) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
+
+  const handleChange = (value: Date | (Date | null)[] | null) => {
+    if (value === null || value instanceof Date) {
+      setSelected(value);
+    } else {
+      setSelected(value[0]);
+      setEndDate(value[1]);
+    }
+  };
+
   const tomorrow = new Date();
   tomorrow.setDate(new Date().getDate() + 1);
   return range ? (
     <>
-      <Calendar
-        {...props}
-        range
-        startDate={selected}
-        endDate={endDate}
-        maxDate={tomorrow}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
+      <Calendar {...props} range startDate={selected} endDate={endDate} maxDate={tomorrow} onChange={handleChange} />
     </>
   ) : (
     <>
-      <Calendar
-        {...props}
-        maxDate={tomorrow}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
+      <Calendar {...props} maxDate={tomorrow} selected={selected} onChange={handleChange} />
     </>
   );
 };
