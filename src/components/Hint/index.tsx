@@ -230,7 +230,7 @@ export const Hint: React.FC<HintProps> = ({
     [anchorElementRef.current],
   );
 
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (event) => {
     const code = keyboardKey.getCode(event);
     if (code === keyboardKey.Enter || code === keyboardKey[' ']) {
       event.preventDefault();

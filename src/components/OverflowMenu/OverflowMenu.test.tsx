@@ -35,7 +35,7 @@ describe('OverflowMenu', () => {
       ),
     })),
   };
-  const Component = (props: OverflowMenuProps) => (
+  const Component = (props: Omit<OverflowMenuProps, 'items'>) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <OverflowMenu {...props} {...requiredProps} data-testid="btn" />
     </ThemeProvider>

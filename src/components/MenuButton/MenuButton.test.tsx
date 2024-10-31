@@ -23,7 +23,7 @@ describe('MenuButton', () => {
     },
     items: options,
   };
-  const Component = (props: MenuButtonProps) => (
+  const Component = (props: Omit<MenuButtonProps, 'items'>) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <MenuButton {...props} {...requiredProps} data-testid="btn">
         test
