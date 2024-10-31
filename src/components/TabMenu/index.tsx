@@ -250,8 +250,8 @@ export const TabMenu: FC<TabMenuProps> = ({
   useLayoutEffect(() => {
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       const updatedEntries: { [index: number | string]: boolean } = {};
-      entries.forEach((entry: any) => {
-        const target = entry.target;
+      entries.forEach((entry) => {
+        const target = entry.target as HTMLElement;
         const targetNumber = target.dataset.number;
 
         // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
