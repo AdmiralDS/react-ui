@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import { EditModeAreaField } from '@admiral-ds/react-ui';
-import type { EditModeAreaFieldProps } from '@admiral-ds/react-ui';
+import type { EditModeAreaFieldProps, InputStatus } from '@admiral-ds/react-ui';
 
 export const EditModeAreaFieldErrorStateTemplate = ({ value = 'Admin', ...props }: EditModeAreaFieldProps) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
-  const [status, setStatus] = React.useState<any>(undefined);
-  const [extraText, setExtraText] = React.useState<any>(undefined);
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const [status, setStatus] = useState<InputStatus | undefined>(undefined);
+  const [extraText, setExtraText] = useState<string | undefined>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;

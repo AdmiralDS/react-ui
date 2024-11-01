@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ProgressStepper, typography } from '@admiral-ds/react-ui';
 import type { ProgressStepperProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
@@ -13,7 +12,11 @@ const Sect = styled.div`
   }
 `;
 
-const Section = ({ title, children }: any) => (
+interface SectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+const Section = ({ title, children }: SectionProps) => (
   <Sect>
     <label>
       <i>{title}</i>

@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
 import type { OverflowMenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import * as React from "react";
+import * as React from 'react';
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {

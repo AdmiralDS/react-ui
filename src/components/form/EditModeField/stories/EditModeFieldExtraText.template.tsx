@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import { EditModeField } from '@admiral-ds/react-ui';
 import type { EditModeFieldProps } from '@admiral-ds/react-ui';
 
 export const EditModeFieldExtraTextTemplate = ({ value = 'Admin', ...props }: EditModeFieldProps) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
-  const [extraText, setExtraText] = React.useState<any>(undefined);
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const [extraText, setExtraText] = useState<string | undefined>(undefined);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
