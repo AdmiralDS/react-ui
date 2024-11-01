@@ -51,8 +51,8 @@ export const SimpleWithSetActiveViewDateTemplate = ({ ...props }: CalendarPropTy
           console.log('onViewYearSelect');
           setCurrentActiveView('YEAR');
         }}
-        onChange={(value: any) => {
-          setSelected(value);
+        onChange={(value) => {
+          setSelected(value as Date);
         }}
       />
     </>

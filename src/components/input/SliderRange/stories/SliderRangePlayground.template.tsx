@@ -12,7 +12,7 @@ export const SliderRangePlaygroundTemplate = ({
   ...props
 }: SliderRangeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   // eslint-disable-next-line no-console
-  const handleChange = (value: any) => console.log(value);
+  const handleChange = (value: [{ str: string; num: number }, { str: string; num: number }]) => console.log(value);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>

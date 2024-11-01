@@ -74,11 +74,11 @@ export const Panel: FC<IPanelProps> = ({
   const previousDisabled = yearsView ? previousYearDisabled : previousMonthDisabled;
   const nextDisabled = yearsView ? nextYearDisabled : nextMonthDisabled;
 
-  const monthMouseDownHandle = (event: any) => {
+  const monthMouseDownHandle: React.MouseEventHandler<HTMLHeadingElement> = (event) => {
     event.preventDefault();
     monthsView ? onMonthsViewHide(event) : onMonthsViewShow(event);
   };
-  const yearMouseDownHandle = (event: any) => {
+  const yearMouseDownHandle: React.MouseEventHandler<HTMLHeadingElement> = (event) => {
     event.preventDefault();
     yearsView ? onYearsViewHide(event) : onYearsViewShow(event);
   };

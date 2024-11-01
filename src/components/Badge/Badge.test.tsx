@@ -4,10 +4,11 @@ import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 
+import type { BadgeProps } from '.';
 import { Badge } from '.';
 
 describe('Badge', () => {
-  const Component = (props: any) => (
+  const Component = (props: BadgeProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Badge {...props}>5</Badge>
     </ThemeProvider>

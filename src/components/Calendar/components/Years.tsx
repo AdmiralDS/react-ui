@@ -15,7 +15,7 @@ export const Years: FC<IYearsCalendarProps> = ({ viewDate, startDate, selected, 
     <>
       {years.map((year) => {
         const disabled = !!validator?.invalidYear(year);
-        const handleClick = (e: any) => {
+        const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
           e.preventDefault();
           const day = startOfYear(setYear(viewDate, year));
           !disabled && onClick && onClick(day, e);

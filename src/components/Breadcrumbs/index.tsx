@@ -89,8 +89,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const updatedEntries: { [index: number | string]: boolean } = {};
-    entries.forEach((entry: any) => {
-      const target = entry.target;
+    entries.forEach((entry) => {
+      const target = entry.target as HTMLElement;
       const targetNumber = target.dataset.number;
 
       if (targetNumber) {

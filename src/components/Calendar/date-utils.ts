@@ -164,7 +164,7 @@ const compareDates = (date1?: Date | null, date2?: Date | null): number => {
 };
 
 const dayInRange = (day: Date, startDate: Date, endDate: Date): boolean => {
-  let valid = false;
+  let valid: boolean;
   const start = startOfDay(startDate);
   const end = endOfDay(endDate);
 
@@ -214,7 +214,7 @@ const equal = (date1?: Date | null, date2?: Date | null) => {
   }
 };
 
-const getFormattedValue = (date: Date | null, options: any, localeName: string) => {
+const getFormattedValue = (date: Date | null, options: Intl.DateTimeFormatOptions, localeName: string) => {
   return new Intl.DateTimeFormat(localeName, options).format(date || new Date());
 };
 
