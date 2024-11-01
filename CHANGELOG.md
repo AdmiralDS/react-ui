@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.26.0](https://github.com/AdmiralDS/react-ui/compare/v8.25.4...v8.26.0) (2024-11-01)
+
+
+### Features
+
+* **Chips:** добавлен вариант с Badge и кнопкой Close ([d5b9751](https://github.com/AdmiralDS/react-ui/commit/d5b97510864ef0a872d35797c65b108209d15b4f))
+* **ImageViewer:** добавлен новый компонент ([20bb501](https://github.com/AdmiralDS/react-ui/commit/20bb50151c1db03531903f791230d233e190c446))
+* **theme:** в темной теме изменены токены Neutral 00 и Neutral 05 ([4b63780](https://github.com/AdmiralDS/react-ui/commit/4b637803b9d0ef345b5c876decd298a30df1011b))
+
+
+### Bug Fixes
+
+* **Toggle:** fix slider position ([a3e9af0](https://github.com/AdmiralDS/react-ui/commit/a3e9af0982a77b69f697661cf84d1714a4163fb6))
+
 ### [8.25.4](https://github.com/AdmiralDS/react-ui/compare/v8.25.3...v8.25.4) (2024-10-30)
 
 
