@@ -1,9 +1,10 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
 import type { OverflowMenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+import * as React from "react";
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
@@ -56,8 +57,8 @@ export const OverflowMenuBaseTemplate = ({
   CSSCustomProps,
   ...props
 }: OverflowMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const model = React.useMemo(() => {
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+  const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
@@ -56,7 +56,7 @@ const items: Array<any> = [
 ];
 
 export const OverflowMenuOptionsTemplate = (props: OverflowMenuProps) => {
-  const model = React.useMemo(() => {
+  const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -68,7 +68,7 @@ export const OverflowMenuOptionsTemplate = (props: OverflowMenuProps) => {
     }));
   }, [props.dimension]);
 
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   return (
     <DisplayBlock>
