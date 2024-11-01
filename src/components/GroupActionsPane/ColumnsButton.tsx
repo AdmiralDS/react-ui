@@ -7,6 +7,7 @@ import { IconButton } from '#src/components/IconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as PlusOutline } from '@admiral-ds/icons/build/service/PlusOutline.svg';
 import { Menu } from '#src/components/Menu';
+import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Tooltip } from '#src/components/Tooltip';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -67,7 +68,11 @@ const TextWrapper = styled.span`
   text-overflow: ellipsis;
 `;
 
-const ColumnMenuItem = ({ visible, title, ...props }: any) => {
+interface ColumnMenuItemProps extends MenuItemProps {
+  visible: boolean;
+}
+
+const ColumnMenuItem = ({ visible, title, ...props }: ColumnMenuItemProps) => {
   const itemRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLSpanElement | null>(null);
 

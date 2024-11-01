@@ -1,4 +1,12 @@
-export const FONTS = [
+import type { ThemeTypographyType } from '@admiral-ds/react-ui';
+
+interface FontProps {
+  name: keyof ThemeTypographyType;
+  style: { name: string; value: string }[];
+  description: string;
+}
+
+export const FONTS: FontProps[] = [
   {
     name: 'Main/XXL',
     style: [
@@ -146,8 +154,7 @@ export const FONTS = [
     description: 'Самый маленький шрифт системы. Применяется в компонентах, сносках, примечаниях, счетчиках и тд.',
   },
 ];
-
-export const NEW_FONTS = [
+export const NEW_FONTS: FontProps[] = [
   {
     name: 'Header/HL1',
     style: [

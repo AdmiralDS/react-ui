@@ -1,8 +1,9 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import { Menu, MenuItem, typography, mediumGroupBorderRadius, CategoryMenuItem } from '@admiral-ds/react-ui';
+import type { MenuModelItemProps, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const category = [
   {
@@ -80,8 +81,8 @@ const StyledAdditionalText = styled.div`
 `;
 
 export const MenuCardGroupsTemplate = (props: MenuProps) => {
-  const model = React.useMemo(() => {
-    return category.reduce((acc: any, item: any) => {
+  const model = useMemo(() => {
+    return category.reduce((acc: MenuModelItemProps[], item) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
@@ -91,7 +92,7 @@ export const MenuCardGroupsTemplate = (props: MenuProps) => {
         ),
       });
       return acc.concat(
-        item.content.map((subitem: any) => {
+        item.content.map((subitem) => {
           return {
             id: subitem.id,
             render: (options: RenderOptionProps) => (
@@ -110,8 +111,8 @@ export const MenuCardGroupsTemplate = (props: MenuProps) => {
     }, []);
   }, [props.dimension]);
 
-  const [selected, setSelected] = React.useState<string | undefined>('');
-  const [active, setActive] = React.useState<string | undefined>('');
+  const [selected, setSelected] = useState<string | undefined>('');
+  const [active, setActive] = useState<string | undefined>('');
 
   return (
     <>

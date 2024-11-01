@@ -102,6 +102,7 @@ export * from './components/CarouselSlider';
 export * from './components/Carousel';
 export * from './components/SegmentedControl';
 export * from './components/List';
+export * from './components/ImageViewer';
 
 export * from './components/CSSCustomProps';
 

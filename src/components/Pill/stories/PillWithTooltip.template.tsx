@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type { BorderRadiusType } from '@admiral-ds/react-ui';
@@ -36,23 +36,26 @@ const LabelWrapper = styled.div`
 export const PillWithTooltipTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+}: {
+  themeBorderKind?: BorderRadiusType;
+  CSSCustomProps?: boolean;
+}) => {
   const pillLabel = 'Я три дня гналась за вами, чтобы сказать, как вы мне безразличны';
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null);
-  const textRef = React.useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
-  const [overflow, setOverflow] = React.useState(false);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const [overflow, setOverflow] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const element = textRef.current;
     if (element && checkOverflow(element) !== overflow) {
       setOverflow(checkOverflow(element));
     }
   }, [tooltipVisible, setOverflow]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     function show() {
       setTooltipVisible(true);
     }
