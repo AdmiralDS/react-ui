@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, CategoryMenuItem, DropMenu, MenuItem, typography } from '@admiral-ds/react-ui';
+import type { DropMenuProps, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import type { DropMenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const WrapperVertical = styled.div`
   display: flex;
@@ -104,8 +104,8 @@ const CATEGORIES = [
 ];
 
 export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
-    return CATEGORIES.reduce((acc: any, item: any) => {
   const model = useMemo(() => {
+    return CATEGORIES.reduce((acc: MenuModelItemProps[], item) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
@@ -115,7 +115,7 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
         ),
       });
       return acc.concat(
-        item.content.map((subitem: any) => {
+        item.content.map((subitem) => {
           return {
             id: subitem.id,
             render: (options: RenderOptionProps) => (

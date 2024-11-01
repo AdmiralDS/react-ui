@@ -44,7 +44,7 @@ const IconsBlock = styled.div`
   justify-content: flex-end;
 `;
 
-type MenuProps = {
+export type PaneMenuProps = {
   /** Функция закрытия меню настроек */
   closeMenu: () => void;
 };
@@ -102,7 +102,7 @@ export interface GroupActionsPaneProps extends React.HTMLAttributes<HTMLDivEleme
   settingsMenu?: React.ReactNode;
 
   /** Функция отрисовки содержимого меню настроек */
-  renderSettingsMenu?: (obj: MenuProps) => React.ReactNode;
+  renderSettingsMenu?: (obj: PaneMenuProps) => React.ReactNode;
 
   /** Признак блокировки кнопок настройки таблицы */
   settingsButtonsDisabled?: boolean;

@@ -21,7 +21,12 @@ const logSelectedId = (id: string) => {
   console.log(`selected: ${id}`);
 };
 
-const items: Array<any> = [
+interface ItemProps {
+  id: string;
+  display: React.ReactNode;
+  disabled?: boolean;
+}
+const items: ItemProps[] = [
   {
     id: '1',
     display: 'Option one',
