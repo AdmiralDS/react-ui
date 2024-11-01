@@ -254,9 +254,11 @@ export const TabMenu: FC<TabMenuProps> = ({
         const target = entry.target as HTMLElement;
         const targetNumber = target.dataset.number;
 
-        // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
-        // результату, данное сравнение равносильно (a - b) < 0.01
-        updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
+        if (targetNumber !== undefined) {
+          // intersectionRatio - имеет значение float, сравнение с 1 может привести к неправильному
+          // результату, данное сравнение равносильно (a - b) < 0.01
+          updatedEntries[targetNumber] = entry.isIntersecting && entry.intersectionRatio > 0.99;
+        }
       });
 
       setVisibilityMap((prev: { [index: number | string]: boolean }) => ({

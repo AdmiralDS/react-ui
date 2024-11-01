@@ -12,7 +12,7 @@ export const TooltipDelayTemplate = ({
 }: ITooltipProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const btnRef = React.useRef<HTMLButtonElement | null>(null);
   const [visible, setVisible] = React.useState(false);
-  const [timer, setTimer] = React.useState<number>();
+  const [timer, setTimer] = React.useState<NodeJS.Timeout>();
 
   React.useEffect(() => {
     function show() {

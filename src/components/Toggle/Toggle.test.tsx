@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 
+import type { ToggleProps } from '@admiral-ds/react-ui';
 import { Toggle, LIGHT_THEME } from '@admiral-ds/react-ui';
 
 describe('Toggle', () => {
@@ -15,7 +16,7 @@ describe('Toggle', () => {
     'data-testid': 'element',
   };
 
-  const Component = (props: any) => (
+  const Component = (props: ToggleProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Toggle {...requiredProps} {...props}>
         text

@@ -14,7 +14,7 @@ export const AnchorWrapper = styled.div`
   position: relative;
   cursor: pointer;
 `;
-export const Portal = styled(PositionInPortal)<{ $flexDirection?: any }>`
+export const Portal = styled(PositionInPortal)<{ $flexDirection?: string }>`
   display: flex;
   flex-wrap: nowrap;
   ${({ $flexDirection }) => ($flexDirection ? `flex-direction: ${$flexDirection};` : 'flex-direction: column;')}
