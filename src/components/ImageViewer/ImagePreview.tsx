@@ -502,8 +502,8 @@ export const ImagePreview = ({
           y: touches[0].clientY - coordinates.y,
         },
         eventType: 'move',
-        xDown: event.touches[0].clientX,
-        yDown: event.touches[0].clientY,
+        xDown: touches[0].clientX,
+        yDown: touches[0].clientY,
         xDiff: 0,
         yDiff: 0,
       });
@@ -540,11 +540,9 @@ export const ImagePreview = ({
       setCoordinates({ x: newX, y: newY });
       onTransform?.({ transform: { ...transform, x: newX, y: newY }, action: 'move' });
       if (xDown && yDown) {
-        const xUp = touches[0].clientX;
-        const yUp = touches[0].clientY;
         updateTouchPointInfo({
-          xDiff: xDown - xUp,
-          yDiff: yDown - yUp,
+          xDiff: xDown - touches[0].clientX,
+          yDiff: yDown - touches[0].clientY,
         });
       }
     }
@@ -560,12 +558,8 @@ export const ImagePreview = ({
         const type = getSwipeType(startEl, event.target, timeDown, timeUp, xDown, yDown, xDiff, yDiff);
 
         if (type === 'swiped-left' && activeImg < totalImg - 1) {
-          // eslint-disable-next-line no-console
-          console.log(type);
           handleActiveChange(getNext(activeImg, totalImg));
         } else if (type === 'swiped-right' && activeImg > 0) {
-          // eslint-disable-next-line no-console
-          console.log(type);
           handleActiveChange(getPrev(activeImg, totalImg));
         } else {
           const width = imgRef.current.offsetWidth * scale;
