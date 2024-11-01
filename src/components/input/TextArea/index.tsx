@@ -337,11 +337,15 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
 
-    if (!props.readOnly && displayClearIcon) {
+    if (!props.readOnly && displayClearIcon && !!inputRef?.current?.value) {
       iconArray.unshift(
         <InputIconButton
           icon={CloseOutlineSvg}
           key="clear-icon"
+          onMouseDown={(e) => {
+            // запрет на перемещение фокуса при клике по иконке
+            e.preventDefault();
+          }}
           onClick={() => {
             if (inputRef.current) {
               changeInputData(inputRef.current, { value: '' });
@@ -432,8 +436,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           $autoHeight={autoHeight}
           value={inputData.value}
         />
-        <Scrollbars contentNode={contentNode} />
         <BorderedDiv />
+        <Scrollbars contentNode={contentNode} />
         {iconCount > 0 && (
           <IconPanel disabled={props.disabled} $dimension={dimension}>
             {iconArray}

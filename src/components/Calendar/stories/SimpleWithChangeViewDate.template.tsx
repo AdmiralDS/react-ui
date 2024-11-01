@@ -21,10 +21,10 @@ export const SimpleWithChangeViewDateTemplate = ({ ...props }: CalendarPropType)
       <Calendar
         {...props}
         selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
+        onChange={(value) => {
+          setSelected(value as Date);
         }}
-        onDateIncreaseDecrease={(value: any) => {
+        onDateIncreaseDecrease={(value) => {
           // eslint-disable-next-line no-console
           console.log('onIncreaseDecreaseDate', value);
         }}

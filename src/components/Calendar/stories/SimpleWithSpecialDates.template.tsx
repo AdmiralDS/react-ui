@@ -288,6 +288,15 @@ export const SimpleWithSpecialDatesTemplate = ({
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
+  const handleChange = (value: Date | (Date | null)[] | null) => {
+    if (value === null || value instanceof Date) {
+      setSelected(value);
+    } else {
+      setSelected(value[0]);
+      setEndDate(value[1]);
+    }
+  };
+
   const highlightHolidays = (day: Date) => {
     const key = startOfDay(day).getTime();
     const check = holidayDates.get(key);
@@ -310,23 +319,13 @@ export const SimpleWithSpecialDatesTemplate = ({
         range
         startDate={selected}
         endDate={endDate}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
+        onChange={handleChange}
         highlightSpecialDay={highlightHolidays}
       />
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Calendar
-        {...props}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-        highlightSpecialDay={highlightHolidays}
-      />
+      <Calendar {...props} selected={selected} onChange={handleChange} highlightSpecialDay={highlightHolidays} />
     </ThemeProvider>
   );
 };

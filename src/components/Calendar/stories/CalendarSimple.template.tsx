@@ -13,28 +13,22 @@ export const CalendarSimpleTemplate = ({
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
 
+  const handleChange = (value: Date | (Date | null)[] | null) => {
+    if (value === null || value instanceof Date) {
+      setSelected(value);
+    } else {
+      setSelected(value[0]);
+      setEndDate(value[1]);
+    }
+  };
+
   return props.range ? (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Calendar
-        {...props}
-        range
-        startDate={selected}
-        endDate={endDate}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
-      />
+      <Calendar {...props} range startDate={selected} endDate={endDate} onChange={handleChange} />
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Calendar
-        {...props}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
+      <Calendar {...props} selected={selected} onChange={handleChange} />
     </ThemeProvider>
   );
 };
