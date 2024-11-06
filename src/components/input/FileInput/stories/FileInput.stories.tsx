@@ -8,11 +8,13 @@ import { FileInput, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 import { FileInputBaseTemplate } from './FileInputBase.template';
 import { FileInputWithStatusTemplate } from './FileInputWithStatus.template';
 import { FileInputCustomTemplate } from './FileInputCustom.template';
+import { FileInputCustomFileTypeTemplate } from './FileInputCustomFileType.template';
 
 // Imports of text sources
 import FileInputBaseRaw from './FileInputBase.template?raw';
 import FileInputWithStatusRaw from './FileInputWithStatus.template?raw';
 import FileInputCustomRaw from './FileInputCustom.template?raw';
+import FileInputCustomFileTypeRaw from './FileInputCustomFileType.template?raw';
 
 const Separator = styled.div`
   height: 40px;
@@ -187,3 +189,33 @@ export const FileInputCustom = {
     },
   },
 };
+
+//</editor-fold>
+
+//<editor-fold desc="File Input. Кастомизация типов файлов">
+const FileInputCustomFileTypeStory: StoryFn<typeof FileInput> = ({ width = '480px', dimension = 'xl', ...props }) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <FileInputCustomFileTypeTemplate {...props} width={width} dimension={dimension} CSSCustomProps={CSSCustomProps} />
+  );
+};
+
+export const FileInputCustomFileType = {
+  render: FileInputCustomFileTypeStory,
+  name: 'FileInput. Кастомизация типов файлов',
+
+  parameters: {
+    docs: {
+      source: {
+        code: FileInputCustomFileTypeRaw,
+      },
+      description: {
+        story: `Функцию загрузки файла можно “повесить” на другие компоненты, например, кнопки, сделав соответствующие 
+        текстовые инструкции. В этом случае нужно воспользоваться методом renderCustomFileInput для отрисовки реакт-компонента. 
+        Для отображения выбранных файлов можно использовать кастомные компоненты.`,
+      },
+    },
+  },
+};
+
+//</editor-fold>
