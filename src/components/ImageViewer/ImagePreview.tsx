@@ -50,7 +50,7 @@ const StyledImage = styled.img<{ $transitionEnabled: boolean; $isVisible?: boole
   outline: none;
   max-width: 100%;
   max-height: 70%;
-  transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
+  transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease' : 'none')};
   cursor: grab;
   display: ${(p) => (p.$isVisible ? 'block' : 'none')};
 
