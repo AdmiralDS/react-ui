@@ -417,6 +417,9 @@ export const ImagePreview = ({
   const onWheel = (event: React.WheelEvent<HTMLImageElement>) => {
     if (event.deltaY == 0) return;
 
+    event.preventDefault();
+    event.stopPropagation();
+
     // Scale ratio depends on the deltaY size
     const scaleRatio = Math.abs(event.deltaY / 100);
     // Limit the maximum scale ratio
