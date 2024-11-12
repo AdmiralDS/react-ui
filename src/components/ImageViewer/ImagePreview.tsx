@@ -105,7 +105,7 @@ export const ImagePreview = ({
   showCounter,
   showNavigation,
   locale,
-  activeImg,
+  activeImg = 0,
   totalImg,
   onVisibleChange,
   onActiveChange,
