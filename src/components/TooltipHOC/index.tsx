@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
-import type { ITooltipProps } from '#src/components/Tooltip';
+import type { ITooltipProps, TooltipDimension } from '#src/components/Tooltip';
 
 export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
@@ -21,6 +21,8 @@ export interface TooltipHocProps {
   tooltipRef?: React.Ref<HTMLDivElement>;
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
+  /** Размер тултипа */
+  tooltipDimension?: TooltipDimension;
 }
 
 type WrappedComponentProps = {
@@ -79,6 +81,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
             renderContent={renderContent}
             container={container}
             tooltipPosition={tooltipPosition}
+            dimension={tooltipDimension}
             ref={tooltipRef}
           />
         )}
