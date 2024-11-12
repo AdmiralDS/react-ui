@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
 import type { ITooltipProps } from '#src/components/Tooltip';
@@ -28,17 +29,25 @@ type WrappedComponentProps = {
 
 export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
   const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
-    const { forwardedRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedCompProps } =
-      props;
+    const {
+      forwardedRef,
+      renderContent,
+      container,
+      withDelay,
+      tooltipRef,
+      tooltipPosition,
+      tooltipDimension,
+      ...wrappedCompProps
+    } = props;
     // Пустая строка, undefined, null и false не будут отображены
     const emptyContent = !renderContent() && renderContent() !== 0;
 
-    const anchorElementRef = React.useRef<any>(null);
-    const [visible, setVisible] = React.useState(false);
-    const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const [timer, setTimer] = React.useState<ReturnType<typeof setTimeout>>();
+    const anchorElementRef = useRef<any>(null);
+    const [visible, setVisible] = useState(false);
+    const [node, setNode] = useState<HTMLElement | null>(null);
+    const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
 
-    React.useEffect(() => {
+    useEffect(() => {
       function show() {
         setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
       }
@@ -77,7 +86,7 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
     );
   };
 
-  return React.forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
+  return forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
     return <WrappedComponent forwardedRef={ref} {...props} />;
   });
 }
