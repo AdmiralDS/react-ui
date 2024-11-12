@@ -49,7 +49,7 @@ export const COLOR: Color = {
   'Opacity/Hover': '#0000000D',
   'Opacity/Focus': '#00000017',
   'Opacity/Press': '#0000001F',
-  'Opacity/Modal': '#00000066',
+  'Opacity/Modal': '#0000009A',
   'Opacity/Dark Static Hover': '#FFFFFF0F',
   'Opacity/Dark Static Focus': '#FFFFFF17',
   'Opacity/Dark Static Press': '#FFFFFF1F',

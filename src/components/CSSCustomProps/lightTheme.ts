@@ -52,7 +52,7 @@ export const lightThemeText = `
   --admiral-color-Opacity_Hover: #0000000D;
   --admiral-color-Opacity_Focus: #00000017;
   --admiral-color-Opacity_Press: #0000001F;
-  --admiral-color-Opacity_Modal: #00000066;
+  --admiral-color-Opacity_Modal: #0000009A;
   --admiral-color-Opacity_DarkStaticHover: #FFFFFF0F;
   --admiral-color-Opacity_DarkStaticFocus: #FFFFFF17;
   --admiral-color-Opacity_DarkStaticPress: #FFFFFF1F;
