@@ -50,7 +50,7 @@ const StyledImage = styled.img<{ $transitionEnabled: boolean; $isVisible?: boole
   outline: none;
   max-width: 100%;
   max-height: 70%;
-  transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease-in-out' : 'none')};
+  transition: ${({ $transitionEnabled }) => ($transitionEnabled ? 'all 0.3s ease' : 'none')};
   cursor: grab;
   display: ${(p) => (p.$isVisible ? 'block' : 'none')};
 
@@ -105,7 +105,7 @@ export const ImagePreview = ({
   showCounter,
   showNavigation,
   locale,
-  activeImg,
+  activeImg = 0,
   totalImg,
   onVisibleChange,
   onActiveChange,
@@ -416,6 +416,9 @@ export const ImagePreview = ({
   // Обработка изменения масштаба по колесику мыши
   const onWheel = (event: React.WheelEvent<HTMLImageElement>) => {
     if (event.deltaY == 0) return;
+
+    event.preventDefault();
+    event.stopPropagation();
 
     // Scale ratio depends on the deltaY size
     const scaleRatio = Math.abs(event.deltaY / 100);

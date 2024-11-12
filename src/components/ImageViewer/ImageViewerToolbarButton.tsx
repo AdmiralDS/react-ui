@@ -66,7 +66,7 @@ export const ImageViewerToolbarButton = ({
   ...props
 }: ImageViewerToolbarButtonProps) => {
   return showTooltip ? (
-    <TooltipedToolbarButton {...props} renderContent={() => text}>
+    <TooltipedToolbarButton {...props} tooltipDimension="s" renderContent={() => text}>
       {icon}
     </TooltipedToolbarButton>
   ) : (

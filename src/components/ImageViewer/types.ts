@@ -127,7 +127,7 @@ export interface ImagePreviewProps
 
 export interface ImageViewerProps
   extends Pick<ImageMiniatureProps, 'dimension'>,
-    Omit<ImagePreviewProps, 'item' | 'totalImg'> {
+    Omit<ImagePreviewProps, 'item' | 'totalImg' | 'activeImg'> {
   /** Массив элементов для просмотра */
   items: string[] | ImageProps[];
   /** Индекс элемента для просмотра по умолчанию, также используется для выбора элемента при appearance=single */
@@ -140,4 +140,6 @@ export interface ImageViewerProps
   mobile?: boolean;
   /** Состояние видимости просмотра элемента */
   visible?: boolean;
+  /** Текущий номер */
+  activeImg?: number;
 }
