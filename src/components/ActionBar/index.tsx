@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import type { ActionBarDimension, ActionBarItemProps, ActionBarProps } from '#src/components/ActionBar/types';
@@ -114,10 +114,10 @@ export const ActionBar = ({
 }: ActionBarProps) => {
   const renderItem = ({ itemId, withDivider }: ActionBarItemProps) => {
     return (
-      <>
+      <Fragment key={itemId}>
         {renderActionBarItem(itemId)}
         {withDivider && <ActionBarDivider key={`divider${itemId}`} dimension={dimension} />}
-      </>
+      </Fragment>
     );
   };
 
