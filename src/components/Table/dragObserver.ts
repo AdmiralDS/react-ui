@@ -34,7 +34,7 @@ export function dragObserver(
   options: Options,
   onDrop?: (item: HTMLElement | null, reference: HTMLElement | null, immediate?: HTMLElement) => void,
   onDragStart?: () => void,
-  onDragEnd?: () => void,
+  onDragEnd?: (item: HTMLElement | null) => void,
 ) {
   let _mirror: HTMLElement | null; // mirror image
   let _source: HTMLElement | null; // source container
@@ -216,7 +216,7 @@ export function dragObserver(
     delete _item?.dataset?.dragover;
     delete _currentTarget?.dataset?.groupover;
     drake.dragging = false;
-    onDragEnd?.();
+    onDragEnd?.(_item);
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
     _itemId = '';
   }

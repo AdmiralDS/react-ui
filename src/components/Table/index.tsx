@@ -88,8 +88,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       virtualScroll,
       locale,
       onColumnDrag,
+      onColumnDragEnd,
       rowsDraggable = false,
       onRowDrag,
+      onRowDragEnd,
       rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       showBorders = false,
       ...props
@@ -664,6 +666,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {renderBody()}
         <ColumnDrag
           onColumnDrag={onColumnDrag}
+          onColumnDragEnd={onColumnDragEnd}
           dimension={dimension}
           isAnyColumnDraggable={isAnyColumnDraggable}
           isAnyStickyColumnDraggable={isAnyStickyColumnDraggable}
@@ -674,6 +677,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         />
         <RowDrag
           onRowDrag={onRowDrag}
+          onRowDragEnd={onRowDragEnd}
           dimension={dimension}
           rowsDraggable={rowsDraggable}
           scrollBodyRef={scrollBodyRef}

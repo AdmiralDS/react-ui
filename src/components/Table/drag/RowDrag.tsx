@@ -12,6 +12,7 @@ import type { GroupRows } from '../types';
 type RowDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
   onRowDrag: TableProps['onRowDrag'];
+  onRowDragEnd: TableProps['onRowDragEnd'];
   rowsDraggable?: boolean;
   scrollBodyRef: React.RefObject<HTMLElement>;
   rowToGroupMap: GroupRows;
@@ -21,6 +22,7 @@ export const RowDrag = ({
   rowsDraggable,
   dimension,
   onRowDrag,
+  onRowDragEnd,
   scrollBodyRef,
   rowToGroupMap,
 }: RowDragProps): ReactPortal | null => {
@@ -30,6 +32,7 @@ export const RowDrag = ({
 
   // save callback via useRef to not update dragObserver on each callback change
   const rowDragCallback = useRef(onRowDrag);
+  const rowDragEndCallback = useRef(onRowDragEnd);
   const rowToGroup = useRef(rowToGroupMap);
   const rowMirrorRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +42,8 @@ export const RowDrag = ({
 
   useEffect(() => {
     rowDragCallback.current = onRowDrag;
-  }, [onRowDrag]);
+    rowDragEndCallback.current = onRowDragEnd;
+  }, [onRowDrag, onRowDragEnd]);
 
   useEffect(() => {
     if (rowMirrorRef.current && rowDragging && rowsDraggable) {
@@ -101,8 +105,13 @@ export const RowDrag = ({
     function handleDragStart() {
       setRowDragging(true);
     }
-    function handleDragEnd() {
+    function handleDragEnd(item: HTMLElement | null) {
       setRowDragging(false);
+
+      const rowId = item?.dataset?.row;
+      if (rowId) {
+        rowDragEndCallback.current?.(rowId);
+      }
     }
     function renderMirror(dragRow: HTMLElement | null) {
       const firstCell = dragRow?.getElementsByClassName('td')[0];
