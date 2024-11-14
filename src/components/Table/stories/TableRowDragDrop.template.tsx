@@ -325,7 +325,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
 
   const handleRowDragEnd = (rowId: string) => {
     const newIndex = rows.findIndex((row) => row.id === rowId);
-    console.log('Row with id ' + rowId + ' now has index ' + newIndex + ' in rowList');
+    console.log('After drag&drop row with id ' + rowId + ' has index ' + newIndex + ' in rowList');
   };
 
   const handleRowDrag2 = (rowId: string, nextRowId: string | null, groupRowId: string | null) => {

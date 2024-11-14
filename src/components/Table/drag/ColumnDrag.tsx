@@ -11,7 +11,7 @@ import { MirrorColumn } from '../style';
 type ColumnDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
   onColumnDrag: TableProps['onColumnDrag'];
-  onColumnDragEnd?: TableProps['onColumnDragEnd'];
+  onColumnDragEnd: TableProps['onColumnDragEnd'];
   isAnyColumnDraggable: boolean;
   isAnyStickyColumnDraggable: boolean;
   tableRef: React.RefObject<HTMLElement>;

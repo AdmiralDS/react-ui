@@ -262,7 +262,7 @@ export const TableColumnDragDropTemplate = (props: TableProps) => {
 
   const handleColumnDragEnd = (columnName: string) => {
     const newIndex = cols.findIndex((col) => col.name === columnName);
-    console.log('Column with name ' + columnName + ' now has index ' + newIndex + ' in columnList');
+    console.log('After drag&drop column with name ' + columnName + ' has index ' + newIndex + ' in columnList');
   };
 
   const handleColumnDrag2 = (columnName: string, nextColumnName: string | null) => {

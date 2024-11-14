@@ -12,7 +12,7 @@ import type { GroupRows } from '../types';
 type RowDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
   onRowDrag: TableProps['onRowDrag'];
-  onRowDragEnd?: TableProps['onRowDragEnd'];
+  onRowDragEnd: TableProps['onRowDragEnd'];
   rowsDraggable?: boolean;
   scrollBodyRef: React.RefObject<HTMLElement>;
   rowToGroupMap: GroupRows;
