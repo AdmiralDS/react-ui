@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.27.0](https://github.com/AdmiralDS/react-ui/compare/v8.26.0...v8.27.0) (2024-11-14)
+
+
+### Features
+
+* **Table:** [#1568](https://github.com/AdmiralDS/react-ui/issues/1568) добавлены колбеки onColumnDragEnd и onRowDragEnd, срабатывающие при завершении drag drop ([25e5bc6](https://github.com/AdmiralDS/react-ui/commit/25e5bc6b9f3efe40ae35347c634f6b97c338f462))
+* **Theme:** [#1577](https://github.com/AdmiralDS/react-ui/issues/1577) в темной теме изменены значения css переменных  Neutral 00 и Neutral 05 ([44b3736](https://github.com/AdmiralDS/react-ui/commit/44b3736c4597613149ff200255df6fa241850eda))
+* **theme:** изменен токен 'Opacity/Modal' в светлой теме ([7a06839](https://github.com/AdmiralDS/react-ui/commit/7a068390f92bde15e80d47885b949c8447b903ba))
+* **TooltipHOC:** добавлен dimension для Tooltip ([081be87](https://github.com/AdmiralDS/react-ui/commit/081be87b2e163e0f9e31b9f2da58188ab2b5abe0))
+
+
+### Bug Fixes
+
+* **ImageViewer:** исправлена анимация ([fe6ef32](https://github.com/AdmiralDS/react-ui/commit/fe6ef32a83e4bb0f8787825ceea30f7f9dcb7458))
+* **ImageViewer:** при зуме колесиком мыши страница внизу не должна прокручиваться ([e0b69c6](https://github.com/AdmiralDS/react-ui/commit/e0b69c6e1fb98dff20747773e80fc9457e5699c6))
+* **ImageViewer:** размер тултипов изменен на S ([3f6b5cb](https://github.com/AdmiralDS/react-ui/commit/3f6b5cbaa67baacb4b6f2eca7cdf6462a3133dfe))
+
 ## [8.26.0](https://github.com/AdmiralDS/react-ui/compare/v8.25.4...v8.26.0) (2024-11-01)
 
 
