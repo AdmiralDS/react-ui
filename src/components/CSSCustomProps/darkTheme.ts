@@ -7,8 +7,8 @@ export const darkThemeText = `
    */
 
   /* Neutral */
-  --admiral-color-Neutral_Neutral00: #131314;
-  --admiral-color-Neutral_Neutral05: #1B1C1D;
+  --admiral-color-Neutral_Neutral00: #1B1C1D;
+  --admiral-color-Neutral_Neutral05: #131314;
   --admiral-color-Neutral_Neutral10: #252627;
   --admiral-color-Neutral_Neutral20: #3B3C3E;
   --admiral-color-Neutral_Neutral30: #515357;
