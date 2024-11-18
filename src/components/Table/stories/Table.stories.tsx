@@ -26,6 +26,7 @@ import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template'
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
 import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
 import { TableBaseHtmlTemplate } from './TableBaseHtml.template';
+import { TanstackTemplate } from './Tanstack.template';
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
 import TableColumnWidthRaw from './TableColumnWidth.template?raw';
@@ -51,6 +52,7 @@ import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
 import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
 import TableBaseHtmlRaw from './TableBaseHtml.template?raw';
+import TanstackRaw from './Tanstack.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -847,4 +849,17 @@ export const BaseHtmlExample = {
     },
   },
   name: 'Table. Базовый HTML table',
+};
+
+const TanstackStory: StoryFn<typeof TanstackTemplate> = (props) => <TanstackTemplate />;
+export const TanstackExample = {
+  render: TanstackStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TanstackRaw,
+      },
+    },
+  },
+  name: 'Table. TanStack example',
 };
