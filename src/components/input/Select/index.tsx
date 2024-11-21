@@ -213,6 +213,8 @@ export interface SelectProps
   onSelectedChange?: (value: string | Array<string>) => void;
   /** Признак поднятия выбранных опций вверх списка */
   moveSelectedOnTop?: boolean;
+  /** Признак очищения введенного значения после выбора элемента в режиме "searchSelect" */
+  clearInputValueAfterSelect?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -271,6 +273,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       forceHideOverflowTooltip = false,
       onSelectedChange,
       moveSelectedOnTop,
+      clearInputValueAfterSelect = true,
       ...props
     },
     ref,
@@ -441,7 +444,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         if (!multiple) onCloseSelect();
 
-        if (searchValue && inputRef.current) {
+        if (searchValue && inputRef.current && clearInputValueAfterSelect) {
           changeInputData(inputRef.current, {
             value: '',
             selectionEnd: 0,

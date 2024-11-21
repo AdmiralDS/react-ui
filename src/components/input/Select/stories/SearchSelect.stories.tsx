@@ -21,6 +21,7 @@ import { SearchSelectExternalFilterTemplate } from './searchSelect/SearchSelectE
 import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVirtualScroll.template';
 import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSelectWithOnChangeHandler.template';
 import { SearchSelectWithSelectedOnTopTemplate } from './searchSelect/SearchSelectWithSelectedOnTop.template';
+import { SearchSelectWithClearInputTemplate } from './searchSelect/SearchSelectWithClearInput.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
@@ -41,6 +42,7 @@ import SearchSelectExternalFilterRaw from './searchSelect/SearchSelectExternalFi
 import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScroll.template?raw';
 import SearchSelectWithOnClickHandlerTemplateRaw from './searchSelect/SearchSelectWithOnChangeHandler.template?raw';
 import SearchSelectWithSelectedOnTopTemplateRaw from './searchSelect/SearchSelectWithSelectedOnTop.template?raw';
+import SearchSelectWithClearInputTemplateRaw from './searchSelect/SearchSelectWithClearInput.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -534,7 +536,7 @@ export const WithSelectedOnTop = {
       },
       description: {
         story:
-          'Для вывода ранее выбранных пунктов сверху списка необходимо включить свойство moveSelectedOnTop\n' +
+          'Для вывода ранее выбранных пунктов сверху списка необходимо включить свойство `moveSelectedOnTop`\n' +
           '- Непосредственно при выборе (или отмене выбора) перестроение не происходит\n' +
           '- Выбранные строки отображаются сверху списка при повторном открытии меню\n' +
           '- Выбранные строки сортируются в том же порядке, что и чипсы в поле ввода, то есть в порядке очередности выбора',
@@ -543,5 +545,28 @@ export const WithSelectedOnTop = {
   },
 
   name: 'Multiple с поднятием выбранных опций вверх списка',
+};
+//</editor-fold>
+
+// <editor-fold desc="Поднятие выбранных опций вверх списка">
+const WithClearInputStory: StoryFn<typeof Select> = (props) => <SearchSelectWithClearInputTemplate {...props} />;
+
+export const WithClearInput = {
+  render: WithClearInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithClearInputTemplateRaw,
+      },
+      description: {
+        story:
+          'После выбора элемента значение, введенное для фильтрации очищается. Это поведение по умолчанию.\n' +
+          'Для того, чтобы изменить это поведение необходимо использовать свойтсво `clearInputValueAfterSelect`',
+      },
+    },
+  },
+
+  name: 'Multiple с опцией очистки введенного значения',
 };
 //</editor-fold>
