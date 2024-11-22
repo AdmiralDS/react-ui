@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.28.1](https://github.com/AdmiralDS/react-ui/compare/v8.28.0...v8.28.1) (2024-11-22)
+
+
+### Bug Fixes
+
+* **ModalContent:** [#1583](https://github.com/AdmiralDS/react-ui/issues/1583) на react 17 + typescript 4 необходима дополнительная типизация children ([339a1b3](https://github.com/AdmiralDS/react-ui/commit/339a1b3d110461b3137ec5d9dfc82d4c07fc5896))
+
 ## [8.28.0](https://github.com/AdmiralDS/react-ui/compare/v8.27.0...v8.28.0) (2024-11-22)
 
 
