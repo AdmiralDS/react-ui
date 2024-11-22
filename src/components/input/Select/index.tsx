@@ -284,7 +284,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const searchValue = inputValue === undefined ? internalSearchValue : inputValue;
     const [shouldRenderSelectValue, setShouldRenderSelectValue] = useState(false);
 
-    const [activeItem, setActiveItem] = useState<string>('');
+    const [activeItem, setActiveItem] = useState<string>();
 
     const [constantOptions, setConstantOptions] = useState<IConstantOption[]>([]);
     const [dropDownItems, setDropItems] = useState<Array<SelectItemProps>>([]);
@@ -712,7 +712,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
         setPreseleceted('');
-        setActiveItem('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
 
@@ -727,7 +726,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     useEffect(() => {
       if (isSearchPanelOpen) {
         const activeValue = selectedValue && !Array.isArray(selectedValue) ? selectedValue : undefined;
-        setActiveItem(activeValue || '');
+        setActiveItem(activeValue);
       }
     }, [isSearchPanelOpen]);
 
