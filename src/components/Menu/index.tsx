@@ -348,7 +348,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowDown: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
 
             const nextId = findNextId(currentId);
             if (preselectedModeActive) preselectItem(nextId);
@@ -358,7 +358,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowUp: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
 
             const previousId = findPreviousId(currentId);
             if (preselectedModeActive) preselectItem(previousId);
@@ -368,7 +368,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowRight: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
             const item = model.find((item) => item.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
               setSubmenuVisible(true);
@@ -494,10 +494,10 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       setTimeout(() => {
         let itemToScroll;
 
-        if (previousActive.current !== active || previousActiveState.current !== activeState) {
+        if ((active && previousActive.current !== active) || previousActiveState.current !== activeState) {
           itemToScroll = menuRef.current?.querySelector('[data-hovered="true"]');
         } else if (
-          previousPreselected.current !== preselected ||
+          (preselected && previousPreselected.current !== preselected) ||
           previousPreselectedState.current !== preselectedState
         ) {
           itemToScroll = menuRef.current?.querySelector('[data-preselected="true"]');

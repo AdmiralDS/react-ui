@@ -451,7 +451,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             selectionStart: 0,
           });
           const currentActiveItem = activeItem;
-          setActiveItem(undefined);
+          setActiveItem('');
           setTimeout(() => setActiveItem(currentActiveItem));
         }
       },
@@ -714,8 +714,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+        setPreseleceted('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
+
+    useEffect(() => {
+      if (preselected) setActiveItem('');
+    }, [preselected]);
+
+    useEffect(() => {
+      if (activeItem) setPreseleceted('');
+    }, [activeItem]);
 
     useEffect(() => {
       if (isSearchPanelOpen) {
@@ -869,7 +878,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={selectedValue}
-              onActivateItem={setActiveItem}
+              onActivateItem={(id) => setActiveItem(id || '')}
               onSelectItem={handleOptionSelect}
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}
