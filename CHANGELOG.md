@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.28.0](https://github.com/AdmiralDS/react-ui/compare/v8.27.0...v8.28.0) (2024-11-22)
+
+
+### Features
+
+* **Select:** Добавлено свойство clearInputValueAfterSelect, отвечающее за очистку поля ввода после выбора элемента. По умолчанию значение true ([2911262](https://github.com/AdmiralDS/react-ui/commit/2911262df127cf6cf5e5c4738b2e455566986dbc)), closes [#1550](https://github.com/AdmiralDS/react-ui/issues/1550)
+
+
+### Bug Fixes
+
+* **Select:** Исправлена логика отображения опций в состоянии hovered и preselected ([3a18eec](https://github.com/AdmiralDS/react-ui/commit/3a18eec252f1ebcd0277c6f4f356d939b08967da)), closes [#1566](https://github.com/AdmiralDS/react-ui/issues/1566)
+
 ## [8.27.0](https://github.com/AdmiralDS/react-ui/compare/v8.26.0...v8.27.0) (2024-11-14)
 
 
