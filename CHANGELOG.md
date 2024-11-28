@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.28.2](https://github.com/AdmiralDS/react-ui/compare/v8.28.1...v8.28.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* **Hint:** базовые html-атрибуты прокидываются непосредственно на элемент подсказки ([69859b5](https://github.com/AdmiralDS/react-ui/commit/69859b5075a85cab4baea694a08dca67c125824e))
+
 ### [8.28.1](https://github.com/AdmiralDS/react-ui/compare/v8.28.0...v8.28.1) (2024-11-22)
 
 
