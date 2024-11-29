@@ -1,32 +1,26 @@
-import { createRow } from '../core/row'
-import { Table, Row, RowModel, RowData } from '../types'
-import { getMemoOptions, memo } from '../utils'
+import { createRow } from '../core/row';
+import { Table, Row, RowModel, RowData } from '../types';
+import { getMemoOptions, memo } from '..';
 
-export function getCoreRowModel<TData extends RowData>(): (
-  table: Table<TData>
-) => () => RowModel<TData> {
-  return table =>
+export function getCoreRowModel<TData extends RowData>(): (table: Table<TData>) => () => RowModel<TData> {
+  return (table) =>
     memo(
       () => [table.options.data],
       (
-        data
+        data,
       ): {
-        rows: Row<TData>[]
-        flatRows: Row<TData>[]
-        rowsById: Record<string, Row<TData>>
+        rows: Row<TData>[];
+        flatRows: Row<TData>[];
+        rowsById: Record<string, Row<TData>>;
       } => {
         const rowModel: RowModel<TData> = {
           rows: [],
           flatRows: [],
           rowsById: {},
-        }
+        };
 
-        const accessRows = (
-          originalRows: TData[],
-          depth = 0,
-          parentRow?: Row<TData>
-        ): Row<TData>[] => {
-          const rows = [] as Row<TData>[]
+        const accessRows = (originalRows: TData[], depth = 0, parentRow?: Row<TData>): Row<TData>[] => {
+          const rows = [] as Row<TData>[];
 
           for (let i = 0; i < originalRows.length; i++) {
             // This could be an expensive check at scale, so we should move it somewhere else, but where?
@@ -44,39 +38,34 @@ export function getCoreRowModel<TData extends RowData>(): (
               i,
               depth,
               undefined,
-              parentRow?.id
-            )
+              parentRow?.id,
+            );
 
             // Keep track of every row in a flat array
-            rowModel.flatRows.push(row)
+            rowModel.flatRows.push(row);
             // Also keep track of every row by its ID
-            rowModel.rowsById[row.id] = row
+            rowModel.rowsById[row.id] = row;
             // Push table row into parent
-            rows.push(row)
+            rows.push(row);
 
             // Get the original subrows
             if (table.options.getSubRows) {
-              row.originalSubRows = table.options.getSubRows(
-                originalRows[i]!,
-                i
-              )
+              row.originalSubRows = table.options.getSubRows(originalRows[i]!, i);
 
               // Then recursively access them
               if (row.originalSubRows?.length) {
-                row.subRows = accessRows(row.originalSubRows, depth + 1, row)
+                row.subRows = accessRows(row.originalSubRows, depth + 1, row);
               }
             }
           }
 
-          return rows
-        }
+          return rows;
+        };
 
-        rowModel.rows = accessRows(data)
+        rowModel.rows = accessRows(data);
 
-        return rowModel
+        return rowModel;
       },
-      getMemoOptions(table.options, 'debugTable', 'getRowModel', () =>
-        table._autoResetPageIndex()
-      )
-    )
+      // getMemoOptions(table.options, 'debugTable', 'getRowModel', () => table._autoResetPageIndex()),
+    );
 }
