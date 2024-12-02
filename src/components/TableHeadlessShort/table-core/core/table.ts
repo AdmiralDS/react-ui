@@ -1,4 +1,4 @@
-import { functionalUpdate, getMemoOptions, memo, RequiredKeys } from '../utils';
+import { functionalUpdate, memo, RequiredKeys } from '../utils';
 
 import {
   Updater,
@@ -150,7 +150,7 @@ export interface CoreOptions<TData extends RowData> {
 
 export interface CoreInstance<TData extends RowData> {
   _features: readonly TableFeature[];
-  _getAllFlatColumnsById: () => Record<string, Column<TData, unknown>>;
+  _getAllColumnsById: () => Record<string, Column<TData, unknown>>;
   _getColumnDefs: () => ColumnDef<TData, unknown>[];
   _getCoreRowModel?: () => RowModel<TData>;
   _getDefaultColumnDef: () => Partial<ColumnDef<TData, unknown>>;
@@ -162,18 +162,6 @@ export interface CoreInstance<TData extends RowData> {
    * @link [Guide](https://tanstack.com/table/v8/docs/guide/tables)
    */
   getAllColumns: () => Column<TData, unknown>[];
-  /**
-   * Returns all columns in the table flattened to a single level.
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#getallflatcolumns)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/tables)
-   */
-  // getAllFlatColumns: () => Column<TData, unknown>[];
-  /**
-   * Returns all leaf-node columns in the table flattened to a single level. This does not include parent columns.
-   * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#getallleafcolumns)
-   * @link [Guide](https://tanstack.com/table/v8/docs/guide/tables)
-   */
-  getAllLeafColumns: () => Column<TData, unknown>[];
   /**
    * Returns a single column by its ID.
    * @link [API Docs](https://tanstack.com/table/v8/docs/api/core/table#getcolumn)
@@ -319,17 +307,11 @@ export function createTable<TData extends RowData>(options: TableOptionsResolved
 
       return table._getCoreRowModel!();
     },
-
-    // The final calls start at the bottom of the model,
-    // expanded rows, which then work their way up
-
     getRowModel: () => {
       return table.getExpandedRowModel();
-      // return table.getPaginationRowModel();
     },
-    //in next version, we should just pass in the row model as the optional 2nd arg
-    getRow: (id: string, searchAll?: boolean) => {
-      let row = (searchAll ? table.getExpandedRowModel() : table.getRowModel()).rowsById[id];
+    getRow: (id: string) => {
+      let row = table.getRowModel().rowsById[id];
 
       if (!row) {
         row = table.getCoreRowModel().rowsById[id];
@@ -349,20 +331,6 @@ export function createTable<TData extends RowData>(options: TableOptionsResolved
         defaultColumn = (defaultColumn ?? {}) as Partial<ColumnDef<TData, unknown>>;
 
         return {
-          header: (props) => {
-            const resolvedColumnDef = props.header.column.columnDef as ColumnDefResolved<TData>;
-
-            if (resolvedColumnDef.accessorKey) {
-              return resolvedColumnDef.accessorKey;
-            }
-
-            if (resolvedColumnDef.accessorFn) {
-              return resolvedColumnDef.id;
-            }
-
-            return null;
-          },
-          // footer: props => props.header.column.id,
           cell: (props) => props.renderValue<any>()?.toString?.() ?? null,
           ...table._features.reduce((obj, feature) => {
             return Object.assign(obj, feature.getDefaultColumnDef?.());
@@ -370,7 +338,6 @@ export function createTable<TData extends RowData>(options: TableOptionsResolved
           ...defaultColumn,
         } as Partial<ColumnDef<TData, unknown>>;
       },
-      getMemoOptions(options, 'debugColumns', '_getDefaultColumnDef'),
     ),
 
     _getColumnDefs: () => table.options.columns,
@@ -398,33 +365,8 @@ export function createTable<TData extends RowData>(options: TableOptionsResolved
 
         return recurseColumns(columnDefs);
       },
-      getMemoOptions(options, 'debugColumns', 'getAllColumns'),
     ),
-
-    // getAllFlatColumns: memo(
-    //   () => [table.getAllColumns()],
-    //   (allColumns) => {
-    //     return allColumns.flatMap((column) => {
-    //       return column.getFlatColumns();
-    //     });
-    //   },
-    //   getMemoOptions(options, 'debugColumns', 'getAllFlatColumns'),
-    // ),
-
-    // _getAllFlatColumnsById: memo(
-    //   () => [table.getAllFlatColumns()],
-    //   (flatColumns) => {
-    //     return flatColumns.reduce(
-    //       (acc, column) => {
-    //         acc[column.id] = column;
-    //         return acc;
-    //       },
-    //       {} as Record<string, Column<TData, unknown>>,
-    //     );
-    //   },
-    //   getMemoOptions(options, 'debugColumns', 'getAllFlatColumnsById'),
-    // ),
-    _getAllFlatColumnsById: memo(
+    _getAllColumnsById: memo(
       () => [table.getAllColumns()],
       (flatColumns) => {
         return flatColumns.reduce(
@@ -435,33 +377,10 @@ export function createTable<TData extends RowData>(options: TableOptionsResolved
           {} as Record<string, Column<TData, unknown>>,
         );
       },
-      getMemoOptions(options, 'debugColumns', 'getAllFlatColumnsById'),
-    ),
-
-    // getAllLeafColumns: memo(
-    //   () => [table.getAllColumns(), table._getOrderColumnsFn()],
-    //   (allColumns, orderColumns) => {
-    //     let leafColumns = allColumns.flatMap((column) => column.getLeafColumns());
-    //     return orderColumns(leafColumns);
-    //   },
-    //   getMemoOptions(options, 'debugColumns', 'getAllLeafColumns'),
-    // ),
-    getAllLeafColumns: memo(
-      () => [table.getAllColumns()],
-      (allColumns) => {
-        let leafColumns = allColumns.flatMap((column) => column.getLeafColumns());
-        return leafColumns;
-      },
-      getMemoOptions(options, 'debugColumns', 'getAllLeafColumns'),
     ),
 
     getColumn: (columnId) => {
-      const column = table._getAllFlatColumnsById()[columnId];
-
-      if (process.env.NODE_ENV !== 'production' && !column) {
-        console.error(`[Table] Column with id '${columnId}' does not exist.`);
-      }
-
+      const column = table._getAllColumnsById()[columnId];
       return column;
     },
   };

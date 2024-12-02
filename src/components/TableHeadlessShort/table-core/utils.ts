@@ -105,19 +105,11 @@ export function flattenBy<TNode>(arr: TNode[], getChildren: (item: TNode) => TNo
 export function memo<TDeps extends readonly any[], TDepArgs, TResult>(
   getDeps: (depArgs?: TDepArgs) => [...TDeps],
   fn: (...args: NoInfer<[...TDeps]>) => TResult,
-  opts?: {
-    key: any;
-    debug?: () => any;
-    onChange?: (result: TResult) => void;
-  },
 ): (depArgs?: TDepArgs) => TResult {
   let deps: any[] = [];
   let result: TResult | undefined;
 
   return (depArgs) => {
-    // let depTime: number
-    // if (opts.key && opts.debug) depTime = Date.now()
-
     const newDeps = getDeps(depArgs);
 
     const depsChanged =
@@ -129,53 +121,8 @@ export function memo<TDeps extends readonly any[], TDepArgs, TResult>(
 
     deps = newDeps;
 
-    // let resultTime: number
-    // if (opts.key && opts.debug) resultTime = Date.now()
-
     result = fn(...newDeps);
-    opts?.onChange?.(result);
-
-    // if (opts.key && opts.debug) {
-    //   if (opts?.debug()) {
-    //     const depEndTime = Math.round((Date.now() - depTime!) * 100) / 100
-    //     const resultEndTime = Math.round((Date.now() - resultTime!) * 100) / 100
-    //     const resultFpsPercentage = resultEndTime / 16
-
-    //     const pad = (str: number | string, num: number) => {
-    //       str = String(str)
-    //       while (str.length < num) {
-    //         str = ' ' + str
-    //       }
-    //       return str
-    //     }
-
-    //     console.info(
-    //       `%c⏱ ${pad(resultEndTime, 5)} /${pad(depEndTime, 5)} ms`,
-    //       `
-    //         font-size: .6rem;
-    //         font-weight: bold;
-    //         color: hsl(${Math.max(
-    //           0,
-    //           Math.min(120 - 120 * resultFpsPercentage, 120)
-    //         )}deg 100% 31%);`,
-    //       opts?.key
-    //     )
-    //   }
-    // }
 
     return result!;
-  };
-}
-
-export function getMemoOptions(
-  tableOptions: Partial<TableOptionsResolved<any>>,
-  debugLevel: 'debugAll' | 'debugCells' | 'debugTable' | 'debugColumns' | 'debugRows' | 'debugHeaders',
-  key: string,
-  onChange?: (result: any) => void,
-) {
-  return {
-    debug: () => tableOptions?.debugAll ?? tableOptions[debugLevel],
-    key: process.env.NODE_ENV === 'development' && key,
-    onChange,
   };
 }

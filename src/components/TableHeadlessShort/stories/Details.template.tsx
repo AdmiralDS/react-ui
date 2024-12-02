@@ -1,14 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {
-  ColumnDef,
-  Table,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getExpandedRowModel,
-  ExpandedState,
-} from '../react-table';
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable, getExpandedRowModel } from '../react-table';
 
 const StyledTable = styled.table`
   font-family: sans-serif;
@@ -31,6 +23,10 @@ const StyledTable = styled.table`
 
   tfoot th {
     font-weight: normal;
+  }
+
+  td.detailed {
+    background-color: lightblue;
   }
 `;
 
@@ -122,7 +118,6 @@ const tableData: Person[] = [
 const tableColumns: Array<ColumnDef<Person>> = [
   {
     accessorKey: 'firstName',
-    // Аналог нашего renderCell
     cell: ({ row, getValue }) => (
       <div
         style={{
@@ -145,14 +140,16 @@ const tableColumns: Array<ColumnDef<Person>> = [
             </button>
           ) : (
             '🔵'
-          )}
+          )}{' '}
           {getValue<boolean>()}
         </div>
       </div>
     ),
   },
   {
-    accessorKey: 'lastName',
+    accessorFn: (row) => row.lastName,
+    id: 'lastName',
+    cell: (info) => info.getValue(),
   },
   {
     accessorKey: 'age',
@@ -162,38 +159,39 @@ const tableColumns: Array<ColumnDef<Person>> = [
   },
 ];
 
-export const ExpansionTemplate = () => {
+export const DetailsTemplate = () => {
   const [columns, setColumns] = React.useState(tableColumns);
   const [data, setData] = React.useState(tableData);
 
-  // Можно сделать controlled expansion state, но это необязательно
-  // const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
-  const table: Table<Person> = useReactTable({
+  const table = useReactTable({
     data,
     columns,
+    getRowCanExpand: (row) => true, // Add your logic to determine if a row can be expanded. True means all rows include expanded data
     getCoreRowModel: getCoreRowModel(),
-    // задавать список подстрок в объекте data можно разными способами главное задать функцию subRows
-    getSubRows: (row) => row.subRows,
-    // getExpandedRowModel: getExpandedRowModel(),
-    // state: {
-    //   expanded,
-    // },
-    // onExpandedChange: setExpanded,
+    getExpandedRowModel: getExpandedRowModel(),
   });
 
   return (
     <StyledTable>
       <tbody>
-        {table.getRowModel().rows.map((row) => {
-          return (
-            <tr key={row.id}>
-              {row.getAllCells().map((cell) => {
-                return <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>;
-              })}
+        {table.getRowModel().rows.map((row) => (
+          <React.Fragment key={row.id}>
+            {/* Normal row UI */}
+            <tr>
+              {row.getAllCells().map((cell) => (
+                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              ))}
             </tr>
-          );
-        })}
+            {/* If the row is expanded, render the expanded UI as a separate row with a single cell that spans the width of the table */}
+            {row.getIsExpanded() && (
+              <tr>
+                <td colSpan={row.getAllCells().length} className="detailed">
+                  Your custom UI goes here
+                </td>
+              </tr>
+            )}
+          </React.Fragment>
+        ))}
       </tbody>
     </StyledTable>
   );

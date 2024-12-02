@@ -5,8 +5,6 @@ import { TableOptions, TableOptionsResolved, RowData, createTable } from '../tab
 
 export type Renderable<TProps> = React.ReactNode | React.ComponentType<TProps>;
 
-//
-
 /**
  * If rendering headers, cells, or footers with custom markup, use flexRender instead of `cell.getValue()` or `cell.renderValue()`.
  */

@@ -1,11 +1,9 @@
 //types
-export * from './columnHelper';
 export * from './types';
 
 //core
 export * from './core/cell';
 export * from './core/column';
-export * from './core/headers';
 export * from './core/row';
 export * from './core/table';
 

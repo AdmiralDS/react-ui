@@ -222,21 +222,6 @@ export const RowExpanding: TableFeature = {
     table.resetExpanded = (defaultState) => {
       table.setExpanded(defaultState ? {} : (table.initialState?.expanded ?? {}));
     };
-    // table.getCanSomeRowsExpand = () => {
-    //   return table
-    //     .getPrePaginationRowModel()
-    //     .flatRows.some(row => row.getCanExpand())
-    // }
-    // table.getToggleAllRowsExpandedHandler = () => {
-    //   return (e: unknown) => {
-    //     (e as any).persist?.();
-    //     table.toggleAllRowsExpanded();
-    //   };
-    // };
-    // table.getIsSomeRowsExpanded = () => {
-    //   const expanded = table.getState().expanded;
-    //   return expanded === true || Object.values(expanded).some(Boolean);
-    // };
     table.getIsAllRowsExpanded = () => {
       const expanded = table.getState().expanded;
 
@@ -272,17 +257,6 @@ export const RowExpanding: TableFeature = {
 
       return maxDepth;
     };
-    // table.getSortedRowModel = () => {
-    //   if (!table._getSortedRowModel && table.options.getSortedRowModel) {
-    //     table._getSortedRowModel = table.options.getSortedRowModel(table)
-    //   }
-
-    //   if (table.options.manualSorting || !table._getSortedRowModel) {
-    //     return table.getPreSortedRowModel()
-    //   }
-
-    //   return table._getSortedRowModel()
-    // }
     table.getPreExpandedRowModel = () => table.getCoreRowModel();
     table.getExpandedRowModel = () => {
       if (!table._getExpandedRowModel && table.options.getExpandedRowModel) {

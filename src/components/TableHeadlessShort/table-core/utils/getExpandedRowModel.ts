@@ -1,10 +1,9 @@
 import { Table, Row, RowModel, RowData } from '../types';
-import { getMemoOptions, memo } from '..';
+import { memo } from '..';
 
 export function getExpandedRowModel<TData extends RowData>(): (table: Table<TData>) => () => RowModel<TData> {
   return (table) =>
     memo(
-      // () => [table.getState().expanded, table.getPreExpandedRowModel(), table.options.paginateExpandedRows],
       () => [table.getState().expanded, table.getCoreRowModel(), table.options.paginateExpandedRows],
       (expanded, rowModel, paginateExpandedRows) => {
         if (!rowModel.rows.length || (expanded !== true && !Object.keys(expanded ?? {}).length)) {
@@ -18,7 +17,6 @@ export function getExpandedRowModel<TData extends RowData>(): (table: Table<TDat
 
         return expandRows(rowModel);
       },
-      getMemoOptions(table.options, 'debugTable', 'getExpandedRowModel'),
     );
 }
 

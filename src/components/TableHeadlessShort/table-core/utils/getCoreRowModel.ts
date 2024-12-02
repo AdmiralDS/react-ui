@@ -1,6 +1,6 @@
 import { createRow } from '../core/row';
 import { Table, Row, RowModel, RowData } from '../types';
-import { getMemoOptions, memo } from '..';
+import { memo } from '..';
 
 export function getCoreRowModel<TData extends RowData>(): (table: Table<TData>) => () => RowModel<TData> {
   return (table) =>
@@ -23,13 +23,6 @@ export function getCoreRowModel<TData extends RowData>(): (table: Table<TData>) 
           const rows = [] as Row<TData>[];
 
           for (let i = 0; i < originalRows.length; i++) {
-            // This could be an expensive check at scale, so we should move it somewhere else, but where?
-            // if (!id) {
-            //   if (process.env.NODE_ENV !== 'production') {
-            //     throw new Error(`getRowId expected an ID, but got ${id}`)
-            //   }
-            // }
-
             // Make the row
             const row = createRow(
               table,
@@ -66,6 +59,5 @@ export function getCoreRowModel<TData extends RowData>(): (table: Table<TData>) 
 
         return rowModel;
       },
-      // getMemoOptions(table.options, 'debugTable', 'getRowModel', () => table._autoResetPageIndex()),
     );
 }

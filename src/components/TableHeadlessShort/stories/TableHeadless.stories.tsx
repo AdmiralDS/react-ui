@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { Table } from '@admiral-ds/react-ui';
 
-import { BasicTemplate } from './Basic.template';
+import { DetailsTemplate } from './Details.template';
 import { ExpansionTemplate } from './Expansion.template';
 
 // Imports of text sources
-import BasicTemplateRaw from './Basic.template?raw';
+import DetailsTemplateRaw from './Details.template?raw';
 import ExpansionTemplateRaw from './Expansion.template?raw';
 
 export default {
@@ -22,25 +22,6 @@ export default {
   argTypes: {},
 } as Meta<typeof Table>;
 
-//<editor-fold desc="Playground">
-const BasicStory: StoryFn = () => <BasicTemplate />;
-
-export const BasicExample = {
-  render: BasicStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: BasicTemplateRaw,
-      },
-    },
-  },
-
-  name: 'Basic',
-};
-
-//</editor-fold>
-
 //<editor-fold desc="Expansion">
 const ExpansionStory: StoryFn = () => <ExpansionTemplate />;
 
@@ -56,6 +37,25 @@ export const ExpansionExample = {
   },
 
   name: 'Expansion',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Details">
+const DetailsStory: StoryFn = () => <DetailsTemplate />;
+
+export const DetailsExample = {
+  render: DetailsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DetailsTemplateRaw,
+      },
+    },
+  },
+
+  name: 'Details',
 };
 
 //</editor-fold>
