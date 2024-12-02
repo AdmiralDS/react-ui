@@ -173,9 +173,9 @@ export const ExpansionTemplate = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    // задавать список подстрок в объекте data можно разными способами главное задать функцию subRows
+    // задавать список подстрок в объекте data можно разными способами главное задать функцию getSubRows
     getSubRows: (row) => row.subRows,
-    // getExpandedRowModel: getExpandedRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
     // state: {
     //   expanded,
     // },

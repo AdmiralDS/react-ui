@@ -3,10 +3,12 @@ import { Table } from '@admiral-ds/react-ui';
 
 import { DetailsTemplate } from './Details.template';
 import { ExpansionTemplate } from './Expansion.template';
+import { MemoTemplate } from './Memo.template';
 
 // Imports of text sources
 import DetailsTemplateRaw from './Details.template?raw';
 import ExpansionTemplateRaw from './Expansion.template?raw';
+import MemoTemplateRaw from './Memo.template?raw';
 
 export default {
   title: 'Admiral-2.1/TableHeadlessShort',
@@ -56,6 +58,25 @@ export const DetailsExample = {
   },
 
   name: 'Details',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Memo">
+const MemoStory: StoryFn = () => <MemoTemplate />;
+
+export const MemoExample = {
+  render: MemoStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MemoTemplateRaw,
+      },
+    },
+  },
+
+  name: 'Memo',
 };
 
 //</editor-fold>

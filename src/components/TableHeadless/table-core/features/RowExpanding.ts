@@ -109,7 +109,6 @@ export interface ExpandedOptions<TData extends RowData> {
 }
 
 export interface ExpandedInstance<TData extends RowData> {
-  _autoResetExpanded: () => void;
   _getExpandedRowModel?: () => RowModel<TData>;
   /**
    * Returns whether there are any rows that can be expanded.
@@ -173,8 +172,6 @@ export interface ExpandedInstance<TData extends RowData> {
   toggleAllRowsExpanded: (expanded?: boolean) => void;
 }
 
-//
-
 export const RowExpanding: TableFeature = {
   getInitialState: (state): ExpandedTableState => {
     return {
@@ -191,26 +188,6 @@ export const RowExpanding: TableFeature = {
   },
 
   createTable: <TData extends RowData>(table: Table<TData>): void => {
-    let registered = false;
-    let queued = false;
-
-    table._autoResetExpanded = () => {
-      if (!registered) {
-        table._queue(() => {
-          registered = true;
-        });
-        return;
-      }
-
-      if (table.options.autoResetAll ?? table.options.autoResetExpanded ?? !table.options.manualExpanding) {
-        if (queued) return;
-        queued = true;
-        table._queue(() => {
-          table.resetExpanded();
-          queued = false;
-        });
-      }
-    };
     table.setExpanded = (updater) => table.options.onExpandedChange?.(updater);
     table.toggleAllRowsExpanded = (expanded) => {
       if (expanded ?? !table.getIsAllRowsExpanded()) {
