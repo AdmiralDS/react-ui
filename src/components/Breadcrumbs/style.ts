@@ -83,6 +83,7 @@ export const OverflowContent = styled.ol`
   & > li {
     margin-left: 4px;
   }
+  & > li[data-number='0'],
   & > li:last-child {
     margin-left: 0;
   }
