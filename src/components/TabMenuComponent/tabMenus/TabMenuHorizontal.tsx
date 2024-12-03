@@ -101,6 +101,7 @@ export const TabMenuHorizontal = ({
       };
     }
   }, [visibleContainerRef, dimension]);
+  useEffect(() => console.log(containerWidth), [containerWidth]);
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
@@ -190,6 +191,7 @@ export const TabMenuHorizontal = ({
       return renderTab(tabId, tabId === selectedTab, handleSelectTab);
     });
   }, [visibleTabs, dimension]);
+
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
     if (hiddenTabs.length === 0) return [];
     return hiddenTabs.map((tabId) => {
@@ -232,10 +234,11 @@ export const TabMenuHorizontal = ({
 
   return (
     <Wrapper {...props}>
-      <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
-      <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
+      <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline} className="visibleTabs">
         {renderedVisibleTabs}
-        {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
+        {showAddTabButton && (
+          <HorizontalAddTabButton className="add-tab-button" dimension={dimension} onClick={onAddTab} />
+        )}
         <HorizontalTabOverflowMenu
           {...dropProps}
           items={overflowMenuItems}
@@ -246,6 +249,9 @@ export const TabMenuHorizontal = ({
         />
         <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
       </VisibleContainer>
+      <HiddenContainer ref={hiddenContainerRef} className="hidddenTabs">
+        {horizontalTabs}
+      </HiddenContainer>
     </Wrapper>
   );
 };

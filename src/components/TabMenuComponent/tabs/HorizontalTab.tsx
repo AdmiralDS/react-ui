@@ -18,7 +18,7 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     return (
       <BaseTab
         {...props}
-        role="tab"
+        role={onSelectTab ? 'tab' : undefined}
         type="button"
         id={idForTab}
         ref={onSelectTab ? ref : undefined}
