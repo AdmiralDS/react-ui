@@ -31,7 +31,7 @@ const StyledOverflowMenu = styled(OverflowMenu)<{ dimension?: TabDimension }>`
 
 export const HorizontalTabOverflowMenu = ({ dimension = 'l', isHidden = false, ...props }: TabOverflowMenuProps) => {
   return (
-    <OverflowMenuContainer $dimension={dimension} $isHidden={isHidden} className="horizontal-tab-overflow-menu">
+    <OverflowMenuContainer $dimension={dimension} $isHidden={isHidden}>
       <StyledOverflowMenu {...props} dimension={dimension} />
     </OverflowMenuContainer>
   );

@@ -1,36 +1,17 @@
 import { ThemeProvider } from 'styled-components';
 import { LIGHT_THEME } from '@admiral-ds/react-ui';
-import { render, waitFor } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
 import { TestTabs } from './testTabs';
 
-class ResizeObserver {
-  observe() {}
-  unobserve() {}
-}
 const user = userEvent.setup();
 
 describe('Table', () => {
-  //window.ResizeObserver = ResizeObserver;
-  // const tabsList = [
-  //   { text: 'Вкладка 1', tabId: '1' },
-  //   { text: 'Вкладка 2', tabId: '2' },
-  // ];
-
-  beforeEach(() => {
-    Object.defineProperty(global, 'ResizeObserver', {
-      writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        observe: jest.fn(() => 'Mocking works'),
-        unobserve: jest.fn(),
-        disconnect: jest.fn(),
-      })),
-    });
-  });
-
   test('должен рендериться дефолтный компонент', async () => {
+    const scrollIntoViewMock = jest.fn();
+    HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
     const mockOnChange = jest.fn();
 
     const tabsList2 = [
@@ -40,17 +21,19 @@ describe('Table', () => {
 
     render(
       <ThemeProvider theme={LIGHT_THEME}>
-        <div style={{ width: '800px', height: '200px' }}>
+        <div style={{ width: '1000px', height: '600px' }} data-testid="box">
           <TestTabs onChange={mockOnChange} tabsList={tabsList2} />
         </div>
       </ThemeProvider>,
     );
 
-    //const promise = new Promise((resolve) => setTimeout(resolve, 3000));
-    //await waitFor(() => promise);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const tab = screen.getAllByRole('tab')[0];
-    const tab2 = screen.getByTestId('3');
+    const tab = await screen.findByTestId('1');
+    const tab2 = await screen.findByTestId('3');
+
+    const box = await screen.findByTestId('box');
+    console.log(box.getBoundingClientRect());
 
     expect(tab).toBeInTheDocument();
     expect(tab2).toBeInTheDocument();
@@ -58,9 +41,11 @@ describe('Table', () => {
     expect(screen.queryByText('Вкладка 1')).toBeInTheDocument();
     expect(screen.queryByText('Вкладка 3')).toBeInTheDocument();
 
-    await user.hover(tab);
-    await user.click(tab);
+    await user.hover(tab2);
+    await user.click(tab2);
+    fireEvent.click(tab2);
 
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 

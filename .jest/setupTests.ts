@@ -9,7 +9,3 @@ import '@testing-library/jest-dom';
 // This package improves the snapshot testing experience and provides
 // a brand new matcher to make expectations on the style rules.
 import 'jest-styled-components';
-
-import * as ResizeObserverModule from 'resize-observer-polyfill';
-
-(global as any).ResizeObserver = ResizeObserverModule.default;

@@ -90,18 +90,21 @@ export const TabMenuHorizontal = ({
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const [overflowState, setOverflowState] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (visibleContainerRef.current) {
+      console.log('>>>>>>>>>>>>>> ResizeObserver ');
       const resizeObserver = new ResizeObserver((entries) => {
+        console.log(`>>>>>>>>>>>>>> observe ${entries}`);
         entries.forEach((entry) => setContainerWidth(entry.contentRect.width || 0));
       });
+      console.log('>>>>>>>>>>>>>> ResizeObserver creared');
       resizeObserver.observe(visibleContainerRef.current);
       return () => {
+        console.log('>>>>>>>>>>>>>> ResizeObserver destroyed');
         resizeObserver.disconnect();
       };
     }
   }, [visibleContainerRef, dimension]);
-  useEffect(() => console.log(containerWidth), [containerWidth]);
   //</editor-fold>
 
   //<editor-fold desc="Создание табов для отрисовки">
@@ -124,8 +127,9 @@ export const TabMenuHorizontal = ({
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function setTabWidth() {
+      console.log(`>>>>>>>>>>>>>> observe setTabWidth`);
       if (hiddenContainerRef.current) {
         const overflow = checkOverflow(hiddenContainerRef.current);
         if (overflowState !== overflow) setOverflowState(overflow);
@@ -134,7 +138,8 @@ export const TabMenuHorizontal = ({
       }
     }
     if (hiddenContainerRef.current?.firstElementChild) {
-      const resizeObserver = new ResizeObserver(debounce(setTabWidth, 100));
+      console.log(`>>>>>>>>>>>>>> ResizeObserver firstElementChild`);
+      const resizeObserver = new ResizeObserver(setTabWidth);
       resizeObserver.observe(hiddenContainerRef.current?.firstElementChild);
       return () => {
         resizeObserver.disconnect();
@@ -185,12 +190,9 @@ export const TabMenuHorizontal = ({
     setHiddenTabs(newHiddenTabs);
   }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, showAddTabButton, selectedTab]);
 
-  const renderedVisibleTabs = useMemo(() => {
-    if (visibleTabs.length === 0) return [];
-    return visibleTabs.map((tabId) => {
-      return renderTab(tabId, tabId === selectedTab, handleSelectTab);
-    });
-  }, [visibleTabs, dimension]);
+  const renderedVisibleTabs = visibleTabs.map((tabId) => {
+    return renderTab(tabId, tabId === selectedTab, handleSelectTab);
+  });
 
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
     if (hiddenTabs.length === 0) return [];
@@ -217,16 +219,19 @@ export const TabMenuHorizontal = ({
     }
     return left;
   };
+
   const getUnderlinePosition = () => {
     const width = selectedTab ? getActiveTabWidth(tabWidthMap, selectedTab) : 0;
     const left = getActiveTabLeft();
     return { left: left, width: width };
   };
+
   const styleUnderline = () => {
     const { left, width } = getUnderlinePosition();
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };
+
   useEffect(() => {
     styleUnderline();
   }, [selectedTab, renderedVisibleTabs]);
@@ -234,11 +239,10 @@ export const TabMenuHorizontal = ({
 
   return (
     <Wrapper {...props}>
-      <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline} className="visibleTabs">
+      <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
+      <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
-        {showAddTabButton && (
-          <HorizontalAddTabButton className="add-tab-button" dimension={dimension} onClick={onAddTab} />
-        )}
+        {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
         <HorizontalTabOverflowMenu
           {...dropProps}
           items={overflowMenuItems}
@@ -249,9 +253,6 @@ export const TabMenuHorizontal = ({
         />
         <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
       </VisibleContainer>
-      <HiddenContainer ref={hiddenContainerRef} className="hidddenTabs">
-        {horizontalTabs}
-      </HiddenContainer>
     </Wrapper>
   );
 };

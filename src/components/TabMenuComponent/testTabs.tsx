@@ -1,7 +1,7 @@
 import type { HorizontalTabProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { HorizontalTab, MenuItem, TabBadge, TabIcon, TabMenuHorizontal, TabText } from '@admiral-ds/react-ui';
 import type { ReactNode } from 'react';
-import { forwardRef, useMemo, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import styled from 'styled-components';
 
 const MenuItemWrapper = styled.div`
@@ -42,6 +42,47 @@ export interface Props {
   onChange: (tab: HorizontalTabProps) => void;
 }
 
+interface TabContentProps extends HorizontalTabProps {
+  text: string;
+  badge?: number;
+  disabled?: boolean;
+  icon?: ReactNode;
+}
+interface CustomHorizontalTabProps extends TabContentProps {}
+
+const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
+  (
+    { dimension = 'l', disabled, selected, tabId, text, badge, icon, onSelectTab, ...props }: CustomHorizontalTabProps,
+    ref,
+  ) => {
+    return (
+      <HorizontalTab
+        {...props}
+        tabId={tabId}
+        ref={ref}
+        dimension={dimension}
+        disabled={disabled}
+        selected={selected}
+        className="BBBBBBBBBBBBBBBBBBBBBB"
+        data-testid={tabId}
+        onSelectTab={onSelectTab}
+      >
+        {icon && (
+          <TabIcon $dimension={dimension} $disabled={disabled}>
+            {icon}
+          </TabIcon>
+        )}
+        <TabText>{text}</TabText>
+        {badge && (
+          <TabBadge disabled={disabled} selected={selected}>
+            {badge}
+          </TabBadge>
+        )}
+      </HorizontalTab>
+    );
+  },
+);
+
 export const TestTabs = ({ onChange, tabsList }: Props) => {
   const [selectedTab, setSelectedTab] = useState<string | undefined>('1');
 
@@ -55,9 +96,7 @@ export const TestTabs = ({ onChange, tabsList }: Props) => {
     }
   };
 
-  const tabsMap = useMemo(() => {
-    return tabsList.map((tab) => tab.tabId);
-  }, [tabsList]);
+  const tabsMap = tabsList.map((tab) => tab.tabId);
 
   const renderDropMenuItem = (tabId: string) => {
     const currentTab = tabsList.find((tab) => tab.tabId === tabId);
@@ -74,57 +113,6 @@ export const TestTabs = ({ onChange, tabsList }: Props) => {
     const currentTab = tabsList.find((tab) => tab.tabId === tabId);
     return !!currentTab?.disabled;
   };
-
-  interface TabContentProps extends HorizontalTabProps {
-    text: string;
-    badge?: number;
-    disabled?: boolean;
-    icon?: ReactNode;
-  }
-  interface CustomHorizontalTabProps extends TabContentProps {}
-
-  const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-    (
-      {
-        dimension = 'l',
-        disabled,
-        selected,
-        tabId,
-        text,
-        badge,
-        icon,
-        onSelectTab,
-        ...props
-      }: CustomHorizontalTabProps,
-      ref,
-    ) => {
-      return (
-        <HorizontalTab
-          {...props}
-          tabId={tabId}
-          ref={ref}
-          dimension={dimension}
-          disabled={disabled}
-          selected={selected}
-          className="BBBBBBBBBBBBBBBBBBBBBB"
-          data-testid={tabId}
-          onSelectTab={onSelectTab}
-        >
-          {icon && (
-            <TabIcon $dimension={dimension} $disabled={disabled}>
-              {icon}
-            </TabIcon>
-          )}
-          <TabText>{text}</TabText>
-          {badge && (
-            <TabBadge disabled={disabled} selected={selected}>
-              {badge}
-            </TabBadge>
-          )}
-        </HorizontalTab>
-      );
-    },
-  );
 
   const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
     const currentTab = tabsList.find((tab) => tab.tabId === tabId);
