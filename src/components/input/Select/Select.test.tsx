@@ -371,7 +371,6 @@ describe('SearchSelect', () => {
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
-      //сбрасываем выделение второго, переходим на третий, выделяем и переходим на 1й, выделяем
       await user.type(inputELem, '{enter}');
       await user.type(inputELem, '{arrowdown}');
       await user.type(inputELem, '{enter}');
@@ -380,17 +379,18 @@ describe('SearchSelect', () => {
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox');
-        if ([0, 2].includes(ind)) expect(checkbox).toBeChecked();
+        if (1 == ind) expect(checkbox).toBeChecked();
         else expect(checkbox).not.toBeChecked();
       });
+
       options.forEach((optionText, optionTextInd) => {
         const chip = within(valueWrapper).queryByText(optionText);
-        if ([0, 2].includes(optionTextInd)) expect(chip).toBeInTheDocument();
+        if (1 == optionTextInd) expect(chip).toBeInTheDocument();
         else expect(chip).toBeNull();
       });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([0, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
+        if (2 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
     });
@@ -435,17 +435,18 @@ describe('SearchSelect', () => {
 
       dropDownOptions.forEach((optionElem, ind) => {
         const checkbox = within(optionElem).getByRole('checkbox');
-        if ([0, 2].includes(ind)) expect(checkbox).toBeChecked();
+        if (0 == ind) expect(checkbox).toBeChecked();
         else expect(checkbox).not.toBeChecked();
       });
+
       options.forEach((optionText, optionTextInd) => {
         const chip = within(valueWrapper).queryByText(optionText);
-        if ([0, 2].includes(optionTextInd)) expect(chip).toBeInTheDocument();
+        if (0 == optionTextInd) expect(chip).toBeInTheDocument();
         else expect(chip).toBeNull();
       });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 3].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
+        if (1 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
     });
