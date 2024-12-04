@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
@@ -86,7 +86,7 @@ export const CardTabMenuHorizontal = ({
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const [overflowState, setOverflowState] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (visibleContainerRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => setContainerWidth(entry.contentRect.width || 0));
@@ -103,12 +103,14 @@ export const CardTabMenuHorizontal = ({
   const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
+
   const handleSelectTab = (tabId: string) => {
     if (!tabIsDisabled(tabId)) {
       setSelectedTabInner(tabId);
       onSelectTab?.(tabId);
     }
   };
+
   const horizontalTabs = useMemo(() => {
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, undefined);
@@ -119,7 +121,7 @@ export const CardTabMenuHorizontal = ({
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function setTabWidth() {
       if (hiddenContainerRef.current) {
         const overflow = checkOverflow(hiddenContainerRef.current);
@@ -137,7 +139,7 @@ export const CardTabMenuHorizontal = ({
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const newVisibleTabs: string[] = [];
     const newHiddenTabs: string[] = [];
     if (visibleContainerRef.current && tabWidthMap.length > 0) {
@@ -180,12 +182,10 @@ export const CardTabMenuHorizontal = ({
     setHiddenTabs(newHiddenTabs);
   }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, showAddTabButton, selectedTab]);
 
-  const renderedVisibleTabs = useMemo(() => {
-    if (visibleTabs.length === 0) return [];
-    return visibleTabs.map((tabId) => {
-      return renderTab(tabId, tabId === selectedTab, handleSelectTab);
-    });
-  }, [visibleTabs, dimension]);
+  const renderedVisibleTabs = visibleTabs.map((tabId) => {
+    return renderTab(tabId, tabId === selectedTab, handleSelectTab);
+  });
+
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
     if (hiddenTabs.length === 0) return [];
     return hiddenTabs.map((tabId) => {
