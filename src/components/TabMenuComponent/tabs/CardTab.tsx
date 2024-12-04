@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from "react";
 import type { MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -26,7 +26,9 @@ const StyledBaseTab = styled(BaseTab)`
 
 export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
   ({ dimension = 'l', children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps, ref) => {
-    const idForTab = onSelectTab ? id : uid();
+    const [defaultId] = useState(uid());
+    const idForTab = onSelectTab && id ? id : defaultId;
+
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
       onSelectTab?.(tabId);
