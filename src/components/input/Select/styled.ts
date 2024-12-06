@@ -328,9 +328,15 @@ export const EmptyMessageWrapper = styled.div`
   user-select: none;
 `;
 
-export const CustomOptionWrapper = styled(MenuItem)<{ $selected?: boolean; $hovered?: boolean; $multiple?: boolean }>`
+export const CustomOptionWrapper = styled(MenuItem)<{
+  $selected?: boolean;
+  $hovered?: boolean;
+  $preselected?: boolean;
+  $multiple?: boolean;
+}>`
   justify-content: flex-start;
   flex-wrap: nowrap;
   white-space: pre-wrap;
-  ${(props) => props.$selected && !props.$hovered && props.$multiple && 'background-color: transparent;'}
+  ${(props) =>
+    props.$selected && !props.$hovered && !props.$preselected && props.$multiple && 'background-color: transparent;'}
 `;
