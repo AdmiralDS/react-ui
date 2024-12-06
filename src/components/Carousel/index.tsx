@@ -1,4 +1,4 @@
-import { Children, forwardRef, cloneElement, isValidElement, useMemo, useEffect, useState } from 'react';
+import { Children, forwardRef, cloneElement, isValidElement, useMemo, useEffect, useState, useRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -6,6 +6,8 @@ import type { CarouselButtonAppearance } from '#src/components/Carousel/Carousel
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
 import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
 import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
+import type { TouchPointInfoType } from '#src/components/ImageViewer/utils';
+import { getSwipeType } from '#src/components/ImageViewer/utils';
 
 const Content = styled.div<{
   $currentItem: number;
@@ -241,6 +243,91 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     };
     //</editor-fold>
 
+    //<editor-fold desc="Обработчики touch событий">
+    const [isTouching, setIsTouching] = useState(false);
+    const touchPointInfo = useRef<TouchPointInfoType>({
+      point1: { x: 0, y: 0 },
+      point2: { x: 0, y: 0 },
+      eventType: 'none',
+      startEl: undefined,
+      timeDown: undefined,
+      xDown: undefined,
+      yDown: undefined,
+      xDiff: undefined,
+      yDiff: undefined,
+      touchCount: undefined,
+    });
+
+    const updateTouchPointInfo = (values: Partial<TouchPointInfoType>) => {
+      touchPointInfo.current = {
+        ...touchPointInfo.current,
+        ...values,
+      };
+    };
+
+    const handleTouchStart = (event: React.TouchEvent<HTMLImageElement>) => {
+      event.stopPropagation();
+      setIsTouching(true);
+
+      const { touches = [] } = event;
+      if (touches.length === 1) {
+        updateTouchPointInfo({
+          startEl: event.target,
+          timeDown: Date.now(),
+          touchCount: touches.length,
+          eventType: 'move',
+          xDown: touches[0].clientX,
+          yDown: touches[0].clientY,
+          xDiff: 0,
+          yDiff: 0,
+        });
+      }
+    };
+    const handleTouchMove = (event: React.TouchEvent<HTMLImageElement>) => {
+      const { touches = [] } = event;
+      const { eventType, xDown, yDown } = touchPointInfo.current;
+
+      if (eventType === 'move') {
+        updateTouchPointInfo({ eventType: 'move' });
+        if (xDown && yDown) {
+          updateTouchPointInfo({
+            xDiff: xDown - touches[0].clientX,
+            yDiff: yDown - touches[0].clientY,
+          });
+        }
+      }
+    };
+    const handleTouchEnd = (event: React.TouchEvent<HTMLImageElement>) => {
+      if (isTouching) {
+        setIsTouching(false);
+
+        const { eventType, startEl, timeDown, xDiff, yDiff, xDown, yDown } = touchPointInfo.current;
+
+        if (eventType === 'move') {
+          const timeUp = Date.now();
+          const type = getSwipeType(startEl, event.target, timeDown, timeUp, xDown, yDown, xDiff, yDiff);
+
+          if (type === 'swiped-left') {
+            handleNextClick();
+          } else if (type === 'swiped-right') {
+            handlePrevClick();
+          }
+        }
+
+        updateTouchPointInfo({
+          eventType: 'none',
+          startEl: undefined,
+          timeDown: undefined,
+          xDown: undefined,
+          yDown: undefined,
+          xDiff: undefined,
+          yDiff: undefined,
+          touchCount: undefined,
+        });
+      }
+    };
+    //</editor-fold>
+
     return (
       <Container ref={ref} {...props}>
         <Wrapper>
@@ -251,6 +338,9 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               $showAnimation={showAnimation}
               $animationDuration={animationDuration}
               onTransitionEnd={updateEdgeContentIndex}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               {contentItems}
             </Content>
