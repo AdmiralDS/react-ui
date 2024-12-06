@@ -6,8 +6,8 @@ import type { CarouselButtonAppearance } from '#src/components/Carousel/Carousel
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
 import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
 import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
-import type { TouchPointInfoType } from '#src/components/ImageViewer/utils';
-import { getSwipeType } from '#src/components/ImageViewer/utils';
+import type { TouchPointInfoType } from '#src/components/common/utils/touchUtils';
+import { getSwipeType } from '#src/components/common/utils/touchUtils';
 
 const Content = styled.div<{
   $currentItem: number;
