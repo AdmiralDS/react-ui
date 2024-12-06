@@ -22,7 +22,7 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
     ref,
   ) => {
     const [defaultId] = useState(uid());
-    const idForTab = id ?? defaultId;;
+    const idForTab = id ?? defaultId;
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
       onSelectTab?.(tabId);
