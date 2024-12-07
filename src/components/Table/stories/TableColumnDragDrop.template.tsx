@@ -262,6 +262,7 @@ export const TableColumnDragDropTemplate = (props: TableProps) => {
 
   const handleColumnDragEnd = (columnName: string) => {
     const newIndex = cols.findIndex((col) => col.name === columnName);
+    // eslint-disable-next-line no-console
     console.log('After drag&drop column with name ' + columnName + ' has index ' + newIndex + ' in columnList');
   };
 

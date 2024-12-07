@@ -325,6 +325,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
 
   const handleRowDragEnd = (rowId: string) => {
     const newIndex = rows.findIndex((row) => row.id === rowId);
+    // eslint-disable-next-line no-console
     console.log('After drag&drop row with id ' + rowId + ' has index ' + newIndex + ' in rowList');
   };
 
