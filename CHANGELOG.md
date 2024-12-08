@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.29.0](https://github.com/AdmiralDS/react-ui/compare/v8.28.2...v8.29.0) (2024-12-08)
+
+
+### Features
+
+* **Carousel:** добавлена прокрутка свайпом ([5be04c0](https://github.com/AdmiralDS/react-ui/commit/5be04c0a08248583e97f05addbcb26a5ba4eef2d))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** [#1589](https://github.com/AdmiralDS/react-ui/issues/1589) исправлен баг с неправильным margin, в случае когда в компонент передана только одна крошка ([55b350e](https://github.com/AdmiralDS/react-ui/commit/55b350e014b649582a309c8aaeb9fc396d4d6519))
+* **HorizontalTab, CardTab, VerticalTab:** id компонента не должно меняться при каждом ререндере ([15aa950](https://github.com/AdmiralDS/react-ui/commit/15aa950c0126ab90885effb3e59230a51c555a54))
+
 ### [8.28.2](https://github.com/AdmiralDS/react-ui/compare/v8.28.1...v8.28.2) (2024-11-28)
 
 
