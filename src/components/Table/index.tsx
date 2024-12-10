@@ -226,11 +226,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     }, [setScrollbarSize]);
 
     React.useLayoutEffect(() => {
-      const scrollBody = scrollBodyRef.current;
+      // const scrollBody = scrollBodyRef.current;
+      const scrollBody = tableRef.current;
 
-      function scrollHeader(scrollLeft: number) {
-        if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
-      }
+      // function scrollHeader(scrollLeft: number) {
+      //   if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
+      // }
 
       function moveOverflowMenu(scrollLeft: number) {
         if (scrollBodyRef.current) {
@@ -262,7 +263,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       function handleScroll(e: any) {
         if (e.target === scrollBodyRef.current) {
           requestAnimationFrame(function () {
-            scrollHeader(e.target.scrollLeft);
+            // scrollHeader(e.target.scrollLeft);
             moveOverflowMenu(e.target.scrollLeft);
           });
         }
@@ -589,7 +590,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderHiddenHeader = () => {
       return (
-        <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
+        <HiddenHeader ref={hiddenHeaderRef}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
@@ -624,12 +625,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         className={`table ${props.className || ''}`}
       >
         {renderHiddenHeader()}
-        <HeaderWrapper
-          $scrollbar={scrollbar}
-          $greyHeader={greyHeader}
-          data-verticalscroll={verticalScroll}
-          className="thead"
-        >
+        <HeaderWrapper $greyHeader={greyHeader} className="thead">
           <Header $dimension={dimension} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>

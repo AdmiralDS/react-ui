@@ -31,6 +31,7 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  overflow: auto;
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
@@ -98,32 +99,13 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div<{ $greyHeader?: boolean }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
+  flex: 1 1 auto;
   flex-direction: column;
-
-  &[data-verticalscroll='true'] {
-    &:after {
-      position: absolute;
-      content: '';
-      box-sizing: border-box;
-      top: 0;
-      right: 0;
-      height: 100%;
-      background: ${({ theme, $greyHeader }) =>
-        $greyHeader
-          ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
-          : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
-      width: ${({ $scrollbar }) => $scrollbar}px;
-      border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    }
-    & > div.tr {
-      overflow-y: scroll;
-    }
-  }
 
   ${({ $greyHeader }) =>
     $greyHeader &&
@@ -133,23 +115,43 @@ export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: bool
       }
     `}
 `;
+// &[data-verticalscroll='true'] {
+//   &:after {
+//     position: absolute;
+//     content: '';
+//     box-sizing: border-box;
+//     top: 0;
+//     right: 0;
+//     height: 100%;
+//     background: ${({ theme, $greyHeader }) =>
+//       $greyHeader
+//         ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+//         : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
+//     width: ${({ $scrollbar }) => $scrollbar}px;
+//     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+//   }
+//   & > div.tr {
+//     overflow-y: scroll;
+//   }
+// }
 
 export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   box-sizing: border-box;
   display: flex;
-  flex: 0 0 auto;
-  overflow-x: hidden;
-  ${headerStyle};
+  flex: 1 1 auto;
+  ${headerStyle}
 
   & > * {
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
+/* flex: 0 0 auto;
+  overflow-x: hidden; */
 
 export const ScrollTableBody = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /* overflow: auto; */
   flex: 1 1 auto;
 `;
 
@@ -495,11 +497,10 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
-
-  &[data-verticalscroll='true'] {
-    overflow-y: scroll;
-  }
 `;
+// &[data-verticalscroll='true'] {
+//   overflow-y: scroll;
+// }
 
 export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
