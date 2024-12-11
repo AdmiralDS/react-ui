@@ -225,6 +225,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       setScrollbarSize(size);
     }, [setScrollbarSize]);
 
+    // TODO: пока избавиться от доскролла заголовков и проверить, что всё красиво работает
     React.useLayoutEffect(() => {
       // const scrollBody = scrollBodyRef.current;
       const scrollBody = tableRef.current;

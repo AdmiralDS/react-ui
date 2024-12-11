@@ -107,6 +107,10 @@ export const HeaderWrapper = styled.div<{ $greyHeader?: boolean }>`
   flex: 1 1 auto;
   flex-direction: column;
 
+  position: sticky;
+  top: 1px;
+  z-index: 1;
+
   ${({ $greyHeader }) =>
     $greyHeader &&
     css`
