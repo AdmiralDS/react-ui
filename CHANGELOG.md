@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.29.1](https://github.com/AdmiralDS/react-ui/compare/v8.29.0...v8.29.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* **forwardRef:** correct wrong typings ([3ca7adb](https://github.com/AdmiralDS/react-ui/commit/3ca7adb07f46cdb9eb54ab97a8c84d78d00d4c3b))
+
 ## [8.29.0](https://github.com/AdmiralDS/react-ui/compare/v8.28.2...v8.29.0) (2024-12-08)
 
 
