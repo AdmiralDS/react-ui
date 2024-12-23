@@ -232,22 +232,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
       }
 
-      function moveOverflowMenu(scrollLeft: number) {
-        if (scrollBodyRef.current) {
-          const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
-          const scrollbarWidth = verticalScroll ? scrollbar : 0;
-          const headerScrollWidth = headerRef.current?.scrollWidth || tableWidth;
-
-          menus.forEach((menu) => {
-            if (scrollLeft <= headerScrollWidth - tableWidth + scrollbarWidth) {
-              menu.style.marginLeft = `${scrollLeft}px`;
-            } else {
-              menu.style.marginLeft = `${headerScrollWidth - tableWidth + scrollbarWidth}px`;
-            }
-          });
-        }
-      }
-
       function setShadow(scrollLeft: number) {
         if (tableRef.current) {
           const initial = tableRef.current.getAttribute('data-shadow');
@@ -263,7 +247,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         if (e.target === scrollBodyRef.current) {
           requestAnimationFrame(function () {
             scrollHeader(e.target.scrollLeft);
-            moveOverflowMenu(e.target.scrollLeft);
           });
         }
         if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
@@ -287,7 +270,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
           setBodyHeight(rect.height);
-          moveOverflowMenu(scrollBody.scrollLeft);
         });
         observer.observe();
 
@@ -522,14 +504,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           dimension={dimension}
           row={row}
           underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-          tableWidth={tableWidth}
           isGroup={isGroupRow}
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={rowWidth}
-          verticalScroll={verticalScroll}
-          scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
           showRowsActions={showRowsActions}
           rowStatusMap={rowStatusMap}

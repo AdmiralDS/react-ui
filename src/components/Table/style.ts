@@ -11,7 +11,6 @@ import {
   groupRowStyle,
   headerStyle,
   multiLineTitle,
-  overflowMenuStyle,
   rowBackground,
   rowStyle,
   singleLineTitle,
@@ -73,25 +72,6 @@ export const NormalWrapper = styled.div`
   display: flex;
 `;
 
-export const OverflowMenuWrapper = styled.div<{
-  $offset: number;
-  $dimension: TableProps['dimension'];
-  $showRowsActions?: boolean;
-}>`
-  will-change: margin-left;
-  transform: translate3d(0, 0, 0);
-  ${overflowMenuStyle};
-
-  ${({ $showRowsActions }) =>
-    !$showRowsActions &&
-    css`
-      visibility: hidden;
-      &:hover {
-        visibility: visible;
-      }
-    `}
-`;
-
 export const Filler = styled.div`
   display: flex;
   flex: 1 1 auto;
@@ -139,7 +119,7 @@ export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   flex: 0 0 auto;
   overflow-x: hidden;
-  ${headerStyle}
+  ${headerStyle};
 
   & > * {
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
@@ -377,15 +357,13 @@ const rowWidthStyle = css<{ $rowWidth?: string }>`
 
 const rowHoverMixin = css`
   cursor: pointer;
-  & > .tr-simple > *,
-  & ${OverflowMenuWrapper} {
+  & > .tr-simple > * {
     background: var(--admiral-color-Primary_Primary10, ${(p) => p.theme.color['Primary/Primary 10']});
   }
 `;
 
 const groupRowHoverMixin = css`
-  &[data-groupover='true'] > .tr-simple > *,
-  & ${OverflowMenuWrapper} {
+  &[data-groupover='true'] > .tr-simple > * {
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
@@ -430,8 +408,7 @@ export const SimpleRow = styled.div<{
   display: inline-flex;
   min-width: max-content;
 
-  & > *,
-  & + ${OverflowMenuWrapper} {
+  & > * {
     background: ${rowBackground};
   }
 
@@ -439,11 +416,11 @@ export const SimpleRow = styled.div<{
     !$showRowsActions &&
     css`
       &:hover {
-        & + ${OverflowMenuWrapper} {
+        & div[data-overflowmenu] {
           visibility: visible;
         }
       }
-      & + div[data-opened='true'] {
+      & div[data-overflowmenu][data-opened='true'] {
         visibility: visible;
       }
     `}
