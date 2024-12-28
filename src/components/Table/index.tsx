@@ -31,6 +31,7 @@ import {
   TableContainer,
   HiddenHeader,
   DragCell,
+  ShadowDetector,
 } from './style';
 import { FixedSizeBody, DynamicSizeBody } from './virtualScroll';
 import type {
@@ -102,7 +103,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
     const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-    const [verticalScroll, setVerticalScroll] = React.useState(false);
+    // const [verticalScroll, setVerticalScroll] = React.useState(false);
     const [tableWidth, setTableWidth] = React.useState(0);
     const [bodyHeight, setBodyHeight] = React.useState(0);
     const [scrollbar, setScrollbarSize] = React.useState(0);
@@ -130,6 +131,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const scrollBodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+    const shadowDetectorRef = React.useRef<HTMLDivElement>(null);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -226,72 +228,140 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     }, [setScrollbarSize]);
 
     React.useLayoutEffect(() => {
-      const scrollBody = scrollBodyRef.current;
+      // const scrollBody = scrollBodyRef.current;
+      const table = tableRef.current;
 
-      function scrollHeader(scrollLeft: number) {
-        if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
-      }
+      // function scrollHeader(scrollLeft: number) {
+      //   if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
+      // }
 
-      function setShadow(scrollLeft: number) {
-        if (tableRef.current) {
-          const initial = tableRef.current.getAttribute('data-shadow');
-          if (scrollLeft === 0) {
-            if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
-          } else {
-            if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
-          }
-        }
-      }
+      // function setShadow(scrollLeft: number) {
+      //   if (tableRef.current) {
+      //     const initial = tableRef.current.getAttribute('data-shadow');
+      //     if (scrollLeft === 0) {
+      //       if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
+      //     } else {
+      //       if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
+      //     }
+      //   }
+      // }
 
       function handleScroll(e: any) {
-        if (e.target === scrollBodyRef.current) {
-          requestAnimationFrame(function () {
-            scrollHeader(e.target.scrollLeft);
-          });
-        }
-        if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
-          requestAnimationFrame(function () {
-            setShadow(e.target.scrollLeft);
-          });
-        }
+        // if (e.target === scrollBodyRef.current) {
+        //   requestAnimationFrame(function () {
+        //     scrollHeader(e.target.scrollLeft);
+        //   });
+        // }
+        // if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
+        //   requestAnimationFrame(function () {
+        //     setShadow(e.target.scrollLeft);
+        //   });
+        // }
       }
 
-      if (scrollBody) {
-        scrollBody.addEventListener('scroll', handleScroll);
+      if (table) {
+        // table.addEventListener('scroll', handleScroll);
 
         // TODO: обдумать возможность замены на ResizeObserver
-        const observer = observeRect(scrollBody, (rect: any) => {
-          if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
-            setVerticalScroll(true);
-          } else {
-            setVerticalScroll(false);
-          }
+        const observer = observeRect(table, (rect: any) => {
+          // if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
+          //   setVerticalScroll(true);
+          // } else {
+          //   setVerticalScroll(false);
+          // }
           setTableWidth(rect.width);
           // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
-          setBodyHeight(rect.height);
+
+          // setBodyHeight(rect.height);
         });
         observer.observe();
 
         return () => {
-          scrollBody.removeEventListener('scroll', handleScroll);
+          // table.removeEventListener('scroll', handleScroll);
           observer.unobserve();
         };
       }
+
+      // if (scrollBody) {
+      //   scrollBody.addEventListener('scroll', handleScroll);
+
+      //   // TODO: обдумать возможность замены на ResizeObserver
+      //   const observer = observeRect(scrollBody, (rect: any) => {
+      //     if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
+      //       setVerticalScroll(true);
+      //     } else {
+      //       setVerticalScroll(false);
+      //     }
+      //     setTableWidth(rect.width);
+      //     // если изменился размер таблицы, то следует пересчитать ширину колонок
+      //     updateColumnsWidth();
+      //     setBodyHeight(rect.height);
+      //   });
+      //   observer.observe();
+
+      //   return () => {
+      //     scrollBody.removeEventListener('scroll', handleScroll);
+      //     observer.unobserve();
+      //   };
+      // }
     }, [
       tableRef.current,
       headerRef.current,
-      scrollBodyRef.current,
-      stickyColumns,
-      displayRowExpansionColumn,
-      displayRowSelectionColumn,
+      // scrollBodyRef.current,
+      // stickyColumns,
+      // displayRowExpansionColumn,
+      // displayRowSelectionColumn,
       tableWidth,
-      scrollbar,
-      verticalScroll,
+      // scrollbar,
+      // verticalScroll,
       setTableWidth,
-      setVerticalScroll,
-      setBodyHeight,
+      // setVerticalScroll,
+      // setBodyHeight,
     ]);
+
+    // scroll-triggered animation via IntersectionObserver
+    // TODO: research ways to implement scroll-driven animation via css and polyfill
+    React.useLayoutEffect(() => {
+      function handleIntersection([entry]: IntersectionObserverEntry[]) {
+        if (tableRef.current) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
+            tableRef.current.setAttribute('data-shadow', 'false');
+          } else {
+            tableRef.current.setAttribute('data-shadow', 'true');
+          }
+        }
+      }
+
+      const observer = new IntersectionObserver(handleIntersection, {
+        root: tableRef.current,
+        threshold: [0, 1.0],
+      });
+
+      if (
+        tableRef.current &&
+        shadowDetectorRef.current &&
+        (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn)
+      ) {
+        observer.observe(shadowDetectorRef.current);
+      }
+
+      return () => observer.disconnect();
+    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn]);
+
+    React.useLayoutEffect(() => {
+      const scrollBody = scrollBodyRef.current;
+
+      if (scrollBody) {
+        const resizeObserver = new ResizeObserver(() => {
+          setBodyHeight(scrollBody.getBoundingClientRect().height);
+        });
+        resizeObserver.observe(scrollBody);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [setBodyHeight]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -504,6 +574,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           dimension={dimension}
           row={row}
           underline={(isLastRow && showLastRowUnderline) || !isLastRow}
+          // underline={(isLastRow && showLastRowUnderline && !showBorders) || !isLastRow}
           isGroup={isGroupRow}
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
@@ -568,7 +639,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderHiddenHeader = () => {
       return (
-        <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
+        <HiddenHeader
+          ref={hiddenHeaderRef}
+          // data-verticalscroll={verticalScroll}
+        >
+          <ShadowDetector ref={shadowDetectorRef} />
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
@@ -605,11 +680,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {renderHiddenHeader()}
         <HeaderWrapper
           $scrollbar={scrollbar}
-          $greyHeader={greyHeader}
-          data-verticalscroll={verticalScroll}
+          // $greyHeader={greyHeader}
+          // data-verticalscroll={verticalScroll}
           className="thead"
         >
-          <Header $dimension={dimension} ref={headerRef} className="tr">
+          <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                 {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}

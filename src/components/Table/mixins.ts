@@ -3,7 +3,6 @@ import { typography } from '#src/components/Typography';
 import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-// padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
 export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
   padding: ${({ $dimension }) => {
     switch ($dimension) {
@@ -16,6 +15,22 @@ export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
       case 'm':
       default:
         return '10px 12px 9px 12px';
+    }
+  }};
+`;
+
+export const headerCellStyle = css<{ $dimension: TableProps['dimension'] }>`
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 's':
+        return '5px 12px';
+      case 'l':
+        return '11px 16px';
+      case 'xl':
+        return '15px 16px';
+      case 'm':
+      default:
+        return '9px 12px';
     }
   }};
 `;

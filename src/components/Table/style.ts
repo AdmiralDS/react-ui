@@ -6,6 +6,7 @@ import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
   cellStyle,
+  headerCellStyle,
   disabledRow,
   extraTextStyle,
   groupRowStyle,
@@ -30,23 +31,16 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  overflow: auto;
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
   }
 
+  // таблица по ширине вырастет на 2px, согласовать с Эльдаром
   &[data-borders='true'] {
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-      z-index: 6;
-      pointer-events: none;
-    }
+    border-left: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -78,58 +72,78 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div<{ $scrollbar: number }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
+  flex: 1 0 auto;
   flex-direction: column;
 
-  &[data-verticalscroll='true'] {
-    &:after {
-      position: absolute;
-      content: '';
-      box-sizing: border-box;
-      top: 0;
-      right: 0;
-      height: 100%;
-      background: ${({ theme, $greyHeader }) =>
-        $greyHeader
-          ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
-          : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
-      width: ${({ $scrollbar }) => $scrollbar}px;
-      border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    }
-    & > div.tr {
-      overflow-y: scroll;
-    }
-  }
-
-  ${({ $greyHeader }) =>
-    $greyHeader &&
-    css`
-      & > div.tr {
-        background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
-      }
-    `}
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `;
+// ${({ $greyHeader }) =>
+//   $greyHeader &&
+//   css`
+//     & > div.tr {
+//       background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
+//     }
+//   `}
 
-export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
+// &[data-verticalscroll='true'] {
+//   &:after {
+//     position: absolute;
+//     content: '';
+//     box-sizing: border-box;
+//     top: 0;
+//     right: 0;
+//     height: 100%;
+//     background: ${({ theme, $greyHeader }) =>
+//       $greyHeader
+//         ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
+//         : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
+//     width: ${({ $scrollbar }) => $scrollbar}px;
+//     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+//   }
+//   & > div.tr {
+//     overflow-y: scroll;
+//   }
+// }
+
+export const Header = styled.div<{
+  $dimension: TableProps['dimension'];
+  $greyHeader?: boolean;
+}>`
   box-sizing: border-box;
   display: flex;
-  flex: 0 0 auto;
-  overflow-x: hidden;
-  ${headerStyle};
+  /* flex: 0 0 auto; */
+  flex: 1 0 auto;
+  /* overflow-x: hidden; */
+  ${headerStyle}
 
   & > * {
+    border-top: 1px solid transparent;
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+
+    ${(p) =>
+      p.$greyHeader &&
+      css`
+        background: var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']});
+      `}
+  }
+  [data-borders='true'] & {
+    & > * {
+      border-top-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    }
   }
 `;
 
 export const ScrollTableBody = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /* overflow: auto; */
   flex: 1 1 auto;
 `;
 
@@ -229,6 +243,21 @@ export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }
         return '10px 12px 9px 12px';
     }
   }};
+  [data-borders='true'] & {
+    padding: ${({ $dimension }) => {
+      switch ($dimension) {
+        case 's':
+          return '5px 12px';
+        case 'l':
+          return '11px 16px';
+        case 'xl':
+          return '15px 16px';
+        case 'm':
+        default:
+          return '9px 12px';
+      }
+    }};
+  }
   border: none;
 `;
 
@@ -248,6 +277,21 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 12px 9px 12px';
     }
   }};
+  [data-borders='true'] & {
+    padding: ${({ $dimension }) => {
+      switch ($dimension) {
+        case 's':
+          return '5px 12px';
+        case 'l':
+          return '11px 16px';
+        case 'xl':
+          return '15px 16px';
+        case 'm':
+        default:
+          return '9px 12px';
+      }
+    }};
+  }
   border: none;
 `;
 
@@ -267,6 +311,21 @@ export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 8px 9px 8px';
     }
   }};
+  [data-borders='true'] & {
+    padding: ${({ $dimension }) => {
+      switch ($dimension) {
+        case 's':
+          return '5px 8px';
+        case 'l':
+          return '11px 12px';
+        case 'xl':
+          return '15px 12px';
+        case 'm':
+        default:
+          return '9px 8px';
+      }
+    }};
+  }
   border: none;
 `;
 
@@ -275,7 +334,7 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   display: inline-flex;
   box-sizing: border-box;
   flex: 0 0 auto;
-  ${cellStyle}
+  ${headerCellStyle}
   ${borderStyle}
   cursor: default;
   &[data-draggable='true'] {
@@ -283,6 +342,7 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   }
   align-items: flex-start;
 `;
+// ${cellStyle}
 
 export const HeaderCellContent = styled.div<{ $cellAlign: 'left' | 'right' }>`
   box-sizing: border-box;
@@ -472,11 +532,10 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
-
-  &[data-verticalscroll='true'] {
-    overflow-y: scroll;
-  }
 `;
+// &[data-verticalscroll='true'] {
+//   overflow-y: scroll;
+// }
 
 export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;
@@ -529,4 +588,9 @@ export const Spacer = styled.div`
   flex: 0 0 auto;
   will-change: min-height;
   transform: translate3d(0px, 0px, 0px);
+`;
+
+export const ShadowDetector = styled.div`
+  height: 100%;
+  width: 0;
 `;
