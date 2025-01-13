@@ -10,26 +10,41 @@ interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
+  tableRef: any;
 }
 
 export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
-  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, ...props }, ref) => {
-    const [scrollTop, setScrollTop] = React.useState(0);
+  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, tableRef, ...props }, ref) => {
+    const [scrollTop, setScrollTop] = React.useState(40);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+    // React.useEffect(() => {
+    //   function handleScroll(e: any) {
+    //     requestAnimationFrame(() => {
+    //       setScrollTop(e.target.scrollTop);
+    //     });
+    //   }
+
+    //   const scrollContainer = scrollContainerRef.current;
+    //   setScrollTop(scrollContainer?.scrollTop || 0);
+
+    //   scrollContainer?.addEventListener('scroll', handleScroll);
+    //   return () => scrollContainer?.removeEventListener('scroll', handleScroll);
+    // }, []);
 
     React.useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop);
+          setScrollTop(e.target.scrollTop + 40);
         });
       }
 
-      const scrollContainer = scrollContainerRef.current;
-      setScrollTop(scrollContainer?.scrollTop || 0);
+      const scrollContainer = tableRef.current;
+      setScrollTop((scrollContainer?.scrollTop || 0) + 40);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef]);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
     const rowNodes = React.useMemo(

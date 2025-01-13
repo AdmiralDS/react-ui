@@ -65,10 +65,18 @@ interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: TableProps['dimension'];
   row: any;
   showRowsActions: boolean;
-  bodyRef: React.RefObject<HTMLElement>;
+  tableRef: React.RefObject<HTMLElement>;
+  headerHeight: number;
 }
 
-export const OverflowMenu: React.FC<OverflowMenuProps> = ({ row, dimension, showRowsActions, bodyRef, ...props }) => {
+export const OverflowMenu: React.FC<OverflowMenuProps> = ({
+  row,
+  dimension,
+  showRowsActions,
+  tableRef,
+  headerHeight,
+  ...props
+}) => {
   const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
 
   const handleVisibilityChange = (isVisible: boolean) => {
@@ -92,18 +100,18 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({ row, dimension, show
   };
 
   React.useEffect(() => {
-    // TODO: change bodyRef on tableRef after scroll refactor
     const observer = new IntersectionObserver(handleIntersection, {
-      root: bodyRef.current,
+      root: tableRef.current,
+      rootMargin: `-${headerHeight || 0}px 0px 0px 0px`,
       threshold: [0, 1.0],
     });
 
-    if (bodyRef.current && oveflowMenuRef.current) {
+    if (tableRef.current && oveflowMenuRef.current) {
       observer.observe(oveflowMenuRef.current);
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [headerHeight]);
 
   const closeMenu = () => {
     const overflowMenuBtn = oveflowMenuRef.current?.querySelector(

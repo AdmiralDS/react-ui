@@ -28,8 +28,10 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
-  /** Ref на тело таблицы */
-  bodyRef: React.RefObject<HTMLElement>;
+  /** Ref на элемент таблицы */
+  tableRef: React.RefObject<HTMLElement>;
+  /** Высота хедера таблицы */
+  headerHeight: number;
 }
 
 export const RowWrapper = ({
@@ -45,7 +47,8 @@ export const RowWrapper = ({
   grey,
   showRowsActions,
   rowStatusMap,
-  bodyRef,
+  tableRef,
+  headerHeight,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -97,7 +100,8 @@ export const RowWrapper = ({
             row={row}
             onClick={handleOverflowMenuClick}
             showRowsActions={showRowsActions}
-            bodyRef={bodyRef}
+            tableRef={tableRef}
+            headerHeight={headerHeight}
           />
         )}
       </SimpleRow>

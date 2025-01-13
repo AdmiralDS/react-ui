@@ -6,7 +6,6 @@ import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
   cellStyle,
-  headerCellStyle,
   disabledRow,
   extraTextStyle,
   groupRowStyle,
@@ -37,10 +36,8 @@ export const TableContainer = styled.div`
     pointer-events: none;
   }
 
-  // таблица по ширине вырастет на 2px, согласовать с Эльдаром
   &[data-borders='true'] {
-    border-left: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -72,45 +69,19 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ $scrollbar: number }>`
+export const HeaderWrapper = styled.div`
   box-sizing: border-box;
   position: relative;
   display: flex;
-  /* flex: 0 0 auto; */
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   flex-direction: column;
 
   position: sticky;
   top: 0;
-  z-index: 1;
+  // bigger than overflow menu and actions
+  z-index: 6;
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
-// ${({ $greyHeader }) =>
-//   $greyHeader &&
-//   css`
-//     & > div.tr {
-//       background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
-//     }
-//   `}
-
-// &[data-verticalscroll='true'] {
-//   &:after {
-//     position: absolute;
-//     content: '';
-//     box-sizing: border-box;
-//     top: 0;
-//     right: 0;
-//     height: 100%;
-//     background: ${({ theme, $greyHeader }) =>
-//       $greyHeader
-//         ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
-//         : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
-//     width: ${({ $scrollbar }) => $scrollbar}px;
-//     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-//   }
-//   & > div.tr {
-//     overflow-y: scroll;
-//   }
-// }
 
 export const Header = styled.div<{
   $dimension: TableProps['dimension'];
@@ -124,7 +95,6 @@ export const Header = styled.div<{
   ${headerStyle}
 
   & > * {
-    border-top: 1px solid transparent;
     border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 
     ${(p) =>
@@ -132,11 +102,6 @@ export const Header = styled.div<{
       css`
         background: var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']});
       `}
-  }
-  [data-borders='true'] & {
-    & > * {
-      border-top-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    }
   }
 `;
 
@@ -243,21 +208,6 @@ export const CheckboxCell = styled(Cell)<{ $dimension: TableProps['dimension'] }
         return '10px 12px 9px 12px';
     }
   }};
-  [data-borders='true'] & {
-    padding: ${({ $dimension }) => {
-      switch ($dimension) {
-        case 's':
-          return '5px 12px';
-        case 'l':
-          return '11px 16px';
-        case 'xl':
-          return '15px 16px';
-        case 'm':
-        default:
-          return '9px 12px';
-      }
-    }};
-  }
   border: none;
 `;
 
@@ -277,21 +227,6 @@ export const ExpandCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 12px 9px 12px';
     }
   }};
-  [data-borders='true'] & {
-    padding: ${({ $dimension }) => {
-      switch ($dimension) {
-        case 's':
-          return '5px 12px';
-        case 'l':
-          return '11px 16px';
-        case 'xl':
-          return '15px 16px';
-        case 'm':
-        default:
-          return '9px 12px';
-      }
-    }};
-  }
   border: none;
 `;
 
@@ -311,21 +246,6 @@ export const DragCell = styled(Cell)<{ $dimension: TableProps['dimension'] }>`
         return '10px 8px 9px 8px';
     }
   }};
-  [data-borders='true'] & {
-    padding: ${({ $dimension }) => {
-      switch ($dimension) {
-        case 's':
-          return '5px 8px';
-        case 'l':
-          return '11px 12px';
-        case 'xl':
-          return '15px 12px';
-        case 'm':
-        default:
-          return '9px 8px';
-      }
-    }};
-  }
   border: none;
 `;
 
@@ -334,7 +254,7 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   display: inline-flex;
   box-sizing: border-box;
   flex: 0 0 auto;
-  ${headerCellStyle}
+  ${cellStyle}
   ${borderStyle}
   cursor: default;
   &[data-draggable='true'] {
@@ -342,7 +262,6 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   }
   align-items: flex-start;
 `;
-// ${cellStyle}
 
 export const HeaderCellContent = styled.div<{ $cellAlign: 'left' | 'right' }>`
   box-sizing: border-box;
@@ -533,9 +452,6 @@ export const HiddenHeader = styled.div`
   display: flex;
   overflow: hidden;
 `;
-// &[data-verticalscroll='true'] {
-//   overflow-y: scroll;
-// }
 
 export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
   position: fixed;

@@ -19,22 +19,6 @@ export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
   }};
 `;
 
-export const headerCellStyle = css<{ $dimension: TableProps['dimension'] }>`
-  padding: ${({ $dimension }) => {
-    switch ($dimension) {
-      case 's':
-        return '5px 12px';
-      case 'l':
-        return '11px 16px';
-      case 'xl':
-        return '15px 16px';
-      case 'm':
-      default:
-        return '9px 12px';
-    }
-  }};
-`;
-
 export const rowStyle = css<{ $dimension: TableProps['dimension'] }>`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   ${({ $dimension }) =>
