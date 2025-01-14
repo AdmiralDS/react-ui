@@ -847,8 +847,10 @@ describe('SearchSelect', () => {
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
       expect(dropDownOptionsAfterInput.length).toBe(1);
       dropDownOptionsAfterInput.forEach((option, ind) => {
-        if (ind === 2) expect(option).toHaveAttribute('data-hovered', 'true');
-        else expect(option).not.toHaveAttribute('data-hovered', 'true');
+        if (ind === 0) expect(option).toHaveAttribute('data-hovered', 'true');
+        else {
+          expect(option).not.toHaveAttribute('data-hovered', 'true');
+        }
       });
       await act(async () => {
         await user.type(inputELem, '{arrowdown}');
