@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.29.1",
+  "version": "8.29.2",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -40,7 +40,7 @@
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --disable-telemetry --output-dir docs",
+    "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
     "preview-storybook": "npx http-server ./docs",
     "release": "standard-version"
   },

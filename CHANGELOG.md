@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.29.2](https://github.com/AdmiralDS/react-ui/compare/v8.29.1...v8.29.2) (2025-01-14)
+
+
+### Bug Fixes
+
+* **ImageViewer:** исправлено обновление активной миниатюры в контроллируемом режиме ([3fa4a3e](https://github.com/AdmiralDS/react-ui/commit/3fa4a3e63ea209eadba7420b616bf5d5228e52bb))
+* **Select:** Исправлена ошибка неправильного выбора значений при нажатии на enter ([6a27798](https://github.com/AdmiralDS/react-ui/commit/6a27798ec3a9ef623f872a054004755f4f26c034))
+
 ### [8.29.1](https://github.com/AdmiralDS/react-ui/compare/v8.29.0...v8.29.1) (2024-12-20)
 
 

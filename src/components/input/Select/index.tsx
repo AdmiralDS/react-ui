@@ -385,6 +385,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
+    useEffect(() => {
+      if (activeItem) {
+        const item = dropDownModel.find((item) => item.id === activeItem);
+        if (!item) {
+          setActiveItem(undefined);
+        }
+      }
+    }, [dropDownModel, activeItem]);
+
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
