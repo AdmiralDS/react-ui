@@ -37,7 +37,7 @@ export const TableContainer = styled.div`
   }
 
   &[data-borders='true'] {
-    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    outline: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -73,14 +73,12 @@ export const HeaderWrapper = styled.div`
   box-sizing: border-box;
   position: relative;
   display: flex;
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   flex-direction: column;
-
   position: sticky;
   top: 0;
   // bigger than overflow menu and actions
   z-index: 6;
-  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
 `;
 
 export const Header = styled.div<{
@@ -89,26 +87,19 @@ export const Header = styled.div<{
 }>`
   box-sizing: border-box;
   display: flex;
-  /* flex: 0 0 auto; */
   flex: 1 0 auto;
-  /* overflow-x: hidden; */
+  min-width: fit-content;
   ${headerStyle}
-
-  & > * {
-    border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-
-    ${(p) =>
-      p.$greyHeader &&
-      css`
-        background: var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']});
-      `}
-  }
+  background: ${(p) =>
+    p.$greyHeader
+      ? `var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']})`
+      : `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
 export const ScrollTableBody = styled.div`
   display: flex;
   flex-direction: column;
-  /* overflow: auto; */
   flex: 1 1 auto;
 `;
 
@@ -507,6 +498,6 @@ export const Spacer = styled.div`
 `;
 
 export const ShadowDetector = styled.div`
-  height: 100%;
+  display: flex;
   width: 0;
 `;

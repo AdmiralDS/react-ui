@@ -505,8 +505,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <RowWrapper
           dimension={dimension}
           row={row}
-          underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-          // underline={(isLastRow && showLastRowUnderline && !showBorders) || !isLastRow}
+          underline={(isLastRow && showLastRowUnderline && !showBorders) || !isLastRow}
           isGroup={isGroupRow}
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
@@ -552,6 +551,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             ref={scrollBodyRef}
             className="tbody"
             tableRef={tableRef}
+            headerHeight={headerHeight}
           />
         ) : (
           <DynamicSizeBody
@@ -611,7 +611,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {...props}
         className={`table ${props.className || ''}`}
       >
-        <div style={{ position: 'absolute', top: '0', bottom: '0', left: '0', right: '0', border: '1px solid red' }} />
         {renderHiddenHeader()}
         <HeaderWrapper
           // $greyHeader={greyHeader}

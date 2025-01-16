@@ -11,10 +11,14 @@ interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
   tableRef: any;
+  headerHeight: number;
 }
 
 export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
-  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, tableRef, ...props }, ref) => {
+  (
+    { height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, tableRef, headerHeight, ...props },
+    ref,
+  ) => {
     const [scrollTop, setScrollTop] = React.useState(40);
     const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
