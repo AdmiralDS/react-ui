@@ -3,6 +3,8 @@ import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
+import { Separator } from '#src/components/input/Select/stories/styled';
+
 const OPTIONS = [
   {
     value: 'val1',
@@ -79,6 +81,11 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Так как компонент построен на нативном select, в выбранных значениях могут отображаться только те элементы,
+        которые переданы в качестве списка option
+      </T>
+      <Separator />
       <T font="Body/Body 2 Long" as="div">
         Внешняя фильтрация элементов по значению
       </T>
