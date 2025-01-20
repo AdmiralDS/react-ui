@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProgressStepper, Button } from '@admiral-ds/react-ui';
+import { ProgressStepper, Button, T } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   & > div {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -26,6 +26,13 @@ export const LocalePropTemplate = () => {
   const [activeStep, setActiveStep] = useState(0);
   return (
     <Wrapper>
+      <T font="Body/Body 1 Long" as="div">
+        В некоторых случаях может быть необходимо изменить значения текстовых констант для отдельных компонентов. Для
+        этого у компонентов, использующих текстовые константы, есть специальный параметр locale - объект, в котором
+        можно задать альтернативные значения текстовых констант, отличные от тех, что заданы в theme.locales. Текстовая
+        константа, заданная через пропс locale компонента имеет больший приоритет, чем та же константа, заданная в
+        theme.locale.
+      </T>
       <ProgressStepper
         steps={steps}
         activeStep={activeStep}

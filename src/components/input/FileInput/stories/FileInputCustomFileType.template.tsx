@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { FileInput, FileItem, fullWidthPositionMixin } from '@admiral-ds/react-ui';
+import { FileInput, FileItem, fullWidthPositionMixin, T } from '@admiral-ds/react-ui';
 import type { FileInputProps, FileAttributeProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PDFSolid.svg';
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
@@ -189,16 +189,23 @@ export const FileInputCustomFileTypeTemplate = ({
   };
 
   return (
-    <FileInput
-      dimension={dimension}
-      disabled={props.disabled}
-      width={width}
-      title="Добавьте файлы"
-      ref={inputRef}
-      onInput={handleChange}
-      files={fileList}
-    >
-      {renderFileList()}
-    </FileInput>
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Функцию загрузки файла можно “повесить” на другие компоненты, например, кнопки, сделав соответствующие текстовые
+        инструкции. В этом случае нужно воспользоваться методом renderCustomFileInput для отрисовки реакт-компонента.
+        Для отображения выбранных файлов можно использовать кастомные компоненты.
+      </T>
+      <FileInput
+        dimension={dimension}
+        disabled={props.disabled}
+        width={width}
+        title="Добавьте файлы"
+        ref={inputRef}
+        onInput={handleChange}
+        files={fileList}
+      >
+        {renderFileList()}
+      </FileInput>
+    </>
   );
 };
