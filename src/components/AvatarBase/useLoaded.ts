@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-export const useLoaded = (src: any) => {
-  const [loaded, setLoaded] = React.useState<'loaded' | 'error' | boolean>(false);
+export const useLoaded = (src: string | undefined) => {
+  const [loaded, setLoaded] = useState<'loaded' | 'error' | boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!src) return;
     setLoaded(false);
 

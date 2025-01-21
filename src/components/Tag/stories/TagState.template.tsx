@@ -4,6 +4,7 @@ import type { TagProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
+// eslint-disable-next-line no-console
 const clickHandler = () => console.log('click active tag');
 
 export const TagStateTemplate = ({

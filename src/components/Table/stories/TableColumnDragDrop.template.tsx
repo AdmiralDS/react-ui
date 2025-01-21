@@ -260,6 +260,12 @@ export const TableColumnDragDropTemplate = (props: TableProps) => {
     setCols(columns);
   };
 
+  const handleColumnDragEnd = (columnName: string) => {
+    const newIndex = cols.findIndex((col) => col.name === columnName);
+    // eslint-disable-next-line no-console
+    console.log('After drag&drop column with name ' + columnName + ' has index ' + newIndex + ' in columnList');
+  };
+
   const handleColumnDrag2 = (columnName: string, nextColumnName: string | null) => {
     const columns = [...cols2];
     const movedIndex = columns.findIndex((col) => col.name === columnName);
@@ -280,6 +286,7 @@ export const TableColumnDragDropTemplate = (props: TableProps) => {
         rowList={rowList}
         onColumnResize={handleResize}
         onColumnDrag={handleColumnDrag}
+        onColumnDragEnd={handleColumnDragEnd}
       />
       <Separator style={{ height: '40px' }} />
       <T font="Body/Body 2 Long">

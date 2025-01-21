@@ -14,6 +14,7 @@ export const SliderInputCustomisedTemplate = ({
       <SliderInput
         {...props}
         defaultValue="5.000"
+        // eslint-disable-next-line no-console
         onChange={(full, short, event) => console.log({ full, short, event })}
         suffix="$"
         thousand=","

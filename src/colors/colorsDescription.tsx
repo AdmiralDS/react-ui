@@ -227,7 +227,7 @@ export const COLORS: ColorsProps = {
       name: 'Modal',
       contrast: { light: '-', dark: '-' },
       description: 'Затемнение всего экрана при всплывающих окнах.',
-      opacity: '40%',
+      opacity: '60%',
     },
     'Opacity/Dark Static Hover': {
       name: 'Dark Static Hover',

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { MouseEventHandler } from 'react';
 
 import { uid } from '#src/components/common/uid';
@@ -8,7 +8,9 @@ import { BaseTab } from '#src/components/TabMenuComponent/tabs/BaseTab';
 
 export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
   ({ dimension = 'l', children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps, ref) => {
-    const idForTab = onSelectTab ? id : uid();
+    const [defaultId] = useState(uid());
+    const idForTab = onSelectTab && id ? id : defaultId;
+
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
       e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -21,13 +23,13 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
         role="tab"
         type="button"
         id={idForTab}
-        ref={onSelectTab ? ref : undefined}
+        ref={ref}
         data-tabid={tabId}
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
         $width="fit-content"
-        onClick={onSelectTab ? handleTabClick : undefined}
+        onClick={handleTabClick}
       >
         {children}
       </BaseTab>

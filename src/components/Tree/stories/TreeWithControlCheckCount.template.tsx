@@ -138,6 +138,7 @@ export const TreeWithControlCheckCountTemplate = (props: TreeProps) => {
   const [dataList, setDataList] = useState<TreeItemProps[]>(demo1_TreeModel);
   const [countSelected, setCountSelected] = useState(0);
   const changeTreeValues = (newDataList: Array<TreeItemProps>) => {
+    // eslint-disable-next-line no-console
     console.log(newDataList);
     const findChecked = (arr: Array<TreeItemProps>, checked: Array<string>) => {
       arr.forEach((el: TreeItemProps) => {

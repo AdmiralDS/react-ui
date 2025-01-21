@@ -323,6 +323,12 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
     setRows(tableRows);
   };
 
+  const handleRowDragEnd = (rowId: string) => {
+    const newIndex = rows.findIndex((row) => row.id === rowId);
+    // eslint-disable-next-line no-console
+    console.log('After drag&drop row with id ' + rowId + ' has index ' + newIndex + ' in rowList');
+  };
+
   const handleRowDrag2 = (rowId: string, nextRowId: string | null, groupRowId: string | null) => {
     // меняем строки местами
     const tableRows = [...rows2];
@@ -362,6 +368,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
         onColumnResize={handleResize}
         rowsDraggable
         onRowDrag={handleRowDrag}
+        onRowDragEnd={handleRowDragEnd}
       />
       <Separator />
       <T font="Body/Body 2 Long">Пример с группами строк</T>

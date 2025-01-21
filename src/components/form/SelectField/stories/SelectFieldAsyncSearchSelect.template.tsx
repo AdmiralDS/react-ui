@@ -61,6 +61,7 @@ export const SelectFieldAsyncSearchSelectTemplate = (props: SearchSelectFieldPro
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   React.useEffect(() => {
     function keyboardEventListener(e: KeyboardEvent) {
+      // eslint-disable-next-line no-console
       console.log(`Нативное событие ${e}`);
     }
     const inputNode = inputRef.current;
@@ -79,6 +80,7 @@ export const SelectFieldAsyncSearchSelectTemplate = (props: SearchSelectFieldPro
         isLoading={isLoading}
         onChange={onChange}
         onInputChange={onInputChange}
+        // eslint-disable-next-line no-console
         onInputKeyDown={(e) => console.log(e.key)}
         inputTargetRef={inputRef}
       >

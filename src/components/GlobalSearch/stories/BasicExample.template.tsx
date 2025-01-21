@@ -139,6 +139,7 @@ export const BasicExampleTemplate = ({
   }, [data]);
 
   const handleOnChange = (value: string) => {
+    // eslint-disable-next-line no-console
     console.log(`handleOnChange ${value}`);
     setSearchValue(value);
     setFilter(value);
@@ -146,6 +147,7 @@ export const BasicExampleTemplate = ({
 
   const handleSubmitButtonClick = () => {
     const value = searchValue;
+    // eslint-disable-next-line no-console
     console.log(`handleSubmitButtonClick ${value}`);
     setHistory((oldHistory) =>
       oldHistory.findIndex((elem) => elem.text === value) < 0 ? [{ value, text: value }, ...oldHistory] : oldHistory,

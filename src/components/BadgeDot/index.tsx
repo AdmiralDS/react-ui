@@ -26,14 +26,14 @@ const getSize = css<{ $dimension: BadgeDotDimension }>`
   ${({ $dimension }) => {
     switch ($dimension) {
       case 'l':
-        return 12;
+        return '12px';
       case 's':
-        return 8;
+        return '8px';
       case 'xs':
-        return 6;
+        return '6px';
       case 'm':
       default:
-        return 10;
+        return '10px';
     }
   }}
 `;
@@ -41,8 +41,8 @@ const getSize = css<{ $dimension: BadgeDotDimension }>`
 const Dot = styled.div<{ $dimension: BadgeDotDimension; $appearance: BadgeDotAppearance }>`
   position: relative;
   box-sizing: border-box;
-  width: ${getSize}px;
-  height: ${getSize}px;
+  width: ${getSize};
+  height: ${getSize};
   background: ${getBackground};
   border-radius: 50%;
 `;

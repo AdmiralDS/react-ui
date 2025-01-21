@@ -30,6 +30,7 @@ export const FileInputFieldBaseTemplate = ({
   const maxFilesNumber = 3;
 
   const handlePreviewIconClick = (file: File) => {
+    // eslint-disable-next-line no-console
     console.log(`Preview icon on file "${file.name}" was clicked`);
   };
 

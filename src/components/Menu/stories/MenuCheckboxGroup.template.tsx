@@ -149,6 +149,7 @@ export const MenuCheckboxGroupTemplate = ({
   }, [props.dimension, map, activeOption]);
 
   const handleSelectItem = (id: string) => {
+    // eslint-disable-next-line no-console
     console.log(`Option ${id} selected`);
     toggleCheck(id);
   };

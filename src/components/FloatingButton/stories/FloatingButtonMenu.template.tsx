@@ -17,6 +17,7 @@ export const FloatingButtonMenuTemplate = ({ icon, ...props }: FloatingButtonMen
     <Layout>
       <FloatingButtonMenu
         icon={icon ?? <EmailOutline />}
+        // eslint-disable-next-line no-console
         onOpenChange={(isOpen) => console.log(isOpen ? 'Open menu' : 'Close menu')}
         {...props}
       >

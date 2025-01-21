@@ -14,6 +14,7 @@ export const SliderInputTickMarksTemplate = ({
       <SliderInput
         {...props}
         defaultValue="15"
+        // eslint-disable-next-line no-console
         onChange={(full, short, event) => console.log({ full, short, event })}
         tickMarks={[5, 10, 15]}
       />

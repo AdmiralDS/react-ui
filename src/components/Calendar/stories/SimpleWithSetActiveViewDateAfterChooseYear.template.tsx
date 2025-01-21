@@ -16,12 +16,14 @@ export const SimpleWithSetActiveViewDateAfterChooseYearTemplate = (props: Calend
         {...props}
         selected={selected}
         currentActiveView={currentActiveView}
-        onDateIncreaseDecrease={(date: any) => {
+        onDateIncreaseDecrease={(date) => {
           setActiveViewDateScreen(null);
+          // eslint-disable-next-line no-console
           console.log(date, 'onIncreaseDecreaseDate');
         }}
-        onChange={(value: any) => {
-          setSelected(value);
+        onChange={(value) => {
+          setSelected(value as Date);
+          // eslint-disable-next-line no-console
           console.log(value, 'onChange');
         }}
         onYearSelect={() => {

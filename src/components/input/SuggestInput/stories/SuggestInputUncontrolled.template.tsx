@@ -12,6 +12,7 @@ export const SuggestInputUncontrolledTemplate = (props: SuggestInputProps) => {
       placeholder="numbers"
       dimension={props.dimension}
       onChange={(e) => {
+        // eslint-disable-next-line no-console
         console.log(e.target.value);
       }}
     />

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 export interface DropdownContextProps {
   addDropdown?: (newDropdown: React.RefObject<HTMLElement>) => void;
@@ -10,7 +10,7 @@ export interface DropdownContextProps {
   deactivateMenu?: (menuRef: React.RefObject<HTMLElement>) => void;
   currentActiveMenu: React.RefObject<HTMLElement> | undefined;
 }
-export const DropdownContext = React.createContext({} as DropdownContextProps);
+export const DropdownContext = createContext({} as DropdownContextProps);
 
 interface ProviderProps {
   children?: React.ReactNode;
@@ -19,31 +19,31 @@ interface ProviderProps {
 }
 
 export const DropdownProvider = ({ rootRef, ...props }: ProviderProps) => {
-  const [dropdowns, setDropdowns] = React.useState<React.RefObject<HTMLElement>[]>([]);
-  const [currentActiveMenu, setCurrentActiveMenu] = React.useState<React.RefObject<HTMLElement> | undefined>(undefined);
+  const [dropdowns, setDropdowns] = useState<React.RefObject<HTMLElement>[]>([]);
+  const [currentActiveMenu, setCurrentActiveMenu] = useState<React.RefObject<HTMLElement> | undefined>(undefined);
 
-  const activateMenu = React.useCallback((menuRef: React.RefObject<HTMLElement>) => {
+  const activateMenu = useCallback((menuRef: React.RefObject<HTMLElement>) => {
     setCurrentActiveMenu(menuRef);
   }, []);
 
-  const deactivateMenu = React.useCallback((menuRef: React.RefObject<HTMLElement>) => {
+  const deactivateMenu = useCallback((menuRef: React.RefObject<HTMLElement>) => {
     setCurrentActiveMenu((prevValue) => {
       return prevValue === menuRef ? undefined : prevValue;
     });
   }, []);
 
-  const removeDropdown = React.useCallback((removeDropdown: React.RefObject<HTMLElement>) => {
+  const removeDropdown = useCallback((removeDropdown: React.RefObject<HTMLElement>) => {
     setDropdowns((prevDrops) => {
       const index = prevDrops.indexOf(removeDropdown);
       return index > -1 ? prevDrops.slice(0, index) : prevDrops;
     });
   }, []);
 
-  const addDropdown = React.useCallback((newDropdown: React.RefObject<HTMLElement>) => {
+  const addDropdown = useCallback((newDropdown: React.RefObject<HTMLElement>) => {
     setDropdowns((prevDrops) => [...prevDrops, newDropdown]);
   }, []);
 
-  const providerValue = React.useMemo(
+  const providerValue = useMemo(
     () => ({
       addDropdown,
       removeDropdown,
@@ -67,7 +67,7 @@ export function useDropdown(dropdownRef: React.RefObject<HTMLElement>): Dropdown
     activateMenu,
     deactivateMenu,
     currentActiveMenu,
-  } = React.useContext(DropdownContext);
+  } = useContext(DropdownContext);
 
   const dropdownIndex = dropdowns.indexOf(dropdownRef);
   const childrenDropdowns = dropdownIndex > -1 ? dropdowns.slice(dropdownIndex + 1, dropdowns.length) : [];

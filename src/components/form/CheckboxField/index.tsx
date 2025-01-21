@@ -23,9 +23,11 @@ export interface CheckboxFieldProps extends React.InputHTMLAttributes<HTMLInputE
   /** Состояние hover */
   hovered?: boolean;
 }
+
 const StyledChekbox = styled(Checkbox)`
   margin-top: 2px;
 `;
+
 export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
   (
     {
@@ -74,6 +76,13 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
         readOnly={readOnly}
         style={style}
         {...fieldContainerProps}
+        onClick={(e) => {
+          // запрещает всплытие двойного клика
+          // https://css-tricks.com/when-a-click-is-not-just-a-click/#aa-checking-checkboxes
+          if ((e.target as HTMLElement).tagName !== 'INPUT') {
+            e.stopPropagation();
+          }
+        }}
       >
         <StyledChekbox
           {...props}

@@ -1,8 +1,7 @@
-import * as React from 'react';
-
 import type { AppearanceLink, Dimension } from './LinkComponent';
 import { LinkComponent } from './LinkComponent';
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '../common/polymorphicProps';
+import type { PolymorphicComponentPropsWithRef } from '../common/polymorphicProps';
+import { fixedForwardRef } from '../common/fixedForwardRef';
 
 export interface LinkProps {
   /** Текст ссылки */
@@ -23,11 +22,8 @@ export type LinkComponentType = (<C extends React.ElementType = 'a'>(
   displayName?: string | undefined;
 };
 
-export const Link: LinkComponentType = React.forwardRef(
-  <C extends React.ElementType = 'a'>(
-    { disabled = false, appearance = 'primary', dimension = 'm', as, ...props }: LinkPolymorphicProps<C>,
-    ref: PolymorphicRef<C>,
-  ) => {
+export const Link: LinkComponentType = fixedForwardRef(
+  ({ disabled = false, appearance = 'primary', dimension = 'm', as, ...props }, ref) => {
     return (
       <LinkComponent
         {...props}

@@ -25,6 +25,7 @@ export const SegmentedControlStateTemplate = ({
       <GroupWrapper key={'disable_' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button ' + (e.target as HTMLInputElement).value + ' selected')}
           {...props}
         >
@@ -46,6 +47,7 @@ export const SegmentedControlStateTemplate = ({
       <GroupWrapper key={'loading' + index}>
         <SegmentedControl
           appearance={appearance}
+          // eslint-disable-next-line no-console
           onChange={(e) => console.log('Button' + (e.target as HTMLInputElement).value + ' selected')}
           {...props}
         >

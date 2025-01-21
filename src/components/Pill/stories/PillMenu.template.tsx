@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, refSetter } from '@admiral-ds/react-ui';
@@ -109,10 +109,10 @@ interface PillMenuProps {
   options: Array<PillOptionProps>;
 }
 
-const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...props }, ref) => {
-  const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(options[0]);
+const PillMenu = forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...props }, ref) => {
+  const [selectedPill, setSelectedPill] = useState<PillOptionProps | undefined>(options[0]);
 
-  const model = React.useMemo(() => {
+  const model = useMemo(() => {
     return options.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -182,7 +182,10 @@ const items: Array<PillOptionProps> = [
 export const PillMenuTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+}: {
+  themeBorderKind?: BorderRadiusType;
+  CSSCustomProps?: boolean;
+}) => {
   return (
     <>
       <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>

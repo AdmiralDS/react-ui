@@ -1,6 +1,6 @@
 // https://www.totaltypescript.com/forwardref-with-generic-components
 
-import type { ReactNode, RefAttributes, Ref } from 'react';
+import type { RefAttributes, ForwardRefRenderFunction, PropsWithoutRef, ReactElement } from 'react';
 import { forwardRef } from 'react';
 
 /**
@@ -9,7 +9,7 @@ import { forwardRef } from 'react';
  * @returns
  */
 export function fixedForwardRef<T, P = object>(
-  render: (props: P, ref: Ref<T>) => ReactNode,
-): (props: P & RefAttributes<T>) => ReactNode {
-  return forwardRef(render) as any;
+  render: ForwardRefRenderFunction<T, PropsWithoutRef<P>>,
+): (props: P & RefAttributes<T>) => ReactElement {
+  return forwardRef(render) as (props: P & RefAttributes<T>) => ReactElement;
 }

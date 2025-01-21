@@ -1,8 +1,9 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import { Button, CategoryMenuItem, DropMenu, MenuItem, typography } from '@admiral-ds/react-ui';
+import type { DropMenuProps, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
-import type { DropMenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const WrapperVertical = styled.div`
   display: flex;
@@ -20,10 +21,13 @@ const Desc = styled.div`
 `;
 
 const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
+  // eslint-disable-next-line no-console
   console.log('onVisibilityChange with uncontrolled state');
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
@@ -100,8 +104,8 @@ const CATEGORIES = [
 ];
 
 export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
-  const model = React.useMemo(() => {
-    return CATEGORIES.reduce((acc: any, item: any) => {
+  const model = useMemo(() => {
+    return CATEGORIES.reduce((acc: MenuModelItemProps[], item) => {
       acc.push({
         id: item.id,
         render: (options: RenderOptionProps) => (
@@ -111,7 +115,7 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
         ),
       });
       return acc.concat(
-        item.content.map((subitem: any) => {
+        item.content.map((subitem) => {
           return {
             id: subitem.id,
             render: (options: RenderOptionProps) => (
@@ -130,8 +134,8 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
     }, []);
   }, [props.dimension]);
 
-  const [selected, setSelected] = React.useState<string | undefined>('');
-  const [active, setActive] = React.useState<string | undefined>('');
+  const [selected, setSelected] = useState<string | undefined>('');
+  const [active, setActive] = useState<string | undefined>('');
 
   return (
     <>
@@ -149,6 +153,7 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
           {...props}
           items={model}
           onSelectItem={(id) => {
+            // eslint-disable-next-line no-console
             console.log(`selected: ${id}`);
             setSelected(id);
           }}

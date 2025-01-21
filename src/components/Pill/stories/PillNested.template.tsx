@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { DropMenu, MenuItem, Pill, Pills, refSetter, smallGroupBorderRadius } from '@admiral-ds/react-ui';
-import type { Shape, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { ReactComponent as BurnSolid } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -128,7 +128,9 @@ const StyledPillIcon = styled.div<{ $status?: Status }>`
   }
 `;
 
+// eslint-disable-next-line no-console
 const leftPillClicked = () => console.log('Left nested pill clicked');
+// eslint-disable-next-line no-console
 const rightPillClicked = () => console.log('Right nested pill clicked');
 const itemsLeft: Array<PillOptionProps> = [
   {
@@ -187,10 +189,10 @@ interface PillMenuProps {
   options: Array<PillOptionProps>;
 }
 
-const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...props }, ref) => {
-  const [selectedPill, setSelectedPill] = React.useState<PillOptionProps | undefined>(options[0]);
+const PillMenu = forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...props }, ref) => {
+  const [selectedPill, setSelectedPill] = useState<PillOptionProps | undefined>(options[0]);
 
-  const model = React.useMemo(() => {
+  const model = useMemo(() => {
     return options.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -229,7 +231,10 @@ const PillMenu = React.forwardRef<HTMLDivElement, PillMenuProps>(({ options, ...
 export const PillNestedTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+}: {
+  themeBorderKind?: BorderRadiusType;
+  CSSCustomProps?: boolean;
+}) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>

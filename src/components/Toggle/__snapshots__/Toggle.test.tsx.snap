@@ -69,6 +69,8 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -219,6 +221,8 @@ exports[`Toggle should render component with disabled state 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -424,6 +428,8 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -571,6 +577,8 @@ exports[`Toggle should render component with left labelPosition 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -773,6 +781,8 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -920,6 +930,8 @@ exports[`Toggle should render component with required properties 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 36px;
@@ -1122,6 +1134,8 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 28px;
@@ -1269,6 +1283,8 @@ exports[`Toggle should render component with small dimension 1`] = `
 
 .c4 {
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
   flex-shrink: 0;
   width: 28px;

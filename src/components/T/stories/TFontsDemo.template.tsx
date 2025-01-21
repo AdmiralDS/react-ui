@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { DefaultFontColorName, LIGHT_THEME, T, TooltipHoc, typography } from '@admiral-ds/react-ui';
@@ -58,7 +58,7 @@ const CopyOutlineWrapper = styled.div`
   cursor: pointer;
 `;
 
-const CopyIcon = React.forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
+const CopyIcon = forwardRef<HTMLDivElement, { text: string }>(({ text }, ref) => {
   const theme = useTheme() || LIGHT_THEME;
   const copyToClipboard = () => {
     const el = document.createElement('textarea');
@@ -98,7 +98,7 @@ export const TFontsDemoTemplate = () => {
           </tr>
         </thead>
         <tbody>
-          {NEW_FONTS.map((item: any, index: number) => {
+          {NEW_FONTS.map((item, index: number) => {
             const text = `
             import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
@@ -132,7 +132,7 @@ export const TFontsDemoTemplate = () => {
                         <td>Шрифт:</td>
                         <td>{theme.fontFamily}</td>
                       </tr>
-                      {item.style.map((st: any, index: number) => (
+                      {item.style.map((st, index: number) => (
                         <tr key={index}>
                           <td>{st.name}</td>
                           <td>{st.value}</td>
@@ -160,7 +160,7 @@ export const TFontsDemoTemplate = () => {
           </tr>
         </thead>
         <tbody>
-          {FONTS.map((item: any, index: number) => {
+          {FONTS.map((item, index: number) => {
             const text = `
             import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
@@ -194,7 +194,7 @@ export const TFontsDemoTemplate = () => {
                         <td>Шрифт:</td>
                         <td>{theme.fontFamily}</td>
                       </tr>
-                      {item.style.map((st: any, index: number) => (
+                      {item.style.map((st, index: number) => (
                         <tr key={index}>
                           <td>{st.name}</td>
                           <td>{st.value}</td>

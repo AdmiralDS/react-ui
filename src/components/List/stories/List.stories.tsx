@@ -137,7 +137,7 @@ export const ListMarkerCustomExample = {
       },
       description: {
         story: `Пользователь может кастомизировать внешний вид и контент маркеров в списках с помощью параметра
-        markerCssMixin, задаваемого для компонентов OrderedList и UnorderedList.\n\n\ В компонентах 
+        markerCssMixin, задаваемого для компонентов OrderedList и UnorderedList.\n\n В компонентах 
         OrderedList и UnorderedList также специально введен css счётчик с именем admiral-list-counter. Пользователи
         могут опираться на значение данного счетчика для задания контента маркеров с использованием css
         функций counter() и counters().`,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
@@ -17,17 +17,25 @@ const DisplayBlock = styled.div`
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
 
 const logSelectedId = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 
-const items: Array<any> = [
+interface ItemProps {
+  id: string;
+  display: React.ReactNode;
+  disabled?: boolean;
+}
+const items: ItemProps[] = [
   {
     id: '1',
     display: 'Option one',
@@ -53,7 +61,7 @@ const items: Array<any> = [
 ];
 
 export const OverflowMenuOptionsTemplate = (props: OverflowMenuProps) => {
-  const model = React.useMemo(() => {
+  const model = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -65,7 +73,7 @@ export const OverflowMenuOptionsTemplate = (props: OverflowMenuProps) => {
     }));
   }, [props.dimension]);
 
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   return (
     <DisplayBlock>

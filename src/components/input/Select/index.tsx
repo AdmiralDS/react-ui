@@ -213,6 +213,8 @@ export interface SelectProps
   onSelectedChange?: (value: string | Array<string>) => void;
   /** Признак поднятия выбранных опций вверх списка */
   moveSelectedOnTop?: boolean;
+  /** Признак очищения введенного значения после выбора элемента в режиме "searchSelect" */
+  clearInputValueAfterSelect?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -271,6 +273,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       forceHideOverflowTooltip = false,
       onSelectedChange,
       moveSelectedOnTop,
+      clearInputValueAfterSelect = true,
       ...props
     },
     ref,
@@ -382,6 +385,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
+    useEffect(() => {
+      if (activeItem) {
+        const item = dropDownModel.find((item) => item.id === activeItem);
+        if (!item) {
+          setActiveItem(undefined);
+        }
+      }
+    }, [dropDownModel, activeItem]);
+
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -441,14 +453,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         if (!multiple) onCloseSelect();
 
-        if (searchValue && inputRef.current) {
+        if (searchValue && inputRef.current && clearInputValueAfterSelect) {
           changeInputData(inputRef.current, {
             value: '',
             selectionEnd: 0,
             selectionStart: 0,
           });
           const currentActiveItem = activeItem;
-          setActiveItem(undefined);
+          setActiveItem('');
           setTimeout(() => setActiveItem(currentActiveItem));
         }
       },
@@ -711,8 +723,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+        setPreseleceted('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
+
+    useEffect(() => {
+      if (preselected) setActiveItem('');
+    }, [preselected]);
+
+    useEffect(() => {
+      if (activeItem) setPreseleceted('');
+    }, [activeItem]);
 
     useEffect(() => {
       if (isSearchPanelOpen) {
@@ -866,7 +887,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={selectedValue}
-              onActivateItem={setActiveItem}
+              onActivateItem={(id) => setActiveItem(id || '')}
               onSelectItem={handleOptionSelect}
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}

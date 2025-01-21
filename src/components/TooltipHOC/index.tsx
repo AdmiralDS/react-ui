@@ -1,7 +1,9 @@
-import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
+
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
-import type { ITooltipProps } from '#src/components/Tooltip';
+import type { ITooltipProps, TooltipDimension } from '#src/components/Tooltip';
+import { fixedForwardRef } from '../common/fixedForwardRef';
 
 export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
@@ -20,25 +22,23 @@ export interface TooltipHocProps {
   tooltipRef?: React.Ref<HTMLDivElement>;
   /** Расположение тултипа */
   tooltipPosition?: ITooltipProps['tooltipPosition'];
+  /** Размер тултипа */
+  tooltipDimension?: TooltipDimension;
 }
 
-type WrappedComponentProps = {
-  forwardedRef?: any;
-};
-
-export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component: React.ComponentType<P>) {
-  const WrappedComponent = (props: P & TooltipHocProps & WrappedComponentProps) => {
-    const { forwardedRef, renderContent, container, withDelay, tooltipRef, tooltipPosition, ...wrappedCompProps } =
+export function TooltipHoc<T>(Component: React.ComponentType<T>) {
+  return fixedForwardRef<HTMLElement, T & TooltipHocProps>((props, ref) => {
+    const { renderContent, container, withDelay, tooltipRef, tooltipPosition, tooltipDimension, ...wrappedCompProps } =
       props;
     // Пустая строка, undefined, null и false не будут отображены
     const emptyContent = !renderContent() && renderContent() !== 0;
 
-    const anchorElementRef = React.useRef<any>(null);
-    const [visible, setVisible] = React.useState(false);
-    const [node, setNode] = React.useState<HTMLElement | null>(null);
-    const [timer, setTimer] = React.useState<ReturnType<typeof setTimeout>>();
+    const anchorElementRef = useRef<HTMLElement | null>(null);
+    const [visible, setVisible] = useState(false);
+    const [node, setNode] = useState<HTMLElement | null>(null);
+    const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
 
-    React.useEffect(() => {
+    useEffect(() => {
       function show() {
         setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
       }
@@ -63,21 +63,18 @@ export function TooltipHoc<P extends React.ComponentPropsWithRef<any>>(Component
 
     return (
       <>
-        <Component {...(wrappedCompProps as P & object)} ref={refSetter(forwardedRef, anchorElementRef, setNode)} />
+        <Component {...(wrappedCompProps as T & object)} ref={refSetter(ref, anchorElementRef, setNode)} />
         {visible && !emptyContent && (
           <Tooltip
             targetElement={anchorElementRef.current}
             renderContent={renderContent}
             container={container}
             tooltipPosition={tooltipPosition}
+            dimension={tooltipDimension}
             ref={tooltipRef}
           />
         )}
       </>
     );
-  };
-
-  return React.forwardRef<any, P & TooltipHocProps>((props: P & TooltipHocProps, ref) => {
-    return <WrappedComponent forwardedRef={ref} {...props} />;
   });
 }

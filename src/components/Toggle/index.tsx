@@ -9,10 +9,6 @@ import { hoverSizes, sizes, SLIDER_SIZE_M, SLIDER_SIZE_S, sliderSizes } from '#s
 import { keyboardKey } from '../common/keyboardKey';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
-  // /** Состояние компонента */
-  // checked?: boolean;
-  // /** Колбек на изменение состояния компонента */
-  // onChange?: ChangeEventHandler<HTMLInputElement>;
   /** Расположение подписи */
   labelPosition?: LabelPosition;
   /** Размер компонента */
@@ -129,6 +125,8 @@ const Slider = styled.span<{
   $faded?: boolean;
 }>`
   position: absolute;
+  top: 0;
+  left: 0;
   border-radius: ${BORDER_RADIUS};
   flex-shrink: 0;
   ${sizes}

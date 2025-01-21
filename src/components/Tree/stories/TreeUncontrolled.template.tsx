@@ -4,6 +4,7 @@ import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents
 import styled from 'styled-components';
 
 const handleNodeClick = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`clicked ${id}`);
 };
 

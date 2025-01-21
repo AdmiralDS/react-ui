@@ -263,6 +263,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если nextColumnName равен null, значит столбец передвигают в самый конец списка.
    */
   onColumnDrag?: (columnName: string, nextColumnName: string | null) => void;
+  /** Колбек, который срабатывает при завершении перетаскивания столбца внутри таблицы */
+  onColumnDragEnd?: (columnName: string) => void;
   /** Включение возможности drag & drop строк */
   rowsDraggable?: boolean;
   /** Колбек, который срабатывает при попытке перетащить строку таблицы на новое место.
@@ -274,6 +276,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
    * Если groupRowId равен null, то строка не принадлежит ни к какой группе.
    */
   onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
+  /** Колбек, который срабатывает при завершении перетаскивания строки внутри таблицы */
+  onRowDragEnd?: (rowId: string) => void;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,

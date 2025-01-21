@@ -6,6 +6,16 @@ import { Calendar } from '@admiral-ds/react-ui';
 export const SimpleWithFilterDateTemplate = ({ range, ...props }: CalendarPropType) => {
   const [selected, setSelected] = React.useState<Date | null>(null);
   const [endDate, setEndDate] = React.useState<Date | null>(null);
+
+  const handleChange = (value: Date | (Date | null)[] | null) => {
+    if (value === null || value instanceof Date) {
+      setSelected(value);
+    } else {
+      setSelected(value[0]);
+      setEndDate(value[1]);
+    }
+  };
+
   const isWeekday = (date: Date) => {
     const day = date.getDay();
     return day !== 0 && day !== 6;
@@ -18,22 +28,12 @@ export const SimpleWithFilterDateTemplate = ({ range, ...props }: CalendarPropTy
         startDate={selected}
         endDate={endDate}
         filterDate={isWeekday}
-        onChange={(value: any) => {
-          setSelected(value[0]);
-          setEndDate(value[1]);
-        }}
+        onChange={handleChange}
       />
     </>
   ) : (
     <>
-      <Calendar
-        {...props}
-        filterDate={isWeekday}
-        selected={selected}
-        onChange={(value: any) => {
-          setSelected(value);
-        }}
-      />
+      <Calendar {...props} filterDate={isWeekday} selected={selected} onChange={handleChange} />
     </>
   );
 };

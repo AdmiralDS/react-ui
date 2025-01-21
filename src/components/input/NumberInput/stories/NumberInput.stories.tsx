@@ -9,6 +9,7 @@ import { NumberInputDisabledTemplate } from './NumberInputDisabled.template';
 import { NumberInputMinMaxTemplate } from './NumberInputMinMax.template';
 import { NumberInputCustomisedTemplate } from './NumberInputCustomised.template';
 import { NumberInputControlledTemplate } from './NumberInputControlled.template';
+import { NumberInputSpacesTemplate } from './NumberInputSpaces.template';
 
 // Imports of text sources
 import NumberInputPlaygroundRaw from './NumberInputPlayground.template?raw';
@@ -16,6 +17,7 @@ import NumberInputDisabledRaw from './NumberInputDisabled.template?raw';
 import NumberInputMinMaxRaw from './NumberInputMinMax.template?raw';
 import NumberInputCustomisedRaw from './NumberInputCustomised.template?raw';
 import NumberInputControlledRaw from './NumberInputControlled.template?raw';
+import NumberInputSpacesRaw from './NumberInputSpaces.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -197,6 +199,29 @@ export const CustomExample = {
     },
   },
   name: 'NumberInput. Пример изменения настроек (suffix, precision, thousand).',
+};
+//</editor-fold>
+
+//<editor-fold desc="NumberInput. Пример скрытия пробелов.">
+const SpacesStory: StoryFn<typeof NumberInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <NumberInputSpacesTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const SpacesExample = {
+  render: SpacesStory,
+  parameters: {
+    docs: {
+      source: {
+        code: NumberInputSpacesRaw,
+      },
+      description: {
+        story: `Пользователь может с помощью параметров hideSpaceAfterPrefix и hideSpaceBeforeSuffix 
+        управлять видимостью пробелов после префикса и перед суффиксом соответственно. По умолчанию
+        после префикса перед значением инпута и перед суффиксом после значения инпута пробелы проставляются.`,
+      },
+    },
+  },
+  name: 'NumberInput. Пример скрытия пробелов.',
 };
 //</editor-fold>
 

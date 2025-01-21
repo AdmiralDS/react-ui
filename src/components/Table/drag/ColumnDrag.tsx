@@ -11,6 +11,7 @@ import { MirrorColumn } from '../style';
 type ColumnDragProps = {
   dimension: 'xl' | 'l' | 'm' | 's';
   onColumnDrag: TableProps['onColumnDrag'];
+  onColumnDragEnd: TableProps['onColumnDragEnd'];
   isAnyColumnDraggable: boolean;
   isAnyStickyColumnDraggable: boolean;
   tableRef: React.RefObject<HTMLElement>;
@@ -21,6 +22,7 @@ type ColumnDragProps = {
 
 export const ColumnDrag = ({
   onColumnDrag,
+  onColumnDragEnd,
   dimension,
   isAnyColumnDraggable,
   isAnyStickyColumnDraggable,
@@ -35,11 +37,13 @@ export const ColumnDrag = ({
 
   // save callback via useRef to not update dragObserver on each callback change
   const columnDragCallback = useRef(onColumnDrag);
+  const columnDragEndCallback = useRef(onColumnDragEnd);
   const columnMirrorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     columnDragCallback.current = onColumnDrag;
-  }, [onColumnDrag]);
+    columnDragEndCallback.current = onColumnDragEnd;
+  }, [onColumnDrag, onColumnDragEnd]);
 
   useEffect(() => {
     if (tableRef.current) {
@@ -96,8 +100,13 @@ export const ColumnDrag = ({
     function handleDragStart() {
       setColumnDragging(true);
     }
-    function handleDragEnd() {
+    function handleDragEnd(item: HTMLElement | null) {
       setColumnDragging(false);
+
+      const columnName = item?.dataset?.thColumn;
+      if (columnName) {
+        columnDragEndCallback.current?.(columnName);
+      }
     }
     function renderMirror(dragColumn: HTMLElement | null) {
       const title = dragColumn?.querySelector('[data-title]');
@@ -127,7 +136,7 @@ export const ColumnDrag = ({
           accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
             // column can be dragged only inside parent container
             if (target !== source) return false;
-            // can not place column before CheckboxCell or ExnandCell
+            // can not place column before CheckboxCell or ExpandCell
             if (sibling?.dataset.droppable == 'false') return false;
             return true;
           },

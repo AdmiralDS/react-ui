@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { MenuItem, OverflowMenu } from '@admiral-ds/react-ui';
@@ -17,17 +17,25 @@ const DisplayBlock = styled.div`
 
 const handleVisibilityChange = (isVisible: boolean) => {
   if (isVisible) {
+    // eslint-disable-next-line no-console
     console.log('Menu opened');
   } else {
+    // eslint-disable-next-line no-console
     console.log('Menu closed');
   }
 };
 
 const logSelectedId = (id: string) => {
+  // eslint-disable-next-line no-console
   console.log(`selected: ${id}`);
 };
 
-const items: Array<any> = [
+interface ItemProps {
+  id: string;
+  display: React.ReactNode;
+  disabled?: boolean;
+}
+const items: ItemProps[] = [
   {
     id: '1',
     display: 'Option one',
@@ -56,7 +64,7 @@ export const OverflowMenuSizesOrientationTemplate = (props: OverflowMenuProps) =
   const dimensionL = 'l';
   const dimensionM = 'm';
   const dimensionS = 's';
-  const modelL = React.useMemo(() => {
+  const modelL = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -67,7 +75,7 @@ export const OverflowMenuSizesOrientationTemplate = (props: OverflowMenuProps) =
       disabled: item.disabled,
     }));
   }, []);
-  const modelM = React.useMemo(() => {
+  const modelM = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -78,7 +86,7 @@ export const OverflowMenuSizesOrientationTemplate = (props: OverflowMenuProps) =
       disabled: item.id === '1',
     }));
   }, []);
-  const modelS = React.useMemo(() => {
+  const modelS = useMemo(() => {
     return items.map((item) => ({
       id: item.id,
       render: (options: RenderOptionProps) => (
@@ -89,7 +97,7 @@ export const OverflowMenuSizesOrientationTemplate = (props: OverflowMenuProps) =
       disabled: item.disabled,
     }));
   }, []);
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   return (
     <>

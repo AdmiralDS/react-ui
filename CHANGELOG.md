@@ -2,6 +2,134 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.29.2](https://github.com/AdmiralDS/react-ui/compare/v8.29.1...v8.29.2) (2025-01-14)
+
+
+### Bug Fixes
+
+* **ImageViewer:** исправлено обновление активной миниатюры в контроллируемом режиме ([3fa4a3e](https://github.com/AdmiralDS/react-ui/commit/3fa4a3e63ea209eadba7420b616bf5d5228e52bb))
+* **Select:** Исправлена ошибка неправильного выбора значений при нажатии на enter ([6a27798](https://github.com/AdmiralDS/react-ui/commit/6a27798ec3a9ef623f872a054004755f4f26c034))
+
+### [8.29.1](https://github.com/AdmiralDS/react-ui/compare/v8.29.0...v8.29.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* **forwardRef:** correct wrong typings ([3ca7adb](https://github.com/AdmiralDS/react-ui/commit/3ca7adb07f46cdb9eb54ab97a8c84d78d00d4c3b))
+
+## [8.29.0](https://github.com/AdmiralDS/react-ui/compare/v8.28.2...v8.29.0) (2024-12-08)
+
+
+### Features
+
+* **Carousel:** добавлена прокрутка свайпом ([5be04c0](https://github.com/AdmiralDS/react-ui/commit/5be04c0a08248583e97f05addbcb26a5ba4eef2d))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** [#1589](https://github.com/AdmiralDS/react-ui/issues/1589) исправлен баг с неправильным margin, в случае когда в компонент передана только одна крошка ([55b350e](https://github.com/AdmiralDS/react-ui/commit/55b350e014b649582a309c8aaeb9fc396d4d6519))
+* **HorizontalTab, CardTab, VerticalTab:** id компонента не должно меняться при каждом ререндере ([15aa950](https://github.com/AdmiralDS/react-ui/commit/15aa950c0126ab90885effb3e59230a51c555a54))
+
+### [8.28.2](https://github.com/AdmiralDS/react-ui/compare/v8.28.1...v8.28.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* **Hint:** базовые html-атрибуты прокидываются непосредственно на элемент подсказки ([69859b5](https://github.com/AdmiralDS/react-ui/commit/69859b5075a85cab4baea694a08dca67c125824e))
+
+### [8.28.1](https://github.com/AdmiralDS/react-ui/compare/v8.28.0...v8.28.1) (2024-11-22)
+
+
+### Bug Fixes
+
+* **ModalContent:** [#1583](https://github.com/AdmiralDS/react-ui/issues/1583) на react 17 + typescript 4 необходима дополнительная типизация children ([339a1b3](https://github.com/AdmiralDS/react-ui/commit/339a1b3d110461b3137ec5d9dfc82d4c07fc5896))
+
+## [8.28.0](https://github.com/AdmiralDS/react-ui/compare/v8.27.0...v8.28.0) (2024-11-22)
+
+
+### Features
+
+* **Select:** Добавлено свойство clearInputValueAfterSelect, отвечающее за очистку поля ввода после выбора элемента. По умолчанию значение true ([2911262](https://github.com/AdmiralDS/react-ui/commit/2911262df127cf6cf5e5c4738b2e455566986dbc)), closes [#1550](https://github.com/AdmiralDS/react-ui/issues/1550)
+
+
+### Bug Fixes
+
+* **Select:** Исправлена логика отображения опций в состоянии hovered и preselected ([3a18eec](https://github.com/AdmiralDS/react-ui/commit/3a18eec252f1ebcd0277c6f4f356d939b08967da)), closes [#1566](https://github.com/AdmiralDS/react-ui/issues/1566)
+
+## [8.27.0](https://github.com/AdmiralDS/react-ui/compare/v8.26.0...v8.27.0) (2024-11-14)
+
+
+### Features
+
+* **Table:** [#1568](https://github.com/AdmiralDS/react-ui/issues/1568) добавлены колбеки onColumnDragEnd и onRowDragEnd, срабатывающие при завершении drag drop ([25e5bc6](https://github.com/AdmiralDS/react-ui/commit/25e5bc6b9f3efe40ae35347c634f6b97c338f462))
+* **Theme:** [#1577](https://github.com/AdmiralDS/react-ui/issues/1577) в темной теме изменены значения css переменных  Neutral 00 и Neutral 05 ([44b3736](https://github.com/AdmiralDS/react-ui/commit/44b3736c4597613149ff200255df6fa241850eda))
+* **theme:** изменен токен 'Opacity/Modal' в светлой теме ([7a06839](https://github.com/AdmiralDS/react-ui/commit/7a068390f92bde15e80d47885b949c8447b903ba))
+* **TooltipHOC:** добавлен dimension для Tooltip ([081be87](https://github.com/AdmiralDS/react-ui/commit/081be87b2e163e0f9e31b9f2da58188ab2b5abe0))
+
+
+### Bug Fixes
+
+* **ImageViewer:** исправлена анимация ([fe6ef32](https://github.com/AdmiralDS/react-ui/commit/fe6ef32a83e4bb0f8787825ceea30f7f9dcb7458))
+* **ImageViewer:** при зуме колесиком мыши страница внизу не должна прокручиваться ([e0b69c6](https://github.com/AdmiralDS/react-ui/commit/e0b69c6e1fb98dff20747773e80fc9457e5699c6))
+* **ImageViewer:** размер тултипов изменен на S ([3f6b5cb](https://github.com/AdmiralDS/react-ui/commit/3f6b5cbaa67baacb4b6f2eca7cdf6462a3133dfe))
+
+## [8.26.0](https://github.com/AdmiralDS/react-ui/compare/v8.25.4...v8.26.0) (2024-11-01)
+
+
+### Features
+
+* **Chips:** добавлен вариант с Badge и кнопкой Close ([d5b9751](https://github.com/AdmiralDS/react-ui/commit/d5b97510864ef0a872d35797c65b108209d15b4f))
+* **ImageViewer:** добавлен новый компонент ([20bb501](https://github.com/AdmiralDS/react-ui/commit/20bb50151c1db03531903f791230d233e190c446))
+* **theme:** в темной теме изменены токены Neutral 00 и Neutral 05 ([4b63780](https://github.com/AdmiralDS/react-ui/commit/4b637803b9d0ef345b5c876decd298a30df1011b))
+
+
+### Bug Fixes
+
+* **Toggle:** fix slider position ([a3e9af0](https://github.com/AdmiralDS/react-ui/commit/a3e9af0982a77b69f697661cf84d1714a4163fb6))
+
+### [8.25.4](https://github.com/AdmiralDS/react-ui/compare/v8.25.3...v8.25.4) (2024-10-30)
+
+
+### Bug Fixes
+
+* **Menu:** [#1555](https://github.com/AdmiralDS/react-ui/issues/1555) срабатывает автоскролл при ховере над задизейбленной опцией ([fec09c3](https://github.com/AdmiralDS/react-ui/commit/fec09c3b9b5800cd15bcce70e1b86fff21fe4a57))
+* **TextArea:** [#1556](https://github.com/AdmiralDS/react-ui/issues/1556) кнопка очистки должна быть видимой только при заполненном поле ([7bb09a5](https://github.com/AdmiralDS/react-ui/commit/7bb09a51b72a9c29003669bc21d1ae510ea68fc6))
+
+### [8.25.3](https://github.com/AdmiralDS/react-ui/compare/v8.25.2...v8.25.3) (2024-10-28)
+
+
+### Bug Fixes
+
+* **BadgeDot:** [#1552](https://github.com/AdmiralDS/react-ui/issues/1552) исправлен баг с отсутствием размеров у компонента ([51733f7](https://github.com/AdmiralDS/react-ui/commit/51733f77abb292f1958f647488e92d2706e512b0))
+
+### [8.25.2](https://github.com/AdmiralDS/react-ui/compare/v8.25.1...v8.25.2) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Modal:** [#1545](https://github.com/AdmiralDS/react-ui/issues/1545) контейнер модалки должен быть максимальной ширины, даже если он пустой ([3cfa981](https://github.com/AdmiralDS/react-ui/commit/3cfa981d354065363da27279502475e4a8469004))
+
+### [8.25.1](https://github.com/AdmiralDS/react-ui/compare/v8.25.0...v8.25.1) (2024-10-18)
+
+## [8.25.0](https://github.com/AdmiralDS/react-ui/compare/v8.24.2...v8.25.0) (2024-10-15)
+
+
+### Features
+
+* **NumberInput:** [#1540](https://github.com/AdmiralDS/react-ui/issues/1540) добавлена возможность скрытия пробелов после префикса и перед суффиксом ([1d6947f](https://github.com/AdmiralDS/react-ui/commit/1d6947fab99db68f415d5ed1cea1977940533b32))
+
+
+### Bug Fixes
+
+* **Menu:** [#1539](https://github.com/AdmiralDS/react-ui/issues/1539) дважды проходит клик по MenuItemWithCheckbox ([9596c4c](https://github.com/AdmiralDS/react-ui/commit/9596c4cc3bede4ab9566c531629ed676facb339c))
+
+### [8.24.2](https://github.com/AdmiralDS/react-ui/compare/v8.24.1...v8.24.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* **Table:** [#1451](https://github.com/AdmiralDS/react-ui/issues/1451) исправлен баг с возникающими скачками при drag and drop столбцов ([e68113e](https://github.com/AdmiralDS/react-ui/commit/e68113ebde7ce877f3419071cf64d330cdceacf5))
+
 ### [8.24.1](https://github.com/AdmiralDS/react-ui/compare/v8.24.0...v8.24.1) (2024-10-04)
 
 

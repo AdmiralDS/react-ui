@@ -25,6 +25,7 @@ export const SuggestInputFilterTemplate = (props: SuggestInputProps) => {
 
   const handleSelectOption = (option: string) => {
     setValue(option);
+    // eslint-disable-next-line no-console
     console.log(`Selected option - ${option}`);
   };
 
@@ -51,6 +52,7 @@ export const SuggestInputFilterTemplate = (props: SuggestInputProps) => {
       onOptionSelect={handleSelectOption}
       options={options}
       onSearchButtonClick={() => {
+        // eslint-disable-next-line no-console
         console.log('search button click');
       }}
       displayClearIcon

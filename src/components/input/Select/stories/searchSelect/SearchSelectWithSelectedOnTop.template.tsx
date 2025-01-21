@@ -24,7 +24,7 @@ export const SearchSelectWithSelectedOnTopTemplate = ({
         {...props}
         placeholder={placeholder}
         multiple
-        moveSelectedOnTop
+        moveSelectedOnTop={moveSelectedOnTop}
         mode="searchSelect"
         dropContainerClassName="dropContainerClass"
       >

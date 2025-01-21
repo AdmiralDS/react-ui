@@ -26,6 +26,7 @@ export const NumberInputControlledTemplate = () => {
       <NumberInput
         value={value1}
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
           setValue1(event.target.value);
         }}
@@ -37,6 +38,7 @@ export const NumberInputControlledTemplate = () => {
       <NumberInput
         value={value2}
         onChange={(event) => {
+          // eslint-disable-next-line no-console
           console.log(event.target.value);
           setValue2(event.target.value);
           setSuffix(declOfNum(Number(clearValue(event.target.value, 0)), ['минута', 'минуты', 'минут']));

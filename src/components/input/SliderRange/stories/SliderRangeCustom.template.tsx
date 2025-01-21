@@ -4,7 +4,8 @@ import { SliderRange } from '@admiral-ds/react-ui';
 export const SliderRangeCustomTemplate = () => {
   return (
     <SliderRange
-      onChange={(value: any) => console.log(value)}
+      // eslint-disable-next-line no-console
+      onChange={(value: [{ str: string; num: number }, { str: string; num: number }]) => console.log(value)}
       minValue={10}
       maxValue={100}
       prefix={['From', 'To']}

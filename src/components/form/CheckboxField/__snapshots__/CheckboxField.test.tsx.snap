@@ -14,6 +14,7 @@ exports[`CheckboxField should render component with disabled state 1`] = `
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {
@@ -237,6 +238,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {
@@ -515,6 +517,7 @@ exports[`CheckboxField should render component with required properties 1`] = `
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {
@@ -735,6 +738,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   overflow: visible;
   width: 20px;
   height: 20px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {
@@ -1010,6 +1014,7 @@ exports[`CheckboxField should render component with small dimension 1`] = `
   overflow: visible;
   width: 16px;
   height: 16px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {
@@ -1230,6 +1235,7 @@ fieldset[data-dimension='s'] .c7.c7 {
   overflow: visible;
   width: 16px;
   height: 16px;
+  flex: 0 0 auto;
 }
 
 fieldset[data-dimension='s'] .c1 {

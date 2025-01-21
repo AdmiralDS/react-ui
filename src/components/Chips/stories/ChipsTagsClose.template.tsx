@@ -18,7 +18,7 @@ const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
 const listData = [
   { id: '1', label: 'Москва', disabled: false, selected: false },
   { id: '2', label: 'Тверь', disabled: false, selected: false },
-  { id: '3', label: 'Самара', disabled: false, selected: false },
+  { id: '3', label: 'Самара', disabled: false, selected: false, badge: 3 },
 ];
 
 export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
@@ -28,7 +28,12 @@ export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
     <>
       <WrapperChip $dimension={props.dimension}>
         {dataListM.map((item) => (
-          <Chips key={item.id} {...props} onClose={() => setDataM((prev) => prev.filter((d) => d.id !== item.id))}>
+          <Chips
+            key={item.id}
+            {...props}
+            badge={item.badge || props.badge}
+            onClose={() => setDataM((prev) => prev.filter((d) => d.id !== item.id))}
+          >
             {item.label}
           </Chips>
         ))}
@@ -40,6 +45,7 @@ export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
             key={item.id}
             {...props}
             dimension="s"
+            badge={item.badge || props.badge}
             onClose={() => setDataS((prev) => prev.filter((d) => d.id !== item.id))}
           >
             {item.label}

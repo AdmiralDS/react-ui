@@ -1,8 +1,7 @@
-import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { Pill, Pills } from '@admiral-ds/react-ui';
-import type { Color, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HeartOutline } from '@admiral-ds/icons/build/category/HeartOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -82,7 +81,10 @@ const StatusPill = styled(Pill).attrs<{ $status?: Status; 'data-status'?: Status
 export const PillSimpleTemplate = ({
   themeBorderKind,
   CSSCustomProps,
-}: any & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+}: {
+  themeBorderKind?: BorderRadiusType;
+  CSSCustomProps?: boolean;
+}) => {
   return (
     <>
       <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
