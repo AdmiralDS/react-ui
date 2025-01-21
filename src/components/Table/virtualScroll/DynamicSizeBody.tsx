@@ -1,6 +1,5 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
 import type { ReactNode } from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
 import { ScrollTableBody, Spacer } from '../style';
 import type { RowId } from '../types';
@@ -20,21 +19,40 @@ type Cache = {
 };
 
 interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  height: number;
+  // height: number;
+  tableHeight: number;
+  headerHeight: number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => ReactNode;
   renderEmptyMessage?: () => ReactNode;
   estimatedRowHeight?: (index: number) => number;
+  tableRef: any;
 }
 
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
-  ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
+  (
+    {
+      rowList,
+      tableHeight,
+      headerHeight,
+      renderAhead = 20,
+      renderRow,
+      renderEmptyMessage,
+      estimatedRowHeight = () => 40,
+      tableRef,
+    },
+    ref,
+  ) => {
     const [measurementCache, setMeasurementCache] = useState<Cache>({});
-    const [scrollTop, setScrollTop] = useState(0);
+    const [scrollTop, setScrollTop] = useState(headerHeight);
+    const [height, setHeight] = useState(tableHeight - headerHeight);
 
-    const scrollElementRef = useRef<HTMLDivElement>(null);
     const measurementCacheRef = useRef<Cache>(measurementCache);
+
+    useEffect(() => {
+      setHeight(tableHeight - headerHeight);
+    }, [tableHeight, headerHeight]);
 
     useLayoutEffect(() => {
       measurementCacheRef.current = measurementCache;
@@ -51,16 +69,16 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop);
+          setScrollTop(e.target.scrollTop + headerHeight);
         });
       }
 
-      const scrollContainer = scrollElementRef.current;
-      setScrollTop(scrollContainer?.scrollTop || 0);
+      const scrollContainer = tableRef.current;
+      setScrollTop((scrollContainer?.scrollTop || 0) + headerHeight);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef, headerHeight]);
 
     const { allItems, totalHeight } = useMemo(() => {
       let totalHeight = 0;
@@ -121,7 +139,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     };
 
     return (
-      <ScrollTableBody ref={refSetter(ref, scrollElementRef)} style={{ height }}>
+      <ScrollTableBody ref={ref} style={{ height }}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
       </ScrollTableBody>
     );

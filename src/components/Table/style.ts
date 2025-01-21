@@ -71,10 +71,7 @@ export const Filler = styled.div`
 
 export const HeaderWrapper = styled.div`
   box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
+  width: 100%;
   position: sticky;
   top: 0;
   // bigger than overflow menu and actions

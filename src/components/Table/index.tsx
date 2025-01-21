@@ -103,7 +103,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
     const [tableWidth, setTableWidth] = React.useState(0);
-    const [bodyHeight, setBodyHeight] = React.useState(0);
+    const [tableHeight, setTableHeight] = React.useState(0);
     const [headerHeight, setHeaderHeight] = React.useState(0);
 
     const stickyColumns = [...columnList].filter((col) => col.sticky);
@@ -126,6 +126,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
     const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
+    // В drag&drop зачем передается?
     const scrollBodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -208,6 +209,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       updateHeaderScrollWidth();
     };
 
+    // check column size updates
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
@@ -227,6 +229,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         // TODO: обдумать возможность замены на ResizeObserver
         const observer = observeRect(table, (rect: any) => {
           setTableWidth(rect.width);
+          setTableHeight(rect.height);
           // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
         });
@@ -236,7 +239,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           observer.unobserve();
         };
       }
-    }, [tableRef.current, headerRef.current, tableWidth, setTableWidth]);
+    }, [tableRef.current, headerRef.current, tableWidth, setTableWidth, setTableHeight]);
 
     // scroll-triggered shadow animation via IntersectionObserver
     // TODO: research ways to implement scroll-driven animation via css and polyfill
@@ -266,20 +269,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       return () => observer.disconnect();
     }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn]);
-
-    React.useLayoutEffect(() => {
-      const scrollBody = scrollBodyRef.current;
-
-      if (scrollBody) {
-        const resizeObserver = new ResizeObserver(() => {
-          setBodyHeight(scrollBody.getBoundingClientRect().height);
-        });
-        resizeObserver.observe(scrollBody);
-        return () => {
-          resizeObserver.disconnect();
-        };
-      }
-    }, [setBodyHeight]);
 
     React.useLayoutEffect(() => {
       const header = headerRef.current;
@@ -543,7 +532,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return virtualScroll && (virtualScroll.fixedRowHeight || virtualScroll.estimatedRowHeight) ? (
         virtualScroll.fixedRowHeight ? (
           <FixedSizeBody
-            height={bodyHeight}
+            // height={bodyHeight}
             rowList={tableRows}
             childHeight={virtualScroll.fixedRowHeight}
             renderRow={renderRow}
@@ -551,11 +540,15 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             ref={scrollBodyRef}
             className="tbody"
             tableRef={tableRef}
+            tableHeight={tableHeight}
             headerHeight={headerHeight}
           />
         ) : (
           <DynamicSizeBody
-            height={bodyHeight}
+            // height={bodyHeight}
+            tableRef={tableRef}
+            tableHeight={tableHeight}
+            headerHeight={headerHeight}
             rowList={tableRows}
             renderRow={renderRow}
             renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
@@ -573,10 +566,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderHiddenHeader = () => {
       return (
-        <HiddenHeader
-          ref={hiddenHeaderRef}
-          // data-verticalscroll={verticalScroll}
-        >
+        <HiddenHeader ref={hiddenHeaderRef}>
           <ShadowDetector ref={shadowDetectorRef} />
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
@@ -612,10 +602,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         className={`table ${props.className || ''}`}
       >
         {renderHiddenHeader()}
-        <HeaderWrapper
-          // $greyHeader={greyHeader}
-          className="thead"
-        >
+        <HeaderWrapper className="thead">
           <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
