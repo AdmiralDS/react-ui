@@ -272,7 +272,8 @@ export const TableFilterTemplate = (props: TableProps) => {
         Для того чтобы задать фильтр для столбца достаточно задать для него параметр <code>renderFilter</code> -
         функцию, которая будет отрисовывать содержимое меню фильтра. Данная функция имеет в качестве входных параметров
         объект столбца и объект с двумя свойствами:
-        <OrderedList>
+        <Separator />
+        <OrderedList dimension="s">
           <ListItem>
             <code>closeMenu</code> - колбек, при вызове которого происходит закрытие меню фильтра;
           </ListItem>
