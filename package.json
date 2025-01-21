@@ -41,7 +41,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
-    "preview-storybook": "npx http-server ./docs",
+    "preview-storybook": "npx http-server ./docs/current",
     "release": "standard-version"
   },
   "peerDependencies": {
