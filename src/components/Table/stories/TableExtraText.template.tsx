@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -210,6 +213,16 @@ export const TableExtraTextTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        При необходимости в заголовке таблицы можно включать дополнительный текст с помощью параметра{' '}
+        <code>extraText</code>. Дополнительный текст по умолчанию выводится в одну строку и при нехватке места
+        сокращается с помощью троеточия. Увеличить высоту дополнительного текста можно с помощью параметра{' '}
+        <code>headerExtraLineClamp</code>, который определяет максимальное количество строк, которое может занимать
+        дополнительный текст. В примере ниже используется <code>headerExtraLineClamp</code> равный 2.
+      </T>
+      <Separator />
+      <Table {...props} rowList={rowList} columnList={cols} headerExtraLineClamp={2} onColumnResize={handleResize} />
+    </>
   );
 };

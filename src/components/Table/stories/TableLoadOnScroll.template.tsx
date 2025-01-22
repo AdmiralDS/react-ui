@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { Table } from '@admiral-ds/react-ui';
+import { Table, T } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const columnList: Column[] = [
   {
@@ -91,14 +96,24 @@ export const TableLoadOnScrollTemplate = (props: TableProps) => {
     );
 
   return (
-    <Table
-      {...props}
-      ref={tableRef}
-      rowList={rows}
-      columnList={cols}
-      onColumnResize={handleResize}
-      renderRowWrapper={renderRowWrapper}
-      style={{ height: '300px', width: '450px' }}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пользователь может реализовать подгрузку новых строк по мере скролла тела таблицы, например, следующим образом.
+        С помощью функции <code>renderRowWrapper</code> можно создать элемент-обёртку над последней строкой в таблице, и
+        через <code>IntersectionObserver</code> отслеживать момент, когда элемент-обёртка станет видим в пределах тела
+        таблицы (т.е. момент доскролла до последней строки). Это событие будет являться триггером для загрузки новой
+        порции строк.
+      </T>
+      <Separator />
+      <Table
+        {...props}
+        ref={tableRef}
+        rowList={rows}
+        columnList={cols}
+        onColumnResize={handleResize}
+        renderRowWrapper={renderRowWrapper}
+        style={{ height: '300px', width: '450px' }}
+      />
+    </>
   );
 };
