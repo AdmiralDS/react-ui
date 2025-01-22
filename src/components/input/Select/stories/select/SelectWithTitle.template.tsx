@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Option, Select } from '@admiral-ds/react-ui';
+import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
+
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 export const SelectWithTitleTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState(props.value ? String(props.value) : '');
@@ -12,6 +14,12 @@ export const SelectWithTitleTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Для того чтобы скрыть tooltip, отображаемый при переполнении, необходимо установить свойство{' '}
+        <code>forceHideOverflowTooltip</code> в значение <code>true</code>.<Separator $height={8} />
+        Title отображается стандартными средствами браузера, поэтому не кастомизируется.
+      </T>
+      <Separator />
       <Select
         {...props}
         title={selectValue}

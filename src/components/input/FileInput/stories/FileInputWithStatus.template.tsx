@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { FileInput, FileItem, fullWidthPositionMixin } from '@admiral-ds/react-ui';
+import { FileInput, FileItem, fullWidthPositionMixin, T } from '@admiral-ds/react-ui';
 import type { FileAttributeProps, FileInputProps } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
@@ -150,16 +150,22 @@ export const FileInputWithStatusTemplate = (props: FileInputProps) => {
   };
 
   return (
-    <FileInput
-      dimension={props.dimension}
-      disabled={props.disabled}
-      width={props.dimension === 'xl' ? '480px' : '288px'}
-      title={props.dimension === 'xl' ? `Загрузите файлы` : 'Добавьте файлы'}
-      ref={inputRef}
-      onInput={handleChange}
-      files={fileList}
-    >
-      {renderFileList()}
-    </FileInput>
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для отображения статуса загрузки файла или ошибки при валидации, компонент файла через параметр status принимает
+        состояния Uploaded, Loading, Error, Queue, а через параметр error - текст ошибки.
+      </T>
+      <FileInput
+        dimension={props.dimension}
+        disabled={props.disabled}
+        width={props.dimension === 'xl' ? '480px' : '288px'}
+        title={props.dimension === 'xl' ? `Загрузите файлы` : 'Добавьте файлы'}
+        ref={inputRef}
+        onInput={handleChange}
+        files={fileList}
+      >
+        {renderFileList()}
+      </FileInput>
+    </>
   );
 };

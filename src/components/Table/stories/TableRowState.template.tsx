@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, UnorderedList, ListItem } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow, Color } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -12,6 +12,9 @@ const AmountCell = styled.div`
       color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
+`;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 const numberFormatter = new Intl.NumberFormat();
@@ -157,15 +160,60 @@ export const TableRowStateTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rowList}
-      columnList={cols}
-      onColumnResize={handleResize}
-      rowBackgroundColorByStatusMap={{
-        attention: (color: Color) => color['Attention/Attention 20'],
-        warning: (color: Color) => color['Warning/Warning 20'],
-      }}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Для каждой строки помимо содержимого ячеек, <code>id</code> и <code>className</code>, можно задать следующие
+        состояния строки: <Separator />
+        <UnorderedList dimension="s">
+          <ListItem>
+            <code>selected</code> - строка выбрана, чекбокс в строке проставлен;
+          </ListItem>
+          <ListItem>
+            <code>disabled</code> - строка задизейблена;
+          </ListItem>
+          <ListItem>
+            <code>hover</code> - строка окрашивается при ховере. Данная окраска должна применяться, если строка
+            кликабельна и ведет к каким-либо действиям.
+          </ListItem>
+        </UnorderedList>
+        <Separator />
+        Также строке можно задать определенный статус, в соответствии с которым она будет окрашена. Чтобы задать статус
+        для строки необходимо использовать параметр <code>status</code>, где в качестве значения указывается строка с
+        названием статуса (например, <code>status='error'</code> или <code>status='success'</code>). По умолчанию
+        таблица предоставляет два статуса: <code>error</code> и <code>success</code>.<Separator />
+        Пользователь также имеет возможность задать для строки свои кастомные статусы. Для того чтобы задать кастомный
+        статус необходимо:
+        <Separator />
+        <UnorderedList dimension="s">
+          <ListItem>
+            Придумать строковое название статуса (например, <code>'attention'</code>) и определить, какой цвет строки
+            будет ему соответствовать (например, <code>Attention/Attention 20</code>). Рекомендуется использовать цвета
+            из палитры библиотеки с индексом контрастности 10 или 20.
+          </ListItem>
+          <ListItem>
+            В параметре таблицы <code>rowBackgroundColorByStatusMap</code> необходимо задать соответствие кастомного
+            статуса строки и её цвета. Для этого в качестве значения <code>rowBackgroundColorByStatusMap</code> нужно
+            указать объект, где ключом объекта должно быть название статуса, а значением свойства объекта должен быть
+            цвет строки, соответствующий данному статусу. Цвет можно задать либо в виде строки со значением цвета, либо
+            в виде функции, которая на вход получает объект <code>color</code> (равный <code>theme.color</code>, данный
+            объект стоит использовать, если цвет строки будет взят из темы) и возвращает строку со значением цвета.
+            Также с помощью параметра <code>rowBackgroundColorByStatusMap</code> можно перезадать дефолтные цвета строк
+            для статусов <code>error</code> и <code>success</code>.
+          </ListItem>
+          <ListItem>В параметре строки status задать название кастомного статуса.</ListItem>
+        </UnorderedList>
+      </T>
+      <Separator $height={24} />
+      <Table
+        {...props}
+        rowList={rowList}
+        columnList={cols}
+        onColumnResize={handleResize}
+        rowBackgroundColorByStatusMap={{
+          attention: (color: Color) => color['Attention/Attention 20'],
+          warning: (color: Color) => color['Warning/Warning 20'],
+        }}
+      />
+    </>
   );
 };
