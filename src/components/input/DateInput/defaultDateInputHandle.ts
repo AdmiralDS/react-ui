@@ -11,18 +11,6 @@ export const formatDate = (value: string) => {
   return `${DD}.${MM}.${YYYY}`;
 };
 
-const calcCursorPosition = (inputValue: string, selectionStart: number) => {
-  const underlinePos = inputValue.indexOf('_');
-  // selectionStart должен быть не менее 1, иначе маска не будет отображаться
-  const valueLength = underlinePos === -1 ? inputValue.length : underlinePos || 1;
-
-  if (selectionStart < valueLength) {
-    return inputValue.charAt(selectionStart - 1) === '.' ? selectionStart + 1 : selectionStart;
-  }
-
-  return valueLength;
-};
-
 export function defaultDateInputHandle(inputData: InputData | null): InputData {
   if (inputData === null) {
     return { value: MASK_VALUE, selectionStart: 0, selectionEnd: 0 };
@@ -37,7 +25,10 @@ export function defaultDateInputHandle(inputData: InputData | null): InputData {
 
   if (lengthDifference < 0) {
     inputValue = splice(inputValue, selectionStart, 0, MASK_VALUE.substr(selectionStart, -lengthDifference));
-    return { ...inputData, value: inputValue };
+    //при стирании символа и остановке курсора рядом с точкой двигаем курсор дальше
+    const cursorPos =
+      selectionStart > 0 && inputValue.charAt(selectionStart - 1) === '.' ? selectionStart - 1 : selectionStart;
+    return { ...inputData, value: inputValue, selectionStart: cursorPos, selectionEnd: cursorPos };
   }
 
   let addCount = 0;
@@ -55,7 +46,13 @@ export function defaultDateInputHandle(inputData: InputData | null): InputData {
 
   const clearValue = splice(inputValue, selectionStart + addCount, lengthDifference, '').replace(/[^\d_]/g, '');
   inputValue = formatDate(clearValue);
-  const cursorPos = calcCursorPosition(inputValue, selectionStart);
+
+  //При добавлении символа и остановке курсора в конечном значении инпута перед точкой, двигаем курсор впред.
+  //Дополнительно, если курсор после ввода символа пользователем остался перед точкой, то двигаем его дальше
+  let cursorPos = inputValue.charAt(selectionStart) === '.' ? selectionStart + 1 : selectionStart;
+  if (inputData.value?.charAt(inputData.selectionStart || 0) === '.') {
+    cursorPos += 1;
+  }
 
   return {
     ...inputData,
