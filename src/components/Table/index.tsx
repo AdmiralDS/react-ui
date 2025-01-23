@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { CheckboxField } from '#src/components/form';
-import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import type { Color } from '#src/components/themes';
@@ -222,54 +221,25 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       }
     }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
 
+    // check table size updates
     React.useLayoutEffect(() => {
       const table = tableRef.current;
 
       if (table) {
-        // TODO: обдумать возможность замены на ResizeObserver
-        const observer = observeRect(table, (rect: any) => {
-          setTableWidth(rect.width);
-          setTableHeight(rect.height);
+        const resizeObserver = new ResizeObserver(() => {
+          setTableWidth(table.getBoundingClientRect().width);
+          setTableHeight(table.getBoundingClientRect().height);
           // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
         });
-        observer.observe();
-
+        resizeObserver.observe(table);
         return () => {
-          observer.unobserve();
+          resizeObserver.disconnect();
         };
       }
-    }, [tableRef.current, headerRef.current, tableWidth, setTableWidth, setTableHeight]);
+    }, [setTableWidth, setTableHeight]);
 
-    // scroll-triggered shadow animation via IntersectionObserver
-    // TODO: research ways to implement scroll-driven animation via css and polyfill
-    React.useLayoutEffect(() => {
-      function handleIntersection([entry]: IntersectionObserverEntry[]) {
-        if (tableRef.current) {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
-            tableRef.current.setAttribute('data-shadow', 'false');
-          } else {
-            tableRef.current.setAttribute('data-shadow', 'true');
-          }
-        }
-      }
-
-      const observer = new IntersectionObserver(handleIntersection, {
-        root: tableRef.current,
-        threshold: [0, 1.0],
-      });
-
-      if (
-        tableRef.current &&
-        shadowDetectorRef.current &&
-        (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn)
-      ) {
-        observer.observe(shadowDetectorRef.current);
-      }
-
-      return () => observer.disconnect();
-    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn]);
-
+    // check header size updates
     React.useLayoutEffect(() => {
       const header = headerRef.current;
 
@@ -283,6 +253,33 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         };
       }
     }, [setHeaderHeight]);
+
+    // scroll-triggered shadow animation via IntersectionObserver
+    // TODO: research ways to implement scroll-driven animation via css and polyfill
+    React.useLayoutEffect(() => {
+      const table = tableRef.current;
+      const shadowDetector = shadowDetectorRef.current;
+      const enableShadow = stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn;
+
+      function handleIntersection([entry]: IntersectionObserverEntry[]) {
+        if (table) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
+            table.setAttribute('data-shadow', 'false');
+          } else {
+            table.setAttribute('data-shadow', 'true');
+          }
+        }
+      }
+
+      if (table && shadowDetector && enableShadow) {
+        const observer = new IntersectionObserver(handleIntersection, {
+          root: table,
+          threshold: [0, 1.0],
+        });
+        observer.observe(shadowDetector);
+        return () => observer.disconnect();
+      }
+    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =

@@ -19,7 +19,7 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     {
       tableHeight,
       childHeight,
-      renderAhead = 20,
+      renderAhead = 5,
       rowList,
       renderRow,
       renderEmptyMessage,
@@ -29,7 +29,7 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     },
     ref,
   ) => {
-    const [scrollTop, setScrollTop] = React.useState(headerHeight);
+    const [scrollTop, setScrollTop] = React.useState(0);
     const [height, setHeight] = React.useState(tableHeight - headerHeight);
 
     React.useEffect(() => {
@@ -39,16 +39,16 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     React.useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop + headerHeight);
+          setScrollTop(e.target.scrollTop);
         });
       }
 
       const scrollContainer = tableRef.current;
-      setScrollTop((scrollContainer?.scrollTop || 0) + headerHeight);
+      setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, [tableRef, headerHeight]);
+    }, [tableRef]);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
     const rowNodes = React.useMemo(

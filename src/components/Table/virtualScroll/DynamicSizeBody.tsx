@@ -45,7 +45,7 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     ref,
   ) => {
     const [measurementCache, setMeasurementCache] = useState<Cache>({});
-    const [scrollTop, setScrollTop] = useState(headerHeight);
+    const [scrollTop, setScrollTop] = useState(0);
     const [height, setHeight] = useState(tableHeight - headerHeight);
 
     const measurementCacheRef = useRef<Cache>(measurementCache);
@@ -69,16 +69,16 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop + headerHeight);
+          setScrollTop(e.target.scrollTop);
         });
       }
 
       const scrollContainer = tableRef.current;
-      setScrollTop((scrollContainer?.scrollTop || 0) + headerHeight);
+      setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, [tableRef, headerHeight]);
+    }, [tableRef]);
 
     const { allItems, totalHeight } = useMemo(() => {
       let totalHeight = 0;

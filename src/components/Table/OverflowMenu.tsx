@@ -89,17 +89,17 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
     }
   };
 
-  const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry: any) => {
+  React.useEffect(() => {
+    function handleIntersection([entry]: IntersectionObserverEntry[]) {
       if (!entry.isIntersecting) {
         /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая
          * меню, вышла из области видимости тела таблицы, н-р, в ходе вертикального скролла таблицы */
-        closeMenu();
+        const overflowMenuBtn = oveflowMenuRef.current?.querySelector(
+          `button[aria-haspopup='true'][aria-expanded='true']`,
+        ) as HTMLElement;
+        overflowMenuBtn?.click();
       }
-    });
-  };
-
-  React.useEffect(() => {
+    }
     const observer = new IntersectionObserver(handleIntersection, {
       root: tableRef.current,
       rootMargin: `-${headerHeight || 0}px 0px 0px 0px`,
@@ -112,13 +112,6 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
 
     return () => observer.disconnect();
   }, [headerHeight]);
-
-  const closeMenu = () => {
-    const overflowMenuBtn = oveflowMenuRef.current?.querySelector(
-      `button[aria-haspopup='true'][aria-expanded='true']`,
-    ) as HTMLElement;
-    overflowMenuBtn?.click();
-  };
 
   return (
     <OverflowMenuWrapper

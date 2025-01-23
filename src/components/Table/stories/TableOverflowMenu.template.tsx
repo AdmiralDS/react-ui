@@ -170,14 +170,7 @@ export const TableOverflowMenuTemplate = (props: TableProps) => {
     <>
       <T font="Body/Body 2 Long">Пример с иконками действий над строками, которые видны только по ховеру</T>
       <Separator />
-      <Table
-        {...props}
-        dimension="m"
-        rowList={rowList}
-        columnList={cols}
-        onColumnResize={handleResize}
-        style={{ maxHeight: '200px', width: '400px' }}
-      />
+      <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} />
       <Separator style={{ height: '40px' }} />
       <T font="Body/Body 2 Long">Пример с постоянно видимыми иконками действий над строками</T>
       <Separator />

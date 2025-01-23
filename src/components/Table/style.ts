@@ -37,7 +37,7 @@ export const TableContainer = styled.div`
   }
 
   &[data-borders='true'] {
-    outline: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
@@ -74,7 +74,6 @@ export const HeaderWrapper = styled.div`
   width: 100%;
   position: sticky;
   top: 0;
-  // bigger than overflow menu and actions
   z-index: 6;
 `;
 
