@@ -144,6 +144,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
         {...dropMenuProps}
         items={model}
         dimension="s"
+        virtualScroll={{ itemHeight: 'auto' }}
         alignSelf={menuWidth ? 'flex-end' : 'stretch'}
         disabled={disabled}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
