@@ -12,6 +12,7 @@ export interface AnchorItem {
   key: string;
   href: string;
   title: string;
+  level?: number;
   children?: Array<AnchorItem>;
 }
 
@@ -49,7 +50,13 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(({ dimension = 'm'
 
   const renderItems = () => {
     return items.map((item, index) => (
-      <AnchorItem key={item.key} dimension={dimension} href={item.href} active={index === currentItem}>
+      <AnchorItem
+        key={item.key}
+        dimension={dimension}
+        href={item.href}
+        active={index === currentItem}
+        level={item.level}
+      >
         {item.title}
       </AnchorItem>
     ));
