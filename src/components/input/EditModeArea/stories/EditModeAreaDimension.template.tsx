@@ -5,8 +5,8 @@ import type { BorderRadiusType, EditModeAreaProps } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 export const EditModeAreaDimensionTemplate = ({
@@ -24,6 +24,13 @@ export const EditModeAreaDimensionTemplate = ({
   };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div">
+        Компонент разработан в 4 размерах: S, M (имеют написание Regular и Bold) и XL, XXL (только Bold). Переключение
+        между Regular и Bold не изменяет размеры компонента.
+        <Separator $height={8} /> По умолчанию размер компонента M, для смены размера используйте параметр dimension.
+        Для переключения в написание Bold испольуйте одноименный параметр bold.
+      </T>
+      <Separator $height={24} />
       <T font="Body/Body 1 Long" as="div">
         Dimension - s
       </T>

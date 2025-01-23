@@ -138,12 +138,6 @@ export const SelectWithTitleExample = {
       source: {
         code: SelectWithTitleRaw,
       },
-      description: {
-        story:
-          'Для того чтобы скрыть tooltip, отображаемый при переполнении, необходимо установить свойство ' +
-          'forceHideOverflowTooltip={true}. Title является отображается стандартными средствами браузера, ' +
-          'поэтому не кастомизируется.',
-      },
     },
   },
 
@@ -169,11 +163,6 @@ export const CustomRenderValueExample = {
       source: {
         code: SelectCustomRenderValueRaw,
       },
-      description: {
-        story:
-          'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
-          'Туда передается функция, получающая выбранные значения, и, возвращающая отображаемый ReactNode',
-      },
     },
   },
 
@@ -198,11 +187,6 @@ export const CustomRenderMultipleValuesExample = {
     docs: {
       source: {
         code: SelectCustomRenderMultipleValuesRaw,
-      },
-      description: {
-        story:
-          'Для кастомного отображения выбранного значения необходимо использовать свойство renderSelectValue.' +
-          'Туда передается функция, получающая выбранные значения, и, возвращающая массив отображаемых ReactNode',
       },
     },
   },

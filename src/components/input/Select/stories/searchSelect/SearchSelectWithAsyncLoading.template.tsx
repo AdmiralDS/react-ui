@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { Option, Select, useDebounce } from '@admiral-ds/react-ui';
+import { Option, Select, useDebounce, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
+
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 async function searchPeopleByName(name: string) {
   const response = await fetch(
@@ -48,19 +50,25 @@ export const SearchSelectWithAsyncLoadingTemplate = (props: SelectProps) => {
   };
 
   return (
-    <Select
-      {...props}
-      value={selectValue}
-      isLoading={isLoading}
-      onChange={onChange}
-      onInputChange={onInputChange}
-      mode="searchSelect"
-    >
-      {options.map((option) => (
-        <Option key={option.value} value={option.value}>
-          {option.text}
-        </Option>
-      ))}
-    </Select>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пример демонстрирует подгрузку данных для селекта с фильтром по имени
+      </T>
+      <Separator />
+      <Select
+        {...props}
+        value={selectValue}
+        isLoading={isLoading}
+        onChange={onChange}
+        onInputChange={onInputChange}
+        mode="searchSelect"
+      >
+        {options.map((option) => (
+          <Option key={option.value} value={option.value}>
+            {option.text}
+          </Option>
+        ))}
+      </Select>
+    </>
   );
 };

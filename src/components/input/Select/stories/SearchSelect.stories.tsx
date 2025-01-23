@@ -146,9 +146,6 @@ export const SearchSelectWithFilter = {
       source: {
         code: SearchSelectWithFilterRaw,
       },
-      description: {
-        story: `Фильтрация списка опций осуществляется вызывающим кодом.\n\n В данном примере показан один из возможных способов`,
-      },
     },
   },
 };
@@ -187,9 +184,6 @@ export const RenderProps = {
       source: {
         code: SearchSelectRenderPropsRaw,
       },
-      description: {
-        story: 'Пример кастомизации select через renderProps',
-      },
     },
   },
 
@@ -210,12 +204,6 @@ export const LoadOnScroll = {
     docs: {
       source: {
         code: SearchSelectLoadOnScrollRaw,
-      },
-      description: {
-        story:
-          'Последним элементом списка опций select добавляется скрытый MenuItem, ' +
-          'который отслеживает прокрутку списка до конца, и сообщает об этом ' +
-          'вызывающему коду. По этому событию происходит изменение списка опций',
       },
     },
   },
@@ -304,9 +292,6 @@ export const AsyncSearchSelect = {
         code: SearchSelectWithAsyncLoadingRaw,
         source: { language: 'tsx' },
       },
-      description: {
-        story: 'Пример демонстрирует подгрузку данных для селекта с фильтром по имени',
-      },
     },
   },
 
@@ -389,12 +374,6 @@ export const ExpandedHeightMultiSearchSelect = {
       source: {
         code: SearchSelectExpandedHeightMultiRaw,
       },
-      description: {
-        story:
-          'Для ограничения высоты Select в режиме multiple необходимо использовать свойства maxRowCount и minRowCount. ' +
-          'В примере стоит ограничение maxRowCount=3. Ограничение работает для Select как в состоянии focused, так и в ' +
-          'состоянии, когда компонент не находится в фокусе',
-      },
     },
   },
 
@@ -415,13 +394,6 @@ export const CustomOptionMultiSearchSelect = {
     docs: {
       source: {
         code: SearchSelectCustomOptionMultiRaw,
-      },
-      description: {
-        story:
-          'При использовании кастомных опций, реализуемых через Option children, в режиме multiple, необходимо определить ' +
-          'у Option свойство renderChip, так как содержимое Chip и Tooltip формируется в методе renderChip, в противном ' +
-          'случае внутри Chip и Tooltip у компонента Chip будет отображаться тот же child, что указан в качестве дочернего ' +
-          'для Option.',
       },
     },
   },
@@ -462,11 +434,6 @@ export const ExternalFilter = {
       source: {
         code: SearchSelectExternalFilterRaw,
       },
-      description: {
-        story:
-          'Так как компонент построен на нативном select, в выбранных значениях могут отображаться только те элементы, ' +
-          'которые переданы в качестве списка option',
-      },
     },
   },
 
@@ -505,14 +472,6 @@ export const WithOnChangeHandler = {
       source: {
         code: SearchSelectWithOnClickHandlerTemplateRaw,
       },
-      description: {
-        story:
-          'Так как компонент построен на нативном select, при использовании нативного события onchange в режиме multiple ' +
-          'необходимо помнить, что в качестве event.target.value возвращается значение первой выбранной option из массива ' +
-          'выбранных опций. Поэтому для обработки этого события используйте event.selectedOptions или свойство option.selected. ' +
-          'Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает ' +
-          'выбранные опции в порядке их выбора пользователем',
-      },
     },
   },
 
@@ -534,13 +493,6 @@ export const WithSelectedOnTop = {
       args: {
         moveSelectedOnTop: true,
       },
-      description: {
-        story:
-          'Для вывода ранее выбранных пунктов сверху списка необходимо включить свойство `moveSelectedOnTop`\n' +
-          '- Непосредственно при выборе (или отмене выбора) перестроение не происходит\n' +
-          '- Выбранные строки отображаются сверху списка при повторном открытии меню\n' +
-          '- Выбранные строки сортируются в том же порядке, что и чипсы в поле ввода, то есть в порядке очередности выбора',
-      },
     },
   },
 
@@ -558,11 +510,6 @@ export const WithClearInput = {
     docs: {
       source: {
         code: SearchSelectWithClearInputTemplateRaw,
-      },
-      description: {
-        story:
-          'После выбора элемента значение, введенное для фильтрации очищается. Это поведение по умолчанию.\n' +
-          'Для того, чтобы изменить это поведение необходимо использовать свойтсво `clearInputValueAfterSelect`',
       },
     },
   },

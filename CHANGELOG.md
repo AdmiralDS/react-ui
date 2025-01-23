@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.29.3](https://github.com/AdmiralDS/react-ui/compare/v8.29.2...v8.29.3) (2025-01-22)
+
+
+### Bug Fixes
+
+* **DateInput:** [#1616](https://github.com/AdmiralDS/react-ui/issues/1616) переход на следующий символ при вводе не осуществляется ([c3c1b29](https://github.com/AdmiralDS/react-ui/commit/c3c1b2902747a7926084f2d0f312c207fd0d5114))
+
 ### [8.29.2](https://github.com/AdmiralDS/react-ui/compare/v8.29.1...v8.29.2) (2025-01-14)
 
 

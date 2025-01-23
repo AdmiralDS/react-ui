@@ -1,10 +1,14 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
-import { SelectField, Option } from '@admiral-ds/react-ui';
+import { SelectField, Option, T } from '@admiral-ds/react-ui';
 import type { SearchSelectFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 const OPTIONS = [
   'teeext 1',
@@ -40,6 +44,15 @@ export const SelectFieldSimpleTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div">
+        Селект с возможностью контекстного поиска среди вариантов.
+        <Separator />
+        Используется при большом количестве элементов в списке.
+        <Separator $height={16} /> При клике на любом месте поля (кроме иконки крестика) открывается меню выбора и
+        активируется поле ввода текста. Меню закрывается при повторном клике в поле, либо при клике вне компонента, либо
+        при выборе опции в меню.
+      </T>
+      <Separator $height={24} />
       <SelectField
         data-container-id="selectFieldIdOne"
         {...props}
