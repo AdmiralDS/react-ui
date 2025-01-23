@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { FileInput, FileItem, fullWidthPositionMixin, halfWidthPositionMixin } from '@admiral-ds/react-ui';
+import { FileInput, FileItem, fullWidthPositionMixin, halfWidthPositionMixin, T } from '@admiral-ds/react-ui';
 import type { FileAttributeProps, FileInputProps, InputStatus, BorderRadiusType } from '@admiral-ds/react-ui';
 
 import { uid } from '#src/components/common/uid';
@@ -109,6 +109,11 @@ export const FileInputBaseTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Компонент позволяет загружать файлы на сервер. Используется в двух вариантах - для загрузки одного или
+        нескольких файлов. Позволяет как загружать файлы через браузер файлов, так и через Drag and Drop (перетаскивание
+        файлов). Компонент можно изменять по ширине, минимальная ширина 320px.
+      </T>
       <FileInput
         dimension={dimension}
         disabled={props.disabled}

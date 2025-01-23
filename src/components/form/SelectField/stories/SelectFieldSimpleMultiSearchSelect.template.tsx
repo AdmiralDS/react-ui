@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { Option, SelectField, T } from '@admiral-ds/react-ui';
 import type { SearchSelectFieldProps } from '@admiral-ds/react-ui';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 24}px;
 `;
 
 type SearchFormat = 'word' | 'wholly';
@@ -64,9 +64,9 @@ export const SelectFieldSimpleMultiSearchSelectTemplate = (props: SearchSelectFi
 
   return (
     <>
-      <T font="Body/Body 2 Long" as="div">
-        Фильтрация элементов списка осуществляется вызывающим кодом
-        <br />В данном примере показан один из возможных способов
+      <T font="Body/Body 1 Long" as="div">
+        Фильтрация элементов списка осуществляется вызывающим кодом.
+        <Separator $height={8} />В данном примере показан один из возможных способов.
       </T>
       <Separator />
       <SelectField
