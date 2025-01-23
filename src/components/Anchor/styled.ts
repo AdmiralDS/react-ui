@@ -13,3 +13,4 @@ export const AnchorContainer = styled.div`
     content: ' ';
   }
 `;
+AnchorContainer.displayName = 'AnchorContainer';

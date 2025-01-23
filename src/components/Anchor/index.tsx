@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import { AnchorContainer } from './styled';
 import type { AnchorDimension } from './Item';
-import { Item } from './Item';
+import { AnchorItem } from './Item';
 
 export { AnchorDimension };
 
@@ -21,9 +21,9 @@ export interface AnchorProps extends HTMLAttributes<HTMLDivElement> {
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(({ dimension = 'm', items, ...props }, ref) => {
   const renderItems = () => {
     return items.map((item) => (
-      <Item key={item.key} dimension={dimension} href={item.href}>
+      <AnchorItem key={item.key} dimension={dimension} href={item.href}>
         {item.title}
-      </Item>
+      </AnchorItem>
     ));
   };
 
@@ -33,3 +33,4 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(({ dimension = 'm'
     </AnchorContainer>
   );
 });
+Anchor.displayName = 'Anchor';

@@ -5,7 +5,7 @@ import type { AnchorHTMLAttributes } from 'react';
 
 export type AnchorDimension = 'm' | 's';
 
-const Anchor = styled.a<{ $dimension: AnchorDimension; $active?: boolean }>`
+const AnchorItemLink = styled.a<{ $dimension: AnchorDimension; $active?: boolean }>`
   text-decoration: none;
   color: ${(props) =>
     props.$active
@@ -24,18 +24,20 @@ const Anchor = styled.a<{ $dimension: AnchorDimension; $active?: boolean }>`
     background-color: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
 `;
+AnchorItemLink.displayName = 'AnchorItemLink';
 
 export interface AnchorItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   active?: boolean;
   dimension?: AnchorDimension;
 }
 
-export const Item = forwardRef<HTMLAnchorElement, AnchorItemProps>(
+export const AnchorItem = forwardRef<HTMLAnchorElement, AnchorItemProps>(
   ({ active, dimension = 'm', children, ...props }, ref) => {
     return (
-      <Anchor {...props} $dimension={dimension} $active={active} ref={ref}>
+      <AnchorItemLink {...props} $dimension={dimension} $active={active} ref={ref}>
         {children}
-      </Anchor>
+      </AnchorItemLink>
     );
   },
 );
+AnchorItem.displayName = 'AnchorItem';
