@@ -4,6 +4,7 @@ export const AnchorContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  height: fit-content;
   &:before {
     position: absolute;
     inset-inline-start: 0;
