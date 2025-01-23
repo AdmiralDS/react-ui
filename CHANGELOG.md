@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.29.4](https://github.com/AdmiralDS/react-ui/compare/v8.29.3...v8.29.4) (2025-01-23)
+
+
+### Bug Fixes
+
+* **PaginationOne:** add virtual scroll option ([bf4b8fe](https://github.com/AdmiralDS/react-ui/commit/bf4b8fe23cfb1d9a2aac8b95f19551d4688740e8))
+
 ### [8.29.3](https://github.com/AdmiralDS/react-ui/compare/v8.29.2...v8.29.3) (2025-01-22)
 
 
