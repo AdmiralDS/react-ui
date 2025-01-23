@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import { AnchorContainer } from './styled';
-import type { AnchorDimension } from './Item';
-import { AnchorItem } from './Item';
+import type { AnchorDimension } from './AnchorItem';
+import { AnchorItem } from './AnchorItem';
 
 export { AnchorDimension };
 
