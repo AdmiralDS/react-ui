@@ -7,11 +7,11 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
-import { MenuButton } from '#src/components/PaginationOne/Menu';
+import { MenuButton } from './Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import { keyboardKey } from '../common/keyboardKey';
+import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 

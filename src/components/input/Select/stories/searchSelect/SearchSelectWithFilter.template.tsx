@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { Option, Select } from '@admiral-ds/react-ui';
+import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
 import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectWithFilterTemplate = ({ placeholder = 'Placeholder', ...props }: SelectProps) => {
   const renderOptions = () => {
@@ -16,6 +17,11 @@ export const SearchSelectWithFilterTemplate = ({ placeholder = 'Placeholder', ..
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Фильтрация списка опций осуществляется вызывающим кодом.
+        <Separator $height={8} />В данном примере показан один из возможных способов
+      </T>
+      <Separator />
       <Select {...props} placeholder={placeholder} mode="searchSelect" dropContainerClassName="dropContainerClass">
         {renderOptions()}
       </Select>

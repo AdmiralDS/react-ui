@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Option, Select, T } from '@admiral-ds/react-ui';
 
+import { Separator } from '#src/components/input/Select/stories/styled';
+
 export const SearchSelectWithOnChangeHandlerTemplate = () => {
   const [activeSegments, setActiveSegments] = React.useState<string[]>([]);
 
@@ -40,11 +42,16 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
 
   return (
     <>
-      <T font="Body/Body 1 Short" as="div" style={{ marginBottom: 16 }}>
-        Вместо нативного <b>onChange</b> рекомендуем использовать <b>onSelectedChange</b>. В обработчике события{' '}
-        <b>onChange</b> для режима <b>multiple</b> список выбранных значения можно получить через{' '}
-        <b>event.selectedOptions</b>
+      <T font="Body/Body 1 Long" as="div">
+        Так как компонент построен на нативном select, при использовании нативного события onchange в режиме multiple
+        необходимо помнить, что в качестве event.target.value возвращается значение первой выбранной option из массива
+        выбранных опций. Поэтому для обработки этого события используйте event.selectedOptions или свойство
+        option.selected.
+        <Separator $height={8} />
+        Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает
+        выбранные опции в порядке их выбора пользователем.
       </T>
+      <Separator />
       <Select
         dimension="m"
         multiple

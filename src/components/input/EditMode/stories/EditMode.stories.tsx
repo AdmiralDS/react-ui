@@ -136,11 +136,6 @@ export const DimensionExample = {
       source: {
         code: EditModeDimensionRaw,
       },
-      description: {
-        story: `Компонент разработан в 4 размерах: S, M (имеют написание Regular и Bold) и XL, XXL (только Bold). 
-        Переключение между Regular и Bold не изменяет размеры компонента.\n\nПо умолчанию размер компонента M, 
-        для смены размера используйте параметр dimension. Для переключения в написание Bold испольуйте одноименный параметр bold.`,
-      },
     },
   },
 
@@ -184,9 +179,6 @@ export const CssMixinExample = {
     docs: {
       source: {
         code: EditModeCssMixinRaw,
-      },
-      description: {
-        story: `Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.`,
       },
     },
   },
