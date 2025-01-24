@@ -23,7 +23,7 @@ import {
   HeaderCellsWrapper,
   HeaderWrapper,
   Row,
-  ScrollTableBody,
+  Body,
   StickyWrapper,
   NormalWrapper,
   TableContainer,
@@ -124,7 +124,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
     const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
-    const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+    const bodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const shadowDetectorRef = React.useRef<HTMLDivElement>(null);
@@ -188,8 +188,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       : {};
 
     const updateHeaderScrollWidth = () => {
-      if (scrollBodyRef.current && headerRef.current) {
-        scrollBodyRef.current.style.setProperty(`--header-scroll-width`, headerRef.current.scrollWidth + 'px');
+      if (bodyRef.current && headerRef.current) {
+        bodyRef.current.style.setProperty(`--header-scroll-width`, headerRef.current.scrollWidth + 'px');
       }
     };
 
@@ -200,7 +200,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         const width = column.getBoundingClientRect().width;
         if (index) {
           headerRef.current?.style.setProperty(`--th-${index}-width`, width + 'px');
-          scrollBodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
+          bodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
         }
       });
       updateHeaderScrollWidth();
@@ -217,7 +217,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
+    }, [hiddenHeaderRef.current, headerRef.current, bodyRef.current, columnList, rowList]);
 
     // check table size updates
     React.useLayoutEffect(() => {
@@ -530,7 +530,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             childHeight={virtualScroll.fixedRowHeight}
             renderRow={renderRow}
             renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
-            ref={scrollBodyRef}
+            ref={bodyRef}
             className="tbody"
             tableRef={tableRef}
             tableHeight={tableHeight}
@@ -545,14 +545,14 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             renderRow={renderRow}
             renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
             estimatedRowHeight={virtualScroll.estimatedRowHeight}
-            ref={scrollBodyRef}
+            ref={bodyRef}
             className="tbody"
           />
         )
       ) : (
-        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+        <Body ref={bodyRef} className="tbody">
           {tableRows.length ? tableRows.map((row, index) => renderRow(row, index)) : renderEmptyMessage()}
-        </ScrollTableBody>
+        </Body>
       );
     };
 
@@ -636,7 +636,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           isAnyColumnDraggable={isAnyColumnDraggable}
           isAnyStickyColumnDraggable={isAnyStickyColumnDraggable}
           tableRef={tableRef}
-          scrollBodyRef={scrollBodyRef}
           normalColumnsWrapperRef={normalColumnsWrapperRef}
           stickyColumnsWrapperRef={stickyColumnsWrapperRef}
         />
@@ -645,7 +644,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           onRowDragEnd={onRowDragEnd}
           dimension={dimension}
           rowsDraggable={rowsDraggable}
-          scrollBodyRef={scrollBodyRef}
+          tableRef={tableRef}
+          bodyRef={bodyRef}
           rowToGroupMap={rowToGroupMap}
         />
       </TableContainer>

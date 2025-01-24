@@ -1,7 +1,7 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
 import type { ReactNode, RefObject } from 'react';
 
-import { ScrollTableBody, Spacer } from '../style';
+import { Body, Spacer } from '../style';
 import type { RowId } from '../types';
 
 import { findStartIndex, findEndIndex } from './utils';
@@ -138,9 +138,9 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     };
 
     return (
-      <ScrollTableBody ref={ref} style={{ height }}>
+      <Body ref={ref} style={{ height }}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );

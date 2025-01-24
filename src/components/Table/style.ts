@@ -93,7 +93,7 @@ export const Header = styled.div<{
   border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
-export const ScrollTableBody = styled.div`
+export const Body = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;

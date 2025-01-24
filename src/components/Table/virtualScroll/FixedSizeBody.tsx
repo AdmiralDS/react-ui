@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ScrollTableBody, Spacer } from '../style';
+import { Body, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   childHeight: number;
@@ -80,9 +80,9 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     };
 
     return (
-      <ScrollTableBody style={{ height }} ref={ref} {...props}>
+      <Body style={{ height }} ref={ref} {...props}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );
