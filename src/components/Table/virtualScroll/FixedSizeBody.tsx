@@ -1,21 +1,39 @@
 import * as React from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { ScrollTableBody, Spacer } from '../style';
+import { Body, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  height: number;
   childHeight: number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
+  tableRef: React.RefObject<HTMLElement>;
+  headerHeight: number;
+  tableHeight: number;
 }
 
 export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
-  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, ...props }, ref) => {
+  (
+    {
+      childHeight,
+      renderAhead = 20,
+      rowList,
+      renderRow,
+      renderEmptyMessage,
+      tableRef,
+      tableHeight,
+      headerHeight,
+      ...props
+    },
+    ref,
+  ) => {
     const [scrollTop, setScrollTop] = React.useState(0);
-    const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+    const [height, setHeight] = React.useState(tableHeight - headerHeight);
+
+    React.useEffect(() => {
+      setHeight(tableHeight - headerHeight);
+    }, [tableHeight, headerHeight]);
 
     React.useEffect(() => {
       function handleScroll(e: any) {
@@ -24,12 +42,12 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
         });
       }
 
-      const scrollContainer = scrollContainerRef.current;
+      const scrollContainer = tableRef.current;
       setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef]);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
     const rowNodes = React.useMemo(
@@ -62,9 +80,9 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     };
 
     return (
-      <ScrollTableBody style={{ height }} ref={refSetter(ref, scrollContainerRef)} {...props}>
+      <Body style={{ height }} ref={ref} {...props}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );
