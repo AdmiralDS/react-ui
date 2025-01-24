@@ -101,7 +101,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
     const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-    const [tableWidth, setTableWidth] = React.useState(0);
     const [tableHeight, setTableHeight] = React.useState(0);
     const [headerHeight, setHeaderHeight] = React.useState(0);
 
@@ -125,7 +124,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
     const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
-    // В drag&drop зачем передается?
     const scrollBodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -227,7 +225,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       if (table) {
         const resizeObserver = new ResizeObserver(() => {
-          setTableWidth(table.getBoundingClientRect().width);
           setTableHeight(table.getBoundingClientRect().height);
           // если изменился размер таблицы, то следует пересчитать ширину колонок
           updateColumnsWidth();
@@ -237,7 +234,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [setTableWidth, setTableHeight]);
+    }, [setTableHeight]);
 
     // check header size updates
     React.useLayoutEffect(() => {
@@ -529,7 +526,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return virtualScroll && (virtualScroll.fixedRowHeight || virtualScroll.estimatedRowHeight) ? (
         virtualScroll.fixedRowHeight ? (
           <FixedSizeBody
-            // height={bodyHeight}
             rowList={tableRows}
             childHeight={virtualScroll.fixedRowHeight}
             renderRow={renderRow}
@@ -542,7 +538,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           />
         ) : (
           <DynamicSizeBody
-            // height={bodyHeight}
             tableRef={tableRef}
             tableHeight={tableHeight}
             headerHeight={headerHeight}

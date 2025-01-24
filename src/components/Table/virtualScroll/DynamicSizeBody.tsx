@@ -1,5 +1,5 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
-import type { ReactNode } from 'react';
+import type { ReactNode, RefObject } from 'react';
 
 import { ScrollTableBody, Spacer } from '../style';
 import type { RowId } from '../types';
@@ -19,7 +19,6 @@ type Cache = {
 };
 
 interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  // height: number;
   tableHeight: number;
   headerHeight: number;
   renderAhead?: number;
@@ -27,7 +26,7 @@ interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   renderRow: (row: any, index: number) => ReactNode;
   renderEmptyMessage?: () => ReactNode;
   estimatedRowHeight?: (index: number) => number;
-  tableRef: any;
+  tableRef: RefObject<HTMLElement>;
 }
 
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(

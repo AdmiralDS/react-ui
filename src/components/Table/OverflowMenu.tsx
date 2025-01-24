@@ -16,10 +16,7 @@ const getActionSize = (dimension: TableProps['dimension']) => {
   }
 };
 
-const OverflowMenuWrapper = styled.div<{
-  $dimension: TableProps['dimension'];
-  $showRowsActions?: boolean;
-}>`
+const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
   position: sticky;
   right: 0;
   z-index: 5;
@@ -118,7 +115,6 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
       ref={oveflowMenuRef}
       data-overflowmenu
       data-opened={showRowsActions}
-      $dimension={dimension}
       $showRowsActions={showRowsActions}
       {...props}
     >

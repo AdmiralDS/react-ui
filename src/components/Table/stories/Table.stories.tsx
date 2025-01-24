@@ -26,7 +26,6 @@ import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template'
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
 import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
 import { TableBaseHtmlTemplate } from './TableBaseHtml.template';
-import { TableBaseHtmlOverflowTemplate } from './TableBaseHtmlOverflow.template';
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
 import TableColumnWidthRaw from './TableColumnWidth.template?raw';
@@ -52,7 +51,6 @@ import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
 import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
 import TableBaseHtmlRaw from './TableBaseHtml.template?raw';
-import TableBaseHtmlOverflowRaw from './TableBaseHtmlOverflow.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -652,22 +650,4 @@ export const BaseHtmlExample = {
     },
   },
   name: 'Table. Базовый HTML table',
-};
-
-const BaseHtmlOverflowStory: StoryFn<typeof TableBaseHtmlOverflowTemplate> = (props) => (
-  <TableBaseHtmlOverflowTemplate {...props} />
-);
-export const BaseHtmlOverflowExample = {
-  render: BaseHtmlOverflowStory,
-  parameters: {
-    docs: {
-      source: {
-        code: TableBaseHtmlOverflowRaw,
-      },
-      description: {
-        story: `Пример минимальной стилизации html table с фиксированной шапкой при вертикальном скроле.`,
-      },
-    },
-  },
-  name: 'Table. Базовый HTML table Overflow',
 };

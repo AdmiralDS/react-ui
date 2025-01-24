@@ -3,13 +3,12 @@ import * as React from 'react';
 import { ScrollTableBody, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  // height: number;
   childHeight: number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
-  tableRef: any;
+  tableRef: React.RefObject<HTMLElement>;
   headerHeight: number;
   tableHeight: number;
 }
@@ -17,13 +16,13 @@ interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
   (
     {
-      tableHeight,
       childHeight,
-      renderAhead = 5,
+      renderAhead = 20,
       rowList,
       renderRow,
       renderEmptyMessage,
       tableRef,
+      tableHeight,
       headerHeight,
       ...props
     },
