@@ -85,6 +85,7 @@ export const Header = styled.div<{
   display: flex;
   flex: 1 0 auto;
   min-width: fit-content;
+  overflow-x: hidden;
   ${headerStyle}
   background: ${(p) =>
     p.$greyHeader

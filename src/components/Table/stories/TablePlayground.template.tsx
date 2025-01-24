@@ -241,9 +241,10 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
       <NotificationItem displayStatusIcon>
         <NotificationItemTitle>Зона скролла</NotificationItemTitle>
         <NotificationItemContent>
-          Начиная с версии <b>8.30.0</b> зона скролла распространяется на всю таблицу, включая зону заголовков. В
-          предыдущих версия зона скролла распространялась только на тело таблицы (т.е. скроллируемым было тело таблицы -
-          элемент с <code>className='tbody'</code> )
+          Начиная с версии <b>8.30.0</b> зона скролла распространяется на всю таблицу, включая зону заголовков (т.е.
+          скроллируемым является верхнеуровневый элемент с <code>className='table'</code>). В предыдущих версия зона
+          скролла распространялась только на тело таблицы (т.е. скроллируемым было только тело таблицы - элемент с{' '}
+          <code>className='tbody'</code>).
         </NotificationItemContent>
       </NotificationItem>
       <Separator height={40} />
