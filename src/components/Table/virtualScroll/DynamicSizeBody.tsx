@@ -1,8 +1,7 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
-import type { ReactNode } from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
+import type { ReactNode, RefObject } from 'react';
 
-import { ScrollTableBody, Spacer } from '../style';
+import { Body, Spacer } from '../style';
 import type { RowId } from '../types';
 
 import { findStartIndex, findEndIndex } from './utils';
@@ -20,21 +19,39 @@ type Cache = {
 };
 
 interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  height: number;
+  tableHeight: number;
+  headerHeight: number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => ReactNode;
   renderEmptyMessage?: () => ReactNode;
   estimatedRowHeight?: (index: number) => number;
+  tableRef: RefObject<HTMLElement>;
 }
 
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
-  ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
+  (
+    {
+      rowList,
+      tableHeight,
+      headerHeight,
+      renderAhead = 20,
+      renderRow,
+      renderEmptyMessage,
+      estimatedRowHeight = () => 40,
+      tableRef,
+    },
+    ref,
+  ) => {
     const [measurementCache, setMeasurementCache] = useState<Cache>({});
     const [scrollTop, setScrollTop] = useState(0);
+    const [height, setHeight] = useState(tableHeight - headerHeight);
 
-    const scrollElementRef = useRef<HTMLDivElement>(null);
     const measurementCacheRef = useRef<Cache>(measurementCache);
+
+    useEffect(() => {
+      setHeight(tableHeight - headerHeight);
+    }, [tableHeight, headerHeight]);
 
     useLayoutEffect(() => {
       measurementCacheRef.current = measurementCache;
@@ -55,12 +72,12 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         });
       }
 
-      const scrollContainer = scrollElementRef.current;
+      const scrollContainer = tableRef.current;
       setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef]);
 
     const { allItems, totalHeight } = useMemo(() => {
       let totalHeight = 0;
@@ -121,9 +138,9 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     };
 
     return (
-      <ScrollTableBody ref={refSetter(ref, scrollElementRef)} style={{ height }}>
+      <Body ref={ref} style={{ height }}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );

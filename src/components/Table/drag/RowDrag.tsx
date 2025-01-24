@@ -14,7 +14,8 @@ type RowDragProps = {
   onRowDrag: TableProps['onRowDrag'];
   onRowDragEnd: TableProps['onRowDragEnd'];
   rowsDraggable?: boolean;
-  scrollBodyRef: React.RefObject<HTMLElement>;
+  tableRef: React.RefObject<HTMLElement>;
+  bodyRef: React.RefObject<HTMLElement>;
   rowToGroupMap: GroupRows;
 };
 
@@ -23,7 +24,8 @@ export const RowDrag = ({
   dimension,
   onRowDrag,
   onRowDragEnd,
-  scrollBodyRef,
+  tableRef,
+  bodyRef,
   rowToGroupMap,
 }: RowDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
@@ -47,20 +49,23 @@ export const RowDrag = ({
 
   useEffect(() => {
     if (rowMirrorRef.current && rowDragging && rowsDraggable) {
-      const observer = observeRect(rowMirrorRef.current, (rect: any) => {
-        const topCoord = scrollBodyRef.current?.getBoundingClientRect().top || 0;
-        const bottomCoord = scrollBodyRef.current?.getBoundingClientRect().bottom || 0;
+      const table = tableRef.current;
+      const header = table?.querySelector('.thead');
 
-        if (scrollBodyRef.current) {
-          const scrollTop = scrollBodyRef.current.scrollTop;
-          const scrollHeight = scrollBodyRef.current.scrollHeight;
-          const offsetHeight = scrollBodyRef.current.offsetHeight;
+      const observer = observeRect(rowMirrorRef.current, (rect: any) => {
+        const topCoord = header?.getBoundingClientRect().bottom || 0;
+        const bottomCoord = table?.getBoundingClientRect().bottom || 0;
+
+        if (table) {
+          const scrollTop = table.scrollTop;
+          const scrollHeight = table.scrollHeight;
+          const offsetHeight = table.offsetHeight;
 
           if (rect.bottom > bottomCoord && scrollHeight > offsetHeight && scrollTop + offsetHeight < scrollHeight) {
-            scrollBodyRef.current.scrollBy({ top: Math.abs(bottomCoord - rect.bottom) });
+            table.scrollBy({ top: Math.abs(bottomCoord - rect.bottom) });
           }
           if (rect.top < topCoord && scrollTop > 0) {
-            scrollBodyRef.current.scrollBy({ top: -Math.abs(topCoord - rect.top) });
+            table.scrollBy({ top: -Math.abs(topCoord - rect.top) });
           }
         }
       });
@@ -71,7 +76,7 @@ export const RowDrag = ({
   }, [rowsDraggable, rowDragging]);
 
   useEffect(() => {
-    const body = scrollBodyRef.current;
+    const body = bodyRef.current;
     const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: HTMLElement) {

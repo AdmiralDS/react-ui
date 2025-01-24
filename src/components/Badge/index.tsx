@@ -46,7 +46,7 @@ const background = css<{ $appearance: BadgeAppearance }>`
       case 'lightInactive':
       case 'lightDisable':
       default:
-        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+        return `var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']})`;
     }
   }};
 `;

@@ -3,7 +3,6 @@ import { typography } from '#src/components/Typography';
 import type { TableProps, TableRow } from '#src/components/Table';
 
 // padding-bottom меньше padding-top на 1px, т.к. 1px остается для border-bottom ячейки
-// padding-right больше padding-left на 1px, т.к. 1px остается для линии resizerа
 export const cellStyle = css<{ $dimension: TableProps['dimension'] }>`
   padding: ${({ $dimension }) => {
     switch ($dimension) {
@@ -94,50 +93,6 @@ export const rowBackground = css<{
     }
     return `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`;
   }}
-`;
-
-const getActionSize = (dimension: TableProps['dimension']) => {
-  switch (dimension) {
-    case 's':
-      return 32;
-    case 'l':
-      return 48;
-    case 'xl':
-      return 56;
-    case 'm':
-    default:
-      return 40;
-  }
-};
-
-export const actionsBGStyle = css<{ $dimension: TableProps['dimension'] }>`
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 5;
-  width: ${({ $dimension }) => getActionSize($dimension)}px;
-  padding: ${({ $dimension }) => {
-    switch ($dimension) {
-      case 's':
-        return '0px';
-      case 'l':
-        return '6px 0 5px';
-      case 'xl':
-        return '10px 0 9px';
-      case 'm':
-      default:
-        return '4px 0 3px';
-    }
-  }};
-`;
-
-export const overflowMenuStyle = css<{ $offset: number; $dimension: TableProps['dimension'] }>`
-  ${actionsBGStyle};
-  left: ${({ $dimension, $offset }) => $offset - getActionSize($dimension)}px;
 `;
 
 export const borderStyle = css<{ $resizer?: boolean }>`
