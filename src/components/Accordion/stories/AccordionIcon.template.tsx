@@ -1,10 +1,23 @@
 import * as React from 'react';
 
-import { Accordion, AccordionItem } from '@admiral-ds/react-ui';
+import { Accordion, AccordionItem, T } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 export const AccordionIconTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Альтернативным вариантом является расположение шеврона слева от заголовка. Текст заголовка и иконка шеврона
+        просто меняются местами с сохранением всех расстояний и размеров. При этом компоновка остальных элементов
+        компонента никак не меняются.
+        <Separator />
+        Используйте параметр iconPosition, чтобы управлять расположением шеврона.
+      </T>
+      <Separator $height={24} />
       <Accordion iconPosition="left">
         <AccordionItem title="Первый пункт">Контент первого пункта</AccordionItem>
         <AccordionItem title="Второй пункт">

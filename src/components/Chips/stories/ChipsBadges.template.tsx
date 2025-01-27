@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Chips } from '@admiral-ds/react-ui';
+import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
@@ -25,8 +25,8 @@ const listDataIcon = [
   { id: '5', label: 'Вильнус', disabled: false, iconStart: <BurnIcon />, selected: false, badge: 3 },
 ];
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
@@ -42,6 +42,10 @@ export const ChipsBadgesTemplate = (props: ChipsProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        В компоненте можно включать бейджи.
+      </T>
+      <Separator $height={24} />
       <WrapperChip $dimension="m">
         {listDataIcon.map((item) => (
           <Chips

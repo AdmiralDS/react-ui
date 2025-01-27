@@ -9,8 +9,8 @@ export const SimpleWithSetActiveViewDateTemplate = ({ ...props }: CalendarPropTy
 
   return (
     <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Переключение экранов выбора дат - месяц/год/день
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с переключением экранов выбора дат - месяц/год/день.
       </T>
       <div style={{ display: 'flex' }}>
         <Button dimension="s" onClick={() => setCurrentActiveView('MONTH')}>

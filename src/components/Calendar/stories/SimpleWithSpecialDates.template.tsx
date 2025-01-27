@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css, ThemeProvider } from 'styled-components';
 
-import { Calendar, weekendMixin } from '@admiral-ds/react-ui';
+import { Calendar, weekendMixin, T } from '@admiral-ds/react-ui';
 import type { CalendarPropType, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -312,20 +312,23 @@ export const SimpleWithSpecialDatesTemplate = ({
     }
   };
 
-  return props.range ? (
+  return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Calendar
-        {...props}
-        range
-        startDate={selected}
-        endDate={endDate}
-        onChange={handleChange}
-        highlightSpecialDay={highlightHolidays}
-      />
-    </ThemeProvider>
-  ) : (
-    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Calendar {...props} selected={selected} onChange={handleChange} highlightSpecialDay={highlightHolidays} />
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с подсветкой выходных, праздничный и специальных дат.
+      </T>
+      {props.range ? (
+        <Calendar
+          {...props}
+          range
+          startDate={selected}
+          endDate={endDate}
+          onChange={handleChange}
+          highlightSpecialDay={highlightHolidays}
+        />
+      ) : (
+        <Calendar {...props} selected={selected} onChange={handleChange} highlightSpecialDay={highlightHolidays} />
+      )}
     </ThemeProvider>
   );
 };
