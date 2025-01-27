@@ -59,8 +59,20 @@ export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   }
 `;
 
+/**
+ * Если NormalWrapper занимает всё свободное место в строке (это можно проверить через элемент Filler и его data-empty атрибут),
+ * то для NormalWrapper следует задать стиль overflow-x: hidden.
+ *
+ * Это важно для случаев, когда у последней ячейки включен resizer. Дело в том, что resizer выходит на 8px за пределы ячейки.
+ * И за счет этого может вызывать увеличение таблицы по длине. Чтобы этого не произошло используется стиль overflow-x: hidden.
+ *
+ * В качестве референса взята реализация из mui https://mui.com/material-ui/react-table/
+ */
 export const NormalWrapper = styled.div`
   display: flex;
+  &:has(+ div[data-empty='true']) {
+    overflow-x: hidden;
+  }
 `;
 
 export const Filler = styled.div`
@@ -85,7 +97,6 @@ export const Header = styled.div<{
   display: flex;
   flex: 1 0 auto;
   min-width: fit-content;
-  overflow-x: hidden;
   ${headerStyle}
   background: ${(p) =>
     p.$greyHeader
