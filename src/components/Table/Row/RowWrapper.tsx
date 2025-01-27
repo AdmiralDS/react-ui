@@ -14,18 +14,12 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   onRowClick?: (rowId: RowId | string) => void;
   /** Колбек для двойного клика по строке таблицы */
   onRowDoubleClick?: (rowId: RowId | string) => void;
-  /** Ширина таблицы */
-  tableWidth: number;
   /** Признак необходимости отображать нижнюю границу */
   underline: boolean;
   /** Признак является ли строка заголовком группы */
   isGroup: boolean;
   /** Id заголовка группы, к которой относится строка */
   groupId: RowId | string | null;
-  /** Наличие вертикального скролла в таблице */
-  verticalScroll: boolean;
-  /** Ширина вертикальной полосы прокрутки */
-  scrollbar: number;
   /** Ширина строки */
   rowWidth?: string;
   /** Окрашивание строки в серый цвет при greyZebraRows */
@@ -34,8 +28,10 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
-  /** Ref на тело таблицы */
-  bodyRef: React.RefObject<HTMLElement>;
+  /** Ref на элемент таблицы */
+  tableRef: React.RefObject<HTMLElement>;
+  /** Высота хедера таблицы */
+  headerHeight: number;
 }
 
 export const RowWrapper = ({
@@ -45,16 +41,14 @@ export const RowWrapper = ({
   onRowClick,
   onRowDoubleClick,
   children,
-  tableWidth,
   isGroup,
   groupId,
   rowWidth,
-  verticalScroll,
-  scrollbar,
   grey,
   showRowsActions,
   rowStatusMap,
-  bodyRef,
+  tableRef,
+  headerHeight,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
@@ -100,19 +94,17 @@ export const RowWrapper = ({
         $grey={!!grey}
       >
         {children}
+        {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
+          <OverflowMenu
+            dimension={dimension}
+            row={row}
+            onClick={handleOverflowMenuClick}
+            showRowsActions={showRowsActions}
+            tableRef={tableRef}
+            headerHeight={headerHeight}
+          />
+        )}
       </SimpleRow>
-      {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
-        <OverflowMenu
-          dimension={dimension}
-          tableWidth={tableWidth}
-          row={row}
-          verticalScroll={verticalScroll}
-          scrollbar={scrollbar}
-          onClick={handleOverflowMenuClick}
-          showRowsActions={showRowsActions}
-          bodyRef={bodyRef}
-        />
-      )}
       {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
     </Row>
   );
