@@ -88,11 +88,6 @@ export const ListNestedExample = {
       source: {
         code: ListNestedRaw,
       },
-      description: {
-        story: `Списки могут быть вложенными, а разновидности могут смешиваться внутри вложенных группировок.\n\nОтступ
-         слева равен расстоянию от текста до левого края компонента вышестоящего уровня. То есть 
-         выравнивание идет по краю текста вышестоящего уровня.`,
-      },
     },
   },
 
@@ -111,10 +106,6 @@ export const ListMarkerColorExample = {
     docs: {
       source: {
         code: ListMarkerColorRaw,
-      },
-      description: {
-        story: `Пользователь может кастомизировать цвет маркеров и иконок самостоятельно, 
-        как это продемонстрировано в данном примере.`,
       },
     },
   },
@@ -135,13 +126,6 @@ export const ListMarkerCustomExample = {
       source: {
         code: ListMarkerCustomRaw,
       },
-      description: {
-        story: `Пользователь может кастомизировать внешний вид и контент маркеров в списках с помощью параметра
-        markerCssMixin, задаваемого для компонентов OrderedList и UnorderedList.\n\n В компонентах 
-        OrderedList и UnorderedList также специально введен css счётчик с именем admiral-list-counter. Пользователи
-        могут опираться на значение данного счетчика для задания контента маркеров с использованием css
-        функций counter() и counters().`,
-      },
     },
   },
 
@@ -160,10 +144,6 @@ export const ListMultiLineExample = {
     docs: {
       source: {
         code: ListMultilineRaw,
-      },
-      description: {
-        story: `Пользователь может настроить необходимую ширину компонента самостоятельно, например,
-        через атрибут style. По умолчанию компонент подстраивается под размеры родительского элемента.`,
       },
     },
   },
