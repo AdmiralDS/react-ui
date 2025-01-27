@@ -15,9 +15,23 @@ const OrangeColor = css`
   color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
 `;
 
+const Separator = styled.div`
+  height: 8px;
+`;
+
 export const TTextStatusTemplate = ({ ...props }: TOwnProps) => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Text — компонент для работы с Typography. Компонент отображает текст в соответствии с заданными HTML-тегом (
+        <a href="https://styled-components.com/docs/api#as-polymorphic-prop">
+          https://styled-components.com/docs/api#as-polymorphic-prop
+        </a>
+        ) и стилем шрифта.
+        <Separator />
+        Важно: при использовании компонента T без стилизации необходимо использовать prop "as". Если необходимо
+        кастомизировать компонент (с помощью styled(T)), следует использовать prop forwardedAs.
+      </T>
       <BlueText font={'Body/Body 1 Short'} forwardedAs="a" href={'https://'}>
         Это ссылка (forwardedAs="a") со стилем Body/Body 1 Short, цветом шрифта Primary.
       </BlueText>
