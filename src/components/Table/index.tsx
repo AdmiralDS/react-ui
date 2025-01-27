@@ -575,7 +575,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderHiddenHeader = () => {
       return (
         <HiddenHeader ref={hiddenHeaderRef}>
-          <ShadowDetector ref={shadowDetectorRef} />
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
@@ -612,6 +611,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         {renderHiddenHeader()}
         <HeaderWrapper className="thead">
           <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
+            <ShadowDetector ref={shadowDetectorRef} />
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                 {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
