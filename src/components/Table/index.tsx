@@ -128,6 +128,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const shadowDetectorRef = React.useRef<HTMLDivElement>(null);
+    const fillerRef = React.useRef<HTMLDivElement>(null);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -250,6 +251,21 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         };
       }
     }, [setHeaderHeight]);
+
+    // check filler size updates
+    React.useLayoutEffect(() => {
+      const filler = fillerRef.current;
+
+      if (filler) {
+        const resizeObserver = new ResizeObserver(() => {
+          filler.dataset.empty = String(filler.getBoundingClientRect().width == 0);
+        });
+        resizeObserver.observe(filler);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, []);
 
     // scroll-triggered shadow animation via IntersectionObserver
     // TODO: research ways to implement scroll-driven animation via css and polyfill
@@ -625,7 +641,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             <NormalWrapper ref={normalColumnsWrapperRef}>
               {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
             </NormalWrapper>
-            <Filler />
+            <Filler ref={fillerRef} />
           </Header>
         </HeaderWrapper>
         {renderBody()}
