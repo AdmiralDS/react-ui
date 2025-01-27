@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -114,5 +117,15 @@ export const TableCustomTitleTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пользователь может кастомизировать часть заголовка столбца, а именно область с текстом заголовка (параметр{' '}
+        <code>title</code>) и область с дополнительным текстом заголовка (параметр <code>extraText</code>). Параметры{' '}
+        <code>title</code> и <code>extraText</code> позволяют задать в них любой <code>ReactNode</code>.
+      </T>
+      <Separator />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+    </>
+  );
 };

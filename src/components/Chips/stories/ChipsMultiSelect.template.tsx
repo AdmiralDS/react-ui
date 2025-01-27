@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Chips } from '@admiral-ds/react-ui';
+import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
@@ -10,8 +10,8 @@ import { ReactComponent as DiamondSolid } from '@admiral-ds/icons/build/category
 import { ReactComponent as TrophyIcon } from '@admiral-ds/icons/build/category/TrophySolid.svg';
 import { ReactComponent as BurnIcon } from '@admiral-ds/icons/build/category/BurnSolid.svg';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
@@ -53,6 +53,10 @@ export const ChipsMultiSelectTemplate = (props: ChipsProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Chips в режиме чекбоксов, когда можно выбрать любое количество значений.
+      </T>
+      <Separator $height={24} />
       <WrapperChip $dimension={props.dimension}>
         {listM.map((item) => (
           <Chips

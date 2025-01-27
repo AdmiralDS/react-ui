@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Stepper, Step, StepContent } from '@admiral-ds/react-ui';
+import { Stepper, Step, StepContent, T } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  max-width: 800px;
+  overflow: hidden;
+`;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 const steps = [
   { key: 0, content: 'Шаг с предупреждением', warning: true },
@@ -13,7 +22,17 @@ const steps = [
 export const StepperStepKindsTemplate = () => {
   return (
     <>
-      <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
+      <Wrapper>
+        <T font="Body/Body 1 Long" as="div">
+          Для обозначения активного шага в компонент Stepper нужно передать параметр activeStep, равный индексу
+          активного шага. Либо для самого Step можно задать параметр active (перезаписывает собой параметр activeStep).
+          <Separator />
+          Чтобы обозначить завершенные (пройденные) шаги, для соответствующих шагов необходимо задать параметр
+          completed. Также компонент Step имеет параметры disabled, error, warning.
+          <Separator />
+          Пройденные шаги могут быть кликабельными, для этого у них должен быть задан колбек onClick или параметр link.
+        </T>
+        <Separator $height={24} />
         <Stepper activeStep={4}>
           {steps.map(({ content, ...step }) => {
             return (
@@ -23,7 +42,7 @@ export const StepperStepKindsTemplate = () => {
             );
           })}
         </Stepper>
-      </div>
+      </Wrapper>
     </>
   );
 };

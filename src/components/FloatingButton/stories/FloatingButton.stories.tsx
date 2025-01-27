@@ -129,14 +129,6 @@ export const FloatingButtonTooltipExample = {
       source: {
         code: FloatingButtonTooltipRaw,
       },
-      description: {
-        story: `Иконка внутри FloatingButton должна быть однозначной и понятной. 
-        Для пояснения значения иконки можно использовать Tooltip c подсказкой. 
-        Для того чтобы задать текст подсказки используйте параметр tooltip.\n\nПо дефолту Tooltip 
-        появляется слева от кнопки при ховере. Можно настроить появление тултипа справа, снизу, сверху, 
-        в зависимости от расположения кнопки, для этого используйте параметр 
-        tooltipPosition.\n\nВ случае, когда смысл кнопки очевиден, тултип можно не использовать.`,
-      },
     },
   },
 
@@ -158,11 +150,6 @@ export const FloatingButtonPositionExample = {
       source: {
         code: FloatingButtonPositionRaw,
       },
-      description: {
-        story: `Кнопка FloatingButton постоянно видна на экране и не скроллится с
-        контентом страницы. По умолчанию кнопка располагается в правом нижнем углу экрана, на расстоянии 28 px от краев экрана. 
-        Пользователь может задать свое расположение кнопки, переопределив её позиционирование через стили.`,
-      },
     },
   },
 
@@ -183,9 +170,6 @@ export const FloatingButtonMobileExample = {
     docs: {
       source: {
         code: FloatingButtonMobileRaw,
-      },
-      description: {
-        story: `На мобильных устройствах отступ по умолчанию равен 16px от краев экрана (вместо стандартных 28px).`,
       },
     },
   },

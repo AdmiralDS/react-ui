@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import { STORY_ITEMS } from './data';
 import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -37,6 +37,9 @@ export const MenuWithLockCycleScrollTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для блокировки цикличного обхода пунктов меню можно использовать onForwardCycleApprove и onBackwardCycleApprove.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

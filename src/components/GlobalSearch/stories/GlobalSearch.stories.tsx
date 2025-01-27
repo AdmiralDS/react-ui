@@ -73,10 +73,6 @@ export const PaneSimpleExample = {
       source: {
         code: BasicExampleRaw,
       },
-      description: {
-        story:
-          'prefix появляется если назначать prefixValue, а если назначить prefixValueList превращается в мини префикс селект.',
-      },
     },
   },
 

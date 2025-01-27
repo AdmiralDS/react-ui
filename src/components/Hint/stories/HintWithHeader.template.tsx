@@ -29,6 +29,9 @@ export const HintWithHeaderTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        В качества контента хинта может выступать любой ReactNode, можно добавить, например, заголовок.
+      </T>
       <Hint
         {...props}
         renderContent={renderHintContent}

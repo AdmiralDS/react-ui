@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tree, TreeNode } from '@admiral-ds/react-ui';
+import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 import { ReactComponent as FolderSolid } from '@admiral-ds/icons/build/documents/FolderSolid.svg';
 
@@ -235,5 +235,12 @@ export const TreeWithCheckboxesTemplate = (props: TreeProps) => {
     setDataList(dataList);
   };
 
-  return <Tree {...props} model={dataList} onChange={handleChange} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Контролируемое дерево с checkbox.
+      </T>
+      <Tree {...props} model={dataList} onChange={handleChange} />
+    </>
+  );
 };

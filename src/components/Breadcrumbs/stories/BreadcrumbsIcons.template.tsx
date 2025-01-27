@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { Breadcrumbs } from '@admiral-ds/react-ui';
+import { Breadcrumbs, T } from '@admiral-ds/react-ui';
 import { ReactComponent as HomeOutline } from '@admiral-ds/icons/build/system/HomeOutline.svg';
 import { ReactComponent as JpgOutline } from '@admiral-ds/icons/build/documents/JpgOutline.svg';
+import styled from 'styled-components';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: 24px;
+`;
 
 const items = [
   { url: '#', text: 'page 1', iconStart: <HomeOutline /> },
@@ -19,5 +24,14 @@ const items = [
 ];
 
 export const BreadcrumbsIconsTemplate = () => {
-  return <Breadcrumbs items={items} dropContainerClassName="dropContainerClass" />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        При необходимости в любой хлебной крошке можно отобразить иконку слева от текста, для этого у хлебной крошки
+        должен быть задан параметр iconStart.
+      </T>
+      <Separator />
+      <Breadcrumbs items={items} dropContainerClassName="dropContainerClass" />
+    </>
+  );
 };

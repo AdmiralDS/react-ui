@@ -9,8 +9,8 @@ export const SimpleWithSetActiveViewDateAfterChooseYearTemplate = (props: Calend
 
   return (
     <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Открытие экрана выбора месяца после выбора года
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с открытием экрана выбора месяца после выбора года.
       </T>
       <Calendar
         {...props}

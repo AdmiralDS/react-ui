@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { FileUploader } from '@admiral-ds/react-ui';
+import { FileUploader, T } from '@admiral-ds/react-ui';
 import type { FileUploaderProps, FileProps } from '@admiral-ds/react-ui';
 
 import type { FileUploadStatus } from '#src/components/input/FileUploader/utils';
@@ -43,14 +43,20 @@ export const FileUploaderWithStatusTemplate = (props: FileUploaderProps) => {
   }, [isLoading, files]);
 
   return (
-    <FileUploader
-      {...props}
-      uploadedFiles={files}
-      style={{ maxWidth: '480px' }}
-      dimension="xl"
-      fileDimension="xl"
-      onChange={handleChange}
-      title="Загрузите не более 3-х файлов до 5 MB каждый"
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для отображения статуса загрузки файла или ошибки при валидации, компонент файла через параметр status принимает
+        состояния Uploaded, Loading, Error, Queue, а через параметр error - текст ошибки.
+      </T>
+      <FileUploader
+        {...props}
+        uploadedFiles={files}
+        style={{ maxWidth: '480px' }}
+        dimension="xl"
+        fileDimension="xl"
+        onChange={handleChange}
+        title="Загрузите не более 3-х файлов до 5 MB каждый"
+      />
+    </>
   );
 };

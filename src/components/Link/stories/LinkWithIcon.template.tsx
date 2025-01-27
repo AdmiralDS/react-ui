@@ -4,8 +4,8 @@ import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/syst
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
 import styled from 'styled-components';
 
-const Separator = styled.div`
-  margin-top: 10px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 const Divider = styled.div`
   width: 10px;
@@ -24,7 +24,7 @@ export const LinkWithIconTemplate = () => {
         <Divider />
         Link
       </Link>
-      <Separator />
+      <Separator $height={24} />
       <T font="Body/Body 1 Long" as="div">
         Link with icon. Dimension - s
       </T>

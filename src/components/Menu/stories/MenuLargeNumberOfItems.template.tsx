@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createItems } from './utils';
@@ -34,6 +34,9 @@ export const MenuLargeNumberOfItemsTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с большим количеством item. Для проверки прокрутки меню при быстрой смене активного элемента.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} />
       </Wrapper>

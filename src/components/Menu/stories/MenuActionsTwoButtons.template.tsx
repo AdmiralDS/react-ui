@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { Button, MenuActionsPanel, Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Button, MenuActionsPanel, Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -81,6 +81,9 @@ export const MenuActionsTwoButtonsTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с Actions с двумя кнопками.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

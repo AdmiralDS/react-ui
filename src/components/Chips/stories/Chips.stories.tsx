@@ -131,10 +131,6 @@ export const ChipsTagsClose = {
       source: {
         code: ChipsTagsCloseRaw,
       },
-      description: {
-        story: `Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При 
-        нажатии на иконку закрытия элемент удаляется из списка выбранных.`,
-      },
     },
   },
 };
@@ -152,9 +148,6 @@ export const ChipsIcon = {
     docs: {
       source: {
         code: ChipsIconRaw,
-      },
-      description: {
-        story: `В компоненте можно включать иконки справа и/или слева от текста.`,
       },
     },
   },
@@ -174,11 +167,6 @@ export const ChipsSelect = {
       source: {
         code: ChipsSelectRaw,
       },
-      description: {
-        story: `Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии 
-        или пассивном (выключенном) состоянии. Chips в режиме радио кнопок, когда можно выбрать 
-        только одно значение из списка. `,
-      },
     },
   },
 };
@@ -196,9 +184,6 @@ export const ChipsMultiSelect = {
     docs: {
       source: {
         code: ChipsMultiSelectRaw,
-      },
-      description: {
-        story: `Chips в режиме чекбоксов, когда можно выбрать любое количество значений`,
       },
     },
   },
@@ -218,11 +203,6 @@ export const ChipsTooltip = {
       source: {
         code: ChipsTooltipRaw,
       },
-      description: {
-        story: `По дефолту в компоненте (в коде) задано граничение ширины в 190 px, после которой 
-        происходит уход в троеточие. Но можно изменять этот параметр, стилизуя компонент через styled 
-        components. В случае сокращения над компонентом при ховере появляется Тултип с расшифровкой.`,
-      },
     },
   },
 };
@@ -240,9 +220,6 @@ export const ChipsBadges = {
     docs: {
       source: {
         code: ChipsBadgesRaw,
-      },
-      description: {
-        story: `В компоненте можно включать бейджи.`,
       },
     },
   },

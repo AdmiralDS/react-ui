@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -96,6 +96,12 @@ export const MenuWithPreselectTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для активации работы режима preselected в меню необходимо указать preselectedModeActive. Переключение элементов
+        в состояние preselected может осуществляться в неконтролируемом режиме, а для поиска нужного элемента меню по
+        нажатию на кнопку необходимо перевести компонент в контролируемый режим и написать обработчик. Пример указан в
+        коде.
+      </T>
       <Container>
         <Wrapper style={{ width: 'fit-content' }}>
           <Menu

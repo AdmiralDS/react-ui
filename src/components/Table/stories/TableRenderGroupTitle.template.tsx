@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -173,13 +176,22 @@ export const TableRenderGroupTitleTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      onColumnResize={handleResize}
-      onRowExpansionChange={handleExpansionChange}
-      displayRowExpansionColumn
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пользователь может кастомизировать заголовок группы строк с помощью рендер-колбека <code>renderGroupTitle</code>
+        . Функция <code>renderGroupTitle</code> задается для каждой строки в отдельности и представляет собой метод для
+        переопределения стандартного вида заголовка группы строк. На вход функция <code>renderGroupTitle</code> получает
+        1 параметр: <code>row</code> - объект строки.
+      </T>
+      <Separator />
+      <Table
+        {...props}
+        rowList={rows}
+        columnList={cols}
+        onColumnResize={handleResize}
+        onRowExpansionChange={handleExpansionChange}
+        displayRowExpansionColumn
+      />
+    </>
   );
 };

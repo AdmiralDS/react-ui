@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { Button, CategoryMenuItem, DropMenu, MenuItem, typography } from '@admiral-ds/react-ui';
+import { Button, CategoryMenuItem, DropMenu, MenuItem, typography, T } from '@admiral-ds/react-ui';
 import type { DropMenuProps, RenderOptionProps, MenuModelItemProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 
@@ -10,14 +10,11 @@ const WrapperVertical = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 `;
 
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  font-size: 16px;
-  line-height: 24px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
@@ -140,15 +137,17 @@ export const DropMenuCategoryTemplate = (props: DropMenuProps) => {
   return (
     <>
       <WrapperVertical>
-        <Desc>
+        <T font="Body/Body 1 Long" as="div">
+          Пример с группировкой опций по категориям.
+          <Separator $height={24} />
           Неконтроллируемое состояние видимости меню:
-          <br />
-          - isVisible не передается в DropMenu; <br />- обработчик onVisibilityChange выполняется из DropMenu;
-          <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
-          <br />
+          <Separator />
+          - isVisible не передается в DropMenu; <Separator />- обработчик onVisibilityChange выполняется из DropMenu;
+          <Separator />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
+          <Separator />
           По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
           закрывает выпадающий список при выборе опции.
-        </Desc>
+        </T>
         <StyledDropMenu
           {...props}
           items={model}
