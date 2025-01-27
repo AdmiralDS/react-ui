@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, Button } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, Button, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as ArrowLeftOutline } from '@admiral-ds/icons/build/system/ArrowLeftOutline.svg';
 import { ReactComponent as ArrowRightOutline } from '@admiral-ds/icons/build/system/ArrowRightOutline.svg';
@@ -26,6 +26,10 @@ export const DrawerPositionTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Drawer может располагаться как справа (по умолчанию), так и слева. Расположение Drawerа определяется параметром
+        position. При этом, компоновка элементов внутри панели не изменяется в зависимости от расположения.
+      </T>
       <ButtonWrapper>
         <Button
           onClick={() => {

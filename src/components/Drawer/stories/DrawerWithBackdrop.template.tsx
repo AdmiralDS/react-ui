@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -51,6 +51,13 @@ export const DrawerWithBackdropTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        По умолчанию Drawer блокирует контент страницы, за это отвечает параметр backdrop, равный по умолчанию true. В
+        этом случае страница затемняется, поверх экрана накладывается цвет Opacity/Modal. Взаимодействовать с контентом
+        страницы при открытой панели нельзя. Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в
+        футере панели, по нажатию на затемненную область (при closeOnBackdropClick = true), по нажатию на клавишу Escape
+        (при closeOnEscapeKeyDown = true).
+      </T>
       <Button onClick={() => setOpened(true)}>Open drawer with backdrop</Button>
       <Drawer
         {...props}

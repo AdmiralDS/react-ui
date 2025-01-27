@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Button, DropMenu, MenuItem, RadioButton } from '@admiral-ds/react-ui';
+import { Button, DropMenu, MenuItem, RadioButton, T } from '@admiral-ds/react-ui';
 import type { DropMenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 const STORY_ITEMS = [
@@ -47,14 +47,11 @@ const WrapperVertical = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 `;
 
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  font-size: 16px;
-  line-height: 24px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
@@ -94,47 +91,51 @@ export const DropMenuRadiobuttonTemplate = (props: DropMenuProps) => {
   }, [props.dimension, checkedState]);
 
   return (
-    <WrapperVertical>
-      <Desc>
-        Неконтроллируемое состояние видимости меню:
-        <br />
-        - isVisible не передается в DropMenu; <br />- обработчик onVisibilityChange выполняется из DropMenu;
-        <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
-        <br />
-        По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
-        закрывает выпадающий список при выборе опции.
-      </Desc>
-      <DropMenu
-        {...props}
-        items={model}
-        onSelectItem={(id) => {
-          // eslint-disable-next-line no-console
-          console.log(`selected: ${id}`);
-          const newCheckedState = checkedState.map((item) => ({
-            ...item,
-            checked: item.id === id || item.id === selected ? !item.checked : item.checked,
-          }));
-          setCheckedState(newCheckedState);
-          setSelected(id);
-        }}
-        onVisibilityChange={handleVisibilityChangeUnControlledState}
-        selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
-          return (
-            <Button
-              ref={buttonRef as React.Ref<HTMLButtonElement>}
-              loading={props.loading}
-              disabled={disabled}
-              onKeyDown={handleKeyDown}
-              onClick={handleClick}
-              dimension={props.dimension}
-            >
-              Нажми
-              {statusIcon}
-            </Button>
-          );
-        }}
-      />
-    </WrapperVertical>
+    <>
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Пример меню с пунктами, содержащими RadioButton.
+          <Separator $height={24} />
+          Неконтроллируемое состояние видимости меню:
+          <Separator />
+          - isVisible не передается в DropMenu; <Separator />- обработчик onVisibilityChange выполняется из DropMenu;
+          <Separator />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu.
+          <Separator />
+          По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
+          закрывает выпадающий список при выборе опции.
+        </T>
+        <DropMenu
+          {...props}
+          items={model}
+          onSelectItem={(id) => {
+            // eslint-disable-next-line no-console
+            console.log(`selected: ${id}`);
+            const newCheckedState = checkedState.map((item) => ({
+              ...item,
+              checked: item.id === id || item.id === selected ? !item.checked : item.checked,
+            }));
+            setCheckedState(newCheckedState);
+            setSelected(id);
+          }}
+          onVisibilityChange={handleVisibilityChangeUnControlledState}
+          selected={selected}
+          renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, disabled }) => {
+            return (
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={props.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+                dimension={props.dimension}
+              >
+                Нажми
+                {statusIcon}
+              </Button>
+            );
+          }}
+        />
+      </WrapperVertical>
+    </>
   );
 };

@@ -127,9 +127,6 @@ export const SimpleExample = {
       source: {
         code: DropMenuSimpleRaw,
       },
-      description: {
-        story: 'Базовый пример использования DropMenu',
-      },
     },
   },
 
@@ -148,9 +145,6 @@ export const CategoryExample = {
     docs: {
       source: {
         code: DropMenuCategoryRaw,
-      },
-      description: {
-        story: 'Пример с группировкой опций по категориям',
       },
     },
   },
@@ -171,9 +165,6 @@ export const DropMenuTooltipExample = {
       source: {
         code: DropMenuTooltipRaw,
       },
-      description: {
-        story: 'Для того чтобы добавить tooltip к пункту меню, его необходимо обернуть TooltipHoc',
-      },
     },
   },
 
@@ -193,9 +184,6 @@ export const DropMenuCheckboxExample = {
       source: {
         code: DropMenuCheckboxRaw,
       },
-      description: {
-        story: 'Пример меню с пунктами, содержащими Checkbox',
-      },
     },
   },
 
@@ -214,9 +202,6 @@ export const DropMenuRadiobuttonExample = {
     docs: {
       source: {
         code: DropMenuRadiobuttonRaw,
-      },
-      description: {
-        story: 'Пример меню с пунктами, содержащими RadioButton',
       },
     },
   },
