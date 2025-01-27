@@ -220,6 +220,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       }
     }, [hiddenHeaderRef.current, headerRef.current, bodyRef.current, columnList, rowList]);
 
+    React.useLayoutEffect(() => {
+      updateColumnsWidth();
+    });
+
     // check table size updates
     React.useLayoutEffect(() => {
       const table = tableRef.current;
@@ -227,8 +231,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (table) {
         const resizeObserver = new ResizeObserver(() => {
           setTableHeight(table.getBoundingClientRect().height);
-          // если изменился размер таблицы, то следует пересчитать ширину колонок
-          updateColumnsWidth();
         });
         resizeObserver.observe(table);
         return () => {
