@@ -96,7 +96,12 @@ export const AnchorTreeTemplate = (props: AnchorProps) => {
         <ContentItem id="part-3" style={{ background: 'rgb(97, 97, 243)' }} />
       </Content>
 
-      <StyledAnchor {...props} getAnchorContainer={() => containerRef.current || window} items={AnchorItems} />
+      <StyledAnchor
+        {...props}
+        style={{ width: '100px' }}
+        getAnchorContainer={() => containerRef.current || window}
+        items={AnchorItems}
+      />
     </Wrapper>
   );
 };

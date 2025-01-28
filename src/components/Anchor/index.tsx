@@ -3,8 +3,8 @@ import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AnchorContainer } from './styled';
 import type { AnchorDimension } from './AnchorItem';
-import { AnchorItem } from './AnchorItem';
-import { ActiveVerticalSelector, SELECTOR_HEIGHT_M, SELECTOR_HEIGHT_S } from './ActiveVerticalSelector';
+import { ANCHOR_ITEM_HEIGHT_M, ANCHOR_ITEM_HEIGHT_S, AnchorItem } from './AnchorItem';
+import { ActiveVerticalSelector } from './ActiveVerticalSelector';
 import { getInternalCurrentAnchor } from './utils';
 
 export { AnchorDimension };
@@ -18,6 +18,8 @@ export interface AnchorLinkItemProps {
 
 export interface AnchorProps extends HTMLAttributes<HTMLDivElement> {
   dimension?: AnchorDimension;
+  /** Многострочное отображение текста, по умолчанию false */
+  multilineView?: boolean;
   items: Array<AnchorLinkItemProps>;
   getAnchorContainer?: () => HTMLElement | Window;
 }
@@ -49,7 +51,7 @@ const treeToMap = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string)
 };
 
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
-  ({ dimension = 'm', items, getAnchorContainer, ...props }, ref) => {
+  ({ dimension = 'm', multilineView = false, items, getAnchorContainer, ...props }, ref) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
     const itemsMap = useMemo(() => {
       return treeToMap(items);
@@ -74,7 +76,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     const getSelectorPosition = () => {
       const index = itemsMap.findIndex((item) => item.href === activeLink);
       if (index < 0) return 0;
-      const height = dimension === 'm' ? SELECTOR_HEIGHT_M : SELECTOR_HEIGHT_S;
+      const height = dimension === 'm' ? ANCHOR_ITEM_HEIGHT_M : ANCHOR_ITEM_HEIGHT_S;
       return index * height;
     };
     const styleSelector = () => {
@@ -99,6 +101,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
         <AnchorItem
           key={item.key}
           dimension={dimension}
+          multilineView={multilineView}
           href={item.href}
           active={item.href === activeLink}
           level={item.level}
