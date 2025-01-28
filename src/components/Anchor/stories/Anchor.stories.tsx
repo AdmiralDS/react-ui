@@ -34,6 +34,9 @@ export default {
     theme: {
       control: false,
     },
+    items: {
+      control: false,
+    },
   },
 } as Meta<typeof Anchor>;
 

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 
-import { Anchor } from '@admiral-ds/react-ui';
+import { Anchor, T } from '@admiral-ds/react-ui';
 import type { AnchorProps } from '@admiral-ds/react-ui';
 
 const Wrapper = styled.div`
@@ -23,6 +23,10 @@ const ContentItem = styled.div`
 
 const StyledAnchor = styled(Anchor)`
   flex: 0 1 20%;
+`;
+
+const Separator = styled.div`
+  height: 24px;
 `;
 
 const AnchorItems = [
@@ -47,14 +51,27 @@ export const AnchorPlaygroundTemplate = (props: AnchorProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Wrapper>
-      <Content ref={containerRef}>
-        <ContentItem id="part-1" style={{ background: 'rgb(255,220,220)' }} />
-        <ContentItem id="part-2" style={{ background: 'rgb(220,255,220)' }} />
-        <ContentItem id="part-3" style={{ background: 'rgb(220,220,255)' }} />
-      </Content>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Компонент служит для упрощения навигации по длинным страницам и состоит из якорных гиперссылок, которые, при
+        клике на них, направляют пользователя на соответствующую часть страницы.
+        <Separator />
+        Имеет одинаковую компоновку при использовании как справа, так и слева относительно контента страницы.
+        <Separator />
+        Ширина компонента задается пользователем. Высота формируется контентом.
+        <Separator />
+        Компонент не используется на мобильных устройствах
+      </T>
+      <Separator />
+      <Wrapper>
+        <Content ref={containerRef}>
+          <ContentItem id="part-1" style={{ background: 'rgb(255,220,220)' }} />
+          <ContentItem id="part-2" style={{ background: 'rgb(220,255,220)' }} />
+          <ContentItem id="part-3" style={{ background: 'rgb(220,220,255)' }} />
+        </Content>
 
-      <StyledAnchor {...props} getAnchorContainer={() => containerRef.current || window} items={AnchorItems} />
-    </Wrapper>
+        <StyledAnchor {...props} getAnchorContainer={() => containerRef.current || window} items={AnchorItems} />
+      </Wrapper>
+    </>
   );
 };

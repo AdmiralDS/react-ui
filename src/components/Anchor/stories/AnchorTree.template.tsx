@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 
-import { Anchor } from '@admiral-ds/react-ui';
+import { Anchor, T } from '@admiral-ds/react-ui';
 import type { AnchorLinkItemProps, AnchorProps } from '@admiral-ds/react-ui';
 
 const Wrapper = styled.div`
@@ -23,6 +23,10 @@ const ContentItem = styled.div`
 
 const StyledAnchor = styled(Anchor)`
   flex: 0 1 20%;
+`;
+
+const Separator = styled.div`
+  height: 24px;
 `;
 
 const AnchorItems: Array<AnchorLinkItemProps> = [
@@ -83,25 +87,35 @@ export const AnchorTreeTemplate = (props: AnchorProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Wrapper>
-      <Content ref={containerRef}>
-        <ContentItem id="part-1" style={{ background: 'rgb(235, 74, 74)' }} />
-        <ContentItem id="part-1-1" style={{ background: 'rgb(172, 109, 109)' }} />
-        <ContentItem id="part-1-1-1" style={{ background: 'rgb(212, 105, 34)' }} />
-        <ContentItem id="part-1-1-2" style={{ background: 'rgb(205, 147, 32)' }} />
-        <ContentItem id="part-1-2" style={{ background: 'rgb(227, 62, 202)' }} />
-        <ContentItem id="part-1-2-1" style={{ background: 'rgb(132, 16, 110)' }} />
-        <ContentItem id="part-1-2-2" style={{ background: 'rgb(194, 110, 177)' }} />
-        <ContentItem id="part-2" style={{ background: 'rgb(65, 220, 65)' }} />
-        <ContentItem id="part-3" style={{ background: 'rgb(97, 97, 243)' }} />
-      </Content>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Основные настройки компонента
+        <Separator />
+        <li>Два размера — M и S</li>
+        <li>До трех уровней вложенности</li>
+        <li>Написание пунктов в одну строку (обрезание текста) или несколько строк</li>
+      </T>
+      <Separator />
+      <Wrapper>
+        <Content ref={containerRef}>
+          <ContentItem id="part-1" style={{ background: 'rgb(235, 74, 74)' }} />
+          <ContentItem id="part-1-1" style={{ background: 'rgb(172, 109, 109)' }} />
+          <ContentItem id="part-1-1-1" style={{ background: 'rgb(212, 105, 34)' }} />
+          <ContentItem id="part-1-1-2" style={{ background: 'rgb(205, 147, 32)' }} />
+          <ContentItem id="part-1-2" style={{ background: 'rgb(227, 62, 202)' }} />
+          <ContentItem id="part-1-2-1" style={{ background: 'rgb(132, 16, 110)' }} />
+          <ContentItem id="part-1-2-2" style={{ background: 'rgb(194, 110, 177)' }} />
+          <ContentItem id="part-2" style={{ background: 'rgb(65, 220, 65)' }} />
+          <ContentItem id="part-3" style={{ background: 'rgb(97, 97, 243)' }} />
+        </Content>
 
-      <StyledAnchor
-        {...props}
-        style={{ width: '100px' }}
-        getAnchorContainer={() => containerRef.current || window}
-        items={AnchorItems}
-      />
-    </Wrapper>
+        <StyledAnchor
+          {...props}
+          style={{ width: '100px' }}
+          getAnchorContainer={() => containerRef.current || window}
+          items={AnchorItems}
+        />
+      </Wrapper>
+    </>
   );
 };
