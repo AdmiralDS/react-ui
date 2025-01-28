@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import { forwardRef, useCallback, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AnchorContainer } from './styled';
 import type { AnchorDimension } from './AnchorItem';
@@ -60,11 +60,11 @@ const treeToFlat = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
   ({ dimension = 'm', multilineView = false, items, getAnchorContainer, ...props }, ref) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
-    const itemsMap = treeToFlat(items);
+    const itemsMap = useMemo(() => treeToFlat(items), [items]);
 
     const [activeLink, setActiveLink] = useState<string | null>(null);
 
-    const handleScroll: any = useCallback(() => {
+    const handleScroll: EventListener = useCallback(() => {
       // TODO: add stop while animating
       // if (animating.current) {
       //   return;

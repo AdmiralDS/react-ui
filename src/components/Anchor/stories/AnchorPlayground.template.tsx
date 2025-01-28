@@ -14,11 +14,11 @@ const Content = styled.div`
   flex-direction: column;
   flex: 1 0 80%;
   overflow: scroll;
+  scroll-behavior: smooth;
 `;
 
 const ContentItem = styled.div`
   flex: 1 0 500px;
-  //height: 500px;
 `;
 
 const StyledAnchor = styled(Anchor)`
