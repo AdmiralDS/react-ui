@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.30.1](https://github.com/AdmiralDS/react-ui/compare/v8.30.0...v8.30.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* **Table:** fix problem with column jumping during drag drop ([ef53eab](https://github.com/AdmiralDS/react-ui/commit/ef53eab62d892033568c8009b5aa9357d5604d99))
+* **Table:** fix shadow on sticky columns during scroll ([80e6899](https://github.com/AdmiralDS/react-ui/commit/80e689969db09b76decab7cc20bafe448a759912))
+
+## [8.30.0](https://github.com/AdmiralDS/react-ui/compare/v8.29.4...v8.30.0) (2025-01-27)
+
+
+### Features
+
+* **Badge:** [#1606](https://github.com/AdmiralDS/react-ui/issues/1606) color variant light changed ([f829c97](https://github.com/AdmiralDS/react-ui/commit/f829c977266f4293872e9c70de96145a2fb7d1e5))
+* **Table:** [#1549](https://github.com/AdmiralDS/react-ui/issues/1549) зона скролла распространяется теперь на всю таблицу, включая зону заголовков и тело таблицы ([b10c444](https://github.com/AdmiralDS/react-ui/commit/b10c4447b547153e62eaa7a59977d0dc3d8617da))
+
 ### [8.29.4](https://github.com/AdmiralDS/react-ui/compare/v8.29.3...v8.29.4) (2025-01-23)
 
 

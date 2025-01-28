@@ -220,6 +220,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       }
     }, [hiddenHeaderRef.current, headerRef.current, bodyRef.current, columnList, rowList]);
 
+    React.useLayoutEffect(() => {
+      updateColumnsWidth();
+    });
+
     // check table size updates
     React.useLayoutEffect(() => {
       const table = tableRef.current;
@@ -227,8 +231,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       if (table) {
         const resizeObserver = new ResizeObserver(() => {
           setTableHeight(table.getBoundingClientRect().height);
-          // если изменился размер таблицы, то следует пересчитать ширину колонок
-          updateColumnsWidth();
         });
         resizeObserver.observe(table);
         return () => {
@@ -272,7 +274,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     React.useLayoutEffect(() => {
       const table = tableRef.current;
       const shadowDetector = shadowDetectorRef.current;
-      const enableShadow = stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn;
+      const enableShadow =
+        stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable;
 
       function handleIntersection([entry]: IntersectionObserverEntry[]) {
         if (table) {
@@ -292,7 +295,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         observer.observe(shadowDetector);
         return () => observer.disconnect();
       }
-    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn]);
+    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn, rowsDraggable]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -575,7 +578,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderHiddenHeader = () => {
       return (
         <HiddenHeader ref={hiddenHeaderRef}>
-          <ShadowDetector ref={shadowDetectorRef} />
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
@@ -613,30 +615,34 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <HeaderWrapper className="thead">
           <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
-              <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
-                {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
-                {displayRowExpansionColumn && (
-                  <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
-                )}
-                {displayRowSelectionColumn && (
-                  <CheckboxCell
-                    $dimension={dimension}
-                    className="th_checkbox"
-                    data-th-column="checkbox"
-                    data-draggable={false}
-                    data-droppable={false}
-                  >
-                    <CheckboxField
-                      dimension={checkboxDimension}
-                      checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
-                      indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
-                      disabled={tableRows.length === 0 || headerCheckboxDisabled}
-                      onChange={handleHeaderCheckboxChange}
-                    />
-                  </CheckboxCell>
-                )}
-                {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
-              </StickyWrapper>
+              <>
+                <ShadowDetector ref={shadowDetectorRef} />
+                <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
+                  {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
+                  {displayRowExpansionColumn && (
+                    <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
+                  )}
+                  {displayRowSelectionColumn && (
+                    <CheckboxCell
+                      $dimension={dimension}
+                      className="th_checkbox"
+                      data-th-column="checkbox"
+                      data-draggable={false}
+                      data-droppable={false}
+                    >
+                      <CheckboxField
+                        dimension={checkboxDimension}
+                        checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
+                        indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                        disabled={tableRows.length === 0 || headerCheckboxDisabled}
+                        onChange={handleHeaderCheckboxChange}
+                      />
+                    </CheckboxCell>
+                  )}
+                  {stickyColumns.length > 0 &&
+                    stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
+                </StickyWrapper>
+              </>
             )}
             <NormalWrapper ref={normalColumnsWrapperRef}>
               {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}

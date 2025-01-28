@@ -100,17 +100,17 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
 
     const startIndex = useMemo(() => {
-      const start = findStartIndex(scrollTop, allItems, itemsCount);
+      const start = itemsCount ? findStartIndex(scrollTop, allItems, itemsCount) : 0;
       return Math.max(0, start - renderAhead);
     }, [scrollTop, allItems, itemsCount, renderAhead]);
 
     const endIndex = useMemo(() => {
-      const end = findEndIndex(allItems, startIndex, scrollTop + height, itemsCount);
+      const end = itemsCount ? findEndIndex(allItems, startIndex, scrollTop + height, itemsCount) : 0;
       return Math.min(itemsCount - 1, end + renderAhead);
     }, [allItems, startIndex, scrollTop, height, itemsCount, renderAhead]);
 
-    const topPadding = allItems[startIndex].offsetTop;
-    const bottomPadding = totalHeight - (allItems[endIndex].offsetTop + allItems[endIndex].height);
+    const topPadding = allItems[startIndex]?.offsetTop;
+    const bottomPadding = totalHeight - (allItems[endIndex]?.offsetTop + allItems[endIndex]?.height);
 
     const virtualItems = useMemo(() => allItems.slice(startIndex, endIndex + 1), [allItems, startIndex, endIndex]);
 

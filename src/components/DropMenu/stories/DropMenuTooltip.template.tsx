@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import type { DropMenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
-import { Button, DropMenu, MenuItem, TooltipHoc } from '@admiral-ds/react-ui';
+import { Button, DropMenu, MenuItem, TooltipHoc, T } from '@admiral-ds/react-ui';
 
 const STORY_ITEMS = [
   {
@@ -46,14 +46,11 @@ const WrapperVertical = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 `;
 
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  font-size: 16px;
-  line-height: 24px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 const handleVisibilityChangeControlledState = (isVisible: boolean) => {
@@ -123,39 +120,44 @@ export const DropMenuTooltipTemplate = (props: DropMenuProps) => {
   };
 
   return (
-    <WrapperVertical>
-      <Desc>
-        Состояние видимости меню полностью контроллируется вне DropMenu:
-        <br />
-        - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
-        списка;
-        <br />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
-        <br />- используется кастомный обработчик при клике вне области выпадающего списка (handleClickOutside).
-      </Desc>
-      <DropMenu
-        {...props}
-        items={model}
-        isVisible={isVisible}
-        onVisibilityChange={handleVisibilityChange}
-        onSelectItem={handleSelectItem}
-        onClickOutside={handleClickOutside}
-        selected={selected}
-        renderContentProp={({ buttonRef, handleKeyDown, statusIcon, disabled }) => {
-          return (
-            <Button
-              ref={buttonRef as React.Ref<HTMLButtonElement>}
-              loading={props.loading}
-              disabled={disabled}
-              onKeyDown={handleKeyDown}
-              onClick={handleButtonClick}
-              dimension={props.dimension}
-            >
-              Нажми
-              {statusIcon}
-            </Button>
-          );
-        }}
-      />
-    </WrapperVertical>
+    <>
+      <WrapperVertical>
+        <T font="Body/Body 1 Long" as="div">
+          Для того чтобы добавить tooltip к пункту меню, его необходимо обернуть TooltipHoc.
+          <Separator $height={24} />
+          Состояние видимости меню полностью контроллируется вне DropMenu:
+          <Separator />
+          - используется кастомный обработчик клика по кнопке (handleButtonClick) для открытия/закрытия выпадающего
+          списка;
+          <Separator />- после выбора опции из выпадающего списка (handleSelectItem) происходит закрытие меню;
+          <Separator />- используется кастомный обработчик при клике вне области выпадающего списка
+          (handleClickOutside).
+        </T>
+        <DropMenu
+          {...props}
+          items={model}
+          isVisible={isVisible}
+          onVisibilityChange={handleVisibilityChange}
+          onSelectItem={handleSelectItem}
+          onClickOutside={handleClickOutside}
+          selected={selected}
+          renderContentProp={({ buttonRef, handleKeyDown, statusIcon, disabled }) => {
+            return (
+              <Button
+                ref={buttonRef as React.Ref<HTMLButtonElement>}
+                loading={props.loading}
+                disabled={disabled}
+                onKeyDown={handleKeyDown}
+                onClick={handleButtonClick}
+                dimension={props.dimension}
+              >
+                Нажми
+                {statusIcon}
+              </Button>
+            );
+          }}
+        />
+      </WrapperVertical>
+    </>
   );
 };

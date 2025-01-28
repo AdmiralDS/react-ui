@@ -86,9 +86,6 @@ export const Demo1_Tree = {
       source: {
         code: TreeWithCheckboxesRaw,
       },
-      description: {
-        story: 'Контролируемое дерево с checkbox',
-      },
     },
   },
 
@@ -105,9 +102,6 @@ export const Demo2_Tree = {
       source: {
         code: TreeSimpleRaw,
       },
-      description: {
-        story: 'Дерево без checkbox c заданной кастомной шириной в 500px и расстоянием между строками 8px',
-      },
     },
   },
 
@@ -123,9 +117,6 @@ export const TreeUncontrolledExample = {
     docs: {
       source: {
         code: TreeUncontrolledRaw,
-      },
-      description: {
-        story: 'Неконтролируемое дерево',
       },
     },
   },
@@ -145,11 +136,6 @@ export const TreeWithControlCheckCountExample = {
       source: {
         code: TreeWithControlCheckCountRaw,
       },
-      description: {
-        story:
-          'Пример показывает обработку состояния checked в модели. Checked являются узлы, которые непосредственно выбраны, ' +
-          'либо узлы, у которых все дочерние элементы находятся в состоянии checked',
-      },
     },
   },
 
@@ -165,11 +151,6 @@ export const TreeWithOnChangeHandlerExample = {
     docs: {
       source: {
         code: TreeWithOnChangeHandlerRaw,
-      },
-      description: {
-        story:
-          'События onExpandedChange и onCheckedChange добавлены для упрощения обработки изменений дерева в контролируемом ' +
-          'состоянии',
       },
     },
   },

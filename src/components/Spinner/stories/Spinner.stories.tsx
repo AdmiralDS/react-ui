@@ -111,9 +111,6 @@ export const SpinnerDark = {
       source: {
         code: SpinnerDarkRaw,
       },
-      description: {
-        story: `На темных поверхностях применяется белый спинер`,
-      },
     },
   },
 

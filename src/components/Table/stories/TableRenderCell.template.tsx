@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -209,5 +212,16 @@ export const TableRenderCellTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Для формирования контента ячейки пользователь может использовать рендер-колбек <code>renderCell</code>. Функция{' '}
+        <code>renderCell</code> задается для каждого столбца в отдельности и представляет собой метод для
+        переопределения стандартного вида ячейки. На вход функция <code>renderCell</code> получает 3 параметра:{' '}
+        <code>data</code> - контент ячейки, <code>row</code> - объект строки и <code>rowIdx</code> - индекс строки.
+      </T>
+      <Separator />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+    </>
+  );
 };
