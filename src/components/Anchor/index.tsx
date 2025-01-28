@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useState } from 'react';
 
 import { AnchorContainer } from './styled';
 import type { AnchorDimension } from './AnchorItem';
@@ -17,10 +17,17 @@ export interface AnchorLinkItemProps {
 }
 
 export interface AnchorProps extends HTMLAttributes<HTMLDivElement> {
+  /** Размер компонента */
   dimension?: AnchorDimension;
+  /** Сдвиг сверху при расчете положения прокрутки, в пикселях */
+  offsetTop?: number;
+  /** Границы зоны якоря, в пикселях */
+  bounds?: number;
   /** Многострочное отображение текста, по умолчанию false */
   multilineView?: boolean;
+  /** Элементы для отображения */
   items: Array<AnchorLinkItemProps>;
+  /** Элемент для отслеживания скролла */
   getAnchorContainer?: () => HTMLElement | Window;
 }
 
@@ -36,13 +43,13 @@ interface NodesMapItem extends Omit<AnchorLinkItemProps, 'children'> {
 const itemHasChildren = (item: AnchorLinkItemProps) =>
   !!item.children && Array.isArray(item.children) && item.children.length > 0;
 
-const treeToMap = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string): Array<NodesMapItem> => {
+const treeToFlat = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string): Array<NodesMapItem> => {
   return tree.reduce((acc: Array<NodesMapItem>, item) => {
     const key = item.key.toString();
     const { href, title } = item;
     acc.push({ key, href, title, parent, level });
     if (item.children && itemHasChildren(item)) {
-      const map = treeToMap(item.children, level + 1, key);
+      const map = treeToFlat(item.children, level + 1, key);
       return [...acc, ...map];
     }
 
@@ -53,9 +60,7 @@ const treeToMap = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string)
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
   ({ dimension = 'm', multilineView = false, items, getAnchorContainer, ...props }, ref) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
-    const itemsMap = useMemo(() => {
-      return treeToMap(items);
-    }, [items]);
+    const itemsMap = treeToFlat(items);
 
     const [activeLink, setActiveLink] = useState<string | null>(null);
 
