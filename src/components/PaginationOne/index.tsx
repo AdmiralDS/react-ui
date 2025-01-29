@@ -189,12 +189,13 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const parsePageNumber = (pageSelected: string) => {
     if (pageSelected === '') {
-      return parseInt(selectedPageNumber);
+      return Number.parseInt(selectedPageNumber, 10);
     }
-    const page = parseInt(pageSelected);
-    if (isNaN(page) || page < 1) {
+    const page = Number.parseInt(pageSelected, 10);
+    if (Number.isNaN(page) || page < 1) {
       return 1;
-    } else if (page > totalPages) {
+    }
+    if (page > totalPages) {
       return totalPages;
     }
     return page;
@@ -213,7 +214,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   };
 
   const handleSizeChange = (pageSizeSelected: string) => {
-    const pageSize = parseInt(pageSizeSelected);
+    const pageSize = Number.parseInt(pageSizeSelected, 10);
     onChange({ page: 1, pageSize: pageSize });
   };
 
