@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.31.0](https://github.com/AdmiralDS/react-ui/compare/v8.30.1...v8.31.0) (2025-01-29)
+
+
+### Features
+
+* **Anchor:** добавлен новый компонент Anchor ([da234cd](https://github.com/AdmiralDS/react-ui/commit/da234cd54bc8dde622d0112bf8bbc46a742ae27a))
+
 ### [8.30.1](https://github.com/AdmiralDS/react-ui/compare/v8.30.0...v8.30.1) (2025-01-28)
 
 
