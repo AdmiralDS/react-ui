@@ -47,9 +47,9 @@ const wrapperBackground = css<{ $background: TagKind | string }>`
       case 'orange':
         return `var(--admiral-color-Warning_Warning10, ${theme.color['Warning/Warning 10']})`;
       case 'neutral':
-        return `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+        return `var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']})`;
       default:
-        return $background || `var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']})`;
+        return $background || `var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']})`;
     }
   }};
 `;
@@ -94,9 +94,9 @@ const wrapperHover = css<{ $backgroundHover: TagKind | string }>`
       case 'orange':
         return `var(--admiral-color-Warning_Warning20, ${theme.color['Warning/Warning 20']})`;
       case 'neutral':
-        return `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`;
+        return `var(--admiral-color-Opacity_Neutral12, ${theme.color['Opacity/Neutral 12']})`;
       default:
-        return $backgroundHover || `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`;
+        return $backgroundHover || `var(--admiral-color-Opacity_Neutral12, ${theme.color['Opacity/Neutral 12']})`;
     }
   }};
 `;
@@ -126,11 +126,8 @@ export const Wrapper = styled.button<{
   ${({ $statusViaBackground, theme }) =>
     $statusViaBackground
       ? wrapperBackground
-      : `background: var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']});`}
-  ${({ $statusViaBackground, theme }) =>
-    $statusViaBackground
-      ? wrapperBorder
-      : `border: 1px solid var(--admiral-color-Neutral_Neutral10, ${theme.color['Neutral/Neutral 10']});`}
+      : `background: var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']});`}
+  ${({ $statusViaBackground }) => ($statusViaBackground ? wrapperBorder : `border: 1px solid transparent;`)}
 
   display: inline-flex;
   align-items: center;
@@ -138,15 +135,13 @@ export const Wrapper = styled.button<{
 
   &:hover,
   &:active {
-    ${({ $statusViaBackground, theme, $clickable }) =>
-      $clickable && !$statusViaBackground
-        ? `border: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`
-        : ''}
+    ${({ $statusViaBackground, $clickable }) =>
+      $clickable && !$statusViaBackground ? `border: 1px solid transparent;` : ''}
     ${({ $statusViaBackground, theme, $clickable }) =>
       $clickable
         ? $statusViaBackground
           ? wrapperHover
-          : `background: var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']});`
+          : `background: var(--admiral-color-Opacity_Neutral12, ${theme.color['Opacity/Neutral 12']});`
         : ''}
   }
 
