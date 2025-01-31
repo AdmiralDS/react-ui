@@ -8,24 +8,31 @@ import type { HorizontalTabProps } from '#src/components/TabMenuComponent/types'
 import { BaseTab } from '#src/components/TabMenuComponent/tabs/BaseTab';
 
 const selectedTabBorderMixin = css`
-  box-shadow:
-    inset -1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']}),
-    inset 1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']}),
-    inset 0 1px 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-
   &:hover:not(:disabled) {
     background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   }
 `;
-const StyledBaseTab = styled(BaseTab)`
+
+const showBorderTabMixin = css`
+  box-shadow:
+    inset -1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']}),
+    inset 1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']}),
+    inset 0 1px 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+`;
+
+const StyledBaseTab = styled(BaseTab)<{ $hideBorder?: boolean }>`
   background-color: ${(p) =>
     p.$selected ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})` : `transparent`};
   border-radius: 4px 4px 0 0;
   ${(p) => p.$selected && selectedTabBorderMixin}
+  ${(p) => p.$selected && !p.$hideBorder && showBorderTabMixin}
 `;
 
 export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
-  ({ dimension = 'l', children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps, ref) => {
+  (
+    { dimension = 'l', hideBorder, children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps,
+    ref,
+  ) => {
     const [defaultId] = useState(uid());
     const idForTab = onSelectTab && id ? id : defaultId;
 
@@ -45,6 +52,7 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
+        $hideBorder={hideBorder}
         $width="fit-content"
         onClick={handleTabClick}
       >

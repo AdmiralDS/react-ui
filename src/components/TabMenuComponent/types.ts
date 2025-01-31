@@ -24,7 +24,10 @@ export interface BaseTabProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 export interface IconTabProps extends Omit<BaseTabProps, 'dimension'> {}
-export interface HorizontalTabProps extends BaseTabProps {}
+export interface HorizontalTabProps extends BaseTabProps {
+  /** Скрыть обводку выбранной вкладки */
+  hideBorder?: boolean;
+}
 export interface VerticalTabProps extends BaseTabProps {
   /** Ширина вкладки */
   width?: string | number;
@@ -33,6 +36,8 @@ export interface VerticalTabProps extends BaseTabProps {
 interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Показывать серую полосу снизу */
   showUnderline?: boolean;
+  /** Скрыть обводку выбранной вкладки */
+  hideBorder?: boolean;
   /** ID выбранной вкладки */
   selectedTabId?: string;
   /** ID выбранной по умолчанию вкладки */
