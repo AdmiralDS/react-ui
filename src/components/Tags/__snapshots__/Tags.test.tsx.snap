@@ -17,8 +17,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: 50px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -26,8 +26,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
-  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  border: 1px solid transparent;
+  background: var(--admiral-color-Opacity_Neutral12, #0000001F);
 }
 
 .c1:focus-visible {
@@ -53,8 +53,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: auto;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -62,8 +62,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
-  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  border: 1px solid transparent;
+  background: var(--admiral-color-Opacity_Neutral12, #0000001F);
 }
 
 .c4:focus-visible {
@@ -180,8 +180,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: 50px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -189,8 +189,8 @@ exports[`Tags should render default component 1`] = `
 
 .c1:hover,
 .c1:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
-  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  border: 1px solid transparent;
+  background: var(--admiral-color-Opacity_Neutral12, #0000001F);
 }
 
 .c1:focus-visible {
@@ -216,8 +216,8 @@ exports[`Tags should render default component 1`] = `
   padding: 3px 7px;
   width: auto;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -225,8 +225,8 @@ exports[`Tags should render default component 1`] = `
 
 .c4:hover,
 .c4:active {
-  border: 1px solid var(--admiral-color-Neutral_Neutral20, #D7D8DA);
-  background: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  border: 1px solid transparent;
+  background: var(--admiral-color-Opacity_Neutral12, #0000001F);
 }
 
 .c4:focus-visible {
