@@ -20,10 +20,6 @@ export default {
         code: null,
       },
     },
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A32367',
-    },
   },
   argTypes: {
     dimension: {
