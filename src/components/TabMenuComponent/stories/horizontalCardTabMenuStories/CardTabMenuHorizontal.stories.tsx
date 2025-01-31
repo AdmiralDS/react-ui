@@ -5,11 +5,13 @@ import { ALL_BORDER_RADIUS_VALUES, CardTabMenuHorizontal } from '@admiral-ds/rea
 import { CardTabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalTemplate';
 import { CardTabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalWithAddButtonTemplate';
 import { CardTabMenuHorizontalLeadingGapTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalLeadingGapTemplate';
+import { CardTabMenuHorizontalWithoutBorderTemplate } from './CardTabMenuHorizontalWithoutBorderTemplate';
 
 // Imports of text sources
 import HorizontalCardTabMenuRaw from './CardTabMenuHorizontalTemplate?raw';
 import HorizontalCardTabMenuWithAddButtonRaw from './CardTabMenuHorizontalWithAddButtonTemplate?raw';
 import HorizontalCardTabMenuLeadingGapRaw from './CardTabMenuHorizontalLeadingGapTemplate?raw';
+import CardTabMenuHorizontalWithoutBorderRaw from './CardTabMenuHorizontalWithoutBorderTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/TabMenuComponent/CardTabMenuHorizontal',
@@ -28,6 +30,9 @@ export default {
       control: { type: 'radio' },
     },
     showUnderline: {
+      control: false,
+    },
+    hideBorder: {
       control: false,
     },
     themeBorderKind: {
@@ -145,5 +150,26 @@ export const HorizontalCardTabMenuWithAddButtonExample = {
   },
 
   name: 'CardTabMenu с возможностью добавления вкладок.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalCardTabMenuWithAddButtonWithAddButton.">
+const CardTabMenuHorizontalWithoutBorderStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CardTabMenuHorizontalWithoutBorderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const CardTabMenuHorizontalWithoutBorderExample = {
+  render: CardTabMenuHorizontalWithoutBorderStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CardTabMenuHorizontalWithoutBorderRaw,
+      },
+    },
+  },
+
+  name: 'CardTabMenu без обводки',
 };
 //</editor-fold>
