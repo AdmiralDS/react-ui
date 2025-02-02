@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Stepper, Step, StepContent } from '@admiral-ds/react-ui';
+import { Stepper, Step, StepContent, T } from '@admiral-ds/react-ui';
 
 const initialSteps = [
   {
@@ -23,6 +23,10 @@ export const StepperPreviousStepsTemplate = () => {
   };
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        В случаях необходимости и когда это позволяет логика шагов, например, результаты предыдущих шагов не влияют на
+        последующие, допускается возможность возврата к предыдущим шагам.
+      </T>
       <div style={{ maxWidth: '800px', overflow: 'hidden' }}>
         <Stepper lineClamp={2} activeStep={activeStep}>
           {steps.map(({ content, ...step }) => {

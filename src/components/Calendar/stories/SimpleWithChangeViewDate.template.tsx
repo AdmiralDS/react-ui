@@ -8,13 +8,13 @@ export const SimpleWithChangeViewDateTemplate = ({ ...props }: CalendarPropType)
 
   return (
     <>
-      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '25px' }}>
-        Коллбеки (смотри в консоль)
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с коллбеками (смотри в консоль)
       </T>
       <T font="Body/Body 2 Long" as="div">
         Открытие экранов выбора года и месяца `(onViewEnter, onViewLeave)`
       </T>
-      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '25px' }}>
+      <T font="Body/Body 2 Long" as="div" style={{ marginBottom: '24px' }}>
         Изменение даты после выбора года или месяца по стрелкам `(onIncreaseDecreaseDate)`
       </T>
 

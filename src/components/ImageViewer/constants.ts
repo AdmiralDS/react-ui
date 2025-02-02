@@ -20,7 +20,3 @@ export const IMAGE_SCALE_PRECISION = 5;
 export const BASE_SCALE_RATIO = 1;
 /** The maximum zoom ratio when the mouse zooms in, adjustable */
 export const WHEEL_MAX_SCALE_RATIO = 1;
-
-export const SWIPE_THRESHOLD = 20;
-export const SWIPE_UNIT = 'px';
-export const SWIPE_TIMEOUT = 500;

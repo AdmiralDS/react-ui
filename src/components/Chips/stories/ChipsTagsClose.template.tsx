@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-import { Chips } from '@admiral-ds/react-ui';
+import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
@@ -26,6 +26,11 @@ export const ChipsTagsCloseTemplate = (props: ChipsProps) => {
   const [dataListS, setDataS] = React.useState(listData);
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Взаимодействовать можно только с чипсами имеющими иконку закрытия “Close”. При нажатии на иконку закрытия
+        элемент удаляется из списка выбранных.
+      </T>
+      <Separator $height={24} />
       <WrapperChip $dimension={props.dimension}>
         {dataListM.map((item) => (
           <Chips

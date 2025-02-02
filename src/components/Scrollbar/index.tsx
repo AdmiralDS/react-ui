@@ -109,11 +109,11 @@ export type ScrollContainerProps<T extends React.ElementType = 'div'> = React.Co
   };
 
 export type ScrollbarProps = {
-  /** Props для контейнера сожержащий вертикальный скролбар */
+  /** Props для контейнера, содержащего вертикальный скролбар */
   verticalScrollProps?: React.ComponentPropsWithRef<typeof VerticalContainer>;
-  /** Props для контейнера сожержащий горизонтальный скролбар */
+  /** Props для контейнера, содержащего горизонтальный скролбар */
   horizontalScrollProps?: React.ComponentPropsWithRef<typeof HorizontalContainer>;
-  /** Минимально допустимая длинна скролбара в пикселях */
+  /** Минимально допустимая длина скролбара в пикселях */
   minThumbSize?: number;
 };
 

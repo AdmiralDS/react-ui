@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Menu, typography, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, typography, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuModelItemProps, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { useMemo } from 'react';
 
@@ -172,6 +172,9 @@ export const MenuWithCustomItemsTemplate = (props: MenuProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример меню с использованием собственных пунктов.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} model={model} defaultSelected={'4'} />
       </Wrapper>

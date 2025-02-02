@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tag, Tags } from '@admiral-ds/react-ui';
+import { Tag, Tags, T } from '@admiral-ds/react-ui';
 import type { TagProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -14,6 +14,10 @@ export const TagStateTemplate = ({
 }: TagProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Тэги могут быть как активными и служить, например, каталагизаторами, так и пассивными, просто отображая
+        принадлежность элемента к некоторой группе элементов имеющих общий признак.
+      </T>
       <Tags>
         <Tag {...props} onClick={clickHandler}>
           Active

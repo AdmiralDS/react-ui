@@ -107,12 +107,14 @@ export const TabMenuHorizontal = ({
   const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
+
   const handleSelectTab = (tabId: string) => {
     if (!tabIsDisabled(tabId)) {
       setSelectedTabInner(tabId);
       onSelectTab?.(tabId);
     }
   };
+
   const horizontalTabs = useMemo(() => {
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, undefined);
@@ -123,7 +125,7 @@ export const TabMenuHorizontal = ({
   const [hiddenTabs, setHiddenTabs] = useState<string[]>([]);
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function setTabWidth() {
       if (hiddenContainerRef.current) {
         const overflow = checkOverflow(hiddenContainerRef.current);
@@ -141,7 +143,7 @@ export const TabMenuHorizontal = ({
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs, tabsId]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const newVisibleTabs: string[] = [];
     const newHiddenTabs: string[] = [];
     if (visibleContainerRef.current && tabWidthMap.length > 0) {
@@ -184,12 +186,10 @@ export const TabMenuHorizontal = ({
     setHiddenTabs(newHiddenTabs);
   }, [visibleContainerRef, containerWidth, tabWidthMap, overflowState, showAddTabButton, selectedTab]);
 
-  const renderedVisibleTabs = useMemo(() => {
-    if (visibleTabs.length === 0) return [];
-    return visibleTabs.map((tabId) => {
-      return renderTab(tabId, tabId === selectedTab, handleSelectTab);
-    });
-  }, [visibleTabs, dimension]);
+  const renderedVisibleTabs = visibleTabs.map((tabId) => {
+    return renderTab(tabId, tabId === selectedTab, handleSelectTab);
+  });
+
   const overflowMenuItems: MenuModelItemProps[] = useMemo(() => {
     if (hiddenTabs.length === 0) return [];
     return hiddenTabs.map((tabId) => {
@@ -205,6 +205,7 @@ export const TabMenuHorizontal = ({
   //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
+
   const getActiveTabLeft = () => {
     const index = visibleTabs.findIndex((tab) => tab === selectedTab);
     if (index < 0) return 0;
@@ -215,16 +216,19 @@ export const TabMenuHorizontal = ({
     }
     return left;
   };
+
   const getUnderlinePosition = () => {
     const width = selectedTab ? getActiveTabWidth(tabWidthMap, selectedTab) : 0;
     const left = getActiveTabLeft();
     return { left: left, width: width };
   };
+
   const styleUnderline = () => {
     const { left, width } = getUnderlinePosition();
     setUnderlineWidth(width);
     setUnderlineLeft(left);
   };
+
   useEffect(() => {
     styleUnderline();
   }, [selectedTab, renderedVisibleTabs]);

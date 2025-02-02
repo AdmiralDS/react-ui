@@ -14,7 +14,7 @@ import { ReactComponent as ShoppingBagOutline } from '@admiral-ds/icons/build/ca
 import { ReactComponent as TrophyOutline } from '@admiral-ds/icons/build/category/TrophyOutline.svg';
 import { ReactComponent as AgreedSolid } from '@admiral-ds/icons/build/service/AgreedSolid.svg';
 import type { MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
-import { getItemHeight, Menu, MenuItem, mediumGroupBorderRadius, typography } from '@admiral-ds/react-ui';
+import { getItemHeight, Menu, MenuItem, mediumGroupBorderRadius, typography, T } from '@admiral-ds/react-ui';
 import styled, { css } from 'styled-components';
 
 const items = [
@@ -176,6 +176,9 @@ export const MenuIconsAndAdditionalTextTemplate = (props: MenuProps) => {
 
   return (
     <div>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример меню с иконками и дополнительным текстом.
+      </T>
       <Wrapper>
         <Menu
           {...props}

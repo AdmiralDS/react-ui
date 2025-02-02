@@ -6,8 +6,8 @@ import { ReactComponent as CopyOutline } from '@admiral-ds/icons/build/documents
 
 import { FONTS, NEW_FONTS } from '#src/components/T/stories/storyDescriptions';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const Wrapper = styled.div`
@@ -88,80 +88,33 @@ const CopyButton = TooltipHoc(CopyIcon);
 export const TFontsDemoTemplate = () => {
   const theme = useTheme() || LIGHT_THEME;
   return (
-    <Wrapper>
-      <Table>
-        <thead>
-          <tr>
-            <th data-label="Style">Стиль</th>
-            <th data-label="Props">Характеристики</th>
-            <th data-label="Manual">Применение</th>
-          </tr>
-        </thead>
-        <tbody>
-          {NEW_FONTS.map((item, index: number) => {
-            const text = `
-            import { T, typography } from '@admiral-ds/react-ui';
-            import styled from 'styled-components';
-
-            const Paragraph = styled.p\`
-              \${typography['${item.name}']}
-              color: #2B313B;
-            \`
-
-            const Example = () => {
-              return(
-                <>
-                  <T font='${item.name}'>Использование StyledComponent</T>
-                  <Paragraph>Использование ThemedCssFunction</Paragraph>
-                </>
-              );
-             }
-            `;
-            return (
-              <tr key={index}>
-                <td data-label="Style">
-                  <T font={item.name} as="div">
-                    {item.name}
-                  </T>
-                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
-                </td>
-                <td data-label="Props">
-                  <FontDesc>
-                    <tbody>
-                      <tr>
-                        <td>Шрифт:</td>
-                        <td>{theme.fontFamily}</td>
-                      </tr>
-                      {item.style.map((st, index: number) => (
-                        <tr key={index}>
-                          <td>{st.name}</td>
-                          <td>{st.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </FontDesc>
-                </td>
-                <td data-label="Manual">{item.description}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      <Separator />
-      <T font="Header/H1" as="p">
-        Old version
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Ниже представлены таблицы стилей типографики, старая и обновленная версия, на которую постепенно будет
+        произведен перевод библиотеки. Каждый из этих стилей можно передавать в компонент T в виде параметра font и в
+        качестве результата получать StyledComponent с необходимыми стилями.
+        <Separator $height={8} />
+        Также возможен случай, когда пользователю нужен css миксин (ThemedCssFunction) с определенными стилями
+        типографики для последующего использования этого миксина в своих styled-компонентах. В таком случае можно
+        воспользоваться объектом typography, экспортируемым из нашей библиотеки. Ключами этого объекта служат названия
+        стилей типографики, а значениями css миксины.
+        <Separator $height={8} />
+        Рядом с названием стиля типографики находится иконка копирования, по нажатию на которую можно будет скопировать
+        пример кода для каждого стиля в отдельности.
       </T>
-      <Table>
-        <thead>
-          <tr>
-            <th data-label="Style">Стиль</th>
-            <th data-label="Props">Характеристики</th>
-            <th data-label="Manual">Применение</th>
-          </tr>
-        </thead>
-        <tbody>
-          {FONTS.map((item, index: number) => {
-            const text = `
+      <Separator $height={24} />
+      <Wrapper>
+        <Table>
+          <thead>
+            <tr>
+              <th data-label="Style">Стиль</th>
+              <th data-label="Props">Характеристики</th>
+              <th data-label="Manual">Применение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {NEW_FONTS.map((item, index: number) => {
+              const text = `
             import { T, typography } from '@admiral-ds/react-ui';
             import styled from 'styled-components';
 
@@ -179,36 +132,99 @@ export const TFontsDemoTemplate = () => {
               );
              }
             `;
-            return (
-              <tr key={index}>
-                <td data-label="Style">
-                  <T font={item.name} as="div">
-                    {item.name}
-                  </T>
-                  <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
-                </td>
-                <td data-label="Props">
-                  <FontDesc>
-                    <tbody>
-                      <tr>
-                        <td>Шрифт:</td>
-                        <td>{theme.fontFamily}</td>
-                      </tr>
-                      {item.style.map((st, index: number) => (
-                        <tr key={index}>
-                          <td>{st.name}</td>
-                          <td>{st.value}</td>
+              return (
+                <tr key={index}>
+                  <td data-label="Style">
+                    <T font={item.name} as="div">
+                      {item.name}
+                    </T>
+                    <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
+                  </td>
+                  <td data-label="Props">
+                    <FontDesc>
+                      <tbody>
+                        <tr>
+                          <td>Шрифт:</td>
+                          <td>{theme.fontFamily}</td>
                         </tr>
-                      ))}
-                    </tbody>
-                  </FontDesc>
-                </td>
-                <td data-label="Manual">{item.description}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </Wrapper>
+                        {item.style.map((st, index: number) => (
+                          <tr key={index}>
+                            <td>{st.name}</td>
+                            <td>{st.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </FontDesc>
+                  </td>
+                  <td data-label="Manual">{item.description}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+        <Separator />
+        <T font="Header/H1" as="p">
+          Old version
+        </T>
+        <Table>
+          <thead>
+            <tr>
+              <th data-label="Style">Стиль</th>
+              <th data-label="Props">Характеристики</th>
+              <th data-label="Manual">Применение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {FONTS.map((item, index: number) => {
+              const text = `
+            import { T, typography } from '@admiral-ds/react-ui';
+            import styled from 'styled-components';
+
+            const Paragraph = styled.p\`
+              \${typography['${item.name}']}
+              color: #2B313B;
+            \`
+
+            const Example = () => {
+              return(
+                <>
+                  <T font='${item.name}'>Использование StyledComponent</T>
+                  <Paragraph>Использование ThemedCssFunction</Paragraph>
+                </>
+              );
+             }
+            `;
+              return (
+                <tr key={index}>
+                  <td data-label="Style">
+                    <T font={item.name} as="div">
+                      {item.name}
+                    </T>
+                    <CopyButton text={text} renderContent={() => 'Копировать пример использования'} />
+                  </td>
+                  <td data-label="Props">
+                    <FontDesc>
+                      <tbody>
+                        <tr>
+                          <td>Шрифт:</td>
+                          <td>{theme.fontFamily}</td>
+                        </tr>
+                        {item.style.map((st, index: number) => (
+                          <tr key={index}>
+                            <td>{st.name}</td>
+                            <td>{st.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </FontDesc>
+                  </td>
+                  <td data-label="Manual">{item.description}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Wrapper>
+    </>
   );
 };

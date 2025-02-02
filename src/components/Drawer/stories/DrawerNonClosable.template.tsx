@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -51,6 +51,12 @@ export const DrawerNonClosableTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        В некоторых случаях применим Drawer с обязательным условием (non-closable Drawer), то есть такая панель, которую
+        можно закрыть только нажав одну из кнопок в футере. Крестик закрытия отсутствует, нажатие на затемненную область
+        ни к чему не приводит. Для того чтобы крестик закрытия отсутствовал используйте параметр displayCloseIcon равный
+        false.
+      </T>
       <Button onClick={() => setOpened(true)}>Open non-closable drawer</Button>
       <Drawer
         {...props}

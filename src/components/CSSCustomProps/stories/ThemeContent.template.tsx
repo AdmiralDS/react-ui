@@ -40,10 +40,8 @@ export const ThemeContentTemplate = () => {
           <Text>--admiral-color-[название группы цветов]_[название конкретного цвета]</Text>, например,
           <Text>--admiral-color-Primary_Primary60Main</Text>
           <Separator />
-          Каждая css переменная имеет аналог в стандартной теме <AdText>
-            (LIGHT_THEME / DARK_THEME)
-          </AdText>, в storybook в разделе Colors можно увидеть какому дизайн токену цвета соответствует каждая css
-          переменная
+          Каждая css переменная имеет аналог в стандартной теме <AdText>(LIGHT_THEME / DARK_THEME)</AdText>, в storybook
+          в разделе Colors можно увидеть какому дизайн токену цвета соответствует каждая css переменная
         </li>
         <li>
           Категория <Term>z-index</Term>

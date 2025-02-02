@@ -1,4 +1,4 @@
-import { Tree, TreeNode } from '@admiral-ds/react-ui';
+import { Tree, TreeNode, T } from '@admiral-ds/react-ui';
 import type { TreeItemProps, TreeNodeRenderOptionProps, TreeProps } from '@admiral-ds/react-ui';
 
 const demo1_TreeModel: Array<TreeItemProps> = [
@@ -145,12 +145,18 @@ export const TreeWithOnChangeHandlerTemplate = (props: TreeProps) => {
   };
 
   return (
-    <Tree
-      {...props}
-      dimension="s"
-      defaultModel={demo1_TreeModel}
-      onCheckedChange={handleCheckedChange}
-      onExpandedChange={handleExpandedChange}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        События onExpandedChange и onCheckedChange добавлены для упрощения обработки изменений дерева в контролируемом
+        состоянии.
+      </T>
+      <Tree
+        {...props}
+        dimension="s"
+        defaultModel={demo1_TreeModel}
+        onCheckedChange={handleCheckedChange}
+        onExpandedChange={handleExpandedChange}
+      />
+    </>
   );
 };

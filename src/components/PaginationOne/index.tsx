@@ -7,11 +7,11 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
-import { MenuButton } from '#src/components/PaginationOne/Menu';
+import { MenuButton } from './Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import { keyboardKey } from '../common/keyboardKey';
+import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
@@ -189,12 +189,13 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const parsePageNumber = (pageSelected: string) => {
     if (pageSelected === '') {
-      return parseInt(selectedPageNumber);
+      return Number.parseInt(selectedPageNumber, 10);
     }
-    const page = parseInt(pageSelected);
-    if (isNaN(page) || page < 1) {
+    const page = Number.parseInt(pageSelected, 10);
+    if (Number.isNaN(page) || page < 1) {
       return 1;
-    } else if (page > totalPages) {
+    }
+    if (page > totalPages) {
       return totalPages;
     }
     return page;
@@ -213,7 +214,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   };
 
   const handleSizeChange = (pageSizeSelected: string) => {
-    const pageSize = parseInt(pageSizeSelected);
+    const pageSize = Number.parseInt(pageSizeSelected, 10);
     onChange({ page: 1, pageSize: pageSize });
   };
 

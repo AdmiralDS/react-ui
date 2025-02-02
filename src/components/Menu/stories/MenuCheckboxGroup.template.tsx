@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, mediumGroupBorderRadius, checkboxTreeToMap, MenuItemWithCheckbox } from '@admiral-ds/react-ui';
+import { Menu, mediumGroupBorderRadius, checkboxTreeToMap, MenuItemWithCheckbox, T } from '@admiral-ds/react-ui';
 import type {
   MenuProps,
   RenderOptionProps,
@@ -160,6 +160,9 @@ export const MenuCheckboxGroupTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с CheckboxGroup.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

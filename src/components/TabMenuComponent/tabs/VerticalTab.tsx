@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { MouseEventHandler } from 'react';
 
 import { uid } from '#src/components/common/uid';
@@ -21,7 +21,8 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
     }: VerticalTabProps,
     ref,
   ) => {
-    const idForTab = onSelectTab ? id : uid();
+    const [defaultId] = useState(uid());
+    const idForTab = id ?? defaultId;
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
       onSelectTab?.(tabId);
@@ -33,13 +34,13 @@ export const VerticalTab = forwardRef<HTMLButtonElement, VerticalTabProps>(
         role="tab"
         type="button"
         id={idForTab}
-        ref={onSelectTab ? ref : undefined}
+        ref={ref}
         data-tabid={tabId}
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
         $width={width}
-        onClick={onSelectTab ? handleTabClick : undefined}
+        onClick={handleTabClick}
       >
         {children}
       </BaseTab>

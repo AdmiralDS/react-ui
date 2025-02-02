@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { CheckboxField } from '#src/components/form';
-import observeRect from '#src/components/common/observeRect';
 import { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import type { Color } from '#src/components/themes';
-import { getScrollbarSize } from '#src/components/common/dom/scrollbarUtil';
 import { GroupRow } from '#src/components/Table/Row/GroupRow';
 import { RegularRow } from '#src/components/Table/Row/RegularRow';
 import { RowWrapper } from '#src/components/Table/Row/RowWrapper';
@@ -25,12 +23,13 @@ import {
   HeaderCellsWrapper,
   HeaderWrapper,
   Row,
-  ScrollTableBody,
+  Body,
   StickyWrapper,
   NormalWrapper,
   TableContainer,
   HiddenHeader,
   DragCell,
+  ShadowDetector,
 } from './style';
 import { FixedSizeBody, DynamicSizeBody } from './virtualScroll';
 import type {
@@ -102,10 +101,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const checkboxDimension = dimension === 's' || dimension === 'm' ? 's' : 'm';
     const columnMinWidth = dimension === 's' || dimension === 'm' ? COLUMN_MIN_WIDTH_M : COLUMN_MIN_WIDTH_L;
 
-    const [verticalScroll, setVerticalScroll] = React.useState(false);
-    const [tableWidth, setTableWidth] = React.useState(0);
-    const [bodyHeight, setBodyHeight] = React.useState(0);
-    const [scrollbar, setScrollbarSize] = React.useState(0);
+    const [tableHeight, setTableHeight] = React.useState(0);
+    const [headerHeight, setHeaderHeight] = React.useState(0);
 
     const stickyColumns = [...columnList].filter((col) => col.sticky);
 
@@ -127,9 +124,11 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const tableRef = React.useRef<HTMLDivElement>(null);
     const headerRef = React.useRef<HTMLDivElement>(null);
     const hiddenHeaderRef = React.useRef<HTMLDivElement>(null);
-    const scrollBodyRef = React.useRef<HTMLDivElement>(null);
+    const bodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
+    const shadowDetectorRef = React.useRef<HTMLDivElement>(null);
+    const fillerRef = React.useRef<HTMLDivElement>(null);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -190,8 +189,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       : {};
 
     const updateHeaderScrollWidth = () => {
-      if (scrollBodyRef.current && headerRef.current) {
-        scrollBodyRef.current.style.setProperty(`--header-scroll-width`, headerRef.current.scrollWidth + 'px');
+      if (bodyRef.current && headerRef.current) {
+        bodyRef.current.style.setProperty(`--header-scroll-width`, headerRef.current.scrollWidth + 'px');
       }
     };
 
@@ -202,12 +201,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         const width = column.getBoundingClientRect().width;
         if (index) {
           headerRef.current?.style.setProperty(`--th-${index}-width`, width + 'px');
-          scrollBodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
+          bodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
         }
       });
       updateHeaderScrollWidth();
     };
 
+    // check column size updates
     React.useLayoutEffect(() => {
       if (hiddenHeaderRef.current) {
         const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
@@ -218,98 +218,84 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           resizeObserver.disconnect();
         };
       }
-    }, [hiddenHeaderRef.current, headerRef.current, scrollBodyRef.current, columnList, rowList]);
-
-    React.useEffect(() => {
-      const size = getScrollbarSize();
-      setScrollbarSize(size);
-    }, [setScrollbarSize]);
+    }, [hiddenHeaderRef.current, headerRef.current, bodyRef.current, columnList, rowList]);
 
     React.useLayoutEffect(() => {
-      const scrollBody = scrollBodyRef.current;
+      updateColumnsWidth();
+    });
 
-      function scrollHeader(scrollLeft: number) {
-        if (headerRef.current) headerRef.current.scrollLeft = scrollLeft;
-      }
+    // check table size updates
+    React.useLayoutEffect(() => {
+      const table = tableRef.current;
 
-      function moveOverflowMenu(scrollLeft: number) {
-        if (scrollBodyRef.current) {
-          const menus = scrollBodyRef.current.querySelectorAll<HTMLElement>('[data-overflowmenu]');
-          const scrollbarWidth = verticalScroll ? scrollbar : 0;
-          const headerScrollWidth = headerRef.current?.scrollWidth || tableWidth;
-
-          menus.forEach((menu) => {
-            if (scrollLeft <= headerScrollWidth - tableWidth + scrollbarWidth) {
-              menu.style.marginLeft = `${scrollLeft}px`;
-            } else {
-              menu.style.marginLeft = `${headerScrollWidth - tableWidth + scrollbarWidth}px`;
-            }
-          });
-        }
-      }
-
-      function setShadow(scrollLeft: number) {
-        if (tableRef.current) {
-          const initial = tableRef.current.getAttribute('data-shadow');
-          if (scrollLeft === 0) {
-            if (initial !== 'false') tableRef.current.setAttribute('data-shadow', 'false');
-          } else {
-            if (initial !== 'true') tableRef.current.setAttribute('data-shadow', 'true');
-          }
-        }
-      }
-
-      function handleScroll(e: any) {
-        if (e.target === scrollBodyRef.current) {
-          requestAnimationFrame(function () {
-            scrollHeader(e.target.scrollLeft);
-            moveOverflowMenu(e.target.scrollLeft);
-          });
-        }
-        if (stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn) {
-          requestAnimationFrame(function () {
-            setShadow(e.target.scrollLeft);
-          });
-        }
-      }
-
-      if (scrollBody) {
-        scrollBody.addEventListener('scroll', handleScroll);
-
-        // TODO: обдумать возможность замены на ResizeObserver
-        const observer = observeRect(scrollBody, (rect: any) => {
-          if (scrollBody.scrollHeight > scrollBody.offsetHeight) {
-            setVerticalScroll(true);
-          } else {
-            setVerticalScroll(false);
-          }
-          setTableWidth(rect.width);
-          // если изменился размер таблицы, то следует пересчитать ширину колонок
-          updateColumnsWidth();
-          setBodyHeight(rect.height);
-          moveOverflowMenu(scrollBody.scrollLeft);
+      if (table) {
+        const resizeObserver = new ResizeObserver(() => {
+          setTableHeight(table.getBoundingClientRect().height);
         });
-        observer.observe();
-
+        resizeObserver.observe(table);
         return () => {
-          scrollBody.removeEventListener('scroll', handleScroll);
-          observer.unobserve();
+          resizeObserver.disconnect();
         };
       }
-    }, [
-      tableRef.current,
-      headerRef.current,
-      scrollBodyRef.current,
-      stickyColumns,
-      displayRowExpansionColumn,
-      displayRowSelectionColumn,
-      tableWidth,
-      scrollbar,
-      verticalScroll,
-      setTableWidth,
-      setVerticalScroll,
-      setBodyHeight,
-    ]);
+    }, [setTableHeight]);
+
+    // check header size updates
+    React.useLayoutEffect(() => {
+      const header = headerRef.current;
+
+      if (header) {
+        const resizeObserver = new ResizeObserver(() => {
+          setHeaderHeight(header.getBoundingClientRect().height);
+        });
+        resizeObserver.observe(header);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [setHeaderHeight]);
+
+    // check filler size updates
+    React.useLayoutEffect(() => {
+      const filler = fillerRef.current;
+
+      if (filler) {
+        const resizeObserver = new ResizeObserver(() => {
+          filler.dataset.empty = String(filler.getBoundingClientRect().width == 0);
+        });
+        resizeObserver.observe(filler);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, []);
+
+    // scroll-triggered shadow animation via IntersectionObserver
+    // TODO: research ways to implement scroll-driven animation via css and polyfill
+    React.useLayoutEffect(() => {
+      const table = tableRef.current;
+      const shadowDetector = shadowDetectorRef.current;
+      const enableShadow =
+        stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable;
+
+      function handleIntersection([entry]: IntersectionObserverEntry[]) {
+        if (table) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
+            table.setAttribute('data-shadow', 'false');
+          } else {
+            table.setAttribute('data-shadow', 'true');
+          }
+        }
+      }
+
+      if (table && shadowDetector && enableShadow) {
+        const observer = new IntersectionObserver(handleIntersection, {
+          root: table,
+          threshold: [0, 1.0],
+        });
+        observer.observe(shadowDetector);
+        return () => observer.disconnect();
+      }
+    }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn, rowsDraggable]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -521,19 +507,17 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         <RowWrapper
           dimension={dimension}
           row={row}
-          underline={(isLastRow && showLastRowUnderline) || !isLastRow}
-          tableWidth={tableWidth}
+          underline={(isLastRow && showLastRowUnderline && !showBorders) || !isLastRow}
           isGroup={isGroupRow}
           groupId={rowToGroupMap[row.id]?.groupId ?? null}
           onRowClick={onRowClick}
           onRowDoubleClick={onRowDoubleClick}
           rowWidth={rowWidth}
-          verticalScroll={verticalScroll}
-          scrollbar={scrollbar}
           grey={zebraRows[row.id]?.includes('even')}
           showRowsActions={showRowsActions}
           rowStatusMap={rowStatusMap}
-          bodyRef={scrollBodyRef}
+          tableRef={tableRef}
+          headerHeight={headerHeight}
           key={`row_${row.id}`}
         >
           {isGroupRow ? renderGroupRow(row) : renderRegularRow(row, index)}
@@ -561,35 +545,39 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       return virtualScroll && (virtualScroll.fixedRowHeight || virtualScroll.estimatedRowHeight) ? (
         virtualScroll.fixedRowHeight ? (
           <FixedSizeBody
-            height={bodyHeight}
             rowList={tableRows}
             childHeight={virtualScroll.fixedRowHeight}
             renderRow={renderRow}
             renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
-            ref={scrollBodyRef}
+            ref={bodyRef}
             className="tbody"
+            tableRef={tableRef}
+            tableHeight={tableHeight}
+            headerHeight={headerHeight}
           />
         ) : (
           <DynamicSizeBody
-            height={bodyHeight}
+            tableRef={tableRef}
+            tableHeight={tableHeight}
+            headerHeight={headerHeight}
             rowList={tableRows}
             renderRow={renderRow}
             renderEmptyMessage={tableRows.length ? undefined : renderEmptyMessage}
             estimatedRowHeight={virtualScroll.estimatedRowHeight}
-            ref={scrollBodyRef}
+            ref={bodyRef}
             className="tbody"
           />
         )
       ) : (
-        <ScrollTableBody ref={scrollBodyRef} className="tbody">
+        <Body ref={bodyRef} className="tbody">
           {tableRows.length ? tableRows.map((row, index) => renderRow(row, index)) : renderEmptyMessage()}
-        </ScrollTableBody>
+        </Body>
       );
     };
 
     const renderHiddenHeader = () => {
       return (
-        <HiddenHeader ref={hiddenHeaderRef} data-verticalscroll={verticalScroll}>
+        <HiddenHeader ref={hiddenHeaderRef}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
@@ -624,43 +612,42 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
         className={`table ${props.className || ''}`}
       >
         {renderHiddenHeader()}
-        <HeaderWrapper
-          $scrollbar={scrollbar}
-          $greyHeader={greyHeader}
-          data-verticalscroll={verticalScroll}
-          className="thead"
-        >
-          <Header $dimension={dimension} ref={headerRef} className="tr">
+        <HeaderWrapper className="thead">
+          <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
-              <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
-                {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
-                {displayRowExpansionColumn && (
-                  <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
-                )}
-                {displayRowSelectionColumn && (
-                  <CheckboxCell
-                    $dimension={dimension}
-                    className="th_checkbox"
-                    data-th-column="checkbox"
-                    data-draggable={false}
-                    data-droppable={false}
-                  >
-                    <CheckboxField
-                      dimension={checkboxDimension}
-                      checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
-                      indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
-                      disabled={tableRows.length === 0 || headerCheckboxDisabled}
-                      onChange={handleHeaderCheckboxChange}
-                    />
-                  </CheckboxCell>
-                )}
-                {stickyColumns.length > 0 && stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
-              </StickyWrapper>
+              <>
+                <ShadowDetector ref={shadowDetectorRef} />
+                <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
+                  {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
+                  {displayRowExpansionColumn && (
+                    <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
+                  )}
+                  {displayRowSelectionColumn && (
+                    <CheckboxCell
+                      $dimension={dimension}
+                      className="th_checkbox"
+                      data-th-column="checkbox"
+                      data-draggable={false}
+                      data-droppable={false}
+                    >
+                      <CheckboxField
+                        dimension={checkboxDimension}
+                        checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}
+                        indeterminate={(someRowsChecked && !allRowsChecked) || headerCheckboxIndeterminate}
+                        disabled={tableRows.length === 0 || headerCheckboxDisabled}
+                        onChange={handleHeaderCheckboxChange}
+                      />
+                    </CheckboxCell>
+                  )}
+                  {stickyColumns.length > 0 &&
+                    stickyColumns.map((col, index) => renderHeaderCell(col as Column, index))}
+                </StickyWrapper>
+              </>
             )}
             <NormalWrapper ref={normalColumnsWrapperRef}>
               {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
             </NormalWrapper>
-            <Filler />
+            <Filler ref={fillerRef} />
           </Header>
         </HeaderWrapper>
         {renderBody()}
@@ -671,7 +658,6 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           isAnyColumnDraggable={isAnyColumnDraggable}
           isAnyStickyColumnDraggable={isAnyStickyColumnDraggable}
           tableRef={tableRef}
-          scrollBodyRef={scrollBodyRef}
           normalColumnsWrapperRef={normalColumnsWrapperRef}
           stickyColumnsWrapperRef={stickyColumnsWrapperRef}
         />
@@ -680,7 +666,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           onRowDragEnd={onRowDragEnd}
           dimension={dimension}
           rowsDraggable={rowsDraggable}
-          scrollBodyRef={scrollBodyRef}
+          tableRef={tableRef}
+          bodyRef={bodyRef}
           rowToGroupMap={rowToGroupMap}
         />
       </TableContainer>

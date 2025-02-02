@@ -185,10 +185,6 @@ export const TooltipHocRefSetterExample = {
       source: {
         code: TooltipHocRefSetterRaw,
       },
-      description: {
-        story: `Если в ваш компонент извне передан параметр ref и у вас есть внутренний
-        ref в компоненте, для синхронной работы данных рефов и их мерджа вы можете воспользоваться утилитой refSetter.`,
-      },
     },
   },
 

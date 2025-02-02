@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.31.0](https://github.com/AdmiralDS/react-ui/compare/v8.30.1...v8.31.0) (2025-01-29)
+
+
+### Features
+
+* **Anchor:** добавлен новый компонент Anchor ([da234cd](https://github.com/AdmiralDS/react-ui/commit/da234cd54bc8dde622d0112bf8bbc46a742ae27a))
+
+### [8.30.1](https://github.com/AdmiralDS/react-ui/compare/v8.30.0...v8.30.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* **Table:** fix problem with column jumping during drag drop ([ef53eab](https://github.com/AdmiralDS/react-ui/commit/ef53eab62d892033568c8009b5aa9357d5604d99))
+* **Table:** fix shadow on sticky columns during scroll ([80e6899](https://github.com/AdmiralDS/react-ui/commit/80e689969db09b76decab7cc20bafe448a759912))
+
+## [8.30.0](https://github.com/AdmiralDS/react-ui/compare/v8.29.4...v8.30.0) (2025-01-27)
+
+
+### Features
+
+* **Badge:** [#1606](https://github.com/AdmiralDS/react-ui/issues/1606) color variant light changed ([f829c97](https://github.com/AdmiralDS/react-ui/commit/f829c977266f4293872e9c70de96145a2fb7d1e5))
+* **Table:** [#1549](https://github.com/AdmiralDS/react-ui/issues/1549) зона скролла распространяется теперь на всю таблицу, включая зону заголовков и тело таблицы ([b10c444](https://github.com/AdmiralDS/react-ui/commit/b10c4447b547153e62eaa7a59977d0dc3d8617da))
+
+### [8.29.4](https://github.com/AdmiralDS/react-ui/compare/v8.29.3...v8.29.4) (2025-01-23)
+
+
+### Bug Fixes
+
+* **PaginationOne:** add virtual scroll option ([bf4b8fe](https://github.com/AdmiralDS/react-ui/commit/bf4b8fe23cfb1d9a2aac8b95f19551d4688740e8))
+
+### [8.29.3](https://github.com/AdmiralDS/react-ui/compare/v8.29.2...v8.29.3) (2025-01-22)
+
+
+### Bug Fixes
+
+* **DateInput:** [#1616](https://github.com/AdmiralDS/react-ui/issues/1616) переход на следующий символ при вводе не осуществляется ([c3c1b29](https://github.com/AdmiralDS/react-ui/commit/c3c1b2902747a7926084f2d0f312c207fd0d5114))
+
+### [8.29.2](https://github.com/AdmiralDS/react-ui/compare/v8.29.1...v8.29.2) (2025-01-14)
+
+
+### Bug Fixes
+
+* **ImageViewer:** исправлено обновление активной миниатюры в контроллируемом режиме ([3fa4a3e](https://github.com/AdmiralDS/react-ui/commit/3fa4a3e63ea209eadba7420b616bf5d5228e52bb))
+* **Select:** Исправлена ошибка неправильного выбора значений при нажатии на enter ([6a27798](https://github.com/AdmiralDS/react-ui/commit/6a27798ec3a9ef623f872a054004755f4f26c034))
+
+### [8.29.1](https://github.com/AdmiralDS/react-ui/compare/v8.29.0...v8.29.1) (2024-12-20)
+
+
+### Bug Fixes
+
+* **forwardRef:** correct wrong typings ([3ca7adb](https://github.com/AdmiralDS/react-ui/commit/3ca7adb07f46cdb9eb54ab97a8c84d78d00d4c3b))
+
+## [8.29.0](https://github.com/AdmiralDS/react-ui/compare/v8.28.2...v8.29.0) (2024-12-08)
+
+
+### Features
+
+* **Carousel:** добавлена прокрутка свайпом ([5be04c0](https://github.com/AdmiralDS/react-ui/commit/5be04c0a08248583e97f05addbcb26a5ba4eef2d))
+
+
+### Bug Fixes
+
+* **Breadcrumbs:** [#1589](https://github.com/AdmiralDS/react-ui/issues/1589) исправлен баг с неправильным margin, в случае когда в компонент передана только одна крошка ([55b350e](https://github.com/AdmiralDS/react-ui/commit/55b350e014b649582a309c8aaeb9fc396d4d6519))
+* **HorizontalTab, CardTab, VerticalTab:** id компонента не должно меняться при каждом ререндере ([15aa950](https://github.com/AdmiralDS/react-ui/commit/15aa950c0126ab90885effb3e59230a51c555a54))
+
 ### [8.28.2](https://github.com/AdmiralDS/react-ui/compare/v8.28.1...v8.28.2) (2024-11-28)
 
 
