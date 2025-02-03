@@ -11,6 +11,7 @@ import { HintTextButtonTemplate } from './HintTextButton.template';
 import { HintTargetTemplate } from './HintTarget.template';
 import { HintAnchorCssTemplate } from './HintAnchorCss.template';
 import { HintWithHeaderTemplate } from './HintWithHeader.template';
+import { HintDimensionTemplate } from './HintDimension.template';
 
 // Imports of text sources
 import HintBaseRaw from './HintBase.template?raw';
@@ -21,6 +22,7 @@ import HintTextButtonRaw from './HintTextButton.template?raw';
 import HintTargetRaw from './HintTarget.template?raw';
 import HintAnchorCssRaw from './HintAnchorCss.template?raw';
 import HintWithHeaderRaw from './HintWithHeader.template?raw';
+import HintDimensionRaw from './HintDimension.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -41,12 +43,7 @@ const Description = () => (
     <Separator />В сценарии, когда Hint вызывается по ховеру, иконки закрытия на компоненте нет и он скрывается, когда
     мы уводим курсор с объекта, к которому он привязан.
     <Separator />
-    Hint имеет три фиксированных по ширине размера: 280px, 384px и 488px, которые используются в зависимости от
-    предполагаемого объема текста. На экранах мобильных устройств, меньше 640px, компонент адаптируется по ширине к
-    рабочей области устройства. Высота компонента настраивается автоматически при задании контента. Максимальная высота
-    компонента – 320px, после чего у контента появляется вертикальный скролл.
-    <Separator />
-    По умолчанию Hint-у присваивается самый большой размер, Hint появляется по ховеру.
+    По умолчанию Hint появляется по ховеру.
   </Desc>
 );
 
@@ -136,6 +133,28 @@ export const HintBaseExample = {
   },
 
   name: 'Hint. Базовый пример.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Размеры">
+const HintDimensionStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HintDimensionExample = {
+  render: HintDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HintDimensionRaw,
+      },
+    },
+  },
+
+  name: 'Hint. Размеры.',
 };
 
 //</editor-fold>
