@@ -549,6 +549,11 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       props.onMouseEnter?.(e);
     };
 
+    const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+      activateItem(undefined);
+      props.onMouseLeave?.(e);
+    };
+
     const handleClickOutside = () => {
       setSubmenuVisible(false);
     };
@@ -572,6 +577,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
         onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
