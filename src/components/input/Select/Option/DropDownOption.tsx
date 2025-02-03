@@ -70,6 +70,7 @@ export const DropDownOption = ({
             {...htmlProps}
             $selected={options.selected}
             $hovered={options.hovered}
+            $preselected={options.preselected}
             $multiple={dropDownContext?.multiple}
           >
             {defaultOptionRender({ selected: options.selected, hovered: options.hovered })}
