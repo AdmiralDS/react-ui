@@ -1,11 +1,13 @@
-import type { HTMLAttributes } from 'react';
-import { forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import type { HTMLAttributes, RefObject } from 'react';
+import { createRef, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AnchorContainer } from './styled';
 import type { AnchorDimension } from './AnchorItem';
-import { ANCHOR_ITEM_HEIGHT_M, ANCHOR_ITEM_HEIGHT_S, AnchorItem } from './AnchorItem';
+import { AnchorItem } from './AnchorItem';
 import { ActiveVerticalSelector } from './ActiveVerticalSelector';
 import { getInternalCurrentAnchor } from './utils';
+import { debounce } from '../common/utils/debounce';
+import { refSetter } from '../common/utils/refSetter';
 
 export { AnchorDimension };
 
@@ -39,6 +41,7 @@ interface NodesMapItem extends Omit<AnchorLinkItemProps, 'children'> {
   parent?: string;
   level: number;
 }
+type NodesMapItemWithRefProps = NodesMapItem & { ref: RefObject<HTMLAnchorElement> };
 
 const itemHasChildren = (item: AnchorLinkItemProps) =>
   !!item.children && Array.isArray(item.children) && item.children.length > 0;
@@ -61,8 +64,12 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
   ({ dimension = 'm', offsetTop = 0, bounds = 5, multilineView = false, items, getAnchorContainer, ...props }, ref) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
     const itemsMap = useMemo(() => treeToFlat(items), [items]);
+    // add refs to links
+    const itemsWithRef: Array<NodesMapItemWithRefProps> = useMemo(() => {
+      return itemsMap.map((item) => ({ ...item, ref: createRef<HTMLAnchorElement>() }));
+    }, [itemsMap]);
 
-    const [activeLink, setActiveLink] = useState<string | null>(null);
+    const [activeLink, setActiveLink] = useState<string | null>(itemsMap[0]?.href || null);
 
     const handleScroll: EventListener = useCallback(() => {
       // TODO: add stop while animating
@@ -77,20 +84,47 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     }, [getAnchorContainer, itemsMap]);
 
     //<editor-fold desc="Параметры для корректной отрисовки ActiveVerticalSelector">
+    const anchorContainerRef = useRef<HTMLDivElement | null>(null);
     const [selectorTop, setSelectorTop] = useState(0);
-    const getSelectorPosition = () => {
-      const index = itemsMap.findIndex((item) => item.href === activeLink);
-      if (index < 0) return 0;
-      const height = dimension === 'm' ? ANCHOR_ITEM_HEIGHT_M : ANCHOR_ITEM_HEIGHT_S;
-      return index * height;
-    };
-    const styleSelector = () => {
-      const top = getSelectorPosition();
+    const [selectorHeight, setSelectorHeight] = useState(0);
+    const selectorRef = useRef<HTMLDivElement | null>(null);
+
+    const styleSelector = (top: number, height: number) => {
       setSelectorTop(top);
+      setSelectorHeight(height);
     };
+
     useEffect(() => {
-      styleSelector();
-    }, [activeLink, dimension]);
+      function setSelector() {
+        const activeLinkRef = itemsWithRef.filter((item) => item.href === activeLink)?.[0]?.ref.current;
+        const top = parseFloat(selectorRef.current?.style.top || '0');
+        const selectorHeight = parseFloat(selectorRef.current?.style.height || '0');
+
+        if (activeLinkRef && anchorContainerRef.current) {
+          // используем метод getBoundingClientRect, так как он дает точность до сотых пикселя
+          const activeLinkHeight = activeLinkRef.getBoundingClientRect().height;
+          const activeLinkTop =
+            activeLinkRef.getBoundingClientRect().top -
+            anchorContainerRef.current.getBoundingClientRect().top +
+            anchorContainerRef.current.scrollTop;
+
+          if (activeLinkTop !== top || activeLinkHeight !== selectorHeight) {
+            styleSelector(activeLinkTop, activeLinkHeight);
+          }
+        }
+        if (!activeLinkRef) {
+          styleSelector(0, 0);
+        }
+      }
+
+      if (anchorContainerRef.current?.firstElementChild) {
+        const resizeObserver = new ResizeObserver(debounce(setSelector, 100));
+        resizeObserver.observe(anchorContainerRef.current?.firstElementChild);
+        return () => {
+          resizeObserver.disconnect();
+        };
+      }
+    }, [itemsWithRef, activeLink, dimension, multilineView, offsetTop, bounds]);
     //</editor-fold>
 
     useEffect(() => {
@@ -102,8 +136,9 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     }, [getAnchorContainer, handleScroll]);
 
     const renderItems = () => {
-      return itemsMap.map((item) => (
+      return itemsWithRef.map((item) => (
         <AnchorItem
+          ref={item.ref}
           key={item.key}
           dimension={dimension}
           multilineView={multilineView}
@@ -117,9 +152,9 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     };
 
     return (
-      <AnchorContainer {...props} ref={ref}>
+      <AnchorContainer {...props} ref={refSetter(ref, anchorContainerRef)}>
         {renderItems()}
-        <ActiveVerticalSelector $top={selectorTop} $dimension={dimension} $transition={true} />
+        <ActiveVerticalSelector $top={selectorTop} $height={selectorHeight} $transition={true} />
       </AnchorContainer>
     );
   },
