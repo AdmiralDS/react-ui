@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
+import { Tooltip } from '#src/components/Tooltip';
 
 import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
@@ -39,6 +40,7 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   dimension?: 'xl' | 'm';
   /** Состояние skeleton */
   skeleton?: boolean;
+  withTooltip?: boolean;
 }
 
 export const Slider = ({
@@ -55,6 +57,7 @@ export const Slider = ({
   step: userStep = 1,
   dimension = 'xl',
   skeleton = false,
+  withTooltip = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
@@ -232,6 +235,7 @@ export const Slider = ({
             >
               <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
+            <TooltipThumb thumb={sliderRef.current} value={value} />
           </DefaultTrack>
         </Track>
       </TrackWrapper>
@@ -240,3 +244,44 @@ export const Slider = ({
 };
 
 Slider.displayName = 'Slider';
+
+const TooltipThumb = ({ thumb, value }: { thumb: HTMLDivElement; value: number }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    function show() {
+      setVisible(true);
+    }
+    function hide() {
+      setVisible(false);
+    }
+    const button = thumb;
+    if (button) {
+      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
+       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
+       * а затем была наведена на target элемент
+       * https://github.com/facebook/react/issues/19419 */
+      button.addEventListener('mouseenter', show);
+      // button.addEventListener('focus', show);
+      button.addEventListener('mouseleave', hide);
+      // button.addEventListener('blur', hide);
+      return () => {
+        button.removeEventListener('mouseenter', show);
+        // button.removeEventListener('focus', show);
+        button.removeEventListener('mouseleave', hide);
+        // button.removeEventListener('blur', hide);
+      };
+    }
+  }, [setVisible, thumb]);
+
+  return visible && thumb ? (
+    <Tooltip
+      // dimension={props.dimension}
+      targetElement={thumb}
+      renderContent={() => value}
+      style={{ minWidth: '200px', maxWidth: '300px' }}
+      // tooltipPosition={props.tooltipPosition}
+      id="test1"
+    />
+  ) : null;
+};
