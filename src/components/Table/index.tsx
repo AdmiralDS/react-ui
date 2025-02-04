@@ -196,15 +196,18 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const updateColumnsWidth = () => {
       const hiddenColumns = hiddenHeaderRef.current?.querySelectorAll<HTMLElement>('.th');
-      hiddenColumns?.forEach((column) => {
-        const index = column.dataset.index;
-        const width = column.getBoundingClientRect().width;
-        if (index) {
-          headerRef.current?.style.setProperty(`--th-${index}-width`, width + 'px');
-          bodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
-        }
-      });
-      updateHeaderScrollWidth();
+      if (hiddenColumns) {
+        Array.from(hiddenColumns)
+          .map((column) => ({ index: column.dataset.index, width: column.getBoundingClientRect().width }))
+          .map(({ index, width }) => {
+            if (index) {
+              headerRef.current?.style.setProperty(`--th-${index}-width`, width + 'px');
+              bodyRef.current?.style.setProperty(`--td-${index}-width`, width + 'px');
+            }
+          });
+
+        updateHeaderScrollWidth();
+      }
     };
 
     // check column size updates
