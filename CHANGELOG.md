@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.32.0](https://github.com/AdmiralDS/react-ui/compare/v8.31.0...v8.32.0) (2025-02-04)
+
+
+### Features
+
+* add multiSearchSelect with add choose all button ([39629b6](https://github.com/AdmiralDS/react-ui/commit/39629b64b436c2fe51c93f9d7f6c9645f09a51af))
+* **CardTab:** add hideBorder option ([a05a762](https://github.com/AdmiralDS/react-ui/commit/a05a7620b0407995f0aab6d033a462b3298452d9))
+* **Divider:** добавлен новый компонент ([c5b5c13](https://github.com/AdmiralDS/react-ui/commit/c5b5c135dd4d77e0ffd063a408f4f20eab16cbdd))
+* **Drawer:** [#1628](https://github.com/AdmiralDS/react-ui/issues/1628) отменено ограничение по минимальной ширине компонента ([b3bfcc6](https://github.com/AdmiralDS/react-ui/commit/b3bfcc69f4d29993f6c472d174abc1dc02a6181a))
+* **Hint:** [#1630](https://github.com/AdmiralDS/react-ui/issues/1630) добавлен пример с размерами компонента и заданием кастомной ширины ([3e6f79e](https://github.com/AdmiralDS/react-ui/commit/3e6f79e9ab6e44dd81681a3cd140259443bcbda3))
+* **Tag:** бэкграунды серого цвета заменены на прозрачности ([1d7f401](https://github.com/AdmiralDS/react-ui/commit/1d7f4013870a43cf03e64d04dd5968557871a4e5))
+
+
+### Bug Fixes
+
+* **Anchor:** исправлена высота селектора при многострочном отображении ([f9a3b15](https://github.com/AdmiralDS/react-ui/commit/f9a3b15773c95aa76f3a8d47631f83165e8e90dd))
+* **Anchor:** прокинуты пропсы offsetTop и bounds ([a45adde](https://github.com/AdmiralDS/react-ui/commit/a45addebe9b538218a3076f76074ed89acd5bc5a))
+* **Menu:** Fix hover effect does not disappear when the cursor is moved away from the menu [#1597](https://github.com/AdmiralDS/react-ui/issues/1597) ([a98536f](https://github.com/AdmiralDS/react-ui/commit/a98536fcd7a48a0f4f7167b3f32ef5bbec437a9b))
+* **Select:** Исправлено пропадание курсора при выранном значении в режиме Multiple ([5de3ff4](https://github.com/AdmiralDS/react-ui/commit/5de3ff4251caad4e2391842ed50726979408e3b6))
+
 ## [8.31.0](https://github.com/AdmiralDS/react-ui/compare/v8.30.1...v8.31.0) (2025-01-29)
 
 
