@@ -20,6 +20,8 @@ export const OPTIONS_NAMES = [
   'Алексей Орлов',
 ];
 
+export const OPTIONS_CITIES = ['Москва', 'Санкт-Петербург', 'Ижевск', 'Тверь', 'Рязань'];
+
 export const OPTIONS = [
   {
     value: 'val1',
