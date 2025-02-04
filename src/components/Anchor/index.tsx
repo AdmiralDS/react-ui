@@ -58,7 +58,7 @@ const treeToFlat = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string
 };
 
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
-  ({ dimension = 'm', multilineView = false, items, getAnchorContainer, ...props }, ref) => {
+  ({ dimension = 'm', offsetTop = 0, bounds = 5, multilineView = false, items, getAnchorContainer, ...props }, ref) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
     const itemsMap = useMemo(() => treeToFlat(items), [items]);
 
@@ -71,7 +71,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
       // }
       const links = itemsMap.map(({ href }) => href);
       const container = getCurrentContainer();
-      const activeLink = getInternalCurrentAnchor(container, links);
+      const activeLink = getInternalCurrentAnchor(container, links, offsetTop, bounds);
 
       setActiveLink(activeLink);
     }, [getAnchorContainer, itemsMap]);
