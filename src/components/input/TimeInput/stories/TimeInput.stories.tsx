@@ -15,6 +15,7 @@ import { TimeInputRangeTemplate } from './TimeInputRange.template';
 import { TimeInputRangeDisabledTemplate } from './TimeInputRangeDisabled.template';
 import { TimeInputSimpleTemplate } from './TimeInputSimple.template';
 import { TimeInputSimpleDisabledTemplate } from './TimeInputSimpleDisabled.template';
+import { TimeInputSimpleCustomSlotsTemplate } from './TimeInputSimpleCustomSlots.template';
 
 // Imports of text sources
 import TimeInputIconAlternativeRaw from './TimeInputIconAlternative.template?raw';
@@ -22,6 +23,7 @@ import TimeInputRangeRaw from './TimeInputRange.template?raw';
 import TimeInputRangeDisabledRaw from './TimeInputRangeDisabled.template?raw';
 import TimeInputSimpleRaw from './TimeInputSimple.template?raw';
 import TimeInputSimpleDisabledRaw from './TimeInputSimpleDisabled.template?raw';
+import TimeInputSimpleCustomSlotsRaw from './TimeInputSimpleCustomSlots.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -113,6 +115,9 @@ export default {
     },
     endTime: {
       control: { type: 'text' },
+    },
+    slots: {
+      control: false,
     },
     disabledSlots: {
       control: false,
@@ -238,3 +243,26 @@ export const TimeInputSimpleDisabled = {
 
   name: 'Базовый с задизейбленными значениями',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Базовый с кастомными значениями">
+const TimeInputSimpleCustomSlotsStory: StoryFn<typeof TimeInput> = (props) => (
+  <TimeInputSimpleCustomSlotsTemplate {...props} />
+);
+
+export const TimeInputSimpleCustomSlots = {
+  render: TimeInputSimpleCustomSlotsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimeInputSimpleCustomSlotsRaw,
+      },
+    },
+  },
+
+  name: 'Базовый с кастомными значениями времени',
+};
+
+//</editor-fold>
