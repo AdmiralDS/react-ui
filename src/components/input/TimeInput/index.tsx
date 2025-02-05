@@ -22,7 +22,7 @@ export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProp
   value: string;
 }
 
-const slots: SlotProps[] = [
+const defaultSlots: SlotProps[] = [
   { value: '00:00', disabled: false },
   { value: '00:30', disabled: false },
   { value: '01:00', disabled: false },
@@ -103,6 +103,8 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value' | 'iconsBef
   endTime?: string;
   /** Задизейбленный инпут */
   disabled?: boolean;
+  /** Возможные значения временного диапозона */
+  slots?: SlotProps[];
   /** Задизейбленное значение временного диапозона */
   disabledSlots?: string[];
   /** Альтернативная иконка компонента */
@@ -126,6 +128,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       endTime,
       dimension = 'm',
       disabled = false,
+      slots = defaultSlots,
       disabledSlots = [],
       parser = parseStringToTime,
       icon = TimeSVG,
