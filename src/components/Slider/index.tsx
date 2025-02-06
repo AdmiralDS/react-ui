@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect, useMemo } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 import { Tooltip } from '#src/components/Tooltip';
@@ -40,7 +40,10 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   dimension?: 'xl' | 'm';
   /** Состояние skeleton */
   skeleton?: boolean;
-  withTooltip?: boolean;
+  /** Отобразить подсказку (Tooltip) текущего значения.
+   * Посказка отображается пока курсор находится над круглым элементом управления
+   */
+  showTooltip?: boolean;
 }
 
 export const Slider = ({
@@ -57,7 +60,7 @@ export const Slider = ({
   step: userStep = 1,
   dimension = 'xl',
   skeleton = false,
-  withTooltip = false,
+  showTooltip = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
@@ -67,9 +70,9 @@ export const Slider = ({
   const [animation, setAnimation] = useState(true);
   const [rangeWidth, setRangeWidth] = useState(0);
 
-  const filledRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const [filledTrack, setFilledTrack] = useState<HTMLDivElement | null>(null);
+  const [thumb, setThumb] = useState<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     function correctSliderPosition(value: number) {
@@ -80,9 +83,9 @@ export const Slider = ({
       calcPercents = calcPercents < 0 ? 0 : calcPercents;
 
       const sliderCoords = String(value) ? calcPercents : 0;
-      if (sliderRef.current && filledRef.current) {
-        sliderRef.current.style.left = `${sliderCoords}%`;
-        filledRef.current.style.width = `${sliderCoords}%`;
+      if (thumb && filledTrack) {
+        thumb.style.left = `${sliderCoords}%`;
+        filledTrack.style.width = `${sliderCoords}%`;
       }
     }
 
@@ -106,7 +109,7 @@ export const Slider = ({
     }
 
     correctSliderPosition(newValue);
-  }, [value, minValue, maxValue, step, rangeWidth]);
+  }, [value, minValue, maxValue, step, rangeWidth, thumb, filledTrack]);
 
   useLayoutEffect(() => {
     if (trackRef.current) {
@@ -208,7 +211,7 @@ export const Slider = ({
     <Wrapper data-disabled={disabled} $disabled={disabled} $skeleton={skeleton} {...props}>
       <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
-          <FilledTrack ref={filledRef} $animation={animation} />
+          <FilledTrack ref={(node) => setFilledTrack(node)} $animation={animation} />
           <DefaultTrack ref={trackRef}>
             {
               <TickMarks
@@ -223,7 +226,7 @@ export const Slider = ({
               />
             }
             <Thumb
-              ref={sliderRef}
+              ref={(node) => setThumb(node)}
               $animation={animation}
               $dimension={dimension}
               role="slider"
@@ -235,7 +238,7 @@ export const Slider = ({
             >
               <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
-            <TooltipThumb thumb={sliderRef.current} value={value} />
+            {showTooltip && <ThumbTooltip targetElement={thumb} value={value} show={isDraging} />}
           </DefaultTrack>
         </Track>
       </TrackWrapper>
@@ -245,43 +248,41 @@ export const Slider = ({
 
 Slider.displayName = 'Slider';
 
-const TooltipThumb = ({ thumb, value }: { thumb: HTMLDivElement; value: number }) => {
+const ThumbTooltip = ({
+  targetElement,
+  value,
+  show,
+}: {
+  targetElement: HTMLDivElement | null;
+  value: number;
+  show?: boolean;
+}) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     function show() {
       setVisible(true);
     }
-    function hide() {
+    function hide(e: any) {
       setVisible(false);
     }
-    const button = thumb;
-    if (button) {
-      /** Рекомендуется использовать именно addEventListener, так как React SyntheticEvent onMouseEnter
-       * отрабатывает некорректно в случае, если мышь была наведена на задизейбленный элемент,
-       * а затем была наведена на target элемент
-       * https://github.com/facebook/react/issues/19419 */
-      button.addEventListener('mouseenter', show);
-      // button.addEventListener('focus', show);
-      button.addEventListener('mouseleave', hide);
-      // button.addEventListener('blur', hide);
+    if (targetElement) {
+      targetElement.addEventListener('mouseenter', show);
+      targetElement.addEventListener('focus', show);
+      targetElement.addEventListener('mouseleave', hide);
+      targetElement.addEventListener('blur', hide);
       return () => {
-        button.removeEventListener('mouseenter', show);
-        // button.removeEventListener('focus', show);
-        button.removeEventListener('mouseleave', hide);
-        // button.removeEventListener('blur', hide);
+        targetElement.removeEventListener('mouseenter', show);
+        targetElement.removeEventListener('focus', show);
+        targetElement.removeEventListener('mouseleave', hide);
+        targetElement.removeEventListener('blur', hide);
       };
     }
-  }, [setVisible, thumb]);
+  }, [setVisible, targetElement]);
 
-  return visible && thumb ? (
-    <Tooltip
-      // dimension={props.dimension}
-      targetElement={thumb}
-      renderContent={() => value}
-      style={{ minWidth: '200px', maxWidth: '300px' }}
-      // tooltipPosition={props.tooltipPosition}
-      id="test1"
-    />
+  const renderContent = useMemo(() => () => value, [value]);
+
+  return (visible || show) && targetElement ? (
+    <Tooltip dimension="s" targetElement={targetElement} renderContent={renderContent} tooltipPosition="top" />
   ) : null;
 };
