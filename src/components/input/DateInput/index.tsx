@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useRef, useState } from 'react';
+import { Children, forwardRef, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
@@ -73,7 +72,7 @@ export interface DateInputProps
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 }
 
-export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
+export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
   (
     {
       type = 'date',
@@ -188,7 +187,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
-    const iconArray = React.Children.toArray(iconsAfter || icons);
+    const iconArray = Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
     }
