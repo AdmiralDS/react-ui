@@ -17,6 +17,8 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
 
+export * from './ActionsPanel';
+
 const Input = styled(TextInput)`
   min-width: 150px;
 `;
@@ -70,6 +72,9 @@ export interface DateInputProps
 
   /** Компонент для отображения альтернативной иконки */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  /** Позволяет добавить панель внизу под календарем */
+  renderBottomPanel?: () => React.ReactNode;
 }
 
 export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
@@ -109,6 +114,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       onDateIncreaseDecrease,
       dimension = 'm',
       onBeforeInput = preventUseUnsupportedCharacters,
+      renderBottomPanel,
       ...props
     },
     ref,
@@ -220,6 +226,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
               onChange={handleCalendarChange}
               range={isDateRange}
             />
+            {renderBottomPanel && renderBottomPanel()}
           </StyledDropdownContainer>
         )}
       </Input>
