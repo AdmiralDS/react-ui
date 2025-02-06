@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
+import { hideNativeScrollbarsCss, ScrollContainer } from '#src/components/Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
@@ -71,7 +71,7 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled.div<MenuListHeightsProps>`
+const StyledScrollContainer = styled(ScrollContainer)<MenuListHeightsProps>`
   ${hideNativeScrollbarsCss}
   position: relative;
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
@@ -284,8 +284,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         : preselected
       : undefined;
 
-    const menuRef = useRef<HTMLDivElement | null>(null);
-    const [menuNode, setMenuNode] = useState<HTMLElement | null>(null);
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
     const verticalScrollAriaRef = useRef<HTMLDivElement | null>(null);
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
@@ -474,7 +473,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
       return (
         <VirtualBody
-          scrollContainerRef={menuRef}
+          scrollContainerRef={scrollContainerRef}
           itemHeight={itemHeight}
           model={model}
           rowCount={rowCount}
@@ -495,12 +494,12 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         let itemToScroll;
 
         if ((active && previousActive.current !== active) || previousActiveState.current !== activeState) {
-          itemToScroll = menuRef.current?.querySelector('[data-hovered="true"]');
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (
           (preselected && previousPreselected.current !== preselected) ||
           previousPreselectedState.current !== preselectedState
         ) {
-          itemToScroll = menuRef.current?.querySelector('[data-preselected="true"]');
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
         }
 
         if (itemToScroll) {
@@ -584,18 +583,18 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       >
         {hasTopPanel && renderTopPanel({ dimension })}
 
-        <StyledDiv
-          ref={refSetter(menuRef, (node) => setMenuNode(node))}
+        <StyledScrollContainer
           $dimension={dimension}
           $rowCount={rowCount}
           $hasTopPanel={hasTopPanel}
           $hasBottomPanel={hasBottomPanel}
           $maxHeight={maxHeight}
           {...menuProps}
+          verticalScrollProps={{ ref: verticalScrollAriaRef }}
+          contentBlockProps={{ ref: scrollContainerRef }}
         >
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
-          <Scrollbars contentNode={menuNode} verticalScrollProps={{ ref: verticalScrollAriaRef }} />
-        </StyledDiv>
+        </StyledScrollContainer>
 
         {submenuVisible && activeItemRef.current && (
           <SubMenuContainer
