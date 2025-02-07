@@ -51,7 +51,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     const getInitialViewDate = () => {
       const current = new Date();
       current.setHours(0, 0, 0, 0);
-      if (selected) {
+      if (viewDate) {
+        return viewDate;
+      } else if (selected) {
         return selected;
       } else if (minDate && before(current, minDate)) {
         return minDate;
