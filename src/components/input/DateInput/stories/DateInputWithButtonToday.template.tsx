@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import { ActionsPanel, DateInput, TextButton } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, DateInputProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
-
-const TodayTextButton = styled(TextButton)`
-  margin-top: 21px;
-`;
 
 export const DateInputWithButtonTodayTemplate = ({
   placeholder,
@@ -39,7 +35,7 @@ export const DateInputWithButtonTodayTemplate = ({
     };
     return (
       <ActionsPanel>
-        <TodayTextButton dimension="s" text="Сегодня" onMouseDown={handleTodayButtonMouseDown} />
+        <TextButton dimension="s" text="Сегодня" onMouseDown={handleTodayButtonMouseDown} />
       </ActionsPanel>
     );
   };

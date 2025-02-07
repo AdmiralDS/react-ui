@@ -153,6 +153,7 @@ export const StyledDropdownContainer = styled(DropdownContainer)`
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
   overflow: hidden;
   width: max-content;
+  background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
 `;
 
 StyledDropdownContainer.displayName = 'StyledDropdownContainer';

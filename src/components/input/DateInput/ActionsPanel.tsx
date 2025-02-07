@@ -5,14 +5,15 @@ import { Divider } from '#src/components/Divider';
 const ActionsPanelDiv = styled.div`
   box-sizing: border-box;
   margin: 0 16px 16px 16px;
-  height: 48px;
 `;
 
 const PanelContent = styled.div<{
   $actionsPanelCssMixin?: ReturnType<typeof css>;
 }>`
   display: flex;
-
+  min-height: 36px;
+  align-items: center;
+  margin-top: 12px;
   ${(p) => p.$actionsPanelCssMixin}
 `;
 
