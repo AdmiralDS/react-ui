@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
-import { DateInput, PanelWithTodayButton } from '@admiral-ds/react-ui';
+import { ActionsPanel, DateInput, TextButton } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, DateInputProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
+
+const TodayTextButton = styled(TextButton)`
+  margin-top: 21px;
+`;
 
 export const DateInputWithButtonTodayTemplate = ({
   placeholder,
@@ -14,10 +18,10 @@ export const DateInputWithButtonTodayTemplate = ({
 }: DateInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [placeholderValue, setPlaceholderValue] = useState<string>(placeholder || 'Some placeholder');
   const [localValue, setValue] = useState<string>(props.value ? String(props.value) : '');
-  //const [localSelected, setLocalSelected] = useState<Date | null>(localValue !== '' ? new Date(localValue) : null);
-  const [calendarIsOpen, setCalendarIsOpen] = useState(false);
-  const handleCalendarVisibilityChange = (newState: boolean) => {
-    setCalendarIsOpen(newState);
+
+  const [viewDateLocal, setViewDateLocal] = useState<Date | null>(localValue !== '' ? new Date(localValue) : null);
+  const handleViewDateLocalChange = (newDate: Date) => {
+    setViewDateLocal(newDate);
   };
 
   useEffect(() => {
@@ -26,16 +30,18 @@ export const DateInputWithButtonTodayTemplate = ({
     }
   }, [props.value]);
 
-  const onTodayButtonMouseDownHandler: React.MouseEventHandler = (e) => {
-    const today = new Date();
-    const todayStr = today.toLocaleDateString('ru', { timeZone: 'UTC' }).replace(/[^ -~]/g, '');
-
-    setValue(todayStr);
-    //setLocalSelected(today);
-    handleCalendarVisibilityChange(false);
-  };
   const renderPanelToday = () => {
-    return <PanelWithTodayButton onTodayButtonMouseDown={onTodayButtonMouseDownHandler} />;
+    const handleTodayButtonMouseDown: React.MouseEventHandler = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const today = new Date();
+      handleViewDateLocalChange(today);
+    };
+    return (
+      <ActionsPanel>
+        <TodayTextButton dimension="s" text="Сегодня" onMouseDown={handleTodayButtonMouseDown} />
+      </ActionsPanel>
+    );
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,9 +60,8 @@ export const DateInputWithButtonTodayTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DateInput
         {...props}
-        isVisible={calendarIsOpen}
-        onVisibilityChange={handleCalendarVisibilityChange}
-        //selected={localSelected}
+        viewDate={viewDateLocal}
+        onViewDateChange={handleViewDateLocalChange}
         value={localValue}
         onChange={handleChange}
         placeholder={placeholderValue}

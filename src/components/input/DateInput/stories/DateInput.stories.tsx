@@ -12,7 +12,6 @@ import { DateInputPickMonthTemplate } from './DateInputPickMonth.template';
 import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.template';
 import { DateInputSpecialDatesTemplate } from './DateInputSpecialDates.template';
 import { DateInputWithButtonTodayTemplate } from './DateInputWithButtonToday.template';
-import { DateInputRangeWithButtonOkTemplate } from './DateInputRangeWithButtonOk.template';
 
 // Imports of text sources
 import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
@@ -20,7 +19,6 @@ import DateInputPickMonthRaw from './DateInputPickMonth.template?raw';
 import DateInputAlternativeIconRaw from './DateInputAlternativeIcon.template?raw';
 import DateInputSpecialDatesRaw from './DateInputSpecialDates.template?raw';
 import DateInputWithButtonTodayRaw from './DateInputWithButtonToday.template?raw';
-import DateInputRangeWithButtonOkRaw from './DateInputRangeWithButtonOk.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -270,28 +268,6 @@ export const DateInputWithButtonToday = {
   },
 
   name: 'DateInput с кнопкой "Сегодня"',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="DateInputRange с кнопкой "Ok">
-const DateInputRangeWithButtonOkStory: StoryFn<typeof DateInput> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <DateInputRangeWithButtonOkTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const DateInputRangeWithButtonOk = {
-  render: DateInputRangeWithButtonOkStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: DateInputRangeWithButtonOkRaw,
-      },
-    },
-  },
-
-  name: 'DateInputRange с кнопкой "Ok"',
 };
 
 //</editor-fold>
