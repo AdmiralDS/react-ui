@@ -16,8 +16,8 @@ export const SearchSelectWithChooseAllButtonTemplate = ({
   ...props
 }: SelectProps & FieldProps & { restrictions?: number[]; options?: string[] }) => {
   const [selectValues, setSelectValues] = React.useState<string[]>([]);
-  const [searchValue, setSearchValue] = React.useState<string>('');
-  const [optionsWithoutDisabled, setOptionsWithoutDisabled] = React.useState<string[]>([
+  const [_searchValue, setSearchValue] = React.useState<string>('');
+  const [optionsWithoutDisabled, _setOptionsWithoutDisabled] = React.useState<string[]>([
     ...options.filter((_, ind) => !restrictions.includes(ind)),
   ]);
 

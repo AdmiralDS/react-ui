@@ -22,6 +22,8 @@ export type { CalendarPropType, IDateSelectionProps, ViewScreenType };
 export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
   (
     {
+      viewDate,
+      onViewDateChange,
       startDate,
       endDate,
       validator,
@@ -49,7 +51,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     const getInitialViewDate = () => {
       const current = new Date();
       current.setHours(0, 0, 0, 0);
-      if (selected) {
+      if (viewDate) {
+        return viewDate;
+      } else if (selected) {
         return selected;
       } else if (minDate && before(current, minDate)) {
         return minDate;
@@ -61,7 +65,12 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     };
 
     // дата, которую отображаем (в том числе в верхней панели)
-    const [viewDate, setViewDate] = useState(getInitialViewDate());
+    const [viewDateState, setViewDateState] = useState(getInitialViewDate());
+    const viewDateInner = viewDate ?? viewDateState;
+    const handleViewDateChange = (newDate: Date) => {
+      setViewDateState(newDate);
+      onViewDateChange?.(newDate);
+    };
     // активная дата, на которой сейчас ховер
     const [activeDate, setActiveDate] = useState<Date | null>(null);
     // отображаем выбор года
@@ -86,7 +95,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     }, [currentActiveView]);
 
     useEffect(() => {
-      setViewDate(getInitialViewDate());
+      handleViewDateChange(getInitialViewDate());
     }, [selected]);
 
     useEffect(() => {
@@ -136,34 +145,30 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
       onViewMonthSelect && onViewMonthSelect();
     };
 
-    const changeYear = (year: number) => setViewDate((date) => setYear(date, year));
-    const changeMonth = (month: number) => setViewDate((date) => setMonth(date, month));
+    const changeYear = (year: number) => handleViewDateChange(setYear(viewDateInner, year));
+    const changeMonth = (month: number) => handleViewDateChange(setMonth(viewDateInner, month));
 
-    const increaseYear = () =>
-      setViewDate((date) => {
-        const increase = addYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
-    const decreaseYear = () =>
-      setViewDate((date) => {
-        const decrease = subYears(date, yearsView ? DEFAULT_YEAR_COUNT : 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const increaseYear = () => {
+      const increase = addYears(viewDateInner, yearsView ? DEFAULT_YEAR_COUNT : 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
+      handleViewDateChange(increase);
+    };
+    const decreaseYear = () => {
+      const decrease = subYears(viewDateInner, yearsView ? DEFAULT_YEAR_COUNT : 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
+      handleViewDateChange(decrease);
+    };
 
-    const increaseMonth = () =>
-      setViewDate((date) => {
-        const increase = addMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
-        return increase;
-      });
-    const decreaseMonth = () =>
-      setViewDate((date) => {
-        const decrease = subMonths(date, 1);
-        onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
-        return decrease;
-      });
+    const increaseMonth = () => {
+      const increase = addMonths(viewDateInner, 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(increase);
+      handleViewDateChange(increase);
+    };
+    const decreaseMonth = () => {
+      const decrease = subMonths(viewDateInner, 1);
+      onDateIncreaseDecrease && onDateIncreaseDecrease(decrease);
+      handleViewDateChange(decrease);
+    };
 
     const handleDayMouseEnter = (day: Date) => setActiveDate(day);
     const handleMonthMouseLeave = () => setActiveDate(null);
@@ -211,7 +216,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderPanel = () => (
       <Panel
-        viewDate={viewDate}
+        viewDate={viewDateInner}
         minDate={minDate}
         maxDate={maxDate}
         yearsView={yearsView}
@@ -228,9 +233,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderMonth = () => (
       <>
-        <DayNames date={viewDate} />
+        <DayNames date={viewDateInner} />
         <Month
-          day={viewDate}
+          day={viewDateInner}
           startDate={startDate}
           endDate={endDate}
           selected={selected}
@@ -248,7 +253,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderMonths = () => (
       <Months
-        viewDate={viewDate}
+        viewDate={viewDateInner}
         startDate={startDate}
         endDate={endDate}
         selected={selected}
@@ -260,7 +265,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
 
     const renderYears = () => (
       <Years
-        viewDate={viewDate}
+        viewDate={viewDateInner}
         startDate={startDate}
         endDate={endDate}
         selected={selected}
