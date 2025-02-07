@@ -22,6 +22,7 @@ import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVi
 import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSelectWithOnChangeHandler.template';
 import { SearchSelectWithSelectedOnTopTemplate } from './searchSelect/SearchSelectWithSelectedOnTop.template';
 import { SearchSelectWithClearInputTemplate } from './searchSelect/SearchSelectWithClearInput.template';
+import { SearchSelectWithChooseAllButtonTemplate } from './searchSelect/SearchSelectWithChooseAllButton.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
@@ -31,6 +32,7 @@ import SearchSelectWithFilterRaw from './searchSelect/SearchSelectWithFilter.tem
 import SearchSelectCustomOptionRaw from './searchSelect/SearchSelectCustomOption.template?raw';
 import SearchSelectRenderValueRaw from './searchSelect/SearchSelectRenderValue.template?raw';
 import SearchSelectWithAddButtonRaw from './searchSelect/SearchSelectWithAddButton.template?raw';
+import SearchSelectWithChooseAllButtonRaw from './searchSelect/SearchSelectWithChooseAllButton.template?raw';
 import SearchSelectOptionGroupRaw from './searchSelect/SearchSelectOptionGroup.template?raw';
 import SearchSelectUncontrolledRaw from './searchSelect/SearchSelectUncontrolled.template?raw';
 import SearchSelectMultipleWithAddOptionRaw from './searchSelect/SearchSelectMultipleWithAddOption.template?raw';
@@ -254,6 +256,27 @@ export const WithAddButton = {
 };
 
 //</editor-fold>
+
+//<editor-fold desc="Нижняя панель с кнопкой "Выбрать все"">
+const WithChooseAllButtonStory: StoryFn<typeof Select> = (props) => (
+  <SearchSelectWithChooseAllButtonTemplate {...props} />
+);
+
+export const WithChooseAllButton = {
+  render: WithChooseAllButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithChooseAllButtonRaw,
+      },
+    },
+  },
+
+  name: 'Нижняя панель с кнопкой "Выбрать все"',
+};
+
+// </editor-fold>
 
 //<editor-fold desc="Использование групп">
 const SearchSelectOptionGroupStory: StoryFn<typeof Select> = (props) => <SearchSelectOptionGroupTemplate {...props} />;
