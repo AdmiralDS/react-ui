@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.33.0](https://github.com/AdmiralDS/react-ui/compare/v8.32.0...v8.33.0) (2025-02-07)
+
+
+### Features
+
+* **DateInput:** добавлен prop renderBottomPanel ([8a0f74a](https://github.com/AdmiralDS/react-ui/commit/8a0f74a6f8f2437fed70117dfae09597ce808bab))
+* **Slider:** [#1632](https://github.com/AdmiralDS/react-ui/issues/1632) добавлена опция включения тултипа ([967f0cd](https://github.com/AdmiralDS/react-ui/commit/967f0cda7eba048ce1c9a96ebd9239cbdf281486))
+* **TimeInput:** добавлена возможность установки произвольных промежутков времени ([bd0f9c8](https://github.com/AdmiralDS/react-ui/commit/bd0f9c8cf2f3140f60908600c3f7617c51e5f557))
+
+
+### Bug Fixes
+
+* **SelectField:** Исправлено появление белых пропусков в списке опций ([d6ddcae](https://github.com/AdmiralDS/react-ui/commit/d6ddcae46f1b6b0d6cf5785ba45a10a84ccfeb78)), closes [#1617](https://github.com/AdmiralDS/react-ui/issues/1617)
+
 ## [8.32.0](https://github.com/AdmiralDS/react-ui/compare/v8.31.0...v8.32.0) (2025-02-04)
 
 
