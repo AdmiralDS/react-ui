@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.33.1](https://github.com/AdmiralDS/react-ui/compare/v8.33.0...v8.33.1) (2025-02-07)
+
+
+### Bug Fixes
+
+* **DateInput:** fix bottom panel background color ([990c356](https://github.com/AdmiralDS/react-ui/commit/990c356be261d25515047ff1eec37e2526d702d1))
+
 ## [8.33.0](https://github.com/AdmiralDS/react-ui/compare/v8.32.0...v8.33.0) (2025-02-07)
 
 
