@@ -255,7 +255,7 @@ export const DateInputSpecialDates = {
 //<editor-fold desc="DateInput с кнопкой "Сегодня"">
 const DateInputWithButtonTodayStory: StoryFn<typeof DateInput> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <DateInputWithButtonTodayTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <DateInputWithButtonTodayTemplate {...props} value="02.05.2025" CSSCustomProps={CSSCustomProps} />;
 };
 
 export const DateInputWithButtonToday = {

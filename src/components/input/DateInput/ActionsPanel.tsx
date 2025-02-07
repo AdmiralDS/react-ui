@@ -35,10 +35,19 @@ const TodayTextButton = styled(TextButton)`
   margin-top: 21px;
 `;
 
-export const PanelWithTodayButton = () => {
+export interface PanelWithTodayButtonProps {
+  onTodayButtonMouseDown: React.MouseEventHandler;
+}
+
+export const PanelWithTodayButton = ({ onTodayButtonMouseDown }: PanelWithTodayButtonProps) => {
+  const handleTodayButtonMouseDown: React.MouseEventHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onTodayButtonMouseDown(e);
+  };
   return (
     <ActionsPanel>
-      <TodayTextButton dimension="s" text="Сегодня" />
+      <TodayTextButton dimension="s" text="Сегодня" onMouseDown={handleTodayButtonMouseDown} />
     </ActionsPanel>
   );
 };
