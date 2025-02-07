@@ -217,7 +217,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
         skeleton={skeleton}
       >
         {isCalendarOpen && !skeleton && (
-          <StyledDropdownContainer
+          <DateInputDropdownContainer
             targetElement={inputRef.current}
             alignSelf={alignDropdown || alignSelf}
             onClickOutside={handleBlurCalendarContainer}
@@ -235,7 +235,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
               range={isDateRange}
             />
             {renderBottomPanel && renderBottomPanel()}
-          </StyledDropdownContainer>
+          </DateInputDropdownContainer>
         )}
       </Input>
     );
