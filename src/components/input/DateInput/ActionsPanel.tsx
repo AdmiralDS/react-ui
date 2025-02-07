@@ -4,14 +4,16 @@ import { Divider } from '#src/components/Divider';
 
 const ActionsPanelDiv = styled.div`
   box-sizing: border-box;
-  margin: 0 16px 16px 16px;
-  height: 48px;
+  padding: 0 16px 16px 16px;
+  height: 64px;
+  background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
 `;
 
 const PanelContent = styled.div<{
   $actionsPanelCssMixin?: ReturnType<typeof css>;
 }>`
   display: flex;
+  height: 47px;
 
   ${(p) => p.$actionsPanelCssMixin}
 `;

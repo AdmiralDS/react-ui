@@ -23,6 +23,10 @@ const Input = styled(TextInput)`
   min-width: 150px;
 `;
 
+const DateInputDropdownContainer = styled(StyledDropdownContainer)`
+  background: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
+`;
+
 function toUTCDateIsoString(date: Date): string {
   return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
 }
