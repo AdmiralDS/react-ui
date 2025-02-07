@@ -6,11 +6,13 @@ import { Slider } from '@admiral-ds/react-ui';
 import { SliderPlaygroundTemplate } from './SliderPlayground.template';
 import { SliderSimpleTemplate } from './SliderSimple.template';
 import { SliderRangeTemplate } from './SliderRange.template';
+import { SliderTooltipTemplate } from './SliderTooltip.template';
 
 // Imports of text sources
 import SliderPlaygroundRaw from './SliderPlayground.template?raw';
 import SliderSimpleRaw from './SliderSimple.template?raw';
 import SliderRangeRaw from './SliderRange.template?raw';
+import SliderTooltipRaw from './SliderTooltip.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -147,3 +149,22 @@ export const RangeExample = {
 
   name: 'Slider с отметками и кастомизированными подписями к ним.',
 };
+//</editor-fold>
+
+//<editor-fold desc="Tooltip">
+const TooltipStory: StoryFn<typeof Slider> = () => <SliderTooltipTemplate />;
+
+export const TooltipExample = {
+  render: TooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SliderTooltipRaw,
+      },
+    },
+  },
+
+  name: 'Slider. Использование с Tooltip.',
+};
+//</editor-fold>

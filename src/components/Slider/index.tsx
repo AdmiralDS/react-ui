@@ -1,11 +1,11 @@
 import { useState, useRef, useLayoutEffect, useEffect, useMemo } from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
-import { Tooltip } from '#src/components/Tooltip';
 
 import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
+import { ThumbTooltip } from './ThumbTooltip';
 
 export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
@@ -40,9 +40,7 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   dimension?: 'xl' | 'm';
   /** Состояние skeleton */
   skeleton?: boolean;
-  /** Отобразить подсказку (Tooltip) текущего значения.
-   * Посказка отображается пока курсор находится над круглым элементом управления
-   */
+  /** Отобразить подсказку (Tooltip) текущего значения */
   showTooltip?: boolean;
 }
 
@@ -238,7 +236,7 @@ export const Slider = ({
             >
               <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
-            {showTooltip && <ThumbTooltip targetElement={thumb} value={value} show={isDraging} />}
+            {showTooltip && <ThumbTooltip targetElement={thumb} value={value} isDraging={isDraging} />}
           </DefaultTrack>
         </Track>
       </TrackWrapper>
@@ -247,42 +245,3 @@ export const Slider = ({
 };
 
 Slider.displayName = 'Slider';
-
-const ThumbTooltip = ({
-  targetElement,
-  value,
-  show,
-}: {
-  targetElement: HTMLDivElement | null;
-  value: number;
-  show?: boolean;
-}) => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    function show() {
-      setVisible(true);
-    }
-    function hide(e: any) {
-      setVisible(false);
-    }
-    if (targetElement) {
-      targetElement.addEventListener('mouseenter', show);
-      targetElement.addEventListener('focus', show);
-      targetElement.addEventListener('mouseleave', hide);
-      targetElement.addEventListener('blur', hide);
-      return () => {
-        targetElement.removeEventListener('mouseenter', show);
-        targetElement.removeEventListener('focus', show);
-        targetElement.removeEventListener('mouseleave', hide);
-        targetElement.removeEventListener('blur', hide);
-      };
-    }
-  }, [setVisible, targetElement]);
-
-  const renderContent = useMemo(() => () => value, [value]);
-
-  return (visible || show) && targetElement ? (
-    <Tooltip dimension="s" targetElement={targetElement} renderContent={renderContent} tooltipPosition="top" />
-  ) : null;
-};
