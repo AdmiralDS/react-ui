@@ -149,7 +149,7 @@ const disableEventMixin = css`
 `;
 
 const disabledStyle = css`
-  && > * {
+  && > *:not(${ValueWrapper}) {
     pointer-events: none;
   }
 
