@@ -15,6 +15,8 @@ import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
+export type PaginationOneDimension = 'm' | 's';
+
 const ComplexWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -71,6 +73,8 @@ const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boole
 `;
 
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Размер компонента */
+  dimension?: PaginationOneDimension;
   /** Колбек, который срабатывает при изменении номера  страницы или размера страницы */
   onChange: (result: { page: number; pageSize: number }) => void;
   /** Номер текущей страницы */
@@ -139,6 +143,7 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
 }
 
 export const PaginationOne: FC<PaginationOneProps> = ({
+  dimension = 'm',
   page,
   pageSize,
   pageSizes,
@@ -293,6 +298,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         <Part>
           {itemsPerPageText}
           <MenuButton
+            dimension={dimension}
             options={pageSizes}
             selected={pageSize.toString()}
             onSelectItem={handleSizeChange}
@@ -322,6 +328,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         <Part>
           <Divider />
           <MenuButton
+            dimension={dimension}
             options={pages}
             selected={selectedPageNumber}
             onSelectItem={handlePageInputChange}
@@ -369,7 +376,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           <ButtonsWrapper>
             <Button
               appearance="tertiary"
-              dimension="m"
+              dimension={dimension}
               iconStart={<ChevronLeft />}
               displayAsSquare
               aria-label={backwardText}
@@ -378,7 +385,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             />
             <Button
               appearance="tertiary"
-              dimension="m"
+              dimension={dimension}
               iconStart={<ChevronRight />}
               displayAsSquare
               aria-label={forwardText}
@@ -404,7 +411,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         <ButtonsWrapper>
           <Button
             appearance="tertiary"
-            dimension="m"
+            dimension={dimension}
             iconStart={<ChevronLeft />}
             displayAsSquare
             aria-label={backwardText}
@@ -413,7 +420,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           />
           <Button
             appearance="tertiary"
-            dimension="m"
+            dimension={dimension}
             iconStart={<ChevronRight />}
             displayAsSquare
             aria-label={forwardText}
