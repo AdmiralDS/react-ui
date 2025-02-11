@@ -71,7 +71,8 @@ const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boole
 
   ${mixin};
 `;
-
+const nothing = () => {};
+type DataAttributes = { [dataAttibute: `data-${string}`]: string };
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationOneDimension;
@@ -140,6 +141,17 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
     /** Текст, описывающий кнопку переключения вперед (атрибут aria-label) */
     forwardText?: string;
   };
+
+  /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+  leftButtonPropsConfig?: (
+    props: React.ComponentProps<typeof Button>,
+  ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
+  /** Конфиг функция пропсов для правой кнопки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+  rightButtonPropsConfig?: (
+    props: React.ComponentProps<typeof Button>,
+  ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
 }
 
 export const PaginationOne: FC<PaginationOneProps> = ({
@@ -159,6 +171,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
+  leftButtonPropsConfig = nothing,
+  rightButtonPropsConfig = nothing,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
@@ -292,6 +306,26 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     return false;
   };
 
+  const leftButtonProps = {
+    appearance: 'tertiary',
+    dimension,
+    iconStart: <ChevronLeft />,
+    displayAsSquare: true,
+    'aria-label': backwardText,
+    disabled: backButtonDisabled,
+    onClick: pageDecrement,
+  } satisfies React.ComponentProps<typeof Button>;
+
+  const rightButtonProps = {
+    appearance: 'tertiary',
+    dimension,
+    iconStart: <ChevronRight />,
+    displayAsSquare: true,
+    'aria-label': forwardText,
+    disabled: forwardButtonDisabled,
+    onClick: pageIncrement,
+  } satisfies React.ComponentProps<typeof Button>;
+
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
@@ -374,24 +408,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           </MenuButton>
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
           <ButtonsWrapper>
-            <Button
-              appearance="tertiary"
-              dimension={dimension}
-              iconStart={<ChevronLeft />}
-              displayAsSquare
-              aria-label={backwardText}
-              disabled={backButtonDisabled}
-              onClick={pageDecrement}
-            />
-            <Button
-              appearance="tertiary"
-              dimension={dimension}
-              iconStart={<ChevronRight />}
-              displayAsSquare
-              aria-label={forwardText}
-              disabled={forwardButtonDisabled}
-              onClick={pageIncrement}
-            />
+            <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
+            <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
           </ButtonsWrapper>
         </Part>
       </ComplexWrapper>
@@ -409,24 +427,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           )}
         </PageSizeAdditional>
         <ButtonsWrapper>
-          <Button
-            appearance="tertiary"
-            dimension={dimension}
-            iconStart={<ChevronLeft />}
-            displayAsSquare
-            aria-label={backwardText}
-            disabled={backButtonDisabled}
-            onClick={pageDecrement}
-          />
-          <Button
-            appearance="tertiary"
-            dimension={dimension}
-            iconStart={<ChevronRight />}
-            displayAsSquare
-            aria-label={forwardText}
-            disabled={forwardButtonDisabled}
-            onClick={pageIncrement}
-          />
+          <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
+          <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
         </ButtonsWrapper>
       </SimpleWrapper>
     );

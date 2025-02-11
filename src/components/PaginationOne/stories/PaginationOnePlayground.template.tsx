@@ -14,6 +14,8 @@ export const PaginationOnePlaygroundTemplate = ({
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = props.totalItems || 100;
 
+  const leftButtonProps = { 'data-testid': React.useId() };
+  const rightButtonProps = { 'data-testid': React.useId() };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <PaginationOne
@@ -31,6 +33,8 @@ export const PaginationOnePlaygroundTemplate = ({
         className="pagination-class-name"
         pageSizeDropContainerStyle={{ dropContainerClassName: 'pageSizeDropContainerClass' }}
         pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
+        leftButtonPropsConfig={() => leftButtonProps}
+        rightButtonPropsConfig={() => rightButtonProps}
       />
     </ThemeProvider>
   );
