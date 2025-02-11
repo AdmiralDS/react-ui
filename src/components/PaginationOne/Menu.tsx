@@ -9,12 +9,14 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '../common/utils/refSetter';
 
-const Button = styled.button<{ $menuOpened?: boolean }>`
+type PaginationOneMenuButtonDimension = 'm' | 's';
+
+const Button = styled.button<{ $menuOpened?: boolean; $dimension?: PaginationOneMenuButtonDimension }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: ${(p) => (p.$dimension === 's' ? 32 : 40)}px;
   padding: 10px 12px;
   border: 2px solid transparent;
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
@@ -66,6 +68,8 @@ export interface MenuButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement' | 'disableSelectedOptionHighlight'>,
     Omit<DropMenuStyleProps, 'alignSelf'> {
+  /** Размер компонента */
+  dimension?: PaginationOneMenuButtonDimension;
   /** Массив опций */
   options: Array<number>;
   /** Выбранная опция */
@@ -81,6 +85,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
     {
       children,
       disabled = false,
+      dimension = 'm',
       options,
       selected,
       onSelectItem = () => undefined,
@@ -151,6 +156,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
           return (
             <Button
               {...props}
+              $dimension={dimension}
               ref={refSetter(ref, buttonRef as React.Ref<HTMLButtonElement>)}
               disabled={disabled}
               $menuOpened={menuState}
