@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.34.0](https://github.com/AdmiralDS/react-ui/compare/v8.33.1...v8.34.0) (2025-02-11)
+
+
+### Features
+
+* **PaginationOne:** add configProps for buttons ([a3ed218](https://github.com/AdmiralDS/react-ui/commit/a3ed218a8060260895a72e56c3f656ba516c1831))
+* **PaginationOne:** добавлен размер S ([03561c9](https://github.com/AdmiralDS/react-ui/commit/03561c94b6fd39e9bfbb046291d4f03cb985e0af))
+
+
+### Bug Fixes
+
+* **Select:** Исправлено tooltip не показывается, если компонент readOnly или disabled ([e8a80af](https://github.com/AdmiralDS/react-ui/commit/e8a80af49c074866d03bdb9bd0409f445239a4a4)), closes [#1604](https://github.com/AdmiralDS/react-ui/issues/1604)
+
 ### [8.33.1](https://github.com/AdmiralDS/react-ui/compare/v8.33.0...v8.33.1) (2025-02-07)
 
 
