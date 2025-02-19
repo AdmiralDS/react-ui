@@ -48,8 +48,12 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-function defaultOptionRender({ value, ...props }: RenderPropsType<ReactNode> & MenuItemProps) {
-  return <MenuItem {...props}>{String(value)}</MenuItem>;
+function defaultOptionRender({ value, key, ...props }: RenderPropsType<ReactNode> & MenuItemProps) {
+  return (
+    <MenuItem key={key} {...props}>
+      {String(value)}
+    </MenuItem>
+  );
 }
 
 export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
