@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.34.1](https://github.com/AdmiralDS/react-ui/compare/v8.34.0...v8.34.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* disabledCopying warning in NumberInput ([a2aeab0](https://github.com/AdmiralDS/react-ui/commit/a2aeab0b6810259bc5be42df6e95d75841aae49b))
+* Warning: A props object containing a "key" prop is being spread into JSX ([e328c79](https://github.com/AdmiralDS/react-ui/commit/e328c79ff8d62d74bc287e38474fefc76a1523a0))
+
 ## [8.34.0](https://github.com/AdmiralDS/react-ui/compare/v8.33.1...v8.34.0) (2025-02-11)
 
 
