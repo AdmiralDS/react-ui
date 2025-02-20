@@ -59,10 +59,16 @@ export const StyledChip = styled(Chips)`
   @media (max-width: 768px) {
     max-width: 140px;
   }
-
-  // По дизайну при наведении цвет чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
-  // то чипс получается clickable и при ховере меняет цвет
-  &:hover {
-    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
-  }
 `;
+
+// По дизайну при наведении цвет чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
+// то чипс получается clickable и при ховере меняет цвет
+// <{ $readOnly?: boolean }>
+/* &:hover {
+    ${({ disabled, $readOnly }) => {
+      if (!$readOnly && !disabled)
+        return `background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']})`; */
+// else if ($readOnly && !disabled)
+//   return `background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']})`;
+//   }}
+/* } */

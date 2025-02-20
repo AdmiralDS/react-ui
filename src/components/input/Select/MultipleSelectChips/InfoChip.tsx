@@ -43,6 +43,7 @@ export const InfoChip = ({ className, option, disabled, readOnly, onClick, onChi
       onClick={onClick}
       onClose={readOnly ? undefined : getChipMeta(option, onChipRemove).onClose}
       disabled={getChipMeta(option, onChipRemove).disabled || disabled}
+      // $readOnly={readOnly}
       renderContentTooltip={renderContentTooltip(getChipMeta(option, onChipRemove).children)}
     >
       {getChipMeta(option, onChipRemove).children}

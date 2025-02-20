@@ -4,7 +4,7 @@ import { Option, Select, T } from '@admiral-ds/react-ui';
 import { Separator } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectWithOnChangeHandlerTemplate = () => {
-  const [activeSegments, setActiveSegments] = React.useState<string[]>([]);
+  const [activeSegments, setActiveSegments] = React.useState<string[]>(['Christopher Bradley', 'Ann Cain']);
 
   const segmentsOptions = [
     'James Welch',
@@ -16,10 +16,13 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
     <Option
       key={segmentName}
       value={segmentName}
+      disabled={segmentName === 'Christopher Bradley'}
       renderChip={() => ({
         children: segmentName,
         onClose: () => ({}),
         key: `${segmentName}-chip`,
+        disabled: segmentName === 'Christopher Bradley',
+        readOnly: true,
       })}
     >
       {segmentName}
@@ -50,6 +53,9 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
         <Separator $height={8} />
         Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает
         выбранные опции в порядке их выбора пользователем.
+        <Separator $height={8} />
+        Также следует помнить, что при использовании renderChip в Option нужно прокидывать все пропсы, включая disabled
+        и readOnly при наличии, для корректного отображения чипсов.
       </T>
       <Separator />
       <Select
