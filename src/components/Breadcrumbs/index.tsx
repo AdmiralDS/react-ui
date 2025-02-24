@@ -13,10 +13,14 @@ import {
   Wrapper,
 } from './style';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import type { DataAttributes } from 'styled-components';
 
 type Dimension = 'l' | 'm' | 's';
 
-export interface BreadcrumbsProps extends React.HTMLAttributes<HTMLElement>, Omit<DropContainerStyles, 'alignSelf'> {
+export interface BreadcrumbsProps
+  extends React.HTMLAttributes<HTMLElement>,
+    Omit<DropContainerStyles, 'alignSelf'>,
+    DataAttributes {
   /** Массив хлебных крошек */
   items: BreadcrumbProps[];
   /** Размер компонента */
