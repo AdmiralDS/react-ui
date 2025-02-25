@@ -39,8 +39,6 @@
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
-    "prettier": "prettier --check '**/**/*.{js,jsx,ts,tsx,css,scss}'",
-    "prettier:fix": "prettier --write '**/**/*.{js,jsx,ts,tsx,css,scss}'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
     "preview-storybook": "npx http-server ./docs/current",

@@ -1,4 +1,3 @@
-import type * as React from 'react';
 import type { ComponentDimension } from '#src/components/input/types';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 

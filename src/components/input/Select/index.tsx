@@ -47,7 +47,7 @@ import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
-export type { SearchFormat } from './types';
+export * from './types';
 
 /**
  * Осталось сделать:

@@ -1,32 +1,18 @@
 import * as React from 'react';
+import type { IOnCloseProps } from '@admiral-ds/react-ui';
 import { Option, Select, T } from '@admiral-ds/react-ui';
 
 import { Separator } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectWithOnChangeHandlerTemplate = () => {
   const [activeSegments, setActiveSegments] = React.useState<string[]>([]);
-
-  const segmentsOptions = [
+  const [optionList] = React.useState<string[]>([
     'James Welch',
     'Lucille Daniels',
     'Christopher Bradley',
     'Ann Cain',
     'Christopher Rodriguez',
-  ].map((segmentName) => (
-    <Option
-      key={segmentName}
-      value={segmentName}
-      disabled={segmentName === 'Christopher Bradley'}
-      renderChip={() => ({
-        children: segmentName,
-        onClose: handleCloseChip,
-        key: `${segmentName}-chip`,
-        disabled: segmentName === 'Christopher Bradley',
-      })}
-    >
-      {segmentName}
-    </Option>
-  ));
+  ]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValues = Array.from(e.target.selectedOptions).map((option) => option.value);
@@ -42,11 +28,26 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
     setActiveSegments([]);
   };
 
-  const handleCloseChip = (data: any) => {
-    const selectedValues = activeSegments.filter((segment) => segment !== data.value);
+  const handleChipOnClose = (props: IOnCloseProps) => {
+    const selectedValues = activeSegments.filter((segment) => segment !== props.value);
     setActiveSegments(selectedValues);
   };
 
+  const segmentsOptions = optionList.map((segmentName) => (
+    <Option
+      key={segmentName}
+      value={segmentName}
+      disabled={segmentName === 'Christopher Bradley'}
+      renderChip={() => ({
+        children: segmentName,
+        onClose: handleChipOnClose,
+        key: `${segmentName}-chip`,
+        disabled: segmentName === 'Christopher Bradley',
+      })}
+    >
+      {segmentName}
+    </Option>
+  ));
   return (
     <>
       <T font="Body/Body 1 Long" as="div">
