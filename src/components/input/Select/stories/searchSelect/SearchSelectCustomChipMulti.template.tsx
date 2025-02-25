@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { Button, Modal, ModalButtonPanel, ModalContent, ModalTitle, Option, Select } from '@admiral-ds/react-ui';
+import { Button, Modal, ModalButtonPanel, ModalContent, ModalTitle, Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
@@ -28,7 +29,11 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
     onOpenModal();
   };
 
-  const renderChip = (ind: number) => () => ({ children: `${ind} $`, onClose: onChipClose });
+  const renderChip = (ind: number, disabled: boolean) => () => ({
+    children: `${ind} $`,
+    onClose: onChipClose,
+    disabled: disabled,
+  });
 
   const onYes = () => {
     if (valueToDelete) deleteValue(valueToDelete);
@@ -37,6 +42,11 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Также следует помнить, что при использовании renderChip в Option нужно прокидывать все пропсы, включая disabled
+        и readOnly при наличии, для корректного отображения чипсов.
+      </T>
+      <Separator />
       <Select
         {...props}
         value={selectValue}
@@ -50,7 +60,7 @@ export const SearchSelectCustomChipMultiTemplate = (props: SelectProps) => {
             data-id={`Id-${ind}`}
             data-value={`My Value ${ind}`}
             value={String(ind)}
-            renderChip={renderChip(ind)}
+            renderChip={renderChip(ind, [0, 2].includes(ind))}
             disabled={[0, 2].includes(ind)}
           >
             {ind}

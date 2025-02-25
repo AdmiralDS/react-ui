@@ -16,10 +16,12 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
     <Option
       key={segmentName}
       value={segmentName}
+      disabled={segmentName === 'Christopher Bradley'}
       renderChip={() => ({
         children: segmentName,
-        onClose: () => ({}),
+        onClose: handleCloseChip,
         key: `${segmentName}-chip`,
+        disabled: segmentName === 'Christopher Bradley',
       })}
     >
       {segmentName}
@@ -40,6 +42,11 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
     setActiveSegments([]);
   };
 
+  const handleCloseChip = (data: any) => {
+    const selectedValues = activeSegments.filter((segment) => segment !== data.value);
+    setActiveSegments(selectedValues);
+  };
+
   return (
     <>
       <T font="Body/Body 1 Long" as="div">
@@ -50,6 +57,9 @@ export const SearchSelectWithOnChangeHandlerTemplate = () => {
         <Separator $height={8} />
         Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает
         выбранные опции в порядке их выбора пользователем.
+        <Separator $height={8} />
+        Также следует помнить, что при использовании renderChip в Option нужно прокидывать все пропсы, включая disabled
+        и readOnly при наличии, для корректного отображения чипсов.
       </T>
       <Separator />
       <Select
