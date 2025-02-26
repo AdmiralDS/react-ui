@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.35.0](https://github.com/AdmiralDS/react-ui/compare/v8.34.1...v8.35.0) (2025-02-26)
+
+
+### Features
+
+* add CurrencyInput ([b6cb8bf](https://github.com/AdmiralDS/react-ui/commit/b6cb8bf220ce0ff53d130b3344a09212af2dc68d))
+
+
+### Bug Fixes
+
+* change disabled chips hover ([337d7c0](https://github.com/AdmiralDS/react-ui/commit/337d7c0de943cf378d978fb6ea54e96df412facd))
+* typings export for select ([68c6066](https://github.com/AdmiralDS/react-ui/commit/68c6066c0cbfc3d1147b3f1a5e951ab0aa9aa412))
+
 ### [8.34.1](https://github.com/AdmiralDS/react-ui/compare/v8.34.0...v8.34.1) (2025-02-19)
 
 
