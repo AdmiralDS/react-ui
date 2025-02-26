@@ -665,6 +665,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         setIsSearchPanelOpen(false);
         selectRef.current?.blur();
         onBlurFromProps?.(evt);
+        isKeyboardEvent.current = false;
       }
     };
 
