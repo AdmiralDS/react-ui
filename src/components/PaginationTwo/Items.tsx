@@ -3,6 +3,12 @@ import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import type { PaginationTwoDimension } from './index';
+
+const ITEM_SIZE_M = 40;
+const ITEM_SIZE_S = 32;
+const CHEVRON_SIZE_M = 24;
+const CHEVRON_SIZE_S = 20;
 
 const selectedMixin = css`
   background: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
@@ -34,17 +40,17 @@ const ButtonContent = styled.span`
   height: 100%;
 `;
 
-const Button = styled.button<{ selected: boolean; $current: boolean }>`
+const Button = styled.button<{ selected: boolean; $current: boolean; $dimension: PaginationTwoDimension }>`
   display: flex;
   flex: 1 1 auto;
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+  height: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
   align-items: center;
   justify-content: center;
   border: 2px solid transparent;
   border-radius: 20px;
-  ${typography['Body/Body 1 Short']}
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   background: transparent;
   border: none;
@@ -90,7 +96,7 @@ const Button = styled.button<{ selected: boolean; $current: boolean }>`
       bottom: ${({ $current }) => ($current ? '2px' : '0px')};
       left: ${({ $current }) => ($current ? '2px' : '0px')};
       right: ${({ $current }) => ($current ? '2px' : '0px')};
-      border-radius: 40px;
+      border-radius: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
     }
   }
 `;
@@ -103,15 +109,23 @@ const NextButton = styled(Button)`
   margin-left: 8px;
 `;
 
-type PageProps = {
+type PaginationItemProps = {
   onClick: (event: any) => void;
   page: number | null;
   selected: boolean;
+  dimension: PaginationTwoDimension;
   disabled: boolean;
   type: string;
 };
 
-export const PaginationItem: React.FC<PageProps> = ({ onClick, page, selected, disabled, type }) => {
+export const PaginationItem: React.FC<PaginationItemProps> = ({
+  onClick,
+  page,
+  selected,
+  dimension,
+  disabled,
+  type,
+}) => {
   let label = '';
   if (type === 'page') label = `Страница ${page}, выбрать`;
   if (type === 'next') label = 'Следующая страница, выбрать';
@@ -126,29 +140,44 @@ export const PaginationItem: React.FC<PageProps> = ({ onClick, page, selected, d
       aria-label={label}
       tabIndex={disabled ? -1 : 0}
       $current={selected}
+      $dimension={dimension}
       disabled={disabled}
       selected={selected}
       onClick={onClick}
     >
       <ButtonContent tabIndex={-1}>
         {type === 'page' && page}
-        {type === 'next' && <ChevronRightOutline width={24} height={24} />}
-        {type === 'previous' && <ChevronLeftOutline width={24} height={24} />}
+        {type === 'next' && (
+          <ChevronRightOutline
+            width={dimension === 's' ? CHEVRON_SIZE_S : CHEVRON_SIZE_M}
+            height={dimension === 's' ? CHEVRON_SIZE_S : CHEVRON_SIZE_M}
+          />
+        )}
+        {type === 'previous' && (
+          <ChevronLeftOutline
+            width={dimension === 's' ? CHEVRON_SIZE_S : CHEVRON_SIZE_M}
+            height={dimension === 's' ? CHEVRON_SIZE_S : CHEVRON_SIZE_M}
+          />
+        )}
       </ButtonContent>
     </Button>
   );
 };
 
-const EllipsisWrapper = styled.div`
+const EllipsisWrapper = styled.div<{ $dimension: PaginationTwoDimension }>`
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+  height: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
   align-items: center;
   justify-content: center;
-  ${typography['Body/Body 1 Short']}
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])}
   background: transparent;
 `;
 
-export const Ellipsis = () => {
-  return <EllipsisWrapper>...</EllipsisWrapper>;
+type EllipsisProps = {
+  dimension: PaginationTwoDimension;
+};
+
+export const Ellipsis: React.FC<EllipsisProps> = ({ dimension }) => {
+  return <EllipsisWrapper $dimension={dimension}>...</EllipsisWrapper>;
 };
