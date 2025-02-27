@@ -39,27 +39,39 @@ const ButtonContent = styled.span`
   height: 100%;
 `;
 
-const Button = styled.button<{ selected: boolean; $current: boolean; $dimension: PaginationTwoDimension }>`
+const SideButtonsMixin = css<{ $isPreviousButton?: boolean; $isNextButton?: boolean }>`
+  ${(p) => p.$isPreviousButton && 'margin-right: 8px;'}
+  ${(p) => p.$isNextButton && 'margin-left: 8px;'}
+`;
+
+const Button = styled.button<{
+  selected: boolean;
+  $current: boolean;
+  $dimension: PaginationTwoDimension;
+  $isPreviousButton?: boolean;
+  $isNextButton?: boolean;
+}>`
+  box-sizing: border-box;
+  appearance: none;
+  outline: none;
+  margin: 0;
+  ${SideButtonsMixin};
+  user-select: none;
   display: flex;
   flex: 1 1 auto;
   position: relative;
-  width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+  min-width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
   height: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+  padding: 0 6px;
   align-items: center;
   justify-content: center;
-  border: 2px solid transparent;
+  border: none;
   border-radius: 20px;
   ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short'])}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   background: transparent;
-  border: none;
-  appearance: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  user-select: none;
-  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
@@ -95,51 +107,42 @@ const Button = styled.button<{ selected: boolean; $current: boolean; $dimension:
       bottom: ${({ $current }) => ($current ? '2px' : '0px')};
       left: ${({ $current }) => ($current ? '2px' : '0px')};
       right: ${({ $current }) => ($current ? '2px' : '0px')};
-      border-radius: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+      border-radius: 20px;
     }
   }
-`;
-
-const PreviousButton = styled(Button)`
-  margin-right: 8px;
-`;
-
-const NextButton = styled(Button)`
-  margin-left: 8px;
 `;
 
 type PaginationItemProps = {
   onClick: (event: any) => void;
   page: number | null;
   selected: boolean;
-  dimension: PaginationTwoDimension;
   disabled: boolean;
   type: string;
 };
 
-export const PaginationItem: React.FC<PaginationItemProps> = ({
+export const PaginationItem = ({
   onClick,
   page,
   selected,
-  dimension,
   disabled,
   type,
-}) => {
+  dimension = 'm',
+}: PaginationItemProps & { dimension?: PaginationTwoDimension }) => {
   let label = '';
   if (type === 'page') label = `Страница ${page}, выбрать`;
   if (type === 'next') label = 'Следующая страница, выбрать';
   if (type === 'previous') label = 'Предыдущая страница, выбрать';
-  const component = type === 'page' ? Button : type === 'previous' ? PreviousButton : NextButton;
 
   return (
     <Button
       type="button"
-      as={component}
       aria-current={selected}
       aria-label={label}
       tabIndex={disabled ? -1 : 0}
       $current={selected}
       $dimension={dimension}
+      $isPreviousButton={type === 'previous'}
+      $isNextButton={type === 'next'}
       disabled={disabled}
       selected={selected}
       onClick={onClick}
@@ -165,7 +168,7 @@ export const PaginationItem: React.FC<PaginationItemProps> = ({
 
 const EllipsisWrapper = styled.div<{ $dimension: PaginationTwoDimension }>`
   display: flex;
-  width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
+  min-width: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
   height: ${(p) => (p.$dimension === 'm' ? ITEM_SIZE_M : ITEM_SIZE_S)}px;
   align-items: center;
   justify-content: center;
@@ -177,6 +180,6 @@ type EllipsisProps = {
   dimension: PaginationTwoDimension;
 };
 
-export const Ellipsis: React.FC<EllipsisProps> = ({ dimension }) => {
+export const Ellipsis = ({ dimension }: EllipsisProps) => {
   return <EllipsisWrapper $dimension={dimension}>...</EllipsisWrapper>;
 };

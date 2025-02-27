@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -137,31 +137,27 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     event.currentTarget.blur();
   };
 
-  const items = useMemo(() => {
-    return itemList.map((item) => {
-      return typeof item === 'number'
-        ? {
-            onClick: (event: any) => {
-              handlePageClick(event, item);
-            },
-            type: 'page',
-            page: item,
-            dimension: dimension,
-            selected: item === page,
-            disabled: disabledPages.indexOf(item) > -1,
-          }
-        : {
-            onClick: (event: any) => {
-              handlePageClick(event, buttonPage(item));
-            },
-            type: item,
-            page: buttonPage(item),
-            dimension: dimension,
-            selected: false,
-            disabled: item.indexOf('ellipsis') === -1 && (item === 'next' ? disableNextBtn : disablePreviousBtn),
-          };
-    });
-  }, [dimension, page, disabledPages]);
+  const items = itemList.map((item) => {
+    return typeof item === 'number'
+      ? {
+          onClick: (event: any) => {
+            handlePageClick(event, item);
+          },
+          type: 'page',
+          page: item,
+          selected: item === page,
+          disabled: disabledPages.indexOf(item) > -1,
+        }
+      : {
+          onClick: (event: any) => {
+            handlePageClick(event, buttonPage(item));
+          },
+          type: item,
+          page: buttonPage(item),
+          selected: false,
+          disabled: item.indexOf('ellipsis') === -1 && (item === 'next' ? disableNextBtn : disablePreviousBtn),
+        };
+  });
 
   const onInputSubmit = (event: any, value: string) => {
     const parsed = parseInt(value, 10);
@@ -196,7 +192,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
         </Button>
       )}
       <PagesWrapper>
-        {items.map(({ type, selected, disabled, page, dimension, onClick }) => {
+        {items.map(({ type, selected, disabled, page, onClick }) => {
           const id = uid();
           return type === 'ellipsis' ? (
             <li key={id}>
