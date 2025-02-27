@@ -1,5 +1,6 @@
-import * as React from 'react';
+import { useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
+
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
@@ -101,7 +102,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const hidePrevButton = mobile || false;
   const isInputVisible = showInput && count > 21 && !mobile;
 
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = useState('');
   const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton);
 
   // возвращаем предыдущую страницу из числа не задизейбленных;
@@ -136,7 +137,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     event.currentTarget.blur();
   };
 
-  const items = React.useMemo(() => {
+  const items = useMemo(() => {
     return itemList.map((item) => {
       return typeof item === 'number'
         ? {

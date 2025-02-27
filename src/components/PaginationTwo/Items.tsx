@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
