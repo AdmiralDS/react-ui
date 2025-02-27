@@ -55,8 +55,12 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   page: number;
   /** Колбек на изменение текущей страницы */
   onChange: (event: any, page: number) => void;
-  /** Количество страниц*/
+  /** Количество страниц */
   count?: number;
+  /** Количество страниц, отображаемых по бокам от текущей страницы */
+  siblingCount: number;
+  /** Количество страниц, отображаемых в начале и в конце компонента */
+  boundaryCount: number;
   /** Массив с номерами задизейбленных страниц */
   disabledPages?: Array<number>;
   /** Включение мобильной версии компонента */
@@ -84,6 +88,8 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   dimension = 'm',
   page,
   count = 1,
+  siblingCount = 1,
+  boundaryCount = 1,
   mobile = false,
   disabledPages = [],
   showNextBtnMobile = true,
@@ -103,7 +109,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const isInputVisible = showInput && count > 21 && !mobile;
 
   const [inputValue, setInputValue] = useState('');
-  const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton);
+  const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton, siblingCount, boundaryCount);
 
   // возвращаем предыдущую страницу из числа не задизейбленных;
   const getPreviousPage = () =>
