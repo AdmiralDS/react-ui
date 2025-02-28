@@ -118,16 +118,10 @@ type PaginationItemProps = {
   selected: boolean;
   disabled: boolean;
   type: string;
+  dimension?: PaginationTwoDimension;
 };
 
-export const PaginationItem = ({
-  onClick,
-  page,
-  selected,
-  disabled,
-  type,
-  dimension = 'm',
-}: PaginationItemProps & { dimension?: PaginationTwoDimension }) => {
+export const PaginationItem = ({ onClick, page, selected, disabled, type, dimension = 'm' }: PaginationItemProps) => {
   let label = '';
   if (type === 'page') label = `Страница ${page}, выбрать`;
   if (type === 'next') label = 'Следующая страница, выбрать';
