@@ -135,8 +135,8 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     }
   };
 
-  const handlePageClick = (event: any, value: any) => {
-    if (value !== page) {
+  const handlePageClick = (event: any, value: number | null) => {
+    if (value && value !== page) {
       onChange?.(event, value);
     }
     // reset active state
