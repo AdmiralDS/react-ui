@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { PaginationTwo, T } from '@admiral-ds/react-ui';
 import type { PaginationTwoProps } from '@admiral-ds/react-ui';
-import styled from 'styled-components';
 
 const MobileWrapper = styled.div`
   width: 320px;
@@ -34,8 +34,8 @@ const Text = styled(T).attrs(() => ({
 `;
 
 export const PaginationTwoMobileTemplate = (args: PaginationTwoProps) => {
-  const [page1, setPage1] = React.useState(1);
-  const [page2, setPage2] = React.useState(1);
+  const [page1, setPage1] = useState(1);
+  const [page2, setPage2] = useState(1);
   const style = { marginBottom: '60px' };
 
   return (
