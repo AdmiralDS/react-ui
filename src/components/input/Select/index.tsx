@@ -280,7 +280,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const emptyMessage = locale?.emptyMessage || (
-      <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
+      <DropDownText $dimension={dimension}>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = useState('');
