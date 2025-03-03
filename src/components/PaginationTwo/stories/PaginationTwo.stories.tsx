@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 
@@ -6,11 +5,13 @@ import { PaginationTwo } from '@admiral-ds/react-ui';
 
 import { PaginationTwoPlaygroundTemplate } from './PaginationTwoPlayground.template';
 import { PaginationTwoVariantsTemplate } from './PaginationTwoVariants.template';
+import { PaginationTwoSettingsTemplate } from './PaginationTwoSettings.template';
 import { PaginationTwoMobileTemplate } from './PaginationTwoMobile.template';
 
 // Imports of text sources
 import PaginationTwoPlaygroundRaw from './PaginationTwoPlayground.template?raw';
 import PaginationTwoVariantsRaw from './PaginationTwoVariants.template?raw';
+import PaginationTwoSettingsRaw from './PaginationTwoSettings.template?raw';
 import PaginationTwoMobileRaw from './PaginationTwoMobile.template?raw';
 
 const Separator = styled.div`
@@ -120,6 +121,27 @@ export const PaginationVariantsExample = {
   },
 
   name: 'Примеры.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Настройка количества видимых страниц">
+const PaginationSettingsStory: StoryFn<typeof PaginationTwo> = ({ page, onChange, ...props }) => (
+  <PaginationTwoSettingsTemplate page={page} onChange={onChange} {...props} />
+);
+
+export const PaginationSettingsExample = {
+  render: PaginationSettingsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationTwoSettingsRaw,
+      },
+    },
+  },
+
+  name: 'Настройка количества видимых страниц.',
 };
 
 //</editor-fold>
