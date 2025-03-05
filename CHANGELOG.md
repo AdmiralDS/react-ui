@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.36.0](https://github.com/AdmiralDS/react-ui/compare/v8.35.0...v8.36.0) (2025-03-05)
+
+
+### Features
+
+* **PaginationTwo:** добавлен размер S ([95aee67](https://github.com/AdmiralDS/react-ui/commit/95aee67eafda0d74a57b0d7f8f8947dbaf226ddf))
+* **PaginationTwo:** добавлена возможность работать с любым количеством страниц ([5ddef2c](https://github.com/AdmiralDS/react-ui/commit/5ddef2cfe76ab0c264784882d76f5811edaec122))
+* **PaginationTwo:** добавлены пропсы siblingCount и boundaryCount ([3bf4e1e](https://github.com/AdmiralDS/react-ui/commit/3bf4e1e4b4a619b6543ccdc4b2302f1ba85814a4))
+
+
+### Bug Fixes
+
+* **Scrollbars:**  fix wrong scoped css vars use ([10851fb](https://github.com/AdmiralDS/react-ui/commit/10851fb8caceab2100c71646576f1e3e8efe7a9e))
+* **Select:** исправлен размер шрифта сообщения, отображаемого при пустом наборе опций ([4c6d1c3](https://github.com/AdmiralDS/react-ui/commit/4c6d1c333423131add0c1674d94066b6d4cecbe9))
+
 ## [8.35.0](https://github.com/AdmiralDS/react-ui/compare/v8.34.1...v8.35.0) (2025-02-26)
 
 
