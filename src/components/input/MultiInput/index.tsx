@@ -14,6 +14,17 @@ type DataAttributes = { [dataAttibute: `data-${string}`]: string | boolean };
 const nothing = () => {};
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
 
+function pressDeleteButtonOnLastChip(
+  input: HTMLInputElement | null,
+  optionsWrapper: HTMLDivElement | null,
+  lastChipCloseButtonSelector: string,
+) {
+  if (input && optionsWrapper && input.selectionStart === 0 && input.selectionEnd === 0) {
+    const closeButton = optionsWrapper.querySelector(lastChipCloseButtonSelector);
+    closeButton?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+  }
+}
+
 export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Делает размер компонента больше или меньше обычной */
   dimension?: ComponentDimension;
@@ -33,9 +44,6 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  /** Отключает возможность удалять опции через нажатие на клавишу Backspace */
-  disableBackspaceClearOption?: boolean;
-
   //* Список кнопок, при нажатии на которые добавляются значения, по умолчанию Enter */
   createActivateButtonList?: string[];
 
@@ -50,6 +58,15 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   containerPropsConfig?: (
     props: React.ComponentProps<typeof Container>,
   ) => Partial<React.ComponentProps<typeof Container> & DataAttributes>;
+
+  /** Селектор позволяющий найти кнопку закрытия последней опции. Необходимо для срабатывания
+   * удаления последней опции при нажатии Backspace в пустом поле ввода. Значение по умолчанию:
+   * '.wrapper-options > :has(.close-button):last-of-type .close-button' */
+  lastChipCloseButtonSelector?: string;
+
+  /**  Функция которая выполняется при нажатии на кнопку Backspace в поле ввода, по умолчанию произодет
+   * поиск последнего чипа и нажате на кнопку удалить */
+  onBackspaceKeyDown?: typeof pressDeleteButtonOnLastChip;
 
   children: React.ReactNode;
 }
@@ -67,10 +84,11 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       disableCopying,
       dimension = 'm',
       createActivateButtonList = ['Enter'],
-      disableBackspaceClearOption,
       onInputComplete,
       containerPropsConfig = nothing,
       onClearOptions,
+      lastChipCloseButtonSelector = '.wrapper-options > :has(.close-button):last-of-type .close-button',
+      onBackspaceKeyDown: onLastChipDelete = pressDeleteButtonOnLastChip,
       ...props
     },
     ref,
@@ -107,16 +125,8 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
         if (createActivateButtonList.includes(e.code) && onInputComplete) {
           onInputComplete();
         }
-        if (!disableBackspaceClearOption && e.code === 'Backspace') {
-          const { selectionStart, selectionEnd } = this;
-
-          if (refWrapperOptions && selectionStart === 0 && selectionEnd === 0) {
-            const closeButton = refWrapperOptions.querySelector(
-              '.wrapper-options > :has(.close-button):last-of-type .close-button',
-            );
-
-            closeButton?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-          }
+        if (e.code === 'Backspace') {
+          onLastChipDelete(this, refWrapperOptions, lastChipCloseButtonSelector);
         }
       }
 

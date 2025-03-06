@@ -72,7 +72,10 @@ export const MultiInputWithoutCloseChipTemplate = ({
         onClearOptions={handleClearListValue}
         onChange={handleChange}
         displayClearIcon={displayClearIcon && listValue.length !== 0}
-        disableBackspaceClearOption
+        onBackspaceKeyDown={() => {
+          /* переопределение дефолтного поведения
+          ни чего не делать */
+        }}
       >
         {listValue.map((item, index) => (
           <StyledChip
