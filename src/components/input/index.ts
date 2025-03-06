@@ -18,3 +18,4 @@ export * from './InputEx';
 export * from './FileInput';
 export * from './FileInput/FileItem';
 export * from './DateTime';
+export * from './MultiInput';
