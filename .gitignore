@@ -12,4 +12,3 @@ package-lock.json
 admiral-ds-react-ui-*.tgz
 tsconfig.tsbuildinfo
 bun.lockb
-.vscode/settings.json
