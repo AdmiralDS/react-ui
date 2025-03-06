@@ -75,8 +75,8 @@ export const SelectFieldCustomOptionsTemplate = (props: SearchSelectFieldProps) 
         Пример отображения кастомных опций с использованием компонента Option
       </T>
       <SelectField mode="searchSelect" label="label" value={selectValue} onChange={onChange}>
-        {OPTIONS.map((option) => (
-          <Option key={option.value} value={option.value}>
+        {OPTIONS.map((option, index) => (
+          <Option key={`${option.value}-${index}`} value={option.value}>
             <Icon />
             <TextWrapper>
               {option.text}

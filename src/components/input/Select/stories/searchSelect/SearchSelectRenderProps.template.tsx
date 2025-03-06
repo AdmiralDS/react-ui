@@ -40,16 +40,16 @@ export const SearchSelectRenderPropsTemplate = (props: SelectProps) => {
       </T>
       <Separator />
       <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
+        {OPTIONS.map(({ text, value }, index) => (
           <Option
-            key={value}
+            key={`${value}-${index}`}
             value={value}
             renderOption={(options) => (
               <MyIncredibleOption
                 text={text}
                 shouldAnimate={options.hovered && value !== selectValue}
                 {...options}
-                key={value}
+                key={`${value}-${index}`}
               />
             )}
           />

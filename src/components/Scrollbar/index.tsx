@@ -35,7 +35,6 @@ const VerticalContainer = styled.div`
   bottom: 0;
   right: 0;
   width: 10px;
-  transform: translate(var(${horizontalContentScrollCSSPropName}, 0), var(${verticalContentScrollCSSPropName}, 0));
 `;
 
 const HorizontalContainer = styled.div`
@@ -44,7 +43,6 @@ const HorizontalContainer = styled.div`
   bottom: 0;
   right: 0;
   height: 10px;
-  transform: translate(var(${horizontalContentScrollCSSPropName}, 0), var(${verticalContentScrollCSSPropName}, 0));
 `;
 
 const VerticalScrollThumbZone = styled.div`
