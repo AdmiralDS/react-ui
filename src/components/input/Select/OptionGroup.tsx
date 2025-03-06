@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { OptionGroupProvider } from './useSelectContext';
 import { OptionWrapper } from './styled';
-import type { HTMLAttributes } from 'react';
+import { useId, type HTMLAttributes } from 'react';
 import { Option } from './Option';
 import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
 
@@ -19,15 +19,14 @@ const Category = styled(OptionWrapper)`
 
 export const OptionGroup = ({ label, disabled, children, ...props }: React.PropsWithChildren<OptionGroupProps>) => {
   const selectContext = useDropDownContext();
-
+  const id = props.id || useId();
   return (
     <OptionGroupProvider disabled={disabled}>
       <Option
-        key={label}
         value={label}
         readOnly={true}
         renderOption={() => (
-          <Category {...props} $dimension={selectContext?.dimension} key={label}>
+          <Category {...props} $dimension={selectContext?.dimension} key={id}>
             {label}
           </Category>
         )}
