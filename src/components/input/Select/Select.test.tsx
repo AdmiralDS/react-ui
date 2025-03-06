@@ -77,7 +77,7 @@ describe('SearchSelect', () => {
     test('Renders visible value correctly', () => {
       render(<SelectComponent initialValue={options[1]} />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
       const visibleText = within(valueWrapper).getByText(options[1]);
 
@@ -87,7 +87,7 @@ describe('SearchSelect', () => {
     test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
 
       expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('SearchSelect', () => {
     test('MultiSelect empty when no value is provided', () => {
       render(<SelectComponent multiple placeholder="placeholder" />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
 
       expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
@@ -127,7 +127,7 @@ describe('SearchSelect', () => {
     test('Renders visible multiselect value correctly', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       ['one', 'two'].forEach((text) => {
         expect(within(valueWrapper).getByText(text)).toBeInTheDocument();
@@ -208,7 +208,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent initialValue="one" />);
 
       const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const parent = document.getElementById('parent') as HTMLElement;
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
@@ -298,7 +298,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       await user.tab();
 
@@ -318,7 +318,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       await act(async () => {
         await user.tab();
@@ -343,7 +343,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       // открываем дроп, селектор на первом элементе
       await user.tab();
@@ -399,7 +399,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       await act(async () => {
         await user.tab();
@@ -455,7 +455,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
         (chipElem) => chipElem.firstChild?.lastChild,
@@ -488,7 +488,7 @@ describe('SearchSelect', () => {
       );
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      // const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      // const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       // const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
       //   (chipElem) => chipElem.firstChild?.lastChild,
@@ -582,7 +582,7 @@ describe('SearchSelect', () => {
       );
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
         (chipElem) => chipElem.firstChild?.lastChild,

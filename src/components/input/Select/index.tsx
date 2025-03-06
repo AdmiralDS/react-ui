@@ -842,7 +842,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <ValueWrapper
           tabIndex={-1}
           ref={valueWrapperRef}
-          id="selectValueWrapper"
+          className="selectValueWrapper"
           $dimension={dimension}
           $multiple={multiple}
           $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}

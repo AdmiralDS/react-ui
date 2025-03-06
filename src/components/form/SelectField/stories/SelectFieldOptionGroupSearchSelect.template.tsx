@@ -10,7 +10,13 @@ export const SelectFieldOptionGroupSearchSelectTemplate = () => {
 
   return (
     <>
-      <SelectField mode="searchSelect" label="label" value={selectValue} onChange={onChange} dimension="xl">
+      <SelectField
+        mode="searchSelect"
+        label="SearchSelect с группами"
+        value={selectValue}
+        onChange={onChange}
+        dimension="xl"
+      >
         <OptionGroup label="Сегодня выступают">
           <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
           <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>
