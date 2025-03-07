@@ -84,6 +84,7 @@ export const ModalTwoButtonsTemplate = ({
   ...props
 }: ModalProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
+  const closeButtonProps = { 'data-testid': React.useId() };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -95,6 +96,7 @@ export const ModalTwoButtonsTemplate = ({
             setOpened(false);
           }}
           aria-labelledby="modal-title"
+          closeButtonPropsConfig={() => closeButtonProps}
         >
           <ModalTitle id="modal-title">Modal title</ModalTitle>
           <ModalForm

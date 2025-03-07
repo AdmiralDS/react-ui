@@ -112,7 +112,8 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement>, Da
   linkProps?: { [key: string]: string };
   /** Размер компонента */
   dimension?: BreadcrumbsProps['dimension'];
-
+  /** Конфиг функция пропсов для хлебной крошки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   containerPropsConfig?: (
     props: React.ComponentProps<typeof Crumb> & DataAttributes,
   ) => Partial<React.ComponentProps<typeof Crumb>> & DataAttributes;

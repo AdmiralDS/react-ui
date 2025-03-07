@@ -48,6 +48,7 @@ export const DrawerPlaygroundTemplate = ({
   ...props
 }: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
+  const closeButtonProps = { 'data-testid': React.useId() };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -58,6 +59,7 @@ export const DrawerPlaygroundTemplate = ({
         onClose={() => setOpened(false)}
         style={{ width: '480px' }}
         aria-labelledby="drawer-title"
+        closeButtonPropsConfig={() => closeButtonProps}
       >
         <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
         <DrawerForm
