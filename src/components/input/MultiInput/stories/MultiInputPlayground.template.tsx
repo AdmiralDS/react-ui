@@ -25,15 +25,16 @@ const hoverChipStyle = css`
   }
 `;
 
-export const StyledChip = styled(Chips)`
+export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
   display: flex;
-
   min-width: 35px;
+  max-width: 190px;
+
   @media (max-width: 768px) {
     max-width: 80px;
   }
 
-  ${({ disabled }) => (disabled ? disabledChipStyle : hoverChipStyle)}
+  ${({ disabled, readOnly }) => (disabled ? disabledChipStyle : readOnly ? null : hoverChipStyle)}
 
   ${typography['Caption/Caption 1']};
 `;
@@ -63,10 +64,14 @@ export const MultiInputPlaygroundTemplate = ({
   };
 
   const handleKeyDown = () => {
-    setListValue((prevState) => {
-      return [...prevState, { id: uid(), children: value }];
-    });
-    setValue('');
+    const newValue = value.trim();
+
+    if (newValue) {
+      setListValue((prevState) => {
+        return [...prevState, { id: uid(), children: newValue }];
+      });
+      setValue('');
+    }
   };
 
   const handleClearListValue = () => {
@@ -100,11 +105,12 @@ export const MultiInputPlaygroundTemplate = ({
           <StyledChip
             {...item}
             key={index}
-            onClose={handleDeleteChip}
+            onClose={props.readOnly || props.disableCopying ? undefined : handleDeleteChip}
             tabIndex={-1}
             dimension="s"
             appearance="filled"
-            disabled={props.disabled || props.disableCopying || props.readOnly}
+            readOnly={props.readOnly}
+            disabled={props.disabled}
           />
         ))}
       </MultiInput>
