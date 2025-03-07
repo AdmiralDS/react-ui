@@ -32,7 +32,7 @@ export interface ChipsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Выбранная чипса */
   selected?: boolean;
   /** Добавляет иконку для удаления чипсов */
-  onClose?: () => void;
+  onClose?: (id?: HTMLElement['id']) => void;
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContentTooltip?: () => React.ReactNode;
   /** Иконка перед текстом Chips'a */
@@ -125,8 +125,8 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
     }, [setTooltipVisible]);
 
     const handleClickCloseIcon = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      onClose?.();
+      e.preventDefault();
+      onClose?.(props.id);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -191,7 +191,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
               <CloseIconButton
                 dimension={dimension === 'm' ? 'mBig' : 's'}
                 highlightFocus={false}
-                onClick={handleClickCloseIcon}
+                onMouseDown={handleClickCloseIcon}
                 disabled={disabled}
                 tabIndex={-1}
                 appearance={appearance === 'outlined' ? 'primary' : 'secondary'}
