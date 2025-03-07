@@ -1,14 +1,13 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
+import { ALL_BORDER_RADIUS_VALUES, INPUT_STATUS_VALUES, MultiInput } from '@admiral-ds/react-ui';
 
 import { MultiInputPlaygroundTemplate } from './MultiInputPlayground.template';
-import { MultiInputWithoutCloseChipTemplate } from './MultiInputWithoutCloseChip.template';
-
-import { ALL_BORDER_RADIUS_VALUES, INPUT_STATUS_VALUES, MultiInput } from '@admiral-ds/react-ui';
+import { MultiInputInitChipsDisabledTemplate } from './MultiInputInitChipsDisabled.template';
 
 // Imports of text sources
 import MultiInputPlaygroundRaw from './MultiInputPlayground.template?raw';
-import MultiInputWithoutCloseChipTemplateRaw from './MultiInputWithoutCloseChip.template?raw';
+import MultiInputInitChipsDisabledTemplateRaw from './MultiInputInitChipsDisabled.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/MultiInput',
@@ -60,24 +59,24 @@ export const MultiInputPlayground = {
 
 //</editor-fold>
 
-//<editor-fold desc="MultiInput с отключённым удалением чипсов по отдельности">
-const MultiInputWithoutCloseChipStory: StoryFn<typeof MultiInput> = (props) => {
+//<editor-fold desc="MultiInput с начальными опциями">
+const MultiInputInitChipsDisabledStory: StoryFn<typeof MultiInput> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <MultiInputWithoutCloseChipTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <MultiInputInitChipsDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const MultiInputWithoutCloseChip = {
-  render: MultiInputWithoutCloseChipStory,
+export const MultiInputInitChipsDisabled = {
+  render: MultiInputInitChipsDisabledStory,
 
   parameters: {
     docs: {
       source: {
-        code: MultiInputWithoutCloseChipTemplateRaw,
+        code: MultiInputInitChipsDisabledTemplateRaw,
       },
     },
   },
 
-  name: 'MultiInput с отключённым удалением чипсов по отдельности',
+  name: 'MultiInput с начальными опциями',
 };
 
 //</editor-fold>

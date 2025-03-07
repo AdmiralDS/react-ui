@@ -65,7 +65,7 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   lastChipCloseButtonSelector?: string;
 
   /**  Функция которая выполняется при нажатии на кнопку Backspace в поле ввода, по умолчанию произодет
-   * поиск последнего чипа и нажате на кнопку удалить */
+   * поиск последнего чипа и нажатие на кнопку удалить */
   onBackspaceKeyDown?: typeof pressDeleteButtonOnLastChip;
 
   children: React.ReactNode;

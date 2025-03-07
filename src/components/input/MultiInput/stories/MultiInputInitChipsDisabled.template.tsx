@@ -5,8 +5,8 @@ import styled, { css, ThemeProvider } from 'styled-components';
 import { Chips, typography, MultiInput } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, MultiInputProps } from '@admiral-ds/react-ui';
 
-import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { uid } from '#src/components/common/uid';
+import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
 const disabledChipStyle = css`
   pointer-events: auto;
@@ -34,7 +34,17 @@ export const StyledChip = styled(Chips)`
   ${typography['Caption/Caption 1']};
 `;
 
-export const MultiInputWithoutCloseChipTemplate = ({
+const initListValue = [
+  {
+    id: uid(),
+    children: 'chipsOne',
+    disabled: true,
+  },
+  { id: uid(), children: 'chipsTwo' },
+  { id: uid(), children: 'chipsThree' },
+];
+
+export const MultiInputInitChipsDisabledTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   displayClearIcon = true,
@@ -44,12 +54,18 @@ export const MultiInputWithoutCloseChipTemplate = ({
   CSSCustomProps?: boolean;
 }) => {
   const [value, setValue] = useState('');
-  const [listValue, setListValue] = useState<React.ComponentProps<typeof StyledChip>[]>([]);
+  const [listValue, setListValue] = useState<React.ComponentProps<typeof StyledChip>[]>(initListValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const currentValue = e.currentTarget.value;
 
     setValue(currentValue);
+  };
+
+  const handleDeleteChip = (id?: string) => {
+    setListValue((prevState) => {
+      return prevState.filter((elem) => elem.id !== id);
+    });
   };
 
   const handleKeyDown = () => {
@@ -60,7 +76,9 @@ export const MultiInputWithoutCloseChipTemplate = ({
   };
 
   const handleClearListValue = () => {
-    setListValue([]);
+    setListValue((prevState) => {
+      return prevState.filter((elem) => elem.disabled);
+    });
   };
 
   return (
@@ -72,19 +90,16 @@ export const MultiInputWithoutCloseChipTemplate = ({
         onClearOptions={handleClearListValue}
         onChange={handleChange}
         displayClearIcon={displayClearIcon && listValue.length !== 0}
-        onBackspaceKeyDown={() => {
-          /* переопределение дефолтного поведения
-          ни чего не делать */
-        }}
       >
         {listValue.map((item, index) => (
           <StyledChip
             {...item}
             key={index}
+            onClose={item.onClose ? item.onClose : handleDeleteChip}
             tabIndex={-1}
             dimension="s"
             appearance="filled"
-            disabled={props.disabled || props.disableCopying || props.readOnly}
+            disabled={item.disabled || props.disabled || props.disableCopying || props.readOnly}
           />
         ))}
       </MultiInput>
