@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.37.0](https://github.com/AdmiralDS/react-ui/compare/v8.36.0...v8.37.0) (2025-03-07)
+
+
+### Features
+
+* add MultiInput ([b4bd043](https://github.com/AdmiralDS/react-ui/commit/b4bd043abf07c25d40c3d331e653b12688816750))
+
+
+### Bug Fixes
+
+* **OptionGroup:** fix warnings and incorrect key and id use ([46baa6c](https://github.com/AdmiralDS/react-ui/commit/46baa6cdd3f001592db349636c05264c6970d7c9))
+
 ## [8.36.0](https://github.com/AdmiralDS/react-ui/compare/v8.35.0...v8.36.0) (2025-03-05)
 
 
