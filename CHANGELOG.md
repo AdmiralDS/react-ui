@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.38.0](https://github.com/AdmiralDS/react-ui/compare/v8.37.0...v8.38.0) (2025-03-07)
+
+
+### Features
+
+* **Modal, Drawer:** [#1672](https://github.com/AdmiralDS/react-ui/issues/1672) add propsConfig function for close button ([7fa325e](https://github.com/AdmiralDS/react-ui/commit/7fa325e2b2838d02a3c54d3371ea7c34febe2d51))
+
+
+### Bug Fixes
+
+* **MultiInput:** style readOnly fixed ([52be94e](https://github.com/AdmiralDS/react-ui/commit/52be94ec10db34a2b09c71013da4a5ddb9ad6594))
+
 ## [8.37.0](https://github.com/AdmiralDS/react-ui/compare/v8.36.0...v8.37.0) (2025-03-07)
 
 
