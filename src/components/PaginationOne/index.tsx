@@ -143,12 +143,12 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
   };
 
   /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
-   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   leftButtonPropsConfig?: (
     props: React.ComponentProps<typeof Button>,
   ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
   /** Конфиг функция пропсов для правой кнопки. На вход получает начальный набор пропсов, на
-   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   rightButtonPropsConfig?: (
     props: React.ComponentProps<typeof Button>,
   ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;

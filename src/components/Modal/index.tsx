@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import styled, { css, useTheme } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 import { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -159,6 +160,7 @@ const ModalContext = createContext({ mobile: false, displayCloseIcon: true } as 
   displayCloseIcon: boolean;
 });
 
+const nothing = () => {};
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -196,6 +198,11 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
     closeButtonAriaLabel?: string;
   };
+  /** Конфиг функция пропсов для кнопки закрытия модального окна. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  closeButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CloseButton>,
+  ) => Partial<React.ComponentProps<typeof CloseButton> & DataAttributes>;
 }
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
@@ -213,6 +220,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       displayCloseIcon = true,
       children,
       locale,
+      closeButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -281,6 +289,13 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       onClose?.();
     };
 
+    const closeButtonProps = {
+      dimension: 'lSmall',
+      'aria-label': closeBtnAriaLabel,
+      $mobile: mobile,
+      onClick: handleCloseBtnClick,
+    } satisfies React.ComponentProps<typeof CloseButton>;
+
     return createPortal(
       <Overlay
         ref={overlayRef}
@@ -301,14 +316,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {...props}
         >
           <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
-          {displayCloseIcon && (
-            <CloseButton
-              dimension="lSmall"
-              aria-label={closeBtnAriaLabel}
-              $mobile={mobile}
-              onClick={handleCloseBtnClick}
-            />
-          )}
+          {displayCloseIcon && <CloseButton {...closeButtonProps} {...closeButtonPropsConfig(closeButtonProps)} />}
         </ModalComponent>
       </Overlay>,
       container || document.body,
