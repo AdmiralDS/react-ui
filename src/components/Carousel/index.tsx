@@ -1,6 +1,7 @@
 import { Children, forwardRef, cloneElement, isValidElement, useMemo, useEffect, useState, useRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 
 import type { CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
@@ -87,6 +88,7 @@ const getPrevItemInfinite = (currentItem: number, maxItems: number) => {
 };
 
 type CarouselSliderPosition = 'inner' | 'outer';
+const nothing = () => {};
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   /** Номер выбранной секции по умолчанию (нумерация с 0) */
   defaultItem?: number;
@@ -108,6 +110,16 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   sliderAppearance?: CarouselSliderAppearance;
   /** Позволяет добавлять миксин, созданный с помощью styled css  */
   contentCssMixin?: ReturnType<typeof css>;
+  /** Конфиг функция пропсов для кнопки переключения на предыдущий элемент. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  prevButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CarouselButton>,
+  ) => Partial<React.ComponentProps<typeof CarouselButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки переключения на следующий элемент. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  nextButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CarouselButton>,
+  ) => Partial<React.ComponentProps<typeof CarouselButton> & DataAttributes>;
 }
 
 export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
@@ -123,6 +135,8 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       sliderPosition = 'inner',
       sliderAppearance = 'default',
       contentCssMixin,
+      prevButtonPropsConfig = nothing,
+      nextButtonPropsConfig = nothing,
       children,
       ...props
     },
@@ -144,7 +158,12 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (infiniteScroll && index === length - 1) {
           preCloneSlides.push(
             isValidElement(elem)
-              ? cloneElement(elem, { ...elem.props, key: 'precloned' + elem.key, 'data-index': -1 })
+              ? cloneElement(elem, {
+                  ...elem.props,
+                  key: 'precloned' + elem.key,
+                  'data-index': -1,
+                  'aria-label': 'precloned' + elem.key,
+                })
               : elem,
           );
         }
@@ -152,7 +171,12 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (infiniteScroll && index === 0) {
           postCloneSlides.push(
             isValidElement(elem)
-              ? cloneElement(elem, { ...elem.props, key: 'postcloned' + elem.key, 'data-index': length })
+              ? cloneElement(elem, {
+                  ...elem.props,
+                  key: 'postcloned' + elem.key,
+                  'data-index': length,
+                  'aria-label': 'postcloned' + elem.key,
+                })
               : elem,
           );
         }
@@ -328,6 +352,17 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     };
     //</editor-fold>
 
+    const prevButtonProps = {
+      appearance: buttonAppearance,
+      direction: 'left',
+      onClick: handlePrevClick,
+    } satisfies React.ComponentProps<typeof CarouselButton>;
+    const nextButtonProps = {
+      appearance: buttonAppearance,
+      direction: 'right',
+      onClick: handleNextClick,
+    } satisfies React.ComponentProps<typeof CarouselButton>;
+
     return (
       <Container ref={ref} {...props}>
         <Wrapper>
@@ -345,8 +380,8 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               {contentItems}
             </Content>
           </ContentWrapper>
-          {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
-          {showNext && <CarouselButton appearance={buttonAppearance} direction="right" onClick={handleNextClick} />}
+          {showPrev && <CarouselButton {...prevButtonProps} {...prevButtonPropsConfig(prevButtonProps)} />}
+          {showNext && <CarouselButton {...nextButtonProps} {...nextButtonPropsConfig(nextButtonProps)} />}
         </Wrapper>
         <StyledCarouselSlider $sliderPosition={sliderPosition}>
           {[...Array(length).keys()].map((item) => {
