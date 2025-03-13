@@ -80,9 +80,9 @@ const NotificationItemWrapper = styled.div<{
   position: relative;
   box-sizing: border-box;
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  padding: 12px 44px 12px 52px;
-  ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 16px;')}
-  ${(p) => (p.$isClosable ? '' : 'padding-right: 16px;')}
+  padding: 13px 47px 13px 51px;
+  ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 15px;')}
+  ${(p) => (p.$isClosable ? '' : 'padding-right: 15px;')}
   border-width: 1px;
   border-style: solid;
   ${borderColorMixin};
@@ -109,7 +109,7 @@ const ButtonPanel = styled.div`
 const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
   top: 10px;
-  right: 8px;
+  right: 12px;
 `;
 
 const IconWrapper = styled.div<{ $status?: NotificationItemStatus }>`
