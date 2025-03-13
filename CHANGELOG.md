@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.39.0](https://github.com/AdmiralDS/react-ui/compare/v8.38.0...v8.39.0) (2025-03-13)
+
+
+### Features
+
+* **Carousel:** [#1709](https://github.com/AdmiralDS/react-ui/issues/1709) add propsConfig function for prev/next buttons ([b79720d](https://github.com/AdmiralDS/react-ui/commit/b79720d1955602e4350a0c2448dda817c91e6bc6))
+* **NotificationItem:** [#1711](https://github.com/AdmiralDS/react-ui/issues/1711) add propsConfig function for close button ([b4c3452](https://github.com/AdmiralDS/react-ui/commit/b4c345241a2cb97ab9782e0710563440599aea57))
+
+
+### Bug Fixes
+
+* **Carousel:** [#1698](https://github.com/AdmiralDS/react-ui/issues/1698) исправлен цвет ховера боковых кнопок ([d8316b9](https://github.com/AdmiralDS/react-ui/commit/d8316b97b19e5a32984e44ce32693baf3e8c1167))
+* **NotificationItem:** [#1697](https://github.com/AdmiralDS/react-ui/issues/1697) расположение элементов внутри компонента обновлено в соответствии с макетом ([0569c3a](https://github.com/AdmiralDS/react-ui/commit/0569c3abc6fa47f704763b35c8555e135413104e))
+
 ## [8.38.0](https://github.com/AdmiralDS/react-ui/compare/v8.37.0...v8.38.0) (2025-03-07)
 
 
