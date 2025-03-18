@@ -58,9 +58,9 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
   /** Количество страниц */
   count?: number;
   /** Количество страниц, отображаемых по бокам от текущей страницы */
-  siblingCount: number;
+  siblingCount?: number;
   /** Количество страниц, отображаемых в начале и в конце компонента */
-  boundaryCount: number;
+  boundaryCount?: number;
   /** Массив с номерами задизейбленных страниц */
   disabledPages?: Array<number>;
   /** Включение мобильной версии компонента */
