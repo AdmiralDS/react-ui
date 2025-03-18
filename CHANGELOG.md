@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.39.2](https://github.com/AdmiralDS/react-ui/compare/v8.39.1...v8.39.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* wrong default settings ([56484f6](https://github.com/AdmiralDS/react-ui/commit/56484f604e707f6562efd6ec312769f9210280f5))
+
 ### [8.39.1](https://github.com/AdmiralDS/react-ui/compare/v8.39.0...v8.39.1) (2025-03-18)
 
 
