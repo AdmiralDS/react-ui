@@ -262,7 +262,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const subMenuRef = useRef<HTMLDivElement | null>(null);
-    const activeItemRef = useRef<HTMLDivElement | null>(null);
+    const [activeItemElement, setActiveItemElement] = useState<HTMLElement | null>(null);
+
     const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
 
     const lastScrollEvent = useRef<number | undefined>();
@@ -443,7 +444,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(id);
           setSubmenuVisible(hasSubmenu);
-          activeItemRef.current = e.currentTarget as HTMLDivElement;
+          setActiveItemElement(e.currentTarget as HTMLDivElement);
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
@@ -569,6 +570,28 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const menuProps = passMenuDataAttributes(props);
 
+    // при скролле меню возникают ситуации когда активная опция выходит из видимой области
+    // и открытое субменю может странным образом позиционироваться "оторванным" от породившего меню
+    useEffect(() => {
+      if (!activeItemElement || !scrollContainerRef.current) return;
+
+      const options = {
+        root: scrollContainerRef.current,
+        rootMargin: '0px',
+        threshold: 0.5,
+      } satisfies IntersectionObserverInit;
+
+      const intersectionCallback: IntersectionObserverCallback = (entries) => {
+        entries.forEach((entry) => {
+          setSubmenuVisible(!(entry.intersectionRatio < options.threshold));
+        });
+      };
+
+      const observer = new IntersectionObserver(intersectionCallback, options);
+      observer.observe(activeItemElement);
+      return () => observer.disconnect();
+    }, [activeItemElement]);
+
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
@@ -596,9 +619,9 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledScrollContainer>
 
-        {submenuVisible && activeItemRef.current && (
+        {submenuVisible && activeItemElement && (
           <SubMenuContainer
-            target={activeItemRef}
+            targetElement={activeItemElement}
             defaultRenderDirection={subMenuRenderDirection}
             onClickOutside={!parentMenuRef ? handleClickOutside : undefined}
           >
