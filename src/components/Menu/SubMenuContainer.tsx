@@ -43,7 +43,7 @@ const InnerContainer = styled.div`
 
 export interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Пункт меню, относительно которого будет позиционироваться */
-  target?: React.MutableRefObject<Element | null | undefined>;
+  targetElement: HTMLElement | null;
   /**
    *  Обработчик события при клике вне компонента
    */
@@ -55,17 +55,14 @@ export interface SubMenuProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const SubMenuContainer = ({
-  target,
+  targetElement,
   children,
   onClickOutside,
   defaultRenderDirection = 'right',
   ...props
 }: SubMenuProps) => {
   const { rootRef } = useContext(DropdownContext);
-  const anchorElementRef = useRef<HTMLDivElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
-  const targetElement: any = target?.current || anchorElementRef.current;
 
   const [recalculation, startRecalculation] = useState<any>(null);
   const [portalFlexDirection, setPortalFlexDirection] = useState('row');
@@ -94,8 +91,9 @@ export const SubMenuContainer = ({
     };
   }, []);
 
-  const handleClickOutside = (e: Event) => {
-    if (!targetElement.contains(e.target) && useDropdownsClickOutside(e, dropdowns)) onClickOutside?.(e);
+  const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+    if (targetElement && !targetElement.contains(e.target as Node) && useDropdownsClickOutside(e, dropdowns))
+      onClickOutside?.(e);
   };
   useClickOutside([wrapperRef], handleClickOutside);
 
@@ -130,22 +128,24 @@ export const SubMenuContainer = ({
           wrapperElement.style.bottom = '8px';
       }
     }
-  }, [target, recalculation]);
+  }, [targetElement, recalculation]);
 
   return (
-    <AnchorWrapper ref={anchorElementRef}>
-      <Portal
-        targetElement={targetElement}
-        rootRef={rootRef}
-        $flexDirection={portalFlexDirection}
-        fullContainerWidth={false}
-      >
-        <FakeTarget />
-        <SubMenuWrapper ref={wrapperRef} {...props}>
-          <InnerContainer>{children}</InnerContainer>
-        </SubMenuWrapper>
-      </Portal>
-    </AnchorWrapper>
+    targetElement && (
+      <AnchorWrapper>
+        <Portal
+          targetElement={targetElement}
+          rootRef={rootRef}
+          $flexDirection={portalFlexDirection}
+          fullContainerWidth={false}
+        >
+          <FakeTarget />
+          <SubMenuWrapper ref={wrapperRef} {...props}>
+            <InnerContainer>{children}</InnerContainer>
+          </SubMenuWrapper>
+        </Portal>
+      </AnchorWrapper>
+    )
   );
 };
 
