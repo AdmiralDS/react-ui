@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.39.1](https://github.com/AdmiralDS/react-ui/compare/v8.39.0...v8.39.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* **Menu:** [#1715](https://github.com/AdmiralDS/react-ui/issues/1715) субменю теряет позицию при вертикальном скроле ([6f51358](https://github.com/AdmiralDS/react-ui/commit/6f513584a4dcb4d4d5f4baf875b37a904adece8a))
+* **PaginationTwo:** fix typing for siblingCount and boundaryCount ([bf81f46](https://github.com/AdmiralDS/react-ui/commit/bf81f4603aa443a5fc9726c7adb2a0dfc606956f))
+
 ## [8.39.0](https://github.com/AdmiralDS/react-ui/compare/v8.38.0...v8.39.0) (2025-03-13)
 
 
