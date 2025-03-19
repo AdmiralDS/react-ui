@@ -47,7 +47,7 @@ import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
-export type { SearchFormat } from './types';
+export * from './types';
 
 /**
  * Осталось сделать:
@@ -280,7 +280,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const emptyMessage = locale?.emptyMessage || (
-      <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
+      <DropDownText $dimension={dimension}>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = useState('');
@@ -665,6 +665,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         setIsSearchPanelOpen(false);
         selectRef.current?.blur();
         onBlurFromProps?.(evt);
+        isKeyboardEvent.current = false;
       }
     };
 
@@ -841,7 +842,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <ValueWrapper
           tabIndex={-1}
           ref={valueWrapperRef}
-          id="selectValueWrapper"
+          className="selectValueWrapper"
           $dimension={dimension}
           $multiple={multiple}
           $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}

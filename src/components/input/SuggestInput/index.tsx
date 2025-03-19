@@ -95,7 +95,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       options,
       isLoading,
       onOptionSelect,
-      alignDropdown = 'stretch',
+      alignDropdown,
       dropMaxHeight,
       alignSelf = 'stretch',
       menuMaxHeight,

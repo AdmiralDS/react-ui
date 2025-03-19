@@ -3,12 +3,14 @@ export const range = (start: number, end: number) => {
   return Array.from({ length }, (_, i) => start + i);
 };
 
-export const getListOfPages = (page: number, count: number, hidePrevButton: boolean, hideNextButton: boolean) => {
-  // в начале и в конце должно отображаться по 1 (boundaryCount) странице
-  const boundaryCount = 1;
-  // по бокам от текущей страницы должно отображаться по 1 (siblingCount) странице
-  const siblingCount = 1;
-
+export const getListOfPages = (
+  page: number,
+  count: number,
+  hidePrevButton: boolean,
+  hideNextButton: boolean,
+  siblingCount: number,
+  boundaryCount: number,
+) => {
   const startPages = range(1, Math.min(boundaryCount, count));
   const endPages = range(Math.max(count - boundaryCount + 1, boundaryCount + 1), count);
 

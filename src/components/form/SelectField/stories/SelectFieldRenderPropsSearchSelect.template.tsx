@@ -21,7 +21,7 @@ const CustomOptionWrapper = styled(MenuItem)`
   white-space: pre-wrap;
 `;
 
-const Icon = styled.div<{ shouldAnimate?: boolean }>`
+const Icon = styled.div<{ $shouldAnimate?: boolean }>`
   width: 20px;
   height: 20px;
   border: 1px solid #8a96a8;
@@ -29,7 +29,7 @@ const Icon = styled.div<{ shouldAnimate?: boolean }>`
   box-sizing: border-box;
   margin-right: 10px;
   transform-origin: bottom center;
-  ${({ shouldAnimate }) => (shouldAnimate ? animation : '')}
+  ${({ $shouldAnimate }) => ($shouldAnimate ? animation : '')}
 `;
 
 const TextWrapper = styled.div`
@@ -67,7 +67,7 @@ interface MyIncredibleOptionProps extends RenderOptionProps {
 
 const MyIncredibleOption = ({ text, shouldAnimate, ...props }: MyIncredibleOptionProps) => (
   <CustomOptionWrapper {...props}>
-    <Icon shouldAnimate={shouldAnimate} />
+    <Icon $shouldAnimate={shouldAnimate} />
     <TextWrapper>{text}</TextWrapper>
   </CustomOptionWrapper>
 );
@@ -82,13 +82,18 @@ export const SelectFieldRenderPropsSearchSelectTemplate = (props: SearchSelectFi
 
   return (
     <>
-      <SelectField mode="searchSelect" label="label" value={selectValue} onChange={onChange}>
-        {OPTIONS.map(({ text, value }) => (
+      <SelectField mode="searchSelect" label="SelectField с кастомными опциями" value={selectValue} onChange={onChange}>
+        {OPTIONS.map(({ text, value }, index) => (
           <Option
-            key={value}
+            key={`${value}-${index}`}
             value={value}
             renderOption={(options) => (
-              <MyIncredibleOption text={text} shouldAnimate={options.hovered && value !== selectValue} {...options} />
+              <MyIncredibleOption
+                {...options}
+                text={text}
+                shouldAnimate={options.hovered && value !== selectValue}
+                key={`${value}-${index}`}
+              />
             )}
           />
         ))}

@@ -1,5 +1,6 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled, { useTheme } from 'styled-components';
+
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { uid } from '#src/components/common/uid';
@@ -8,6 +9,8 @@ import { Button as SecondaryButton } from '#src/components/Button';
 
 import { Ellipsis, PaginationItem } from '#src/components/PaginationTwo/Items';
 import { getListOfPages, range } from '#src/components/PaginationTwo/utils';
+
+export type PaginationTwoDimension = 'm' | 's';
 
 const Wrapper = styled.div<{ $mobile?: boolean }>`
   position: relative;
@@ -39,19 +42,25 @@ const Button = styled(SecondaryButton)`
   margin-bottom: 20px;
 `;
 
-const PageSize = styled.div`
+const PageSize = styled.div<{ $dimension: PaginationTwoDimension }>`
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
-  ${typography['Body/Body 1 Long']}
+  ${(p) => (p.$dimension === 'm' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
   margin-left: 16px;
 `;
 
 export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Размер компонента */
+  dimension?: PaginationTwoDimension;
   /** Текущая страница */
   page: number;
   /** Колбек на изменение текущей страницы */
   onChange: (event: any, page: number) => void;
-  /** Количество страниц*/
+  /** Количество страниц */
   count?: number;
+  /** Количество страниц, отображаемых по бокам от текущей страницы */
+  siblingCount?: number;
+  /** Количество страниц, отображаемых в начале и в конце компонента */
+  boundaryCount?: number;
   /** Массив с номерами задизейбленных страниц */
   disabledPages?: Array<number>;
   /** Включение мобильной версии компонента */
@@ -76,8 +85,11 @@ export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivEle
 }
 
 export const PaginationTwo: React.FC<PaginationTwoProps> = ({
+  dimension = 'm',
   page,
   count = 1,
+  siblingCount = 1,
+  boundaryCount = 1,
   mobile = false,
   disabledPages = [],
   showNextBtnMobile = true,
@@ -96,8 +108,8 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const hidePrevButton = mobile || false;
   const isInputVisible = showInput && count > 21 && !mobile;
 
-  const [inputValue, setInputValue] = React.useState('');
-  const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton);
+  const [inputValue, setInputValue] = useState('');
+  const itemList = getListOfPages(page, count, hidePrevButton, hideNextButton, siblingCount, boundaryCount);
 
   // возвращаем предыдущую страницу из числа не задизейбленных;
   const getPreviousPage = () =>
@@ -123,8 +135,8 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     }
   };
 
-  const handlePageClick = (event: any, value: any) => {
-    if (value !== page) {
+  const handlePageClick = (event: any, value: number | null) => {
+    if (value && value !== page) {
       onChange?.(event, value);
     }
     // reset active state
@@ -181,7 +193,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   return (
     <Wrapper $mobile={mobile} {...props}>
       {mobile && showNextBtnMobile && (
-        <Button dimension="m" appearance="secondary" disabled={disableNextBtn} onClick={handleBtnClick}>
+        <Button dimension={dimension} appearance="secondary" disabled={disableNextBtn} onClick={handleBtnClick}>
           Дальше
         </Button>
       )}
@@ -190,17 +202,25 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
           const id = uid();
           return type === 'ellipsis' ? (
             <li key={id}>
-              <Ellipsis />
+              <Ellipsis dimension={dimension} />
             </li>
           ) : (
             <li key={id}>
-              <PaginationItem type={type} selected={selected} disabled={disabled} page={page} onClick={onClick} />
+              <PaginationItem
+                dimension={dimension}
+                type={type}
+                selected={selected}
+                disabled={disabled}
+                page={page}
+                onClick={onClick}
+              />
             </li>
           );
         })}
       </PagesWrapper>
       {isInputVisible && (
         <Input
+          dimension={dimension}
           pattern="[0-9]+"
           placeholder={placeholder}
           value={inputValue}
@@ -210,7 +230,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
         />
       )}
       {pageSize !== undefined && totalItems !== undefined && (
-        <PageSize>
+        <PageSize $dimension={dimension}>
           {itemRangeText(
             Math.min(pageSize * (page - 1) + 1, totalItems),
             Math.min(page * pageSize, totalItems),

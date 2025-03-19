@@ -1,5 +1,6 @@
 import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import type { DataAttributes } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -72,7 +73,6 @@ const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boole
   ${mixin};
 `;
 const nothing = () => {};
-type DataAttributes = { [dataAttibute: `data-${string}`]: string };
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationOneDimension;
@@ -143,12 +143,12 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
   };
 
   /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
-   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   leftButtonPropsConfig?: (
     props: React.ComponentProps<typeof Button>,
   ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
   /** Конфиг функция пропсов для правой кнопки. На вход получает начальный набор пропсов, на
-   * выход должна отдавать объект с пропсами, которые будут внедрятся после оригинальных пропсов. */
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   rightButtonPropsConfig?: (
     props: React.ComponentProps<typeof Button>,
   ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;

@@ -2,6 +2,95 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.39.2](https://github.com/AdmiralDS/react-ui/compare/v8.39.1...v8.39.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* wrong default settings ([56484f6](https://github.com/AdmiralDS/react-ui/commit/56484f604e707f6562efd6ec312769f9210280f5))
+
+### [8.39.1](https://github.com/AdmiralDS/react-ui/compare/v8.39.0...v8.39.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* **Menu:** [#1715](https://github.com/AdmiralDS/react-ui/issues/1715) субменю теряет позицию при вертикальном скроле ([6f51358](https://github.com/AdmiralDS/react-ui/commit/6f513584a4dcb4d4d5f4baf875b37a904adece8a))
+* **PaginationTwo:** fix typing for siblingCount and boundaryCount ([bf81f46](https://github.com/AdmiralDS/react-ui/commit/bf81f4603aa443a5fc9726c7adb2a0dfc606956f))
+
+## [8.39.0](https://github.com/AdmiralDS/react-ui/compare/v8.38.0...v8.39.0) (2025-03-13)
+
+
+### Features
+
+* **Carousel:** [#1709](https://github.com/AdmiralDS/react-ui/issues/1709) add propsConfig function for prev/next buttons ([b79720d](https://github.com/AdmiralDS/react-ui/commit/b79720d1955602e4350a0c2448dda817c91e6bc6))
+* **NotificationItem:** [#1711](https://github.com/AdmiralDS/react-ui/issues/1711) add propsConfig function for close button ([b4c3452](https://github.com/AdmiralDS/react-ui/commit/b4c345241a2cb97ab9782e0710563440599aea57))
+
+
+### Bug Fixes
+
+* **Carousel:** [#1698](https://github.com/AdmiralDS/react-ui/issues/1698) исправлен цвет ховера боковых кнопок ([d8316b9](https://github.com/AdmiralDS/react-ui/commit/d8316b97b19e5a32984e44ce32693baf3e8c1167))
+* **NotificationItem:** [#1697](https://github.com/AdmiralDS/react-ui/issues/1697) расположение элементов внутри компонента обновлено в соответствии с макетом ([0569c3a](https://github.com/AdmiralDS/react-ui/commit/0569c3abc6fa47f704763b35c8555e135413104e))
+
+## [8.38.0](https://github.com/AdmiralDS/react-ui/compare/v8.37.0...v8.38.0) (2025-03-07)
+
+
+### Features
+
+* **Modal, Drawer:** [#1672](https://github.com/AdmiralDS/react-ui/issues/1672) add propsConfig function for close button ([7fa325e](https://github.com/AdmiralDS/react-ui/commit/7fa325e2b2838d02a3c54d3371ea7c34febe2d51))
+
+
+### Bug Fixes
+
+* **MultiInput:** style readOnly fixed ([52be94e](https://github.com/AdmiralDS/react-ui/commit/52be94ec10db34a2b09c71013da4a5ddb9ad6594))
+
+## [8.37.0](https://github.com/AdmiralDS/react-ui/compare/v8.36.0...v8.37.0) (2025-03-07)
+
+
+### Features
+
+* add MultiInput ([b4bd043](https://github.com/AdmiralDS/react-ui/commit/b4bd043abf07c25d40c3d331e653b12688816750))
+
+
+### Bug Fixes
+
+* **OptionGroup:** fix warnings and incorrect key and id use ([46baa6c](https://github.com/AdmiralDS/react-ui/commit/46baa6cdd3f001592db349636c05264c6970d7c9))
+
+## [8.36.0](https://github.com/AdmiralDS/react-ui/compare/v8.35.0...v8.36.0) (2025-03-05)
+
+
+### Features
+
+* **PaginationTwo:** добавлен размер S ([95aee67](https://github.com/AdmiralDS/react-ui/commit/95aee67eafda0d74a57b0d7f8f8947dbaf226ddf))
+* **PaginationTwo:** добавлена возможность работать с любым количеством страниц ([5ddef2c](https://github.com/AdmiralDS/react-ui/commit/5ddef2cfe76ab0c264784882d76f5811edaec122))
+* **PaginationTwo:** добавлены пропсы siblingCount и boundaryCount ([3bf4e1e](https://github.com/AdmiralDS/react-ui/commit/3bf4e1e4b4a619b6543ccdc4b2302f1ba85814a4))
+
+
+### Bug Fixes
+
+* **Scrollbars:**  fix wrong scoped css vars use ([10851fb](https://github.com/AdmiralDS/react-ui/commit/10851fb8caceab2100c71646576f1e3e8efe7a9e))
+* **Select:** исправлен размер шрифта сообщения, отображаемого при пустом наборе опций ([4c6d1c3](https://github.com/AdmiralDS/react-ui/commit/4c6d1c333423131add0c1674d94066b6d4cecbe9))
+
+## [8.35.0](https://github.com/AdmiralDS/react-ui/compare/v8.34.1...v8.35.0) (2025-02-26)
+
+
+### Features
+
+* add CurrencyInput ([b6cb8bf](https://github.com/AdmiralDS/react-ui/commit/b6cb8bf220ce0ff53d130b3344a09212af2dc68d))
+
+
+### Bug Fixes
+
+* change disabled chips hover ([337d7c0](https://github.com/AdmiralDS/react-ui/commit/337d7c0de943cf378d978fb6ea54e96df412facd))
+* typings export for select ([68c6066](https://github.com/AdmiralDS/react-ui/commit/68c6066c0cbfc3d1147b3f1a5e951ab0aa9aa412))
+
+### [8.34.1](https://github.com/AdmiralDS/react-ui/compare/v8.34.0...v8.34.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* disabledCopying warning in NumberInput ([a2aeab0](https://github.com/AdmiralDS/react-ui/commit/a2aeab0b6810259bc5be42df6e95d75841aae49b))
+* Warning: A props object containing a "key" prop is being spread into JSX ([e328c79](https://github.com/AdmiralDS/react-ui/commit/e328c79ff8d62d74bc287e38474fefc76a1523a0))
+
 ## [8.34.0](https://github.com/AdmiralDS/react-ui/compare/v8.33.1...v8.34.0) (2025-02-11)
 
 

@@ -25,6 +25,7 @@ export const DropDownOption = ({
   value,
   children,
   renderOption,
+  renderChip: _,
   ...htmlProps
 }: OptionProps) => {
   const dropDownContext = useDropDownContext();

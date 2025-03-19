@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-export const useClickOutside = (elements: React.RefObject<HTMLElement>[], handler: (e: Event) => void) => {
+export const useClickOutside = (
+  elements: React.RefObject<HTMLElement>[],
+  handler: (e: MouseEvent | TouchEvent) => void,
+) => {
   const listener = React.useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (

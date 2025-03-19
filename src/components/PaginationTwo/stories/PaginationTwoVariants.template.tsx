@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 import { PaginationTwo, T } from '@admiral-ds/react-ui';
 import type { PaginationTwoProps } from '@admiral-ds/react-ui';
-import styled from 'styled-components';
 
 const Text = styled(T).attrs(() => ({
   font: 'Body/Body 1 Long',
@@ -12,12 +12,12 @@ const Text = styled(T).attrs(() => ({
 `;
 
 export const PaginationTwoVariantsTemplate = (args: PaginationTwoProps) => {
-  const [page1, setPage1] = React.useState(1);
-  const [page2, setPage2] = React.useState(1);
-  const [page3, setPage3] = React.useState(1);
-  const [page4, setPage4] = React.useState(1);
-  const [page5, setPage5] = React.useState(1);
-  const [page6, setPage6] = React.useState(1);
+  const [page1, setPage1] = useState(1);
+  const [page2, setPage2] = useState(1);
+  const [page3, setPage3] = useState(1);
+  const [page4, setPage4] = useState(1);
+  const [page5, setPage5] = useState(1);
+  const [page6, setPage6] = useState(1);
   const style = { marginBottom: '60px' };
 
   return (

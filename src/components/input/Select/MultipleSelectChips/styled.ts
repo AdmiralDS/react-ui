@@ -60,9 +60,13 @@ export const StyledChip = styled(Chips)`
     max-width: 140px;
   }
 
-  // По дизайну при наведении цвет чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
-  // то чипс получается clickable и при ховере меняет цвет
+  // По дизайну при наведении цвет самого чипса меняться не должен, но т.к. есть обработчик onClick для stopPropagation,
+  // то крестик чипса получается clickable и при ховере меняет цвет
+  // disabled и readOnly чипсы не меняют цвет при ховере (в readOnly в целом отсутствует кнопка крестика)
   &:hover {
-    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+    ${({ theme, disabled }) => {
+      if (!disabled)
+        return `background-color: var(--admiral-color-Opacity_Neutral8, ${theme.color['Opacity/Neutral 8']})`;
+    }}
   }
 `;
