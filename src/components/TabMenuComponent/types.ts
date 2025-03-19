@@ -3,6 +3,7 @@ import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type TabDimension = 'l' | 'm';
+export type FilterTabDimension = 'm' | 's';
 export type VerticalUnderlinePosition = 'left' | 'right';
 
 export type TabWidthMapProps = {
@@ -36,8 +37,6 @@ export interface VerticalTabProps extends BaseTabProps {
 interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   /** Показывать серую полосу снизу */
   showUnderline?: boolean;
-  /** Скрыть обводку выбранной вкладки */
-  hideBorder?: boolean;
   /** ID выбранной вкладки */
   selectedTabId?: string;
   /** ID выбранной по умолчанию вкладки */
@@ -83,4 +82,19 @@ export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverf
   underlinePosition?: VerticalUnderlinePosition;
 }
 
-export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {}
+export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {
+  /** Скрыть обводку выбранной вкладки */
+  hideBorder?: boolean;
+}
+
+export interface FilterTabsProps extends Omit<TabMenuBaseProps, 'showUnderline'> {
+  /** Размер компонента */
+  dimension?: FilterTabDimension;
+  mobile?: boolean;
+}
+
+export interface FilterTabProps extends Omit<BaseTabProps, 'dimension'> {
+  /** Размер компонента */
+  dimension?: FilterTabDimension;
+  mobile?: boolean;
+}
