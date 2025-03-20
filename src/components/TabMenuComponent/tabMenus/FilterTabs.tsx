@@ -14,18 +14,25 @@ const FilterTabsContainer = styled(HorizontalTabsContainer)`
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
+  position: relative;
 `;
 
-const WrapperIconLeft = styled(IconButton)`
-  margin: 0 4px 0 0;
-  flex: 0 0 auto;
+const LeftButtonContainer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-right: 4px;
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
-const WrapperIconRight = styled(IconButton)`
-  margin: 0 0 0 4px;
-  flex: 0 0 auto;
+const RightButtonContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding-left: 4px;
+  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
 export const FilterTabs = ({
@@ -157,21 +164,8 @@ export const FilterTabs = ({
     };
   }, [isMouseDown, containerElement]);
 
-  useEffect(() => {
-    if (!containerElement || mobile) return;
-    if (visibleLeftButton) containerElement.scrollLeft += buttonSize;
-    else {
-      if (containerElement.scrollLeft <= buttonSize) containerElement.scrollLeft = 0;
-    }
-  }, [containerElement, visibleLeftButton]);
-
   return (
     <Wrapper>
-      {!mobile && visibleLeftButton && (
-        <WrapperIconLeft onClick={() => handleScroll(true)} dimension={dimension}>
-          <ChevronLeftOutline />
-        </WrapperIconLeft>
-      )}
       <FilterTabsContainer
         onMouseDown={(e) => {
           if (e.button === 0 && !mobile) setMouseDown(true);
@@ -182,10 +176,19 @@ export const FilterTabs = ({
       >
         {filterTabs}
       </FilterTabsContainer>
+      {!mobile && visibleLeftButton && (
+        <LeftButtonContainer>
+          <IconButton onClick={() => handleScroll(true)} dimension={dimension}>
+            <ChevronLeftOutline />
+          </IconButton>
+        </LeftButtonContainer>
+      )}
       {!mobile && visibleRightButton && (
-        <WrapperIconRight onClick={() => handleScroll(false)} dimension={dimension}>
-          <ChevronRightOutline />
-        </WrapperIconRight>
+        <RightButtonContainer>
+          <IconButton onClick={() => handleScroll(false)} dimension={dimension}>
+            <ChevronRightOutline />
+          </IconButton>
+        </RightButtonContainer>
       )}
     </Wrapper>
   );
