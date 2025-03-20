@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.40.0](https://github.com/AdmiralDS/react-ui/compare/v8.39.2...v8.40.0) (2025-03-20)
+
+
+### Features
+
+* add FilterTabs ([214c09b](https://github.com/AdmiralDS/react-ui/commit/214c09baccfe99b265cbfa778b31d57aece77b2c))
+
+
+### Bug Fixes
+
+* scroll jump ([5ba3a41](https://github.com/AdmiralDS/react-ui/commit/5ba3a4181ba47182ac89ccc9e08f908888685968))
+
 ### [8.39.2](https://github.com/AdmiralDS/react-ui/compare/v8.39.1...v8.39.2) (2025-03-18)
 
 
