@@ -6,9 +6,6 @@ import type { BorderRadiusType, FilterTabProps, FilterTabsProps } from '@admiral
 import {
   FilterTab,
   TabText,
-  // NotificationItem,
-  // NotificationItemContent,
-  // NotificationItemTitle,
   FilterTabs,
   FilterTabBadge,
   FilterTabIcon,

@@ -11,19 +11,21 @@ import { FILTER_TAB_SIZE_M, FILTER_TAB_SIZE_S } from '../constants';
 
 const FilterTabsContainer = styled(HorizontalTabsContainer)`
   gap: 4px;
-  padding: 4px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const WrapperIconLeft = styled(IconButton)`
-  margin: 4px 4px 0 0;
+  margin: 0 4px 0 0;
+  flex: 0 0 auto;
 `;
 
 const WrapperIconRight = styled(IconButton)`
-  margin: 4px 0 0 4px;
+  margin: 0 0 0 4px;
+  flex: 0 0 auto;
 `;
 
 export const FilterTabs = ({
