@@ -11,7 +11,7 @@ import FilterTabsTemplateRaw from './FilterTabsTemplate?raw';
 import FilterTabsMobileTemplateRaw from './FilterTabsMobileTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/FilterTabs',
+  title: 'Admiral-2.1/Tabs/FilterTabs',
   decorators: undefined,
   component: FilterTabs,
   parameters: {

@@ -8,7 +8,7 @@ import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/TabMenuIcon',
+  title: 'Admiral-2.1/Tabs/TabMenuIcon',
   decorators: undefined,
   component: TabMenuIcon,
   parameters: {
