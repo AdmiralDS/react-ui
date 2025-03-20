@@ -9,7 +9,7 @@ import { HorizontalTabsTemplate } from './HorizontalTabsTemplate';
 import HorizontalTabsRaw from './HorizontalTabsTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/HorizontalTabs',
+  title: 'Admiral-2.1/Tabs/HorizontalTabs',
   decorators: undefined,
   component: HorizontalTabs,
   parameters: {

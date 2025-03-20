@@ -14,7 +14,7 @@ import HorizontalCardTabMenuLeadingGapRaw from './CardTabMenuHorizontalLeadingGa
 import CardTabMenuHorizontalWithoutBorderRaw from './CardTabMenuHorizontalWithoutBorderTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/CardTabMenuHorizontal',
+  title: 'Admiral-2.1/Tabs/CardTabMenuHorizontal',
   decorators: undefined,
   component: CardTabMenuHorizontal,
   parameters: {

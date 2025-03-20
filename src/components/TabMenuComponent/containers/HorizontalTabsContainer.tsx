@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { SELECTOR_HEIGHT } from '#src/components/TabMenuComponent/constants';
 
 export const HorizontalTabsContainer = styled.div<{ $showUnderline?: boolean }>`
-  position: relative;
   display: flex;
-  flex: 1 1 auto;
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;

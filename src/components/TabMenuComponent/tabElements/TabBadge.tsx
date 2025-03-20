@@ -22,3 +22,14 @@ export const VerticalTabBadge = styled(TabBadge)`
   margin-left: auto;
 `;
 TabBadge.displayName = 'TabBadge';
+
+const getFilterBadgeAppearance = (selected?: boolean, disabled?: boolean): BadgeAppearance => {
+  if (disabled) return 'lightDisable';
+  if (selected) return 'white';
+  return 'lightInactive';
+};
+
+export const FilterTabBadge = ({ disabled = false, selected = false, ...props }: TabBadgeProps) => {
+  const appearance = getFilterBadgeAppearance(selected, disabled);
+  return <Badge {...props} dimension="s" appearance={appearance} />;
+};

@@ -10,7 +10,7 @@ import HorizontalTabMenuRaw from './TabMenuHorizontalTemplate?raw';
 import HorizontalTabMenuWithAddButtonRaw from './TabMenuHorizontalWithAddButtonTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/TabMenuHorizontal',
+  title: 'Admiral-2.1/Tabs/TabMenuHorizontal',
   decorators: undefined,
   component: TabMenuHorizontal,
   parameters: {

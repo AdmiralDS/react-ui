@@ -10,7 +10,7 @@ import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
 import VerticalTabMenuWithAddButtonRaw from './VerticalTabMenuWithAddButtonTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/TabMenuVertical',
+  title: 'Admiral-2.1/Tabs/TabMenuVertical',
   decorators: undefined,
   component: TabMenuVertical,
   parameters: {
