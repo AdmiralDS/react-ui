@@ -8,6 +8,7 @@ import {
   SelectField,
   InputField,
   Option,
+  useId,
 } from '@admiral-ds/react-ui';
 import type { ModalProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
@@ -84,7 +85,7 @@ export const ModalTwoButtonsTemplate = ({
   ...props
 }: ModalProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
-  const closeButtonProps = { 'data-testid': React.useId() };
+  const closeButtonProps = { 'data-testid': useId() };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>

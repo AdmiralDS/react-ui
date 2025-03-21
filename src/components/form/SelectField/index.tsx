@@ -1,4 +1,4 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import type { SelectProps } from '#src/components/input/Select';
 import { Select as BaseSelect } from '#src/components/input/Select';
@@ -8,6 +8,7 @@ import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+import { useId } from '#src/components/common/hooks/useId';
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {

@@ -1,12 +1,11 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { OptionGroupProvider } from './useSelectContext';
 import { OptionWrapper } from './styled';
-import { useId, type HTMLAttributes } from 'react';
 import { Option } from './Option';
 import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
+import { useId } from '#src/components/common/hooks/useId';
 
-export interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
+export interface OptionGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   label: string;
 }
