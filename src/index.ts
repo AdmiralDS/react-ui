@@ -82,6 +82,7 @@ export * from './components/common/hooks/useDebounce';
 export * from './components/common/hooks/useInterval';
 export * from './components/common/hooks/useOnScreen';
 export * from './components/common/hooks/useTimeout';
+export * from './components/common/hooks/useId';
 export * from './components/TagMenu';
 export * from './components/Range';
 export * from './components/Pill';
