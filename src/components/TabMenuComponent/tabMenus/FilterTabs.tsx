@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-
+import styled from 'styled-components';
 import { HorizontalTabsContainer } from '../containers';
 import type { FilterTabsProps } from '../types';
-
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-import styled from 'styled-components';
 import { IconButton } from '#src/components/IconButton';
 import { FILTER_TAB_SIZE_M, FILTER_TAB_SIZE_S } from '../constants';
 
@@ -60,6 +58,28 @@ export const FilterTabs = ({
     if (!tabIsDisabled(tabId)) {
       setSelectedTabInner(tabId);
       onSelectTab?.(tabId);
+
+      const elem = document.querySelector(`[data-tabid="${tabId}"]`) as HTMLElement;
+
+      if (containerElement && elem) {
+        if (mobile) {
+          elem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          const fullButtonWidth = buttonSize + 4;
+          const tabScrollToLeft = elem.offsetLeft - fullButtonWidth;
+          const tabScrollToRight = elem.offsetLeft + elem.clientWidth + fullButtonWidth - containerElement.clientWidth;
+
+          if (containerElement.scrollLeft > tabScrollToLeft) {
+            containerElement.scrollTo({ left: tabScrollToLeft, behavior: 'smooth' });
+          }
+          if (tabScrollToRight > containerElement.scrollLeft) {
+            containerElement.scrollTo({
+              left: tabScrollToRight,
+              behavior: 'smooth',
+            });
+          }
+        }
+      }
     }
   };
 
@@ -68,7 +88,7 @@ export const FilterTabs = ({
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, handleSelectTab);
     });
-  }, [tabsId, renderTab, dimension]);
+  }, [tabsId, renderTab, containerElement]);
 
   const handleScroll = (right: boolean) => {
     if (!containerElement) return;
@@ -86,10 +106,9 @@ export const FilterTabs = ({
     if (!containerElement || mobile) return;
 
     const scrollSetVisible = () => {
-      const visibleLeft = containerElement.scrollLeft >= buttonSize;
+      const visibleLeft = containerElement.scrollLeft > 10;
       const visibleRight =
-        Math.round(containerElement.clientWidth + containerElement.scrollLeft + buttonSize) <
-        containerElement.scrollWidth;
+        containerElement.clientWidth + containerElement.scrollLeft + 10 < containerElement.scrollWidth;
 
       setVisibleLeftButton(visibleLeft);
       setVisibleRightButton(visibleRight);
@@ -100,7 +119,7 @@ export const FilterTabs = ({
     return () => {
       containerElement.removeEventListener('scroll', scrollSetVisible);
     };
-  }, [containerElement, visibleLeftButton, visibleRightButton]);
+  }, [containerElement]);
 
   useEffect(() => {
     if (!containerElement) return;

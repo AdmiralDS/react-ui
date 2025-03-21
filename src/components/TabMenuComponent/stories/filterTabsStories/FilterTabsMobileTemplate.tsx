@@ -56,15 +56,15 @@ const CustomFilterTab = forwardRef<HTMLButtonElement, CustomFilterTabProps>(
 );
 
 const tabs = [
-  { text: 'Text1', tabId: '1', badge: 1 },
-  { text: 'Text22', tabId: '2', icon: <MinusCircleOutline /> },
-  { text: 'Text333', tabId: '3' },
-  { text: 'Text4444', tabId: '4', badge: 4 },
-  { text: 'Text55555', tabId: '5', disabled: true, icon: <MinusCircleOutline /> },
-  { text: 'Text66666', tabId: '6' },
-  { text: 'Text7777 is very very very very long', tabId: '7' },
-  { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
-  { text: 'Text99', tabId: '9' },
+  { text: 'Text1', tabId: '1-1', badge: 1 },
+  { text: 'Text22', tabId: '2-2', icon: <MinusCircleOutline /> },
+  { text: 'Text333', tabId: '3-3' },
+  { text: 'Text4444', tabId: '4-4', badge: 4 },
+  { text: 'Text55555', tabId: '5-5', disabled: true, icon: <MinusCircleOutline /> },
+  { text: 'Text66666', tabId: '6-6' },
+  { text: 'Text7777 is very very very very long', tabId: '7-7' },
+  { text: 'Text888', tabId: '8-8', icon: <MinusCircleOutline /> },
+  { text: 'Text99', tabId: '9-9' },
 ];
 
 const Wrapper = styled.div`
@@ -105,7 +105,6 @@ export const FilterTabsMobileTemplate = ({
     return (
       <CustomFilterTab
         dimension={dimension}
-        mobile={mobile}
         tabId={tabId}
         text={text}
         badge={badge}
