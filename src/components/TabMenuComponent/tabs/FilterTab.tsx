@@ -28,16 +28,12 @@ const StyledBaseTab = styled(BaseTab)<{ $dimension: FilterTabDimension }>`
 `;
 
 export const FilterTab = forwardRef<HTMLButtonElement, FilterTabProps>(
-  (
-    { dimension = 'm', children, disabled, selected, onSelectTab, tabId, id, mobile, ...props }: FilterTabProps,
-    ref,
-  ) => {
+  ({ dimension = 'm', children, disabled, selected, onSelectTab, tabId, id, ...props }: FilterTabProps, ref) => {
     const [defaultId] = useState(uid());
     const idForTab = onSelectTab && id ? id : defaultId;
 
     const handleTabClick: MouseEventHandler<HTMLButtonElement> = (e) => {
       const tabId = e.currentTarget.dataset.tabid || '';
-      e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: mobile ? 'center' : 'nearest', block: 'nearest' });
       onSelectTab?.(tabId);
     };
 

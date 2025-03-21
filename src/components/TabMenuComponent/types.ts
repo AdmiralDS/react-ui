@@ -96,5 +96,4 @@ export interface FilterTabsProps extends Omit<TabMenuBaseProps, 'showUnderline'>
 export interface FilterTabProps extends Omit<BaseTabProps, 'dimension'> {
   /** Размер компонента */
   dimension?: FilterTabDimension;
-  mobile?: boolean;
 }
