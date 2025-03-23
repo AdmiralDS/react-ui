@@ -59,25 +59,24 @@ export const FilterTabs = ({
       setSelectedTabInner(tabId);
       onSelectTab?.(tabId);
 
-      const elem = document.querySelector(`[data-tabid="${tabId}"]`) as HTMLElement;
+      if (!containerElement) return;
+      const elem = containerElement.querySelector(`[data-tabid="${tabId}"]`) as HTMLElement;
 
-      if (containerElement && elem) {
-        if (mobile) {
-          elem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        } else {
-          const fullButtonWidth = buttonSize + 4;
-          const tabScrollToLeft = elem.offsetLeft - fullButtonWidth;
-          const tabScrollToRight = elem.offsetLeft + elem.clientWidth + fullButtonWidth - containerElement.clientWidth;
+      if (mobile) {
+        elem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        const fullButtonWidth = buttonSize + 4;
+        const tabScrollToLeft = elem.offsetLeft - fullButtonWidth;
+        const tabScrollToRight = elem.offsetLeft + elem.clientWidth + fullButtonWidth - containerElement.clientWidth;
 
-          if (containerElement.scrollLeft > tabScrollToLeft) {
-            containerElement.scrollTo({ left: tabScrollToLeft, behavior: 'smooth' });
-          }
-          if (tabScrollToRight > containerElement.scrollLeft) {
-            containerElement.scrollTo({
-              left: tabScrollToRight,
-              behavior: 'smooth',
-            });
-          }
+        if (containerElement.scrollLeft > tabScrollToLeft) {
+          containerElement.scrollTo({ left: tabScrollToLeft, behavior: 'smooth' });
+        }
+        if (tabScrollToRight > containerElement.scrollLeft) {
+          containerElement.scrollTo({
+            left: tabScrollToRight,
+            behavior: 'smooth',
+          });
         }
       }
     }
