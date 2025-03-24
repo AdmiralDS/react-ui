@@ -1,5 +1,6 @@
-import type { css } from 'styled-components';
+import type { css, DataAttributes } from 'styled-components';
 
+import type { EditButton } from './style';
 export type EditModeDimension = 's' | 'm' | 'xl' | 'xxl';
 type Dimension = EditModeDimension;
 
@@ -21,4 +22,14 @@ export interface EditModeComponentProps {
   /** Функция обработчика события нажатия кнопки отмены
    * @param value - значение поля ввода до нажатия кнопки редактирования */
   onCancel?: (value: string | number) => void;
+  /** Конфиг функция пропсов для кнопки подтверждения редактирования. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  confirmButtonPropsConfig?: (
+    props: React.ComponentProps<typeof EditButton>,
+  ) => Partial<React.ComponentProps<typeof EditButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки отмены редактирования. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  cancelButtonPropsConfig?: (
+    props: React.ComponentProps<typeof EditButton>,
+  ) => Partial<React.ComponentProps<typeof EditButton> & DataAttributes>;
 }
