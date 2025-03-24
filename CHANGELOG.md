@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.41.0](https://github.com/AdmiralDS/react-ui/compare/v8.40.2...v8.41.0) (2025-03-24)
+
+
+### Features
+
+* **EditMode:** [#1669](https://github.com/AdmiralDS/react-ui/issues/1669) add propsConfig function for confirm and cancel buttons ([cf1935f](https://github.com/AdmiralDS/react-ui/commit/cf1935f2fa5c7d44ea2022a45dcc3c6040546045))
+* **EditModeArea:** [#1669](https://github.com/AdmiralDS/react-ui/issues/1669) add propsConfig function for confirm and cancel buttons ([d23a5fe](https://github.com/AdmiralDS/react-ui/commit/d23a5fe407a445cb1d70a99e96f3785cbfe99a43))
+* **Select:** [#1670](https://github.com/AdmiralDS/react-ui/issues/1670) add propsConfig function for clear and open buttons ([96e123e](https://github.com/AdmiralDS/react-ui/commit/96e123e11f3e444bb4f85a29a402531f83125d9c))
+
 ### [8.40.2](https://github.com/AdmiralDS/react-ui/compare/v8.40.1...v8.40.2) (2025-03-24)
 
 
