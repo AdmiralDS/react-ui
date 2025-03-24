@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.40.2](https://github.com/AdmiralDS/react-ui/compare/v8.40.1...v8.40.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* **FilterTab:** fix scroll ([90550f6](https://github.com/AdmiralDS/react-ui/commit/90550f6a6a7468656df38478cbba689df97b4b92))
+
 ### [8.40.1](https://github.com/AdmiralDS/react-ui/compare/v8.40.0...v8.40.1) (2025-03-21)
 
 ## [8.40.0](https://github.com/AdmiralDS/react-ui/compare/v8.39.2...v8.40.0) (2025-03-20)
