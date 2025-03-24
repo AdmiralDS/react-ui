@@ -65,6 +65,12 @@ const tabs = [
   { text: 'Text7777 is very very very very long', tabId: '7' },
   { text: 'Text888', tabId: '8', icon: <MinusCircleOutline /> },
   { text: 'Text99', tabId: '9' },
+  { text: 'Text1010', tabId: '10', badge: 4 },
+  { text: 'Text11111', tabId: '11', disabled: true, icon: <MinusCircleOutline /> },
+  { text: 'Text121212', tabId: '12' },
+  { text: 'Text131313 is very very very very long', tabId: '13' },
+  { text: 'Text141414', tabId: '14', icon: <MinusCircleOutline /> },
+  { text: 'Text151515', tabId: '15' },
 ];
 
 const Wrapper = styled.div`
