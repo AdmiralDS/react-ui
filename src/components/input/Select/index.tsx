@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react';
 import styled, { useTheme } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -215,8 +216,19 @@ export interface SelectProps
   moveSelectedOnTop?: boolean;
   /** Признак очищения введенного значения после выбора элемента в режиме "searchSelect" */
   clearInputValueAfterSelect?: boolean;
+  /** Конфиг функция пропсов для кнопки выпадающего списка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  openButtonPropsConfig?: (
+    props: React.ComponentProps<typeof OpenStatusButton>,
+  ) => Partial<React.ComponentProps<typeof OpenStatusButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки очистки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
 }
 
+const nothing = () => {};
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
@@ -274,6 +286,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onSelectedChange,
       moveSelectedOnTop,
       clearInputValueAfterSelect = true,
+      openButtonPropsConfig = nothing,
+      clearButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -808,6 +822,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isKeyboardEvent.current = true;
     };
 
+    const clearButtonProps = {
+      icon: CloseOutlineSvg,
+      id: 'searchSelectClearIcon',
+      onClick: handleOnClear,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof InputIconButton>;
+
+    const openButtonProps = {
+      $isOpen: isSearchPanelOpen,
+      onClick: handleSearchPanelToggle,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof OpenStatusButton>;
+
     return (
       <SelectWrapper
         className={className}
@@ -914,16 +941,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         >
           {isLoading && <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />}
           {displayClearIcon && !readOnly && needShowClearIcon && (
-            <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
+            <InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />
           )}
           {icons}
           {!readOnly && (
             <OpenStatusButton
-              $isOpen={isSearchPanelOpen}
               data-disabled={disabled ? true : undefined}
               data-loading={isLoading ? true : undefined}
-              onClick={handleSearchPanelToggle}
-              aria-hidden
+              {...openButtonProps}
+              {...openButtonPropsConfig(openButtonProps)}
             />
           )}
         </IconPanel>
