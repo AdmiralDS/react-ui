@@ -8,6 +8,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { ReactComponent as CopyOutlineSvg } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
 import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
@@ -288,6 +289,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
+  /** Отображать иконку копирования содержимого поля */
+  displayCopyIcon?: boolean;
+
   /** Статус поля */
   status?: InputStatus;
 
@@ -317,6 +321,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       maxRows,
       value,
       displayClearIcon,
+      displayCopyIcon,
       status,
       handleInput = defaultHandleInput,
       containerRef,
@@ -337,23 +342,42 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
 
-    if (!props.readOnly && displayClearIcon && !!inputRef?.current?.value) {
-      iconArray.unshift(
-        <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onMouseDown={(e) => {
-            // запрет на перемещение фокуса при клике по иконке
-            e.preventDefault();
-          }}
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
-        />,
-      );
+    if (!props.readOnly && !!inputRef?.current?.value) {
+      if (displayClearIcon) {
+        iconArray.unshift(
+          <InputIconButton
+            icon={CloseOutlineSvg}
+            key="clear-icon"
+            onMouseDown={(e) => {
+              // запрет на перемещение фокуса при клике по иконке
+              e.preventDefault();
+            }}
+            onClick={() => {
+              if (inputRef.current) {
+                changeInputData(inputRef.current, { value: '' });
+              }
+            }}
+            aria-hidden
+          />,
+        );
+      } else if (displayCopyIcon) {
+        iconArray.unshift(
+          <InputIconButton
+            icon={CopyOutlineSvg}
+            key="copy-icon"
+            onMouseDown={(e) => {
+              // запрет на перемещение фокуса при клике по иконке
+              e.preventDefault();
+            }}
+            onClick={() => {
+              if (inputRef.current) {
+                navigator.clipboard.writeText(inputRef.current.value);
+              }
+            }}
+            aria-hidden
+          />,
+        );
+      }
     }
 
     const iconCount = iconArray.length;
