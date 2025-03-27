@@ -9,9 +9,11 @@ import type { ComponentDimension, ExtraProps, InputStatus } from '#src/component
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import { ReactComponent as CopyOutlineSvg } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
+import type { AnyIconProps } from '#src/components/InputIconButton';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
 import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -221,6 +223,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   & > * {
     display: block;
     width: ${iconSizeValue}px;
+    height: ${iconSizeValue}px;
   }
 `;
 
@@ -251,6 +254,15 @@ const StyledContainer = styled(Container)<{
   ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
+
+const IconButton = forwardRef<HTMLDivElement, AnyIconProps>((props, ref) => {
+  return (
+    <div ref={ref}>
+      <InputIconButton {...props} />
+    </div>
+  );
+});
+const TooltipedInputIconButton = TooltipHoc(IconButton);
 
 function toHtmlString(value?: string) {
   return String(value || '')
@@ -341,6 +353,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
+    const [tooltipText, setTooltipText] = useState('Копировать текст');
+    const handleCopyIconClick = () => {
+      if (inputRef.current) {
+        navigator.clipboard.writeText(inputRef.current.value);
+        setTooltipText('Скопировано');
+        setTimeout(() => setTooltipText('Копировать текст'), 2000);
+      }
+    };
 
     if (!props.readOnly && !!inputRef?.current?.value) {
       if (displayClearIcon) {
@@ -362,18 +382,16 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         );
       } else if (displayCopyIcon) {
         iconArray.unshift(
-          <InputIconButton
+          <TooltipedInputIconButton
+            tooltipDimension="s"
+            renderContent={() => tooltipText}
             icon={CopyOutlineSvg}
             key="copy-icon"
             onMouseDown={(e) => {
               // запрет на перемещение фокуса при клике по иконке
               e.preventDefault();
             }}
-            onClick={() => {
-              if (inputRef.current) {
-                navigator.clipboard.writeText(inputRef.current.value);
-              }
-            }}
+            onClick={handleCopyIconClick}
             aria-hidden
           />,
         );
