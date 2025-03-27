@@ -1,6 +1,7 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
 import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -324,6 +325,16 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Надпись (тултип) для иконки копирования текста */
+    copyTextMessage?: string;
+    /** Надпись (тултип) для иконки копирования текста в течение 2 секунд после копирования */
+    copiedMessage?: string;
+  };
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -345,20 +356,24 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       skeleton = false,
       dimension = 'm',
       disableCopying,
+      locale,
       ...props
     },
     ref,
   ) => {
+    const theme = useTheme() || LIGHT_THEME;
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
-    const [tooltipText, setTooltipText] = useState('Копировать текст');
+    const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale].textArea.copyTextMessage;
+    const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale].textArea.copiedMessage;
+    const [tooltipText, setTooltipText] = useState(copyText);
     const handleCopyIconClick = () => {
       if (inputRef.current) {
         navigator.clipboard.writeText(inputRef.current.value);
-        setTooltipText('Скопировано');
-        setTimeout(() => setTooltipText('Копировать текст'), 2000);
+        setTooltipText(copiedText);
+        setTimeout(() => setTooltipText(copyText), 2000);
       }
     };
 
