@@ -6,9 +6,9 @@ import type {
   BorderRadiusType,
   RenderOptionProps,
   HorizontalTabProps,
-  TabMenuHorizontalProps,
+  CardTabMenuHorizontalProps,
 } from '@admiral-ds/react-ui';
-import { CardTabMenuHorizontal, CardTab, TabIcon, TabBadge, TabText, MenuItem } from '@admiral-ds/react-ui';
+import { CardTabMenuHorizontal, CardTab, TabIcon, CardTabBadge, TabText, MenuItem } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as MinusCircleOutline } from '@admiral-ds/icons/build/service/MinusCircleOutline.svg';
 import { ReactComponent as WifiOutline } from '@admiral-ds/icons/build/communication/WifiOutline.svg';
@@ -48,9 +48,9 @@ const CustomHorizontalCardTab = forwardRef<HTMLButtonElement, CustomHorizontalTa
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <TabBadge disabled={disabled} selected={selected}>
+          <CardTabBadge disabled={disabled} selected={selected}>
             {badge}
-          </TabBadge>
+          </CardTabBadge>
         )}
       </CardTab>
     );
@@ -97,7 +97,7 @@ export const CardTabMenuHorizontalWithoutBorderTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: TabMenuHorizontalProps & {
+}: CardTabMenuHorizontalProps & {
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {
