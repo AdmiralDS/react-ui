@@ -81,6 +81,10 @@ export const LocaleThemeNewLocaleTemplate = () => {
       table: {
         emptyMessage: 'Keine Zufälle',
       },
+      textArea: {
+        copyTextMessage: 'Text kopieren',
+        copiedMessage: 'Kopiert',
+      },
     };
     if (theme) {
       return { ...theme, currentLocale: 'de', locales: { ...theme.locales, de: deLocale } };
