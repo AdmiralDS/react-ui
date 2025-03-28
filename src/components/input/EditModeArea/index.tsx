@@ -19,7 +19,10 @@ const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeAreaProps
   extends EditModeComponentProps,
-    Omit<TextAreaProps, 'dimension' | 'displayClearIcon' | 'value'> {
+    Omit<
+      TextAreaProps,
+      'dimension' | 'displayClearIcon' | 'displayCopyIcon' | 'clearIconPropsConfig' | 'copyIconPropsConfig' | 'value'
+    > {
   /** Колбек на изменение значения компонента */
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }

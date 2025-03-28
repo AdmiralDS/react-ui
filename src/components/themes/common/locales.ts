@@ -69,6 +69,10 @@ export interface Locale {
   table: {
     emptyMessage: React.ReactNode;
   };
+  textArea: {
+    copyTextMessage: string;
+    copiedMessage: string;
+  };
 }
 
 const ruLocale: Locale = {
@@ -135,6 +139,10 @@ const ruLocale: Locale = {
   table: {
     emptyMessage: 'Нет совпадений',
   },
+  textArea: {
+    copyTextMessage: 'Копировать текст',
+    copiedMessage: 'Скопировано',
+  },
 };
 
 const enLocale: Locale = {
@@ -200,6 +208,10 @@ const enLocale: Locale = {
   },
   table: {
     emptyMessage: 'No matches',
+  },
+  textArea: {
+    copyTextMessage: 'Copy text',
+    copiedMessage: 'Copied',
   },
 };
 
