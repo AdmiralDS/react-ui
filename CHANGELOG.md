@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.42.0](https://github.com/AdmiralDS/react-ui/compare/v8.41.0...v8.42.0) (2025-03-28)
+
+
+### Features
+
+* **CardTab:** [#1726](https://github.com/AdmiralDS/react-ui/issues/1726) изменен цвет бейджа ([94d2b96](https://github.com/AdmiralDS/react-ui/commit/94d2b96533ce930395da62c1aecb0c5cbb47ac1b))
+* **TextArea:** добавлена опция копирования текста ([88fae8e](https://github.com/AdmiralDS/react-ui/commit/88fae8e85b688922d5334a2e5f1a0e5aff5da554))
+
+
+### Bug Fixes
+
+* **EditMode:** [#1736](https://github.com/AdmiralDS/react-ui/issues/1736) add editButtonPropsConfig ([224be86](https://github.com/AdmiralDS/react-ui/commit/224be869567f54bc686aaa22d3c2213fed2dd783))
+
 ## [8.41.0](https://github.com/AdmiralDS/react-ui/compare/v8.40.2...v8.41.0) (2025-03-24)
 
 
