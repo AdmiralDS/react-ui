@@ -34,7 +34,7 @@ describe('TextArea Component', () => {
   // Тест на отображение иконки очистки
   test('shows clear icon when text is present', () => {
     const clearIconProps = { 'data-testid': 'clearIconTest' };
-    render(<TextAreaCoponent value="test" displayClearIcon clearIconPropsConfig={() => clearIconProps} />);
+    render(<TextAreaCoponent defaultValue="test" displayClearIcon clearIconPropsConfig={() => clearIconProps} />);
     const clearIcon = screen.getByTestId('clearIconTest');
     expect(clearIcon).toBeInTheDocument();
   });
@@ -42,7 +42,7 @@ describe('TextArea Component', () => {
   // Тест на отображение иконки копирования
   test('shows copy icon when text is present', () => {
     const copyIconProps = { 'data-testid': 'copyIconTest' };
-    render(<TextAreaCoponent value="test" displayCopyIcon copyIconPropsConfig={() => copyIconProps} />);
+    render(<TextAreaCoponent defaultValue="test" displayCopyIcon copyIconPropsConfig={() => copyIconProps} />);
     const copyIcon = screen.getByTestId('copyIconTest');
     expect(copyIcon).toBeInTheDocument();
   });
@@ -57,7 +57,7 @@ describe('TextArea Component', () => {
       writable: true,
     });
 
-    render(<TextAreaCoponent value="test" disableCopying />);
+    render(<TextAreaCoponent defaultValue="test" disableCopying />);
     const textarea = screen.getByRole('textbox');
     fireEvent.focus(textarea);
     fireEvent.keyDown(textarea, { key: 'c', code: 'KeyC' });
