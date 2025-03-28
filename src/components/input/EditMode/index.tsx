@@ -53,6 +53,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       multilineView = false,
       confirmButtonPropsConfig = nothing,
       cancelButtonPropsConfig = nothing,
+      editButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -133,6 +134,13 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       $multiline: false,
     } satisfies React.ComponentProps<typeof EditButton>;
 
+    const editButtonProps = {
+      $multiline: multilineView,
+      height: iconSize,
+      width: iconSize,
+      onClick: disabled ? undefined : enableEdit,
+    } satisfies React.ComponentProps<typeof EditIcon>;
+
     return (
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
@@ -173,14 +181,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
             {showTooltip && tooltipVisible && overflowActive && (
               <Tooltip renderContent={() => value} targetElement={textRef.current} />
             )}
-            {!props.readOnly && (
-              <EditIcon
-                $multiline={multilineView}
-                height={iconSize}
-                width={iconSize}
-                onClick={disabled ? undefined : enableEdit}
-              />
-            )}
+            {!props.readOnly && <EditIcon {...editButtonProps} {...editButtonPropsConfig(editButtonProps)} />}
           </>
         )}
       </Wrapper>
