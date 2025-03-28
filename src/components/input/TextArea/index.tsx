@@ -370,6 +370,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale].textArea.copiedMessage;
     const [tooltipText, setTooltipText] = useState(copyText);
     const handleCopyIconClick = () => {
+      if (!document.hasFocus()) {
+        window.focus();
+      }
       if (inputRef.current) {
         navigator.clipboard.writeText(inputRef.current.value);
         setTooltipText(copiedText);
