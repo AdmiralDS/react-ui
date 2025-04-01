@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useId, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
@@ -13,7 +13,9 @@ export const TextAreaPlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: TextAreaProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [localValue, setValue] = React.useState<string>(String(value) ?? '');
+  const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const clearIconProps = { 'data-testid': useId() };
+  const copyIconProps = { 'data-testid': useId() };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.currentTarget.value;
@@ -23,7 +25,14 @@ export const TextAreaPlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <TextArea {...props} value={localValue} onChange={handleChange} placeholder={placeholder} />
+      <TextArea
+        {...props}
+        value={localValue}
+        onChange={handleChange}
+        placeholder={placeholder}
+        clearIconPropsConfig={() => clearIconProps}
+        copyIconPropsConfig={() => copyIconProps}
+      />
     </ThemeProvider>
   );
 };

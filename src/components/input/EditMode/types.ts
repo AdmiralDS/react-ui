@@ -1,6 +1,6 @@
 import type { css, DataAttributes } from 'styled-components';
 
-import type { EditButton } from './style';
+import type { EditButton, EditIcon } from './style';
 export type EditModeDimension = 's' | 'm' | 'xl' | 'xxl';
 type Dimension = EditModeDimension;
 
@@ -32,4 +32,10 @@ export interface EditModeComponentProps {
   cancelButtonPropsConfig?: (
     props: React.ComponentProps<typeof EditButton>,
   ) => Partial<React.ComponentProps<typeof EditButton> & DataAttributes>;
+
+  /** Конфиг функция пропсов для кнопки начала редактирования. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  editButtonPropsConfig?: (
+    props: React.ComponentProps<typeof EditIcon>,
+  ) => Partial<React.ComponentProps<typeof EditIcon> & DataAttributes>;
 }
