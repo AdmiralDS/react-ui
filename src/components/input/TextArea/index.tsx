@@ -380,8 +380,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
-    const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale].textArea.copyTextMessage;
-    const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale].textArea.copiedMessage;
+    const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale]?.textArea?.copyTextMessage;
+    const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale]?.textArea?.copiedMessage;
     const [tooltipText, setTooltipText] = useState(copyText);
 
     const handleClearIconClick = () => {
