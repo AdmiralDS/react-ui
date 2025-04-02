@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.43.0](https://github.com/AdmiralDS/react-ui/compare/v8.42.0...v8.43.0) (2025-04-02)
+
+
+### Features
+
+* **Table:** [#1671](https://github.com/AdmiralDS/react-ui/issues/1671) добавлен параметр headerPropsConfig для заголовка столбца ([b6bd640](https://github.com/AdmiralDS/react-ui/commit/b6bd64033882d809a20629f1d9cc06025d514d81))
+
+
+### Bug Fixes
+
+* **HorizontalTabs:** container must have some default positioning ([03636e2](https://github.com/AdmiralDS/react-ui/commit/03636e2c975acee6af99cd12e28cf04fae3d218c))
+
 ## [8.42.0](https://github.com/AdmiralDS/react-ui/compare/v8.41.0...v8.42.0) (2025-03-28)
 
 
