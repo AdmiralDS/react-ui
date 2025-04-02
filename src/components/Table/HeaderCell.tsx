@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { DataAttributes } from 'styled-components';
 
 import { HeaderCell, HeaderCellContent, HeaderCellTitle, HeaderCellSpacer, TitleContent } from './style';
 import { RowWidthResizer } from './RowWidthResizer';
@@ -7,6 +8,7 @@ import { TitleText } from './TitleText';
 import { SortIcon } from './SortIcon';
 
 const DEFAULT_COLUMN_WIDTH = 100;
+const nothing = () => {};
 
 type HeaderCellType = {
   column: any;
@@ -54,6 +56,7 @@ export const HeaderCellComponent = React.memo(
       disableResize = false,
       draggable = false,
       renderFilter,
+      headerPropsConfig = nothing,
     } = column;
     const iconSize = dimension === 's' || dimension === 'm' ? 16 : 20;
     const defaultSpacer = dimension === 'l' || dimension === 'xl' ? '16px' : '12px';
@@ -66,17 +69,18 @@ export const HeaderCellComponent = React.memo(
 
     const [cellNode, setCellNode] = React.useState<HTMLDivElement | null>(null);
 
+    const headerCellProps = {
+      $dimension: dimension,
+      $resizer: withResizer,
+      style: { width: colWidth, minWidth: colWidth },
+      className: 'th',
+      'data-draggable': draggable,
+      'data-th-column': name,
+      ...(hidden ? { 'data-index': index } : {}),
+    } satisfies React.ComponentProps<typeof HeaderCell> & DataAttributes;
+
     return (
-      <HeaderCell
-        $dimension={dimension}
-        $resizer={withResizer}
-        style={{ width: colWidth, minWidth: colWidth }}
-        className="th"
-        data-draggable={draggable}
-        data-th-column={name}
-        {...(hidden ? { 'data-index': index } : {})}
-        ref={(node) => setCellNode(node)}
-      >
+      <HeaderCell {...headerCellProps} {...headerPropsConfig(headerCellProps)} ref={(node) => setCellNode(node)}>
         <HeaderCellContent $cellAlign={cellAlign}>
           <HeaderCellTitle
             $sort={sort || 'initial'}
