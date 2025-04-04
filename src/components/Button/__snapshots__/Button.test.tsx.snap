@@ -19,7 +19,7 @@ exports[`Button should render component 1`] = `
   white-space: nowrap;
 }
 
-.c2 >.sc-gnOvAp {
+.c2 >.sc-fYsHOw {
   flex: 0 0 auto;
 }
 
@@ -549,7 +549,7 @@ exports[`Button should render component with text 1`] = `
   white-space: nowrap;
 }
 
-.c2 >.sc-gnOvAp {
+.c2 >.sc-fYsHOw {
   flex: 0 0 auto;
 }
 
