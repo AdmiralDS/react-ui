@@ -106,6 +106,9 @@ const Docs = () => {
           showBorders
           style={{ width: '750px', margin: '8px 0 24px 0' }}
         />
+        Для прокидывания дополнительных пропсов и data-атрибутов на верхнеуровневый элемент заголовка используйте
+        параметр столбца headerPropsConfig.
+        <Separator $height={8} />
         Также существует ряд параметров, влияющих на внешний вид таблицы:
         <Separator $height={8} />
         <UnorderedList dimension="s">
@@ -310,24 +313,32 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
+    headerPropsConfig: ({ className }) => ({ className: `${className} transferType`, 'data-testId': 'transferType' }),
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
     width: 150,
+    headerPropsConfig: ({ className }) => ({ className: `${className} transferDate`, 'data-testId': 'transferDate' }),
   },
   {
     name: 'transfer_amount',
     title: 'Сумма',
     width: 170,
+    headerPropsConfig: ({ className }) => ({
+      className: `${className} transferAmount`,
+      'data-testId': 'transferAmount',
+    }),
   },
   {
     name: 'currency',
     title: 'Валюта',
+    headerPropsConfig: ({ className }) => ({ className: `${className} currency`, 'data-testId': 'currency' }),
   },
   {
     name: 'rate',
     title: 'Ставка',
+    headerPropsConfig: ({ className }) => ({ className: `${className} rate`, 'data-testId': 'rate' }),
   },
 ];
 

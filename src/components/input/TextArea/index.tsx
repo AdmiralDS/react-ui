@@ -1,6 +1,8 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
 import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, useTheme } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
@@ -8,9 +10,12 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
+import { ReactComponent as CopyOutlineSvg } from '@admiral-ds/icons/build/documents/CopyOutline.svg';
+import type { AnyIconProps } from '#src/components/InputIconButton';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Container } from '../Container';
 import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
+import { TooltipHoc } from '#src/components/TooltipHOC';
 
 const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
@@ -220,6 +225,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
   & > * {
     display: block;
     width: ${iconSizeValue}px;
+    height: ${iconSizeValue}px;
   }
 `;
 
@@ -250,6 +256,15 @@ const StyledContainer = styled(Container)<{
   ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
+
+const CopyIconButton = forwardRef<HTMLDivElement, AnyIconProps>((props, ref) => {
+  return (
+    <div ref={ref}>
+      <InputIconButton {...props} />
+    </div>
+  );
+});
+const TooltipedInputIconButton = TooltipHoc(CopyIconButton);
 
 function toHtmlString(value?: string) {
   return String(value || '')
@@ -288,6 +303,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
 
+  /** Отображать иконку копирования содержимого поля */
+  displayCopyIcon?: boolean;
+
   /** Статус поля */
   status?: InputStatus;
 
@@ -308,8 +326,29 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
+   * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
+   **/
+  locale?: {
+    /** Надпись (тултип) для иконки копирования текста */
+    copyTextMessage?: string;
+    /** Надпись (тултип) для иконки копирования текста в течение 2 секунд после копирования */
+    copiedMessage?: string;
+  };
+  /** Конфиг функция пропсов для кнопки очистки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearIconPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки копирования текста. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  copyIconPropsConfig?: (
+    props: React.ComponentProps<typeof TooltipedInputIconButton>,
+  ) => Partial<React.ComponentProps<typeof TooltipedInputIconButton> & DataAttributes>;
 }
 
+const nothing = () => {};
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
@@ -317,6 +356,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       maxRows,
       value,
       displayClearIcon,
+      displayCopyIcon,
       status,
       handleInput = defaultHandleInput,
       containerRef,
@@ -328,32 +368,70 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       skeleton = false,
       dimension = 'm',
       disableCopying,
+      locale,
+      clearIconPropsConfig = nothing,
+      copyIconPropsConfig = nothing,
       ...props
     },
     ref,
   ) => {
+    const theme = useTheme() || LIGHT_THEME;
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
     const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
+    const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale]?.textArea?.copyTextMessage;
+    const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale]?.textArea?.copiedMessage;
+    const [tooltipText, setTooltipText] = useState(copyText);
 
-    if (!props.readOnly && displayClearIcon && !!inputRef?.current?.value) {
-      iconArray.unshift(
-        <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onMouseDown={(e) => {
-            // запрет на перемещение фокуса при клике по иконке
-            e.preventDefault();
-          }}
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
-        />,
-      );
+    const handleClearIconClick = () => {
+      if (inputRef.current) {
+        changeInputData(inputRef.current, { value: '' });
+      }
+    };
+
+    const handleCopyIconClick = () => {
+      if (!document.hasFocus()) {
+        window.focus();
+      }
+      if (inputRef.current) {
+        navigator.clipboard.writeText(inputRef.current.value);
+        setTooltipText(copiedText);
+        setTimeout(() => setTooltipText(copyText), 2000);
+      }
+    };
+
+    const handleIconMouseDown: React.MouseEventHandler<SVGSVGElement> = (e) => {
+      // запрет на перемещение фокуса при клике по иконке
+      e.preventDefault();
+    };
+
+    const clearIconProps = {
+      icon: CloseOutlineSvg,
+      onMouseDown: handleIconMouseDown,
+      onClick: handleClearIconClick,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof InputIconButton>;
+
+    const copyIconProps = {
+      tooltipDimension: 's',
+      renderContent: () => tooltipText,
+      icon: CopyOutlineSvg,
+      onMouseDown: handleIconMouseDown,
+      onClick: handleCopyIconClick,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof TooltipedInputIconButton>;
+
+    if (!props.readOnly && !!inputRef?.current?.value) {
+      if (displayClearIcon) {
+        iconArray.unshift(
+          <InputIconButton {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} key="clear-icon" />,
+        );
+      } else if (displayCopyIcon) {
+        iconArray.unshift(
+          <TooltipedInputIconButton {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} key="copy-icon" />,
+        );
+      }
     }
 
     const iconCount = iconArray.length;
@@ -405,6 +483,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         };
       }
     }, [autoHeight, inputData.value, props.defaultValue]);
+
     return (
       <StyledContainer
         className={className}

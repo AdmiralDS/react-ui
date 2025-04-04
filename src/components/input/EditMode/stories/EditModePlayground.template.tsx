@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { EditMode } from '@admiral-ds/react-ui';
+import { EditMode, useId } from '@admiral-ds/react-ui';
 import type { EditModeProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
@@ -21,7 +21,7 @@ export const EditModePlaygroundTemplate = ({
   };
   const confirmButtonProps = { 'data-testid': 'confirmButton' };
   const cancelButtonProps = { 'data-testid': 'cancelButton' };
-
+  const editButtonProps = { 'data-testid': useId() };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <EditMode
@@ -31,6 +31,7 @@ export const EditModePlaygroundTemplate = ({
         placeholder={placeholder}
         confirmButtonPropsConfig={() => confirmButtonProps}
         cancelButtonPropsConfig={() => cancelButtonProps}
+        editButtonPropsConfig={() => editButtonProps}
       />
     </ThemeProvider>
   );

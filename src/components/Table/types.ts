@@ -1,6 +1,7 @@
-import type { css } from 'styled-components';
+import type { css, DataAttributes } from 'styled-components';
 import type { CSSProperties } from 'react';
 import type { Color } from '#src/components/themes';
+import { HeaderCell } from '#src/components/Table/style';
 
 export type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -80,6 +81,11 @@ export type Column = {
    * @param rowIdx - индекс строки
    */
   renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
+  /** Конфиг функция пропсов для заголовка колонки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  headerPropsConfig?: (
+    props: React.ComponentProps<typeof HeaderCell> & DataAttributes,
+  ) => Partial<React.ComponentProps<typeof HeaderCell> & DataAttributes>;
 };
 
 /**

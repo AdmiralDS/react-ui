@@ -12,7 +12,7 @@ import {
   CardTabMenuHorizontal,
   CardTab,
   TabIcon,
-  TabBadge,
+  CardTabBadge,
   TabText,
   TabCloseIconButton,
   MenuItem,
@@ -49,9 +49,9 @@ const CustomHorizontalCardTab = forwardRef<HTMLButtonElement, CustomHorizontalTa
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <TabBadge disabled={disabled} selected={selected}>
+          <CardTabBadge disabled={disabled} selected={selected}>
             {badge}
-          </TabBadge>
+          </CardTabBadge>
         )}
         <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </CardTab>
