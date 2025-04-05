@@ -1,6 +1,7 @@
-import { useRef, useLayoutEffect, forwardRef, useState } from 'react';
+import { useRef, useLayoutEffect, forwardRef, useState, Children } from 'react';
+import type { ReactNode } from 'react';
 
-import { Container, WrapperOptions, Input, IconPanel } from './styled';
+import { Container, WrapperOptions, Input, IconPanelBefore, IconPanelAfter } from './styled';
 import { InputBorderedDiv } from '../TextInput';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -28,6 +29,12 @@ function pressDeleteButtonOnLastChip(
 export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Делает размер компонента больше или меньше обычной */
   dimension?: ComponentDimension;
+
+  /** Иконки для отображения в начале поля */
+  iconsBefore?: ReactNode;
+
+  /** Иконки для отображения в конце поля */
+  iconsAfter?: ReactNode;
 
   /** Отображать иконку очистки поля */
   displayClearIcon?: boolean;
@@ -87,6 +94,8 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       onInputComplete,
       containerPropsConfig = nothing,
       onClearOptions,
+      iconsBefore,
+      iconsAfter,
       lastChipCloseButtonSelector = '.wrapper-options > :has(.close-button):last-of-type .close-button',
       onBackspaceKeyDown: onLastChipDelete = pressDeleteButtonOnLastChip,
       ...props
@@ -95,6 +104,15 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [refWrapperOptions, setRefWrapperOptions] = useState<HTMLDivElement | null>(null);
+
+    const iconAfterArray = Children.toArray(iconsAfter);
+    const iconBeforeArray = Children.toArray(iconsBefore);
+
+    if (displayClearIcon && !props.readOnly && !disableCopying) {
+      iconAfterArray.unshift(
+        <InputIconButton icon={CloseOutlineSvg} onClick={onClearOptions} aria-hidden key={'close'} />,
+      );
+    }
 
     const handleContainerFocus: React.FocusEventHandler<HTMLDivElement> = (e) => {
       if (e.target.tagName.toLowerCase() !== 'input') {
@@ -142,17 +160,19 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       }
     }, [props.disabled, props.readOnly, disableCopying, refWrapperOptions, onInputComplete, inputRef]);
 
+    const iconsBeforeCount = iconBeforeArray.length;
+    const iconsAfterCount = iconAfterArray.length;
+
     return (
       <Container {...containerProps} {...containerPropsConfig(containerProps)}>
+        {iconsBeforeCount > 0 && <IconPanelBefore $dimension={dimension}>{iconBeforeArray}</IconPanelBefore>}
+
         <WrapperOptions className="wrapper-options" ref={(elem) => setRefWrapperOptions(elem)}>
           {children} <Input $dimension={dimension} {...props} ref={refSetter(ref, inputRef)} />
         </WrapperOptions>
         <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
-        {displayClearIcon && !props.readOnly && !disableCopying && (
-          <IconPanel>
-            <InputIconButton icon={CloseOutlineSvg} onClick={onClearOptions} aria-hidden />
-          </IconPanel>
-        )}
+
+        {iconsAfterCount > 0 && <IconPanelAfter $dimension={dimension}>{iconAfterArray}</IconPanelAfter>}
       </Container>
     );
   },

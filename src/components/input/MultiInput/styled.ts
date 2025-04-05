@@ -44,9 +44,9 @@ export const WrapperOptions = styled.div`
   flex-grow: 1;
 `;
 
-export const IconPanel = styled.div<{ $disabled?: boolean; $dimension?: ComponentDimension }>`
-  position: relative;
-  margin-left: 8px;
+const IconPanel = styled.div<{ $disabled?: boolean; $dimension?: ComponentDimension }>`
+  display: flex;
+  align-items: flex-start;
 
   & > svg {
     border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
@@ -73,6 +73,7 @@ export const Container = styled.div<{
 }>`
   position: relative;
   display: flex;
+  column-gap: 8px;
   align-items: stretch;
   overflow: hidden;
   border: none;
@@ -138,4 +139,15 @@ export const Input = styled.input<{ $dimension?: ComponentDimension }>`
   }
 
   ${ieFixes}
+`;
+
+export const IconPanelBefore = styled(IconPanel)`
+  & > *:not(:last-child) {
+    margin-right: 8px;
+  }
+`;
+export const IconPanelAfter = styled(IconPanel)`
+  & > *:not(:first-child) {
+    margin-left: 8px;
+  }
 `;

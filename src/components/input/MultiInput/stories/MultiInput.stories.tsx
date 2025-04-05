@@ -4,10 +4,12 @@ import { ALL_BORDER_RADIUS_VALUES, INPUT_STATUS_VALUES, MultiInput } from '@admi
 
 import { MultiInputPlaygroundTemplate } from './MultiInputPlayground.template';
 import { MultiInputInitChipsDisabledTemplate } from './MultiInputInitChipsDisabled.template';
+import { MultiInputWithIconsTemplate } from './MultiInputWithIcons.template';
 
 // Imports of text sources
 import MultiInputPlaygroundRaw from './MultiInputPlayground.template?raw';
 import MultiInputInitChipsDisabledTemplateRaw from './MultiInputInitChipsDisabled.template?raw';
+import MultiInputWithIconsTemplateRaw from './MultiInputWithIcons.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/MultiInput',
@@ -78,5 +80,25 @@ export const MultiInputInitChipsDisabled = {
 
   name: 'MultiInput с начальными опциями',
 };
+//</editor-fold>
 
+//<editor-fold desc="MultiInput с дополнительными иконками">
+const MultiInputWithIconsStory: StoryFn<typeof MultiInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MultiInputWithIconsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const MultiInputWithIcons = {
+  render: MultiInputWithIconsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: MultiInputWithIconsTemplateRaw,
+      },
+    },
+  },
+
+  name: 'MultiInput с дополнительными иконками',
+};
 //</editor-fold>
