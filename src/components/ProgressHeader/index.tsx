@@ -30,7 +30,6 @@ const Progress = styled.div<{ $percent: number; $appearance?: AppearanceHeaderBa
     $appearance === 'error'
       ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`
       : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
-  width: ${({ $percent }) => $percent}%;
   transition: all 0.3s linear;
 `;
 
@@ -38,7 +37,7 @@ export const ProgressHeader: FC<ProgressHeaderProps> = ({ percent = 0, appearanc
   return (
     <Container {...props}>
       <Wrapper>
-        <Progress $appearance={appearance} $percent={percent} />
+        <Progress $appearance={appearance} $percent={percent} style={{ width: `${percent}%` }} />
       </Wrapper>
     </Container>
   );

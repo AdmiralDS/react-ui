@@ -20,8 +20,7 @@ const ProgressWrapper = styled.div`
   background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
-const Progress = styled.div<{ $percent: number }>`
-  width: ${({ $percent }) => $percent}%;
+const Progress = styled.div`
   background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
@@ -111,7 +110,7 @@ export const ProgressStepper: FC<ProgressStepperProps> = ({
           aria-valuemax={stepsAmount}
           aria-valuenow={activeStepNumber}
           aria-valuetext={`${fixedStepName} ${activeStepNumber}: ${steps[activeStep]}`}
-          $percent={convertNumberToIntegerPercent(activeStepNumber, stepsAmount)}
+          style={{ width: `${convertNumberToIntegerPercent(activeStepNumber, stepsAmount)}%` }}
         />
       </ProgressWrapper>
       {displayNextStepName && steps[nextStep] && <NextStep aria-hidden>{nextStepContent}</NextStep>}
