@@ -6,8 +6,8 @@ import type {
   BorderRadiusType,
   RenderOptionProps,
   HorizontalTabProps,
-  TabMenuHorizontalProps,
   TabDimension,
+  CardTabMenuHorizontalProps,
 } from '@admiral-ds/react-ui';
 import {
   CardTabMenuHorizontal,
@@ -87,7 +87,7 @@ export const CardTabMenuHorizontalLeadingGapTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: TabMenuHorizontalProps & {
+}: CardTabMenuHorizontalProps & {
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {

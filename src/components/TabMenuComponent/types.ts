@@ -5,6 +5,7 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 export type TabDimension = 'l' | 'm';
 export type FilterTabDimension = 'm' | 's';
 export type VerticalUnderlinePosition = 'left' | 'right';
+export type TabAppearance = 'primary' | 'secondary';
 
 export type TabWidthMapProps = {
   tabId: string;
@@ -75,14 +76,17 @@ export interface HorizontalTabsProps extends TabMenuBaseProps {
 export interface TabMenuHorizontalProps
   extends TabMenuBaseProps,
     TabMenuWithOverflowProps,
-    TabMenuWithAddTabButtonProps {}
+    TabMenuWithAddTabButtonProps {
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
+}
 
-export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
+export interface TabMenuVerticalProps extends TabMenuHorizontalProps {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
 }
 
-export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {
+export interface CardTabMenuHorizontalProps extends Omit<TabMenuHorizontalProps, 'appearance'> {
   /** Скрыть обводку выбранной вкладки */
   hideBorder?: boolean;
 }
