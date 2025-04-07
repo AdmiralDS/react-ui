@@ -11,7 +11,6 @@ exports[`ProgressBar should render component 1`] = `
 
 .c2 {
   background: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  width: 0%;
   border-radius: 2px;
   transition: all 0.3s linear;
 }
@@ -45,6 +44,7 @@ exports[`ProgressBar should render component 1`] = `
     >
       <div
         class="c2"
+        style="width: 0%;"
       />
     </div>
   </div>
@@ -62,7 +62,6 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
 
 .c2 {
   background: var(--admiral-color-Error_Error60Main, #D92020);
-  width: 0%;
   border-radius: 2px;
   transition: all 0.3s linear;
 }
@@ -96,6 +95,7 @@ exports[`ProgressBar should render component with prop appearance=error 1`] = `
     >
       <div
         class="c2"
+        style="width: 0%;"
       />
     </div>
   </div>
@@ -113,7 +113,6 @@ exports[`ProgressBar should render component with prop percent 1`] = `
 
 .c2 {
   background: var(--admiral-color-Primary_Primary60Main, #0062FF);
-  width: 50%;
   border-radius: 2px;
   transition: all 0.3s linear;
 }
@@ -147,6 +146,7 @@ exports[`ProgressBar should render component with prop percent 1`] = `
     >
       <div
         class="c2"
+        style="width: 50%;"
       />
     </div>
   </div>
