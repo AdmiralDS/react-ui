@@ -111,9 +111,9 @@ const StyledNotificationItem = styled(NotificationItem)`
   flex-shrink: 0;
 `;
 
-export const VerticalTabMenuTemplate = ({
+export const VerticalTabMenuSecondaryTemplate = ({
   dimension = 'l',
-  appearance = 'primary',
+  appearance = 'secondary',
   width = TAB_MENU_WIDTH,
   showUnderline = true,
   underlinePosition = 'right',
@@ -137,6 +137,7 @@ export const VerticalTabMenuTemplate = ({
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return !!currentTab?.disabled;
   };
+
   const renderTab = (tabId: string, selected?: boolean, onSelectTab?: (tabId: string) => void) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     const text = currentTab?.text || '';
@@ -159,6 +160,7 @@ export const VerticalTabMenuTemplate = ({
       />
     );
   };
+
   const renderDropMenuItem = (tabId: string) => {
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return (options: RenderOptionProps) => {

@@ -6,7 +6,7 @@ import type {
   BorderRadiusType,
   RenderOptionProps,
   HorizontalTabProps,
-  TabMenuHorizontalProps,
+  CardTabMenuHorizontalProps,
 } from '@admiral-ds/react-ui';
 import {
   CardTabMenuHorizontal,
@@ -109,7 +109,7 @@ export const CardTabMenuHorizontalWithAddButtonTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: TabMenuHorizontalProps & {
+}: CardTabMenuHorizontalProps & {
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {

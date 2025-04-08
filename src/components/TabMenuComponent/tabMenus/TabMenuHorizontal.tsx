@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 
 export const TabMenuHorizontal = ({
   dimension = 'l',
+  appearance = 'primary',
   showUnderline,
   selectedTabId,
   defaultSelectedTabId,
@@ -248,7 +249,12 @@ export const TabMenuHorizontal = ({
           selected={selectedTab}
           dimension={dimension}
         />
-        <ActiveHorizontalTabSelector $left={`${underlineLeft}px`} $width={`${underlineWidth}px`} $transition={true} />
+        <ActiveHorizontalTabSelector
+          $appearance={appearance}
+          $left={`${underlineLeft}px`}
+          $width={`${underlineWidth}px`}
+          $transition={true}
+        />
       </VisibleContainer>
     </Wrapper>
   );
