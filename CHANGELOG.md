@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.44.0](https://github.com/AdmiralDS/react-ui/compare/v8.43.0...v8.44.0) (2025-04-08)
+
+
+### Features
+
+* [#1725](https://github.com/AdmiralDS/react-ui/issues/1725) add secondary in HorizontalTabMenu and VerticalTabMenu ([fdc5516](https://github.com/AdmiralDS/react-ui/commit/fdc5516049e74579186b8cf6b82ad6f170584b02))
+* [#1733](https://github.com/AdmiralDS/react-ui/issues/1733) add InputLine ([d9c9abb](https://github.com/AdmiralDS/react-ui/commit/d9c9abba231b092f1673713dcabe8cb6a4a6ef1c))
+* **MultiInput:**  Добавлена возможность отображать иконки вначале и конце поля ([01bee40](https://github.com/AdmiralDS/react-ui/commit/01bee4038a0cb944fdc6ab1ae9761eb6b1d12e65)), closes [#1745](https://github.com/AdmiralDS/react-ui/issues/1745)
+* Небольшая оптимизация для прогресс-баров ([d89c4a9](https://github.com/AdmiralDS/react-ui/commit/d89c4a91d1db2d3c9f4f973c24e42d50de13f5bb))
+
+
+### Bug Fixes
+
+* **Menu:** Убран лишний css mixin hideNativeScroll [#1732](https://github.com/AdmiralDS/react-ui/issues/1732) ([8902792](https://github.com/AdmiralDS/react-ui/commit/8902792acc23ab19cb7f83eaa789ec4c4c237a0e))
+* **Select:** Исправлена работа свойства MinHeight [#1731](https://github.com/AdmiralDS/react-ui/issues/1731) ([85835f1](https://github.com/AdmiralDS/react-ui/commit/85835f1ba475fe3073c32af5b42ac8a8a94e7103))
+
 ## [8.43.0](https://github.com/AdmiralDS/react-ui/compare/v8.42.0...v8.43.0) (2025-04-02)
 
 
