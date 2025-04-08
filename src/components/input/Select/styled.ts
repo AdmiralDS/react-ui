@@ -28,29 +28,33 @@ export const BorderedDiv = styled.div`
   border-radius: inherit;
 `;
 
-const ROW_HEIGHT = 24;
+const ROW_HEIGHT_S = 20;
+const ROW_HEIGHT_M = 24;
+
+const getRowHeight = (dimension?: ComponentDimension) => (dimension === 's' ? ROW_HEIGHT_S : ROW_HEIGHT_M);
 
 const rowHeightStyle = css<{
+  $dimension?: ComponentDimension;
   $multiple?: boolean;
   $opened?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
   $idleHeight: 'full' | 'fixed';
 }>`
-  min-height: ${({ $multiple, $minRowCount }) => {
+  min-height: ${({ $multiple, $minRowCount, $dimension }) => {
     if (!$multiple || !$minRowCount) return 'auto';
 
-    return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
+    return `${getRowHeight($dimension) * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight }) => {
+  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight, $dimension }) => {
     if (!$multiple) return 'none';
 
     if (!$maxRowCount) {
-      return !$opened && $idleHeight === 'fixed' ? `${ROW_HEIGHT}px` : 'none';
+      return !$opened && $idleHeight === 'fixed' ? `${getRowHeight($dimension)}px` : 'none';
     }
 
-    return `${ROW_HEIGHT * $maxRowCount + ($maxRowCount - 1) * 4}px`;
+    return `${getRowHeight($dimension) * $maxRowCount + ($maxRowCount - 1) * 4}px`;
   }};
 `;
 
@@ -80,6 +84,7 @@ export const ValueWrapper = styled.div<{
   gap: 4px;
   flex-wrap: ${({ $multiple }) => ($multiple ? 'wrap' : 'unset')};
   align-items: center;
+  align-content: flex-start;
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
@@ -88,7 +93,6 @@ export const ValueWrapper = styled.div<{
   [data-disabled='true'] &&& {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
-  min-height: ${(p) => (p.$dimension === 's' ? 20 : 24)}px;
 `;
 
 export const StringValueWrapper = styled.div`
