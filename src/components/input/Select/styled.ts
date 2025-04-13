@@ -28,10 +28,7 @@ export const BorderedDiv = styled.div`
   border-radius: inherit;
 `;
 
-const ROW_HEIGHT_S = 20;
-const ROW_HEIGHT_M = 24;
-
-const getRowHeight = (dimension?: ComponentDimension) => (dimension === 's' ? ROW_HEIGHT_S : ROW_HEIGHT_M);
+const ROW_HEIGHT = 24;
 
 const rowHeightStyle = css<{
   $dimension?: ComponentDimension;
@@ -42,19 +39,21 @@ const rowHeightStyle = css<{
   $idleHeight: 'full' | 'fixed';
 }>`
   min-height: ${({ $multiple, $minRowCount, $dimension }) => {
-    if (!$multiple || !$minRowCount) return 'auto';
+    if (!$multiple) return `${$dimension === 's' ? 20 : 24}px`;
 
-    return `${getRowHeight($dimension) * $minRowCount + ($minRowCount - 1) * 4}px`;
+    if (!$minRowCount) return `${ROW_HEIGHT}px`;
+
+    return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
 
-  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight, $dimension }) => {
+  max-height: ${({ $multiple, $maxRowCount, $opened, $idleHeight }) => {
     if (!$multiple) return 'none';
 
     if (!$maxRowCount) {
-      return !$opened && $idleHeight === 'fixed' ? `${getRowHeight($dimension)}px` : 'none';
+      return !$opened && $idleHeight === 'fixed' ? `${ROW_HEIGHT}px` : 'none';
     }
 
-    return `${getRowHeight($dimension) * $maxRowCount + ($maxRowCount - 1) * 4}px`;
+    return `${ROW_HEIGHT * $maxRowCount + ($maxRowCount - 1) * 4}px`;
   }};
 `;
 
