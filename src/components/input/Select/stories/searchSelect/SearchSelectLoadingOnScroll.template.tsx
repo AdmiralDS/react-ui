@@ -59,7 +59,7 @@ export const LoadOnScrollTemplate = (props: SelectProps) => {
     array.push(
       <Option
         key={`last/${count}`}
-        value={''}
+        value={'invisible'}
         renderOption={(options) => <LastOption {...options} onVisible={() => setCount(count + 5)} key={`last`} />}
       />,
     );
