@@ -38,6 +38,7 @@ const Wrapper = styled.div`
 `;
 
 export const TabMenuHorizontal = ({
+  adaptive,
   dimension = 'l',
   appearance = 'primary',
   showUnderline,
@@ -91,6 +92,8 @@ export const TabMenuHorizontal = ({
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
   const [overflowState, setOverflowState] = useState(false);
 
+  const isAdaptiveFill = adaptive === 'fill';
+
   useLayoutEffect(() => {
     if (visibleContainerRef.current) {
       const resizeObserver = new ResizeObserver((entries) => {
@@ -127,20 +130,25 @@ export const TabMenuHorizontal = ({
   const [tabWidthMap, setTabWidthMap] = useState<Array<TabWidthMapProps>>([]);
 
   useEffect(() => {
-    function setTabWidth() {
+    const setTabWidth = () => {
       if (hiddenContainerRef.current) {
+        // if (isAdaptiveFill) {
         const overflow = checkOverflow(hiddenContainerRef.current);
         if (overflowState !== overflow) setOverflowState(overflow);
+        // }
         const tabWidth = getTabWidthMap(tabsId, hiddenContainerRef.current.children);
         setTabWidthMap(tabWidth);
       }
-    }
+    };
     if (hiddenContainerRef.current?.firstElementChild) {
-      const resizeObserver = new ResizeObserver(debounce(setTabWidth, 100));
-      resizeObserver.observe(hiddenContainerRef.current?.firstElementChild);
-      return () => {
-        resizeObserver.disconnect();
-      };
+      //todo нужен ли тут обсервер?
+      // const resizeObserver = new ResizeObserver(debounce(setTabWidth, 100));
+      debounce(setTabWidth, 100)();
+
+      // resizeObserver.observe(hiddenContainerRef.current?.firstElementChild);
+      // return () => {
+      //   resizeObserver.disconnect();
+      // };
     }
   }, [hiddenContainerRef, containerWidth, horizontalTabs, tabsId]);
 
@@ -240,15 +248,19 @@ export const TabMenuHorizontal = ({
       <HiddenContainer ref={hiddenContainerRef}>{horizontalTabs}</HiddenContainer>
       <VisibleContainer ref={visibleContainerRef} $showUnderline={showUnderline}>
         {renderedVisibleTabs}
-        {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
-        <HorizontalTabOverflowMenu
-          {...dropProps}
-          items={overflowMenuItems}
-          isHidden={!overflowState}
-          onSelectItem={handleSelectTab}
-          selected={selectedTab}
-          dimension={dimension}
-        />
+        {!isAdaptiveFill && (
+          <>
+            {showAddTabButton && <HorizontalAddTabButton dimension={dimension} onClick={onAddTab} />}
+            <HorizontalTabOverflowMenu
+              {...dropProps}
+              items={overflowMenuItems}
+              isHidden={!overflowState}
+              onSelectItem={handleSelectTab}
+              selected={selectedTab}
+              dimension={dimension}
+            />
+          </>
+        )}
         <ActiveHorizontalTabSelector
           $appearance={appearance}
           $left={`${underlineLeft}px`}

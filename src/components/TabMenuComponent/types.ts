@@ -6,6 +6,7 @@ export type TabDimension = 'l' | 'm';
 export type FilterTabDimension = 'm' | 's';
 export type VerticalUnderlinePosition = 'left' | 'right';
 export type TabAppearance = 'primary' | 'secondary';
+export type TabAdaptive = 'fill';
 
 export type TabWidthMapProps = {
   tabId: string;
@@ -29,6 +30,7 @@ export interface IconTabProps extends Omit<BaseTabProps, 'dimension'> {}
 export interface HorizontalTabProps extends BaseTabProps {
   /** Скрыть обводку выбранной вкладки */
   hideBorder?: boolean;
+  adaptive?: TabAdaptive;
 }
 export interface VerticalTabProps extends BaseTabProps {
   /** Ширина вкладки */
@@ -79,14 +81,18 @@ export interface TabMenuHorizontalProps
     TabMenuWithAddTabButtonProps {
   /** Внешний вид активной вкладки */
   appearance?: TabAppearance;
+  adaptive?: TabAdaptive;
 }
 
-export interface TabMenuVerticalProps extends TabMenuHorizontalProps {
+export interface TabMenuVerticalProps extends Omit<TabMenuHorizontalProps, 'adaptive'> {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
 }
 
-export interface CardTabMenuHorizontalProps extends Omit<TabMenuHorizontalProps, 'appearance'> {
+export interface CardTabMenuHorizontalProps
+  extends TabMenuBaseProps,
+    TabMenuWithOverflowProps,
+    TabMenuWithAddTabButtonProps {
   /** Скрыть обводку выбранной вкладки */
   hideBorder?: boolean;
 }
