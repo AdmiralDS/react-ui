@@ -4,12 +4,14 @@ import styled, { css } from 'styled-components';
 
 import { typography } from '#src/components/Typography';
 import { BadgeComponent } from '#src/components/Badge';
+import type { Adaptive } from './ContentSwitcherComponent';
 
 export interface ContentSwitcherItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Активная кнопка */
   active?: boolean;
   /** Позволяет добавлять  миксин созданный с помощью styled css  */
   cssMixin?: ReturnType<typeof css>;
+  adaptive?: Adaptive;
 }
 
 const colorMixin = css<{ $active?: boolean; disabled?: boolean }>`
@@ -35,10 +37,17 @@ const colorMixin = css<{ $active?: boolean; disabled?: boolean }>`
   }
 `;
 
+const adaptiveMixin = css`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 const BORDER_RADIUS = 22;
 
 export const ContentSwitcherItemButton = styled.button<{
   $active?: boolean;
+  $adaptive?: Adaptive;
   $cssMixin?: ReturnType<typeof css>;
 }>`
   border: none;
@@ -57,6 +66,7 @@ export const ContentSwitcherItemButton = styled.button<{
   white-space: nowrap;
 
   ${colorMixin};
+  ${({ $adaptive }) => ($adaptive === 'fill' ? adaptiveMixin : '')}
 
   &:hover:not(:disabled) {
     ${({ $active, disabled, theme }) =>
@@ -148,7 +158,15 @@ export const ContentSwitcherItemButton = styled.button<{
 `;
 
 export const ContentSwitcherItem = forwardRef<HTMLButtonElement, ContentSwitcherItemProps>(
-  ({ active, cssMixin, type = 'button', ...props }: ContentSwitcherItemProps, ref) => {
-    return <ContentSwitcherItemButton ref={ref} {...{ type, ...props }} $active={active} $cssMixin={cssMixin} />;
+  ({ active, cssMixin, type = 'button', adaptive, ...props }: ContentSwitcherItemProps, ref) => {
+    return (
+      <ContentSwitcherItemButton
+        ref={ref}
+        {...{ type, ...props }}
+        $adaptive={adaptive}
+        $active={active}
+        $cssMixin={cssMixin}
+      />
+    );
   },
 );
