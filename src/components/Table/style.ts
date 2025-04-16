@@ -54,8 +54,8 @@ export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
-  ${TableContainer}[data-shadow='true'] & {
-    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
+  ${TableContainer}[data-shadow-left='true'] & {
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
   }
 `;
 
@@ -505,7 +505,40 @@ export const Spacer = styled.div`
   transform: translate3d(0px, 0px, 0px);
 `;
 
-export const ShadowDetector = styled.div`
+export const LeftEdge = styled.div`
   display: flex;
   width: 0;
+`;
+
+export const RightEdge = styled.div`
+  display: flex;
+  width: 0;
+`;
+
+const getActionSize = (dimension: TableProps['dimension']) => {
+  switch (dimension) {
+    case 's':
+      return 32;
+    case 'l':
+      return 48;
+    case 'xl':
+      return 56;
+    case 'm':
+    default:
+      return 40;
+  }
+};
+
+export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  .table[data-shadow-right='true'] & {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  display: flex;
+  height: ${({ $dimension }) => getActionSize($dimension)}px;
+  width: ${({ $dimension }) => getActionSize($dimension)}px;
+  background-color: inherit;
 `;

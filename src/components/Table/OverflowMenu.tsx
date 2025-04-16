@@ -20,12 +20,16 @@ const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
   position: sticky;
   right: 0;
   z-index: 5;
-  width: 0;
-  direction: rtl;
+
+  .table[data-shadow-right='true'] & {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+  }
 
   ${({ $showRowsActions }) =>
     !$showRowsActions &&
     css`
+      width: 0;
+      direction: rtl;
       visibility: hidden;
       &:hover {
         visibility: visible;
