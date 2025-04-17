@@ -21,6 +21,7 @@ import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
 import { ResizerWrapper } from './RowWidthResizer';
+import { getActionSize } from './OverflowMenu';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
@@ -424,22 +425,25 @@ export const EmptyMessage = styled(Cell)`
   border: none;
 `;
 
-const getTechColumnsWidth = (
-  dimension: TableProps['dimension'],
-  selectionCol?: boolean,
-  expansionCol?: boolean,
-): number =>
-  (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
-  (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
+const getTechColumnsWidth = (p: {
+  $dimension: TableProps['dimension'];
+  $selectionColumn?: boolean;
+  $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
+}): number =>
+  (p.$selectionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$expansionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$overflowMenuColumn ? getActionSize(p.$dimension) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
   $dimension: TableProps['dimension'];
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
+  width: calc(100% - ${(p) => getTechColumnsWidth(p) + 'px'});
 `;
 
 export const HiddenHeader = styled.div`
@@ -505,31 +509,14 @@ export const Spacer = styled.div`
   transform: translate3d(0px, 0px, 0px);
 `;
 
-export const LeftEdge = styled.div`
+export const Edge = styled.div`
   display: flex;
   width: 0;
+  height: auto;
 `;
-
-export const RightEdge = styled.div`
-  display: flex;
-  width: 0;
-`;
-
-const getActionSize = (dimension: TableProps['dimension']) => {
-  switch (dimension) {
-    case 's':
-      return 32;
-    case 'l':
-      return 48;
-    case 'xl':
-      return 56;
-    case 'm':
-    default:
-      return 40;
-  }
-};
 
 export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
+  display: flex;
   position: sticky;
   right: 0;
   z-index: 5;
@@ -537,8 +524,7 @@ export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
   }
 
-  display: flex;
-  height: ${({ $dimension }) => getActionSize($dimension)}px;
+  min-height: ${({ $dimension }) => getActionSize($dimension) - 1}px;
   width: ${({ $dimension }) => getActionSize($dimension)}px;
   background-color: inherit;
 `;

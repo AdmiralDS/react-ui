@@ -29,8 +29,7 @@ import {
   TableContainer,
   HiddenHeader,
   DragCell,
-  LeftEdge,
-  RightEdge,
+  Edge,
   ActionMock,
 } from './style';
 import { FixedSizeBody, DynamicSizeBody } from './virtualScroll';
@@ -625,6 +624,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           <HeaderCellsWrapper
             $expansionColumn={displayRowExpansionColumn}
             $selectionColumn={displayRowSelectionColumn}
+            $overflowMenuColumn={showRowsActions}
             $dimension={dimension}
           >
             {stickyColumns.length > 0 &&
@@ -650,7 +650,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <>
-                <LeftEdge ref={leftEdgeRef} />
+                <Edge ref={leftEdgeRef} />
                 <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                   {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
                   {displayRowExpansionColumn && (
@@ -685,7 +685,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
             {showRowsActions && (
               <>
                 <ActionMock $dimension={dimension} />
-                <RightEdge ref={rightEdgeRef} />
+                <Edge ref={rightEdgeRef} />
               </>
             )}
           </Header>

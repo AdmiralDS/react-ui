@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { TableProps } from '#src/components/Table';
 import styled, { css } from 'styled-components';
 
-const getActionSize = (dimension: TableProps['dimension']) => {
+export const getActionSize = (dimension: TableProps['dimension']) => {
   switch (dimension) {
     case 's':
       return 32;
