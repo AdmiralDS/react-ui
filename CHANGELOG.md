@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.45.0](https://github.com/AdmiralDS/react-ui/compare/v8.44.1...v8.45.0) (2025-04-18)
+
+
+### Features
+
+* **ContentSwitcher:** add adaptive fill ([d3a4966](https://github.com/AdmiralDS/react-ui/commit/d3a49664c30752169b04d8eecad2de0ebce0c302))
+* **Table:** [#1761](https://github.com/AdmiralDS/react-ui/issues/1761) OverflowMenu и иконки одиночных действий вынесены в отдельный столбец, визуально выделяемый тенью ([15829b7](https://github.com/AdmiralDS/react-ui/commit/15829b770a14fa21c3096a2fb6ed2f715ae7a945))
+
 ### [8.44.1](https://github.com/AdmiralDS/react-ui/compare/v8.44.0...v8.44.1) (2025-04-14)
 
 
