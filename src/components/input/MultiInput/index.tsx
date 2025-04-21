@@ -11,6 +11,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, InputStatus } from '../types';
 
 type DataAttributes = { [dataAttibute: `data-${string}`]: string | boolean };
+export type ContainerProps = React.ComponentProps<typeof Container>;
 
 const nothing = () => {};
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
@@ -51,13 +52,13 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  //* Список кнопок, при нажатии на которые добавляются значения, по умолчанию Enter */
+  /** Список кнопок, при нажатии на которые добавляются значения, по умолчанию Enter */
   createActivateButtonList?: string[];
 
-  //* Функция которая выполняется при нажатии на одну из кнопок из createActivateButtonList */
+  /** Функция которая выполняется при нажатии на одну из кнопок из createActivateButtonList */
   onInputComplete?: () => void;
 
-  //* Функция которая выполняется при нажатии на кнопку очистки поля при активном displayClearIcon */
+  /** Функция которая выполняется при нажатии на кнопку очистки поля при активном displayClearIcon */
   onClearOptions?: () => void;
 
   /** Конфиг функция пропсов для контейнера. На вход получает начальный набор пропсов, на
@@ -75,7 +76,7 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
    * поиск последнего чипа и нажатие на кнопку удалить */
   onBackspaceKeyDown?: typeof pressDeleteButtonOnLastChip;
 
-  children: React.ReactNode;
+  // children: React.ReactNode;
 }
 
 export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
