@@ -1,6 +1,4 @@
-import type { CSSProperties, HTMLAttributes } from 'react';
-import * as React from 'react';
-import { useRef, useState } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { IconButton } from '#src/components/IconButton';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { ReactComponent as SettingsOutline } from '@admiral-ds/icons/build/system/SettingsOutline.svg';
@@ -21,17 +19,17 @@ const StyledIconButton = styled(IconButton)`
   margin-left: 4px;
 `;
 
-export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ColumnsButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   menu?: React.ReactNode;
   renderMenu?: (obj: { closeMenu: () => void }) => React.ReactNode;
   buttonDimension?: 's' | 'l';
   disabled?: boolean;
   dropContainerCssMixin?: ReturnType<typeof css>;
   dropContainerClassName?: string;
-  dropContainerStyle?: CSSProperties;
+  dropContainerStyle?: React.CSSProperties;
 }
 
-export const SettingsButton = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
+export const SettingsButton = forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
     {
       menu,

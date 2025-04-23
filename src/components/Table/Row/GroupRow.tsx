@@ -9,7 +9,7 @@ import {
   Filler,
   DragCell,
 } from '#src/components/Table/style';
-import * as React from 'react';
+
 import type { TableRow } from '#src/components/Table';
 import { CheckboxField } from '#src/components/form';
 import type { RegularRowProps } from '#src/components/Table/Row/RegularRow';

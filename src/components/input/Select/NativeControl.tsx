@@ -1,12 +1,11 @@
-import type { SelectHTMLAttributes } from 'react';
-import { forwardRef } from 'react';
-import * as React from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
+
 import styled from 'styled-components';
 import { keyboardKey } from '../../common/keyboardKey';
 import type { IConstantOption } from '#src/components/input/Select/types';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-interface NativeSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<IConstantOption>;
 }
 
@@ -25,9 +24,9 @@ const NativeSelect = styled.select`
 
 export const NativeControl = forwardRef<HTMLSelectElement, NativeSelectProps>(
   ({ options, ...props }: NativeSelectProps, ref) => {
-    const selectRef = React.useRef<HTMLSelectElement>(null);
+    const selectRef = useRef<HTMLSelectElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
         const code = keyboardKey.getCode(e);
         if (!code) return;

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import type { CSSProperties, ReactNode } from 'react';
 import type { css } from 'styled-components';
 
 import { FloatingButton } from '#src/components/FloatingButton';
@@ -13,7 +12,7 @@ type Dimension = 'm' | 'xl';
 
 export interface FloatingButtonMenuProps extends FloatingButtonProps {
   /** Иконка для размещения в основной кнопке */
-  icon: ReactNode;
+  icon: React.ReactNode;
   /** Состояние видимости меню */
   isOpen?: boolean;
   /** Обработчик события на изменение видимости меню */
@@ -29,7 +28,7 @@ export interface FloatingButtonMenuProps extends FloatingButtonProps {
   /** Позволяет добавлять класс на контейнер компонента  */
   containerClassName?: string;
   /** Позволяет добавлять стили на контейнер компонента  */
-  containerStyle?: CSSProperties;
+  containerStyle?: React.CSSProperties;
 }
 
 export const FloatingButtonMenu = ({

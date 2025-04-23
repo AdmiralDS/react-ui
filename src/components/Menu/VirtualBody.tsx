@@ -1,7 +1,7 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const Spacer = styled.div`
   display: flex;
@@ -52,8 +52,8 @@ export const VirtualBody = ({
   selected,
   onRenderItem,
 }: VirtualBodyProps) => {
-  const [scrollTop, setScrollTop] = React.useState(0);
-  const [partition, setPartition] = React.useState<PartitionExt>({
+  const [scrollTop, setScrollTop] = useState(0);
+  const [partition, setPartition] = useState<PartitionExt>({
     startIndex: 0,
     endIndex: rowCount,
     topPadding: '',
@@ -62,7 +62,7 @@ export const VirtualBody = ({
   });
   const prevValue = usePrevious<PreviousValues>({ activeId });
 
-  const handleScroll = React.useCallback(
+  const handleScroll = useCallback(
     (e: Event) => {
       requestAnimationFrame(() => {
         if (e.target) setScrollTop((e.target as HTMLDivElement).scrollTop);
@@ -71,7 +71,7 @@ export const VirtualBody = ({
     [scrollContainerRef],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     setScrollTop(scrollContainer?.scrollTop || 0);
 
@@ -79,14 +79,14 @@ export const VirtualBody = ({
     return () => scrollContainer?.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (partition.needAddListener) {
       setTimeout(() => scrollContainerRef?.current?.addEventListener('scroll', handleScroll));
       setPartition({ ...partition, needAddListener: false });
     }
   }, [partition, scrollContainerRef]);
 
-  const calcPartition = React.useCallback(
+  const calcPartition = useCallback(
     (start: number) => {
       const itemCount = model.length;
 
@@ -104,13 +104,13 @@ export const VirtualBody = ({
     [itemHeight, aheadItemsCount, model, rowCount],
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const start = Math.floor(scrollTop / itemHeight - aheadItemsCount);
     const partition: PartitionExt = { ...calcPartition(start), needAddListener: false };
     setPartition(partition);
   }, [scrollTop, calcPartition]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!activeId || !prevValue) return;
     const prevActiveId = prevValue.activeId;
 
@@ -126,7 +126,7 @@ export const VirtualBody = ({
     }
   }, [activeId, partition, calcPartition, scrollContainerRef]);
 
-  const visibleChildren = React.useMemo(() => {
+  const visibleChildren = useMemo(() => {
     const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
 
     return visibleItems.map((item, index) => {

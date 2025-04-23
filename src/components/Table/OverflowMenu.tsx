@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { TableProps } from '#src/components/Table';
+import { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 export const getActionSize = (dimension: TableProps['dimension']) => {
@@ -78,7 +78,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   headerHeight,
   ...props
 }) => {
-  const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
+  const oveflowMenuRef = useRef<HTMLDivElement>(null);
 
   const handleVisibilityChange = (isVisible: boolean) => {
     if (!showRowsActions) {
@@ -90,7 +90,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleIntersection([entry]: IntersectionObserverEntry[]) {
       if (!entry.isIntersecting) {
         /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая

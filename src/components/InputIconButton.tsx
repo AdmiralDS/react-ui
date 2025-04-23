@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 export interface AnyIconProps extends React.SVGProps<SVGSVGElement> {
