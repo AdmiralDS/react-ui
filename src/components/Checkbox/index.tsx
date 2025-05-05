@@ -1,10 +1,11 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef, useLayoutEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { keyboardKey } from '../common/keyboardKey';
+import { refSetter } from '../common/utils/refSetter';
 
 export * from './CheckboxDimension';
 
@@ -101,17 +102,6 @@ export const Background = styled.div<{ $error?: boolean }>`
   }
 `;
 
-const indeterminateCss = css<{ $indeterminate?: boolean }>`
-  &:not(:checked) + ${Background} {
-    background-color: ${({ theme, $indeterminate }) =>
-      $indeterminate && `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
-    border: ${({ $indeterminate }) => $indeterminate && 'none'};
-    > * {
-      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
-    }
-  }
-`;
-
 const actionCss = css`
   content: '';
   position: absolute;
@@ -149,6 +139,24 @@ const disabledCss = css`
   }
 `;
 
+const disabledIndeterminateBackgroundCss = css`
+  background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
+  & *[fill^='#'] {
+    fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  }
+  border: none;
+  > * {
+    display: block;
+  }
+`;
+const indeterminateBackgroundCss = css`
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  border: none;
+  > * {
+    display: block;
+  }
+`;
+
 const disabledCheckedBackgroundCss = css`
   background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   border: none;
@@ -162,7 +170,7 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
-const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
+const Input = styled.input<{ $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -186,6 +194,22 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   &:checked + ${Background} {
     ${(props) => (props.readOnly ? disabledCheckedBackgroundCss : checkedBackgroundCss)}
   }
+  &:checked:disabled + ${Background} {
+    ${disabledCheckedBackgroundCss}
+  }
+
+  &:indeterminate + ${Background} {
+    ${(props) => (props.readOnly ? disabledIndeterminateBackgroundCss : indeterminateBackgroundCss)}
+  }
+  &:indeterminate:disabled + ${Background} {
+    ${disabledIndeterminateBackgroundCss}
+  }
+
+  &:not(:checked):not(:indeterminate) + ${Background} {
+    > * {
+      display: none;
+    }
+  }
 
   &:disabled {
     cursor: not-allowed;
@@ -194,17 +218,11 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 
   ${(props) => !props.readOnly && props.$hovered && hoveredCss}
 
-  ${indeterminateCss}
-
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
 
   &:active:not(:disabled) {
     ${activeCss}
-  }
-
-  &:checked:disabled + ${Background} {
-    ${disabledCheckedBackgroundCss}
   }
 
   &:focus-visible {
@@ -214,7 +232,15 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
 `;
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, error, ...props }, ref) => {
+  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate = false, error, ...props }, ref) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useLayoutEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.indeterminate = indeterminate;
+      }
+    }, [indeterminate]);
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -229,12 +255,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
     return (
       <Container $dimension={dimension} $disabled={disabled} $readOnly={readOnly} className={className}>
         <Input
-          ref={ref}
+          ref={refSetter(ref, inputRef)}
           disabled={disabled}
           readOnly={readOnly}
           {...props}
           type="checkbox"
-          $indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
           data-hovered={hovered}
           $hovered={hovered}
