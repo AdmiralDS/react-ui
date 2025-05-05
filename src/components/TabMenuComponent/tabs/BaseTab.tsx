@@ -10,7 +10,7 @@ import {
   HORIZONTAL_TAB_PADDING_M,
 } from '#src/components/TabMenuComponent/constants';
 
-export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimension; $width: string | number }>`
+export const BaseTab = styled.button<{ $selected?: boolean; $dimension: TabDimension; $width?: string | number }>`
   box-sizing: border-box;
   appearance: none;
   border: none;
