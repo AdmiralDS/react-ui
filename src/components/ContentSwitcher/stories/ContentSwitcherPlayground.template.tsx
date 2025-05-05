@@ -25,15 +25,21 @@ const list = [
   { title: 'Disabled button', disabled: true },
 ];
 
-export const ContentSwitcherPlaygroundTemplate = ({ dimension, className, ...props }: ContentSwitcherProps) => {
+export const ContentSwitcherPlaygroundTemplate = ({
+  dimension,
+  className,
+  adaptive,
+  ...props
+}: ContentSwitcherProps) => {
   const [active, setActive] = React.useState(0);
 
   return (
     <>
-      <ContentSwitcher dimension={dimension} className={className} {...props}>
+      <ContentSwitcher dimension={dimension} adaptive={adaptive} className={className} {...props}>
         {list.map((item, index) => (
           <ContentSwitcherItem
             key={index}
+            adaptive={adaptive}
             active={index === active}
             onClick={() => setActive(index)}
             disabled={item.disabled}

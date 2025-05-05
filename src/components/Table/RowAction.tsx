@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { IconPlacement } from '#src/components/IconPlacement';
+import { forwardRef } from 'react';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
 
@@ -7,7 +7,7 @@ export interface RowActionProps extends React.ButtonHTMLAttributes<HTMLButtonEle
   dimension?: Dimension;
 }
 
-export const RowAction = React.forwardRef<HTMLButtonElement, RowActionProps>(({ dimension = 'm', ...props }, ref) => {
+export const RowAction = forwardRef<HTMLButtonElement, RowActionProps>(({ dimension = 'm', ...props }, ref) => {
   return (
     <IconPlacement
       ref={ref}

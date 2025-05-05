@@ -1,4 +1,3 @@
-import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 
 import { refSetter } from '../common/utils/refSetter';
@@ -29,7 +28,7 @@ export interface TagVisualProps {
    */
   statusViaBackground?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
 }
 
 export interface TagSizeProps {
@@ -41,14 +40,14 @@ export interface TagSizeProps {
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
-  as?: ElementType;
+  as?: React.ElementType;
 }
 
-export interface TagProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
+export interface TagProps extends React.HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
 
 export interface TagInternalProps {
   /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
-  statusIcon?: ReactNode;
+  statusIcon?: React.ReactNode;
 }
 
 export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(

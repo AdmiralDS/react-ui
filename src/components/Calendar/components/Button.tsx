@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
 import { IconPlacement } from '#src/components/IconPlacement';
+import { forwardRef } from 'react';
 
 type ButtonProps = {
   onMouseDown: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -10,7 +10,7 @@ type ButtonProps = {
   type: 'left' | 'right';
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ onMouseDown, disabled, type }, ref) => (
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ onMouseDown, disabled, type }, ref) => (
   <IconPlacement
     dimension="lSmall"
     ref={ref}

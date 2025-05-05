@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, cloneElement, Children } from 'react';
-import type { ReactElement } from 'react';
 
 type Status = 'entering' | 'entered' | 'exiting' | 'exited';
 
@@ -133,7 +132,7 @@ export const Transition = ({
     <>
       {typeof children === 'function'
         ? children(status, childProps)
-        : cloneElement(Children.only(children) as ReactElement, childProps)}
+        : cloneElement(Children.only(children) as React.ReactElement, childProps)}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode, useMemo, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import type {
@@ -28,7 +28,7 @@ interface TabContentProps extends VerticalTabProps {
   text: string;
   badge?: number;
   disabled?: boolean;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   appearance: TabAppearance;
 }
 

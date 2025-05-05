@@ -29,7 +29,8 @@ import {
   TableContainer,
   HiddenHeader,
   DragCell,
-  ShadowDetector,
+  Edge,
+  ActionMock,
 } from './style';
 import { FixedSizeBody, DynamicSizeBody } from './virtualScroll';
 import type {
@@ -127,8 +128,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const bodyRef = React.useRef<HTMLDivElement>(null);
     const stickyColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
     const normalColumnsWrapperRef = React.useRef<HTMLDivElement>(null);
-    const shadowDetectorRef = React.useRef<HTMLDivElement>(null);
     const fillerRef = React.useRef<HTMLDivElement>(null);
+    const leftEdgeRef = React.useRef<HTMLDivElement>(null);
+    const rightEdgeRef = React.useRef<HTMLDivElement>(null);
 
     const groupToRowsMap = rowList.reduce<Group>((acc: Group, row) => {
       if (typeof row.groupRows !== 'undefined') {
@@ -272,33 +274,59 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       }
     }, []);
 
-    // scroll-triggered shadow animation via IntersectionObserver
+    // scroll-triggered shadow animation via IntersectionObserver for left sticky columns
     // TODO: research ways to implement scroll-driven animation via css and polyfill
     React.useLayoutEffect(() => {
       const table = tableRef.current;
-      const shadowDetector = shadowDetectorRef.current;
+      const leftEdge = leftEdgeRef.current;
       const enableShadow =
         stickyColumns.length > 0 || displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable;
 
       function handleIntersection([entry]: IntersectionObserverEntry[]) {
         if (table) {
           if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
-            table.setAttribute('data-shadow', 'false');
+            table.setAttribute('data-shadow-left', 'false');
           } else {
-            table.setAttribute('data-shadow', 'true');
+            table.setAttribute('data-shadow-left', 'true');
           }
         }
       }
 
-      if (table && shadowDetector && enableShadow) {
+      if (table && leftEdge && enableShadow) {
         const observer = new IntersectionObserver(handleIntersection, {
           root: table,
           threshold: [0, 1.0],
         });
-        observer.observe(shadowDetector);
+        observer.observe(leftEdge);
         return () => observer.disconnect();
       }
     }, [stickyColumns, displayRowExpansionColumn, displayRowSelectionColumn, rowsDraggable]);
+
+    // scroll-triggered shadow animation via IntersectionObserver for right sticky column
+    // TODO: research ways to implement scroll-driven animation via css and polyfill
+    React.useLayoutEffect(() => {
+      const table = tableRef.current;
+      const rightEdge = rightEdgeRef.current;
+
+      function handleIntersection([entry]: IntersectionObserverEntry[]) {
+        if (table) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
+            table.setAttribute('data-shadow-right', 'false');
+          } else {
+            table.setAttribute('data-shadow-right', 'true');
+          }
+        }
+      }
+
+      if (table && rightEdge && showRowsActions) {
+        const observer = new IntersectionObserver(handleIntersection, {
+          root: table,
+          threshold: [0, 1.0],
+        });
+        observer.observe(rightEdge);
+        return () => observer.disconnect();
+      }
+    }, [showRowsActions]);
 
     const calcGroupCheckStatus = (groupInfo: GroupInfo) => {
       const indeterminate =
@@ -581,7 +609,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     const renderHiddenHeader = () => {
       return (
         <HiddenHeader ref={hiddenHeaderRef}>
-          {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable) && (
+          {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable || showRowsActions) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
               {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
@@ -590,11 +618,13 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
                   <CheckboxField dimension={checkboxDimension} />
                 </CheckboxCell>
               )}
+              {showRowsActions && <ActionMock $dimension={dimension} />}
             </StickyWrapper>
           )}
           <HeaderCellsWrapper
             $expansionColumn={displayRowExpansionColumn}
             $selectionColumn={displayRowSelectionColumn}
+            $overflowMenuColumn={showRowsActions}
             $dimension={dimension}
           >
             {stickyColumns.length > 0 &&
@@ -608,7 +638,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     return (
       <TableContainer
         ref={refSetter(ref, tableRef)}
-        data-shadow={false}
+        data-shadow-left={false}
+        data-shadow-right={false}
         data-borders={showBorders}
         data-dragging={false}
         {...props}
@@ -619,7 +650,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           <Header $dimension={dimension} $greyHeader={greyHeader} ref={headerRef} className="tr">
             {(displayRowSelectionColumn || displayRowExpansionColumn || stickyColumns.length > 0 || rowsDraggable) && (
               <>
-                <ShadowDetector ref={shadowDetectorRef} />
+                <Edge ref={leftEdgeRef} />
                 <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
                   {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
                   {displayRowExpansionColumn && (
@@ -651,6 +682,12 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
               {columnList.map((col, index) => (col.sticky ? null : renderHeaderCell(col as Column, index)))}
             </NormalWrapper>
             <Filler ref={fillerRef} />
+            {showRowsActions && (
+              <>
+                <ActionMock $dimension={dimension} />
+                <Edge ref={rightEdgeRef} />
+              </>
+            )}
           </Header>
         </HeaderWrapper>
         {renderBody()}

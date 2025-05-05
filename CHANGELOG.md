@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.45.1](https://github.com/AdmiralDS/react-ui/compare/v8.45.0...v8.45.1) (2025-04-23)
+
+## [8.45.0](https://github.com/AdmiralDS/react-ui/compare/v8.44.1...v8.45.0) (2025-04-18)
+
+
+### Features
+
+* **ContentSwitcher:** add adaptive fill ([d3a4966](https://github.com/AdmiralDS/react-ui/commit/d3a49664c30752169b04d8eecad2de0ebce0c302))
+* **Table:** [#1761](https://github.com/AdmiralDS/react-ui/issues/1761) OverflowMenu и иконки одиночных действий вынесены в отдельный столбец, визуально выделяемый тенью ([15829b7](https://github.com/AdmiralDS/react-ui/commit/15829b770a14fa21c3096a2fb6ed2f715ae7a945))
+
+### [8.44.1](https://github.com/AdmiralDS/react-ui/compare/v8.44.0...v8.44.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* **Select:** Исправлена ошибка в подгрузке данных при scroll, обновлен пример в storybook ([bda6129](https://github.com/AdmiralDS/react-ui/commit/bda61294eefd45a9e0f980c44f980d3ca90bae39)), closes [#1754](https://github.com/AdmiralDS/react-ui/issues/1754)
+* **Select:** Исправлена ошибка отображения chip для  размера S ([640bccc](https://github.com/AdmiralDS/react-ui/commit/640bccca87421e3c0a1795e85b2fd7cc951d4f92)), closes [#1757](https://github.com/AdmiralDS/react-ui/issues/1757)
+
 ## [8.44.0](https://github.com/AdmiralDS/react-ui/compare/v8.43.0...v8.44.0) (2025-04-08)
 
 

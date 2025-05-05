@@ -103,6 +103,8 @@ export interface TabMenuHorizontalAdaptiveFillProps extends TabMenuBaseProps {
 export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
 }
 
 export interface CardTabMenuHorizontalProps extends Omit<TabMenuHorizontalProps, 'appearance'> {}

@@ -915,7 +915,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={selectedValue}
-              onActivateItem={(id) => setActiveItem(id || '')}
+              onActivateItem={(id) => setActiveItem(id)}
               onSelectItem={handleOptionSelect}
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}

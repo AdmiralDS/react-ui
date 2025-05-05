@@ -1,5 +1,4 @@
-import * as React from 'react';
-import type { ElementType } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import type { ComponentName } from '@admiral-ds/flags';
@@ -39,22 +38,22 @@ const CountryCode = styled.span`
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 `;
 
-export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>((props, ref) => {
+export const CountryBlock = forwardRef<HTMLDivElement, CountryBlockProps>((props, ref) => {
   const { dimension, value, code, name, ...otherProps }: CountryBlockProps = props;
 
-  const wrapperRef = React.useRef<HTMLDivElement>(null);
-  const textRef = React.useRef<HTMLElement>(null);
-  const [overflow, setOverflow] = React.useState(false);
-  const [tooltipVisible, setTooltipVisible] = React.useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLElement>(null);
+  const [overflow, setOverflow] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const element = textRef.current;
     if (element && checkOverflow(element) !== overflow) {
       setOverflow(checkOverflow(element));
     }
   }, [tooltipVisible, setOverflow]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     function show() {
       setTooltipVisible(true);
     }
@@ -76,7 +75,7 @@ export const CountryBlock = React.forwardRef<HTMLDivElement, CountryBlockProps>(
     }
   }, [setTooltipVisible]);
 
-  const SvgFlag = (FlagsPack as { [key: ComponentName]: ElementType })[name];
+  const SvgFlag = (FlagsPack as { [key: ComponentName]: React.ElementType })[name];
 
   return (
     <>

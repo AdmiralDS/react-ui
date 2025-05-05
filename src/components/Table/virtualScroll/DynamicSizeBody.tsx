@@ -1,5 +1,4 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
-import type { ReactNode, RefObject } from 'react';
 
 import { Body, Spacer } from '../style';
 import type { RowId } from '../types';
@@ -23,10 +22,10 @@ interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   headerHeight: number;
   renderAhead?: number;
   rowList: any[];
-  renderRow: (row: any, index: number) => ReactNode;
-  renderEmptyMessage?: () => ReactNode;
+  renderRow: (row: any, index: number) => React.ReactNode;
+  renderEmptyMessage?: () => React.ReactNode;
   estimatedRowHeight?: (index: number) => number;
-  tableRef: RefObject<HTMLElement>;
+  tableRef: React.RefObject<HTMLElement>;
 }
 
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(

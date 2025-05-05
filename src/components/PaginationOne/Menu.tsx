@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled from 'styled-components';
 
 import { typography } from '#src/components/Typography';
@@ -8,6 +7,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '../common/utils/refSetter';
+import { forwardRef, useMemo } from 'react';
 
 type PaginationOneMenuButtonDimension = 'm' | 's';
 
@@ -80,7 +80,7 @@ export interface MenuButtonProps
   dropMenuDataAttributes?: Record<string, any>;
 }
 
-export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
+export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
     {
       children,
@@ -129,7 +129,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       onForwardCycleApprove,
       onBackwardCycleApprove,
     };
-    const model = React.useMemo(() => {
+    const model = useMemo(() => {
       return options.map((item) => {
         const id = item.toString();
 

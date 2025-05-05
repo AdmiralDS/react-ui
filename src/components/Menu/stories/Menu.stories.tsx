@@ -20,6 +20,7 @@ import { MenuActionsTwoButtonsTemplate } from './MenuActionsTwoButtons.template'
 import { MenuActionsAddUserValueTemplate } from './MenuActionsAddUserValue.template';
 import { MenuCheckboxGroupTemplate } from './MenuCheckboxGroup.template';
 import { MenuWithPreselectTemplate } from './MenuWithPreselect.template';
+import { MenuWithSeparatorTemplate } from './MenuWithSeparator.template';
 
 // Imports of text sources
 import MenuLargeNumberOfItemsRaw from './MenuLargeNumberOfItems.template?raw';
@@ -38,6 +39,7 @@ import MenuActionsTwoButtonsRaw from './MenuActionsTwoButtons.template?raw';
 import MenuActionsAddUserValueRaw from './MenuActionsAddUserValue.template?raw';
 import MenuCheckboxGroupRaw from './MenuCheckboxGroup.template?raw';
 import MenuWithPreselectRaw from './MenuWithPreselect.template?raw';
+import MenuWithSeparatorRaw from './MenuWithSeparator.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -386,5 +388,23 @@ export const MenuWithPreselectExample = {
     },
   },
   name: 'Меню c состоянием preselect',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с разделителями">
+const MenuWithSeparatorStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuWithSeparatorTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const MenuWithSeparatorExample = {
+  render: MenuWithSeparatorStory,
+  parameters: {
+    docs: {
+      source: {
+        code: MenuWithSeparatorRaw,
+      },
+    },
+  },
+  name: 'Пример с разделителями',
 };
 //</editor-fold>

@@ -7,6 +7,7 @@ import { ContentSwitcherExampleTemplate } from './ContentSwitcherExample.templat
 import { ContentSwitcherWithIconTemplate } from './ContentSwitcherWithIcon.template';
 import { ContentSwitcherIconOnlyTemplate } from './ContentSwitcherIconOnly.template';
 import { ContentSwitcherWithBadgeTemplate } from './ContentSwitcherWithBadge.template';
+import { ContentSwitcherAdaptiveFillTemplate } from './ContentSwitcherAdaptiveFill.template';
 
 // Imports of text sources
 import ContentSwitcherPlaygroundRaw from './ContentSwitcherPlayground.template?raw';
@@ -14,6 +15,7 @@ import ContentSwitcherExampleRaw from './ContentSwitcherExample.template?raw';
 import ContentSwitcherWithIconRaw from './ContentSwitcherWithIcon.template?raw';
 import ContentSwitcherIconOnlyRaw from './ContentSwitcherIconOnly.template?raw';
 import ContentSwitcherWithBadgeRaw from './ContentSwitcherWithBadge.template?raw';
+import ContentSwitcherAdaptiveFillRaw from './ContentSwitcherAdaptiveFill.template?raw';
 
 export default {
   title: 'Admiral-2.1/ContentSwitcher',
@@ -67,6 +69,10 @@ export default {
     },
     appearance: {
       options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
+    adaptive: {
+      options: ['fill'],
       control: { type: 'radio' },
     },
     children: {
@@ -168,4 +174,21 @@ export const ContentSwitcherWithBadge = {
   },
 
   name: 'ContentSwitcher с Badge',
+};
+
+//<editor-fold desc="ContentSwitcher adaptive fill">
+const ContentSwitcherAdaptiveFillStory: StoryFn<typeof ContentSwitcher> = () => <ContentSwitcherAdaptiveFillTemplate />;
+
+export const ContentSwitcherAdaptiveFill = {
+  render: ContentSwitcherAdaptiveFillStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ContentSwitcherAdaptiveFillRaw,
+      },
+    },
+  },
+
+  name: 'ContentSwitcher adaptive fill',
 };

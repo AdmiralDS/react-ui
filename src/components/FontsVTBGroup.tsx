@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import VTBGroupUI_SemiBold_ttf from '@admiral-ds/fonts/VTBGroupUI-SemiBold.ttf';
 import VTBGroupUI_Medium_otf from '@admiral-ds/fonts/VTBGroupUI-Medium.otf';
 import VTBGroupUI_Regular_otf from '@admiral-ds/fonts/VTBGroupUI-Regular.otf';

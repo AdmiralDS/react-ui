@@ -1,10 +1,11 @@
 import type { IChipProps, IConstantOption } from '#src/components/input/Select/types';
-import * as React from 'react';
+
 import { ContentTooltip, StyledChip } from './styled';
 import { passDataAttributes } from '#src/components/common/utils/splitDataAttributes';
+import { isValidElement, useCallback } from 'react';
 
 const chipIsChipMeta = (chip: IChipProps | React.ReactNode): chip is IChipProps =>
-  typeof chip === 'object' && chip !== null && !React.isValidElement(chip);
+  typeof chip === 'object' && chip !== null && !isValidElement(chip);
 
 const getChipMeta = (
   { value, disabled, renderChip, ...restProps }: IConstantOption,
@@ -29,7 +30,7 @@ interface InfoChipProps {
 }
 
 export const InfoChip = ({ className, option, disabled, readOnly, onClick, onChipRemove }: InfoChipProps) => {
-  const renderContentTooltip = React.useCallback(
+  const renderContentTooltip = useCallback(
     (children: React.ReactNode) => () => <ContentTooltip>{children}</ContentTooltip>,
     [],
   );

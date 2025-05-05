@@ -1,10 +1,10 @@
 import { InfoChip } from './InfoChip';
 import { CounterChip } from './CounterChip';
 import { ShadowCounterChip } from './styled';
-import * as React from 'react';
+
 import type { IConstantOption } from '#src/components/input/Select/types';
 import styled from 'styled-components';
-import type { HTMLAttributes } from 'react';
+import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface CommonChipProps {
@@ -16,7 +16,7 @@ export interface CommonChipProps {
   onChipClick?: (evt: React.MouseEvent) => void;
 }
 
-interface ChipBoxProps extends CommonChipProps, HTMLAttributes<HTMLDivElement> {
+interface ChipBoxProps extends CommonChipProps, React.HTMLAttributes<HTMLDivElement> {
   option: IConstantOption;
   childrenOptions: Array<IConstantOption>;
 }
@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
   display: flex;
 `;
 
-export const ChipBox = React.forwardRef<HTMLDivElement, ChipBoxProps>(
+export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
   (
     {
       option,
@@ -39,10 +39,10 @@ export const ChipBox = React.forwardRef<HTMLDivElement, ChipBoxProps>(
     }: ChipBoxProps,
     ref,
   ) => {
-    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
-    const [visible, setVisible] = React.useState<boolean>(false);
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const [visible, setVisible] = useState<boolean>(false);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
       function handleIntersection(entries: IntersectionObserverEntry[]) {
         if (entries[0].isIntersecting && !visible) {
           setVisible(true);
