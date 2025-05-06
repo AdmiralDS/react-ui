@@ -45,8 +45,11 @@ const backGroundColorMixin = css<{ $status?: NotificationItemStatus }>`
   }};
 `;
 
-const borderColorMixin = css<{ $status?: NotificationItemStatus }>`
-  border-color: ${({ theme, $status }) => {
+const borderColorMixin = css<{ $status?: NotificationItemStatus; $hideBorder?: boolean }>`
+  border-color: ${({ theme, $status, $hideBorder }) => {
+    if ($hideBorder) {
+      return 'transparent';
+    }
     switch ($status) {
       case 'warning':
         return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
@@ -63,6 +66,7 @@ const borderColorMixin = css<{ $status?: NotificationItemStatus }>`
 
 const NotificationItemWrapper = styled.div<{
   $status?: NotificationItemStatus;
+  $hideBorder?: boolean;
   $displayStatusIcon: boolean;
   $isClosable: boolean;
 }>`
@@ -133,6 +137,8 @@ const nothing = () => {};
 export interface NotificationItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
   /** Статус notification */
   status?: NotificationItemStatus;
+  /** Скрыть обводку notification */
+  hideBorder?: boolean;
   /** Переключатель видимости иконки "Close" */
   isClosable?: boolean;
   /** Закрытие notification */
@@ -154,6 +160,7 @@ export const NotificationItem = forwardRef<HTMLDivElement, NotificationItemProps
   (
     {
       status = 'info',
+      hideBorder = false,
       displayStatusIcon = false,
       isClosable = false,
       onClose,
@@ -180,6 +187,7 @@ export const NotificationItem = forwardRef<HTMLDivElement, NotificationItemProps
         role={isAlert ? 'alert' : 'status'}
         aria-live={isAlert ? 'assertive' : 'polite'}
         $status={status}
+        $hideBorder={hideBorder}
         $displayStatusIcon={displayStatusIcon}
         $isClosable={isClosable}
       >
