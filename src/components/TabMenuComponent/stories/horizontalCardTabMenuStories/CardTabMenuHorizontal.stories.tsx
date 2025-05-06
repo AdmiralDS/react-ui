@@ -6,12 +6,14 @@ import { CardTabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/
 import { CardTabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalWithAddButtonTemplate';
 import { CardTabMenuHorizontalLeadingGapTemplate } from '#src/components/TabMenuComponent/stories/horizontalCardTabMenuStories/CardTabMenuHorizontalLeadingGapTemplate';
 import { CardTabMenuHorizontalWithoutBorderTemplate } from './CardTabMenuHorizontalWithoutBorderTemplate';
+import { CardTabMenuHorizontalAdaptiveFillTemplate } from './CardTabMenuHorizontalAdaptiveFillTemplate';
 
 // Imports of text sources
 import HorizontalCardTabMenuRaw from './CardTabMenuHorizontalTemplate?raw';
 import HorizontalCardTabMenuWithAddButtonRaw from './CardTabMenuHorizontalWithAddButtonTemplate?raw';
 import HorizontalCardTabMenuLeadingGapRaw from './CardTabMenuHorizontalLeadingGapTemplate?raw';
 import CardTabMenuHorizontalWithoutBorderRaw from './CardTabMenuHorizontalWithoutBorderTemplate?raw';
+import CardTabMenuHorizontalAdaptiveFillRaw from './CardTabMenuHorizontalAdaptiveFillTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/Tabs/CardTabMenuHorizontal',
@@ -87,6 +89,9 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    adaptive: {
+      control: false,
+    },
   },
 } as Meta<typeof CardTabMenuHorizontal>;
 
@@ -132,7 +137,7 @@ export const HorizontalCardTabMenuLeadingGapExample = {
 };
 //</editor-fold>
 
-//<editor-fold desc="HorizontalCardTabMenuWithAddButtonWithAddButton.">
+//<editor-fold desc="HorizontalCardTabMenuWithAddButton.">
 const HorizontalCardTabMenuWithAddButtonStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -153,7 +158,7 @@ export const HorizontalCardTabMenuWithAddButtonExample = {
 };
 //</editor-fold>
 
-//<editor-fold desc="HorizontalCardTabMenuWithAddButtonWithAddButton.">
+//<editor-fold desc="HorizontalCardTabMenuWithoutBorder.">
 const CardTabMenuHorizontalWithoutBorderStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalWithoutBorderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -171,5 +176,26 @@ export const CardTabMenuHorizontalWithoutBorderExample = {
   },
 
   name: 'CardTabMenu без обводки',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalCardTabMenuAdaptiveFill.">
+const CardTabMenuHorizontalAdaptiveFillStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CardTabMenuHorizontalAdaptiveFillTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const CardTabMenuHorizontalAdaptiveFillExample = {
+  render: CardTabMenuHorizontalAdaptiveFillStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: CardTabMenuHorizontalAdaptiveFillRaw,
+      },
+    },
+  },
+
+  name: 'CardTabMenu adaptive fill',
 };
 //</editor-fold>
