@@ -167,6 +167,11 @@ const indeterminateCss = css<{ readOnly?: boolean }>`
   ${(p) => (p.readOnly ? disabledIndeterminateBackgroundCss : indeterminateBackgroundCss)}
 `;
 
+/**
+ * - cостояние indeterminate должно отображаться независимо от состояния inputа (checked или unchecked)
+ * - cостояние indeterminate имеет схожие стили с состоянием checked
+ */
+
 const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
