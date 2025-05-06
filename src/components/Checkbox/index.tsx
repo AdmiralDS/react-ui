@@ -1,11 +1,10 @@
-import { forwardRef, useRef, useLayoutEffect } from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as CheckSVG } from './Success.svg';
 import { ReactComponent as IndeterminateSVG } from './Minus.svg';
 import type { CheckboxDimension } from './CheckboxDimension';
 import { smallGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { keyboardKey } from '../common/keyboardKey';
-import { refSetter } from '../common/utils/refSetter';
 
 export * from './CheckboxDimension';
 
@@ -139,24 +138,6 @@ const disabledCss = css`
   }
 `;
 
-const disabledIndeterminateBackgroundCss = css`
-  background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
-  & *[fill^='#'] {
-    fill: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
-  }
-  border: none;
-  > * {
-    display: block;
-  }
-`;
-const indeterminateBackgroundCss = css`
-  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
-  border: none;
-  > * {
-    display: block;
-  }
-`;
-
 const disabledCheckedBackgroundCss = css`
   background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   border: none;
@@ -170,7 +151,23 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
-const Input = styled.input<{ $hovered?: boolean }>`
+const indeterminateBackgroundCss = css`
+  & + ${Background} {
+    ${checkedBackgroundCss}
+  }
+`;
+
+const disabledIndeterminateBackgroundCss = css`
+  & + ${Background} {
+    ${disabledCheckedBackgroundCss}
+  }
+`;
+
+const indeterminateCss = css<{ readOnly?: boolean }>`
+  ${(p) => (p.readOnly ? disabledIndeterminateBackgroundCss : indeterminateBackgroundCss)}
+`;
+
+const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
     display: none;
@@ -198,22 +195,18 @@ const Input = styled.input<{ $hovered?: boolean }>`
     ${disabledCheckedBackgroundCss}
   }
 
-  &:indeterminate + ${Background} {
-    ${(props) => (props.readOnly ? disabledIndeterminateBackgroundCss : indeterminateBackgroundCss)}
-  }
-  &:indeterminate:disabled + ${Background} {
-    ${disabledIndeterminateBackgroundCss}
-  }
+  ${(p) => p.$indeterminate && indeterminateCss}
 
-  &:not(:checked):not(:indeterminate) + ${Background} {
+  &:not(:checked) + ${Background} {
     > * {
-      display: none;
+      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
     }
   }
 
   &:disabled {
     cursor: not-allowed;
-    ${disabledCss};
+    ${disabledCss}
+    ${(p) => p.$indeterminate && disabledIndeterminateBackgroundCss}
   }
 
   ${(props) => !props.readOnly && props.$hovered && hoveredCss}
@@ -232,15 +225,7 @@ const Input = styled.input<{ $hovered?: boolean }>`
 `;
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
-  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate = false, error, ...props }, ref) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    useLayoutEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.indeterminate = indeterminate;
-      }
-    }, [indeterminate]);
-
+  ({ className, dimension = 'm', disabled, readOnly, hovered, indeterminate, error, ...props }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (readOnly) {
         const code = keyboardKey.getCode(e);
@@ -255,11 +240,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
     return (
       <Container $dimension={dimension} $disabled={disabled} $readOnly={readOnly} className={className}>
         <Input
-          ref={refSetter(ref, inputRef)}
+          ref={ref}
           disabled={disabled}
           readOnly={readOnly}
           {...props}
           type="checkbox"
+          $indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
           data-hovered={hovered}
           $hovered={hovered}

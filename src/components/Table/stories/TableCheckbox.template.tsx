@@ -235,7 +235,6 @@ export const TableCheckboxTemplate = (props: TableProps) => {
         displayRowSelectionColumn
         onRowSelectionChange={handleSelectionChange}
         onColumnResize={handleResize}
-        headerCheckboxIndeterminate
       />
     </>
   );
