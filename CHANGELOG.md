@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.46.0](https://github.com/AdmiralDS/react-ui/compare/v8.45.1...v8.46.0) (2025-05-06)
+
+
+### Features
+
+* refactor and add adaptive fill in CardTabMenuHorizontal and TabMenuHorizontal ([5f152b0](https://github.com/AdmiralDS/react-ui/commit/5f152b041ba2caadae63c188c53d737c3fd86537))
+
+
+### Bug Fixes
+
+* **Checkbox:** [#1760](https://github.com/AdmiralDS/react-ui/issues/1760) доработаны стили состояния indeterminate для случаев disabled и readOnly ([a4dccab](https://github.com/AdmiralDS/react-ui/commit/a4dccab8e66b3692668fdd7f08b0c832b840cf02))
+* **TabMenuHorizontalAdaptiveFill:** width underline active tab fixed ([a60be5a](https://github.com/AdmiralDS/react-ui/commit/a60be5a81e0703bffcc3b5fd91ff1b06bf202ee1))
+
 ### [8.45.1](https://github.com/AdmiralDS/react-ui/compare/v8.45.0...v8.45.1) (2025-04-23)
 
 ## [8.45.0](https://github.com/AdmiralDS/react-ui/compare/v8.44.1...v8.45.0) (2025-04-18)
