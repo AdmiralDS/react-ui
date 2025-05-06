@@ -77,6 +77,13 @@ export const CheckboxDemoTemplate = ({
             </T>
           </Row>
           <Row>
+            <Checkbox disabled indeterminate />
+            <Checkbox dimension="s" disabled indeterminate />
+            <T font="Body/Body 1 Long" as="div">
+              Disable indeterminate
+            </T>
+          </Row>
+          <Row>
             <Checkbox error />
             <Checkbox dimension="s" error />
             <T font="Body/Body 1 Long" as="div">
@@ -95,6 +102,13 @@ export const CheckboxDemoTemplate = ({
             <Checkbox dimension="s" readOnly defaultChecked />
             <T font="Body/Body 1 Long" as="div">
               Readonly active
+            </T>
+          </Row>
+          <Row>
+            <Checkbox readOnly indeterminate />
+            <Checkbox dimension="s" readOnly indeterminate />
+            <T font="Body/Body 1 Long" as="div">
+              Readonly indeterminate
             </T>
           </Row>
         </Container>
