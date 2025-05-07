@@ -138,7 +138,7 @@ export interface NotificationItemProps extends Omit<React.HTMLAttributes<HTMLDiv
   /** Статус notification */
   status?: NotificationItemStatus;
   /** Скрыть обводку notification */
-  hideBorder?: boolean;
+  isBorderHidden?: boolean;
   /** Переключатель видимости иконки "Close" */
   isClosable?: boolean;
   /** Закрытие notification */
@@ -160,7 +160,7 @@ export const NotificationItem = forwardRef<HTMLDivElement, NotificationItemProps
   (
     {
       status = 'info',
-      hideBorder = false,
+      isBorderHidden = false,
       displayStatusIcon = false,
       isClosable = false,
       onClose,
@@ -187,7 +187,7 @@ export const NotificationItem = forwardRef<HTMLDivElement, NotificationItemProps
         role={isAlert ? 'alert' : 'status'}
         aria-live={isAlert ? 'assertive' : 'polite'}
         $status={status}
-        $hideBorder={hideBorder}
+        $hideBorder={isBorderHidden}
         $displayStatusIcon={displayStatusIcon}
         $isClosable={isClosable}
       >
