@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.47.0](https://github.com/AdmiralDS/react-ui/compare/v8.46.0...v8.47.0) (2025-05-12)
+
+
+### Features
+
+* **NotificationItem:** добавлена возможность отключения обводки ([1c4d9a4](https://github.com/AdmiralDS/react-ui/commit/1c4d9a492693843f8b3107835a177b5de17b337e))
+
 ## [8.46.0](https://github.com/AdmiralDS/react-ui/compare/v8.45.1...v8.46.0) (2025-05-06)
 
 
