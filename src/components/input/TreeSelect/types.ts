@@ -1,5 +1,3 @@
-// type ItemDimension = 'l' | 'm' | 's';
-
 import type { DropdownContainer } from '#src/components/DropdownContainer';
 
 export interface TreeSelectItemProps {

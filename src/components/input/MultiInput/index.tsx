@@ -75,8 +75,6 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   /**  Функция которая выполняется при нажатии на кнопку Backspace в поле ввода, по умолчанию произодет
    * поиск последнего чипа и нажатие на кнопку удалить */
   onBackspaceKeyDown?: typeof pressDeleteButtonOnLastChip;
-
-  // children: React.ReactNode;
 }
 
 export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
@@ -166,14 +164,22 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
 
     return (
       <Container {...containerProps} {...containerPropsConfig(containerProps)}>
-        {iconsBeforeCount > 0 && <IconPanelBefore $dimension={dimension}>{iconBeforeArray}</IconPanelBefore>}
+        {iconsBeforeCount > 0 && (
+          <IconPanelBefore data-role={'icon-pane-before'} $dimension={dimension}>
+            {iconBeforeArray}
+          </IconPanelBefore>
+        )}
 
         <WrapperOptions className="wrapper-options" ref={(elem) => setRefWrapperOptions(elem)}>
           {children} <Input $dimension={dimension} {...props} ref={refSetter(ref, inputRef)} />
         </WrapperOptions>
         <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
 
-        {iconsAfterCount > 0 && <IconPanelAfter $dimension={dimension}>{iconAfterArray}</IconPanelAfter>}
+        {iconsAfterCount > 0 && (
+          <IconPanelAfter data-role={'icon-pane-after'} $dimension={dimension}>
+            {iconAfterArray}
+          </IconPanelAfter>
+        )}
       </Container>
     );
   },

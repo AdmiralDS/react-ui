@@ -1,5 +1,4 @@
-// import type { ChangeEvent } from 'react';
-// import { useState } from 'react';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { TreeSelect } from '@admiral-ds/react-ui';
@@ -59,23 +58,49 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
 ];
 
 export const PlaygroundTemplate = ({
-  // value = 'Привет!',
   placeholder = 'Placeholder',
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  // const [localValue, setValue] = useState<string>(String(value) ?? '');
+  const [value, setValue] = useState(['1.2.1', '1.2.2']);
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const inputValue = e.target.value;
-  //   setValue(inputValue);
-  //   props.onChange?.(e);
-  // };
+  const onChange = (newValue: string[]) => {
+    console.log('onChange ', newValue);
+    setValue(newValue);
+  };
+
+  const onSelect = (value: string) => {
+    console.log('onSelect ', value);
+  };
+
+  const onDeselect = (value: string) => {
+    console.log('onDeselect ', value);
+  };
+
+  const onClearIconClick = () => {
+    console.log('onClearIconClick');
+  };
+
+  const onOpenChange = (open: boolean) => {
+    console.log('onOpenChange', open);
+  };
+
+  const treeProps: TreeSelectProps = {
+    ...props,
+    items: STORY_ITEMS,
+    value,
+    placeholder,
+    onChange,
+    onSelect,
+    onDeselect,
+    onClearIconClick,
+    onOpenChange,
+  };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <TreeSelect {...props} placeholder={placeholder} items={STORY_ITEMS} />
+      <TreeSelect {...treeProps} />
     </ThemeProvider>
   );
 };

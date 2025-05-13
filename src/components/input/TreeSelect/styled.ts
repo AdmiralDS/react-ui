@@ -1,3 +1,4 @@
+import { Chips } from '#src/components/Chips';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { MultiInput } from '#src/components/input/MultiInput';
 import { Menu } from '#src/components/Menu';
@@ -20,4 +21,33 @@ export const StyledMenu = styled(Menu)`
 
 export const StyledMultiInput = styled(MultiInput)`
   cursor: pointer;
+  & .wrapper-options input {
+    display: none;
+  }
+`;
+
+const disabledChipStyle = css`
+  pointer-events: auto;
+  &:hover {
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  }
+`;
+
+const hoverChipStyle = css`
+  &:hover {
+    background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+  }
+`;
+
+export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
+  /* display: flex;
+  min-width: 35px;
+  max-width: 190px; */
+
+  /* @media (max-width: 768px) {
+    max-width: 80px;
+  } */
+
+  /* ${typography['Caption/Caption 1']}; */
+  ${({ disabled, readOnly }) => (disabled ? disabledChipStyle : readOnly ? null : hoverChipStyle)}
 `;

@@ -1,27 +1,36 @@
-import { useMemo, useState } from 'react';
-import type { MenuProps } from '#src/components/Menu';
-import type { MenuModelItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
-import { checkboxTreeToMap, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
-import type { TreeSelectItemProps } from './types';
+import { useMemo } from 'react';
+import { type FlatMapItems, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { DropdownContainer } from '#src/components/DropdownContainer';
-import type { DataAttributes } from 'styled-components';
 import { StyledMenu } from '#src/components/input/TreeSelect/styled';
+import type { MenuProps } from '#src/components/Menu';
+import type { DataAttributes } from 'styled-components';
+// import type { TreeSelectItemProps } from './types';
+import type { MenuModelItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
-export interface DropDownTreeProps extends Omit<MenuProps, 'model'> {
-  items: Array<TreeSelectItemProps>;
+export interface DropDownTreeProps extends Omit<MenuProps, 'model' | 'onSelectItem' | 'onDeselectItem'> {
+  items: FlatMapItems;
   /** Конфиг функция пропсов для dropdown. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   dropdownConfig?: (
     props: React.ComponentProps<typeof DropdownContainer>,
   ) => Partial<React.ComponentProps<typeof DropdownContainer> & DataAttributes>;
+
+  onChangeSelected?: (value: Array<string>) => void;
+
+  onSelectImem?: (id: string) => void;
+
+  onDeselectItem?: (id: string) => void;
 }
 
-export const DropDownTree = ({ items, dropdownConfig, ...props }: DropDownTreeProps) => {
-  const [internalModel, setInternalModel] = useState<Array<TreeSelectItemProps>>([...items]);
-
-  const map = useMemo(() => {
-    return checkboxTreeToMap(internalModel);
-  }, [internalModel]);
+export const DropDownTree = ({
+  items,
+  dropdownConfig,
+  onChangeSelected,
+  onSelectImem,
+  onDeselectItem,
+  ...props
+}: DropDownTreeProps) => {
+  const map = useMemo(() => new Map(items), [items]);
 
   const setChecked = (id: string, value: boolean) => {
     const mapItem = map.get(id);
@@ -52,7 +61,10 @@ export const DropDownTree = ({ items, dropdownConfig, ...props }: DropDownTreePr
 
     setChecked(id, !checked);
 
-    setInternalModel([...internalModel]);
+    onChangeSelected?.([...map.values()].filter((item) => !!item.node.checked).map((item) => item.node.id));
+
+    if (map.get(id)?.node.checked) onSelectImem?.(id);
+    else onDeselectItem?.(id);
   };
 
   const handleSelectItem = (id: string) => {

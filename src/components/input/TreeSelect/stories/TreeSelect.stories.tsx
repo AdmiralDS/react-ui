@@ -1,19 +1,17 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
+import type { TreeSelect } from '@admiral-ds/react-ui';
 import {
   TextInput,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
-  TreeSelect,
 } from '@admiral-ds/react-ui';
 
 import { PlaygroundTemplate } from './Playground.template';
-// import { TextInputWithIconTemplate } from '#src/components/input/TextInput/stories/TextInputWithIcon.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
-// import TextInputWithIconRaw from './TextInputWithIcon.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
