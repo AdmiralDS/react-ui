@@ -2,6 +2,60 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.47.0](https://github.com/AdmiralDS/react-ui/compare/v8.46.0...v8.47.0) (2025-05-12)
+
+
+### Features
+
+* **NotificationItem:** добавлена возможность отключения обводки ([1c4d9a4](https://github.com/AdmiralDS/react-ui/commit/1c4d9a492693843f8b3107835a177b5de17b337e))
+
+## [8.46.0](https://github.com/AdmiralDS/react-ui/compare/v8.45.1...v8.46.0) (2025-05-06)
+
+
+### Features
+
+* refactor and add adaptive fill in CardTabMenuHorizontal and TabMenuHorizontal ([5f152b0](https://github.com/AdmiralDS/react-ui/commit/5f152b041ba2caadae63c188c53d737c3fd86537))
+
+
+### Bug Fixes
+
+* **Checkbox:** [#1760](https://github.com/AdmiralDS/react-ui/issues/1760) доработаны стили состояния indeterminate для случаев disabled и readOnly ([a4dccab](https://github.com/AdmiralDS/react-ui/commit/a4dccab8e66b3692668fdd7f08b0c832b840cf02))
+* **TabMenuHorizontalAdaptiveFill:** width underline active tab fixed ([a60be5a](https://github.com/AdmiralDS/react-ui/commit/a60be5a81e0703bffcc3b5fd91ff1b06bf202ee1))
+
+### [8.45.1](https://github.com/AdmiralDS/react-ui/compare/v8.45.0...v8.45.1) (2025-04-23)
+
+## [8.45.0](https://github.com/AdmiralDS/react-ui/compare/v8.44.1...v8.45.0) (2025-04-18)
+
+
+### Features
+
+* **ContentSwitcher:** add adaptive fill ([d3a4966](https://github.com/AdmiralDS/react-ui/commit/d3a49664c30752169b04d8eecad2de0ebce0c302))
+* **Table:** [#1761](https://github.com/AdmiralDS/react-ui/issues/1761) OverflowMenu и иконки одиночных действий вынесены в отдельный столбец, визуально выделяемый тенью ([15829b7](https://github.com/AdmiralDS/react-ui/commit/15829b770a14fa21c3096a2fb6ed2f715ae7a945))
+
+### [8.44.1](https://github.com/AdmiralDS/react-ui/compare/v8.44.0...v8.44.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* **Select:** Исправлена ошибка в подгрузке данных при scroll, обновлен пример в storybook ([bda6129](https://github.com/AdmiralDS/react-ui/commit/bda61294eefd45a9e0f980c44f980d3ca90bae39)), closes [#1754](https://github.com/AdmiralDS/react-ui/issues/1754)
+* **Select:** Исправлена ошибка отображения chip для  размера S ([640bccc](https://github.com/AdmiralDS/react-ui/commit/640bccca87421e3c0a1795e85b2fd7cc951d4f92)), closes [#1757](https://github.com/AdmiralDS/react-ui/issues/1757)
+
+## [8.44.0](https://github.com/AdmiralDS/react-ui/compare/v8.43.0...v8.44.0) (2025-04-08)
+
+
+### Features
+
+* [#1725](https://github.com/AdmiralDS/react-ui/issues/1725) add secondary in HorizontalTabMenu and VerticalTabMenu ([fdc5516](https://github.com/AdmiralDS/react-ui/commit/fdc5516049e74579186b8cf6b82ad6f170584b02))
+* [#1733](https://github.com/AdmiralDS/react-ui/issues/1733) add InputLine ([d9c9abb](https://github.com/AdmiralDS/react-ui/commit/d9c9abba231b092f1673713dcabe8cb6a4a6ef1c))
+* **MultiInput:**  Добавлена возможность отображать иконки вначале и конце поля ([01bee40](https://github.com/AdmiralDS/react-ui/commit/01bee4038a0cb944fdc6ab1ae9761eb6b1d12e65)), closes [#1745](https://github.com/AdmiralDS/react-ui/issues/1745)
+* Небольшая оптимизация для прогресс-баров ([d89c4a9](https://github.com/AdmiralDS/react-ui/commit/d89c4a91d1db2d3c9f4f973c24e42d50de13f5bb))
+
+
+### Bug Fixes
+
+* **Menu:** Убран лишний css mixin hideNativeScroll [#1732](https://github.com/AdmiralDS/react-ui/issues/1732) ([8902792](https://github.com/AdmiralDS/react-ui/commit/8902792acc23ab19cb7f83eaa789ec4c4c237a0e))
+* **Select:** Исправлена работа свойства MinHeight [#1731](https://github.com/AdmiralDS/react-ui/issues/1731) ([85835f1](https://github.com/AdmiralDS/react-ui/commit/85835f1ba475fe3073c32af5b42ac8a8a94e7103))
+
 ## [8.43.0](https://github.com/AdmiralDS/react-ui/compare/v8.42.0...v8.43.0) (2025-04-02)
 
 

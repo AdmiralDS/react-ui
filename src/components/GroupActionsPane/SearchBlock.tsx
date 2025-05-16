@@ -1,13 +1,11 @@
-import type { HTMLAttributes } from 'react';
-import * as React from 'react';
-import { useRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import { IconButton } from '#src/components/IconButton';
 import { ReactComponent as SearchOutline } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { SearchInput } from '#src/components/GroupActionsPane/SearchInput';
 import styled from 'styled-components';
 
-export interface ColumnsButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ColumnsButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   dimension?: 's' | 'l';
   opened?: boolean;
   searchValue?: string;
@@ -26,7 +24,7 @@ const StyledIconButton = styled(IconButton)`
   }
 `;
 
-export const SearchBlock = React.forwardRef<HTMLButtonElement, ColumnsButtonProps>(
+export const SearchBlock = forwardRef<HTMLButtonElement, ColumnsButtonProps>(
   (
     { dimension = 'l', opened = true, searchValue, locale, onOpenSearch, onCloseSearch, onChangeSearchValue, ...props },
     ref,

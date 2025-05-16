@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useOptionGroupContext } from '#src/components/input/Select/useSelectContext';
 import type { ComponentDimension } from '#src/components/input/types';
 import type { OptionProps } from '#src/components/input/Select/Option/types';
@@ -8,6 +7,7 @@ import { useDropDownContext } from '#src/components/input/Select/DropDownContext
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import { CustomOptionWrapper } from '#src/components/input/Select/styled';
 import type { SelectItemProps } from '#src/components/input/Select/types';
+import { useEffect } from 'react';
 
 interface OptionRenderProps {
   selected?: boolean;
@@ -52,7 +52,7 @@ export const DropDownOption = ({
   const defaultOptionRender = (props: OptionRenderProps) =>
     dropDownContext?.multiple ? multipleOptionRender(props) : children;
 
-  React.useEffect(() => {
+  useEffect(() => {
     const itemId = id || value;
 
     const item: SelectItemProps = {

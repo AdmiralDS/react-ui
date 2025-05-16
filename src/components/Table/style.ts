@@ -21,6 +21,7 @@ import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
 import { ResizerWrapper } from './RowWidthResizer';
+import { getActionSize } from './OverflowMenu';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
@@ -54,8 +55,8 @@ export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
-  ${TableContainer}[data-shadow='true'] & {
-    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
+  ${TableContainer}[data-shadow-left='true'] & {
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
   }
 `;
 
@@ -424,22 +425,25 @@ export const EmptyMessage = styled(Cell)`
   border: none;
 `;
 
-const getTechColumnsWidth = (
-  dimension: TableProps['dimension'],
-  selectionCol?: boolean,
-  expansionCol?: boolean,
-): number =>
-  (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
-  (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
+const getTechColumnsWidth = (p: {
+  $dimension: TableProps['dimension'];
+  $selectionColumn?: boolean;
+  $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
+}): number =>
+  (p.$selectionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$expansionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$overflowMenuColumn ? getActionSize(p.$dimension) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
   $dimension: TableProps['dimension'];
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
+  width: calc(100% - ${(p) => getTechColumnsWidth(p) + 'px'});
 `;
 
 export const HiddenHeader = styled.div`
@@ -505,7 +509,22 @@ export const Spacer = styled.div`
   transform: translate3d(0px, 0px, 0px);
 `;
 
-export const ShadowDetector = styled.div`
+export const Edge = styled.div`
   display: flex;
   width: 0;
+  height: auto;
+`;
+
+export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
+  display: flex;
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  .table[data-shadow-right='true'] & {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  min-height: ${({ $dimension }) => getActionSize($dimension) - 1}px;
+  width: ${({ $dimension }) => getActionSize($dimension)}px;
+  background-color: inherit;
 `;

@@ -2,12 +2,16 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuHorizontal } from '@admiral-ds/react-ui';
 
-import { TabMenuHorizontalTemplate } from '#src/components/TabMenuComponent/stories/horizontalTabMenuStories/TabMenuHorizontalTemplate';
-import { TabMenuHorizontalWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/horizontalTabMenuStories/TabMenuHorizontalWithAddButtonTemplate';
+import { TabMenuHorizontalTemplate } from './TabMenuHorizontalTemplate';
+import { TabMenuHorizontalWithAddButtonTemplate } from './TabMenuHorizontalWithAddButtonTemplate';
+import { TabMenuHorizontalSecondaryTemplate } from './TabMenuHorizontalSecondaryTemplate';
+import { TabMenuHorizontalAdaptiveFillTemplate } from './TabMenuHorizontalAdaptiveFillTemplate';
 
 // Imports of text sources
 import HorizontalTabMenuRaw from './TabMenuHorizontalTemplate?raw';
 import HorizontalTabMenuWithAddButtonRaw from './TabMenuHorizontalWithAddButtonTemplate?raw';
+import TabMenuHorizontalSecondaryRaw from './TabMenuHorizontalSecondaryTemplate?raw';
+import TabMenuHorizontalAdaptiveFillRaw from './TabMenuHorizontalAdaptiveFillTemplate?raw';
 
 export default {
   title: 'Admiral-2.1/Tabs/TabMenuHorizontal',
@@ -23,6 +27,10 @@ export default {
   argTypes: {
     dimension: {
       options: ['l', 'm'],
+      control: { type: 'radio' },
+    },
+    appearance: {
+      options: ['primary', 'secondary'],
       control: { type: 'radio' },
     },
     showUnderline: {
@@ -80,6 +88,9 @@ export default {
     dropContainerStyle: {
       control: false,
     },
+    adaptive: {
+      control: false,
+    },
   },
 } as Meta<typeof TabMenuHorizontal>;
 
@@ -122,5 +133,48 @@ export const HorizontalTabMenuWithAddButtonExample = {
   },
 
   name: 'Горизонтальный вариант TabMenu с возможностью добавления вкладок.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="HorizontalTabMenuSecondary.">
+const TabMenuHorizontalSecondaryStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuHorizontalSecondaryTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalTabMenuSecondaryExample = {
+  render: TabMenuHorizontalSecondaryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TabMenuHorizontalSecondaryRaw,
+      },
+    },
+  },
+
+  name: 'Горизонтальный вариант TabMenu со стилем secondary.',
+};
+//</editor-fold>
+
+//<editor-fold desc="HorizontalTabMenuAdaptiveFill.">
+const TabMenuHorizontalAdaptiveFillStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TabMenuHorizontalAdaptiveFillTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HorizontalTabMenuAdaptiveFillExample = {
+  render: TabMenuHorizontalAdaptiveFillStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TabMenuHorizontalAdaptiveFillRaw,
+      },
+    },
+  },
+
+  name: 'Горизонтальный вариант TabMenu adaptive fill',
 };
 //</editor-fold>

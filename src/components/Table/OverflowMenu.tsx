@@ -1,8 +1,8 @@
-import * as React from 'react';
 import type { TableProps } from '#src/components/Table';
+import { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
-const getActionSize = (dimension: TableProps['dimension']) => {
+export const getActionSize = (dimension: TableProps['dimension']) => {
   switch (dimension) {
     case 's':
       return 32;
@@ -20,12 +20,16 @@ const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
   position: sticky;
   right: 0;
   z-index: 5;
-  width: 0;
-  direction: rtl;
+
+  .table[data-shadow-right='true'] & {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+  }
 
   ${({ $showRowsActions }) =>
     !$showRowsActions &&
     css`
+      width: 0;
+      direction: rtl;
       visibility: hidden;
       &:hover {
         visibility: visible;
@@ -74,7 +78,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   headerHeight,
   ...props
 }) => {
-  const oveflowMenuRef = React.useRef<HTMLDivElement>(null);
+  const oveflowMenuRef = useRef<HTMLDivElement>(null);
 
   const handleVisibilityChange = (isVisible: boolean) => {
     if (!showRowsActions) {
@@ -86,7 +90,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleIntersection([entry]: IntersectionObserverEntry[]) {
       if (!entry.isIntersecting) {
         /** Вызываем закрытие OverflowMenu в момент, когда кнопка, открывающая

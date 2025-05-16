@@ -5,9 +5,23 @@ import { uid } from '#src/components/common/uid';
 
 import type { HorizontalTabProps } from '#src/components/TabMenuComponent/types';
 import { BaseTab } from '#src/components/TabMenuComponent/tabs/BaseTab';
+import styled from 'styled-components';
+
+const HorizontalTabStyled = styled(BaseTab)<{ $adaptive: boolean }>((p) =>
+  p.$adaptive
+    ? `
+  display: flex;
+  justify-content: center;
+  width: 100%
+`
+    : `width: fit-content`,
+);
 
 export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
-  ({ dimension = 'l', children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps, ref) => {
+  (
+    { dimension = 'l', adaptive, children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps,
+    ref,
+  ) => {
     const [defaultId] = useState(uid());
     const idForTab = onSelectTab && id ? id : defaultId;
 
@@ -18,8 +32,9 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
     };
 
     return (
-      <BaseTab
+      <HorizontalTabStyled
         {...props}
+        $adaptive={adaptive === 'fill'}
         role="tab"
         type="button"
         id={idForTab}
@@ -28,11 +43,10 @@ export const HorizontalTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
         disabled={disabled}
         $dimension={dimension}
         $selected={selected}
-        $width="fit-content"
         onClick={handleTabClick}
       >
         {children}
-      </BaseTab>
+      </HorizontalTabStyled>
     );
   },
 );

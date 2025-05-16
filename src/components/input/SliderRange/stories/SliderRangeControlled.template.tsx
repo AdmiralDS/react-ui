@@ -21,9 +21,12 @@ export const SliderRangeControlledTemplate = () => {
       </T>
       <SliderRange
         value={value}
-        onChange={(value: [{ str: string; num: number }, { str: string; num: number }]) => {
+        onChange={(
+          value: [{ str: string; num: number }, { str: string; num: number }],
+          event: React.ChangeEvent<HTMLInputElement>,
+        ) => {
           // eslint-disable-next-line no-console
-          console.log(value);
+          console.log(value, event);
           setValue([value[0].str, value[1].str]);
         }}
         prefix={['От', 'До']}

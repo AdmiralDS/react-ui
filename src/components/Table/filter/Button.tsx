@@ -1,7 +1,7 @@
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as MoreHorizontalOutline } from '@admiral-ds/icons/build/system/MoreHorizontalOutline.svg';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { forwardRef, useEffect, useRef } from 'react';
 
 const activeFilter = css`
   & *[fill^='#'] {
@@ -58,12 +58,12 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isFilterActive?: boolean;
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ dimension, renderFilterIcon, isFilterActive, ...props }, ref) => {
     const iconSize = dimension === 's' || dimension === 'm' ? '16px' : '20px';
-    const btnRef = React.useRef<HTMLButtonElement>(null);
+    const btnRef = useRef<HTMLButtonElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const button = btnRef.current;
       function handleMove(e: any) {
         // block column drag when mouse moves above filter icon

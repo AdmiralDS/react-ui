@@ -1,5 +1,4 @@
-import * as React from 'react';
-import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
 
@@ -54,7 +53,7 @@ export interface MenuButtonProps {
   /** Позволяет добавлять класс на контейнер выпадающего меню  */
   dropContainerClassName?: string;
   /** Позволяет добавлять стили на контейнер выпадающего меню  */
-  dropContainerStyle?: CSSProperties;
+  dropContainerStyle?: React.CSSProperties;
 }
 
 export const MenuButton: React.FC<MenuButtonProps> = ({
@@ -64,7 +63,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
   dropContainerClassName,
   dropContainerStyle,
 }) => {
-  const model = React.useMemo(() => {
+  const model = useMemo(() => {
     return options.map((item) => {
       const id = uid();
       return {

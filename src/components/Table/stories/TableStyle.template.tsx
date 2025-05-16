@@ -313,13 +313,13 @@ const columnList: Column[] = [
   {
     name: 'transfer_type',
     title: 'Тип сделки',
-    headerPropsConfig: ({ className }) => ({ className: `${className} transferType`, 'data-testId': 'transferType' }),
+    headerPropsConfig: ({ className }) => ({ className: `${className} transferType`, 'data-testid': 'transferType' }),
   },
   {
     name: 'transfer_date',
     title: 'Дата сделки',
     width: 150,
-    headerPropsConfig: ({ className }) => ({ className: `${className} transferDate`, 'data-testId': 'transferDate' }),
+    headerPropsConfig: ({ className }) => ({ className: `${className} transferDate`, 'data-testid': 'transferDate' }),
   },
   {
     name: 'transfer_amount',
@@ -327,18 +327,18 @@ const columnList: Column[] = [
     width: 170,
     headerPropsConfig: ({ className }) => ({
       className: `${className} transferAmount`,
-      'data-testId': 'transferAmount',
+      'data-testid': 'transferAmount',
     }),
   },
   {
     name: 'currency',
     title: 'Валюта',
-    headerPropsConfig: ({ className }) => ({ className: `${className} currency`, 'data-testId': 'currency' }),
+    headerPropsConfig: ({ className }) => ({ className: `${className} currency`, 'data-testid': 'currency' }),
   },
   {
     name: 'rate',
     title: 'Ставка',
-    headerPropsConfig: ({ className }) => ({ className: `${className} rate`, 'data-testId': 'rate' }),
+    headerPropsConfig: ({ className }) => ({ className: `${className} rate`, 'data-testid': 'rate' }),
   },
 ];
 

@@ -20,17 +20,35 @@ const showBorderTabMixin = css`
     inset 0 1px 0 0 var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
-const StyledBaseTab = styled(BaseTab)<{ $hideBorder?: boolean }>`
+const adaptiveFillTabMixin = css`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const StyledBaseTab = styled(BaseTab)<{ $hideBorder?: boolean; $adaptive?: boolean }>`
   background-color: ${(p) =>
     p.$selected ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})` : `transparent`};
   border-radius: 4px 4px 0 0;
   ${(p) => p.$selected && selectedTabBorderMixin}
   ${(p) => p.$selected && !p.$hideBorder && showBorderTabMixin}
+  ${(p) => (p.$adaptive ? adaptiveFillTabMixin : 'width: fit-content')}
 `;
 
 export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
   (
-    { dimension = 'l', hideBorder, children, disabled, selected, onSelectTab, tabId, id, ...props }: HorizontalTabProps,
+    {
+      dimension = 'l',
+      adaptive,
+      hideBorder,
+      children,
+      disabled,
+      selected,
+      onSelectTab,
+      tabId,
+      id,
+      ...props
+    }: HorizontalTabProps,
     ref,
   ) => {
     const [defaultId] = useState(uid());
@@ -45,6 +63,7 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
       <StyledBaseTab
         {...props}
         role="tab"
+        $adaptive={adaptive === 'fill'}
         type="button"
         id={idForTab}
         ref={ref}
@@ -53,7 +72,6 @@ export const CardTab = forwardRef<HTMLButtonElement, HorizontalTabProps>(
         $dimension={dimension}
         $selected={selected}
         $hideBorder={hideBorder}
-        $width="fit-content"
         onClick={handleTabClick}
       >
         {children}

@@ -18,7 +18,6 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -97,6 +96,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
             aria-valuetext="шаг 3: название третьего шага"
             class="c5"
             role="progressbar"
+            style="width: 50%;"
             tabindex="0"
           />
         </div>
@@ -124,7 +124,6 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -202,6 +201,7 @@ exports[`Spinner should render component with custom nextStepName 1`] = `
           aria-valuetext="шаг 3: название третьего шага"
           class="c5"
           role="progressbar"
+          style="width: 50%;"
           tabindex="0"
         />
       </div>
@@ -285,7 +285,6 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -364,6 +363,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
             aria-valuetext="этап 3: название третьего этапа"
             class="c5"
             role="progressbar"
+            style="width: 50%;"
             tabindex="0"
           />
         </div>
@@ -391,7 +391,6 @@ exports[`Spinner should render component with custom stepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -469,6 +468,7 @@ exports[`Spinner should render component with custom stepName 1`] = `
           aria-valuetext="этап 3: название третьего этапа"
           class="c5"
           role="progressbar"
+          style="width: 50%;"
           tabindex="0"
         />
       </div>
@@ -552,7 +552,6 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -616,6 +615,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
             aria-valuetext="шаг 3: название третьего шага"
             class="c5"
             role="progressbar"
+            style="width: 50%;"
             tabindex="0"
           />
         </div>
@@ -637,7 +637,6 @@ exports[`Spinner should render component without nextStepName 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -700,6 +699,7 @@ exports[`Spinner should render component without nextStepName 1`] = `
           aria-valuetext="шаг 3: название третьего шага"
           class="c5"
           role="progressbar"
+          style="width: 50%;"
           tabindex="0"
         />
       </div>
@@ -777,7 +777,6 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -856,6 +855,7 @@ exports[`Spinner should render default component 1`] = `
             aria-valuetext="шаг 3: название третьего шага"
             class="c5"
             role="progressbar"
+            style="width: 50%;"
             tabindex="0"
           />
         </div>
@@ -883,7 +883,6 @@ exports[`Spinner should render default component 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -961,6 +960,7 @@ exports[`Spinner should render default component 1`] = `
           aria-valuetext="шаг 3: название третьего шага"
           class="c5"
           role="progressbar"
+          style="width: 50%;"
           tabindex="0"
         />
       </div>
@@ -1044,7 +1044,6 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -1122,6 +1121,7 @@ exports[`Spinner should render mobile component 1`] = `
             aria-valuetext="шаг 3: название третьего шага"
             class="c5"
             role="progressbar"
+            style="width: 50%;"
             tabindex="0"
           />
         </div>
@@ -1149,7 +1149,6 @@ exports[`Spinner should render mobile component 1`] = `
 }
 
 .c5 {
-  width: 50%;
   background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
@@ -1226,6 +1225,7 @@ exports[`Spinner should render mobile component 1`] = `
           aria-valuetext="шаг 3: название третьего шага"
           class="c5"
           role="progressbar"
+          style="width: 50%;"
           tabindex="0"
         />
       </div>

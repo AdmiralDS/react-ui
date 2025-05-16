@@ -1,5 +1,4 @@
-import * as React from 'react';
-
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { Body, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,7 +12,7 @@ interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   tableHeight: number;
 }
 
-export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
+export const FixedSizeBody = forwardRef<HTMLDivElement, FixedSizeBodyProps>(
   (
     {
       childHeight,
@@ -28,14 +27,14 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     },
     ref,
   ) => {
-    const [scrollTop, setScrollTop] = React.useState(0);
-    const [height, setHeight] = React.useState(tableHeight - headerHeight);
+    const [scrollTop, setScrollTop] = useState(0);
+    const [height, setHeight] = useState(tableHeight - headerHeight);
 
-    React.useEffect(() => {
+    useEffect(() => {
       setHeight(tableHeight - headerHeight);
     }, [tableHeight, headerHeight]);
 
-    React.useEffect(() => {
+    useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
           setScrollTop(e.target.scrollTop);
@@ -50,7 +49,7 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     }, [tableRef]);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
-    const rowNodes = React.useMemo(
+    const rowNodes = useMemo(
       () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
       [rowList, renderRow],
     );
@@ -64,7 +63,7 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
 
     const topPadding = `${startNode * childHeight}px`;
     const bottomPadding = `${(itemCount - startNode - visibleNodeCount) * childHeight}px`;
-    const visibleChildren = React.useMemo(
+    const visibleChildren = useMemo(
       () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),
       [rowNodes, startNode, visibleNodeCount],
     );

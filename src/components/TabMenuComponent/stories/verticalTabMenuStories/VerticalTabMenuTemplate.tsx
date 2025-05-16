@@ -1,7 +1,13 @@
-import { forwardRef, type ReactNode, useMemo, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import type { BorderRadiusType, RenderOptionProps, TabMenuVerticalProps, VerticalTabProps } from '@admiral-ds/react-ui';
+import type {
+  BorderRadiusType,
+  RenderOptionProps,
+  TabAppearance,
+  TabMenuVerticalProps,
+  VerticalTabProps,
+} from '@admiral-ds/react-ui';
 import {
   MenuItem,
   TabMenuVertical,
@@ -22,13 +28,25 @@ interface TabContentProps extends VerticalTabProps {
   text: string;
   badge?: number;
   disabled?: boolean;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
+  appearance: TabAppearance;
 }
 
 interface CustomVerticalTabProps extends TabContentProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
   (
-    { dimension = 'l', disabled, selected, onSelectTab, icon, badge, tabId, text, ...props }: CustomVerticalTabProps,
+    {
+      dimension = 'l',
+      appearance,
+      disabled,
+      selected,
+      onSelectTab,
+      icon,
+      badge,
+      tabId,
+      text,
+      ...props
+    }: CustomVerticalTabProps,
     ref,
   ) => {
     return (
@@ -48,7 +66,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <VerticalTabBadge disabled={disabled} selected={selected}>
+          <VerticalTabBadge tabAppearance={appearance} disabled={disabled} selected={selected}>
             {badge}
           </VerticalTabBadge>
         )}
@@ -95,6 +113,7 @@ const StyledNotificationItem = styled(NotificationItem)`
 
 export const VerticalTabMenuTemplate = ({
   dimension = 'l',
+  appearance = 'primary',
   width = TAB_MENU_WIDTH,
   showUnderline = true,
   underlinePosition = 'right',
@@ -126,6 +145,7 @@ export const VerticalTabMenuTemplate = ({
     const icon = currentTab?.icon;
     return (
       <CustomVerticalTab
+        appearance={appearance}
         tabId={tabId}
         dimension={dimension}
         text={text}
@@ -178,6 +198,7 @@ export const VerticalTabMenuTemplate = ({
         <Separator height={40} />
         <TabMenuVertical
           {...props}
+          appearance={appearance}
           dimension={dimension}
           showUnderline={showUnderline}
           underlinePosition={underlinePosition}

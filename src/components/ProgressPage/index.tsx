@@ -20,12 +20,11 @@ const Wrapper = styled.div`
   min-height: 4px;
   display: flex;
 `;
-const Progress = styled.div<{ $percent: number; $appearance?: AppearanceProgressPage }>`
+const Progress = styled.div<{ $appearance?: AppearanceProgressPage }>`
   background: ${({ theme, $appearance }) =>
     $appearance === 'error'
       ? `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`
       : `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
-  width: ${({ $percent }) => $percent}%;
   border-radius: 2px;
   transition: all 0.3s linear;
 `;
@@ -49,7 +48,7 @@ export const ProgressPage: FC<ProgressPageProps> = ({ percent = 0, label, appear
     <Container {...props}>
       <Label $appearance={appearance}>{label}</Label>
       <Wrapper>
-        <Progress $appearance={appearance} $percent={percent} />
+        <Progress $appearance={appearance} style={{ width: `${percent}%` }} />
       </Wrapper>
     </Container>
   );

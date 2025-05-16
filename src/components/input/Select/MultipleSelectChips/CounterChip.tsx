@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useRef } from 'react';
 import { CounterChipWrap, ShadowCounterChip, StyledCounterChip } from './styled';
 
 export interface CounterChipsProps {
@@ -8,8 +8,8 @@ export interface CounterChipsProps {
 }
 
 export const CounterChip = ({ count, disabled, onClick }: React.PropsWithChildren<CounterChipsProps>) => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const counterRef = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLDivElement>(null);
 
   if (!count) return <ShadowCounterChip />;
 
