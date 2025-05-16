@@ -40,14 +40,5 @@ const hoverChipStyle = css`
 `;
 
 export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
-  /* display: flex;
-  min-width: 35px;
-  max-width: 190px; */
-
-  /* @media (max-width: 768px) {
-    max-width: 80px;
-  } */
-
-  /* ${typography['Caption/Caption 1']}; */
   ${({ disabled, readOnly }) => (disabled ? disabledChipStyle : readOnly ? null : hoverChipStyle)}
 `;

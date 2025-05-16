@@ -63,6 +63,8 @@ export const PlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const clearButtonProps = { 'data-testid': 'selectClearButton' };
+  const openButtonProps = { 'data-testid': 'selectOpenButton' };
   const [value, setValue] = useState(['1.2.1', '1.2.2']);
 
   const onChange = (newValue: string[]) => {
@@ -100,7 +102,11 @@ export const PlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <TreeSelect {...treeProps} />
+      <TreeSelect
+        {...treeProps}
+        clearButtonPropsConfig={() => clearButtonProps}
+        openButtonPropsConfig={() => openButtonProps}
+      />
     </ThemeProvider>
   );
 };

@@ -13,6 +13,7 @@ import {
   type CheckboxNodesMapItem,
   type CheckboxGroupItemProps,
 } from '#src/components/Menu/MenuItemWithCheckbox';
+import type { ComponentDimension } from '#src/components/input/types';
 
 export interface TreeSelectProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'> {
   value?: string[];
@@ -35,6 +36,9 @@ export interface TreeSelectProps extends Omit<React.InputHTMLAttributes<HTMLInpu
    * Список опций дерева
    */
   items: Array<TreeSelectItemProps>;
+
+  /** Делает высоту компонента больше или меньше обычной */
+  dimension?: ComponentDimension;
 
   /** Конфиг функция пропсов для кнопки выпадающего списка. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
@@ -71,7 +75,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       isLoading,
       readOnly,
       placeholder,
+      dimension = 'm',
       openButtonPropsConfig,
+      clearButtonPropsConfig,
       onOpenChange,
       onSelect,
       onDeselect,
@@ -247,12 +253,14 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     return (
       <>
         <StyledMultiInput
-          containerPropsConfig={getInputContainerProps}
           ref={refSetter(ref, inputRef)}
+          placeholder={placeholder}
+          containerPropsConfig={getInputContainerProps}
           displayClearIcon={displayClearIcon && selectedChips.length > 0}
           iconsAfter={iconsAfter}
-          placeholder={placeholder}
+          clearButtonPropsConfig={clearButtonPropsConfig}
           onClearOptions={handleClearOptions}
+          dimension={dimension}
         >
           {renderSelectedChips()}
         </StyledMultiInput>
@@ -263,6 +271,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             onSelectImem={handleSelectItem}
             onDeselectItem={handleDeselectItem}
             onChangeSelected={handleSelectedChange}
+            dimension={dimension === 'xl' ? 'l' : dimension}
           />
         )}
       </>

@@ -2,9 +2,8 @@ import { useMemo } from 'react';
 import { type FlatMapItems, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { StyledMenu } from '#src/components/input/TreeSelect/styled';
-import type { MenuProps } from '#src/components/Menu';
+import type { MenuDimensions, MenuProps } from '#src/components/Menu';
 import type { DataAttributes } from 'styled-components';
-// import type { TreeSelectItemProps } from './types';
 import type { MenuModelItemProps, RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export interface DropDownTreeProps extends Omit<MenuProps, 'model' | 'onSelectItem' | 'onDeselectItem'> {
@@ -20,6 +19,8 @@ export interface DropDownTreeProps extends Omit<MenuProps, 'model' | 'onSelectIt
   onSelectImem?: (id: string) => void;
 
   onDeselectItem?: (id: string) => void;
+  /** Размер Меню */
+  dimension?: MenuDimensions;
 }
 
 export const DropDownTree = ({
@@ -28,6 +29,7 @@ export const DropDownTree = ({
   onChangeSelected,
   onSelectImem,
   onDeselectItem,
+  dimension = 'l',
   ...props
 }: DropDownTreeProps) => {
   const map = useMemo(() => new Map(items), [items]);
@@ -90,7 +92,7 @@ export const DropDownTree = ({
           <MenuItemWithCheckbox
             key={node.id}
             id={node.id}
-            dimension={props.dimension}
+            dimension={dimension}
             disabled={node.disabled}
             checked={checked}
             indeterminate={indeterminate}
@@ -105,7 +107,7 @@ export const DropDownTree = ({
     });
 
     return menuModel;
-  }, [props.dimension, map]);
+  }, [dimension, map]);
 
   const dropdownProps = {
     alignSelf: 'stretch',
@@ -125,6 +127,7 @@ export const DropDownTree = ({
         model={model}
         onSelectItem={handleSelectItem}
         disableSelectedOptionHighlight={true}
+        dimension={dimension}
       />
     </DropdownContainer>
   );
