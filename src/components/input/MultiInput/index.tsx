@@ -67,6 +67,12 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
     props: React.ComponentProps<typeof Container>,
   ) => Partial<React.ComponentProps<typeof Container> & DataAttributes>;
 
+  /** Конфиг функция пропсов для кнопки очистки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
+
   /** Селектор позволяющий найти кнопку закрытия последней опции. Необходимо для срабатывания
    * удаления последней опции при нажатии Backspace в пустом поле ввода. Значение по умолчанию:
    * '.wrapper-options > :has(.close-button):last-of-type .close-button' */
@@ -92,6 +98,7 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       createActivateButtonList = ['Enter'],
       onInputComplete,
       containerPropsConfig = nothing,
+      clearButtonPropsConfig = nothing,
       onClearOptions,
       iconsBefore,
       iconsAfter,
@@ -108,9 +115,15 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
     const iconBeforeArray = Children.toArray(iconsBefore);
 
     if (displayClearIcon && !props.readOnly && !disableCopying) {
-      iconAfterArray.unshift(
-        <InputIconButton icon={CloseOutlineSvg} onClick={onClearOptions} aria-hidden key={'close'} />,
-      );
+      const clearButtonProps = {
+        icon: CloseOutlineSvg,
+        id: 'searchSelectClearIcon',
+        onClick: onClearOptions,
+        'aria-hidden': true,
+        key: 'close',
+      } satisfies React.ComponentProps<typeof InputIconButton>;
+
+      iconAfterArray.unshift(<InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />);
     }
 
     const handleContainerFocus: React.FocusEventHandler<HTMLDivElement> = (e) => {
