@@ -110,3 +110,5 @@ export * from './components/CSSCustomProps';
 export * from './components/Scrollbar';
 export * from './components/Anchor';
 export * from './components/Divider';
+
+export * from './components/input/TreeSelect';

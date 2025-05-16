@@ -20,3 +20,4 @@ export * from './FileInput/FileItem';
 export * from './DateTime';
 export * from './MultiInput';
 export * from './InputLine';
+export * from './TreeSelect';

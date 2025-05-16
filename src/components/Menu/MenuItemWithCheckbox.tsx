@@ -25,11 +25,13 @@ export type CheckboxNodesMapItem = {
   node: CheckboxGroupItemProps;
 };
 
+export type FlatMapItems = Map<string, CheckboxNodesMapItem>;
+
 export const checkboxTreeToMap = (
   checkboxTree: Array<CheckboxGroupItemProps>,
   level = 0,
   dependencies?: Array<Array<string>>,
-): Map<string, CheckboxNodesMapItem> => {
+): FlatMapItems => {
   return checkboxTree.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
     const key = item.id;
     const currentNode: CheckboxNodesMapItem = { level, node: item };

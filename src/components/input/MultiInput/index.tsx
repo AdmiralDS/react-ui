@@ -11,6 +11,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { ComponentDimension, InputStatus } from '../types';
 
 type DataAttributes = { [dataAttibute: `data-${string}`]: string | boolean };
+export type ContainerProps = React.ComponentProps<typeof Container>;
 
 const nothing = () => {};
 const preventDefault = (e: React.MouseEvent) => e.preventDefault();
@@ -51,13 +52,13 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   /** Состояние skeleton */
   skeleton?: boolean;
 
-  //* Список кнопок, при нажатии на которые добавляются значения, по умолчанию Enter */
+  /** Список кнопок, при нажатии на которые добавляются значения, по умолчанию Enter */
   createActivateButtonList?: string[];
 
-  //* Функция которая выполняется при нажатии на одну из кнопок из createActivateButtonList */
+  /** Функция которая выполняется при нажатии на одну из кнопок из createActivateButtonList */
   onInputComplete?: () => void;
 
-  //* Функция которая выполняется при нажатии на кнопку очистки поля при активном displayClearIcon */
+  /** Функция которая выполняется при нажатии на кнопку очистки поля при активном displayClearIcon */
   onClearOptions?: () => void;
 
   /** Конфиг функция пропсов для контейнера. На вход получает начальный набор пропсов, на
@@ -65,6 +66,12 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   containerPropsConfig?: (
     props: React.ComponentProps<typeof Container>,
   ) => Partial<React.ComponentProps<typeof Container> & DataAttributes>;
+
+  /** Конфиг функция пропсов для кнопки очистки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
 
   /** Селектор позволяющий найти кнопку закрытия последней опции. Необходимо для срабатывания
    * удаления последней опции при нажатии Backspace в пустом поле ввода. Значение по умолчанию:
@@ -74,8 +81,6 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
   /**  Функция которая выполняется при нажатии на кнопку Backspace в поле ввода, по умолчанию произодет
    * поиск последнего чипа и нажатие на кнопку удалить */
   onBackspaceKeyDown?: typeof pressDeleteButtonOnLastChip;
-
-  children: React.ReactNode;
 }
 
 export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
@@ -93,6 +98,7 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       createActivateButtonList = ['Enter'],
       onInputComplete,
       containerPropsConfig = nothing,
+      clearButtonPropsConfig = nothing,
       onClearOptions,
       iconsBefore,
       iconsAfter,
@@ -109,9 +115,15 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
     const iconBeforeArray = Children.toArray(iconsBefore);
 
     if (displayClearIcon && !props.readOnly && !disableCopying) {
-      iconAfterArray.unshift(
-        <InputIconButton icon={CloseOutlineSvg} onClick={onClearOptions} aria-hidden key={'close'} />,
-      );
+      const clearButtonProps = {
+        icon: CloseOutlineSvg,
+        id: 'searchSelectClearIcon',
+        onClick: onClearOptions,
+        'aria-hidden': true,
+        key: 'close',
+      } satisfies React.ComponentProps<typeof InputIconButton>;
+
+      iconAfterArray.unshift(<InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />);
     }
 
     const handleContainerFocus: React.FocusEventHandler<HTMLDivElement> = (e) => {
@@ -165,14 +177,22 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
 
     return (
       <Container {...containerProps} {...containerPropsConfig(containerProps)}>
-        {iconsBeforeCount > 0 && <IconPanelBefore $dimension={dimension}>{iconBeforeArray}</IconPanelBefore>}
+        {iconsBeforeCount > 0 && (
+          <IconPanelBefore data-role={'icon-pane-before'} $dimension={dimension}>
+            {iconBeforeArray}
+          </IconPanelBefore>
+        )}
 
         <WrapperOptions className="wrapper-options" ref={(elem) => setRefWrapperOptions(elem)}>
           {children} <Input $dimension={dimension} {...props} ref={refSetter(ref, inputRef)} />
         </WrapperOptions>
         <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
 
-        {iconsAfterCount > 0 && <IconPanelAfter $dimension={dimension}>{iconAfterArray}</IconPanelAfter>}
+        {iconsAfterCount > 0 && (
+          <IconPanelAfter data-role={'icon-pane-after'} $dimension={dimension}>
+            {iconAfterArray}
+          </IconPanelAfter>
+        )}
       </Container>
     );
   },
