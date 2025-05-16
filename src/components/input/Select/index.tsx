@@ -850,6 +850,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
+        onMouseDown={(e) => {
+          // если компонент в фокусе (курсор на инпуте) то необходимо отменить уход фокуса с инпута при клике на рамку инпута
+          if (isFocused) {
+            e.preventDefault();
+          }
+        }}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
         title={title}
