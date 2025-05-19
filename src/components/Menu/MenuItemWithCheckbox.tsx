@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import { CheckboxField } from '#src/components/form';
+import { CheckboxField } from '#src/components/form/CheckboxField';
 import { forwardRef } from 'react';
 
 export interface ItemWithCheckbox {
