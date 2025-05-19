@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { type FlatMapItems, MenuItemWithCheckbox } from '#src/components/Menu/MenuItemWithCheckbox';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import { StyledMenu } from '#src/components/input/TreeSelect/styled';
@@ -32,6 +32,7 @@ export const DropDownTree = ({
   dimension = 'l',
   ...props
 }: DropDownTreeProps) => {
+  const [active, setActive] = useState<string>()
   const map = useMemo(() => new Map(items), [items]);
 
   const setChecked = (id: string, value: boolean) => {
@@ -120,8 +121,8 @@ export const DropDownTree = ({
     <DropdownContainer {...dropdownProps} {...dropdownConfig?.(dropdownProps)}>
       <StyledMenu
         {...props}
-        // active={active}
-        // onActivateItem={setActive}
+        active={active}
+        onActivateItem={setActive}
         defaultIsActive={false}
         preselectedModeActive={false}
         model={model}

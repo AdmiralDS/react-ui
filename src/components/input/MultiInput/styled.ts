@@ -142,11 +142,13 @@ export const Input = styled.input<{ $dimension?: ComponentDimension }>`
 `;
 
 export const IconPanelBefore = styled(IconPanel)`
+  height: fit-content;
   & > *:not(:last-child) {
     margin-right: 8px;
   }
 `;
 export const IconPanelAfter = styled(IconPanel)`
+  height: fit-content;
   & > *:not(:first-child) {
     margin-left: 8px;
   }
