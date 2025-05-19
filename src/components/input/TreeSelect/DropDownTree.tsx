@@ -32,7 +32,7 @@ export const DropDownTree = ({
   dimension = 'l',
   ...props
 }: DropDownTreeProps) => {
-  const [active, setActive] = useState<string>()
+  const [active, setActive] = useState<string>();
   const map = useMemo(() => new Map(items), [items]);
 
   const setChecked = (id: string, value: boolean) => {
