@@ -95,7 +95,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     useEffect(() => {
       const array = defaultValue ?? value ?? [];
 
-      const selected = array.map((item) => flatMap.get(item)?.node).filter((item) => !!item);
+      const selected: CheckboxGroupItemProps[] = array
+        .map((item) => flatMap.get(item)?.node)
+        .filter((item): item is CheckboxGroupItemProps => !!item); // https://www.benmvp.com/blog/filtering-undefined-elements-from-array-typescript/
       selected.forEach((item) => (item.checked = true));
 
       setSelectedChips(selected);
