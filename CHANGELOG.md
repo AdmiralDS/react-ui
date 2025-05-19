@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.48.0](https://github.com/AdmiralDS/react-ui/compare/v8.47.0...v8.48.0) (2025-05-19)
+
+
+### Features
+
+* **MultiInput:** добавлено свойство clearButtonPropsConfig для настройки кнопки очистки ([5127923](https://github.com/AdmiralDS/react-ui/commit/512792309ebb064aac56c9ccb87aa5cef2e320c4))
+* **SliderRange:** [#938](https://github.com/AdmiralDS/react-ui/issues/938) add event parameter in onChange callback ([db005c7](https://github.com/AdmiralDS/react-ui/commit/db005c79a1eabcbe2451952f42bdcc85a0c72b7d))
+* **TreeSelect:** Добавлен новый компонент с минимальным набором свойств. ([5a29069](https://github.com/AdmiralDS/react-ui/commit/5a29069f4dc61a7c9239b49c524c4665aea6715e))
+
+
+### Bug Fixes
+
+* **Select:** click on focus ring while in focus ([376c5ac](https://github.com/AdmiralDS/react-ui/commit/376c5aca09a63250d2b59c98a55a29699e40a9fa))
+* **TextArea:** исправлены названия пропсов для передачи в styled контейнер ([9430151](https://github.com/AdmiralDS/react-ui/commit/943015148259b865629bb34f2d6d700544d0604a))
+
 ## [8.47.0](https://github.com/AdmiralDS/react-ui/compare/v8.46.0...v8.47.0) (2025-05-12)
 
 
