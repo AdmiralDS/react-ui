@@ -9,7 +9,7 @@ import { TextInput } from '../TextInput';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
-import { getTimeInMinutes, parseStringToTime } from './utils';
+import { getTimeInMinutes, parseStringToTime, generateTimeArray } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
@@ -22,56 +22,7 @@ export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProp
   value: string;
 }
 
-const defaultSlots: SlotProps[] = [
-  { value: '00:00', disabled: false },
-  { value: '00:30', disabled: false },
-  { value: '01:00', disabled: false },
-  { value: '01:30', disabled: false },
-  { value: '02:00', disabled: false },
-  { value: '02:30', disabled: false },
-  { value: '03:00', disabled: false },
-  { value: '03:30', disabled: false },
-  { value: '04:00', disabled: false },
-  { value: '04:30', disabled: false },
-  { value: '05:00', disabled: false },
-  { value: '05:30', disabled: false },
-  { value: '06:00', disabled: false },
-  { value: '06:30', disabled: false },
-  { value: '07:00', disabled: false },
-  { value: '07:30', disabled: false },
-  { value: '08:00', disabled: false },
-  { value: '08:30', disabled: false },
-  { value: '09:00', disabled: false },
-  { value: '09:30', disabled: false },
-  { value: '10:00', disabled: false },
-  { value: '10:30', disabled: false },
-  { value: '11:00', disabled: false },
-  { value: '11:30', disabled: false },
-  { value: '12:00', disabled: false },
-  { value: '12:30', disabled: false },
-  { value: '13:00', disabled: false },
-  { value: '13:30', disabled: false },
-  { value: '14:00', disabled: false },
-  { value: '14:30', disabled: false },
-  { value: '15:00', disabled: false },
-  { value: '15:30', disabled: false },
-  { value: '16:00', disabled: false },
-  { value: '16:30', disabled: false },
-  { value: '17:00', disabled: false },
-  { value: '17:30', disabled: false },
-  { value: '18:00', disabled: false },
-  { value: '18:30', disabled: false },
-  { value: '19:00', disabled: false },
-  { value: '19:30', disabled: false },
-  { value: '20:00', disabled: false },
-  { value: '20:30', disabled: false },
-  { value: '21:00', disabled: false },
-  { value: '21:30', disabled: false },
-  { value: '22:00', disabled: false },
-  { value: '22:30', disabled: false },
-  { value: '23:00', disabled: false },
-  { value: '23:30', disabled: false },
-];
+const defaultSlots: SlotProps[] = generateTimeArray();
 
 const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
