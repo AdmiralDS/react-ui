@@ -5,6 +5,7 @@ export * from './Select';
 export * from './types';
 export * from './TextArea';
 export * from './TimeInput';
+export * from './TimePicker';
 export * from './SliderInput';
 export * from './FileUploader';
 export * from './SliderRange';
