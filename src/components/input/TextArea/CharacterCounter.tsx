@@ -3,18 +3,18 @@ import type { FC, RefObject } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div<{ error?: boolean; transparent?: boolean }>`
+const Container = styled.div<{ $error?: boolean; $transparent?: boolean }>`
   white-space: nowrap;
   ${typography['Body/Body 2 Long']}
   color: ${(p) =>
-    p.error
+    p.$error
       ? `var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']})`
       : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   transition:
     all 0.5s,
     color 0.5s;
-  opacity: ${(p) => (p.transparent && !p.error ? 0 : 1)};
-  max-width: ${(p) => (p.transparent && !p.error ? 0 : 'none')};
+  opacity: ${(p) => (p.$transparent && !p.$error ? 0 : 1)};
+  max-width: ${(p) => (p.$transparent && !p.$error ? 0 : 'none')};
   overflow: hidden;
 `;
 
@@ -47,8 +47,8 @@ export const CharacterCounter: FC<CharacterCounterProps> = ({
   return currentCount >= maxLength * visibilityThreshold ? (
     <Container
       {...props}
-      error={currentCount >= maxLength}
-      transparent={currentCount < maxLength * visibilityThreshold}
+      $error={currentCount >= maxLength}
+      $transparent={currentCount < maxLength * visibilityThreshold}
     >
       {currentCount}
       {' / '}
