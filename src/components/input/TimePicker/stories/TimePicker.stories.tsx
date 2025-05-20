@@ -11,9 +11,19 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { TimePickerSimpleTemplate } from './TimePickerSimple.template';
+import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
+import { TimePickerRangeTemplate } from './TimePickerRange.template';
+import { TimePickerRangeDisabledTemplate } from './TimePickerRangeDisabled.template';
+import { TimePickerSimpleDisabledTemplate } from './TimePickerSimpleDisabled.template';
+import { TimePickerSimpleCustomSlotsTemplate } from './TimePickerSimpleCustomSlots.template';
 
 // Imports of text sources
 import TimePickerSimpleRaw from './TimePickerSimple.template?raw';
+import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
+import TimePickerRangeRaw from './TimePickerRange.template?raw';
+import TimePickerRangeDisabledRaw from './TimePickerRangeDisabled.template?raw';
+import TimePickerSimpleDisabledRaw from './TimePickerSimpleDisabled.template?raw';
+import TimePickerSimpleCustomSlotsRaw from './TimePickerSimpleCustomSlots.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -140,6 +150,107 @@ export const TimePickerSimple = {
   },
 
   name: 'Базовый компонент',
+};
+
+//</editor-fold>
+
+// //<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой компонента">
+const TimePickerIconCustomStory: StoryFn<typeof TimePicker> = (props) => <TimePickerIconCustomTemplate {...props} />;
+
+export const TimePickerIconCustom = {
+  render: TimePickerIconCustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerIconCustomRaw,
+      },
+    },
+  },
+
+  name: 'Компонент с альтернативной иконкой',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="C диапазоном времени">
+const TimePickerRangeStory: StoryFn<typeof TimePicker> = (props) => <TimePickerRangeTemplate {...props} />;
+
+export const TimePickerRange = {
+  render: TimePickerRangeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerRangeRaw,
+      },
+    },
+  },
+
+  name: 'C диапазоном времени',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="C диапазоном времени и задизейбленными значениями">
+const TimePickerRangeDisabledStory: StoryFn<typeof TimePicker> = (props) => (
+  <TimePickerRangeDisabledTemplate {...props} />
+);
+
+export const TimePickerRangeDisabled = {
+  render: TimePickerRangeDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerRangeDisabledRaw,
+      },
+    },
+  },
+
+  name: 'C диапазоном времени и задизейбленными значениями',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Базовый с задизейбленными значениями">
+const TimePickerSimpleDisabledStory: StoryFn<typeof TimePicker> = (props) => (
+  <TimePickerSimpleDisabledTemplate {...props} />
+);
+
+export const TimePickerSimpleDisabled = {
+  render: TimePickerSimpleDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerSimpleDisabledRaw,
+      },
+    },
+  },
+
+  name: 'Базовый с задизейбленными значениями',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Базовый с кастомными значениями">
+const TimePickerSimpleCustomSlotsStory: StoryFn<typeof TimePicker> = (props) => (
+  <TimePickerSimpleCustomSlotsTemplate {...props} />
+);
+
+export const TimePickerSimpleCustomSlots = {
+  render: TimePickerSimpleCustomSlotsStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerSimpleCustomSlotsRaw,
+      },
+    },
+  },
+
+  name: 'Базовый с кастомными значениями времени',
 };
 
 //</editor-fold>
