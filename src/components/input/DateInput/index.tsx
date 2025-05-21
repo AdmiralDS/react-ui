@@ -37,7 +37,7 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
-function preventUseUnsupportedCharacters(e: React.CompositionEvent<HTMLInputElement>) {
+function preventUseUnsupportedCharacters(e: React.InputEvent<HTMLInputElement>) {
   const typedChar = e.data;
   if (typedChar && typedChar.replace(/[^\d_.]/g, '').length === 0) {
     e.preventDefault();
