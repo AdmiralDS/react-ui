@@ -83,9 +83,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    displayClearIcon: {
-      control: false,
-    },
     icons: {
       control: false,
     },
