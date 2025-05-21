@@ -175,7 +175,7 @@ describe('SearchSelect', () => {
       expect(inputELem).toHaveFocus();
 
       await act(async () => {
-        await user.type(selectWrapper, '{esc}');
+        await user.type(selectWrapper, '{escape}');
       });
       expect(dropDownContainer).not.toBeInTheDocument();
     });
