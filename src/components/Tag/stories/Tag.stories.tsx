@@ -72,6 +72,9 @@ export default {
     statusViaBackground: {
       control: { type: 'boolean' },
     },
+    isBorderHidden: {
+      control: { type: 'boolean' },
+    },
     statusIcon: {
       control: false,
     },
@@ -131,7 +134,10 @@ export const StatusExample = {
 //</editor-fold>
 
 //<editor-fold desc="Tag. Статус через цвет обводки и фона.">
-const StatusBackgroundStory: StoryFn<typeof Tag> = () => <TagStatusBackgroundTemplate />;
+const StatusBackgroundStory: StoryFn<typeof Tag> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagStatusBackgroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const StatusBackgroundExample = {
   render: StatusBackgroundStory,

@@ -9,6 +9,8 @@ const handleClickDangerTag = () => console.log('click danger tag');
 
 export const TagsKindTemplate = ({
   kind = 'success',
+  statusViaBackground,
+  isBorderHidden,
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -18,6 +20,8 @@ export const TagsKindTemplate = ({
       <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
         <Tags
           dimension={props.dimension}
+          statusViaBackground={statusViaBackground}
+          isBorderHidden={isBorderHidden}
           width={50}
           kind={kind}
           // eslint-disable-next-line no-console
