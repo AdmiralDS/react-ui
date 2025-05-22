@@ -15,3 +15,4 @@ export * from './PhoneInputField';
 export * from './InputExField';
 export * from './FileInputField';
 export * from './MultiInputField';
+export * from './TreeSelectField';

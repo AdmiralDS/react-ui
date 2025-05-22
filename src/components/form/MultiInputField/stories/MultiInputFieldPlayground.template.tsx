@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { Chips, MultiInputField, typography } from '@admiral-ds/react-ui';
-import type { InputExFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, MultiInputFieldProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { uid } from '#src/components/common/uid';
 
@@ -41,7 +41,7 @@ export const MultiInputFieldPlaygroundTemplate = ({
   displayClearIcon = true,
   CSSCustomProps,
   ...props
-}: InputExFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+}: MultiInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [value, setValue] = useState('');
   const [listValue, setListValue] = useState<React.ComponentProps<typeof StyledChip>[]>([]);
 

@@ -5,18 +5,18 @@ import {
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
-  MultiInputField,
+  TreeSelectField,
 } from '@admiral-ds/react-ui';
 
-import { MultiInputFieldPlaygroundTemplate } from './MultiInputFieldPlayground.template';
+import { TreeSelectFieldPlaygroundTemplate } from './TreeSelectFieldPlayground.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
-import MultiInputFieldPlaygroundTemplateRaw from './MultiInputFieldPlayground.template?raw';
+import TreeSelectFieldPlaygroundTemplateRaw from './TreeSelectFieldPlayground.template?raw';
 
 export default {
-  title: 'Admiral-2.1/Form Field/MultiInputField',
-  component: MultiInputField,
+  title: 'Admiral-2.1/Form Field/TreeSelectField',
+  component: TreeSelectField,
   decorators: undefined,
   parameters: {
     docs: {
@@ -61,24 +61,25 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as Meta<typeof MultiInputField>;
+} as Meta<typeof TreeSelectField>;
 
-//<editor-fold desc="MultiInputField">
-const MultoOnputFieldInputStory: StoryFn<typeof MultiInputField> = (props) => {
+//#region "Базовый пример компонент"
+const TreeSelectFieldInputStory: StoryFn<typeof TreeSelectField> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <MultiInputFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <TreeSelectFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const MultiInputFieldPlayground = {
-  render: MultoOnputFieldInputStory,
+export const TreeSelectFieldPlayground = {
+  render: TreeSelectFieldInputStory,
 
   parameters: {
     docs: {
       source: {
-        code: MultiInputFieldPlaygroundTemplateRaw,
+        code: TreeSelectFieldPlaygroundTemplateRaw,
       },
     },
   },
 
-  name: 'MultiInputField',
+  name: 'TreeSelectField Базовый пример компонента',
 };
+//#endregion
