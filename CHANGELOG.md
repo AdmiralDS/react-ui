@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.49.0](https://github.com/AdmiralDS/react-ui/compare/v8.48.0...v8.49.0) (2025-05-22)
+
+
+### Features
+
+* **Tag, Tags:** добавлена возможность отключать обводку тэга ([3ff495f](https://github.com/AdmiralDS/react-ui/commit/3ff495fb9ac200bfc0def24b0834c031d1b5528e))
+* **TreeSelectField:** Добавлен компонент [#1784](https://github.com/AdmiralDS/react-ui/issues/1784) ([616bf26](https://github.com/AdmiralDS/react-ui/commit/616bf26e97d1c1719d6717912f4cac9d036e5771))
+
+
+### Bug Fixes
+
+* **PhoneNumberInput:** fix omitting 'value' and 'displayClearIcon' props ([69faac1](https://github.com/AdmiralDS/react-ui/commit/69faac1d5d0c1e5963ab08ce5f3f7711752fbc88))
+
 ## [8.48.0](https://github.com/AdmiralDS/react-ui/compare/v8.47.0...v8.48.0) (2025-05-19)
 
 
