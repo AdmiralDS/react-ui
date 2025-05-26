@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Accordion, AccordionItem, FieldSet, Option, RadioButton, SelectField as Select } from '@admiral-ds/react-ui';
+import { Accordion, AccordionItem, FieldSet, Option, RadioButton, SelectField as Select, Avatar } from '@admiral-ds/react-ui';
 import type { AccordionProps } from '@admiral-ds/react-ui';
 
 const SelectField = styled(Select)`
@@ -30,7 +30,7 @@ export const AccordionPlaygroundTemplate = (props: AccordionProps) => {
       <Accordion {...props}>
         <AccordionItem
           id="accordion1-item1"
-          title="Первый пункт"
+          title={<>Первый пункт<Avatar userName='Test'/></>}
           // eslint-disable-next-line no-console
           onClick={(title, expanded, event) => console.log({ title, expanded, event })}
         >

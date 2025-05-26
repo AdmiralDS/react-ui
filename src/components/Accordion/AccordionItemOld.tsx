@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback } from 'react';
 
 import { uid } from '#src/components/common/uid';
 import { Collapse } from './Collapse';
-import { ItemWrapper, ItemTitle, ItemTitleContent, ItemContent, TitleContent, Chevron } from './style';
+import { ItemWrapperOld, ItemTitleOld, ItemTitleContent, ItemContent, TitleContent, Chevron } from './style';
 
 export interface AccordionItemProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'onClick' | 'title'> {
   /** Заголовок компонента */
@@ -50,25 +50,23 @@ export const AccordionItem: FC<AccordionItemProps> = ({
     [expanded, userExpanded, onClick, title],
   );
   return (
-    <>
-    <ItemWrapper open={collapseOpened} data-disabled={disabled}>
-      <ItemTitle
+    <ItemWrapperOld $opened={collapseOpened} data-disabled={disabled}>
+      <ItemTitleOld
         onClick={handleClick}
-        // role="button"
+        role="button"
+        type="button"
         aria-expanded={collapseOpened}
-        // aria-controls={ITEM_CONTENT_ID}
-        // disabled={disabled}
+        aria-controls={ITEM_CONTENT_ID}
         id={ITEM_TITLE_ID}
-        aria-details={ITEM_CONTENT_ID}
+        disabled={disabled}
         {...props}
       >
         <ItemTitleContent tabIndex={-1}>
           <TitleContent>{title}</TitleContent>
           <Chevron aria-hidden />
         </ItemTitleContent>
-      </ItemTitle>
-    </ItemWrapper>      
-    <Collapse $opened={collapseOpened} $contentMaxHeight={contentMaxHeight}>
+      </ItemTitleOld>
+      <Collapse $opened={collapseOpened} $contentMaxHeight={contentMaxHeight}>
         <ItemContent
           $contentMaxHeight={contentMaxHeight}
           role="region"
@@ -77,6 +75,7 @@ export const AccordionItem: FC<AccordionItemProps> = ({
         >
           {children}
         </ItemContent>
-      </Collapse></>
+      </Collapse>
+    </ItemWrapperOld>
   );
 };
