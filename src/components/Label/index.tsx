@@ -15,7 +15,7 @@ export const Label = styled.label<{ disabled?: boolean }>`
     color: ${(p) =>
       p.disabled ? '' : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
   }
-  [data-required-within] &:after {
+  [data-required-within] &:is(label)[required]::after {
     content: ' *';
     color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }

@@ -27,6 +27,8 @@ export interface TagVisualProps {
    * происходит через цветную статусную метку (цветной кружок рядом с текстом)
    */
   statusViaBackground?: boolean;
+  /** Скрыть обводку тэга (при условии, что статус отображается через цвет обводки и фона) */
+  isBorderHidden?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
   icon?: React.ReactNode;
 }
@@ -58,6 +60,7 @@ export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
       dimension = 'm',
       width,
       statusViaBackground = false,
+      isBorderHidden = false,
       icon,
       statusIcon,
       onClick,
@@ -71,8 +74,13 @@ export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const background: TagKind | string =
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
-    const border: TagKind | string =
-      typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+    const border: TagKind | string = isBorderHidden
+      ? 'transparent'
+      : typeof kind === 'object'
+        ? !!kind.background && !!kind.border
+          ? kind.border
+          : 'neutral'
+        : (kind as TagKind);
     const backgroundHover: TagKind | string =
       typeof kind === 'object'
         ? kind.backgroundHover

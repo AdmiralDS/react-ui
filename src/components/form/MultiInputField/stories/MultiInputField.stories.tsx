@@ -64,13 +64,13 @@ export default {
 } as Meta<typeof MultiInputField>;
 
 //<editor-fold desc="MultiInputField">
-const InputExFieldInputStory: StoryFn<typeof MultiInputField> = (props) => {
+const MultoOnputFieldInputStory: StoryFn<typeof MultiInputField> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <MultiInputFieldPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const MultiInputFieldPlayground = {
-  render: InputExFieldInputStory,
+  render: MultoOnputFieldInputStory,
 
   parameters: {
     docs: {
