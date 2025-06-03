@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.49.1](https://github.com/AdmiralDS/react-ui/compare/v8.49.0...v8.49.1) (2025-06-03)
+
+
+### Bug Fixes
+
+* **Accordion:** [#1599](https://github.com/AdmiralDS/react-ui/issues/1599) заголовок аккордиона переписан на div элемент для решения проблемы с dom nesting ([7b394e0](https://github.com/AdmiralDS/react-ui/commit/7b394e00dd288fa036d9e12c7446298417d2005c))
+* **Field:** fix label selector ([7650659](https://github.com/AdmiralDS/react-ui/commit/765065908de5f29f084995a91b4de76e0e280584))
+
 ## [8.49.0](https://github.com/AdmiralDS/react-ui/compare/v8.48.0...v8.49.0) (2025-05-22)
 
 
