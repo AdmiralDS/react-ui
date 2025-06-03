@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '#src/components/common/keyboardKey';
 
+import { keyboardKey } from '../common/keyboardKey';
 import { Collapse } from './Collapse';
 import { ItemWrapper, ItemTitle, ItemTitleContent, ItemContent, TitleContent, Chevron } from './style';
 
