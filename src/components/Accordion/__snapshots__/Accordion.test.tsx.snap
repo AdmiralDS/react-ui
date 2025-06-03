@@ -75,16 +75,20 @@ exports[`Spinner should render component with dimension m 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:not(:disabled):hover {
+[data-disabled='false'] .c4:hover {
   cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:not(:disabled):active {
+[data-disabled='false'] .c4:active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:not(:disabled):focus:before {
+[data-disabled='false'] .c4:focus-visible {
+  outline: none;
+}
+
+[data-disabled='false'] .c4:focus-visible:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -94,13 +98,9 @@ exports[`Spinner should render component with dimension m 1`] = `
   right: 0;
 }
 
-.c4:not(:disabled):focus,
-.c4:not(:disabled)>.c5 {
-  outline: none;
-}
-
-.c4:disabled {
+[data-disabled='true'] .c4 {
   cursor: not-allowed;
+  user-select: none;
 }
 
 [data-dimension='m'] .c4 {
@@ -179,17 +179,18 @@ exports[`Spinner should render component with dimension m 1`] = `
       >
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_1"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_1"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -201,7 +202,7 @@ exports[`Spinner should render component with dimension m 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -217,17 +218,18 @@ exports[`Spinner should render component with dimension m 1`] = `
         </div>
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_2"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_2"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -239,7 +241,7 @@ exports[`Spinner should render component with dimension m 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -255,17 +257,18 @@ exports[`Spinner should render component with dimension m 1`] = `
         </div>
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_3"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_3"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -277,7 +280,7 @@ exports[`Spinner should render component with dimension m 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -366,16 +369,20 @@ exports[`Spinner should render component with dimension m 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:not(:disabled):hover {
+[data-disabled='false'] .c4:hover {
   cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:not(:disabled):active {
+[data-disabled='false'] .c4:active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:not(:disabled):focus:before {
+[data-disabled='false'] .c4:focus-visible {
+  outline: none;
+}
+
+[data-disabled='false'] .c4:focus-visible:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -385,13 +392,9 @@ exports[`Spinner should render component with dimension m 1`] = `
   right: 0;
 }
 
-.c4:not(:disabled):focus,
-.c4:not(:disabled)>.c5 {
-  outline: none;
-}
-
-.c4:disabled {
+[data-disabled='true'] .c4 {
   cursor: not-allowed;
+  user-select: none;
 }
 
 [data-dimension='m'] .c4 {
@@ -469,17 +472,18 @@ exports[`Spinner should render component with dimension m 1`] = `
     >
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_1"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_1"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -491,7 +495,7 @@ exports[`Spinner should render component with dimension m 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
@@ -507,17 +511,18 @@ exports[`Spinner should render component with dimension m 1`] = `
       </div>
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_2"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_2"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -529,7 +534,7 @@ exports[`Spinner should render component with dimension m 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
@@ -545,17 +550,18 @@ exports[`Spinner should render component with dimension m 1`] = `
       </div>
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_3"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_3"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -567,7 +573,7 @@ exports[`Spinner should render component with dimension m 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
@@ -712,16 +718,20 @@ exports[`Spinner should render default component 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:not(:disabled):hover {
+[data-disabled='false'] .c4:hover {
   cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:not(:disabled):active {
+[data-disabled='false'] .c4:active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:not(:disabled):focus:before {
+[data-disabled='false'] .c4:focus-visible {
+  outline: none;
+}
+
+[data-disabled='false'] .c4:focus-visible:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -731,13 +741,9 @@ exports[`Spinner should render default component 1`] = `
   right: 0;
 }
 
-.c4:not(:disabled):focus,
-.c4:not(:disabled)>.c5 {
-  outline: none;
-}
-
-.c4:disabled {
+[data-disabled='true'] .c4 {
   cursor: not-allowed;
+  user-select: none;
 }
 
 [data-dimension='m'] .c4 {
@@ -816,17 +822,18 @@ exports[`Spinner should render default component 1`] = `
       >
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_1"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_1"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -838,7 +845,7 @@ exports[`Spinner should render default component 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -854,17 +861,18 @@ exports[`Spinner should render default component 1`] = `
         </div>
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_2"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_2"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -876,7 +884,7 @@ exports[`Spinner should render default component 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -892,17 +900,18 @@ exports[`Spinner should render default component 1`] = `
         </div>
         <div
           class="c1 c2"
+          data-disabled="false"
         >
-          <button
+          <div
             aria-controls="accordion_content_AccordionItem_3"
+            aria-disabled="false"
             class="c3 c4"
             id="accordion_title_AccordionItem_3"
             role="button"
-            type="button"
+            tabindex="0"
           >
             <span
               class="c5 c6"
-              tabindex="-1"
             >
               <span
                 class="c7"
@@ -914,7 +923,7 @@ exports[`Spinner should render default component 1`] = `
                 class="c8 c9"
               />
             </span>
-          </button>
+          </div>
           <div
             class="c10"
           >
@@ -1003,16 +1012,20 @@ exports[`Spinner should render default component 1`] = `
   text-rendering: geometricPrecision;
 }
 
-.c4:not(:disabled):hover {
+[data-disabled='false'] .c4:hover {
   cursor: pointer;
   background: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c4:not(:disabled):active {
+[data-disabled='false'] .c4:active {
   background: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c4:not(:disabled):focus:before {
+[data-disabled='false'] .c4:focus-visible {
+  outline: none;
+}
+
+[data-disabled='false'] .c4:focus-visible:before {
   position: absolute;
   content: '';
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
@@ -1022,13 +1035,9 @@ exports[`Spinner should render default component 1`] = `
   right: 0;
 }
 
-.c4:not(:disabled):focus,
-.c4:not(:disabled)>.c5 {
-  outline: none;
-}
-
-.c4:disabled {
+[data-disabled='true'] .c4 {
   cursor: not-allowed;
+  user-select: none;
 }
 
 [data-dimension='m'] .c4 {
@@ -1106,17 +1115,18 @@ exports[`Spinner should render default component 1`] = `
     >
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_1"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_1"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -1128,7 +1138,7 @@ exports[`Spinner should render default component 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
@@ -1144,17 +1154,18 @@ exports[`Spinner should render default component 1`] = `
       </div>
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_2"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_2"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -1166,7 +1177,7 @@ exports[`Spinner should render default component 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
@@ -1182,17 +1193,18 @@ exports[`Spinner should render default component 1`] = `
       </div>
       <div
         class="c1 c2"
+        data-disabled="false"
       >
-        <button
+        <div
           aria-controls="accordion_content_AccordionItem_3"
+          aria-disabled="false"
           class="c3 c4"
           id="accordion_title_AccordionItem_3"
           role="button"
-          type="button"
+          tabindex="0"
         >
           <span
             class="c5 c6"
-            tabindex="-1"
           >
             <span
               class="c7"
@@ -1204,7 +1216,7 @@ exports[`Spinner should render default component 1`] = `
               class="c8 c9"
             />
           </span>
-        </button>
+        </div>
         <div
           class="c10"
         >
