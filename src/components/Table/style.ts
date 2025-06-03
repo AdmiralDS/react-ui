@@ -49,14 +49,16 @@ export const StickyGroupRow = styled.div`
   z-index: 5;
 `;
 
+/** clip-path: inset() позволяет обрезать тень так, чтобы она была только по правому краю */
 export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   background: ${({ theme, $greyHeader }) =>
     $greyHeader
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
+  clip-path: inset(0 -12px 0 0);
   ${TableContainer}[data-shadow-left='true'] & {
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 4px 0 12px red;
   }
 `;
 
@@ -515,11 +517,13 @@ export const Edge = styled.div`
   height: auto;
 `;
 
+/** clip-path: inset() позволяет обрезать тень так, чтобы она была только по левому краю */
 export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
   display: flex;
   position: sticky;
   right: 0;
   z-index: 5;
+  clip-path: inset(0 0 0 -12px);
   .table[data-shadow-right='true'] & {
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
   }

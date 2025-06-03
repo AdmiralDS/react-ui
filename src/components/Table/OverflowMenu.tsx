@@ -16,10 +16,12 @@ export const getActionSize = (dimension: TableProps['dimension']) => {
   }
 };
 
+/** clip-path: inset() позволяет обрезать тень так, чтобы она была только по левому краю */
 const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
   position: sticky;
   right: 0;
   z-index: 5;
+  clip-path: inset(0 0 0 -12px);
 
   .table[data-shadow-right='true'] & {
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
@@ -31,6 +33,7 @@ const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
       width: 0;
       direction: rtl;
       visibility: hidden;
+      clip-path: none;
       &:hover {
         visibility: visible;
       }
