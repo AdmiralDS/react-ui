@@ -35,8 +35,8 @@ const adaptiveMixin = css`
 `;
 
 export const ContentSwitcherComponent = styled.div<ContentSwitcherComponentProps>`
-  background: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
-  border: 2px solid var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
+  background: var(--admiral-color-Opacity_Neutral8, ${(p) => p.theme.color['Opacity/Neutral 8']});
+  border: 2px solid transparent;
   border-radius: ${({ $dimension }) => BORDER_RADIUS[$dimension]}px;
   display: inline-flex;
   height: ${({ $dimension }) => SIZE[$dimension]}px;
