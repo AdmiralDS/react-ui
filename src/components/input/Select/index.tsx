@@ -32,6 +32,7 @@ import {
   ValueWrapper,
 } from './styled';
 import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { Spinner } from '#src/components/Spinner';
 import { DisplayValue } from './DisplayValue';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
@@ -767,10 +768,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (!passClick) handleSearchPanelToggle();
     };
 
-    const handleClickOutside = () => {
+    const handleClickOutside = (e: Event) => {
+      if (e.target && containerRef.current?.contains(e.target as Node)) {
+        return;
+      }
       setIsFocused(false);
       onCloseSelect();
     };
+
+    useClickOutside([containerRef, dropDownRef], handleClickOutside);
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
@@ -909,7 +915,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
-            onClickOutside={handleClickOutside}
             {...dropContainerProps}
           >
             <StyledMenu
