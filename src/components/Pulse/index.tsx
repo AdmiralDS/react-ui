@@ -1,6 +1,19 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-const SAnim = keyframes`
+export type PulseDimension = 'l' | 'm' | 's';
+export type PulseStatus = 'info' | 'danger' | 'success' | 'warning';
+
+export interface PulseProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Размер компонента */
+  dimension?: PulseDimension;
+  /** Статус компонента (цветовое окрашивание).
+   * Можно задать кастомный цвет через объект со свойством background */
+  status?: PulseStatus | { background?: string };
+  /** Позволяет добавлять  миксин созданный с помощью styled css  */
+  cssMixin?: ReturnType<typeof css>;
+}
+
+const AnimationS = keyframes`
  0% {
     width: 6px;
     height: 6px;
@@ -22,7 +35,7 @@ const SAnim = keyframes`
   }
 `;
 
-const MAnim = keyframes`
+const AnimationM = keyframes`
  0% {
     width: 10px;
     height: 10px;
@@ -42,7 +55,7 @@ const MAnim = keyframes`
   }
 `;
 
-const LAnim = keyframes`
+const AnimationL = keyframes`
  0% {
     width: 14px;
     height: 14px;
@@ -62,7 +75,30 @@ const LAnim = keyframes`
   }
 `;
 
-const PulseElement = styled.div<{ $dimension: 'l' | 'm' | 's' }>`
+const getPulseColor = css<{ $status: PulseStatus | { background?: string } }>`
+  ${({ theme, $status }) => {
+    switch ($status) {
+      case 'danger':
+        return `var(--admiral-color-Error_Error60Main, ${theme.color['Error/Error 60 Main']})`;
+      case 'success':
+        return `var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']})`;
+      case 'warning':
+        return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
+      case 'info':
+        return `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`;
+      default:
+        return (
+          $status?.background || `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`
+        );
+    }
+  }}
+`;
+
+const PulseElement = styled.div<{
+  $dimension: PulseDimension;
+  $status: PulseStatus | { background?: string };
+  $cssMixin?: ReturnType<typeof css>;
+}>`
   position: relative;
   display: flex;
   justify-content: center;
@@ -70,7 +106,7 @@ const PulseElement = styled.div<{ $dimension: 'l' | 'm' | 's' }>`
   block-size: ${(p) => (p.$dimension == 'l' ? 16 : p.$dimension == 'm' ? 12 : 8)}px;
   inline-size: ${(p) => (p.$dimension == 'l' ? 16 : p.$dimension == 'm' ? 12 : 8)}px;
   border-radius: 50%;
-  background-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+  background-color: ${getPulseColor};
 
   &:before {
     position: absolute;
@@ -78,15 +114,17 @@ const PulseElement = styled.div<{ $dimension: 'l' | 'm' | 's' }>`
     background-color: transparent;
     border-radius: 50%;
     border-style: solid;
-    border-color: ${(p) => p.theme.color['Primary/Primary 60 Main']};
+    border-color: ${getPulseColor};
     box-sizing: border-box;
-    animation-name: ${(p) => (p.$dimension == 'l' ? LAnim : p.$dimension == 'm' ? MAnim : SAnim)};
+    animation-name: ${(p) => (p.$dimension == 'l' ? AnimationL : p.$dimension == 'm' ? AnimationM : AnimationS)};
     animation-duration: 2500ms;
     animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
     animation-iteration-count: infinite;
   }
+
+  ${(p) => p.$cssMixin}
 `;
 
-export const Pulse = ({ dimension }: { dimension: 'l' | 'm' | 's' }) => {
-  return <PulseElement $dimension={dimension} />;
+export const Pulse: React.FC<PulseProps> = ({ dimension = 'm', status = 'info', cssMixin, ...props }) => {
+  return <PulseElement $dimension={dimension} $status={status} $cssMixin={cssMixin} {...props} />;
 };
