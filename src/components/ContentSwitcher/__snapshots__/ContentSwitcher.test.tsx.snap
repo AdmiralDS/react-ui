@@ -54,8 +54,8 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c0 {
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 2px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 2px solid transparent;
   border-radius: 20px;
   display: inline-flex;
   height: 32px;
@@ -148,8 +148,8 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c0 {
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 2px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 2px solid transparent;
   border-radius: 20px;
   display: inline-flex;
   height: 32px;

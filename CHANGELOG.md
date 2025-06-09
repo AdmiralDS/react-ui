@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.50.0](https://github.com/AdmiralDS/react-ui/compare/v8.49.1...v8.50.0) (2025-06-07)
+
+
+### Features
+
+* **ContentSwitcher:** цвет фона изменен на Opacity/Neutral 8 ([d2cc0c6](https://github.com/AdmiralDS/react-ui/commit/d2cc0c6c8c64b40b1bfc3223e29aa19477338910))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** onClickOutside works even with other DropdownContainer as children ([778079e](https://github.com/AdmiralDS/react-ui/commit/778079e2a0ec731ab9a9466aad3ba3a8ec3a8210))
+
 ### [8.49.1](https://github.com/AdmiralDS/react-ui/compare/v8.49.0...v8.49.1) (2025-06-03)
 
 
