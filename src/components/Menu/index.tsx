@@ -95,7 +95,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
   dimension?: MenuDimensions;
   /** Активная секция Menu */
-  active?: string;
+  active?: string | null;
   /** Секция в состоянии preselected  */
   preselected?: string;
   /** выбранная секция Menu */
