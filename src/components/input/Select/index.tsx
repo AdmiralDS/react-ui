@@ -800,7 +800,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {memorisedChildren}
         </DropDownProvider>
       ),
-      [memorisedChildren, dimension, showCheckbox],
+      [memorisedChildren, dimension, showCheckbox, multiple],
     );
 
     const memorisedConstantOptions = useMemo(
