@@ -214,7 +214,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
-    const findNextId = (currentId?: string) => {
+    const findNextId = (currentId?: string | null) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
       let finishCycle = false;
@@ -233,7 +233,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       return disabled ? undefined : model[nextIndex].id;
     };
 
-    const findPreviousId = (currentId?: string) => {
+    const findPreviousId = (currentId?: string | null) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
       let finishCycle = false;
@@ -484,7 +484,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    const previousActive = useRef<string | undefined>();
+    const previousActive = useRef<string | undefined | null>();
     const previousActiveState = useRef<string | undefined>();
     const previousPreselected = useRef<string | undefined>();
     const previousPreselectedState = useRef<string | undefined>();
