@@ -1,37 +1,27 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 
 import { Option, Select } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-export const SelectMultiTemplate = (props: SelectProps) => {
-  const [_, setSelectValue] = React.useState<string[]>(
-    Array.from({ length: 20 })
-      .map((_, ind) => String(ind))
-      .slice(0, 10),
-  );
+const options = Array.from({ length: 20 }).map((_item, index) => ({ value: `${index}0000`, text: `${index}0000` }));
+options.unshift({
+  value: 'big',
+  text: 'Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку',
+});
 
-  const handleSelectedChange = (value: string | Array<string>) => {
-    if (Array.isArray(value)) setSelectValue(value);
-  };
+export const SelectMultiTemplate = (props: SelectProps) => {
+  const memoizedOptions = useMemo(() => {
+    return options.map(({ value, text }) => (
+      <Option key={value} renderChip={() => text} value={value}>
+        {text}
+      </Option>
+    ));
+  }, []);
 
   return (
     <>
-      <Select
-        {...props}
-        multiple={true}
-        onSelectedChange={handleSelectedChange}
-        dimension="xl"
-        displayClearIcon={true}
-        placeholder="Placeholder"
-      >
-        <Option id={'big'} value="big">
-          Здесь ооооочень большой текст, который может, так сказать, и не поместиться в одну строку
-        </Option>
-        {Array.from({ length: 20 }).map((_option, ind) => (
-          <Option id={ind.toString()} key={ind} value={`${ind}0000`} disabled={[1, 3].includes(ind)}>
-            {`${ind}0000`}
-          </Option>
-        ))}
+      <Select {...props} multiple={true} dimension="xl" displayClearIcon={true} placeholder="Placeholder">
+        {memoizedOptions}
       </Select>
     </>
   );
