@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.51.0](https://github.com/AdmiralDS/react-ui/compare/v8.50.0...v8.51.0) (2025-06-10)
+
+
+### Features
+
+* **Pulse:** [#1797](https://github.com/AdmiralDS/react-ui/issues/1797) добавлен компонент Pulse ([c041b60](https://github.com/AdmiralDS/react-ui/commit/c041b601d23eb8564f443a708db6dac6135e24e3))
+
+
+### Bug Fixes
+
+* **Select:**  Исправлен баг отображения checkbox при переключении режима multiple ([57c7f0d](https://github.com/AdmiralDS/react-ui/commit/57c7f0d2e2951946676bb6639951f6c2ae3f06b1))
+* **TreeSelect:** Испроавлено прокручивание списока вверх при удалении чипса [#1793](https://github.com/AdmiralDS/react-ui/issues/1793) ([97bf390](https://github.com/AdmiralDS/react-ui/commit/97bf3901229aba7ae1b952eff7021afb99d55610))
+
 ## [8.50.0](https://github.com/AdmiralDS/react-ui/compare/v8.49.1...v8.50.0) (2025-06-07)
 
 
