@@ -20,7 +20,7 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Модель данных, с рендер-пропсами*/
   model: Array<MenuModelItemProps>;
   /** Id активного элемента */
-  activeId?: string;
+  activeId?: string | null;
   /** Id выбранных элементов */
   selected: Array<string>;
   /** render-метод для отрисовки пункта меню */
@@ -28,7 +28,7 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface PreviousValues {
-  activeId?: string;
+  activeId?: string | null;
 }
 
 interface Partition {

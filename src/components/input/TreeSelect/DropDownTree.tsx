@@ -121,7 +121,7 @@ export const DropDownTree = ({
     <DropdownContainer {...dropdownProps} {...dropdownConfig?.(dropdownProps)}>
       <StyledMenu
         {...props}
-        active={active}
+        active={active ?? null}
         onActivateItem={setActive}
         defaultIsActive={false}
         preselectedModeActive={false}
