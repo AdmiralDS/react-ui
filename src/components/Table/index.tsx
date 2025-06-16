@@ -608,7 +608,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     const renderHiddenHeader = () => {
       return (
-        <HiddenHeader ref={hiddenHeaderRef}>
+        <HiddenHeader ref={hiddenHeaderRef} $dimension={dimension}>
           {(displayRowSelectionColumn || displayRowExpansionColumn || rowsDraggable || showRowsActions) && (
             <StickyWrapper>
               {rowsDraggable && <DragCell $dimension={dimension} />}
