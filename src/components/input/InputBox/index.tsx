@@ -32,6 +32,7 @@ export const InputBox = styled.div<SizeProps & { disabled?: boolean; $status?: I
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: stretch;
+  width: 280px;
 
   height: 40px;
   padding: 0;

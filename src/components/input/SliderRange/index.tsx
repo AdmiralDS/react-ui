@@ -44,7 +44,10 @@ export interface SliderRangeProps
   /** Дефолтное значение компонента - массив из двух строк (значений первого и второго инпутов) */
   defaultValue?: [string, string];
   /** Колбек на изменение значений */
-  onChange?: (value: [{ str: string; num: number }, { str: string; num: number }], event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: [{ str: string; num: number }, { str: string; num: number }],
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
   /** Размер компонента */
   dimension?: Dimension;
   /** Минимальное значение слайдера */
@@ -193,18 +196,24 @@ export const SliderRange: React.FC<SliderRangeProps> = ({
   const handleInput1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSlider1 = Number(clearValue(event.target.value, precision, decimal).replace(decimal, '.') || minValue);
     setInnerInput1State(event.target.value);
-    onChange?.([
-      { str: event.target.value, num: newSlider1 },
-      { str: input2, num: slider2 },
-    ], event);
+    onChange?.(
+      [
+        { str: event.target.value, num: newSlider1 },
+        { str: input2, num: slider2 },
+      ],
+      event,
+    );
   };
   const handleInput2Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSlider2 = Number(clearValue(event.target.value, precision, decimal).replace(decimal, '.') || maxValue);
     setInnerInput2State(event.target.value);
-    onChange?.([
-      { str: input1, num: slider1 },
-      { str: event.target.value, num: newSlider2 },
-    ], event);
+    onChange?.(
+      [
+        { str: input1, num: slider1 },
+        { str: event.target.value, num: newSlider2 },
+      ],
+      event,
+    );
   };
 
   const inputProps = {
