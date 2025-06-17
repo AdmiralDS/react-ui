@@ -43,9 +43,6 @@ export default {
     disabled: {
       control: { type: 'boolean' },
     },
-    displayClearIcon: {
-      control: { type: 'boolean' },
-    },
     disableCopying: {
       control: { type: 'boolean' },
     },
@@ -70,6 +67,9 @@ export default {
     },
     dropContainerStyle: {
       control: false,
+    },
+    extraText: {
+      control: { type: 'text' },
     },
   },
 } as Meta<typeof PhoneInputField>;

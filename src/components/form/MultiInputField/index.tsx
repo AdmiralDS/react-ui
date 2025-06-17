@@ -64,4 +64,4 @@ export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFiel
   );
 });
 
-MultiInputField.displayName = 'InputExField';
+MultiInputField.displayName = 'MultiInputField';

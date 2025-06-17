@@ -11,9 +11,9 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Отображаемая строка */
   row: TableRow;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId | string) => void;
+  onRowClick?: (rowId: RowId | string, event: React.MouseEvent<HTMLDivElement>) => void;
   /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId | string) => void;
+  onRowDoubleClick?: (rowId: RowId | string, event: React.MouseEvent<HTMLDivElement>) => void;
   /** Признак необходимости отображать нижнюю границу */
   underline: boolean;
   /** Признак является ли строка заголовком группы */
@@ -53,12 +53,12 @@ export const RowWrapper = ({
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
 
-  const handleRowClick = (rowId: RowId | string) => {
-    onRowClick?.(rowId);
+  const handleRowClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    onRowClick?.(row.id, event);
   };
 
-  const handleRowDoubleClick = (rowId: RowId | string) => {
-    onRowDoubleClick?.(rowId);
+  const handleRowDoubleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    onRowDoubleClick?.(row.id, event);
   };
 
   const handleOverflowMenuClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -70,8 +70,8 @@ export const RowWrapper = ({
     <Row
       {...props}
       ref={rowRef}
-      onClick={row.disabled ? undefined : () => handleRowClick(row.id)}
-      onDoubleClick={row.disabled ? undefined : () => handleRowDoubleClick(row.id)}
+      onClick={row.disabled ? undefined : handleRowClick}
+      onDoubleClick={row.disabled ? undefined : handleRowDoubleClick}
       $underline={underline}
       disabled={!!row.disabled}
       $dimension={dimension}

@@ -2,13 +2,11 @@ import type { CSSProperties, HTMLAttributes, PropsWithChildren } from 'react';
 import { forwardRef, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { css } from 'styled-components';
 import styled from 'styled-components';
-
-import { useClickOutside } from '#src/components/common/hooks/useClickOutside';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { PositionInPortal } from '#src/components/PositionInPortal';
 import { useInterval } from '#src/components/common/hooks/useInterval';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { DropdownContext, useDropdown, useDropdownsClickOutside } from '#src/components/DropdownProvider';
+import { DropdownContext } from '#src/components/DropdownProvider';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { setVerticalPosition, setHorizontalPosition } from './utils';
 
@@ -59,7 +57,7 @@ export interface DropContainerStyles {
 }
 export interface DropContainerProps {
   /**
-   *  Позволяет обработать событие при клике вне компонента
+   *  Позволяет обработать событие возникшее при клике вне компонента и его детей, включая другие DropContainer
    */
   onClickOutside?: (e: Event) => void;
 }
@@ -71,19 +69,13 @@ export interface DropdownContainerProps
   /** Элемент, относительно которого позиционируется выпадающее меню */
   targetElement: Element | null;
 }
-
+const doNothing = () => null;
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
-  ({ targetElement, onClickOutside = () => null, className = '', alignSelf, dropContainerCssMixin, ...props }, ref) => {
+  ({ targetElement, onClickOutside = doNothing, className = '', alignSelf, dropContainerCssMixin, ...props }, ref) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = useState(false);
 
-    const { addDropdown, removeDropdown, dropdowns } = useDropdown(containerRef);
     const { rootRef } = useContext(DropdownContext);
-
-    const handleClickOutside = (e: Event) => {
-      if (useDropdownsClickOutside(e, dropdowns)) onClickOutside(e);
-    };
-    useClickOutside([containerRef], handleClickOutside);
 
     useLayoutEffect(() => {
       if (containerRef.current !== document.activeElement) {
@@ -122,16 +114,46 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
       }
     }, []);
 
-    useLayoutEffect(() => {
-      addDropdown?.(containerRef);
+    const [shouldTriggerClickOutside, setShouldTriggerClickOutside] = useState(false);
+
+    useEffect(() => {
+      function listener() {
+        setShouldTriggerClickOutside(true);
+      }
+
+      document.addEventListener('mousedown', listener, true);
+      document.addEventListener('touchstart', listener, true);
+
       return () => {
-        removeDropdown?.(containerRef);
+        document.removeEventListener('mousedown', listener, true);
+        document.removeEventListener('touchstart', listener, true);
       };
     }, []);
 
+    useEffect(() => {
+      function listener(e: MouseEvent | TouchEvent) {
+        onClickOutside(e);
+      }
+      if (shouldTriggerClickOutside) {
+        document.addEventListener('mouseup', listener);
+        document.addEventListener('touchend', listener);
+
+        return () => {
+          document.removeEventListener('mouseup', listener);
+          document.removeEventListener('touchend', listener);
+        };
+      }
+    }, [shouldTriggerClickOutside]);
+    const onMouseDownHandler = () => setShouldTriggerClickOutside(false);
+
     return (
       <>
-        <Portal targetElement={targetElement} $reverse={displayUpward} rootRef={rootRef}>
+        <Portal
+          targetElement={targetElement}
+          $reverse={displayUpward}
+          rootRef={rootRef}
+          onMouseDown={onMouseDownHandler}
+        >
           <FakeTarget />
           <Container
             ref={refSetter(ref, containerRef)}

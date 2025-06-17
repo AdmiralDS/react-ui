@@ -102,7 +102,7 @@ const FlagContainer = styled.div<{ $dimension: Dimension }>`
 // https://github.com/AdmiralDS/react-ui/issues/971
 
 export interface PhoneNumberInputProps
-  extends Omit<TextInputProps, 'value | displayClearIcon'>,
+  extends Omit<TextInputProps, 'value' | 'displayClearIcon'>,
     Omit<DropContainerStyles, 'alignSelf'> {
   value?: string;
   /** Код ISO A3 страны для определения префикса номера по умолчанию */

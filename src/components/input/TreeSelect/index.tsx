@@ -101,7 +101,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       selected.forEach((item) => (item.checked = true));
 
       setSelectedChips(selected);
-    }, [value]);
+    }, [defaultValue, value]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {

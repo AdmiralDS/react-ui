@@ -446,7 +446,7 @@ export const HeaderCellsWrapper = styled.div<{
   width: calc(100% - ${(p) => getTechColumnsWidth(p) + 'px'});
 `;
 
-export const HiddenHeader = styled.div`
+export const HiddenHeader = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -454,6 +454,7 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
+  ${headerStyle}
 `;
 
 export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`

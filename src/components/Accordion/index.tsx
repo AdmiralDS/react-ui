@@ -37,7 +37,7 @@ export const Accordion: FC<AccordionProps> = ({
   const handleKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
     let focusedOption: any = ((accordionRef.current && accordionRef.current.ownerDocument) || document).activeElement;
     // если фокус находится на AccordionItem Title, то можно переключаться между accordion items с помощью ArrowDown, ArrowUp, Home, End
-    if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'button') {
+    if (focusedOption.id.indexOf('accordion_title') > -1 && focusedOption.tagName.toLowerCase() === 'div') {
       do {
         focusedOption = focusedOption?.parentNode;
       } while (focusedOption.parentNode !== accordionRef.current);

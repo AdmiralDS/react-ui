@@ -7,7 +7,6 @@ import type { AccordionProps } from '@admiral-ds/react-ui';
 const SelectField = styled(Select)`
   margin-top: 24px;
 `;
-
 const OPTIONS_SIMPLE = [
   'teeext 1',
   'text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text text 2 text ',

@@ -2,6 +2,52 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.51.0](https://github.com/AdmiralDS/react-ui/compare/v8.50.0...v8.51.0) (2025-06-10)
+
+
+### Features
+
+* **Pulse:** [#1797](https://github.com/AdmiralDS/react-ui/issues/1797) добавлен компонент Pulse ([c041b60](https://github.com/AdmiralDS/react-ui/commit/c041b601d23eb8564f443a708db6dac6135e24e3))
+
+
+### Bug Fixes
+
+* **Select:**  Исправлен баг отображения checkbox при переключении режима multiple ([57c7f0d](https://github.com/AdmiralDS/react-ui/commit/57c7f0d2e2951946676bb6639951f6c2ae3f06b1))
+* **TreeSelect:** Испроавлено прокручивание списока вверх при удалении чипса [#1793](https://github.com/AdmiralDS/react-ui/issues/1793) ([97bf390](https://github.com/AdmiralDS/react-ui/commit/97bf3901229aba7ae1b952eff7021afb99d55610))
+
+## [8.50.0](https://github.com/AdmiralDS/react-ui/compare/v8.49.1...v8.50.0) (2025-06-07)
+
+
+### Features
+
+* **ContentSwitcher:** цвет фона изменен на Opacity/Neutral 8 ([d2cc0c6](https://github.com/AdmiralDS/react-ui/commit/d2cc0c6c8c64b40b1bfc3223e29aa19477338910))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** onClickOutside works even with other DropdownContainer as children ([778079e](https://github.com/AdmiralDS/react-ui/commit/778079e2a0ec731ab9a9466aad3ba3a8ec3a8210))
+
+### [8.49.1](https://github.com/AdmiralDS/react-ui/compare/v8.49.0...v8.49.1) (2025-06-03)
+
+
+### Bug Fixes
+
+* **Accordion:** [#1599](https://github.com/AdmiralDS/react-ui/issues/1599) заголовок аккордиона переписан на div элемент для решения проблемы с dom nesting ([7b394e0](https://github.com/AdmiralDS/react-ui/commit/7b394e00dd288fa036d9e12c7446298417d2005c))
+* **Field:** fix label selector ([7650659](https://github.com/AdmiralDS/react-ui/commit/765065908de5f29f084995a91b4de76e0e280584))
+
+## [8.49.0](https://github.com/AdmiralDS/react-ui/compare/v8.48.0...v8.49.0) (2025-05-22)
+
+
+### Features
+
+* **Tag, Tags:** добавлена возможность отключать обводку тэга ([3ff495f](https://github.com/AdmiralDS/react-ui/commit/3ff495fb9ac200bfc0def24b0834c031d1b5528e))
+* **TreeSelectField:** Добавлен компонент [#1784](https://github.com/AdmiralDS/react-ui/issues/1784) ([616bf26](https://github.com/AdmiralDS/react-ui/commit/616bf26e97d1c1719d6717912f4cac9d036e5771))
+
+
+### Bug Fixes
+
+* **PhoneNumberInput:** fix omitting 'value' and 'displayClearIcon' props ([69faac1](https://github.com/AdmiralDS/react-ui/commit/69faac1d5d0c1e5963ab08ce5f3f7711752fbc88))
+
 ## [8.48.0](https://github.com/AdmiralDS/react-ui/compare/v8.47.0...v8.48.0) (2025-05-19)
 
 

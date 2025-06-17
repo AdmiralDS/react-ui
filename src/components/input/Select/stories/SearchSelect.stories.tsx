@@ -5,7 +5,7 @@ import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS
 
 import { SearchSelectRenderPropsTemplate } from './searchSelect/SearchSelectRenderProps.template';
 import { LoadOnScrollTemplate } from './searchSelect/SearchSelectLoadingOnScroll.template';
-import { SearchSelectWithAsyncLoadingTemplate } from './searchSelect/SearchSelectWithAsyncLoading.template';
+import { AsyncDataLoadingTemplate } from './searchSelect/AsyncLoading.template';
 import { SearchSelectWithFilterTemplate } from './searchSelect/SearchSelectWithFilter.template';
 import { SearchSelectCustomOptionTemplate } from './searchSelect/SearchSelectCustomOption.template';
 import { SearchSelectRenderValueTemplate } from './searchSelect/SearchSelectRenderValue.template';
@@ -27,7 +27,7 @@ import { SearchSelectWithChooseAllButtonTemplate } from './searchSelect/SearchSe
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
 import SearchSelectLoadOnScrollRaw from './searchSelect/SearchSelectLoadingOnScroll.template?raw';
-import SearchSelectWithAsyncLoadingRaw from './searchSelect/SearchSelectWithAsyncLoading.template?raw';
+import AsyncDataLoadingTemplateRaw from './searchSelect/AsyncLoading.template?raw';
 import SearchSelectWithFilterRaw from './searchSelect/SearchSelectWithFilter.template?raw';
 import SearchSelectCustomOptionRaw from './searchSelect/SearchSelectCustomOption.template?raw';
 import SearchSelectRenderValueRaw from './searchSelect/SearchSelectRenderValue.template?raw';
@@ -301,7 +301,7 @@ export const SearchSelectOptionGroup = {
 const AsyncSearchSelectStory: StoryFn<typeof Select> = (props) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <SearchSelectWithAsyncLoadingTemplate {...props} />
+      <AsyncDataLoadingTemplate {...props} />
     </QueryClientProvider>
   );
 };
@@ -312,13 +312,13 @@ export const AsyncSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: SearchSelectWithAsyncLoadingRaw,
+        code: AsyncDataLoadingTemplateRaw,
         source: { language: 'tsx' },
       },
     },
   },
 
-  name: 'SearchSelect. Асинхронный',
+  name: 'С запросом данных и фильтрацией на сервере',
 };
 
 //</editor-fold>
