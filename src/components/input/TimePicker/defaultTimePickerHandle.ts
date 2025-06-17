@@ -24,7 +24,7 @@ export function defaultTimePickerHandle(inputData: InputData | null): InputData 
   let value: string = inputData.value || '';
   const selectionStart: number = inputData.selectionStart || 0;
   let moveCursor: number = 0;
-  const lengthDifference: number = value.length - 5; // 5 is the length of a valid time string without colons
+  const lengthDifference: number = value.length - 5;
 
   if (lengthDifference < 0) {
     const newChar = value.charAt(selectionStart - 1);
@@ -36,6 +36,9 @@ export function defaultTimePickerHandle(inputData: InputData | null): InputData 
       value = splice(value, selectionStart, 1, '');
     } else if (selectionStart - 1 !== 2 && selectionStart - 1 !== 1 && isValidDigit(newChar, selectionStart - 1)) {
       value = splice(value, selectionStart, 1, '');
+    } else if (selectionStart - 1 === 0 || selectionStart - 1 === 3) {
+      value = splice(value, selectionStart - 1, 1, '0' + newChar);
+      moveCursor += 1;
     } else if (selectionStart - 1 !== 2) {
       value = splice(value, selectionStart - 1, 1, '');
       moveCursor -= 1;
@@ -51,7 +54,7 @@ export function defaultTimePickerHandle(inputData: InputData | null): InputData 
     }
   }
 
-  value = value.replace(/:/g, '');
+  value = value.replace(/[^0-9]/g, '');
   if (value.length >= 2) {
     value = `${value.substring(0, 2)}:${value.substring(2, 4)}`;
     if (selectionStart > 2) {
