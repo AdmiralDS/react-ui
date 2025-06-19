@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.52.0](https://github.com/AdmiralDS/react-ui/compare/v8.51.0...v8.52.0) (2025-06-19)
+
+
+### Features
+
+* **Table:** [#1802](https://github.com/AdmiralDS/react-ui/issues/1802) добавлен параметр event в колбеки onRowClick, onRowDoubleClick ([07ec9f3](https://github.com/AdmiralDS/react-ui/commit/07ec9f3c68c3e3be76d710f8d41e9a03538cfdea))
+
 ## [8.51.0](https://github.com/AdmiralDS/react-ui/compare/v8.50.0...v8.51.0) (2025-06-10)
 
 
