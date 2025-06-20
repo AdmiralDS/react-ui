@@ -509,10 +509,7 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension']; $cssM
   & > .td {
     width: 100%;
   }
-  ${(p) => {
-    console.log(p.$cssMixin);
-    return p.$cssMixin;
-  }}
+  ${(p) => p.$cssMixin}
 `;
 
 export const Spacer = styled.div`

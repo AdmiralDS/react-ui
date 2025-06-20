@@ -42,7 +42,6 @@ export const RowDrag = ({
   const rowMirrorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(draggedRowCssMixin);
     rowToGroup.current = rowToGroupMap;
   }, [rowToGroupMap]);
 
@@ -126,6 +125,7 @@ export const RowDrag = ({
       const firstCell = dragRow?.getElementsByClassName('td')[0];
       if (firstCell && rowMirror) {
         const draggedCell = firstCell.cloneNode(true);
+        /** Убираем ограничения по ширине */
         (draggedCell as HTMLElement).style.removeProperty('width');
         rowMirror.appendChild(draggedCell);
       }
