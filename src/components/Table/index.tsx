@@ -92,6 +92,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       rowsDraggable = false,
       onRowDrag,
       onRowDragEnd,
+      draggedColumnCssMixin,
+      draggedRowCssMixin,
       rowBackgroundColorByStatusMap: userRowBackgroundColorByStatusMap,
       showBorders = false,
       ...props
@@ -700,6 +702,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           tableRef={tableRef}
           normalColumnsWrapperRef={normalColumnsWrapperRef}
           stickyColumnsWrapperRef={stickyColumnsWrapperRef}
+          draggedColumnCssMixin={draggedColumnCssMixin}
         />
         <RowDrag
           onRowDrag={onRowDrag}
@@ -709,6 +712,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           tableRef={tableRef}
           bodyRef={bodyRef}
           rowToGroupMap={rowToGroupMap}
+          draggedRowCssMixin={draggedRowCssMixin}
         />
       </TableContainer>
     );

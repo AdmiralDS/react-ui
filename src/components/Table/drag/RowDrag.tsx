@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
+import { css } from 'styled-components';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorRow } from '../style';
@@ -17,6 +18,7 @@ type RowDragProps = {
   tableRef: React.RefObject<HTMLElement>;
   bodyRef: React.RefObject<HTMLElement>;
   rowToGroupMap: GroupRows;
+  draggedRowCssMixin?: ReturnType<typeof css>;
 };
 
 export const RowDrag = ({
@@ -27,6 +29,7 @@ export const RowDrag = ({
   tableRef,
   bodyRef,
   rowToGroupMap,
+  draggedRowCssMixin,
 }: RowDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -121,7 +124,10 @@ export const RowDrag = ({
     function renderMirror(dragRow: HTMLElement | null) {
       const firstCell = dragRow?.getElementsByClassName('td')[0];
       if (firstCell && rowMirror) {
-        rowMirror.appendChild(firstCell.cloneNode(true));
+        const draggedCell = firstCell.cloneNode(true);
+        /** Убираем ограничения по ширине */
+        (draggedCell as HTMLElement).style.removeProperty('width');
+        rowMirror.appendChild(draggedCell);
       }
     }
     function removeMirror() {
@@ -169,6 +175,9 @@ export const RowDrag = ({
   }, [rowsDraggable]);
 
   return rowsDraggable
-    ? createPortal(<MirrorRow $dimension={dimension} ref={rowMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(
+        <MirrorRow $dimension={dimension} ref={rowMirrorRef} $cssMixin={draggedRowCssMixin} />,
+        rootRef?.current || document.body,
+      )
     : null;
 };
