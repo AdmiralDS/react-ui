@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
+import { css } from 'styled-components';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorColumn } from '../style';
@@ -17,6 +18,7 @@ type ColumnDragProps = {
   tableRef: React.RefObject<HTMLElement>;
   normalColumnsWrapperRef: React.RefObject<HTMLElement>;
   stickyColumnsWrapperRef: React.RefObject<HTMLElement>;
+  draggedColumnCssMixin?: ReturnType<typeof css>;
 };
 
 export const ColumnDrag = ({
@@ -28,6 +30,7 @@ export const ColumnDrag = ({
   tableRef,
   normalColumnsWrapperRef,
   stickyColumnsWrapperRef,
+  draggedColumnCssMixin,
 }: ColumnDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -152,6 +155,9 @@ export const ColumnDrag = ({
   }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
-    ? createPortal(<MirrorColumn $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(
+        <MirrorColumn $dimension={dimension} ref={columnMirrorRef} $cssMixin={draggedColumnCssMixin} />,
+        rootRef?.current || document.body,
+      )
     : null;
 };
