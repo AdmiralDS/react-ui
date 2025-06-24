@@ -42,14 +42,11 @@ export const TableContainer = styled.div`
   }
 `;
 
-export const StickyGroupRow = styled.div`
+export const StickyWrapper = styled.div<{ $greyHeader?: boolean }>`
   display: flex;
   position: sticky;
   left: 0;
   z-index: 5;
-`;
-
-export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   background: ${({ theme, $greyHeader }) =>
     $greyHeader
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
