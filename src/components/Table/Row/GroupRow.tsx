@@ -5,7 +5,7 @@ import {
   ExpandIconPlacement,
   CheckboxCell,
   GroupTextContent,
-  StickyGroupRow,
+  StickyWrapper,
   Filler,
   DragCell,
 } from '#src/components/Table/style';
@@ -62,7 +62,7 @@ export const GroupRow = ({
 
   return (
     <>
-      <StickyGroupRow>
+      <StickyWrapper>
         {rowsDraggable && <DragCell $dimension={dimension} />}
         <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
           <ExpandIconPlacement
@@ -86,10 +86,10 @@ export const GroupRow = ({
             />
           </CheckboxCell>
         )}
-        <Cell key={`${row.id}`} $dimension={dimension} className="td" data-column="group" data-row={row.id}>
-          {renderGroup()}
-        </Cell>
-      </StickyGroupRow>
+      </StickyWrapper>
+      <Cell key={`${row.id}`} $dimension={dimension} className="td" data-column="group" data-row={row.id}>
+        {renderGroup()}
+      </Cell>
       <Filler />
     </>
   );
