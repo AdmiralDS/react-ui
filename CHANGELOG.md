@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.52.2](https://github.com/AdmiralDS/react-ui/compare/v8.52.1...v8.52.2) (2025-06-25)
+
+
+### Bug Fixes
+
+* **InputLine:** fix type and names, delete trash ([8ac6909](https://github.com/AdmiralDS/react-ui/commit/8ac69091ebda52a8951d8c7b4a04e031c9c7ce4e))
+* **Table:** [#1812](https://github.com/AdmiralDS/react-ui/issues/1812) исправлен баг с шириной миниатюры перемещаемой строки, добавлены параметры draggedRowCssMixin, draggedColumnCssMixin ([0aa19a5](https://github.com/AdmiralDS/react-ui/commit/0aa19a52013ed00eec832d9e7666fc91dfb4eb3b))
+* **Table:** [#1815](https://github.com/AdmiralDS/react-ui/issues/1815) исправлен баг с фиксацией заголовков групп строк при горизонтальном скролле ([b43884a](https://github.com/AdmiralDS/react-ui/commit/b43884a83e4d56e7edf5f496f075e3d29cff0035))
+
 ### [8.52.1](https://github.com/AdmiralDS/react-ui/compare/v8.52.0...v8.52.1) (2025-06-25)
 
 ## [8.52.0](https://github.com/AdmiralDS/react-ui/compare/v8.51.0...v8.52.0) (2025-06-19)
