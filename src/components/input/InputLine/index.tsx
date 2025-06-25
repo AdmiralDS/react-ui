@@ -24,19 +24,19 @@ export const StyledInputLine = styled.input<{ $isTmpValue?: boolean }>`
   }
 `;
 
-const Visible = styled.span`
+const PlaceholderValue = styled.span`
   color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   transition: color 0.3s ease-in-out;
 `;
 
-const AdditionalText = styled(Visible)`
+const AdditionalText = styled(PlaceholderValue)`
   user-select: none;
   -webkit-user-select: none;
   pointer-events: none;
 `;
-const InputValue = styled.span<{ $isTmpValue?: boolean }>`
+
+const InvisibleInputValue = styled.span`
   visibility: hidden;
-  transition: color 0.3s ease-in-out;
 `;
 
 const InputLineContainer = styled.div`
@@ -46,7 +46,7 @@ const InputLineContainer = styled.div`
   overflow: hidden;
   position: relative;
 
-  &:focus-within ${Visible} {
+  &:focus-within ${PlaceholderValue} {
     color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
 `;
@@ -71,17 +71,18 @@ const AdditionalTextWrapper = styled.div`
   white-space: pre;
 `;
 
-export type InputLineProps = JSX.IntrinsicElements['input'] & {
+export interface InputLineProps extends React.InputHTMLAttributes<HTMLInputElement> {
   dataPlaceholder?: string;
   tmpValue?: string;
+  value?: string;
   prefix?: string;
   suffix?: string;
-};
+}
 
 export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
   ({ className, dataPlaceholder, tmpValue, prefix, suffix, ...inputProps }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const visibleRef = useRef<HTMLSpanElement>(null);
+    const placeholderRef = useRef<HTMLSpanElement>(null);
 
     const placeholder = inputProps.placeholder;
     const isTmpValue = typeof tmpValue === 'string';
@@ -97,22 +98,22 @@ export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
 
     useEffect(() => {
       const inputNode = inputRef.current;
-      const visNode = visibleRef.current;
+      const placeholderNode = placeholderRef.current;
 
       function oninput(this: HTMLInputElement) {
         const { value } = this;
         const len = value.length;
 
-        if (visNode) {
+        if (placeholderNode) {
           if (typeof placeholder === 'string' && placeholder.length > 0 && len == 0) {
-            visNode.innerHTML = '';
+            placeholderNode.innerHTML = '';
           } else {
-            visNode.innerHTML = dataPlaceholder?.substring(len) || '';
+            placeholderNode.innerHTML = dataPlaceholder?.substring(len) || '';
           }
         }
       }
 
-      if (typeof dataPlaceholder === 'string' && inputNode && visNode) {
+      if (typeof dataPlaceholder === 'string' && inputNode && placeholderNode) {
         inputNode.addEventListener('input', oninput);
 
         return () => inputNode.removeEventListener('input', oninput);
@@ -132,8 +133,8 @@ export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
         )}
         <InputContainer>
           <MaskBox>
-            <InputValue>{isTmpValue ? tmpValue : inputProps.value}</InputValue>
-            <Visible ref={visibleRef}></Visible>
+            <InvisibleInputValue>{isTmpValue ? tmpValue : inputProps.value}</InvisibleInputValue>
+            <PlaceholderValue ref={placeholderRef}></PlaceholderValue>
             {suffix && (inputProps.value !== '' || tmpValue) && (
               <AdditionalTextWrapper>
                 <AdditionalText> </AdditionalText>
