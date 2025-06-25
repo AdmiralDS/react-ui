@@ -454,11 +454,15 @@ export const HiddenHeader = styled.div<{ $dimension: TableProps['dimension'] }>`
   ${headerStyle}
 `;
 
-export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
+export const MirrorColumn = styled(HeaderCell)<{
+  $dimension: TableProps['dimension'];
+  $cssMixin?: ReturnType<typeof css>;
+}>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
   display: flex;
+  box-sizing: border-box;
   max-width: 200px;
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -474,18 +478,19 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
-
   & > [data-title] {
     ${singleLineTitle}
   }
+  ${(p) => p.$cssMixin}
 `;
 
-export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const MirrorRow = styled.div<{ $dimension: TableProps['dimension']; $cssMixin?: ReturnType<typeof css> }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   max-width: 288px;
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -498,6 +503,10 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
+  & > .td {
+    width: 100%;
+  }
+  ${(p) => p.$cssMixin}
 `;
 
 export const Spacer = styled.div`
