@@ -1,5 +1,7 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { typography } from '@admiral-ds/react-ui';
+import type { TableProps } from '@admiral-ds/react-ui';
 
 const TableWrapper = styled.div`
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -29,11 +31,6 @@ const TableWrapper = styled.div`
     background-color: ${(p) => p.theme.color['Neutral/Neutral 10']};
   }
 
-  td {
-    ${(p) => p.theme.typography['Body/Body 2 Short']}
-    padding: 12px;
-  }
-
   th,
   td {
     box-shadow: 0 0 0 1px ${(p) => p.theme.color['Neutral/Neutral 20']};
@@ -43,6 +40,56 @@ const TableWrapper = styled.div`
   th:last-child {
     width: 100%;
   }
+`;
+
+// Прорабатывается возможность перехода с разметкой с использованием div на табличные теги
+// Для табличных тегов существуют сложности с оперделением конкретной ширины в стилях
+
+export const Cell = styled.td<{ $dimension: TableProps['dimension']; $resizer?: boolean }>`
+  box-sizing: border-box;
+  padding: ${({ $dimension }) => {
+    switch ($dimension) {
+      case 's':
+        return '6px 12px 5px 12px';
+      case 'l':
+        return '12px 16px 11px 16px';
+      case 'xl':
+        return '16px 16px 15px 16px';
+      case 'm':
+      default:
+        return '10px 12px 9px 12px';
+    }
+  }};
+  overflow: hidden;
+  border-right: 1px solid transparent;
+`;
+
+const disabledRow = css`
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  cursor: not-allowed;
+  & > * {
+    pointer-events: none;
+  }
+`;
+
+const underlineRow = css`
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+`;
+
+export const Row = styled.tr<{
+  $dimension: TableProps['dimension'];
+  $underline: boolean;
+  disabled?: boolean;
+}>`
+  position: relative;
+  min-width: fit-content;
+  background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
+  ${({ $dimension }) =>
+    $dimension === 'l' || $dimension === 'xl' ? typography['Body/Body 1 Short'] : typography['Body/Body 2 Short']}
+  ${({ disabled }) => disabled && disabledRow}
+  ${({ $underline }) => $underline && underlineRow}
+  transition: opacity 0.3s ease;
 `;
 
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
@@ -135,11 +182,13 @@ export const TanstackTemplate = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <Row $dimension="m" $underline key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                <Cell $dimension="m" key={cell.id} style={{ width: '100px' }}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Cell>
               ))}
-            </tr>
+            </Row>
           ))}
         </tbody>
       </TableWrapper>
