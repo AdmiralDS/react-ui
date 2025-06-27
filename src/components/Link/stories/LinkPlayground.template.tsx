@@ -4,9 +4,8 @@ import type { LinkProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-const Divider = styled.div`
-  width: 10px;
-  height: 12px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 export const LinkPlaygroundTemplate = ({
@@ -16,13 +15,12 @@ export const LinkPlaygroundTemplate = ({
 }: LinkProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <T font="Body/Body 1 Short" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Компонент Link используется для навигации. Может применяться отдельно или внутри текста, с иконкой или без.
-      </T>
-      <T font="Body/Body 1 Short" as="div">
+        <Separator />
         Ссылки бывают двух типов — Primary и Secondary, и двух размеров — M (24px) и S (20px).
       </T>
-      <Divider />
+      <Separator $height={24} />
       <Link {...props} href="http://localhost:6006/?path=/story/example-link--playground">
         {props.children || 'Link'}
       </Link>

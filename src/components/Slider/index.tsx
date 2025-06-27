@@ -5,6 +5,7 @@ import { throttle } from '#src/components/common/utils/throttle';
 import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
+import { ThumbTooltip } from './ThumbTooltip';
 
 export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
@@ -39,6 +40,8 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   dimension?: 'xl' | 'm';
   /** Состояние skeleton */
   skeleton?: boolean;
+  /** Отобразить подсказку (Tooltip) текущего значения */
+  showTooltip?: boolean;
 }
 
 export const Slider = ({
@@ -55,6 +58,7 @@ export const Slider = ({
   step: userStep = 1,
   dimension = 'xl',
   skeleton = false,
+  showTooltip = false,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
@@ -64,9 +68,9 @@ export const Slider = ({
   const [animation, setAnimation] = useState(true);
   const [rangeWidth, setRangeWidth] = useState(0);
 
-  const filledRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const [filledTrack, setFilledTrack] = useState<HTMLDivElement | null>(null);
+  const [thumb, setThumb] = useState<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     function correctSliderPosition(value: number) {
@@ -77,9 +81,9 @@ export const Slider = ({
       calcPercents = calcPercents < 0 ? 0 : calcPercents;
 
       const sliderCoords = String(value) ? calcPercents : 0;
-      if (sliderRef.current && filledRef.current) {
-        sliderRef.current.style.left = `${sliderCoords}%`;
-        filledRef.current.style.width = `${sliderCoords}%`;
+      if (thumb && filledTrack) {
+        thumb.style.left = `${sliderCoords}%`;
+        filledTrack.style.width = `${sliderCoords}%`;
       }
     }
 
@@ -103,7 +107,7 @@ export const Slider = ({
     }
 
     correctSliderPosition(newValue);
-  }, [value, minValue, maxValue, step, rangeWidth]);
+  }, [value, minValue, maxValue, step, rangeWidth, thumb, filledTrack]);
 
   useLayoutEffect(() => {
     if (trackRef.current) {
@@ -205,7 +209,7 @@ export const Slider = ({
     <Wrapper data-disabled={disabled} $disabled={disabled} $skeleton={skeleton} {...props}>
       <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
         <Track>
-          <FilledTrack ref={filledRef} $animation={animation} />
+          <FilledTrack ref={(node) => setFilledTrack(node)} $animation={animation} />
           <DefaultTrack ref={trackRef}>
             {
               <TickMarks
@@ -220,7 +224,7 @@ export const Slider = ({
               />
             }
             <Thumb
-              ref={sliderRef}
+              ref={(node) => setThumb(node)}
               $animation={animation}
               $dimension={dimension}
               role="slider"
@@ -232,6 +236,7 @@ export const Slider = ({
             >
               <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
             </Thumb>
+            {showTooltip && <ThumbTooltip targetElement={thumb} value={value} isDraging={isDraging} />}
           </DefaultTrack>
         </Track>
       </TrackWrapper>

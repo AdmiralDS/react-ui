@@ -2,7 +2,7 @@ import type { ChangeEvent } from 'react';
 import { useState, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { InputIconButton, TextInput, typography } from '@admiral-ds/react-ui';
+import { InputIconButton, TextInput, T } from '@admiral-ds/react-ui';
 import type { TextInputProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
@@ -12,9 +12,7 @@ const DisplayContainer = styled.div`
     margin-bottom: 24px;
   }
 `;
-const Desc = styled.div`
-  ${typography['Body/Body 1 Long']}
-`;
+
 interface InputIcon {
   text: string;
 }
@@ -60,7 +58,9 @@ export const TextInputWithIconTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
-        <Desc>Поле ввода с одной иконкой:</Desc>
+        <T font="Body/Body 1 Long" as="div">
+          Поле ввода с одной иконкой:
+        </T>
         <TextInput
           {...props}
           containerRef={informerInput1Ref}
@@ -69,7 +69,9 @@ export const TextInputWithIconTemplate = ({
           onChange={handleChange1}
           iconsAfter={<InputIcon text="Icon after" />}
         />
-        <Desc>Поле ввода с двумя иконками:</Desc>
+        <T font="Body/Body 1 Long" as="div">
+          Поле ввода с двумя иконками:
+        </T>
         <TextInput
           {...props}
           containerRef={informerInput2Ref}
@@ -83,7 +85,9 @@ export const TextInputWithIconTemplate = ({
             </>
           }
         />
-        <Desc>Поле ввода с иконкой слева:</Desc>
+        <T font="Body/Body 1 Long" as="div">
+          Поле ввода с иконкой слева:
+        </T>
         <TextInput
           {...props}
           containerRef={informerInput3Ref}

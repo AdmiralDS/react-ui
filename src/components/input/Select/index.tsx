@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react';
 import styled, { useTheme } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -47,7 +48,7 @@ import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
 
-export type { SearchFormat } from './types';
+export * from './types';
 
 /**
  * Осталось сделать:
@@ -213,8 +214,21 @@ export interface SelectProps
   onSelectedChange?: (value: string | Array<string>) => void;
   /** Признак поднятия выбранных опций вверх списка */
   moveSelectedOnTop?: boolean;
+  /** Признак очищения введенного значения после выбора элемента в режиме "searchSelect" */
+  clearInputValueAfterSelect?: boolean;
+  /** Конфиг функция пропсов для кнопки выпадающего списка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  openButtonPropsConfig?: (
+    props: React.ComponentProps<typeof OpenStatusButton>,
+  ) => Partial<React.ComponentProps<typeof OpenStatusButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки очистки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
 }
 
+const nothing = () => {};
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
@@ -271,13 +285,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       forceHideOverflowTooltip = false,
       onSelectedChange,
       moveSelectedOnTop,
+      clearInputValueAfterSelect = true,
+      openButtonPropsConfig = nothing,
+      clearButtonPropsConfig = nothing,
       ...props
     },
     ref,
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const emptyMessage = locale?.emptyMessage || (
-      <DropDownText>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
+      <DropDownText $dimension={dimension}>{theme.locales[theme.currentLocale].select.emptyMessage}</DropDownText>
     );
     const [selectedValue, setSelectedValue] = useState(value ?? defaultValue);
     const [internalSearchValue, setSearchValue] = useState('');
@@ -382,6 +399,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
+    useEffect(() => {
+      if (activeItem) {
+        const item = dropDownModel.find((item) => item.id === activeItem);
+        if (!item) {
+          setActiveItem(undefined);
+        }
+      }
+    }, [dropDownModel, activeItem]);
+
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -441,14 +467,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         if (!multiple) onCloseSelect();
 
-        if (searchValue && inputRef.current) {
+        if (searchValue && inputRef.current && clearInputValueAfterSelect) {
           changeInputData(inputRef.current, {
             value: '',
             selectionEnd: 0,
             selectionStart: 0,
           });
           const currentActiveItem = activeItem;
-          setActiveItem(undefined);
+          setActiveItem('');
           setTimeout(() => setActiveItem(currentActiveItem));
         }
       },
@@ -653,6 +679,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         setIsSearchPanelOpen(false);
         selectRef.current?.blur();
         onBlurFromProps?.(evt);
+        isKeyboardEvent.current = false;
       }
     };
 
@@ -711,8 +738,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     useEffect(() => {
       if (isSearchPanelOpen) {
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+        setPreseleceted('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
+
+    useEffect(() => {
+      if (preselected) setActiveItem('');
+    }, [preselected]);
+
+    useEffect(() => {
+      if (activeItem) setPreseleceted('');
+    }, [activeItem]);
 
     useEffect(() => {
       if (isSearchPanelOpen) {
@@ -764,7 +800,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {memorisedChildren}
         </DropDownProvider>
       ),
-      [memorisedChildren, dimension, showCheckbox],
+      [memorisedChildren, dimension, showCheckbox, multiple],
     );
 
     const memorisedConstantOptions = useMemo(
@@ -786,6 +822,19 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isKeyboardEvent.current = true;
     };
 
+    const clearButtonProps = {
+      icon: CloseOutlineSvg,
+      id: 'searchSelectClearIcon',
+      onClick: handleOnClear,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof InputIconButton>;
+
+    const openButtonProps = {
+      $isOpen: isSearchPanelOpen,
+      onClick: handleSearchPanelToggle,
+      'aria-hidden': true,
+    } satisfies React.ComponentProps<typeof OpenStatusButton>;
+
     return (
       <SelectWrapper
         className={className}
@@ -801,6 +850,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
+        onMouseDown={(e) => {
+          // если компонент в фокусе (курсор на инпуте) то необходимо отменить уход фокуса с инпута при клике на рамку инпута
+          if (isFocused) {
+            e.preventDefault();
+          }
+        }}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
         title={title}
@@ -820,7 +875,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <ValueWrapper
           tabIndex={-1}
           ref={valueWrapperRef}
-          id="selectValueWrapper"
+          className="selectValueWrapper"
           $dimension={dimension}
           $multiple={multiple}
           $minRowCount={minRowCount !== 'none' ? minRowCount : undefined}
@@ -866,7 +921,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={activeItem}
               selected={selectedValue}
-              onActivateItem={setActiveItem}
+              onActivateItem={(id) => setActiveItem(id)}
               onSelectItem={handleOptionSelect}
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}
@@ -892,16 +947,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         >
           {isLoading && <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />}
           {displayClearIcon && !readOnly && needShowClearIcon && (
-            <InputIconButton icon={CloseOutlineSvg} id="searchSelectClearIcon" onClick={handleOnClear} aria-hidden />
+            <InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />
           )}
           {icons}
           {!readOnly && (
             <OpenStatusButton
-              $isOpen={isSearchPanelOpen}
               data-disabled={disabled ? true : undefined}
               data-loading={isLoading ? true : undefined}
-              onClick={handleSearchPanelToggle}
-              aria-hidden
+              {...openButtonProps}
+              {...openButtonPropsConfig(openButtonProps)}
             />
           )}
         </IconPanel>

@@ -14,6 +14,10 @@ const AmountCell = styled.div`
   }
 `;
 
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
+
 const numberFormatter = new Intl.NumberFormat();
 
 type RowData = TableRow & {
@@ -206,5 +210,28 @@ export const TableColumnWidthTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        По умолчанию ширина столбца составляет 100 пикселей. Чтобы изменить этот параметр в массиве{' '}
+        <code>columnList</code> для столбца, чью ширину нужно изменить, следует задать параметр <code>width</code>. В
+        качестве значения <code>width</code> может выступать любое валидное css значение (пиксели, проценты, функция
+        calc и т.д.).
+        <Separator />
+        Также ширину столбца можно регулировать с помощью ручного ресайза, для этого нужно потянуть разделитель между
+        столбцами в нужном направлении. При этом обязательно должен быть задан колбек <code>onColumnResize</code>. При
+        срабатывании колбек сообщает пользователю о попытке ресайзинга столбца, после чего пользователь должен обновить
+        ширину соответствующего столбца в массиве <code>columnList</code>. Таким образом контроль за ресайзингом
+        происходит на стороне пользователя.
+        <Separator />
+        По умолчанию в таблице всегда включена возможность ручного ресайза столбцов, однако с помощью параметра{' '}
+        <code>disableColumnResize</code> можно отменить эту возможность для всей таблицы, либо с помощью параметра{' '}
+        <code>disableResize</code> отключить ресайз для отдельного столбца. Также в таблице по умолчанию не отображается
+        разделитель для последнего столбца, данное поведение можно изменить с помощью параметра{' '}
+        <code>showDividerForLastColumn</code>.
+      </T>
+      <Separator $height={24} />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+    </>
+  );
 };

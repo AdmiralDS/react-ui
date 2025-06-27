@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta, InputIconButton } from '@admiral-ds/react-ui';
+import { GlobalSearch, useDebounce, MenuItem, getTextHighlightMeta, InputIconButton, T } from '@admiral-ds/react-ui';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { GlobalSearchProps, BorderRadiusType, RenderOptionProps, HighlightFormat } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -158,6 +158,10 @@ export const BasicExampleTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Prefix появляется если назначать prefixValue, а если назначить prefixValueList превращается в мини префикс
+        селект.
+      </T>
       <Wrapper>
         <GlobalSearch
           {...props}

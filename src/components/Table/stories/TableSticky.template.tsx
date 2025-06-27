@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -208,12 +211,26 @@ export const TableStickyTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rowList}
-      columnList={cols}
-      style={{ maxHeight: '300px', maxWidth: '700px' }}
-      onColumnResize={handleResize}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        При необходимости можно “закреплять” столбцы таблицы. Фиксированные столбцы располагаются по левому краю таблицы
+        и идут друг за другом (то есть фиксированные столбцы должны быть заданы в начале <code>columnList</code> друг за
+        другом и никак иначе).
+        <Separator />
+        Чтобы сделать столбец фиксированным, необходимо задать для него параметр <code>sticky:true</code>.
+        <Separator />
+        Столбцы с чекбоксами, стрелками, <code>OverflowMenu</code> и иконками одиночных действий (если задан параметр{' '}
+        <code>showRowsActions=true</code>) являются фиксированными по умолчанию. Столбец с <code>OverflowMenu</code> и
+        иконками одиночных действий является единственным столбцом, который позиционируется по правому краю таблицы.
+      </T>
+      <Separator $height={24} />
+      <Table
+        {...props}
+        rowList={rowList}
+        columnList={cols}
+        style={{ maxHeight: '300px', maxWidth: '700px' }}
+        onColumnResize={handleResize}
+      />
+    </>
   );
 };

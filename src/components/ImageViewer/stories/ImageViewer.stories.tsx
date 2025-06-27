@@ -5,14 +5,12 @@ import { ImageViewer } from '@admiral-ds/react-ui';
 
 import { ImageViewerPlaygroundTemplate } from './ImageViewerPlayground.template';
 import { ImageViewerMobileTemplate } from './ImageViewerMobile.template';
-//import { ImageViewerVariantsTemplate } from './ImageViewerVariants.template';
-//import { ImageViewerAppearanceTemplate } from './ImageViewerAppearance.template';
+import { ImageViewerControlledStateTemplate } from '#src/components/ImageViewer/stories/ImageViewerControlledState.template';
 
 // Imports of text sources
 import ImageViewerPlaygroundRaw from './ImageViewerPlayground.template?raw';
 import ImageViewerMobileRaw from './ImageViewerMobile.template?raw';
-//import ImageViewerVariantsRaw from './ImageViewerVariants.template?raw';
-//import ImageViewerAppearanceRaw from './ImageViewerAppearance.template?raw';
+import ImageViewerControlledStateRaw from './ImageViewerControlledState.template?raw';
 
 export default {
   title: 'Admiral-2.1/ImageViewer',
@@ -71,7 +69,7 @@ export const ImageViewerPlayground = {
 
 //</editor-fold>
 
-//<editor-fold desc="ImageViewer. Размеры">
+//<editor-fold desc="ImageViewer. Mobile">
 const ImageViewerMobileStory: StoryFn<typeof ImageViewer> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <ImageViewerMobileTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -93,46 +91,24 @@ export const ImageViewerMobile = {
 
 //</editor-fold>
 
-/*//<editor-fold desc="ImageViewer. Appearance">
-const ImageViewerAppearanceStory: StoryFn<typeof ImageViewer> = (props) => {
+//<editor-fold desc="ImageViewer. Controlled state">
+const ImageViewerControlledStateStory: StoryFn<typeof ImageViewer> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <ImageViewerAppearanceTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <ImageViewerControlledStateTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const ImageViewerAppearance = {
-  render: ImageViewerAppearanceStory,
+export const ImageViewerControlledState = {
+  render: ImageViewerControlledStateStory,
 
   parameters: {
     docs: {
       source: {
-        code: ImageViewerAppearanceRaw,
+        code: ImageViewerControlledStateRaw,
       },
     },
   },
 
-  name: 'ImageViewer. Appearance',
+  name: 'ImageViewer. ControlledState',
 };
 
-//</editor-fold>*/
-
-/*//<editor-fold desc="ImageViewer. Варианты использования">
-const ImageViewerVariantsStory: StoryFn<typeof ImageViewer> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <ImageViewerVariantsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const ImageViewerVariants = {
-  render: ImageViewerVariantsStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: ImageViewerVariantsRaw,
-      },
-    },
-  },
-
-  name: 'ImageViewer. Варианты использования',
-};
-
-//</editor-fold>*/
+//</editor-fold>

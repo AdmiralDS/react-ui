@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, ModalTitle, ModalContent, Button } from '@admiral-ds/react-ui';
+import { Modal, ModalTitle, ModalContent, Button, T } from '@admiral-ds/react-ui';
 import type { ModalProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider, css } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -17,6 +17,11 @@ export const ModalCustomOverlayTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        У пользователя есть возможность кастомизировать внешний вид подложки модального окна. Для этого можно
+        воспользоваться параметром overlayStyledCss, чтобы задать миксин со стилями для подложки. Либо можно
+        воспользоваться параметрами overlayClassName, overlayStyle.
+      </T>
       <Button onClick={() => setOpened(true)}>Open modal with custom overlay</Button>
       {opened && (
         <Modal

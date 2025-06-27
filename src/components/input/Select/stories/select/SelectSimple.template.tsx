@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { ThemeProvider } from 'styled-components';
 
@@ -12,7 +12,9 @@ export const SelectSimpleTemplate = ({
   CSSCustomProps,
   ...props
 }: SelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [selectValue, setSelectValue] = React.useState('');
+  const clearButtonProps = { 'data-testid': 'selectClearButton' };
+  const openButtonProps = { 'data-testid': 'selectOpenButton' };
+  const [selectValue, setSelectValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
 
@@ -30,6 +32,8 @@ export const SelectSimpleTemplate = ({
         onSelectedChange={handleSelectedChange}
         placeholder={placeholder}
         dropContainerClassName="dropContainerClass"
+        clearButtonPropsConfig={() => clearButtonProps}
+        openButtonPropsConfig={() => openButtonProps}
       >
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>

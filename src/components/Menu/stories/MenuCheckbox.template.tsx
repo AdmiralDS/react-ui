@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { mediumGroupBorderRadius, Menu, MenuItemWithCheckbox } from '@admiral-ds/react-ui';
+import { mediumGroupBorderRadius, Menu, MenuItemWithCheckbox, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -83,6 +83,9 @@ export const MenuCheckboxTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример меню с пунктами, содержащими Checkbox.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

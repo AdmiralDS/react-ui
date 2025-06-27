@@ -143,9 +143,6 @@ export const EditModeAreaFieldExtraText = {
       source: {
         code: EditModeAreaFieldExtraTextRaw,
       },
-      description: {
-        story: `В режиме редактирования допускается использование поясняющего текста для инпута.`,
-      },
     },
   },
 };

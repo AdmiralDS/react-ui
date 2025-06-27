@@ -3,14 +3,16 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuVertical } from '@admiral-ds/react-ui';
 
 import { VerticalTabMenuTemplate } from './VerticalTabMenuTemplate';
-import { VerticalTabMenuWithAddButtonTemplate } from '#src/components/TabMenuComponent/stories/verticalTabMenuStories/VerticalTabMenuWithAddButtonTemplate';
+import { VerticalTabMenuWithAddButtonTemplate } from './VerticalTabMenuWithAddButtonTemplate';
+import { VerticalTabMenuSecondaryTemplate } from './VerticalTabMenuSecondaryTemplate';
 
 // Imports of text sources
 import VerticalTabMenuRaw from './VerticalTabMenuTemplate?raw';
 import VerticalTabMenuWithAddButtonRaw from './VerticalTabMenuWithAddButtonTemplate?raw';
+import VerticalTabMenuSecondaryRaw from './VerticalTabMenuSecondaryTemplate?raw';
 
 export default {
-  title: 'Admiral-2.1/TabMenuComponent/TabMenuVertical',
+  title: 'Admiral-2.1/Tabs/TabMenuVertical',
   decorators: undefined,
   component: TabMenuVertical,
   parameters: {
@@ -23,6 +25,10 @@ export default {
   argTypes: {
     dimension: {
       options: ['l', 'm'],
+      control: { type: 'radio' },
+    },
+    appearance: {
+      options: ['primary', 'secondary'],
       control: { type: 'radio' },
     },
     showUnderline: {
@@ -125,6 +131,27 @@ export const VerticalTabMenuWithAddButtonExample = {
     },
   },
 
-  name: 'Вертикальный вариант TabMenu с возможностью добавления вкладок..',
+  name: 'Вертикальный вариант TabMenu с возможностью добавления вкладок.',
+};
+//</editor-fold>
+
+//<editor-fold desc="VerticalTabMenuSecondary.">
+const VerticalTabMenuSecondaryStory: StoryFn<typeof TabMenuVertical> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <VerticalTabMenuSecondaryTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const VerticalTabMenuSecondaryExample = {
+  render: VerticalTabMenuSecondaryStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: VerticalTabMenuSecondaryRaw,
+      },
+    },
+  },
+
+  name: 'Вертикальный вариант TabMenu со стилем secondary.',
 };
 //</editor-fold>

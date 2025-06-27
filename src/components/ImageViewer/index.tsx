@@ -60,7 +60,7 @@ export const ImageViewer = ({
   const renderItem = (item: string | ImageProps, index: number) => {
     const itemKey = uid();
     const handleMouseDown = () => {
-      setActiveImgState(index);
+      handleActiveChange(index);
       setVisibleState(true);
     };
     return <ImageMiniature item={item} dimension={dimension} onMouseDown={handleMouseDown} key={itemKey} />;

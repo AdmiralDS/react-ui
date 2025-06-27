@@ -5,11 +5,20 @@ import { InputEx, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIU
 import { InputExBaseTemplate } from './InputExBase.template';
 import { InputExPrefixSuffixSelectTemplate } from './InputExPrefixSuffixSelect.template';
 import { InputExCustomTemplate } from './InputExCustom.template';
+import { CurrencyInputPlaygroundTemplate } from './CurrencyInputPlayground.template';
+import { CurrencyInputWithPrefixTemplate } from './CurrencyInputWithPrefix.template';
+import { CurrencyInputMinMaxValueTemplate } from './CurrencyInputMinMaxValue.template';
 
 // Imports of text sources
 import InputExBaseRaw from './InputExBase.template?raw';
 import InputExPrefixSuffixSelectRaw from './InputExPrefixSuffixSelect.template?raw';
 import InputExCustomRaw from './InputExCustom.template?raw';
+import CurrencyInputPlaygroundTemplateRaw from './CurrencyInputPlayground.template?raw';
+import CurrencyInputWithPrefixTemplateRaw from './CurrencyInputWithPrefix.template?raw';
+import CurrencyInputMinMaxValueTemplateRaw from './CurrencyInputMinMaxValue.template?raw';
+import type { ComponentProps } from 'react';
+
+type CurrencyInputType = Omit<ComponentProps<typeof InputEx>, 'onChange'>;
 
 export default {
   title: 'Admiral-2.1/Input/InputEx',
@@ -177,3 +186,59 @@ export const InputExCustom = {
 
   name: 'InputExtended. Кастомизация',
 };
+
+//<editor-fold desc="Базовый CurrencyInput">
+const CurrencyInputPlaygroundStory: StoryFn<CurrencyInputType> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CurrencyInputPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const Playground = {
+  render: CurrencyInputPlaygroundStory,
+  parameters: {
+    docs: {
+      source: {
+        code: CurrencyInputPlaygroundTemplateRaw,
+      },
+    },
+  },
+  name: 'Базовый CurrencyInput',
+};
+//</editor-fold>
+
+//<editor-fold desc="CurrencyInput с префиксом">
+const CurrencyInputWithPrefixTemplateStory: StoryFn<CurrencyInputType> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CurrencyInputWithPrefixTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const CurrencyInputWithPrefix = {
+  render: CurrencyInputWithPrefixTemplateStory,
+  parameters: {
+    docs: {
+      source: {
+        code: CurrencyInputWithPrefixTemplateRaw,
+      },
+    },
+  },
+  name: 'CurrencyInput с префиксом',
+};
+//</editor-fold>
+
+//<editor-fold desc="CurrencyInput с минимальным и максимальным значением">
+const CurrencyInputMinMaxValueTemplateStory: StoryFn<CurrencyInputType> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <CurrencyInputMinMaxValueTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const CurrencyInputMinMaxValue = {
+  render: CurrencyInputMinMaxValueTemplateStory,
+  parameters: {
+    docs: {
+      source: {
+        code: CurrencyInputMinMaxValueTemplateRaw,
+      },
+    },
+  },
+  name: 'CurrencyInput с минимальным и максимальным значением',
+};
+//</editor-fold>

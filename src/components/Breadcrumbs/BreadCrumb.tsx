@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
+import type { DataAttributes } from 'styled-components';
 import styled, { css } from 'styled-components';
 import { typography } from '#src/components/Typography';
 import { TooltipHoc } from '#src/components/TooltipHOC';
@@ -96,7 +97,7 @@ export const CrumbAnchor = styled.a<{ $active?: boolean }>`
   }
 `;
 
-export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement>, DataAttributes {
   /** Текст хлебной крошки */
   text: string;
   /** Иконка перед текстом хлебной крошки */
@@ -111,6 +112,11 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement> {
   linkProps?: { [key: string]: string };
   /** Размер компонента */
   dimension?: BreadcrumbsProps['dimension'];
+  /** Конфиг функция пропсов для хлебной крошки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof Crumb> & DataAttributes,
+  ) => Partial<React.ComponentProps<typeof Crumb>> & DataAttributes;
 }
 
 interface InternalBreadcrumbProps {
@@ -120,7 +126,7 @@ interface InternalBreadcrumbProps {
   displaySeparator?: boolean;
 }
 
-export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & InternalBreadcrumbProps>(
+export const Breadcrumb = forwardRef<HTMLLIElement, BreadcrumbProps & InternalBreadcrumbProps>(
   (
     {
       text,
@@ -132,6 +138,7 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & Inte
       dimension = 'l',
       active = true,
       displaySeparator = true,
+      containerPropsConfig = (props) => props,
       ...props
     },
     ref,
@@ -139,8 +146,11 @@ export const Breadcrumb = React.forwardRef<HTMLLIElement, BreadcrumbProps & Inte
     const tooltip = text.length > 40;
     const iconSize = dimension === 'l' ? 20 : 16;
 
+    const crumbProps = { ref, $dimension: dimension, ...props } satisfies Partial<
+      React.ComponentProps<typeof Crumb> & DataAttributes
+    >;
     return (
-      <Crumb ref={ref} $dimension={dimension} {...props}>
+      <Crumb {...crumbProps} {...containerPropsConfig(crumbProps)}>
         <CrumbAnchor
           {...(active ? { href: url } : {})}
           as={active ? linkAs : 'span'}

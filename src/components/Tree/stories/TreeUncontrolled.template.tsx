@@ -79,5 +79,12 @@ const StyledTree = styled(Tree)`
 `;
 
 export const TreeUncontrolledTemplate = (props: TreeProps) => {
-  return <StyledTree {...props} defaultSelected={'1-1'} defaultModel={demo2_TreeModel} withCheckbox={false} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Неконтролируемое дерево.
+      </T>
+      <StyledTree {...props} defaultSelected={'1-1'} defaultModel={demo2_TreeModel} withCheckbox={false} />
+    </>
+  );
 };

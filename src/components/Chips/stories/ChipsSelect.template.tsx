@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Chips } from '@admiral-ds/react-ui';
+import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
@@ -26,6 +26,11 @@ export const ChipsSelectTemplate = (props: ChipsProps) => {
   const [selectedS, setSelectedS] = React.useState('');
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Набор из двух и более чипсов, которые могут быть в активном (выбранном) состоянии или пассивном (выключенном)
+        состоянии. Chips в режиме радио кнопок, когда можно выбрать только одно значение из списка.
+      </T>
+      <Separator $height={24} />
       <WrapperChip $dimension={props.dimension}>
         {listData.map((item) => (
           <Chips

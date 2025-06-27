@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, Button } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, Button, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -19,6 +19,10 @@ export const DrawerWidthTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Ширина компонента задается пользователем. Drawer подстраивает свою ширину под ширину контента, либо пользователь
+        может задать ширину компонента напрямую через параметры style или используя classname.
+      </T>
       <Button onClick={() => setOpened(true)}>Open drawer</Button>
       <Drawer
         {...props}

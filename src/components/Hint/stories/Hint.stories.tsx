@@ -11,6 +11,7 @@ import { HintTextButtonTemplate } from './HintTextButton.template';
 import { HintTargetTemplate } from './HintTarget.template';
 import { HintAnchorCssTemplate } from './HintAnchorCss.template';
 import { HintWithHeaderTemplate } from './HintWithHeader.template';
+import { HintDimensionTemplate } from './HintDimension.template';
 
 // Imports of text sources
 import HintBaseRaw from './HintBase.template?raw';
@@ -21,6 +22,7 @@ import HintTextButtonRaw from './HintTextButton.template?raw';
 import HintTargetRaw from './HintTarget.template?raw';
 import HintAnchorCssRaw from './HintAnchorCss.template?raw';
 import HintWithHeaderRaw from './HintWithHeader.template?raw';
+import HintDimensionRaw from './HintDimension.template?raw';
 
 const Separator = styled.div<{ height?: number }>`
   height: ${({ height }) => (height ? height : 20)}px;
@@ -41,12 +43,7 @@ const Description = () => (
     <Separator />В сценарии, когда Hint вызывается по ховеру, иконки закрытия на компоненте нет и он скрывается, когда
     мы уводим курсор с объекта, к которому он привязан.
     <Separator />
-    Hint имеет три фиксированных по ширине размера: 280px, 384px и 488px, которые используются в зависимости от
-    предполагаемого объема текста. На экранах мобильных устройств, меньше 640px, компонент адаптируется по ширине к
-    рабочей области устройства. Высота компонента настраивается автоматически при задании контента. Максимальная высота
-    компонента – 320px, после чего у контента появляется вертикальный скролл.
-    <Separator />
-    По умолчанию Hint-у присваивается самый большой размер, Hint появляется по ховеру.
+    По умолчанию Hint появляется по ховеру.
   </Desc>
 );
 
@@ -140,6 +137,28 @@ export const HintBaseExample = {
 
 //</editor-fold>
 
+//<editor-fold desc="Размеры">
+const HintDimensionStory: StoryFn<typeof Hint> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <HintDimensionTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const HintDimensionExample = {
+  render: HintDimensionStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: HintDimensionRaw,
+      },
+    },
+  },
+
+  name: 'Hint. Размеры.',
+};
+
+//</editor-fold>
+
 //<editor-fold desc="Позиционирование">
 const HintPositionStory: StoryFn<typeof Hint> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
@@ -153,27 +172,6 @@ export const HintPositionExample = {
     docs: {
       source: {
         code: HintPositionRaw,
-      },
-      description: {
-        story: `Компонент имеет 8 основных вариантов позиционирования: снизу справа, снизу слева, сверху справа, 
-        сверху слева, слева внизу, слева вверху, справа внизу и справа вверху. Позиции перечислены в порядке приоритета.
-        По умолчанию компонент сам рассчитывает свою позицию, исходя из приоритета позиций и свободного места на экране.
-        Если хинт не помещается ни в один из перечисленных 8 вариантов позиционирования, то происходит проверка того, можно ли разместить хинт
-        снизу/сверху/слева/справа относительно центра target-элемента или снизу/сверху по центру страницы.\n\nТакже 
-        пользователь может сам с помощью параметра hintPosition задать, с какой стороны от target-элемента должен появляться Hint.
-        Параметр hintPosition может принимать следующие значения - bottom|top|left|right. \n\n* При hintPosition='bottom' 
-        хинт рендерится снизу от target-элемента с возможным сдвигом по горизонтальной оси, т.е. происходит выбор 
-        из 4 вариантов позиционирования: снизу справа, снизу слева, снизу по центру target-элемента и 
-        снизу по центру страницы (позиции расположены в порядке приоритета);\n\n* При hintPosition='top' хинт рендерится сверху от target-элемента 
-        с возможным сдвигом по горизонтальной оси, т.е. происходит выбор из 4 вариантов позиционирования: сверху справа, сверху слева, сверху 
-        по центру target-элемента и сверху по центру страницы (позиции расположены в порядке приоритета);\n\n* При hintPosition='left' 
-        хинт рендерится слева от target-элемента с возможным сдвигом по вертикальной оси, т.е. происходит выбор из 3 вариантов позиционирования: 
-        слева снизу, слева сверху и слева по центру target-элемента (позиции расположены в порядке приоритета);\n\n* При hintPosition='right' 
-        хинт рендерится справа от target-элемента с возможным сдвигом по вертикальной оси, т.е. происходит выбор из 3 вариантов 
-        позиционирования: справа снизу, справа сверху и справа по центру target-элемента (позиции расположены в порядке приоритета).\n\nНа 
-        экранах мобильных устройств, меньше 640px, 
-        компонент адаптируется по ширине к рабочей области устройства, то есть занимает всю ширину экрана 
-        и позиционируется только снизу или сверху от target-элемента.\n\nНиже приведен пример с использованием параметра hintPosition.`,
       },
     },
   },
@@ -219,11 +217,6 @@ export const HintTextButtonExample = {
       source: {
         code: HintTextButtonRaw,
       },
-      description: {
-        story: `В качества контента хинта может выступать любой ReactNode, 
-        например допускается использование TextButton внутри хинта. В случае если 
-      хинт содержит в себе TextButton, триггером его появления должен быть click.`,
-      },
     },
   },
 
@@ -268,9 +261,6 @@ export const HintClassNameExample = {
       source: {
         code: HintClassNameRaw,
       },
-      description: {
-        story: `На Hint, созданный через портал, добавляется класс через пропс className.`,
-      },
     },
   },
 
@@ -314,10 +304,6 @@ export const HintWithHeaderExample = {
     docs: {
       source: {
         code: HintWithHeaderRaw,
-      },
-      description: {
-        story: `В качества контента хинта может выступать любой ReactNode, 
-        можно добавить, например, заголовок.`,
       },
     },
   },

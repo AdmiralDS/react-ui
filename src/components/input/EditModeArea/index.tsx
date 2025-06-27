@@ -1,4 +1,3 @@
-import type { ChangeEventHandler, MouseEvent } from 'react';
 import { forwardRef, useRef, useState } from 'react';
 
 import type { TextAreaProps } from '#src/components/input/TextArea';
@@ -16,15 +15,19 @@ import {
 } from '#src/components/input/EditMode/style';
 import type { EditModeComponentProps } from '#src/components/input/EditMode/types';
 
-const stopEvent = (e: MouseEvent) => e.preventDefault();
+const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeAreaProps
   extends EditModeComponentProps,
-    Omit<TextAreaProps, 'dimension' | 'displayClearIcon' | 'value'> {
+    Omit<
+      TextAreaProps,
+      'dimension' | 'displayClearIcon' | 'displayCopyIcon' | 'clearIconPropsConfig' | 'copyIconPropsConfig' | 'value'
+    > {
   /** Колбек на изменение значения компонента */
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
+const nothing = () => {};
 export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
   (
     {
@@ -38,6 +41,8 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
       value,
       rows = 1,
       autoHeight = true,
+      confirmButtonPropsConfig = nothing,
+      cancelButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -69,6 +74,26 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
     };
     const editDimension = dimension === 'xxl' ? 'xl' : dimension;
 
+    const confirmButtonProps = {
+      appearance: 'secondary',
+      dimension: editDimension,
+      displayAsSquare: true,
+      disabled: props.status === 'error',
+      onClick: handleConfirm,
+      iconStart: <ConfirmIcon height={iconSize} width={iconSize} />,
+      $multiline: true,
+    } satisfies React.ComponentProps<typeof EditButton>;
+
+    const cancelButtonProps = {
+      appearance: 'secondary',
+      dimension: editDimension,
+      displayAsSquare: true,
+      disabled: props.status === 'error',
+      onClick: handleCancel,
+      iconStart: <CancelIcon height={iconSize} width={iconSize} />,
+      $multiline: true,
+    } satisfies React.ComponentProps<typeof EditButton>;
+
     return (
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
@@ -95,23 +120,8 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
                 autoHeight={autoHeight}
                 {...props}
               />
-              <EditButton
-                appearance="secondary"
-                dimension={editDimension}
-                displayAsSquare
-                disabled={props.status === 'error'}
-                onClick={handleConfirm}
-                iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
-                $multiline={true}
-              />
-              <EditButton
-                appearance="secondary"
-                dimension={editDimension}
-                displayAsSquare
-                onClick={handleCancel}
-                iconStart={<CancelIcon height={iconSize} width={iconSize} />}
-                $multiline={true}
-              />
+              <EditButton {...confirmButtonProps} {...confirmButtonPropsConfig(confirmButtonProps)} />
+              <EditButton {...cancelButtonProps} {...cancelButtonPropsConfig(cancelButtonProps)} />
             </>
           )
         ) : (

@@ -5,7 +5,7 @@ import { Select, INPUT_DIMENSIONS_VALUES, INPUT_STATUS_VALUES, ALL_BORDER_RADIUS
 
 import { SearchSelectRenderPropsTemplate } from './searchSelect/SearchSelectRenderProps.template';
 import { LoadOnScrollTemplate } from './searchSelect/SearchSelectLoadingOnScroll.template';
-import { SearchSelectWithAsyncLoadingTemplate } from './searchSelect/SearchSelectWithAsyncLoading.template';
+import { AsyncDataLoadingTemplate } from './searchSelect/AsyncLoading.template';
 import { SearchSelectWithFilterTemplate } from './searchSelect/SearchSelectWithFilter.template';
 import { SearchSelectCustomOptionTemplate } from './searchSelect/SearchSelectCustomOption.template';
 import { SearchSelectRenderValueTemplate } from './searchSelect/SearchSelectRenderValue.template';
@@ -21,15 +21,18 @@ import { SearchSelectExternalFilterTemplate } from './searchSelect/SearchSelectE
 import { SearchSelectVirtualScrollTemplate } from './searchSelect/SearchSelectVirtualScroll.template';
 import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSelectWithOnChangeHandler.template';
 import { SearchSelectWithSelectedOnTopTemplate } from './searchSelect/SearchSelectWithSelectedOnTop.template';
+import { SearchSelectWithClearInputTemplate } from './searchSelect/SearchSelectWithClearInput.template';
+import { SearchSelectWithChooseAllButtonTemplate } from './searchSelect/SearchSelectWithChooseAllButton.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
 import SearchSelectLoadOnScrollRaw from './searchSelect/SearchSelectLoadingOnScroll.template?raw';
-import SearchSelectWithAsyncLoadingRaw from './searchSelect/SearchSelectWithAsyncLoading.template?raw';
+import AsyncDataLoadingTemplateRaw from './searchSelect/AsyncLoading.template?raw';
 import SearchSelectWithFilterRaw from './searchSelect/SearchSelectWithFilter.template?raw';
 import SearchSelectCustomOptionRaw from './searchSelect/SearchSelectCustomOption.template?raw';
 import SearchSelectRenderValueRaw from './searchSelect/SearchSelectRenderValue.template?raw';
 import SearchSelectWithAddButtonRaw from './searchSelect/SearchSelectWithAddButton.template?raw';
+import SearchSelectWithChooseAllButtonRaw from './searchSelect/SearchSelectWithChooseAllButton.template?raw';
 import SearchSelectOptionGroupRaw from './searchSelect/SearchSelectOptionGroup.template?raw';
 import SearchSelectUncontrolledRaw from './searchSelect/SearchSelectUncontrolled.template?raw';
 import SearchSelectMultipleWithAddOptionRaw from './searchSelect/SearchSelectMultipleWithAddOption.template?raw';
@@ -41,6 +44,7 @@ import SearchSelectExternalFilterRaw from './searchSelect/SearchSelectExternalFi
 import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScroll.template?raw';
 import SearchSelectWithOnClickHandlerTemplateRaw from './searchSelect/SearchSelectWithOnChangeHandler.template?raw';
 import SearchSelectWithSelectedOnTopTemplateRaw from './searchSelect/SearchSelectWithSelectedOnTop.template?raw';
+import SearchSelectWithClearInputTemplateRaw from './searchSelect/SearchSelectWithClearInput.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -144,9 +148,6 @@ export const SearchSelectWithFilter = {
       source: {
         code: SearchSelectWithFilterRaw,
       },
-      description: {
-        story: `Фильтрация списка опций осуществляется вызывающим кодом.\n\n В данном примере показан один из возможных способов`,
-      },
     },
   },
 };
@@ -185,9 +186,6 @@ export const RenderProps = {
       source: {
         code: SearchSelectRenderPropsRaw,
       },
-      description: {
-        story: 'Пример кастомизации select через renderProps',
-      },
     },
   },
 
@@ -208,12 +206,6 @@ export const LoadOnScroll = {
     docs: {
       source: {
         code: SearchSelectLoadOnScrollRaw,
-      },
-      description: {
-        story:
-          'Последним элементом списка опций select добавляется скрытый MenuItem, ' +
-          'который отслеживает прокрутку списка до конца, и сообщает об этом ' +
-          'вызывающему коду. По этому событию происходит изменение списка опций',
       },
     },
   },
@@ -265,6 +257,27 @@ export const WithAddButton = {
 
 //</editor-fold>
 
+//<editor-fold desc="Нижняя панель с кнопкой "Выбрать все"">
+const WithChooseAllButtonStory: StoryFn<typeof Select> = (props) => (
+  <SearchSelectWithChooseAllButtonTemplate {...props} />
+);
+
+export const WithChooseAllButton = {
+  render: WithChooseAllButtonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithChooseAllButtonRaw,
+      },
+    },
+  },
+
+  name: 'Нижняя панель с кнопкой "Выбрать все"',
+};
+
+// </editor-fold>
+
 //<editor-fold desc="Использование групп">
 const SearchSelectOptionGroupStory: StoryFn<typeof Select> = (props) => <SearchSelectOptionGroupTemplate {...props} />;
 
@@ -288,7 +301,7 @@ export const SearchSelectOptionGroup = {
 const AsyncSearchSelectStory: StoryFn<typeof Select> = (props) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <SearchSelectWithAsyncLoadingTemplate {...props} />
+      <AsyncDataLoadingTemplate {...props} />
     </QueryClientProvider>
   );
 };
@@ -299,16 +312,13 @@ export const AsyncSearchSelect = {
   parameters: {
     docs: {
       source: {
-        code: SearchSelectWithAsyncLoadingRaw,
+        code: AsyncDataLoadingTemplateRaw,
         source: { language: 'tsx' },
-      },
-      description: {
-        story: 'Пример демонстрирует подгрузку данных для селекта с фильтром по имени',
       },
     },
   },
 
-  name: 'SearchSelect. Асинхронный',
+  name: 'С запросом данных и фильтрацией на сервере',
 };
 
 //</editor-fold>
@@ -387,12 +397,6 @@ export const ExpandedHeightMultiSearchSelect = {
       source: {
         code: SearchSelectExpandedHeightMultiRaw,
       },
-      description: {
-        story:
-          'Для ограничения высоты Select в режиме multiple необходимо использовать свойства maxRowCount и minRowCount. ' +
-          'В примере стоит ограничение maxRowCount=3. Ограничение работает для Select как в состоянии focused, так и в ' +
-          'состоянии, когда компонент не находится в фокусе',
-      },
     },
   },
 
@@ -413,13 +417,6 @@ export const CustomOptionMultiSearchSelect = {
     docs: {
       source: {
         code: SearchSelectCustomOptionMultiRaw,
-      },
-      description: {
-        story:
-          'При использовании кастомных опций, реализуемых через Option children, в режиме multiple, необходимо определить ' +
-          'у Option свойство renderChip, так как содержимое Chip и Tooltip формируется в методе renderChip, в противном ' +
-          'случае внутри Chip и Tooltip у компонента Chip будет отображаться тот же child, что указан в качестве дочернего ' +
-          'для Option.',
       },
     },
   },
@@ -460,11 +457,6 @@ export const ExternalFilter = {
       source: {
         code: SearchSelectExternalFilterRaw,
       },
-      description: {
-        story:
-          'Так как компонент построен на нативном select, в выбранных значениях могут отображаться только те элементы, ' +
-          'которые переданы в качестве списка option',
-      },
     },
   },
 
@@ -503,14 +495,6 @@ export const WithOnChangeHandler = {
       source: {
         code: SearchSelectWithOnClickHandlerTemplateRaw,
       },
-      description: {
-        story:
-          'Так как компонент построен на нативном select, при использовании нативного события onchange в режиме multiple ' +
-          'необходимо помнить, что в качестве event.target.value возвращается значение первой выбранной option из массива ' +
-          'выбранных опций. Поэтому для обработки этого события используйте event.selectedOptions или свойство option.selected. ' +
-          'Кроме того, рекомендуем использовать ненативное событие onSelectedChange, которое для режима multiple возвращает ' +
-          'выбранные опции в порядке их выбора пользователем',
-      },
     },
   },
 
@@ -532,16 +516,27 @@ export const WithSelectedOnTop = {
       args: {
         moveSelectedOnTop: true,
       },
-      description: {
-        story:
-          'Для вывода ранее выбранных пунктов сверху списка необходимо включить свойство moveSelectedOnTop\n' +
-          '- Непосредственно при выборе (или отмене выбора) перестроение не происходит\n' +
-          '- Выбранные строки отображаются сверху списка при повторном открытии меню\n' +
-          '- Выбранные строки сортируются в том же порядке, что и чипсы в поле ввода, то есть в порядке очередности выбора',
-      },
     },
   },
 
   name: 'Multiple с поднятием выбранных опций вверх списка',
+};
+//</editor-fold>
+
+// <editor-fold desc="Поднятие выбранных опций вверх списка">
+const WithClearInputStory: StoryFn<typeof Select> = (props) => <SearchSelectWithClearInputTemplate {...props} />;
+
+export const WithClearInput = {
+  render: WithClearInputStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SearchSelectWithClearInputTemplateRaw,
+      },
+    },
+  },
+
+  name: 'Multiple с опцией очистки введенного значения',
 };
 //</editor-fold>

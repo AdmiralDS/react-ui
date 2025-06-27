@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, BorderRadiusType, MenuModelItemProps } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -62,6 +62,11 @@ export const MenuVirtualScrollTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, содержаний размер 1
+        элемента меню, для расчета максимальной высоты контейнера меню. Или установить значение "auto". В этом случае
+        максимальная высота будет рассчитана исходя из свойства "dimension".
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu {...props} defaultIsActive={false} virtualScroll={{ itemHeight: 'auto' }} model={model} />
       </Wrapper>

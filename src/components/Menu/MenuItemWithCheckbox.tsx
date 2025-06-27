@@ -1,10 +1,10 @@
-import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 import type { ItemDimension } from '#src/components/Menu/menuItemMixins';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
-import { CheckboxField } from '#src/components/form';
+import { CheckboxField } from '#src/components/form/CheckboxField';
+import { forwardRef } from 'react';
 
 export interface ItemWithCheckbox {
   id: string;
@@ -25,11 +25,13 @@ export type CheckboxNodesMapItem = {
   node: CheckboxGroupItemProps;
 };
 
+export type FlatMapItems = Map<string, CheckboxNodesMapItem>;
+
 export const checkboxTreeToMap = (
   checkboxTree: Array<CheckboxGroupItemProps>,
   level = 0,
   dependencies?: Array<Array<string>>,
-): Map<string, CheckboxNodesMapItem> => {
+): FlatMapItems => {
   return checkboxTree.reduce((acc: Map<string, CheckboxNodesMapItem>, item) => {
     const key = item.id;
     const currentNode: CheckboxNodesMapItem = { level, node: item };
@@ -84,7 +86,7 @@ export interface MenuItemWithCheckboxProps extends MenuItemProps {
   /** Сдвиг внутри MenuItem при наличии нескольких уровней (например при использовании составной группы чекбоксов внутри Menu) */
   level?: number;
 }
-export const MenuItemWithCheckbox = React.forwardRef<HTMLDivElement, MenuItemWithCheckboxProps>(
+export const MenuItemWithCheckbox = forwardRef<HTMLDivElement, MenuItemWithCheckboxProps>(
   ({ checked, indeterminate, checkboxRef, level = 0, children, dimension = 'l', ...props }, ref) => {
     return (
       <CheckboxGroupMenuItem dimension={dimension} $level={level} ref={ref} {...props}>

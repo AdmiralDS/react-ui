@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Button, DropMenu, MenuItem } from '@admiral-ds/react-ui';
+import { Button, DropMenu, MenuItem, T } from '@admiral-ds/react-ui';
 import type { DropMenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -48,14 +48,10 @@ const WrapperVertical = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 `;
-
-const Desc = styled.div`
-  font-family: 'VTB Group UI';
-  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  font-size: 16px;
-  line-height: 24px;
+const Separator = styled.div`
+  height: 8px;
 `;
 
 const handleVisibilityChangeUnControlledState = (isVisible: boolean) => {
@@ -91,15 +87,15 @@ export const DropMenuSimpleTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperVertical>
-        <Desc>
+        <T font="Body/Body 1 Long" as="div">
           Неконтроллируемое состояние видимости меню:
-          <br />
-          - isVisible не передается в DropMenu, <br />- обработчик onVisibilityChange выполняется из DropMenu
-          <br />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu
-          <br />
+          <Separator />
+          - isVisible не передается в DropMenu, <Separator />- обработчик onVisibilityChange выполняется из DropMenu
+          <Separator />- для открытия/закрытия меню при клике на кнопке используется обработчик handleClick из DropMenu
+          <Separator />
           По умолчанию DropMenu открывает/закрывает выпадающий список при нажатии на переданный компонент, а также
           закрывает выпадающий список при выборе опции
-        </Desc>
+        </T>
         <DropMenu
           {...props}
           items={model}

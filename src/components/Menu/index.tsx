@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode, RefObject, MouseEvent, FocusEvent } from 'react';
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { hideNativeScrollbarsCss, Scrollbars } from '#src/components/Scrollbar';
+import { ScrollContainer } from '#src/components/Scrollbar';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { keyboardKey } from '../common/keyboardKey';
@@ -71,8 +71,7 @@ const Wrapper = styled.div<{
   }
 `;
 
-const StyledDiv = styled.div<MenuListHeightsProps>`
-  ${hideNativeScrollbarsCss}
+const StyledScrollContainer = styled(ScrollContainer)<MenuListHeightsProps>`
   position: relative;
   ${(p) => (!p.$hasTopPanel ? 'padding-top: 8px' : '')};
   ${(p) => (!p.$hasBottomPanel ? 'padding-bottom: 8px' : '')};
@@ -96,7 +95,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
   dimension?: MenuDimensions;
   /** Активная секция Menu */
-  active?: string;
+  active?: string | null;
   /** Секция в состоянии preselected  */
   preselected?: string;
   /** выбранная секция Menu */
@@ -215,7 +214,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     },
     ref,
   ) => {
-    const findNextId = (currentId?: string) => {
+    const findNextId = (currentId?: string | null) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
       let finishCycle = false;
@@ -234,7 +233,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       return disabled ? undefined : model[nextIndex].id;
     };
 
-    const findPreviousId = (currentId?: string) => {
+    const findPreviousId = (currentId?: string | null) => {
       const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
       let finishCycle = false;
@@ -262,7 +261,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const subMenuRef = useRef<HTMLDivElement | null>(null);
-    const activeItemRef = useRef<HTMLDivElement | null>(null);
+    const [activeItemElement, setActiveItemElement] = useState<HTMLElement | null>(null);
+
     const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
 
     const lastScrollEvent = useRef<number | undefined>();
@@ -284,8 +284,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         : preselected
       : undefined;
 
-    const menuRef = useRef<HTMLDivElement | null>(null);
-    const [menuNode, setMenuNode] = useState<HTMLElement | null>(null);
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
     const verticalScrollAriaRef = useRef<HTMLDivElement | null>(null);
     const hasTopPanel = !!renderTopPanel;
     const hasBottomPanel = !!renderBottomPanel;
@@ -348,7 +347,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowDown: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
 
             const nextId = findNextId(currentId);
             if (preselectedModeActive) preselectItem(nextId);
@@ -358,7 +357,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowUp: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
 
             const previousId = findPreviousId(currentId);
             if (preselectedModeActive) preselectItem(previousId);
@@ -368,7 +367,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowRight: {
-            const currentId = preselectedModeActive ? preselectedId : activeId;
+            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
             const item = model.find((item) => item.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
               setSubmenuVisible(true);
@@ -444,7 +443,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(id);
           setSubmenuVisible(hasSubmenu);
-          activeItemRef.current = e.currentTarget as HTMLDivElement;
+          setActiveItemElement(e.currentTarget as HTMLDivElement);
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
         onClick: () => handleClickItem(id),
@@ -474,7 +473,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
       return (
         <VirtualBody
-          scrollContainerRef={menuRef}
+          scrollContainerRef={scrollContainerRef}
           itemHeight={itemHeight}
           model={model}
           rowCount={rowCount}
@@ -485,7 +484,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       );
     };
 
-    const previousActive = useRef<string | undefined>();
+    const previousActive = useRef<string | undefined | null>();
     const previousActiveState = useRef<string | undefined>();
     const previousPreselected = useRef<string | undefined>();
     const previousPreselectedState = useRef<string | undefined>();
@@ -494,13 +493,13 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       setTimeout(() => {
         let itemToScroll;
 
-        if (previousActive.current !== active || previousActiveState.current !== activeState) {
-          itemToScroll = menuRef.current?.querySelector('[data-hovered="true"]');
+        if ((active && previousActive.current !== active) || previousActiveState.current !== activeState) {
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (
-          previousPreselected.current !== preselected ||
+          (preselected && previousPreselected.current !== preselected) ||
           previousPreselectedState.current !== preselectedState
         ) {
-          itemToScroll = menuRef.current?.querySelector('[data-preselected="true"]');
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
         }
 
         if (itemToScroll) {
@@ -549,6 +548,11 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       props.onMouseEnter?.(e);
     };
 
+    const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+      activateItem(undefined);
+      props.onMouseLeave?.(e);
+    };
+
     const handleClickOutside = () => {
       setSubmenuVisible(false);
     };
@@ -565,6 +569,28 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const menuProps = passMenuDataAttributes(props);
 
+    // при скролле меню возникают ситуации когда активная опция выходит из видимой области
+    // и открытое субменю может странным образом позиционироваться "оторванным" от породившего меню
+    useEffect(() => {
+      if (!activeItemElement || !scrollContainerRef.current) return;
+
+      const options = {
+        root: scrollContainerRef.current,
+        rootMargin: '0px',
+        threshold: 0.5,
+      } satisfies IntersectionObserverInit;
+
+      const intersectionCallback: IntersectionObserverCallback = (entries) => {
+        entries.forEach((entry) => {
+          setSubmenuVisible(!(entry.intersectionRatio < options.threshold));
+        });
+      };
+
+      const observer = new IntersectionObserver(intersectionCallback, options);
+      observer.observe(activeItemElement);
+      return () => observer.disconnect();
+    }, [activeItemElement]);
+
     return (
       <Wrapper
         ref={refSetter(wrapperRef, ref)}
@@ -572,28 +598,29 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         $hasTopPanel={hasTopPanel}
         $hasBottomPanel={hasBottomPanel}
         onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       >
         {hasTopPanel && renderTopPanel({ dimension })}
 
-        <StyledDiv
-          ref={refSetter(menuRef, (node) => setMenuNode(node))}
+        <StyledScrollContainer
           $dimension={dimension}
           $rowCount={rowCount}
           $hasTopPanel={hasTopPanel}
           $hasBottomPanel={hasBottomPanel}
           $maxHeight={maxHeight}
           {...menuProps}
+          verticalScrollProps={{ ref: verticalScrollAriaRef }}
+          contentBlockProps={{ ref: scrollContainerRef }}
         >
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
-          <Scrollbars contentNode={menuNode} verticalScrollProps={{ ref: verticalScrollAriaRef }} />
-        </StyledDiv>
+        </StyledScrollContainer>
 
-        {submenuVisible && activeItemRef.current && (
+        {submenuVisible && activeItemElement && (
           <SubMenuContainer
-            target={activeItemRef}
+            targetElement={activeItemElement}
             defaultRenderDirection={subMenuRenderDirection}
             onClickOutside={!parentMenuRef ? handleClickOutside : undefined}
           >

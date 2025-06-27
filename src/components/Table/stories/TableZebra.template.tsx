@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -205,6 +208,19 @@ export const TableZebraTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table {...props} rowList={rowList} columnList={cols} greyHeader greyZebraRows onColumnResize={handleResize} />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Опционально, для лучшей визуальной сепарации строк, их можно окрашивать через одну в цвет вторичного фона (
+        <code>Neutral 05</code>). Используйте для этого параметр <code>greyZebraRows</code>. Окраска начинается со
+        второй строки, считая от заголовка таблицы или группы. При группировке строк, строка с названием группы не
+        окрашивается. При перетаскивании строк, поиске или сортировке, они окрашиваются в соответствии с описанным выше
+        алгоритмом.
+        <Separator />
+        Для консистентности рекомендуется заголовок таблицы тоже окрашивать в серый цвет (параметр{' '}
+        <code>greyHeader</code>).
+      </T>
+      <Separator $height={24} />
+      <Table {...props} rowList={rowList} columnList={cols} greyHeader greyZebraRows onColumnResize={handleResize} />
+    </>
   );
 };

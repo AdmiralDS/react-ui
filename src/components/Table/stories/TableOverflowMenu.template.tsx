@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Table, RowAction, TooltipHoc, OverflowMenu, MenuItem, T } from '@admiral-ds/react-ui';
+import { Table, RowAction, TooltipHoc, OverflowMenu, MenuItem, T, UnorderedList, ListItem } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as DeleteOutline } from '@admiral-ds/icons/build/system/DeleteOutline.svg';
 import styled from 'styled-components';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 24}px;
 `;
 
 const StrToDate = (str: string) => {
@@ -168,6 +168,43 @@ export const TableOverflowMenuTemplate = (props: TableProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Опционально со строками можно производить набор действий через <code>OverflowMenu</code>, которое по умолчанию
+        появляется при ховере над строкой. При этом, чтобы не накладываться на возможный текст, под иконкой меню
+        добавляется квадратная подложка белого цвета. В примере ниже <code>OverflowMenu</code> задано для первых двух
+        строк в таблицах.
+        <Separator $height={8} />
+        Для того чтобы задать для строки <code>OverflowMenu</code> необходимо для строки прописать функцию{' '}
+        <code>overflowMenuRender</code>. Входные параметры функции: сама строка и колбек <code>onVisibilityChange</code>
+        . Колбек необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью{' '}
+        <code>OverflowMenu</code>. В качестве результата функция должна возвращать компонент <code>OverflowMenu</code>.
+        Размер <code>OverflowMenu</code> следует задавать согласно правилу:
+        <Separator $height={8} />
+        <UnorderedList dimension="s">
+          <ListItem>
+            Для таблицы с <code>dimension="s"</code> или <code>dimension="m"</code> используется{' '}
+            <code>OverflowMenu</code> c <code>dimension="m"</code>
+          </ListItem>
+          <ListItem>
+            Для таблицы с <code>dimension="l"</code> или <code>dimension="xl"</code> используется{' '}
+            <code>OverflowMenu</code> c <code>dimension="l"</code>
+          </ListItem>
+        </UnorderedList>
+        <Separator $height={8} />
+        Если подразумевается только одно действие над строкой, то вместо <code>overflowMenuRender</code> следует
+        использовать функцию <code>actionRender</code> (в примере используется для 3-4 строк). На вход функция получает
+        саму строку, а возвращает компонент <code>RowAction</code> (экспортируется из библиотеки), внутрь которого
+        необходимо передать иконку для обозначения действия над строкой.
+        <Separator $height={8} />
+        Опционально допускается, чтобы <code>OverflowMenu</code> и иконки одиночных действий были видны постоянно, а не
+        только по ховеру. Данное поведение можно задать с помощью параметра <code>showRowsActions</code>. Если{' '}
+        <code>showRowsActions=true</code>, то все иконки меню и иконки одиночных действий во всех строках таблицы
+        отображаются постоянно. При этом в строки, для которых не заданы действия, добавляется подложка, для того чтобы
+        визуально был выделен столбец с действиями над строками. Начиная с версии 8.45.0, при{' '}
+        <code>showRowsActions=true</code> <code>OverflowMenu</code> и иконки одиночных действий рендерятся в виде
+        отдельного столбца, на который отведена часть ширины таблицы.
+      </T>
+      <Separator />
       <T font="Body/Body 2 Long">Пример с иконками действий над строками, которые видны только по ховеру</T>
       <Separator />
       <Table {...props} dimension="m" rowList={rowList} columnList={cols} onColumnResize={handleResize} />

@@ -184,6 +184,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       onBlur,
       createInputHandler = createNumberInputHandler,
       handleInput,
+      disableCopying,
       ...props
     },
     ref,
@@ -320,8 +321,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         $dimension={props.dimension}
         readOnly={props.readOnly}
         data-read-only={props.readOnly ? true : undefined}
-        data-disable-copying={props.disableCopying ? true : undefined}
-        onMouseDown={props.disableCopying ? preventDefault : undefined}
+        data-disable-copying={disableCopying ? true : undefined}
+        onMouseDown={disableCopying ? preventDefault : undefined}
         $skeleton={skeleton}
         $status={status}
       >

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LIGHT_THEME, Label, Calendar } from '@admiral-ds/react-ui';
+import { LIGHT_THEME, Label, Calendar, T } from '@admiral-ds/react-ui';
 import type { Theme, Locale } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   & > div {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -81,6 +81,10 @@ export const LocaleThemeNewLocaleTemplate = () => {
       table: {
         emptyMessage: 'Keine Zufälle',
       },
+      textArea: {
+        copyTextMessage: 'Text kopieren',
+        copiedMessage: 'Kopiert',
+      },
     };
     if (theme) {
       return { ...theme, currentLocale: 'de', locales: { ...theme.locales, de: deLocale } };
@@ -94,6 +98,12 @@ export const LocaleThemeNewLocaleTemplate = () => {
   return (
     <Wrapper>
       <ThemeProvider theme={setDeLocale}>
+        <T font="Body/Body 1 Long" as="div">
+          Пользователь может создать свою локаль. Для этого в объект theme.locales добавляется соответсвующий ключ,
+          значением которого является объект типа Locale. Данный объект содержит в себе перечисление текстовых констант
+          для компонентов библиотеки, а также содержит свойство firstDayOfWeek. Свойство firstDayOfWeek (значение св-ва
+          - число от 0 до 6) обозначает, с какого дня начинается неделя для данной локали, где 0 - это воскресенье.
+        </T>
         <Label>Calendar in 'de' locale</Label>
         <Calendar
           selected={selected}

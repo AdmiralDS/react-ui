@@ -1,6 +1,6 @@
 import type { HTMLAttributes, KeyboardEvent, ReactNode } from 'react';
 import { useRef } from 'react';
-import type { Dimension } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
+import type { Adaptive, Dimension } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { ContentSwitcherComponent } from '#src/components/ContentSwitcher/ContentSwitcherComponent';
 import { moveFocus, nextItem, previousItem } from '#src/components/ContentSwitcher/utils';
 import { keyboardKey } from '../common/keyboardKey';
@@ -12,12 +12,14 @@ export interface ContentSwitcherProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   /** Стиль отображения компонента */
   appearance?: 'primary' | 'secondary';
+  adaptive?: Adaptive;
 }
 
 export const ContentSwitcher = ({
   dimension = 'l',
   tabIndex = -1,
   appearance = 'secondary',
+  adaptive,
   ...props
 }: ContentSwitcherProps) => {
   const localRef = useRef<HTMLDivElement>(null);
@@ -44,6 +46,7 @@ export const ContentSwitcher = ({
       $dimension={dimension}
       tabIndex={tabIndex}
       data-appearance={appearance}
+      $adaptive={adaptive}
       {...props}
     />
   );

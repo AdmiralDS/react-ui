@@ -3,15 +3,19 @@ import styled from 'styled-components';
 
 import { Accordion, AccordionItem, T } from '@admiral-ds/react-ui';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 export const AccordionDimensionTemplate = () => {
   return (
     <>
       <T font="Body/Body 1 Long" as="div">
-        Размер l
+        Существует в двух размерах - L и M.
+      </T>
+      <Separator $height={24} />
+      <T font="Body/Body 1 Long" as="div">
+        Размер L
       </T>
       <Separator />
       <Accordion>
@@ -29,7 +33,7 @@ export const AccordionDimensionTemplate = () => {
       </Accordion>
       <Separator />
       <T font="Body/Body 1 Long" as="div">
-        Размер m
+        Размер M
       </T>
       <Separator />
       <Accordion dimension="m">

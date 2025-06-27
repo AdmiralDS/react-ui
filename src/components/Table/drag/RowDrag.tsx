@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
+import { css } from 'styled-components';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorRow } from '../style';
@@ -14,8 +15,10 @@ type RowDragProps = {
   onRowDrag: TableProps['onRowDrag'];
   onRowDragEnd: TableProps['onRowDragEnd'];
   rowsDraggable?: boolean;
-  scrollBodyRef: React.RefObject<HTMLElement>;
+  tableRef: React.RefObject<HTMLElement>;
+  bodyRef: React.RefObject<HTMLElement>;
   rowToGroupMap: GroupRows;
+  draggedRowCssMixin?: ReturnType<typeof css>;
 };
 
 export const RowDrag = ({
@@ -23,8 +26,10 @@ export const RowDrag = ({
   dimension,
   onRowDrag,
   onRowDragEnd,
-  scrollBodyRef,
+  tableRef,
+  bodyRef,
   rowToGroupMap,
+  draggedRowCssMixin,
 }: RowDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -47,20 +52,23 @@ export const RowDrag = ({
 
   useEffect(() => {
     if (rowMirrorRef.current && rowDragging && rowsDraggable) {
-      const observer = observeRect(rowMirrorRef.current, (rect: any) => {
-        const topCoord = scrollBodyRef.current?.getBoundingClientRect().top || 0;
-        const bottomCoord = scrollBodyRef.current?.getBoundingClientRect().bottom || 0;
+      const table = tableRef.current;
+      const header = table?.querySelector('.thead');
 
-        if (scrollBodyRef.current) {
-          const scrollTop = scrollBodyRef.current.scrollTop;
-          const scrollHeight = scrollBodyRef.current.scrollHeight;
-          const offsetHeight = scrollBodyRef.current.offsetHeight;
+      const observer = observeRect(rowMirrorRef.current, (rect: any) => {
+        const topCoord = header?.getBoundingClientRect().bottom || 0;
+        const bottomCoord = table?.getBoundingClientRect().bottom || 0;
+
+        if (table) {
+          const scrollTop = table.scrollTop;
+          const scrollHeight = table.scrollHeight;
+          const offsetHeight = table.offsetHeight;
 
           if (rect.bottom > bottomCoord && scrollHeight > offsetHeight && scrollTop + offsetHeight < scrollHeight) {
-            scrollBodyRef.current.scrollBy({ top: Math.abs(bottomCoord - rect.bottom) });
+            table.scrollBy({ top: Math.abs(bottomCoord - rect.bottom) });
           }
           if (rect.top < topCoord && scrollTop > 0) {
-            scrollBodyRef.current.scrollBy({ top: -Math.abs(topCoord - rect.top) });
+            table.scrollBy({ top: -Math.abs(topCoord - rect.top) });
           }
         }
       });
@@ -71,7 +79,7 @@ export const RowDrag = ({
   }, [rowsDraggable, rowDragging]);
 
   useEffect(() => {
-    const body = scrollBodyRef.current;
+    const body = bodyRef.current;
     const rowMirror = rowMirrorRef.current;
 
     function handleDrop(item: HTMLElement | null, before: HTMLElement | null, immediate?: HTMLElement) {
@@ -116,7 +124,10 @@ export const RowDrag = ({
     function renderMirror(dragRow: HTMLElement | null) {
       const firstCell = dragRow?.getElementsByClassName('td')[0];
       if (firstCell && rowMirror) {
-        rowMirror.appendChild(firstCell.cloneNode(true));
+        const draggedCell = firstCell.cloneNode(true);
+        /** Убираем ограничения по ширине */
+        (draggedCell as HTMLElement).style.removeProperty('width');
+        rowMirror.appendChild(draggedCell);
       }
     }
     function removeMirror() {
@@ -164,6 +175,9 @@ export const RowDrag = ({
   }, [rowsDraggable]);
 
   return rowsDraggable
-    ? createPortal(<MirrorRow $dimension={dimension} ref={rowMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(
+        <MirrorRow $dimension={dimension} ref={rowMirrorRef} $cssMixin={draggedRowCssMixin} />,
+        rootRef?.current || document.body,
+      )
     : null;
 };

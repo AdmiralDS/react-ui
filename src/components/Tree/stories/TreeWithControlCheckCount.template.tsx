@@ -159,6 +159,10 @@ export const TreeWithControlCheckCountTemplate = (props: TreeProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример показывает обработку состояния checked в модели. Checked являются узлы, которые непосредственно выбраны,
+        либо узлы, у которых все дочерние элементы находятся в состоянии checked.
+      </T>
       <T font="Subtitle/Subtitle 1" as="p">
         Выбрано элементов: {countSelected}
       </T>

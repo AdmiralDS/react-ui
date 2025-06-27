@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { Menu, MenuItem, typography, mediumGroupBorderRadius, CategoryMenuItem } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, typography, mediumGroupBorderRadius, CategoryMenuItem, T } from '@admiral-ds/react-ui';
 import type { MenuModelItemProps, MenuProps, RenderOptionProps } from '@admiral-ds/react-ui';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 
@@ -116,6 +116,9 @@ export const MenuCardGroupsTemplate = (props: MenuProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример построения меню с группированием пунктов.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

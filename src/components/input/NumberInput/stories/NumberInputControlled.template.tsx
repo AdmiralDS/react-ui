@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { NumberInput, clearValue } from '@admiral-ds/react-ui';
+import { NumberInput, clearValue, T } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Separator = styled.div`
+  height: 8px;
+`;
 
 function declOfNum(n: number, text_forms: Array<string>) {
   n = Math.abs(n) % 100;
@@ -23,6 +28,19 @@ export const NumberInputControlledTemplate = () => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        В качестве значений параметров value и defaultValue в NumberInput необходимо передавать уже отформатированную
+        строку с разделителями тысяч (суффикс/префикс в value/defaultValue вносить не нужно).
+        <Separator />
+        Если вы используете контролируемый NumberInput, то в качестве значения value вам досточно указывать
+        event.target.value, где event - это нативное событие инпута, передаваемое к качестве параметра в колбек
+        onChange.
+        <Separator />
+        Кроме того, библиотека предоставляет утилиту fitToCurrency, которая возвращает строку отформатированную в
+        денежном формате. В качестве параметров данная утилита принимает value - значение, которое надо отформатировать,
+        а также параметры precision, decimal, thousand. Также библиотека предоставляет утилиту clearValue, которая
+        возвращает входную строку, из которой удалены все символы кроме цифр, символа decimal и минуса.
+      </T>
       <NumberInput
         value={value1}
         onChange={(event) => {

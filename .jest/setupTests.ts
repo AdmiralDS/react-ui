@@ -10,6 +10,6 @@ import '@testing-library/jest-dom';
 // a brand new matcher to make expectations on the style rules.
 import 'jest-styled-components';
 
-import * as ResizeObserverModule from 'resize-observer-polyfill';
+// import * as ResizeObserverModule from 'resize-observer-polyfill';
 
-(global as any).ResizeObserver = ResizeObserverModule.default;
+// (global as any).ResizeObserver = ResizeObserverModule.default;

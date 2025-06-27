@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useRef, useState } from 'react';
+import { Children, forwardRef, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
@@ -17,6 +16,8 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+
+export * from './ActionsPanel';
 
 const Input = styled(TextInput)`
   min-width: 150px;
@@ -36,7 +37,7 @@ function defaultFormatter(isoValues: string[], joinString = ' - '): string {
     .join(joinString);
 }
 
-function preventUseUnsupportedCharacters(e: React.CompositionEvent<HTMLInputElement>) {
+function preventUseUnsupportedCharacters(e: React.InputEvent<HTMLInputElement>) {
   const typedChar = e.data;
   if (typedChar && typedChar.replace(/[^\d_.]/g, '').length === 0) {
     e.preventDefault();
@@ -71,9 +72,12 @@ export interface DateInputProps
 
   /** Компонент для отображения альтернативной иконки */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+  /** Позволяет добавить панель внизу под календарем */
+  renderBottomPanel?: () => React.ReactNode;
 }
 
-export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
+export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
   (
     {
       type = 'date',
@@ -95,6 +99,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       onViewMonthSelect,
       onViewYearSelect,
       selected,
+      viewDate,
+      onViewDateChange,
       calendarRef,
       icon = CalendarOutlineSVG,
       icons,
@@ -110,6 +116,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       onDateIncreaseDecrease,
       dimension = 'm',
       onBeforeInput = preventUseUnsupportedCharacters,
+      renderBottomPanel,
       ...props
     },
     ref,
@@ -128,6 +135,8 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       onViewMonthSelect,
       onViewYearSelect,
       selected,
+      viewDate,
+      onViewDateChange,
       highlightSpecialDay,
       locale,
       onDateIncreaseDecrease,
@@ -188,7 +197,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
-    const iconArray = React.Children.toArray(iconsAfter || icons);
+    const iconArray = Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
     }
@@ -221,6 +230,7 @@ export const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               onChange={handleCalendarChange}
               range={isDateRange}
             />
+            {renderBottomPanel && renderBottomPanel()}
           </StyledDropdownContainer>
         )}
       </Input>

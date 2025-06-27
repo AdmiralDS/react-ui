@@ -41,6 +41,12 @@ export interface CalendarPropType extends IDateSelectionProps {
    */
   tooltipContainer?: never;
 
+  /** Дата, отображаемая на календаре */
+  viewDate?: Date | null;
+
+  /** Коллбэк при изменении даты, отображаемая на календаре */
+  onViewDateChange?: (newDate: Date) => void;
+
   /** Показать экран выбора дат (месяц/год/день) */
   currentActiveView?: ViewScreenType | null;
 

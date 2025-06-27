@@ -1,5 +1,6 @@
 import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
+import type { DataAttributes } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -7,13 +8,15 @@ import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 
-import { MenuButton } from '#src/components/PaginationOne/Menu';
+import { MenuButton } from './Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
-import { keyboardKey } from '../common/keyboardKey';
+import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
+
+export type PaginationOneDimension = 'm' | 's';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -69,8 +72,10 @@ const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boole
 
   ${mixin};
 `;
-
+const nothing = () => {};
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  /** Размер компонента */
+  dimension?: PaginationOneDimension;
   /** Колбек, который срабатывает при изменении номера  страницы или размера страницы */
   onChange: (result: { page: number; pageSize: number }) => void;
   /** Номер текущей страницы */
@@ -136,9 +141,21 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
     /** Текст, описывающий кнопку переключения вперед (атрибут aria-label) */
     forwardText?: string;
   };
+
+  /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  leftButtonPropsConfig?: (
+    props: React.ComponentProps<typeof Button>,
+  ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
+  /** Конфиг функция пропсов для правой кнопки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  rightButtonPropsConfig?: (
+    props: React.ComponentProps<typeof Button>,
+  ) => Partial<React.ComponentProps<typeof Button> & DataAttributes>;
 }
 
 export const PaginationOne: FC<PaginationOneProps> = ({
+  dimension = 'm',
   page,
   pageSize,
   pageSizes,
@@ -154,6 +171,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
+  leftButtonPropsConfig = nothing,
+  rightButtonPropsConfig = nothing,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
@@ -189,12 +208,13 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const parsePageNumber = (pageSelected: string) => {
     if (pageSelected === '') {
-      return parseInt(selectedPageNumber);
+      return Number.parseInt(selectedPageNumber, 10);
     }
-    const page = parseInt(pageSelected);
-    if (isNaN(page) || page < 1) {
+    const page = Number.parseInt(pageSelected, 10);
+    if (Number.isNaN(page) || page < 1) {
       return 1;
-    } else if (page > totalPages) {
+    }
+    if (page > totalPages) {
       return totalPages;
     }
     return page;
@@ -213,7 +233,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   };
 
   const handleSizeChange = (pageSizeSelected: string) => {
-    const pageSize = parseInt(pageSizeSelected);
+    const pageSize = Number.parseInt(pageSizeSelected, 10);
     onChange({ page: 1, pageSize: pageSize });
   };
 
@@ -286,12 +306,33 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     return false;
   };
 
+  const leftButtonProps = {
+    appearance: 'tertiary',
+    dimension,
+    iconStart: <ChevronLeft />,
+    displayAsSquare: true,
+    'aria-label': backwardText,
+    disabled: backButtonDisabled,
+    onClick: pageDecrement,
+  } satisfies React.ComponentProps<typeof Button>;
+
+  const rightButtonProps = {
+    appearance: 'tertiary',
+    dimension,
+    iconStart: <ChevronRight />,
+    displayAsSquare: true,
+    'aria-label': forwardText,
+    disabled: forwardButtonDisabled,
+    onClick: pageIncrement,
+  } satisfies React.ComponentProps<typeof Button>;
+
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
         <Part>
           {itemsPerPageText}
           <MenuButton
+            dimension={dimension}
             options={pageSizes}
             selected={pageSize.toString()}
             onSelectItem={handleSizeChange}
@@ -321,6 +362,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         <Part>
           <Divider />
           <MenuButton
+            dimension={dimension}
             options={pages}
             selected={selectedPageNumber}
             onSelectItem={handlePageInputChange}
@@ -366,24 +408,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           </MenuButton>
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
           <ButtonsWrapper>
-            <Button
-              appearance="tertiary"
-              dimension="m"
-              iconStart={<ChevronLeft />}
-              displayAsSquare
-              aria-label={backwardText}
-              disabled={backButtonDisabled}
-              onClick={pageDecrement}
-            />
-            <Button
-              appearance="tertiary"
-              dimension="m"
-              iconStart={<ChevronRight />}
-              displayAsSquare
-              aria-label={forwardText}
-              disabled={forwardButtonDisabled}
-              onClick={pageIncrement}
-            />
+            <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
+            <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
           </ButtonsWrapper>
         </Part>
       </ComplexWrapper>
@@ -401,24 +427,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
           )}
         </PageSizeAdditional>
         <ButtonsWrapper>
-          <Button
-            appearance="tertiary"
-            dimension="m"
-            iconStart={<ChevronLeft />}
-            displayAsSquare
-            aria-label={backwardText}
-            disabled={backButtonDisabled}
-            onClick={pageDecrement}
-          />
-          <Button
-            appearance="tertiary"
-            dimension="m"
-            iconStart={<ChevronRight />}
-            displayAsSquare
-            aria-label={forwardText}
-            disabled={forwardButtonDisabled}
-            onClick={pageIncrement}
-          />
+          <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
+          <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
         </ButtonsWrapper>
       </SimpleWrapper>
     );

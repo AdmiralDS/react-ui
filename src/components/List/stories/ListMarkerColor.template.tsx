@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UnorderedList, ListItem, ListIcon } from '@admiral-ds/react-ui';
+import { UnorderedList, ListItem, ListIcon, T } from '@admiral-ds/react-ui';
 import { ReactComponent as TasksOutline } from '@admiral-ds/icons/build/documents/TasksOutline.svg';
 import { ReactComponent as PeopleOutline } from '@admiral-ds/icons/build/system/PeopleOutline.svg';
 import { ReactComponent as EmailOutline } from '@admiral-ds/icons/build/system/EmailOutline.svg';
@@ -14,6 +14,10 @@ const ItemWithColoredMarker = styled(ListItem)<{ $color: string }>`
 export const ListMarkerColorTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пользователь может кастомизировать цвет маркеров и иконок самостоятельно, как это продемонстрировано в данном
+        примере.
+      </T>
       <UnorderedList>
         <ListItem>Уборка</ListItem>
         <ListItem>

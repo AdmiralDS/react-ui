@@ -89,9 +89,6 @@ export const StatusIndicatorDimension = {
       source: {
         code: StatusIndicatorDimensionRaw,
       },
-      description: {
-        story: `Компонент регулируется только по высоте и представлен в размерах M (24px) и S (20px), ширина подстраивается под контент.`,
-      },
     },
   },
 };
@@ -109,10 +106,6 @@ export const StatusIndicatorPosition = {
     docs: {
       source: {
         code: StatusIndicatorPositionRaw,
-      },
-      description: {
-        story: `Через параметр cssMixin можно изменять цветовое отображение статуса. Также с помощью 
-        параметра displayRight можно управлять позиционированием иконки.`,
       },
     },
   },

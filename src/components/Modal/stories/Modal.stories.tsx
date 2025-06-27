@@ -224,11 +224,6 @@ export const ModalCustomOverlayExample = {
       source: {
         code: ModalCustomOverlayRaw,
       },
-      description: {
-        story: `У пользователя есть возможность кастомизировать внешний вид подложки модального окна.
-        Для этого можно воспользоваться параметром overlayStyledCss, чтобы задать миксин со стилями для подложки.
-        Либо можно воспользоваться параметрами overlayClassName, overlayStyle.`,
-      },
     },
   },
 
@@ -250,10 +245,6 @@ export const ModalStatusIconExample = {
     docs: {
       source: {
         code: ModalStatusIconRaw,
-      },
-      description: {
-        story: `Используются в простых текстовых модальных окнах для оповещений пользователя о важных 
-        событиях. Статус модального окна может быть четырех типов: Success, Information, Danger, Warning.`,
       },
     },
   },

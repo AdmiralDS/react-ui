@@ -10,11 +10,14 @@ const Container = styled.div<{ $reduceMargin?: boolean }>`
   margin-bottom: ${(p) => (p.$reduceMargin ? 0 : 20)}px;
   transform: scale(1);
 `;
+const Separator = styled.div`
+  height: 8px;
+`;
 
 export const FloatingButtonStyleTemplate = (_props: FloatingButtonProps) => {
   return (
     <>
-      <T font="Body/Body 1 Short" as="div">
+      <T font="Body/Body 1 Long" as="div">
         Компонент имеет два размера – M (40 px) и XL (56 px). Два типа – Primary и Secondary.
       </T>
       <Container>
@@ -33,7 +36,7 @@ export const FloatingButtonStyleTemplate = (_props: FloatingButtonProps) => {
       </Container>
       <T font="Body/Body 1 Short" as="div">
         Компонент можно использовать с бэйджами – Badge и Badge Dot. Для этого необходимо задать параметр badge.
-        <br />
+        <Separator />
         Параметр badge - это специальный объект с настройками, где свойство <i>count</i> отвечает за числовой контент
         бейджа, свойство <i>appearance</i> отвечает за внешний вид бейджа, а свойство <i>dot</i> включает отображение
         Badge Dot вместо Badge.

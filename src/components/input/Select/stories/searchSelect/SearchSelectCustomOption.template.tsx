@@ -27,8 +27,8 @@ export const SearchSelectCustomOptionTemplate = (props: SelectProps) => {
 
   return (
     <>
-      <T font="Body/Body 2 Long" as="div">
-        Фильтрация элементов значению, тексту и дополнительному тексту
+      <T font="Body/Body 1 Long" as="div">
+        Фильтрация элементов по значению, тексту и дополнительному тексту
       </T>
       <Separator />
       <Select {...props} value={selectValue} mode="searchSelect" onFilterItem={handleFilterItem} onChange={onChange}>

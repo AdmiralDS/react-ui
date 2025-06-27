@@ -161,9 +161,6 @@ export const ToggleLabel = {
       source: {
         code: ToggleLabelRaw,
       },
-      description: {
-        story: `Варианты компонента без подписи, с подписью слева и справа.`,
-      },
     },
   },
 };
@@ -182,9 +179,6 @@ export const ToggleHint = {
       source: {
         code: ToggleHintRaw,
       },
-      description: {
-        story: `Варианты компонента с дополнительным текстом.`,
-      },
     },
   },
 };
@@ -202,10 +196,6 @@ export const ToggleMobile = {
     docs: {
       source: {
         code: ToggleMobileRaw,
-      },
-      description: {
-        story: `При создании отдельных макетов для мобильных устройств, рекомендуется использовать вариацию комопнента размера M с текстом слева, который можно
-        вытянуть на всю ширину экрана.`,
       },
     },
   },

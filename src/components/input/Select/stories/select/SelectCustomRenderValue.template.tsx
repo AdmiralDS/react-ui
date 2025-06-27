@@ -1,10 +1,12 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Option, Select, SelectValueWrapper } from '@admiral-ds/react-ui';
+import { Option, Select, SelectValueWrapper, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 import { ReactComponent as Cuba } from '@admiral-ds/icons/build/flags/Cuba.svg';
 import { ReactComponent as Belarus } from '@admiral-ds/icons/build/flags/Belarus.svg';
 import { ReactComponent as RussianFederation } from '@admiral-ds/icons/build/flags/RussianFederation.svg';
+
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 const MultipleMixin = css`
   & ${SelectValueWrapper} {
@@ -49,6 +51,11 @@ export const SelectCustomRenderValueTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Для кастомного отображения выбранного значения необходимо использовать свойство <code>renderSelectValue</code>.
+        Туда передается функция, получающая выбранные значения, и, возвращающая отображаемый ReactNode.
+      </T>
+      <Separator />
       <CustomSelect {...props} multiple={false} placeholder="Placeholder" renderSelectValue={renderValue}>
         <Option value="Саша Даль">Саша Даль</Option>
         <Option value="Алексей Елесин">Алексей Елесин</Option>

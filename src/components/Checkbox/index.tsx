@@ -101,17 +101,6 @@ export const Background = styled.div<{ $error?: boolean }>`
   }
 `;
 
-const indeterminateCss = css<{ $indeterminate?: boolean }>`
-  &:not(:checked) + ${Background} {
-    background-color: ${({ theme, $indeterminate }) =>
-      $indeterminate && `var(--admiral-color-Primary_Primary60Main, ${theme.color['Primary/Primary 60 Main']})`};
-    border: ${({ $indeterminate }) => $indeterminate && 'none'};
-    > * {
-      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
-    }
-  }
-`;
-
 const actionCss = css`
   content: '';
   position: absolute;
@@ -162,6 +151,27 @@ const checkedBackgroundCss = css`
   border: none;
 `;
 
+const indeterminateBackgroundCss = css`
+  & + ${Background} {
+    ${checkedBackgroundCss}
+  }
+`;
+
+const disabledIndeterminateBackgroundCss = css`
+  & + ${Background} {
+    ${disabledCheckedBackgroundCss}
+  }
+`;
+
+const indeterminateCss = css<{ readOnly?: boolean }>`
+  ${(p) => (p.readOnly ? disabledIndeterminateBackgroundCss : indeterminateBackgroundCss)}
+`;
+
+/**
+ * - cостояние indeterminate должно отображаться независимо от состояния inputа (checked или unchecked)
+ * - cостояние indeterminate имеет схожие стили с состоянием checked
+ */
+
 const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   appearance: none;
   ::-ms-check {
@@ -186,25 +196,31 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   &:checked + ${Background} {
     ${(props) => (props.readOnly ? disabledCheckedBackgroundCss : checkedBackgroundCss)}
   }
+  &:checked:disabled + ${Background} {
+    ${disabledCheckedBackgroundCss}
+  }
+
+  ${(p) => p.$indeterminate && indeterminateCss}
+
+  &:not(:checked) + ${Background} {
+    > * {
+      display: ${(p) => (p.$indeterminate ? 'block' : 'none')};
+    }
+  }
 
   &:disabled {
     cursor: not-allowed;
-    ${disabledCss};
+    ${disabledCss}
+    ${(p) => p.$indeterminate && disabledIndeterminateBackgroundCss}
   }
 
   ${(props) => !props.readOnly && props.$hovered && hoveredCss}
-
-  ${indeterminateCss}
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) + ${hoveredCss}
 
   &:active:not(:disabled) {
     ${activeCss}
-  }
-
-  &:checked:disabled + ${Background} {
-    ${disabledCheckedBackgroundCss}
   }
 
   &:focus-visible {

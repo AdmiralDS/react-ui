@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { MenuItem, Option, Select } from '@admiral-ds/react-ui';
+import { MenuItem, Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
 
 import { OPTIONS } from '#src/components/input/Select/stories/data';
-import { Icon, TextWrapper } from '#src/components/input/Select/stories/styled';
+import { Icon, TextWrapper, Separator } from '#src/components/input/Select/stories/styled';
 
 interface MyIncredibleOptionProps extends RenderOptionProps {
   shouldAnimate?: boolean;
@@ -34,21 +34,27 @@ export const SearchSelectRenderPropsTemplate = (props: SelectProps) => {
   };
 
   return (
-    <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
-      {OPTIONS.map(({ text, value }) => (
-        <Option
-          key={value}
-          value={value}
-          renderOption={(options) => (
-            <MyIncredibleOption
-              text={text}
-              shouldAnimate={options.hovered && value !== selectValue}
-              {...options}
-              key={value}
-            />
-          )}
-        />
-      ))}
-    </Select>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пример кастомизации select через renderProps
+      </T>
+      <Separator />
+      <Select {...props} value={selectValue} mode="searchSelect" onChange={onChange}>
+        {OPTIONS.map(({ text, value }, index) => (
+          <Option
+            key={`${value}-${index}`}
+            value={value}
+            renderOption={(options) => (
+              <MyIncredibleOption
+                text={text}
+                shouldAnimate={options.hovered && value !== selectValue}
+                {...options}
+                key={`${value}-${index}`}
+              />
+            )}
+          />
+        ))}
+      </Select>
+    </>
   );
 };

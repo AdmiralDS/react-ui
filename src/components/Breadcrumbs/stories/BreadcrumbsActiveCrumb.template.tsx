@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Breadcrumbs } from '@admiral-ds/react-ui';
+import { Breadcrumbs, T } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: 24px;
+`;
 
 const items1 = [
   { url: '#', text: 'page 1' },
@@ -20,6 +25,12 @@ const items2 = [
 export const BreadcrumbsActiveCrumbTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Последняя вкладка в компоненте может быть либо неактивной (по умолчанию), в таком случае она отображает текущее
+        местоположение. Либо последняя вкладка активна и отображает предыдущий уровень сайта. Управляет поведением
+        последней вкладки параметр lastBreadcrumbActive.
+      </T>
+      <Separator />
       <Breadcrumbs items={items1} />
       <Breadcrumbs items={items2} lastBreadcrumbActive />
     </>

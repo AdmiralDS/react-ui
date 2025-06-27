@@ -1,4 +1,3 @@
-import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 
 import { refSetter } from '../common/utils/refSetter';
@@ -28,8 +27,10 @@ export interface TagVisualProps {
    * происходит через цветную статусную метку (цветной кружок рядом с текстом)
    */
   statusViaBackground?: boolean;
+  /** Скрыть обводку тэга (при условии, что статус отображается через цвет обводки и фона) */
+  isBorderHidden?: boolean;
   /** Отображение иконки. Иконка отображается только по левому краю и при условии, что статус отображается через цвет обводки и фона */
-  icon?: ReactNode;
+  icon?: React.ReactNode;
 }
 
 export interface TagSizeProps {
@@ -41,14 +42,14 @@ export interface TagSizeProps {
    * Позволяет рендерить компонент, используя другой тег HTML (https://styled-components.com/docs/api#as-polymorphic-prop).
    * В storybook в качестве примера приведены несколько возможных вариантов этого параметра (кроме них можно использовать любой другой HTML тег).
    */
-  as?: ElementType;
+  as?: React.ElementType;
 }
 
-export interface TagProps extends HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
+export interface TagProps extends React.HTMLAttributes<HTMLButtonElement>, TagVisualProps, TagSizeProps {}
 
 export interface TagInternalProps {
   /** Для внутреннего использования! Отображение иконки отрытия выпадающего меню */
-  statusIcon?: ReactNode;
+  statusIcon?: React.ReactNode;
 }
 
 export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
@@ -59,6 +60,7 @@ export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
       dimension = 'm',
       width,
       statusViaBackground = false,
+      isBorderHidden = false,
       icon,
       statusIcon,
       onClick,
@@ -72,8 +74,13 @@ export const Tag = forwardRef<HTMLElement, TagProps & TagInternalProps>(
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const background: TagKind | string =
       typeof kind === 'object' ? (kind.background ? kind.background : 'neutral') : (kind as TagKind);
-    const border: TagKind | string =
-      typeof kind === 'object' ? (!!kind.background && !!kind.border ? kind.border : 'neutral') : (kind as TagKind);
+    const border: TagKind | string = isBorderHidden
+      ? 'transparent'
+      : typeof kind === 'object'
+        ? !!kind.background && !!kind.border
+          ? kind.border
+          : 'neutral'
+        : (kind as TagKind);
     const backgroundHover: TagKind | string =
       typeof kind === 'object'
         ? kind.backgroundHover

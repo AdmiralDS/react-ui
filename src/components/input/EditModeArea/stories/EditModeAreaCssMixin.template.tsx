@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { ChangeEvent } from 'react';
-import { EditModeArea } from '@admiral-ds/react-ui';
+import { EditModeArea, T } from '@admiral-ds/react-ui';
 import type { EditModeAreaProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { css, ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
@@ -24,6 +24,9 @@ export const EditModeAreaCssMixinTemplate = ({
   };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Для изменения стилей компонента в контейнер компонента можно передать стили в виде containerCssMixin.
+      </T>
       <EditModeArea {...props} value={localValue} onChange={handleChange} containerCssMixin={cssMixin} />
     </ThemeProvider>
   );

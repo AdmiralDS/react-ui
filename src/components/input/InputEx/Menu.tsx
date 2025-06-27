@@ -1,4 +1,3 @@
-import type { HTMLAttributes, ReactNode } from 'react';
 import { useState, forwardRef, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -48,11 +47,15 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-function defaultOptionRender({ value, ...props }: RenderPropsType<ReactNode> & MenuItemProps) {
-  return <MenuItem {...props}>{String(value)}</MenuItem>;
+function defaultOptionRender({ value, key, ...props }: RenderPropsType<React.ReactNode> & MenuItemProps) {
+  return (
+    <MenuItem key={key} {...props}>
+      {String(value)}
+    </MenuItem>
+  );
 }
 
-export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {
+export interface MenuProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   /** Размер Меню */
   dimension?: MenuDimensions;
 
@@ -74,7 +77,7 @@ export interface MenuProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'onSe
   preventFocusSteal?: boolean;
 }
 
-export const Menu = forwardRef<HTMLDivElement, MenuProps<ReactNode>>(
+export const Menu = forwardRef<HTMLDivElement, MenuProps<React.ReactNode>>(
   (
     {
       options,
@@ -88,7 +91,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps<ReactNode>>(
     },
     ref,
   ) => {
-    const [activeOption, setActiveOption] = useState<null | ReactNode>(null);
+    const [activeOption, setActiveOption] = useState<null | React.ReactNode>(null);
 
     const menuRef = useRef<HTMLDivElement | null>(null);
 

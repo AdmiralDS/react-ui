@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import styled, { css, useTheme } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 import { createContext, forwardRef, useContext, useEffect, useRef } from 'react';
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -13,6 +14,7 @@ import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/I
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 import { ReactComponent as CloseCircleOutline } from '@admiral-ds/icons/build/service/CloseCircleOutline.svg';
 import { ReactComponent as ErrorOutline } from '@admiral-ds/icons/build/service/ErrorOutline.svg';
+import type { ScrollContainerProps } from '#src/components/Scrollbar';
 import { ScrollContainer } from '#src/components/Scrollbar';
 
 type Dimension = 'xl' | 'l' | 'm' | 's';
@@ -67,11 +69,6 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
     }
     return $displayCloseIcon ? '0 56px 8px 24px' : '0 24px 8px';
   }};
-`;
-
-const ScrollableContent = styled(ScrollContainer)<{ $mobile: boolean }>`
-  padding-block: 8px;
-  padding-inline: ${({ $mobile }) => `${$mobile ? 16 : 24}px`};
 `;
 
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
@@ -163,6 +160,7 @@ const ModalContext = createContext({ mobile: false, displayCloseIcon: true } as 
   displayCloseIcon: boolean;
 });
 
+const nothing = () => {};
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: Dimension;
@@ -200,6 +198,11 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей модальное окно */
     closeButtonAriaLabel?: string;
   };
+  /** Конфиг функция пропсов для кнопки закрытия модального окна. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  closeButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CloseButton>,
+  ) => Partial<React.ComponentProps<typeof CloseButton> & DataAttributes>;
 }
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(
@@ -217,6 +220,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       displayCloseIcon = true,
       children,
       locale,
+      closeButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -285,6 +289,13 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       onClose?.();
     };
 
+    const closeButtonProps = {
+      dimension: 'lSmall',
+      'aria-label': closeBtnAriaLabel,
+      $mobile: mobile,
+      onClick: handleCloseBtnClick,
+    } satisfies React.ComponentProps<typeof CloseButton>;
+
     return createPortal(
       <Overlay
         ref={overlayRef}
@@ -305,14 +316,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {...props}
         >
           <ModalContext.Provider value={{ mobile, displayCloseIcon }}>{children}</ModalContext.Provider>
-          {displayCloseIcon && (
-            <CloseButton
-              dimension="lSmall"
-              aria-label={closeBtnAriaLabel}
-              $mobile={mobile}
-              onClick={handleCloseBtnClick}
-            />
-          )}
+          {displayCloseIcon && <CloseButton {...closeButtonProps} {...closeButtonPropsConfig(closeButtonProps)} />}
         </ModalComponent>
       </Overlay>,
       container || document.body,
@@ -332,12 +336,21 @@ export const ModalTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({
   );
 };
 
-export const ModalContent = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof ScrollContainer>) => {
+export const ModalContent = ({
+  children,
+  contentBlockProps = {},
+  ...props
+}: ScrollContainerProps & { children: React.ReactNode }) => {
   const mobile = useContext(ModalContext).mobile;
+  contentBlockProps.style = {
+    ...contentBlockProps.style,
+    paddingBlock: '8px',
+    paddingInline: mobile ? '16px' : '24px',
+  };
   return (
-    <ScrollableContent tabIndex={-1} $mobile={mobile} {...props}>
+    <ScrollContainer tabIndex={-1} contentBlockProps={contentBlockProps} {...props}>
       {children}
-    </ScrollableContent>
+    </ScrollContainer>
   );
 };
 

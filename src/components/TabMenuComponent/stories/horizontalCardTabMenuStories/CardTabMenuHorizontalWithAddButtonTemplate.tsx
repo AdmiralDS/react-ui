@@ -6,13 +6,13 @@ import type {
   BorderRadiusType,
   RenderOptionProps,
   HorizontalTabProps,
-  TabMenuHorizontalProps,
+  CardTabMenuHorizontalProps,
 } from '@admiral-ds/react-ui';
 import {
   CardTabMenuHorizontal,
   CardTab,
   TabIcon,
-  TabBadge,
+  CardTabBadge,
   TabText,
   TabCloseIconButton,
   MenuItem,
@@ -49,9 +49,9 @@ const CustomHorizontalCardTab = forwardRef<HTMLButtonElement, CustomHorizontalTa
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <TabBadge disabled={disabled} selected={selected}>
+          <CardTabBadge disabled={disabled} selected={selected}>
             {badge}
-          </TabBadge>
+          </CardTabBadge>
         )}
         <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
       </CardTab>
@@ -109,7 +109,7 @@ export const CardTabMenuHorizontalWithAddButtonTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
-}: TabMenuHorizontalProps & {
+}: CardTabMenuHorizontalProps & {
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {

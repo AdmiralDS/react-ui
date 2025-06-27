@@ -1,4 +1,3 @@
-import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import {
@@ -17,7 +16,7 @@ const Layout = styled.div`
 
 const title = 'Заголовок оповещения';
 const body = 'Тут находится текст короткого оповещения';
-const linkText = 'Link';
+const linkText = 'Text Button';
 
 export const NotificationItemStatusTemplate = ({
   displayStatusIcon = true,

@@ -5,11 +5,11 @@ import {
   ExpandIconPlacement,
   CheckboxCell,
   GroupTextContent,
-  StickyGroupRow,
+  StickyWrapper,
   Filler,
   DragCell,
 } from '#src/components/Table/style';
-import * as React from 'react';
+
 import type { TableRow } from '#src/components/Table';
 import { CheckboxField } from '#src/components/form';
 import type { RegularRowProps } from '#src/components/Table/Row/RegularRow';
@@ -62,7 +62,7 @@ export const GroupRow = ({
 
   return (
     <>
-      <StickyGroupRow>
+      <StickyWrapper>
         {rowsDraggable && <DragCell $dimension={dimension} />}
         <ExpandCell $dimension={dimension} className="td_expand" data-column="expand" data-row={row.id}>
           <ExpandIconPlacement
@@ -86,10 +86,10 @@ export const GroupRow = ({
             />
           </CheckboxCell>
         )}
-        <Cell key={`${row.id}`} $dimension={dimension} className="td" data-column="group" data-row={row.id}>
-          {renderGroup()}
-        </Cell>
-      </StickyGroupRow>
+      </StickyWrapper>
+      <Cell key={`${row.id}`} $dimension={dimension} className="td" data-column="group" data-row={row.id}>
+        {renderGroup()}
+      </Cell>
       <Filler />
     </>
   );

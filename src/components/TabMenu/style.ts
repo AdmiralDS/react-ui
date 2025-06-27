@@ -52,7 +52,9 @@ export const Wrapper = styled.div<{ $underline?: boolean; $mobile?: boolean; $di
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: inset 0 -${LINE_HEIGHT} 0 0 ${(p) => (p.$underline ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent')};
+  box-shadow: inset 0 -${LINE_HEIGHT} 0 0
+    ${(p) =>
+      p.$underline ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})` : 'transparent'};
   overflow: ${({ $mobile }) => ($mobile ? 'scroll' : 'hidden')};
 
   height: ${({ $dimension }) => ($dimension === 'l' ? TAB_HEIGHT_L : TAB_HEIGHT_M)}px;

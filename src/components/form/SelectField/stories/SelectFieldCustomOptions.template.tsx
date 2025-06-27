@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 import type { SearchSelectFieldProps } from '@admiral-ds/react-ui';
-import { SelectField, Option, typography } from '@admiral-ds/react-ui';
+import { SelectField, Option, typography, T } from '@admiral-ds/react-ui';
 
 const jump = keyframes`
   50% {
@@ -71,9 +71,12 @@ export const SelectFieldCustomOptionsTemplate = (props: SearchSelectFieldProps) 
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример отображения кастомных опций с использованием компонента Option
+      </T>
       <SelectField mode="searchSelect" label="label" value={selectValue} onChange={onChange}>
-        {OPTIONS.map((option) => (
-          <Option key={option.value} value={option.value}>
+        {OPTIONS.map((option, index) => (
+          <Option key={`${option.value}-${index}`} value={option.value}>
             <Icon />
             <TextWrapper>
               {option.text}

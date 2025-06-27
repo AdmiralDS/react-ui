@@ -56,7 +56,8 @@ const eventsMixin = css`
   &:active {
     background: var(--admiral-color-Opacity_Press, ${(p) => p.theme.color['Opacity/Press']});
   }
-  &:focus {
+  &:focus-visible {
+    outline: none;
     &:before {
       position: absolute;
       content: '';
@@ -67,13 +68,9 @@ const eventsMixin = css`
       right: 0;
     }
   }
-  &:focus,
-  & > ${ItemTitleContent} {
-    outline: none;
-  }
 `;
 
-export const ItemTitle = styled.button`
+export const ItemTitle = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -91,12 +88,13 @@ export const ItemTitle = styled.button`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   ${typography['Subtitle/Subtitle 2']}
 
-  &:not(:disabled) {
+  [data-disabled='false'] & {
     ${eventsMixin}
   }
 
-  &:disabled {
+  [data-disabled='true'] & {
     cursor: not-allowed;
+    user-select: none;
   }
 
   [data-dimension='m'] & {

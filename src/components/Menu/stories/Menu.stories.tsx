@@ -20,6 +20,7 @@ import { MenuActionsTwoButtonsTemplate } from './MenuActionsTwoButtons.template'
 import { MenuActionsAddUserValueTemplate } from './MenuActionsAddUserValue.template';
 import { MenuCheckboxGroupTemplate } from './MenuCheckboxGroup.template';
 import { MenuWithPreselectTemplate } from './MenuWithPreselect.template';
+import { MenuWithSeparatorTemplate } from './MenuWithSeparator.template';
 
 // Imports of text sources
 import MenuLargeNumberOfItemsRaw from './MenuLargeNumberOfItems.template?raw';
@@ -38,6 +39,7 @@ import MenuActionsTwoButtonsRaw from './MenuActionsTwoButtons.template?raw';
 import MenuActionsAddUserValueRaw from './MenuActionsAddUserValue.template?raw';
 import MenuCheckboxGroupRaw from './MenuCheckboxGroup.template?raw';
 import MenuWithPreselectRaw from './MenuWithPreselect.template?raw';
+import MenuWithSeparatorRaw from './MenuWithSeparator.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -120,9 +122,6 @@ export const SimpleExample = {
       source: {
         code: MenuSimpleRaw,
       },
-      description: {
-        story: 'Базовый пример построения Menu.',
-      },
     },
   },
   name: 'Базовый пример',
@@ -139,9 +138,6 @@ export const IconsExample = {
       source: {
         code: MenuIconsAndAdditionalTextRaw,
       },
-      description: {
-        story: 'Пример меню с иконками и дополнительным текстом',
-      },
     },
   },
   name: 'Пример с иконками и дополнительным текстом',
@@ -157,9 +153,6 @@ export const CardGroupsExample = {
       source: {
         code: MenuCardGroupsRaw,
       },
-      description: {
-        story: 'Пример построения меню с группированием пунктов',
-      },
     },
   },
   name: 'Пример с группами карт',
@@ -174,9 +167,6 @@ export const MenuWithCustomItemsExample = {
     docs: {
       source: {
         code: MenuWithCustomItemsRaw,
-      },
-      description: {
-        story: 'Пример меню с использованием собственных пунктов',
       },
     },
   },
@@ -196,9 +186,6 @@ export const CheckboxMenuExample = {
       source: {
         code: MenuCheckboxRaw,
       },
-      description: {
-        story: 'Пример меню с пунктами, содержащими Checkbox.',
-      },
     },
   },
   name: 'Меню с checkbox',
@@ -216,9 +203,6 @@ export const RadioButtonMenuExample = {
     docs: {
       source: {
         code: MenuRadioButtonRaw,
-      },
-      description: {
-        story: 'Пример меню с пунктами, содержащими RadioButton.',
       },
     },
   },
@@ -238,9 +222,6 @@ export const TooltipMenuExample = {
       source: {
         code: MenuTooltipRaw,
       },
-      description: {
-        story: 'Пример меню с пунктами, имеющими tooltip',
-      },
     },
   },
   name: 'Пример с Tooltip',
@@ -258,9 +239,6 @@ export const MultiLineMenuExample = {
     docs: {
       source: {
         code: MenuMultiLineRaw,
-      },
-      description: {
-        story: 'Пример с многострочными пунктами',
       },
     },
   },
@@ -280,9 +258,6 @@ export const MenuActionsTwoButtonsExample = {
       source: {
         code: MenuActionsTwoButtonsRaw,
       },
-      description: {
-        story: 'Пример с Actions с двумя кнопками',
-      },
     },
   },
   name: 'Пример с Actions с двумя кнопками',
@@ -300,9 +275,6 @@ export const MenuActionsAddUserValueExample = {
     docs: {
       source: {
         code: MenuActionsAddUserValueRaw,
-      },
-      description: {
-        story: 'Пример с Actions и Search',
       },
     },
   },
@@ -322,9 +294,6 @@ export const MenuCheckboxGroupExample = {
       source: {
         code: MenuCheckboxGroupRaw,
       },
-      description: {
-        story: 'Пример с CheckboxGroup',
-      },
     },
   },
   name: 'Пример с CheckboxGroup',
@@ -342,9 +311,6 @@ export const LargeNumberOfItemsExample = {
     docs: {
       source: {
         code: MenuLargeNumberOfItemsRaw,
-      },
-      description: {
-        story: 'Пример с большим количеством item. Для проверки прокрутки меню при быстрой смене активного элемента.',
       },
     },
   },
@@ -365,10 +331,6 @@ export const MenuWithLockCycleScrollExample = {
       source: {
         code: MenuWithLockCycleScrollRaw,
       },
-      description: {
-        story:
-          'Для блокировки цикличного обхода пунктов меню можно использовать onForwardCycleApprove и onBackwardCycleApprove.',
-      },
     },
   },
   name: 'Пример без цикла обхода пунктов',
@@ -386,12 +348,6 @@ export const VirtualScrollExample = {
     docs: {
       source: {
         code: MenuVirtualScrollRaw,
-      },
-      description: {
-        story:
-          'Для включения виртуального скролла, необходимо передать в параметр virtualScroll объект, ' +
-          'содержаний размер 1 элемента меню, для расчета максимальной высоты контейнера меню. ' +
-          'Или установить значение "auto". В этом случае максимальная высота будет рассчитана исходя из свойства "dimension"',
       },
     },
   },
@@ -411,11 +367,6 @@ export const MultiLevelExample = {
       source: {
         code: MenuMultiLevelRaw,
       },
-      description: {
-        story:
-          'Многоуровневая структура меню задается в модели данных, через указание дочерних элементов в свойстве subItems. ' +
-          'Ограничения по количеству уровней вложенности нет, но не следует забывать о комфорте пользователей.',
-      },
     },
   },
   name: 'Многоуровневое меню',
@@ -434,15 +385,26 @@ export const MenuWithPreselectExample = {
       source: {
         code: MenuWithPreselectRaw,
       },
-      description: {
-        story:
-          'Для активации работы режима preselected в меню необходимо указать preselectedModeActive. Переключение ' +
-          'элементов в состояние preselected может осуществляться в неконтролируемом режиме, а для поиска нужного ' +
-          'элемента меню по нажатию на кнопку необходимо перевести компонент в контролируемый режим и написать обработчик.' +
-          'Пример указан в коде.',
-      },
     },
   },
   name: 'Меню c состоянием preselect',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример с разделителями">
+const MenuWithSeparatorStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuWithSeparatorTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const MenuWithSeparatorExample = {
+  render: MenuWithSeparatorStory,
+  parameters: {
+    docs: {
+      source: {
+        code: MenuWithSeparatorRaw,
+      },
+    },
+  },
+  name: 'Пример с разделителями',
 };
 //</editor-fold>

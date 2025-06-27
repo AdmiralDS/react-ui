@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { UnorderedList, OrderedList, ListItem } from '@admiral-ds/react-ui';
-import { css } from 'styled-components';
+import { UnorderedList, OrderedList, ListItem, T } from '@admiral-ds/react-ui';
+import styled, { css } from 'styled-components';
 
 /**
  * Контент маркера может зависить от значения счетчика.
@@ -19,9 +19,21 @@ const checkMarker = css`
   color: green;
 `;
 
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
+
 export const ListMarkerCustomTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Пользователь может кастомизировать внешний вид и контент маркеров в списках с помощью параметра markerCssMixin,
+        задаваемого для компонентов OrderedList и UnorderedList.
+        <Separator /> В компонентах OrderedList и UnorderedList также специально введен css счётчик с именем
+        admiral-list-counter. Пользователи могут опираться на значение данного счетчика для задания контента маркеров с
+        использованием css функций counter() и counters().
+      </T>
+      <Separator $height={24} />
       <OrderedList styleType="lower-letters" markerCssMixin={latinLettersMarker}>
         <ListItem>Уборка</ListItem>
         <ListItem>

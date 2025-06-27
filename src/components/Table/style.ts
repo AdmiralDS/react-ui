@@ -11,7 +11,6 @@ import {
   groupRowStyle,
   headerStyle,
   multiLineTitle,
-  overflowMenuStyle,
   rowBackground,
   rowStyle,
   singleLineTitle,
@@ -22,6 +21,7 @@ import { IconPlacement } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 import { typography } from '../Typography';
 import { ResizerWrapper } from './RowWidthResizer';
+import { getActionSize } from './OverflowMenu';
 
 // устанавливаем  pointer-events: none для ResizerWrapper во время drag&drop столбцов, так как ResizerWrapper
 // располагается прямо между соседними столбцами, и это мешает правильно рассчитать то, над каким столбцом находится курсор
@@ -31,65 +31,46 @@ export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  overflow: auto;
 
   &[data-dragging='true'] ${ResizerWrapper} {
     pointer-events: none;
   }
 
   &[data-borders='true'] {
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-      z-index: 6;
-      pointer-events: none;
-    }
+    border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
 
-export const StickyGroupRow = styled.div`
+export const StickyWrapper = styled.div<{ $greyHeader?: boolean }>`
   display: flex;
   position: sticky;
   left: 0;
   z-index: 5;
-`;
-
-export const StickyWrapper = styled(StickyGroupRow)<{ $greyHeader?: boolean }>`
   background: ${({ theme, $greyHeader }) =>
     $greyHeader
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
-  ${TableContainer}[data-shadow='true'] & {
-    box-shadow: 4px 0 12px rgba(138, 150, 168, 0.16);
+  ${TableContainer}[data-shadow-left='true'] & {
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
   }
 `;
 
+/**
+ * Если NormalWrapper занимает всё свободное место в строке (это можно проверить через элемент Filler и его data-empty атрибут),
+ * то для NormalWrapper следует задать стиль overflow-x: hidden.
+ *
+ * Это важно для случаев, когда у последней ячейки включен resizer. Дело в том, что resizer выходит на 8px за пределы ячейки.
+ * И за счет этого может вызывать увеличение таблицы по длине. Чтобы этого не произошло используется стиль overflow-x: hidden.
+ *
+ * В качестве референса взята реализация из mui https://mui.com/material-ui/react-table/
+ */
 export const NormalWrapper = styled.div`
   display: flex;
-`;
-
-export const OverflowMenuWrapper = styled.div<{
-  $offset: number;
-  $dimension: TableProps['dimension'];
-  $showRowsActions?: boolean;
-}>`
-  will-change: margin-left;
-  transform: translate3d(0, 0, 0);
-  ${overflowMenuStyle};
-
-  ${({ $showRowsActions }) =>
-    !$showRowsActions &&
-    css`
-      visibility: hidden;
-      &:hover {
-        visibility: visible;
-      }
-    `}
+  &:has(+ div[data-empty='true']) {
+    overflow-x: hidden;
+  }
 `;
 
 export const Filler = styled.div`
@@ -98,58 +79,33 @@ export const Filler = styled.div`
   width: unset;
 `;
 
-export const HeaderWrapper = styled.div<{ $scrollbar: number; $greyHeader?: boolean }>`
+export const HeaderWrapper = styled.div`
   box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-
-  &[data-verticalscroll='true'] {
-    &:after {
-      position: absolute;
-      content: '';
-      box-sizing: border-box;
-      top: 0;
-      right: 0;
-      height: 100%;
-      background: ${({ theme, $greyHeader }) =>
-        $greyHeader
-          ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
-          : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
-      width: ${({ $scrollbar }) => $scrollbar}px;
-      border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-    }
-    & > div.tr {
-      overflow-y: scroll;
-    }
-  }
-
-  ${({ $greyHeader }) =>
-    $greyHeader &&
-    css`
-      & > div.tr {
-        background: var(--admiral-color-Neutral_Neutral05, ${(p) => p.theme.color['Neutral/Neutral 05']});
-      }
-    `}
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 6;
 `;
 
-export const Header = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const Header = styled.div<{
+  $dimension: TableProps['dimension'];
+  $greyHeader?: boolean;
+}>`
   box-sizing: border-box;
   display: flex;
-  flex: 0 0 auto;
-  overflow-x: hidden;
-  ${headerStyle};
-
-  & > * {
-    border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-  }
+  flex: 1 0 auto;
+  min-width: fit-content;
+  ${headerStyle}
+  background: ${(p) =>
+    p.$greyHeader
+      ? `var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']})`
+      : `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`};
+  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
 `;
 
-export const ScrollTableBody = styled.div`
+export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: auto;
   flex: 1 1 auto;
 `;
 
@@ -377,15 +333,13 @@ const rowWidthStyle = css<{ $rowWidth?: string }>`
 
 const rowHoverMixin = css`
   cursor: pointer;
-  & > .tr-simple > *,
-  & ${OverflowMenuWrapper} {
+  & > .tr-simple > * {
     background: var(--admiral-color-Primary_Primary10, ${(p) => p.theme.color['Primary/Primary 10']});
   }
 `;
 
 const groupRowHoverMixin = css`
-  &[data-groupover='true'] > .tr-simple > *,
-  & ${OverflowMenuWrapper} {
+  &[data-groupover='true'] > .tr-simple > * {
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
@@ -430,8 +384,7 @@ export const SimpleRow = styled.div<{
   display: inline-flex;
   min-width: max-content;
 
-  & > *,
-  & + ${OverflowMenuWrapper} {
+  & > * {
     background: ${rowBackground};
   }
 
@@ -439,11 +392,11 @@ export const SimpleRow = styled.div<{
     !$showRowsActions &&
     css`
       &:hover {
-        & + ${OverflowMenuWrapper} {
+        & div[data-overflowmenu] {
           visibility: visible;
         }
       }
-      & + div[data-opened='true'] {
+      & div[data-overflowmenu][data-opened='true'] {
         visibility: visible;
       }
     `}
@@ -469,25 +422,28 @@ export const EmptyMessage = styled(Cell)`
   border: none;
 `;
 
-const getTechColumnsWidth = (
-  dimension: TableProps['dimension'],
-  selectionCol?: boolean,
-  expansionCol?: boolean,
-): number =>
-  (selectionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0) +
-  (expansionCol ? (dimension === 's' || dimension === 'm' ? 44 : 56) : 0);
+const getTechColumnsWidth = (p: {
+  $dimension: TableProps['dimension'];
+  $selectionColumn?: boolean;
+  $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
+}): number =>
+  (p.$selectionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$expansionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$overflowMenuColumn ? getActionSize(p.$dimension) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
   $dimension: TableProps['dimension'];
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
+  $overflowMenuColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;
-  width: calc(100% - ${(p) => getTechColumnsWidth(p.$dimension, p.$selectionColumn, p.$expansionColumn) + 'px'});
+  width: calc(100% - ${(p) => getTechColumnsWidth(p) + 'px'});
 `;
 
-export const HiddenHeader = styled.div`
+export const HiddenHeader = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -495,17 +451,18 @@ export const HiddenHeader = styled.div`
   visibility: hidden;
   display: flex;
   overflow: hidden;
-
-  &[data-verticalscroll='true'] {
-    overflow-y: scroll;
-  }
+  ${headerStyle}
 `;
 
-export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimension'] }>`
+export const MirrorColumn = styled(HeaderCell)<{
+  $dimension: TableProps['dimension'];
+  $cssMixin?: ReturnType<typeof css>;
+}>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
   display: flex;
+  box-sizing: border-box;
   max-width: 200px;
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -521,18 +478,19 @@ export const MirrorColumn = styled(HeaderCell)<{ $dimension: TableProps['dimensi
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
-
   & > [data-title] {
     ${singleLineTitle}
   }
+  ${(p) => p.$cssMixin}
 `;
 
-export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
+export const MirrorRow = styled.div<{ $dimension: TableProps['dimension']; $cssMixin?: ReturnType<typeof css> }>`
   position: fixed;
   z-index: 6;
   visibility: hidden;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   max-width: 288px;
   box-shadow: var(--admiral-box-shadow-Shadow08, ${(p) => parseShadow(p.theme.shadow['Shadow 08'])});
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
@@ -545,6 +503,10 @@ export const MirrorRow = styled.div<{ $dimension: TableProps['dimension'] }>`
   &[data-cursor='error'] {
     cursor: not-allowed;
   }
+  & > .td {
+    width: 100%;
+  }
+  ${(p) => p.$cssMixin}
 `;
 
 export const Spacer = styled.div`
@@ -552,4 +514,24 @@ export const Spacer = styled.div`
   flex: 0 0 auto;
   will-change: min-height;
   transform: translate3d(0px, 0px, 0px);
+`;
+
+export const Edge = styled.div`
+  display: flex;
+  width: 0;
+  height: auto;
+`;
+
+export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
+  display: flex;
+  position: sticky;
+  right: 0;
+  z-index: 5;
+  .table[data-shadow-right='true'] & {
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  min-height: ${({ $dimension }) => getActionSize($dimension) - 1}px;
+  width: ${({ $dimension }) => getActionSize($dimension)}px;
+  background-color: inherit;
 `;

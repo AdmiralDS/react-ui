@@ -1,8 +1,6 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect, useMemo, useCallback } from 'react';
-import type { ReactNode } from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
 
-import { ScrollTableBody, Spacer } from '../style';
+import { Body, Spacer } from '../style';
 import type { RowId } from '../types';
 
 import { findStartIndex, findEndIndex } from './utils';
@@ -20,21 +18,39 @@ type Cache = {
 };
 
 interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  height: number;
+  tableHeight: number;
+  headerHeight: number;
   renderAhead?: number;
   rowList: any[];
-  renderRow: (row: any, index: number) => ReactNode;
-  renderEmptyMessage?: () => ReactNode;
+  renderRow: (row: any, index: number) => React.ReactNode;
+  renderEmptyMessage?: () => React.ReactNode;
   estimatedRowHeight?: (index: number) => number;
+  tableRef: React.RefObject<HTMLElement>;
 }
 
 export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
-  ({ rowList, height, renderAhead = 20, renderRow, renderEmptyMessage, estimatedRowHeight = () => 40 }, ref) => {
+  (
+    {
+      rowList,
+      tableHeight,
+      headerHeight,
+      renderAhead = 20,
+      renderRow,
+      renderEmptyMessage,
+      estimatedRowHeight = () => 40,
+      tableRef,
+    },
+    ref,
+  ) => {
     const [measurementCache, setMeasurementCache] = useState<Cache>({});
     const [scrollTop, setScrollTop] = useState(0);
+    const [height, setHeight] = useState(tableHeight - headerHeight);
 
-    const scrollElementRef = useRef<HTMLDivElement>(null);
     const measurementCacheRef = useRef<Cache>(measurementCache);
+
+    useEffect(() => {
+      setHeight(tableHeight - headerHeight);
+    }, [tableHeight, headerHeight]);
 
     useLayoutEffect(() => {
       measurementCacheRef.current = measurementCache;
@@ -55,12 +71,12 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
         });
       }
 
-      const scrollContainer = scrollElementRef.current;
+      const scrollContainer = tableRef.current;
       setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef]);
 
     const { allItems, totalHeight } = useMemo(() => {
       let totalHeight = 0;
@@ -83,17 +99,17 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     }, [getItemKey, estimatedRowHeight, measurementCache, itemsCount, rowNodes]);
 
     const startIndex = useMemo(() => {
-      const start = findStartIndex(scrollTop, allItems, itemsCount);
+      const start = itemsCount ? findStartIndex(scrollTop, allItems, itemsCount) : 0;
       return Math.max(0, start - renderAhead);
     }, [scrollTop, allItems, itemsCount, renderAhead]);
 
     const endIndex = useMemo(() => {
-      const end = findEndIndex(allItems, startIndex, scrollTop + height, itemsCount);
+      const end = itemsCount ? findEndIndex(allItems, startIndex, scrollTop + height, itemsCount) : 0;
       return Math.min(itemsCount - 1, end + renderAhead);
     }, [allItems, startIndex, scrollTop, height, itemsCount, renderAhead]);
 
-    const topPadding = allItems[startIndex].offsetTop;
-    const bottomPadding = totalHeight - (allItems[endIndex].offsetTop + allItems[endIndex].height);
+    const topPadding = allItems[startIndex]?.offsetTop;
+    const bottomPadding = totalHeight - (allItems[endIndex]?.offsetTop + allItems[endIndex]?.height);
 
     const virtualItems = useMemo(() => allItems.slice(startIndex, endIndex + 1), [allItems, startIndex, endIndex]);
 
@@ -121,9 +137,9 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     };
 
     return (
-      <ScrollTableBody ref={refSetter(ref, scrollElementRef)} style={{ height }}>
+      <Body ref={ref} style={{ height }}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );

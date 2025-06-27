@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { EditModeField } from '@admiral-ds/react-ui';
+import { EditModeField, T } from '@admiral-ds/react-ui';
 import type { EditModeFieldProps } from '@admiral-ds/react-ui';
 
 export const EditModeFieldExtraTextTemplate = ({ value = 'Admin', ...props }: EditModeFieldProps) => {
@@ -15,6 +15,9 @@ export const EditModeFieldExtraTextTemplate = ({ value = 'Admin', ...props }: Ed
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        В режиме редактирования допускается использование поясняющего текста для инпута.
+      </T>
       <EditModeField
         value={localValue}
         onChange={handleChange}

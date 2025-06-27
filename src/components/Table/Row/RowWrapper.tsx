@@ -11,21 +11,15 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   /** Отображаемая строка */
   row: TableRow;
   /** Колбек для клика по строке таблицы */
-  onRowClick?: (rowId: RowId | string) => void;
+  onRowClick?: (rowId: RowId | string, event: React.MouseEvent<HTMLDivElement>) => void;
   /** Колбек для двойного клика по строке таблицы */
-  onRowDoubleClick?: (rowId: RowId | string) => void;
-  /** Ширина таблицы */
-  tableWidth: number;
+  onRowDoubleClick?: (rowId: RowId | string, event: React.MouseEvent<HTMLDivElement>) => void;
   /** Признак необходимости отображать нижнюю границу */
   underline: boolean;
   /** Признак является ли строка заголовком группы */
   isGroup: boolean;
   /** Id заголовка группы, к которой относится строка */
   groupId: RowId | string | null;
-  /** Наличие вертикального скролла в таблице */
-  verticalScroll: boolean;
-  /** Ширина вертикальной полосы прокрутки */
-  scrollbar: number;
   /** Ширина строки */
   rowWidth?: string;
   /** Окрашивание строки в серый цвет при greyZebraRows */
@@ -34,8 +28,10 @@ export interface RowWrapperProps extends HTMLAttributes<HTMLDivElement> {
   showRowsActions: boolean;
   /** Объект с описанием статусов строки */
   rowStatusMap?: TableProps['rowBackgroundColorByStatusMap'];
-  /** Ref на тело таблицы */
-  bodyRef: React.RefObject<HTMLElement>;
+  /** Ref на элемент таблицы */
+  tableRef: React.RefObject<HTMLElement>;
+  /** Высота хедера таблицы */
+  headerHeight: number;
 }
 
 export const RowWrapper = ({
@@ -45,26 +41,24 @@ export const RowWrapper = ({
   onRowClick,
   onRowDoubleClick,
   children,
-  tableWidth,
   isGroup,
   groupId,
   rowWidth,
-  verticalScroll,
-  scrollbar,
   grey,
   showRowsActions,
   rowStatusMap,
-  bodyRef,
+  tableRef,
+  headerHeight,
   ...props
 }: RowWrapperProps) => {
   const rowRef = React.useRef<HTMLDivElement>(null);
 
-  const handleRowClick = (rowId: RowId | string) => {
-    onRowClick?.(rowId);
+  const handleRowClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    onRowClick?.(row.id, event);
   };
 
-  const handleRowDoubleClick = (rowId: RowId | string) => {
-    onRowDoubleClick?.(rowId);
+  const handleRowDoubleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    onRowDoubleClick?.(row.id, event);
   };
 
   const handleOverflowMenuClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -76,8 +70,8 @@ export const RowWrapper = ({
     <Row
       {...props}
       ref={rowRef}
-      onClick={row.disabled ? undefined : () => handleRowClick(row.id)}
-      onDoubleClick={row.disabled ? undefined : () => handleRowDoubleClick(row.id)}
+      onClick={row.disabled ? undefined : handleRowClick}
+      onDoubleClick={row.disabled ? undefined : handleRowDoubleClick}
       $underline={underline}
       disabled={!!row.disabled}
       $dimension={dimension}
@@ -100,19 +94,17 @@ export const RowWrapper = ({
         $grey={!!grey}
       >
         {children}
+        {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
+          <OverflowMenu
+            dimension={dimension}
+            row={row}
+            onClick={handleOverflowMenuClick}
+            showRowsActions={showRowsActions}
+            tableRef={tableRef}
+            headerHeight={headerHeight}
+          />
+        )}
       </SimpleRow>
-      {(showRowsActions || row.overflowMenuRender || row.actionRender) && (
-        <OverflowMenu
-          dimension={dimension}
-          tableWidth={tableWidth}
-          row={row}
-          verticalScroll={verticalScroll}
-          scrollbar={scrollbar}
-          onClick={handleOverflowMenuClick}
-          showRowsActions={showRowsActions}
-          bodyRef={bodyRef}
-        />
-      )}
       {row.expandedRowRender && <ExpandedRow row={row} rowRef={rowRef} />}
     </Row>
   );

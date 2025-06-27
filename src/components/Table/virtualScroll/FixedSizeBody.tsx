@@ -1,38 +1,55 @@
-import * as React from 'react';
-import { refSetter } from '#src/components/common/utils/refSetter';
-
-import { ScrollTableBody, Spacer } from '../style';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { Body, Spacer } from '../style';
 
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  height: number;
   childHeight: number;
   renderAhead?: number;
   rowList: any[];
   renderRow: (row: any, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
+  tableRef: React.RefObject<HTMLElement>;
+  headerHeight: number;
+  tableHeight: number;
 }
 
-export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps>(
-  ({ height, childHeight, renderAhead = 20, rowList, renderRow, renderEmptyMessage, ...props }, ref) => {
-    const [scrollTop, setScrollTop] = React.useState(0);
-    const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+export const FixedSizeBody = forwardRef<HTMLDivElement, FixedSizeBodyProps>(
+  (
+    {
+      childHeight,
+      renderAhead = 20,
+      rowList,
+      renderRow,
+      renderEmptyMessage,
+      tableRef,
+      tableHeight,
+      headerHeight,
+      ...props
+    },
+    ref,
+  ) => {
+    const [scrollTop, setScrollTop] = useState(0);
+    const [height, setHeight] = useState(tableHeight - headerHeight);
 
-    React.useEffect(() => {
+    useEffect(() => {
+      setHeight(tableHeight - headerHeight);
+    }, [tableHeight, headerHeight]);
+
+    useEffect(() => {
       function handleScroll(e: any) {
         requestAnimationFrame(() => {
           setScrollTop(e.target.scrollTop);
         });
       }
 
-      const scrollContainer = scrollContainerRef.current;
+      const scrollContainer = tableRef.current;
       setScrollTop(scrollContainer?.scrollTop || 0);
 
       scrollContainer?.addEventListener('scroll', handleScroll);
       return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [tableRef]);
 
     // проверка filter(Boolean), чтобы отсеять невидимые/скрытые групповые строки
-    const rowNodes = React.useMemo(
+    const rowNodes = useMemo(
       () => rowList.map((row, index) => renderRow(row, index)).filter(Boolean),
       [rowList, renderRow],
     );
@@ -46,7 +63,7 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
 
     const topPadding = `${startNode * childHeight}px`;
     const bottomPadding = `${(itemCount - startNode - visibleNodeCount) * childHeight}px`;
-    const visibleChildren = React.useMemo(
+    const visibleChildren = useMemo(
       () => [...rowNodes].slice(startNode, startNode + visibleNodeCount),
       [rowNodes, startNode, visibleNodeCount],
     );
@@ -62,9 +79,9 @@ export const FixedSizeBody = React.forwardRef<HTMLDivElement, FixedSizeBodyProps
     };
 
     return (
-      <ScrollTableBody style={{ height }} ref={refSetter(ref, scrollContainerRef)} {...props}>
+      <Body style={{ height }} ref={ref} {...props}>
         {renderEmptyMessage ? renderEmptyMessage() : renderContent()}
-      </ScrollTableBody>
+      </Body>
     );
   },
 );

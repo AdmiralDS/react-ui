@@ -1,4 +1,3 @@
-import type { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -35,7 +34,7 @@ const IconWrapper = styled.div<{ $appearance?: CarouselButtonAppearance }>`
   }
 `;
 
-const StyledButton = styled.button<{ $direction: CarouselButtonDirection }>`
+const StyledButton = styled.button<{ $direction: CarouselButtonDirection; $appearance?: CarouselButtonAppearance }>`
   all: unset;
   cursor: pointer;
   display: flex;
@@ -52,12 +51,15 @@ const StyledButton = styled.button<{ $direction: CarouselButtonDirection }>`
   &:hover,
   &:active {
     & > ${IconWrapper} {
-      background-color: var(--admiral-color-Opacity_Modal, ${(p) => p.theme.color['Opacity/Modal']});
+      background-color: ${(p) =>
+        p.$appearance === 'primary'
+          ? `var(--admiral-color-Opacity_Hover, ${p.theme.color['Opacity/Hover']})`
+          : `var(--admiral-color-Opacity_Modal, ${p.theme.color['Opacity/Modal']})`};
     }
   }
 `;
 
-export interface CarouselButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CarouselButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Внешний вид компонента */
   appearance?: CarouselButtonAppearance;
   /** Назначение кнопки - назад/вперед */
@@ -66,7 +68,7 @@ export interface CarouselButtonProps extends ButtonHTMLAttributes<HTMLButtonElem
 
 export const CarouselButton = ({ appearance, direction, ...props }: CarouselButtonProps) => {
   return (
-    <StyledButton {...props} $direction={direction}>
+    <StyledButton {...props} $direction={direction} $appearance={appearance}>
       <IconWrapper $appearance={appearance}>{direction === 'left' ? <ChevronLeft /> : <ChevronRight />}</IconWrapper>
     </StyledButton>
   );

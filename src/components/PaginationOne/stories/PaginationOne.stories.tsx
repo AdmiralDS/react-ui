@@ -33,6 +33,11 @@ export default {
     ],
   },
   argTypes: {
+    dimension: {
+      options: ['m', 's'],
+      defaultValue: 'm',
+      control: { type: 'radio' },
+    },
     page: {
       control: false,
     },

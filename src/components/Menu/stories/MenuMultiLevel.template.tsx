@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Menu, MenuItem, mediumGroupBorderRadius } from '@admiral-ds/react-ui';
+import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui';
 import type { MenuProps, RenderOptionProps, MenuModelItemProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -225,6 +225,10 @@ export const MenuMultiLevelTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Многоуровневая структура меню задается в модели данных, через указание дочерних элементов в свойстве subItems.
+        Ограничения по количеству уровней вложенности нет, но не следует забывать о комфорте пользователей.
+      </T>
       <Container>
         <Wrapper style={{ width: 'fit-content' }}>
           <Menu tabIndex={1} {...props} defaultIsActive={false} model={model} />

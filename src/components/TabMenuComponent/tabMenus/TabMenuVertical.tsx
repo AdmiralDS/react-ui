@@ -53,6 +53,7 @@ export const TabMenuVertical = ({
   onForwardCycleApprove,
   onBackwardCycleApprove,
   onClickOutside,
+  appearance,
   ...props
 }: TabMenuVerticalProps) => {
   const dropProps = {
@@ -217,6 +218,7 @@ export const TabMenuVertical = ({
           isHidden={hiddenTabs.length === 0}
         />
         <ActiveVerticalTabSelector
+          $appearance={appearance}
           $top={`${underlineTop}px`}
           $height={`${underlineHeight}px`}
           $transition={true}

@@ -1,4 +1,3 @@
-import type { ChangeEventHandler, MouseEvent } from 'react';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 
 import type { TextInputProps } from '#src/components/input/TextInput';
@@ -17,13 +16,13 @@ import {
 } from '#src/components/input/EditMode/style';
 import type { EditModeComponentProps } from '#src/components/input/EditMode/types';
 
-const stopEvent = (e: MouseEvent) => e.preventDefault();
+const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeProps
   extends EditModeComponentProps,
     Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
   /** Колбек на изменение значения компонента */
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   /**
    * @deprecated Помечено как deprecated в версии 6.0.0, будет удалено в 9.x.x версии.
    * Взамен используйте onCancel
@@ -37,6 +36,7 @@ export interface EditModeProps
   multilineView?: boolean;
 }
 
+const nothing = () => {};
 export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
   (
     {
@@ -51,6 +51,9 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
       value,
       showTooltip = true,
       multilineView = false,
+      confirmButtonPropsConfig = nothing,
+      cancelButtonPropsConfig = nothing,
+      editButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -111,6 +114,33 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     };
     const editDimension = dimension === 'xxl' ? 'xl' : dimension;
 
+    const confirmButtonProps = {
+      appearance: 'secondary',
+      dimension: editDimension,
+      displayAsSquare: true,
+      disabled: props.status === 'error',
+      onClick: handleConfirm,
+      iconStart: <ConfirmIcon height={iconSize} width={iconSize} />,
+      $multiline: false,
+    } satisfies React.ComponentProps<typeof EditButton>;
+
+    const cancelButtonProps = {
+      appearance: 'secondary',
+      dimension: editDimension,
+      displayAsSquare: true,
+      disabled: props.status === 'error',
+      onClick: handleCancel,
+      iconStart: <CancelIcon height={iconSize} width={iconSize} />,
+      $multiline: false,
+    } satisfies React.ComponentProps<typeof EditButton>;
+
+    const editButtonProps = {
+      $multiline: multilineView,
+      height: iconSize,
+      width: iconSize,
+      onClick: disabled ? undefined : enableEdit,
+    } satisfies React.ComponentProps<typeof EditIcon>;
+
     return (
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
@@ -135,23 +165,8 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
                 containerRef={wrapperRef}
                 {...props}
               />
-              <EditButton
-                appearance="secondary"
-                dimension={editDimension}
-                displayAsSquare
-                disabled={props.status === 'error'}
-                onClick={handleConfirm}
-                iconStart={<ConfirmIcon height={iconSize} width={iconSize} />}
-                $multiline={false}
-              />
-              <EditButton
-                appearance="secondary"
-                dimension={editDimension}
-                displayAsSquare
-                onClick={handleCancel}
-                iconStart={<CancelIcon height={iconSize} width={iconSize} />}
-                $multiline={false}
-              />
+              <EditButton {...confirmButtonProps} {...confirmButtonPropsConfig(confirmButtonProps)} />
+              <EditButton {...cancelButtonProps} {...cancelButtonPropsConfig(cancelButtonProps)} />
             </>
           )
         ) : (
@@ -166,14 +181,7 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
             {showTooltip && tooltipVisible && overflowActive && (
               <Tooltip renderContent={() => value} targetElement={textRef.current} />
             )}
-            {!props.readOnly && (
-              <EditIcon
-                $multiline={multilineView}
-                height={iconSize}
-                width={iconSize}
-                onClick={disabled ? undefined : enableEdit}
-              />
-            )}
+            {!props.readOnly && <EditIcon {...editButtonProps} {...editButtonPropsConfig(editButtonProps)} />}
           </>
         )}
       </Wrapper>

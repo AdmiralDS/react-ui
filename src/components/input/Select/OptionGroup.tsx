@@ -1,12 +1,11 @@
-import * as React from 'react';
 import styled from 'styled-components';
 import { OptionGroupProvider } from './useSelectContext';
 import { OptionWrapper } from './styled';
-import type { HTMLAttributes } from 'react';
 import { Option } from './Option';
 import { useDropDownContext } from '#src/components/input/Select/DropDownContext';
+import { useId } from '#src/components/common/hooks/useId';
 
-export interface OptionGroupProps extends HTMLAttributes<HTMLDivElement> {
+export interface OptionGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   label: string;
 }
@@ -19,15 +18,14 @@ const Category = styled(OptionWrapper)`
 
 export const OptionGroup = ({ label, disabled, children, ...props }: React.PropsWithChildren<OptionGroupProps>) => {
   const selectContext = useDropDownContext();
-
+  const id = props.id || useId();
   return (
     <OptionGroupProvider disabled={disabled}>
       <Option
-        key={label}
         value={label}
         readOnly={true}
         renderOption={() => (
-          <Category {...props} $dimension={selectContext?.dimension} key={label}>
+          <Category {...props} $dimension={selectContext?.dimension} key={id}>
             {label}
           </Category>
         )}

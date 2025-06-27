@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PaginationOne } from '@admiral-ds/react-ui';
+import { PaginationOne, useId } from '@admiral-ds/react-ui';
 import type { PaginationOneProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -14,6 +14,8 @@ export const PaginationOnePlaygroundTemplate = ({
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = props.totalItems || 100;
 
+  const leftButtonProps = { 'data-testid': useId() };
+  const rightButtonProps = { 'data-testid': useId() };
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <PaginationOne
@@ -31,6 +33,8 @@ export const PaginationOnePlaygroundTemplate = ({
         className="pagination-class-name"
         pageSizeDropContainerStyle={{ dropContainerClassName: 'pageSizeDropContainerClass' }}
         pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
+        leftButtonPropsConfig={() => leftButtonProps}
+        rightButtonPropsConfig={() => rightButtonProps}
       />
     </ThemeProvider>
   );

@@ -30,6 +30,9 @@ const Content = styled.div`
     margin-bottom: 8px;
   }
 `;
+const Separator = styled.div`
+  height: 24px;
+`;
 
 const expandedRowRender = (row: RowData) => {
   return (
@@ -174,13 +177,23 @@ export const TableExpandTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      displayRowExpansionColumn
-      onRowExpansionChange={handleExpansionChange}
-      onColumnResize={handleResize}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Отображение столбца детализации (столбец со стрелками) регулируется параметром{' '}
+        <code>displayRowExpansionColumn</code>. Стрелка позволяет развернуть строку и посмотреть более детализированную
+        информацию о строке. По нажатию на любую из стрелок срабатывает колбек <code>onRowExpansionChange</code>.
+        Развернутое/свернутое состояние строки задается параметром <code>expanded</code>. А с помощью функции{' '}
+        <code>expandedRowRender</code> происходит рендер развернутой части строки (рендер детализированной информации).
+      </T>
+      <Separator />
+      <Table
+        {...props}
+        rowList={rows}
+        columnList={cols}
+        displayRowExpansionColumn
+        onRowExpansionChange={handleExpansionChange}
+        onColumnResize={handleResize}
+      />
+    </>
   );
 };

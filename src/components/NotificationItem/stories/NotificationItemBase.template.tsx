@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import {
@@ -13,12 +12,12 @@ import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRa
 
 const title = 'Заголовок оповещения';
 const body = 'Тут находится текст короткого оповещения';
-const linkText = 'Link';
+const linkText = 'Text Button';
 
 export const NotificationItemBaseTemplate = ({
-  status = 'info',
-  displayStatusIcon = true,
-  isClosable = true,
+  status,
+  displayStatusIcon,
+  isClosable,
   themeBorderKind,
   CSSCustomProps,
   ...props

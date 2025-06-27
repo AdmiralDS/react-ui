@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Breadcrumbs } from '@admiral-ds/react-ui';
+import { Breadcrumbs, T } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
 const MobileWrapper = styled.div`
@@ -24,6 +24,9 @@ const Wrapper = styled.div`
     display: none;
   }
 `;
+const Separator = styled.div<{ $height?: number }>`
+  height: 24px;
+`;
 
 const items = [
   { url: '#', text: 'page 1' },
@@ -42,10 +45,19 @@ const items = [
 
 export const BreadcrumbsMobileTemplate = () => {
   return (
-    <Wrapper>
-      <MobileWrapper>
-        <Breadcrumbs items={items} mobile />
-      </MobileWrapper>
-    </Wrapper>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        На мобильных устройствах предполагается использовать компонент в режиме адаптива (mobile). Компонент настроен
+        таким образом, что если закладки не помещаются в ширину экрана, то они “выходят” за область экрана и их можно
+        прокручивать свайпом, при этом текущая вкладка видна по дефолту, а вкладки, которые не помещаются, “уходят” за
+        левую часть экрана (как на примере).
+      </T>
+      <Separator />
+      <Wrapper>
+        <MobileWrapper>
+          <Breadcrumbs items={items} mobile />
+        </MobileWrapper>
+      </Wrapper>
+    </>
   );
 };

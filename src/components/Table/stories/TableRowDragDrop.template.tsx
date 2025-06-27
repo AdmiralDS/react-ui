@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, OrderedList, UnorderedList, ListItem } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 24}px;
 `;
 
 const AmountCell = styled.div`
@@ -325,6 +325,7 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
 
   const handleRowDragEnd = (rowId: string) => {
     const newIndex = rows.findIndex((row) => row.id === rowId);
+    // eslint-disable-next-line no-console
     console.log('After drag&drop row with id ' + rowId + ' has index ' + newIndex + ' in rowList');
   };
 
@@ -358,6 +359,58 @@ export const TableRowDragDropTemplate = (props: TableProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long">
+        Функция изменения порядка строк является опциональной. По умолчанию строки таблицы не подлежат перемещению. Для
+        того чтобы строки можно было перемещать, необходимо в таблицу передать параметр <code>rowsDraggable</code>{' '}
+        равный <code>true</code>. При установленном параметре <code>rowsDraggable</code> у каждой строки (кроме строк с
+        заголовками групп) слева появится иконка с 6ю точками, так называемая <code>Drag</code> зона.
+        <Separator $height={8} />
+        Для перемещения строки следует мышью навестись на <code>Drag</code> зону и “зажать” левую кнопку мыши над ней,
+        после чего над строкой появится миниатюра строки, в которой отображается содержание первой ячейки строки.
+        Передвигая данную миниатюру по вертикали в пределах тела таблицы, можно изменить местоположение интересующей
+        строки. При этом, отменяется сортировка строк, если она была произведена ранее. Если перемещаемая миниатюра
+        выходит за границы тела таблицы наполовину своей высоты, то перемещение становится невозможным, курсор принимает
+        соответствующий вид. Миниатюры строки можно дополнительно стилизовать с помощью параметра draggedRowCssMixin.
+        <Separator $height={8} />
+        Процесс перемещения строк контролируется пользователем. Поэтому для таблицы должен быть задан колбек{' '}
+        <code>onRowDrag</code>, который срабатывает при каждой попытке изменить местоположение строки таблицы. Данный
+        колбек имеет три параметра:
+        <Separator $height={8} />
+        <UnorderedList>
+          <ListItem>
+            <code>rowId - id</code> строки, которая сейчас перемещается;
+          </ListItem>
+          <ListItem>
+            <code>nextRowId - id</code> строки, перед которой пытается встать перемещаемая строка. Параметр{' '}
+            <code>nextRowId</code> может быть также равен <code>null</code>, если строка пытается встать в самый конец
+            таблицы;
+          </ListItem>
+          <ListItem>
+            <code>groupRowId - id</code> групповой строки (строки с заголовком группы), по данному <code>id</code> можно
+            определить к какой группе будет относиться перемещаемая строка. Параметр <code>groupRowId</code> может быть
+            также равен <code>null</code>, это значит, что перемещаемая строка не будет относиться ни к какой группе.
+          </ListItem>
+        </UnorderedList>
+        <Separator $height={8} />
+        При срабатывании колбека <code>onRowDrag</code>, пользователь должен будет соответственно обновить список строк
+        (<code>rowList</code>) для таблицы.
+        <Separator $height={8} />
+        Миниатюра строки, возникающая при перемещении строки, отрисовывается по умолчанию через портал в{' '}
+        <code>document.body</code>. Если пользователь хочет изменить <code>document.body</code> на свой элемент, то
+        пользователю следует:
+        <Separator $height={8} />
+        <OrderedList>
+          <ListItem>
+            убедиться, что компоненты библиотеки <code>@admiral-ds/react-ui</code> (включая таблицу) обернуты
+            компонентом <code>DropdownProvider</code>;
+          </ListItem>
+          <ListItem>
+            задать для компонента <code>DropdownProvider</code> параметр <code>rootRef</code>, где <code>rootRef</code>{' '}
+            - это реф на <code>dom</code>-элемент, внутри которого отрендерится миниатюра строки.
+          </ListItem>
+        </OrderedList>
+      </T>
+      <Separator />
       <T font="Body/Body 2 Long">Пример с обычными строками</T>
       <Separator />
       <Table

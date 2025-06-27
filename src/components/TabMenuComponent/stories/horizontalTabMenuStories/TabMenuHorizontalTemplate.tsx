@@ -7,6 +7,7 @@ import type {
   RenderOptionProps,
   HorizontalTabProps,
   TabMenuHorizontalProps,
+  TabAppearance,
 } from '@admiral-ds/react-ui';
 import {
   TabMenuHorizontal,
@@ -27,11 +28,15 @@ interface TabContentProps extends HorizontalTabProps {
   badge?: number;
   disabled?: boolean;
   icon?: ReactNode;
+  appearance: TabAppearance;
 }
 
 interface CustomHorizontalTabProps extends TabContentProps {}
 const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabProps>(
-  ({ dimension = 'l', disabled, selected, tabId, text, badge, icon, ...props }: CustomHorizontalTabProps, ref) => {
+  (
+    { dimension = 'l', appearance, disabled, selected, tabId, text, badge, icon, ...props }: CustomHorizontalTabProps,
+    ref,
+  ) => {
     return (
       <HorizontalTab {...props} tabId={tabId} ref={ref} dimension={dimension} disabled={disabled} selected={selected}>
         {icon && (
@@ -41,7 +46,7 @@ const CustomHorizontalTab = forwardRef<HTMLButtonElement, CustomHorizontalTabPro
         )}
         <TabText>{text}</TabText>
         {badge && (
-          <TabBadge disabled={disabled} selected={selected}>
+          <TabBadge tabAppearance={appearance} disabled={disabled} selected={selected}>
             {badge}
           </TabBadge>
         )}
@@ -82,6 +87,7 @@ export const TabMenuHorizontalTemplate = ({
   dimension = 'l',
   showUnderline,
   defaultSelectedTabId = '3',
+  appearance = 'primary',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -108,6 +114,7 @@ export const TabMenuHorizontalTemplate = ({
     const icon = currentTab?.icon;
     return (
       <CustomHorizontalTab
+        appearance={appearance}
         dimension={dimension}
         tabId={tabId}
         text={text}
@@ -170,6 +177,7 @@ export const TabMenuHorizontalTemplate = ({
         <Separator height={40} />
         <TabMenuHorizontal
           {...props}
+          appearance={appearance}
           dimension={dimension}
           showUnderline={showUnderline}
           selectedTabId={selectedTab}

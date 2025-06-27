@@ -31,14 +31,17 @@ export const BorderedDiv = styled.div`
 const ROW_HEIGHT = 24;
 
 const rowHeightStyle = css<{
+  $dimension?: ComponentDimension;
   $multiple?: boolean;
   $opened?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
   $idleHeight: 'full' | 'fixed';
 }>`
-  min-height: ${({ $multiple, $minRowCount }) => {
-    if (!$multiple || !$minRowCount) return 'auto';
+  min-height: ${({ $multiple, $minRowCount, $dimension }) => {
+    if (!$multiple) return `${$dimension === 's' ? 20 : 24}px`;
+
+    if (!$minRowCount) return `${ROW_HEIGHT}px`;
 
     return `${ROW_HEIGHT * $minRowCount + ($minRowCount - 1) * 4}px`;
   }};
@@ -80,6 +83,7 @@ export const ValueWrapper = styled.div<{
   gap: 4px;
   flex-wrap: ${({ $multiple }) => ($multiple ? 'wrap' : 'unset')};
   align-items: center;
+  align-content: flex-start;
 
   ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
@@ -88,7 +92,6 @@ export const ValueWrapper = styled.div<{
   [data-disabled='true'] &&& {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
-  min-height: ${(p) => (p.$dimension === 's' ? 20 : 24)}px;
 `;
 
 export const StringValueWrapper = styled.div`
@@ -149,7 +152,7 @@ const disableEventMixin = css`
 `;
 
 const disabledStyle = css`
-  && > * {
+  && > *:not(${ValueWrapper}) {
     pointer-events: none;
   }
 
@@ -328,9 +331,15 @@ export const EmptyMessageWrapper = styled.div`
   user-select: none;
 `;
 
-export const CustomOptionWrapper = styled(MenuItem)<{ $selected?: boolean; $hovered?: boolean; $multiple?: boolean }>`
+export const CustomOptionWrapper = styled(MenuItem)<{
+  $selected?: boolean;
+  $hovered?: boolean;
+  $preselected?: boolean;
+  $multiple?: boolean;
+}>`
   justify-content: flex-start;
   flex-wrap: nowrap;
   white-space: pre-wrap;
-  ${(props) => props.$selected && !props.$hovered && props.$multiple && 'background-color: transparent;'}
+  ${(props) =>
+    props.$selected && !props.$hovered && !props.$preselected && props.$multiple && 'background-color: transparent;'}
 `;

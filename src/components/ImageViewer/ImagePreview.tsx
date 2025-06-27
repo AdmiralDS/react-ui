@@ -5,19 +5,12 @@ import { createPortal } from 'react-dom';
 import type { ImagePreviewProps, ImageProps } from './types';
 import { ImageViewerCloseButton } from '#src/components/ImageViewer/ImageViewerCloseButton';
 import { ImageViewerToolbar } from '#src/components/ImageViewer/ImageViewerToolbar';
-import type { TouchPointInfoType } from '#src/components/ImageViewer/utils';
-import {
-  getCenter,
-  getClientSize,
-  getDistance,
-  getNext,
-  getPrev,
-  getSwipeType,
-  updatePosition,
-} from '#src/components/ImageViewer/utils';
+import { getClientSize, getNext, getPrev, updatePosition } from '#src/components/ImageViewer/utils';
 import { BASE_SCALE_RATIO, IMAGE_SCALE_PRECISION, WHEEL_MAX_SCALE_RATIO } from '#src/components/ImageViewer/constants';
 
 import { keyboardKey } from '../common/keyboardKey';
+import type { TouchPointInfoType } from '#src/components/common/utils/touchUtils';
+import { getCenter, getDistance, getSwipeType } from '#src/components/common/utils/touchUtils';
 
 const Overlay = styled.div`
   display: flex;

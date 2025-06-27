@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Option, Select, MenuItem } from '@admiral-ds/react-ui';
+import { Option, Select, MenuItem, T } from '@admiral-ds/react-ui';
 import type { SelectProps, RenderOptionProps } from '@admiral-ds/react-ui';
+
+import { Separator } from '#src/components/input/Select/stories/styled';
 
 const InvisibleItem = styled(MenuItem)`
   height: 1px;
@@ -57,7 +59,7 @@ export const LoadOnScrollTemplate = (props: SelectProps) => {
     array.push(
       <Option
         key={`last/${count}`}
-        value={''}
+        value={'invisible'}
         renderOption={(options) => <LastOption {...options} onVisible={() => setCount(count + 5)} key={`last`} />}
       />,
     );
@@ -66,8 +68,15 @@ export const LoadOnScrollTemplate = (props: SelectProps) => {
   }, [count]);
 
   return (
-    <Select {...props} mode="searchSelect">
-      {renderOptions}
-    </Select>
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Последним элементом списка опций select добавляется скрытый MenuItem, который отслеживает прокрутку списка до
+        конца, и сообщает об этом вызывающему коду. По этому событию происходит изменение списка опций
+      </T>
+      <Separator />
+      <Select {...props} mode="searchSelect">
+        {renderOptions}
+      </Select>
+    </>
   );
 };

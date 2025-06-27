@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, Button, CheckboxField, DrawerContent } from '@admiral-ds/react-ui';
+import { Drawer, Button, CheckboxField, DrawerContent, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -13,6 +13,11 @@ export const DrawerCustomContentTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Наполнение Drawer контентом полностью контролируется пользователем. Пользователь может разместить внутри Drawer
+        любые свои компоненты, а также может воспользоваться вспомогательными компонентами DrawerTitle, DrawerContent,
+        DrawerButtonPanel, экспортируемыми из библиотеки @admiral-ds/react-ui.
+      </T>
       <Button onClick={() => setOpened(true)}>Open drawer with custom content</Button>
       <Drawer {...props} isOpen={opened} onClose={() => setOpened(false)} aria-labelledby="drawer-title">
         <h1 id="drawer-title" style={{ paddingLeft: '24px' }}>

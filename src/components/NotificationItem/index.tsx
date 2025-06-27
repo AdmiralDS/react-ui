@@ -1,6 +1,7 @@
-import * as React from 'react';
-import type { HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
+
 import { ReactComponent as InfoIcon } from '@admiral-ds/icons/build/service/InfoSolid.svg';
 import { ReactComponent as WarningIcon } from '@admiral-ds/icons/build/service/ErrorSolid.svg';
 import { ReactComponent as SuccessIcon } from '@admiral-ds/icons/build/service/CheckSolid.svg';
@@ -13,17 +14,6 @@ import { CloseIconPlacementButton } from '#src/components/IconPlacement';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
 
 export type NotificationItemStatus = 'info' | 'error' | 'success' | 'warning';
-
-export interface NotificationItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
-  /** Статус notification */
-  status?: NotificationItemStatus;
-  /** Переключатель видимости иконки "Close" */
-  isClosable?: boolean;
-  /** Закрытие notification */
-  onClose?: () => void;
-  /** Переключатель видимости статусных иконок */
-  displayStatusIcon?: boolean;
-}
 
 const getIcon = (status: NotificationItemStatus) => {
   switch (status) {
@@ -55,8 +45,11 @@ const backGroundColorMixin = css<{ $status?: NotificationItemStatus }>`
   }};
 `;
 
-const borderColorMixin = css<{ $status?: NotificationItemStatus }>`
-  border-color: ${({ theme, $status }) => {
+const borderColorMixin = css<{ $status?: NotificationItemStatus; $hideBorder?: boolean }>`
+  border-color: ${({ theme, $status, $hideBorder }) => {
+    if ($hideBorder) {
+      return 'transparent';
+    }
     switch ($status) {
       case 'warning':
         return `var(--admiral-color-Warning_Warning50Main, ${theme.color['Warning/Warning 50 Main']})`;
@@ -73,6 +66,7 @@ const borderColorMixin = css<{ $status?: NotificationItemStatus }>`
 
 const NotificationItemWrapper = styled.div<{
   $status?: NotificationItemStatus;
+  $hideBorder?: boolean;
   $displayStatusIcon: boolean;
   $isClosable: boolean;
 }>`
@@ -80,9 +74,9 @@ const NotificationItemWrapper = styled.div<{
   position: relative;
   box-sizing: border-box;
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  padding: 12px 44px 12px 52px;
-  ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 16px;')}
-  ${(p) => (p.$isClosable ? '' : 'padding-right: 16px;')}
+  padding: 13px 47px 13px 51px;
+  ${(p) => (p.$displayStatusIcon ? '' : 'padding-left: 15px;')}
+  ${(p) => (p.$isClosable ? '' : 'padding-right: 15px;')}
   border-width: 1px;
   border-style: solid;
   ${borderColorMixin};
@@ -109,7 +103,7 @@ const ButtonPanel = styled.div`
 const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
   top: 10px;
-  right: 8px;
+  right: 12px;
 `;
 
 const IconWrapper = styled.div<{ $status?: NotificationItemStatus }>`
@@ -139,41 +133,75 @@ const IconWrapper = styled.div<{ $status?: NotificationItemStatus }>`
   }
 `;
 
+const nothing = () => {};
+export interface NotificationItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'id'> {
+  /** Статус notification */
+  status?: NotificationItemStatus;
+  /** Скрыть обводку notification */
+  isBorderHidden?: boolean;
+  /** Переключатель видимости иконки "Close" */
+  isClosable?: boolean;
+  /** Закрытие notification */
+  onClose?: () => void;
+  /** Переключатель видимости статусных иконок */
+  displayStatusIcon?: boolean;
+  /** Конфиг функция пропсов для кнопки закрытия уведомления. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  closeButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CloseButton>,
+  ) => Partial<React.ComponentProps<typeof CloseButton> & DataAttributes>;
+}
+
 NotificationItemWrapper.defaultProps = {
   theme: DEFAULT_THEME,
 };
 
-export const NotificationItem = ({
-  status = 'info',
-  displayStatusIcon = false,
-  isClosable = false,
-  onClose,
-  children,
-  ...props
-}: React.PropsWithChildren<NotificationItemProps>) => {
-  const NotificationIcon = getIcon(status);
+export const NotificationItem = forwardRef<HTMLDivElement, NotificationItemProps>(
+  (
+    {
+      status = 'info',
+      isBorderHidden = false,
+      displayStatusIcon = false,
+      isClosable = false,
+      onClose,
+      closeButtonPropsConfig = nothing,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const NotificationIcon = getIcon(status);
 
-  const isAlert = status !== 'info';
+    const isAlert = status !== 'info';
 
-  return (
-    <NotificationItemWrapper
-      role={isAlert ? 'alert' : 'status'}
-      aria-live={isAlert ? 'assertive' : 'polite'}
-      $status={status}
-      $displayStatusIcon={displayStatusIcon}
-      $isClosable={isClosable}
-      {...props}
-    >
-      {displayStatusIcon && (
-        <IconWrapper $status={status}>
-          <NotificationIcon />
-        </IconWrapper>
-      )}
-      {children}
-      {isClosable && <CloseButton dimension="mSmall" highlightFocus={false} onClick={onClose} />}
-    </NotificationItemWrapper>
-  );
-};
+    const closeButtonProps = {
+      dimension: 'mSmall',
+      highlightFocus: false,
+      onClick: onClose,
+    } satisfies React.ComponentProps<typeof CloseButton>;
+
+    return (
+      <NotificationItemWrapper
+        {...props}
+        ref={ref}
+        role={isAlert ? 'alert' : 'status'}
+        aria-live={isAlert ? 'assertive' : 'polite'}
+        $status={status}
+        $hideBorder={isBorderHidden}
+        $displayStatusIcon={displayStatusIcon}
+        $isClosable={isClosable}
+      >
+        {displayStatusIcon && (
+          <IconWrapper $status={status}>
+            <NotificationIcon />
+          </IconWrapper>
+        )}
+        {children}
+        {isClosable && <CloseButton {...closeButtonProps} {...closeButtonPropsConfig(closeButtonProps)} />}
+      </NotificationItemWrapper>
+    );
+  },
+);
 
 export const NotificationItemTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ children, ...props }) => {
   return <Title {...props}>{children}</Title>;

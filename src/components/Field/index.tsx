@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { InputStatus } from '#src/components/input/types';
@@ -7,7 +7,6 @@ import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounte
 import { Label } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
-import { useState } from 'react';
 
 const ContentWrapper = styled.div``;
 
@@ -135,7 +134,7 @@ const PositionedCharacterCounter = styled(CharacterCounter)`
 
 export interface FieldProps extends FieldOwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
-export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
+export const Field = forwardRef<HTMLDivElement, FieldProps>(
   (
     {
       children,
@@ -147,8 +146,8 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
     }: FieldProps,
     ref,
   ) => {
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const [hasFocus, setFocus] = React.useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [hasFocus, setFocus] = useState(false);
 
     const {
       className,
@@ -168,7 +167,7 @@ export const Field = React.forwardRef<HTMLDivElement, FieldProps>(
 
     const labelProps = { htmlFor: id ?? defaultID, children: label, required, disabled };
 
-    React.useEffect(() => {
+    useEffect(() => {
       const onFocusIn = () => {
         setFocus(true);
       };

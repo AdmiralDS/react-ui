@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, T } from '@admiral-ds/react-ui';
+import { Table, T, UnorderedList, ListItem } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
@@ -12,6 +12,9 @@ const AmountCell = styled.div`
       color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
+`;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
 `;
 
 const numberFormatter = new Intl.NumberFormat();
@@ -150,14 +153,35 @@ export const TableGroupTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      displayRowExpansionColumn
-      onRowExpansionChange={handleExpansionChange}
-      onRowSelectionChange={handleSelectionChange}
-      onColumnResize={handleResize}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Строки в таблице можно группировать под общим заголовком. При группировке допускается только один уровень
+        вложенности строк. Не допускается использование строк вне групп, то есть все строки в таблице должны входить в
+        какую-то группу.
+        <Separator />
+        Для того чтобы задать группу строк, нужно в массиве <code>rowList</code> создать объект строки, которая будет
+        являться заголовком группы. Для такой строки необходимо задать два параметра:
+        <Separator />
+        <UnorderedList dimension="s">
+          <ListItem>
+            <code>groupTitle</code> - название группы
+          </ListItem>
+          <ListItem>
+            <code>groupRows</code> - массив с <code>id</code> строк, входящих в данную группу. Сами строки, относящиеся
+            к группе, должны быть просто перечислены в массиве <code>rowList</code>.
+          </ListItem>
+        </UnorderedList>
+      </T>
+      <Separator $height={24} />
+      <Table
+        {...props}
+        rowList={rows}
+        columnList={cols}
+        displayRowExpansionColumn
+        onRowExpansionChange={handleExpansionChange}
+        onRowSelectionChange={handleSelectionChange}
+        onColumnResize={handleResize}
+      />
+    </>
   );
 };

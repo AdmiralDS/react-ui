@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Hint, Button } from '@admiral-ds/react-ui';
+import { Hint, Button, T } from '@admiral-ds/react-ui';
 import type { HintProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import { ThemeProvider } from 'styled-components';
@@ -18,6 +18,9 @@ export const HintClassNameTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        На Hint, созданный через портал, добавляется класс через пропс className.
+      </T>
       <Hint
         {...props}
         className="custom-hint-class"

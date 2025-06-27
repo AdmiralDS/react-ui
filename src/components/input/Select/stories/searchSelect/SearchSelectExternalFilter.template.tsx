@@ -3,6 +3,8 @@ import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 import styled from 'styled-components';
 
+import { Separator } from '#src/components/input/Select/stories/styled';
+
 const OPTIONS = [
   {
     value: 'val1',
@@ -67,11 +69,28 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
     if (Array.isArray(value)) setMultipleSelectValue(value);
   };
 
-  const renderOptions = (value: string) => {
+  const renderSingleOptions = (value: string) => {
     const toSearch = value.trim().toLowerCase();
 
-    return OPTIONS.filter((option) => option.text.toLowerCase().includes(toSearch)).map((option) => (
+    const filteredOptions = OPTIONS.filter((option) => option.text.toLowerCase().includes(toSearch));
+
+    return filteredOptions.map((option) => (
       <Option key={`${toSearch}/${option.value}`} value={option.text} disabled={option.disabled}>
+        {option.text}
+      </Option>
+    ));
+  };
+
+  const renderMultipleOptions = (value: string) => {
+    const toSearch = value.trim().toLowerCase();
+
+    // Всегда показываем выбранные значения
+    const filteredOptions = OPTIONS.filter(
+      (option) => option.text.toLowerCase().includes(toSearch) || multipleSelectValue.includes(option.text),
+    );
+
+    return filteredOptions.map((option) => (
+      <Option key={option.value} value={option.text} disabled={option.disabled}>
         {option.text}
       </Option>
     ));
@@ -79,6 +98,11 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Так как компонент построен на нативном select, в выбранных значениях могут отображаться только те элементы,
+        которые переданы в качестве списка option
+      </T>
+      <Separator />
       <T font="Body/Body 2 Long" as="div">
         Внешняя фильтрация элементов по значению
       </T>
@@ -97,7 +121,7 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
             placeholder="пока ни чего не выбрано"
             onFilterItem={() => true}
           >
-            {renderOptions(singleSearchValue)}
+            {renderSingleOptions(singleSearchValue)}
           </Select>
         </div>
         <div>
@@ -115,7 +139,7 @@ export const SearchSelectExternalFilterTemplate = (props: SelectProps) => {
             placeholder="пока ни чего не выбрано"
             onFilterItem={() => true}
           >
-            {renderOptions(multipleSearchValue)}
+            {renderMultipleOptions(multipleSearchValue)}
           </Select>
         </div>
       </Container>

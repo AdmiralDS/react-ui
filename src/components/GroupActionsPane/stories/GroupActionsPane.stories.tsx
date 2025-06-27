@@ -91,12 +91,6 @@ export const PaneSimpleExample = {
       source: {
         code: PaneSimpleRaw,
       },
-      description: {
-        story:
-          'Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и onChangeSearchValue, ' +
-          'для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки настроек("шестерёнка") - ' +
-          'settingsMenu',
-      },
     },
   },
 

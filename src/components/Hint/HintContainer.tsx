@@ -128,8 +128,9 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       }
     };
     return (
-      <HintWrapper {...props} role="tooltip" ref={hintRef} onKeyDown={handleKeyDown}>
+      <HintWrapper role="tooltip" ref={hintRef} onKeyDown={handleKeyDown}>
         <HintDialog
+          {...props}
           role="dialog"
           aria-labelledby={anchorId}
           $dimension={dimension}

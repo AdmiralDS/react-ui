@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Toggle } from '@admiral-ds/react-ui';
+import { Toggle, T } from '@admiral-ds/react-ui';
 
 const Separator = styled.div`
   height: 20px;
@@ -11,6 +11,10 @@ const Separator = styled.div`
 export const ToggleMobileTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        При создании отдельных макетов для мобильных устройств, рекомендуется использовать вариацию комопнента размера M
+        с текстом слева, который можно вытянуть на всю ширину экрана.
+      </T>
       <div style={{ width: '400px' }}>
         <Toggle labelPosition="left">Some label</Toggle>
         <Separator />

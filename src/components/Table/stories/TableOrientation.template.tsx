@@ -14,6 +14,10 @@ const AmountCell = styled.div`
   }
 `;
 
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
+
 const numberFormatter = new Intl.NumberFormat();
 
 type RowData = TableRow & {
@@ -206,5 +210,19 @@ export const TableOrientationTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        По умолчанию текстовый контент столбца выравнивается по левому краю. Если необходимо выравнивание по правому
+        краю, то следует задать параметр <code>cellAlign:'right'</code> для столбца.
+        <Separator />
+        Примечание: параметр <code>cellAlign</code> применим только к простому текстовому наполнению ячеек и заголовка
+        столбца. Если в ячейку таблицы или заголовок встроен не просто текст, а какой-то кастомный компонент со своей
+        версткой, то пользователю нужно будет самостоятельно прописывать для этого компонента правила выравнивания
+        контента.
+      </T>
+      <Separator $height={24} />
+      <Table {...props} rowList={rowList} columnList={cols} onColumnResize={handleResize} />
+    </>
+  );
 };

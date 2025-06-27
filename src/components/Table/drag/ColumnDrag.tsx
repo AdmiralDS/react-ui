@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
+import { css } from 'styled-components';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorColumn } from '../style';
@@ -15,9 +16,9 @@ type ColumnDragProps = {
   isAnyColumnDraggable: boolean;
   isAnyStickyColumnDraggable: boolean;
   tableRef: React.RefObject<HTMLElement>;
-  scrollBodyRef: React.RefObject<HTMLElement>;
   normalColumnsWrapperRef: React.RefObject<HTMLElement>;
   stickyColumnsWrapperRef: React.RefObject<HTMLElement>;
+  draggedColumnCssMixin?: ReturnType<typeof css>;
 };
 
 export const ColumnDrag = ({
@@ -27,9 +28,9 @@ export const ColumnDrag = ({
   isAnyColumnDraggable,
   isAnyStickyColumnDraggable,
   tableRef,
-  scrollBodyRef,
   normalColumnsWrapperRef,
   stickyColumnsWrapperRef,
+  draggedColumnCssMixin,
 }: ColumnDragProps): ReactPortal | null => {
   const { rootRef } = useContext(DropdownContext);
 
@@ -53,22 +54,23 @@ export const ColumnDrag = ({
 
   useEffect(() => {
     if (columnMirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
+      const table = tableRef.current;
+
       const observer = observeRect(columnMirrorRef.current, (rect: any) => {
-        const rightCoord = tableRef.current?.getBoundingClientRect().right || 0;
+        const rightCoord = table?.getBoundingClientRect().right || 0;
         const leftCoord =
-          stickyColumnsWrapperRef.current?.getBoundingClientRect().right ||
-          tableRef.current?.getBoundingClientRect().left ||
-          0;
-        if (scrollBodyRef.current) {
-          const scrollLeft = scrollBodyRef.current.scrollLeft;
-          const scrollWidth = scrollBodyRef.current.scrollWidth;
-          const offsetWidth = scrollBodyRef.current.offsetWidth;
+          stickyColumnsWrapperRef.current?.getBoundingClientRect().right || table?.getBoundingClientRect().left || 0;
+
+        if (table) {
+          const scrollLeft = table.scrollLeft;
+          const scrollWidth = table.scrollWidth;
+          const offsetWidth = table.offsetWidth;
 
           if (rect.right > rightCoord && scrollWidth > offsetWidth && scrollLeft + offsetWidth < scrollWidth) {
-            scrollBodyRef.current.scrollBy({ left: Math.abs(rightCoord - rect.right) });
+            table.scrollBy({ left: Math.abs(rightCoord - rect.right) });
           }
           if (rect.left < leftCoord && scrollLeft > 0) {
-            scrollBodyRef.current.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
+            table.scrollBy({ left: -Math.abs(leftCoord - rect.left) });
           }
         }
       });
@@ -153,6 +155,9 @@ export const ColumnDrag = ({
   }, [isAnyColumnDraggable, isAnyStickyColumnDraggable, dimension]);
 
   return isAnyColumnDraggable || isAnyStickyColumnDraggable
-    ? createPortal(<MirrorColumn $dimension={dimension} ref={columnMirrorRef} />, rootRef?.current || document.body)
+    ? createPortal(
+        <MirrorColumn $dimension={dimension} ref={columnMirrorRef} $cssMixin={draggedColumnCssMixin} />,
+        rootRef?.current || document.body,
+      )
     : null;
 };

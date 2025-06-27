@@ -95,9 +95,6 @@ export const CalendarSimple = {
       source: {
         code: CalendarSimpleRaw,
       },
-      description: {
-        story: 'Пример календаря с выбором даты>.',
-      },
     },
   },
 
@@ -117,9 +114,6 @@ export const Range = {
     docs: {
       source: {
         code: RangeRaw,
-      },
-      description: {
-        story: 'Пример с выбором диапазона.',
       },
     },
   },
@@ -143,9 +137,6 @@ export const SimpleWithMaxDate = {
       source: {
         code: SimpleWithMaxDateRaw,
       },
-      description: {
-        story: 'Пример с ограничением максимальной даты.',
-      },
     },
   },
 
@@ -167,9 +158,6 @@ export const SimpleWithFilterDate = {
     docs: {
       source: {
         code: SimpleWithFilterDateRaw,
-      },
-      description: {
-        story: 'Пример с недоступными для выбора датами.',
       },
     },
   },
@@ -193,9 +181,6 @@ export const SimpleWithChangeViewDate = {
       source: {
         code: SimpleWithChangeViewDateRaw,
       },
-      description: {
-        story: 'Пример с коллбеками.',
-      },
     },
   },
 
@@ -217,9 +202,6 @@ export const SimpleWithSetActiveViewDate = {
     docs: {
       source: {
         code: SimpleWithSetActiveViewDateRaw,
-      },
-      description: {
-        story: 'Пример с переключением экранов выбора дат.',
       },
     },
   },
@@ -243,9 +225,6 @@ export const SimpleWithSetActiveViewDateAfterChooseYear = {
       source: {
         code: SimpleWithSetActiveViewDateAfterChooseYearRaw,
       },
-      description: {
-        story: 'Пример с открытием экрана выбора месяца после выбора года.',
-      },
     },
   },
 
@@ -267,9 +246,6 @@ export const SimpleWithSetActiveViewWithoutDay = {
     docs: {
       source: {
         code: SimpleWithSetActiveViewWithoutDayRaw,
-      },
-      description: {
-        story: 'Пример с выбором только месяца/года.',
       },
     },
   },
@@ -293,9 +269,6 @@ export const SimpleWithSpecialDates = {
     docs: {
       source: {
         code: SimpleWithSpecialDatesRaw,
-      },
-      description: {
-        story: 'Пример с подсветкой выходных, праздничный и специальных дат.',
       },
     },
   },

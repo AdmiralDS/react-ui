@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DefaultBackgroundColorName, MainPrimaryColorName, Spinner } from '@admiral-ds/react-ui';
+import { DefaultBackgroundColorName, MainPrimaryColorName, Spinner, T } from '@admiral-ds/react-ui';
 import type { SpinnerProps } from '@admiral-ds/react-ui';
 
 const Layout = styled.div<{
@@ -22,6 +22,9 @@ const Layout = styled.div<{
 export const SpinnerDarkTemplate = ({ inverse = true }: SpinnerProps) => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        На темных поверхностях применяется белый спинер.
+      </T>
       <Layout $inverse={inverse}>
         <Spinner dimension="xl" inverse={inverse} />
         <Spinner dimension="l" inverse={inverse} />

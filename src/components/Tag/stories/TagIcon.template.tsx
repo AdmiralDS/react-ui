@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tag, Tags } from '@admiral-ds/react-ui';
+import { Tag, Tags, T } from '@admiral-ds/react-ui';
 import { ReactComponent as CheckOutline } from '@admiral-ds/icons/build/service/CheckOutline.svg';
 
 // eslint-disable-next-line no-console
@@ -8,6 +8,10 @@ const clickHandler = () => console.log('click active tag');
 export const TagIconTemplate = () => {
   return (
     <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Тэги могут быть с иконками, но только в том случае, если статус отображается через цвет обводки и фона (параметр
+        statusViaBackground установлен в true).
+      </T>
       <Tags>
         <Tag statusViaBackground onClick={clickHandler} icon={<CheckOutline />}>
           Neutral

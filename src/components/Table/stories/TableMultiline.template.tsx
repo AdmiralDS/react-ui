@@ -13,6 +13,9 @@ const AmountCell = styled.div`
     }
   }
 `;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 const numberFormatter = new Intl.NumberFormat();
 
 type RowData = TableRow & {
@@ -132,5 +135,20 @@ export const TableMultilineTemplate = (props: TableProps) => {
     setCols(newCols);
   };
 
-  return <Table {...props} rowList={rowList} columnList={cols} headerLineClamp={2} onColumnResize={handleResize} />;
+  return (
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Заголовки таблицы по умолчанию выводятся в одну строку и при нехватке места сокращаются с помощью троеточия.
+        Увеличить высоту заголовка можно с помощью параметра <code>headerLineClamp</code>, который определяет
+        максимальное количество строк, которое может занимать заголовок таблицы. В примере ниже используется{' '}
+        <code>headerLineClamp</code> равный 2.
+        <Separator />
+        Строки таблицы не ограничены по высоте. В ячейке строки можно отрисовать любой <code>ReactNode</code>, передав
+        его в <code>rowList</code>. Также с помощью функции <code>renderCell</code> можно переопределить стандартный вид
+        ячеек, относящихся к определенному столбцу таблицы (смотрите "Пример кастомизации компонента ячейки").
+      </T>
+      <Separator $height={24} />
+      <Table {...props} rowList={rowList} columnList={cols} headerLineClamp={2} onColumnResize={handleResize} />
+    </>
+  );
 };

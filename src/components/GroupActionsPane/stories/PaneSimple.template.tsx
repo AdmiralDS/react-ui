@@ -1,6 +1,6 @@
 import styled, { ThemeProvider } from 'styled-components';
 
-import { GroupActionsPane, PaneSeparator, typography, TextButton, Button } from '@admiral-ds/react-ui';
+import { GroupActionsPane, PaneSeparator, typography, TextButton, Button, T } from '@admiral-ds/react-ui';
 import type { GroupActionsPaneProps, PaneColumn, BorderRadiusType, PaneMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
 import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
@@ -29,6 +29,10 @@ const ButtonWrapper = styled.div`
   & > button:first-child {
     margin-right: 8px;
   }
+`;
+
+const Separator = styled.div`
+  height: 24px;
 `;
 
 const columns: PaneColumn[] = [
@@ -84,6 +88,12 @@ export const PaneSimpleTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div">
+        Для того чтобы была видна кнопка поиска("лупа") необходимо определить свойства searchValue и
+        onChangeSearchValue, для кнопки настройки видимости колонок("плюс") - columns и onColumnsChange, для кнопки
+        настроек("шестерёнка") - settingsMenu
+      </T>
+      <Separator />
       <Wrapper>
         <GroupActionsPane
           {...props}

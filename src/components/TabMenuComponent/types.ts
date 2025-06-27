@@ -3,7 +3,10 @@ import type { DropMenuComponentProps, DropMenuStyleProps } from '#src/components
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 
 export type TabDimension = 'l' | 'm';
+export type FilterTabDimension = 'm' | 's';
 export type VerticalUnderlinePosition = 'left' | 'right';
+export type TabAppearance = 'primary' | 'secondary';
+export type TabAdaptive = 'fill';
 
 export type TabWidthMapProps = {
   tabId: string;
@@ -24,7 +27,11 @@ export interface BaseTabProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 export interface IconTabProps extends Omit<BaseTabProps, 'dimension'> {}
-export interface HorizontalTabProps extends BaseTabProps {}
+export interface HorizontalTabProps extends BaseTabProps {
+  /** Скрыть обводку выбранной вкладки */
+  hideBorder?: boolean;
+  adaptive?: TabAdaptive;
+}
 export interface VerticalTabProps extends BaseTabProps {
   /** Ширина вкладки */
   width?: string | number;
@@ -68,14 +75,47 @@ export interface HorizontalTabsProps extends TabMenuBaseProps {
   dimension?: TabDimension;
 }
 
+export interface TabMenuHorizontalWithOverflowMenuProps
+  extends TabMenuBaseProps,
+    TabMenuWithOverflowProps,
+    TabMenuWithAddTabButtonProps {
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
+  showActiveTabSelector?: boolean;
+}
+
 export interface TabMenuHorizontalProps
   extends TabMenuBaseProps,
     TabMenuWithOverflowProps,
-    TabMenuWithAddTabButtonProps {}
+    TabMenuWithAddTabButtonProps {
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
+  adaptive?: TabAdaptive;
+}
+
+export interface TabMenuHorizontalAdaptiveFillProps extends TabMenuBaseProps {
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
+  /** Показывать полосу активной вкладки */
+  showActiveTabSelector?: boolean;
+}
 
 export interface TabMenuVerticalProps extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Позиция серой полосы - справа/слева */
   underlinePosition?: VerticalUnderlinePosition;
+  /** Внешний вид активной вкладки */
+  appearance?: TabAppearance;
 }
 
-export interface CardTabMenuHorizontalProps extends TabMenuHorizontalProps {}
+export interface CardTabMenuHorizontalProps extends Omit<TabMenuHorizontalProps, 'appearance'> {}
+
+export interface FilterTabsProps extends Omit<TabMenuBaseProps, 'showUnderline'> {
+  /** Размер компонента */
+  dimension?: FilterTabDimension;
+  mobile?: boolean;
+}
+
+export interface FilterTabProps extends Omit<BaseTabProps, 'dimension'> {
+  /** Размер компонента */
+  dimension?: FilterTabDimension;
+}

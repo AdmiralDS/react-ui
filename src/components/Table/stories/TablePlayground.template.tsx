@@ -213,24 +213,38 @@ export const TablePlaygroundTemplate = (props: TableProps) => {
       <NotificationItem displayStatusIcon>
         <NotificationItemTitle>Table API</NotificationItemTitle>
         <NotificationItemContent>
-          API таблицы предполагает 2 обязательных параметра: columnList и rowList, где
+          <code>API</code> таблицы предполагает 2 обязательных параметра: <code>columnList</code> и <code>rowList</code>
+          , где
           <Separator height={8} />
           <li>
-            columnList - массив данных с описанием столбцов, у каждого столбца должен быть задан уникальный
-            идентификатор name;
+            <code>columnList</code> - массив данных с описанием столбцов, у каждого столбца должен быть задан уникальный
+            идентификатор <code>name</code>;
           </li>
           <Separator height={8} />
           <li>
-            rowList - массив данных с описанием строк, у каждой строки должен быть задан уникальный идентификатор id.
+            <code>rowList</code> - массив данных с описанием строк, у каждой строки должен быть задан уникальный
+            идентификатор <code>id</code>.
           </li>
           <Separator height={16} />
           Между столбцами и строками таблицы существует четкий МАППИНГ для задания контента ячеек:
           <Separator height={8} />
-          <li>название свойства строки ⇔ name столбца</li>
+          <li>
+            название свойства строки ⇔ <code>name</code> столбца
+          </li>
           <li>значение свойства строки ⇔ контент ячейки строки в данном столбце</li>
           <Separator height={8} />
-          ВАЖНО: таблица не поддерживает сложные составные имена столбцов с использованием точки (н-р, 'test.name'), имя
-          столбца не должно быть составной структурой.
+          ВАЖНО: таблица не поддерживает сложные составные имена столбцов с использованием точки (н-р,{' '}
+          <code>'test.name'</code>), имя столбца не должно быть составной структурой.
+        </NotificationItemContent>
+      </NotificationItem>
+      <Separator height={40} />
+      <NotificationItem displayStatusIcon>
+        <NotificationItemTitle>Зона скролла</NotificationItemTitle>
+        <NotificationItemContent>
+          Начиная с версии <b>8.30.0</b> зона скролла распространяется на всю таблицу, включая зону заголовков (т.е.
+          скроллируемым является верхнеуровневый элемент с <code>className='table'</code>). В предыдущих версия зона
+          скролла распространялась только на тело таблицы (т.е. скроллируемым было только тело таблицы - элемент с{' '}
+          <code>className='tbody'</code>).
         </NotificationItemContent>
       </NotificationItem>
       <Separator height={40} />

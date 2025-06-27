@@ -11,8 +11,8 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   padding: 3px 7px;
   width: 60px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -83,8 +83,8 @@ exports[`Tag should render component with kind "green" and determined width 1`] 
   padding: 3px 7px;
   width: 60px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -209,8 +209,8 @@ exports[`Tag should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: default;
@@ -267,8 +267,8 @@ exports[`Tag should render default component 1`] = `
   height: 24px;
   padding: 3px 7px;
   border-radius: var(--admiral-border-radius-Small, 4px);
-  background: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
-  border: 1px solid var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  background: var(--admiral-color-Opacity_Neutral8, #00000014);
+  border: 1px solid transparent;
   display: inline-flex;
   align-items: center;
   cursor: default;

@@ -68,15 +68,20 @@ export const TreeSimpleTemplate = (props: TreeProps) => {
   };
 
   return (
-    <Tree
-      {...props}
-      style={{ width: 500, gap: 8 }}
-      defaultSelected={'1-1'}
-      withCheckbox={false}
-      model={demo2_TreeModel}
-      active={activeItem}
-      onActivateItem={setActiveItem}
-      onMouseLeave={handleMouseLeave}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Дерево без checkbox c заданной кастомной шириной в 500px и расстоянием между строками 8px.
+      </T>
+      <Tree
+        {...props}
+        style={{ width: 500, gap: 8 }}
+        defaultSelected={'1-1'}
+        withCheckbox={false}
+        model={demo2_TreeModel}
+        active={activeItem}
+        onActivateItem={setActiveItem}
+        onMouseLeave={handleMouseLeave}
+      />
+    </>
   );
 };

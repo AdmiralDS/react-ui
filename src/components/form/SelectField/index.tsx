@@ -1,14 +1,14 @@
+import { forwardRef } from 'react';
+import styled from 'styled-components';
 import type { SelectProps } from '#src/components/input/Select';
 import { Select as BaseSelect } from '#src/components/input/Select';
-import * as React from 'react';
 import type { FieldOwnProps } from '#src/components/Field';
 import { Field } from '#src/components/Field';
-import styled from 'styled-components';
-import { uid } from '#src/components/common/uid';
 import {
   passFormFieldContainerDataAttributes,
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
+import { useId } from '#src/components/common/hooks/useId';
 
 const Select = styled(BaseSelect)`
   [data-status='error'] & {
@@ -20,7 +20,7 @@ export interface SearchSelectFieldProps
   extends SelectProps,
     Omit<FieldOwnProps, 'inputRef' | 'onChange' | 'displayCharacterCounter' | 'maxLength'> {}
 
-export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectFieldProps>((props, ref) => {
+export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>((props, ref) => {
   const {
     className,
     displayInline,
@@ -28,7 +28,7 @@ export const SelectField = React.forwardRef<HTMLSelectElement, SearchSelectField
     required,
     extraText,
     label,
-    id = uid(),
+    id = useId(),
     disabled,
     skeleton,
     ...restProps

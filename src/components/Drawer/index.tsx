@@ -2,6 +2,7 @@ import type { CSSProperties, HTMLAttributes, KeyboardEvent, MouseEvent } from 'r
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css, useTheme, keyframes } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 
 import { getKeyboardFocusableElements } from '#src/components/common/utils/getKeyboardFocusableElements';
 import { parseShadow } from '#src/components/common/utils/parseShadowFromTheme';
@@ -89,7 +90,7 @@ const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   flex-direction: column;
   overflow: hidden;
   padding: 20px 0 24px;
-  min-width: ${({ $mobile }) => ($mobile ? 'calc(100% - 16px)' : '320px')};
+  ${({ $mobile }) => $mobile && 'min-width: calc(100% - 16px);'}
   max-width: calc(100% - 16px);
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
@@ -109,6 +110,7 @@ const CloseButton = styled(CloseIconPlacementButton)<{ $mobile?: boolean }>`
   right: ${({ $mobile }) => ($mobile ? 16 : 24)}px;
 `;
 
+const nothing = () => {};
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
   /** Состояние компонента: открыт/закрыт */
   isOpen?: boolean;
@@ -150,6 +152,11 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
     /** Атрибут aria-label, описывающий назначение кнопки с крестиком, закрывающей компонент */
     closeButtonAriaLabel?: string;
   };
+  /** Конфиг функция пропсов для кнопки закрытия компонента. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  closeButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CloseButton>,
+  ) => Partial<React.ComponentProps<typeof CloseButton> & DataAttributes>;
 }
 
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
@@ -169,6 +176,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       displayCloseIcon = true,
       children,
       locale,
+      closeButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -260,6 +268,13 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       onClose?.();
     };
 
+    const closeButtonProps = {
+      dimension: 'lSmall',
+      'aria-label': closeBtnAriaLabel,
+      $mobile: mobile,
+      onClick: handleCloseBtnClick,
+    } satisfies React.ComponentProps<typeof CloseButton>;
+
     return createPortal(
       <Overlay
         ref={overlayRef}
@@ -283,14 +298,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           {...props}
         >
           <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>
-          {displayCloseIcon && (
-            <CloseButton
-              dimension="lSmall"
-              aria-label={closeBtnAriaLabel}
-              $mobile={mobile}
-              onClick={handleCloseBtnClick}
-            />
-          )}
+          {displayCloseIcon && <CloseButton {...closeButtonProps} {...closeButtonPropsConfig(closeButtonProps)} />}
         </DrawerComponent>
       </Overlay>,
       container || document.body,

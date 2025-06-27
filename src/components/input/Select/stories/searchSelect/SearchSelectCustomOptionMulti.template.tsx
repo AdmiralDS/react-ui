@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Option, Select } from '@admiral-ds/react-ui';
+import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { ExtraText, TextWrapper } from '#src/components/input/Select/stories/styled';
+import { ExtraText, TextWrapper, Separator } from '#src/components/input/Select/stories/styled';
 
 export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
   const [selectValue, setSelectValue] = React.useState<string[]>(
@@ -16,6 +16,13 @@ export const SearchSelectCustomOptionMultiTemplate = (props: SelectProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        При использовании кастомных опций, реализуемых через Option children, в режиме multiple, необходимо определить у
+        Option свойство renderChip, так как содержимое Chip и Tooltip формируется в методе renderChip, в противном
+        случае внутри Chip и Tooltip у компонента Chip будет отображаться тот же child, что указан в качестве дочернего
+        для Option.
+      </T>
+      <Separator />
       <Select
         {...props}
         value={selectValue}

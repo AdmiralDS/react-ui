@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-import type { TabDimension } from '#src/components/TabMenuComponent/types';
-import { HORIZONTAL_TAB_ICON_SIZE_L, HORIZONTAL_TAB_ICON_SIZE_M } from '#src/components/TabMenuComponent/constants';
+import type { FilterTabDimension, TabDimension } from '#src/components/TabMenuComponent/types';
+import {
+  FILTER_TAB_ICON_SIZE_M,
+  FILTER_TAB_ICON_SIZE_S,
+  HORIZONTAL_TAB_ICON_SIZE_L,
+  HORIZONTAL_TAB_ICON_SIZE_M,
+} from '#src/components/TabMenuComponent/constants';
 
 export const TabIcon = styled.div<{ $dimension: TabDimension; $disabled?: boolean }>`
   padding: 0;
@@ -22,3 +27,14 @@ export const TabIcon = styled.div<{ $dimension: TabDimension; $disabled?: boolea
   }
 `;
 TabIcon.displayName = 'TabIcon';
+
+export const FilterTabIcon = styled(TabIcon)<{ $dimension: FilterTabDimension }>`
+  width: ${({ $dimension }) => ($dimension === 'm' ? FILTER_TAB_ICON_SIZE_M : FILTER_TAB_ICON_SIZE_S)}px;
+  height: ${({ $dimension }) => ($dimension === 'm' ? FILTER_TAB_ICON_SIZE_M : FILTER_TAB_ICON_SIZE_S)}px;
+  & svg {
+    width: ${({ $dimension }) => ($dimension === 'm' ? FILTER_TAB_ICON_SIZE_M : FILTER_TAB_ICON_SIZE_S)}px;
+    height: ${({ $dimension }) => ($dimension === 'm' ? FILTER_TAB_ICON_SIZE_M : FILTER_TAB_ICON_SIZE_S)}px;
+  }
+`;
+
+FilterTabIcon.displayName = 'FilterTabIcon';

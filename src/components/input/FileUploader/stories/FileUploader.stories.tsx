@@ -138,11 +138,6 @@ export const FileUploaderM = {
       source: {
         code: FileUploaderMRaw,
       },
-      description: {
-        story: `Компонент M-размера используется на мобильных устройствах или как альтернатива большому компоненту. Не имеет функцию
-      Drag and Drop. Поведение выбранных файлов такое же, как в компоненте XL-размера. Текстовое описание к полю носит
-      произвольный характер, но должно точно описывать количество, размер и тип выбранных файлов.`,
-      },
     },
   },
 };
@@ -162,9 +157,6 @@ export const FileUploaderWithStatus = {
     docs: {
       source: {
         code: FileUploaderWithStatusRaw,
-      },
-      description: {
-        story: `Для отображения статуса загрузки файла или ошибки при валидации, компонент файла через параметр status принимает состояния Uploaded, Loading, Error, Queue, а через параметр error - текст ошибки.`,
       },
     },
   },
@@ -186,9 +178,6 @@ export const FileUploaderCustomFiles = {
       source: {
         code: FileUploaderCustomFilesRaw,
       },
-      description: {
-        story: `В случае, если необходима кастомизация компонента выбранного файла, нужно воспользоваться методом renderFileInfoList для отрисовки реакт-компонента.`,
-      },
     },
   },
 };
@@ -206,9 +195,6 @@ export const FileUploaderCustom = {
     docs: {
       source: {
         code: FileUploaderCustomRaw,
-      },
-      description: {
-        story: `В случае, если необходимо добавить функционал загрузчика к другому компоненту, данный компонент нужно вложить в компонент FileUploader.`,
       },
     },
   },

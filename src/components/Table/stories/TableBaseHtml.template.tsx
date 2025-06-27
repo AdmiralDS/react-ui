@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { T } from '@admiral-ds/react-ui';
 
 const HtmlTable = styled.table`
   // фиксированный заголовок
@@ -59,6 +60,10 @@ const HtmlTable = styled.table`
   }
 `;
 
+const Separator = styled.div`
+  height: 24px;
+`;
+
 export type TableBaseHtmlProps = {
   /** количество столбцов */
   colNumber?: number;
@@ -69,29 +74,35 @@ export type TableBaseHtmlProps = {
 
 export function TableBaseHtmlTemplate({ colNumber = 12, rowNum = 20 }: TableBaseHtmlProps) {
   return (
-    <HtmlTable style={{ maxHeight: 500, maxWidth: 980 }}>
-      <tbody>
-        {Array(rowNum)
-          .fill(1)
-          .map((_, rowIndex) => (
-            <tr key={`row_${rowIndex}`}>
-              {Array(colNumber)
-                .fill(1)
-                .map((_, colIndex) => (
-                  <td key={`cell_${rowIndex}_${colIndex}`}>{`Cell ${rowIndex}_${colIndex + 1}`}</td>
-                ))}
-            </tr>
-          ))}
-      </tbody>
-      <thead>
-        <tr>
-          {Array(colNumber)
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Пример минимальной стилизации <code>html table</code> с фиксированной шапкой при вертикальном скроле.
+      </T>
+      <Separator />
+      <HtmlTable style={{ maxHeight: 500, maxWidth: 980 }}>
+        <tbody>
+          {Array(rowNum)
             .fill(1)
-            .map((_, index) => (
-              <th key={`header_${index}`}>{`Header ${index + 1}`}</th>
+            .map((_, rowIndex) => (
+              <tr key={`row_${rowIndex}`}>
+                {Array(colNumber)
+                  .fill(1)
+                  .map((_, colIndex) => (
+                    <td key={`cell_${rowIndex}_${colIndex}`}>{`Cell ${rowIndex}_${colIndex + 1}`}</td>
+                  ))}
+              </tr>
             ))}
-        </tr>
-      </thead>
-    </HtmlTable>
+        </tbody>
+        <thead>
+          <tr>
+            {Array(colNumber)
+              .fill(1)
+              .map((_, index) => (
+                <th key={`header_${index}`}>{`Header ${index + 1}`}</th>
+              ))}
+          </tr>
+        </thead>
+      </HtmlTable>
+    </>
   );
 }

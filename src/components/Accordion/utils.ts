@@ -15,7 +15,7 @@ export const moveFocus = (
       wrappedOnce = true;
     }
 
-    if (nextFocus.hasAttribute('disabled')) {
+    if (nextFocus.getAttribute('aria-disabled') == 'true') {
       nextFocus = calcNextFocus(parent, nextFocus, stop);
     } else {
       nextFocus.focus();

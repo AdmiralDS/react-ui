@@ -72,6 +72,9 @@ export default {
     statusViaBackground: {
       control: { type: 'boolean' },
     },
+    isBorderHidden: {
+      control: { type: 'boolean' },
+    },
     statusIcon: {
       control: false,
     },
@@ -122,9 +125,6 @@ export const StatusExample = {
       source: {
         code: TagStatusRaw,
       },
-      description: {
-        story: `Тэг может иметь цветную статусную метку, определяемую параметром kind.`,
-      },
     },
   },
 
@@ -134,7 +134,10 @@ export const StatusExample = {
 //</editor-fold>
 
 //<editor-fold desc="Tag. Статус через цвет обводки и фона.">
-const StatusBackgroundStory: StoryFn<typeof Tag> = () => <TagStatusBackgroundTemplate />;
+const StatusBackgroundStory: StoryFn<typeof Tag> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TagStatusBackgroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
 export const StatusBackgroundExample = {
   render: StatusBackgroundStory,
@@ -143,11 +146,6 @@ export const StatusBackgroundExample = {
     docs: {
       source: {
         code: TagStatusBackgroundRaw,
-      },
-      description: {
-        story: `Тэг также может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент.\n\nЧтобы 
-        отобразить статус через цвет обводки и фона необходимо передать
-        в компонент параметр statusViaBackground, установленный в true.`,
       },
     },
   },
@@ -167,20 +165,6 @@ export const CustomColorsExample = {
     docs: {
       source: {
         code: TagCustomColorsRaw,
-      },
-      description: {
-        story: `Тэг может иметь цветную статусную метку. Помимо предложенных вариантов метка может быть
-        окрашена в любой цвет на усмотрение пользователя. Для этого в качестве значения 
-        параметра kind нужно указать объект со свойством background, содержащим значение кастомного цвета метки. \n\n Либо 
-        тэг может отображать статус через цвет обводки и фона, когда нужен выраженный цветовой акцент.
-        В этом случае, помимо предложенных вариантов, фон и обводку тега можно окрасить в любые цвета. 
-        Рекомендуются цветовые пары (фон, обводка) из представленных 
-        в палитре цветов по следующей схеме: фон - color 10, обводка - основной цвет минус 1 шаг вниз.
-        Чтобы задать кастомные цвета фона и обводки тега нужно в качестве значения 
-        параметра kind указать объект со свойствами background и border, содержащими соответственно кастомные значения цветов
-        фона и обводки тега.\n\nТакже помимо свойств background и border пользователь может задать свойство backgroundHover.
-        Данное свойство отвечает за цвет фона тега при ховере, в случае если тег является активным. Рекомендуется 
-        в качестве значения backgroundHover выбирать из палитры цветов цвет, который на 1 шаг темнее цвета фона.`,
       },
     },
   },
@@ -204,10 +188,6 @@ export const StateExample = {
       source: {
         code: TagStateRaw,
       },
-      description: {
-        story: `Тэги могут быть как активными и служить, например, каталагизаторами, так и пассивными, просто отображая
-              принадлежность элемента к некоторой группе элементов имеющих общий признак.`,
-      },
     },
   },
 
@@ -227,9 +207,6 @@ export const TooltipExample = {
       source: {
         code: TagTooltipRaw,
       },
-      description: {
-        story: `В случае ограниченного пространства используется тултип.`,
-      },
     },
   },
 
@@ -248,10 +225,6 @@ export const IconExample = {
     docs: {
       source: {
         code: TagIconRaw,
-      },
-      description: {
-        story: `Тэги могут быть с иконками, но только в том случае, если статус отображается
-        через цвет обводки и фона (параметр statusViaBackground установлен в true)`,
       },
     },
   },

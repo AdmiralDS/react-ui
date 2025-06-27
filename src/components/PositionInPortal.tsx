@@ -11,7 +11,7 @@ export const PositionedPortalContainer = styled.div`
   z-index: var(--admiral-z-index-dropdown, ${({ theme }) => theme.zIndex.dropdown});
 `;
 
-export interface PositionInPortalProps {
+export interface PositionInPortalProps extends React.ComponentProps<'div'> {
   /** Элемент, относительно которого позиционируется портал */
   targetElement: Element | null;
 

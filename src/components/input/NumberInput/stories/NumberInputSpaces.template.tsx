@@ -1,4 +1,4 @@
-import { NumberInput } from '@admiral-ds/react-ui';
+import { NumberInput, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, NumberInputProps } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
@@ -10,6 +10,11 @@ export const NumberInputSpacesTemplate = ({
 }: NumberInputProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пользователь может с помощью параметров hideSpaceAfterPrefix и hideSpaceBeforeSuffix управлять видимостью
+        пробелов после префикса и перед суффиксом соответственно. По умолчанию после префикса перед значением инпута и
+        перед суффиксом после значения инпута пробелы проставляются.
+      </T>
       <NumberInput
         {...props}
         onChange={(event) => {

@@ -77,7 +77,7 @@ describe('SearchSelect', () => {
     test('Renders visible value correctly', () => {
       render(<SelectComponent initialValue={options[1]} />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
       const visibleText = within(valueWrapper).getByText(options[1]);
 
@@ -87,7 +87,7 @@ describe('SearchSelect', () => {
     test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
 
       expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('SearchSelect', () => {
     test('MultiSelect empty when no value is provided', () => {
       render(<SelectComponent multiple placeholder="placeholder" />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
 
       expect(within(valueWrapper).getByPlaceholderText('placeholder')).toBeInTheDocument();
@@ -127,7 +127,7 @@ describe('SearchSelect', () => {
     test('Renders visible multiselect value correctly', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       ['one', 'two'].forEach((text) => {
         expect(within(valueWrapper).getByText(text)).toBeInTheDocument();
@@ -175,7 +175,7 @@ describe('SearchSelect', () => {
       expect(inputELem).toHaveFocus();
 
       await act(async () => {
-        await user.type(selectWrapper, '{esc}');
+        await user.type(selectWrapper, '{escape}');
       });
       expect(dropDownContainer).not.toBeInTheDocument();
     });
@@ -208,7 +208,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent initialValue="one" />);
 
       const selectWrapper = document.querySelector('.searchSelect') as HTMLElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       const parent = document.getElementById('parent') as HTMLElement;
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
 
@@ -298,20 +298,15 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
-      await act(async () => {
-        await user.tab();
-      });
-      await act(async () => {
-        await user.type(valueWrapper, '{enter}');
-      });
-      await act(async () => {
-        await user.type(valueWrapper, '{arrowdown}');
-      });
-      await act(async () => {
-        await user.type(valueWrapper, '{enter}');
-      });
+      await user.tab();
+
+      await user.type(valueWrapper, '{enter}');
+
+      await user.type(valueWrapper, '{arrowdown}');
+
+      await user.type(valueWrapper, '{enter}');
 
       const visibleText = within(valueWrapper).getByText(options[1]);
       expect(visibleText).toBeInTheDocument();
@@ -323,7 +318,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent />);
 
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       await act(async () => {
         await user.tab();
@@ -348,66 +343,54 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
-      await act(async () => {
-        await user.tab();
-        await user.type(valueWrapper, '{space}');
-      });
+      // открываем дроп, селектор на первом элементе
+      await user.tab();
+      await user.type(valueWrapper, '{space}');
 
       const inputELem = screen.getByRole('textbox') as HTMLInputElement;
       const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
       const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
 
       dropDownOptions.forEach((optionElem) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        expect(checkbox.checked).toBeFalsy();
+        const checkbox = within(optionElem).getByRole('checkbox');
+        expect(checkbox).not.toBeChecked();
       });
 
-      await act(async () => {
-        await user.type(inputELem, '{arrowdown}');
-      });
-      await act(async () => {
-        await user.keyboard('{enter}');
-      });
+      // переходим на второй элемент и выделяем его
+      await user.type(inputELem, '{arrowdown}');
+      await user.keyboard('{enter}');
 
       dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if (ind === 1) expect(checkbox.checked).toBeTruthy();
-        else expect(checkbox.checked).toBeFalsy();
+        const checkbox = within(optionElem).getByRole('checkbox');
+        if (ind === 1) expect(checkbox).toBeChecked();
+        else expect(checkbox).not.toBeChecked();
       });
       expect(within(valueWrapper).getByText(options[1])).toBeInTheDocument();
       expect(dropDownContainer).toBeInTheDocument();
       expect(inputELem).toHaveFocus();
 
-      await act(async () => {
-        await user.type(inputELem, '{arrowdown}');
-      });
-      await act(async () => {
-        await user.type(inputELem, '{enter}');
-      });
-      await act(async () => {
-        await user.type(inputELem, '{enter}');
-      });
-      await act(async () => {
-        await user.type(inputELem, '{arrowdown}');
-      });
-      await act(async () => {
-        await user.type(inputELem, '{enter}');
-      });
+      await user.type(inputELem, '{enter}');
+      await user.type(inputELem, '{arrowdown}');
+      await user.type(inputELem, '{enter}');
+      await user.type(inputELem, '{arrowdown}');
+      await user.type(inputELem, '{enter}');
+
       dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if ([0, 1].includes(ind)) expect(checkbox.checked).toBeTruthy();
-        else expect(checkbox.checked).toBeFalsy();
+        const checkbox = within(optionElem).getByRole('checkbox');
+        if (1 == ind) expect(checkbox).toBeChecked();
+        else expect(checkbox).not.toBeChecked();
       });
+
       options.forEach((optionText, optionTextInd) => {
         const chip = within(valueWrapper).queryByText(optionText);
-        if ([0, 1].includes(optionTextInd)) expect(chip).toBeInTheDocument();
+        if (1 == optionTextInd) expect(chip).toBeInTheDocument();
         else expect(chip).toBeNull();
       });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
+        if (2 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
     });
@@ -416,7 +399,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
 
       await act(async () => {
         await user.tab();
@@ -451,18 +434,19 @@ describe('SearchSelect', () => {
       });
 
       dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if ([0, 2].includes(ind)) expect(checkbox.checked).toBeTruthy();
-        else expect(checkbox.checked).toBeFalsy();
+        const checkbox = within(optionElem).getByRole('checkbox');
+        if (0 == ind) expect(checkbox).toBeChecked();
+        else expect(checkbox).not.toBeChecked();
       });
+
       options.forEach((optionText, optionTextInd) => {
         const chip = within(valueWrapper).queryByText(optionText);
-        if ([0, 2].includes(optionTextInd)) expect(chip).toBeInTheDocument();
+        if (0 == optionTextInd) expect(chip).toBeInTheDocument();
         else expect(chip).toBeNull();
       });
 
       Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 3].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
+        if (1 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
         else expect(nativeOption.selected).toBeFalsy();
       });
     });
@@ -471,7 +455,7 @@ describe('SearchSelect', () => {
       render(<SelectComponent multiple initialValue={['one', 'two']} />);
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
         (chipElem) => chipElem.firstChild?.lastChild,
@@ -504,7 +488,7 @@ describe('SearchSelect', () => {
       );
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      // const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      // const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       // const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
       //   (chipElem) => chipElem.firstChild?.lastChild,
@@ -598,7 +582,7 @@ describe('SearchSelect', () => {
       );
 
       const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementById('selectValueWrapper') as HTMLElement;
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
       // такой стремный селектор нужен, так как по другому svg не достанешь...
       const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
         (chipElem) => chipElem.firstChild?.lastChild,
@@ -863,8 +847,10 @@ describe('SearchSelect', () => {
       const dropDownOptionsAfterInput = within(dropDownContainer).getAllByTestId('option');
       expect(dropDownOptionsAfterInput.length).toBe(1);
       dropDownOptionsAfterInput.forEach((option, ind) => {
-        if (ind === 2) expect(option).toHaveAttribute('data-hovered', 'true');
-        else expect(option).not.toHaveAttribute('data-hovered', 'true');
+        if (ind === 0) expect(option).toHaveAttribute('data-hovered', 'true');
+        else {
+          expect(option).not.toHaveAttribute('data-hovered', 'true');
+        }
       });
       await act(async () => {
         await user.type(inputELem, '{arrowdown}');

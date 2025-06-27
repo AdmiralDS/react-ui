@@ -1,11 +1,9 @@
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType, PropsWithChildren } from 'react';
-
 /** prop 'as' controls the render element of the Polymorphic component */
-type AsProp<C extends ElementType> = {
+type AsProp<C extends React.ElementType> = {
   as?: C;
 };
 
-type PropsToOmit<C extends ElementType, P> = keyof (AsProp<C> & P);
+type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 
 /** ComponentPropsWithoutRef<C> adds other props based on what the type of 'as' is.
  *
@@ -17,14 +15,14 @@ type PropsToOmit<C extends ElementType, P> = keyof (AsProp<C> & P);
  *  and returns the union of component props, prop 'as' and props generated based on 'as' type.
  */
 
-type PolymorphicComponentProps<C extends ElementType, Props = Record<string, unknown>> = PropsWithChildren<
+type PolymorphicComponentProps<C extends React.ElementType, Props = Record<string, unknown>> = React.PropsWithChildren<
   Props & AsProp<C>
 > &
-  Omit<ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
+  Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
-export type PolymorphicRef<C extends ElementType> = ComponentPropsWithRef<C>['ref'];
+export type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>['ref'];
 
 export type PolymorphicComponentPropsWithRef<
-  C extends ElementType,
+  C extends React.ElementType,
   Props = Record<string, unknown>,
 > = PolymorphicComponentProps<C, Props> & { ref?: PolymorphicRef<C> };

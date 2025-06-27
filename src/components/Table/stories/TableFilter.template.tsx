@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { Table, FieldSet, RadioButton, Button, DateField } from '@admiral-ds/react-ui';
+import { Table, FieldSet, RadioButton, Button, DateField, T, OrderedList, ListItem } from '@admiral-ds/react-ui';
 import type { TableProps, Column, TableRow } from '@admiral-ds/react-ui';
 import { ReactComponent as AcceptSolid } from '@admiral-ds/icons/build/category/AcceptSolid.svg';
 import styled from 'styled-components';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
 
 const numberFormatter = new Intl.NumberFormat();
 
@@ -261,6 +265,48 @@ export const TableFilterTemplate = (props: TableProps) => {
 
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        Опционально в заголовках можно включать фильтрацию столбцов. При этом у заголовка будет появляться иконка
+        фильтрации, по нажатию на которую будет открываться меню фильтрации.
+        <Separator />
+        Для того чтобы задать фильтр для столбца достаточно задать для него параметр <code>renderFilter</code> -
+        функцию, которая будет отрисовывать содержимое меню фильтра. Данная функция имеет в качестве входных параметров
+        объект столбца и объект с двумя свойствами:
+        <Separator />
+        <OrderedList dimension="s">
+          <ListItem>
+            <code>closeMenu</code> - колбек, при вызове которого происходит закрытие меню фильтра;
+          </ListItem>
+          <ListItem>
+            <code>setFilterActive</code> - колбек, который устанавливает фильтр в активное/неактивное состояние. Колбек{' '}
+            <code>setFilterActive</code> - это устаревшее api, вместо него рекомендуется использовать параметр столбца{' '}
+            <code>isFilterActive</code>, который также устанавливает фильтр в активное/неактивное состояние. В
+            неактивном состоянии иконка фильтра окрашена в серый цвет, при активном (включенном фильтре) иконка фильтра
+            окрашивается в синий цвет.
+          </ListItem>
+        </OrderedList>
+        <Separator />
+        Меню фильтра является произвольным и полностью контролируется пользователем. Закрытие меню и установка фильтра в
+        активное/неактивное состояние производится пользователем внутри функции <code>renderFilter</code> с помощью
+        вышеописанных колбеков. С помощью параметров <code>filterMenuAlignSelf</code>, <code>filterMenuClassName</code>,{' '}
+        <code>filterMenuCssMixin</code> и <code>filterMenuStyle</code> пользователь также может управлять выравниваем
+        фильтра, добавлять <code>className</code> и изменять его стили.
+        <Separator />
+        Иконка фильтрации может быть любой (шестеренка, фильтр и т.д.). По умолчанию в качестве иконки фильтра
+        используется иконка <code>MoreHorizontalOutline</code>. Дефолтную иконку можно заменить с помощью параметра{' '}
+        <code>renderFilterIcon</code>.
+        <Separator />
+        Кроме того для столбца можно задать колбеки <code>onFilterMenuOpen</code> и <code>onFilterMenuClose</code>,
+        которые будут срабатывать соответственно при открытии и закрытии меню фильтра. А также для столбца можно задать
+        колбек <code>onFilterMenuClickOutside</code>, который будет срабатывать при клике вне меню фильтра. Данный
+        колбек имеет в качестве входных параметров объект с двумя свойствами (<code>closeMenu</code>,{' '}
+        <code>setFilterActive</code>) и параметр <code>event</code>.
+        <Separator />
+        !!! Примечание: для корректной работы вложенных друг в друга дропдаунов (н-р, меню фильтра, внутри которого
+        открывается дропдаун с календарем) убедитесь, что компоненты библиотеки обернуты в <code>DropdownProvider</code>
+        . Пример использования <code>DropdownProvider</code> есть в <code>readme</code>.
+      </T>
+      <Separator $height={24} />
       <Table {...props} columnList={cols} rowList={rows} onColumnResize={handleResize} />
     </>
   );

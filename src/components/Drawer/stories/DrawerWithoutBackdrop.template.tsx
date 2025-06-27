@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField, T } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -51,6 +51,12 @@ export const DrawerWithoutBackdropTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Если необходим Drawer без блокировки контента страницы, то необходимо использовать параметр backdrop равный
+        false. В этом случае пользователь сможет одновременно взаимодействовать и с Drawer, и с содержимым страницы.
+        Закрытие Drawer может происходить по клику на крестик, по клику на кнопке в футере панели, по нажатию на клавишу
+        Escape (при closeOnEscapeKeyDown = true).
+      </T>
       <Button onClick={() => setOpened(true)}>Open drawer without backdrop</Button>
       <Drawer
         {...props}

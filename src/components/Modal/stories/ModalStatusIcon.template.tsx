@@ -9,6 +9,7 @@ import {
   Button,
   ModalStatusIcon,
   TooltipHoc,
+  T,
 } from '@admiral-ds/react-ui';
 import type { ModalProps, BorderRadiusType, ModalStatusIconType } from '@admiral-ds/react-ui';
 import { ReactComponent as InfoOutline } from '@admiral-ds/icons/build/service/InfoOutline.svg';
@@ -29,6 +30,10 @@ export const ModalStatusIconTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Используются в простых текстовых модальных окнах для оповещений пользователя о важных событиях. Статус
+        модального окна может быть четырех типов: Success, Information, Danger, Warning.
+      </T>
       <div style={{ display: 'flex', gap: '5px' }}>
         <TooltipedButton
           onClick={() => {

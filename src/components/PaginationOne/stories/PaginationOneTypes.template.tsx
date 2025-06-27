@@ -23,6 +23,7 @@ export const PaginationOneTypesTemplate = (
     <ThemeProvider theme={createBorderRadiusSwapper(props.themeBorderKind, props.CSSCustomProps)}>
       <Field label="Pagination One Complex">
         <PaginationOne
+          dimension={props.dimension}
           onChange={({ page, pageSize }) => {
             setPage1(page);
             setPageSize1(pageSize);
@@ -38,6 +39,7 @@ export const PaginationOneTypesTemplate = (
       <Separator />
       <Field label="Pagination One Complex. Minimal size">
         <PaginationOne
+          dimension={props.dimension}
           style={{ width: 'fit-content' }}
           onChange={({ page, pageSize }) => {
             setPage1(page);
@@ -54,6 +56,7 @@ export const PaginationOneTypesTemplate = (
       <Separator />
       <Field label="Pagination One Simple">
         <PaginationOne
+          dimension={props.dimension}
           onChange={({ page, pageSize }) => {
             setPage2(page);
             setPageSize2(pageSize);
@@ -68,6 +71,7 @@ export const PaginationOneTypesTemplate = (
       <Separator />
       <Field label="Pagination One Simple. Minimal size">
         <PaginationOne
+          dimension={props.dimension}
           style={{ width: 'fit-content' }}
           onChange={({ page, pageSize }) => {
             setPage2(page);

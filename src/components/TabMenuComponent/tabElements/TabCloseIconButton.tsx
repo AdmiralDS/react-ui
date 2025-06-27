@@ -1,4 +1,3 @@
-import type { MouseEventHandler, HTMLAttributes, KeyboardEventHandler } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
@@ -42,7 +41,7 @@ const Wrapper = styled.div<{ $dimension: TabDimension; $disabled?: boolean }>`
   }
 `;
 
-export interface TabCloseIconButtonProps extends HTMLAttributes<HTMLDivElement> {
+export interface TabCloseIconButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Размер компонента */
   dimension?: TabDimension;
   /** Состояние disabled */
@@ -53,7 +52,7 @@ export interface TabCloseIconButtonProps extends HTMLAttributes<HTMLDivElement> 
 
 export const TabCloseIconButton = forwardRef<HTMLDivElement, TabCloseIconButtonProps>(
   ({ dimension = 'l', disabled, onCloseIconButtonClick, ...props }, ref) => {
-    const handleKeyDown: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
       e.stopPropagation();
       const code = keyboardKey.getCode(e);
       if (code === keyboardKey.Enter) {
@@ -63,7 +62,7 @@ export const TabCloseIconButton = forwardRef<HTMLDivElement, TabCloseIconButtonP
         onCloseIconButtonClick?.();
       }
     };
-    const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
       e.stopPropagation();
       onCloseIconButtonClick?.();
     };

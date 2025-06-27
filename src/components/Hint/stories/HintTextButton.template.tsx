@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Hint, Button, TextButton } from '@admiral-ds/react-ui';
+import { Hint, Button, TextButton, T } from '@admiral-ds/react-ui';
 import type { HintProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ReactComponent as HelpOutline } from '@admiral-ds/icons/build/service/HelpOutline.svg';
 import styled, { ThemeProvider } from 'styled-components';
@@ -22,6 +22,11 @@ export const HintTextButtonTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div">
+        В качества контента хинта может выступать любой ReactNode, например допускается использование TextButton внутри
+        хинта. В случае если хинт содержит в себе TextButton, триггером его появления должен быть click.
+      </T>
+      <Separator height={24} />
       <Hint
         {...props}
         visible={visible}

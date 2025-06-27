@@ -14,6 +14,10 @@ const AmountCell = styled.div`
   }
 `;
 
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
+
 const numberFormatter = new Intl.NumberFormat();
 
 type RowData = TableRow & {
@@ -211,13 +215,27 @@ export const TableCheckboxTemplate = (props: TableProps) => {
   };
 
   return (
-    <Table
-      {...props}
-      rowList={rows}
-      columnList={cols}
-      displayRowSelectionColumn
-      onRowSelectionChange={handleSelectionChange}
-      onColumnResize={handleResize}
-    />
+    <>
+      <T font="Body/Body 1 Long" as="div">
+        Отображение столбца с чекбоксами регулируется параметром <code>displayRowSelectionColumn</code>. Чекбокс в шапке
+        таблицы позволяет выбрать все строки (если не выбрано ни одной строки), либо отменить выбранные до этого строки.
+        По нажатию на любой из чекбоксов срабатывает колбек <code>onRowSelectionChange</code>.<Separator />
+        Также с помощью параметров <code>headerCheckboxChecked</code>, <code>headerCheckboxIndeterminate</code> можно
+        контролировать состояние чекбокса в шапке таблицы. А с помощью колбека <code>onHeaderSelectionChange</code>{' '}
+        отслеживать нажатие на данный чекбокс.
+        <Separator />
+        Если необходимо задизейблить чекбокс отдельной строки, для данной строки нужно задать параметр{' '}
+        <code>checkboxDisabled</code>.
+      </T>
+      <Separator $height={24} />
+      <Table
+        {...props}
+        rowList={rows}
+        columnList={cols}
+        displayRowSelectionColumn
+        onRowSelectionChange={handleSelectionChange}
+        onColumnResize={handleResize}
+      />
+    </>
   );
 };

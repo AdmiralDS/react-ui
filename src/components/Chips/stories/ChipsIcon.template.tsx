@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { Chips } from '@admiral-ds/react-ui';
+import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
 import { ReactComponent as VacationIcon } from '@admiral-ds/icons/build/category/VacationSolid.svg';
@@ -17,8 +17,8 @@ const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
   }
 `;
 
-const Separator = styled.div`
-  height: 20px;
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 20}px;
 `;
 
 const listDataIcon = [
@@ -41,6 +41,10 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
   const [selectedS, setSelectedS] = React.useState('');
   return (
     <>
+      <T font="Body/Body 1 Long" as="div">
+        В компоненте можно включать иконки справа и/или слева от текста.
+      </T>
+      <Separator $height={24} />
       <WrapperChip $dimension={props.dimension}>
         {listDataIcon.map((d) => (
           <Chips

@@ -1,11 +1,14 @@
-import { Children, forwardRef, cloneElement, isValidElement, useMemo, useEffect, useState } from 'react';
+import { Children, forwardRef, cloneElement, isValidElement, useMemo, useEffect, useState, useRef } from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 
 import type { CarouselButtonAppearance } from '#src/components/Carousel/CarouselButton';
 import { CarouselButton } from '#src/components/Carousel/CarouselButton';
 import type { CarouselSliderAppearance } from '#src/components/CarouselSlider';
 import { CarouselSlider, CarouselSliderItem } from '#src/components/CarouselSlider';
+import type { TouchPointInfoType } from '#src/components/common/utils/touchUtils';
+import { getSwipeType } from '#src/components/common/utils/touchUtils';
 
 const Content = styled.div<{
   $currentItem: number;
@@ -85,6 +88,7 @@ const getPrevItemInfinite = (currentItem: number, maxItems: number) => {
 };
 
 type CarouselSliderPosition = 'inner' | 'outer';
+const nothing = () => {};
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   /** Номер выбранной секции по умолчанию (нумерация с 0) */
   defaultItem?: number;
@@ -106,6 +110,16 @@ export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   sliderAppearance?: CarouselSliderAppearance;
   /** Позволяет добавлять миксин, созданный с помощью styled css  */
   contentCssMixin?: ReturnType<typeof css>;
+  /** Конфиг функция пропсов для кнопки переключения на предыдущий элемент. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  prevButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CarouselButton>,
+  ) => Partial<React.ComponentProps<typeof CarouselButton> & DataAttributes>;
+  /** Конфиг функция пропсов для кнопки переключения на следующий элемент. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  nextButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CarouselButton>,
+  ) => Partial<React.ComponentProps<typeof CarouselButton> & DataAttributes>;
 }
 
 export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
@@ -121,6 +135,8 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       sliderPosition = 'inner',
       sliderAppearance = 'default',
       contentCssMixin,
+      prevButtonPropsConfig = nothing,
+      nextButtonPropsConfig = nothing,
       children,
       ...props
     },
@@ -142,7 +158,12 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (infiniteScroll && index === length - 1) {
           preCloneSlides.push(
             isValidElement(elem)
-              ? cloneElement(elem, { ...elem.props, key: 'precloned' + elem.key, 'data-index': -1 })
+              ? cloneElement(elem, {
+                  ...elem.props,
+                  key: 'precloned' + elem.key,
+                  'data-index': -1,
+                  'aria-label': 'precloned' + elem.key,
+                })
               : elem,
           );
         }
@@ -150,7 +171,12 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (infiniteScroll && index === 0) {
           postCloneSlides.push(
             isValidElement(elem)
-              ? cloneElement(elem, { ...elem.props, key: 'postcloned' + elem.key, 'data-index': length })
+              ? cloneElement(elem, {
+                  ...elem.props,
+                  key: 'postcloned' + elem.key,
+                  'data-index': length,
+                  'aria-label': 'postcloned' + elem.key,
+                })
               : elem,
           );
         }
@@ -241,6 +267,102 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     };
     //</editor-fold>
 
+    //<editor-fold desc="Обработчики touch событий">
+    const [isTouching, setIsTouching] = useState(false);
+    const touchPointInfo = useRef<TouchPointInfoType>({
+      point1: { x: 0, y: 0 },
+      point2: { x: 0, y: 0 },
+      eventType: 'none',
+      startEl: undefined,
+      timeDown: undefined,
+      xDown: undefined,
+      yDown: undefined,
+      xDiff: undefined,
+      yDiff: undefined,
+      touchCount: undefined,
+    });
+
+    const updateTouchPointInfo = (values: Partial<TouchPointInfoType>) => {
+      touchPointInfo.current = {
+        ...touchPointInfo.current,
+        ...values,
+      };
+    };
+
+    const handleTouchStart = (event: React.TouchEvent<HTMLImageElement>) => {
+      event.stopPropagation();
+      setIsTouching(true);
+
+      const { touches = [] } = event;
+      if (touches.length === 1) {
+        updateTouchPointInfo({
+          startEl: event.target,
+          timeDown: Date.now(),
+          touchCount: touches.length,
+          eventType: 'move',
+          xDown: touches[0].clientX,
+          yDown: touches[0].clientY,
+          xDiff: 0,
+          yDiff: 0,
+        });
+      }
+    };
+    const handleTouchMove = (event: React.TouchEvent<HTMLImageElement>) => {
+      const { touches = [] } = event;
+      const { eventType, xDown, yDown } = touchPointInfo.current;
+
+      if (eventType === 'move') {
+        updateTouchPointInfo({ eventType: 'move' });
+        if (xDown && yDown) {
+          updateTouchPointInfo({
+            xDiff: xDown - touches[0].clientX,
+            yDiff: yDown - touches[0].clientY,
+          });
+        }
+      }
+    };
+    const handleTouchEnd = (event: React.TouchEvent<HTMLImageElement>) => {
+      if (isTouching) {
+        setIsTouching(false);
+
+        const { eventType, startEl, timeDown, xDiff, yDiff, xDown, yDown } = touchPointInfo.current;
+
+        if (eventType === 'move') {
+          const timeUp = Date.now();
+          const type = getSwipeType(startEl, event.target, timeDown, timeUp, xDown, yDown, xDiff, yDiff);
+
+          if (type === 'swiped-left') {
+            handleNextClick();
+          } else if (type === 'swiped-right') {
+            handlePrevClick();
+          }
+        }
+
+        updateTouchPointInfo({
+          eventType: 'none',
+          startEl: undefined,
+          timeDown: undefined,
+          xDown: undefined,
+          yDown: undefined,
+          xDiff: undefined,
+          yDiff: undefined,
+          touchCount: undefined,
+        });
+      }
+    };
+    //</editor-fold>
+
+    const prevButtonProps = {
+      appearance: buttonAppearance,
+      direction: 'left',
+      onClick: handlePrevClick,
+    } satisfies React.ComponentProps<typeof CarouselButton>;
+    const nextButtonProps = {
+      appearance: buttonAppearance,
+      direction: 'right',
+      onClick: handleNextClick,
+    } satisfies React.ComponentProps<typeof CarouselButton>;
+
     return (
       <Container ref={ref} {...props}>
         <Wrapper>
@@ -251,12 +373,15 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               $showAnimation={showAnimation}
               $animationDuration={animationDuration}
               onTransitionEnd={updateEdgeContentIndex}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               {contentItems}
             </Content>
           </ContentWrapper>
-          {showPrev && <CarouselButton appearance={buttonAppearance} direction="left" onClick={handlePrevClick} />}
-          {showNext && <CarouselButton appearance={buttonAppearance} direction="right" onClick={handleNextClick} />}
+          {showPrev && <CarouselButton {...prevButtonProps} {...prevButtonPropsConfig(prevButtonProps)} />}
+          {showNext && <CarouselButton {...nextButtonProps} {...nextButtonPropsConfig(nextButtonProps)} />}
         </Wrapper>
         <StyledCarouselSlider $sliderPosition={sliderPosition}>
           {[...Array(length).keys()].map((item) => {

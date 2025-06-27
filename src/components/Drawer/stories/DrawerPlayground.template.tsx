@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField } from '@admiral-ds/react-ui';
+import { Drawer, DrawerTitle, DrawerContent, DrawerButtonPanel, Button, InputField, useId } from '@admiral-ds/react-ui';
 import type { DrawerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -48,6 +48,7 @@ export const DrawerPlaygroundTemplate = ({
   ...props
 }: DrawerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [opened, setOpened] = React.useState(false);
+  const closeButtonProps = { 'data-testid': useId() };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -58,6 +59,7 @@ export const DrawerPlaygroundTemplate = ({
         onClose={() => setOpened(false)}
         style={{ width: '480px' }}
         aria-labelledby="drawer-title"
+        closeButtonPropsConfig={() => closeButtonProps}
       >
         <DrawerTitle id="drawer-title">Drawer title</DrawerTitle>
         <DrawerForm

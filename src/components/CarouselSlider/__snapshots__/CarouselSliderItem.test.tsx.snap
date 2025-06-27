@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CarouselSliderItem should render current item with default appearance 1`] = `
+.c2 {
+  box-sizing: border-box;
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 0.5px solid var(--admiral-color-Special_DarkStaticNeutral00, #C9CACD);
+}
+
+.c0 {
+  all: unset;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  width: 34px;
+  height: 16px;
+  padding: 7px 3px 6px 3px;
+}
+
+.c0:focus-visible>.c1 {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+<button
+  aria-label="testItem"
+  class="c0"
+  data-testid="testItem"
+>
+  <div
+    class="c1 c2"
+  />
+</button>
+`;
+
+exports[`CarouselSliderItem should render current item with primary appearance 1`] = `
+.c2 {
+  box-sizing: border-box;
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: none;
+}
+
+.c0 {
+  all: unset;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  width: 34px;
+  height: 16px;
+  padding: 7px 3px 6px 3px;
+}
+
+.c0:focus-visible>.c1 {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+<button
+  aria-label="testItem"
+  class="c0"
+  data-testid="testItem"
+>
+  <div
+    class="c1 c2"
+  />
+</button>
+`;
+
+exports[`CarouselSliderItem should render item with default appearance 1`] = `
+.c2 {
+  box-sizing: border-box;
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 0.5px solid var(--admiral-color-Special_DarkStaticNeutral00, #C9CACD);
+}
+
+.c0 {
+  all: unset;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  width: 18px;
+  height: 16px;
+  padding: 7px 3px 6px 3px;
+}
+
+.c0:focus-visible>.c1 {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+<button
+  aria-label="testItem"
+  class="c0"
+  data-testid="testItem"
+>
+  <div
+    class="c1 c2"
+  />
+</button>
+`;
+
+exports[`CarouselSliderItem should render item with primary appearance 1`] = `
+.c2 {
+  box-sizing: border-box;
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border: none;
+}
+
+.c0 {
+  all: unset;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  width: 18px;
+  height: 16px;
+  padding: 7px 3px 6px 3px;
+}
+
+.c0:focus-visible>.c1 {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+<button
+  aria-label="testItem"
+  class="c0"
+  data-testid="testItem"
+>
+  <div
+    class="c1 c2"
+  />
+</button>
+`;

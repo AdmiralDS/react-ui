@@ -9,6 +9,7 @@ import {
   MenuActionsPanel,
   TextInput,
   TextButton,
+  T,
 } from '@admiral-ds/react-ui';
 import type { MenuProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import type { ChangeEvent } from 'react';
@@ -130,6 +131,9 @@ export const MenuActionsAddUserValueTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '24px' }}>
+        Пример с Actions и Search.
+      </T>
       <Wrapper style={{ width: 'fit-content' }}>
         <Menu
           {...props}

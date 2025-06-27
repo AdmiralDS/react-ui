@@ -1,10 +1,11 @@
-import { forwardRef } from 'react';
+import type { ForwardedRef } from 'react';
 import styled, { css } from 'styled-components';
 
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from '#src/components/common/polymorphicProps';
+import type { PolymorphicComponentPropsWithRef } from '#src/components/common/polymorphicProps';
 import type { ColorName, ThemeTypographyType } from '#src/components/themes';
 import { DefaultFontColorName } from '#src/components/themes';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
+import { fixedForwardRef } from '../common/fixedForwardRef';
 
 export type FontName = keyof ThemeTypographyType;
 
@@ -51,13 +52,17 @@ export type TextComponentType = (<C extends React.ElementType = 'span'>(
 ) => ReturnType<typeof Tspan>) & {
   displayName?: string | undefined;
 };
-export const T: TextComponentType = forwardRef(
-  <P extends React.ElementType = 'span'>(
-    { font, color, cssMixin, skeleton, ...props }: TProps<P>,
-    ref: PolymorphicRef<P>,
-  ) => {
-    return <Tspan ref={ref} {...props} $font={font} $color={color} $cssMixin={cssMixin} $skeleton={skeleton} />;
-  },
-);
+export const T: TextComponentType = fixedForwardRef(({ font, color, cssMixin, skeleton, ...props }, ref) => {
+  return (
+    <Tspan
+      ref={ref as ForwardedRef<HTMLSpanElement>}
+      {...props}
+      $font={font}
+      $color={color}
+      $cssMixin={cssMixin}
+      $skeleton={skeleton}
+    />
+  );
+});
 
 T.displayName = 'T';

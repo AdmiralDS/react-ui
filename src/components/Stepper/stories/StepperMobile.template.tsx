@@ -1,5 +1,20 @@
 import * as React from 'react';
-import { Stepper, Step, StepContent, Button } from '@admiral-ds/react-ui';
+import { Stepper, Step, StepContent, Button, T } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
+
+const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 8}px;
+`;
+const Wrapper = styled.div`
+  width: 400px;
+  overflow: hidden;
+`;
+const MobileWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 40px;
+`;
 
 const initialSteps = [
   {
@@ -17,8 +32,20 @@ export const StepperMobileTemplate = () => {
 
   return (
     <>
-      <div style={{ width: '400px', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', marginBottom: '40px' }}>
+      <T font="Body/Body 1 Long" as="div">
+        В мобильной версии применяется только горизонтальный вариант компонента с автоматическим скроллом по горизонтали
+        по мере прохождения шагов.
+        <Separator />
+        Компонент можно скроллить пальцем, если нужно посмотреть пройденные или будущие шаги.
+        <Separator />
+        При переходе на следующий шаг, который становится текущим, он выравнивается относительно левого края на
+        расстоянии 16px (боковой падинг). Шаг перед текущим уходит за границы экрана.
+        <Separator />
+        Для перевода компонента в мобильный вид используйте параметр mobile.
+      </T>
+      <Separator $height={24} />
+      <Wrapper>
+        <MobileWrapper>
           <Button
             onClick={() => {
               const newSteps = [...steps].map((step, i) =>
@@ -43,7 +70,7 @@ export const StepperMobileTemplate = () => {
           >
             Шаг вперёд
           </Button>
-        </div>
+        </MobileWrapper>
         <Stepper activeStep={activeStep} mobile>
           {steps.map(({ content, ...step }) => {
             return (
@@ -53,7 +80,7 @@ export const StepperMobileTemplate = () => {
             );
           })}
         </Stepper>
-      </div>
+      </Wrapper>
     </>
   );
 };

@@ -71,6 +71,7 @@ export interface DropMenuProps
       | 'renderBottomPanel'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
+      | 'virtualScroll'
     >,
     DropContainerProps,
     Omit<HTMLAttributes<HTMLElement>, 'onChange'>,
@@ -157,6 +158,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
       renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      virtualScroll,
       ...props
     },
     ref,
@@ -251,6 +253,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
             <StyledMenu
               maxHeight={menuMaxHeight}
               $width={menuWidth}
+              virtualScroll={virtualScroll}
               model={items}
               selected={selected}
               onSelectItem={handleSelectItem}

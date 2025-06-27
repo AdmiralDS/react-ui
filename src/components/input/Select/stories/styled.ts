@@ -47,8 +47,8 @@ export const ExtraText = styled.div`
   ${typography['Body/Body 2 Short']}
 `;
 
-export const Separator = styled.div`
-  height: 20px;
+export const Separator = styled.div<{ $height?: number }>`
+  height: ${(p) => p.$height || 24}px;
 `;
 
 export const Form = styled.form`
