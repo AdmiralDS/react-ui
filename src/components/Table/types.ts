@@ -284,6 +284,10 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   onRowDrag?: (rowId: string, nextRowId: string | null, groupRowId: string | null) => void;
   /** Колбек, который срабатывает при завершении перетаскивания строки внутри таблицы */
   onRowDragEnd?: (rowId: string) => void;
+  /** CSS миксин для стилизации миниатюры колонки, возникающей при drag&drop колонок */
+  draggedColumnCssMixin?: ReturnType<typeof css>;
+  /** CSS миксин для стилизации миниатюры строки, возникающей при drag&drop строк */
+  draggedRowCssMixin?: ReturnType<typeof css>;
   /** Объект, который описывает соответствие цвета строки и её статуса.
    *
    * Данный параметр нужно применять при создании кастомных статусов строк,

@@ -60,7 +60,7 @@ export const InputLinePlaygroundTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '40px' }}>
-        Поле ввода с адаптивным placeholder или с примером значения tmpValue
+        Поле ввода с адаптивным placeholder или с временным значением(tmpValue)
       </T>
       <FocusBox>
         <InputLine
