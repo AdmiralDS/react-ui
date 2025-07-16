@@ -79,6 +79,8 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
 
     useLayoutEffect(() => {
       if (containerRef.current !== document.activeElement) {
+        console.log('focus dropdown container from dropdown container');
+
         containerRef?.current?.focus();
       }
     }, []);
