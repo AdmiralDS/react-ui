@@ -102,11 +102,7 @@ export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(
         {children && (
           <CheckboxComponentLabel $dimension={dimension} disabled={disabled}>
             {children}
-            {extraText && (
-              <CheckboxComponentHint disabled={disabled} $dimension={dimension}>
-                {extraText}
-              </CheckboxComponentHint>
-            )}
+            {extraText && <CheckboxComponentHint disabled={disabled}>{extraText}</CheckboxComponentHint>}
           </CheckboxComponentLabel>
         )}
       </CheckboxComponentWrapper>

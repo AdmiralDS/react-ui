@@ -61,15 +61,11 @@ export const CheckboxComponentLabel = styled.div<{
   }
 `;
 
-export const CheckboxComponentHint = styled.div<{ $dimension: CheckboxComponentDimension; disabled?: boolean }>`
+export const CheckboxComponentHint = styled.div<{ disabled?: boolean }>`
   margin-top: 4px;
-  ${(p) => (p.$dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${typography['Body/Body 2 Short']};
   color: ${(p) =>
     p.disabled
       ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
       : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
-
-  fieldset[data-dimension='s'] && {
-    ${typography['Caption/Caption 1']}
-  }
 `;
