@@ -108,12 +108,9 @@ const Label = styled.div<{
       : `var(--admiral-color-Neutral_Neutral90, ${theme.color['Neutral/Neutral 90']})`};
 `;
 
-const Hint = styled.div<{
-  $dimension: Dimension;
-  disabled: boolean;
-}>`
+const Hint = styled.div<{ disabled: boolean }>`
   margin-top: 4px;
-  ${({ $dimension }) => ($dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${typography['Body/Body 2 Short']};
   color: ${({ theme, disabled }) =>
     disabled
       ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
@@ -234,11 +231,7 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
         {children && (
           <Label $dimension={dimension} disabled={disabled} $position={labelPosition}>
             {children}
-            {extraText && (
-              <Hint $dimension={dimension} disabled={disabled}>
-                {extraText}
-              </Hint>
-            )}
+            {extraText && <Hint disabled={disabled}>{extraText}</Hint>}
           </Label>
         )}
       </Wrapper>
