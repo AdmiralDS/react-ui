@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import type { DataAttributes } from 'styled-components';
 import { forwardRef, useEffect, useRef } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
@@ -77,10 +78,15 @@ export interface InputLineProps extends React.InputHTMLAttributes<HTMLInputEleme
   value?: string;
   prefix?: string;
   suffix?: string;
+  /** Конфиг функция пропсов для контейнера. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof InputLineContainer>,
+  ) => Partial<React.ComponentProps<typeof InputLineContainer> & DataAttributes>;
 }
 
 export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
-  ({ className, dataPlaceholder, tmpValue, prefix, suffix, ...inputProps }, ref) => {
+  ({ dataPlaceholder, tmpValue, prefix, suffix, containerPropsConfig = () => {}, ...inputProps }, ref) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const placeholderRef = useRef<HTMLSpanElement>(null);
 
@@ -121,10 +127,10 @@ export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
       // inputProps.value inputProps.defaultValue важно, изменение не приводит к триггеру события input
     }, [dataPlaceholder, placeholder, inputProps.value, inputProps.defaultValue, tmpValue]);
 
-    const containerProps = { className, onFocus: handleContainerFocus, tabIndex: -1 };
+    const containerProps = { onFocus: handleContainerFocus, tabIndex: -1 };
 
     return (
-      <InputLineContainer {...containerProps}>
+      <InputLineContainer {...containerProps} {...containerPropsConfig(containerProps)}>
         {prefix && (inputProps.value !== '' || tmpValue) && (
           <AdditionalTextWrapper>
             <AdditionalText>{prefix}</AdditionalText>
