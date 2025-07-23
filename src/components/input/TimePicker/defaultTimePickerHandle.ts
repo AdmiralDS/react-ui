@@ -55,7 +55,7 @@ export function defaultTimePickerHandle(inputData: InputData | null): InputData 
   }
 
   value = value.replace(/[^0-9]/g, '');
-  if (value.length >= 2) {
+  if (value.length >= 3) {
     value = `${value.substring(0, 2)}:${value.substring(2, 4)}`;
     if (selectionStart > 2) {
       moveCursor += 1;
