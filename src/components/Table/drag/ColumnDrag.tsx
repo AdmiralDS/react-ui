@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { DropdownContext } from '#src/components/DropdownProvider';
 import observeRect from '#src/components/common/observeRect';
 import type { TableProps } from '#src/components/Table';
-import { css } from 'styled-components';
+import type { css } from 'styled-components';
 
 import { dragObserver } from '../dragObserver';
 import { MirrorColumn } from '../style';
