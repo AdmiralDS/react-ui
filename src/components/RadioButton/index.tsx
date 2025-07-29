@@ -60,11 +60,7 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
         {children && (
           <RadioButtonLabel $dimension={dimension} disabled={disabled}>
             {children}
-            {extraText && (
-              <Hint disabled={disabled} $dimension={dimension}>
-                {extraText}
-              </Hint>
-            )}
+            {extraText && <Hint disabled={disabled}>{extraText}</Hint>}
           </RadioButtonLabel>
         )}
       </RadioButtonComponent>

@@ -193,17 +193,13 @@ export const Input = styled.input<{ $dimension: Dimension }>`
   }
 `;
 
-export const Hint = styled.div<{ $dimension: Dimension; disabled?: boolean }>`
+export const Hint = styled.div<{ disabled?: boolean }>`
   margin-top: 6px;
-  ${(p) => (p.$dimension === 's' ? typography['Caption/Caption 1'] : typography['Body/Body 2 Short'])}
+  ${typography['Body/Body 2 Short']};
   color: ${(p) =>
     p.disabled
       ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
       : `var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']})`};
-
-  fieldset[data-dimension='s'] && {
-    ${typography['Caption/Caption 1']}
-  }
 `;
 
 export const RadioButtonComponent = styled.label<{
