@@ -537,6 +537,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             selected={innerSelected}
             onSelectItem={(id) => handleClickItem(id)}
             virtualScroll={virtualScroll}
+            rowCount={rowCount}
+            maxHeight={maxHeight}
             preventFocusSteal
           />
         )
