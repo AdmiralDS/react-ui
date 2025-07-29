@@ -1,14 +1,15 @@
 import * as React from 'react';
-import type { HTMLAttributes } from 'react';
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import type { HTMLAttributes, ComponentProps } from 'react';
+import { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import styled, { css } from 'styled-components';
 
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { TextInputProps } from '../TextInput';
-import { TextInput } from '../TextInput';
+import { InputLine } from '../InputLine';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import { defaultTimeInputHandle } from '#src/components/input/TimeInput/defaultTimeInputHandle';
-import { changeInputData } from '#src/components/common/dom/changeInputData';
+import { defaultTimePickerHandle } from '#src/components/input/TimePicker/defaultTimePickerHandle';
+import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { getTimeInMinutes, parseStringToTime, generateTimeArray } from './utils';
 import { typography } from '#src/components/Typography';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -17,12 +18,109 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
+import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
+import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
 
-export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
+interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
   value: string;
 }
 
+type SizeProps = {
+  $dimension?: ComponentDimension;
+};
+
+export type InputBoxProps = ComponentProps<'div'> & SizeProps;
+
 const defaultSlots: SlotProps[] = generateTimeArray();
+
+const iconSizeValue = (props: SizeProps) => {
+  switch (props.$dimension) {
+    case 'xl':
+      return 24;
+    case 's':
+      return 20;
+    default:
+      return 24;
+  }
+};
+const horizontalPaddingValue = (props: SizeProps) => {
+  switch (props.$dimension) {
+    case 'xl':
+      return 16;
+    case 's':
+      return 12;
+    default:
+      return 16;
+  }
+};
+
+const extraPadding = css<Omit<ExtraProps, '$iconsBeforeCount'>>`
+  padding-right: ${(props) =>
+    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
+`;
+
+const dimensionFocusBoxStyles = {
+  xl: `
+    height: 56px;
+    & * {
+      line-height: 56px;
+    }
+  `,
+  s: `
+    height: 32px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
+    & * {
+      ${typography['Body/Body 2 Long']}
+      line-height: 32px;
+    }
+  `,
+  m: ``,
+};
+
+export const FocusBox = styled.div<
+  Omit<ExtraProps, '$iconsBeforeCount'> &
+    SizeProps & { disabled?: boolean; $status?: InputStatus; readOnly?: boolean; $isLoading?: boolean }
+>`
+  cursor: text;
+  display: inline-flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: stretch;
+  width: 280px;
+  min-width: 136px;
+  height: 40px;
+  padding: 0;
+  padding-inline-start: 16px;
+  padding-inline-end: 16px;
+  transition: box-shadow 0.3s ease-in-out;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background: transparent;
+  /* https://stackoverflow.com/questions/69658462/inset-box-shadow-visual-artifacts-in-google-chrome */
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0px 0px 0px 1px var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']})
+    inset;
+
+  &:hover:not(:focus-within) {
+    box-shadow: 0px 0px 0px 1px var(--admiral-color-Neutral_Neutral60, ${(p) => p.theme.color['Neutral/Neutral 60']})
+      inset;
+  }
+  &:focus-within {
+    box-shadow: 0px 0px 0px 2px
+      var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) inset;
+  }
+  ${(p) => p.disabled && 'border-color: transparent;'};
+
+  & * {
+    ${typography['Body/Body 1 Long']}
+    line-height: 40px;
+  }
+
+  ${({ $dimension }) => $dimension && dimensionFocusBoxStyles[$dimension]}
+  ${extraPadding}
+`;
 
 const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
@@ -42,10 +140,37 @@ const StyledMenu = styled(Menu)`
 const StyledMenuItem = styled(MenuItem)`
   justify-content: center;
 `;
-const StyledTextInput = styled(TextInput)`
-  min-width: 136px;
+
+const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimension }>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+
+  & svg {
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+    display: block;
+    width: ${iconSizeValue}px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline-offset: 2px;
+      outline: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) solid 2px;
+    }
+  }
 `;
-export interface TimeInputProps extends Omit<TextInputProps, 'value' | 'iconsBefore'>, DropContainerStyles {
+const IconPanelAfter = styled(IconPanel)`
+  right: 0;
+  padding-right: ${horizontalPaddingValue}px;
+  gap: 8px;
+`;
+
+export interface TimePickerProps extends Omit<TextInputProps, 'value' | 'iconsBefore' | 'icons'>, DropContainerStyles {
   /** Выбранное значение времени */
   value?: string;
   /** Начало временного диапазона */
@@ -60,19 +185,19 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value' | 'iconsBef
   disabledSlots?: string[];
   /** Альтернативная иконка компонента */
   icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  /** Отображать иконку очистки поля */
+  displayClearIcon?: boolean;
+  /** Статус поля */
+  status?: InputStatus;
+  /** Отображать статус загрузки данных */
+  isLoading?: boolean;
   /** Позволяет обрабатывать введенные значения */
   parser?: (time?: string) => string;
-  /**
-   * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в 10.x.x версии.
-   * Взамен используйте alignSelf
-   *
-   * Позволяет выравнивать позицию дропдаун контейнера относительно селекта.
-   * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
-   **/
-  alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  /** Позволяет выравнивать позицию дропдаун контейнера относительно селекта */
+  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
 
-export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
+export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
   (
     {
       startTime,
@@ -83,9 +208,10 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       disabledSlots = [],
       parser = parseStringToTime,
       icon = TimeSVG,
-      icons,
       iconsAfter,
-      alignDropdown = 'flex-end',
+      displayClearIcon,
+      isLoading,
+      status,
       alignSelf = 'flex-end',
       skeleton = false,
       dropContainerCssMixin,
@@ -95,7 +221,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     },
     ref,
   ) => {
-    const handleInput = props.handleInput || defaultTimeInputHandle;
+    const handleInput = props.handleInput || defaultTimePickerHandle;
     const [timeValue, setTimeValue] = useState<string>('');
     const [activeOption, setActiveOption] = React.useState<string | undefined>('');
     const inputContainerRef = useRef<HTMLDivElement>(null);
@@ -103,6 +229,43 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
+
+    useLayoutEffect(() => {
+      const nullHandledValue = handleInput(null);
+
+      function oninput(this: HTMLInputElement, e: Event) {
+        const { value, selectionStart, selectionEnd } = this;
+        const currentInputData = { value, selectionStart, selectionEnd };
+
+        const inputData = handleInput(currentInputData, e as InputEvent);
+
+        if (!isInputDataDifferent(nullHandledValue, inputData)) {
+          changeInputData(this, { ...inputData, value: '' });
+        } else {
+          changeInputData(this, inputData);
+        }
+      }
+
+      // Чтение selectionStart в Safari при type='date' вызывает ошибку
+      if (inputRef.current) {
+        const node = inputRef.current;
+        node.addEventListener('input', oninput);
+
+        const { value, selectionStart, selectionEnd } = node;
+        const currentInputData = { value, selectionStart, selectionEnd };
+        const inputData = handleInput(currentInputData);
+
+        if (!isInputDataDifferent(nullHandledValue, inputData)) {
+          changeInputData(node, { ...inputData, value: '' });
+        } else {
+          changeInputData(node, inputData);
+        }
+
+        return () => {
+          node.removeEventListener('input', oninput);
+        };
+      }
+    }, [handleInput]);
 
     const handleButtonClick = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -125,7 +288,27 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       setIsOpened(!isOpened);
     };
 
-    const iconArray = React.Children.toArray(iconsAfter || icons);
+    const iconArray = React.Children.toArray(iconsAfter);
+
+    if (!props.readOnly && displayClearIcon && !!timeValue) {
+      iconArray.unshift(
+        <InputIconButton
+          icon={CloseOutlineSvg}
+          key="clear-icon"
+          onMouseDown={(e) => {
+            // запрет на перемещение фокуса при клике по иконке
+            e.preventDefault();
+          }}
+          onClick={() => {
+            if (inputRef.current) {
+              changeInputData(inputRef.current, { value: '' });
+            }
+          }}
+          aria-hidden
+        />,
+      );
+    }
+
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onMouseDown={handleButtonClick} tabIndex={0} />);
     }
@@ -206,7 +389,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
 
     const selectedPos = React.useRef<number | undefined>();
 
-    React.useEffect(() => {
+    useEffect(() => {
       let focused = false;
 
       function handleClick() {
@@ -244,20 +427,35 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
     }, []);
 
     return (
-      <StyledTextInput
-        {...props}
-        ref={refSetter(ref, inputRef)}
-        handleInput={handleInput}
-        iconsAfter={iconArray}
-        containerRef={inputContainerRef}
-        disabled={disabled}
-        dimension={dimension}
-        skeleton={skeleton}
-      >
+      <>
+        <FocusBox
+          $dimension={dimension}
+          $iconsAfterCount={iconArray.length}
+          $status={status}
+          disabled={disabled}
+          readOnly={props.readOnly}
+          $isLoading={isLoading}
+        >
+          <InputLine
+            {...props}
+            ref={refSetter(ref, inputRef)}
+            placeholder="чч:мм"
+            dataPlaceholder="чч:мм"
+            onInput={(e) => setTimeValue(e.currentTarget.value)}
+            value={timeValue}
+            disabled={disabled}
+            readOnly={props.readOnly}
+          />
+          {iconArray.length > 0 && (
+            <IconPanelAfter disabled={disabled} $dimension={dimension}>
+              {iconArray}
+            </IconPanelAfter>
+          )}
+        </FocusBox>
         {availableSlots && isOpened && !disabled && !skeleton && (
           <StyledDropdownContainer
             targetElement={inputRef.current}
-            alignSelf={alignDropdown || alignSelf}
+            alignSelf={alignSelf}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
@@ -275,9 +473,9 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
             />
           </StyledDropdownContainer>
         )}
-      </StyledTextInput>
+      </>
     );
   },
 );
 
-TimeInput.displayName = 'TimeInput';
+TimePicker.displayName = 'TimePicker';
