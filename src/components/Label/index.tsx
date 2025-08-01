@@ -6,6 +6,7 @@ export const MainLabel = styled.div`
 `;
 export const AdditionalLabel = styled.div`
   text-align: right;
+  margin-left: 8px;
 `;
 
 export const Label = styled.label<{ disabled?: boolean }>`

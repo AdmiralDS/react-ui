@@ -103,7 +103,7 @@ export interface FieldOwnProps {
 
   /**  Имя поля формы */
   label?: React.ReactNode;
-  /**  Имя поля формы */
+  /**  Дополнительное имя поля формы */
   additionalLabel?: React.ReactNode;
 
   /** Отображать лейбл в одну строчку с инпутом */
