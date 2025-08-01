@@ -41,6 +41,12 @@ export default {
     extraText: {
       control: { type: 'text' },
     },
+    label: {
+      control: { type: 'text' },
+    },
+    additionalLabel: {
+      control: { type: 'text' },
+    },
     displayInline: {
       control: { type: 'boolean' },
     },

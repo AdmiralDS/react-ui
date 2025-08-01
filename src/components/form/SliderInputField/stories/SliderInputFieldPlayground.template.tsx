@@ -8,6 +8,7 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const SliderInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -21,6 +22,7 @@ export const SliderInputFieldPlaygroundTemplate = ({
         maxValue={10000}
         defaultValue={defaultValue}
         label={label}
+        additionalLabel={additionalLabel}
       />
     </ThemeProvider>
   );

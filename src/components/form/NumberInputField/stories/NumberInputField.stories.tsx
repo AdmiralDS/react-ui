@@ -103,6 +103,12 @@ export default {
     extraText: {
       control: { type: 'text' },
     },
+    label: {
+      control: { type: 'text' },
+    },
+    additionalLabel: {
+      control: { type: 'text' },
+    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },

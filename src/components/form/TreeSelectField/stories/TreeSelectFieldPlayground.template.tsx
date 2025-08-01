@@ -59,6 +59,7 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
 
 export const TreeSelectFieldPlaygroundTemplate = ({
   label = 'Label',
+  additionalLabel = 'Add label',
   extraText = 'extraText',
   placeholder = 'Placeholder',
   themeBorderKind,
@@ -94,6 +95,7 @@ export const TreeSelectFieldPlaygroundTemplate = ({
     ...props,
     items: STORY_ITEMS,
     label,
+    additionalLabel,
     extraText,
     value,
     placeholder,

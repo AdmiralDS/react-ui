@@ -22,6 +22,7 @@ interface DateTimeFieldProps extends FieldProps {
 
 export const DateTimeFieldReadOnlyTemplate = ({
   label = 'Read only control',
+  additionalLabel,
   dimension,
   status,
   disabled,
@@ -33,6 +34,7 @@ export const DateTimeFieldReadOnlyTemplate = ({
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const fieldProps = {
     label,
+    additionalLabel,
     status,
     disabled,
     readOnly,

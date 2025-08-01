@@ -10,6 +10,7 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const FileInputFieldBaseTemplate = ({
   dimension = 'xl',
   label = 'Label',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -124,6 +125,7 @@ export const FileInputFieldBaseTemplate = ({
           status={status}
           extraText={extraText}
           label={label}
+          additionalLabel={additionalLabel}
         >
           {renderFileList()}
         </FileInputField>

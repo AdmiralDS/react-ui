@@ -50,6 +50,7 @@ const IconWithHint = ({ targetElement }: IconWithHintProps) => {
 export const InputFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -81,6 +82,7 @@ export const InputFieldInputTemplate = ({
           value={localValue}
           onChange={handleChange}
           label={label}
+          additionalLabel={additionalLabel}
         />
         <InputField data-container-id="inputFieldIdTwo" required label="Поле необходимо заполнить" />
         <InputField
@@ -140,6 +142,7 @@ export const InputFieldInputTemplate = ({
           label="Поле с иконкой в начале"
           iconsBefore={<IconWithHint targetElement={informerInputRef2.current} />}
         />
+        <InputField data-container-id="inputFieldIdTen" additionalLabel="Поле с дополнительным лейблом" />
       </DisplayContainer>
     </ThemeProvider>
   );

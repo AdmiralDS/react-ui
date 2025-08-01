@@ -80,6 +80,9 @@ export default {
     label: {
       control: { type: 'text' },
     },
+    additionalLabel: {
+      control: { type: 'text' },
+    },
     disabledSlots: {
       control: false,
     },

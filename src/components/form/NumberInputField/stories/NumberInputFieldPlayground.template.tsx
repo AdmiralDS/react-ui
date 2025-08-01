@@ -12,6 +12,7 @@ function convertStrToNum(str: string, precision: number, decimal: string) {
 export const NumberInputFieldPlaygroundTemplate = ({
   defaultValue = '2 000',
   label = 'Введите сумму',
+  additionalLabel = 'Add label',
   precision = 0,
   maxValue = 10000,
   decimal = ',',
@@ -42,6 +43,7 @@ export const NumberInputFieldPlaygroundTemplate = ({
         defaultValue={defaultValue}
         onChange={handleChange}
         label={label}
+        additionalLabel={additionalLabel}
         precision={precision}
         decimal={decimal}
         status={status}

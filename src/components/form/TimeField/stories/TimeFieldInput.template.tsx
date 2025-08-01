@@ -16,6 +16,7 @@ const DisplayContainer = styled.div`
 export const TimeFieldInputTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода времени',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -46,6 +47,7 @@ export const TimeFieldInputTemplate = ({
           dropContainerClassName="dropContainerClass"
           placeholder={placeholder}
           label={label}
+          additionalLabel={additionalLabel}
         />
       </DisplayContainer>
     </ThemeProvider>

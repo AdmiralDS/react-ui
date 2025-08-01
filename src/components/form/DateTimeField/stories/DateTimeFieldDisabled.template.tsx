@@ -23,6 +23,7 @@ interface DateTimeFieldProps extends FieldProps {
 
 export const DateTimeFieldDisabledTemplate = ({
   label = 'Disabled control',
+  additionalLabel,
   dimension,
   status,
   disabled = true,
@@ -34,6 +35,7 @@ export const DateTimeFieldDisabledTemplate = ({
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const fieldProps = {
     label,
+    additionalLabel,
     status,
     disabled,
     readOnly,

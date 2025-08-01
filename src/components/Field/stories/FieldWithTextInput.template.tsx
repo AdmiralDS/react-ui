@@ -13,6 +13,7 @@ const Container = styled.div`
 
 export const FieldWithTextInputTemplate = ({
   label = 'some label of wrapped component',
+  additionalLabel = 'add label',
   id = 'props_id',
   themeBorderKind,
   CSSCustomProps,
@@ -22,7 +23,7 @@ export const FieldWithTextInputTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Container>
-        <Field {...props} label={label} id={id}>
+        <Field {...props} label={label} additionalLabel={additionalLabel} id={id}>
           <TextInput {...inputProps} id={id} />
         </Field>
         <Field label="Inline label" id="some_id" displayInline>

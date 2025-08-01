@@ -23,6 +23,7 @@ interface DateTimeFieldProps extends FieldProps {
 
 export const DateTimeFieldStatusTemplate = ({
   label = 'Status control',
+  additionalLabel,
   dimension,
   disabled,
   readOnly,
@@ -35,6 +36,7 @@ export const DateTimeFieldStatusTemplate = ({
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const fieldProps = {
     label,
+    additionalLabel,
     disabled,
     readOnly,
     skeleton,
@@ -52,6 +54,7 @@ export const DateTimeFieldStatusTemplate = ({
 
   const [dateTimeStatus, setDateTimeStatus] = React.useState<InputStatus | undefined>(status);
   const [additionalText, setAdditionalText] = React.useState<string>('');
+  const [addLabel, setAddLabel] = React.useState<string>('');
 
   React.useEffect(() => {
     if (disabled || readOnly) {
@@ -64,6 +67,17 @@ export const DateTimeFieldStatusTemplate = ({
     }
     setAdditionalText('Additional text');
   }, [disabled, readOnly, extraText]);
+  React.useEffect(() => {
+    if (disabled || readOnly) {
+      setAddLabel('');
+      return;
+    }
+    if (additionalLabel) {
+      setAddLabel(String(extraText));
+      return;
+    }
+    setAddLabel('Add label');
+  }, [disabled, readOnly, additionalLabel]);
 
   React.useEffect(() => {
     if (disabled || readOnly) {
@@ -77,17 +91,19 @@ export const DateTimeFieldStatusTemplate = ({
         setDateTimeStatus('error');
         break;
     }
-    if (extraText) {
-      setAdditionalText(String(extraText));
+    if (extraText || additionalLabel) {
+      if (extraText) setAdditionalText(String(extraText));
+      if (additionalLabel) setAddLabel(String(additionalLabel));
       return;
     }
     setAdditionalText('Additional text');
+    setAddLabel('Add label');
   }, [status]);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <DisplayContainer>
-        <Field {...fieldProps} status={dateTimeStatus} extraText={additionalText}>
+        <Field {...fieldProps} status={dateTimeStatus} extraText={additionalText} additionalLabel={addLabel}>
           <DateTimeContainer {...baseDateTimeProps} status={dateTimeStatus} disabled={disabled || skeleton}>
             <DateTimeDateInput {...dateTimeProps} defaultValue="12.10.2022" status={dateTimeStatus} />
             <DateTimeSeparator {...baseDateTimeProps} status={dateTimeStatus} disabled={disabled || skeleton} />

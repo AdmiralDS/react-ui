@@ -4,7 +4,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { InputStatus } from '#src/components/input/types';
 import { skeletonMixin } from '#src/components/input/Container';
 import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
-import { Label } from '#src/components/Label';
+import { AdditionalLabel, Label, MainLabel } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
 
@@ -103,6 +103,8 @@ export interface FieldOwnProps {
 
   /**  Имя поля формы */
   label?: React.ReactNode;
+  /**  Дополнительное имя поля формы */
+  additionalLabel?: React.ReactNode;
 
   /** Отображать лейбл в одну строчку с инпутом */
   displayInline?: boolean;
@@ -156,6 +158,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       status,
       extraText,
       label,
+      additionalLabel,
       required,
       disabled,
       id,
@@ -165,7 +168,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
     const [defaultID] = useState(uid());
     const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
 
-    const labelProps = { htmlFor: id ?? defaultID, children: label, required, disabled };
+    const labelProps = { htmlFor: id ?? defaultID, required, disabled };
 
     useEffect(() => {
       const onFocusIn = () => {
@@ -199,10 +202,13 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
         data-read-only={props.readOnly ? true : undefined}
         ref={refSetter(containerRef, ref)}
       >
-        {labelProps.children && (
+        {(label || additionalLabel) && (
           <LabelContainer>
             {skeleton && <SkeletonLabel />}
-            <StyledLabel $skeleton={skeleton} {...labelProps} />
+            <StyledLabel $skeleton={skeleton} {...labelProps}>
+              <MainLabel>{label}</MainLabel>
+              {additionalLabel && !displayInline && <AdditionalLabel>{additionalLabel}</AdditionalLabel>}
+            </StyledLabel>
           </LabelContainer>
         )}
         <ContentWrapper>
