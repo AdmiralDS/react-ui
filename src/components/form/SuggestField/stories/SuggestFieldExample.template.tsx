@@ -24,6 +24,7 @@ const OPTIONS = [
 export const SuggestFieldExampleTemplate = ({
   placeholder = 'Наберите несколько символов...',
   label = 'Поле ввода с вариантами подстановки значений',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -86,6 +87,7 @@ export const SuggestFieldExampleTemplate = ({
           isLoading={isLoading}
           placeholder={placeholder}
           label={label}
+          additionalLabel={additionalLabel}
         />
       </DisplayContainer>
     </ThemeProvider>
