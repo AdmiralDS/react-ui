@@ -13,6 +13,7 @@ const FormContainer = styled.form`
 
 export const DateFieldBaseTemplate = ({
   label = 'Label',
+  additionalLabel,
   placeholder,
   themeBorderKind,
   CSSCustomProps,
@@ -64,6 +65,7 @@ export const DateFieldBaseTemplate = ({
           placeholder={placeholderValue}
           dropContainerClassName="dropContainerClass"
           label={label}
+          additionalLabel={additionalLabel}
         />
         <DateField
           data-container-id="dateFieldIdTwo"
@@ -78,6 +80,14 @@ export const DateFieldBaseTemplate = ({
           id="date range 1"
           label="uncontrolled date range"
           placeholder={'Введите отрезок времени'}
+          dropContainerClassName="dropContainerClass"
+        />
+        <DateField
+          data-container-id="dateFieldIdFour"
+          required
+          label="uncontrolled input"
+          additionalLabel="add label"
+          id={'date 4'}
           dropContainerClassName="dropContainerClass"
         />
       </FormContainer>
