@@ -8,6 +8,7 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -45,6 +46,7 @@ export const PhoneInputFieldExampleTemplate = ({
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
         label={label}
+        additionalLabel={additionalLabel}
       />
     </ThemeProvider>
   );
