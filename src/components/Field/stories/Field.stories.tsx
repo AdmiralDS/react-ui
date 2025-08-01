@@ -32,6 +32,12 @@ export default {
     displayCharacterCounter: {
       control: { type: 'boolean' },
     },
+    label: {
+      control: { type: 'text' },
+    },
+    additionalLabel: {
+      control: { type: 'text' },
+    },
     extraText: {
       control: { type: 'text' },
     },
