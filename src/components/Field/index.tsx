@@ -4,7 +4,7 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 import type { InputStatus } from '#src/components/input/types';
 import { skeletonMixin } from '#src/components/input/Container';
 import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounter';
-import { Label } from '#src/components/Label';
+import { AdditionalLabel, Label, MainLabel } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
 
@@ -50,15 +50,6 @@ const textSkeletonMixin = css`
 
 const StyledLabel = styled(Label)<{ $skeleton?: boolean }>`
   ${(p) => p.$skeleton && textSkeletonMixin};
-
-  display: flex;
-  justify-content: space-between;
-`;
-const MainLabel = styled.div`
-  text-align: left;
-`;
-const AddLabel = styled.div`
-  text-align: right;
 `;
 
 const containerSkeletonMixin = css`
@@ -216,7 +207,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
             {skeleton && <SkeletonLabel />}
             <StyledLabel $skeleton={skeleton} {...labelProps}>
               <MainLabel>{label}</MainLabel>
-              {additionalLabel && !displayInline && <AddLabel>{additionalLabel}</AddLabel>}
+              {additionalLabel && !displayInline && <AdditionalLabel>{additionalLabel}</AdditionalLabel>}
             </StyledLabel>
           </LabelContainer>
         )}
