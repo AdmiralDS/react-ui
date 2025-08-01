@@ -10,6 +10,7 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 export const FileInputFieldRequiredTemplate = ({
   dimension = 'xl',
   label = 'Обязательно для заполнения',
+  additionalLabel = 'дополнительная информация',
   required = true,
   themeBorderKind,
   CSSCustomProps,
@@ -125,6 +126,7 @@ export const FileInputFieldRequiredTemplate = ({
           status={status}
           extraText={extraText}
           label={label}
+          additionalLabel={additionalLabel}
           required={required}
         >
           {renderFileList()}
