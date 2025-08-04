@@ -57,6 +57,12 @@ export interface DropContainerStyles {
 }
 export interface DropContainerProps {
   /**
+   * Отключает автоматическую установку фокуса на компонент при его монтировании.
+   * Если `true`, компонент не будет автоматически фокусироваться при монтировании.
+   * @default false
+   */
+  disableAutoFocus?: boolean;
+  /**
    *  Позволяет обработать событие возникшее при клике вне компонента и его детей, включая другие DropContainer
    */
   onClickOutside?: (e: Event) => void;
@@ -71,14 +77,25 @@ export interface DropdownContainerProps
 }
 const doNothing = () => null;
 export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<DropdownContainerProps>>(
-  ({ targetElement, onClickOutside = doNothing, className = '', alignSelf, dropContainerCssMixin, ...props }, ref) => {
+  (
+    {
+      targetElement,
+      onClickOutside = doNothing,
+      className = '',
+      alignSelf,
+      dropContainerCssMixin,
+      disableAutoFocus,
+      ...props
+    },
+    ref,
+  ) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [displayUpward, setDisplayUpward] = useState(false);
 
     const { rootRef } = useContext(DropdownContext);
 
     useLayoutEffect(() => {
-      if (containerRef.current !== document.activeElement) {
+      if (containerRef.current !== document.activeElement && !disableAutoFocus) {
         containerRef?.current?.focus();
       }
     }, []);

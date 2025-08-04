@@ -915,6 +915,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
+            disableAutoFocus
             {...dropContainerProps}
           >
             <StyledMenu
@@ -935,6 +936,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               preselected={preselected}
               onPreselectItem={setPreseleceted}
               onMenuKeyDown={handleMenuKeyDown}
+              disableSelectionOnSpace={mode === 'searchSelect'}
               {...menuProps}
             />
           </DropdownContainer>
