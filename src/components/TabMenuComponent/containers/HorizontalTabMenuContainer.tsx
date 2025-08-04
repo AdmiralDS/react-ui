@@ -16,6 +16,5 @@ export const HorizontalTabMenuContainer = styled.div<{ $showUnderline?: boolean;
         ? `var(--admiral-color-Neutral_Neutral20, ${p.theme.color['Neutral/Neutral 20']})`
         : 'transparent'};
   overflow: hidden;
-  min-width: fit-content;
 `;
 HorizontalTabMenuContainer.displayName = 'HorizontalTabMenuContainer';

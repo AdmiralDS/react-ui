@@ -12,6 +12,9 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
 `;
+const StyledHorizontalTabMenuContainer = styled(HorizontalTabMenuContainer)`
+  min-width: fit-content;
+`;
 
 export const TabMenuHorizontalAdaptiveFill = ({
   appearance = 'primary',
@@ -97,13 +100,13 @@ export const TabMenuHorizontalAdaptiveFill = ({
 
   return (
     <Wrapper {...props}>
-      <HorizontalTabMenuContainer
+      <StyledHorizontalTabMenuContainer
         ref={containerRef}
         $showUnderline={showUnderline}
         $showActiveTabSelector={showActiveTabSelector}
       >
         {horizontalTabs}
-      </HorizontalTabMenuContainer>
+      </StyledHorizontalTabMenuContainer>
       {showActiveTabSelector && (
         <ActiveHorizontalTabSelector
           $appearance={appearance}
