@@ -108,6 +108,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       icon = SearchOutlineSVG,
       skeleton = false,
       status,
+      showTooltip,
       highlightFormat,
       locale,
       dimension = 'm',
@@ -228,7 +229,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
         skeleton={skeleton}
         isLoading={isLoading}
         dimension={dimension}
-        showTooltip={!isSuggestPanelOpen && !skeleton}
+        showTooltip={!isSuggestPanelOpen && !skeleton && showTooltip}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
           handleKeyDown(...p);
