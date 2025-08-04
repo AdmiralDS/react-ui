@@ -21,6 +21,7 @@ export const TextFieldInputTemplate = ({
     'heights.At breakpoint boundaries, mini units divide the screen into a fixed master ' +
     'grid, and multiples of mini units map to fluid grid column widths and row heights.',
   label = 'Label',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -43,6 +44,7 @@ export const TextFieldInputTemplate = ({
           autoHeight={true}
           onChange={handleChange}
           label={label}
+          additionalLabel={additionalLabel}
         />
         <TextField
           data-container-id="textFieldIdOne"
@@ -50,6 +52,7 @@ export const TextFieldInputTemplate = ({
           value={localValue}
           onChange={handleChange}
           label={label}
+          additionalLabel={additionalLabel}
         />
         <TextField data-container-id="textFieldIdTwo" required label="Поле необходимо заполнить" />
         <TextField data-container-id="textFieldIdThree" ref={fieldRef} label="Напишите сочинение на заданную тему" />

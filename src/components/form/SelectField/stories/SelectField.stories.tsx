@@ -11,6 +11,7 @@ import { SelectFieldExpandedHeightMultiSearchSelectTemplate } from './SelectFiel
 import { SelectFieldOptionGroupSearchSelectTemplate } from './SelectFieldOptionGroupSearchSelect.template';
 import { SelectFieldRenderPropsSearchSelectTemplate } from './SelectFieldRenderPropsSearchSelect.template';
 import { SelectFieldSimpleMultiSearchSelectTemplate } from './SelectFieldSimpleMultiSearchSelect.template';
+import { SelectFieldMultiSearchSelectWithCounterTemplate } from './SelectFieldMultiSearchSelectWithCounter.template';
 import { DataAttributesDescription } from '#src/components/form/common';
 
 // Imports of text sources
@@ -22,6 +23,7 @@ import SelectFieldExpandedHeightMultiSearchSelectRaw from './SelectFieldExpanded
 import SelectFieldOptionGroupSearchSelectRaw from './SelectFieldOptionGroupSearchSelect.template?raw';
 import SelectFieldRenderPropsSearchSelectRaw from './SelectFieldRenderPropsSearchSelect.template?raw';
 import SelectFieldSimpleMultiSearchSelectRaw from './SelectFieldSimpleMultiSearchSelect.template?raw';
+import SelectFieldMultiSearchSelectWithCounterRaw from './SelectFieldMultiSearchSelectWithCounter.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/SelectField',
@@ -164,6 +166,9 @@ export default {
       control: false,
     },
     label: {
+      control: { type: 'text' },
+    },
+    additionalLabel: {
       control: { type: 'text' },
     },
     extraText: {
@@ -342,3 +347,26 @@ export const CustomOptionMultiSearchSelect = {
 
   name: 'MultiSearchSelect с кастомными опциями',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="MultiSearchSelect с опцией лимитированного выбора">
+const MultiSearchSelectWithCounterStory: StoryFn<typeof SelectField> = (props) => (
+  <SelectFieldMultiSearchSelectWithCounterTemplate {...props} />
+);
+
+export const MultiSearchSelectWithCounter = {
+  render: MultiSearchSelectWithCounterStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectFieldMultiSearchSelectWithCounterRaw,
+      },
+    },
+  },
+
+  name: 'MultiSearchSelect с опцией лимитированного выбора',
+};
+
+//</editor-fold>

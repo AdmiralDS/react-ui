@@ -59,6 +59,10 @@ export default {
       control: { type: 'text' },
     },
 
+    additionalLabel: {
+      control: { type: 'text' },
+    },
+
     displayClearIcon: {
       control: { type: 'boolean' },
     },

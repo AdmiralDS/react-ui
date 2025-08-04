@@ -10,7 +10,7 @@ import {
   passFormFieldDataAttributes,
 } from '#src/components/common/utils/splitDataAttributes';
 
-export interface EditModeFieldProps extends EditModeProps, Omit<FieldOwnProps, 'inputRef'> {}
+export interface EditModeFieldProps extends EditModeProps, Omit<FieldOwnProps, 'inputRef' | 'additionalLabel'> {}
 
 export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldProps>((props, ref) => {
   const inputRef = React.useRef<HTMLInputElement>(null);

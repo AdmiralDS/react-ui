@@ -20,6 +20,7 @@ interface DateTimeFieldProps extends FieldProps {
 }
 
 export const DateTimeFieldBaseTemplate = ({
+  additionalLabel,
   label = 'Введите дату',
   dimension,
   status,
@@ -32,6 +33,7 @@ export const DateTimeFieldBaseTemplate = ({
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const fieldProps = {
     label,
+    additionalLabel,
     disabled,
     readOnly,
     skeleton,

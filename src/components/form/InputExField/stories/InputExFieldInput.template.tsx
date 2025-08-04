@@ -20,6 +20,7 @@ const SUFFIX_OPTIONS = ['suffix One', 'suffix Two', 'suffix Three'];
 export const InputExFieldInputTemplate = ({
   value = 'Привет',
   label = 'Label',
+  additionalLabel = 'Add label',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -49,6 +50,7 @@ export const InputExFieldInputTemplate = ({
           maxLength={50}
           displayCharacterCounter
           label={label}
+          additionalLabel={additionalLabel}
         />
         <InputExField
           data-container-id="InputExFieldIdTwo"
@@ -103,7 +105,12 @@ export const InputExFieldInputTemplate = ({
           displayClearIcon
           data-container-id="InputExFieldIdEight"
           prefixValue={'prefix'}
-          label="Поле иконкой очистки"
+          label="Поле с иконкой очистки"
+        />
+        <InputExField
+          data-container-id="InputExFieldIdNine"
+          prefixValue={'prefix'}
+          additionalLabel="Поле с дополнительным лейблом"
         />
       </DisplayContainer>
     </ThemeProvider>

@@ -36,6 +36,7 @@ export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
 
 export const MultiInputFieldPlaygroundTemplate = ({
   label = 'Label',
+  additionalLabel = 'Add label',
   extraText = 'extraText',
   themeBorderKind,
   displayClearIcon = true,
@@ -78,6 +79,7 @@ export const MultiInputFieldPlaygroundTemplate = ({
         data-container-id="MultiInputFieldId"
         {...props}
         label={label}
+        additionalLabel={additionalLabel}
         extraText={extraText}
         value={value}
         onInputComplete={handleKeyDown}

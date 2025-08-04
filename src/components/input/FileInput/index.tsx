@@ -47,10 +47,7 @@ const Icon = styled(AttachFileOutline)<{ $dimension?: FileInputDimension }>`
   }
 `;
 
-// TODO: удалить LabelM, Description при поднятии версии до новой мажорной
-const LabelM = styled(Label)`
-  display: flex;
-`;
+// TODO: удалить Description при поднятии версии до новой мажорной
 const Description = styled.div<{ disabled?: boolean }>`
   color: ${(p) =>
     p.disabled
@@ -197,7 +194,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     const titleWithoutDescription = (title && !description) || (title && description && dimension === 'xl');
 
     // TODO: удалить description, renderLabel, renderDescription, extraText, status при поднятии версии до новой мажорной
-    const renderLabel = () => <LabelM disabled={disabled} children={title} />;
+    const renderLabel = () => <Label disabled={disabled} children={title} />;
     const renderDescription = () => <Description disabled={disabled}>{description}</Description>;
 
     const renderTitleText = () => (

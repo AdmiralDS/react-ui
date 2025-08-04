@@ -90,6 +90,9 @@ export default {
     label: {
       control: { type: 'text' },
     },
+    additionalLabel: {
+      control: { type: 'text' },
+    },
     handleInput: {
       control: false,
     },
