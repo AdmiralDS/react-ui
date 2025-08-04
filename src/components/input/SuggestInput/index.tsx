@@ -65,8 +65,7 @@ export interface SuggestInputProps
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
-   * Взамен используйте параметры pageSizeDropContainerStyle.menuMaxHeight и
-   * pageNumberDropContainerStyle.menuMaxHeight.
+   * Взамен используйте menuMaxHeight.
    *
    * Задает максимальную высоту контейнера с опциями */
   dropMaxHeight?: string | number;
@@ -107,7 +106,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       iconsAfter,
       icon = SearchOutlineSVG,
       skeleton = false,
-      status,
+      showTooltip,
       highlightFormat,
       locale,
       dimension = 'm',
@@ -224,11 +223,10 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
         {...props}
         ref={refSetter(ref, inputRef)}
         iconsAfter={iconArray}
-        status={status}
         skeleton={skeleton}
         isLoading={isLoading}
         dimension={dimension}
-        showTooltip={!isSuggestPanelOpen && !skeleton}
+        showTooltip={!isSuggestPanelOpen && !skeleton && showTooltip}
         onKeyDown={(...p) => {
           props.onKeyDown?.(...p);
           handleKeyDown(...p);
