@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.53.0](https://github.com/AdmiralDS/react-ui/compare/v8.52.2...v8.53.0) (2025-08-05)
+
+
+### Features
+
+* **CheckboxField:** change extraTexts size in size S ([b903e5a](https://github.com/AdmiralDS/react-ui/commit/b903e5a8e17d639759c50964a82a3230eeeec22e))
+* **DateField:** добавлен additionalLabel ([e2d9d01](https://github.com/AdmiralDS/react-ui/commit/e2d9d01253da2e1f377f3666129b205d12024289))
+* **DateTimeField:** добавлены примеры с additionalLabel ([8ac20c4](https://github.com/AdmiralDS/react-ui/commit/8ac20c4da0e4340aff720f76619e44b4ebd6ec34))
+* **Field:** добавлен проп additionalLabel ([e0d4ba2](https://github.com/AdmiralDS/react-ui/commit/e0d4ba25ac1610c91c0d49cf0ebb9dccc8e520b7))
+* **FileInputField:** добавлен additionalLabel ([e28791e](https://github.com/AdmiralDS/react-ui/commit/e28791e5f7cf4b8172f9400f4456e308e63a15a3))
+* **InputExField:** добавлен additionalLabel ([2f0bb23](https://github.com/AdmiralDS/react-ui/commit/2f0bb23e75c74bf803389404c4cca533f1c43f5a))
+* **InputField:** добавлен additionalLabel ([29c46fa](https://github.com/AdmiralDS/react-ui/commit/29c46fa4462f81fa84069bad1f82b1aaf3ee5950))
+* **InputLine:** add containerPropsConfig ([927ab0d](https://github.com/AdmiralDS/react-ui/commit/927ab0d99c9ceed995057964d2376a44d539afdc))
+* **Label:** добавлена разбивка на основную и дополнительную часть внутри лейбла ([55e5c54](https://github.com/AdmiralDS/react-ui/commit/55e5c54b0d8ce3e80ba31199139ea858b7ed3293))
+* **MultiInputField:** добавлен additionalLabel ([194089a](https://github.com/AdmiralDS/react-ui/commit/194089a1e463cea46069b9856ac9c7b595f71b39))
+* **NumberInputField:** добавлен additionalLabel ([f4aa6bb](https://github.com/AdmiralDS/react-ui/commit/f4aa6bb9520fb78e3e79fba39dcc9ceb9ceb799c))
+* **PhoneInputField:** добавлен additionalLabel ([0cf466d](https://github.com/AdmiralDS/react-ui/commit/0cf466d7d0b18f89bab9601962cd57ad95c93344))
+* **RadioButton:** change extraTexts size in size S ([6eda9ce](https://github.com/AdmiralDS/react-ui/commit/6eda9ce213ff55035ccd1a5f836d3e581d7bacf1))
+* **SelectField:** добавлен additionalLabel ([069d443](https://github.com/AdmiralDS/react-ui/commit/069d4437657993d1f1fd9920a54a378093fdeed0))
+* **SliderInputField:** добавлен additionalLabel ([79f457b](https://github.com/AdmiralDS/react-ui/commit/79f457b5bcfdb1919285090c2b4bd1312b680d89))
+* **SliderRangeField:** добавлен additionalLabel ([045b940](https://github.com/AdmiralDS/react-ui/commit/045b940759671eb9f0db49e1317f4dc578162536))
+* **SuggestField:** добавлен additionalLabel ([cdf42fd](https://github.com/AdmiralDS/react-ui/commit/cdf42fd475b12dfed41780bcd786cfe1950b8517))
+* **TextField:** добавлен additionalLabel ([397f836](https://github.com/AdmiralDS/react-ui/commit/397f836bbdadb1b6b1da1833e5172564a2d83b31))
+* **TimeField:** добавлен additionalLabel ([031bb0b](https://github.com/AdmiralDS/react-ui/commit/031bb0b7c59734382d3812030800dc9a6b8bf2df))
+* **Toggle:** change extraTexts size in size S ([9566ee5](https://github.com/AdmiralDS/react-ui/commit/9566ee5d26dd99aaf24f58e57e9f7817eb361f01))
+* **TreeSelectField:** добавлен additionalLabel ([1f3c994](https://github.com/AdmiralDS/react-ui/commit/1f3c994a4109b2359b726b82107512fd4de203c2))
+
+
+### Bug Fixes
+
+* **HorizontalTabMenuContainer:** исправлен баг уменьшения ширины меню ([94379b7](https://github.com/AdmiralDS/react-ui/commit/94379b70d879c94d5b2f5d56b136ca6d503193f4))
+* **Menu:** Добавлена передача свойств maxHeight и rowCount в дочерние меню ([f7da798](https://github.com/AdmiralDS/react-ui/commit/f7da798dfa892215b960a1722ad43c18ab611ea0))
+* **select:** отключен перевод фокуса на dropdown и выбор опции пробелом в режиме searchSelect strictMode ([7731e19](https://github.com/AdmiralDS/react-ui/commit/7731e19cd7dcace83b14512408d794feabee8b50))
+* **SuggestInput:** pass showTooltip prop ([c433dee](https://github.com/AdmiralDS/react-ui/commit/c433dee19f90e0663e825a38ea9302e0e2d22a05))
+
 ### [8.52.2](https://github.com/AdmiralDS/react-ui/compare/v8.52.1...v8.52.2) (2025-06-25)
 
 
