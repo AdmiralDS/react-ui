@@ -86,7 +86,7 @@ export const TabMenuHorizontalWithOverflowMenu = ({
     onBackwardCycleApprove,
     onClickOutside,
   };
-  //<editor-fold desc="Управление шириной контейнера">
+  //#region "Управление шириной контейнера"
   const [containerWidth, setContainerWidth] = useState(0);
   const visibleContainerRef = useRef<HTMLDivElement>(null);
   const hiddenContainerRef = useRef<HTMLDivElement>(null);
@@ -103,9 +103,9 @@ export const TabMenuHorizontalWithOverflowMenu = ({
       };
     }
   }, [visibleContainerRef, dimension]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
@@ -203,9 +203,9 @@ export const TabMenuHorizontalWithOverflowMenu = ({
       };
     });
   }, [hiddenTabs, dimension]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
@@ -237,7 +237,7 @@ export const TabMenuHorizontalWithOverflowMenu = ({
 
     styleUnderline();
   }, [selectedTab, renderedVisibleTabs]);
-  //</editor-fold>
+  //#endregion
 
   return (
     <Wrapper {...props}>

@@ -32,7 +32,7 @@ export const TabMenuIcon = ({
   scrollStep = 160,
   ...props
 }: TabMenuIconProps) => {
-  //<editor-fold desc="Отображение и обработка кнопок прокурутки">
+  //#region "Отображение и обработка кнопок прокурутки"
   const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
   const [scrollingContainerLeft, setScrollingContainerLeft] = useState(0);
   const [scrolledToRight, setScrolledToRight] = useState(false);
@@ -65,9 +65,9 @@ export const TabMenuIcon = ({
     if (resValue === maxValue) setScrolledToRight(true);
     setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
   };
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
@@ -100,9 +100,9 @@ export const TabMenuIcon = ({
       };
     }
   }, [scrollingContainerRef, iconTabs]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
@@ -115,7 +115,7 @@ export const TabMenuIcon = ({
   useEffect(() => {
     styleUnderline();
   }, [selectedTab, tabWidthMap]);
-  //</editor-fold>
+  //#endregion
 
   return (
     <IconTabMenuWrapper {...props}>

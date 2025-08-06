@@ -50,7 +50,7 @@ export const TabMenuHorizontalAdaptiveFill = ({
     });
   }, [tabsId, renderTab]);
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   useLayoutEffect(() => {
     const setTabWidth = () => {
       if (containerRef.current) {
@@ -96,7 +96,7 @@ export const TabMenuHorizontalAdaptiveFill = ({
 
     styleUnderline();
   }, [selectedTab, horizontalTabs, tabWidthMap]);
-  //</editor-fold>
+  //#endregion
 
   return (
     <Wrapper {...props}>

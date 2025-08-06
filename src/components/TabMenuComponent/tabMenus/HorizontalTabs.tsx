@@ -16,7 +16,7 @@ export const HorizontalTabs = ({
   tabIsDisabled,
   ...props
 }: HorizontalTabsProps) => {
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
@@ -42,9 +42,9 @@ export const HorizontalTabs = ({
       setTabWidthMap(tabWidth);
     }
   }, [containerRef, horizontalTabs]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
@@ -57,7 +57,7 @@ export const HorizontalTabs = ({
   useEffect(() => {
     styleUnderline();
   }, [selectedTab, tabWidthMap]);
-  //</editor-fold>
+  //#endregion
 
   return (
     <HorizontalTabsContainer {...props} ref={containerRef} $showUnderline={showUnderline}>

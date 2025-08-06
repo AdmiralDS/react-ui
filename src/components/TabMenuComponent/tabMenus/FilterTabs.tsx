@@ -82,7 +82,7 @@ export const FilterTabs = ({
     }
   };
 
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const filterTabs = useMemo(() => {
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, handleSelectTab);

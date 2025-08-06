@@ -74,7 +74,7 @@ export const TabMenuVertical = ({
     onBackwardCycleApprove,
     onClickOutside,
   };
-  //<editor-fold desc="Управление высотой контейнера">
+  //#region "Управление высотой контейнера"
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerHeight, setContainerHeight] = useState(0);
   const [maxTabs, setMaxTabs] = useState(0);
@@ -104,9 +104,9 @@ export const TabMenuVertical = ({
       setMaxTabs(newMaxTabs);
     }
   }, [containerRef, containerHeight, dimension, tabsId]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const showAddTabButton = !!onAddTab;
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
@@ -177,9 +177,9 @@ export const TabMenuVertical = ({
       };
     });
   }, [hiddenTabs, dimension]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   const [underlineTop, setUnderlineTop] = useState(0);
   const [underlineHeight, setUnderlineHeight] = useState(0);
   const getUnderlinePosition = () => {
@@ -197,7 +197,7 @@ export const TabMenuVertical = ({
   useEffect(() => {
     styleUnderlineL();
   }, [selectedTab, renderedVisibleTabs]);
-  //</editor-fold>
+  //#endregion
 
   return (
     <Wrapper>
