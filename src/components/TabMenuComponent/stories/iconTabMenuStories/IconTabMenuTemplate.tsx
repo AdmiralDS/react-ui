@@ -58,6 +58,7 @@ const Wrapper = styled.div`
 
 export const IconTabMenuTemplate = ({
   showUnderline = true,
+  defaultSelectedTabId = '13',
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -69,7 +70,7 @@ export const IconTabMenuTemplate = ({
     return tabs.map((tab) => tab.tabId);
   }, [tabs]);
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>('3');
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(defaultSelectedTabId);
   const handleSelectTab = (tabId: string) => setSelectedTab(tabId);
 
   const tabIsDisabled = (tabId: string) => {
@@ -113,7 +114,7 @@ export const IconTabMenuTemplate = ({
           {...props}
           showUnderline={showUnderline}
           selectedTabId={selectedTab}
-          defaultSelectedTabId="3"
+          defaultSelectedTabId={defaultSelectedTabId}
           onSelectTab={handleSelectTab}
           tabsId={tabsMap}
           renderTab={renderTab}

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { debounce } from '#src/components/common/utils/debounce';
@@ -38,17 +38,6 @@ export const TabMenuIcon = ({
   const [scrolledToRight, setScrolledToRight] = useState(false);
   const [prevDisabled, setPrevDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
-
-  useLayoutEffect(() => {
-    if (!scrollingContainerRef.current) return;
-
-    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
-
-    setPrevDisabled(scrollingContainerLeft === 0);
-    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
-    setNextDisabled(newNextDisabled);
-    setScrolledToRight(newNextDisabled);
-  });
 
   const handleLeftClick = () => {
     if (scrolledToRight) setScrolledToRight(false);
@@ -116,6 +105,53 @@ export const TabMenuIcon = ({
     styleUnderline();
   }, [selectedTab, tabWidthMap]);
   //#endregion
+
+  // Вызываем только при монтировании
+  useEffect(() => {
+    // Добавляем небольшую задержку, чтобы дать время на рендеринг
+    const timer = setTimeout(() => {
+      if (!scrollingContainerRef.current || !selectedTab) return;
+
+      const container = scrollingContainerRef.current;
+      const parent = container.parentElement as HTMLDivElement;
+
+      const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
+      const currentSelectedTab = (
+        currentTabIndex >= 0 ? container.children[currentTabIndex] : null
+      ) as HTMLElement | null;
+
+      if (!currentSelectedTab) return;
+
+      const tabRect = currentSelectedTab.getBoundingClientRect();
+      const parentRect = parent.getBoundingClientRect();
+
+      // Проверяем, видна ли вкладка
+      const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
+
+      if (!isTabVisible) {
+        // Вычисляем необходимую позицию прокрутки
+        const scrollToPosition =
+          tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
+        setScrollingContainerLeft(scrollToPosition);
+      }
+      setPrevDisabled(scrollingContainerLeft === 0);
+      const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
+      setNextDisabled(newNextDisabled);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []); // Пустой массив зависимостей означает выполнение только при монтировании
+
+  useEffect(() => {
+    if (!scrollingContainerRef.current) return;
+
+    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
+
+    setPrevDisabled(scrollingContainerLeft === 0);
+    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
+    setNextDisabled(newNextDisabled);
+    setScrolledToRight(newNextDisabled);
+  });
 
   return (
     <IconTabMenuWrapper {...props}>
