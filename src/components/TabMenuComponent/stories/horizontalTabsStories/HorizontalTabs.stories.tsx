@@ -52,7 +52,7 @@ export default {
   },
 } as Meta<typeof HorizontalTabs>;
 
-//<editor-fold desc="HorizontalTabs.">
+//#region "HorizontalTabs."
 const HorizontalTabsStory: StoryFn<typeof HorizontalTabs> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <HorizontalTabsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -71,4 +71,4 @@ export const HorizontalTabsExample = {
 
   name: 'HorizontalTabs.',
 };
-//</editor-fold>
+//#endregion

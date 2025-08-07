@@ -94,7 +94,7 @@ export default {
   },
 } as Meta<typeof TabMenuHorizontal>;
 
-//<editor-fold desc="HorizontalTabMenu.">
+//#region "HorizontalTabMenu."
 const HorizontalTabMenuStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <TabMenuHorizontalTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -113,9 +113,9 @@ export const HorizontalTabMenuExample = {
 
   name: 'Горизонтальный вариант TabMenu.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalTabMenuWithAddButton.">
+//#region "HorizontalTabMenuWithAddButton."
 const HorizontalTabMenuWithAddButtonStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <TabMenuHorizontalWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -135,9 +135,9 @@ export const HorizontalTabMenuWithAddButtonExample = {
   name: 'Горизонтальный вариант TabMenu с возможностью добавления вкладок.',
 };
 
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalTabMenuSecondary.">
+//#region "HorizontalTabMenuSecondary."
 const TabMenuHorizontalSecondaryStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <TabMenuHorizontalSecondaryTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -156,9 +156,9 @@ export const HorizontalTabMenuSecondaryExample = {
 
   name: 'Горизонтальный вариант TabMenu со стилем secondary.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalTabMenuAdaptiveFill.">
+//#region "HorizontalTabMenuAdaptiveFill."
 const TabMenuHorizontalAdaptiveFillStory: StoryFn<typeof TabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <TabMenuHorizontalAdaptiveFillTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -177,4 +177,4 @@ export const HorizontalTabMenuAdaptiveFillExample = {
 
   name: 'Горизонтальный вариант TabMenu adaptive fill',
 };
-//</editor-fold>
+//#endregion

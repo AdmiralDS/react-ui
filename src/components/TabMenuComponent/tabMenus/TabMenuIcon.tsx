@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { debounce } from '#src/components/common/utils/debounce';
@@ -32,27 +32,20 @@ export const TabMenuIcon = ({
   scrollStep = 160,
   ...props
 }: TabMenuIconProps) => {
-  //<editor-fold desc="Отображение и обработка кнопок прокурутки">
+  //#region "Отображение и обработка кнопок прокурутки"
   const scrollingContainerRef = useRef<HTMLDivElement | null>(null);
   const [scrollingContainerLeft, setScrollingContainerLeft] = useState(0);
   const [scrolledToRight, setScrolledToRight] = useState(false);
   const [prevDisabled, setPrevDisabled] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(false);
 
-  useLayoutEffect(() => {
-    if (!scrollingContainerRef.current) return;
-
-    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
-
-    setPrevDisabled(scrollingContainerLeft === 0);
-    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
-    setNextDisabled(newNextDisabled);
-    setScrolledToRight(newNextDisabled);
-  });
-
   const handleLeftClick = () => {
     if (scrolledToRight) setScrolledToRight(false);
-    setScrollingContainerLeft((prev) => (prev - scrollStep < 0 ? 0 : prev - scrollStep));
+    setScrollingContainerLeft((prev) => {
+      const newLeft = prev - scrollStep < 0 ? 0 : prev - scrollStep;
+      console.log('newLeft ', newLeft);
+      return newLeft;
+    });
   };
   const handleRightClick = () => {
     if (!scrollingContainerRef.current) return;
@@ -65,9 +58,9 @@ export const TabMenuIcon = ({
     if (resValue === maxValue) setScrolledToRight(true);
     setScrollingContainerLeft(newValue > maxValue ? maxValue : newValue);
   };
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Создание табов для отрисовки">
+  //#region "Создание табов для отрисовки"
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
   const selectedTab = selectedTabId || selectedTabInner;
   const handleSelectTab = (tabId: string) => {
@@ -100,9 +93,9 @@ export const TabMenuIcon = ({
       };
     }
   }, [scrollingContainerRef, iconTabs]);
-  //</editor-fold>
+  //#endregion
 
-  //<editor-fold desc="Параметры для корректной отрисовки TabActiveUnderline">
+  //#region "Параметры для корректной отрисовки TabActiveUnderline"
   const [underlineLeft, setUnderlineLeft] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
 
@@ -115,7 +108,50 @@ export const TabMenuIcon = ({
   useEffect(() => {
     styleUnderline();
   }, [selectedTab, tabWidthMap]);
-  //</editor-fold>
+  //#endregion
+
+  //#region "Подкрутка на выбранную вкаладку. Вызываем только при монтировании"
+  useEffect(() => {
+    if (!scrollingContainerRef.current || !selectedTab) return;
+
+    const container = scrollingContainerRef.current;
+    const parent = container.parentElement as HTMLDivElement;
+
+    const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
+    const currentSelectedTab = (
+      currentTabIndex >= 0 ? container.children[currentTabIndex] : null
+    ) as HTMLElement | null;
+
+    if (!currentSelectedTab) return;
+
+    const tabRect = currentSelectedTab.getBoundingClientRect();
+    const parentRect = parent.getBoundingClientRect();
+
+    // Проверяем, видна ли вкладка
+    const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
+
+    if (!isTabVisible) {
+      // Вычисляем необходимую позицию прокрутки
+      const scrollToPosition =
+        tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
+
+      const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
+      const resValue = scrollToPosition > maxValue ? maxValue : scrollToPosition;
+      setScrollingContainerLeft(resValue);
+    }
+  }, []); // Пустой массив зависимостей означает выполнение только при монтировании
+  //#endregion
+
+  useEffect(() => {
+    if (!scrollingContainerRef.current) return;
+
+    const parent = scrollingContainerRef.current.parentElement as HTMLDivElement;
+
+    setPrevDisabled(scrollingContainerLeft === 0);
+    const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
+    setNextDisabled(newNextDisabled);
+    setScrolledToRight(newNextDisabled);
+  });
 
   return (
     <IconTabMenuWrapper {...props}>
