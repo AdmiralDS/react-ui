@@ -41,7 +41,11 @@ export const TabMenuIcon = ({
 
   const handleLeftClick = () => {
     if (scrolledToRight) setScrolledToRight(false);
-    setScrollingContainerLeft((prev) => (prev - scrollStep < 0 ? 0 : prev - scrollStep));
+    setScrollingContainerLeft((prev) => {
+      const newLeft = prev - scrollStep < 0 ? 0 : prev - scrollStep;
+      console.log('newLeft ', newLeft);
+      return newLeft;
+    });
   };
   const handleRightClick = () => {
     if (!scrollingContainerRef.current) return;
@@ -106,41 +110,37 @@ export const TabMenuIcon = ({
   }, [selectedTab, tabWidthMap]);
   //#endregion
 
-  // Вызываем только при монтировании
+  //#region "Подкрутка на выбранную вкаладку. Вызываем только при монтировании"
   useEffect(() => {
-    // Добавляем небольшую задержку, чтобы дать время на рендеринг
-    const timer = setTimeout(() => {
-      if (!scrollingContainerRef.current || !selectedTab) return;
+    if (!scrollingContainerRef.current || !selectedTab) return;
 
-      const container = scrollingContainerRef.current;
-      const parent = container.parentElement as HTMLDivElement;
+    const container = scrollingContainerRef.current;
+    const parent = container.parentElement as HTMLDivElement;
 
-      const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
-      const currentSelectedTab = (
-        currentTabIndex >= 0 ? container.children[currentTabIndex] : null
-      ) as HTMLElement | null;
+    const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
+    const currentSelectedTab = (
+      currentTabIndex >= 0 ? container.children[currentTabIndex] : null
+    ) as HTMLElement | null;
 
-      if (!currentSelectedTab) return;
+    if (!currentSelectedTab) return;
 
-      const tabRect = currentSelectedTab.getBoundingClientRect();
-      const parentRect = parent.getBoundingClientRect();
+    const tabRect = currentSelectedTab.getBoundingClientRect();
+    const parentRect = parent.getBoundingClientRect();
 
-      // Проверяем, видна ли вкладка
-      const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
+    // Проверяем, видна ли вкладка
+    const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
 
-      if (!isTabVisible) {
-        // Вычисляем необходимую позицию прокрутки
-        const scrollToPosition =
-          tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
-        setScrollingContainerLeft(scrollToPosition);
-      }
-      setPrevDisabled(scrollingContainerLeft === 0);
-      const newNextDisabled = scrollingContainerLeft + parent.clientWidth >= scrollingContainerRef.current.scrollWidth;
-      setNextDisabled(newNextDisabled);
-    }, 100);
+    if (!isTabVisible) {
+      // Вычисляем необходимую позицию прокрутки
+      const scrollToPosition =
+        tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
 
-    return () => clearTimeout(timer);
+      const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
+      const resValue = scrollToPosition > maxValue ? maxValue : scrollToPosition;
+      setScrollingContainerLeft(resValue);
+    }
   }, []); // Пустой массив зависимостей означает выполнение только при монтировании
+  //#endregion
 
   useEffect(() => {
     if (!scrollingContainerRef.current) return;
