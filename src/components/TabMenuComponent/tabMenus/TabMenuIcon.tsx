@@ -110,36 +110,40 @@ export const TabMenuIcon = ({
   }, [selectedTab, tabWidthMap]);
   //#endregion
 
-  //#region "Подкрутка на выбранную вкаладку. Вызываем только при монтировании"
+  //#region "Подкрутка на выбранную вкаладку"
   useEffect(() => {
-    if (!scrollingContainerRef.current || !selectedTab) return;
+    const timer = setTimeout(() => {
+      if (!scrollingContainerRef.current || !selectedTab) return;
 
-    const container = scrollingContainerRef.current;
-    const parent = container.parentElement as HTMLDivElement;
+      const container = scrollingContainerRef.current;
+      const parent = container.parentElement as HTMLDivElement;
 
-    const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
-    const currentSelectedTab = (
-      currentTabIndex >= 0 ? container.children[currentTabIndex] : null
-    ) as HTMLElement | null;
+      const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
+      const currentSelectedTab = (
+        currentTabIndex >= 0 ? container.children[currentTabIndex] : null
+      ) as HTMLElement | null;
 
-    if (!currentSelectedTab) return;
+      if (!currentSelectedTab) return;
 
-    const tabRect = currentSelectedTab.getBoundingClientRect();
-    const parentRect = parent.getBoundingClientRect();
+      const tabRect = currentSelectedTab.getBoundingClientRect();
+      const parentRect = parent.getBoundingClientRect();
 
-    // Проверяем, видна ли вкладка
-    const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
+      // Проверяем, видна ли вкладка
+      const isTabVisible = tabRect.left >= parentRect.left && tabRect.right <= parentRect.right;
 
-    if (!isTabVisible) {
-      // Вычисляем необходимую позицию прокрутки
-      const scrollToPosition =
-        tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
+      if (!isTabVisible) {
+        // Вычисляем необходимую позицию прокрутки
+        const scrollToPosition =
+          tabRect.left - parentRect.left + container.scrollLeft - (parentRect.width - tabRect.width) / 2;
 
-      const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
-      const resValue = scrollToPosition > maxValue ? maxValue : scrollToPosition;
-      setScrollingContainerLeft(resValue);
-    }
-  }, []); // Пустой массив зависимостей означает выполнение только при монтировании
+        const maxValue = scrollingContainerRef.current.scrollWidth - parent.clientWidth;
+        const resValue = scrollToPosition > maxValue ? maxValue : scrollToPosition;
+        setScrollingContainerLeft(resValue);
+      }
+    }, 100); // Таймаут 100 мс
+
+    return () => clearTimeout(timer);
+  }, [selectedTab]);
   //#endregion
 
   useEffect(() => {

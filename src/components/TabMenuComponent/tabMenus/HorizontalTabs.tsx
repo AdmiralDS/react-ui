@@ -61,32 +61,36 @@ export const HorizontalTabs = ({
 
   //#region "Проверка видимости выбранной вкладки и скролл при необходимости"
   useEffect(() => {
-    if (!containerRef.current || !selectedTab || !tabsId) return;
+    const timer = setTimeout(() => {
+      if (!containerRef.current || !selectedTab || !tabsId) return;
 
-    const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
-    const currentSelectedTab = (
-      currentTabIndex >= 0 ? containerRef.current.children[currentTabIndex] : null
-    ) as HTMLElement | null;
+      const currentTabIndex = tabsId.findIndex((tab) => tab === selectedTab);
+      const currentSelectedTab = (
+        currentTabIndex >= 0 ? containerRef.current.children[currentTabIndex] : null
+      ) as HTMLElement | null;
 
-    if (!currentSelectedTab) return;
+      if (!currentSelectedTab) return;
 
-    // Проверяем, видна ли вкладка
-    const isVisible = (element: HTMLElement) => {
-      const rect = element.getBoundingClientRect();
-      const containerRect = containerRef.current!.getBoundingClientRect();
+      // Проверяем, видна ли вкладка
+      const isVisible = (element: HTMLElement) => {
+        const rect = element.getBoundingClientRect();
+        const containerRect = containerRef.current!.getBoundingClientRect();
 
-      return rect.left >= containerRect.left && rect.right <= containerRect.right;
-    };
+        return rect.left >= containerRect.left && rect.right <= containerRect.right;
+      };
 
-    if (!isVisible(currentSelectedTab)) {
-      // Прокручиваем контейнер до выбранной вкладки
-      currentSelectedTab.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center',
-      });
-    }
-  }, []);
+      if (!isVisible(currentSelectedTab)) {
+        // Прокручиваем контейнер до выбранной вкладки
+        currentSelectedTab.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center',
+        });
+      }
+    }, 100); // Таймаут 100 мс
+
+    return () => clearTimeout(timer);
+  }, [selectedTab]);
   //#endregion
 
   return (
