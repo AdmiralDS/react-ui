@@ -98,39 +98,40 @@ export const FilterTabs = ({
   }, [tabsId, renderTab, selectedTab]);
 
   const handleScroll = (right: boolean) => {
-    if (!containerElementRef.current) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const scrollWidth = right
-      ? containerElementRef.current.scrollLeft - containerElementRef.current.clientWidth / 3
-      : containerElementRef.current.scrollLeft + containerElementRef.current.clientWidth / 3;
-    containerElementRef.current.scrollTo({
+      ? container.scrollLeft - container.clientWidth / 3
+      : container.scrollLeft + container.clientWidth / 3;
+    container.scrollTo({
       left: scrollWidth,
       behavior: 'smooth',
     });
   };
 
   useEffect(() => {
-    if (!containerElementRef.current || mobile) return;
+    const container = containerElementRef.current;
+    if (!container || mobile) return;
 
     const scrollSetVisible = () => {
-      const visibleLeft = containerElementRef.current!.scrollLeft > 10;
-      const visibleRight =
-        containerElementRef.current!.clientWidth + containerElementRef.current!.scrollLeft + 10 <
-        containerElementRef.current!.scrollWidth;
+      const visibleLeft = container.scrollLeft > 10;
+      const visibleRight = container.clientWidth + container.scrollLeft + 10 < container.scrollWidth;
 
       setVisibleLeftButton(visibleLeft);
       setVisibleRightButton(visibleRight);
     };
     scrollSetVisible();
 
-    containerElementRef.current.addEventListener('scroll', scrollSetVisible);
+    container.addEventListener('scroll', scrollSetVisible);
     return () => {
-      containerElementRef.current?.removeEventListener('scroll', scrollSetVisible);
+      container.removeEventListener('scroll', scrollSetVisible);
     };
-  }, [containerElementRef.current]);
+  }, [mobile]);
 
   useEffect(() => {
-    if (!containerElementRef.current) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const handleWheel = (event: WheelEvent) => {
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
@@ -140,29 +141,24 @@ export const FilterTabs = ({
       if (event.deltaMode == event.DOM_DELTA_PIXEL) {
         modifier = 1;
       } else if (event.deltaMode == event.DOM_DELTA_LINE) {
-        modifier = parseInt(getComputedStyle(containerElementRef.current!).lineHeight);
+        modifier = parseInt(getComputedStyle(container).lineHeight);
       } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
-        modifier = containerElementRef.current!.clientHeight;
+        modifier = container.clientHeight;
       }
       if (event.deltaY != 0) {
-        containerElementRef.current!.scrollLeft += modifier * event.deltaY;
+        container.scrollLeft += modifier * event.deltaY;
       }
-      if (containerElementRef.current!.scrollLeft === 0 && event.deltaY < 0) return;
-      if (
-        Math.round(containerElementRef.current!.scrollLeft) >=
-        containerElementRef.current!.scrollWidth - containerElementRef.current!.clientWidth
-      )
-        return;
+      if (container.scrollLeft === 0 && event.deltaY < 0) return;
+      if (Math.round(container.scrollLeft) >= container.scrollWidth - container.clientWidth) return;
 
       event.preventDefault();
     };
 
-    containerElementRef.current.addEventListener('wheel', handleWheel, { passive: false });
-
+    container.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      containerElementRef.current?.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('wheel', handleWheel);
     };
-  }, [containerElementRef.current]);
+  }, []);
 
   useEffect(() => {
     if (!drag || mobile) return;
@@ -175,23 +171,25 @@ export const FilterTabs = ({
     }
     globalThis.document.addEventListener('click', captureClick, true);
     return () => globalThis.document.removeEventListener('click', captureClick, true);
-  }, [drag]);
+  }, [drag, mobile]);
 
   useEffect(() => {
-    if (!isMouseDown || !containerElementRef.current || mobile) return;
+    if (!isMouseDown || mobile) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (e.movementX === 0) return;
 
       setDrag(true);
-      containerElementRef.current!.scrollLeft += -e.movementX;
+      container.scrollLeft += -e.movementX;
     };
 
     globalThis.document.addEventListener('mousemove', handleMouseMove);
     return () => {
       globalThis.document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isMouseDown, containerElementRef.current]);
+  }, [isMouseDown, mobile]);
 
   return (
     <Wrapper>
