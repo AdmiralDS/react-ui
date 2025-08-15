@@ -169,8 +169,8 @@ export const FilterTabs = ({
       setMouseDown(false);
       setDrag(false);
     }
-    globalThis.document.addEventListener('click', captureClick, true);
-    return () => globalThis.document.removeEventListener('click', captureClick, true);
+    document.addEventListener('click', captureClick, true);
+    return () => document.removeEventListener('click', captureClick, true);
   }, [drag, mobile]);
 
   useEffect(() => {
@@ -185,9 +185,9 @@ export const FilterTabs = ({
       container.scrollLeft += -e.movementX;
     };
 
-    globalThis.document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove);
     return () => {
-      globalThis.document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousemove', handleMouseMove);
     };
   }, [isMouseDown, mobile]);
 
