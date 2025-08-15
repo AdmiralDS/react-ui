@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { HorizontalTabsContainer } from '../containers';
 import type { FilterTabsProps } from '../types';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -15,22 +15,23 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const LeftButtonContainer = styled.div`
+const buttonContainerCommon = css`
   position: absolute;
-  left: 0;
   top: 0;
   bottom: 0;
-  padding-right: 4px;
   background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
+const LeftButtonContainer = styled.div`
+  ${buttonContainerCommon};
+  left: 0;
+  padding-right: 4px;
+`;
+
 const RightButtonContainer = styled.div`
-  position: absolute;
+  ${buttonContainerCommon};
   right: 0;
-  top: 0;
-  bottom: 0;
   padding-left: 4px;
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
 export const FilterTabs = ({
