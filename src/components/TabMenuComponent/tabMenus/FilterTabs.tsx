@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { useEffect, useMemo, useState, useRef } from 'react';
+import styled, { css } from 'styled-components';
 import { HorizontalTabsContainer } from '../containers';
 import type { FilterTabsProps } from '../types';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
@@ -15,22 +15,23 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const LeftButtonContainer = styled.div`
+const buttonContainerCommon = css`
   position: absolute;
-  left: 0;
   top: 0;
   bottom: 0;
-  padding-right: 4px;
   background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
+const LeftButtonContainer = styled.div`
+  ${buttonContainerCommon};
+  left: 0;
+  padding-right: 4px;
+`;
+
 const RightButtonContainer = styled.div`
-  position: absolute;
+  ${buttonContainerCommon};
   right: 0;
-  top: 0;
-  bottom: 0;
   padding-left: 4px;
-  background-color: ${(p) => p.theme.color['Neutral/Neutral 00']};
 `;
 
 export const FilterTabs = ({
@@ -48,7 +49,7 @@ export const FilterTabs = ({
   const [visibleRightButton, setVisibleRightButton] = useState(false);
   const [drag, setDrag] = useState(false);
   const [isMouseDown, setMouseDown] = useState(false);
-  const [containerElement, setContainerElement] = useState<HTMLElement | null>(null);
+  const containerElementRef = useRef<HTMLDivElement>(null);
   const [selectedTabInner, setSelectedTabInner] = useState<string | undefined>(defaultSelectedTabId);
 
   const buttonSize = dimension === 'm' ? FILTER_TAB_SIZE_M : FILTER_TAB_SIZE_S;
@@ -59,21 +60,29 @@ export const FilterTabs = ({
       setSelectedTabInner(tabId);
       onSelectTab?.(tabId);
 
-      if (!containerElement) return;
-      const elem = containerElement.querySelector(`[data-tabid="${tabId}"]`) as HTMLElement;
+      const container = containerElementRef.current;
+      if (!container) return;
+
+      const currentTabIndex = tabsId.findIndex((tab) => tab === tabId);
+      const currentSelectedTab = (
+        currentTabIndex >= 0 ? container.children[currentTabIndex] : null
+      ) as HTMLElement | null;
+
+      if (!currentSelectedTab) return;
 
       if (mobile) {
-        elem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        currentSelectedTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         const fullButtonWidth = buttonSize + 4;
-        const tabScrollToLeft = elem.offsetLeft - fullButtonWidth;
-        const tabScrollToRight = elem.offsetLeft + elem.clientWidth + fullButtonWidth - containerElement.clientWidth;
+        const tabScrollToLeft = currentSelectedTab.offsetLeft - fullButtonWidth;
+        const tabScrollToRight =
+          currentSelectedTab.offsetLeft + currentSelectedTab.clientWidth + fullButtonWidth - container.clientWidth;
 
-        if (containerElement.scrollLeft > tabScrollToLeft) {
-          containerElement.scrollTo({ left: tabScrollToLeft, behavior: 'smooth' });
+        if (container.scrollLeft > tabScrollToLeft) {
+          container.scrollTo({ left: tabScrollToLeft, behavior: 'smooth' });
         }
-        if (tabScrollToRight > containerElement.scrollLeft) {
-          containerElement.scrollTo({
+        if (tabScrollToRight > container.scrollLeft) {
+          container.scrollTo({
             left: tabScrollToRight,
             behavior: 'smooth',
           });
@@ -82,46 +91,47 @@ export const FilterTabs = ({
     }
   };
 
-  //#region "Создание табов для отрисовки"
   const filterTabs = useMemo(() => {
     return tabsId.map((tabId) => {
       return renderTab(tabId, tabId === selectedTab, handleSelectTab);
     });
-  }, [tabsId, renderTab, containerElement]);
+  }, [tabsId, renderTab, selectedTab]);
 
   const handleScroll = (right: boolean) => {
-    if (!containerElement) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const scrollWidth = right
-      ? containerElement.scrollLeft - containerElement.clientWidth / 3
-      : containerElement.scrollLeft + containerElement.clientWidth / 3;
-    containerElement.scrollTo({
+      ? container.scrollLeft - container.clientWidth / 3
+      : container.scrollLeft + container.clientWidth / 3;
+    container.scrollTo({
       left: scrollWidth,
       behavior: 'smooth',
     });
   };
 
   useEffect(() => {
-    if (!containerElement || mobile) return;
+    const container = containerElementRef.current;
+    if (!container || mobile) return;
 
     const scrollSetVisible = () => {
-      const visibleLeft = containerElement.scrollLeft > 10;
-      const visibleRight =
-        containerElement.clientWidth + containerElement.scrollLeft + 10 < containerElement.scrollWidth;
+      const visibleLeft = container.scrollLeft > 10;
+      const visibleRight = container.clientWidth + container.scrollLeft + 10 < container.scrollWidth;
 
       setVisibleLeftButton(visibleLeft);
       setVisibleRightButton(visibleRight);
     };
     scrollSetVisible();
 
-    containerElement.addEventListener('scroll', scrollSetVisible);
+    container.addEventListener('scroll', scrollSetVisible);
     return () => {
-      containerElement.removeEventListener('scroll', scrollSetVisible);
+      container.removeEventListener('scroll', scrollSetVisible);
     };
-  }, [containerElement]);
+  }, [mobile]);
 
   useEffect(() => {
-    if (!containerElement) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const handleWheel = (event: WheelEvent) => {
       if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
@@ -131,27 +141,24 @@ export const FilterTabs = ({
       if (event.deltaMode == event.DOM_DELTA_PIXEL) {
         modifier = 1;
       } else if (event.deltaMode == event.DOM_DELTA_LINE) {
-        modifier = parseInt(getComputedStyle(containerElement).lineHeight);
+        modifier = parseInt(getComputedStyle(container).lineHeight);
       } else if (event.deltaMode == event.DOM_DELTA_PAGE) {
-        modifier = containerElement.clientHeight;
+        modifier = container.clientHeight;
       }
       if (event.deltaY != 0) {
-        // замена вертикальной прокрутки горизонтальной
-        containerElement.scrollLeft += modifier * event.deltaY;
+        container.scrollLeft += modifier * event.deltaY;
       }
-      if (containerElement.scrollLeft === 0 && event.deltaY < 0) return;
-      if (Math.round(containerElement.scrollLeft) >= containerElement.scrollWidth - containerElement.clientWidth)
-        return;
+      if (container.scrollLeft === 0 && event.deltaY < 0) return;
+      if (Math.round(container.scrollLeft) >= container.scrollWidth - container.clientWidth) return;
 
       event.preventDefault();
     };
 
-    containerElement.addEventListener('wheel', handleWheel, { passive: false });
-
+    container.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      containerElement.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('wheel', handleWheel);
     };
-  }, [containerElement]);
+  }, []);
 
   useEffect(() => {
     if (!drag || mobile) return;
@@ -162,25 +169,27 @@ export const FilterTabs = ({
       setMouseDown(false);
       setDrag(false);
     }
-    globalThis.document.addEventListener('click', captureClick, true);
-    return () => globalThis.document.removeEventListener('click', captureClick, true);
-  }, [drag]);
+    document.addEventListener('click', captureClick, true);
+    return () => document.removeEventListener('click', captureClick, true);
+  }, [drag, mobile]);
 
   useEffect(() => {
-    if (!isMouseDown || !containerElement || mobile) return;
+    if (!isMouseDown || mobile) return;
+    const container = containerElementRef.current;
+    if (!container) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (e.movementX === 0) return;
 
       setDrag(true);
-      containerElement.scrollLeft += -e.movementX;
+      container.scrollLeft += -e.movementX;
     };
 
-    globalThis.document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousemove', handleMouseMove);
     return () => {
-      globalThis.document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isMouseDown, containerElement]);
+  }, [isMouseDown, mobile]);
 
   return (
     <Wrapper>
@@ -190,7 +199,7 @@ export const FilterTabs = ({
         }}
         onMouseUp={() => setMouseDown(false)}
         {...props}
-        ref={(node) => setContainerElement(node)}
+        ref={containerElementRef}
       >
         {filterTabs}
       </FilterTabsContainer>
