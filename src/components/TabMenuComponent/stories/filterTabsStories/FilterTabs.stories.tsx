@@ -81,7 +81,7 @@ export default {
   },
 } as Meta<typeof FilterTabs>;
 
-//<editor-fold desc="FilterTabs.">
+//#region "FilterTabs."
 const FilterTabsStory: StoryFn<typeof FilterTabs> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <FilterTabsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -100,9 +100,9 @@ export const FilterTabsTemplateExample = {
 
   name: 'FilterTabs.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="FilterTabs. Мобильная версия">
+//#region "FilterTabs. Мобильная версия"
 const FilterTabsMobileStory: StoryFn<typeof FilterTabs> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <FilterTabsMobileTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -121,4 +121,4 @@ export const FilterTabsMobileTemplateExample = {
 
   name: 'FilterTabs. Мобильная версия',
 };
-//</editor-fold>
+//#endregion

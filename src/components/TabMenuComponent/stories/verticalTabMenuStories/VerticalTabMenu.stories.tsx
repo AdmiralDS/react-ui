@@ -93,7 +93,7 @@ export default {
   },
 } as Meta<typeof TabMenuVertical>;
 
-//<editor-fold desc="VerticalTabMenu.">
+//#region "VerticalTabMenu."
 const VerticalTabMenuStory: StoryFn<typeof TabMenuVertical> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <VerticalTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -112,9 +112,9 @@ export const VerticalTabMenuExample = {
 
   name: 'Вертикальный вариант TabMenu.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="VerticalTabWithAddButtonMenu.">
+//#region "VerticalTabWithAddButtonMenu."
 const VerticalTabMenuWithAddButtonStory: StoryFn<typeof TabMenuVertical> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <VerticalTabMenuWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -133,9 +133,9 @@ export const VerticalTabMenuWithAddButtonExample = {
 
   name: 'Вертикальный вариант TabMenu с возможностью добавления вкладок.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="VerticalTabMenuSecondary.">
+//#region "VerticalTabMenuSecondary."
 const VerticalTabMenuSecondaryStory: StoryFn<typeof TabMenuVertical> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <VerticalTabMenuSecondaryTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -154,4 +154,4 @@ export const VerticalTabMenuSecondaryExample = {
 
   name: 'Вертикальный вариант TabMenu со стилем secondary.',
 };
-//</editor-fold>
+//#endregion

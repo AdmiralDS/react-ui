@@ -47,7 +47,7 @@ export default {
   },
 } as Meta<typeof TabMenuIcon>;
 
-//<editor-fold desc="IconTabMenu.">
+//#region "IconTabMenu."
 const IconTabMenuStory: StoryFn<typeof TabMenuIcon> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <IconTabMenuTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -66,4 +66,4 @@ export const IconTabMenuExample = {
 
   name: 'IconTabMenu.',
 };
-//</editor-fold>
+//#endregion

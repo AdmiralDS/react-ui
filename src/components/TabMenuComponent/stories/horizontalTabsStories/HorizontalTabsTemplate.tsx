@@ -79,7 +79,7 @@ const Wrapper = styled.div`
 export const HorizontalTabsTemplate = ({
   dimension = 'l',
   showUnderline = true,
-  defaultSelectedTabId = '3',
+  defaultSelectedTabId = '7',
   themeBorderKind,
   CSSCustomProps,
   ...props

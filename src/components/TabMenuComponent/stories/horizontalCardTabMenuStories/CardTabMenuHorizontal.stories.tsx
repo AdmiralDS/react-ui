@@ -95,7 +95,7 @@ export default {
   },
 } as Meta<typeof CardTabMenuHorizontal>;
 
-//<editor-fold desc="HorizontalCardTabMenu.">
+//#region "HorizontalCardTabMenu."
 const HorizontalCardTabMenuStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -114,9 +114,9 @@ export const HorizontalCardTabMenuExample = {
 
   name: 'CardTabMenu.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalCardTabMenuLeadingGap.">
+//#region "HorizontalCardTabMenuLeadingGap."
 const HorizontalCardTabMenuLeadingGapStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalLeadingGapTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -135,9 +135,9 @@ export const HorizontalCardTabMenuLeadingGapExample = {
 
   name: 'CardTabMenu с отступами.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalCardTabMenuWithAddButton.">
+//#region "HorizontalCardTabMenuWithAddButton."
 const HorizontalCardTabMenuWithAddButtonStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalWithAddButtonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -156,9 +156,9 @@ export const HorizontalCardTabMenuWithAddButtonExample = {
 
   name: 'CardTabMenu с возможностью добавления вкладок.',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalCardTabMenuWithoutBorder.">
+//#region "HorizontalCardTabMenuWithoutBorder."
 const CardTabMenuHorizontalWithoutBorderStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalWithoutBorderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -177,9 +177,9 @@ export const CardTabMenuHorizontalWithoutBorderExample = {
 
   name: 'CardTabMenu без обводки',
 };
-//</editor-fold>
+//#endregion
 
-//<editor-fold desc="HorizontalCardTabMenuAdaptiveFill.">
+//#region "HorizontalCardTabMenuAdaptiveFill."
 const CardTabMenuHorizontalAdaptiveFillStory: StoryFn<typeof CardTabMenuHorizontal> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <CardTabMenuHorizontalAdaptiveFillTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -198,4 +198,4 @@ export const CardTabMenuHorizontalAdaptiveFillExample = {
 
   name: 'CardTabMenu adaptive fill',
 };
-//</editor-fold>
+//#endregion
