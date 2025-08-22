@@ -138,12 +138,10 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
         setShouldTriggerClickOutside(true);
       }
 
-      document.addEventListener('mousedown', listener, true);
-      document.addEventListener('touchstart', listener, true);
+      document.addEventListener('pointerdown', listener, true);
 
       return () => {
-        document.removeEventListener('mousedown', listener, true);
-        document.removeEventListener('touchstart', listener, true);
+        document.removeEventListener('pointerdown', listener, true);
       };
     }, []);
 
@@ -152,12 +150,10 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
         onClickOutside(e);
       }
       if (shouldTriggerClickOutside) {
-        document.addEventListener('mouseup', listener);
-        document.addEventListener('touchend', listener);
+        document.addEventListener('pointerup', listener);
 
         return () => {
-          document.removeEventListener('mouseup', listener);
-          document.removeEventListener('touchend', listener);
+          document.removeEventListener('pointerup', listener);
         };
       }
     }, [shouldTriggerClickOutside]);
@@ -169,7 +165,7 @@ export const DropdownContainer = forwardRef<HTMLDivElement, PropsWithChildren<Dr
           targetElement={targetElement}
           $reverse={displayUpward}
           rootRef={rootRef}
-          onMouseDown={onMouseDownHandler}
+          onPointerDown={onMouseDownHandler}
         >
           <FakeTarget />
           <Container
