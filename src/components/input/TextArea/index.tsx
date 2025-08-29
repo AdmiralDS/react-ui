@@ -30,24 +30,24 @@ const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
 const verticalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
     case 'xl':
-      return 16;
+      return 14;
     case 'm':
-      return 8;
-    case 's':
       return 6;
+    case 's':
+      return 4;
     default:
-      return 8;
+      return 6;
   }
 };
 const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
     case 'xl':
     case 'm':
-      return 16;
+      return 14;
     case 's':
-      return 12;
+      return 10;
     default:
-      return 16;
+      return 14;
   }
 };
 
@@ -156,7 +156,6 @@ const textBlockStyleMixin = css<TextBlockProps>`
   border-radius: inherit;
   border: none;
   box-sizing: border-box;
-  margin: 0;
   padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   overflow-wrap: break-word;
 
@@ -165,14 +164,20 @@ const textBlockStyleMixin = css<TextBlockProps>`
   ${extraPadding}
 `;
 
-const Text = styled.textarea<ExtraProps>`
+const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: number; $maxHeight?: number }>`
   ${hideNativeScrollbarsCss}
+  margin: 2px;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  resize: none;
+  width: calc(100% - 4px); /* минус margin*2 */
+  height: calc(100% - 4px);
+
+  /* ограничиваем размеры для ручного ресайза и autoheight */
+  min-height: ${(p) => p.$minHeight}px;
+  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}px;` : '')}
+
+  resize: ${(p) => (p.$resizable && !p.$autoHeight ? 'vertical' : 'none')};
 
   flex: 1 1 auto;
   min-width: 10px;
@@ -242,9 +247,9 @@ const StyledContainer = styled(Container)<{
   $dimension: ComponentDimension;
   disabled?: boolean;
 }>`
-  min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension)}px;
-  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension)}px;` : '')}
-  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
+  min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension) + 4}px;
+  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension) + 4}px;` : '')}
+  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension) + 4}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
 
@@ -305,6 +310,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
   autoHeight?: boolean;
 
+  /** Включает возможность ручного изменения высоты textarea */
+  resizable?: boolean;
+
   /** Состояние skeleton */
   skeleton?: boolean;
 
@@ -346,6 +354,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       children,
       className,
       autoHeight,
+      resizable = false,
       skeleton = false,
       dimension = 'm',
       disableCopying,
@@ -443,64 +452,55 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput]);
 
-    // === AutoHeight через scrollHeight (без HiddenSpanContainer) + синхронизация рамки ===
+    const minHeight = textAreaHeight(rows, dimension);
+    const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : undefined;
+
+    // AutoHeight через scrollHeight (без HiddenSpanContainer) + синхронизация StyledContainer
     useLayoutEffect(() => {
-      if (!autoHeight || !inputRef.current || !localContainerRef.current) {
-        // сбрасываем инлайновую высоту, если autoHeight выключили
-        if (localContainerRef.current) localContainerRef.current.style.height = '';
-        if (inputRef.current) inputRef.current.style.overflowY = '';
-        return;
-      }
+      if (!inputRef.current || !localContainerRef.current) return;
 
       const node = inputRef.current;
       const container = localContainerRef.current;
-      let lastWidth = container.clientWidth;
 
-      const recalc = () => {
-        // временно даём textarea высоту "auto", чтобы получить естественный scrollHeight
-        const prevInlineHeight = node.style.height;
-        node.style.height = 'auto';
-        const natural = node.scrollHeight; // включает padding
-        const minH = textAreaHeight(rows, dimension);
-        const cappedByMin = Math.max(natural, minH);
-        const maxH = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
-        const finalH = Math.min(cappedByMin, maxH);
+      const recalcHeight = () => {
+        if (autoHeight) {
+          // авто-высота
+          const prevInlineHeight = node.style.height;
+          node.style.height = 'auto';
+          const natural = node.scrollHeight + 4;
+          const minHeight = textAreaHeight(rows, dimension);
+          const cappedByMin = Math.max(natural, minHeight);
+          const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
+          const finalHeight = Math.min(cappedByMin, maxHeight);
 
-        // высота контейнера = высоте textarea => рамка синхронизирована
-        container.style.height = `${finalH}px`;
-
-        // управляем вертикальным скроллом textarea
-        if (natural > maxH) {
-          node.style.overflowY = ''; // показываем скролл
+          container.style.height = `${finalHeight}px`;
+          if (natural > maxHeight) {
+            node.style.overflowY = '';
+          } else {
+            node.style.overflowY = 'hidden';
+          }
+          node.style.height = prevInlineHeight;
         } else {
-          node.style.overflowY = 'hidden';
+          // если ручной ресайз — просто синхронизируем высоту контейнера
+          container.style.height = `${node.offsetHeight + 4}px`;
         }
-
-        // возвращаем исходное inline-значение (пусть CSS `height: 100%` управляет)
-        node.style.height = prevInlineHeight;
       };
 
-      recalc();
+      recalcHeight();
 
-      const onInput = () => recalc();
+      const onInput = () => recalcHeight();
       node.addEventListener('input', onInput);
 
-      // пересчитываем при изменении ширины (переносы строк)
-      const ro = new ResizeObserver((entries) => {
-        const cr = entries[0]?.contentRect;
-        if (!cr) return;
-        if (Math.round(cr.width) !== lastWidth) {
-          lastWidth = Math.round(cr.width);
-          recalc();
-        }
-      });
-      ro.observe(container);
+      // следим за изменением ширины (для переносов строк) и за ручным ресайзом
+      const resizeObserver = new ResizeObserver(() => recalcHeight());
+      resizeObserver.observe(container);
+      resizeObserver.observe(node);
 
       return () => {
         node.removeEventListener('input', onInput);
-        ro.disconnect();
+        resizeObserver.disconnect();
       };
-    }, [autoHeight, rows, maxRows, dimension, inputData.value, props.defaultValue, iconCount]);
+    }, [autoHeight, resizable, rows, maxRows, dimension, inputData.value, props.defaultValue, iconCount]);
 
     return (
       <StyledContainer
@@ -525,6 +525,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
+          $autoHeight={autoHeight}
+          $resizable={resizable}
+          $minHeight={minHeight}
+          $maxHeight={maxHeight}
           value={inputData.value}
         />
         <BorderedDiv />
