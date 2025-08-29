@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { HTMLAttributes } from 'react';
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { type DataAttributes } from 'styled-components';
 
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import type { TextInputProps } from '../TextInput';
@@ -18,7 +18,7 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 
-export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
+export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps, DataAttributes {
   value: string;
 }
 
@@ -70,6 +70,12 @@ export interface TimeInputProps extends Omit<TextInputProps, 'value' | 'iconsBef
    * Принимает стандартные значения css свойства align-self (auto | flex-start | flex-end | center | baseline | stretch)
    **/
   alignDropdown?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Конфиг функция пропсов для кнопки с иконкой TimeOutline. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  timeInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
 }
 
 export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
@@ -91,6 +97,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      timeInputIconButtonPropsConfig = () => {},
       ...props
     },
     ref,
@@ -127,7 +134,15 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
 
     const iconArray = React.Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
-      iconArray.push(<InputIconButton icon={icon} onMouseDown={handleButtonClick} tabIndex={0} />);
+      const timeInputIconButtonProps = {
+        icon,
+        onMouseDown: handleButtonClick,
+        tabIndex: 0,
+      };
+
+      iconArray.push(
+        <InputIconButton {...timeInputIconButtonProps} {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)} />,
+      );
     }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {
@@ -184,21 +199,26 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
 
     const model = React.useMemo(() => {
       if (availableSlots) {
-        return availableSlots.map((slot, index) => ({
-          id: slot.value,
-          render: (options: RenderOptionProps) => (
-            <StyledMenuItem
-              key={index}
-              dimension={menuDimension}
-              data-dimension={dimension}
-              disabled={slot.disabled}
-              {...options}
-            >
-              {slot.value}
-            </StyledMenuItem>
-          ),
-          disabled: slot.disabled,
-        }));
+        return availableSlots.map((slot, index) => {
+          const { value, disabled, ...additionalProps } = slot;
+
+          return {
+            id: value,
+            render: (options: RenderOptionProps) => (
+              <StyledMenuItem
+                key={index}
+                dimension={menuDimension}
+                data-dimension={dimension}
+                disabled={disabled}
+                {...additionalProps}
+                {...options}
+              >
+                {value}
+              </StyledMenuItem>
+            ),
+            disabled: disabled,
+          };
+        });
       } else {
         return [];
       }

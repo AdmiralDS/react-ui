@@ -170,7 +170,17 @@ const IconPanelAfter = styled(IconPanel)`
   gap: 8px;
 `;
 
-export interface TimePickerProps extends Omit<TextInputProps, 'value' | 'iconsBefore' | 'icons'>, DropContainerStyles {
+export interface TimePickerProps
+  extends Omit<
+      TextInputProps,
+      | 'value'
+      | 'iconsBefore'
+      | 'icons'
+      | 'containerPropsConfig'
+      | 'clearInputIconButtonPropsConfig'
+      | 'visiblePasswordInputIconButtonPropsConfig'
+    >,
+    DropContainerStyles {
   /** Выбранное значение времени */
   value?: string;
   /** Начало временного диапазона */

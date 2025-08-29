@@ -48,7 +48,15 @@ const Input = styled(NumberInput)`
 // TODO: in next major version rename onChange to OLD_onChange deprecated method,
 // and create new native input onChange with event
 
-export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'isLoading'> {
+export interface SliderInputProps
+  extends Omit<
+    TextInputProps,
+    | 'onChange'
+    | 'isLoading'
+    | 'containerPropsConfig'
+    | 'clearInputIconButtonPropsConfig'
+    | 'visiblePasswordInputIconButtonPropsConfig'
+  > {
   /** Колбек на изменение значения компонента
    * (fullStr - строка вместе с префиксом/суффиксом/разделителями,
    * shortStr - строка только с числом без символа разделителя тысяч)
@@ -82,6 +90,14 @@ export interface SliderInputProps extends Omit<TextInputProps, 'onChange' | 'isL
   placeholder?: string;
   /** Стандартные html-атрибуты, которые будут переданы wrapper-контейнеру компонента */
   wrapperProps?: React.HTMLAttributes<HTMLDivElement>;
+
+  /** Конфиг функция пропсов для полосы в которой находится ползунок. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  thumbPropsConfig?: React.ComponentProps<typeof Slider>['thumbPropsConfig'];
+
+  /** Конфиг функция пропсов для ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  thumbCirclePropsConfig?: React.ComponentProps<typeof Slider>['thumbPropsConfig'];
 }
 
 export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
@@ -105,6 +121,8 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
       disabled,
       wrapperProps,
       skeleton = false,
+      thumbPropsConfig,
+      thumbCirclePropsConfig,
       ...props
     },
     ref,
@@ -203,6 +221,8 @@ export const SliderInput = forwardRef<HTMLInputElement, SliderInputProps>(
             step={step}
             disabled={disabled || props.readOnly}
             dimension={sliderDimension}
+            thumbPropsConfig={thumbPropsConfig}
+            thumbCirclePropsConfig={thumbCirclePropsConfig}
           />
         )}
       </Wrapper>

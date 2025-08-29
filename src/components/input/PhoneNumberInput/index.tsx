@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, type DataAttributes } from 'styled-components';
 
 import { changeInputData } from '#src/components/common/dom/changeInputData';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -109,6 +109,18 @@ export interface PhoneNumberInputProps
   defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
   onlyCountries?: Array<CountryAlpha3Code>;
+
+  /** Конфиг функция пропсов для контейнера, в котором находится инпут. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPhonePropsConfig?: (
+    props: React.ComponentProps<typeof PhoneContainer>,
+  ) => Partial<React.ComponentProps<typeof PhoneContainer>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки выбора страны. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  selectorCountryPropsConfig?: (
+    props: React.ComponentProps<typeof PhoneContainer>,
+  ) => Partial<React.ComponentProps<typeof PhoneContainer>> & DataAttributes;
 }
 
 const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
@@ -126,6 +138,8 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      containerPhonePropsConfig = () => {},
+      selectorCountryPropsConfig = () => {},
       ...props
     },
     ref,
@@ -320,8 +334,24 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
       props.onFocus?.(e);
     };
 
+    const containerPhoneProps = {
+      ref: containerRef,
+      $dimension: dimension,
+      disabled,
+      readOnly: props.readOnly,
+    };
+
+    const selectorCountryProps = {
+      $skeleton: skeleton,
+      $dimension: dimension,
+      $isOpened: isOpened,
+      disabled,
+      $isLoading: props.isLoading,
+      onClick: props.isLoading ? undefined : handleButtonClick,
+    };
+
     return (
-      <PhoneContainer ref={containerRef} $dimension={dimension} disabled={disabled} readOnly={props.readOnly}>
+      <PhoneContainer {...containerPhoneProps} {...containerPhonePropsConfig(containerPhoneProps)}>
         <TextInput
           {...props}
           type="tel"
@@ -361,14 +391,7 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
             </PhoneInputDropContainer>
           )}
         </TextInput>
-        <CountryContainer
-          $skeleton={skeleton}
-          $dimension={dimension}
-          $isOpened={isOpened}
-          disabled={disabled}
-          $isLoading={props.isLoading}
-          onClick={props.isLoading ? undefined : handleButtonClick}
-        >
+        <CountryContainer {...selectorCountryProps} {...selectorCountryPropsConfig(selectorCountryProps)}>
           <FlagContainer $dimension={dimension}>{IconComponent}</FlagContainer>
           {!props.readOnly && <Chevron disabled={disabled} />}
         </CountryContainer>

@@ -6,6 +6,7 @@ import { calcValue } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import { TickMarks } from './TickMarks';
 import { ThumbTooltip } from './ThumbTooltip';
+import type { DataAttributes } from 'styled-components';
 
 export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
@@ -42,7 +43,21 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   skeleton?: boolean;
   /** Отобразить подсказку (Tooltip) текущего значения */
   showTooltip?: boolean;
+
+  /** Конфиг функция пропсов для полосы в которой находится ползунок. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  thumbPropsConfig?: (
+    props: React.ComponentProps<typeof Thumb>,
+  ) => Partial<React.ComponentProps<typeof Thumb>> & DataAttributes;
+
+  /** Конфиг функция пропсов для ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  thumbCirclePropsConfig?: (
+    props: React.ComponentProps<typeof ThumbCircle>,
+  ) => Partial<React.ComponentProps<typeof ThumbCircle>> & DataAttributes;
 }
+
+const nothing = () => ({});
 
 export const Slider = ({
   minValue = 0,
@@ -59,6 +74,8 @@ export const Slider = ({
   dimension = 'xl',
   skeleton = false,
   showTooltip = false,
+  thumbPropsConfig = nothing,
+  thumbCirclePropsConfig = nothing,
   ...props
 }: SliderProps) => {
   const tickMarks = Array.isArray(points) ? points : undefined;
@@ -205,6 +222,24 @@ export const Slider = ({
     }
   };
 
+  const thumbProps = {
+    ref: (node: HTMLDivElement) => setThumb(node),
+    $animation: animation,
+    $dimension: dimension,
+    role: 'slider',
+    tabIndex: disabled ? -1 : 0,
+    'aria-valuenow': value,
+    'aria-valuemin': minValue,
+    'aria-valuemax': maxValue,
+    onKeyDown: handleKeyDown,
+  };
+
+  const thumbCircleProps = {
+    $dimension: dimension,
+    onTouchStart: onSliderClick,
+    onMouseDown: onSliderClick,
+  };
+
   return (
     <Wrapper data-disabled={disabled} $disabled={disabled} $skeleton={skeleton} {...props}>
       <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
@@ -223,18 +258,8 @@ export const Slider = ({
                 renderTickMark={renderTickMark}
               />
             }
-            <Thumb
-              ref={(node) => setThumb(node)}
-              $animation={animation}
-              $dimension={dimension}
-              role="slider"
-              tabIndex={disabled ? -1 : 0}
-              aria-valuenow={value}
-              aria-valuemin={minValue}
-              aria-valuemax={maxValue}
-              onKeyDown={handleKeyDown}
-            >
-              <ThumbCircle $dimension={dimension} onTouchStart={onSliderClick} onMouseDown={onSliderClick} />
+            <Thumb {...thumbProps} {...thumbPropsConfig(thumbProps)}>
+              <ThumbCircle {...thumbCircleProps} {...thumbCirclePropsConfig(thumbCircleProps)} />
             </Thumb>
             {showTooltip && <ThumbTooltip targetElement={thumb} value={value} isDraging={isDraging} />}
           </DefaultTrack>

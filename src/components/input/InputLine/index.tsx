@@ -78,6 +78,7 @@ export interface InputLineProps extends React.InputHTMLAttributes<HTMLInputEleme
   value?: string;
   prefix?: string;
   suffix?: string;
+
   /** Конфиг функция пропсов для контейнера. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   containerPropsConfig?: (

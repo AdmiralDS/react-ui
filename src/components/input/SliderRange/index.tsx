@@ -80,6 +80,14 @@ export interface SliderRangeProps
   skeleton?: boolean;
   /** Режим readOnly компонента */
   readOnly?: boolean;
+
+  /** Конфиг функция пропсов для первого ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  firstThumbCirclePropsConfig?: React.ComponentProps<typeof Range>['firstThumbCirclePropsConfig'];
+
+  /** Конфиг функция пропсов для первого ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  secondThumbCirclePropsConfig?: React.ComponentProps<typeof Range>['secondThumbCirclePropsConfig'];
 }
 
 export const SliderRange: React.FC<SliderRangeProps> = ({

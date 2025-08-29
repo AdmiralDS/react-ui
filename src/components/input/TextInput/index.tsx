@@ -1,6 +1,6 @@
 import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes } from 'react';
 import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, type DataAttributes } from 'styled-components';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
@@ -298,7 +298,27 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /** Отображение тултипа, по умолчанию true */
   showTooltip?: boolean;
+
+  /** Конфиг функция пропсов для контейнера в котором находится input. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof StyledContainer> & DataAttributes,
+  ) => Partial<React.ComponentProps<typeof StyledContainer>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки очистки поля. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки показать/скрыть значение при type="password". На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  visiblePasswordInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
 }
+
+const nothing = () => {};
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
@@ -320,6 +340,9 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       skeleton = false,
       showTooltip = true,
       disableCopying,
+      containerPropsConfig = nothing,
+      clearInputIconButtonPropsConfig = nothing,
+      visiblePasswordInputIconButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -371,33 +394,44 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     if (!props.readOnly && type === 'password') {
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
+
+      const visiblePasswordInputIconButtonProps = {
+        key: 'eye-icon',
+        icon: Icon,
+        onClick: () => {
+          setPasswordVisible(!isPasswordVisible);
+        },
+        'aria-hidden': true,
+      };
+
       iconAfterArray.push(
         <InputIconButton
-          icon={Icon}
-          key="eye-icon"
-          onClick={() => {
-            setPasswordVisible(!isPasswordVisible);
-          }}
-          aria-hidden
+          {...visiblePasswordInputIconButtonProps}
+          {...visiblePasswordInputIconButtonPropsConfig(visiblePasswordInputIconButtonProps)}
         />,
       );
     }
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
+      const clearInputIconButtonProps = {
+        key: 'clear-icon',
+        icon: CloseOutlineSvg,
+        onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+          // запрет на перемещение фокуса при клике по иконке
+          e.preventDefault();
+        },
+        onClick: () => {
+          if (inputRef.current) {
+            changeInputData(inputRef.current, { value: '' });
+          }
+        },
+        'aria-hidden': true,
+      };
+
       iconAfterArray.unshift(
         <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onMouseDown={(e) => {
-            // запрет на перемещение фокуса при клике по иконке
-            e.preventDefault();
-          }}
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
+          {...clearInputIconButtonProps}
+          {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
       );
     }
@@ -460,24 +494,26 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         return () => node.removeEventListener('select', select, true);
       }
     }, [disableCopying]);
+
+    const containerProps = {
+      className: className,
+      style: style,
+      $dimension: dimension,
+      ref: wrapperRef,
+      disabled: props.disabled,
+      readOnly: props.readOnly,
+      $isLoading: isLoading,
+      $status: status,
+      'data-disabled': props.disabled ? true : undefined,
+      'data-read-only': props.readOnly ? true : undefined,
+      'data-loading': isLoading ? true : undefined,
+      'data-status': status,
+      $skeleton: skeleton,
+      'data-disable-copying': disableCopying ? true : undefined,
+    };
     return (
       <>
-        <StyledContainer
-          className={className}
-          style={style}
-          $dimension={dimension}
-          ref={wrapperRef}
-          disabled={props.disabled}
-          readOnly={props.readOnly}
-          $isLoading={isLoading}
-          $status={status}
-          data-disabled={props.disabled ? true : undefined}
-          data-read-only={props.readOnly ? true : undefined}
-          data-loading={isLoading ? true : undefined}
-          data-status={status}
-          $skeleton={skeleton}
-          data-disable-copying={disableCopying ? true : undefined}
-        >
+        <StyledContainer {...containerProps} {...containerPropsConfig(containerProps)}>
           <Input
             ref={refSetter(ref, inputRef)}
             {...props}
