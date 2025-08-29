@@ -1,5 +1,5 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
-import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
+import { forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import type { DataAttributes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -165,15 +165,6 @@ const textBlockStyleMixin = css<TextBlockProps>`
   ${extraPadding}
 `;
 
-const HiddenSpanContainer = styled.div<TextBlockProps>`
-  ${hideNativeScrollbarsCss}
-  ${textBlockStyleMixin}
-
-  [data-disable-copying] & {
-    cursor: default;
-  }
-`;
-
 const Text = styled.textarea<ExtraProps>`
   ${hideNativeScrollbarsCss}
   position: absolute;
@@ -266,16 +257,6 @@ const CopyIconButton = forwardRef<HTMLDivElement, AnyIconProps>((props, ref) => 
 });
 const TooltipedInputIconButton = TooltipHoc(CopyIconButton);
 
-function toHtmlString(value?: string) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/(\r?\n)$/g, '<br /><br />')
-    .replace(/\r?\n/g, '<br /> ');
-}
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Максимальное количество символов для ввода */
   maxLength?: number;
@@ -377,8 +358,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const inputRef = useRef<HTMLTextAreaElement>(null);
+    const localContainerRef = useRef<HTMLDivElement>(null);
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
-    const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
     const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale]?.textArea?.copyTextMessage;
     const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale]?.textArea?.copiedMessage;
@@ -462,32 +443,69 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput]);
 
-    useEffect(() => {
-      function oninput(this: HTMLTextAreaElement) {
-        const { value } = this;
-        const hiddenDiv = hiddenDivRef.current;
-        if (hiddenDiv) {
-          hiddenDiv.innerHTML = toHtmlString(value);
-          this.style.overflowY = hiddenDiv.clientHeight < hiddenDiv.scrollHeight ? '' : 'hidden';
-        }
+    // === AutoHeight через scrollHeight (без HiddenSpanContainer) + синхронизация рамки ===
+    useLayoutEffect(() => {
+      if (!autoHeight || !inputRef.current || !localContainerRef.current) {
+        // сбрасываем инлайновую высоту, если autoHeight выключили
+        if (localContainerRef.current) localContainerRef.current.style.height = '';
+        if (inputRef.current) inputRef.current.style.overflowY = '';
+        return;
       }
 
-      if (autoHeight && inputRef.current && hiddenDivRef.current) {
-        const node = inputRef.current;
-        hiddenDivRef.current.innerHTML = toHtmlString(node.value);
-        node.addEventListener('input', oninput);
-        node.style.overflowY = hiddenDivRef.current.clientHeight < hiddenDivRef.current.scrollHeight ? '' : 'hidden';
-        return () => {
-          node.removeEventListener('input', oninput);
-          node.style.overflowY = '';
-        };
-      }
-    }, [autoHeight, inputData.value, props.defaultValue]);
+      const node = inputRef.current;
+      const container = localContainerRef.current;
+      let lastWidth = container.clientWidth;
+
+      const recalc = () => {
+        // временно даём textarea высоту "auto", чтобы получить естественный scrollHeight
+        const prevInlineHeight = node.style.height;
+        node.style.height = 'auto';
+        const natural = node.scrollHeight; // включает padding
+        const minH = textAreaHeight(rows, dimension);
+        const cappedByMin = Math.max(natural, minH);
+        const maxH = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
+        const finalH = Math.min(cappedByMin, maxH);
+
+        // высота контейнера = высоте textarea => рамка синхронизирована
+        container.style.height = `${finalH}px`;
+
+        // управляем вертикальным скроллом textarea
+        if (natural > maxH) {
+          node.style.overflowY = ''; // показываем скролл
+        } else {
+          node.style.overflowY = 'hidden';
+        }
+
+        // возвращаем исходное inline-значение (пусть CSS `height: 100%` управляет)
+        node.style.height = prevInlineHeight;
+      };
+
+      recalc();
+
+      const onInput = () => recalc();
+      node.addEventListener('input', onInput);
+
+      // пересчитываем при изменении ширины (переносы строк)
+      const ro = new ResizeObserver((entries) => {
+        const cr = entries[0]?.contentRect;
+        if (!cr) return;
+        if (Math.round(cr.width) !== lastWidth) {
+          lastWidth = Math.round(cr.width);
+          recalc();
+        }
+      });
+      ro.observe(container);
+
+      return () => {
+        node.removeEventListener('input', onInput);
+        ro.disconnect();
+      };
+    }, [autoHeight, rows, maxRows, dimension, inputData.value, props.defaultValue, iconCount]);
 
     return (
       <StyledContainer
         className={className}
-        ref={containerRef}
+        ref={refSetter(containerRef, localContainerRef)}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         $skeleton={skeleton}
@@ -501,18 +519,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <HiddenSpanContainer
-          ref={hiddenDivRef}
-          $dimension={dimension}
-          disabled={props.disabled}
-          $iconsAfterCount={iconCount}
-        />
+        {/* HiddenSpanContainer убран — авто-высота теперь через scrollHeight */}
         <Text
           ref={refSetter(ref, inputRef, (node) => setContentNode(node))}
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
-          $autoHeight={autoHeight}
           value={inputData.value}
         />
         <BorderedDiv />
