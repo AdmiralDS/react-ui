@@ -1,5 +1,5 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
-import { useEffect, forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
+import { forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import type { DataAttributes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -30,24 +30,24 @@ const iconSizeValue = (props: { $dimension?: ComponentDimension }) => {
 const verticalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
     case 'xl':
-      return 16;
+      return 14;
     case 'm':
-      return 8;
-    case 's':
       return 6;
+    case 's':
+      return 4;
     default:
-      return 8;
+      return 6;
   }
 };
 const horizontalPaddingValue = (props: { $dimension?: ComponentDimension }) => {
   switch (props.$dimension) {
     case 'xl':
     case 'm':
-      return 16;
+      return 14;
     case 's':
-      return 12;
+      return 10;
     default:
-      return 16;
+      return 14;
   }
 };
 
@@ -156,7 +156,6 @@ const textBlockStyleMixin = css<TextBlockProps>`
   border-radius: inherit;
   border: none;
   box-sizing: border-box;
-  margin: 0;
   padding: ${verticalPaddingValue}px ${horizontalPaddingValue}px;
   overflow-wrap: break-word;
 
@@ -165,23 +164,20 @@ const textBlockStyleMixin = css<TextBlockProps>`
   ${extraPadding}
 `;
 
-const HiddenSpanContainer = styled.div<TextBlockProps>`
+const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: number; $maxHeight?: number }>`
   ${hideNativeScrollbarsCss}
-  ${textBlockStyleMixin}
-
-  [data-disable-copying] & {
-    cursor: default;
-  }
-`;
-
-const Text = styled.textarea<ExtraProps>`
-  ${hideNativeScrollbarsCss}
+  margin: 2px;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  resize: none;
+  width: calc(100% - 4px); /* минус margin*2 */
+  height: calc(100% - 4px);
+
+  /* ограничиваем размеры для ручного ресайза и autoheight */
+  min-height: ${(p) => p.$minHeight}px;
+  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}px;` : '')}
+
+  resize: ${(p) => (p.$resizable && !p.$autoHeight ? 'vertical' : 'none')};
 
   flex: 1 1 auto;
   min-width: 10px;
@@ -251,9 +247,9 @@ const StyledContainer = styled(Container)<{
   $dimension: ComponentDimension;
   disabled?: boolean;
 }>`
-  min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension)}px;
-  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension)}px;` : '')}
-  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension)}px;`)}
+  min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension) + 4}px;
+  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension) + 4}px;` : '')}
+  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension) + 4}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
 
@@ -266,16 +262,6 @@ const CopyIconButton = forwardRef<HTMLDivElement, AnyIconProps>((props, ref) => 
 });
 const TooltipedInputIconButton = TooltipHoc(CopyIconButton);
 
-function toHtmlString(value?: string) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/(\r?\n)$/g, '<br /><br />')
-    .replace(/\r?\n/g, '<br /> ');
-}
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Максимальное количество символов для ввода */
   maxLength?: number;
@@ -324,6 +310,9 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
   autoHeight?: boolean;
 
+  /** Включает возможность ручного изменения высоты textarea */
+  resizable?: boolean;
+
   /** Состояние skeleton */
   skeleton?: boolean;
 
@@ -365,6 +354,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       children,
       className,
       autoHeight,
+      resizable = false,
       skeleton = false,
       dimension = 'm',
       disableCopying,
@@ -377,8 +367,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ) => {
     const theme = useTheme() || LIGHT_THEME;
     const inputRef = useRef<HTMLTextAreaElement>(null);
+    const localContainerRef = useRef<HTMLDivElement>(null);
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
-    const hiddenDivRef = useRef<HTMLDivElement>(null);
     const iconArray = Children.toArray(iconsAfter || icons);
     const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale]?.textArea?.copyTextMessage;
     const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale]?.textArea?.copiedMessage;
@@ -462,32 +452,60 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput]);
 
-    useEffect(() => {
-      function oninput(this: HTMLTextAreaElement) {
-        const { value } = this;
-        const hiddenDiv = hiddenDivRef.current;
-        if (hiddenDiv) {
-          hiddenDiv.innerHTML = toHtmlString(value);
-          this.style.overflowY = hiddenDiv.clientHeight < hiddenDiv.scrollHeight ? '' : 'hidden';
-        }
-      }
+    const minHeight = textAreaHeight(rows, dimension);
+    const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : undefined;
 
-      if (autoHeight && inputRef.current && hiddenDivRef.current) {
-        const node = inputRef.current;
-        hiddenDivRef.current.innerHTML = toHtmlString(node.value);
-        node.addEventListener('input', oninput);
-        node.style.overflowY = hiddenDivRef.current.clientHeight < hiddenDivRef.current.scrollHeight ? '' : 'hidden';
-        return () => {
-          node.removeEventListener('input', oninput);
-          node.style.overflowY = '';
-        };
-      }
-    }, [autoHeight, inputData.value, props.defaultValue]);
+    // AutoHeight через scrollHeight (без HiddenSpanContainer) + синхронизация StyledContainer
+    useLayoutEffect(() => {
+      if (!inputRef.current || !localContainerRef.current) return;
+
+      const node = inputRef.current;
+      const container = localContainerRef.current;
+
+      const recalcHeight = () => {
+        if (autoHeight) {
+          // авто-высота
+          const prevInlineHeight = node.style.height;
+          node.style.height = 'auto';
+          const natural = node.scrollHeight + 4;
+          const minHeight = textAreaHeight(rows, dimension);
+          const cappedByMin = Math.max(natural, minHeight);
+          const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
+          const finalHeight = Math.min(cappedByMin, maxHeight);
+
+          container.style.height = `${finalHeight}px`;
+          if (natural > maxHeight) {
+            node.style.overflowY = '';
+          } else {
+            node.style.overflowY = 'hidden';
+          }
+          node.style.height = prevInlineHeight;
+        } else {
+          // если ручной ресайз — просто синхронизируем высоту контейнера
+          container.style.height = `${node.offsetHeight + 4}px`;
+        }
+      };
+
+      recalcHeight();
+
+      const onInput = () => recalcHeight();
+      node.addEventListener('input', onInput);
+
+      // следим за изменением ширины (для переносов строк) и за ручным ресайзом
+      const resizeObserver = new ResizeObserver(() => recalcHeight());
+      resizeObserver.observe(container);
+      resizeObserver.observe(node);
+
+      return () => {
+        node.removeEventListener('input', onInput);
+        resizeObserver.disconnect();
+      };
+    }, [autoHeight, resizable, rows, maxRows, dimension, inputData.value, props.defaultValue, iconCount]);
 
     return (
       <StyledContainer
         className={className}
-        ref={containerRef}
+        ref={refSetter(containerRef, localContainerRef)}
         data-read-only={props.readOnly ? true : undefined}
         data-status={status}
         $skeleton={skeleton}
@@ -501,18 +519,16 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        <HiddenSpanContainer
-          ref={hiddenDivRef}
-          $dimension={dimension}
-          disabled={props.disabled}
-          $iconsAfterCount={iconCount}
-        />
+        {/* HiddenSpanContainer убран — авто-высота теперь через scrollHeight */}
         <Text
           ref={refSetter(ref, inputRef, (node) => setContentNode(node))}
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
           $autoHeight={autoHeight}
+          $resizable={resizable}
+          $minHeight={minHeight}
+          $maxHeight={maxHeight}
           value={inputData.value}
         />
         <BorderedDiv />
