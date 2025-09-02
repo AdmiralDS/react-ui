@@ -1,7 +1,7 @@
 import type { HTMLAttributes, KeyboardEvent, FunctionComponent, SVGProps } from 'react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import type { FileInputDimension } from '#src/components/input/FileInput';
-import styled, { css } from 'styled-components';
+import styled, { css, type DataAttributes } from 'styled-components';
 
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
 import { typography } from '#src/components/Typography';
@@ -247,7 +247,27 @@ export interface FileItemProps extends HTMLAttributes<HTMLDivElement>, FileAttri
   /** Позволяет назначать иконку файла */
   formatFileTypeIcon?: (type: string) => FunctionComponent<SVGProps<SVGSVGElement>>;
   children?: never;
+
+  /** Конфиг функция пропсов для кнопки "Закрыть". На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  closeButtonPropsConfig?: (
+    props: React.ComponentProps<typeof CloseButton>,
+  ) => Partial<React.ComponentProps<typeof CloseButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для контейнера с иконкой типа/превью загружаемого файла. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerIconPropsConfig?: (
+    props: React.ComponentProps<typeof IconWrapper>,
+  ) => Partial<React.ComponentProps<typeof IconWrapper>> & DataAttributes;
+
+  /** Конфиг функция пропсов для контейнера, в котором находится input. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof Container>,
+  ) => Partial<React.ComponentProps<typeof Container>> & DataAttributes;
 }
+
+const nothing = () => {};
 
 export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
   (
@@ -266,6 +286,9 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
       formatFileSizeInfo = formatFileSize,
       formatFileTypeInfo = formatFileType,
       formatFileTypeIcon = getFileTypeIcon,
+      closeButtonPropsConfig = nothing,
+      containerIconPropsConfig = nothing,
+      containerPropsConfig = nothing,
       ...props
     },
     ref,
@@ -321,18 +344,33 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
     };
     const disabled = status === 'Queue';
 
+    const closeButtonProps = {
+      dimension: dimension === 'xl' ? 'lSmall' : 'mSmall',
+      disabled,
+      onClick: handleCloseIconClick,
+    } as const;
+
+    const containerIconProps = {
+      $status: status,
+      $showHover: !!onPreviewIconClick,
+      onClick: handlePreviewIconClick,
+      onKeyDown: handleKeyDown,
+      tabIndex: onPreviewIconClick ? 0 : -1,
+    };
+
+    const containerProps = {
+      ref,
+      disabled,
+      $dimension: dimension,
+      $filesLayoutCssMixin: filesLayoutCssMixin,
+    };
+
     return (
-      <Container ref={ref} disabled={disabled} $dimension={dimension} $filesLayoutCssMixin={filesLayoutCssMixin}>
+      <Container {...containerProps} {...containerPropsConfig(containerProps)}>
         <PreviewWrapper {...props} ref={previewWrapperRef} $status={status} $dimension={dimension}>
           <FileInfoBlock $dimension={dimension}>
             {dimension === 'xl' && (
-              <IconWrapper
-                $status={status}
-                $showHover={!!onPreviewIconClick}
-                onClick={handlePreviewIconClick}
-                onKeyDown={handleKeyDown}
-                tabIndex={onPreviewIconClick ? 0 : -1}
-              >
+              <IconWrapper {...containerIconProps} {...containerIconPropsConfig(containerIconProps)}>
                 {previewImageURL ? (
                   <ImagePreview>
                     <img src={previewImageURL} alt={''} />
@@ -355,13 +393,7 @@ export const FileItem = forwardRef<HTMLDivElement, FileItemProps>(
           </FileInfoBlock>
           <FunctionalBlock>
             {status === 'Loading' && <StyledSpinner dimension={dimension === 'm' ? 'ms' : 'm'} />}
-            {onCloseIconClick && (
-              <CloseButton
-                dimension={dimension === 'xl' ? 'lSmall' : 'mSmall'}
-                disabled={disabled}
-                onClick={handleCloseIconClick}
-              />
-            )}
+            {onCloseIconClick && <CloseButton {...closeButtonProps} {...closeButtonPropsConfig(closeButtonProps)} />}
           </FunctionalBlock>
         </PreviewWrapper>
         {errorMessage && status === 'Error' && <ErrorBlock $status={status}>{errorMessage}</ErrorBlock>}

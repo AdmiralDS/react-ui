@@ -1,6 +1,6 @@
 import type { FunctionComponent, MouseEventHandler, KeyboardEvent, ReactNode, RefObject, SVGProps } from 'react';
 import { forwardRef, useEffect, useReducer, useRef, useState, useMemo, Children } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled, { useTheme, type DataAttributes } from 'styled-components';
 
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -86,6 +86,12 @@ export interface SuggestInputProps
     /** Текст сообщения при отсутствии вариантов для подстановки */
     emptyMessage?: ReactNode;
   };
+
+  /** Конфиг функция пропсов для кнопки "Поиск". На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  inputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
 }
 
 export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
@@ -112,6 +118,7 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       dimension = 'm',
       portalTargetRef,
       targetElement,
+      inputIconButtonPropsConfig = () => {},
       ...props
     },
     ref,
@@ -187,7 +194,11 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
     const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly) {
-      iconArray.push(<InputIconButton icon={icon} onClick={onSearchButtonClick} aria-hidden />);
+      const inputIconButtonProps = { icon: icon, onClick: onSearchButtonClick, 'aria-hidden': true };
+
+      iconArray.push(
+        <InputIconButton {...inputIconButtonProps} {...inputIconButtonPropsConfig(inputIconButtonProps)} />,
+      );
     }
 
     const emptyAtLoading: boolean = (options || []).length === 0 && !!isLoading;

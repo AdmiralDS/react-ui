@@ -1,6 +1,6 @@
 import type { ChangeEvent, MouseEvent, FocusEvent, KeyboardEvent } from 'react';
 import { useState, useRef, useEffect, forwardRef, Children, useMemo } from 'react';
-import styled, { css, useTheme } from 'styled-components';
+import styled, { css, useTheme, type DataAttributes } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { TextInputProps } from '#src/components/input/TextInput';
@@ -155,7 +155,33 @@ export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore' | '
   hideSpaceAfterPrefix?: boolean;
   /** Скрыть пробел перед суффиксом */
   hideSpaceBeforeSuffix?: boolean;
+
+  /** Конфиг функция пропсов для контейнера. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof Wrapper>,
+  ) => Partial<React.ComponentProps<typeof Wrapper>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки очистки поля. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки показать/скрыть значение при type="password". На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  plusInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки показать/скрыть значение при type="password". На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  minusInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
 }
+
+const nothing = () => {};
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (
@@ -185,6 +211,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       createInputHandler = createNumberInputHandler,
       handleInput,
       disableCopying,
+      containerPropsConfig = nothing,
+      clearInputIconButtonPropsConfig = nothing,
+      plusInputIconButtonPropsConfig = nothing,
+      minusInputIconButtonPropsConfig = nothing,
       ...props
     },
     ref,
@@ -238,36 +268,48 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     const iconArray = Children.toArray(iconsAfter || icons);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
+      const clearInputIconButtonProps = {
+        key: 'clear-icon',
+        icon: CloseOutlineSvg,
+        onClick: () => {
+          if (inputRef.current) {
+            changeInputData(inputRef.current, { value: '' });
+          }
+        },
+        'aria-hidden': true,
+      };
+
       iconArray.unshift(
         <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
+          {...clearInputIconButtonProps}
+          {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
       );
     }
 
     if (!props.readOnly && displayPlusMinusIcons) {
+      const minusInputIconButtonProps = {
+        key: 'minus-icon',
+        icon: MinusOutline,
+        onClick: props.disabled || minusDisabled ? undefined : handleMinus,
+        disabled: props.disabled || minusDisabled,
+        'aria-hidden': true,
+      };
+
+      const plusInputIconButtonProps = {
+        key: 'plus-icon',
+        icon: PlusOutline,
+        onClick: props.disabled || plusDisabled ? undefined : handlePlus,
+        disabled: props.disabled || plusDisabled,
+        'aria-hidden': true,
+      };
+
       iconArray.push(
         <PlusMinusIcon
-          icon={MinusOutline}
-          key="minus-icon"
-          onClick={props.disabled || minusDisabled ? undefined : handleMinus}
-          disabled={props.disabled || minusDisabled}
-          aria-hidden
+          {...minusInputIconButtonProps}
+          {...minusInputIconButtonPropsConfig(minusInputIconButtonProps)}
         />,
-        <PlusMinusIcon
-          icon={PlusOutline}
-          key="plus-icon"
-          onClick={props.disabled || plusDisabled ? undefined : handlePlus}
-          disabled={props.disabled || plusDisabled}
-          aria-hidden
-        />,
+        <PlusMinusIcon {...plusInputIconButtonProps} {...plusInputIconButtonPropsConfig(plusInputIconButtonProps)} />,
       );
     }
 
@@ -312,20 +354,22 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       [precision, decimal, thousand, minValue, maxValue, handleInput],
     );
 
+    const containerProps = {
+      ref: containerRef,
+      className,
+      style,
+      disabled: props.disabled,
+      $dimension: props.dimension,
+      readOnly: props.readOnly,
+      'data-read-only': props.readOnly ? true : undefined,
+      'data-disable-copying': disableCopying ? true : undefined,
+      onMouseDown: disableCopying ? preventDefault : undefined,
+      $skeleton: skeleton,
+      $status: status,
+    };
+
     return (
-      <Wrapper
-        ref={containerRef}
-        className={className}
-        style={style}
-        disabled={props.disabled}
-        $dimension={props.dimension}
-        readOnly={props.readOnly}
-        data-read-only={props.readOnly ? true : undefined}
-        data-disable-copying={disableCopying ? true : undefined}
-        onMouseDown={disableCopying ? preventDefault : undefined}
-        $skeleton={skeleton}
-        $status={status}
-      >
+      <Wrapper {...containerProps} {...containerPropsConfig(containerProps)}>
         <Content $dimension={props.dimension} $iconsAfterCount={iconCount} onKeyDown={handleKeyDown}>
           <AutoSizeInput
             ref={refSetter(ref, inputRef)}

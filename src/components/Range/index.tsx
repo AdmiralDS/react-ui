@@ -5,6 +5,7 @@ import { throttle } from '#src/components/common/utils/throttle';
 import type { NumberRange } from './utils';
 import { sortNum, calcValue, calcSliderCoords, arraysEqual } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
+import type { DataAttributes } from 'styled-components';
 
 export interface RangeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
@@ -27,7 +28,21 @@ export interface RangeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChan
   dimension?: 'm' | 's';
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** Конфиг функция пропсов для первого ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  firstThumbCirclePropsConfig?: (
+    props: React.ComponentProps<typeof ThumbCircle>,
+  ) => Partial<React.ComponentProps<typeof ThumbCircle>> & DataAttributes;
+
+  /** Конфиг функция пропсов для первого ползунка. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  secondThumbCirclePropsConfig?: (
+    props: React.ComponentProps<typeof ThumbCircle>,
+  ) => Partial<React.ComponentProps<typeof ThumbCircle>> & DataAttributes;
 }
+
+const nothing = () => ({});
 
 export const Range = ({
   minValue = 0,
@@ -39,6 +54,8 @@ export const Range = ({
   step = 1,
   dimension = 'm',
   skeleton = false,
+  firstThumbCirclePropsConfig = nothing,
+  secondThumbCirclePropsConfig = nothing,
   ...props
 }: RangeProps) => {
   const value: NumberRange =
@@ -205,6 +222,36 @@ export const Range = ({
     }
   };
 
+  const firstThumbCircleProps = {
+    $dimension: dimension,
+    onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      props.onTouchStart?.(e);
+      onSliderClick(e, 'first');
+    },
+    onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      props.onMouseDown?.(e);
+      onSliderClick(e, 'first');
+    },
+    $active: isDraging,
+  };
+
+  const secondThumbCircleProps = {
+    $dimension: dimension,
+    onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      props.onTouchStart?.(e);
+      onSliderClick(e, 'second');
+    },
+    onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      props.onMouseDown?.(e);
+      onSliderClick(e, 'second');
+    },
+    $active: isDraging2,
+  };
+
   return (
     <Wrapper data-disabled={disabled} $disabled={disabled} $skeleton={skeleton} {...props}>
       <TrackWrapper $dimension={dimension} $skeleton={skeleton} onTouchStart={onTrackClick} onMouseDown={onTrackClick}>
@@ -212,36 +259,10 @@ export const Range = ({
           <FilledTrack ref={filledRef} $animation={animation} />
           <DefaultTrack ref={trackRef}>
             <Thumb ref={sliderRef} $animation={animation} $dimension={dimension}>
-              <ThumbCircle
-                $dimension={dimension}
-                onTouchStart={(e) => {
-                  e.stopPropagation();
-                  props.onTouchStart?.(e);
-                  onSliderClick(e, 'first');
-                }}
-                onMouseDown={(e) => {
-                  e.stopPropagation();
-                  props.onMouseDown?.(e);
-                  onSliderClick(e, 'first');
-                }}
-                $active={isDraging}
-              />
+              <ThumbCircle {...firstThumbCircleProps} {...firstThumbCirclePropsConfig(firstThumbCircleProps)} />
             </Thumb>
             <Thumb ref={slider2Ref} $animation={animation} $dimension={dimension}>
-              <ThumbCircle
-                $dimension={dimension}
-                onTouchStart={(e) => {
-                  e.stopPropagation();
-                  props.onTouchStart?.(e);
-                  onSliderClick(e, 'second');
-                }}
-                onMouseDown={(e) => {
-                  e.stopPropagation();
-                  props.onMouseDown?.(e);
-                  onSliderClick(e, 'second');
-                }}
-                $active={isDraging2}
-              />
+              <ThumbCircle {...secondThumbCircleProps} {...secondThumbCirclePropsConfig(secondThumbCircleProps)} />
             </Thumb>
           </DefaultTrack>
         </Track>

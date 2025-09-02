@@ -1,6 +1,6 @@
 import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
 import type { ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, type DataAttributes } from 'styled-components';
 
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
@@ -203,8 +203,9 @@ export interface RenderProps {
   disabled?: boolean;
   readOnly?: boolean;
 }
+
 export interface InputExProps
-  extends Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix'>,
+  extends Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix' | 'containerPropsConfig'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
@@ -264,6 +265,18 @@ export interface InputExProps
   prefixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
   /** Позволяет добавлять стили и className для выпадающего меню кнопки настроек  */
   suffixDropContainerStyle?: Omit<DropMenuStyleProps, 'alignSelf'>;
+
+  /** Конфиг функция пропсов для кнопки очистки поля. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для контейнера в котором находится input. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof Container>,
+  ) => Partial<React.ComponentProps<typeof Container>> & DataAttributes;
 }
 
 export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
@@ -301,6 +314,8 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       prefixDropContainerStyle,
       suffixDropContainerStyle,
       showTooltip = true,
+      clearInputIconButtonPropsConfig = () => {},
+      containerPropsConfig = () => {},
       ...props
     },
     ref,
@@ -399,16 +414,21 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     const iconBeforeArray = Children.toArray(iconsBefore);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
+      const clearInputIconButtonProps = {
+        key: 'clear-icon',
+        icon: CloseOutlineSvg,
+        onClick: () => {
+          if (inputRef.current) {
+            changeInputData(inputRef.current, { value: '' });
+          }
+        },
+        'aria-hidden': true,
+      };
+
       iconAfterArray.unshift(
         <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
+          {...clearInputIconButtonProps}
+          {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
       );
     }
@@ -416,23 +436,25 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     const iconsAfterCount = iconAfterArray.length;
     const iconsBeforeCount = iconBeforeArray.length;
 
+    const containerProps = {
+      className,
+      style,
+      'data-disabled': props.disabled ? true : undefined,
+      $dimension: dimension,
+      ref: refSetter(innerContainerRef, containerRef),
+      'data-read-only': props.readOnly ? true : undefined,
+      'data-status': status,
+      'data-disable-copying': props.disableCopying ? true : undefined,
+      onMouseDown: props.disableCopying ? preventDefault : undefined,
+      $skeleton: skeleton,
+      $status: status,
+      disabled: props.disabled,
+      readOnly: props.readOnly,
+    };
+
     return (
       <>
-        <Container
-          className={className}
-          style={style}
-          data-disabled={props.disabled ? true : undefined}
-          $dimension={dimension}
-          ref={refSetter(innerContainerRef, containerRef)}
-          data-read-only={props.readOnly ? true : undefined}
-          data-status={status}
-          data-disable-copying={props.disableCopying ? true : undefined}
-          onMouseDown={props.disableCopying ? preventDefault : undefined}
-          $skeleton={skeleton}
-          $status={status}
-          disabled={props.disabled}
-          readOnly={props.readOnly}
-        >
+        <Container {...containerProps} {...containerPropsConfig(containerProps)}>
           {!!prefix && (
             <PrefixContainer $dimension={dimension} disabled={props.disabled}>
               {prefix}
