@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.54.0](https://github.com/AdmiralDS/react-ui/compare/v8.53.0...v8.54.0) (2025-09-03)
+
+
+### Features
+
+* add propsConfig for some components ([08cd38b](https://github.com/AdmiralDS/react-ui/commit/08cd38b174e6829054dda93200542007a2ea6926))
+* **TextArea:** добавлена возможность ручного ресайза по вертикали ([fd9ae54](https://github.com/AdmiralDS/react-ui/commit/fd9ae545c23a356b333d3c30c8f7e1916ef939b8))
+* **TextArea:** refactor autoheight property ([46ab89c](https://github.com/AdmiralDS/react-ui/commit/46ab89c3edd2b48a6016dc777173ccce056715cc))
+
+
+### Bug Fixes
+
+* **DropdownContainer:** добавлен обработчик события pointercancel ([12ccc4c](https://github.com/AdmiralDS/react-ui/commit/12ccc4c71ef913f343b68ccfa0f35cb21cb8749b))
+* **DropdownContainer:** Исправлена некорректная работа компонента на touch устройствах ([5eb8a0f](https://github.com/AdmiralDS/react-ui/commit/5eb8a0f3616c41c57a4cf00515628b90fe377b4a))
+* **HorizontalTabs:** добавлена прокрутка на выбранную по умолчанию вкладку ([6f31641](https://github.com/AdmiralDS/react-ui/commit/6f31641c7b8797f5f775627d82fc18c42eefda57))
+* **TabMenuIcon:** добавлена прокрутка на выбранную по умолчанию вкладку ([da5cd35](https://github.com/AdmiralDS/react-ui/commit/da5cd350f1c58faec4b362f9cada9ee62efb318a))
+
 ## [8.53.0](https://github.com/AdmiralDS/react-ui/compare/v8.52.2...v8.53.0) (2025-08-05)
 
 
