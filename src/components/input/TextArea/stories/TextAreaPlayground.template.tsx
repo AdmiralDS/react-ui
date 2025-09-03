@@ -27,6 +27,7 @@ export const TextAreaPlaygroundTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TextArea
         {...props}
+        id={'TextAreaPlayground'}
         value={localValue}
         onChange={handleChange}
         placeholder={placeholder}

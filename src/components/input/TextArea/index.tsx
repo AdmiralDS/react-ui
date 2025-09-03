@@ -166,6 +166,8 @@ const textBlockStyleMixin = css<TextBlockProps>`
 
 const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: number; $maxHeight?: number }>`
   ${hideNativeScrollbarsCss}
+  // Этот margin обеспечивает отступ в режиме resizable, предотвращая перекрытие drag handle border'ом,
+  // который создается с помощью BorderedDiv. Значение margin вычитается из padding.
   margin: 2px;
   position: absolute;
   top: 0;
@@ -465,7 +467,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       const recalcHeight = () => {
         if (autoHeight) {
           // авто-высота
-          const prevInlineHeight = node.style.height;
           node.style.height = 'auto';
           const natural = node.scrollHeight + 4;
           const minHeight = textAreaHeight(rows, dimension);
@@ -479,7 +480,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           } else {
             node.style.overflowY = 'hidden';
           }
-          node.style.height = prevInlineHeight;
+          node.style.height = '';
         } else {
           // если ручной ресайз — просто синхронизируем высоту контейнера
           container.style.height = `${node.offsetHeight + 4}px`;
@@ -519,7 +520,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onMouseDown: stopEvent,
         })}
       >
-        {/* HiddenSpanContainer убран — авто-высота теперь через scrollHeight */}
         <Text
           ref={refSetter(ref, inputRef, (node) => setContentNode(node))}
           {...props}
