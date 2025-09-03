@@ -6,7 +6,6 @@ dist-ssr
 *.log
 .idea
 storybook-static
-package-lock.json
 .npmrc
 admiral-ds-react-ui-*.tgz
 tsconfig.tsbuildinfo
