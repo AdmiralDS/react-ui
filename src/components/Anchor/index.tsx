@@ -31,6 +31,8 @@ export interface AnchorProps extends HTMLAttributes<HTMLDivElement> {
   items: Array<AnchorLinkItemProps>;
   /** Элемент для отслеживания скролла */
   getAnchorContainer?: () => HTMLElement | Window;
+  /** Вертикальный отступ между пунктами */
+  indent?: number;
 }
 
 function getDefaultContainer() {
@@ -61,7 +63,19 @@ const treeToFlat = (tree: Array<AnchorLinkItemProps>, level = 0, parent?: string
 };
 
 export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
-  ({ dimension = 'm', offsetTop = 0, bounds = 5, multilineView = false, items, getAnchorContainer, ...props }, ref) => {
+  (
+    {
+      dimension = 'm',
+      offsetTop = 0,
+      bounds = 5,
+      multilineView = false,
+      items,
+      getAnchorContainer,
+      indent = 0,
+      ...props
+    },
+    ref,
+  ) => {
     const getCurrentContainer = getAnchorContainer ?? getDefaultContainer;
     const itemsMap = useMemo(() => treeToFlat(items), [items]);
     // add refs to links
@@ -152,7 +166,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     };
 
     return (
-      <AnchorContainer {...props} ref={refSetter(ref, anchorContainerRef)}>
+      <AnchorContainer {...props} ref={refSetter(ref, anchorContainerRef)} $indent={indent}>
         {renderItems()}
         <ActiveVerticalSelector $top={selectorTop} $height={selectorHeight} $transition={true} />
       </AnchorContainer>
