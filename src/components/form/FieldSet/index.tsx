@@ -11,7 +11,8 @@ export const ALL_FIELDSET_DIMENSIONS_VALUES = ['m', 's'] as const;
 export type FieldSetDimension = (typeof ALL_FIELDSET_DIMENSIONS_VALUES)[number];
 
 const Legend = styled.legend<{ $dimension?: FieldSetDimension }>`
-  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
+  padding-inline: 0;
+  ${(props) => (props.$dimension === 's' ? typography['Body/Body 2 Long'] : typography['Body/Body 1 Long'])}
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   fieldset:disabled & {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
