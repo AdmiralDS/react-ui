@@ -32,7 +32,7 @@ export interface AnchorProps extends HTMLAttributes<HTMLDivElement> {
   /** Элемент для отслеживания скролла */
   getAnchorContainer?: () => HTMLElement | Window;
   /** Вертикальный отступ между пунктами */
-  indent?: number;
+  indentItems?: number;
 }
 
 function getDefaultContainer() {
@@ -71,7 +71,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
       multilineView = false,
       items,
       getAnchorContainer,
-      indent = 0,
+      indentItems = 0,
       ...props
     },
     ref,
@@ -166,7 +166,7 @@ export const Anchor = forwardRef<HTMLDivElement, AnchorProps>(
     };
 
     return (
-      <AnchorContainer {...props} ref={refSetter(ref, anchorContainerRef)} $indent={indent}>
+      <AnchorContainer {...props} ref={refSetter(ref, anchorContainerRef)} $indentItems={indentItems}>
         {renderItems()}
         <ActiveVerticalSelector $top={selectorTop} $height={selectorHeight} $transition={true} />
       </AnchorContainer>

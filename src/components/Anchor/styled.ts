@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AnchorContainer = styled.div<{ $indent?: number }>`
+export const AnchorContainer = styled.div<{ $indentItems: number }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -17,7 +17,7 @@ export const AnchorContainer = styled.div<{ $indent?: number }>`
   }
 
   > *:not(:last-child):not(:first-child) {
-    margin-top: ${({ $indent }) => `${$indent}px`};
+    margin-top: ${({ $indentItems }) => `${$indentItems}px`};
   }
 `;
 

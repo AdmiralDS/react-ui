@@ -58,7 +58,7 @@ export const AnchorWithIndentTemplate = (props: AnchorProps) => {
         {...props}
         getAnchorContainer={() => containerRef.current || window}
         items={AnchorItems}
-        indent={8}
+        indentItems={8}
       />
     </Wrapper>
   );
