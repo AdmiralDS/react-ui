@@ -11,7 +11,7 @@ export const CompositeWrapper = styled.div<{ $dimension: CheckboxDimension; disa
     display: flex;
     flex-flow: column;
     & > ${CheckboxGroupWrapper} {
-      padding-left: ${$dimension === 'm' ? 30 : 25}px;
+      padding-left: ${$dimension === 'm' ? 32 : 28}px;
     }
   `}
   ${styleTextMixin}

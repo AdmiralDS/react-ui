@@ -21,7 +21,7 @@ exports[`RadioButton should render component with disabled state 1`] = `
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 10px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -37,8 +37,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -84,6 +82,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 2px;
   width: 20px;
   height: 20px;
 }
@@ -91,6 +90,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -150,28 +150,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 2px 0 2px 2px;
   user-select: none;
   cursor: not-allowed;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
-  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
-  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
@@ -231,7 +212,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 10px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -247,8 +228,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -294,6 +273,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 2px;
   width: 20px;
   height: 20px;
 }
@@ -301,6 +281,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -360,28 +341,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 2px 0 2px 2px;
   user-select: none;
   cursor: not-allowed;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
-  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
-  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
@@ -496,7 +458,7 @@ exports[`RadioButton should render component with required properties 1`] = `
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 10px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -512,8 +474,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -557,6 +517,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 2px;
   width: 20px;
   height: 20px;
 }
@@ -564,6 +525,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -623,28 +585,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 2px 0 2px 2px;
   user-select: none;
   cursor: pointer;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
-  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
-  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #252629);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
@@ -700,7 +643,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 10px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -716,8 +659,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -761,6 +702,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 2px;
   width: 20px;
   height: 20px;
 }
@@ -768,6 +710,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -827,28 +770,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 2px 0 2px 2px;
   user-select: none;
   cursor: pointer;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
-  font-size: var(--admiral-font-size-Body_Body1Short, 16px);
-  line-height: var(--admiral-line-height-Body_Body1Short, 20px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #252629);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
@@ -959,8 +883,7 @@ exports[`RadioButton should render component with small dimension 1`] = `
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 9px;
-  margin-top: 1px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -976,8 +899,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1021,6 +942,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 1px;
   width: 18px;
   height: 18px;
 }
@@ -1028,6 +950,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -1087,28 +1010,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 1px 0 1px 1px;
   user-select: none;
   cursor: pointer;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #252629);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {
@@ -1164,8 +1068,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: 9px;
-  margin-top: 1px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1181,8 +1084,6 @@ fieldset:disabled .c5.c5 {
 }
 
 fieldset[data-dimension='s'] .c5.c5 {
-  margin-left: 9px;
-  margin-top: 1px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1226,6 +1127,7 @@ fieldset:disabled .c4 {
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: 1px;
   width: 18px;
   height: 18px;
 }
@@ -1233,6 +1135,7 @@ fieldset:disabled .c4 {
 fieldset[data-dimension='s'] .c2 {
   width: 18px;
   height: 18px;
+  margin: 1px;
 }
 
 .c1 {
@@ -1292,28 +1195,9 @@ fieldset[data-dimension='s'] .c2 {
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: 1px 0 1px 1px;
   user-select: none;
   cursor: pointer;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
   color: var(--admiral-color-Neutral_Neutral90, #252629);
-}
-
-fieldset[data-dimension='s'] .c0.c0 {
-  padding: 1px 0 1px 1px;
-  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
-  font-style: normal;
-  font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
-  font-size: var(--admiral-font-size-Body_Body2Short, 14px);
-  line-height: var(--admiral-line-height-Body_Body2Short, 16px);
-  font-feature-settings: 'tnum' on,'lnum' on;
-  text-rendering: geometricPrecision;
 }
 
 fieldset:disabled .c0.c0 {

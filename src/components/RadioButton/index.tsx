@@ -43,7 +43,7 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
     };
 
     return (
-      <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className} $dimension={dimension}>
+      <RadioButtonComponent disabled={disabled} readOnly={readOnly} className={className}>
         <Input
           ref={ref}
           type="radio"

@@ -33,7 +33,7 @@ exports[`CheckboxCompositeGroup should render component with disabled state 1`] 
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -73,9 +73,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -320,7 +318,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -530,7 +528,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -570,9 +568,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -817,7 +813,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
@@ -1082,7 +1078,7 @@ exports[`CheckboxCompositeGroup should render component with label 1`] = `
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -1122,9 +1118,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -1369,7 +1363,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -1562,7 +1556,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -1602,9 +1596,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -1849,7 +1841,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
@@ -2097,7 +2089,7 @@ exports[`CheckboxCompositeGroup should render component with small dimension 1`]
 }
 
 .c0>.c9 {
-  padding-left: 25px;
+  padding-left: 28px;
 }
 
 .c1 {
@@ -2137,9 +2129,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2384,7 +2374,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -2577,7 +2567,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c0>.c9 {
-  padding-left: 25px;
+  padding-left: 28px;
 }
 
 .c1 {
@@ -2617,9 +2607,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -2864,7 +2852,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
@@ -3112,7 +3100,7 @@ exports[`CheckboxCompositeGroup should render components 1`] = `
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -3152,9 +3140,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -3399,7 +3385,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -3592,7 +3578,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c0>.c9 {
-  padding-left: 30px;
+  padding-left: 32px;
 }
 
 .c1 {
@@ -3632,9 +3618,7 @@ fieldset:disabled .c1.c1 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -3879,7 +3863,7 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c3 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
