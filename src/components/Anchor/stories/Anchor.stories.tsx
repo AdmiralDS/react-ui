@@ -5,10 +5,12 @@ import { Anchor } from '@admiral-ds/react-ui';
 
 import { AnchorPlaygroundTemplate } from './AnchorPlayground.template';
 import { AnchorTreeTemplate } from './AnchorTree.template';
+import { AnchorWithIndentTemplate } from './AnchorWithIndent.template';
 
 // Imports of text sources
 import AnchorPlaygroundRaw from './AnchorPlayground.template?raw';
 import AnchorTreeRaw from './AnchorTree.template?raw';
+import AnchorWithIndentRaw from './AnchorWithIndent.template?raw';
 
 export default {
   title: 'Admiral-2.1/Anchor',
@@ -71,5 +73,24 @@ export const AnchorTree = {
   },
 
   name: 'Anchor. Tree',
+};
+//</editor-fold>
+//
+//<editor-fold desc="Anchor With Indent">
+const AnchorWithIndentgStory: StoryFn<typeof Anchor> = (props: AnchorProps) => <AnchorWithIndentTemplate {...props} />;
+
+export const AnchorWithIndent = {
+  render: AnchorWithIndentgStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: AnchorWithIndentRaw,
+      },
+      viewMode: 'story',
+    },
+  },
+
+  name: 'Anchor. With indent',
 };
 //</editor-fold>

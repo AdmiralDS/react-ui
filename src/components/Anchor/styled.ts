@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const AnchorContainer = styled.div`
+export const AnchorContainer = styled.div<{ $indentItems: number }>`
   box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
   height: fit-content;
+
   &:before {
     position: absolute;
     inset-inline-start: 0;
@@ -14,5 +15,10 @@ export const AnchorContainer = styled.div`
     border-inline-start: 2px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
     content: ' ';
   }
+
+  > *:not(:last-child):not(:first-child) {
+    margin-top: ${({ $indentItems }) => `${$indentItems}px`};
+  }
 `;
+
 AnchorContainer.displayName = 'AnchorContainer';
