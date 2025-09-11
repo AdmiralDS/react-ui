@@ -25,7 +25,7 @@ export interface CheckboxFieldProps extends React.InputHTMLAttributes<HTMLInputE
 }
 
 const StyledChekbox = styled(Checkbox)`
-  margin-top: 2px;
+  margin: 2px;
 `;
 
 export const CheckboxField = forwardRef<HTMLInputElement, CheckboxFieldProps>(

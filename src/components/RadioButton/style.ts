@@ -11,8 +11,7 @@ const FOCUS_OFFSET = 2;
 const FOCUS_BORDER_WIDTH = 2;
 const HOVER_BORDER_WIDTH_M = 8;
 const HOVER_BORDER_WIDTH_S = 7;
-const LABEL_MARGIN_M = '10px';
-const LABEL_MARGIN_S = '9px';
+const LABEL_MARGIN = '2px 0 2px 8px';
 
 export const RadioButtonHover = styled.div<{ $dimension: Dimension }>`
   visibility: hidden;
@@ -36,8 +35,7 @@ export const RadioButtonLabel = styled.div<{
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-left: ${(p) => (p.$dimension === 's' ? LABEL_MARGIN_S : LABEL_MARGIN_M)};
-  ${(p) => (p.$dimension === 's' ? 'margin-top: 1px;' : '')}
+  margin: ${LABEL_MARGIN};
   ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) =>
     p.disabled
@@ -47,8 +45,6 @@ export const RadioButtonLabel = styled.div<{
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   fieldset[data-dimension='s'] && {
-    margin-left: ${LABEL_MARGIN_S};
-    margin-top: 1px;
     ${typography['Body/Body 2 Short']}
   }
 `;
@@ -98,6 +94,7 @@ export const InputContainer = styled.div<{ $dimension: Dimension }>`
   position: relative;
   flex-shrink: 0;
   border-radius: 50%;
+  margin: ${(p) => (p.$dimension === 's' ? 1 : 2)}px;
   ${(p) => `
     width: ${p.$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
     height: ${p.$dimension === 's' ? DIMENSION_S : DIMENSION_M}px;
@@ -105,6 +102,7 @@ export const InputContainer = styled.div<{ $dimension: Dimension }>`
   fieldset[data-dimension='s'] & {
     width: ${DIMENSION_S}px;
     height: ${DIMENSION_S}px;
+    margin: 1px;
   }
 `;
 
@@ -203,7 +201,6 @@ export const Hint = styled.div<{ disabled?: boolean }>`
 `;
 
 export const RadioButtonComponent = styled.label<{
-  $dimension: Dimension;
   disabled?: boolean;
   readOnly?: boolean;
 }>`
@@ -211,21 +208,14 @@ export const RadioButtonComponent = styled.label<{
   align-items: flex-start;
   position: relative;
   box-sizing: content-box;
-  padding: ${(p) => (p.$dimension === 's' ? '1px 0 1px 1px' : '2px 0 2px 2px')};
   user-select: none;
 
   cursor: ${(p) => (p.disabled ? 'not-allowed' : p.readOnly ? 'default' : 'pointer')};
-
-  ${(p) => (p.$dimension === 's' ? typography['Body/Body 2 Short'] : typography['Body/Body 1 Short'])}
   color: ${(p) =>
     p.disabled
       ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
       : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
 
-  fieldset[data-dimension='s'] && {
-    padding: 1px 0 1px 1px;
-    ${typography['Body/Body 2 Short']};
-  }
   fieldset:disabled && {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     cursor: not-allowed;

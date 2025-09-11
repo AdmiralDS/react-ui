@@ -157,7 +157,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {
@@ -476,7 +476,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {
@@ -850,7 +850,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {
@@ -1169,7 +1169,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {
@@ -1543,7 +1543,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {
@@ -1862,7 +1862,7 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c7 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 .c3 {

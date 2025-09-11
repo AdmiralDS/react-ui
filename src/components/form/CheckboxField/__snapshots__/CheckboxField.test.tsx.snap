@@ -160,9 +160,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -188,7 +186,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -384,9 +382,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -412,7 +408,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
@@ -663,9 +659,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -691,7 +685,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -884,9 +878,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body1Short, 400);
@@ -912,7 +904,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
@@ -1160,9 +1152,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1188,7 +1178,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <body>
@@ -1381,9 +1371,7 @@ fieldset:disabled .c0.c0 {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 8px;
+  margin: 2px 0 2px 8px;
   font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
   font-style: normal;
   font-weight: var(--admiral-font-weight-Body_Body2Short, 400);
@@ -1409,7 +1397,7 @@ fieldset[data-dimension='s'] .c7.c7 {
 }
 
 .c2 {
-  margin-top: 2px;
+  margin: 2px;
 }
 
 <div>
