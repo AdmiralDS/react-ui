@@ -4,10 +4,12 @@ import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@ad
 
 import { TextAreaPlaygroundTemplate } from './TextAreaPlayground.template';
 import { TextAreaAsyncTemplate } from './TextAreaAsync.template';
+import { TextAreaControlledTemplate } from './TextAreaControlled.template';
 
 // Imports of text sources
 import TextAreaPlaygroundRaw from './TextAreaPlayground.template?raw';
 import TextAreaAsyncRaw from './TextAreaAsync.template?raw';
+import TextAreaControlledRaw from './TextAreaControlled.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TextArea',
@@ -73,6 +75,12 @@ export default {
     icons: {
       control: false,
     },
+    iconsAfter: {
+      control: false,
+    },
+    locale: {
+      control: false,
+    },
     handleInput: {
       control: false,
     },
@@ -123,4 +131,23 @@ export const TextAreaAsync = {
   },
 
   name: 'Асинхронное изменение значения',
+};
+
+const TextAreaControlledStory: StoryFn<typeof TextArea> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TextAreaControlledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TextAreaControlled = {
+  render: TextAreaControlledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TextAreaControlledRaw,
+      },
+    },
+  },
+
+  name: 'Контроллируемый режим изменения значения',
 };
