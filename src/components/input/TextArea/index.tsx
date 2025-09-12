@@ -1,5 +1,5 @@
 import type { ForwardedRef, ReactNode, TextareaHTMLAttributes, MouseEvent } from 'react';
-import { forwardRef, useRef, Children, useLayoutEffect, useState } from 'react';
+import { forwardRef, useRef, Children, useLayoutEffect, useState, useCallback, useMemo } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import type { DataAttributes } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -340,12 +340,14 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 }
 
 const nothing = () => {};
+
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       rows = 3,
       maxRows,
       value,
+      defaultValue,
       displayClearIcon,
       displayCopyIcon,
       status,
@@ -363,6 +365,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       locale,
       clearIconPropsConfig = nothing,
       copyIconPropsConfig = nothing,
+      onChange,
       ...props
     },
     ref,
@@ -371,14 +374,23 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const localContainerRef = useRef<HTMLDivElement>(null);
     const [contentNode, setContentNode] = useState<HTMLTextAreaElement | null>(null);
-    const iconArray = Children.toArray(iconsAfter || icons);
     const copyText = locale?.copyTextMessage || theme.locales[theme.currentLocale]?.textArea?.copyTextMessage;
     const copiedText = locale?.copiedMessage || theme.locales[theme.currentLocale]?.textArea?.copiedMessage;
     const [tooltipText, setTooltipText] = useState(copyText);
 
+    // Состояние для внутреннего значения в неконтроллируемом режиме
+    const [internalValue, setInternalValue] = useState(defaultValue !== undefined ? String(defaultValue) : '');
+
+    // Определяем, работает ли компонент в контроллируемом режиме
+    const isControlled = value !== undefined;
+    const currentValue = isControlled ? String(value) : internalValue;
+
     const handleClearIconClick = () => {
       if (inputRef.current) {
         changeInputData(inputRef.current, { value: '' });
+        if (!isControlled) {
+          setInternalValue('');
+        }
       }
     };
 
@@ -394,7 +406,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     const handleIconMouseDown: React.MouseEventHandler<SVGSVGElement> = (e) => {
-      // запрет на перемещение фокуса при клике по иконке
       e.preventDefault();
     };
 
@@ -414,21 +425,46 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       'aria-hidden': true,
     } satisfies React.ComponentProps<typeof TooltipedInputIconButton>;
 
-    if (!props.readOnly && !!inputRef?.current?.value) {
-      if (displayClearIcon) {
-        iconArray.unshift(
-          <InputIconButton {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} key="clear-icon" />,
-        );
-      } else if (displayCopyIcon) {
-        iconArray.unshift(
-          <TooltipedInputIconButton {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} key="copy-icon" />,
-        );
+    // Обработчик изменения значения
+    const handleChange = useCallback(
+      (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (!isControlled) {
+          setInternalValue(event.target.value);
+        }
+
+        if (onChange) {
+          onChange(event);
+        }
+      },
+      [isControlled, onChange],
+    );
+
+    // Создаем массив иконок
+    const iconArray = useMemo(() => {
+      const array = Children.toArray(iconsAfter || icons);
+      const hasValue = currentValue.length > 0;
+
+      if (!props.readOnly && hasValue) {
+        if (displayClearIcon) {
+          array.unshift(
+            <InputIconButton {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} key="clear-icon" />,
+          );
+        } else if (displayCopyIcon) {
+          array.unshift(
+            <TooltipedInputIconButton {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} key="copy-icon" />,
+          );
+        }
       }
-    }
+
+      return array;
+    }, [iconsAfter, icons, props.readOnly, currentValue, displayClearIcon, displayCopyIcon]);
 
     const iconCount = iconArray.length;
 
-    const inputData = value !== undefined && value !== null ? handleInput({ value: String(value) }) : {};
+    // Обрабатываем inputData
+    const inputData = useMemo(() => {
+      return handleInput({ value: currentValue });
+    }, [currentValue, handleInput]);
 
     useLayoutEffect(() => {
       function oninput(this: HTMLTextAreaElement) {
@@ -437,6 +473,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
         const inputData = handleInput(currentInputData);
         changeInputData(this, inputData);
+
+        // Обновляем внутреннее состояние в неконтроллируемом режиме
+        if (!isControlled) {
+          setInternalValue(inputData.value || '');
+        }
       }
 
       if (inputRef.current) {
@@ -452,12 +493,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           node.removeEventListener('input', oninput);
         };
       }
-    }, [handleInput]);
+    }, [handleInput, isControlled]);
 
     const minHeight = textAreaHeight(rows, dimension);
     const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : undefined;
 
-    // AutoHeight через scrollHeight (без HiddenSpanContainer) + синхронизация StyledContainer
+    // AutoHeight логика
     useLayoutEffect(() => {
       if (!inputRef.current || !localContainerRef.current) return;
 
@@ -466,7 +507,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
       const recalcHeight = () => {
         if (autoHeight) {
-          // авто-высота
           node.style.height = 'auto';
           const natural = node.scrollHeight + 4;
           const minHeight = textAreaHeight(rows, dimension);
@@ -482,7 +522,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           }
           node.style.height = '';
         } else {
-          // если ручной ресайз — просто синхронизируем высоту контейнера
           container.style.height = `${node.offsetHeight + 4}px`;
         }
       };
@@ -492,7 +531,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       const onInput = () => recalcHeight();
       node.addEventListener('input', onInput);
 
-      // следим за изменением ширины (для переносов строк) и за ручным ресайзом
       const resizeObserver = new ResizeObserver(() => recalcHeight());
       resizeObserver.observe(container);
       resizeObserver.observe(node);
@@ -501,7 +539,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         node.removeEventListener('input', onInput);
         resizeObserver.disconnect();
       };
-    }, [autoHeight, resizable, rows, maxRows, dimension, inputData.value, props.defaultValue, iconCount]);
+    }, [autoHeight, resizable, rows, maxRows, dimension, currentValue]);
 
     return (
       <StyledContainer
@@ -530,6 +568,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           $minHeight={minHeight}
           $maxHeight={maxHeight}
           value={inputData.value}
+          onChange={handleChange}
         />
         <BorderedDiv />
         <Scrollbars contentNode={contentNode} />
