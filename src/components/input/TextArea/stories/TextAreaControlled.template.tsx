@@ -25,7 +25,7 @@ export const TextAreaControlledTemplate = ({
   CSSCustomProps,
   ...props
 }: TextAreaProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [textValue, setTextValue] = useState<string>('' /*TEXT*/);
+  const [textValue, setTextValue] = useState<string>();
 
   const handleChangeTextValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
@@ -45,6 +45,7 @@ export const TextAreaControlledTemplate = ({
       <TextArea
         {...props}
         data-container-id="textField-1"
+        defaultValue={'default value'}
         autoHeight
         value={textValue}
         onChange={handleChangeTextValue}
