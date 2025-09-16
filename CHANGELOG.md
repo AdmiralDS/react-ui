@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.55.0](https://github.com/AdmiralDS/react-ui/compare/v8.54.0...v8.55.0) (2025-09-16)
+
+
+### Features
+
+* **Anchor:** add indent between AnchorItem ([8e5efb8](https://github.com/AdmiralDS/react-ui/commit/8e5efb8afdde136fa211d29ef4c438961690dbb4))
+
+
+### Bug Fixes
+
+* **Anchor:** fix name indent items ([9c4e579](https://github.com/AdmiralDS/react-ui/commit/9c4e579c2054d3fce7702fa52c67bb637e4cf1ef))
+* **FieldSet, CheckboxField:** [#1871](https://github.com/AdmiralDS/react-ui/issues/1871) исправлены padding и типографика у заголовка FieldSet, исправлен margin у CheckboxField ([c1d6036](https://github.com/AdmiralDS/react-ui/commit/c1d6036456b55813c2a1e5139021fdf7866e42bc))
+* **TextArea:** исправлена работа компонента в контроллируемом режиме ([09a6606](https://github.com/AdmiralDS/react-ui/commit/09a6606e8de19e3328833643ee22011dea1e426b))
+
 ## [8.54.0](https://github.com/AdmiralDS/react-ui/compare/v8.53.0...v8.54.0) (2025-09-03)
 
 
