@@ -33,6 +33,7 @@ export const TextAreaPlaygroundTemplate = ({
         placeholder={placeholder}
         clearIconPropsConfig={() => clearIconProps}
         copyIconPropsConfig={() => copyIconProps}
+        data-testid="textAreaPlayground"
       />
     </ThemeProvider>
   );
