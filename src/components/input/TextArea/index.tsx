@@ -164,7 +164,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
   ${extraPadding}
 `;
 
-const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: number; $maxHeight?: number }>`
+const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight?: number; $maxHeight?: number }>`
   ${hideNativeScrollbarsCss}
   // Этот margin обеспечивает отступ в режиме resizable, предотвращая перекрытие drag handle border'ом,
   // который создается с помощью BorderedDiv. Значение margin вычитается из padding.
@@ -176,7 +176,7 @@ const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: nu
   height: calc(100% - 4px);
 
   /* ограничиваем размеры для ручного ресайза и autoheight */
-  min-height: ${(p) => p.$minHeight}px;
+  ${(p) => (p.$minHeight ? `min-height: ${p.$minHeight}px;` : '')}
   ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}px;` : '')}
 
   resize: ${(p) => (p.$resizable && !p.$autoHeight ? 'vertical' : 'none')};
@@ -268,10 +268,15 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Максимальное количество символов для ввода */
   maxLength?: number;
 
-  /** Начальная высота компонента в количествах строк */
+  /** Высота компонента в количествах строк */
   rows?: number;
 
-  /** Максимальная высота компонента в количествах строк  */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.56.0, будет удалено в 10.x.x версии.
+   * Взамен используйте autoHeight.maxRows
+   *
+   * Максимальная высота компонента в количествах строк
+   **/
   maxRows?: number;
 
   /** Делает высоту компонента больше или меньше обычной */
@@ -310,7 +315,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   disableCopying?: boolean;
 
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
-  autoHeight?: boolean;
+  autoHeight?: boolean | { minRows?: number; maxRows?: number };
 
   /** Включает возможность ручного изменения высоты textarea */
   resizable?: boolean;
@@ -495,10 +500,20 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput, isControlled]);
 
-    const minHeight = textAreaHeight(rows, dimension);
-    const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : undefined;
-
     // AutoHeight логика
+
+    const [minRowsAutoheight, maxRowsAutoheight] = useMemo(() => {
+      if (autoHeight && typeof autoHeight === 'object') {
+        return [
+          textAreaHeight(autoHeight.minRows || 2, dimension),
+          autoHeight.maxRows ? textAreaHeight(autoHeight.maxRows, dimension) : Infinity,
+        ];
+      }
+
+      return [];
+    }, [autoHeight]);
+
+    const needAutoSize = !!autoHeight;
     useLayoutEffect(() => {
       if (!inputRef.current || !localContainerRef.current) return;
 
@@ -506,12 +521,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       const container = localContainerRef.current;
 
       const recalcHeight = () => {
-        if (autoHeight) {
+        if (needAutoSize) {
           node.style.height = 'auto';
           const natural = node.scrollHeight + 4;
-          const minHeight = textAreaHeight(rows, dimension);
+          const minHeight = minRowsAutoheight || textAreaHeight(2, dimension);
           const cappedByMin = Math.max(natural, minHeight);
-          const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
+          const maxHeight = maxRowsAutoheight ? maxRowsAutoheight : Infinity;
           const finalHeight = Math.min(cappedByMin, maxHeight);
 
           container.style.height = `${finalHeight}px`;
@@ -563,10 +578,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
-          $autoHeight={autoHeight}
+          $autoHeight={needAutoSize}
           $resizable={resizable}
-          $minHeight={minHeight}
-          $maxHeight={maxHeight}
+          $minHeight={minRowsAutoheight}
+          $maxHeight={maxRowsAutoheight}
           value={inputData.value}
           onChange={handleChange}
         />
