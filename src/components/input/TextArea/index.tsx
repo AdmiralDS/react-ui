@@ -349,7 +349,7 @@ const nothing = () => {};
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
-      rows = 3,
+      rows = 2,
       maxRows,
       value,
       defaultValue,
