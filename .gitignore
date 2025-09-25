@@ -10,3 +10,10 @@ storybook-static
 admiral-ds-react-ui-*.tgz
 tsconfig.tsbuildinfo
 bun.lockb
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
