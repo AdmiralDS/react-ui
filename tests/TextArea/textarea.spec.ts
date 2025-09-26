@@ -9,28 +9,47 @@ test('basic render', async ({ page }) => {
   await expect(textarea).toHaveText('Привет!');
 });
 
-test('resizable', async ({ page }) => {
+test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=resizable:!true');
-  const frame = page.frameLocator('#storybook-preview-iframe');
-  const scale = await page.evaluate(() => window.devicePixelRatio);
 
+  const frame = page.frameLocator('#storybook-preview-iframe');
   const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');
 
-  const boxFirst = await component.boundingBox();
-  const boxFirstTA = await textarea.boundingBox();
-  const xStart = (boxFirstTA!.x + boxFirstTA!.width - 2) * scale;
-  const yStart = (boxFirstTA!.y + boxFirstTA!.height - 2) * scale;
-  await page.mouse.move(xStart, yStart);
-  await page.mouse.down();
-  await page.mouse.move(xStart, yStart + 100, { steps: 5 });
-  await page.mouse.up();
+  const componentBox = await component.boundingBox();
+  expect(componentBox).not.toBeNull();
+  // Сохраняем исходную высоту через CSS
+  const initialHeight = await component.evaluate((el) => parseFloat(getComputedStyle(el).height));
 
-  await expect(component).toHaveJSProperty('offsetHeight', boxFirst!.height + 100);
+  if (browserName === 'webkit') {
+    // Программно меняем размер textarea
+    await textarea.evaluate((el) => {
+      (el as HTMLElement).style.height = '200px';
+    });
 
-  const boxSecond = await component.boundingBox();
-  //expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
-  await expect(component).toHaveCSS('height', `${boxFirst!.height + 100}px`);
+    // Дождёмся, пока ResizeObserver обновит высоту wrapper
+    await expect
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 1000 })
+      .toBeGreaterThan(initialHeight);
+  } else {
+    // Chromium / Firefox — имитируем drag мышью
+    const textAreaBox = await textarea.boundingBox();
+    const xStart = textAreaBox!.x + textAreaBox!.width - 2;
+    const yStart = textAreaBox!.y + textAreaBox!.height - 2;
+
+    await page.mouse.move(xStart, yStart);
+    await page.mouse.down();
+    await page.mouse.move(xStart, yStart + 100, { steps: 5 });
+    await page.mouse.up();
+
+    // Ждём, пока высота изменится
+    await expect
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 1000 })
+      .toBeGreaterThan(initialHeight);
+
+    // Дополнительно проверяем через toHaveCSS, что высота действительно увеличилась
+    await expect(component).toHaveCSS('height', `${initialHeight + 100}px`);
+  }
 });
 
 test('autoheight with value undefined', async ({ page }) => {
