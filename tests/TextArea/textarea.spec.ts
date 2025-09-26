@@ -30,7 +30,7 @@ test('autoheight with value true', async ({ page }) => {
   const frame = page.frameLocator('#storybook-preview-iframe');
 
   const component = frame.getByTestId('textAreaPlayground');
-  await component.fill('1\n2');
+  await component.fill('1');
 
   const boxFirst = await component.boundingBox();
   await component.fill('');
@@ -40,6 +40,10 @@ test('autoheight with value true', async ({ page }) => {
   await component.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
   expect(boxThird?.height).toBeGreaterThan(boxSecond!.height);
+
+  await component.fill('1');
+  const boxFourth = await component.boundingBox();
+  expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
 });
 
 test('autoheight with min and max rows', async ({ page }) => {
