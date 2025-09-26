@@ -4,8 +4,28 @@ test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
   const frame = page.frameLocator('#storybook-preview-iframe');
 
-  const component = frame.getByTestId('textAreaPlayground');
-  await expect(component).toHaveText('Привет!');
+  //const component = frame.getByTestId('textAreaWrapper');
+  const textarea = frame.getByTestId('textAreaPlayground');
+  await expect(textarea).toHaveText('Привет!');
+});
+
+test('resizable', async ({ page }) => {
+  await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=resizable:!true');
+  const frame = page.frameLocator('#storybook-preview-iframe');
+
+  const component = frame.getByTestId('textAreaWrapper');
+  //const textarea = frame.getByTestId('textAreaPlayground');
+
+  const boxFirst = await component.boundingBox();
+  const xStart = boxFirst!.x + boxFirst!.width - 6;
+  const yStart = boxFirst!.y + boxFirst!.height - 3;
+  await page.mouse.move(xStart, yStart);
+  await page.mouse.down();
+  await page.mouse.move(xStart, yStart + 100);
+  await page.mouse.up();
+
+  const boxSecond = await component.boundingBox();
+  expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
 });
 
 test('autoheight with value undefined', async ({ page }) => {
