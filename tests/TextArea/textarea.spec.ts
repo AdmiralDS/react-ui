@@ -12,20 +12,25 @@ test('basic render', async ({ page }) => {
 test('resizable', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=resizable:!true');
   const frame = page.frameLocator('#storybook-preview-iframe');
+  const scale = await page.evaluate(() => window.devicePixelRatio);
 
   const component = frame.getByTestId('textAreaWrapper');
-  //const textarea = frame.getByTestId('textAreaPlayground');
+  const textarea = frame.getByTestId('textAreaPlayground');
 
   const boxFirst = await component.boundingBox();
-  const xStart = boxFirst!.x + boxFirst!.width - 6;
-  const yStart = boxFirst!.y + boxFirst!.height - 3;
+  const boxFirstTA = await textarea.boundingBox();
+  const xStart = (boxFirstTA!.x + boxFirstTA!.width - 2) * scale;
+  const yStart = (boxFirstTA!.y + boxFirstTA!.height - 2) * scale;
   await page.mouse.move(xStart, yStart);
   await page.mouse.down();
-  await page.mouse.move(xStart, yStart + 100);
+  await page.mouse.move(xStart, yStart + 100, { steps: 5 });
   await page.mouse.up();
 
+  await expect(component).toHaveJSProperty('offsetHeight', boxFirst!.height + 100);
+
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
+  //expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
+  await expect(component).toHaveCSS('height', `${boxFirst!.height + 100}px`);
 });
 
 test('autoheight with value undefined', async ({ page }) => {
