@@ -177,7 +177,7 @@ const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight?: n
 
   /* ограничиваем размеры для ручного ресайза и autoheight */
   ${(p) => (p.$minHeight ? `min-height: ${p.$minHeight}px;` : '')}
-  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}px;` : '')}
+  ${(p) => (p.$maxHeight && p.$maxHeight !== Infinity ? `max-height: ${p.$maxHeight}px;` : '')}
 
   resize: ${(p) => (p.$resizable && !p.$autoHeight ? 'vertical' : 'none')};
 
@@ -254,7 +254,7 @@ const StyledContainer = styled(Container)<{
 }>`
   min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension) + 4}px;
   ${(p) => (p.$minHeight ? `min-height: ${p.$minHeight + 4}px;` : '')}
-  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight + 4}px;` : '')}
+  ${(p) => (p.$maxHeight && p.$maxHeight !== Infinity ? `max-height: ${p.$maxHeight + 4}px;` : '')}
   ${(p) => (p.$autoHeight || p.$resizable ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension) + 4}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
