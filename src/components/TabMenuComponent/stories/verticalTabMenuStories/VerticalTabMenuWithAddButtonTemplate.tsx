@@ -228,7 +228,6 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
             переполнении вкладок (есть меню) кнопка добавления вкладки видна всегда.
           </NotificationItemContent>
         </StyledNotificationItem>
-        <Separator height={20} />
         <TabMenuVertical
           {...props}
           dimension={dimension}
