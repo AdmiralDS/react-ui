@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  storybook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.storybook
+    ports:
+      - "6006:6006"  
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6006"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+    command: npm run storybook
+
+  playwright:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.playwright
+    depends_on:
+      storybook:
+        condition: service_healthy
+    ports:
+      - "9323:9323"
+    environment:
+      - STORYBOOK_URL=http://storybook:6006
+    volumes:
+      - ./playwright-report:/app/playwright-report
+    command: >
+      sh -c "npx wait-on -t 60000 http://storybook:6006 && npx playwright test"
