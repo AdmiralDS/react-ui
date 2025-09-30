@@ -59,6 +59,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
     return (
       <VerticalTab
         {...props}
+        data-testid={`VerticalTab${tabId}`}
         ref={ref}
         tabId={tabId}
         dimension={dimension}
@@ -79,7 +80,12 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
             </VerticalTabBadge>
           )}
         </Content>
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
+        <TabCloseIconButton
+          data-testid={`TabCloseButton${tabId}`}
+          dimension={dimension}
+          disabled={disabled}
+          onCloseIconButtonClick={handleCloseTab}
+        />
       </VerticalTab>
     );
   },
@@ -198,7 +204,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return (options: RenderOptionProps) => {
       return (
-        <MenuItem dimension={dimension} {...options} key={tabId}>
+        <MenuItem data-testid={`MenuItemCloseButton${tabId}`} dimension={dimension} {...options} key={tabId}>
           <MenuItemWrapper>
             <div>{currentTab?.text}</div>
             <TabCloseIconButton
@@ -240,6 +246,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
         </StyledNotificationItem>
         <TabMenuVertical
           {...props}
+          data-testid="TabMenuVertical"
           dimension={dimension}
           showUnderline={showUnderline}
           underlinePosition={underlinePosition}

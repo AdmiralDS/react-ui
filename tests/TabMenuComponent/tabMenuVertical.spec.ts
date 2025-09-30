@@ -7,6 +7,8 @@ test('basic render', async ({ page }) => {
 
   const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
   await expect(tabMenu).toBeVisible();
+  // ждем, пока подгрузятся шрифты и пройдет вся анимация
+  await page.waitForTimeout(400);
 
   const overflowMenu = frame.locator('.overflow-menu-button-with-dropdown');
   await expect(overflowMenu).toBeVisible();
@@ -19,8 +21,9 @@ test('basic render', async ({ page }) => {
 
   const activeTabBox = await activeTab.boundingBox();
   const activeTabSelectorBox = await activeTabSelector.boundingBox();
-  expect(activeTabSelectorBox!.height).toBeCloseTo(activeTabBox!.height, 0);
+
   expect(activeTabSelectorBox!.y).toBeCloseTo(activeTabBox!.y, 0);
+  expect(activeTabSelectorBox!.height).toBeCloseTo(activeTabBox!.height, 0);
 });
 
 test('select tab logic', async ({ page }) => {
@@ -67,4 +70,48 @@ test('resize tab menu height', async ({ page }) => {
   const tabMenuBox3 = await tabMenu.boundingBox();
   expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox2!.height);
   expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox1!.height);
+});
+
+test('add and delete tabs', async ({ page }) => {
+  await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-with-add-button-example');
+  const frame = page.frameLocator('#storybook-preview-iframe');
+
+  // выбираем tab1
+  const tab1 = frame.getByTestId('VerticalTab1');
+  await expect(tab1).toBeVisible();
+  await clickAndWait(tab1, page);
+
+  // проверяем удаление таба в видимом меню  const tab1 = frame.getByTestId('VerticalTab1');
+  const tabCloseButton1 = frame.getByTestId('TabCloseButton1');
+  await clickAndWait(tabCloseButton1, page);
+
+  await expect(page.getByTestId('VerticalTab1')).toHaveCount(0);
+  await expect(page.getByTestId('TabCloseButton1')).toHaveCount(0);
+
+  // проверяем, что activeTabSelector сместился на tab2
+  const tab2 = frame.getByTestId('VerticalTab2');
+  const activeTabSelector = frame.locator('.active-vertical-tab-selector');
+  const activeTabSelectorBox1 = await activeTabSelector.boundingBox();
+  const tab2Box = await tab2.boundingBox();
+  expect(tab2Box!.y).toBeCloseTo(activeTabSelectorBox1!.y, 0);
+
+  // проверяем добавление таба по кнопке "+"
+  const addButton = frame.locator('.add-tab-button-class');
+  await clickAndWait(addButton, page);
+
+  const tab10 = frame.getByTestId('VerticalTab10');
+  await expect(tab10).toBeVisible();
+
+  const activeTabSelectorBox2 = await activeTabSelector.boundingBox();
+  const tab10Box = await tab10.boundingBox();
+  expect(tab10Box!.y).toBeCloseTo(activeTabSelectorBox2!.y, 0);
+
+  // проверяем удаление таба из выпадающего меню
+  const overflowMenu = frame.locator('.overflow-menu-button-with-dropdown');
+  await clickAndWait(overflowMenu, page);
+  const tabCloseButton6 = frame.getByTestId('TabCloseButton6');
+  await clickAndWait(tabCloseButton6, page);
+
+  await expect(page.getByTestId('VerticalTab6')).toHaveCount(0);
+  await expect(page.getByTestId('TabCloseButton6')).toHaveCount(0);
 });
