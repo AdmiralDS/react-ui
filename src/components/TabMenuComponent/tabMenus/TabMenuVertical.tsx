@@ -211,6 +211,7 @@ export const TabMenuVertical = ({
         isHidden={hiddenTabs.length === 0}
       />
       <ActiveVerticalTabSelector
+        className="active-vertical-tab-selector"
         $appearance={appearance}
         $top={`${underlineTop}px`}
         $height={`${underlineHeight}px`}

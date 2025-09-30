@@ -32,7 +32,7 @@ const TooltipedIconPlacement = TooltipHoc(StyledIconPlacement);
 export const VerticalAddTabButton = ({ dimension = 'l', ...props }: AddTabButtonProps) => {
   const buttonDimension = dimension === 'l' ? 'lBig' : 'mBig';
   return (
-    <AddTabButtonContainer $dimension={dimension}>
+    <AddTabButtonContainer $dimension={dimension} className="add-tab-button-class">
       <TooltipedIconPlacement
         {...props}
         dimension={buttonDimension}

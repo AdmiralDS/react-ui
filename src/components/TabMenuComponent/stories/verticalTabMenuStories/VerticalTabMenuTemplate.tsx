@@ -52,6 +52,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
     return (
       <VerticalTab
         {...props}
+        data-testid={`verticalTab${tabId}`}
         ref={ref}
         tabId={tabId}
         dimension={dimension}
@@ -163,7 +164,7 @@ export const VerticalTabMenuTemplate = ({
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return (options: RenderOptionProps) => {
       return (
-        <MenuItem dimension={dimension} {...options} key={tabId}>
+        <MenuItem dimension={dimension} {...options} key={tabId} data-testid={'overflowTab' + currentTab?.tabId}>
           <MenuItemWrapper>{currentTab?.text}</MenuItemWrapper>
         </MenuItem>
       );
@@ -172,7 +173,7 @@ export const VerticalTabMenuTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Wrapper>
+      <Wrapper data-testid="templateWrapper">
         <StyledNotificationItem displayStatusIcon>
           <NotificationItemTitle>Вертикальное TabMenu</NotificationItemTitle>
           <NotificationItemContent>
@@ -197,6 +198,7 @@ export const VerticalTabMenuTemplate = ({
         </StyledNotificationItem>
         <TabMenuVertical
           {...props}
+          data-testid="verticalTabMenuTemplate"
           appearance={appearance}
           dimension={dimension}
           showUnderline={showUnderline}
