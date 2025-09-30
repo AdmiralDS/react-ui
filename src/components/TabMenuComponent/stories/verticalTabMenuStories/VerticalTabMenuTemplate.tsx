@@ -173,7 +173,7 @@ export const VerticalTabMenuTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Wrapper>
+      <Wrapper data-testid="templateWrapper">
         <StyledNotificationItem displayStatusIcon>
           <NotificationItemTitle>Вертикальное TabMenu</NotificationItemTitle>
           <NotificationItemContent>

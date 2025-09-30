@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { clickAndWait } from '../utils';
+import { clickAndWait, resizeElement } from '../utils';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
@@ -48,4 +48,23 @@ test('select tab logic', async ({ page }) => {
 
   const tab7Box = await tab7.boundingBox();
   expect(tab7Box!.y).toBeCloseTo(activeTabSelectorBox!.y, 0);
+});
+
+test('resize tab menu height', async ({ page }) => {
+  await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
+  const frame = page.frameLocator('#storybook-preview-iframe');
+
+  const wrapper = frame.getByTestId('templateWrapper');
+  const wrapperBox = await wrapper.boundingBox();
+  const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
+  const tabMenuBox1 = await tabMenu.boundingBox();
+
+  await resizeElement(wrapper, wrapperBox!.width - 200, wrapperBox!.height);
+  const tabMenuBox2 = await tabMenu.boundingBox();
+  expect(tabMenuBox2!.height).toBeLessThan(tabMenuBox1!.height);
+
+  await resizeElement(wrapper, wrapperBox!.width + 400, wrapperBox!.height);
+  const tabMenuBox3 = await tabMenu.boundingBox();
+  expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox2!.height);
+  expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox1!.height);
 });
