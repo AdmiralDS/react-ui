@@ -164,7 +164,7 @@ const textBlockStyleMixin = css<TextBlockProps>`
   ${extraPadding}
 `;
 
-const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: number; $maxHeight?: number }>`
+const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight?: number; $maxHeight?: number }>`
   ${hideNativeScrollbarsCss}
   // Этот margin обеспечивает отступ в режиме resizable, предотвращая перекрытие drag handle border'ом,
   // который создается с помощью BorderedDiv. Значение margin вычитается из padding.
@@ -176,8 +176,8 @@ const Text = styled.textarea<ExtraProps & { $resizable?: boolean; $minHeight: nu
   height: calc(100% - 4px);
 
   /* ограничиваем размеры для ручного ресайза и autoheight */
-  min-height: ${(p) => p.$minHeight}px;
-  ${(p) => (p.$maxHeight ? `max-height: ${p.$maxHeight}px;` : '')}
+  ${(p) => (p.$minHeight ? `min-height: ${p.$minHeight}px;` : '')}
+  ${(p) => (p.$maxHeight && p.$maxHeight !== Infinity ? `max-height: ${p.$maxHeight}px;` : '')}
 
   resize: ${(p) => (p.$resizable && !p.$autoHeight ? 'vertical' : 'none')};
 
@@ -237,21 +237,25 @@ interface TextBlockProps extends ExtraProps {
   disabled?: boolean;
 }
 
-const textAreaHeight = (rows: number, $dimension?: ComponentDimension) => {
+const textAreaHeight = (rows: number | typeof Infinity, $dimension?: ComponentDimension) => {
+  if (rows === 0 || rows === Infinity) return rows;
   const textAreaLineHeight = $dimension === 's' ? 20 : 24;
   return rows * textAreaLineHeight + 2 * verticalPaddingValue({ $dimension });
 };
 
 const StyledContainer = styled(Container)<{
   $autoHeight: boolean;
+  $resizable: boolean;
   $rows: number;
-  $maxRows?: number;
+  $minHeight?: number;
+  $maxHeight?: number;
   $dimension: ComponentDimension;
   disabled?: boolean;
 }>`
   min-height: ${(p) => textAreaHeight(p.$rows, p.$dimension) + 4}px;
-  ${(p) => (p.$maxRows ? `max-height: ${textAreaHeight(p.$maxRows, p.$dimension) + 4}px;` : '')}
-  ${(p) => (p.$autoHeight ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension) + 4}px;`)}
+  ${(p) => (p.$minHeight ? `min-height: ${p.$minHeight + 4}px;` : '')}
+  ${(p) => (p.$maxHeight && p.$maxHeight !== Infinity ? `max-height: ${p.$maxHeight + 4}px;` : '')}
+  ${(p) => (p.$autoHeight || p.$resizable ? '' : `height: ${textAreaHeight(p.$rows, p.$dimension) + 4}px;`)}
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
 
@@ -268,10 +272,15 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   /** Максимальное количество символов для ввода */
   maxLength?: number;
 
-  /** Начальная высота компонента в количествах строк */
+  /** Высота компонента в количествах строк */
   rows?: number;
 
-  /** Максимальная высота компонента в количествах строк  */
+  /**
+   * @deprecated Помечено как deprecated в версии 8.56.0, будет удалено в 10.x.x версии.
+   * Взамен используйте autoHeight.maxRows
+   *
+   * Максимальная высота компонента в количествах строк
+   **/
   maxRows?: number;
 
   /** Делает высоту компонента больше или меньше обычной */
@@ -310,7 +319,7 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   disableCopying?: boolean;
 
   /**  Включает автоматическое изменение высоты компонента в зависимости от количества текста */
-  autoHeight?: boolean;
+  autoHeight?: boolean | { minRows?: number; maxRows?: number };
 
   /** Включает возможность ручного изменения высоты textarea */
   resizable?: boolean;
@@ -495,10 +504,32 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [handleInput, isControlled]);
 
-    const minHeight = textAreaHeight(rows, dimension);
-    const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : undefined;
-
     // AutoHeight логика
+
+    const [minRowsAutoheight, maxRowsAutoheight] = useMemo(() => {
+      let min = 1;
+      let max = Infinity;
+      if (autoHeight) {
+        if (typeof autoHeight === 'object') {
+          if (autoHeight.minRows) {
+            min = autoHeight.minRows;
+          } else {
+            min = 2;
+          }
+          if (autoHeight.maxRows) {
+            max = autoHeight.maxRows;
+          } else if (maxRows) {
+            max = maxRows;
+          }
+        }
+      } else if (!resizable && rows) {
+        min = rows;
+        max = rows;
+      }
+
+      return [textAreaHeight(min, dimension), textAreaHeight(max, dimension)];
+    }, [autoHeight, resizable, maxRows, rows]);
+
     useLayoutEffect(() => {
       if (!inputRef.current || !localContainerRef.current) return;
 
@@ -507,15 +538,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
       const recalcHeight = () => {
         if (autoHeight) {
-          node.style.height = 'auto';
+          node.style.height = '0px';
           const natural = node.scrollHeight + 4;
-          const minHeight = textAreaHeight(rows, dimension);
-          const cappedByMin = Math.max(natural, minHeight);
-          const maxHeight = typeof maxRows === 'number' ? textAreaHeight(maxRows, dimension) : Infinity;
-          const finalHeight = Math.min(cappedByMin, maxHeight);
+          const cappedByMin = Math.max(natural, minRowsAutoheight);
+          const finalHeight = Math.min(cappedByMin, maxRowsAutoheight);
 
           container.style.height = `${finalHeight}px`;
-          if (natural > maxHeight) {
+          if (natural > maxRowsAutoheight) {
             node.style.overflowY = '';
           } else {
             node.style.overflowY = 'hidden';
@@ -539,7 +568,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         node.removeEventListener('input', onInput);
         resizeObserver.disconnect();
       };
-    }, [autoHeight, resizable, rows, maxRows, dimension, currentValue]);
+    }, [autoHeight, resizable, dimension, currentValue, minRowsAutoheight, maxRowsAutoheight]);
 
     return (
       <StyledContainer
@@ -551,8 +580,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         disabled={props.disabled}
         data-disable-copying={disableCopying ? true : undefined}
         $autoHeight={!!autoHeight}
+        $resizable={resizable}
         $rows={rows}
-        $maxRows={maxRows}
+        $minHeight={minRowsAutoheight}
+        $maxHeight={maxRowsAutoheight}
         $dimension={dimension}
         {...(disableCopying && {
           onMouseDown: stopEvent,
@@ -563,10 +594,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
           $dimension={dimension}
           $iconsAfterCount={iconCount}
-          $autoHeight={autoHeight}
+          $autoHeight={!!autoHeight}
           $resizable={resizable}
-          $minHeight={minHeight}
-          $maxHeight={maxHeight}
+          $minHeight={minRowsAutoheight}
+          $maxHeight={maxRowsAutoheight}
           value={inputData.value}
           onChange={handleChange}
         />
