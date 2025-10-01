@@ -195,7 +195,6 @@ export const VerticalTabMenuTemplate = ({
             горизонтальную версию компонента Horizontal Tab Menu.
           </NotificationItemContent>
         </StyledNotificationItem>
-        <Separator height={40} />
         <TabMenuVertical
           {...props}
           appearance={appearance}
