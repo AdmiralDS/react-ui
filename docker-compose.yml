@@ -1,5 +1,5 @@
 # docker-compose.yml
-version: '3.8'
+# version: '3.8'
 
 services:
   storybook:
@@ -23,8 +23,6 @@ services:
     depends_on:
       storybook:
         condition: service_healthy
-    ports:
-      - "9323:9323"
     environment:
       - STORYBOOK_URL=http://storybook:6006
     volumes:
