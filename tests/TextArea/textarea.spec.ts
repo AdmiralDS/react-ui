@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { getStorybookFrameLocator } from '../utils';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   //const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');
@@ -12,7 +13,7 @@ test('basic render', async ({ page }) => {
 test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=resizable:!true');
 
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
   const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');
 
@@ -54,7 +55,7 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
 test('autoheight with value undefined', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');
@@ -72,7 +73,7 @@ test('autoheight with value undefined', async ({ page }) => {
 
 test('autoheight with value true', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=autoHeightBoolean:!true');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');
@@ -96,7 +97,7 @@ test('autoheight with min and max rows', async ({ page }) => {
   await page.goto(
     '/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=autoHeightBoolean:!true;autoHeightMinRows:3;autoHeightMaxRows:5',
   );
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const component = frame.getByTestId('textAreaWrapper');
   const textarea = frame.getByTestId('textAreaPlayground');

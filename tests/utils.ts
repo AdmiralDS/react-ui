@@ -1,6 +1,10 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
+export function getStorybookFrameLocator(page: Page) {
+  return page.frameLocator('#storybook-preview-iframe');
+}
+
 /**
  * Делает click по элементу
  * и ждет timeout (по умолчанию 400) мс (для отработки анимации).

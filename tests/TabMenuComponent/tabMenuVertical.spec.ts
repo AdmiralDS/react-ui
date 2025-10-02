@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { clickAndWait, resizeElement } from '../utils';
+import { getStorybookFrameLocator, clickAndWait, resizeElement } from '../utils';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
   await expect(tabMenu).toBeVisible();
@@ -28,7 +28,7 @@ test('basic render', async ({ page }) => {
 
 test('select tab logic', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const tab6 = frame.getByTestId('verticalTab6');
   await clickAndWait(tab6, page);
@@ -55,7 +55,7 @@ test('select tab logic', async ({ page }) => {
 
 test('resize tab menu height', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   const wrapper = frame.getByTestId('templateWrapper');
   const wrapperBox = await wrapper.boundingBox();
@@ -74,7 +74,7 @@ test('resize tab menu height', async ({ page }) => {
 
 test('add and delete tabs', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-with-add-button-example');
-  const frame = page.frameLocator('#storybook-preview-iframe');
+  const frame = getStorybookFrameLocator(page);
 
   // выбираем tab1
   const tab1 = frame.getByTestId('VerticalTab1');
