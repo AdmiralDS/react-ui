@@ -1,12 +1,14 @@
 import * as React from 'react';
 import type { HTMLAttributes, ComponentProps } from 'react';
-import { useRef, useState, useEffect, useLayoutEffect } from 'react';
-import styled, { css } from 'styled-components';
+import { useRef, useState } from 'react';
+const { useEffect, useLayoutEffect } = React;
+import styled, { type DataAttributes } from 'styled-components';
 
 import { ReactComponent as TimeSVG } from '@admiral-ds/icons/build/system/TimeOutline.svg';
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 import type { TextInputProps } from '../TextInput';
 import { InputLine } from '../InputLine';
+import { InputBox } from '../InputBox';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { defaultTimePickerHandle } from '#src/components/input/TimePicker/defaultTimePickerHandle';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
@@ -19,108 +21,21 @@ import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
-import type { ComponentDimension, ExtraProps, InputStatus } from '#src/components/input/types';
+import type { ComponentDimension, InputStatus } from '#src/components/input/types';
+import { iconSizeValue, horizontalPaddingValue } from '../TimePickerIcons';
+import { Spinner } from '#src/components/Spinner';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
 interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps {
   value: string;
 }
 
-type SizeProps = {
-  $dimension?: ComponentDimension;
-};
+type SizeProps = { $dimension?: ComponentDimension };
 
 export type InputBoxProps = ComponentProps<'div'> & SizeProps;
 
 const defaultSlots: SlotProps[] = generateTimeArray();
-
-const iconSizeValue = (props: SizeProps) => {
-  switch (props.$dimension) {
-    case 'xl':
-      return 24;
-    case 's':
-      return 20;
-    default:
-      return 24;
-  }
-};
-const horizontalPaddingValue = (props: SizeProps) => {
-  switch (props.$dimension) {
-    case 'xl':
-      return 16;
-    case 's':
-      return 12;
-    default:
-      return 16;
-  }
-};
-
-const extraPadding = css<Omit<ExtraProps, '$iconsBeforeCount'>>`
-  padding-right: ${(props) =>
-    horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconsAfterCount ?? 0)}px;
-`;
-
-const dimensionFocusBoxStyles = {
-  xl: `
-    height: 56px;
-    & * {
-      line-height: 56px;
-    }
-  `,
-  s: `
-    height: 32px;
-    padding-inline-start: 12px;
-    padding-inline-end: 12px;
-    & * {
-      ${typography['Body/Body 2 Long']}
-      line-height: 32px;
-    }
-  `,
-  m: ``,
-};
-
-export const FocusBox = styled.div<
-  Omit<ExtraProps, '$iconsBeforeCount'> &
-    SizeProps & { disabled?: boolean; $status?: InputStatus; readOnly?: boolean; $isLoading?: boolean }
->`
-  cursor: text;
-  display: inline-flex;
-  overflow: hidden;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: stretch;
-  width: 280px;
-  min-width: 136px;
-  height: 40px;
-  padding: 0;
-  padding-inline-start: 16px;
-  padding-inline-end: 16px;
-  transition: box-shadow 0.3s ease-in-out;
-  box-sizing: border-box;
-  border-radius: 4px;
-  background: transparent;
-  /* https://stackoverflow.com/questions/69658462/inset-box-shadow-visual-artifacts-in-google-chrome */
-  transform: translate3d(0, 0, 0);
-  box-shadow: 0px 0px 0px 1px var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']})
-    inset;
-
-  &:hover:not(:focus-within) {
-    box-shadow: 0px 0px 0px 1px var(--admiral-color-Neutral_Neutral60, ${(p) => p.theme.color['Neutral/Neutral 60']})
-      inset;
-  }
-  &:focus-within {
-    box-shadow: 0px 0px 0px 2px
-      var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']}) inset;
-  }
-  ${(p) => p.disabled && 'border-color: transparent;'};
-
-  & * {
-    ${typography['Body/Body 1 Long']}
-    line-height: 40px;
-  }
-
-  ${({ $dimension }) => $dimension && dimensionFocusBoxStyles[$dimension]}
-  ${extraPadding}
-`;
 
 const StyledMenu = styled(Menu)`
   &[data-dimension='xl'] {
@@ -201,10 +116,42 @@ export interface TimePickerProps
   status?: InputStatus;
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
+  /** Отображать заглушку */
+  skeleton?: boolean;
   /** Позволяет обрабатывать введенные значения */
   parser?: (time?: string) => string;
+  /** Наличие этого атрибута отключает возможность выделения и копирования значения поля */
+  disableCopying?: boolean;
+  /** Отображение тултипа, по умолчанию true */
+  showTooltip?: boolean;
+  /** Ref контейнера компонента */
+  containerRef?: React.RefObject<HTMLDivElement>;
   /** Позволяет выравнивать позицию дропдаун контейнера относительно селекта */
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
+  /** Конфиг функция пропсов для контейнера InputBox. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  containerPropsConfig?: (
+    props: React.ComponentProps<typeof InputBox> & DataAttributes,
+  ) => Partial<React.ComponentProps<typeof InputBox>> & DataAttributes;
+
+  /** Конфиг функция пропсов для InputLine. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  inputLinePropsConfig?: (
+    props: React.ComponentProps<typeof InputLine> & DataAttributes,
+  ) => Partial<React.ComponentProps<typeof InputLine>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки очистки поля. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  clearInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для кнопки с иконкой времени. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  timeInputIconButtonPropsConfig?: (
+    props: React.ComponentProps<typeof InputIconButton>,
+  ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
 }
 
 export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
@@ -222,21 +169,37 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       displayClearIcon,
       isLoading,
       status,
+      disableCopying,
+      showTooltip = true,
+      containerRef,
       alignSelf = 'flex-end',
       skeleton = false,
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      containerPropsConfig = () => ({}),
+      inputLinePropsConfig = () => ({}),
+      clearInputIconButtonPropsConfig = () => ({}),
+      timeInputIconButtonPropsConfig = () => ({}),
       ...props
     },
     ref,
   ) => {
     const handleInput = props.handleInput || defaultTimePickerHandle;
-    const [timeValue, setTimeValue] = useState<string>('');
+    const [innerValueState, setInnerValueState] = useState(String(props.defaultValue ?? ''));
+    const innerValue = String(props.value ?? innerValueState);
     const [activeOption, setActiveOption] = React.useState<string | undefined>('');
-    const inputContainerRef = useRef<HTMLDivElement>(null);
+    const inputContainerRef = containerRef || useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isOpened, setIsOpened] = useState<boolean>(false);
+    const [overflowActive, setOverflowActive] = useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = e.currentTarget.value;
+      setInnerValueState(inputValue);
+      props.onChange?.(e);
+    };
 
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
 
@@ -284,7 +247,6 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       }
       if (!isOpened) {
         const inputTimeValue = parser(inputRef.current?.value);
-        setTimeValue(inputTimeValue);
         if (availableSlots) {
           if (availableSlots.find((slot) => slot.value === inputTimeValue)) {
             setActiveOption(inputTimeValue);
@@ -300,27 +262,44 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     const iconArray = React.Children.toArray(iconsAfter);
 
-    if (!props.readOnly && displayClearIcon && !!timeValue) {
+    if (!props.readOnly && displayClearIcon && !!innerValue) {
+      const clearInputIconButtonProps = {
+        icon: CloseOutlineSvg,
+        key: 'clear-icon',
+        onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+          // запрет на перемещение фокуса при клике по иконке
+          e.preventDefault();
+        },
+        onClick: () => {
+          if (inputRef.current) {
+            changeInputData(inputRef.current, { value: '' });
+          }
+        },
+        'aria-hidden': true,
+      };
+
       iconArray.unshift(
         <InputIconButton
-          icon={CloseOutlineSvg}
-          key="clear-icon"
-          onMouseDown={(e) => {
-            // запрет на перемещение фокуса при клике по иконке
-            e.preventDefault();
-          }}
-          onClick={() => {
-            if (inputRef.current) {
-              changeInputData(inputRef.current, { value: '' });
-            }
-          }}
-          aria-hidden
+          {...clearInputIconButtonProps}
+          {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
       );
     }
 
     if (!props.readOnly) {
-      iconArray.push(<InputIconButton icon={icon} onMouseDown={handleButtonClick} tabIndex={0} />);
+      const timeInputIconButtonProps = {
+        icon,
+        onMouseDown: handleButtonClick,
+        tabIndex: 0,
+      };
+
+      iconArray.push(
+        <InputIconButton {...timeInputIconButtonProps} {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)} />,
+      );
+    }
+
+    if (isLoading) {
+      iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
     }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {
@@ -362,7 +341,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     const handleSelectOption = (option: string) => {
       if (inputRef.current) {
-        setTimeValue(option);
+        setInnerValueState(option);
         changeInputData(inputRef.current, { value: option });
         setIsOpened(false);
       }
@@ -436,33 +415,103 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       };
     }, []);
 
+    useEffect(() => {
+      if (checkOverflow(inputRef.current)) {
+        setOverflowActive(true);
+        return;
+      }
+      setOverflowActive(false);
+    }, [tooltipVisible, setOverflowActive]);
+
+    useLayoutEffect(() => {
+      function show() {
+        if (inputRef.current && !disabled && !props.readOnly) {
+          setTooltipVisible(true);
+        }
+      }
+
+      function hide() {
+        setTooltipVisible(false);
+      }
+
+      const element = inputRef.current;
+      if (element) {
+        element.addEventListener('mouseenter', show);
+        element.addEventListener('focus', show);
+        element.addEventListener('mouseleave', hide);
+        element.addEventListener('blur', hide);
+        return () => {
+          element.removeEventListener('mouseenter', show);
+          element.removeEventListener('focus', show);
+          element.removeEventListener('mouseleave', hide);
+          element.removeEventListener('blur', hide);
+        };
+      }
+    }, [disabled, props.readOnly]);
+
+    useEffect(() => {
+      if (disableCopying) {
+        const element = inputRef.current;
+        if (element) {
+          const handleSelectStart = (e: Event) => e.preventDefault();
+          const handleDragStart = (e: Event) => e.preventDefault();
+          const handleDrop = (e: Event) => e.preventDefault();
+          const handleDragOver = (e: Event) => e.preventDefault();
+
+          element.addEventListener('selectstart', handleSelectStart);
+          element.addEventListener('dragstart', handleDragStart);
+          element.addEventListener('drop', handleDrop);
+          element.addEventListener('dragover', handleDragOver);
+
+          return () => {
+            element.removeEventListener('selectstart', handleSelectStart);
+            element.removeEventListener('dragstart', handleDragStart);
+            element.removeEventListener('drop', handleDrop);
+            element.removeEventListener('dragover', handleDragOver);
+          };
+        }
+      }
+    }, [disableCopying]);
+
+    const containerProps = {
+      $dimension: dimension,
+      $status: status,
+      disabled: disabled,
+      readOnly: props.readOnly,
+      $isLoading: isLoading,
+      $skeleton: skeleton,
+      $iconsAfterCount: iconArray.length,
+      'data-disabled': disabled ? true : undefined,
+      'data-read-only': props.readOnly ? true : undefined,
+      'data-loading': isLoading ? true : undefined,
+      'data-skeleton': skeleton ? true : undefined,
+      'data-status': status,
+      'data-disable-copying': disableCopying ? true : undefined,
+      ref: inputContainerRef,
+    };
+
+    const inputLineProps = {
+      ...props,
+      ref: refSetter(ref, inputRef),
+      placeholder: 'чч:мм',
+      dataPlaceholder: 'чч:мм',
+      onChange: handleChange,
+      value: innerValue,
+      disabled: disabled,
+      readOnly: props.readOnly,
+    };
+
     return (
       <>
-        <FocusBox
-          $dimension={dimension}
-          $iconsAfterCount={iconArray.length}
-          $status={status}
-          disabled={disabled}
-          readOnly={props.readOnly}
-          $isLoading={isLoading}
-        >
-          <InputLine
-            {...props}
-            ref={refSetter(ref, inputRef)}
-            placeholder="чч:мм"
-            dataPlaceholder="чч:мм"
-            onInput={(e) => setTimeValue(e.currentTarget.value)}
-            value={timeValue}
-            disabled={disabled}
-            readOnly={props.readOnly}
-          />
+        <InputBox {...containerProps} {...containerPropsConfig(containerProps)}>
+          <InputLine {...inputLineProps} {...inputLinePropsConfig(inputLineProps)} />
           {iconArray.length > 0 && (
             <IconPanelAfter disabled={disabled} $dimension={dimension}>
               {iconArray}
             </IconPanelAfter>
           )}
-        </FocusBox>
-        {availableSlots && isOpened && !disabled && !skeleton && (
+        </InputBox>
+        {availableSlots && isOpened && !disabled && !props.readOnly && !skeleton && (
           <StyledDropdownContainer
             targetElement={inputRef.current}
             alignSelf={alignSelf}
@@ -472,7 +521,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
             style={dropContainerStyle}
           >
             <StyledMenu
-              selected={timeValue}
+              selected={innerValue}
               active={activeOption}
               model={model}
               dimension={menuDimension}
@@ -482,6 +531,9 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
               preventFocusSteal
             />
           </StyledDropdownContainer>
+        )}
+        {showTooltip && tooltipVisible && overflowActive && (
+          <Tooltip renderContent={() => inputRef?.current?.value || ''} targetElement={inputContainerRef.current} />
         )}
       </>
     );

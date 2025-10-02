@@ -6,7 +6,7 @@ import { TimePicker } from '@admiral-ds/react-ui';
 import type { TimePickerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
-export const TimePickerSimpleTemplate = ({
+export const TimePickerSkeletonTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -31,6 +31,7 @@ export const TimePickerSimpleTemplate = ({
         style={{ maxWidth: '320px' }}
         value={localValue}
         onChange={handleChange}
+        skeleton
         dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>

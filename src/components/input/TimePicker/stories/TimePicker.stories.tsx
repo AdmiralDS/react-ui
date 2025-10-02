@@ -11,19 +11,25 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { TimePickerSimpleTemplate } from './TimePickerSimple.template';
+import { TimePickerSkeletonTemplate } from './TimePickerSkeleton.template';
 import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
+import { TimePickerDoubleIconTemplate } from './TimePickerDoubleIcon.template';
 import { TimePickerRangeTemplate } from './TimePickerRange.template';
 import { TimePickerRangeDisabledTemplate } from './TimePickerRangeDisabled.template';
 import { TimePickerSimpleDisabledTemplate } from './TimePickerSimpleDisabled.template';
 import { TimePickerSimpleCustomSlotsTemplate } from './TimePickerSimpleCustomSlots.template';
+import { TimePickerAlignDropdownContainerTemplate } from './TimePickerAlignDropdownContainer.template';
 
 // Imports of text sources
 import TimePickerSimpleRaw from './TimePickerSimple.template?raw';
+import TimePickerSkeletonRaw from './TimePickerSkeleton.template?raw';
 import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
+import TimePickerDoubleIconRaw from './TimePickerDoubleIcon.template?raw';
 import TimePickerRangeRaw from './TimePickerRange.template?raw';
 import TimePickerRangeDisabledRaw from './TimePickerRangeDisabled.template?raw';
 import TimePickerSimpleDisabledRaw from './TimePickerSimpleDisabled.template?raw';
 import TimePickerSimpleCustomSlotsRaw from './TimePickerSimpleCustomSlots.template?raw';
+import TimePickerAlignDropdownContainerRaw from './TimePickerAlignDropdownContainer.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -37,7 +43,7 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Компонент находится в разработке. Рекомендуем к использованию стабильную версию компонента TimeInput.
+    Альтернативная версия компонента TimeInput, реализованного через динамическую маску ввода.
     <Separator />
     Компонент для ввода-выбора времени. Поддерживается как ручной ввод, так и выбор через выпадающий список с
     фиксированным шагом в полчаса.
@@ -151,12 +157,40 @@ export const TimePickerSimple = {
     },
   },
 
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
   name: 'Базовый компонент',
 };
 
 //</editor-fold>
 
-// //<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой компонента">
+//<editor-fold desc="Компонент в загрузке скелетона">
+
+const TimePickerSkeletonStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerSkeletonTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerSkeleton = {
+  render: TimePickerSkeletonStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerSkeletonRaw,
+      },
+    },
+  },
+
+  name: 'Скелетон',
+};
+
+// </editor-fold>
+
+// //<editor-fold desc="ReadOnly компонент с альтернативной иконкой">
 const TimePickerIconCustomStory: StoryFn<typeof TimePicker> = (props) => <TimePickerIconCustomTemplate {...props} />;
 
 export const TimePickerIconCustom = {
@@ -170,7 +204,26 @@ export const TimePickerIconCustom = {
     },
   },
 
-  name: 'Компонент с альтернативной иконкой',
+  name: 'ReadOnly компонент с альтернативной иконкой',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой компонента">
+const TimePickerDoubleIconStory: StoryFn<typeof TimePicker> = (props) => <TimePickerDoubleIconTemplate {...props} />;
+
+export const TimePickerDoubleIcon = {
+  render: TimePickerDoubleIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerDoubleIconRaw,
+      },
+    },
+  },
+
+  name: 'Компонент с дополнительной иконкой и кастомной иконкой компонента',
 };
 
 //</editor-fold>
@@ -256,3 +309,25 @@ export const TimePickerSimpleCustomSlots = {
 };
 
 //</editor-fold>
+
+//<editor-fold desc='Компонент с выравненным дропдауном'>
+
+const TimePickerAlignDropdownContainerStory: StoryFn<typeof TimePicker> = (props) => (
+  <TimePickerAlignDropdownContainerTemplate {...props} />
+);
+
+export const TimePickerAlignDropdownContainer = {
+  render: TimePickerAlignDropdownContainerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerAlignDropdownContainerRaw,
+      },
+    },
+  },
+
+  name: 'Компонент с выравненным дропдауном',
+};
+
+// </editor-fold>
