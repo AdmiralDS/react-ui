@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
+import type { TextAreaProps } from '@admiral-ds/react-ui';
 import { TextArea, INPUT_DIMENSIONS_VALUES, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { TextAreaPlaygroundTemplate } from './TextAreaPlayground.template';
@@ -72,6 +73,18 @@ export default {
     onChange: {
       action: 'onChange',
     },
+    autoHeight: {
+      control: false,
+    },
+    autoHeightBoolean: {
+      control: { type: 'boolean' },
+    },
+    autoHeightMinRows: {
+      type: 'number',
+    },
+    autoHeightMaxRows: {
+      type: 'number',
+    },
     icons: {
       control: false,
     },
@@ -87,9 +100,6 @@ export default {
     containerRef: {
       control: false,
     },
-    autoHeight: {
-      control: { type: 'boolean' },
-    },
     themeBorderKind: {
       options: ALL_BORDER_RADIUS_VALUES,
       control: { type: 'radio' },
@@ -100,9 +110,18 @@ export default {
   },
 } as Meta<typeof TextArea>;
 
-const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = (props) => {
+const TextAreaPlaygroundStory: StoryFn<typeof TextArea> = ({
+  autoHeightBoolean,
+  autoHeightMinRows,
+  autoHeightMaxRows,
+  ...props
+}: TextAreaProps & { autoHeightBoolean?: boolean; autoHeightMinRows?: number; autoHeightMaxRows?: number }) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <TextAreaPlaygroundTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  let autoHeight: boolean | undefined | { minRows?: number; maxRows?: number } = autoHeightBoolean;
+  if (autoHeightBoolean && (autoHeightMinRows || autoHeightMaxRows)) {
+    autoHeight = { minRows: autoHeightMinRows, maxRows: autoHeightMaxRows };
+  }
+  return <TextAreaPlaygroundTemplate {...props} autoHeight={autoHeight} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const TextAreaPlayground = {

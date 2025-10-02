@@ -8,6 +8,7 @@ export const VerticalTabMenuContainer = styled.div<{
   $underlinePosition?: VerticalUnderlinePosition;
 }>`
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 8px;
