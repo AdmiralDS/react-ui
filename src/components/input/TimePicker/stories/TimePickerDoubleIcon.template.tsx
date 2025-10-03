@@ -5,8 +5,9 @@ import { TimePicker, InputIconButton } from '@admiral-ds/react-ui';
 import type { TimePickerProps } from '@admiral-ds/react-ui';
 import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/GPSOutline.svg';
 import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
+import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
-export const TimePickerIconCustomTemplate = (props: TimePickerProps) => {
+export const TimePickerDoubleIconTemplate = (props: TimePickerProps) => {
   const [localValue, setLocalValue] = React.useState<string>(String(props.value) ?? '');
 
   React.useEffect(() => {
@@ -25,11 +26,15 @@ export const TimePickerIconCustomTemplate = (props: TimePickerProps) => {
       <TimePicker
         {...props}
         style={{ maxWidth: '320px' }}
-        iconsAfter={<InputIconButton icon={GPSOutline} onClick={() => setLocalValue('12:00')} />}
+        iconsAfter={
+          <>
+            <InputIconButton icon={CloseOutlineSvg} onClick={() => setLocalValue('00:00')} />
+            <InputIconButton icon={GPSOutline} onClick={() => setLocalValue('12:00')} />
+          </>
+        }
         icon={TimeSolid}
         value={localValue}
         onChange={handleChange}
-        readOnly
         dropContainerClassName="dropContainerClass"
       />
     </>

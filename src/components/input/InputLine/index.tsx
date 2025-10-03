@@ -20,8 +20,37 @@ export const StyledInputLine = styled.input<{ $isTmpValue?: boolean }>`
       ? `var(--admiral-color-Neutral_Neutral30, ${p.theme.color['Neutral/Neutral 30']})`
       : `var(--admiral-color-Neutral_Neutral90, ${p.theme.color['Neutral/Neutral 90']})`};
 
+  &:disabled {
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+    cursor: not-allowed;
+  }
+
+  [data-loading] &&&,
+  &&&:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  [data-disable-copying] & {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    &::selection {
+      background-color: transparent;
+    }
+    &::-moz-selection {
+      background-color: transparent;
+    }
+  }
+
   ::placeholder {
     color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  }
+
+  &:disabled::placeholder,
+  &:read-only::placeholder {
+    color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;
 
@@ -49,6 +78,11 @@ const InputLineContainer = styled.div`
 
   &:focus-within ${PlaceholderValue} {
     color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  }
+
+  [data-loading] &,
+  [data-skeleton] & {
+    pointer-events: none;
   }
 `;
 
