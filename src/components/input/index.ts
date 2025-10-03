@@ -23,3 +23,4 @@ export * from './MultiInput';
 export * from './InputLine';
 export * from './TreeSelect';
 export * from './InputBox';
+export * from './TimePickerIcons';
