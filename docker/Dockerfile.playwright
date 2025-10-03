@@ -1,0 +1,20 @@
+# Dockerfile.playwright
+FROM mcr.microsoft.com/playwright:v1.55.1-jammy
+
+WORKDIR /app
+
+# Копируем файлы зависимостей
+COPY docker/package.playwright.json ./package.json
+
+# Устанавливаем зависимости
+RUN npm i
+
+# Копируем исходный код
+COPY  docker/playwright.config.ts ./
+COPY  tests/ ./tests/
+
+# Устанавливаем браузеры Playwright
+RUN npx playwright install-deps
+
+# Запускаем тесты
+CMD ["npx", "playwright", "test"]

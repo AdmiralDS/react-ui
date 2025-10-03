@@ -28,6 +28,14 @@ interface TabContentProps extends VerticalTabProps {
   onCloseTab?: (tabId: string) => void;
 }
 
+const Content = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-grow: 2;
+  gap: 8px;
+`;
+
 interface CustomVerticalTabProps extends TabContentProps {}
 const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
   (
@@ -51,6 +59,7 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
     return (
       <VerticalTab
         {...props}
+        data-testid={`VerticalTab${tabId}`}
         ref={ref}
         tabId={tabId}
         dimension={dimension}
@@ -58,18 +67,25 @@ const CustomVerticalTab = forwardRef<HTMLButtonElement, CustomVerticalTabProps>(
         selected={selected}
         onSelectTab={onSelectTab}
       >
-        {icon && (
-          <TabIcon $dimension={dimension} $disabled={disabled}>
-            {icon}
-          </TabIcon>
-        )}
-        <TabText>{text}</TabText>
-        {badge && (
-          <VerticalTabBadge disabled={disabled} selected={selected}>
-            {badge}
-          </VerticalTabBadge>
-        )}
-        <TabCloseIconButton dimension={dimension} disabled={disabled} onCloseIconButtonClick={handleCloseTab} />
+        <Content>
+          {icon && (
+            <TabIcon $dimension={dimension} $disabled={disabled}>
+              {icon}
+            </TabIcon>
+          )}
+          <TabText>{text}</TabText>
+          {badge && (
+            <VerticalTabBadge disabled={disabled} selected={selected}>
+              {badge}
+            </VerticalTabBadge>
+          )}
+        </Content>
+        <TabCloseIconButton
+          data-testid={`TabCloseButton${tabId}`}
+          dimension={dimension}
+          disabled={disabled}
+          onCloseIconButtonClick={handleCloseTab}
+        />
       </VerticalTab>
     );
   },
@@ -188,7 +204,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
     const currentTab = tabs.find((tab) => tab.tabId === tabId);
     return (options: RenderOptionProps) => {
       return (
-        <MenuItem dimension={dimension} {...options} key={tabId}>
+        <MenuItem data-testid={`MenuItemCloseButton${tabId}`} dimension={dimension} {...options} key={tabId}>
           <MenuItemWrapper>
             <div>{currentTab?.text}</div>
             <TabCloseIconButton
@@ -230,6 +246,7 @@ export const VerticalTabMenuWithAddButtonTemplate = ({
         </StyledNotificationItem>
         <TabMenuVertical
           {...props}
+          data-testid="TabMenuVertical"
           dimension={dimension}
           showUnderline={showUnderline}
           underlinePosition={underlinePosition}

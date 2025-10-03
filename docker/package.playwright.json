@@ -1,0 +1,42 @@
+{
+  "name": "@admiral-ds/react-ui",
+  "version": "8.55.0",
+  "description": "React component library for Admiral design system 2.1",
+  "keywords": ["AdmiralDS", "Admiral", "ui", "react", "library"],
+  "author": "Admiral DS team",
+  "license": "See license in ./LICENSE",
+  "files": ["dist", "src/components", "README.md", "tsconfig.json"],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js"
+    }
+  },
+  "sideEffects": false,
+  "imports": {
+    "#src/*": "./src/*"
+  },
+  "scripts": {
+    "build": "rollup -c --strictDeprecations",
+    "test": "jest --detectOpenHandles",
+    "test:update": "jest -u",
+    "test:watch": "jest --watch",
+    "test:e2e": "playwright test",
+    "test:e2e-ui": "playwright test --ui",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
+    "preview-storybook": "npx http-server ./docs/current",
+    "release": "standard-version"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^20.16.11",
+    "typescript": "5.4.2"
+  }
+}

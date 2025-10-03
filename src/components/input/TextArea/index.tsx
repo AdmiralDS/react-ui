@@ -572,6 +572,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <StyledContainer
+        data-testid="textAreaWrapper"
         className={className}
         ref={refSetter(containerRef, localContainerRef)}
         data-read-only={props.readOnly ? true : undefined}
