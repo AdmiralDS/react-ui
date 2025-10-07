@@ -11,6 +11,12 @@ import { StepperCustomStepContentTemplate } from './StepperCustomStepContent.tem
 import { StepperClickPropTemplate } from './StepperClickProp.template';
 import { StepperPreviousStepsTemplate } from './StepperPreviousSteps.template';
 import { StepperMobileTemplate } from './StepperMobile.template';
+import { StepperProgressTemplate } from './StepperProgress.template';
+import { StepperProgressPercentageTemplate } from './StepperProgressPercentage.template';
+import { StepperProgressDisplayNextStepTemplate } from './StepperProgressDisplayNextStep.template';
+import { StepperProgressLineClampTemplate } from './StepperProgressLineClamp.template';
+import { StepperProgressMobileTemplate } from './StepperProgressMobile.template';
+import { StepperProgressCustomTemplate } from './StepperProgressCustom.template';
 
 // Imports of text sources
 import StepperPlaygroundRaw from './StepperPlayground.template?raw';
@@ -21,6 +27,12 @@ import StepperCustomStepContentRaw from './StepperCustomStepContent.template?raw
 import StepperClickPropRaw from './StepperClickProp.template?raw';
 import StepperPreviousStepsRaw from './StepperPreviousSteps.template?raw';
 import StepperMobileRaw from './StepperMobile.template?raw';
+import StepperProgressRaw from './StepperProgress.template?raw';
+import StepperProgressPercentageRaw from './StepperProgressPercentage.template?raw';
+import StepperProgressDisplayNextStepRaw from './StepperProgressDisplayNextStep.template?raw';
+import StepperProgressLineClampRaw from './StepperProgressLineClamp.template?raw';
+import StepperProgressMobileRaw from './StepperProgressMobile.template?raw';
+import StepperProgressCustomRaw from './StepperProgressCustom.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -88,6 +100,16 @@ export default {
     },
     stepWidth: {
       control: false,
+    },
+    progressMode: {
+      control: { type: 'boolean' },
+    },
+    displayNextStepName: {
+      control: { type: 'boolean' },
+    },
+    progressFormat: {
+      options: ['percentage', 'steps'],
+      control: { type: 'radio' },
     },
   },
 } as Meta<typeof Stepper>;
@@ -241,3 +263,119 @@ export const MobileExample = {
 
   name: 'Stepper. Мобильная версия.',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Mode">
+const ProgressStory: StoryFn<typeof Stepper> = () => <StepperProgressTemplate />;
+
+export const ProgressExample = {
+  render: ProgressStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Percentage">
+const ProgressPercentageStory: StoryFn<typeof Stepper> = () => <StepperProgressPercentageTemplate />;
+
+export const ProgressPercentageExample = {
+  render: ProgressPercentageStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressPercentageRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper. Проценты.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Next Step">
+const ProgressNextStepStory: StoryFn<typeof Stepper> = () => <StepperProgressDisplayNextStepTemplate />;
+
+export const ProgressNextStepExample = {
+  render: ProgressNextStepStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressDisplayNextStepRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper. Отключение следующего шага.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Line Clamp">
+const ProgressLineClampStepStory: StoryFn<typeof Stepper> = () => <StepperProgressLineClampTemplate />;
+
+export const ProgressLineClampStepExample = {
+  render: ProgressLineClampStepStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressLineClampRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper. Ограничение количества строк.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Mobile">
+const ProgressMobileStory: StoryFn<typeof Stepper> = () => <StepperProgressMobileTemplate />;
+
+export const ProgressMobileExample = {
+  render: ProgressMobileStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressMobileRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper. Мобильная версия.',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Progress Custom">
+const ProgressCustomStory: StoryFn<typeof Stepper> = () => <StepperProgressCustomTemplate />;
+
+export const ProgressCustomExample = {
+  render: ProgressCustomStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: StepperProgressCustomRaw,
+      },
+    },
+  },
+
+  name: 'ProgressStepper. Кастомное отображение проресса',
+};
+
+//</editor-fold>
