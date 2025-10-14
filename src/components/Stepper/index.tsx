@@ -2,8 +2,25 @@ import { Children, cloneElement, isValidElement, useRef, useMemo, useEffect } fr
 import type { FC, HTMLAttributes } from 'react';
 
 import { StepperContext } from './StepperContext';
-import { List } from './style';
-import type { Orientation } from './type';
+import {
+  List,
+  ProgressWrapper,
+  ProgressHeader,
+  ProgressActiveStep,
+  ProgressText,
+  ProgressBarWrapper,
+  ProgressBar,
+  ProgressNextStep,
+} from './style';
+import type { Orientation, LineClamp, ProgressMode } from './type';
+import {
+  convertNumberToIntegerPercent,
+  setFirstLetterToUpperCase,
+  setFirstLetterToLowerCase,
+  getStepsPluralForm,
+} from './utils';
+import { useTheme } from 'styled-components';
+import { LIGHT_THEME } from '#src/components/themes';
 
 export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
   /** Ориентация компонента */
@@ -13,7 +30,7 @@ export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
    */
   activeStep: number;
   /** Количество строк в шаге, все шаги по высоте вмещают одинаковое количество строк */
-  lineClamp?: 1 | 2 | 3;
+  lineClamp?: LineClamp;
   /** Ширина шага
    * Если данный параметр не задан, то ширина шага будет адаптивной:
    * - при горизонтальной ориентации все шаги будут в равной степени делить между собой свободное пространство (ширину степпера);
@@ -28,12 +45,28 @@ export interface StepperProps extends HTMLAttributes<HTMLUListElement> {
    * по мере прохождения шагов происходит автоматический скролл по горизонтали
    */
   mobile?: boolean;
+  /** Включить режим отображения Progress для большого количества шагов */
+  progressMode?: boolean;
+  /** Отображение/скрытие подписи о следующем шаге в режиме Progress */
+  displayNextStepName?: boolean;
+  /** Формат отображения прогресса: 'percentage' - проценты, 'steps' - в шагах */
+  progressFormat?: ProgressMode;
+  /** Объект локализации для режима Progress */
+  progressLocale?: {
+    /** Название шага, допускает 2 или 3 формы, например, ['шаг', 'шагов'] или ['шаг', 'шага', 'шагов'] */
+    stepName?: [string, string] | [string, string, string];
+    /** Функция, возвращающая текст, поясняющий, на каком шаге из скольки шагов находится пользователь */
+    progressText?: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) => string;
+    /** Функция, которая формирует подпись о следующем шаге, на основе nextStepName */
+    renderNextStepName?: (nextStepName: string) => React.ReactNode;
+  };
 }
 
 export * from './type';
 export * from './Step';
 export * from './StepContent';
 export * from './StepperContext';
+export * from './utils';
 
 export const Stepper: FC<StepperProps> = ({
   orientation = 'horizontal',
@@ -42,6 +75,10 @@ export const Stepper: FC<StepperProps> = ({
   stepWidth,
   hideLastStepLine = false,
   mobile,
+  progressMode = false,
+  displayNextStepName = true,
+  progressFormat = 'steps',
+  progressLocale,
   children,
   ...props
 }) => {
@@ -74,8 +111,23 @@ export const Stepper: FC<StepperProps> = ({
       stepsAmount,
       stepWidth,
       mobile,
+      progressMode,
+      displayNextStepName,
+      progressFormat,
+      progressLocale,
     }),
-    [activeStep, orientation, lineClamp, stepWidth, stepsAmount, mobile],
+    [
+      activeStep,
+      orientation,
+      lineClamp,
+      stepWidth,
+      stepsAmount,
+      mobile,
+      progressMode,
+      displayNextStepName,
+      progressFormat,
+      progressLocale,
+    ],
   );
 
   useEffect(() => {
@@ -84,6 +136,74 @@ export const Stepper: FC<StepperProps> = ({
       listRef.current.scrollLeft = activeStep === 0 ? activeNode.offsetLeft : activeNode.offsetLeft - 16;
     }
   }, [activeStep, steps]);
+
+  // Progress Mode Logic
+  if (progressMode) {
+    const theme = useTheme() || LIGHT_THEME;
+    const stepNames = Children.toArray(children)
+      .map((step) => {
+        if (isValidElement(step) && typeof step.props.children === 'string') {
+          return step.props.children;
+        }
+        return '';
+      })
+      .filter(Boolean);
+
+    const stepsAmount = stepNames.length;
+    const currentStep = Math.max(0, Math.min(activeStep, stepsAmount - 1));
+    const currentStepNumber = currentStep + 1;
+    const nextStep = currentStep + 1;
+    const nextStepName = stepNames[nextStep];
+
+    // Локализация
+    const stepName = progressLocale?.stepName ||
+      theme.locales[theme.currentLocale].progressStepper?.stepName || ['шага', 'шагов', 'шагов'];
+    const progressText =
+      progressLocale?.progressText ||
+      theme.locales[theme.currentLocale].progressStepper?.progressText ||
+      ((activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
+        `${activeStepNumber} из ${stepsAmount} ${stepNamePlural}`);
+    const renderNextStepName =
+      progressLocale?.renderNextStepName ||
+      theme.locales[theme.currentLocale].progressStepper?.renderNextStepName ||
+      ((nextStepName: string) => `Далее - ${setFirstLetterToLowerCase(nextStepName)}`);
+
+    const progressPercentage = convertNumberToIntegerPercent(currentStepNumber, stepsAmount);
+    const stepNamePlural = getStepsPluralForm(stepsAmount, stepName);
+    const progressTextContent =
+      progressFormat === 'percentage'
+        ? `${progressPercentage}%`
+        : progressText(currentStepNumber, stepsAmount, stepNamePlural);
+
+    return (
+      <StepperContext.Provider value={contextValue}>
+        <ProgressWrapper className={props.className} style={props.style}>
+          <ProgressHeader $mobile={mobile} aria-hidden>
+            <ProgressActiveStep $lineClamp={lineClamp}>
+              {setFirstLetterToUpperCase(stepNames[currentStep])}
+            </ProgressActiveStep>
+            <ProgressText>{progressTextContent}</ProgressText>
+          </ProgressHeader>
+          <ProgressBarWrapper>
+            <ProgressBar
+              tabIndex={0}
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={stepsAmount}
+              aria-valuenow={currentStepNumber}
+              aria-valuetext={`${stepName[0]} ${currentStepNumber}: ${stepNames[currentStep]}`}
+              style={{ width: `${progressPercentage}%` }}
+            />
+          </ProgressBarWrapper>
+          {displayNextStepName && nextStepName && (
+            <ProgressNextStep $lineClamp={lineClamp} aria-hidden>
+              {renderNextStepName(setFirstLetterToLowerCase(nextStepName))}
+            </ProgressNextStep>
+          )}
+        </ProgressWrapper>
+      </StepperContext.Provider>
+    );
+  }
 
   return (
     <StepperContext.Provider value={contextValue}>

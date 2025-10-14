@@ -216,3 +216,67 @@ flex-direction: column;
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
+
+// Progress Mode Styles
+export const ProgressWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+`;
+
+export const ProgressHeader = styled.div<{ $mobile?: boolean }>`
+  display: flex;
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')};
+  ${({ $mobile }) => !$mobile && 'justify-content: space-between;'}
+  margin-bottom: 8px;
+`;
+
+export const ProgressActiveStep = styled.div<{ $lineClamp?: 1 | 2 | 3 }>`
+  ${typography['Body/Body 2 Long']}
+  color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${({ $lineClamp }) => {
+    if ($lineClamp === 1) return 1;
+    if ($lineClamp === 2) return 2;
+    return 3;
+  }};
+  overflow: hidden;
+`;
+
+export const ProgressText = styled.div`
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  ${typography['Body/Body 2 Long']}
+`;
+
+export const ProgressBarWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+`;
+
+export const ProgressBar = styled.div`
+  background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+  transition: width 0.3s ease;
+  border-radius: 2px;
+`;
+
+export const ProgressNextStep = styled.div<{ $lineClamp?: 1 | 2 | 3 }>`
+  width: 100%;
+  text-align: left;
+  margin-top: 8px;
+  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+  ${typography['Caption/Caption 1']}
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${({ $lineClamp }) => {
+    if ($lineClamp === 1) return 1;
+    if ($lineClamp === 2) return 2;
+    return 3;
+  }};
+  overflow: hidden;
+`;
