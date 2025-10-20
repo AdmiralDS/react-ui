@@ -1,4 +1,4 @@
-import { Children, forwardRef, useRef, useState } from 'react';
+import { Children, forwardRef, useRef, useState, type KeyboardEvent } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
@@ -16,6 +16,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
+import { keyboardKey } from '../../common/keyboardKey';
 
 export * from './ActionsPanel';
 
@@ -117,6 +118,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       dimension = 'm',
       onBeforeInput = preventUseUnsupportedCharacters,
       renderBottomPanel,
+      onKeyDown,
       ...props
     },
     ref,
@@ -202,12 +204,21 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
     }
 
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+      const code = keyboardKey.getCode(event);
+      if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        event.preventDefault();
+      }
+      onKeyDown?.(event);
+    };
+
     return (
       <Input
         {...{ dimension, ...props }}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
         onBeforeInput={onBeforeInput}
+        onKeyDown={handleKeyDown}
         iconsAfter={iconArray}
         containerRef={inputContainerRef}
         skeleton={skeleton}
