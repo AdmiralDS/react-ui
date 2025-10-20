@@ -11,7 +11,7 @@ export const TimePickerSkeletonTemplate = ({
   CSSCustomProps,
   ...props
 }: TimePickerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value ?? ''));
 
   React.useEffect(() => {
     if (props.value !== undefined) {

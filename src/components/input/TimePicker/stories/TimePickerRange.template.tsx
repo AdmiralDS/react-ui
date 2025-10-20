@@ -5,7 +5,7 @@ import { TimePicker } from '@admiral-ds/react-ui';
 import type { TimePickerProps } from '@admiral-ds/react-ui';
 
 export const TimePickerRangeTemplate = (props: TimePickerProps) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value ?? ''));
 
   React.useEffect(() => {
     if (props.value !== undefined) {

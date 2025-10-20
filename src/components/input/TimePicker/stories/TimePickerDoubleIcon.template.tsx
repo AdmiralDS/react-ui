@@ -8,7 +8,7 @@ import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/Time
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
 
 export const TimePickerDoubleIconTemplate = (props: TimePickerProps) => {
-  const [localValue, setLocalValue] = React.useState<string>(String(props.value) ?? '');
+  const [localValue, setLocalValue] = React.useState<string>(String(props.value ?? ''));
 
   React.useEffect(() => {
     if (props.value !== undefined) {
