@@ -304,7 +304,11 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       };
 
       iconArray.push(
-        <InputIconButton {...timeInputIconButtonProps} {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)} />,
+        <InputIconButton
+{...timeInputIconButtonProps}
+{...timeInputIconButtonPropsConfig(timeInputIconButtonProps)}
+          key="time-icon"
+/>,
       );
     }
 
