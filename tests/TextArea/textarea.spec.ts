@@ -116,3 +116,17 @@ test('autoheight with min and max rows', async ({ page }) => {
   const boxFourth = await component.boundingBox();
   expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
 });
+
+test('native undo reverts last character', async ({ page }) => {
+  await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
+  const frame = getStorybookFrameLocator(page);
+  const textarea = frame.getByTestId('textAreaPlayground');
+
+  await textarea.click();
+  await textarea.fill('hello');
+  await textarea.pressSequentially('a');
+
+  await page.keyboard.press(process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ');
+
+  await expect(textarea).toHaveValue('hello');
+});
