@@ -10,6 +10,7 @@ import type { TextInputProps } from '../TextInput';
 import { InputLine } from '../InputLine';
 import { InputBox } from '../InputBox';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { keyboardKey } from '../../common/keyboardKey';
 import { defaultTimePickerHandle } from '#src/components/input/TimePicker/defaultTimePickerHandle';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { getTimeInMinutes, parseStringToTime, generateTimeArray } from './utils';
@@ -195,6 +196,14 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     const [isOpened, setIsOpened] = useState<boolean>(false);
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      const code = keyboardKey.getCode(event);
+      if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        event.preventDefault();
+      }
+      props.onKeyDown?.(event);
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = e.currentTarget.value;
@@ -498,6 +507,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       placeholder: 'чч:мм',
       dataPlaceholder: 'чч:мм',
       onChange: handleChange,
+      onKeyDown: handleKeyDown,
       value: innerValue,
       disabled: disabled,
       readOnly: props.readOnly,
