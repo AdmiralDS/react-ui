@@ -17,6 +17,7 @@ import { StyledDropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { Menu } from '#src/components/Menu';
+import { keyboardKey } from '../../common/keyboardKey';
 
 export interface SlotProps extends HTMLAttributes<HTMLElement>, RenderOptionProps, DataAttributes {
   value: string;
@@ -98,6 +99,7 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       dropContainerClassName,
       dropContainerStyle,
       timeInputIconButtonPropsConfig = () => {},
+      onKeyDown,
       ...props
     },
     ref,
@@ -263,12 +265,21 @@ export const TimeInput = React.forwardRef<HTMLInputElement, TimeInputProps>(
       };
     }, []);
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      const code = keyboardKey.getCode(event);
+      if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        event.preventDefault();
+      }
+      onKeyDown?.(event);
+    };
+
     return (
       <StyledTextInput
         {...props}
         ref={refSetter(ref, inputRef)}
         handleInput={handleInput}
         iconsAfter={iconArray}
+        onKeyDown={handleKeyDown}
         containerRef={inputContainerRef}
         disabled={disabled}
         dimension={dimension}
