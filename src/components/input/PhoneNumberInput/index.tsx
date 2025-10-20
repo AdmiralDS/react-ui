@@ -243,8 +243,15 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
       setIsOpened(false);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       const code = keyboardKey.getCode(e);
+      if ((e.ctrlKey || e.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        e.preventDefault();
+        props.onKeyDown?.(e);
+        return;
+      }
+
+      props.onKeyDown?.(e);
 
       switch (code) {
         case keyboardKey[' ']:
@@ -364,10 +371,7 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
           dimension={dimension}
           skeleton={skeleton}
           displayClearIcon={false}
-          onKeyDown={(...p) => {
-            props.onKeyDown?.(...p);
-            handleKeyDown(...p);
-          }}
+          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           onFocus={handleFocus}
         >
