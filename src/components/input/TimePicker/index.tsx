@@ -222,6 +222,19 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
         const inputData = handleInput(currentInputData, e as InputEvent);
 
+        /*
+        сравнение текущего состояния ввода с уже обработанным,
+        если существенных изменений нет — пропуск changeInputData,
+        чтобы не уйти в бесконечный цикл
+        */
+        if (!isInputDataDifferent(currentInputData, inputData)) {
+          return;
+        }
+
+        if (!inputData || inputData.value === value) {
+          return;
+        }
+
         if (!isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(this, { ...inputData, value: '' });
         } else {
@@ -237,6 +250,19 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         const { value, selectionStart, selectionEnd } = node;
         const currentInputData = { value, selectionStart, selectionEnd };
         const inputData = handleInput(currentInputData);
+
+        /*
+        сравнение текущего состояния ввода с уже обработанным,
+        если существенных изменений нет — пропуск changeInputData,
+        чтобы не уйти в бесконечный цикл
+        */
+        if (!isInputDataDifferent(currentInputData, inputData)) {
+          return;
+        }
+
+        if (!inputData || inputData.value === value) {
+          return;
+        }
 
         if (!isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(node, { ...inputData, value: '' });
@@ -305,10 +331,10 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
       iconArray.push(
         <InputIconButton
-{...timeInputIconButtonProps}
-{...timeInputIconButtonPropsConfig(timeInputIconButtonProps)}
+          {...timeInputIconButtonProps}
+          {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)}
           key="time-icon"
-/>,
+        />,
       );
     }
 
