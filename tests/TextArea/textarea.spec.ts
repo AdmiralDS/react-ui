@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator } from '../utils';
+import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
@@ -126,7 +126,7 @@ test('native undo reverts last character', async ({ page }) => {
   await textarea.fill('hello');
   await textarea.pressSequentially('a');
 
-  await page.keyboard.press(process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ');
+    await page.keyboard.press(UNDO_SHORTCUT);
 
   await expect(textarea).toHaveValue('hello');
 });

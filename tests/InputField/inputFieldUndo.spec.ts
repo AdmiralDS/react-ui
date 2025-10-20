@@ -1,10 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator } from '../utils';
-
-const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
+import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
 test('native undo restores previous value for InputField', async ({ page }) => {
-  await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-example');
+  await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
   const frame = getStorybookFrameLocator(page);
   const input = frame.locator('[data-container-id="inputFieldIdOne"] .text-input-native-input');
   const initialValue = await input.inputValue();

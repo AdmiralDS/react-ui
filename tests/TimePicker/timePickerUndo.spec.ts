@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { clickAndWait, getStorybookFrameLocator } from '../utils';
-
-const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
+import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
 test('native undo is disabled for TimePicker', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
