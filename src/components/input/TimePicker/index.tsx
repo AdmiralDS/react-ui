@@ -177,6 +177,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      className,
       containerPropsConfig = () => ({}),
       inputLinePropsConfig = () => ({}),
       clearInputIconButtonPropsConfig = () => ({}),
@@ -492,6 +493,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     const inputLineProps = {
       ...props,
+      className: className + ' time-picker-native-input',
       ref: refSetter(ref, inputRef),
       placeholder: 'чч:мм',
       dataPlaceholder: 'чч:мм',
