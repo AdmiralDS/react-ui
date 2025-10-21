@@ -1,16 +1,24 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
-test('native undo removes last character for TextField', async ({ page }) => {
+test('native undo works', async ({ page, browserName }) => {
   await page.goto('/?path=/story/admiral-2-1-form-field-textfield--text-field-input');
   const frame = getStorybookFrameLocator(page);
   const textarea = frame.locator('[data-container-id="textFieldIdOne"] textarea').first();
 
+  // очищаем поле и вставляем текст для теста
+  await textarea.fill('');
   await textarea.click();
-  await textarea.fill('hello');
-  await textarea.pressSequentially('a');
+  // имитируем ввод с клавиатуры по одному символу
+  await textarea.pressSequentially('hello');
 
+  const valueBeforeUndo = await textarea.inputValue();
   await page.keyboard.press(UNDO_SHORTCUT);
 
-  await expect(textarea).toHaveValue('hello');
+  // разделение обусловлено реализацией системы undo/redo в разных движках
+  if (browserName === 'chromium') {
+    await expect(textarea).toHaveValue('hell');
+  } else {
+    await expect(textarea).not.toHaveValue(valueBeforeUndo);
+  }
 });
