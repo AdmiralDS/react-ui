@@ -192,7 +192,7 @@ exports[`DateField should render component 1`] = `
         class="c1 c2 c3 c4"
       >
         <input
-          class="c5"
+          class="c5 text-input-native-input"
           data-testid="my test input"
           id="some static snapshot id"
         />
