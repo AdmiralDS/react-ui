@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 
-describe('Spinner', () => {
+describe('Stepper', () => {
   const steps = [
     {
       key: 0,
@@ -63,5 +63,117 @@ describe('Spinner', () => {
   it('should render component with stepWidth', () => {
     const wrapper = render(<Comp stepWidth={'100px'} />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  // ProgressMode tests
+  describe('ProgressMode', () => {
+    const progressSteps = [
+      { key: 0, content: 'Первый шаг' },
+      { key: 1, content: 'Второй шаг' },
+      { key: 2, content: 'Третий шаг' },
+      { key: 3, content: 'Четвертый шаг' },
+      { key: 4, content: 'Пятый шаг' },
+    ];
+
+    const ProgressComp = ({
+      activeStep = 2,
+      progressMode = true,
+      displayNextStepName = true,
+      progressFormat = 'steps',
+      mobile = false,
+      progressLocale,
+    }: {
+      activeStep?: number;
+      progressMode?: boolean;
+      displayNextStepName?: boolean;
+      progressFormat?: 'steps' | 'percentage';
+      mobile?: boolean;
+      progressLocale?: {
+        stepName?: [string, string] | [string, string, string];
+        progressText?: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) => string;
+        renderNextStepName?: (nextStepName: string) => React.ReactNode;
+      };
+    }) => (
+      <ThemeProvider theme={LIGHT_THEME}>
+        <Stepper
+          activeStep={activeStep}
+          progressMode={progressMode}
+          displayNextStepName={displayNextStepName}
+          progressFormat={progressFormat}
+          mobile={mobile}
+          progressLocale={progressLocale}
+        >
+          {progressSteps.map((step) => {
+            return (
+              <Step {...step} key={step.key}>
+                <StepContent>{step.content}</StepContent>
+              </Step>
+            );
+          })}
+        </Stepper>
+      </ThemeProvider>
+    );
+
+    it('should render ProgressMode with steps format', () => {
+      const wrapper = render(<ProgressComp />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with percentage format', () => {
+      const wrapper = render(<ProgressComp progressFormat="percentage" />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode without next step name', () => {
+      const wrapper = render(<ProgressComp displayNextStepName={false} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode in mobile version', () => {
+      const wrapper = render(<ProgressComp mobile={true} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with first step active', () => {
+      const wrapper = render(<ProgressComp activeStep={0} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with last step active', () => {
+      const wrapper = render(<ProgressComp activeStep={4} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with custom locale', () => {
+      const customLocale = {
+        stepName: ['этап', 'этапа', 'этапов'] as [string, string, string],
+        progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
+          `Этап ${activeStepNumber} из ${stepsAmount} ${stepNamePlural}`,
+        renderNextStepName: (nextStepName: string) => `Следующий: ${nextStepName}`,
+      };
+      const wrapper = render(<ProgressComp progressLocale={customLocale} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with custom locale (2 forms)', () => {
+      const customLocale = {
+        stepName: ['шаг', 'шагов'] as [string, string],
+        progressText: (activeStepNumber: number, stepsAmount: number, stepNamePlural: string) =>
+          `${activeStepNumber} из ${stepsAmount} ${stepNamePlural}`,
+        renderNextStepName: (nextStepName: string) => `Далее: ${nextStepName}`,
+      };
+      const wrapper = render(<ProgressComp progressLocale={customLocale} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with negative activeStep', () => {
+      const wrapper = render(<ProgressComp activeStep={-1} />);
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render ProgressMode with activeStep greater than steps count', () => {
+      const wrapper = render(<ProgressComp activeStep={10} />);
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 });

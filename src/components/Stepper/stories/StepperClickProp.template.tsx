@@ -21,11 +21,11 @@ const steps = [
 export const StepperClickPropTemplate = () => {
   return (
     <>
-      <Stepper activeStep={2}>
+      <Stepper activeStep={2} data-testid="stepper">
         {steps.map(({ content, ...step }) => {
           return (
             // eslint-disable-next-line no-console
-            <Step {...step} onClick={(step: any) => console.log(step.index)}>
+            <Step {...step} onClick={(step: any) => console.log(`step ${step.index}`)} data-testid="step">
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
@@ -36,7 +36,7 @@ export const StepperClickPropTemplate = () => {
         {steps.map(({ content, ...step }) => {
           return (
             // eslint-disable-next-line no-console
-            <Step {...step} onClick={(step: any) => console.log(step.index)}>
+            <Step {...step} onClick={(step: any) => console.log(`step ${step.index}`)}>
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );

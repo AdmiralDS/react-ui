@@ -1,6 +1,2394 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Spinner should render component with lineClamp equal 1 1`] = `
+exports[`Stepper ProgressMode should render ProgressMode in mobile version 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with activeStep greater than steps count 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with custom locale (2 forms) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with custom locale 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            Этап 1 из 0 этапов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="этап 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          Этап 1 из 0 этапов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="этап 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with first step active 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with last step active 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with negative activeStep 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with percentage format 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            Infinity%
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          Infinity%
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode with steps format 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper ProgressMode should render ProgressMode without next step name 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+        data-testid="progress-wrapper"
+      >
+        <div
+          aria-hidden="true"
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="progress-active-step"
+          />
+          <div
+            class="c3"
+            data-testid="progress-text"
+          >
+            1 из 0 шагов
+          </div>
+        </div>
+        <div
+          class="c4"
+        >
+          <div
+            aria-valuemax="0"
+            aria-valuemin="0"
+            aria-valuenow="1"
+            aria-valuetext="шаг 1: undefined"
+            class="c5"
+            role="progressbar"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": .c0 {
+  display: flex;
+  flex-direction: column;
+  min-width: 388px;
+}
+
+.c1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.c2 {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.c3 {
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--admiral-color-Neutral_Neutral50, #74767B);
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4 {
+  display: flex;
+  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c5 {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+<div>
+    <div
+      class="c0"
+      data-testid="progress-wrapper"
+    >
+      <div
+        aria-hidden="true"
+        class="c1"
+      >
+        <div
+          class="c2"
+          data-testid="progress-active-step"
+        />
+        <div
+          class="c3"
+          data-testid="progress-text"
+        >
+          1 из 0 шагов
+        </div>
+      </div>
+      <div
+        class="c4"
+      >
+        <div
+          aria-valuemax="0"
+          aria-valuemin="0"
+          aria-valuenow="1"
+          aria-valuetext="шаг 1: undefined"
+          class="c5"
+          role="progressbar"
+          tabindex="0"
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Stepper should render component with lineClamp equal 1 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
@@ -205,6 +2593,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -242,6 +2631,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -278,6 +2668,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -314,6 +2705,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -524,6 +2916,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -561,6 +2954,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -597,6 +2991,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -633,6 +3028,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -695,7 +3091,7 @@ exports[`Spinner should render component with lineClamp equal 1 1`] = `
 }
 `;
 
-exports[`Spinner should render component with lineClamp equal 2 1`] = `
+exports[`Stepper should render component with lineClamp equal 2 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
@@ -900,6 +3296,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -937,6 +3334,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -973,6 +3371,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1009,6 +3408,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1219,6 +3619,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -1256,6 +3657,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -1292,6 +3694,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -1328,6 +3731,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -1390,7 +3794,7 @@ exports[`Spinner should render component with lineClamp equal 2 1`] = `
 }
 `;
 
-exports[`Spinner should render component with stepWidth 1`] = `
+exports[`Stepper should render component with stepWidth 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
@@ -1595,6 +3999,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -1632,6 +4037,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -1668,6 +4074,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -1704,6 +4111,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -1914,6 +4322,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -1951,6 +4360,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -1987,6 +4397,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -2023,6 +4434,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -2085,7 +4497,7 @@ exports[`Spinner should render component with stepWidth 1`] = `
 }
 `;
 
-exports[`Spinner should render default component 1`] = `
+exports[`Stepper should render default component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
@@ -2290,6 +4702,7 @@ exports[`Spinner should render default component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -2327,6 +4740,7 @@ exports[`Spinner should render default component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -2363,6 +4777,7 @@ exports[`Spinner should render default component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -2399,6 +4814,7 @@ exports[`Spinner should render default component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -2609,6 +5025,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -2646,6 +5063,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -2682,6 +5100,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -2718,6 +5137,7 @@ exports[`Spinner should render default component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>
@@ -2780,7 +5200,7 @@ exports[`Spinner should render default component 1`] = `
 }
 `;
 
-exports[`Spinner should render vertical component 1`] = `
+exports[`Stepper should render vertical component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c4 {
@@ -2984,6 +5404,7 @@ exports[`Spinner should render vertical component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
               </div>
@@ -3021,6 +5442,7 @@ exports[`Spinner should render vertical component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Шаг с ошибкой, текст занимает максимум три строки
               </div>
@@ -3057,6 +5479,7 @@ exports[`Spinner should render vertical component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Активный шаг, текст занимает максимум три строки
               </div>
@@ -3093,6 +5516,7 @@ exports[`Spinner should render vertical component 1`] = `
             >
               <div
                 class="c8"
+                data-testid="step-content"
               >
                 Неактивный шаг, текст занимает максимум три строки
               </div>
@@ -3302,6 +5726,7 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Завершенный шаг, текст занимает максимум три строки, далее идет сокращение
             </div>
@@ -3339,6 +5764,7 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Шаг с ошибкой, текст занимает максимум три строки
             </div>
@@ -3375,6 +5801,7 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Активный шаг, текст занимает максимум три строки
             </div>
@@ -3411,6 +5838,7 @@ exports[`Spinner should render vertical component 1`] = `
           >
             <div
               class="c8"
+              data-testid="step-content"
             >
               Неактивный шаг, текст занимает максимум три строки
             </div>

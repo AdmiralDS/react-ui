@@ -177,12 +177,12 @@ export const Stepper: FC<StepperProps> = ({
 
     return (
       <StepperContext.Provider value={contextValue}>
-        <ProgressWrapper className={props.className} style={props.style}>
+        <ProgressWrapper className={props.className} style={props.style} data-testid="progress-wrapper">
           <ProgressHeader $mobile={mobile} aria-hidden>
-            <ProgressActiveStep $lineClamp={lineClamp}>
+            <ProgressActiveStep $lineClamp={lineClamp} data-testid="progress-active-step">
               {setFirstLetterToUpperCase(stepNames[currentStep])}
             </ProgressActiveStep>
-            <ProgressText>{progressTextContent}</ProgressText>
+            <ProgressText data-testid="progress-text">{progressTextContent}</ProgressText>
           </ProgressHeader>
           <ProgressBarWrapper>
             <ProgressBar
@@ -196,7 +196,7 @@ export const Stepper: FC<StepperProps> = ({
             />
           </ProgressBarWrapper>
           {displayNextStepName && nextStepName && (
-            <ProgressNextStep $lineClamp={lineClamp} aria-hidden>
+            <ProgressNextStep $lineClamp={lineClamp} aria-hidden data-testid="progress-next-step">
               {renderNextStepName(setFirstLetterToLowerCase(nextStepName))}
             </ProgressNextStep>
           )}

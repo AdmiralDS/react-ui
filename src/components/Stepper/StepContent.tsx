@@ -44,7 +44,7 @@ export const StepContent: FC<{ children: string; tooltipProps?: Partial<ITooltip
   return (
     <>
       <ContentWrapper ref={wrapperRef} $withTooltip={overflow}>
-        <Content ref={contentRef} $lineClamp={lineClamp}>
+        <Content ref={contentRef} $lineClamp={lineClamp} data-testid="step-content">
           {children}
         </Content>
       </ContentWrapper>
