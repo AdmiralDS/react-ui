@@ -1,6 +1,8 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
+export const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
+
 export function getStorybookFrameLocator(page: Page) {
   return page.frameLocator('#storybook-preview-iframe');
 }

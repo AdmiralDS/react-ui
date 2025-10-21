@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.56.0](https://github.com/AdmiralDS/react-ui/compare/v8.55.0...v8.56.0) (2025-10-15)
+
+
+### Features
+
+* **TabMenuVertical:** fix height ([0c8f03c](https://github.com/AdmiralDS/react-ui/commit/0c8f03c5adbb5110a96c715e37d2adbfe142f03a))
+* **TeaxtArea:** refactor API for autoHeight ([1387db5](https://github.com/AdmiralDS/react-ui/commit/1387db53a8dccfc44884cf0e4c2d9adccd5c98d6))
+* **TextArea:** set default minRows to 2 ([5630edc](https://github.com/AdmiralDS/react-ui/commit/5630edcfd2c0babc76cf93011b6eda90d9399ff2))
+
 ## [8.55.0](https://github.com/AdmiralDS/react-ui/compare/v8.54.0...v8.55.0) (2025-09-16)
 
 

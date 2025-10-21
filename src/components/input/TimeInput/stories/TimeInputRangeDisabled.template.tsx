@@ -5,7 +5,7 @@ import { TimeInput } from '@admiral-ds/react-ui';
 import type { TimeInputProps } from '@admiral-ds/react-ui';
 
 export const TimeInputRangeDisabledTemplate = (props: TimeInputProps) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value ?? ''));
 
   React.useEffect(() => {
     if (props.value !== undefined) {

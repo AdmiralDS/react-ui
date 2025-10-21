@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator } from '../utils';
+import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
@@ -115,4 +115,27 @@ test('autoheight with min and max rows', async ({ page }) => {
   await textarea.fill('Привет!');
   const boxFourth = await component.boundingBox();
   expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
+});
+
+test('native undo works', async ({ page, browserName }) => {
+  await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
+  const frame = getStorybookFrameLocator(page);
+  const textarea = frame.getByTestId('textAreaPlayground');
+
+  // очищаем поле и вставляем текст для теста
+  await textarea.fill('');
+  await textarea.click();
+  // имитируем ввод с клавиатуры по одному символу
+  await textarea.pressSequentially('hello');
+  await page.waitForTimeout(400);
+
+  const valueBeforeUndo = await textarea.inputValue();
+  await page.keyboard.press(UNDO_SHORTCUT);
+
+  // разделение обусловлено реализацией системы undo/redo в разных движках
+  if (browserName === 'chromium') {
+    await expect(textarea).toHaveValue('hell');
+  } else {
+    await expect(textarea).not.toHaveValue(valueBeforeUndo);
+  }
 });
