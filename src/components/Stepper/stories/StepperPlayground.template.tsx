@@ -16,7 +16,7 @@ const steps = [
 export const StepperPlaygroundTemplate = ({ lineClamp, activeStep, orientation, ...args }: StepperProps) => {
   return (
     <>
-      <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} {...args}>
+      <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} stepWidth={200} {...args}>
         {steps.map(({ content, ...step }) => {
           return (
             // eslint-disable-next-line no-console

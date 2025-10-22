@@ -27,7 +27,7 @@ const steps = [
 export const StepperClickableLinksTemplate = () => {
   return (
     <>
-      <Stepper activeStep={2}>
+      <Stepper activeStep={2} data-testid="stepper">
         {steps.map(({ content, ...step }) => {
           return (
             <Step {...step}>
