@@ -517,6 +517,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <Input
             ref={refSetter(ref, inputRef)}
             {...props}
+            className={'text-input-native-input'}
             onChange={handleChange}
             placeholder={placeholder}
             $dimension={dimension}

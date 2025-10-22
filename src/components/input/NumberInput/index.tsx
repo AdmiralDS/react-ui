@@ -335,6 +335,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const code = keyboardKey.getCode(e);
+      if ((e.ctrlKey || e.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        e.preventDefault();
+        return;
+      }
       switch (code) {
         case keyboardKey.ArrowUp: {
           handlePlus();

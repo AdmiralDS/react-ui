@@ -7,7 +7,7 @@ import { ReactComponent as GPSOutline } from '@admiral-ds/icons/build/location/G
 import { ReactComponent as TimeSolid } from '@admiral-ds/icons/build/system/TimeSolid.svg';
 
 export const TimeInputIconAlternativeTemplate = (props: TimeInputProps) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value) ?? '');
+  const [localValue, setValue] = React.useState<string>(String(props.value ?? ''));
 
   React.useEffect(() => {
     if (props.value !== undefined) {

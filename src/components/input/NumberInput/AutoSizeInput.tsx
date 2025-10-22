@@ -202,6 +202,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
     {
       dimension,
       placeholder,
+      className,
       type,
       prefix,
       suffix,
@@ -356,6 +357,7 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
         </HiddenContent>
         <Input
           {...props}
+          className={className + ' number-input-native-input'}
           $dimension={dimension}
           ref={refSetter(ref, inputRef)}
           placeholder={placeholder}

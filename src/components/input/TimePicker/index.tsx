@@ -10,6 +10,7 @@ import type { TextInputProps } from '../TextInput';
 import { InputLine } from '../InputLine';
 import { InputBox } from '../InputBox';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { keyboardKey } from '../../common/keyboardKey';
 import { defaultTimePickerHandle } from '#src/components/input/TimePicker/defaultTimePickerHandle';
 import { changeInputData, isInputDataDifferent } from '#src/components/common/dom/changeInputData';
 import { getTimeInMinutes, parseStringToTime, generateTimeArray } from './utils';
@@ -177,6 +178,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       dropContainerCssMixin,
       dropContainerClassName,
       dropContainerStyle,
+      className,
       containerPropsConfig = () => ({}),
       inputLinePropsConfig = () => ({}),
       clearInputIconButtonPropsConfig = () => ({}),
@@ -195,6 +197,14 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      const code = keyboardKey.getCode(event);
+      if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
+        event.preventDefault();
+      }
+      props.onKeyDown?.(event);
+    };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = e.currentTarget.value;
       setInnerValueState(inputValue);
@@ -212,6 +222,19 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
         const inputData = handleInput(currentInputData, e as InputEvent);
 
+        /*
+        сравнение текущего состояния ввода с уже обработанным,
+        если существенных изменений нет — пропуск changeInputData,
+        чтобы не уйти в бесконечный цикл
+        */
+        if (!isInputDataDifferent(currentInputData, inputData)) {
+          return;
+        }
+
+        if (!inputData || inputData.value === value) {
+          return;
+        }
+
         if (!isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(this, { ...inputData, value: '' });
         } else {
@@ -227,6 +250,19 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         const { value, selectionStart, selectionEnd } = node;
         const currentInputData = { value, selectionStart, selectionEnd };
         const inputData = handleInput(currentInputData);
+
+        /*
+        сравнение текущего состояния ввода с уже обработанным,
+        если существенных изменений нет — пропуск changeInputData,
+        чтобы не уйти в бесконечный цикл
+        */
+        if (!isInputDataDifferent(currentInputData, inputData)) {
+          return;
+        }
+
+        if (!inputData || inputData.value === value) {
+          return;
+        }
 
         if (!isInputDataDifferent(nullHandledValue, inputData)) {
           changeInputData(node, { ...inputData, value: '' });
@@ -294,7 +330,11 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       };
 
       iconArray.push(
-        <InputIconButton {...timeInputIconButtonProps} {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)} />,
+        <InputIconButton
+          {...timeInputIconButtonProps}
+          {...timeInputIconButtonPropsConfig(timeInputIconButtonProps)}
+          key="time-icon"
+        />,
       );
     }
 
@@ -492,10 +532,12 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     const inputLineProps = {
       ...props,
+      className: className + ' time-picker-native-input',
       ref: refSetter(ref, inputRef),
       placeholder: 'чч:мм',
       dataPlaceholder: 'чч:мм',
       onChange: handleChange,
+      onKeyDown: handleKeyDown,
       value: innerValue,
       disabled: disabled,
       readOnly: props.readOnly,
