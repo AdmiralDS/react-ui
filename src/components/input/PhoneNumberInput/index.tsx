@@ -247,8 +247,6 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
       const code = keyboardKey.getCode(e);
       if ((e.ctrlKey || e.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
         e.preventDefault();
-        props.onKeyDown?.(e);
-        return;
       }
 
       props.onKeyDown?.(e);
