@@ -22,6 +22,7 @@ const STORY_ITEMS: Array<StoryItem> = [
     id: '2',
     label: 'Option two',
     value: 2,
+    disabled: true,
   },
   {
     id: '3',
@@ -73,6 +74,7 @@ export const MenuSimpleTemplate = ({
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
+      disabled: item.disabled,
       render: (options: RenderOptionProps) => (
         <MenuItem dimension={props.dimension} {...options} key={item.id}>
           {item.label}
