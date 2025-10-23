@@ -1,4 +1,4 @@
-import { Children, forwardRef } from 'react';
+import React, { Children, forwardRef } from 'react';
 import styled from 'styled-components';
 import type { ItemDimension } from './menuItemMixins';
 import { backgroundColor, colorTextMixin, paddings, styleTextMixin } from './menuItemMixins';
@@ -93,6 +93,15 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
 
     const handleMouseDown = !disabled ? onMouseDown : stopEventHandler;
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        e.stopPropagation();
+      } else {
+        props.onClick?.(e);
+      }
+    };
+
     const resolvedRef = selfRef ? refSetter(ref, selfRef) : ref;
 
     return (
@@ -112,6 +121,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
         onMouseMove={handleMouseMove}
         onMouseDown={handleMouseDown}
         {...props}
+        onClick={handleClick}
       >
         {Children.toArray(children).map((child, index) =>
           typeof child === 'string' ? <TextWrapper key={child + index}>{child}</TextWrapper> : child,
