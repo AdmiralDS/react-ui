@@ -136,7 +136,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
           if (withCloseIcon) {
             onClose?.();
           } else {
-            props.onClick?.(e as any);
+            props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
           }
         }
         props.onKeyDown?.(e);

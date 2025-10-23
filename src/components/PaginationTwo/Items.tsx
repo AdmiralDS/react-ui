@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 import { typography } from '#src/components/Typography';
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
@@ -113,7 +114,7 @@ const Button = styled.button<{
 `;
 
 type PaginationItemProps = {
-  onClick: (event: any) => void;
+  onClick: (event: ReactMouseEvent<HTMLButtonElement>) => void;
   page: number | null;
   selected: boolean;
   disabled: boolean;

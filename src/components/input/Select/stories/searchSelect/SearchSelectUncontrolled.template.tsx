@@ -8,7 +8,7 @@ import { Form, FormValuesWrapper } from '#src/components/input/Select/stories/st
 import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
 
 export const SearchSelectUncontrolledTemplate = (props: SelectProps) => {
-  const [submitValues, setSubmitValues] = React.useState<null | Record<string, any>>(null);
+  const [submitValues, setSubmitValues] = React.useState<null | Record<string, FormDataEntryValue>>(null);
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

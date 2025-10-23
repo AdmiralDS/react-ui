@@ -7,6 +7,7 @@ import { DropMenu } from '#src/components/DropMenu';
 import type { RenderOptionProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
 import { refSetter } from '../common/utils/refSetter';
+import type { DataAttributeMap } from '#src/components/common/utils/splitDataAttributes';
 import { forwardRef, useMemo } from 'react';
 
 type PaginationOneMenuButtonDimension = 'm' | 's';
@@ -77,7 +78,7 @@ export interface MenuButtonProps
   /** Отключение компонента */
   disabled?: boolean;
   /** Data-attributes для DropMenu */
-  dropMenuDataAttributes?: Record<string, any>;
+  dropMenuDataAttributes?: DataAttributeMap;
 }
 
 export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(

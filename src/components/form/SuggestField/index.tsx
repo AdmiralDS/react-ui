@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { SuggestInputProps } from '#src/components/input';
 import { SuggestInput as Suggest } from '#src/components/input';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import { uid } from '#src/components/common/uid';
 import {
@@ -31,7 +31,10 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     skeleton,
     ...restProps
   } = props;
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps &
+    FieldDataAttributes & {
+      ref?: React.Ref<HTMLDivElement>;
+    } = {
     className,
     extraText,
     status,
@@ -49,7 +52,7 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

@@ -55,7 +55,7 @@ export const RowDrag = ({
       const table = tableRef.current;
       const header = table?.querySelector('.thead');
 
-      const observer = observeRect(rowMirrorRef.current, (rect: any) => {
+      const observer = observeRect(rowMirrorRef.current, (rect: DOMRectReadOnly) => {
         const topCoord = header?.getBoundingClientRect().bottom || 0;
         const bottomCoord = table?.getBoundingClientRect().bottom || 0;
 

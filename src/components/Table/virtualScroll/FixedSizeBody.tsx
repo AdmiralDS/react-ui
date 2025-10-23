@@ -4,8 +4,8 @@ import { Body, Spacer } from '../style';
 interface FixedSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   childHeight: number;
   renderAhead?: number;
-  rowList: any[];
-  renderRow: (row: any, index: number) => React.ReactNode;
+  rowList: unknown[];
+  renderRow: (row: unknown, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
   tableRef: React.RefObject<HTMLElement>;
   headerHeight: number;
@@ -35,9 +35,11 @@ export const FixedSizeBody = forwardRef<HTMLDivElement, FixedSizeBodyProps>(
     }, [tableHeight, headerHeight]);
 
     useEffect(() => {
-      function handleScroll(e: any) {
+      function handleScroll(event: Event) {
+        const target = event.target as HTMLElement | null;
+        if (!target) return;
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop);
+          setScrollTop(target.scrollTop);
         });
       }
 

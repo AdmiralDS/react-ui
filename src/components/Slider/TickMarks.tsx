@@ -1,4 +1,5 @@
 import * as React from 'react';
+import type { CSSProperties, MouseEvent as ReactMouseEvent } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
@@ -47,7 +48,7 @@ interface TickMarksProps {
   precision?: number;
   thousand?: string;
   tickMarks: number[];
-  onPointClick: (e: any, value: number) => void;
+  onPointClick: (event: ReactMouseEvent<HTMLDivElement>, value: number) => void;
   renderTickMark?: (mark: string) => React.ReactNode;
 }
 
@@ -76,15 +77,14 @@ export const TickMarks = ({
       {items.map((value, index) => {
         const key = value.toString() + index;
         const position = ((value - minValue) / range) * 100;
-        let style: any = {};
-        style = index === 0 ? { left: 0 } : style;
-        style = index === tickMarks.length - 1 ? { right: 0 } : style;
+        const style: CSSProperties =
+          index === 0 ? { left: 0 } : index === tickMarks.length - 1 ? { right: 0 } : {};
         return (
           <Wrapper
             key={key}
             $position={position}
-            onMouseDown={(e: any) => {
-              onPointClick(e, value);
+            onMouseDown={(event) => {
+              onPointClick(event, value);
             }}
           >
             <Content style={style}>

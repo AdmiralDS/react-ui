@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import type { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { InputStatus } from '#src/components/input/types';
@@ -136,6 +137,12 @@ const PositionedCharacterCounter = styled(CharacterCounter)`
 
 export interface FieldProps extends FieldOwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
+export type FieldContainerProps = FieldOwnProps & HTMLAttributes<HTMLDivElement>;
+export type FieldDataAttributes = {
+  'data-field-id': string;
+  'data-field-name'?: string;
+};
+
 export const Field = forwardRef<HTMLDivElement, FieldProps>(
   (
     {
@@ -166,7 +173,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
-    const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
+    const fieldContainerProps: HTMLAttributes<HTMLDivElement> = { className, style, ...restFieldProps };
 
     const labelProps = { htmlFor: id ?? defaultID, required, disabled };
 

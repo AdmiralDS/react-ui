@@ -447,14 +447,16 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const withResizer = col.name === columnList[columnList.length - 1].name ? showDividerForLastColumn : true;
 
       const render = () => {
+        const cellValue = row[col.name];
+
         if (col.renderCell) {
-          return col.renderCell((row as any)[col.name], row, idx);
+          return col.renderCell(cellValue, row, idx);
         }
         if (renderCell) {
           return renderCell(row, col.name);
         }
 
-        return <CellTextContent $cellAlign={col.cellAlign}>{(row as any)[col.name]}</CellTextContent>;
+        return <CellTextContent $cellAlign={col.cellAlign}>{cellValue as React.ReactNode}</CellTextContent>;
       };
 
       return (

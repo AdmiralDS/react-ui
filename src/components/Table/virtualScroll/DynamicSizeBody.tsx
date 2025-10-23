@@ -21,8 +21,8 @@ interface DynamicSizeBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   tableHeight: number;
   headerHeight: number;
   renderAhead?: number;
-  rowList: any[];
-  renderRow: (row: any, index: number) => React.ReactNode;
+  rowList: Array<{ id: RowId | string }>;
+  renderRow: (row: { id: RowId | string }, index: number) => React.ReactNode;
   renderEmptyMessage?: () => React.ReactNode;
   estimatedRowHeight?: (index: number) => number;
   tableRef: React.RefObject<HTMLElement>;
@@ -65,9 +65,11 @@ export const DynamicSizeBody = forwardRef<HTMLDivElement, DynamicSizeBodyProps>(
     const getItemKey = useCallback((index: number) => rowNodes[index].id, [rowNodes]);
 
     useEffect(() => {
-      function handleScroll(e: any) {
+      function handleScroll(event: Event) {
+        const target = event.target as HTMLElement | null;
+        if (!target) return;
         requestAnimationFrame(() => {
-          setScrollTop(e.target.scrollTop);
+          setScrollTop(target.scrollTop);
         });
       }
 

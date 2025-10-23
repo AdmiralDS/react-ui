@@ -33,7 +33,7 @@ export const DateTimeFieldDisabledTemplate = ({
   CSSCustomProps,
   ...props
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const fieldProps = {
+  const fieldProps: FieldProps = {
     label,
     additionalLabel,
     status,
@@ -41,17 +41,17 @@ export const DateTimeFieldDisabledTemplate = ({
     readOnly,
     skeleton,
     ...props,
-  } as Record<string, any>;
+  };
   const baseDateTimeProps = {
     status,
     disabled,
     readOnly,
-  } as Record<string, any>;
+  };
   const dateTimeProps = {
     dimension,
     skeleton,
     ...baseDateTimeProps,
-  } as Record<string, any>;
+  };
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>

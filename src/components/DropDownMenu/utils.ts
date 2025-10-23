@@ -1,7 +1,13 @@
+type MenuFocusCalculator = (
+  parent: HTMLUListElement | null,
+  child: Element | null,
+  stop?: boolean,
+) => Element | null;
+
 export const moveFocus = (
   parent: HTMLUListElement | null,
   currentFocus: Element | null,
-  calcNextFocus: (parent: HTMLUListElement | null, child: Element | null, stop?: boolean) => any,
+  calcNextFocus: MenuFocusCalculator,
   stop?: boolean,
 ): void => {
   let wrappedOnce = false;
@@ -27,20 +33,26 @@ export const nextItem = (
   parent: Element | null,
   child: Element | null,
   stop?: boolean,
-): Element | null | undefined | ChildNode => {
+): Element | null => {
   if (child?.nextElementSibling) {
     return child.nextElementSibling;
   }
-  return stop ? null : parent?.firstChild;
+  if (stop) {
+    return null;
+  }
+  return parent?.firstElementChild ?? null;
 };
 
 export const previousItem = (
   parent: Element | null,
   child: Element | null,
   stop?: boolean,
-): Element | null | undefined | ChildNode => {
+): Element | null => {
   if (child?.previousElementSibling) {
     return child.previousElementSibling;
   }
-  return stop ? null : parent?.lastChild;
+  if (stop) {
+    return null;
+  }
+  return parent?.lastElementChild ?? null;
 };

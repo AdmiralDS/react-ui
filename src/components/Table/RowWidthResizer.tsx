@@ -53,10 +53,17 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
   const clientXRef = React.useRef(0);
   const [isTaken, setTaken] = React.useState(false);
 
-  const handleResize = (e: any) => {
+  const getClientX = (event: MouseEvent | TouchEvent): number => {
+    if (event instanceof TouchEvent) {
+      return event.changedTouches[0]?.clientX ?? 0;
+    }
+    return event.clientX;
+  };
+
+  const handleResize = (e: MouseEvent | TouchEvent) => {
     e.preventDefault();
     const width = node.current?.parentElement?.getBoundingClientRect().width || 100;
-    const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const clientX = getClientX(e);
     let newWidth = width - (clientXRef.current - clientX);
     newWidth = newWidth >= columnMinWidth ? newWidth : columnMinWidth;
     if (width !== newWidth) {
@@ -65,12 +72,12 @@ export function RowWidthResizer({ name, disabled, dimension, columnMinWidth, onC
     clientXRef.current = clientX;
   };
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: MouseEvent | TouchEvent) => {
     e.preventDefault();
     // block column drag
     e.stopPropagation();
     setTaken(true);
-    clientXRef.current = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    clientXRef.current = getClientX(e);
   };
 
   const handleMouseMove = (e: MouseEvent | TouchEvent) => {

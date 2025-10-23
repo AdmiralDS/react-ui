@@ -92,7 +92,7 @@ export const Hint: React.FC<HintProps> = ({
 
   const targetElement = userTargetElement || anchorElementRef.current;
 
-  const [recalculation, startRecalculation] = React.useState<any>(null);
+  const [recalculation, startRecalculation] = React.useState(0);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);

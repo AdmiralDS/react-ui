@@ -64,12 +64,12 @@ export const SubMenuContainer = ({
   const { rootRef } = useContext(DropdownContext);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  const [recalculation, startRecalculation] = useState<any>(null);
+  const [recalculationTrigger, triggerRecalculation] = useState(0);
   const [portalFlexDirection, setPortalFlexDirection] = useState('row');
 
   useLayoutEffect(() => {
     const [listener, freeResources] = throttle(() => {
-      startRecalculation({});
+      triggerRecalculation((value) => value + 1);
     }, 100);
 
     addEventListener('resize', listener);
@@ -128,7 +128,7 @@ export const SubMenuContainer = ({
           wrapperElement.style.bottom = '8px';
       }
     }
-  }, [targetElement, recalculation]);
+  }, [targetElement, recalculationTrigger]);
 
   return (
     targetElement && (

@@ -1,4 +1,4 @@
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import type { DateInputProps } from '#src/components/input/DateInput';
 import { DateInput } from '#src/components/input/DateInput';
@@ -27,7 +27,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     ...restProps
   } = props;
 
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -40,7 +40,7 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     'data-field-name': name,
     displayInline,
     disabled,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

@@ -1,4 +1,12 @@
 import { useState } from 'react';
+import type {
+  HTMLAttributes,
+  SyntheticEvent,
+  MouseEvent as ReactMouseEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  FocusEvent as ReactFocusEvent,
+  ChangeEvent as ReactChangeEvent,
+} from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -9,6 +17,11 @@ import { Button as SecondaryButton } from '#src/components/Button';
 
 import { Ellipsis, PaginationItem } from '#src/components/PaginationTwo/Items';
 import { getListOfPages, range } from '#src/components/PaginationTwo/utils';
+
+type PaginationTwoChangeEvent =
+  | ReactMouseEvent<HTMLButtonElement>
+  | ReactKeyboardEvent<HTMLInputElement>
+  | ReactFocusEvent<HTMLInputElement>;
 
 export type PaginationTwoDimension = 'm' | 's';
 
@@ -48,13 +61,13 @@ const PageSize = styled.div<{ $dimension: PaginationTwoDimension }>`
   margin-left: 16px;
 `;
 
-export interface PaginationTwoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+export interface PaginationTwoProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationTwoDimension;
   /** Текущая страница */
   page: number;
   /** Колбек на изменение текущей страницы */
-  onChange: (event: any, page: number) => void;
+  onChange: (event: PaginationTwoChangeEvent, page: number) => void;
   /** Количество страниц */
   count?: number;
   /** Количество страниц, отображаемых по бокам от текущей страницы */
@@ -135,7 +148,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
     }
   };
 
-  const handlePageClick = (event: any, value: number | null) => {
+  const handlePageClick = (event: ReactMouseEvent<HTMLButtonElement>, value: number | null) => {
     if (value && value !== page) {
       onChange?.(event, value);
     }
@@ -146,7 +159,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
   const items = itemList.map((item) => {
     return typeof item === 'number'
       ? {
-          onClick: (event: any) => {
+          onClick: (event: ReactMouseEvent<HTMLButtonElement>) => {
             handlePageClick(event, item);
           },
           type: 'page',
@@ -155,7 +168,7 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
           disabled: disabledPages.indexOf(item) > -1,
         }
       : {
-          onClick: (event: any) => {
+          onClick: (event: ReactMouseEvent<HTMLButtonElement>) => {
             handlePageClick(event, buttonPage(item));
           },
           type: item,
@@ -165,7 +178,10 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
         };
   });
 
-  const onInputSubmit = (event: any, value: string) => {
+  const onInputSubmit = (
+    event: ReactKeyboardEvent<HTMLInputElement> | ReactFocusEvent<HTMLInputElement>,
+    value: string,
+  ) => {
     const parsed = parseInt(value, 10);
     setInputValue('');
 
@@ -178,17 +194,17 @@ export const PaginationTwo: React.FC<PaginationTwoProps> = ({
       }
     }
   };
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.currentTarget.value);
-  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ReactChangeEvent<HTMLInputElement>) => setInputValue(event.currentTarget.value);
+  const handleInputKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       onInputSubmit(event, event.currentTarget.value);
       event.preventDefault();
     }
   };
-  const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) =>
+  const handleInputBlur = (event: ReactFocusEvent<HTMLInputElement>) =>
     onInputSubmit(event, event.currentTarget.value);
 
-  const handleBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => onChange?.(event, getNextPage());
+  const handleBtnClick = (event: ReactMouseEvent<HTMLButtonElement>) => onChange?.(event, getNextPage());
 
   return (
     <Wrapper $mobile={mobile} {...props}>

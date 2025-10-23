@@ -48,7 +48,7 @@ const calcValueByPos = (
 };
 
 export const calcValue = (
-  e: any,
+  e: TouchEvent | MouseEvent,
   trackRef: React.RefObject<HTMLDivElement>,
   minValue: number,
   maxValue: number,

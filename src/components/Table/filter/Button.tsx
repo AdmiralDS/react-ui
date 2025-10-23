@@ -65,7 +65,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     useEffect(() => {
       const button = btnRef.current;
-      function handleMove(e: any) {
+      function handleMove(e: MouseEvent | TouchEvent) {
         // block column drag when mouse moves above filter icon
         e.stopPropagation();
       }

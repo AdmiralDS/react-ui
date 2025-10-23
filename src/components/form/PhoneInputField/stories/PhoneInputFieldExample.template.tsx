@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { PhoneInputField } from '@admiral-ds/react-ui';
 import type { PhoneInputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 export const PhoneInputFieldExampleTemplate = ({
   label = 'Введите номер телефона',
@@ -13,14 +14,7 @@ export const PhoneInputFieldExampleTemplate = ({
   CSSCustomProps,
   ...props
 }: PhoneInputFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
-    (acc, key) => {
-      if (props[key] !== undefined) acc[key] = props[key];
-
-      return acc;
-    },
-    {} as Record<any, any>,
-  );
+  const cleanProps = cleanUpProps(props);
 
   const [localValue, setValue] = React.useState<string>(props.value ?? '');
 

@@ -1,5 +1,5 @@
 import { uid } from '#src/components/common/uid';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field as FieldComponent } from '#src/components/Field';
 import type { SliderRangeProps } from '#src/components/input/SliderRange';
 import { SliderRange } from '#src/components/input/SliderRange';
@@ -34,7 +34,7 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
     ...restProps
   } = props;
 
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -48,7 +48,7 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

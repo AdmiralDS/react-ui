@@ -255,7 +255,7 @@ const setMonth = (date: Date, month: number): Date => {
 };
 
 const setYear = (date: Date, year: number) => {
-  if (isNaN(date as any)) {
+  if (Number.isNaN(date.getTime())) {
     return new Date(NaN);
   }
 
@@ -304,7 +304,7 @@ const startOfWeek = (current: Date, weekStartsOn: number): Date => {
 
 const subMonths = (date: Date, amount: number): Date => addMonths(date, -amount);
 
-const valid = (date: any): boolean => !isNaN(date as any);
+const valid = (date?: Date | null): boolean => !(!date || Number.isNaN(date.getTime()));
 
 const getMonthList = (locale: string, format: 'long' | 'short' = 'long'): string[] => {
   const year = new Date().getFullYear();

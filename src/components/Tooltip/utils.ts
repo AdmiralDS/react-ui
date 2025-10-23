@@ -24,7 +24,7 @@ export function getTooltipDirection(
   tooltipElement: HTMLElement,
   scrollbarSize: number,
   tooltipPosition?: TooltipPositionType,
-): any {
+): InternalTooltipPositionType {
   const anchorElementRect: DOMRect = anchorElement.getBoundingClientRect();
   const tooltipRect: DOMRect = tooltipElement.getBoundingClientRect();
   const positions = Object.entries(getPositionMapper(scrollbarSize)) as [

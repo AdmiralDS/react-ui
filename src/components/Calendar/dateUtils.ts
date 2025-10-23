@@ -1,6 +1,24 @@
 import { locales } from './locales';
 import type { LocaleType } from './constants';
 
+type DateWithUTC = Date & { utc?: boolean };
+
+interface ParsedDateState {
+  Y: number;
+  M: number;
+  D: number;
+  H: number;
+  A: number;
+  h: number;
+  m: number;
+  s: number;
+  S: number;
+  Z: number;
+  _index: number;
+  _length: number;
+  _match: number;
+}
+
 export { format, parse };
 
 /**
@@ -45,7 +63,7 @@ const compile = (formatString: string): string[] => {
 
 const format = (dateObj: Date, arg: string | string[], locale: LocaleType, utc?: boolean): string => {
   const pattern = typeof arg === 'string' ? compile(arg) : arg;
-  const d: any = addMinutes(dateObj, utc ? dateObj.getTimezoneOffset() : 0);
+  const d = addMinutes(dateObj, utc ? dateObj.getTimezoneOffset() : 0) as DateWithUTC;
   const formatter = locales[locale].formatter;
   let str = '';
   d.utc = utc || false;
@@ -69,18 +87,32 @@ const addMilliseconds = (dateObj: Date, milliseconds: number): Date => {
   return new Date(dateObj.getTime() + milliseconds);
 };
 
-const preparse = (dateString: string, arg: string | string[], locale: LocaleType) => {
+const preparse = (dateString: string, arg: string | string[], locale: LocaleType): ParsedDateState => {
   let offset = 0;
   const pattern = typeof arg === 'string' ? compile(arg) : arg,
-    dt: any = { Y: 1970, M: 1, D: 1, H: 0, A: 0, h: 0, m: 0, s: 0, S: 0, Z: 0, _index: 0, _length: 0, _match: 0 },
-    comment: any = /\[(.*)]/,
-    parser = locales[locale].parser;
+    dt: ParsedDateState = {
+      Y: 1970,
+      M: 1,
+      D: 1,
+      H: 0,
+      A: 0,
+      h: 0,
+      m: 0,
+      s: 0,
+      S: 0,
+      Z: 0,
+      _index: 0,
+      _length: 0,
+      _match: 0,
+    };
+  const comment = /\[(.*)]/;
+  const parser = locales[locale].parser;
 
   dateString = parser.pre(dateString);
-  for (let i = 1, len = pattern.length, token, result; i < len; i++) {
+  for (let i = 1, len = pattern.length, token; i < len; i++) {
     token = pattern[i];
     if (parser[token]) {
-      result = parser[token](dateString.slice(offset), pattern[0]);
+      const result = parser[token](dateString.slice(offset), pattern[0]);
       if (!result.length) {
         break;
       }
@@ -104,8 +136,8 @@ const preparse = (dateString: string, arg: string | string[], locale: LocaleType
   return dt;
 };
 
-const isValid = (arg1: any, arg2: string | string[], locale: LocaleType): boolean => {
-  const dt: any = typeof arg1 === 'string' ? preparse(arg1, arg2, locale) : arg1,
+const isValid = (arg1: string | ParsedDateState, arg2: string | string[], locale: LocaleType): boolean => {
+  const dt: ParsedDateState = typeof arg1 === 'string' ? preparse(arg1, arg2, locale) : arg1;
     last = [31, (28 + Number(isLeapYear(dt.Y))) | 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][dt.M - 1];
 
   return !(

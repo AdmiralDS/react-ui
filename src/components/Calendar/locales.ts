@@ -64,7 +64,10 @@ const res_de = {
   A: ['Uhr nachmittags', 'Uhr morgens'],
 };
 
-const A_enUS = (d: Date) => res_enUS.A[((d.getHours() > 11) as any) | 0];
+type LocaleResource = typeof res_enUS;
+type DateWithUTC = Date & { utc?: boolean };
+
+const A_enUS = (d: Date) => res_enUS.A[Number(d.getHours() > 11)];
 const A_ru = (d: Date) => {
   const h = d.getHours();
   if (h < 4) {
@@ -77,7 +80,7 @@ const A_ru = (d: Date) => {
   return res_ru.A[3]; // вечера
 };
 
-const formatter = (res: any) => ({
+const formatter = (res: LocaleResource) => ({
   YYYY: (d: Date) => ('000' + d.getFullYear()).slice(-4),
   YY: (d: Date) => ('0' + d.getFullYear()).slice(-2),
   Y: (d: Date) => '' + d.getFullYear(),
@@ -101,11 +104,11 @@ const formatter = (res: any) => ({
   dddd: (d: Date) => res.dddd[d.getDay()],
   ddd: (d: Date) => res.ddd[d.getDay()],
   dd: (d: Date) => res.dd[d.getDay()],
-  Z: (d: any) => (d.utc ? '+0000' : /[+-]\d{4}/.exec(d.toTimeString())?.[0]),
-  post: (str: any) => str,
+  Z: (d: DateWithUTC) => (d.utc ? '+0000' : /[+-]\d{4}/.exec(d.toTimeString())?.[0]),
+  post: (str: string) => str,
 });
 
-const parser = (res: any) => ({
+const parser = (res: LocaleResource) => ({
   YYYY: function (str: string) {
     return this.exec(/^\d{4}/, str);
   },
@@ -179,14 +182,14 @@ const parser = (res: any) => ({
     result.value = ((result.value / 100) | 0) * -60 - (result.value % 100);
     return result;
   },
-  h12: function (h: any, a: any) {
+  h12: function (h: number, a: number) {
     return (h === 12 ? 0 : h) + a * 12;
   },
-  exec: function (re: any, str: any) {
+  exec: function (re: RegExp, str: string) {
     const result = (re.exec(str) || [''])[0];
-    return { value: result | 0, length: result.length };
+    return { value: Number(result) || 0, length: result.length };
   },
-  find: function (array: any, str: any) {
+  find: function (array: string[], str: string) {
     let index = -1,
       length = 0;
 
@@ -199,10 +202,19 @@ const parser = (res: any) => ({
     }
     return { value: index, length: length };
   },
-  pre: (str: any) => str,
+  pre: (str: string) => str,
 });
 
-export const locales: any = {
+type FormatterMap = ReturnType<typeof formatter>;
+type ParserMap = ReturnType<typeof parser>;
+
+type LocaleBundle = {
+  res: LocaleResource;
+  formatter: FormatterMap & { A?: (d: Date) => string };
+  parser: ParserMap;
+};
+
+export const locales: Record<string, LocaleBundle> = {
   enUS: {
     res: res_enUS,
     formatter: { ...formatter(res_enUS), A: A_enUS },

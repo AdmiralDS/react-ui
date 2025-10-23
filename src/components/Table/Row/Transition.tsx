@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, cloneElement, Children } from 'react';
 type Status = 'entering' | 'entered' | 'exiting' | 'exited';
 
 type TransitionProps = {
-  children: React.ReactNode | ((status: Status, props: any) => React.ReactNode);
+  children: React.ReactNode | ((status: Status, props: Record<string, unknown>) => React.ReactNode);
   /** Show the component; triggers the enter or exit states */
   in: boolean;
   /** The duration of the transition, in milliseconds */
@@ -33,10 +33,10 @@ export const Transition = ({
   onExiting,
   onExited,
   ...childProps
-}: TransitionProps) => {
+}: TransitionProps & Record<string, unknown>) => {
   const [status, setStatus] = useState<Status>(_in ? 'entered' : 'exited');
   const statusRef = useRef(_in ? 'entered' : 'exited');
-  const timer = useRef<any>(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
@@ -121,7 +121,10 @@ export const Transition = ({
   };
 
   const cancelCallback = () => {
-    clearTimeout(timer.current);
+    if (timer.current) {
+      clearTimeout(timer.current);
+      timer.current = null;
+    }
   };
 
   const onTransitionEnd = (timeout: number, handler: () => void) => {

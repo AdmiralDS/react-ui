@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 
 export default function useInterval_DEPRECATED(
-  callback: (...args: any[]) => void,
+  callback: (...args: unknown[]) => void,
   delay?: number | null,
-  ...args: any[]
+  ...args: unknown[]
 ) {
-  const savedCallback = useRef<(...args: any[]) => void>();
+  const savedCallback = useRef<((...args: unknown[]) => void) | undefined>();
 
   useEffect(() => {
     savedCallback.current = callback;

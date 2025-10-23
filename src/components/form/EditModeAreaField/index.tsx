@@ -2,7 +2,7 @@ import { forwardRef, useRef } from 'react';
 
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import type { EditModeAreaProps } from '#src/components/input';
 import { EditModeArea } from '#src/components/input';
@@ -30,7 +30,7 @@ export const EditModeAreaField = forwardRef<HTMLTextAreaElement, EditModeAreaFie
     displayCharacterCounter,
     ...restProps
   } = props;
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -44,7 +44,7 @@ export const EditModeAreaField = forwardRef<HTMLTextAreaElement, EditModeAreaFie
     displayCharacterCounter,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

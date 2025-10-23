@@ -1,3 +1,3 @@
-export function isValidDate(d: any) {
-  return d instanceof Date && !isNaN(d.getTime());
+export function isValidDate(d: unknown) {
+  return d instanceof Date && !Number.isNaN(d.getTime());
 }

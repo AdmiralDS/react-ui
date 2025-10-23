@@ -14,7 +14,7 @@ export const SortIcon = ({ sort, sortOrder, multipleSort, iconSize }: SortProps)
 
   useEffect(() => {
     const sortIcon = sortRef.current;
-    function handleMove(e: any) {
+    function handleMove(e: MouseEvent | TouchEvent) {
       // block column drag when mouse moves above sort icon
       e.stopPropagation();
     }

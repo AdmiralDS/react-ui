@@ -1,7 +1,9 @@
+type SwitcherFocusCalculator = (parent: HTMLDivElement | null, child: Element | null) => Element | null;
+
 export const moveFocus = (
   parent: HTMLDivElement | null,
   currentFocus: Element | null,
-  calcNextFocus: (parent: HTMLDivElement | null, child: Element | null) => any,
+  calcNextFocus: SwitcherFocusCalculator,
 ): void => {
   let wrappedOnce = false;
   let nextFocus = calcNextFocus(parent, currentFocus);
@@ -22,16 +24,16 @@ export const moveFocus = (
   }
 };
 
-export const nextItem = (parent: Element | null, child: Element | null): Element | null | undefined | ChildNode => {
+export const nextItem = (parent: Element | null, child: Element | null): Element | null => {
   if (child?.nextElementSibling) {
     return child.nextElementSibling;
   }
-  return parent?.firstChild;
+  return parent?.firstElementChild ?? null;
 };
 
-export const previousItem = (parent: Element | null, child: Element | null): Element | null | undefined | ChildNode => {
+export const previousItem = (parent: Element | null, child: Element | null): Element | null => {
   if (child?.previousElementSibling) {
     return child.previousElementSibling;
   }
-  return parent?.lastChild;
+  return parent?.lastElementChild ?? null;
 };

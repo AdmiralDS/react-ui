@@ -1,4 +1,13 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import type {
+  HTMLAttributes,
+  ComponentProps,
+  SyntheticEvent,
+  MouseEvent as ReactMouseEvent,
+  TouchEvent as ReactTouchEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  ReactNode,
+} from 'react';
 import { keyboardKey } from '../common/keyboardKey';
 import { throttle } from '#src/components/common/utils/throttle';
 
@@ -8,11 +17,18 @@ import { TickMarks } from './TickMarks';
 import { ThumbTooltip } from './ThumbTooltip';
 import type { DataAttributes } from 'styled-components';
 
-export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
+type SliderChangeEvent = SyntheticEvent | MouseEvent | TouchEvent;
+type SliderPointerEvent = MouseEvent | TouchEvent;
+
+const isMouseEvent = (
+  event: ReactMouseEvent<HTMLDivElement> | ReactTouchEvent<HTMLDivElement>,
+): event is ReactMouseEvent<HTMLDivElement> => event.type === 'mousedown';
+
+export interface SliderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: number;
   /** Коллбек на изменение состояния */
-  onChange: (event: React.SyntheticEvent, value: number) => void;
+  onChange: (event: SliderChangeEvent, value: number) => void;
   /** Минимальное значение */
   minValue?: number;
   /** Максимальное значение */
@@ -34,7 +50,7 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /** Массив отметок */
   tickMarks?: number[];
   /** Render колбек для отрисовки кастомизированных подписей к отметкам слайдера */
-  renderTickMark?: (mark: string) => React.ReactNode;
+  renderTickMark?: (mark: string) => ReactNode;
   /** Отключение компонента */
   disabled?: boolean;
   /** Размер компонента */
@@ -47,14 +63,14 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   /** Конфиг функция пропсов для полосы в которой находится ползунок. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   thumbPropsConfig?: (
-    props: React.ComponentProps<typeof Thumb>,
-  ) => Partial<React.ComponentProps<typeof Thumb>> & DataAttributes;
+    props: ComponentProps<typeof Thumb>,
+  ) => Partial<ComponentProps<typeof Thumb>> & DataAttributes;
 
   /** Конфиг функция пропсов для ползунка. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   thumbCirclePropsConfig?: (
-    props: React.ComponentProps<typeof ThumbCircle>,
-  ) => Partial<React.ComponentProps<typeof ThumbCircle>> & DataAttributes;
+    props: ComponentProps<typeof ThumbCircle>,
+  ) => Partial<ComponentProps<typeof ThumbCircle>> & DataAttributes;
 }
 
 const nothing = () => ({});
@@ -138,7 +154,7 @@ export const Slider = ({
     }
   }, [setRangeWidth]);
 
-  const updateSlider = (e: any) => {
+  const updateSlider = (e: SliderPointerEvent) => {
     const newValue = calcValue(e, trackRef, minValue, maxValue, step, undefined);
     if (newValue !== value) {
       onChange(e, newValue);
@@ -166,14 +182,18 @@ export const Slider = ({
     };
   });
 
-  const onSliderClick = (e: any) => {
+  const onSliderClick = (e: ReactMouseEvent<HTMLDivElement> | ReactTouchEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    e.type === 'mousedown' ? props.onMouseDown?.(e) : props.onTouchStart?.(e);
+    if (isMouseEvent(e)) {
+      props.onMouseDown?.(e);
+    } else {
+      props.onTouchStart?.(e);
+    }
     setDrag(true);
     setAnimation(true);
   };
 
-  const onPointClick = (e: any, newValue: number) => {
+  const onPointClick = (e: ReactMouseEvent<HTMLDivElement>, newValue: number) => {
     e.stopPropagation();
     props.onMouseDown?.(e);
     setAnimation(true);
@@ -182,16 +202,16 @@ export const Slider = ({
     }
   };
 
-  const onTrackClick = (e: any) => {
+  const onTrackClick = (e: ReactMouseEvent<HTMLDivElement> | ReactTouchEvent<HTMLDivElement>) => {
     setAnimation(true);
     if (!tickMarks) setDrag(true);
-    const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
+    const newValue = calcValue(e.nativeEvent, trackRef, minValue, maxValue, step, tickMarks);
     if (newValue !== value) {
       onChange(e, newValue);
     }
   };
 
-  const handleMouseUp = (e: any) => {
+  const handleMouseUp = (e: SliderPointerEvent) => {
     setDrag(false);
     setAnimation(true);
     const newValue = calcValue(e, trackRef, minValue, maxValue, step, tickMarks);
@@ -200,7 +220,7 @@ export const Slider = ({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     const code = keyboardKey.getCode(e);
     switch (code) {
       case keyboardKey.ArrowLeft:

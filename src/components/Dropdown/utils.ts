@@ -1,13 +1,15 @@
+type FocusCalculator = (
+  parent: HTMLDivElement | null,
+  child: Element | null,
+  stop?: boolean,
+  onMenuReachTop?: () => void,
+  onMenuReachBottom?: () => void,
+) => Element | null;
+
 export const moveFocus = (
   parent: HTMLDivElement | null,
   currentFocus: Element | null,
-  calcNextFocus: (
-    parent: HTMLDivElement | null,
-    child: Element | null,
-    stop?: boolean,
-    onMenuReachTop?: () => void,
-    onMenuReachBottom?: () => void,
-  ) => any,
+  calcNextFocus: FocusCalculator,
   stop?: boolean,
   menuFocus?: boolean,
   onMenuReachTop?: () => void,
@@ -18,7 +20,7 @@ export const moveFocus = (
     ? calcNextFocus(parent, currentFocus, stop, onMenuReachTop, onMenuReachBottom)
     : calcNextFocus(parent, currentFocus, stop);
   while (nextFocus) {
-    if (nextFocus === parent?.firstChild) {
+    if (nextFocus === parent?.firstElementChild) {
       if (wrappedOnce) {
         return;
       }
@@ -37,28 +39,34 @@ export const moveFocus = (
 };
 
 export const nextItem = (
-  parent: Element | null,
+  parent: HTMLDivElement | null,
   child: Element | null,
   stop?: boolean,
   _onMenuReachTop?: () => void,
   onMenuReachBottom?: () => void,
-): Element | null | undefined | ChildNode => {
+): Element | null => {
   if (child?.nextElementSibling) {
     return child.nextElementSibling;
   }
   onMenuReachBottom?.();
-  return stop ? null : parent?.firstChild;
+  if (stop) {
+    return null;
+  }
+  return parent?.firstElementChild ?? null;
 };
 
 export const previousItem = (
-  parent: Element | null,
+  parent: HTMLDivElement | null,
   child: Element | null,
   stop?: boolean,
   onMenuReachTop?: () => void,
-): Element | null | undefined | ChildNode => {
+): Element | null => {
   if (child?.previousElementSibling) {
     return child.previousElementSibling;
   }
   onMenuReachTop?.();
-  return stop ? null : parent?.lastChild;
+  if (stop) {
+    return null;
+  }
+  return parent?.lastElementChild ?? null;
 };

@@ -92,7 +92,7 @@ export interface PaginationSimpleProps extends Omit<React.HTMLAttributes<HTMLULi
   /** Номер выбранной секции (нумерация с 0) */
   currentItem: number;
   /** Колбек на изменение текущей секции */
-  onChange: (event: any, item: number) => void;
+  onChange: (event: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>, item: number) => void;
 }
 
 /**

@@ -262,7 +262,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
         onClose?.();
       } else if (event.key === 'Tab') {
         // focus trap
-        const focusableEls: any = getKeyboardFocusableElements(modalRef.current);
+        const focusableEls = getKeyboardFocusableElements(modalRef.current);
         if (event.shiftKey) {
           /* shift + tab */
           if (document.activeElement === focusableEls[0] || document.activeElement === modalRef.current) {

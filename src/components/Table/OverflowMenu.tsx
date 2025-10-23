@@ -1,4 +1,4 @@
-import type { TableProps } from '#src/components/Table';
+import type { TableProps, TableRow } from '#src/components/Table';
 import { useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -64,7 +64,7 @@ const OverflowMenuContent = styled.div<{
 
 interface OverflowMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   dimension: TableProps['dimension'];
-  row: any;
+  row: TableRow;
   showRowsActions: boolean;
   tableRef: React.RefObject<HTMLElement>;
   headerHeight: number;

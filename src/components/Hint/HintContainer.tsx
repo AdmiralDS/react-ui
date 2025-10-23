@@ -15,10 +15,10 @@ export interface HintContainerPropsType extends Omit<React.HTMLAttributes<HTMLDi
   dimension: 's' | 'm' | 'l';
   content: React.ReactNode;
   scrollableParents: Array<Element>;
-  anchorElementRef: any;
+  anchorElementRef: React.RefObject<HTMLElement | null>;
   anchorId: string;
   hideHint: () => void;
-  startRecalculation: React.Dispatch<React.SetStateAction<any>>;
+  startRecalculation: React.Dispatch<React.SetStateAction<number>>;
   locale?: {
     closeButtonAriaLabel?: string;
   };
@@ -50,13 +50,13 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].hint.closeButtonAriaLabel;
     const hideOnScrollResize = visibilityTrigger === 'hover';
 
-    const hintRef: any = React.useRef(null);
-    const previousFocusedElement: any = React.useRef(null);
-    const [firstFocusableChild, setFirstFocusableChild] = React.useState<any>();
-    const [lastFocusableChild, setLastFocusableChild] = React.useState<any>();
+    const hintRef = React.useRef<HTMLDivElement | null>(null);
+    const previousFocusedElement = React.useRef<HTMLElement | null>(null);
+    const [firstFocusableChild, setFirstFocusableChild] = React.useState<Element | null>(null);
+    const [lastFocusableChild, setLastFocusableChild] = React.useState<Element | null>(null);
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintRef);
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (useDropdownsClickOutside(e, dropdowns)) hideHint();
     };
     if (visibilityTrigger === 'click') {
@@ -75,9 +75,9 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
     React.useLayoutEffect(() => {
       if (!preventFocusSteal && hintRef.current && visibilityTrigger === 'click') {
         const focusableEls = getKeyboardFocusableElements(hintRef.current);
-        setFirstFocusableChild(focusableEls[0]);
-        setLastFocusableChild(focusableEls[focusableEls.length - 1]);
-        (focusableEls[0] as any)?.focus();
+        setFirstFocusableChild(focusableEls[0] ?? null);
+        setLastFocusableChild(focusableEls[focusableEls.length - 1] ?? null);
+        focusableEls[0]?.focus();
       }
     }, [visibilityTrigger, content, preventFocusSteal]);
 
@@ -87,7 +87,7 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       const [listener, freeResources] = hideOnScrollResize
         ? [hideHint, () => undefined]
         : throttle(() => {
-            startRecalculation({});
+            startRecalculation((value) => value + 1);
           }, 150);
       addEventListener('resize', listener);
       addEventListener('scroll', listener);
@@ -109,18 +109,18 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       const code = keyboardKey.getCode(event);
       if (code === keyboardKey.Escape) {
         event.preventDefault();
-        previousFocusedElement.current.focus();
+        previousFocusedElement.current?.focus();
         hideHint();
       } else if (code === keyboardKey.Tab && visibilityTrigger === 'click') {
         // focus trap
         if (code === keyboardKey.Shift) {
           /* shift + tab */
-          if (document.activeElement === firstFocusableChild) {
+          if (firstFocusableChild && lastFocusableChild && document.activeElement === firstFocusableChild) {
             lastFocusableChild.focus();
             event.preventDefault();
           }
         } /* tab */ else {
-          if (document.activeElement === lastFocusableChild) {
+          if (firstFocusableChild && lastFocusableChild && document.activeElement === lastFocusableChild) {
             firstFocusableChild.focus();
             event.preventDefault();
           }
@@ -145,7 +145,7 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
               aria-label={closeBtnAriaLabel}
               onClick={(event?: React.MouseEvent<HTMLButtonElement>) => {
                 event?.stopPropagation();
-                previousFocusedElement.current.focus();
+                previousFocusedElement.current?.focus();
                 hideHint();
               }}
             />

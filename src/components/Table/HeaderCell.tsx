@@ -6,12 +6,13 @@ import { RowWidthResizer } from './RowWidthResizer';
 import { Filter } from './filter/Filter';
 import { TitleText } from './TitleText';
 import { SortIcon } from './SortIcon';
+import type { Column } from '#src/components/Table';
 
 const DEFAULT_COLUMN_WIDTH = 100;
 const nothing = () => {};
 
 type HeaderCellType = {
-  column: any;
+  column: Column;
   index: number;
   columnsAmount: number;
   showDividerForLastColumn?: boolean;

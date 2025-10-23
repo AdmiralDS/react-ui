@@ -34,23 +34,23 @@ export const DateTimeFieldStatusTemplate = ({
   CSSCustomProps,
   ...props
 }: DateTimeFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const fieldProps = {
+  const fieldProps: FieldProps = {
     label,
     additionalLabel,
     disabled,
     readOnly,
     skeleton,
     ...props,
-  } as Record<string, any>;
+  };
   const baseDateTimeProps = {
     disabled,
     readOnly,
-  } as Record<string, any>;
+  };
   const dateTimeProps = {
     dimension,
     skeleton,
     ...baseDateTimeProps,
-  } as Record<string, any>;
+  };
 
   const [dateTimeStatus, setDateTimeStatus] = React.useState<InputStatus | undefined>(status);
   const [additionalText, setAdditionalText] = React.useState<string>('');

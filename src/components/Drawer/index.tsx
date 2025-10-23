@@ -185,10 +185,15 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const theme = useTheme() || LIGHT_THEME;
     const closeBtnAriaLabel =
       locale?.closeButtonAriaLabel || theme.locales[theme.currentLocale].modal.closeButtonAriaLabel;
-    const drawer = useRef<any>({});
-    const drawerRef: any = useRef<HTMLDivElement>(null);
+    type DrawerHandle = {
+      modalEl?: HTMLDivElement | null;
+      containerEl?: Element;
+    };
+
+    const drawer = useRef<DrawerHandle>({});
+    const drawerRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
-    const previousFocusedElement: any = useRef(null);
+    const previousFocusedElement = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
       if (overlayRef.current) {
@@ -243,7 +248,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         onClose?.();
       } else if (event.key === 'Tab') {
         // focus trap
-        const focusableEls: any = getKeyboardFocusableElements(drawerRef.current);
+        const focusableEls = getKeyboardFocusableElements(drawerRef.current);
         if (event.shiftKey) {
           /* shift + tab */
           if (document.activeElement === focusableEls[0] || document.activeElement === drawerRef.current) {

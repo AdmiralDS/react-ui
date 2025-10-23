@@ -39,9 +39,15 @@ export const SelectTree: FC<SelectTreeProps> = ({ list, dimension = 'm', expandA
     }
   };
 
-  const handleChangeList = (type: string, e: any) => {
-    const checked = e.target.checked;
-    const key = (e.target as HTMLElement).getAttribute('data-key');
+  type ChangeListEvent = 'buttonclick' | 'inputchange' | 'keydown';
+
+  const handleChangeList = (
+    type: ChangeListEvent,
+    e: MouseEvent<HTMLDivElement> | ChangeEvent<HTMLInputElement> | KeyboardEvent<HTMLLIElement>,
+  ) => {
+    const target = e.target as HTMLElement;
+    const checked = type === 'inputchange' ? (e as ChangeEvent<HTMLInputElement>).target.checked : undefined;
+    const key = target.getAttribute('data-key');
 
     const traverseNodes = (node: SelectTreeNodeProps) => {
       if (node.id === key) {

@@ -80,7 +80,7 @@ export type Column = {
    * @param row - объект строки
    * @param rowIdx - индекс строки
    */
-  renderCell?(data: any, row: TableRow, rowIdx: number): React.ReactNode;
+  renderCell?(data: unknown, row: TableRow, rowIdx: number): React.ReactNode;
   /** Конфиг функция пропсов для заголовка колонки. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   headerPropsConfig?: (
@@ -117,7 +117,7 @@ export interface TableRow {
   /** Строки таблицы, находящиеся в группе */
   groupRows?: Array<string>;
   /** Функция рендера содержимого раскрытой части строки (детализации строки) */
-  expandedRowRender?: (row: any) => React.ReactNode;
+  expandedRowRender?: (row: TableRow) => React.ReactNode;
   /** Функция рендера OverflowMenu для строки.
    * Входные параметры: сама строка, колбек onVisibilityChange.
    * Колбек необходимо вызывать при открытии/закрытии меню для того, чтобы таблица могла управлять видимостью OverflowMenu.
@@ -128,20 +128,22 @@ export interface TableRow {
    * Для таблицы с dimension='s' или dimension='m' используется OverflowMenu c dimension='m'.
    * Для таблицы с dimension='l' или dimension='xl' используется OverflowMenu c dimension='l'.
    */
-  overflowMenuRender?: (row: any, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
+  overflowMenuRender?: (row: TableRow, onVisibilityChange?: (isVisible: boolean) => void) => React.ReactNode;
   /** Функция рендера одиночного действия над строкой.
    * Одиночное действие отображается в виде иконки при ховере на строку
    * и располагается по правому краю строки в видимой области таблицы.
    *
    * В качестве результата функция должна возвращать компонент RowAction,
    * внутрь которого нужно передать произвольную иконку для отображения действия.
-   */
-  actionRender?: (row: any) => React.ReactNode;
+  */
+  actionRender?: (row: TableRow) => React.ReactNode;
   /**
    * Метод для переопределения стандартного вида заголовка группы
    * @param row - объект строки
    */
   renderGroupTitle?(row: TableRow): React.ReactNode;
+
+  [key: string]: unknown;
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {

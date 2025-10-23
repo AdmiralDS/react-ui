@@ -224,13 +224,13 @@ export const AutoSizeInput = forwardRef<HTMLInputElement, InputProps>(
     const prefixRef = useRef<HTMLDivElement>(null);
     const suffixRef = useRef<HTMLDivElement>(null);
 
-    const updateHiddenContent = (newValue: any) => {
+    const updateHiddenContent = (newValue: TextInputProps['value']) => {
       if (sizerRef.current) {
         sizerRef.current.innerHTML = newValue || placeholder || '';
       }
     };
 
-    const updatePrefixSuffixState = (newValue: any) => {
+    const updatePrefixSuffixState = (newValue: TextInputProps['value']) => {
       if (newValue) {
         setPrefixSuffix(true);
       } else {

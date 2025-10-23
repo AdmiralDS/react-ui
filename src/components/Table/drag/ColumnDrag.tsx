@@ -56,7 +56,7 @@ export const ColumnDrag = ({
     if (columnMirrorRef.current && columnDragging && (isAnyColumnDraggable || isAnyStickyColumnDraggable)) {
       const table = tableRef.current;
 
-      const observer = observeRect(columnMirrorRef.current, (rect: any) => {
+      const observer = observeRect(columnMirrorRef.current, (rect: DOMRectReadOnly) => {
         const rightCoord = table?.getBoundingClientRect().right || 0;
         const leftCoord =
           stickyColumnsWrapperRef.current?.getBoundingClientRect().right || table?.getBoundingClientRect().left || 0;

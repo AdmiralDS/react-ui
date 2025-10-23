@@ -44,10 +44,10 @@ export interface Locale {
   };
   paginationOne: {
     itemsPerPageText: string;
-    pageSelectLabel: (...props: any) => string;
-    pageSizeSelectLabel: (...props: any) => string;
-    itemRangeText: (...props: any) => string;
-    pageRangeText: (props: any) => string;
+    pageSelectLabel: (page: number, totalPages: number) => string;
+    pageSizeSelectLabel: (pageSize: number, totalItems: number) => string;
+    itemRangeText: (min: number, max: number, total: number) => string;
+    pageRangeText: (totalPages: number) => string;
     backwardText: string;
     forwardText: string;
   };

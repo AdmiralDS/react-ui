@@ -54,7 +54,7 @@ export interface CalendarPropType extends IDateSelectionProps {
   currentActiveViewImportant?: boolean;
 
   /** Коллбэк срабатывает при клике на стрелках переключения дат */
-  onDateIncreaseDecrease?: (date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>) => void;
+  onDateIncreaseDecrease?: (date: Date | Array<Date | null> | null, event?: SyntheticEvent<Element>) => void;
 
   /** Коллбэк при изменении месяца */
   onMonthSelect?: (date: Date | Array<Date | null> | null) => void;
@@ -78,7 +78,7 @@ export interface CalendarPropType extends IDateSelectionProps {
   highlightSpecialDay?: (date: Date) => ReturnType<typeof css> | undefined;
 
   /** Коллбэк выбора даты, срабатывает при клике на дне (в режиме диапазона date - это массив из двух дат) */
-  onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<any>): void;
+  onChange(date: Date | Array<Date | null> | null, event?: SyntheticEvent<Element>): void;
 
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме

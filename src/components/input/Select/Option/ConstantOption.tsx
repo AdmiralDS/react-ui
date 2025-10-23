@@ -35,7 +35,7 @@ const ConstantOption = ({
     [renderOption, disabled, value, children],
   );
 
-  const dataProps = {} as Record<string, any>;
+  const dataProps = {};
   passDataAttributes(restProps, dataProps, 'data', false);
 
   const option = useMemo(

@@ -1,5 +1,5 @@
 import { memo, useState, useLayoutEffect } from 'react';
-import type { ReactNode, MutableRefObject, FC } from 'react';
+import type { ReactNode, MutableRefObject, FC, Dispatch, SetStateAction } from 'react';
 
 import type { RowId } from '../types';
 
@@ -7,7 +7,7 @@ type VirtualRowWrapperProps = {
   id: RowId | number;
   children: ReactNode;
   cacheRef: MutableRefObject<Cache>;
-  setCache: any;
+  setCache: Dispatch<SetStateAction<Cache>>;
 };
 
 type Cache = {

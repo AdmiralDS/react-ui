@@ -1,4 +1,8 @@
-import type { HTMLAttributes } from 'react';
+import type {
+  HTMLAttributes,
+  MouseEvent as ReactMouseEvent,
+  TouchEvent as ReactTouchEvent,
+} from 'react';
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { throttle } from '#src/components/common/utils/throttle';
 
@@ -7,11 +11,17 @@ import { sortNum, calcValue, calcSliderCoords, arraysEqual } from './utils';
 import { DefaultTrack, FilledTrack, Thumb, ThumbCircle, Track, TrackWrapper, Wrapper } from './style';
 import type { DataAttributes } from 'styled-components';
 
+type RangeChangeEvent =
+  | MouseEvent
+  | TouchEvent
+  | ReactMouseEvent<HTMLDivElement>
+  | ReactTouchEvent<HTMLDivElement>;
+
 export interface RangeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Значение компонента */
   value: NumberRange;
   /** Коллбек на изменение состояния */
-  onChange: (event: any, value: NumberRange) => void;
+  onChange: (event: RangeChangeEvent, value: NumberRange) => void;
   /** Колбек, который срабатывает по окончании изменения значения (по окончании перетаскивания ползунка или клика на полосу диапазона) */
   onRangeMouseUp?: () => void;
   /** Минимальное значение */
@@ -116,7 +126,7 @@ export const Range = ({
     }
   }, [setRangeWidth]);
 
-  const [moveListener, freeResources] = throttle((e: any) => {
+  const [moveListener, freeResources] = throttle((e: MouseEvent | TouchEvent) => {
     updateSlider(e);
   }, 50);
 
@@ -138,7 +148,7 @@ export const Range = ({
     };
   });
 
-  const updateSlider = (e: any) => {
+  const updateSlider = (e: MouseEvent | TouchEvent) => {
     setAnimation(false);
 
     if (isDraging || isDraging2) {
@@ -167,7 +177,7 @@ export const Range = ({
     }
   };
 
-  const onSliderClick = (_e: any, slider: 'first' | 'second') => {
+  const onSliderClick = (slider: 'first' | 'second') => {
     slider === 'first' ? setDrag(true) : setDrag2(true);
     setAnimation(true);
   };
@@ -198,27 +208,27 @@ export const Range = ({
     setDrag2(false);
   };
 
-  const onTrackClick = (e: any) => {
-    const calcVal = calcValue(e, trackRef, minValue, maxValue, step);
+  const onTrackClick = (e: ReactMouseEvent<HTMLDivElement> | ReactTouchEvent<HTMLDivElement>) => {
+    const calcVal = calcValue(e.nativeEvent, trackRef, minValue, maxValue, step);
 
     // calc nearest slider
     if (Math.abs(value[1] - calcVal) < Math.abs(calcVal - value[0])) {
       if (!arraysEqual(sortNum([value[0], calcVal]), value)) {
         onChange(e, sortNum([value[0], calcVal]));
       }
-      onSliderClick(e, 'second');
+      onSliderClick('second');
     } else if (Math.abs(value[1] - calcVal) > Math.abs(calcVal - value[0])) {
       if (!arraysEqual(sortNum([calcVal, value[1]]), value)) {
         onChange(e, sortNum([calcVal, value[1]]));
       }
-      onSliderClick(e, 'first');
+      onSliderClick('first');
     } else if (Math.abs(value[1] - calcVal) === Math.abs(calcVal - value[0])) {
       const slider = value[0] === value[1] ? (calcVal < value[0] ? 'first' : 'second') : 'first';
       const newValue: NumberRange = slider === 'first' ? [calcVal, value[1]] : [value[0], calcVal];
       if (!arraysEqual(sortNum(newValue), value)) {
         onChange(e, sortNum(newValue));
       }
-      onSliderClick(e, slider);
+      onSliderClick(slider);
     }
   };
 
@@ -227,12 +237,12 @@ export const Range = ({
     onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
       e.stopPropagation();
       props.onTouchStart?.(e);
-      onSliderClick(e, 'first');
+      onSliderClick('first');
     },
     onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       props.onMouseDown?.(e);
-      onSliderClick(e, 'first');
+      onSliderClick('first');
     },
     $active: isDraging,
   };
@@ -242,12 +252,12 @@ export const Range = ({
     onTouchStart: (e: React.TouchEvent<HTMLDivElement>) => {
       e.stopPropagation();
       props.onTouchStart?.(e);
-      onSliderClick(e, 'second');
+      onSliderClick('second');
     },
     onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       props.onMouseDown?.(e);
-      onSliderClick(e, 'second');
+      onSliderClick('second');
     },
     $active: isDraging2,
   };

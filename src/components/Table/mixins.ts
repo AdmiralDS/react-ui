@@ -84,9 +84,13 @@ export const rowBackground = css<{
       return `var(--admiral-color-Primary_Primary20, ${theme.color['Primary/Primary 20']})`;
     }
     if ($status && $rowStatusMap?.[$status]) {
-      return typeof $rowStatusMap[$status] === 'string'
-        ? $rowStatusMap[$status]
-        : ($rowStatusMap[$status] as any)(theme.color);
+      const statusColor = $rowStatusMap[$status];
+      if (typeof statusColor === 'string') {
+        return statusColor;
+      }
+      if (typeof statusColor === 'function') {
+        return statusColor(theme.color);
+      }
     }
     if ($grey) {
       return `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import type { MultiInputProps } from '#src/components/input';
 import { MultiInput } from '#src/components/input';
@@ -31,7 +31,7 @@ export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFiel
     ...restProps
   } = props;
 
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -45,7 +45,7 @@ export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFiel
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

@@ -12,7 +12,7 @@ const getChipMeta = (
   onChipRemove: (value: string) => void,
 ) => {
   const chip = renderChip();
-  const dataProps = {} as Record<string, any>;
+  const dataProps = {};
   passDataAttributes(restProps, dataProps, 'data', false);
 
   return chipIsChipMeta(chip)

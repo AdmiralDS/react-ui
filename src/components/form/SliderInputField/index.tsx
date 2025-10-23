@@ -1,6 +1,6 @@
 import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field as FieldComponent } from '#src/components/Field';
 import type { SliderInputProps } from '#src/components/input/SliderInput';
 import { SliderInput } from '#src/components/input/SliderInput';
@@ -33,7 +33,7 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     skeleton,
     ...restProps
   } = props;
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -48,7 +48,7 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);

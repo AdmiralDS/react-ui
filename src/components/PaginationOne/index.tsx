@@ -129,13 +129,13 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
     /** Текст, описывающий сколько записей размещено на одной странице */
     itemsPerPageText?: string;
     /** Функция, возвращающая текст, описывающий селект с выбором номера страницы */
-    pageSelectLabel?: (...props: any) => string;
+    pageSelectLabel?: (page: number, totalPages: number) => string;
     /** Функция, возвращающая текст, описывающий селект с выбором размера страницы */
-    pageSizeSelectLabel?: (...props: any) => string;
+    pageSizeSelectLabel?: (pageSize: number, total: number) => string;
     /** Функция, возвращающая текст, поясняющий, какой диапазон записей сейчас отображается */
-    itemRangeText?: (...props: any) => string;
+    itemRangeText?: (min: number, max: number, total: number) => string;
     /** Функция, возвращающая текст, поясняющий, из какого количества страниц выбрана текущая */
-    pageRangeText?: (...props: any) => string;
+    pageRangeText?: (totalPages: number) => string;
     /** Текст, описывающий кнопку переключения назад (атрибут aria-label) */
     backwardText?: string;
     /** Текст, описывающий кнопку переключения вперед (атрибут aria-label) */

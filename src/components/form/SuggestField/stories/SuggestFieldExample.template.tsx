@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { SuggestField } from '@admiral-ds/react-ui';
 import type { SuggestFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
+import { cleanUpProps } from '#src/components/common/utils/cleanUpStoriesProps';
 
 const DisplayContainer = styled.div`
   > * {
@@ -29,14 +30,7 @@ export const SuggestFieldExampleTemplate = ({
   CSSCustomProps,
   ...props
 }: SuggestFieldProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const cleanProps = (Object.keys(props) as Array<keyof typeof props>).reduce(
-    (acc, key) => {
-      if (props[key] !== undefined) acc[key] = props[key];
-
-      return acc;
-    },
-    {} as Record<any, any>,
-  );
+  const cleanProps = cleanUpProps(props);
 
   const [localValue, setValue] = React.useState<string>(props.value ? String(props.value) : '');
   const [isLoading, setIsLoading] = React.useState(false);

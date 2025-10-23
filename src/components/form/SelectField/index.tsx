@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import type { SelectProps } from '#src/components/input/Select';
 import { Select as BaseSelect } from '#src/components/input/Select';
-import type { FieldOwnProps } from '#src/components/Field';
+import type { FieldOwnProps, FieldContainerProps, FieldDataAttributes } from '#src/components/Field';
 import { Field } from '#src/components/Field';
 import {
   passFormFieldContainerDataAttributes,
@@ -34,7 +34,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>
     skeleton,
     ...restProps
   } = props;
-  const fieldContainerProps = {
+  const fieldContainerProps: FieldContainerProps & FieldDataAttributes = {
     className,
     extraText,
     status,
@@ -47,7 +47,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>
     skeleton,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  };
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
