@@ -122,7 +122,7 @@ describe('Hint', () => {
       getRangeAt: () => fakeRange,
     };
     const origGetSelection = window.getSelection;
-    window.getSelection = () => fakeSelection as any;
+    window.getSelection = () => fakeSelection as unknown as Selection | null;
 
     act(() => {
       fireEvent.mouseDown(document.body);
@@ -152,7 +152,7 @@ describe('Hint', () => {
       getRangeAt: () => fakeRange,
     };
     const origGetSelection = window.getSelection;
-    window.getSelection = () => fakeSelection as any;
+    window.getSelection = () => fakeSelection as unknown as Selection | null;
 
     // Генерируем touchstart вне Hint
     act(() => {

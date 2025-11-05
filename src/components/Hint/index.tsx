@@ -92,7 +92,7 @@ export const Hint: React.FC<HintProps> = ({
 
   const targetElement = userTargetElement || anchorElementRef.current;
 
-  const [recalculation, startRecalculation] = React.useState<any>(null);
+  const [recalculation, startRecalculation] = React.useState<Record<string, never> | null>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
@@ -281,7 +281,7 @@ export const Hint: React.FC<HintProps> = ({
           if (!relatedTarget) {
             requestAnimationFrame(() => {
               // Проверяем, не находится ли курсор над Hint или anchor
-              const hoveredElement = document.elementFromPoint((e as any).clientX || 0, (e as any).clientY || 0);
+              const hoveredElement = document.elementFromPoint(e.clientX || 0, e.clientY || 0);
               if (hoveredElement && hintElementRef.current && hintElementRef.current.contains(hoveredElement)) {
                 return;
               }
