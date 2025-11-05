@@ -122,7 +122,8 @@ describe('Hint', () => {
       getRangeAt: () => fakeRange,
     };
     const origGetSelection = window.getSelection;
-    window.getSelection = () => fakeSelection as unknown as Selection | null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.getSelection = () => fakeSelection as any;
 
     act(() => {
       fireEvent.mouseDown(document.body);
@@ -152,7 +153,8 @@ describe('Hint', () => {
       getRangeAt: () => fakeRange,
     };
     const origGetSelection = window.getSelection;
-    window.getSelection = () => fakeSelection as unknown as Selection | null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.getSelection = () => fakeSelection as any;
 
     // Генерируем touchstart вне Hint
     act(() => {

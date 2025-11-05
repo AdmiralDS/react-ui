@@ -115,7 +115,7 @@ export const Hint: React.FC<HintProps> = ({
     return () => {
       removeEventListener('resize', listener);
     };
-  });
+  }, []);
 
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;
@@ -281,7 +281,8 @@ export const Hint: React.FC<HintProps> = ({
           if (!relatedTarget) {
             requestAnimationFrame(() => {
               // Проверяем, не находится ли курсор над Hint или anchor
-              const hoveredElement = document.elementFromPoint(e.clientX || 0, e.clientY || 0);
+              const mouseEvent = e as React.MouseEvent<HTMLDivElement>;
+              const hoveredElement = document.elementFromPoint(mouseEvent.clientX || 0, mouseEvent.clientY || 0);
               if (hoveredElement && hintElementRef.current && hintElementRef.current.contains(hoveredElement)) {
                 return;
               }

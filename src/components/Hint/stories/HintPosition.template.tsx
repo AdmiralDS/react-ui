@@ -86,7 +86,7 @@ export const HintPositionTemplate = ({
           visible={visible2}
           onVisibilityChange={handleVisibilityChange2}
           renderContent={() => text}
-          id="top_pos"
+          anchorId="top_pos"
           hintPosition="top"
         >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby="top_pos">
@@ -110,7 +110,7 @@ export const HintPositionTemplate = ({
           visible={visible4}
           onVisibilityChange={handleVisibilityChange4}
           renderContent={() => text}
-          id="left-pos"
+          anchorId="left-pos"
           hintPosition="left"
         >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby="left-pos">
