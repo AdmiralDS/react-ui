@@ -19,8 +19,13 @@ export const StepperPlaygroundTemplate = ({ lineClamp, activeStep, orientation, 
       <Stepper lineClamp={lineClamp} activeStep={activeStep || 2} orientation={orientation} stepWidth={200} {...args}>
         {steps.map(({ content, ...step }) => {
           return (
-            // eslint-disable-next-line no-console
-            <Step {...step} onClick={(step: any) => console.log(step.index)}>
+            <Step
+              {...step}
+              onClick={(step: { index: number; active: boolean; completed: boolean; disabled?: boolean }) => {
+                // Обработчик клика по шагу
+                void step;
+              }}
+            >
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
             </Step>
           );
