@@ -23,6 +23,8 @@ export interface HintContainerPropsType extends Omit<React.HTMLAttributes<HTMLDi
     closeButtonAriaLabel?: string;
   };
   preventFocusSteal?: boolean;
+  visible?: boolean;
+  onHintInteraction?: () => void;
 }
 
 export type RefType = HTMLDivElement | null;
@@ -41,6 +43,8 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
       startRecalculation,
       locale,
       preventFocusSteal,
+      visible,
+      onHintInteraction,
       ...props
     },
     ref,
@@ -56,7 +60,32 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
     const [lastFocusableChild, setLastFocusableChild] = React.useState<any>();
 
     const { addDropdown, removeDropdown, dropdowns } = useDropdown(hintRef);
-    const handleClickOutside = (e: any) => {
+
+    // Игнорируем первый клик вне после открытия
+    const justOpened = React.useRef(false);
+    React.useEffect(() => {
+      if (visible) {
+        justOpened.current = true;
+        setTimeout(() => {
+          justOpened.current = false;
+        }, 0);
+      }
+    }, [visible]);
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (justOpened.current) {
+        justOpened.current = false;
+        return;
+      }
+      // Проверяем, есть ли выделение текста внутри Hint
+      const selection = window.getSelection && window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        if (hintRef.current && hintRef.current.contains(range.commonAncestorContainer)) {
+          return;
+        }
+      }
+
       if (useDropdownsClickOutside(e, dropdowns)) hideHint();
     };
     if (visibilityTrigger === 'click') {
@@ -127,8 +156,56 @@ export const HintContainer = React.forwardRef<RefType, HintContainerPropsType>(
         }
       }
     };
+
+    // В режиме hover: предотвращаем закрытие Hint при наведении/взаимодействии с ним
+    const handleHintMouseEnter =
+      visibilityTrigger === 'hover'
+        ? () => {
+            onHintInteraction?.();
+          }
+        : undefined;
+    const handleHintMouseLeave =
+      visibilityTrigger === 'hover'
+        ? (e: React.MouseEvent) => {
+            // Проверяем, что мышь действительно ушла с Hint и не перешла на другой элемент внутри Hint
+            const relatedTarget = e.relatedTarget as Node;
+            if (!hintRef.current || (relatedTarget && hintRef.current.contains(relatedTarget))) {
+              return;
+            }
+            // Если курсор не перешёл на anchor элемент, не закрываем
+            if (anchorElementRef?.current && anchorElementRef.current.contains(relatedTarget as Node)) {
+              return;
+            }
+          }
+        : undefined;
+
+    // В режиме hover: предотвращаем закрытие Hint при клике внутри него
+    const handleHintClick =
+      visibilityTrigger === 'hover'
+        ? (e: React.MouseEvent) => {
+            e.stopPropagation();
+            onHintInteraction?.();
+          }
+        : undefined;
+
+    const handleHintMouseDown =
+      visibilityTrigger === 'hover'
+        ? (e: React.MouseEvent) => {
+            e.stopPropagation();
+            onHintInteraction?.();
+          }
+        : undefined;
+
     return (
-      <HintWrapper role="tooltip" ref={hintRef} onKeyDown={handleKeyDown}>
+      <HintWrapper
+        role="tooltip"
+        ref={hintRef}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleHintMouseEnter}
+        onMouseLeave={handleHintMouseLeave}
+        onClick={handleHintClick}
+        onMouseDown={handleHintMouseDown}
+      >
         <HintDialog
           {...props}
           role="dialog"
