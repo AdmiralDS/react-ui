@@ -22,13 +22,14 @@ export const StepperClickPropTemplate = () => {
   return (
     <>
       <Stepper activeStep={2} data-testid="stepper">
-        {steps.map(({ content, ...step }) => {
+        {steps.map(({ content, key, completed }) => {
           return (
             <Step
-              {...step}
+              completed={completed}
+              key={`step-${key}`}
               onClick={(step: { index: number; active: boolean; completed: boolean; disabled?: boolean }) => {
                 // Обработчик клика по шагу
-                void step;
+                console.log(`step ${step.index}`);
               }}
               data-testid="step"
             >
@@ -39,13 +40,14 @@ export const StepperClickPropTemplate = () => {
       </Stepper>
       <Separator />
       <Stepper activeStep={2} orientation="vertical" style={{ width: '225px' }}>
-        {steps.map(({ content, ...step }) => {
+        {steps.map(({ content, key, completed }) => {
           return (
             <Step
-              {...step}
+              completed={completed}
+              key={`step-${key}`}
               onClick={(step: { index: number; active: boolean; completed: boolean; disabled?: boolean }) => {
                 // Обработчик клика по шагу
-                void step;
+                console.log(`step ${step.index}`);
               }}
             >
               <StepContent tooltipProps={{ style: { maxWidth: '300px' } }}>{content}</StepContent>
