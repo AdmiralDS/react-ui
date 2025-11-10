@@ -23,8 +23,8 @@ const Container = styled.div<{
   flex: 0 0 auto;
   ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf}` : '')};
   opacity: 0;
-  transition-delay: 200ms;
   transition-property: opacity;
+  transition-duration: 0.1s;
   ${(p) => p.$dropContainerCssMixin}
 `;
 

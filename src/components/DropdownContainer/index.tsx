@@ -20,8 +20,8 @@ const Container = styled.div<{
   ${(p) => (p.$alignSelf ? `align-self: ${p.$alignSelf};` : '')};
   max-width: calc(100vw - 32px);
   opacity: 0;
-  transition-delay: 200ms;
   transition-property: opacity;
+  transition-duration: 0.1s;
 
   &:focus-visible {
     border: 2px solid blue;
