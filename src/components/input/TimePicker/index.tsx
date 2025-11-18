@@ -527,6 +527,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       'data-skeleton': skeleton ? true : undefined,
       'data-status': status,
       'data-disable-copying': disableCopying ? true : undefined,
+      className: 'time-picker-container',
       ref: inputContainerRef,
     };
 
@@ -548,7 +549,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         <InputBox {...containerProps} {...containerPropsConfig(containerProps)}>
           <InputLine {...inputLineProps} {...inputLinePropsConfig(inputLineProps)} />
           {iconArray.length > 0 && (
-            <IconPanelAfter disabled={disabled} $dimension={dimension}>
+            <IconPanelAfter disabled={disabled} $dimension={dimension} className="time-picker-icon-panel">
               {iconArray}
             </IconPanelAfter>
           )}
