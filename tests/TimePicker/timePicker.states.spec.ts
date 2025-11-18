@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - readOnly & disabled options', () => {
   test('readOnly: time icon absent, extra icon works, no dropdown', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-icon-custom');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-icon-custom');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -19,7 +19,7 @@ test.describe('TimePicker - readOnly & disabled options', () => {
   });
 
   test('disabled options are not selectable in simple-disabled story', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');

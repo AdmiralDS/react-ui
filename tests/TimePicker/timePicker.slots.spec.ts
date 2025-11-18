@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - custom slots', () => {
   test('shows only hourly options from custom slots and selects one', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple-custom-slots');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple-custom-slots');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');

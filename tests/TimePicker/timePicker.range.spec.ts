@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - range constraints', () => {
   test('disables options outside startTime/endTime and allows inside', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-range');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-range');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -26,7 +26,7 @@ test.describe('TimePicker - range constraints', () => {
   });
 
   test('respects disabledSlots along with range', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-range-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-range-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -48,7 +48,7 @@ test.describe('TimePicker - range constraints', () => {
   });
 
   test('shows error status when manually entering disabled slot value', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-range-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-range-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');

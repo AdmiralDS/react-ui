@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - data attributes and states', () => {
   test('disabled slot in dropdown has data-disabled attribute', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -25,7 +25,7 @@ test.describe('TimePicker - data attributes and states', () => {
   });
 
   test('readOnly sets container data-read-only', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-icon-custom');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-icon-custom');
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container[data-read-only="true"]');
@@ -33,7 +33,7 @@ test.describe('TimePicker - data attributes and states', () => {
   });
 
   test('validates disabledSlots and shows error status on manual input', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');

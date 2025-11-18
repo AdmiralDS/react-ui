@@ -3,7 +3,7 @@ import { getStorybookFrameLocator } from '../utils';
 
 test.describe('TimePicker - visual states and props', () => {
   test('displays clear icon when displayClearIcon is true and value exists', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-clear-icon');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-clear-icon');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -20,7 +20,7 @@ test.describe('TimePicker - visual states and props', () => {
 
   test('shows loading spinner when isLoading is true', async ({ page }) => {
     // Нужна история с isLoading, если её нет - пропускаем
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
@@ -28,7 +28,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('applies error status visually', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -51,7 +51,7 @@ test.describe('TimePicker - visual states and props', () => {
 
   test('applies success status when provided', async ({ page }) => {
     // Если есть история с success статусом, проверяем
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
@@ -60,7 +60,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('shows custom icon when icon prop is provided', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-icon-custom');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-icon-custom');
     const frame = getStorybookFrameLocator(page);
 
     // Проверяем что иконка времени присутствует (последняя кнопка в панели)
@@ -69,7 +69,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('displays iconsAfter correctly', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-double-icon');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-double-icon');
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
@@ -96,7 +96,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('skeleton state renders correctly', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-skeleton');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-skeleton');
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container[data-skeleton="true"]');
@@ -107,7 +107,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('disabled state prevents interaction', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-disabled');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-disabled');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -129,7 +129,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('readOnly state prevents editing but allows viewing', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-icon-custom');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-icon-custom');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -144,7 +144,7 @@ test.describe('TimePicker - visual states and props', () => {
   });
 
   test('tooltip appears on overflow when showTooltip is true', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');

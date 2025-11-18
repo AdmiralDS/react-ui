@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - dropdown and selection', () => {
   test('opens dropdown via icon and selects an option', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -23,7 +23,7 @@ test.describe('TimePicker - dropdown and selection', () => {
   });
 
   test('dropdown closes on outside click', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();

@@ -3,7 +3,7 @@ import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - user interactions', () => {
   test('onChange is called when value changes', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -22,7 +22,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('clear icon clears the input value', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-clear-icon');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-clear-icon');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -40,7 +40,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('custom clear icon sets the input value to 00:00', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-double-icon');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-double-icon');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -58,7 +58,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('keyboard navigation in dropdown works', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -81,7 +81,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('dropdown closes on Escape key', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -99,7 +99,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('value prop controls the input value', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -115,7 +115,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('disableCopying prevents text selection', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-disable-copying');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-disable-copying');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -129,7 +129,7 @@ test.describe('TimePicker - user interactions', () => {
   });
 
   test('dropdown positioning with alignSelf', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-align-dropdown-container');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-align-dropdown-container');
     const frame = getStorybookFrameLocator(page);
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
@@ -144,4 +144,3 @@ test.describe('TimePicker - user interactions', () => {
     expect(dropdownBox).toBeTruthy();
   });
 });
-

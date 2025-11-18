@@ -3,7 +3,7 @@ import { getStorybookFrameLocator } from '../utils';
 
 test.describe('TimePicker - basic interactions', () => {
   test('typing masks to HH:MM and ignores non-digits', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -15,7 +15,7 @@ test.describe('TimePicker - basic interactions', () => {
   });
 
   test('placeholder is visible and value updates with typing', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -27,7 +27,7 @@ test.describe('TimePicker - basic interactions', () => {
   });
 
   test('adding zeroes to HH:MM', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -43,7 +43,7 @@ test.describe('TimePicker - basic interactions', () => {
   });
 
   test('writing : only after the minutes digit', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
@@ -65,7 +65,7 @@ test.describe('TimePicker - basic interactions', () => {
   });
 
   test('ignore invalid hour the second digit after 2', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-datepicker-timepicker--time-picker-simple');
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
