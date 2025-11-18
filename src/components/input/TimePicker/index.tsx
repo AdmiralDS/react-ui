@@ -202,6 +202,11 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
         event.preventDefault();
       }
+      if (code === keyboardKey.Escape && isOpened) {
+        setIsOpened(false);
+        event.preventDefault();
+        event.stopPropagation();
+      }
       props.onKeyDown?.(event);
     };
 
