@@ -77,6 +77,7 @@ export * from './components/common/utils/refSetter';
 export * from './components/common/utils/checkOverflow';
 export * from './components/common/utils/getTextHighlightMeta';
 export * from './components/common/keyboardKey';
+export * from './components/common/mixins';
 export * from './components/common/hooks/useClickOutside';
 export * from './components/common/hooks/useDebounce';
 export * from './components/common/hooks/useInterval';
