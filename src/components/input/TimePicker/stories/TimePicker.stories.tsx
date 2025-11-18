@@ -49,10 +49,8 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Альтернативная версия компонента TimeInput, реализованного через динамическую маску ввода.
-    <Separator />
-    Компонент для ввода-выбора времени. Поддерживается как ручной ввод, так и выбор через выпадающий список с
-    фиксированным шагом в полчаса.
+    Компонент для ввода-выбора времени, реализованный через динамическую маску ввода. Поддерживается как ручной ввод,
+    так и выбор через выпадающий список с фиксированным шагом в полчаса.
     <Separator />
     Компонент нельзя изменять по ширине.
     <Separator />
@@ -61,7 +59,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/DatePicker/TimePicker',
+  title: 'Admiral-2.1/Input/TimePicker',
   component: TimePicker,
   decorators: undefined,
   parameters: {
