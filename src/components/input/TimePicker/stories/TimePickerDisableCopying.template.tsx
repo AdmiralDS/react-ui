@@ -6,12 +6,12 @@ import { TimePicker } from '@admiral-ds/react-ui';
 import type { TimePickerProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
-export const TimePickerDisabledTemplate = ({
+export const TimePickerDisableCopyingTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: TimePickerProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [localValue, setValue] = React.useState<string>(String(props.value ?? ''));
+  const [localValue, setValue] = React.useState<string>(String(props.value ?? '12:30'));
 
   React.useEffect(() => {
     if (props.value !== undefined) {
@@ -31,10 +31,9 @@ export const TimePickerDisabledTemplate = ({
         style={{ maxWidth: '320px' }}
         value={localValue}
         onChange={handleChange}
-        disabled
+        disableCopying
         dropContainerClassName="dropContainerClass"
       />
     </ThemeProvider>
   );
 };
-

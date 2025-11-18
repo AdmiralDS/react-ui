@@ -12,6 +12,7 @@ import {
 
 import { TimePickerSimpleTemplate } from './TimePickerSimple.template';
 import { TimePickerDisabledTemplate } from './TimePickerDisabled.template';
+import { TimePickerDisableCopyingTemplate } from './TimePickerDisableCopying.template';
 import { TimePickerSkeletonTemplate } from './TimePickerSkeleton.template';
 import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
 import { TimePickerDoubleIconTemplate } from './TimePickerDoubleIcon.template';
@@ -24,6 +25,7 @@ import { TimePickerAlignDropdownContainerTemplate } from './TimePickerAlignDropd
 // Imports of text sources
 import TimePickerSimpleRaw from './TimePickerSimple.template?raw';
 import TimePickerDisabledRaw from './TimePickerDisabled.template?raw';
+import TimePickerDisableCopyingRaw from './TimePickerDisableCopying.template?raw';
 import TimePickerSkeletonRaw from './TimePickerSkeleton.template?raw';
 import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
 import TimePickerDoubleIconRaw from './TimePickerDoubleIcon.template?raw';
@@ -192,6 +194,33 @@ export const TimePickerDisabled = {
   },
 
   name: 'Задизейбленный компонент',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Компонент с блокировкой копирования">
+const TimePickerDisableCopyingStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerDisableCopyingTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerDisableCopying = {
+  render: TimePickerDisableCopyingStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerDisableCopyingRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Компонент с блокировкой копирования',
 };
 
 //</editor-fold>
