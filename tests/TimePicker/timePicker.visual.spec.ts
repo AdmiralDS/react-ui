@@ -152,8 +152,5 @@ test.describe('TimePicker - visual states and props', () => {
     await input.click();
     await input.fill('2359');
     await page.waitForTimeout(100);
-
-    // Tooltip должен появиться при переполнении (если реализовано)
-    // Это зависит от реализации checkOverflow
   });
 });

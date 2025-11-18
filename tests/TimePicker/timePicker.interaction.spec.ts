@@ -144,3 +144,4 @@ test.describe('TimePicker - user interactions', () => {
     expect(dropdownBox).toBeTruthy();
   });
 });
+

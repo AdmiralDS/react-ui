@@ -7,6 +7,7 @@ test.describe('TimePicker - dropdown and selection', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
+    await expect(input).toBeVisible({ timeout: 5000 });
     await expect(input).toBeVisible();
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
