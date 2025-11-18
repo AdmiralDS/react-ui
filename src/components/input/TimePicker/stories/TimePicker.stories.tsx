@@ -11,6 +11,7 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { TimePickerSimpleTemplate } from './TimePickerSimple.template';
+import { TimePickerDisabledTemplate } from './TimePickerDisabled.template';
 import { TimePickerSkeletonTemplate } from './TimePickerSkeleton.template';
 import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
 import { TimePickerDoubleIconTemplate } from './TimePickerDoubleIcon.template';
@@ -22,6 +23,7 @@ import { TimePickerAlignDropdownContainerTemplate } from './TimePickerAlignDropd
 
 // Imports of text sources
 import TimePickerSimpleRaw from './TimePickerSimple.template?raw';
+import TimePickerDisabledRaw from './TimePickerDisabled.template?raw';
 import TimePickerSkeletonRaw from './TimePickerSkeleton.template?raw';
 import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
 import TimePickerDoubleIconRaw from './TimePickerDoubleIcon.template?raw';
@@ -163,6 +165,33 @@ export const TimePickerSimple = {
   },
 
   name: 'Базовый компонент',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Задизейбленный компонент">
+const TimePickerDisabledStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerDisabled = {
+  render: TimePickerDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerDisabledRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Задизейбленный компонент',
 };
 
 //</editor-fold>
