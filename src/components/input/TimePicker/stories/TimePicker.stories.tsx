@@ -15,6 +15,7 @@ import { TimePickerDisabledTemplate } from './TimePickerDisabled.template';
 import { TimePickerDisableCopyingTemplate } from './TimePickerDisableCopying.template';
 import { TimePickerSkeletonTemplate } from './TimePickerSkeleton.template';
 import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
+import { TimePickerClearIconTemplate } from './TimePickerClearIcon.template';
 import { TimePickerDoubleIconTemplate } from './TimePickerDoubleIcon.template';
 import { TimePickerRangeTemplate } from './TimePickerRange.template';
 import { TimePickerRangeDisabledTemplate } from './TimePickerRangeDisabled.template';
@@ -28,6 +29,7 @@ import TimePickerDisabledRaw from './TimePickerDisabled.template?raw';
 import TimePickerDisableCopyingRaw from './TimePickerDisableCopying.template?raw';
 import TimePickerSkeletonRaw from './TimePickerSkeleton.template?raw';
 import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
+import TimePickerClearIconRaw from './TimePickerClearIcon.template?raw';
 import TimePickerDoubleIconRaw from './TimePickerDoubleIcon.template?raw';
 import TimePickerRangeRaw from './TimePickerRange.template?raw';
 import TimePickerRangeDisabledRaw from './TimePickerRangeDisabled.template?raw';
@@ -267,7 +269,34 @@ export const TimePickerIconCustom = {
 
 //</editor-fold>
 
-//<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой компонента">
+//<editor-fold desc="Компонент с иконкой очистки">
+const TimePickerClearIconStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerClearIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerClearIcon = {
+  render: TimePickerClearIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerClearIconRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Компонент с иконкой очистки',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой очистки">
 const TimePickerDoubleIconStory: StoryFn<typeof TimePicker> = (props) => <TimePickerDoubleIconTemplate {...props} />;
 
 export const TimePickerDoubleIcon = {
@@ -281,7 +310,7 @@ export const TimePickerDoubleIcon = {
     },
   },
 
-  name: 'Компонент с дополнительной иконкой и кастомной иконкой компонента',
+  name: 'Компонент с дополнительной иконкой и кастомной иконкой очистки',
 };
 
 //</editor-fold>
