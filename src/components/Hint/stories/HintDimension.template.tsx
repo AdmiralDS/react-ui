@@ -58,7 +58,7 @@ export const HintDimensionTemplate = ({
           visible={visible2}
           onVisibilityChange={handleVisibilityChange2}
           renderContent={() => text}
-          id="dim_m"
+          anchorId="dim_m"
           dimension="m"
         >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby="dim_m">
@@ -82,7 +82,7 @@ export const HintDimensionTemplate = ({
           visible={visible4}
           onVisibilityChange={handleVisibilityChange4}
           renderContent={() => text}
-          id="width_custom"
+          anchorId="width_custom"
           style={{ width: '500px' }}
         >
           <StyledButton dimension="s" aria-label="Additional information" aria-describedby="width_custom-pos">

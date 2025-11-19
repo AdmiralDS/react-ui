@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.57.0](https://github.com/AdmiralDS/react-ui/compare/v8.56.0...v8.57.0) (2025-11-06)
+
+
+### Features
+
+* **DateInput:** добавлена блокировка отработки нативной отмены ([cd1a8d6](https://github.com/AdmiralDS/react-ui/commit/cd1a8d64ab8b549d80b6ba4e7a2964ab6652c954))
+* **NumberInput:** добавлена блокировка отработки нативной отмены ([66b7814](https://github.com/AdmiralDS/react-ui/commit/66b781493ea3cb8159a2e5d58714555524a90b38))
+* **PhoneNumberInput:** добавлена блокировка отработки нативной отмены ([b860b8c](https://github.com/AdmiralDS/react-ui/commit/b860b8ce3f0e377e5dc1829a6e19a496689a2468))
+* **TimeInput:** добавлена блокировка отработки нативной отмены ([f39338a](https://github.com/AdmiralDS/react-ui/commit/f39338a62ad9b0c88c164089deaffc664ae3658c))
+* **TimePicker:** добавлена блокировка отработки нативной отмены ([bed2e3d](https://github.com/AdmiralDS/react-ui/commit/bed2e3d8ca619b55111d813833590dc782a60ee6))
+
+
+### Bug Fixes
+
+* **Menu:** Исправлено срабатывание click у MenuItem в состоянии disabled ([96b3d06](https://github.com/AdmiralDS/react-ui/commit/96b3d064a6386fcc8989ba892af067ea8b0c10ab))
+* **TimePicker:** fix infinite loop ([030c6e8](https://github.com/AdmiralDS/react-ui/commit/030c6e80d251f988047f3f2d4a1da278486d1ba8))
+* **TimePicker:** fix key issue ([bb009d4](https://github.com/AdmiralDS/react-ui/commit/bb009d4d2d6ec45b9be6e38424dc6ac8585a2e86))
+
 ## [8.56.0](https://github.com/AdmiralDS/react-ui/compare/v8.55.0...v8.56.0) (2025-10-15)
 
 

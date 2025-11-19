@@ -58,12 +58,30 @@ describe('Hint', () => {
   });
 
   it('should hide hint when mouse leaves component', () => {
+    const originalRAF = window.requestAnimationFrame;
+    const rafCallbacks: Array<FrameRequestCallback> = [];
+    window.requestAnimationFrame = (callback: FrameRequestCallback) => {
+      rafCallbacks.push(callback);
+      return 0;
+    };
+
     render(<WrappedComponentWithTooltip renderContent={() => 'hintText'} />);
     act(() => {
       fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
-      fireEvent.mouseLeave(screen.getByTestId('wrapped-component'));
+    });
+    act(() => {
+      fireEvent.mouseLeave(screen.getByTestId('wrapped-component'), {
+        relatedTarget: document.body,
+      });
+    });
+    // Выполняем все колбэки requestAnimationFrame
+    act(() => {
+      rafCallbacks.forEach((cb) => cb(0));
+      rafCallbacks.length = 0;
     });
     expect(screen.queryByText('hintText')).not.toBeInTheDocument();
+
+    window.requestAnimationFrame = originalRAF;
   });
 
   it('should show hint when user clicks component', () => {
@@ -83,5 +101,118 @@ describe('Hint', () => {
       fireEvent.click(screen.getByLabelText('Закрыть подсказку'));
     });
     expect(screen.queryByText('hintText')).not.toBeInTheDocument();
+  });
+
+  it('should NOT close hint if selection is inside hint (mouse)', () => {
+    render(
+      <WrappedComponentWithTooltip
+        renderContent={() => <span data-testid="hint-inner">hintText</span>}
+        visibilityTrigger="click"
+      />,
+    );
+    act(() => {
+      fireEvent.click(screen.getByTestId('wrapped-component'));
+    });
+    const hintContent = screen.getByText('hintText');
+
+    // Мокаем window.getSelection для jsdom
+    const fakeRange = { commonAncestorContainer: hintContent };
+    const fakeSelection = {
+      rangeCount: 1,
+      getRangeAt: () => fakeRange,
+    };
+    const origGetSelection = window.getSelection;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.getSelection = () => fakeSelection as any;
+
+    act(() => {
+      fireEvent.mouseDown(document.body);
+    });
+
+    expect(screen.getByText('hintText')).toBeInTheDocument();
+
+    window.getSelection = origGetSelection;
+  });
+
+  it('should NOT close hint if selection is inside hint (touch)', () => {
+    render(
+      <WrappedComponentWithTooltip
+        renderContent={() => <span data-testid="hint-inner">hintText</span>}
+        visibilityTrigger="click"
+      />,
+    );
+    act(() => {
+      fireEvent.click(screen.getByTestId('wrapped-component'));
+    });
+    const hintContent = screen.getByText('hintText');
+
+    // Мокаем window.getSelection для jsdom
+    const fakeRange = { commonAncestorContainer: hintContent };
+    const fakeSelection = {
+      rangeCount: 1,
+      getRangeAt: () => fakeRange,
+    };
+    const origGetSelection = window.getSelection;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.getSelection = () => fakeSelection as any;
+
+    // Генерируем touchstart вне Hint
+    act(() => {
+      const event = new window.Event('touchstart', { bubbles: true });
+      document.body.dispatchEvent(event);
+    });
+
+    expect(screen.getByText('hintText')).toBeInTheDocument();
+    window.getSelection = origGetSelection;
+  });
+
+  it('should NOT close hint when clicking interactive element (input) inside hint (mouse)', () => {
+    render(
+      <WrappedComponentWithTooltip
+        renderContent={() => (
+          <div>
+            <input data-testid="hint-input" defaultValue="abc" />
+            <span>hintText</span>
+          </div>
+        )}
+        visibilityTrigger="click"
+      />,
+    );
+    act(() => {
+      fireEvent.click(screen.getByTestId('wrapped-component'));
+    });
+
+    const input = screen.getByTestId('hint-input');
+    act(() => {
+      fireEvent.mouseDown(input);
+      fireEvent.click(input);
+    });
+
+    expect(screen.getByText('hintText')).toBeInTheDocument();
+  });
+
+  it('should NOT close hint when touching interactive element (input) inside hint (touch)', () => {
+    render(
+      <WrappedComponentWithTooltip
+        renderContent={() => (
+          <div>
+            <input data-testid="hint-input-touch" defaultValue="xyz" />
+            <span>hintText</span>
+          </div>
+        )}
+        visibilityTrigger="click"
+      />,
+    );
+    act(() => {
+      fireEvent.click(screen.getByTestId('wrapped-component'));
+    });
+
+    const input = screen.getByTestId('hint-input-touch');
+    act(() => {
+      const event = new window.Event('touchstart', { bubbles: true });
+      input.dispatchEvent(event);
+    });
+
+    expect(screen.getByText('hintText')).toBeInTheDocument();
   });
 });

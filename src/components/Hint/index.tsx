@@ -21,8 +21,8 @@ export interface HintProps extends React.HTMLAttributes<HTMLDivElement> {
   visible: boolean;
   /** Колбек на изменение видимости хинта
    *
-   * Если visibilityTrigger = 'hover', при ховере/фокусе на target элементе колбек вызовется со значением visible=true,
-   * при потере ховера/фокуса на target элементе колбек вызовется со значением visible=false.
+   * Если visibilityTrigger = 'hover', при ховере/фокусе на target элементе или hint колбек вызовется со значением visible=true,
+   * при потере ховера/фокуса на target элементе или hint колбек вызовется со значением visible=false.
    *
    * Если visibilityTrigger = 'click', при клике на target элемент или нажатии клавиш Space/Enter на
    * target элементе колбек вызовется со значением visible=true,
@@ -92,7 +92,7 @@ export const Hint: React.FC<HintProps> = ({
 
   const targetElement = userTargetElement || anchorElementRef.current;
 
-  const [recalculation, startRecalculation] = React.useState<any>(null);
+  const [recalculation, startRecalculation] = React.useState<Record<string, never> | null>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
   const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
@@ -115,7 +115,7 @@ export const Hint: React.FC<HintProps> = ({
     return () => {
       removeEventListener('resize', listener);
     };
-  });
+  }, []);
 
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;
@@ -246,13 +246,104 @@ export const Hint: React.FC<HintProps> = ({
     }
   }, [visible]);
 
+  // Очистка таймера при размонтировании
+  React.useEffect(() => {
+    return () => {
+      if (blockTimeoutRef.current) {
+        clearTimeout(blockTimeoutRef.current);
+        blockTimeoutRef.current = null;
+      }
+    };
+  }, []);
+
+  // Флаг для блокировки закрытия Hint при взаимодействии (клик на anchor или Hint)
+  const shouldBlockHideHint = React.useRef(false);
+  const blockTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // В режиме hover: предотвращаем закрытие Hint при переходе курсора с anchor на Hint
+  const handleAnchorMouseLeave =
+    visibilityTrigger === 'hover'
+      ? (e: React.MouseEvent) => {
+          const relatedTarget = e.relatedTarget as Node;
+          // Если курсор перешёл на Hint, не закрываем
+          if (hintElementRef.current && relatedTarget && hintElementRef.current.contains(relatedTarget)) {
+            return;
+          }
+          // Если курсор перешёл на anchor (вернулся обратно), не закрываем
+          if (anchorElementRef.current && relatedTarget && anchorElementRef.current.contains(relatedTarget)) {
+            return;
+          }
+          // Проверяем, не заблокировано ли закрытие (например, при клике)
+          if (shouldBlockHideHint.current) {
+            return;
+          }
+          // Если relatedTarget не определён (быстрое движение мыши), проверяем через requestAnimationFrame
+          if (!relatedTarget) {
+            requestAnimationFrame(() => {
+              // Проверяем, не находится ли курсор над Hint или anchor
+              const mouseEvent = e as React.MouseEvent<HTMLDivElement>;
+              const hoveredElement = document.elementFromPoint(mouseEvent.clientX || 0, mouseEvent.clientY || 0);
+              if (hoveredElement && hintElementRef.current && hintElementRef.current.contains(hoveredElement)) {
+                return;
+              }
+              if (hoveredElement && anchorElementRef.current && anchorElementRef.current.contains(hoveredElement)) {
+                return;
+              }
+              if (!shouldBlockHideHint.current) {
+                hideHint();
+              }
+            });
+            return;
+          }
+          hideHint();
+        }
+      : undefined;
+
+  // В режиме hover: предотвращаем закрытие Hint при потере фокуса, если фокус перешёл на Hint
+  const handleAnchorBlur =
+    visibilityTrigger === 'hover'
+      ? (e: React.FocusEvent) => {
+          const relatedTarget = e.relatedTarget as Node;
+          // Если фокус перешёл на Hint, не закрываем
+          if (hintElementRef.current && relatedTarget && hintElementRef.current.contains(relatedTarget)) {
+            return;
+          }
+          // Если фокус перешёл на anchor, не закрываем
+          if (anchorElementRef.current && relatedTarget && anchorElementRef.current.contains(relatedTarget)) {
+            return;
+          }
+          // Проверяем, не заблокировано ли закрытие
+          if (shouldBlockHideHint.current) {
+            return;
+          }
+          hideHint();
+        }
+      : undefined;
+
+  // В режиме hover: при mousedown на anchor блокируем закрытие (срабатывает раньше mouseleave/blur)
+  const handleAnchorMouseDown =
+    visibilityTrigger === 'hover'
+      ? () => {
+          shouldBlockHideHint.current = true;
+          if (blockTimeoutRef.current) {
+            clearTimeout(blockTimeoutRef.current);
+          }
+          // Сбрасываем флаг через небольшую задержку (после завершения клика)
+          blockTimeoutRef.current = setTimeout(() => {
+            shouldBlockHideHint.current = false;
+            blockTimeoutRef.current = null;
+          }, 150);
+        }
+      : undefined;
+
   return (
     <AnchorWrapper
       onMouseEnter={visibilityTrigger === 'click' ? undefined : showHint}
-      onMouseLeave={visibilityTrigger === 'click' ? undefined : hideHint}
+      onMouseLeave={visibilityTrigger === 'click' ? undefined : handleAnchorMouseLeave}
       onFocus={visibilityTrigger === 'click' ? undefined : showHint}
-      onBlur={visibilityTrigger === 'click' ? undefined : hideHint}
+      onBlur={visibilityTrigger === 'click' ? undefined : handleAnchorBlur}
       onClick={visibilityTrigger === 'click' ? showHint : undefined}
+      onMouseDown={handleAnchorMouseDown}
       onKeyDown={visibilityTrigger === 'click' ? handleKeyDown : undefined}
       ref={anchorElementRef}
       className={anchorClassName}
@@ -281,6 +372,21 @@ export const Hint: React.FC<HintProps> = ({
             hideHint={hideHint}
             locale={locale}
             preventFocusSteal={preventFocusSteal}
+            visible={visible}
+            onHintInteraction={
+              visibilityTrigger === 'hover'
+                ? () => {
+                    shouldBlockHideHint.current = true;
+                    if (blockTimeoutRef.current) {
+                      clearTimeout(blockTimeoutRef.current);
+                    }
+                    blockTimeoutRef.current = setTimeout(() => {
+                      shouldBlockHideHint.current = false;
+                      blockTimeoutRef.current = null;
+                    }, 150);
+                  }
+                : undefined
+            }
             {...props}
           />
         </Portal>
