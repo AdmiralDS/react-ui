@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
-import { DropDownTree } from './DropDownTree';
+import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledMultiInput, StyledChip } from './styled';
@@ -13,9 +13,13 @@ import {
   type CheckboxNodesMapItem,
   type CheckboxGroupItemProps,
 } from '#src/components/Menu/MenuItemWithCheckbox';
+import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 
-export interface TreeSelectProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'> {
+export interface TreeSelectProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
+    Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'>,
+    Pick<DropDownTreeProps, 'dropdownConfig'> {
   value?: string[];
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
@@ -76,8 +80,11 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       readOnly,
       placeholder,
       dimension = 'm',
+      renderTopPanel,
+      renderBottomPanel,
       openButtonPropsConfig,
       clearButtonPropsConfig,
+      dropdownConfig,
       onOpenChange,
       onSelect,
       onDeselect,
@@ -120,7 +127,12 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const getDropdownConfig = (config: DropdownContainerProps) => {
-      return { ...config, onClickOutside: handleClickOutside, targetElement: inputContainerRef?.current };
+      return {
+        ...config,
+        ...dropdownConfig?.(config),
+        onClickOutside: handleClickOutside,
+        targetElement: inputContainerRef?.current,
+      };
     };
 
     const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -252,6 +264,21 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       });
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const handleDrop = (e: React.DragEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
     return (
       <>
         <StyledMultiInput
@@ -263,6 +290,10 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
           clearButtonPropsConfig={clearButtonPropsConfig}
           onClearOptions={handleClearOptions}
           dimension={dimension}
+          $hidden={selectedChips.length > 0}
+          onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
+          onDrop={handleDrop}
         >
           {renderSelectedChips()}
         </StyledMultiInput>
@@ -274,6 +305,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             onDeselectItem={handleDeselectItem}
             onChangeSelected={handleSelectedChange}
             dimension={dimension === 'xl' ? 'l' : dimension}
+            renderTopPanel={renderTopPanel}
+            renderBottomPanel={renderBottomPanel}
           />
         )}
       </>

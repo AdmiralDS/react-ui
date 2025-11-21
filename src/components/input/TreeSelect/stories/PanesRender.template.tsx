@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, styled } from 'styled-components';
 
-import { TreeSelect } from '@admiral-ds/react-ui';
+import { TreeSelect, Button, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, TreeSelectItemProps, TreeSelectProps } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorderRadiusSwapper';
 
@@ -57,16 +57,19 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
   },
 ];
 
-export const PlaygroundTemplate = ({
-  placeholder = 'Выберите элементы...',
+const ContentWrapper = styled.div`
+  margin: 8px;
+`;
+
+export const PanesRenderTemplate = ({
+  placeholder = 'Placeholder',
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
-  const dropdownProps = { 'data-testid': 'dropdown-tree' };
-  const [value, setValue] = useState<Array<string>>();
+  const [value, setValue] = useState(['1.2.1', '1.2.2']);
 
   const onChange = (newValue: string[]) => {
     console.log('onChange ', newValue);
@@ -101,14 +104,51 @@ export const PlaygroundTemplate = ({
     onOpenChange,
   };
 
+  // Пример функции для верхней панели
+  const topPanelContent = () => (
+    <ContentWrapper>
+      <T font="Caption/Caption 1" as="div">
+        Верхняя панель
+      </T>
+      <Button
+        dimension="s"
+        onClick={() => {
+          console.log('Кнопка в верхней панели нажата');
+        }}
+      >
+        Действие сверху
+      </Button>
+    </ContentWrapper>
+  );
+
+  // Пример функции для нижней панели
+  const bottomPanelContent = () => (
+    <ContentWrapper>
+      <T font="Caption/Caption 1" as="div">
+        Выбрано: {value.length} элементов
+      </T>
+      <Button
+        dimension="s"
+        onClick={() => {
+          console.log('Кнопка в нижней панели нажата');
+        }}
+      >
+        Действие снизу
+      </Button>
+      <T font="Caption/Caption 1" as="div">
+        Нижняя панель
+      </T>
+    </ContentWrapper>
+  );
+
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <TreeSelect
         {...treeProps}
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
-        dropdownConfig={() => dropdownProps}
-        displayClearIcon
+        renderTopPanel={topPanelContent}
+        renderBottomPanel={bottomPanelContent}
       />
     </ThemeProvider>
   );
