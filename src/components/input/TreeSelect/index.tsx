@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
-import { DropDownTree } from './DropDownTree';
+import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { StyledMultiInput, StyledChip } from './styled';
@@ -18,7 +18,8 @@ import type { ComponentDimension } from '#src/components/input/types';
 
 export interface TreeSelectProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
-    Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'> {
+    Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'>,
+    Pick<DropDownTreeProps, 'dropdownConfig'> {
   value?: string[];
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
@@ -83,6 +84,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       renderBottomPanel,
       openButtonPropsConfig,
       clearButtonPropsConfig,
+      dropdownConfig,
       onOpenChange,
       onSelect,
       onDeselect,
@@ -125,7 +127,12 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const getDropdownConfig = (config: DropdownContainerProps) => {
-      return { ...config, onClickOutside: handleClickOutside, targetElement: inputContainerRef?.current };
+      return {
+        ...config,
+        ...dropdownConfig?.(config),
+        onClickOutside: handleClickOutside,
+        targetElement: inputContainerRef?.current,
+      };
     };
 
     const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {

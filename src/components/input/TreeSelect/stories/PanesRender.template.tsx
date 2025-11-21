@@ -107,8 +107,8 @@ export const PanesRenderTemplate = ({
   // Пример функции для верхней панели
   const topPanelContent = () => (
     <ContentWrapper>
-      <T font="Body/Body 1 Long" as="div">
-        Это верхняя панель
+      <T font="Caption/Caption 1" as="div">
+        Верхняя панель
       </T>
       <Button
         dimension="s"
@@ -124,10 +124,9 @@ export const PanesRenderTemplate = ({
   // Пример функции для нижней панели
   const bottomPanelContent = () => (
     <ContentWrapper>
-      <T font="Body/Body 1 Long" as="div">
-        Это нижняя панель
+      <T font="Caption/Caption 1" as="div">
+        Выбрано: {value.length} элементов
       </T>
-      <div style={{ marginTop: '4px' }}>Выбрано: {value.length} элементов</div>
       <Button
         dimension="s"
         onClick={() => {
@@ -136,6 +135,9 @@ export const PanesRenderTemplate = ({
       >
         Действие снизу
       </Button>
+      <T font="Caption/Caption 1" as="div">
+        Нижняя панель
+      </T>
     </ContentWrapper>
   );
 

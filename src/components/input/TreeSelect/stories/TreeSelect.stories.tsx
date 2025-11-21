@@ -92,6 +92,9 @@ export const TextInputPlayground = {
   render: PlaygroundStory,
 
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: PlaygroundRaw,
