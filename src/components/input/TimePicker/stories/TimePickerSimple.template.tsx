@@ -32,6 +32,7 @@ export const TimePickerSimpleTemplate = ({
         value={localValue}
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
+        containerPropsConfig={() => ({ 'data-testid': 'testidTimePickerContainer' })}
       />
     </ThemeProvider>
   );
