@@ -197,7 +197,11 @@ export const SuggestInput = forwardRef<HTMLInputElement, SuggestInputProps>(
       const inputIconButtonProps = { icon: icon, onClick: onSearchButtonClick, 'aria-hidden': true };
 
       iconArray.push(
-        <InputIconButton {...inputIconButtonProps} {...inputIconButtonPropsConfig(inputIconButtonProps)} />,
+        <InputIconButton
+          key="search-icon"
+          {...inputIconButtonProps}
+          {...inputIconButtonPropsConfig(inputIconButtonProps)}
+        />,
       );
     }
 

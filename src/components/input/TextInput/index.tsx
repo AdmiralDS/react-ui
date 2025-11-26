@@ -1,5 +1,15 @@
-import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes } from 'react';
-import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes, ReactElement } from 'react';
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled, { css, type DataAttributes } from 'styled-components';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
@@ -320,6 +330,37 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const nothing = () => {};
 
+// Разворачиваем вложенные массивы и React.Fragment, чтобы корректно посчитать количество иконок
+function flattenChildren(children: ReactNode): ReactElement[] {
+  const result: ReactElement[] = [];
+  let index = 0;
+
+  Children.forEach(children, (child) => {
+    if (!child) return;
+
+    if (Array.isArray(child)) {
+      result.push(...flattenChildren(child));
+      return;
+    }
+
+    if (isValidElement(child) && child.type === Fragment) {
+      if (child.props && child.props.children) {
+        result.push(...flattenChildren(child.props.children));
+      }
+      return;
+    }
+
+    if (isValidElement(child)) {
+      // Если у элемента нет key, добавляем его на основе индекса
+      // Это нужно для избежания предупреждений React о missing keys
+      const elementWithKey = child.key != null ? child : cloneElement(child, { key: `flattened-${index++}` });
+      result.push(elementWithKey);
+    }
+  });
+
+  return result;
+}
+
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
@@ -350,8 +391,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const wrapperRef = containerRef || useRef<HTMLDivElement>(null);
 
-    const iconAfterArray = Children.toArray(iconsAfter || icons);
-    const iconBeforeArray = Children.toArray(iconsBefore);
+    const iconAfterArray = flattenChildren(iconsAfter || icons);
+    const iconBeforeArray = flattenChildren(iconsBefore);
 
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
@@ -396,7 +437,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
 
       const visiblePasswordInputIconButtonProps = {
-        key: 'eye-icon',
         icon: Icon,
         onClick: () => {
           setPasswordVisible(!isPasswordVisible);
@@ -406,6 +446,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
       iconAfterArray.push(
         <InputIconButton
+          key="eye-icon"
           {...visiblePasswordInputIconButtonProps}
           {...visiblePasswordInputIconButtonPropsConfig(visiblePasswordInputIconButtonProps)}
         />,
@@ -414,7 +455,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
-        key: 'clear-icon',
         icon: CloseOutlineSvg,
         onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
           // запрет на перемещение фокуса при клике по иконке
@@ -430,6 +470,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
       iconAfterArray.unshift(
         <InputIconButton
+          key="clear-icon"
           {...clearInputIconButtonProps}
           {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,

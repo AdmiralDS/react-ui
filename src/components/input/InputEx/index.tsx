@@ -1,5 +1,15 @@
-import { Children, forwardRef, useRef, useState, useEffect, useLayoutEffect } from 'react';
-import type { ReactNode, ChangeEvent, MouseEvent, RefObject } from 'react';
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useRef,
+  useState,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
+import type { ReactNode, ChangeEvent, MouseEvent, RefObject, ReactElement } from 'react';
 import styled, { css, type DataAttributes } from 'styled-components';
 
 import { ReactComponent as CloseOutlineSvg } from '@admiral-ds/icons/build/service/CloseOutline.svg';
@@ -169,6 +179,37 @@ const IconPanelAfter = styled(IconPanel)`
 `;
 
 const preventDefault = (e: MouseEvent) => e.preventDefault();
+
+// Разворачиваем вложенные массивы и React.Fragment, чтобы корректно посчитать количество иконок
+function flattenChildren(children: ReactNode): ReactElement[] {
+  const result: ReactElement[] = [];
+  let index = 0;
+
+  Children.forEach(children, (child) => {
+    if (!child) return;
+
+    if (Array.isArray(child)) {
+      result.push(...flattenChildren(child));
+      return;
+    }
+
+    if (isValidElement(child) && child.type === Fragment) {
+      if (child.props && child.props.children) {
+        result.push(...flattenChildren(child.props.children));
+      }
+      return;
+    }
+
+    if (isValidElement(child)) {
+      // Если у элемента нет key, добавляем его на основе индекса
+      // Это нужно для избежания предупреждений React о missing keys
+      const elementWithKey = child.key != null ? child : cloneElement(child, { key: `flattened-${index++}` });
+      result.push(elementWithKey);
+    }
+  });
+
+  return result;
+}
 
 const Container = styled.div<{
   disabled?: boolean;
@@ -410,12 +451,11 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
       props.onChange?.(e);
     };
 
-    const iconAfterArray = Children.toArray(iconsAfter || icons);
-    const iconBeforeArray = Children.toArray(iconsBefore);
+    const iconAfterArray = flattenChildren(iconsAfter || icons);
+    const iconBeforeArray = flattenChildren(iconsBefore);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
-        key: 'clear-icon',
         icon: CloseOutlineSvg,
         onClick: () => {
           if (inputRef.current) {
@@ -427,6 +467,7 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
 
       iconAfterArray.unshift(
         <InputIconButton
+          key="clear-icon"
           {...clearInputIconButtonProps}
           {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
