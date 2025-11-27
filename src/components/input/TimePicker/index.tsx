@@ -577,7 +577,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         </InputBox>
         {availableSlots && isOpened && !disabled && !props.readOnly && !skeleton && (
           <StyledDropdownContainer
-            targetElement={inputRef.current}
+            targetElement={inputContainerRef.current}
             alignSelf={alignSelf}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}
