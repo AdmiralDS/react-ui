@@ -180,34 +180,35 @@ const IconPanelAfter = styled(IconPanel)`
 
 const preventDefault = (e: MouseEvent) => e.preventDefault();
 
-// Разворачиваем вложенные массивы и React.Fragment, чтобы корректно посчитать количество иконок
+// Разворачиваем вложенные массивы и React.Fragment, чтобы корректно посчитать количество иконок.
+// Дополнительно гарантируем наличие уникальных key у элементов без собственного key.
 function flattenChildren(children: ReactNode): ReactElement[] {
   const result: ReactElement[] = [];
-  let index = 0;
+  let autoKey = 0;
 
-  Children.forEach(children, (child) => {
-    if (!child) return;
+  const traverse = (nodes: ReactNode) => {
+    Children.forEach(nodes, (child) => {
+      if (!child) return;
 
-    if (Array.isArray(child)) {
-      result.push(...flattenChildren(child));
-      return;
-    }
-
-    if (isValidElement(child) && child.type === Fragment) {
-      if (child.props && child.props.children) {
-        result.push(...flattenChildren(child.props.children));
+      if (Array.isArray(child)) {
+        traverse(child);
+        return;
       }
-      return;
-    }
 
-    if (isValidElement(child)) {
-      // Если у элемента нет key, добавляем его на основе индекса
-      // Это нужно для избежания предупреждений React о missing keys
-      const elementWithKey = child.key != null ? child : cloneElement(child, { key: `flattened-${index++}` });
-      result.push(elementWithKey);
-    }
-  });
+      if (isValidElement(child) && child.type === Fragment) {
+        if (child.props && child.props.children) {
+          traverse(child.props.children);
+        }
+        return;
+      }
 
+      if (isValidElement(child)) {
+        result.push(child.key != null ? child : cloneElement(child, { key: `flattened-${autoKey++}` }));
+      }
+    });
+  };
+
+  traverse(children);
   return result;
 }
 
