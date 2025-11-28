@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
 
 test('native undo is disabled for TimeInput', async ({ page }) => {
-  await page.goto('/?path=/story/admiral-2-1-input-timeinput--time-input-simple');
+  await page.goto('/?path=/story/deprecated-timeinput-deprecated-используйте-timepicker--time-input-simple');
   const frame = getStorybookFrameLocator(page);
   const timeInput = frame.locator('.text-input-native-input').first();
 

@@ -9,9 +9,11 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { PlaygroundTemplate } from './Playground.template';
+import { PanesRenderTemplate } from './PanesRender.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
+import PanesRenderRaw from './PanesRender.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
@@ -90,6 +92,9 @@ export const TextInputPlayground = {
   render: PlaygroundStory,
 
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: PlaygroundRaw,
@@ -101,23 +106,23 @@ export const TextInputPlayground = {
 };
 //</editor-fold>
 
-//<editor-fold desc="Input компонент с иконками">
-// const TextInputWithIconStory: StoryFn<typeof TextInput> = (props) => {
-//   const [{ CSSCustomProps }] = useGlobals();
-//   return <TextInputWithIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-// };
+//<editor-fold desc="Пример с рендером панелей">
+const PanesRenderStory: StoryFn<typeof TreeSelect> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <PanesRenderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
 
-// export const TextInputWithIcon = {
-//   render: TextInputWithIconStory,
+export const TextInputWithIcon = {
+  render: PanesRenderStory,
 
-//   parameters: {
-//     docs: {
-//       source: {
-//         code: TextInputWithIconRaw,
-//       },
-//     },
-//   },
+  parameters: {
+    docs: {
+      source: {
+        code: PanesRenderRaw,
+      },
+    },
+  },
 
-//   name: 'Input компонент с иконками',
-// };
+  name: 'Кастомные панели в списке',
+};
 //</editor-fold>

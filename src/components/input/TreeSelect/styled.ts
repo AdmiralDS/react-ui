@@ -19,10 +19,10 @@ export const StyledMenu = styled(Menu)`
   ${ShadowContainerMixin}
 `;
 
-export const StyledMultiInput = styled(MultiInput)`
+export const StyledMultiInput = styled(MultiInput)<{ $hidden?: boolean }>`
   cursor: pointer;
   & .wrapper-options input {
-    display: none;
+    ${(props) => props.$hidden && `display: none`};
   }
 `;
 

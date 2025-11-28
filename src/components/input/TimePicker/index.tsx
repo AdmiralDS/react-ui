@@ -202,6 +202,11 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       if ((event.ctrlKey || event.metaKey) && (code === keyboardKey.z || code === keyboardKey.Z)) {
         event.preventDefault();
       }
+      if (code === keyboardKey.Escape && isOpened) {
+        setIsOpened(false);
+        event.preventDefault();
+        event.stopPropagation();
+      }
       props.onKeyDown?.(event);
     };
 
@@ -210,6 +215,22 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       setInnerValueState(inputValue);
       props.onChange?.(e);
     };
+
+    // Валидация disabledSlots: проверяем, является ли введенное значение в списке disabledSlots
+    const isValidValue = React.useMemo(() => {
+      if (!innerValue || !disabledSlots?.length) return true;
+      const parsedValue = parser(innerValue);
+      // Если значение невалидно (не парсится) или пустое, считаем валидным
+      if (!parsedValue) return true;
+      return !disabledSlots.includes(parsedValue);
+    }, [innerValue, disabledSlots, parser]);
+
+    // Вычисляем финальный status: приоритет у явно переданного status, иначе error если значение в disabledSlots
+    const computedStatus = React.useMemo(() => {
+      if (status) return status; // Приоритет у явно переданного status
+      if (!isValidValue && innerValue) return 'error';
+      return undefined;
+    }, [status, isValidValue, innerValue]);
 
     const menuDimension = dimension === 'xl' ? 'l' : dimension;
 
@@ -515,7 +536,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
     const containerProps = {
       $dimension: dimension,
-      $status: status,
+      $status: computedStatus,
       disabled: disabled,
       readOnly: props.readOnly,
       $isLoading: isLoading,
@@ -525,8 +546,9 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       'data-read-only': props.readOnly ? true : undefined,
       'data-loading': isLoading ? true : undefined,
       'data-skeleton': skeleton ? true : undefined,
-      'data-status': status,
+      'data-status': computedStatus,
       'data-disable-copying': disableCopying ? true : undefined,
+      className: 'time-picker-container',
       ref: inputContainerRef,
     };
 
@@ -548,14 +570,14 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         <InputBox {...containerProps} {...containerPropsConfig(containerProps)}>
           <InputLine {...inputLineProps} {...inputLinePropsConfig(inputLineProps)} />
           {iconArray.length > 0 && (
-            <IconPanelAfter disabled={disabled} $dimension={dimension}>
+            <IconPanelAfter disabled={disabled} $dimension={dimension} className="time-picker-icon-panel">
               {iconArray}
             </IconPanelAfter>
           )}
         </InputBox>
         {availableSlots && isOpened && !disabled && !props.readOnly && !skeleton && (
           <StyledDropdownContainer
-            targetElement={inputRef.current}
+            targetElement={inputContainerRef.current}
             alignSelf={alignSelf}
             onClickOutside={clickOutside}
             dropContainerCssMixin={dropContainerCssMixin}

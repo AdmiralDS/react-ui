@@ -11,8 +11,11 @@ import {
 } from '@admiral-ds/react-ui';
 
 import { TimePickerSimpleTemplate } from './TimePickerSimple.template';
+import { TimePickerDisabledTemplate } from './TimePickerDisabled.template';
+import { TimePickerDisableCopyingTemplate } from './TimePickerDisableCopying.template';
 import { TimePickerSkeletonTemplate } from './TimePickerSkeleton.template';
 import { TimePickerIconCustomTemplate } from './TimePickerIconCustom.template';
+import { TimePickerClearIconTemplate } from './TimePickerClearIcon.template';
 import { TimePickerDoubleIconTemplate } from './TimePickerDoubleIcon.template';
 import { TimePickerRangeTemplate } from './TimePickerRange.template';
 import { TimePickerRangeDisabledTemplate } from './TimePickerRangeDisabled.template';
@@ -22,8 +25,11 @@ import { TimePickerAlignDropdownContainerTemplate } from './TimePickerAlignDropd
 
 // Imports of text sources
 import TimePickerSimpleRaw from './TimePickerSimple.template?raw';
+import TimePickerDisabledRaw from './TimePickerDisabled.template?raw';
+import TimePickerDisableCopyingRaw from './TimePickerDisableCopying.template?raw';
 import TimePickerSkeletonRaw from './TimePickerSkeleton.template?raw';
 import TimePickerIconCustomRaw from './TimePickerIconCustom.template?raw';
+import TimePickerClearIconRaw from './TimePickerClearIcon.template?raw';
 import TimePickerDoubleIconRaw from './TimePickerDoubleIcon.template?raw';
 import TimePickerRangeRaw from './TimePickerRange.template?raw';
 import TimePickerRangeDisabledRaw from './TimePickerRangeDisabled.template?raw';
@@ -43,10 +49,8 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
-    Альтернативная версия компонента TimeInput, реализованного через динамическую маску ввода.
-    <Separator />
-    Компонент для ввода-выбора времени. Поддерживается как ручной ввод, так и выбор через выпадающий список с
-    фиксированным шагом в полчаса.
+    Компонент для ввода-выбора времени, реализованный через динамическую маску ввода. Поддерживается как ручной ввод,
+    так и выбор через выпадающий список с фиксированным шагом в полчаса.
     <Separator />
     Компонент нельзя изменять по ширине.
     <Separator />
@@ -55,7 +59,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/DatePicker/TimePicker',
+  title: 'Admiral-2.1/Input/TimePicker',
   component: TimePicker,
   decorators: undefined,
   parameters: {
@@ -167,6 +171,60 @@ export const TimePickerSimple = {
 
 //</editor-fold>
 
+//<editor-fold desc="Задизейбленный компонент">
+const TimePickerDisabledStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerDisabledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerDisabled = {
+  render: TimePickerDisabledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerDisabledRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Задизейбленный компонент',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Компонент с блокировкой копирования">
+const TimePickerDisableCopyingStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerDisableCopyingTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerDisableCopying = {
+  render: TimePickerDisableCopyingStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerDisableCopyingRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Компонент с блокировкой копирования',
+};
+
+//</editor-fold>
+
 //<editor-fold desc="Компонент в загрузке скелетона">
 
 const TimePickerSkeletonStory: StoryFn<typeof TimePicker> = (props) => {
@@ -209,7 +267,34 @@ export const TimePickerIconCustom = {
 
 //</editor-fold>
 
-//<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой компонента">
+//<editor-fold desc="Компонент с иконкой очистки">
+const TimePickerClearIconStory: StoryFn<typeof TimePicker> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <TimePickerClearIconTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const TimePickerClearIcon = {
+  render: TimePickerClearIconStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TimePickerClearIconRaw,
+      },
+    },
+  },
+
+  args: {
+    themeBorderKind: 'Border radius 4',
+    dimension: 'm',
+  },
+
+  name: 'Компонент с иконкой очистки',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Компонент с дополнительной иконкой и кастомной иконкой очистки">
 const TimePickerDoubleIconStory: StoryFn<typeof TimePicker> = (props) => <TimePickerDoubleIconTemplate {...props} />;
 
 export const TimePickerDoubleIcon = {
@@ -223,7 +308,7 @@ export const TimePickerDoubleIcon = {
     },
   },
 
-  name: 'Компонент с дополнительной иконкой и кастомной иконкой компонента',
+  name: 'Компонент с дополнительной иконкой и кастомной иконкой очистки',
 };
 
 //</editor-fold>

@@ -45,7 +45,7 @@ const Description = () => (
 );
 
 export default {
-  title: 'Admiral-2.1/Input/TimeInput',
+  title: 'Deprecated/TimeInput (Deprecated используйте TimePicker)',
   component: TimeInput,
   decorators: undefined,
   parameters: {

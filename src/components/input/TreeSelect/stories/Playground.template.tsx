@@ -58,14 +58,15 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
 ];
 
 export const PlaygroundTemplate = ({
-  placeholder = 'Placeholder',
+  placeholder = 'Выберите элементы...',
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
-  const [value, setValue] = useState(['1.2.1', '1.2.2']);
+  const dropdownProps = { 'data-testid': 'dropdown-tree' };
+  const [value, setValue] = useState<Array<string>>();
 
   const onChange = (newValue: string[]) => {
     console.log('onChange ', newValue);
@@ -106,6 +107,8 @@ export const PlaygroundTemplate = ({
         {...treeProps}
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
+        dropdownConfig={() => dropdownProps}
+        displayClearIcon
       />
     </ThemeProvider>
   );

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.58.0](https://github.com/AdmiralDS/react-ui/compare/v8.57.0...v8.58.0) (2025-11-21)
+
+
+### Features
+
+* **TreeSelect:** добавлены placeholder [#1915](https://github.com/AdmiralDS/react-ui/issues/1915) и возможность отображения topPanel & bottomPanel [#1925](https://github.com/AdmiralDS/react-ui/issues/1925) ([5abba41](https://github.com/AdmiralDS/react-ui/commit/5abba41b9e64b80ffd5adf7ea00047f694aabd74))
+
 ## [8.57.0](https://github.com/AdmiralDS/react-ui/compare/v8.56.0...v8.57.0) (2025-11-06)
 
 
