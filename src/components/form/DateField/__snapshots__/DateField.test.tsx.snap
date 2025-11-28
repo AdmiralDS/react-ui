@@ -201,6 +201,7 @@ exports[`DateField should render component 1`] = `
         />
         <div
           class="c8 c9"
+          data-role="icon-pane-after"
         >
           <div
             class="c10"
