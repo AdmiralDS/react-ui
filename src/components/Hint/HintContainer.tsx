@@ -66,6 +66,7 @@ export const HintContainer = React.forwardRef<HTMLDivElement, HintContainerProps
     React.useEffect(() => {
       if (visible) {
         justOpened.current = true;
+        // нужна задержка для отработки анимации
         setTimeout(() => {
           justOpened.current = false;
         }, 0);
@@ -78,7 +79,7 @@ export const HintContainer = React.forwardRef<HTMLDivElement, HintContainerProps
         return;
       }
       // Проверяем, есть ли выделение текста внутри Hint
-      const selection = window.getSelection && window.getSelection();
+      const selection = window.getSelection?.();
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
         if (hintRef.current && hintRef.current.contains(range.commonAncestorContainer)) {
