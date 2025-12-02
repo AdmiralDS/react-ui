@@ -9,9 +9,10 @@ interface CustomTimePickerProps extends TimePickerProps {
 }
 
 const TimePickerComponent = (props: CustomTimePickerProps) => {
+  const { testId, ...timePickerProps } = props;
   return (
     <ThemeProvider theme={LIGHT_THEME}>
-      <TimePicker {...props} data-testid={props.testId} />
+      <TimePicker {...timePickerProps} data-testid={testId} />
     </ThemeProvider>
   );
 };

@@ -248,7 +248,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
-    const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, any>;
+    const fieldContainerProps = { className, style, ...restFieldProps } as Record<string, unknown>;
 
     const labelProps = { htmlFor: id ?? defaultID, required, disabled };
 

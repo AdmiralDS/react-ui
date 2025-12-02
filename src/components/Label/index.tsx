@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import type { css } from 'styled-components';
+import styled from 'styled-components';
 import { typography } from '#src/components/Typography';
 
 export const MainLabel = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`

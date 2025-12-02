@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DateField should render component 1`] = `
-.c1 {
+.c2 {
   position: relative;
   display: flex;
   align-items: stretch;
@@ -10,8 +10,12 @@ exports[`DateField should render component 1`] = `
   pointer-events: all;
 }
 
-.c2 {
+.c3 {
   height: 40px;
+}
+
+.c1 {
+  min-width: 0;
 }
 
 .c0 {
@@ -20,36 +24,37 @@ exports[`DateField should render component 1`] = `
   flex-direction: column;
 }
 
-.c11 {
+.c12 {
   display: flex;
   justify-content: space-between;
+  min-width: 0;
 }
 
-.c10 {
+.c11 {
   cursor: pointer;
 }
 
-.c10 *[fill^='#'] {
+.c11 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-[data-loading] .c10.c10.c10 {
+[data-loading] .c11.c11.c11 {
   pointer-events: none;
 }
 
-[disabled] .c10.c10.c10 {
+[disabled] .c11.c11.c11 {
   pointer-events: none;
 }
 
-[disabled] .c10.c10.c10 *[fill^='#'] {
+[disabled] .c11.c11.c11 *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-.c10:hover *[fill^='#'] {
+.c11:hover *[fill^='#'] {
   fill: var(--admiral-color-Primary_Primary70, #0046E2);
 }
 
-.c7 {
+.c8 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -64,7 +69,7 @@ exports[`DateField should render component 1`] = `
   border: 1px solid var(--admiral-color-Neutral_Neutral40, #9EA0A4);
 }
 
-.c5 {
+.c6 {
   outline: none;
   appearance: none;
   border-radius: inherit;
@@ -87,56 +92,56 @@ exports[`DateField should render component 1`] = `
   padding-left: 16px;
 }
 
-.c5.c5.c5:disabled {
+.c6.c6.c6:disabled {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-.c5::placeholder {
+.c6::placeholder {
   color: var(--admiral-color-Neutral_Neutral50, #74767B);
 }
 
-.c5:disabled::placeholder {
+.c6:disabled::placeholder {
   color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-[data-disable-copying] .c5 {
+[data-disable-copying] .c6 {
   user-select: none;
 }
 
-[data-disable-copying] .c5::selection {
+[data-disable-copying] .c6::selection {
   background-color: transparent;
 }
 
-.c5.c5.c5:user-invalid+.c6 {
+.c6.c6.c6:user-invalid+.c7 {
   border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
-.c5.c5.c5:user-invalid:hover:not(:disabled)+.c6 {
+.c6.c6.c6:user-invalid:hover:not(:disabled)+.c7 {
   border: 1px solid var(--admiral-color-Error_Error70, #BA1717);
 }
 
-.c5.c5.c5:user-invalid:focus:not(:disabled)+.c6 {
+.c6.c6.c6:user-invalid:focus:not(:disabled)+.c7 {
   border: 2px solid var(--admiral-color-Error_Error60Main, #D92020);
 }
 
-[data-read-only] .c5.c5.c5,
-.c5.c5.c5:disabled {
+[data-read-only] .c6.c6.c6,
+.c6.c6.c6:disabled {
   background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
   border-color: transparent;
 }
 
-[data-loading] .c5.c5.c5,
-.c5.c5.c5:disabled {
+[data-loading] .c6.c6.c6,
+.c6.c6.c6:disabled {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c5 ::-ms-clear,
-.c5 ::-ms-reveal {
+.c6 ::-ms-clear,
+.c6 ::-ms-reveal {
   display: none;
 }
 
-.c8 {
+.c9 {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -144,39 +149,39 @@ exports[`DateField should render component 1`] = `
   align-items: center;
 }
 
-.c8 svg {
+.c9 svg {
   border-radius: var(--admiral-border-radius-Medium, 4px);
   display: block;
   width: 24px;
 }
 
-.c8 svg:focus {
+.c9 svg:focus {
   outline: none;
 }
 
-.c8 svg:focus-visible {
+.c9 svg:focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
-.c9 {
+.c10 {
   right: 0;
   padding-right: 16px;
 }
 
-.c9>*:not(:first-child) {
+.c10>*:not(:first-child) {
   margin-left: 8px;
 }
 
-.c3:focus-within:not(:disabled)>.c6 {
+.c4:focus-within:not(:disabled)>.c7 {
   border: 2px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
 }
 
-.c3:hover:not(:focus-within)>.c6 {
+.c4:hover:not(:focus-within)>.c7 {
   border-color: var(--admiral-color-Neutral_Neutral60, #67696D);
 }
 
-.c4 {
+.c5 {
   min-width: 150px;
 }
 
@@ -186,30 +191,30 @@ exports[`DateField should render component 1`] = `
     data-field-id="some static snapshot id"
   >
     <div
-      class=""
+      class="c1"
     >
       <div
-        class="c1 c2 c3 c4"
+        class="c2 c3 c4 c5"
       >
         <input
-          class="c5 text-input-native-input"
+          class="c6 text-input-native-input"
           data-testid="my test input"
           id="some static snapshot id"
         />
         <div
-          class="c6 c7"
+          class="c7 c8"
         />
         <div
-          class="c8 c9"
+          class="c9 c10"
         >
           <div
-            class="c10"
+            class="c11"
             tabindex="0"
           />
         </div>
       </div>
       <div
-        class="c11"
+        class="c12"
       />
     </div>
   </div>

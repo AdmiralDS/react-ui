@@ -183,13 +183,16 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       inputLinePropsConfig = () => ({}),
       clearInputIconButtonPropsConfig = () => ({}),
       timeInputIconButtonPropsConfig = () => ({}),
+      handleInput: handleInputProp,
+      value: valueProp,
+      defaultValue: defaultValueProp,
       ...props
     },
     ref,
   ) => {
-    const handleInput = props.handleInput || defaultTimePickerHandle;
-    const [innerValueState, setInnerValueState] = useState(String(props.defaultValue ?? ''));
-    const innerValue = String(props.value ?? innerValueState);
+    const handleInput = handleInputProp || defaultTimePickerHandle;
+    const [innerValueState, setInnerValueState] = useState(String(defaultValueProp ?? ''));
+    const innerValue = String(valueProp ?? innerValueState);
     const [activeOption, setActiveOption] = React.useState<string | undefined>('');
     const inputContainerRef = containerRef || useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -322,7 +325,6 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
         icon: CloseOutlineSvg,
-        key: 'clear-icon',
         onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
           // запрет на перемещение фокуса при клике по иконке
           e.preventDefault();
@@ -337,6 +339,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 
       iconArray.unshift(
         <InputIconButton
+          key="clear-icon"
           {...clearInputIconButtonProps}
           {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,

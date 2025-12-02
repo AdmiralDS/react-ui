@@ -55,7 +55,7 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     disableAdditionalLabelTooltip,
     'data-field-id': id,
     'data-field-name': restProps.name,
-  } as Record<string, any>;
+  } as Record<string, unknown>;
 
   passFormFieldDataAttributes(restProps, fieldContainerProps);
   passFormFieldContainerDataAttributes(restProps, fieldContainerProps);
