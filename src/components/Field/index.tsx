@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { InputStatus } from '#src/components/input/types';
@@ -7,8 +7,12 @@ import { CharacterCounter } from '#src/components/input/TextArea/CharacterCounte
 import { AdditionalLabel, Label, MainLabel } from '#src/components/Label';
 import { uid } from '#src/components/common/uid';
 import { typography } from '#src/components/Typography';
+import { Tooltip } from '#src/components/Tooltip';
+import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 
-const ContentWrapper = styled.div``;
+const ContentWrapper = styled.div`
+  min-width: 0;
+`;
 
 const inlineMixin = css`
   flex-direction: row;
@@ -59,11 +63,18 @@ const containerSkeletonMixin = css`
 export const ExtrasContainer = styled.div<{ $skeleton?: boolean }>`
   display: flex;
   justify-content: space-between;
+  min-width: 0;
   ${(p) => p.$skeleton && containerSkeletonMixin};
 `;
 
-export const ExtraTextContainer = styled.div`
+export const ExtraTextContainer = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
   flex: 1 1 auto;
+  min-width: 0;
+
+  && {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
 
   padding-top: 8px;
 
@@ -83,6 +94,10 @@ export const ExtraTextContainer = styled.div`
 
   [data-status='success'] & {
     color: var(--admiral-color-Success_Success50Main, ${(p) => p.theme.color['Success/Success 50 Main']});
+  }
+
+  &&& {
+    ${(p) => p.$cssMixin && p.$cssMixin}
   }
 `;
 
@@ -106,6 +121,9 @@ export interface FieldOwnProps {
   /**  Дополнительное имя поля формы */
   additionalLabel?: React.ReactNode;
 
+  /** Отключает показ tooltip для additionalLabel при обрезании текста троеточием */
+  disableAdditionalLabelTooltip?: boolean;
+
   /** Отображать лейбл в одну строчку с инпутом */
   displayInline?: boolean;
 
@@ -127,12 +145,72 @@ export interface FieldOwnProps {
 
   /** Состояние skeleton */
   skeleton?: boolean;
+
+  /** CSS миксин для переопределения стилей основного лейбла (MainLabel) */
+  labelCssMixin?: ReturnType<typeof css>;
+
+  /** CSS миксин для переопределения стилей дополнительного лейбла (AdditionalLabel) */
+  additionalLabelCssMixin?: ReturnType<typeof css>;
+
+  /** CSS миксин для переопределения стилей дополнительного текста (ExtraTextContainer) */
+  extraTextCssMixin?: ReturnType<typeof css>;
 }
 
 const PositionedCharacterCounter = styled(CharacterCounter)`
   flex: 0 0 auto;
   padding: 8px 0 0 8px;
 `;
+
+interface AdditionalLabelWithTooltipProps {
+  additionalLabel: React.ReactNode;
+  disableTooltip?: boolean;
+  cssMixin?: ReturnType<typeof css>;
+}
+
+const AdditionalLabelWithTooltip = ({ additionalLabel, disableTooltip, cssMixin }: AdditionalLabelWithTooltipProps) => {
+  const labelRef = useRef<HTMLDivElement>(null);
+  const [overflowActive, setOverflowActive] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  useLayoutEffect(() => {
+    if (labelRef.current && checkOverflow(labelRef.current) !== overflowActive) {
+      setOverflowActive(checkOverflow(labelRef.current));
+    }
+  }, [tooltipVisible, overflowActive]);
+
+  useEffect(() => {
+    if (disableTooltip) {
+      setTooltipVisible(false);
+      return;
+    }
+    function show() {
+      setTooltipVisible(true);
+    }
+    function hide() {
+      setTooltipVisible(false);
+    }
+    const label = labelRef.current;
+    if (label) {
+      label.addEventListener('mouseenter', show);
+      label.addEventListener('mouseleave', hide);
+      return () => {
+        label.removeEventListener('mouseenter', show);
+        label.removeEventListener('mouseleave', hide);
+      };
+    }
+  }, [disableTooltip]);
+
+  const showTooltip = !disableTooltip && tooltipVisible && overflowActive && typeof additionalLabel === 'string';
+
+  return (
+    <>
+      <AdditionalLabel ref={labelRef} $cssMixin={cssMixin}>
+        {additionalLabel}
+      </AdditionalLabel>
+      {showTooltip && <Tooltip targetElement={labelRef.current} renderContent={() => additionalLabel} />}
+    </>
+  );
+};
 
 export interface FieldProps extends FieldOwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
@@ -163,6 +241,10 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       disabled,
       id,
       skeleton = false,
+      labelCssMixin,
+      additionalLabelCssMixin,
+      extraTextCssMixin,
+      disableAdditionalLabelTooltip,
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
@@ -206,15 +288,21 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
           <LabelContainer>
             {skeleton && <SkeletonLabel />}
             <StyledLabel $skeleton={skeleton} {...labelProps}>
-              <MainLabel>{label}</MainLabel>
-              {additionalLabel && !displayInline && <AdditionalLabel>{additionalLabel}</AdditionalLabel>}
+              <MainLabel $cssMixin={labelCssMixin}>{label}</MainLabel>
+              {additionalLabel && !displayInline && (
+                <AdditionalLabelWithTooltip
+                  additionalLabel={additionalLabel}
+                  disableTooltip={disableAdditionalLabelTooltip}
+                  cssMixin={additionalLabelCssMixin}
+                />
+              )}
             </StyledLabel>
           </LabelContainer>
         )}
         <ContentWrapper>
           {children}
           <ExtrasContainer $skeleton={skeleton}>
-            {extraText && <ExtraTextContainer>{extraText}</ExtraTextContainer>}
+            {extraText && <ExtraTextContainer $cssMixin={extraTextCssMixin}>{extraText}</ExtraTextContainer>}
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (
               <>

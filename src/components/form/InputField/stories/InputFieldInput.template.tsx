@@ -1,6 +1,6 @@
 import type { MouseEvent, ChangeEvent } from 'react';
 import { useState, useRef } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, css } from 'styled-components';
 
 import { Hint, InputField, InputIconButton } from '@admiral-ds/react-ui';
 import type { InputFieldProps, BorderRadiusType } from '@admiral-ds/react-ui';
@@ -11,6 +11,14 @@ const DisplayContainer = styled.div`
   > * {
     margin-bottom: 24px;
   }
+`;
+
+const compactStyles = css`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-wrap: normal;
 `;
 
 const text = `At breakpoint boundaries, mini units divide the screen into a fixed master grid, and multiples
@@ -143,6 +151,24 @@ export const InputFieldInputTemplate = ({
           iconsBefore={<IconWithHint targetElement={informerInputRef2.current} />}
         />
         <InputField data-container-id="inputFieldIdTen" additionalLabel="Поле с дополнительным лейблом" />
+        <InputField
+          data-container-id="inputFieldIdEleven"
+          label="Очень очень очень длинный основной лейбл который должен переноситься"
+          additionalLabel="Дополнительный лейбл тоже тоже тоже тоже тоже тоже тоже может быть длинным но он не должен переноситься"
+          extraText="И дополнительный текст тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже должен переноситься"
+          placeholder="Default Label, AdditionalLabel, ExtraText behavior"
+        />
+        <InputField
+          data-container-id="inputFieldIdTwelve"
+          label="Очень очень очень длинный основной лейбл который должен переноситься"
+          additionalLabel="Дополнительный лейбл тоже тоже тоже тоже тоже тоже тоже может быть длинным но он не должен переноситься"
+          extraText="И дополнительный текст тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже должен переноситься"
+          labelCssMixin={compactStyles}
+          additionalLabelCssMixin={compactStyles}
+          extraTextCssMixin={compactStyles}
+          disableAdditionalLabelTooltip={true}
+          placeholder="Custom compact Label, AdditionalLabel, ExtraText behavior"
+        />
       </DisplayContainer>
     </ThemeProvider>
   );
