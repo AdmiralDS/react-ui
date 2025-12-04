@@ -166,7 +166,7 @@ export const InputFieldInputTemplate = ({
           labelCssMixin={compactStyles}
           additionalLabelCssMixin={compactStyles}
           extraTextCssMixin={compactStyles}
-          disableAdditionalLabelTooltip={true}
+          disableAdditionalLabelTooltip={false}
           placeholder="Custom compact Label, AdditionalLabel, ExtraText behavior"
         />
       </DisplayContainer>

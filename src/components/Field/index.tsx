@@ -73,7 +73,6 @@ export const ExtraTextContainer = styled.div<{ $cssMixin?: ReturnType<typeof css
 
   && {
     overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
   padding-top: 8px;
@@ -244,7 +243,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       labelCssMixin,
       additionalLabelCssMixin,
       extraTextCssMixin,
-      disableAdditionalLabelTooltip,
+      disableAdditionalLabelTooltip = true,
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());

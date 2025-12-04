@@ -9,7 +9,6 @@ export const MainLabel = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
 
   && {
     overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
   &&& {
@@ -24,9 +23,8 @@ export const AdditionalLabel = styled.div<{ $cssMixin?: ReturnType<typeof css> }
   margin-left: 8px;
 
   && {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   &&& {
