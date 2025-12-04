@@ -13,12 +13,11 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     await expect(mainLabel).toHaveCSS('overflow-wrap', 'break-word');
     await expect(mainLabel).toHaveCSS('word-wrap', 'break-word');
 
-    // Проверяем AdditionalLabel - должен обрезаться троеточием
+    // Проверяем AdditionalLabel - теперь тоже должен переноситься (как MainLabel)
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
-    await expect(additionalLabel).toHaveCSS('overflow', 'hidden');
-    await expect(additionalLabel).toHaveCSS('text-overflow', 'ellipsis');
-    await expect(additionalLabel).toHaveCSS('white-space', 'nowrap');
+    await expect(additionalLabel).toHaveCSS('overflow-wrap', 'break-word');
+    await expect(additionalLabel).toHaveCSS('word-wrap', 'break-word');
 
     // Проверяем ExtraText - должен переноситься
     // ExtraText находится в ExtrasContainer после инпута
@@ -31,7 +30,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     await expect(extraText).toHaveCSS('word-wrap', 'normal');
   });
 
-  test('tooltip appears for additionalLabel on overflow', async ({ page }) => {
+  test('tooltip does not appear for additionalLabel by default', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
     const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
@@ -39,39 +38,21 @@ test.describe('InputField Overflow and CSS Mixins', () => {
 
     await expect(additionalLabel).toBeVisible();
 
-    // Проверяем, что текст обрезается (есть переполнение)
-    const hasOverflow = await additionalLabel.evaluate((el) => {
-      const htmlEl = el as HTMLElement;
-      return htmlEl.scrollWidth > htmlEl.offsetWidth || htmlEl.scrollHeight > htmlEl.offsetHeight;
-    });
-    expect(hasOverflow).toBe(true);
-
     await additionalLabel.hover();
     await page.waitForTimeout(300);
 
-    // Проверяем, что тултип появился
+    // Проверяем, что тултип НЕ появился (по умолчанию disableAdditionalLabelTooltip = true)
     const tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).toBeVisible();
-
-    // Проверяем содержимое тултипа
-    const tooltipText = await tooltip.textContent();
-    expect(tooltipText).toContain('Дополнительный лейбл');
+    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
   });
 
   test('tooltip is disabled when disableAdditionalLabelTooltip is true', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdTwelve"]');
+    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
     const additionalLabel = field.locator('label > div:last-child');
 
     await expect(additionalLabel).toBeVisible();
-
-    // Проверяем, что текст обрезается (есть переполнение)
-    const hasOverflow = await additionalLabel.evaluate((el) => {
-      const htmlEl = el as HTMLElement;
-      return htmlEl.scrollWidth > htmlEl.offsetWidth || htmlEl.scrollHeight > htmlEl.offsetHeight;
-    });
-    expect(hasOverflow).toBe(true);
 
     await additionalLabel.hover();
     await page.waitForTimeout(300);
@@ -101,11 +82,11 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const mainLabelOffsetHeight = await mainLabel.evaluate((el) => (el as HTMLElement).offsetHeight);
     expect(mainLabelScrollHeight).toBeGreaterThanOrEqual(mainLabelOffsetHeight);
 
-    // Проверяем AdditionalLabel - должен иметь переполнение по ширине (ellipsis)
+    // Проверяем AdditionalLabel - теперь может переполняться по высоте (перенос текста)
     const additionalLabel = fieldDefault.locator('label > div:last-child');
-    const additionalLabelScrollWidth = await additionalLabel.evaluate((el) => (el as HTMLElement).scrollWidth);
-    const additionalLabelOffsetWidth = await additionalLabel.evaluate((el) => (el as HTMLElement).offsetWidth);
-    expect(additionalLabelScrollWidth).toBeGreaterThan(additionalLabelOffsetWidth);
+    const additionalLabelScrollHeight = await additionalLabel.evaluate((el) => (el as HTMLElement).scrollHeight);
+    const additionalLabelOffsetHeight = await additionalLabel.evaluate((el) => (el as HTMLElement).offsetHeight);
+    expect(additionalLabelScrollHeight).toBeGreaterThanOrEqual(additionalLabelOffsetHeight);
 
     // Проверяем ExtraText - должен иметь возможность переполнения
     const extraText = fieldDefault
