@@ -17,8 +17,8 @@ const CLOSE_BUTTON_MARGIN_LEFT = 16;
 
 export const CloseButton = styled(CloseIconPlacementButton)`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
 `;
 
 export type Dimension = 's' | 'm' | 'l';
