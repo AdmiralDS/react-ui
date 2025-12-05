@@ -78,14 +78,6 @@ export const HintContainer = React.forwardRef<HTMLDivElement, HintContainerProps
         justOpened.current = false;
         return;
       }
-      // Проверяем, есть ли выделение текста внутри Hint
-      const selection = window.getSelection?.();
-      if (selection && selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        if (hintRef.current && hintRef.current.contains(range.commonAncestorContainer)) {
-          return;
-        }
-      }
 
       if (useDropdownsClickOutside(e, dropdowns)) hideHint();
     };
