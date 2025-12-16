@@ -380,6 +380,7 @@ export const Hint: React.FC<HintProps> = ({
                     if (blockTimeoutRef.current) {
                       clearTimeout(blockTimeoutRef.current);
                     }
+                    // Сбрасываем флаг через небольшую задержку
                     blockTimeoutRef.current = setTimeout(() => {
                       shouldBlockHideHint.current = false;
                       blockTimeoutRef.current = null;
