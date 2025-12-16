@@ -5,7 +5,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
   test('default overflow behavior - text wrapping', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdThirteen"]');
 
     // Проверяем MainLabel (label) - должен переноситься
     const mainLabel = field.locator('label > div:first-child');
@@ -30,7 +30,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
   test('tooltips do not appear for all labels by default', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdThirteen"]');
 
     // Проверяем MainLabel
     const mainLabel = field.locator('label > div:first-child');
@@ -63,7 +63,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
   test('tooltip is not disabled when disableLabelTooltips is set to false', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdTwelve"]');
+    const field = frame.locator('[data-container-id="inputFieldIdFourteen"]');
 
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
@@ -87,7 +87,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const frame = getStorybookFrameLocator(page);
 
     // Тестируем поле с дефолтным поведением
-    const fieldDefault = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const fieldDefault = frame.locator('[data-container-id="inputFieldIdThirteen"]');
     const containerDefault = fieldDefault.first();
 
     // Проверяем, что контейнер имеет min-width: 0 (позволяет дочерним элементам сжиматься)

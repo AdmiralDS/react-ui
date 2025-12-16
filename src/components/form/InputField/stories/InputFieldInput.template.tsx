@@ -68,6 +68,7 @@ export const InputFieldInputTemplate = ({
 
   const informerInputRef1 = useRef<HTMLDivElement>(null);
   const informerInputRef2 = useRef<HTMLDivElement>(null);
+  const informerInputRef3 = useRef<HTMLDivElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -146,20 +147,33 @@ export const InputFieldInputTemplate = ({
         />
         <InputField
           containerRef={informerInputRef2}
-          data-container-id="inputFieldIdNine"
-          label="Поле с иконкой в начале"
-          iconsBefore={<IconWithHint targetElement={informerInputRef2.current} />}
+          data-container-id="inputFieldIdTen"
+          label="Поле с множественными иконками"
+          displayClearIcon
+          iconsAfter={
+            <>
+              <IconWithHint targetElement={informerInputRef2.current} />
+              <IconWithHint targetElement={informerInputRef2.current} />
+              <IconWithHint targetElement={informerInputRef2.current} />
+            </>
+          }
         />
-        <InputField data-container-id="inputFieldIdTen" additionalLabel="Поле с дополнительным лейблом" />
         <InputField
+          containerRef={informerInputRef3}
           data-container-id="inputFieldIdEleven"
+          label="Поле с иконкой в начале"
+          iconsBefore={<IconWithHint targetElement={informerInputRef3.current} />}
+        />
+        <InputField data-container-id="inputFieldIdTwelve" additionalLabel="Поле с дополнительным лейблом" />
+        <InputField
+          data-container-id="inputFieldIdThirteen"
           label="Очень очень очень длинный основной лейбл который должен переноситься"
           additionalLabel="Дополнительный лейбл тоже тоже тоже тоже тоже тоже тоже может быть длинным но он не должен переноситься"
           extraText="И дополнительный текст тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже должен переноситься"
           placeholder="Default Label, AdditionalLabel, ExtraText behavior"
         />
         <InputField
-          data-container-id="inputFieldIdTwelve"
+          data-container-id="inputFieldIdFourteen"
           label="Очень очень очень длинный основной лейбл который должен переноситься"
           additionalLabel="Дополнительный лейбл тоже тоже тоже тоже тоже тоже тоже может быть длинным но он не должен переноситься"
           extraText="И дополнительный текст тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже должен переноситься"

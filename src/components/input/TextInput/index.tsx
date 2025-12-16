@@ -1,5 +1,15 @@
-import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes } from 'react';
-import { Children, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import type { ChangeEvent, ReactNode, RefObject, InputHTMLAttributes, ReactElement } from 'react';
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled, { css, type DataAttributes } from 'styled-components';
 
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
@@ -320,6 +330,37 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const nothing = () => {};
 
+// Разворачиваем вложенные массивы и React.Fragment, чтобы корректно посчитать количество иконок.
+// Дополнительно гарантируем наличие уникальных key у элементов без собственного key.
+function flattenChildren(children: ReactNode): ReactElement[] {
+  const result: ReactElement[] = [];
+
+  const traverse = (nodes: ReactNode) => {
+    Children.forEach(nodes, (child, index) => {
+      if (!child) return;
+
+      if (Array.isArray(child)) {
+        traverse(child);
+        return;
+      }
+
+      if (isValidElement(child) && child.type === Fragment) {
+        if (child.props && child.props.children) {
+          traverse(child.props.children);
+        }
+        return;
+      }
+
+      if (isValidElement(child)) {
+        result.push(child.key != null ? child : cloneElement(child, { key: `flattened-${index}` }));
+      }
+    });
+  };
+
+  traverse(children);
+  return result;
+}
+
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
@@ -350,8 +391,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const inputRef = useRef<HTMLInputElement>(null);
     const wrapperRef = containerRef || useRef<HTMLDivElement>(null);
 
-    const iconAfterArray = Children.toArray(iconsAfter || icons);
-    const iconBeforeArray = Children.toArray(iconsBefore);
+    const iconAfterArray = flattenChildren(iconsAfter || icons);
+    const iconBeforeArray = flattenChildren(iconsBefore);
 
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
