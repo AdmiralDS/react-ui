@@ -5,19 +5,17 @@ test.describe('InputField Overflow and CSS Mixins', () => {
   test('default overflow behavior - text wrapping', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdThirteen"]');
 
     // Проверяем MainLabel (label) - должен переноситься
     const mainLabel = field.locator('label > div:first-child');
     await expect(mainLabel).toBeVisible();
     await expect(mainLabel).toHaveCSS('overflow-wrap', 'break-word');
-    await expect(mainLabel).toHaveCSS('word-wrap', 'break-word');
 
     // Проверяем AdditionalLabel - теперь тоже должен переноситься (как MainLabel)
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
     await expect(additionalLabel).toHaveCSS('overflow-wrap', 'break-word');
-    await expect(additionalLabel).toHaveCSS('word-wrap', 'break-word');
 
     // Проверяем ExtraText - должен переноситься
     // ExtraText находится в ExtrasContainer после инпута
@@ -27,39 +25,61 @@ test.describe('InputField Overflow and CSS Mixins', () => {
       .first();
     await expect(extraText).toBeVisible();
     await expect(extraText).toHaveCSS('overflow-wrap', 'normal');
-    await expect(extraText).toHaveCSS('word-wrap', 'normal');
   });
 
-  test('tooltip does not appear for additionalLabel by default', async ({ page }) => {
+  test('tooltips do not appear for all labels by default', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdThirteen"]');
+
+    // Проверяем MainLabel
+    const mainLabel = field.locator('label > div:first-child');
+    await expect(mainLabel).toBeVisible();
+    await mainLabel.hover();
+    await page.waitForTimeout(300);
+    let tooltip = frame.locator('[role="tooltip"]');
+    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
+
+    // Проверяем AdditionalLabel
     const additionalLabel = field.locator('label > div:last-child');
-
     await expect(additionalLabel).toBeVisible();
-
     await additionalLabel.hover();
     await page.waitForTimeout(300);
+    tooltip = frame.locator('[role="tooltip"]');
+    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
 
-    // Проверяем, что тултип НЕ появился (по умолчанию disableAdditionalLabelTooltip = true)
-    const tooltip = frame.locator('[role="tooltip"]');
+    // Проверяем ExtraText
+    const extraText = field
+      .locator('div')
+      .filter({ hasText: /И дополнительный текст/ })
+      .first();
+    await expect(extraText).toBeVisible();
+    await extraText.hover();
+    await page.waitForTimeout(300);
+    tooltip = frame.locator('[role="tooltip"]');
     await expect(tooltip).not.toBeVisible({ timeout: 1000 });
   });
 
-  test('tooltip is disabled when disableAdditionalLabelTooltip is true', async ({ page }) => {
+  test('tooltip is not disabled when visibleLabelTooltips is set to true', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdFourteen"]');
+
     const additionalLabel = field.locator('label > div:last-child');
-
     await expect(additionalLabel).toBeVisible();
-
     await additionalLabel.hover();
     await page.waitForTimeout(300);
-
-    // Проверяем, что тултип НЕ появился (отключен через disableAdditionalLabelTooltip)
+    // Проверяем, что тултип additionalLabel появился (включен через visibleLabelTooltips.additionalLabel = false)
     const tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
+    await expect(tooltip).toBeVisible({ timeout: 1000 });
+
+    const mainLabel = field.locator('label > div:first-child');
+    await expect(mainLabel).toBeVisible();
+    await mainLabel.hover();
+    await page.waitForTimeout(300);
+    // Проверяем, что тултип mainLabel появился (включен через visibleLabelTooltips.label = false)
+    const tooltip2 = frame.locator('[role="tooltip"]');
+    await expect(tooltip2).toBeVisible({ timeout: 1000 });
   });
 
   test('overflow detection works correctly', async ({ page }) => {
@@ -67,7 +87,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const frame = getStorybookFrameLocator(page);
 
     // Тестируем поле с дефолтным поведением
-    const fieldDefault = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const fieldDefault = frame.locator('[data-container-id="inputFieldIdThirteen"]');
     const containerDefault = fieldDefault.first();
 
     // Проверяем, что контейнер имеет min-width: 0 (позволяет дочерним элементам сжиматься)
