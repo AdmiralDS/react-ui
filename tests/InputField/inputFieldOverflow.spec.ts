@@ -60,7 +60,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     await expect(tooltip).not.toBeVisible({ timeout: 1000 });
   });
 
-  test('tooltip is not disabled when disableLabelTooltips is set to false', async ({ page }) => {
+  test('tooltip is not disabled when visibleLabelTooltips is set to true', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
     const field = frame.locator('[data-container-id="inputFieldIdFourteen"]');
@@ -69,7 +69,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     await expect(additionalLabel).toBeVisible();
     await additionalLabel.hover();
     await page.waitForTimeout(300);
-    // Проверяем, что тултип additionalLabel появился (включен через disableLabelTooltips.additionalLabel = false)
+    // Проверяем, что тултип additionalLabel появился (включен через visibleLabelTooltips.additionalLabel = false)
     const tooltip = frame.locator('[role="tooltip"]');
     await expect(tooltip).toBeVisible({ timeout: 1000 });
 
@@ -77,7 +77,7 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     await expect(mainLabel).toBeVisible();
     await mainLabel.hover();
     await page.waitForTimeout(300);
-    // Проверяем, что тултип mainLabel появился (включен через disableLabelTooltips.label = false)
+    // Проверяем, что тултип mainLabel появился (включен через visibleLabelTooltips.label = false)
     const tooltip2 = frame.locator('[role="tooltip"]');
     await expect(tooltip2).toBeVisible({ timeout: 1000 });
   });

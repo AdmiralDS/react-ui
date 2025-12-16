@@ -178,7 +178,7 @@ export const InputFieldInputTemplate = ({
           additionalLabel="Дополнительный лейбл тоже тоже тоже тоже тоже тоже тоже может быть длинным но он не должен переноситься"
           extraText="И дополнительный текст тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже тоже должен переноситься"
           labelCssMixins={{ label: compactStyles, additionalLabel: compactStyles, extraText: compactStyles }}
-          disableLabelTooltips={{ label: false, additionalLabel: false, extraText: false }}
+          visibleLabelTooltips={{ label: false, additionalLabel: false, extraText: false }}
           placeholder="Custom compact Label, AdditionalLabel, ExtraText behavior"
         />
       </DisplayContainer>

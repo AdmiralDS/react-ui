@@ -122,7 +122,7 @@ export interface FieldOwnProps {
 
   /** Отключает показ tooltip для лейблов при переполнении текста.
    * По умолчанию все тултипы отключены (все значения = true) */
-  disableLabelTooltips?: {
+  visibleLabelTooltips?: {
     /** Отключает tooltip для основного лейбла (label) */
     label?: boolean;
     /** Отключает tooltip для дополнительного лейбла (additionalLabel) */
@@ -253,7 +253,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       id,
       skeleton = false,
       labelCssMixins,
-      disableLabelTooltips = { label: true, additionalLabel: true, extraText: true },
+      visibleLabelTooltips = { label: false, additionalLabel: false, extraText: false },
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
@@ -299,7 +299,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
             <StyledLabel $skeleton={skeleton} {...labelProps}>
               {label && (
                 <LabelWithTooltip
-                  disableTooltip={disableLabelTooltips.label}
+                  disableTooltip={!visibleLabelTooltips.label}
                   cssMixin={labelCssMixins?.label}
                   Component={MainLabel}
                 >
@@ -308,7 +308,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
               )}
               {additionalLabel && !displayInline && (
                 <LabelWithTooltip
-                  disableTooltip={disableLabelTooltips.additionalLabel}
+                  disableTooltip={!visibleLabelTooltips.additionalLabel}
                   cssMixin={labelCssMixins?.additionalLabel}
                   Component={AdditionalLabel}
                 >
@@ -323,7 +323,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
           <ExtrasContainer $skeleton={skeleton}>
             {extraText && (
               <LabelWithTooltip
-                disableTooltip={disableLabelTooltips.extraText}
+                disableTooltip={!visibleLabelTooltips.extraText}
                 cssMixin={labelCssMixins?.extraText}
                 Component={ExtraTextContainer}
               >
