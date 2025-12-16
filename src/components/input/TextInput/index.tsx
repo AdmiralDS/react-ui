@@ -527,12 +527,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           />
           <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />
           {iconsBeforeCount > 0 && (
-            <IconPanelBefore disabled={props.disabled} $dimension={dimension}>
+            <IconPanelBefore data-role="icon-pane-before" disabled={props.disabled} $dimension={dimension}>
               {iconBeforeArray}
             </IconPanelBefore>
           )}
           {iconsAfterCount > 0 && (
-            <IconPanelAfter disabled={props.disabled} $dimension={dimension}>
+            <IconPanelAfter data-role="icon-pane-after" disabled={props.disabled} $dimension={dimension}>
               {iconAfterArray}
             </IconPanelAfter>
           )}

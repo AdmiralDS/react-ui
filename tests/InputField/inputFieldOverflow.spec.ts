@@ -11,13 +11,11 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const mainLabel = field.locator('label > div:first-child');
     await expect(mainLabel).toBeVisible();
     await expect(mainLabel).toHaveCSS('overflow-wrap', 'break-word');
-    await expect(mainLabel).toHaveCSS('word-wrap', 'break-word');
 
     // Проверяем AdditionalLabel - теперь тоже должен переноситься (как MainLabel)
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
     await expect(additionalLabel).toHaveCSS('overflow-wrap', 'break-word');
-    await expect(additionalLabel).toHaveCSS('word-wrap', 'break-word');
 
     // Проверяем ExtraText - должен переноситься
     // ExtraText находится в ExtrasContainer после инпута
@@ -27,39 +25,61 @@ test.describe('InputField Overflow and CSS Mixins', () => {
       .first();
     await expect(extraText).toBeVisible();
     await expect(extraText).toHaveCSS('overflow-wrap', 'normal');
-    await expect(extraText).toHaveCSS('word-wrap', 'normal');
   });
 
-  test('tooltip does not appear for additionalLabel by default', async ({ page }) => {
+  test('tooltips do not appear for all labels by default', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
     const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+
+    // Проверяем MainLabel
+    const mainLabel = field.locator('label > div:first-child');
+    await expect(mainLabel).toBeVisible();
+    await mainLabel.hover();
+    await page.waitForTimeout(300);
+    let tooltip = frame.locator('[role="tooltip"]');
+    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
+
+    // Проверяем AdditionalLabel
     const additionalLabel = field.locator('label > div:last-child');
-
     await expect(additionalLabel).toBeVisible();
-
     await additionalLabel.hover();
     await page.waitForTimeout(300);
+    tooltip = frame.locator('[role="tooltip"]');
+    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
 
-    // Проверяем, что тултип НЕ появился (по умолчанию disableAdditionalLabelTooltip = true)
-    const tooltip = frame.locator('[role="tooltip"]');
+    // Проверяем ExtraText
+    const extraText = field
+      .locator('div')
+      .filter({ hasText: /И дополнительный текст/ })
+      .first();
+    await expect(extraText).toBeVisible();
+    await extraText.hover();
+    await page.waitForTimeout(300);
+    tooltip = frame.locator('[role="tooltip"]');
     await expect(tooltip).not.toBeVisible({ timeout: 1000 });
   });
 
-  test('tooltip is disabled when disableAdditionalLabelTooltip is true', async ({ page }) => {
+  test('tooltip is not disabled when disableLabelTooltips is set to false', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');
     const frame = getStorybookFrameLocator(page);
-    const field = frame.locator('[data-container-id="inputFieldIdEleven"]');
+    const field = frame.locator('[data-container-id="inputFieldIdTwelve"]');
+
     const additionalLabel = field.locator('label > div:last-child');
-
     await expect(additionalLabel).toBeVisible();
-
     await additionalLabel.hover();
     await page.waitForTimeout(300);
-
-    // Проверяем, что тултип НЕ появился (отключен через disableAdditionalLabelTooltip)
+    // Проверяем, что тултип additionalLabel появился (включен через disableLabelTooltips.additionalLabel = false)
     const tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).not.toBeVisible({ timeout: 1000 });
+    await expect(tooltip).toBeVisible({ timeout: 1000 });
+
+    const mainLabel = field.locator('label > div:first-child');
+    await expect(mainLabel).toBeVisible();
+    await mainLabel.hover();
+    await page.waitForTimeout(300);
+    // Проверяем, что тултип mainLabel появился (включен через disableLabelTooltips.label = false)
+    const tooltip2 = frame.locator('[role="tooltip"]');
+    await expect(tooltip2).toBeVisible({ timeout: 1000 });
   });
 
   test('overflow detection works correctly', async ({ page }) => {

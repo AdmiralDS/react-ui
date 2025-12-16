@@ -120,8 +120,26 @@ export interface FieldOwnProps {
   /**  Дополнительное имя поля формы */
   additionalLabel?: React.ReactNode;
 
-  /** Отключает показ tooltip для additionalLabel при обрезании текста троеточием */
-  disableAdditionalLabelTooltip?: boolean;
+  /** Отключает показ tooltip для лейблов при переполнении текста.
+   * По умолчанию все тултипы отключены (все значения = true) */
+  disableLabelTooltips?: {
+    /** Отключает tooltip для основного лейбла (label) */
+    label?: boolean;
+    /** Отключает tooltip для дополнительного лейбла (additionalLabel) */
+    additionalLabel?: boolean;
+    /** Отключает tooltip для дополнительного текста (extraText) */
+    extraText?: boolean;
+  };
+
+  /** CSS миксины для переопределения стилей лейблов */
+  labelCssMixins?: {
+    /** CSS миксин для переопределения стилей основного лейбла (MainLabel) */
+    label?: ReturnType<typeof css>;
+    /** CSS миксин для переопределения стилей дополнительного лейбла (AdditionalLabel) */
+    additionalLabel?: ReturnType<typeof css>;
+    /** CSS миксин для переопределения стилей дополнительного текста (ExtraTextContainer) */
+    extraText?: ReturnType<typeof css>;
+  };
 
   /** Отображать лейбл в одну строчку с инпутом */
   displayInline?: boolean;
@@ -144,15 +162,6 @@ export interface FieldOwnProps {
 
   /** Состояние skeleton */
   skeleton?: boolean;
-
-  /** CSS миксин для переопределения стилей основного лейбла (MainLabel) */
-  labelCssMixin?: ReturnType<typeof css>;
-
-  /** CSS миксин для переопределения стилей дополнительного лейбла (AdditionalLabel) */
-  additionalLabelCssMixin?: ReturnType<typeof css>;
-
-  /** CSS миксин для переопределения стилей дополнительного текста (ExtraTextContainer) */
-  extraTextCssMixin?: ReturnType<typeof css>;
 }
 
 const PositionedCharacterCounter = styled(CharacterCounter)`
@@ -160,13 +169,16 @@ const PositionedCharacterCounter = styled(CharacterCounter)`
   padding: 8px 0 0 8px;
 `;
 
-interface AdditionalLabelWithTooltipProps {
-  additionalLabel: React.ReactNode;
+type LabelComponent = typeof MainLabel | typeof AdditionalLabel | typeof ExtraTextContainer;
+
+interface LabelWithTooltipProps {
+  children: React.ReactNode;
   disableTooltip?: boolean;
   cssMixin?: ReturnType<typeof css>;
+  Component: LabelComponent;
 }
 
-const AdditionalLabelWithTooltip = ({ additionalLabel, disableTooltip, cssMixin }: AdditionalLabelWithTooltipProps) => {
+const LabelWithTooltip = ({ children, disableTooltip = true, cssMixin, Component }: LabelWithTooltipProps) => {
   const labelRef = useRef<HTMLDivElement>(null);
   const [overflowActive, setOverflowActive] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -199,14 +211,14 @@ const AdditionalLabelWithTooltip = ({ additionalLabel, disableTooltip, cssMixin 
     }
   }, [disableTooltip]);
 
-  const showTooltip = !disableTooltip && tooltipVisible && overflowActive && typeof additionalLabel === 'string';
+  const showTooltip = !disableTooltip && tooltipVisible && overflowActive && typeof children === 'string';
 
   return (
     <>
-      <AdditionalLabel ref={labelRef} $cssMixin={cssMixin}>
-        {additionalLabel}
-      </AdditionalLabel>
-      {showTooltip && <Tooltip targetElement={labelRef.current} renderContent={() => additionalLabel} />}
+      <Component ref={labelRef} $cssMixin={cssMixin}>
+        {children}
+      </Component>
+      {showTooltip && <Tooltip targetElement={labelRef.current} renderContent={() => children} />}
     </>
   );
 };
@@ -240,10 +252,8 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
       disabled,
       id,
       skeleton = false,
-      labelCssMixin,
-      additionalLabelCssMixin,
-      extraTextCssMixin,
-      disableAdditionalLabelTooltip = true,
+      labelCssMixins,
+      disableLabelTooltips = { label: true, additionalLabel: true, extraText: true },
       ...restFieldProps
     } = props;
     const [defaultID] = useState(uid());
@@ -287,13 +297,23 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
           <LabelContainer>
             {skeleton && <SkeletonLabel />}
             <StyledLabel $skeleton={skeleton} {...labelProps}>
-              <MainLabel $cssMixin={labelCssMixin}>{label}</MainLabel>
+              {label && (
+                <LabelWithTooltip
+                  disableTooltip={disableLabelTooltips.label}
+                  cssMixin={labelCssMixins?.label}
+                  Component={MainLabel}
+                >
+                  {label}
+                </LabelWithTooltip>
+              )}
               {additionalLabel && !displayInline && (
-                <AdditionalLabelWithTooltip
-                  additionalLabel={additionalLabel}
-                  disableTooltip={disableAdditionalLabelTooltip}
-                  cssMixin={additionalLabelCssMixin}
-                />
+                <LabelWithTooltip
+                  disableTooltip={disableLabelTooltips.additionalLabel}
+                  cssMixin={labelCssMixins?.additionalLabel}
+                  Component={AdditionalLabel}
+                >
+                  {additionalLabel}
+                </LabelWithTooltip>
               )}
             </StyledLabel>
           </LabelContainer>
@@ -301,7 +321,15 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
         <ContentWrapper>
           {children}
           <ExtrasContainer $skeleton={skeleton}>
-            {extraText && <ExtraTextContainer $cssMixin={extraTextCssMixin}>{extraText}</ExtraTextContainer>}
+            {extraText && (
+              <LabelWithTooltip
+                disableTooltip={disableLabelTooltips.extraText}
+                cssMixin={labelCssMixins?.extraText}
+                Component={ExtraTextContainer}
+              >
+                {extraText}
+              </LabelWithTooltip>
+            )}
 
             {displayCharacterCounter && inputRef && maxLength !== undefined && (
               <>

@@ -28,10 +28,8 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     displayCharacterCounter,
     characterCounterVisibilityThreshold,
     skeleton,
-    labelCssMixin,
-    additionalLabelCssMixin,
-    extraTextCssMixin,
-    disableAdditionalLabelTooltip,
+    labelCssMixins,
+    disableLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -49,10 +47,8 @@ export const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>((p
     displayCharacterCounter,
     characterCounterVisibilityThreshold,
     skeleton,
-    labelCssMixin,
-    additionalLabelCssMixin,
-    extraTextCssMixin,
-    disableAdditionalLabelTooltip,
+    labelCssMixins,
+    disableLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, unknown>;
