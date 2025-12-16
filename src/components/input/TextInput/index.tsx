@@ -334,10 +334,9 @@ const nothing = () => {};
 // Дополнительно гарантируем наличие уникальных key у элементов без собственного key.
 function flattenChildren(children: ReactNode): ReactElement[] {
   const result: ReactElement[] = [];
-  let autoKey = 0;
 
   const traverse = (nodes: ReactNode) => {
-    Children.forEach(nodes, (child) => {
+    Children.forEach(nodes, (child, index) => {
       if (!child) return;
 
       if (Array.isArray(child)) {
@@ -353,7 +352,7 @@ function flattenChildren(children: ReactNode): ReactElement[] {
       }
 
       if (isValidElement(child)) {
-        result.push(child.key != null ? child : cloneElement(child, { key: `flattened-${autoKey++}` }));
+        result.push(child.key != null ? child : cloneElement(child, { key: `flattened-${index}` }));
       }
     });
   };
