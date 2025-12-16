@@ -120,14 +120,14 @@ export interface FieldOwnProps {
   /**  Дополнительное имя поля формы */
   additionalLabel?: React.ReactNode;
 
-  /** Отключает показ tooltip для лейблов при переполнении текста.
-   * По умолчанию все тултипы отключены (все значения = true) */
+  /** Включает показ tooltip для лейблов при переполнении текста.
+   * По умолчанию все тултипы отключены (все значения = false) */
   visibleLabelTooltips?: {
-    /** Отключает tooltip для основного лейбла (label) */
+    /** Включает tooltip для основного лейбла (label) */
     label?: boolean;
-    /** Отключает tooltip для дополнительного лейбла (additionalLabel) */
+    /** Включает tooltip для дополнительного лейбла (additionalLabel) */
     additionalLabel?: boolean;
-    /** Отключает tooltip для дополнительного текста (extraText) */
+    /** Включает tooltip для дополнительного текста (extraText) */
     extraText?: boolean;
   };
 
