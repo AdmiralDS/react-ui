@@ -456,11 +456,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       if (!props.readOnly && hasValue) {
         if (displayClearIcon) {
           array.unshift(
-            <InputIconButton {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} key="clear-icon" />,
+            <InputIconButton key="clear-icon" {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} />,
           );
         } else if (displayCopyIcon) {
           array.unshift(
-            <TooltipedInputIconButton {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} key="copy-icon" />,
+            <TooltipedInputIconButton key="copy-icon" {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} />,
           );
         }
       }

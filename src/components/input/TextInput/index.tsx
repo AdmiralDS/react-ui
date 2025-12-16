@@ -396,7 +396,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       const Icon = isPasswordVisible ? EyeOutlineSvg : EyeCloseOutlineSvg;
 
       const visiblePasswordInputIconButtonProps = {
-        key: 'eye-icon',
         icon: Icon,
         onClick: () => {
           setPasswordVisible(!isPasswordVisible);
@@ -406,6 +405,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
       iconAfterArray.push(
         <InputIconButton
+          key="eye-icon"
           {...visiblePasswordInputIconButtonProps}
           {...visiblePasswordInputIconButtonPropsConfig(visiblePasswordInputIconButtonProps)}
         />,
@@ -414,7 +414,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
-        key: 'clear-icon',
         icon: CloseOutlineSvg,
         onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
           // запрет на перемещение фокуса при клике по иконке
@@ -430,6 +429,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
       iconAfterArray.unshift(
         <InputIconButton
+          key="clear-icon"
           {...clearInputIconButtonProps}
           {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
