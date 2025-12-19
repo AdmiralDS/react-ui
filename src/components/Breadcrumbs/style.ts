@@ -6,9 +6,12 @@ import type { BreadcrumbsProps } from '#src/components/Breadcrumbs';
  * то есть при задании размеров учтены размеры синей рамки, которая появляется при переходе табом на хлебную крошку.
  * */
 
-export const Separator = styled(ChevronRight)`
+export const Separator = styled(ChevronRight)<{ $disabled?: boolean }>`
   & *[fill^='#'] {
-    fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
+    fill: ${({ theme, $disabled }) =>
+      $disabled
+        ? `var(--admiral-color-Neutral_Neutral30, ${theme.color['Neutral/Neutral 30']})`
+        : `var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']})`};
   }
   flex-shrink: 0;
   margin-left: 4px;
