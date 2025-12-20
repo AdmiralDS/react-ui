@@ -9,6 +9,7 @@ import { BreadcrumbsMobileTemplate } from './BreadcrumbsMobile.template';
 import { BreadcrumbsLinkTemplate } from './BreadcrumbsLink.template';
 import { BreadcrumbsActiveCrumbTemplate } from './BreadcrumbsActiveCrumb.template';
 import { BreadcrumbsIconsTemplate } from './BreadcrumbsIcons.template';
+import { BreadcrumbsDisabledTemplate } from './BreadcrumbsDisabled.template';
 
 // Imports of text sources
 import BreadcrumbsPlaygroundRaw from './BreadcrumbsPlayground.template?raw';
@@ -17,6 +18,7 @@ import BreadcrumbsMobileRaw from './BreadcrumbsMobile.template?raw';
 import BreadcrumbsLinkRaw from './BreadcrumbsLink.template?raw';
 import BreadcrumbsActiveCrumbRaw from './BreadcrumbsActiveCrumb.template?raw';
 import BreadcrumbsIconsRaw from './BreadcrumbsIcons.template?raw';
+import BreadcrumbsDisabledRaw from './BreadcrumbsDisabled.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -194,4 +196,21 @@ export const CrumbWithIconExample = {
   },
 
   name: 'Breadcrumbs. Пример вкладок с иконками.',
+};
+
+//<editor-fold desc="Disabled Crumb">
+const DisabledCrumbStory: StoryFn<typeof Breadcrumbs> = () => <BreadcrumbsDisabledTemplate />;
+
+export const DisabledCrumbExample = {
+  render: DisabledCrumbStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: BreadcrumbsDisabledRaw,
+      },
+    },
+  },
+
+  name: 'Breadcrumbs. Пример с состоянием disabled.',
 };
