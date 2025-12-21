@@ -1,8 +1,14 @@
 import styled, { css, keyframes } from 'styled-components';
 
-export const IconContainer = styled.div``;
+export const IconContainer = styled.div`
+  flex: 1 0 auto;
+`;
 
-export const ButtonContainer = styled.div``;
+export const ButtonContainer = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
+  ${(p) => p.$cssMixin && p.$cssMixin}
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 const loadingKeyframes = keyframes`
   to {

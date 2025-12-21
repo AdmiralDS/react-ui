@@ -2,11 +2,13 @@ import * as React from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Spinner } from '#src/components/Spinner';
-import type { Appearance, Dimension, StyledButtonProps } from './types';
 import { appearanceMixin } from './appearanceMixin';
 import { ButtonContainer, IconContainer } from '#src/components/TextButton/commonMixin';
 import { dimensionMixin } from '#src/components/TextButton/dimensionMixin';
 import { skeletonAnimationMixin } from '#src/components/skeleton/animation';
+import { TextContainer } from './textContainer';
+import type { TextContainerProps } from './textContainer';
+import type { Appearance, Dimension, StyledButtonProps } from './types';
 
 const StyledSpinner = styled(Spinner)`
   position: absolute;
@@ -72,6 +74,11 @@ export interface TextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   loading?: boolean;
   /** Состояние skeleton */
   skeleton?: boolean;
+  /** Конфиг функция пропсов для контейнера, в котором находится текст. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  textContainerPropsConfig?: TextContainerProps['containerPropsConfig'];
+  /** CSS миксин для переопределения стилей текста */
+  textCssMixin?: TextContainerProps['textCssMixin'];
 }
 
 export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
@@ -87,11 +94,14 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
       displayRight = false,
       loading = false,
       skeleton = false,
+      textContainerPropsConfig,
+      textCssMixin,
       ...props
     },
     ref,
   ) => {
     const disabled = props.disabled || loading || skeleton;
+
     return (
       <StyledButton
         {...props}
@@ -111,9 +121,7 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         ) : icon && !displayRight ? (
           <IconContainer>{icon}</IconContainer>
         ) : null}
-        <ButtonContainer>
-          <span>{text}</span>
-        </ButtonContainer>
+        <TextContainer text={text} containerPropsConfig={textContainerPropsConfig} textCssMixin={textCssMixin} />
         {iconEnd ? (
           <IconContainer>{iconEnd}</IconContainer>
         ) : icon && displayRight ? (
