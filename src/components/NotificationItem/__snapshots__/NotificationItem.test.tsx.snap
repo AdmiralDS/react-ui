@@ -3,7 +3,12 @@
 exports[`NotificationItem should render error components with all properties 1`] = `
 {
   "asFragment": [Function],
-  "baseElement": .c5 {
+  "baseElement": .c7 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c5 {
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -17,6 +22,10 @@ exports[`NotificationItem should render error components with all properties 1`]
   padding: 0;
   white-space: nowrap;
   border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c5 .c6 {
+  visibility: visible;
 }
 
 .c5[data-appearance='primary'] {
@@ -66,19 +75,19 @@ exports[`NotificationItem should render error components with all properties 1`]
   text-rendering: geometricPrecision;
 }
 
-.c10 {
+.c12 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
 }
 
-.c10>svg {
+.c12>svg {
   height: 20px;
   width: 20px;
 }
 
-.c9 {
+.c11 {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -90,7 +99,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   transform: translate(-50%, -50%);
 }
 
-.c6 {
+.c8 {
   position: relative;
   padding: 0;
   margin: 4px;
@@ -106,36 +115,36 @@ exports[`NotificationItem should render error components with all properties 1`]
   cursor: pointer;
 }
 
-.c6 >* {
+.c8 >* {
   pointer-events: none;
 }
 
-.c6:disabled {
+.c8:disabled {
   cursor: not-allowed;
 }
 
-.c6:disabled *[fill^='#'] {
+.c8:disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-.c6:not(:disabled):focus-visible {
+.c8:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
-.c6:not(:disabled):focus >.c8 {
+.c8:not(:disabled):focus >.c10 {
   background-color: transparent;
 }
 
-.c6:not(:disabled):hover >.c8 {
+.c8:not(:disabled):hover >.c10 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c6:not(:disabled):active >.c8 {
+.c8:not(:disabled):active >.c10 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c6:not(:disabled):focus-visible >.c8 {
+.c8:not(:disabled):focus-visible >.c10 {
   background-color: transparent;
 }
 
@@ -180,7 +189,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   gap: 16px;
 }
 
-.c7 {
+.c9 {
   position: absolute;
   top: 10px;
   right: 12px;
@@ -235,7 +244,7 @@ exports[`NotificationItem should render error components with all properties 1`]
             type="button"
           >
             <div
-              class=""
+              class="c6 c7"
             >
               <span>
                 Link
@@ -244,16 +253,16 @@ exports[`NotificationItem should render error components with all properties 1`]
           </button>
         </div>
         <button
-          class="c6 close-button c7"
+          class="c8 close-button c9"
           type="button"
         >
           <div
             aria-hidden="true"
-            class="c8 c9"
+            class="c10 c11"
           />
           <div
             aria-hidden="true"
-            class="c10"
+            class="c12"
           >
             <div
               aria-hidden="true"
@@ -263,7 +272,12 @@ exports[`NotificationItem should render error components with all properties 1`]
       </div>
     </div>
   </body>,
-  "container": .c5 {
+  "container": .c7 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c5 {
   position: relative;
   box-sizing: border-box;
   display: inline-flex;
@@ -277,6 +291,10 @@ exports[`NotificationItem should render error components with all properties 1`]
   padding: 0;
   white-space: nowrap;
   border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c5 .c6 {
+  visibility: visible;
 }
 
 .c5[data-appearance='primary'] {
@@ -326,19 +344,19 @@ exports[`NotificationItem should render error components with all properties 1`]
   text-rendering: geometricPrecision;
 }
 
-.c10 {
+.c12 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
 }
 
-.c10>svg {
+.c12>svg {
   height: 20px;
   width: 20px;
 }
 
-.c9 {
+.c11 {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -350,7 +368,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   transform: translate(-50%, -50%);
 }
 
-.c6 {
+.c8 {
   position: relative;
   padding: 0;
   margin: 4px;
@@ -366,36 +384,36 @@ exports[`NotificationItem should render error components with all properties 1`]
   cursor: pointer;
 }
 
-.c6 >* {
+.c8 >* {
   pointer-events: none;
 }
 
-.c6:disabled {
+.c8:disabled {
   cursor: not-allowed;
 }
 
-.c6:disabled *[fill^='#'] {
+.c8:disabled *[fill^='#'] {
   fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
 }
 
-.c6:not(:disabled):focus-visible {
+.c8:not(:disabled):focus-visible {
   outline-offset: 2px;
   outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
 }
 
-.c6:not(:disabled):focus >.c8 {
+.c8:not(:disabled):focus >.c10 {
   background-color: transparent;
 }
 
-.c6:not(:disabled):hover >.c8 {
+.c8:not(:disabled):hover >.c10 {
   background-color: var(--admiral-color-Opacity_Hover, #0000000D);
 }
 
-.c6:not(:disabled):active >.c8 {
+.c8:not(:disabled):active >.c10 {
   background-color: var(--admiral-color-Opacity_Press, #0000001F);
 }
 
-.c6:not(:disabled):focus-visible >.c8 {
+.c8:not(:disabled):focus-visible >.c10 {
   background-color: transparent;
 }
 
@@ -440,7 +458,7 @@ exports[`NotificationItem should render error components with all properties 1`]
   gap: 16px;
 }
 
-.c7 {
+.c9 {
   position: absolute;
   top: 10px;
   right: 12px;
@@ -494,7 +512,7 @@ exports[`NotificationItem should render error components with all properties 1`]
           type="button"
         >
           <div
-            class=""
+            class="c6 c7"
           >
             <span>
               Link
@@ -503,16 +521,16 @@ exports[`NotificationItem should render error components with all properties 1`]
         </button>
       </div>
       <button
-        class="c6 close-button c7"
+        class="c8 close-button c9"
         type="button"
       >
         <div
           aria-hidden="true"
-          class="c8 c9"
+          class="c10 c11"
         />
         <div
           aria-hidden="true"
-          class="c10"
+          class="c12"
         >
           <div
             aria-hidden="true"
