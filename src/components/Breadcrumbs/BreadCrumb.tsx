@@ -70,14 +70,25 @@ const activeCrumbMixin = css`
   }
 `;
 
-export const CrumbAnchor = styled.a<{ $active?: boolean }>`
+const disabledCrumbMixin = css`
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  ${IconContainer} *[fill^='#'] {
+    fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  }
+`;
+
+export const CrumbAnchor = styled.a<{ $active?: boolean; $disabled?: boolean }>`
   display: flex;
   align-items: center;
   text-decoration: none;
   position: relative;
-  color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 
-  ${({ $active }) => $active && activeCrumbMixin}
+  ${({ $disabled, theme }) =>
+    $disabled
+      ? disabledCrumbMixin
+      : `color: var(--admiral-color-Neutral_Neutral50, ${theme.color['Neutral/Neutral 50']});`}
+  ${({ $active, $disabled }) => !$disabled && $active && activeCrumbMixin}
 
   &:focus {
     &:before {
@@ -117,6 +128,8 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLLIElement>, Da
   containerPropsConfig?: (
     props: React.ComponentProps<typeof Crumb> & DataAttributes,
   ) => Partial<React.ComponentProps<typeof Crumb>> & DataAttributes;
+  /** Отключение хлебной крошки */
+  disabled?: boolean;
 }
 
 interface InternalBreadcrumbProps {
@@ -139,6 +152,7 @@ export const Breadcrumb = forwardRef<HTMLLIElement, BreadcrumbProps & InternalBr
       active = true,
       displaySeparator = true,
       containerPropsConfig = (props) => props,
+      disabled,
       ...props
     },
     ref,
@@ -152,10 +166,11 @@ export const Breadcrumb = forwardRef<HTMLLIElement, BreadcrumbProps & InternalBr
     return (
       <Crumb {...crumbProps} {...containerPropsConfig(crumbProps)}>
         <CrumbAnchor
-          {...(active ? { href: url } : {})}
+          {...(!disabled && active ? { href: url } : {})}
           as={active ? linkAs : 'span'}
-          tabIndex={tabIndex}
+          tabIndex={disabled ? -1 : tabIndex}
           $active={active}
+          $disabled={disabled}
           {...linkProps}
         >
           <Content tabIndex={-1} role="link">
@@ -163,7 +178,7 @@ export const Breadcrumb = forwardRef<HTMLLIElement, BreadcrumbProps & InternalBr
             {tooltip ? <TextWithTooltip renderContent={() => text}>{text.slice(0, 37) + '...'}</TextWithTooltip> : text}
           </Content>
         </CrumbAnchor>
-        {displaySeparator && <Separator width={iconSize} height={iconSize} aria-hidden />}
+        {displaySeparator && <Separator width={iconSize} height={iconSize} aria-hidden $disabled={disabled} />}
       </Crumb>
     );
   },

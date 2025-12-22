@@ -77,15 +77,16 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
               {...options}
               key={id}
               role="option"
+              disabled={item.disabled}
             >
-              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+              <Option {...(item.disabled ? {} : { href: item.url })} as={item.linkAs} {...item.linkProps}>
                 {item.iconStart && <IconContainer $dimension={dimension}>{item.iconStart}</IconContainer>}
                 {item.text.slice(0, 37) + '...'}
               </Option>
             </MenuItemWithTooltip>
           ) : (
-            <MenuItem dimension={dimension} {...options} key={id} role="option">
-              <Option href={item.url} as={item.linkAs} {...item.linkProps}>
+            <MenuItem dimension={dimension} {...options} disabled={item.disabled} key={id} role="option">
+              <Option {...(item.disabled ? {} : { href: item.url })} as={item.linkAs} {...item.linkProps}>
                 {item.iconStart && <IconContainer $dimension={dimension}>{item.iconStart}</IconContainer>}
                 {item.text}
               </Option>
