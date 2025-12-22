@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.59.0](https://github.com/AdmiralDS/react-ui/compare/v8.58.0...v8.59.0) (2025-12-22)
+
+
+### Features
+
+* **BreadCrumbs:** add disabled state ([cff2cb9](https://github.com/AdmiralDS/react-ui/commit/cff2cb91dc7177b8883f07b045e939029bd87478))
+* **Field:** исправлена логика отображения лейблов ([47dfd85](https://github.com/AdmiralDS/react-ui/commit/47dfd8518b4ffeb439215f9ec3d316b78e59cb1f))
+* **TextButton:** Добавлена обработка text overflow, а так же config-функция и cssMixin для текста ([de73ec3](https://github.com/AdmiralDS/react-ui/commit/de73ec3c29839e50b7735f0e37c9bf63664c80b1))
+
+
+### Bug Fixes
+
+* **TimePicker:** fix align dropdown ([869699a](https://github.com/AdmiralDS/react-ui/commit/869699acb1610f8fabd846152a069a45c8434a85))
+
 ## [8.58.0](https://github.com/AdmiralDS/react-ui/compare/v8.57.0...v8.58.0) (2025-11-21)
 
 
