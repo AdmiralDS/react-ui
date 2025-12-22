@@ -34,7 +34,13 @@ export const TextButtonDimensionTemplate = (
           <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - M
           </StyledText>
-          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} appearance="primary" />
+          <TextButton
+            dimension="m"
+            text="Text Button"
+            data-testid={'button-m'}
+            iconStart={<AttachFileOutline />}
+            appearance="primary"
+          />
           <Separator />
           <TextButton dimension="m" text="Text Button" iconEnd={<AttachFileOutline />} />
           <Separator />
@@ -43,7 +49,7 @@ export const TextButtonDimensionTemplate = (
           <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
-          <TextButton dimension="s" text="Text Button" iconStart={<AttachFileOutline />} />
+          <TextButton dimension="s" data-testid={'button-s'} text="Text Button" iconStart={<AttachFileOutline />} />
           <Separator />
           <TextButton dimension="s" text="Text Button" iconEnd={<AttachFileOutline />} />
           <Separator />

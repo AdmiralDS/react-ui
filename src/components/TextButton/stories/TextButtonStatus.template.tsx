@@ -28,6 +28,8 @@ export const TextButtonStatusTemplate = ({
   themeBorderKind,
   CSSCustomProps,
 }: TextButtonProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const textContainerProps = { 'data-testid': 'textContainer' };
+
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <WrapperButton>
@@ -37,9 +39,23 @@ export const TextButtonStatusTemplate = ({
           </StyledText>
           <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} />
           <Separator />
-          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} loading />
+          <TextButton
+            dimension="m"
+            text="Text Button"
+            iconStart={<AttachFileOutline />}
+            loading
+            data-testid={'loading-status'}
+            textContainerPropsConfig={() => textContainerProps}
+          />
           <Separator />
-          <TextButton dimension="m" text="Text Button" iconStart={<AttachFileOutline />} skeleton />
+          <TextButton
+            dimension="m"
+            text="Text Button"
+            iconStart={<AttachFileOutline />}
+            skeleton
+            data-testid={'skeleton-status'}
+            textContainerPropsConfig={() => textContainerProps}
+          />
           <StyledText font="Body/Body 1 Long" forwardedAs="div">
             Dimension - S
           </StyledText>
