@@ -199,6 +199,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     const [isOpened, setIsOpened] = useState<boolean>(false);
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const iconPanelAfterRef = useRef<HTMLDivElement>(null);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       const code = keyboardKey.getCode(event);
@@ -318,6 +319,43 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         }
       }
       setIsOpened(!isOpened);
+    };
+
+    const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Не обрабатываем, если инпут disabled или skeleton
+      if (disabled || skeleton || !availableSlots) {
+        return;
+      }
+
+      const clickedElement = e.target as HTMLElement;
+
+      // Проверяем, был ли клик на интерактивных элементах (кнопки, иконки)
+      const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
+
+      // Проверяем, был ли клик на самой маске InputLine (input элемент или его контейнер)
+      // InputLine имеет структуру: InputLineContainer > InputContainer > input
+      // Нужно проверить, что клик был внутри InputLineContainer, который содержит input
+      const isClickOnInputLine =
+        inputRef.current &&
+        (clickedElement === inputRef.current ||
+          inputRef.current.contains(clickedElement) ||
+          (clickedElement.tagName === 'INPUT' && clickedElement === inputRef.current) ||
+          // Проверяем, что клик был на контейнере InputLine (InputLineContainer или его дочерних элементах)
+          (inputRef.current.parentElement &&
+            (inputRef.current.parentElement.contains(clickedElement) || clickedElement.contains(inputRef.current))));
+
+      // Если клик на InputLine и инпут не readOnly - не открываем дропдаун (позволяем редактировать)
+      if (isClickOnInputLine && !props.readOnly) {
+        return;
+      }
+
+      // Если клик на интерактивных элементах (кнопки) - они сами обработают клик
+      if (isClickOnInteractiveElement) {
+        return;
+      }
+
+      // Во всех остальных случаях (падинги, область между InputLine и IconPanel, readOnly InputLine) - открываем дропдаун
+      handleButtonClick(e);
     };
 
     const iconArray = React.Children.toArray(iconsAfter);
@@ -553,6 +591,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       'data-disable-copying': disableCopying ? true : undefined,
       className: 'time-picker-container',
       ref: inputContainerRef,
+      onMouseDown: handleContainerMouseDown,
     };
 
     const inputLineProps = {
@@ -573,7 +612,12 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         <InputBox {...containerProps} {...containerPropsConfig(containerProps)}>
           <InputLine {...inputLineProps} {...inputLinePropsConfig(inputLineProps)} />
           {iconArray.length > 0 && (
-            <IconPanelAfter disabled={disabled} $dimension={dimension} className="time-picker-icon-panel">
+            <IconPanelAfter
+              ref={iconPanelAfterRef}
+              disabled={disabled}
+              $dimension={dimension}
+              className="time-picker-icon-panel"
+            >
               {iconArray}
             </IconPanelAfter>
           )}
