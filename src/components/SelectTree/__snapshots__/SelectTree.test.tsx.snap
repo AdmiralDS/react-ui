@@ -50,6 +50,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -117,8 +121,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {
@@ -369,6 +373,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -436,8 +444,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {
@@ -743,6 +751,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -810,8 +822,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {
@@ -1062,6 +1074,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -1129,8 +1145,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {
@@ -1436,6 +1452,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -1503,8 +1523,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {
@@ -1755,6 +1775,10 @@ fieldset:disabled .c4.c4 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c6.c6 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c6 {
   width: 16px;
 }
@@ -1822,8 +1846,8 @@ fieldset[data-dimension='s'] .c6 {
 }
 
 .c8:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c8:disabled+.c9 {

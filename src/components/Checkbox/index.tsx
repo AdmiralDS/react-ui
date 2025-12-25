@@ -69,6 +69,10 @@ const Container = styled.div<{
   box-sizing: border-box;
   cursor: ${(props) => (props.$disabled ? 'not-allowed' : props.$readOnly ? 'default' : 'pointer')};
 
+  fieldset:disabled && {
+    cursor: not-allowed;
+  }
+
   overflow: visible;
   ${width};
   ${height};
@@ -209,8 +213,8 @@ const Input = styled.input<{ $indeterminate?: boolean; $hovered?: boolean }>`
   }
 
   &:disabled {
-    cursor: not-allowed;
     ${disabledCss}
+    cursor: not-allowed;
     ${(p) => p.$indeterminate && disabledIndeterminateBackgroundCss}
   }
 
