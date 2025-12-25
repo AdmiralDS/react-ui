@@ -17,6 +17,10 @@ exports[`CheckboxField should render component with disabled state 1`] = `
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -84,8 +88,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {
@@ -239,6 +243,10 @@ fieldset[data-dimension='s'] .c7.c7 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -306,8 +314,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {
@@ -516,6 +524,10 @@ exports[`CheckboxField should render component with required properties 1`] = `
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -583,8 +595,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {
@@ -735,6 +747,10 @@ fieldset[data-dimension='s'] .c7.c7 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -802,8 +818,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {
@@ -1009,6 +1025,10 @@ exports[`CheckboxField should render component with small dimension 1`] = `
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -1076,8 +1096,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {
@@ -1228,6 +1248,10 @@ fieldset[data-dimension='s'] .c7.c7 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c1.c1 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c1 {
   width: 16px;
 }
@@ -1295,8 +1319,8 @@ fieldset[data-dimension='s'] .c1 {
 }
 
 .c3:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c3:disabled+.c4 {

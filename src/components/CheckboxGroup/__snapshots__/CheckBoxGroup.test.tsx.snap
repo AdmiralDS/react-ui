@@ -95,6 +95,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -162,8 +166,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -399,6 +403,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -466,8 +474,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -758,6 +766,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -825,8 +837,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -1053,6 +1065,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -1120,8 +1136,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -1403,6 +1419,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -1470,8 +1490,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -1697,6 +1717,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -1764,8 +1788,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -2046,6 +2070,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -2113,8 +2141,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
@@ -2340,6 +2368,10 @@ fieldset[data-dimension='s'] .c8.c8 {
   flex: 0 0 auto;
 }
 
+fieldset:disabled .c2.c2 {
+  cursor: not-allowed;
+}
+
 fieldset[data-dimension='s'] .c2 {
   width: 16px;
 }
@@ -2407,8 +2439,8 @@ fieldset[data-dimension='s'] .c2 {
 }
 
 .c4:disabled {
-  cursor: not-allowed;
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .c4:disabled+.c5 {
