@@ -35,10 +35,10 @@ test.describe('TimePicker - basic interactions', () => {
 
     await input.click();
     // Вводим символы по одному с задержкой, чтобы маска успевала отработать
-    await input.type('3', { delay: 100 });
+    await input.type('3', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('7', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('7', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('03:07');
   });
 
@@ -50,17 +50,17 @@ test.describe('TimePicker - basic interactions', () => {
     await expect(input).toHaveAttribute('placeholder', 'чч:мм');
 
     await input.click();
-    await input.type('3', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('3', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('03');
 
-    await input.type('2', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('2', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('03:2');
 
     await input.fill('');
-    await input.type('3', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('3', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('03');
   });
 
@@ -72,31 +72,31 @@ test.describe('TimePicker - basic interactions', () => {
     await expect(input).toHaveAttribute('placeholder', 'чч:мм');
 
     await input.click();
-    await input.type('2', { delay: 100 });
+    await input.type('2', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('3', { delay: 100 });
+    await input.type('3', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('3', { delay: 100 });
+    await input.type('3', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('0', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('0', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('23:30');
 
     await input.fill('');
-    await input.type('2', { delay: 100 });
+    await input.type('2', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('4', { delay: 100 });
+    await input.type('4', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('5', { delay: 100 });
+    await input.type('5', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('6', { delay: 100 });
+    await input.type('6', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('7', { delay: 100 });
+    await input.type('7', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('8', { delay: 100 });
+    await input.type('8', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('9', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('9', { delay: 50 });
+    await page.waitForTimeout(50);
     await expect(input).toHaveValue('2');
   });
 });

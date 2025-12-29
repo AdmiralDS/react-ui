@@ -332,29 +332,39 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       // Проверяем, был ли клик на интерактивных элементах (кнопки, иконки)
       const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
 
-      // Проверяем, был ли клик на самой маске InputLine (input элемент или его контейнер)
-      // InputLine имеет структуру: InputLineContainer > InputContainer > input
-      // Нужно проверить, что клик был внутри InputLineContainer, который содержит input
-      const isClickOnInputLine =
-        inputRef.current &&
-        (clickedElement === inputRef.current ||
-          inputRef.current.contains(clickedElement) ||
-          (clickedElement.tagName === 'INPUT' && clickedElement === inputRef.current) ||
-          // Проверяем, что клик был на контейнере InputLine (InputLineContainer или его дочерних элементах)
-          (inputRef.current.parentElement &&
-            (inputRef.current.parentElement.contains(clickedElement) || clickedElement.contains(inputRef.current))));
-
-      // Если клик на InputLine и инпут не readOnly - не открываем дропдаун (позволяем редактировать)
-      if (isClickOnInputLine && !props.readOnly) {
-        return;
-      }
-
       // Если клик на интерактивных элементах (кнопки) - они сами обработают клик
       if (isClickOnInteractiveElement) {
         return;
       }
 
-      // Во всех остальных случаях (падинги, область между InputLine и IconPanel, readOnly InputLine) - открываем дропдаун
+      const isClickOnInputLine = (() => {
+        if (!inputRef.current) {
+          return false;
+        }
+
+        if (clickedElement === inputRef.current || clickedElement.tagName === 'INPUT') {
+          return true;
+        }
+
+        const inputRect = inputRef.current.getBoundingClientRect();
+        const clickX = e.clientX;
+        const clickY = e.clientY;
+
+        const isWithinInputBounds =
+          clickX >= inputRect.left &&
+          clickX <= inputRect.right &&
+          clickY >= inputRect.top &&
+          clickY <= inputRect.bottom;
+
+        const isClickOnInputChildren = inputRef.current.contains(clickedElement);
+
+        return isWithinInputBounds || isClickOnInputChildren;
+      })();
+
+      if (isClickOnInputLine && !props.readOnly) {
+        return;
+      }
+
       handleButtonClick(e);
     };
 
@@ -364,7 +374,6 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       const clearInputIconButtonProps = {
         icon: CloseOutlineSvg,
         onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-          // запрет на перемещение фокуса при клике по иконке
           e.preventDefault();
         },
         onClick: () => {

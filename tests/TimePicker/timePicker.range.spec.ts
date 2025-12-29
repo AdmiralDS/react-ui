@@ -56,16 +56,16 @@ test.describe('TimePicker - range constraints', () => {
 
     // Вводим disabled значение вручную
     await input.click();
-    await input.type('1', { delay: 100 });
+    await input.type('1', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('2', { delay: 100 });
+    await input.type('2', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type(':', { delay: 100 });
+    await input.type(':', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('3', { delay: 100 });
+    await input.type('3', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('0', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('0', { delay: 50 });
+    await page.waitForTimeout(50);
 
     // Проверяем, что значение введено
     await expect(input).toHaveValue('12:30');

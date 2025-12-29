@@ -7,7 +7,7 @@ test.describe('TimePicker - dropdown and selection', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
-    await expect(input).toBeVisible({ timeout: 5000 });
+    await expect(input).toBeVisible({ timeout: 1000 });
     await expect(input).toBeVisible();
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
@@ -22,17 +22,31 @@ test.describe('TimePicker - dropdown and selection', () => {
     await expect(input).toHaveValue('09:00');
   });
 
-  // test('dropdown closes on outside click', async ({ page }) => {
-  //   await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
-  //   const frame = getStorybookFrameLocator(page);
+  test('dropdown closes on outside click', async ({ page }) => {
+    await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
+    const frame = getStorybookFrameLocator(page);
 
-  //   const iconButton = frame.locator('.time-picker-icon-panel svg').last();
-  //   await clickAndWait(iconButton, page);
+    const iconButton = frame.locator('.time-picker-icon-panel svg').last();
+    await clickAndWait(iconButton, page);
 
-  //   const dropdown = frame.locator('.dropContainerClass');
-  //   await expect(dropdown).toBeVisible();
+    const dropdown = frame.locator('.dropContainerClass');
+    await expect(dropdown).toBeVisible();
 
-  //   await page.mouse.click(5, 5);
-  //   await expect(dropdown).not.toBeVisible({ timeout: 1000 });
-  // });
+    const inputBox = frame.locator('.time-picker-container');
+    await inputBox.click({ position: { x: 4, y: 10 } });
+    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+
+    await clickAndWait(iconButton, page);
+    await expect(dropdown).toBeVisible();
+
+    const iconPanel = frame.locator('.time-picker-icon-panel');
+    const panelBox = await iconPanel.boundingBox();
+    if (!panelBox) throw new Error('Icon panel bounding box not found');
+    // Кликаем в правый паддинг панели IconPanelAfter, чтобы не попасть по svg
+    const paddingX = panelBox.x + panelBox.width - 2;
+    const paddingY = panelBox.y + panelBox.height / 2;
+    await page.mouse.click(paddingX, paddingY);
+
+    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+  });
 });
