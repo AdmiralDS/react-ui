@@ -201,38 +201,26 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     };
 
     const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-      // Не обрабатываем, если инпут disabled или skeleton
       if (disabled || skeleton) {
         return;
       }
 
       const clickedElement = e.target as HTMLElement;
 
-      // Проверяем, был ли клик на интерактивных элементах (кнопки, иконки)
       const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
-
-      // Проверяем, был ли клик на самой маске InputLine (input элемент или его контейнер)
-      // TextInput использует обычный input внутри контейнера
-      const isClickOnInputLine =
-        inputRef.current &&
-        (clickedElement === inputRef.current ||
-          inputRef.current.contains(clickedElement) ||
-          (clickedElement.tagName === 'INPUT' && clickedElement === inputRef.current) ||
-          // Проверяем, что клик был на контейнере input или его дочерних элементах
-          (inputRef.current.parentElement &&
-            (inputRef.current.parentElement.contains(clickedElement) || clickedElement.contains(inputRef.current))));
-
-      // Если клик на InputLine и инпут не readOnly - не открываем дропдаун (позволяем редактировать)
-      if (isClickOnInputLine && !props.readOnly) {
-        return;
-      }
-
-      // Если клик на интерактивных элементах (кнопки) - они сами обработают клик
       if (isClickOnInteractiveElement) {
         return;
       }
 
-      // Во всех остальных случаях (падинги, область между InputLine и IconPanel, readOnly InputLine) - открываем дропдаун
+      const isClickOnInput =
+        !!inputRef.current &&
+        (clickedElement === inputRef.current ||
+          clickedElement.closest('.text-input-native-input') === inputRef.current);
+
+      if (isClickOnInput && !props.readOnly) {
+        return;
+      }
+
       handleButtonClick();
     };
 
