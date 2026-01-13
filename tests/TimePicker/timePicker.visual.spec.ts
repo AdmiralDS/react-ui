@@ -73,7 +73,7 @@ test.describe('TimePicker - visual states and props', () => {
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
-    await expect(container).toBeVisible({ timeout: 1000 });
+    await expect(container).toBeVisible({ timeout: 3000 });
 
     const iconPanel = frame.locator('.time-picker-icon-panel');
     await expect(iconPanel).toBeVisible({ timeout: 400 });

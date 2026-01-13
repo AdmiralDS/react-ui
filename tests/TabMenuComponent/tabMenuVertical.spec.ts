@@ -8,7 +8,7 @@ test('basic render', async ({ page }) => {
   const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
   await expect(tabMenu).toBeVisible();
   // ждем, пока подгрузятся шрифты и пройдет вся анимация
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(200);
 
   const overflowMenu = frame.locator('.overflow-menu-button-with-dropdown');
   await expect(overflowMenu).toBeVisible();
