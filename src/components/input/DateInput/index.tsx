@@ -116,7 +116,6 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       locale,
       onDateIncreaseDecrease,
       dimension = 'm',
-      disabled = false,
       onBeforeInput = preventUseUnsupportedCharacters,
       renderBottomPanel,
       onKeyDown,
@@ -201,7 +200,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     };
 
     const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (disabled || skeleton) {
+      if (props.disabled || skeleton) {
         return;
       }
 
