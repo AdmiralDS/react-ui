@@ -17,7 +17,7 @@ test.describe('TimePicker - data attributes and states', () => {
     await expect(dropdown).toBeVisible();
 
     const disabledItem = dropdown.locator('[data-disabled="true"]').filter({ hasText: '12:30' }).first();
-    await expect(disabledItem).toBeVisible({ timeout: 400 });
+    await expect(disabledItem).toBeVisible({ timeout: 50 });
     await expect(disabledItem).toHaveAttribute('data-disabled', 'true');
 
     await disabledItem.click();

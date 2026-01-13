@@ -7,7 +7,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.text-input-native-input');
-    await expect(input).toBeVisible({ timeout: 1000 });
+    await expect(input).toBeVisible({ timeout: 3000 });
 
     const iconButton = frame.locator('[data-role="icon-pane-after"] svg').last();
     await clickAndWait(iconButton, page);
@@ -36,7 +36,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const inputBox = await input.boundingBox();
     if (!inputBox) throw new Error('Input bounding box not found');
     await page.mouse.click(inputBox.x - 8, inputBox.y + inputBox.height / 2);
-    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+    await expect(dropdown).not.toBeVisible({ timeout: 100 });
 
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
@@ -48,6 +48,6 @@ test.describe('DateInput - dropdown and selection', () => {
     const paddingY = panelBox.y + panelBox.height / 2;
     await page.mouse.click(paddingX, paddingY);
 
-    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+    await expect(dropdown).not.toBeVisible({ timeout: 100 });
   });
 });

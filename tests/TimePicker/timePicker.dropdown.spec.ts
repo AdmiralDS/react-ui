@@ -7,8 +7,7 @@ test.describe('TimePicker - dropdown and selection', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
-    await expect(input).toBeVisible({ timeout: 1000 });
-    await expect(input).toBeVisible();
+    await expect(input).toBeVisible({ timeout: 3000 });
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
     await clickAndWait(iconButton, page);
@@ -34,7 +33,7 @@ test.describe('TimePicker - dropdown and selection', () => {
 
     const inputBox = frame.locator('.time-picker-container');
     await inputBox.click({ position: { x: 4, y: 10 } });
-    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+    await expect(dropdown).not.toBeVisible({ timeout: 50 });
 
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
@@ -47,6 +46,6 @@ test.describe('TimePicker - dropdown and selection', () => {
     const paddingY = panelBox.y + panelBox.height / 2;
     await page.mouse.click(paddingX, paddingY);
 
-    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+    await expect(dropdown).not.toBeVisible({ timeout: 100 });
   });
 });

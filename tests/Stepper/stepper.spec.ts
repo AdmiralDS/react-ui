@@ -238,14 +238,14 @@ test.describe('Stepper Component', () => {
 
     // Изменяем размер окна
     await page.setViewportSize({ width: 400, height: 600 });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(50);
 
     const resizedBox = await stepper.boundingBox();
     expect(resizedBox!.width).toBeLessThan(initialBox!.width);
 
     // Возвращаем размер окна
     await page.setViewportSize({ width: 1200, height: 800 });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(50);
 
     const restoredBox = await stepper.boundingBox();
     expect(restoredBox!.width).toBeGreaterThan(resizedBox!.width);
