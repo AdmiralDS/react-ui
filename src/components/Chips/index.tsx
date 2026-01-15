@@ -57,6 +57,9 @@ export interface ChipsProps extends React.HTMLAttributes<HTMLDivElement> {
   iconAfter?: React.ReactNode;
   /** Число, которое будет отображено в компоненте Badge справа от content */
   badge?: number;
+
+  /** Только для чтения */
+  readOnly?: boolean;
 }
 
 export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
@@ -74,6 +77,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
       iconStart,
       iconEnd,
       badge,
+      readOnly,
       ...props
     },
     ref,
@@ -165,11 +169,12 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
             $disabled={disabled}
             $appearance={appearance}
             $selected={selected}
-            $withCloseIcon={withCloseIcon}
+            //
+            $withCloseIcon={readOnly || withCloseIcon}
           >
             {(iconStart || iconBefore) && (
               <IconStartWrapperStyled>
-                <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={readOnly || withCloseIcon}>
                   {iconStart ? iconStart : iconBefore}
                 </IconWrapperStyled>
               </IconStartWrapperStyled>
@@ -180,14 +185,14 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
                 {badge}
               </StyledBadge>
             )}
-            {!onClose && (iconEnd || iconAfter) && (
+            {!withCloseIcon && (iconEnd || iconAfter) && (
               <IconEndWrapperStyled $dimension={dimension}>
-                <IconWrapperStyled $dimension={dimension} $withCloseIcon={withCloseIcon}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={readOnly || withCloseIcon}>
                   {iconEnd ? iconEnd : iconAfter}
                 </IconWrapperStyled>
               </IconEndWrapperStyled>
             )}
-            {onClose && (
+            {withCloseIcon && (
               <CloseIconButton
                 dimension={dimension === 'm' ? 'mBig' : 's'}
                 highlightFocus={false}
