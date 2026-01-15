@@ -53,6 +53,10 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
       current.setHours(0, 0, 0, 0);
       if (viewDate) {
         return viewDate;
+      } else if (range && startDate) {
+        return startDate;
+      } else if (range && endDate) {
+        return endDate;
       } else if (selected) {
         return selected;
       } else if (minDate && before(current, minDate)) {
@@ -99,11 +103,17 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     }, [selected]);
 
     useEffect(() => {
-      if (range && startDate) {
-        changeYear(startDate.getFullYear());
-        changeMonth(startDate.getMonth());
+      if (!range || viewDate) {
+        return;
       }
-    }, []);
+      if (startDate) {
+        handleViewDateChange(startDate);
+        return;
+      }
+      if (endDate) {
+        handleViewDateChange(endDate);
+      }
+    }, [range, startDate, endDate, viewDate]);
 
     useEffect(() => {
       yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
