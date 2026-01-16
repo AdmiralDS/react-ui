@@ -160,7 +160,7 @@ test.describe('Stepper Advanced Features', () => {
 
     for (let i = 0; i < 3; i++) {
       await clickAndWait(nextButton, page);
-      await page.waitForTimeout(200); // Даем время на анимацию скролла
+      await page.waitForTimeout(50); // Даем время на анимацию скролла
 
       // Проверяем, что скролл изменился (используем более мягкое сравнение)
       const currentScrollLeft = await scrollContainer.evaluate((el) => el.scrollLeft);

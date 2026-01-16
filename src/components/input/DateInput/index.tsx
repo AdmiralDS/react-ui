@@ -199,6 +199,30 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       setCalendarOpen(!isCalendarOpen);
     };
 
+    const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (props.disabled || skeleton) {
+        return;
+      }
+
+      const clickedElement = e.target as HTMLElement;
+
+      const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
+      if (isClickOnInteractiveElement) {
+        return;
+      }
+
+      const isClickOnInput =
+        !!inputRef.current &&
+        (clickedElement === inputRef.current ||
+          clickedElement.closest('.text-input-native-input') === inputRef.current);
+
+      if (isClickOnInput && !props.readOnly) {
+        return;
+      }
+
+      handleButtonClick();
+    };
+
     const iconArray = Children.toArray(iconsAfter || icons);
     if (!props.readOnly) {
       iconArray.push(<InputIconButton icon={icon} onClick={handleButtonClick} tabIndex={0} />);
@@ -222,6 +246,10 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
         iconsAfter={iconArray}
         containerRef={inputContainerRef}
         skeleton={skeleton}
+        containerPropsConfig={(containerProps) => ({
+          ...containerProps,
+          onMouseDown: handleContainerMouseDown,
+        })}
       >
         {isCalendarOpen && !skeleton && (
           <StyledDropdownContainer

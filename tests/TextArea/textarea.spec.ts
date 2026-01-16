@@ -45,7 +45,7 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Ждём, пока высота изменится
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 1000 })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 50 })
       .toBeGreaterThan(initialHeight);
 
     // Дополнительно проверяем через toHaveCSS, что высота действительно увеличилась
@@ -127,7 +127,7 @@ test('native undo works', async ({ page, browserName }) => {
   await textarea.click();
   // имитируем ввод с клавиатуры по одному символу
   await textarea.pressSequentially('hello');
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(50);
 
   const valueBeforeUndo = await textarea.inputValue();
   await page.keyboard.press(UNDO_SHORTCUT);

@@ -199,6 +199,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     const [isOpened, setIsOpened] = useState<boolean>(false);
     const [overflowActive, setOverflowActive] = useState<boolean>(false);
     const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
+    const iconPanelAfterRef = useRef<HTMLDivElement>(null);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       const code = keyboardKey.getCode(event);
@@ -320,13 +321,59 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       setIsOpened(!isOpened);
     };
 
+    const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+      // Не обрабатываем, если инпут disabled или skeleton
+      if (disabled || skeleton || !availableSlots) {
+        return;
+      }
+
+      const clickedElement = e.target as HTMLElement;
+
+      // Проверяем, был ли клик на интерактивных элементах (кнопки, иконки)
+      const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
+
+      // Если клик на интерактивных элементах (кнопки) - они сами обработают клик
+      if (isClickOnInteractiveElement) {
+        return;
+      }
+
+      const isClickOnInputLine = (() => {
+        if (!inputRef.current) {
+          return false;
+        }
+
+        if (clickedElement === inputRef.current || clickedElement.tagName === 'INPUT') {
+          return true;
+        }
+
+        const inputRect = inputRef.current.getBoundingClientRect();
+        const clickX = e.clientX;
+        const clickY = e.clientY;
+
+        const isWithinInputBounds =
+          clickX >= inputRect.left &&
+          clickX <= inputRect.right &&
+          clickY >= inputRect.top &&
+          clickY <= inputRect.bottom;
+
+        const isClickOnInputChildren = inputRef.current.contains(clickedElement);
+
+        return isWithinInputBounds || isClickOnInputChildren;
+      })();
+
+      if (isClickOnInputLine && !props.readOnly) {
+        return;
+      }
+
+      handleButtonClick(e);
+    };
+
     const iconArray = React.Children.toArray(iconsAfter);
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
         icon: CloseOutlineSvg,
         onMouseDown: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-          // запрет на перемещение фокуса при клике по иконке
           e.preventDefault();
         },
         onClick: () => {
@@ -553,6 +600,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       'data-disable-copying': disableCopying ? true : undefined,
       className: 'time-picker-container',
       ref: inputContainerRef,
+      onMouseDown: handleContainerMouseDown,
     };
 
     const inputLineProps = {
@@ -573,7 +621,12 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         <InputBox {...containerProps} {...containerPropsConfig(containerProps)}>
           <InputLine {...inputLineProps} {...inputLinePropsConfig(inputLineProps)} />
           {iconArray.length > 0 && (
-            <IconPanelAfter disabled={disabled} $dimension={dimension} className="time-picker-icon-panel">
+            <IconPanelAfter
+              ref={iconPanelAfterRef}
+              disabled={disabled}
+              $dimension={dimension}
+              className="time-picker-icon-panel"
+            >
               {iconArray}
             </IconPanelAfter>
           )}

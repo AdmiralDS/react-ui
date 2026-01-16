@@ -9,7 +9,7 @@ test.describe('TimePicker - visual states and props', () => {
     const input = frame.locator('.time-picker-native-input');
     await input.click();
     await input.fill('12:30');
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(50);
 
     const clearIcon = frame.locator('.time-picker-icon-panel svg').first();
     await expect(clearIcon).toBeVisible();
@@ -36,14 +36,14 @@ test.describe('TimePicker - visual states and props', () => {
 
     // Вводим disabled значение
     await input.click();
-    await input.type('1', { delay: 100 });
+    await input.type('1', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('2', { delay: 100 });
+    await input.type('2', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('3', { delay: 100 });
+    await input.type('3', { delay: 50 });
     await page.waitForTimeout(50);
-    await input.type('0', { delay: 100 });
-    await page.waitForTimeout(100);
+    await input.type('0', { delay: 50 });
+    await page.waitForTimeout(50);
 
     // Проверяем визуальный статус error
     await expect(container).toHaveAttribute('data-status', 'error');
@@ -73,10 +73,10 @@ test.describe('TimePicker - visual states and props', () => {
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
-    await expect(container).toBeVisible({ timeout: 10000 });
+    await expect(container).toBeVisible({ timeout: 3000 });
 
     const iconPanel = frame.locator('.time-picker-icon-panel');
-    await expect(iconPanel).toBeVisible({ timeout: 5000 });
+    await expect(iconPanel).toBeVisible({ timeout: 400 });
     await page.waitForTimeout(500);
 
     const iconButtons = iconPanel.locator('> *');
@@ -151,6 +151,6 @@ test.describe('TimePicker - visual states and props', () => {
 
     await input.click();
     await input.fill('2359');
-    await page.waitForTimeout(100);
+    await page.waitForTimeout(50);
   });
 });
