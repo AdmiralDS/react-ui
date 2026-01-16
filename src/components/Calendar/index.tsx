@@ -95,15 +95,12 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     }, [currentActiveView]);
 
     useEffect(() => {
-      handleViewDateChange(getInitialViewDate());
-    }, [selected]);
-
-    useEffect(() => {
-      if (range && startDate) {
-        changeYear(startDate.getFullYear());
-        changeMonth(startDate.getMonth());
+      if (selected) {
+        handleViewDateChange(selected);
+      } else if (range && startDate) {
+        handleViewDateChange(startDate);
       }
-    }, []);
+    }, [selected, range, startDate]);
 
     useEffect(() => {
       yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
