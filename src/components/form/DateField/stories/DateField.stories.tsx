@@ -11,9 +11,11 @@ import {
 import { DataAttributesDescription } from '#src/components/form/common';
 
 import { DateFieldBaseTemplate } from './DateFieldBase.template';
+import { DateFieldWithButtonTodayTemplate } from './DateFieldWithButtonToday.template';
 
 // Imports of text sources
 import DateFieldBaseRaw from './DateFieldBase.template?raw';
+import DateFieldWithButtonTodayRaw from './DateFieldWithButtonToday.template?raw';
 
 export default {
   title: 'Admiral-2.1/Form Field/DateField',
@@ -173,3 +175,24 @@ export const DateFieldBase = {
 
   name: 'DateField example',
 };
+
+//<editor-fold desc="DateField with button Today">
+const DateFieldWithButtonTodayStory: StoryFn<typeof DateField> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateFieldWithButtonTodayTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const DateFieldWithButtonToday = {
+  render: DateFieldWithButtonTodayStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateFieldWithButtonTodayRaw,
+      },
+    },
+  },
+
+  name: 'DateField с кнопкой "Сегодня"',
+};
+//</editor-fold>
