@@ -669,6 +669,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (!isFocused) {
         setIsFocused(true);
         onFocusFromProps?.(evt);
+        setIsSearchPanelOpen(true);
       }
     };
 
