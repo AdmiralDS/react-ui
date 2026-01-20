@@ -261,8 +261,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onFocus: onFocusFromProps,
       onBlur: onBlurFromProps,
       children,
-      alignDropdown = 'stretch',
-      alignSelf = 'stretch',
+      alignDropdown,
+      alignSelf,
       skeleton = false,
       locale,
       dropContainerCssMixin,
@@ -911,7 +911,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             tabIndex={-1}
             targetElement={targetNode}
             data-dimension={dimension}
-            alignSelf={alignDropdown || alignSelf}
+            alignSelf={alignSelf || alignDropdown || 'stretch'}
             dropContainerCssMixin={dropContainerCssMixin}
             className={dropContainerClassName}
             style={dropContainerStyle}
