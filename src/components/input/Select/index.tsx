@@ -633,7 +633,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         const modifyKeyPressed = evt.ctrlKey || evt.metaKey || evt.altKey;
 
-        if (evt.key.length === 1 && !modifyKeyPressed) extendSelectValueToInputValue();
+        if (evt.key.length === 1 && !modifyKeyPressed) {
+          if (!isSearchPanelOpen) {
+            setIsSearchPanelOpen(true);
+          }
+          extendSelectValueToInputValue();
+        }
         if (code === keyboardKey.Backspace && !evt.repeat) deleteOrHideSelectValueOnBackspace();
         if (code === keyboardKey.Backspace) {
           narrowSelectValueToInputValue(evt);
@@ -669,7 +674,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       if (!isFocused) {
         setIsFocused(true);
         onFocusFromProps?.(evt);
-        setIsSearchPanelOpen(true);
       }
     };
 
