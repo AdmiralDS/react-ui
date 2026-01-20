@@ -93,6 +93,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "babel-plugin-styled-components": "^2.1.4",
     "dayjs": "^1.11.13",
+    "dotenv": "^17.2.3",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
