@@ -20,7 +20,7 @@ jobs:
       - name: Upload Docs Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: docs/current
   tests-e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest
