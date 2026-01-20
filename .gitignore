@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+docs
 dist
 dist-ssr
 *.local
@@ -17,3 +18,4 @@ bun.lockb
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+.env
