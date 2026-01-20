@@ -167,7 +167,7 @@ const IconPanel = styled.div<{ disabled?: boolean; $dimension?: ComponentDimensi
 `;
 const IconPanelBefore = styled(IconPanel)`
   margin-right: 8px;
-  & > *:not(:first-child) {
+  & > *:not(:last-child) {
     margin-right: 8px;
   }
 `;

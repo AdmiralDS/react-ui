@@ -35,6 +35,7 @@ export const TextInputWithIconTemplate = ({
   const [localValue2, setValue2] = useState<string>(String(value) ?? '');
   const [localValue3, setValue3] = useState<string>(String(value) ?? '');
   const [localValue4, setValue4] = useState<string>(String(value) ?? '');
+  const [localValue5, setValue5] = useState<string>(String(value) ?? '');
 
   const handleChange1 = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -56,11 +57,17 @@ export const TextInputWithIconTemplate = ({
     setValue4(inputValue);
     props.onChange?.(e);
   };
+  const handleChange5 = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue5(inputValue);
+    props.onChange?.(e);
+  };
 
   const informerInput1Ref = useRef<HTMLDivElement>(null);
   const informerInput2Ref = useRef<HTMLDivElement>(null);
   const informerInput3Ref = useRef<HTMLDivElement>(null);
   const informerInput4Ref = useRef<HTMLDivElement>(null);
+  const informerInput5Ref = useRef<HTMLDivElement>(null);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -111,7 +118,7 @@ export const TextInputWithIconTemplate = ({
           }
         />
         <T font="Body/Body 1 Long" as="div">
-          Поле ввода с иконкой слева:
+          Поле ввода с одной иконкой слева:
         </T>
         <TextInput
           {...props}
@@ -120,6 +127,23 @@ export const TextInputWithIconTemplate = ({
           placeholder={placeholder}
           onChange={handleChange4}
           iconsBefore={<InputIcon text="Icon before" />}
+        />
+        <T font="Body/Body 1 Long" as="div">
+          Поле ввода с тремя иконкой слева:
+        </T>
+        <TextInput
+          {...props}
+          containerRef={informerInput5Ref}
+          value={localValue5}
+          placeholder={placeholder}
+          onChange={handleChange5}
+          iconsBefore={
+            <>
+              <InputIcon text="Icon before" />
+              <InputIcon text="Second icon before" />
+              <InputIcon text="Third icon before" />
+            </>
+          }
         />
       </DisplayContainer>
     </ThemeProvider>

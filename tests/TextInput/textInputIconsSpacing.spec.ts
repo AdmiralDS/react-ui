@@ -37,4 +37,34 @@ test.describe('TextInput icons spacing', () => {
       expect(panelBox.x).toBeGreaterThanOrEqual(safeTextAreaEnd - 1);
     }
   });
+
+  test('reserves space for leading icons and keeps text readable', async ({ page }) => {
+    await page.goto(STORY_PATH);
+    const frame = getStorybookFrameLocator(page);
+
+    // Пятый инпут в истории — с тремя иконками слева
+    const targetInput = frame.locator('.text-input-native-input').nth(4);
+    await targetInput.click();
+    await targetInput.fill(
+      'Очень длинный текст для проверки того, что слева достаточно места и иконки не перекрывают ввод',
+    );
+
+    const container = targetInput.locator('xpath=..');
+    const iconPanel = container.locator('[data-role="icon-pane-before"]');
+    await expect(iconPanel).toHaveCount(1);
+
+    const iconButtons = iconPanel.locator(':scope > *');
+    await expect(iconButtons).toHaveCount(3);
+
+    const paddingLeft = await targetInput.evaluate((el) => parseFloat(window.getComputedStyle(el).paddingLeft || '0'));
+    expect(paddingLeft).toBeGreaterThanOrEqual(112); // 16 + (24 + 8) * 3 = 112px
+
+    const [inputBox, panelBox] = await Promise.all([targetInput.boundingBox(), iconPanel.boundingBox()]);
+    expect(inputBox && panelBox).toBeTruthy();
+
+    if (inputBox && panelBox) {
+      const safeTextAreaStart = inputBox.x + paddingLeft;
+      expect(panelBox.x + panelBox.width).toBeLessThanOrEqual(safeTextAreaStart + 1);
+    }
+  });
 });

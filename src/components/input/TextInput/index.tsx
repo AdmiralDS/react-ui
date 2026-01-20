@@ -235,7 +235,7 @@ const IconPanelBefore = styled(IconPanel)`
 
   padding-left: ${horizontalPaddingValue}px;
 
-  & > *:not(:first-child) {
+  & > *:not(:last-child) {
     margin-right: 8px;
   }
 `;
