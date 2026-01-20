@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.59.1](https://github.com/AdmiralDS/react-ui/compare/v8.59.0...v8.59.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Calendar:** исправлена рассинхронизацию месяца и года в режиме range ([06a37fe](https://github.com/AdmiralDS/react-ui/commit/06a37fee42f256fd8184bd05751c484e525c8541))
+* **FieldSet:** fix cursor in state disabled ([4da6e59](https://github.com/AdmiralDS/react-ui/commit/4da6e599a4c3a43336e9e60031277488e10eb709))
+* **Select:** [#1947](https://github.com/AdmiralDS/react-ui/issues/1947) исправлен баг с неправильной работой параметра alignSelf ([142a631](https://github.com/AdmiralDS/react-ui/commit/142a631a3829a204f6c37a7e5a8398df3ea87f00))
+* **Select:** Исправлена ошибка невозомжности установить курсор мышкой внутри поля поиска ([1a04adc](https://github.com/AdmiralDS/react-ui/commit/1a04adc66e892b982c4ccdef6be3234b9c57a8cf))
+* **Select:** Исправлена проблема с вводом значения в Select по переключению на поле через Tab ([4878ddf](https://github.com/AdmiralDS/react-ui/commit/4878ddf1c7e8a806a216e1605ce792e5df3a4c71)), closes [#1929](https://github.com/AdmiralDS/react-ui/issues/1929)
+* **SelectField:** readOnly style chips fixed ([fde01c2](https://github.com/AdmiralDS/react-ui/commit/fde01c2859c5f2e085069ee8341d6aaa37e3061d))
+* **SelectField:** readOnly style chips fixed ([51070e9](https://github.com/AdmiralDS/react-ui/commit/51070e9392615c99f1e87536bb20267219e18742))
+* **Select:** focus in select mode searchSelect fixed ([c83eb82](https://github.com/AdmiralDS/react-ui/commit/c83eb822923fc267b343e7bab6ed2450023dbf1c))
+
 ## [8.59.0](https://github.com/AdmiralDS/react-ui/compare/v8.58.0...v8.59.0) (2025-12-22)
 
 
