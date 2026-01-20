@@ -835,6 +835,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       'aria-hidden': true,
     } satisfies React.ComponentProps<typeof OpenStatusButton>;
 
+    const handleWrapperMouseDown = (e: React.MouseEvent) => {
+      if (isFocused && e.target !== inputRef.current) {
+        e.preventDefault();
+      }
+    };
+
     return (
       <SelectWrapper
         className={className}
@@ -850,12 +856,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         data-status={status}
         onClick={disabled || readOnly || isLoading ? undefined : handleWrapperClick}
         onFocus={onFocus}
-        onMouseDown={(e) => {
-          // если компонент в фокусе (курсор на инпуте) то необходимо отменить уход фокуса с инпута при клике на рамку инпута
-          if (isFocused) {
-            e.preventDefault();
-          }
-        }}
+        onMouseDown={handleWrapperMouseDown}
         $skeleton={skeleton}
         onBlur={handleWrapperBlur}
         title={title}
