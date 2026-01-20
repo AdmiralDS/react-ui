@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { DEFAULT_YEAR_COUNT } from './constants';
 import { getDefaultDateValidator } from './validator';
 import { DayNames, Month, Months, Panel, Years } from './components';
@@ -48,15 +48,17 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     },
     ref,
   ) => {
+    const rangeStartDate = range ? startDate : null;
+    const rangeEndDate = range ? endDate : null;
     const getInitialViewDate = () => {
       const current = new Date();
       current.setHours(0, 0, 0, 0);
       if (viewDate) {
         return viewDate;
-      } else if (range && startDate) {
-        return startDate;
-      } else if (range && endDate) {
-        return endDate;
+      } else if (rangeStartDate) {
+        return rangeStartDate;
+      } else if (rangeEndDate) {
+        return rangeEndDate;
       } else if (selected) {
         return selected;
       } else if (minDate && before(current, minDate)) {
@@ -69,7 +71,15 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     };
 
     // дата, которую отображаем (в том числе в верхней панели)
-    const [viewDateState, setViewDateState] = useState(getInitialViewDate());
+    const initialViewDate = useMemo(getInitialViewDate, [
+      viewDate,
+      rangeStartDate,
+      rangeEndDate,
+      selected,
+      minDate,
+      maxDate,
+    ]);
+    const [viewDateState, setViewDateState] = useState(initialViewDate);
     const viewDateInner = viewDate ?? viewDateState;
     const handleViewDateChange = (newDate: Date) => {
       setViewDateState(newDate);
@@ -99,21 +109,11 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarPropType>(
     }, [currentActiveView]);
 
     useEffect(() => {
-      handleViewDateChange(getInitialViewDate());
-    }, [selected]);
-
-    useEffect(() => {
-      if (!range || viewDate) {
+      if (viewDate) {
         return;
       }
-      if (startDate) {
-        handleViewDateChange(startDate);
-        return;
-      }
-      if (endDate) {
-        handleViewDateChange(endDate);
-      }
-    }, [range, startDate, endDate, viewDate]);
+      handleViewDateChange(initialViewDate);
+    }, [initialViewDate, viewDate]);
 
     useEffect(() => {
       yearsView ? onViewEnter && onViewEnter('YEAR') : onViewLeave && onViewLeave('YEAR');
