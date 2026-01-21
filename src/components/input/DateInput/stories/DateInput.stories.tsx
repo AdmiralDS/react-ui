@@ -12,6 +12,7 @@ import { DateInputPickMonthTemplate } from './DateInputPickMonth.template';
 import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.template';
 import { DateInputSpecialDatesTemplate } from './DateInputSpecialDates.template';
 import { DateInputWithButtonTodayTemplate } from './DateInputWithButtonToday.template';
+import { DateInputRangeTemplate } from './DateInputRange.template';
 
 // Imports of text sources
 import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
@@ -19,6 +20,7 @@ import DateInputPickMonthRaw from './DateInputPickMonth.template?raw';
 import DateInputAlternativeIconRaw from './DateInputAlternativeIcon.template?raw';
 import DateInputSpecialDatesRaw from './DateInputSpecialDates.template?raw';
 import DateInputWithButtonTodayRaw from './DateInputWithButtonToday.template?raw';
+import DateInputRangeRaw from './DateInputRange.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -268,6 +270,28 @@ export const DateInputWithButtonToday = {
   },
 
   name: 'DateInput с кнопкой "Сегодня"',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="DateInput. Выбор диапазона">
+const DateInputRangeStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputRangeTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const DateInputRange = {
+  render: DateInputRangeStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputRangeRaw,
+      },
+    },
+  },
+
+  name: 'DateInput. Выбор диапазона',
 };
 
 //</editor-fold>
