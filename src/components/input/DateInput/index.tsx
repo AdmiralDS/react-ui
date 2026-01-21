@@ -196,6 +196,9 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       if (!isCalendarOpen) {
         inputRef.current?.focus();
       }
+      if (isCalendarOpen && isDateRange && calValue && Array.isArray(calValue) && calValue.includes(null)) {
+        return;
+      }
       setCalendarOpen(!isCalendarOpen);
     };
 
