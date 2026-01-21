@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.59.2](https://github.com/AdmiralDS/react-ui/compare/v8.59.1...v8.59.2) (2026-01-21)
+
+
+### Bug Fixes
+
+* **DateInput:** исправлено закрытие календаря в режиме range после выбора первой даты ([3ed5fec](https://github.com/AdmiralDS/react-ui/commit/3ed5fecefa8526396a88db4d893f58b199cd3baa))
+
 ### [8.59.1](https://github.com/AdmiralDS/react-ui/compare/v8.59.0...v8.59.1) (2026-01-20)
 
 
