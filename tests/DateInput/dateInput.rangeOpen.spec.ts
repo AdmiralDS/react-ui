@@ -1,20 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator } from '../utils';
-
-const RU_MONTHS = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-];
+import { getStorybookFrameLocator, getCalendarPanelDate, RU_MONTHS } from '../utils';
 
 test('date-range calendar opens on selected month and year', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-dateinput--date-input-playground&args=type:date-range');
@@ -27,8 +12,9 @@ test('date-range calendar opens on selected month and year', async ({ page }) =>
 
   const panel = frame.locator('.ui-kit-calendar-panel-component');
   await expect(panel).toBeVisible();
-  await expect(panel.locator('h6').first()).toHaveText('Апрель');
-  await expect(panel.locator('h6').nth(1)).toHaveText('2024');
+  const { month, year } = await getCalendarPanelDate(panel);
+  expect(month).toBe('Апрель');
+  expect(year).toBe('2024');
 });
 
 test('date-range calendar opens on end date when start date is empty', async ({ page }) => {
@@ -42,8 +28,9 @@ test('date-range calendar opens on end date when start date is empty', async ({ 
 
   const panel = frame.locator('.ui-kit-calendar-panel-component');
   await expect(panel).toBeVisible();
-  await expect(panel.locator('h6').first()).toHaveText('Апрель');
-  await expect(panel.locator('h6').nth(1)).toHaveText('2024');
+  const { month, year } = await getCalendarPanelDate(panel);
+  expect(month).toBe('Апрель');
+  expect(year).toBe('2024');
 });
 
 test('date-range calendar respects controlled viewDate', async ({ page }) => {
@@ -70,6 +57,7 @@ test('date-range calendar respects controlled viewDate', async ({ page }) => {
   const expectedYear = String(today.getFullYear());
 
   await expect(panel).toBeVisible();
-  await expect(panel.locator('h6').first()).toHaveText(expectedMonth);
-  await expect(panel.locator('h6').nth(1)).toHaveText(expectedYear);
+  const { month, year } = await getCalendarPanelDate(panel);
+  expect(month).toBe(expectedMonth);
+  expect(year).toBe(expectedYear);
 });
