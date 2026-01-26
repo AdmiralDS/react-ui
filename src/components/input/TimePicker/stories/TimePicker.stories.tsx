@@ -101,9 +101,6 @@ export default {
     showTooltip: {
       control: { type: 'boolean' },
     },
-    icons: {
-      control: false,
-    },
     icon: {
       control: false,
     },
