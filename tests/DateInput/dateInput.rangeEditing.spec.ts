@@ -77,14 +77,14 @@ test.describe('DateInput - date-range editing and viewDate behavior', () => {
   });
 
   test('typing partial range keeps dropdown open when trying to close while end date is missing', async ({ page }) => {
-    await page.goto('/?path=/story/admiral-2-1-input-dateinput--date-input-range');
+    await page.goto('/?path=/story/admiral-2-1-input-dateinput--date-input-range&args=type:date-range');
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.text-input-native-input');
     const iconButton = frame.locator('[data-role="icon-pane-after"] svg').last();
     const dropdown = frame.locator('.dropContainerClass');
 
-    await input.fill('16.04.2024 - __.__.____');
+    await input.fill('01.04.2024 - __.__.____');
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
 
