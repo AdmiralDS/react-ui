@@ -14,7 +14,7 @@ test.describe('Stepper Advanced Features', () => {
 
     // Проверяем, что ширина шага соответствует заданной
     const stepBox = await firstStep.boundingBox();
-    expect(stepBox!.width).toBeCloseTo(200, 10);
+    expect(stepBox?.width).toBeCloseTo(200, 10);
   });
 
   test('step click with onClick handler', async ({ page }) => {
@@ -109,7 +109,7 @@ test.describe('Stepper Advanced Features', () => {
 
     // Проверяем высоту элемента
     const titleBox = await activeStepTitle.boundingBox();
-    expect(titleBox!.height).toBeLessThanOrEqual(30); // Примерная высота для одной строки
+    expect(titleBox?.height).toBeLessThanOrEqual(30); // Примерная высота для одной строки
   });
 
   test('progress mode - step navigation edge cases', async ({ page }) => {

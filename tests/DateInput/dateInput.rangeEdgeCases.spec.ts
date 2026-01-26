@@ -59,7 +59,7 @@ test.describe('DateInput - date-range edge cases', () => {
     // The previously selected end date should now be the start date
     expect(newStartDate).not.toBeNull();
     expect(newEndDate).toBeNull(); // End date should be empty
-    expect(newStartDate!.getTime()).toBeLessThan(startDate.getTime()); // New start should be before old start
+    expect(newStartDate?.getTime()).toBeLessThan(startDate.getTime()); // New start should be before old start
   });
 
   test('when startDate is changed to be after endDate, range is reset', async ({ page }) => {

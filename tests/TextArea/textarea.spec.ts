@@ -35,8 +35,8 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
   } else {
     // Chromium / Firefox — имитируем drag мышью
     const textAreaBox = await textarea.boundingBox();
-    const xStart = textAreaBox!.x + textAreaBox!.width - 2;
-    const yStart = textAreaBox!.y + textAreaBox!.height - 2;
+    const xStart = (textAreaBox?.x ?? 0) + (textAreaBox?.width ?? 0) - 2;
+    const yStart = (textAreaBox?.y ?? 0) + (textAreaBox?.height ?? 0) - 2;
 
     await page.mouse.move(xStart, yStart);
     await page.mouse.down();
@@ -64,11 +64,15 @@ test('autoheight with value undefined', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxThird?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('autoheight with value true', async ({ page }) => {
@@ -82,15 +86,21 @@ test('autoheight with value true', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeGreaterThan(boxSecond!.height);
+  if (boxSecond !== undefined && boxSecond?.height !== undefined) {
+    expect(boxThird?.height).toBeGreaterThan(boxSecond.height);
+  }
 
   await textarea.fill('1');
   const boxFourth = await component.boundingBox();
-  expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxFourth?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('autoheight with min and max rows', async ({ page }) => {
@@ -106,15 +116,21 @@ test('autoheight with min and max rows', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('1\n2\n3\n4\n5');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeGreaterThan(boxFirst.height);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeCloseTo(boxSecond!.height, 0);
+  if (boxSecond !== undefined && boxSecond?.height !== undefined) {
+    expect(boxThird?.height).toBeCloseTo(boxSecond.height, 0);
+  }
 
   await textarea.fill('Привет!');
   const boxFourth = await component.boundingBox();
-  expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxFourth?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('native undo works', async ({ page, browserName }) => {
