@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { getStorybookFrameLocator, clickAndWait, getVisibleDayIndices } from '../utils';
 
 test('date-range calendar stays open after selecting start date', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-dateinput--date-input-range');
@@ -11,15 +11,7 @@ test('date-range calendar stays open after selecting start date', async ({ page 
   await expect(dropdown).toBeVisible();
 
   const days = frame.locator('.ui-kit-calendar-day-component');
-  const dayIndices = await days.evaluateAll((elements) => {
-    return elements.reduce<number[]>((indices, el, index) => {
-      const style = window.getComputedStyle(el);
-      if (style.opacity !== '0' && style.pointerEvents !== 'none') {
-        indices.push(index);
-      }
-      return indices;
-    }, []);
-  });
+  const dayIndices = await days.evaluateAll(getVisibleDayIndices);
 
   if (dayIndices.length < 2) {
     throw new Error('Not enough clickable calendar days found');
@@ -44,7 +36,7 @@ test('date-range calendar closes after picking end date when start date is typed
   await expect(dropdown).toBeVisible();
 
   const days = frame.locator('.ui-kit-calendar-day-component');
-  const targetIndex = await days.evaluateAll((elements) => {
+  const result = await days.evaluateAll((elements) => {
     const startDay = 16;
     const visibleIndices = elements.reduce<number[]>((indices, el, index) => {
       const style = window.getComputedStyle(el);
@@ -53,13 +45,14 @@ test('date-range calendar closes after picking end date when start date is typed
       }
       return indices;
     }, []);
-    const nextIndex = visibleIndices.find((index) => {
+    const targetIndex = visibleIndices.find((index) => {
       const text = elements[index].textContent?.trim() || '';
       const day = Number(text);
       return Number.isFinite(day) && day > startDay;
     });
-    return nextIndex ?? visibleIndices[0] ?? -1;
+    return targetIndex ?? visibleIndices[0] ?? -1;
   });
+  const targetIndex = result;
 
   if (targetIndex === -1) {
     throw new Error('No clickable calendar day found');

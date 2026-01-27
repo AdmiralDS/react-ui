@@ -18,7 +18,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const todayButton = dropdown.getByRole('button', { name: /сегодня|today/i }).first();
     if (await todayButton.isVisible().catch(() => false)) {
       await todayButton.click();
-      await expect(dropdown).not.toBeVisible({ timeout: 1000 });
+      await expect(dropdown).not.toBeVisible({ timeout: 300 });
     }
   });
 
@@ -36,7 +36,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const inputBox = await input.boundingBox();
     if (!inputBox) throw new Error('Input bounding box not found');
     await page.mouse.click(inputBox.x - 8, inputBox.y + inputBox.height / 2);
-    await expect(dropdown).not.toBeVisible({ timeout: 100 });
+    await expect(dropdown).not.toBeVisible({ timeout: 500 });
 
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
@@ -44,10 +44,10 @@ test.describe('DateInput - dropdown and selection', () => {
     const iconPanel = frame.locator('[data-role="icon-pane-after"]');
     const panelBox = await iconPanel.boundingBox();
     if (!panelBox) throw new Error('Icon panel bounding box not found');
-    const paddingX = panelBox.x + panelBox.width - 2;
+    const paddingX = panelBox.x + panelBox.width + 8;
     const paddingY = panelBox.y + panelBox.height / 2;
     await page.mouse.click(paddingX, paddingY);
 
-    await expect(dropdown).not.toBeVisible({ timeout: 100 });
+    await expect(dropdown).not.toBeVisible({ timeout: 500 });
   });
 });

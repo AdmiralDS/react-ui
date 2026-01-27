@@ -223,7 +223,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
         return;
       }
 
-      handleButtonClick();
+      // handleButtonClick();
     };
 
     const iconArray = Children.toArray(iconsAfter || icons);

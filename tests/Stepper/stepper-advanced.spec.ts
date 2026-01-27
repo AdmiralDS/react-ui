@@ -14,7 +14,7 @@ test.describe('Stepper Advanced Features', () => {
 
     // Проверяем, что ширина шага соответствует заданной
     const stepBox = await firstStep.boundingBox();
-    expect(stepBox!.width).toBeCloseTo(200, 10);
+    expect(stepBox?.width).toBeCloseTo(200, 10);
   });
 
   test('step click with onClick handler', async ({ page }) => {
@@ -109,7 +109,7 @@ test.describe('Stepper Advanced Features', () => {
 
     // Проверяем высоту элемента
     const titleBox = await activeStepTitle.boundingBox();
-    expect(titleBox!.height).toBeLessThanOrEqual(30); // Примерная высота для одной строки
+    expect(titleBox?.height).toBeLessThanOrEqual(30); // Примерная высота для одной строки
   });
 
   test('progress mode - step navigation edge cases', async ({ page }) => {
@@ -274,13 +274,18 @@ test.describe('Stepper Advanced Features', () => {
     await expect(errorIcon).toBeVisible();
   });
 
-  test('warning state visual feedback', async ({ page }) => {
+  test('warning state visual feedback', async ({ page, browserName }) => {
     await page.goto('/?path=/story/admiral-2-1-stepper--step-kinds-example');
     const frame = getStorybookFrameLocator(page);
 
+    // Wait for iframe to load (WebKit needs more time)
+    if (browserName === 'webkit') {
+      await page.waitForTimeout(500);
+    }
+
     // Ищем шаг с data-warning="true"
     const warningStep = frame.locator('[data-warning="true"]');
-    await expect(warningStep).toBeVisible();
+    await expect(warningStep).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 5000 });
 
     // Проверяем, что у шага с предупреждением есть соответствующие стили
     const warningIcon = warningStep.locator('svg');

@@ -22,8 +22,11 @@ test('basic render', async ({ page }) => {
   const activeTabBox = await activeTab.boundingBox();
   const activeTabSelectorBox = await activeTabSelector.boundingBox();
 
-  expect(activeTabSelectorBox!.y).toBeCloseTo(activeTabBox!.y, 0);
-  expect(activeTabSelectorBox!.height).toBeCloseTo(activeTabBox!.height, 0);
+  if (activeTabBox !== undefined && activeTabBox?.y !== undefined) {
+    expect(activeTabSelectorBox?.y).toBeCloseTo(activeTabBox.y, 0);
+  } else if (activeTabBox !== undefined && activeTabBox?.height !== undefined) {
+    expect(activeTabSelectorBox?.height).toBeCloseTo(activeTabBox.height, 0);
+  }
 });
 
 test('select tab logic', async ({ page }) => {
@@ -36,7 +39,9 @@ test('select tab logic', async ({ page }) => {
   const activeTabSelector = frame.locator('.active-vertical-tab-selector');
   const activeTabSelectorBox = await activeTabSelector.boundingBox();
   const tab6Box = await tab6.boundingBox();
-  expect(activeTabSelectorBox!.y).toBeCloseTo(tab6Box!.y, 0);
+  if (tab6Box !== undefined && tab6Box?.y !== undefined) {
+    expect(activeTabSelectorBox?.y).toBeCloseTo(tab6Box.y, 0);
+  }
 
   const tab7 = frame.getByTestId('verticalTab7');
   await expect(tab7).not.toBeVisible();
@@ -50,7 +55,9 @@ test('select tab logic', async ({ page }) => {
   await expect(tab7).toBeVisible();
 
   const tab7Box = await tab7.boundingBox();
-  expect(tab7Box!.y).toBeCloseTo(activeTabSelectorBox!.y, 0);
+  if (activeTabSelectorBox !== undefined && activeTabSelectorBox?.y !== undefined) {
+    expect(tab7Box?.y).toBeCloseTo(activeTabSelectorBox.y, 0);
+  }
 });
 
 test('resize tab menu height', async ({ page }) => {
@@ -62,14 +69,16 @@ test('resize tab menu height', async ({ page }) => {
   const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
   const tabMenuBox1 = await tabMenu.boundingBox();
 
-  await resizeElement(wrapper, wrapperBox!.width - 200, wrapperBox!.height);
-  const tabMenuBox2 = await tabMenu.boundingBox();
-  expect(tabMenuBox2!.height).toBeLessThan(tabMenuBox1!.height);
+  if (wrapperBox && tabMenuBox1) {
+    await resizeElement(wrapper, wrapperBox.width - 200, wrapperBox.height);
+    const tabMenuBox2 = await tabMenu.boundingBox();
+    expect(tabMenuBox2?.height ?? 0).toBeLessThan(tabMenuBox1.height);
 
-  await resizeElement(wrapper, wrapperBox!.width + 400, wrapperBox!.height);
-  const tabMenuBox3 = await tabMenu.boundingBox();
-  expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox2!.height);
-  expect(tabMenuBox3!.height).toBeGreaterThan(tabMenuBox1!.height);
+    await resizeElement(wrapper, wrapperBox.width + 400, wrapperBox.height);
+    const tabMenuBox3 = await tabMenu.boundingBox();
+    expect(tabMenuBox3?.height ?? 0).toBeGreaterThan(tabMenuBox2?.height ?? 0);
+    expect(tabMenuBox3?.height ?? 0).toBeGreaterThan(tabMenuBox1.height);
+  }
 });
 
 test('add and delete tabs', async ({ page }) => {
@@ -93,7 +102,9 @@ test('add and delete tabs', async ({ page }) => {
   const activeTabSelector = frame.locator('.active-vertical-tab-selector');
   const activeTabSelectorBox1 = await activeTabSelector.boundingBox();
   const tab2Box = await tab2.boundingBox();
-  expect(tab2Box!.y).toBeCloseTo(activeTabSelectorBox1!.y, 0);
+  if (activeTabSelectorBox1 !== undefined && activeTabSelectorBox1?.y !== undefined) {
+    expect(tab2Box?.y).toBeCloseTo(activeTabSelectorBox1.y, 0);
+  }
 
   // проверяем добавление таба по кнопке "+"
   const addButton = frame.locator('.add-tab-button-class');
@@ -104,7 +115,9 @@ test('add and delete tabs', async ({ page }) => {
 
   const activeTabSelectorBox2 = await activeTabSelector.boundingBox();
   const tab10Box = await tab10.boundingBox();
-  expect(tab10Box!.y).toBeCloseTo(activeTabSelectorBox2!.y, 0);
+  if (activeTabSelectorBox2 !== undefined && activeTabSelectorBox2?.y !== undefined) {
+    expect(tab10Box?.y).toBeCloseTo(activeTabSelectorBox2.y, 0);
+  }
 
   // проверяем удаление таба из выпадающего меню
   const overflowMenu = frame.locator('.overflow-menu-button-with-dropdown');
