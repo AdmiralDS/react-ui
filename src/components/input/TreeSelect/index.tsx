@@ -101,7 +101,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
 
     useEffect(() => {
-      const array = defaultValue ?? value ?? [];
+      const array = value ?? defaultValue ?? [];
       const selected: CheckboxGroupItemProps[] = [];
 
       flatMap.forEach((value, key) => {
