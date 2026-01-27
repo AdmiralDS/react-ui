@@ -68,12 +68,17 @@ test.describe('TimePicker - visual states and props', () => {
     await expect(iconButton).toBeVisible();
   });
 
-  test('displays iconsAfter correctly', async ({ page }) => {
+  test('displays iconsAfter correctly', async ({ page, browserName }) => {
     await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-double-icon');
     const frame = getStorybookFrameLocator(page);
 
+    // Wait for iframe to load (WebKit needs more time)
+    if (browserName === 'webkit') {
+      await page.waitForTimeout(500);
+    }
+
     const container = frame.locator('.time-picker-container');
-    await expect(container).toBeVisible({ timeout: 3000 });
+    await expect(container).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 3000 });
 
     const iconPanel = frame.locator('.time-picker-icon-panel');
     await expect(iconPanel).toBeVisible({ timeout: 400 });

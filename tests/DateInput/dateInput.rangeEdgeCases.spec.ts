@@ -239,7 +239,7 @@ test.describe('DateInput - date-range edge cases', () => {
     expect(year).toBe('2024');
   });
 
-  test('selecting same date twice in range mode resets range', async ({ page }) => {
+  test('selecting same date twice in range mode resets range', async ({ page, browserName }) => {
     await page.goto('/?path=/story/admiral-2-1-input-dateinput--date-input-range');
     const frame = getStorybookFrameLocator(page);
 
@@ -248,20 +248,48 @@ test.describe('DateInput - date-range edge cases', () => {
     const dropdown = frame.locator('.dropContainerClass');
     const days = frame.locator('.ui-kit-calendar-day-component');
 
+    const waitTime = browserName === 'webkit' ? 300 : browserName === 'firefox' ? 200 : 100;
+    const visibilityTimeout = browserName === 'webkit' ? 1000 : 500;
+
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
 
     const dayIndices = await days.evaluateAll(getVisibleDayIndices);
-    if (dayIndices.length < 1) throw new Error('No clickable calendar days found');
+    if (dayIndices.length < 2) throw new Error('Not enough clickable calendar days found');
 
-    const selectedIndex = dayIndices[0];
-    await days.nth(selectedIndex).click();
-    await expect(dropdown).toBeVisible();
+    const startDateIndex = dayIndices[0];
+    const endDateIndex = dayIndices[1];
 
-    // Click the same date again
-    await days.nth(selectedIndex).click();
-    await expect(dropdown).toBeVisible(); // Should stay open
+    // Select startDate (first click)
+    await days.nth(startDateIndex).click();
+    await page.waitForTimeout(waitTime);
+    await expect(dropdown).toBeVisible({ timeout: visibilityTimeout });
 
+    // Select endDate (different date to create a valid range)
+    await days.nth(endDateIndex).click();
+    await page.waitForTimeout(waitTime);
+
+    await expect(dropdown).not.toBeVisible({ timeout: visibilityTimeout });
+
+    // Verify that range was created
+    const rangeValue = await input.inputValue();
+    const [rangeStartStr, rangeEndStr] = rangeValue.split(' - ');
+    const rangeStartDate = parseDateOrNull(rangeStartStr);
+    const rangeEndDate = parseDateOrNull(rangeEndStr);
+
+    expect(rangeStartDate).not.toBeNull();
+    expect(rangeEndDate).not.toBeNull();
+
+    await clickAndWait(iconButton, page);
+    await expect(dropdown).toBeVisible({ timeout: visibilityTimeout });
+    // Click the same date as startDate (should reset range - clear endDate)
+    await days.nth(startDateIndex).click();
+    await page.waitForTimeout(waitTime);
+
+    // Dropdown should stay open (range is incomplete - only startDate exists)
+    await expect(dropdown).toBeVisible({ timeout: visibilityTimeout });
+
+    // Verify that range was reset - only startDate should exist, endDate should be cleared
     const value = await input.inputValue();
     const [startStr, endStr] = value.split(' - ');
     const startDate = parseDateOrNull(startStr);

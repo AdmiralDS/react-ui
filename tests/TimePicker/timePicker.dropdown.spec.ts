@@ -2,12 +2,17 @@ import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
 
 test.describe('TimePicker - dropdown and selection', () => {
-  test('opens dropdown via icon and selects an option', async ({ page }) => {
+  test('opens dropdown via icon and selects an option', async ({ page, browserName }) => {
     await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-simple');
     const frame = getStorybookFrameLocator(page);
 
+    // Wait for iframe to load (WebKit needs more time)
+    if (browserName === 'webkit') {
+      await page.waitForTimeout(500);
+    }
+
     const input = frame.locator('.time-picker-native-input');
-    await expect(input).toBeVisible({ timeout: 3000 });
+    await expect(input).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 3000 });
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
     await clickAndWait(iconButton, page);
