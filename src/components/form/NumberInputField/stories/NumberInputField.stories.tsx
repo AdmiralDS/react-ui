@@ -58,9 +58,6 @@ export default {
     displayInline: {
       control: { type: 'boolean' },
     },
-    isLoading: {
-      control: { type: 'boolean' },
-    },
     showTooltip: {
       control: { type: 'boolean' },
     },

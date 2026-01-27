@@ -269,18 +269,18 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     if (!props.readOnly && displayClearIcon && !!innerValue) {
       const clearInputIconButtonProps = {
-        key: 'clear-icon',
         icon: CloseOutlineSvg,
         onClick: () => {
           if (inputRef.current) {
             changeInputData(inputRef.current, { value: '' });
           }
         },
-        'aria-hidden': true,
       };
 
       iconArray.unshift(
         <InputIconButton
+          key="clear-icon"
+          aria-hidden
           {...clearInputIconButtonProps}
           {...clearInputIconButtonPropsConfig(clearInputIconButtonProps)}
         />,
@@ -289,27 +289,30 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     if (!props.readOnly && displayPlusMinusIcons) {
       const minusInputIconButtonProps = {
-        key: 'minus-icon',
         icon: MinusOutline,
         onClick: props.disabled || minusDisabled ? undefined : handleMinus,
         disabled: props.disabled || minusDisabled,
-        'aria-hidden': true,
       };
 
       const plusInputIconButtonProps = {
-        key: 'plus-icon',
         icon: PlusOutline,
         onClick: props.disabled || plusDisabled ? undefined : handlePlus,
         disabled: props.disabled || plusDisabled,
-        'aria-hidden': true,
       };
 
       iconArray.push(
         <PlusMinusIcon
+          key="minus-icon"
+          aria-hidden
           {...minusInputIconButtonProps}
           {...minusInputIconButtonPropsConfig(minusInputIconButtonProps)}
         />,
-        <PlusMinusIcon {...plusInputIconButtonProps} {...plusInputIconButtonPropsConfig(plusInputIconButtonProps)} />,
+        <PlusMinusIcon
+          key="plus-icon"
+          aria-hidden
+          {...plusInputIconButtonProps}
+          {...plusInputIconButtonPropsConfig(plusInputIconButtonProps)}
+        />,
       );
     }
 
