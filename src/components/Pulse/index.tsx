@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export type PulseDimension = 'l' | 'm' | 's';
 export type PulseStatus = 'info' | 'danger' | 'success' | 'warning';
@@ -12,68 +12,6 @@ export interface PulseProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Позволяет добавлять  миксин созданный с помощью styled css  */
   cssMixin?: ReturnType<typeof css>;
 }
-
-const AnimationS = keyframes`
- 0% {
-    width: 6px;
-    height: 6px;
-    opacity: 100%;
-    border-width: 1px;
-    filter: blur(0.33px);
-  }
-
-  80% {
-    width: 20px;
-    height: 20px;
-    opacity: 0%;
-    border-width: 1.5px;
-    filter: blur(0.66px);
-  }
-
-  100% {
-    opacity: 0%;
-  }
-`;
-
-const AnimationM = keyframes`
- 0% {
-    width: 10px;
-    height: 10px;
-    opacity: 100%;
-    border-width: 1px;
-    filter: blur(0.33px);
-  }
-  80% {
-    width: 28px;
-    height: 28px;
-    opacity: 0%;
-    border-width: 2px;
-    filter: blur(1px);
-  }
-  100% {
-    opacity: 0%;
-  }
-`;
-
-const AnimationL = keyframes`
- 0% {
-    width: 14px;
-    height: 14px;
-    opacity: 100%;
-    border-width: 1px;
-    filter: blur(0.33px);
-  }
-  80% {
-    width: 36px;
-    height: 36px;
-    opacity: 0%;
-    border-width: 3px;
-    filter: blur(1.33px);
-  }
-  100% {
-    opacity: 0%;
-  }
-`;
 
 const getPulseColor = css<{ $status: PulseStatus | { background?: string } }>`
   ${({ theme, $status }) => {
@@ -94,6 +32,20 @@ const getPulseColor = css<{ $status: PulseStatus | { background?: string } }>`
   }}
 `;
 
+const getSize = css<{ $dimension: PulseDimension }>`
+  ${({ $dimension }) => {
+    switch ($dimension) {
+      case 's':
+        return '6px';
+      case 'l':
+        return '14px';
+      case 'm':
+      default:
+        return '10px';
+    }
+  }}
+`;
+
 const PulseElement = styled.div<{
   $dimension: PulseDimension;
   $status: PulseStatus | { background?: string };
@@ -109,17 +61,74 @@ const PulseElement = styled.div<{
   background-color: ${getPulseColor};
 
   &:before {
-    position: absolute;
     content: '';
+    border: none;
+    position: absolute;
     background-color: transparent;
     border-radius: 50%;
-    border-style: solid;
-    border-color: ${getPulseColor};
+    width: ${getSize};
+    height: ${getSize};
     box-sizing: border-box;
-    animation-name: ${(p) => (p.$dimension == 'l' ? AnimationL : p.$dimension == 'm' ? AnimationM : AnimationS)};
+    animation-name: ${(p) =>
+      p.$dimension == 'l' ? 'animation-l' : p.$dimension == 'm' ? 'animation-m' : 'animation-s'};
     animation-duration: 2500ms;
     animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
     animation-iteration-count: infinite;
+  }
+
+  @keyframes animation-s {
+    0% {
+      opacity: 100%;
+      filter: blur(0.2px);
+      box-shadow: inset 0 0 0 1px ${getPulseColor};
+    }
+
+    80% {
+      transform: scale(3.3);
+      opacity: 0%;
+      box-shadow: inset 0 0 0 0.4px ${getPulseColor};
+      filter: blur(0.2px);
+    }
+
+    100% {
+      opacity: 0%;
+    }
+  }
+
+  @keyframes animation-m {
+    0% {
+      opacity: 100%;
+      box-shadow: inset 0 0 0 1px
+        var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      filter: blur(0.33px);
+    }
+    80% {
+      transform: scale(2.8);
+      opacity: 0%;
+      box-shadow: inset 0 0 0 0.7px
+        var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      filter: blur(0.33px);
+    }
+    100% {
+      opacity: 0%;
+    }
+  }
+
+  @keyframes animation-l {
+    0% {
+      opacity: 100%;
+      filter: blur(0.33px);
+      box-shadow: inset 0 0 0 1px ${getPulseColor};
+    }
+    80% {
+      transform: scale(2.5);
+      opacity: 0%;
+      filter: blur(0.33px);
+      box-shadow: inset 0 0 0 1.2px ${getPulseColor};
+    }
+    100% {
+      opacity: 0%;
+    }
   }
 
   ${(p) => p.$cssMixin}
