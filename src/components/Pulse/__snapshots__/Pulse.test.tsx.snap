@@ -15,14 +15,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 14px;
+  height: 14px;
   box-sizing: border-box;
-  animation-name: IezNe;
+  animation-name: animation-l;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -40,14 +41,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c1:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -65,14 +67,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c2:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 6px;
+  height: 6px;
   box-sizing: border-box;
-  animation-name: fXgQcW;
+  animation-name: animation-s;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -103,14 +106,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 14px;
+  height: 14px;
   box-sizing: border-box;
-  animation-name: IezNe;
+  animation-name: animation-l;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -128,14 +132,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c1:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -153,14 +158,15 @@ exports[`Pulse should render component with different dimensions 1`] = `
 }
 
 .c2:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 6px;
+  height: 6px;
   box-sizing: border-box;
-  animation-name: fXgQcW;
+  animation-name: animation-s;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -246,14 +252,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -271,14 +278,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c1:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Error_Error60Main, #D92020);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -296,14 +304,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c2:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -321,14 +330,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c3:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -346,14 +356,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c4:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: #8A3FFC;
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -390,14 +401,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -415,14 +427,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c1:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Error_Error60Main, #D92020);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -440,14 +453,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c2:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -465,14 +479,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c3:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -490,14 +505,15 @@ exports[`Pulse should render component with different statuses 1`] = `
 }
 
 .c4:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: #8A3FFC;
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -589,14 +605,15 @@ exports[`Pulse should render default component 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
@@ -621,14 +638,15 @@ exports[`Pulse should render default component 1`] = `
 }
 
 .c0:before {
-  position: absolute;
   content: '';
+  border: none;
+  position: absolute;
   background-color: transparent;
   border-radius: 50%;
-  border-style: solid;
-  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  width: 10px;
+  height: 10px;
   box-sizing: border-box;
-  animation-name: cIwzhZ;
+  animation-name: animation-m;
   animation-duration: 2500ms;
   animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
   animation-iteration-count: infinite;
