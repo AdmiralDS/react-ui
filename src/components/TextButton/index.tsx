@@ -114,6 +114,8 @@ export const TextButton = React.forwardRef<HTMLButtonElement, TextButtonProps>(
         disabled={disabled}
         $loading={loading}
         $skeleton={skeleton}
+        aria-busy={loading || undefined}
+        aria-disabled={disabled || undefined}
       >
         {loading && <StyledSpinner dimension={dimension === 's' ? 'ms' : 'm'} />}
         {iconStart ? (
