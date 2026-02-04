@@ -160,7 +160,7 @@ test.describe('Stepper Advanced Features', () => {
 
     for (let i = 0; i < 3; i++) {
       await clickAndWait(nextButton, page);
-      await page.waitForTimeout(50); // Даем время на анимацию скролла
+      await page.waitForTimeout(TIMEOUTS.WAIT_SHORT); // Даем время на анимацию скролла
 
       // Проверяем, что скролл изменился (используем более мягкое сравнение)
       const currentScrollLeft = await scrollContainer.evaluate((el) => el.scrollLeft);
@@ -280,12 +280,12 @@ test.describe('Stepper Advanced Features', () => {
 
     // Wait for iframe to load (WebKit needs more time)
     if (browserName === 'webkit') {
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(TIMEOUTS.WAIT_LONG);
     }
 
     // Ищем шаг с data-warning="true"
     const warningStep = frame.locator('[data-warning="true"]');
-    await expect(warningStep).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 5000 });
+    await expect(warningStep).toBeVisible({ timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_LONG });
 
     // Проверяем, что у шага с предупреждением есть соответствующие стили
     const warningIcon = warningStep.locator('svg');

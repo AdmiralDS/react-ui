@@ -1,22 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
-
-export const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
-
-export const RU_MONTHS = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-];
+import { TIMEOUTS } from './constants';
 
 export function getStorybookFrameLocator(page: Page) {
   return page.frameLocator('#storybook-preview-iframe');
@@ -29,7 +13,7 @@ export function getStorybookFrameLocator(page: Page) {
 export async function clickAndWait(el: Locator, page: Page, timeout?: number) {
   await el.click();
   // ждём анимацию
-  await page.waitForTimeout(timeout || 400);
+  await page.waitForTimeout(timeout || TIMEOUTS.WAIT_DEFAULT);
 }
 
 /**

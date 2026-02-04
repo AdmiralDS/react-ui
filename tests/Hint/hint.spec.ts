@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('Hint Component', () => {
   test('click trigger - show and close hint', async ({ page }) => {
@@ -26,7 +27,7 @@ test.describe('Hint Component', () => {
     await closeButton.click();
 
     // Hint должен исчезнуть
-    await expect(hint).not.toBeVisible({ timeout: 100 });
+    await expect(hint).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 
   test('click trigger - close hint by clicking outside', async ({ page }) => {
@@ -44,7 +45,7 @@ test.describe('Hint Component', () => {
     await page.mouse.click(10, 10);
 
     // Hint должен исчезнуть
-    await expect(hint).not.toBeVisible({ timeout: 100 });
+    await expect(hint).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 
   test('click trigger - hint stays open when clicking inside hint', async ({ page }) => {
@@ -98,7 +99,7 @@ test.describe('Hint Component', () => {
     await hint.press('Escape');
 
     // Hint должен исчезнуть
-    await expect(hint).not.toBeVisible({ timeout: 100 });
+    await expect(hint).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 
   test('hint with interactive content - does not close on interaction', async ({ page }) => {

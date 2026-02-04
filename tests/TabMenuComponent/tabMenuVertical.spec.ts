@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait, resizeElement } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-tabs-tabmenuvertical--vertical-tab-menu-example');
@@ -8,7 +9,7 @@ test('basic render', async ({ page }) => {
   const tabMenu = frame.getByTestId('verticalTabMenuTemplate');
   await expect(tabMenu).toBeVisible();
   // ждем, пока подгрузятся шрифты и пройдет вся анимация
-  await page.waitForTimeout(200);
+  await page.waitForTimeout(TIMEOUTS.WAIT_MEDIUM);
 
   const overflowMenu = frame.locator('.overflow-menu-button-with-dropdown');
   await expect(overflowMenu).toBeVisible();

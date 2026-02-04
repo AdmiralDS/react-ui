@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
+import { getStorybookFrameLocator } from '../utils';
+import { UNDO_SHORTCUT } from '../constants';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
@@ -30,7 +31,7 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Дождёмся, пока ResizeObserver обновит высоту wrapper
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 1000 })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: TIMEOUTS.POLL_STANDARD })
       .toBeGreaterThan(initialHeight);
   } else {
     // Chromium / Firefox — имитируем drag мышью
@@ -45,7 +46,7 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Ждём, пока высота изменится
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 50 })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: TIMEOUTS.POLL_FAST })
       .toBeGreaterThan(initialHeight);
 
     // Дополнительно проверяем через toHaveCSS, что высота действительно увеличилась
@@ -143,7 +144,7 @@ test('native undo works', async ({ page, browserName }) => {
   await textarea.click();
   // имитируем ввод с клавиатуры по одному символу
   await textarea.pressSequentially('hello');
-  await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
   const valueBeforeUndo = await textarea.inputValue();
   await page.keyboard.press(UNDO_SHORTCUT);

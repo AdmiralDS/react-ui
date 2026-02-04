@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
+import { getStorybookFrameLocator } from '../utils';
+import { UNDO_SHORTCUT } from '../constants';
 
 test('native undo is disabled for TimeInput', async ({ page }) => {
   await page.goto('/?path=/story/deprecated-timeinput-deprecated-используйте-timepicker--time-input-simple');

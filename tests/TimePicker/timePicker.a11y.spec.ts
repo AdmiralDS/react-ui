@@ -17,7 +17,7 @@ test.describe('TimePicker - data attributes and states', () => {
     await expect(dropdown).toBeVisible();
 
     const disabledItem = dropdown.locator('[data-disabled="true"]').filter({ hasText: '12:30' }).first();
-    await expect(disabledItem).toBeVisible({ timeout: 50 });
+    await expect(disabledItem).toBeVisible({ timeout: TIMEOUTS.EXPECT_FAST });
     await expect(disabledItem).toHaveAttribute('data-disabled', 'true');
 
     await disabledItem.click();
@@ -42,28 +42,28 @@ test.describe('TimePicker - data attributes and states', () => {
     await expect(container).not.toHaveAttribute('data-status', 'error');
 
     await input.click();
-    await input.type('1', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('2', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('3', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
+    await input.type('1', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('2', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('3', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     await expect(input).toHaveValue('12:30');
 
     await expect(container).toHaveAttribute('data-status', 'error');
 
     await input.fill('');
-    await input.type('1', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('2', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
+    await input.type('1', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('2', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     await expect(input).toHaveValue('12:00');
     await expect(container).not.toHaveAttribute('data-status', 'error');

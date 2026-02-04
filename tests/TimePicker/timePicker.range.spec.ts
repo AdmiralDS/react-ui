@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TimePicker - range constraints', () => {
   test('disables options outside startTime/endTime and allows inside', async ({ page }) => {
@@ -56,16 +57,16 @@ test.describe('TimePicker - range constraints', () => {
 
     // Вводим disabled значение вручную
     await input.click();
-    await input.type('1', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('2', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type(':', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('3', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
+    await input.type('1', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('2', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type(':', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('3', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     // Проверяем, что значение введено
     await expect(input).toHaveValue('12:30');
