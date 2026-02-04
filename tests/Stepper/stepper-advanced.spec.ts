@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('Stepper Advanced Features', () => {
   test('step width property', async ({ page }) => {
@@ -285,7 +286,9 @@ test.describe('Stepper Advanced Features', () => {
 
     // Ищем шаг с data-warning="true"
     const warningStep = frame.locator('[data-warning="true"]');
-    await expect(warningStep).toBeVisible({ timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_LONG });
+    await expect(warningStep).toBeVisible({
+      timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_LONG,
+    });
 
     // Проверяем, что у шага с предупреждением есть соответствующие стили
     const warningIcon = warningStep.locator('svg');

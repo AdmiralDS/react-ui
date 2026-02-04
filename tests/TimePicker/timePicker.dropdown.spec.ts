@@ -13,7 +13,9 @@ test.describe('TimePicker - dropdown and selection', () => {
     }
 
     const input = frame.locator('.time-picker-native-input');
-    await expect(input).toBeVisible({ timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD });
+    await expect(input).toBeVisible({
+      timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD,
+    });
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
     await clickAndWait(iconButton, page);

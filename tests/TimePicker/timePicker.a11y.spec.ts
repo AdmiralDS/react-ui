@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TimePicker - data attributes and states', () => {
   test('disabled slot in dropdown has data-disabled attribute', async ({ page }) => {

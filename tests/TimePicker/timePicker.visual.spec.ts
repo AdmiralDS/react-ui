@@ -79,7 +79,9 @@ test.describe('TimePicker - visual states and props', () => {
     }
 
     const container = frame.locator('.time-picker-container');
-    await expect(container).toBeVisible({ timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD });
+    await expect(container).toBeVisible({
+      timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD,
+    });
 
     const iconPanel = frame.locator('.time-picker-icon-panel');
     await expect(iconPanel).toBeVisible({ timeout: TIMEOUTS.EXPECT_VISIBILITY });

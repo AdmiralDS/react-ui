@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator } from '../utils';
-import { UNDO_SHORTCUT } from '../constants';
+import { UNDO_SHORTCUT, TIMEOUTS } from '../constants';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
@@ -31,7 +31,9 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Дождёмся, пока ResizeObserver обновит высоту wrapper
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: TIMEOUTS.POLL_STANDARD })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), {
+        timeout: TIMEOUTS.POLL_STANDARD,
+      })
       .toBeGreaterThan(initialHeight);
   } else {
     // Chromium / Firefox — имитируем drag мышью
@@ -144,7 +146,7 @@ test('native undo works', async ({ page, browserName }) => {
   await textarea.click();
   // имитируем ввод с клавиатуры по одному символу
   await textarea.pressSequentially('hello');
-    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+  await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
   const valueBeforeUndo = await textarea.inputValue();
   await page.keyboard.press(UNDO_SHORTCUT);
