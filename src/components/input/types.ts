@@ -17,3 +17,26 @@ export interface ExtraProps {
 
   $autoHeight?: boolean;
 }
+
+export interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** Делает высоту компонента больше или меньше обычной */
+  dimension?: ComponentDimension;
+
+  /** Иконки для отображения в начале поля */
+  iconsBefore?: React.ReactNode;
+
+  /** Иконки для отображения в конце поля */
+  iconsAfter?: React.ReactNode;
+
+  /** Статус поля */
+  status?: InputStatus;
+
+  /** Отображать статус загрузки данных */
+  isLoading?: boolean;
+
+  /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
+  disableCopying?: boolean;
+
+  /** Состояние skeleton */
+  skeleton?: boolean;
+}
