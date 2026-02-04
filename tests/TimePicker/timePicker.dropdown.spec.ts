@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TimePicker - dropdown and selection', () => {
   test('opens dropdown via icon and selects an option', async ({ page, browserName }) => {
@@ -8,11 +9,13 @@ test.describe('TimePicker - dropdown and selection', () => {
 
     // Wait for iframe to load (WebKit needs more time)
     if (browserName === 'webkit') {
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(TIMEOUTS.WAIT_LONG);
     }
 
     const input = frame.locator('.time-picker-native-input');
-    await expect(input).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 3000 });
+    await expect(input).toBeVisible({
+      timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD,
+    });
 
     const iconButton = frame.locator('.time-picker-icon-panel svg').last();
     await clickAndWait(iconButton, page);
@@ -38,7 +41,7 @@ test.describe('TimePicker - dropdown and selection', () => {
 
     const inputBox = frame.locator('.time-picker-container');
     await inputBox.click({ position: { x: 4, y: 10 } });
-    await expect(dropdown).not.toBeVisible({ timeout: 50 });
+    await expect(dropdown).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_FAST });
 
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();
@@ -51,6 +54,6 @@ test.describe('TimePicker - dropdown and selection', () => {
     const paddingY = panelBox.y + panelBox.height / 2;
     await page.mouse.click(paddingX, paddingY);
 
-    await expect(dropdown).not.toBeVisible({ timeout: 100 });
+    await expect(dropdown).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 });

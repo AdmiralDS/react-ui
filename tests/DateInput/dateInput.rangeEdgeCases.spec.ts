@@ -8,6 +8,7 @@ import {
   getCalendarPanelDate,
   isValidDateRangeFormat,
 } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('DateInput - date-range edge cases', () => {
   test('when endDate is selected before startDate, range is reset and endDate becomes new startDate', async ({
@@ -248,8 +249,14 @@ test.describe('DateInput - date-range edge cases', () => {
     const dropdown = frame.locator('.dropContainerClass');
     const days = frame.locator('.ui-kit-calendar-day-component');
 
-    const waitTime = browserName === 'webkit' ? 300 : browserName === 'firefox' ? 200 : 100;
-    const visibilityTimeout = browserName === 'webkit' ? 1000 : 500;
+    const waitTime =
+      browserName === 'webkit'
+        ? TIMEOUTS.BROWSER_WEBKIT_WAIT
+        : browserName === 'firefox'
+          ? TIMEOUTS.BROWSER_FIREFOX_WAIT
+          : TIMEOUTS.BROWSER_CHROME_WAIT;
+    const visibilityTimeout =
+      browserName === 'webkit' ? TIMEOUTS.BROWSER_WEBKIT_VISIBILITY : TIMEOUTS.BROWSER_CHROME_FIREFOX_VISIBILITY;
 
     await clickAndWait(iconButton, page);
     await expect(dropdown).toBeVisible();

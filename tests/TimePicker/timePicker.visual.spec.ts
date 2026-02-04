@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TimePicker - visual states and props', () => {
   test('displays clear icon when displayClearIcon is true and value exists', async ({ page }) => {
@@ -9,7 +10,7 @@ test.describe('TimePicker - visual states and props', () => {
     const input = frame.locator('.time-picker-native-input');
     await input.click();
     await input.fill('12:30');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const clearIcon = frame.locator('.time-picker-icon-panel svg').first();
     await expect(clearIcon).toBeVisible();
@@ -36,14 +37,14 @@ test.describe('TimePicker - visual states and props', () => {
 
     // Вводим disabled значение
     await input.click();
-    await input.type('1', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('2', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('3', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
+    await input.type('1', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('2', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('3', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     // Проверяем визуальный статус error
     await expect(container).toHaveAttribute('data-status', 'error');
@@ -74,15 +75,17 @@ test.describe('TimePicker - visual states and props', () => {
 
     // Wait for iframe to load (WebKit needs more time)
     if (browserName === 'webkit') {
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(TIMEOUTS.WAIT_LONG);
     }
 
     const container = frame.locator('.time-picker-container');
-    await expect(container).toBeVisible({ timeout: browserName === 'webkit' ? 10000 : 3000 });
+    await expect(container).toBeVisible({
+      timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_STANDARD,
+    });
 
     const iconPanel = frame.locator('.time-picker-icon-panel');
-    await expect(iconPanel).toBeVisible({ timeout: 400 });
-    await page.waitForTimeout(500);
+    await expect(iconPanel).toBeVisible({ timeout: TIMEOUTS.EXPECT_VISIBILITY });
+    await page.waitForTimeout(TIMEOUTS.WAIT_LONG);
 
     const iconButtons = iconPanel.locator('> *');
 
@@ -156,6 +159,6 @@ test.describe('TimePicker - visual states and props', () => {
 
     await input.click();
     await input.fill('2359');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
   });
 });

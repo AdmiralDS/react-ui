@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('Stepper Component', () => {
   test('basic render', async ({ page }) => {
@@ -244,7 +245,7 @@ test.describe('Stepper Component', () => {
 
     // Изменяем размер окна
     await page.setViewportSize({ width: 400, height: 600 });
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const resizedBox = await stepper.boundingBox();
     if (initialBox !== undefined && initialBox?.width !== undefined) {
@@ -253,7 +254,7 @@ test.describe('Stepper Component', () => {
 
     // Возвращаем размер окна
     await page.setViewportSize({ width: 1200, height: 800 });
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const restoredBox = await stepper.boundingBox();
     if (resizedBox !== undefined && resizedBox?.width !== undefined) {

@@ -148,6 +148,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     const [calendarValue, setCalendarValue] = useState<Date | (Date | null)[] | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const [isCalendarOpenState, setCalendarOpenState] = useState<boolean>(defaultIsCalendarOpen);
 
     const isCalendarOpen = isVisible ?? isCalendarOpenState;
@@ -203,27 +204,35 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
     };
 
     const handleContainerMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (props.disabled || skeleton) {
+      if (props.disabled || skeleton || !isCalendarOpen) {
         return;
       }
 
       const clickedElement = e.target as HTMLElement;
 
-      const isClickOnInteractiveElement = clickedElement.closest('button, svg, [role="button"]') !== null;
-      if (isClickOnInteractiveElement) {
+      if (dropdownRef.current && dropdownRef.current.contains(clickedElement)) {
+        return;
+      }
+      const dropdownElement = clickedElement.closest('.dropdown-container, [class*="dropContainer"]');
+      if (dropdownElement) {
         return;
       }
 
-      const isClickOnInput =
-        !!inputRef.current &&
+      if (clickedElement.closest('button, svg, [role="button"]') !== null) {
+        return;
+      }
+
+      if (
+        inputRef.current &&
         (clickedElement === inputRef.current ||
-          clickedElement.closest('.text-input-native-input') === inputRef.current);
-
-      if (isClickOnInput && !props.readOnly) {
+          clickedElement.closest('.text-input-native-input') === inputRef.current) &&
+        !props.readOnly
+      ) {
         return;
       }
 
-      // handleButtonClick();
+      // Все остальные клики в контейнере (слева от инпута, вокруг иконки) - закрываем дропдаун
+      handleButtonClick();
     };
 
     const iconArray = Children.toArray(iconsAfter || icons);
@@ -256,6 +265,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       >
         {isCalendarOpen && !skeleton && (
           <StyledDropdownContainer
+            ref={dropdownRef}
             targetElement={inputRef.current}
             alignSelf={alignDropdown || alignSelf}
             onClickOutside={handleBlurCalendarContainer}

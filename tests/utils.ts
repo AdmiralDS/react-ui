@@ -1,7 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
-
-export const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
+import { TIMEOUTS } from './constants';
 
 export function getStorybookFrameLocator(page: Page) {
   return page.frameLocator('#storybook-preview-iframe');
@@ -14,7 +13,7 @@ export function getStorybookFrameLocator(page: Page) {
 export async function clickAndWait(el: Locator, page: Page, timeout?: number) {
   await el.click();
   // ждём анимацию
-  await page.waitForTimeout(timeout || 400);
+  await page.waitForTimeout(timeout || TIMEOUTS.WAIT_DEFAULT);
 }
 
 /**
@@ -132,18 +131,3 @@ export function isValidDateRangeFormat(value: string): boolean {
   const parts = value.split(' - ');
   return parts.length === 2 && parts.every((part) => isValidDateFormat(part) || part.includes('_'));
 }
-
-export const RU_MONTHS = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-];

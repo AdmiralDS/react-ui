@@ -1,20 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator } from '../utils';
-
-const RU_MONTHS = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-];
+import { RU_MONTHS } from '../constants';
 
 test('date-range calendar opens on selected month and year', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-form-field-datefield--date-field-base');
