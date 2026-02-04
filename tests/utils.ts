@@ -3,6 +3,21 @@ import { expect } from '@playwright/test';
 
 export const UNDO_SHORTCUT = process.platform === 'darwin' ? 'Meta+KeyZ' : 'Control+KeyZ';
 
+export const RU_MONTHS = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+];
+
 export function getStorybookFrameLocator(page: Page) {
   return page.frameLocator('#storybook-preview-iframe');
 }
@@ -132,18 +147,3 @@ export function isValidDateRangeFormat(value: string): boolean {
   const parts = value.split(' - ');
   return parts.length === 2 && parts.every((part) => isValidDateFormat(part) || part.includes('_'));
 }
-
-export const RU_MONTHS = [
-  'Январь',
-  'Февраль',
-  'Март',
-  'Апрель',
-  'Май',
-  'Июнь',
-  'Июль',
-  'Август',
-  'Сентябрь',
-  'Октябрь',
-  'Ноябрь',
-  'Декабрь',
-];

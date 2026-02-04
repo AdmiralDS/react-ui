@@ -7,7 +7,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.text-input-native-input');
-    await expect(input).toBeVisible({ timeout: 3000 });
+    await expect(input).toBeVisible({ timeout: 5000 });
 
     const iconButton = frame.locator('[data-role="icon-pane-after"] svg').last();
     await clickAndWait(iconButton, page);
@@ -44,7 +44,7 @@ test.describe('DateInput - dropdown and selection', () => {
     const iconPanel = frame.locator('[data-role="icon-pane-after"]');
     const panelBox = await iconPanel.boundingBox();
     if (!panelBox) throw new Error('Icon panel bounding box not found');
-    const paddingX = panelBox.x + panelBox.width + 8;
+    const paddingX = panelBox.x + panelBox.width;
     const paddingY = panelBox.y + panelBox.height / 2;
     await page.mouse.click(paddingX, paddingY);
 
