@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.60.0](https://github.com/AdmiralDS/react-ui/compare/v8.59.3...v8.60.0) (2026-02-04)
+
+
+### Features
+
+* **Pulse:** add smoothness to animation ([b397cfe](https://github.com/AdmiralDS/react-ui/commit/b397cfebf65d84a50e6b79a72ea1a9e5b6d932a3))
+* **RadioButton:** checked animation fixed ([c3d67d7](https://github.com/AdmiralDS/react-ui/commit/c3d67d725ea586dbabe16423ccbf487d961ed9e1))
+
+
+### Bug Fixes
+
+* **DateInput:** исправлена обработка кликов вокруг иконки ([e17266c](https://github.com/AdmiralDS/react-ui/commit/e17266c1e0f0692ff9c8f1805718a4595a74fdae))
+* **TextButton:** Исправлен размер иконки внутри flex-контейнера ([fc328ea](https://github.com/AdmiralDS/react-ui/commit/fc328eaf9ba7c4f731b6ec07fa4fbb0b215ba629)), closes [#2009](https://github.com/AdmiralDS/react-ui/issues/2009)
+
 ### [8.59.3](https://github.com/AdmiralDS/react-ui/compare/v8.59.2...v8.59.3) (2026-01-27)
 
 
