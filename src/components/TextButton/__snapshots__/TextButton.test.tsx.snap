@@ -1,0 +1,565 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextButton should apply correct dimension styles for dimension="s" vs "m" (snapshot) 1`] = `
+.c2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c0 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  vertical-align: middle;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c0 .c1 {
+  visibility: visible;
+}
+
+.c0[data-appearance='primary'] {
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0[data-appearance='secondary'] {
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0:hover {
+  cursor: pointer;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c0:active {
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c0[data-dimension='m'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c0[data-dimension='s'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+<button
+  class="c0"
+  data-appearance="primary"
+  data-dimension="s"
+  type="button"
+>
+  <div
+    class="c1 c2"
+  >
+    <span />
+  </div>
+</button>
+`;
+
+exports[`TextButton should apply correct dimension styles for dimension="s" vs "m" (snapshot) 2`] = `
+.c2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c0 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  vertical-align: middle;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c0 .c1 {
+  visibility: visible;
+}
+
+.c0[data-appearance='primary'] {
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0[data-appearance='secondary'] {
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0:hover {
+  cursor: pointer;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c0:active {
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c0[data-dimension='m'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c0[data-dimension='s'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+<button
+  class="c0"
+  data-appearance="primary"
+  data-dimension="m"
+  type="button"
+>
+  <div
+    class="c1 c2"
+  >
+    <span />
+  </div>
+</button>
+`;
+
+exports[`TextButton should match snapshot (flex container) 1`] = `
+.c3 {
+  flex: 0 0 auto;
+}
+
+.c5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  vertical-align: middle;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c1 .c4 {
+  visibility: visible;
+}
+
+.c1 .c2 {
+  visibility: visible;
+}
+
+.c1[data-appearance='primary'] {
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c1[data-appearance='primary'] .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c1[data-appearance='secondary'] {
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c1[data-appearance='secondary'] .c2 svg path {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c1 .c2 svg {
+  visibility: visible;
+}
+
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c1:hover {
+  cursor: pointer;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c1:hover .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c1:active {
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c1:active .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c1:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c1:disabled .c2 svg path {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c1[data-dimension='m'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c1[data-dimension='m'] .c2 {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.c1[data-dimension='s'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c1[data-dimension='s'] .c2 {
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.c0 {
+  display: flex;
+  flex-direction: row;
+}
+
+<div
+  class="c0"
+>
+  <button
+    class="c1"
+    data-appearance="primary"
+    data-dimension="s"
+    type="button"
+  >
+    <div
+      class="c2 c3"
+    >
+      <div />
+    </div>
+    <div
+      class="c4 c5"
+    >
+      <span>
+        Row
+      </span>
+    </div>
+  </button>
+</div>
+`;
+
+exports[`TextButton should match snapshot (flex container) 2`] = `
+.c3 {
+  flex: 0 0 auto;
+}
+
+.c5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c1 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  vertical-align: middle;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c1 .c4 {
+  visibility: visible;
+}
+
+.c1 .c2 {
+  visibility: visible;
+}
+
+.c1[data-appearance='primary'] {
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c1[data-appearance='primary'] .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c1[data-appearance='secondary'] {
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c1[data-appearance='secondary'] .c2 svg path {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c1 .c2 svg {
+  visibility: visible;
+}
+
+.c1:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c1:hover {
+  cursor: pointer;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c1:hover .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c1:active {
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c1:active .c2 svg path {
+  fill: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c1:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c1:disabled .c2 svg path {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c1[data-dimension='m'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c1[data-dimension='m'] .c2 {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.c1[data-dimension='s'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c1[data-dimension='s'] .c2 {
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.c0 {
+  display: flex;
+  flex-direction: column;
+}
+
+<div
+  class="c0"
+>
+  <button
+    class="c1"
+    data-appearance="primary"
+    data-dimension="s"
+    type="button"
+  >
+    <div
+      class="c2 c3"
+    >
+      <div />
+    </div>
+    <div
+      class="c4 c5"
+    >
+      <span>
+        Column
+      </span>
+    </div>
+    <div
+      class="c2 c3"
+    >
+      <div />
+    </div>
+  </button>
+</div>
+`;
+
+exports[`TextButton should match styled snapshot (hover/focus states included by jest-styled-components) 1`] = `
+.c2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c0 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  vertical-align: middle;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  white-space: nowrap;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+}
+
+.c0 .c1 {
+  visibility: visible;
+}
+
+.c0[data-appearance='primary'] {
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c0[data-appearance='secondary'] {
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c0:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.c0:hover {
+  cursor: pointer;
+  color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c0:active {
+  color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c0:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c0[data-dimension='m'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c0[data-dimension='s'] {
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+<button
+  class="c0"
+  data-appearance="primary"
+  data-dimension="m"
+  type="button"
+>
+  <div
+    class="c1 c2"
+  >
+    <span />
+  </div>
+</button>
+`;

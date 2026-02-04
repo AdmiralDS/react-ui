@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 export const IconContainer = styled.div`
-  flex: 1 0 auto;
+  flex: 0 0 auto;
 `;
 
 export const ButtonContainer = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
