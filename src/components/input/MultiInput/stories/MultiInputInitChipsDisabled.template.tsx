@@ -21,7 +21,7 @@ const hoverChipStyle = css`
   }
 `;
 
-export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
+export const StyledChip = styled(Chips)`
   display: flex;
   min-width: 35px;
   max-width: 190px;
@@ -100,7 +100,7 @@ export const MultiInputInitChipsDisabledTemplate = ({
           <StyledChip
             {...item}
             key={index}
-            onClose={item.onClose || props.readOnly || props.disableCopying ? undefined : handleDeleteChip}
+            onClose={item.onClose || props.disableCopying ? undefined : handleDeleteChip}
             tabIndex={-1}
             dimension="s"
             appearance="filled"

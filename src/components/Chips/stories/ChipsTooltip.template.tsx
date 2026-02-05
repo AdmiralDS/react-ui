@@ -5,9 +5,17 @@ import { Chips, T } from '@admiral-ds/react-ui';
 import type { ChipsProps } from '@admiral-ds/react-ui';
 
 const listDataIconTooltip = [
-  { id: '1', label: 'Ограниченное пространство', disabled: false },
-  { id: '2', label: 'Ограниченное пространство', disabled: false },
-  { id: '3', label: 'Ограниченное пространство', disabled: false },
+  { id: '1', label: 'Ограниченное пространство' },
+  {
+    id: '2',
+    label: 'Кастомый Tooltip',
+    renderContentTooltip: () => (
+      <T font="Body/Body 2 Long" color={'Success/Success 40'} as="div">
+        Здесь отображается кастомный Tooltip
+      </T>
+    ),
+  },
+  { id: '3', label: 'Tooltip отключён', disabledTooltip: true },
 ];
 
 const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
@@ -18,7 +26,7 @@ const WrapperChip = styled.div<{ $dimension?: 'm' | 's' }>`
 `;
 
 const StyledChipsTooltip = styled(Chips)`
-  width: 160px;
+  max-width: 140px;
 `;
 const Separator = styled.div`
   height: 24px;
@@ -35,7 +43,12 @@ export const ChipsTooltipTemplate = (props: ChipsProps) => {
       <Separator />
       <WrapperChip>
         {listDataIconTooltip.map((item) => (
-          <StyledChipsTooltip {...props} renderContentTooltip={() => item.label} key={item.id}>
+          <StyledChipsTooltip
+            key={item.id}
+            renderContentTooltip={item.renderContentTooltip}
+            disabledTooltip={item.disabledTooltip}
+            {...props}
+          >
             {item.label}
           </StyledChipsTooltip>
         ))}
