@@ -26,7 +26,8 @@ export const PaginationOnePlaygroundTemplate = ({
         }}
         page={page}
         pageSize={pageSize}
-        totalItems={totalElements}
+        // totalItems={totalElements}
+        totalItems={19880516}
         pageSizes={pageSizes}
         data-dropdown-container-id="pagination-with-dropdown"
         data-dropdown-container-test-id="pagination-test-id-with-dropdown"

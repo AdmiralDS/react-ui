@@ -1,20 +1,19 @@
 import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import type { DataAttributes } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
-import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-
-import { MenuButton } from './Menu';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
 import { keyboardKey } from '#src/components/common/keyboardKey.js';
-import { Button } from '#src/components/Button';
+import type { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
+
+import { MenuButton } from './Menu';
+import { SideButtons } from './SideButtons';
 
 export type PaginationOneDimension = 'm' | 's';
 
@@ -56,23 +55,13 @@ const PageSizeAdditional = styled.div`
   }
 `;
 
-const ButtonsWrapper = styled.div`
-  display: flex;
-  & > button {
-    margin-left: 8px;
-  }
-  [data-simple='true'] & {
-    margin-left: 20px;
-  }
-`;
-
 const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boolean) => css`
   width: auto;
   min-width: ${showPageNumberInput ? 80 : 68}px;
 
   ${mixin};
 `;
-const nothing = () => {};
+
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationOneDimension;
@@ -171,8 +160,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
-  leftButtonPropsConfig = nothing,
-  rightButtonPropsConfig = nothing,
+  leftButtonPropsConfig,
+  rightButtonPropsConfig,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
@@ -182,8 +171,6 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     pageRangeText: theme_pageRangeText,
     pageSelectLabel: theme_pageSelectLabel,
     pageSizeSelectLabel: theme_pageSizeSelectLabel,
-    backwardText: theme_backwardText,
-    forwardText: theme_forwardText,
   } = theme.locales[theme.currentLocale].paginationOne;
 
   const itemsPerPageText = locale?.itemsPerPageText || theme_itemsPerPageText;
@@ -191,11 +178,17 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const pageRangeText = locale?.pageRangeText || theme_pageRangeText;
   const pageSelectLabel = locale?.pageSelectLabel || theme_pageSelectLabel;
   const pageSizeSelectLabel = locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
-  const backwardText = locale?.backwardText || theme_backwardText;
-  const forwardText = locale?.forwardText || theme_forwardText;
 
-  const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
-  const pages = Array.from({ length: totalPages }, (_, k) => k + 1);
+  const safePageSize = pageSize > 0 ? pageSize : 1;
+  const totalPages = useMemo(() => Math.max(Math.ceil(totalItems / safePageSize), 1), [totalItems, safePageSize]);
+  const pages = useMemo(() => Array.from({ length: totalPages }, (_, k) => k + 1), [totalPages]);
+
+  const [rangeStart, rangeEnd] = useMemo(() => {
+    const start = Math.min(pageSize * (page - 1) + 1, totalItems);
+    const end = Math.min(page * pageSize, totalItems);
+    return [start, end];
+  }, [page, pageSize, totalItems]);
+
   const backButtonDisabled = page === 1;
   const forwardButtonDisabled = page === totalPages;
 
@@ -247,18 +240,19 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     handleClosePageNumberDropMenu(page.toString());
   };
 
-  const pageIncrement = () => {
+  const pageIncrement = useCallback(() => {
     const newPage = page + 1;
     setSelectedPageNumber(newPage.toString());
     setActivePageNumber(newPage.toString());
     onChange({ page: newPage, pageSize });
-  };
-  const pageDecrement = () => {
+  }, [page, pageSize]);
+
+  const pageDecrement = useCallback(() => {
     const newPage = page - 1;
     setSelectedPageNumber(newPage.toString());
     setActivePageNumber(newPage.toString());
     onChange({ page: newPage, pageSize });
-  };
+  }, [page, pageSize]);
 
   const dropMenuProps = passDropdownDataAttributes(props);
 
@@ -306,25 +300,21 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     return false;
   };
 
-  const leftButtonProps = {
-    appearance: 'tertiary',
-    dimension,
-    iconStart: <ChevronLeft />,
-    displayAsSquare: true,
-    'aria-label': backwardText,
-    disabled: backButtonDisabled,
-    onClick: pageDecrement,
-  } satisfies React.ComponentProps<typeof Button>;
-
-  const rightButtonProps = {
-    appearance: 'tertiary',
-    dimension,
-    iconStart: <ChevronRight />,
-    displayAsSquare: true,
-    'aria-label': forwardText,
-    disabled: forwardButtonDisabled,
-    onClick: pageIncrement,
-  } satisfies React.ComponentProps<typeof Button>;
+  const renderSideButtons = () => {
+    return (
+      <SideButtons
+        dimension={dimension}
+        localeBackwardText={locale?.backwardText}
+        localeForwardText={locale?.forwardText}
+        leftButtonPropsConfig={leftButtonPropsConfig}
+        rightButtonPropsConfig={rightButtonPropsConfig}
+        pageDecrement={pageDecrement}
+        pageIncrement={pageIncrement}
+        backButtonDisabled={backButtonDisabled}
+        forwardButtonDisabled={forwardButtonDisabled}
+      />
+    );
+  };
 
   const renderComplex = () => {
     return (
@@ -351,13 +341,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             {pageSize}
           </MenuButton>
           <Divider />
-          <PageSizeAdditional>
-            {itemRangeText(
-              Math.min(pageSize * (page - 1) + 1, totalItems),
-              Math.min(page * pageSize, totalItems),
-              totalItems,
-            )}
-          </PageSizeAdditional>
+          <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
         </Part>
         <Part>
           <Divider />
@@ -407,10 +391,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
             {page}
           </MenuButton>
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
-          <ButtonsWrapper>
-            <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
-            <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
-          </ButtonsWrapper>
+          {renderSideButtons()}
         </Part>
       </ComplexWrapper>
     );
@@ -419,17 +400,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const renderSimple = () => {
     return (
       <SimpleWrapper data-simple={simple} {...props}>
-        <PageSizeAdditional>
-          {itemRangeText(
-            Math.min(pageSize * (page - 1) + 1, totalItems),
-            Math.min(page * pageSize, totalItems),
-            totalItems,
-          )}
-        </PageSizeAdditional>
-        <ButtonsWrapper>
-          <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
-          <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
-        </ButtonsWrapper>
+        <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
+        {renderSideButtons()}
       </SimpleWrapper>
     );
   };
