@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('InputField Overflow and CSS Mixins', () => {
   test('default overflow behavior - text wrapping', async ({ page }) => {
@@ -36,17 +37,17 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const mainLabel = field.locator('label > div:first-child');
     await expect(mainLabel).toBeVisible();
     await mainLabel.hover();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     let tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).not.toBeVisible({ timeout: 100 });
+    await expect(tooltip).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
 
     // Проверяем AdditionalLabel
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
     await additionalLabel.hover();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).not.toBeVisible({ timeout: 100 });
+    await expect(tooltip).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
 
     // Проверяем ExtraText
     const extraText = field
@@ -55,9 +56,9 @@ test.describe('InputField Overflow and CSS Mixins', () => {
       .first();
     await expect(extraText).toBeVisible();
     await extraText.hover();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).not.toBeVisible({ timeout: 100 });
+    await expect(tooltip).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 
   test('tooltip is not disabled when visibleLabelTooltips is set to true', async ({ page }) => {
@@ -68,18 +69,18 @@ test.describe('InputField Overflow and CSS Mixins', () => {
     const additionalLabel = field.locator('label > div:last-child');
     await expect(additionalLabel).toBeVisible();
     await additionalLabel.hover();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     // Проверяем, что тултип additionalLabel появился (включен через visibleLabelTooltips.additionalLabel = false)
     const tooltip = frame.locator('[role="tooltip"]');
-    await expect(tooltip).toBeVisible({ timeout: 100 });
+    await expect(tooltip).toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
 
     const mainLabel = field.locator('label > div:first-child');
     await expect(mainLabel).toBeVisible();
     await mainLabel.hover();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     // Проверяем, что тултип mainLabel появился (включен через visibleLabelTooltips.label = false)
     const tooltip2 = frame.locator('[role="tooltip"]');
-    await expect(tooltip2).toBeVisible({ timeout: 100 });
+    await expect(tooltip2).toBeVisible({ timeout: TIMEOUTS.EXPECT_STANDARD });
   });
 
   test('overflow detection works correctly', async ({ page }) => {

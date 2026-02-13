@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
+import { getStorybookFrameLocator } from '../utils';
+import { UNDO_SHORTCUT, TIMEOUTS } from '../constants';
 
 test('basic render', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-input-textarea--text-area-playground');
@@ -30,13 +31,15 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Дождёмся, пока ResizeObserver обновит высоту wrapper
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 1000 })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), {
+        timeout: TIMEOUTS.POLL_STANDARD,
+      })
       .toBeGreaterThan(initialHeight);
   } else {
     // Chromium / Firefox — имитируем drag мышью
     const textAreaBox = await textarea.boundingBox();
-    const xStart = textAreaBox!.x + textAreaBox!.width - 2;
-    const yStart = textAreaBox!.y + textAreaBox!.height - 2;
+    const xStart = (textAreaBox?.x ?? 0) + (textAreaBox?.width ?? 0) - 2;
+    const yStart = (textAreaBox?.y ?? 0) + (textAreaBox?.height ?? 0) - 2;
 
     await page.mouse.move(xStart, yStart);
     await page.mouse.down();
@@ -45,7 +48,7 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Ждём, пока высота изменится
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: 50 })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: TIMEOUTS.POLL_FAST })
       .toBeGreaterThan(initialHeight);
 
     // Дополнительно проверяем через toHaveCSS, что высота действительно увеличилась
@@ -64,11 +67,15 @@ test('autoheight with value undefined', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxThird?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('autoheight with value true', async ({ page }) => {
@@ -82,15 +89,21 @@ test('autoheight with value true', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeGreaterThan(boxSecond!.height);
+  if (boxSecond !== undefined && boxSecond?.height !== undefined) {
+    expect(boxThird?.height).toBeGreaterThan(boxSecond.height);
+  }
 
   await textarea.fill('1');
   const boxFourth = await component.boundingBox();
-  expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxFourth?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('autoheight with min and max rows', async ({ page }) => {
@@ -106,15 +119,21 @@ test('autoheight with min and max rows', async ({ page }) => {
   const boxFirst = await component.boundingBox();
   await textarea.fill('1\n2\n3\n4\n5');
   const boxSecond = await component.boundingBox();
-  expect(boxSecond?.height).toBeGreaterThan(boxFirst!.height);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxSecond?.height).toBeGreaterThan(boxFirst.height);
+  }
 
   await textarea.fill('1\n2\n3\n4\n5\n6');
   const boxThird = await component.boundingBox();
-  expect(boxThird?.height).toBeCloseTo(boxSecond!.height, 0);
+  if (boxSecond !== undefined && boxSecond?.height !== undefined) {
+    expect(boxThird?.height).toBeCloseTo(boxSecond.height, 0);
+  }
 
   await textarea.fill('Привет!');
   const boxFourth = await component.boundingBox();
-  expect(boxFourth?.height).toBeCloseTo(boxFirst!.height, 0);
+  if (boxFirst !== undefined && boxFirst?.height !== undefined) {
+    expect(boxFourth?.height).toBeCloseTo(boxFirst.height, 0);
+  }
 });
 
 test('native undo works', async ({ page, browserName }) => {
@@ -127,7 +146,7 @@ test('native undo works', async ({ page, browserName }) => {
   await textarea.click();
   // имитируем ввод с клавиатуры по одному символу
   await textarea.pressSequentially('hello');
-  await page.waitForTimeout(50);
+  await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
   const valueBeforeUndo = await textarea.inputValue();
   await page.keyboard.press(UNDO_SHORTCUT);

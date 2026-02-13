@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TimePicker - user interactions', () => {
   test('onChange is called when value changes', async ({ page }) => {
@@ -9,14 +10,14 @@ test.describe('TimePicker - user interactions', () => {
     const input = frame.locator('.time-picker-native-input');
 
     await input.click();
-    await input.type('1', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('2', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('3', { delay: 50 });
-    await page.waitForTimeout(50);
-    await input.type('0', { delay: 50 });
-    await page.waitForTimeout(50);
+    await input.type('1', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('2', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('3', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
+    await input.type('0', { delay: TIMEOUTS.TYPE_STANDARD });
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     await expect(input).toHaveValue('12:30');
   });
@@ -29,13 +30,13 @@ test.describe('TimePicker - user interactions', () => {
 
     await input.click();
     await input.fill('1545');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const clearIcon = frame.locator('.time-picker-icon-panel svg').first();
     await expect(clearIcon).toBeVisible();
 
     await clearIcon.click();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     await expect(input).toHaveValue('');
   });
 
@@ -47,13 +48,13 @@ test.describe('TimePicker - user interactions', () => {
 
     await input.click();
     await input.fill('1545');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const clearIcon = frame.locator('.time-picker-icon-panel svg').first();
     await expect(clearIcon).toBeVisible();
 
     await clearIcon.click();
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     await expect(input).toHaveValue('00:00');
   });
 
@@ -70,11 +71,11 @@ test.describe('TimePicker - user interactions', () => {
     await expect(dropdown).toBeVisible();
 
     await input.press('ArrowDown');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     await input.press('ArrowDown');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
     await input.press('Enter');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const value = await input.inputValue();
     expect(value).toBeTruthy();
@@ -93,9 +94,9 @@ test.describe('TimePicker - user interactions', () => {
     await expect(dropdown).toBeVisible();
 
     await input.press('Escape');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
-    await expect(dropdown).not.toBeVisible({ timeout: 400 });
+    await expect(dropdown).not.toBeVisible({ timeout: TIMEOUTS.EXPECT_VISIBILITY });
   });
 
   test('value prop controls the input value', async ({ page }) => {
@@ -109,7 +110,7 @@ test.describe('TimePicker - user interactions', () => {
 
     await input.click();
     await input.fill('1420');
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     await expect(input).toHaveValue('14:20');
   });

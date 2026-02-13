@@ -95,17 +95,22 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
+
     const [open, setOpen] = useState<boolean>(false);
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>([...items]);
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
 
     useEffect(() => {
-      const array = defaultValue ?? value ?? [];
+      const array = value ?? defaultValue ?? [];
+      const selected: CheckboxGroupItemProps[] = [];
 
-      const selected: CheckboxGroupItemProps[] = array
-        .map((item) => flatMap.get(item)?.node)
-        .filter((item): item is CheckboxGroupItemProps => !!item); // https://www.benmvp.com/blog/filtering-undefined-elements-from-array-typescript/
-      selected.forEach((item) => (item.checked = true));
+      flatMap.forEach((value, key) => {
+        if (array.includes(key)) {
+          value.node.checked = true;
+
+          selected.push(value.node);
+        } else value.node.checked = false;
+      });
 
       setSelectedChips(selected);
     }, [defaultValue, value]);

@@ -50,7 +50,8 @@ export const RadioButtonLabel = styled.div<{
 `;
 
 const disabledCss = css`
-  border-color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
+  box-shadow: inset 0 0 0 ${BORDER_WIDTH_DEFAULT}px
+    var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   background-color: var(--admiral-color-Neutral_Neutral10, ${(p) => p.theme.color['Neutral/Neutral 10']});
 `;
 
@@ -72,7 +73,7 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
   width: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
   height: ${(p) => (p.$dimension === 's' ? DIMENSION_S : DIMENSION_M)}px;
   background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
-  border: ${BORDER_WIDTH_DEFAULT}px solid
+  box-shadow: inset 0 0 0 ${BORDER_WIDTH_DEFAULT}px
     var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
 
   fieldset[data-dimension='s'] & {
@@ -81,10 +82,13 @@ export const Span = styled.span<{ $dimension: Dimension; disabled?: boolean; $er
   }
   ${(p) => (p.disabled ? disabledCss : '')}
   ${(p) =>
-    p.$error ? `border-color: var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});` : ''}
+    p.$error
+      ? `box-shadow: inset 0 0 0 ${BORDER_WIDTH_DEFAULT}px
+        var(--admiral-color-Error_Error60Main, ${p.theme.color['Error/Error 60 Main']});`
+      : ''}
 
   fieldset:disabled & {
-    border: ${BORDER_WIDTH_DEFAULT}px solid
+    box-shadow: inset 0 0 0 ${BORDER_WIDTH_DEFAULT}px
       var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;
@@ -149,7 +153,7 @@ export const Input = styled.input<{ $dimension: Dimension }>`
 
   &:checked:disabled {
     & + div > span {
-      border: ${BORDER_WIDTH_CHECKED}px solid
+      box-shadow: inset 0 0 0 ${BORDER_WIDTH_CHECKED}px
         var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
       background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
     }
@@ -157,10 +161,12 @@ export const Input = styled.input<{ $dimension: Dimension }>`
 
   &:checked:not(:disabled) {
     & + div > span {
-      border: ${(p) =>
+      box-shadow: ${(p) =>
         p.readOnly
-          ? `${BORDER_WIDTH_CHECKED}px solid var(--admiral-color_Primary_Primary30, ${p.theme.color['Primary/Primary 30']})`
-          : `${BORDER_WIDTH_CHECKED}px solid var(--admiral-color_Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`};
+          ? `inset 0 0 0 ${BORDER_WIDTH_CHECKED}px
+        var(--admiral-color_Primary_Primary30, ${p.theme.color['Primary/Primary 30']})`
+          : `inset 0 0 0 ${BORDER_WIDTH_CHECKED}px
+        var(--admiral-color-Primary_Primary60Main, ${p.theme.color['Primary/Primary 60 Main']})`};
     }
   }
 

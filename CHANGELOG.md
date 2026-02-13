@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.60.0](https://github.com/AdmiralDS/react-ui/compare/v8.59.3...v8.60.0) (2026-02-04)
+
+
+### Features
+
+* **Pulse:** add smoothness to animation ([b397cfe](https://github.com/AdmiralDS/react-ui/commit/b397cfebf65d84a50e6b79a72ea1a9e5b6d932a3))
+* **RadioButton:** checked animation fixed ([c3d67d7](https://github.com/AdmiralDS/react-ui/commit/c3d67d725ea586dbabe16423ccbf487d961ed9e1))
+
+
+### Bug Fixes
+
+* **DateInput:** исправлена обработка кликов вокруг иконки ([e17266c](https://github.com/AdmiralDS/react-ui/commit/e17266c1e0f0692ff9c8f1805718a4595a74fdae))
+* **TextButton:** Исправлен размер иконки внутри flex-контейнера ([fc328ea](https://github.com/AdmiralDS/react-ui/commit/fc328eaf9ba7c4f731b6ec07fa4fbb0b215ba629)), closes [#2009](https://github.com/AdmiralDS/react-ui/issues/2009)
+
+### [8.59.3](https://github.com/AdmiralDS/react-ui/compare/v8.59.2...v8.59.3) (2026-01-27)
+
+
+### Bug Fixes
+
+* **DateInput:** remove closing dropdown by changing month ([e4d3117](https://github.com/AdmiralDS/react-ui/commit/e4d3117659e6478f0f2d64482fe90ffda5d9aa10))
+* **NumberInput:** [#1994](https://github.com/AdmiralDS/react-ui/issues/1994) исправлен warning, возникающий из-за параметра key в иконках ([30f307c](https://github.com/AdmiralDS/react-ui/commit/30f307cf1ca8be255ec05780c41619070b5f6ce8))
+* **TreeSelect:** сброс данных дерева при отсутствие value ([47b9dce](https://github.com/AdmiralDS/react-ui/commit/47b9dcea1a63f91d05e7993b4e10e800be5dad79))
+* **TreeSelect:** fix defaultValue ([2e1d88f](https://github.com/AdmiralDS/react-ui/commit/2e1d88f6152a8fb8b52db26c484827c5cd87b26e))
+
 ### [8.59.2](https://github.com/AdmiralDS/react-ui/compare/v8.59.1...v8.59.2) (2026-01-21)
 
 

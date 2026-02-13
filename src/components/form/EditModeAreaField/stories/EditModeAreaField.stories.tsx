@@ -56,9 +56,6 @@ export default {
     disableCopying: {
       control: { type: 'boolean' },
     },
-    displayClearIcon: {
-      control: { type: 'boolean' },
-    },
     displayInline: {
       control: { type: 'boolean' },
     },
@@ -69,9 +66,6 @@ export default {
       control: { type: 'boolean' },
     },
     skeleton: {
-      control: { type: 'boolean' },
-    },
-    isLoading: {
       control: { type: 'boolean' },
     },
     multilineView: {

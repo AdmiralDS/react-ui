@@ -7,6 +7,10 @@ export const MainLabel = styled.div<{ $cssMixin?: ReturnType<typeof css> }>`
   min-width: 0;
   text-align: left;
 
+  &:hover {
+    cursor: text;
+  }
+
   && {
     overflow-wrap: break-word;
   }
@@ -21,6 +25,10 @@ export const AdditionalLabel = styled.div<{ $cssMixin?: ReturnType<typeof css> }
   max-width: 50%;
   text-align: right;
   margin-left: 8px;
+
+  &:hover {
+    cursor: text;
+  }
 
   && {
     overflow-wrap: break-word;

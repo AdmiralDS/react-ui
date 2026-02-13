@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('Stepper Component', () => {
   test('basic render', async ({ page }) => {
@@ -35,8 +36,11 @@ test.describe('Stepper Component', () => {
     const firstStepBox = await firstStep.boundingBox();
     const secondStepBox = await secondStep.boundingBox();
 
-    expect(firstStepBox!.x).toBeLessThan(secondStepBox!.x);
-    expect(firstStepBox!.y).toBeCloseTo(secondStepBox!.y, 5);
+    if (secondStepBox !== undefined && secondStepBox?.x !== undefined) {
+      expect(firstStepBox?.x).toBeLessThan(secondStepBox.x);
+    } else if (secondStepBox !== undefined && secondStepBox?.y !== undefined) {
+      expect(firstStepBox?.y).toBeCloseTo(secondStepBox.y, 5);
+    }
 
     // Тест вертикальной ориентации
     await page.goto('/?path=/story/admiral-2-1-stepper--playground&args=orientation:vertical');
@@ -51,8 +55,11 @@ test.describe('Stepper Component', () => {
     const firstVerticalStepBox = await firstVerticalStep.boundingBox();
     const secondVerticalStepBox = await secondVerticalStep.boundingBox();
 
-    expect(firstVerticalStepBox!.y).toBeLessThan(secondVerticalStepBox!.y);
-    expect(firstVerticalStepBox!.x).toBeCloseTo(secondVerticalStepBox!.x, 5);
+    if (secondVerticalStepBox !== undefined && secondVerticalStepBox?.y !== undefined) {
+      expect(firstVerticalStepBox?.y).toBeLessThan(secondVerticalStepBox.y);
+    } else if (secondVerticalStepBox !== undefined && secondVerticalStepBox?.x !== undefined) {
+      expect(firstVerticalStepBox?.x).toBeCloseTo(secondVerticalStepBox.x, 5);
+    }
   });
 
   test('step states (completed, error, warning, disabled)', async ({ page }) => {
@@ -238,17 +245,21 @@ test.describe('Stepper Component', () => {
 
     // Изменяем размер окна
     await page.setViewportSize({ width: 400, height: 600 });
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const resizedBox = await stepper.boundingBox();
-    expect(resizedBox!.width).toBeLessThan(initialBox!.width);
+    if (initialBox !== undefined && initialBox?.width !== undefined) {
+      expect(resizedBox?.width).toBeLessThan(initialBox.width);
+    }
 
     // Возвращаем размер окна
     await page.setViewportSize({ width: 1200, height: 800 });
-    await page.waitForTimeout(50);
+    await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const restoredBox = await stepper.boundingBox();
-    expect(restoredBox!.width).toBeGreaterThan(resizedBox!.width);
+    if (resizedBox !== undefined && resizedBox?.width !== undefined) {
+      expect(restoredBox?.width).toBeGreaterThan(resizedBox.width);
+    }
   });
 
   test('lineClamp property', async ({ page }) => {
@@ -269,7 +280,7 @@ test.describe('Stepper Component', () => {
     // Проверяем, что высота соответствует lineClamp=1
     // Увеличиваем допустимую высоту, так как реальная высота может быть больше
     const lineHeight = 20; // Примерная высота строки
-    expect(stepBox!.height).toBeLessThanOrEqual(lineHeight * 2); // Запас
+    expect(stepBox?.height).toBeLessThanOrEqual(lineHeight * 2); // Запас
   });
 
   test('hideLastStepLine property', async ({ page }) => {

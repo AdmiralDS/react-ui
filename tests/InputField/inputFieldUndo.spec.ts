@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator, UNDO_SHORTCUT } from '../utils';
+import { getStorybookFrameLocator } from '../utils';
+import { UNDO_SHORTCUT } from '../constants';
 
 test('native undo restores previous value for InputField', async ({ page }) => {
   await page.goto('/?path=/story/admiral-2-1-form-field-inputfield--input-field-input');

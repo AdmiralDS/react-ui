@@ -12,6 +12,8 @@ export const dimensionMixin = css<DimensionProps>`
     ${IconContainer} {
       width: 24px;
       height: 24px;
+      max-width: 24px;
+      max-height: 24px;
     }
     ${typography['Button/Button 1']};
   }
@@ -20,6 +22,8 @@ export const dimensionMixin = css<DimensionProps>`
     ${IconContainer} {
       width: 20px;
       height: 20px;
+      max-width: 20px;
+      max-height: 20px;
     }
     ${typography['Button/Button 2']};
   }
