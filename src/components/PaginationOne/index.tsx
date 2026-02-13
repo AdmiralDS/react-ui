@@ -14,6 +14,7 @@ import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
 import { MenuButton } from './Menu';
 import { SideButtons } from './SideButtons';
+import { PageSizeSelect } from './PageSizeSelect';
 
 export type PaginationOneDimension = 'm' | 's';
 
@@ -170,14 +171,12 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     itemRangeText: theme_itemRangeText,
     pageRangeText: theme_pageRangeText,
     pageSelectLabel: theme_pageSelectLabel,
-    pageSizeSelectLabel: theme_pageSizeSelectLabel,
   } = theme.locales[theme.currentLocale].paginationOne;
 
   const itemsPerPageText = locale?.itemsPerPageText || theme_itemsPerPageText;
   const itemRangeText = locale?.itemRangeText || theme_itemRangeText;
   const pageRangeText = locale?.pageRangeText || theme_pageRangeText;
   const pageSelectLabel = locale?.pageSelectLabel || theme_pageSelectLabel;
-  const pageSizeSelectLabel = locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
 
   const safePageSize = pageSize > 0 ? pageSize : 1;
   const totalPages = useMemo(() => Math.max(Math.ceil(totalItems / safePageSize), 1), [totalItems, safePageSize]);
@@ -223,11 +222,6 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const handleClosePageNumberDropMenu = (pageNumber: string) => {
     handlePageInputHover(pageNumber);
     setIsVisible(false);
-  };
-
-  const handleSizeChange = (pageSizeSelected: string) => {
-    const pageSize = Number.parseInt(pageSizeSelected, 10);
-    onChange({ page: 1, pageSize: pageSize });
   };
 
   const handlePageInputChange = (pageSelected: string) => {
@@ -321,25 +315,20 @@ export const PaginationOne: FC<PaginationOneProps> = ({
       <ComplexWrapper data-simple={simple} {...props}>
         <Part>
           {itemsPerPageText}
-          <MenuButton
+          <PageSizeSelect
             dimension={dimension}
-            options={pageSizes}
-            selected={pageSize.toString()}
-            onSelectItem={handleSizeChange}
-            disabled={pageSizeSelectDisabled}
-            aria-label={pageSizeSelectLabel(pageSize, totalItems)}
-            menuMaxHeight={pageSizeDropContainerStyle?.menuMaxHeight || dropMaxHeight}
-            dropContainerCssMixin={
-              pageSizeDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
-            }
-            dropContainerClassName={pageSizeDropContainerStyle?.dropContainerClassName}
-            dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
-            menuWidth={pageSizeDropContainerStyle?.menuWidth || menuWidth}
-            dropMenuDataAttributes={dropMenuProps}
-            className="records-per-page-with-dropdown"
-          >
-            {pageSize}
-          </MenuButton>
+            pageSize={pageSize}
+            pageSizes={pageSizes}
+            pageSizeSelectDisabled={pageSizeSelectDisabled}
+            pageSizeDropContainerStyle={pageSizeDropContainerStyle}
+            dropContainerCssMixin={dropContainerCssMixin}
+            totalItems={totalItems}
+            dropMaxHeight={dropMaxHeight}
+            menuWidth={menuWidth}
+            localeLabel={locale?.pageSizeSelectLabel}
+            onChange={onChange}
+            {...props}
+          />
           <Divider />
           <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
         </Part>
