@@ -1,20 +1,18 @@
-import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import type { FC, HTMLAttributes } from 'react';
+import { useRef, useState, useMemo, useCallback } from 'react';
 import type { DataAttributes } from 'styled-components';
 import styled, { css, useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
 import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextInput } from '#src/components/input';
-import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import type { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
 import { MenuButton } from './Menu';
 import { SideButtons } from './SideButtons';
 import { PageSizeSelect } from './PageSizeSelect';
+import { PageNumberInput } from './PageNumberInput';
 
 export type PaginationOneDimension = 'm' | 's';
 
@@ -192,30 +190,28 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const forwardButtonDisabled = page === totalPages;
 
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedPageNumber, setSelectedPageNumber] = useState(page.toString());
+  const selectedPageNumber = useMemo(() => page.toString(), [page]);
   const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
-  const [inputPageNumber, setInputPageNumber] = useState(page.toString());
 
   const pageNumberInputRef = useRef<HTMLInputElement>(null);
 
-  const parsePageNumber = (pageSelected: string) => {
+  const parsePageNumber = (pageSelected: string): number => {
     if (pageSelected === '') {
-      return Number.parseInt(selectedPageNumber, 10);
+      return page;
     }
-    const page = Number.parseInt(pageSelected, 10);
-    if (Number.isNaN(page) || page < 1) {
+    const pageSelectedNumber = Number.parseInt(pageSelected, 10);
+    if (Number.isNaN(pageSelectedNumber) || pageSelectedNumber < 1) {
       return 1;
     }
-    if (page > totalPages) {
+    if (pageSelectedNumber > totalPages) {
       return totalPages;
     }
-    return page;
+    return pageSelectedNumber;
   };
 
   const handlePageInputHover = (activePage?: string) => {
     if (activePage) {
       setActivePageNumber(activePage);
-      setInputPageNumber(activePage);
     }
   };
 
@@ -226,7 +222,6 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const handlePageInputChange = (pageSelected: string) => {
     const page = parsePageNumber(pageSelected);
-    setSelectedPageNumber(page.toString());
     onChange({
       page,
       pageSize,
@@ -236,14 +231,12 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const pageIncrement = useCallback(() => {
     const newPage = page + 1;
-    setSelectedPageNumber(newPage.toString());
     setActivePageNumber(newPage.toString());
     onChange({ page: newPage, pageSize });
   }, [page, pageSize]);
 
   const pageDecrement = useCallback(() => {
     const newPage = page - 1;
-    setSelectedPageNumber(newPage.toString());
     setActivePageNumber(newPage.toString());
     onChange({ page: newPage, pageSize });
   }, [page, pageSize]);
@@ -259,33 +252,6 @@ export const PaginationOne: FC<PaginationOneProps> = ({
       handleClosePageNumberDropMenu(selectedPageNumber);
     } else {
       setIsVisible(true);
-    }
-  };
-
-  useEffect(() => {
-    if (isVisible && pageNumberInputRef) {
-      pageNumberInputRef.current?.select();
-      pageNumberInputRef.current?.focus();
-    }
-  }, [isVisible]);
-
-  const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
-    inputValue = inputValue.replace(/\D/g, '');
-    setInputPageNumber(inputValue);
-    setActivePageNumber(parsePageNumber(inputValue).toString());
-  };
-
-  const handleInputPageNumberKeyDown = (e: KeyboardEvent) => {
-    const code = keyboardKey.getCode(e);
-
-    if (code === keyboardKey.Enter) {
-      handlePageInputChange(inputPageNumber);
-      setIsVisible(false);
-    } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
-      pageNumberInputRef.current?.blur();
-    } else if (code === keyboardKey.Escape) {
-      handleClosePageNumberDropMenu(selectedPageNumber);
     }
   };
 
@@ -363,15 +329,16 @@ export const PaginationOne: FC<PaginationOneProps> = ({
               showPageNumberInput
                 ? ({ dimension = 's' }) => {
                     return (
-                      <MenuActionsPanel dimension={dimension}>
-                        <TextInput
-                          dimension="s"
-                          value={inputPageNumber}
-                          onChange={handleInputPageNumberChange}
-                          onKeyDown={handleInputPageNumberKeyDown}
-                          ref={pageNumberInputRef}
-                        />
-                      </MenuActionsPanel>
+                      <PageNumberInput
+                        dimension={dimension}
+                        page={page}
+                        pageSize={pageSize}
+                        totalPages={totalPages}
+                        activePageNumber={activePageNumber}
+                        setActivePageNumber={setActivePageNumber}
+                        setMenuVisible={setIsVisible}
+                        onChange={onChange}
+                      />
                     );
                   }
                 : undefined

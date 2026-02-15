@@ -12,7 +12,7 @@ export const PaginationOnePlaygroundTemplate = ({
   const [pageSize, setPageSize] = React.useState(8);
   const [page, setPage] = React.useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
-  const totalElements = props.totalItems || 100;
+  // const totalElements = props.totalItems || 100;
 
   const leftButtonProps = { 'data-testid': useId() };
   const rightButtonProps = { 'data-testid': useId() };
@@ -36,6 +36,7 @@ export const PaginationOnePlaygroundTemplate = ({
         pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
         leftButtonPropsConfig={() => leftButtonProps}
         rightButtonPropsConfig={() => rightButtonProps}
+        // showPageNumberInput
       />
     </ThemeProvider>
   );

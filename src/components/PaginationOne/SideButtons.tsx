@@ -21,10 +21,10 @@ const nothing = () => ({});
 
 type ButtonsProps = {
   dimension: PaginationOneProps['dimension'];
-  localeBackwardText?: string;
-  localeForwardText?: string;
-  leftButtonPropsConfig?: PaginationOneProps['leftButtonPropsConfig'];
-  rightButtonPropsConfig?: PaginationOneProps['rightButtonPropsConfig'];
+  localeBackwardText: string | undefined;
+  localeForwardText: string | undefined;
+  leftButtonPropsConfig: PaginationOneProps['leftButtonPropsConfig'] | undefined;
+  rightButtonPropsConfig: PaginationOneProps['rightButtonPropsConfig'] | undefined;
   pageDecrement: () => void;
   pageIncrement: () => void;
   backButtonDisabled: boolean;
