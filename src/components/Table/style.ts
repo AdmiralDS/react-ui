@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as ArrowUpOutline } from '@admiral-ds/icons/build/system/ArrowUpOutline.svg';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
-import { ReactComponent as DragOutline } from './icons/dragIcon.svg';
+// import { ReactComponent as DragOutline } from './icons/dragIcon.svg';
+import { ReactComponent as DragOutline } from '@admiral-ds/icons/build/service/DragOutline.svg';
+
 import type { TableProps, TableRow } from '#src/components/Table';
 
 import {
