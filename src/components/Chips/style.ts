@@ -189,7 +189,6 @@ const colorsBorderAndBackground = css<{
   $disabled?: boolean;
   $selected?: boolean;
   $appearance?: ChipAppearance;
-  $withCloseIcon?: boolean;
   $clickable: boolean;
 }>`
   background-color: ${({ theme, $appearance, $selected, $disabled }) => {
@@ -244,6 +243,7 @@ export const ChipComponentStyled = styled.div<{
   $withBadge?: boolean;
   $withTooltip?: boolean;
   $clickable: boolean;
+  $readOnly?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -259,11 +259,11 @@ export const ChipComponentStyled = styled.div<{
   ${colorsBorderAndBackground}
   ${heights}
   ${(p) =>
-    p.$withCloseIcon
+    p.$withCloseIcon && !p.$readOnly
       ? `padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
       : paddings}
   ${(p) =>
-    p.$withBadge && !p.$withCloseIcon
+    p.$withBadge && (!p.$withCloseIcon || p.$readOnly)
       ? `padding-inline-end: ${(p.$dimension === 's' ? 4 : 6) - (p.$appearance === 'outlined' ? 1 : 0)}px;
          padding-inline-start: ${(p.$dimension === 's' ? 8 : 12) - (p.$appearance === 'outlined' ? 1 : 0)}px;`
       : ''}

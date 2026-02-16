@@ -51,7 +51,7 @@ export const ChipsIconTemplate = (props: ChipsProps) => {
             {...props}
             key={d.id}
             selected={selectedM === d.id}
-            onClick={() => (props.disabled ? null : setSelectedM(d.id))}
+            onClick={() => (props.disabled || props.readOnly ? undefined : setSelectedM(d.id))}
             iconStart={d?.iconStart}
             iconEnd={d?.iconEnd}
           >
