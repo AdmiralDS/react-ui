@@ -1,20 +1,16 @@
 import type { FC, HTMLAttributes } from 'react';
-import { useRef, useState, useMemo, useCallback } from 'react';
-import type { DataAttributes } from 'styled-components';
-import styled, { css, useTheme } from 'styled-components';
+import { useMemo } from 'react';
+import type { DataAttributes, css } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
 import type { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
-import { MenuButton } from './Menu';
 import { SideButtons } from './SideButtons';
 import { PageSizeSelect } from './PageSizeSelect';
-import { PageNumberInput } from './PageNumberInput';
-
-export type PaginationOneDimension = 'm' | 's';
+import { PageSelect } from './PageSelect';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -54,13 +50,7 @@ const PageSizeAdditional = styled.div`
   }
 `;
 
-const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boolean) => css`
-  width: auto;
-  min-width: ${showPageNumberInput ? 80 : 68}px;
-
-  ${mixin};
-`;
-
+export type PaginationOneDimension = 'm' | 's';
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationOneDimension;
@@ -168,97 +158,20 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     itemsPerPageText: theme_itemsPerPageText,
     itemRangeText: theme_itemRangeText,
     pageRangeText: theme_pageRangeText,
-    pageSelectLabel: theme_pageSelectLabel,
   } = theme.locales[theme.currentLocale].paginationOne;
 
   const itemsPerPageText = locale?.itemsPerPageText || theme_itemsPerPageText;
   const itemRangeText = locale?.itemRangeText || theme_itemRangeText;
   const pageRangeText = locale?.pageRangeText || theme_pageRangeText;
-  const pageSelectLabel = locale?.pageSelectLabel || theme_pageSelectLabel;
 
   const safePageSize = pageSize > 0 ? pageSize : 1;
   const totalPages = useMemo(() => Math.max(Math.ceil(totalItems / safePageSize), 1), [totalItems, safePageSize]);
-  const pages = useMemo(() => Array.from({ length: totalPages }, (_, k) => k + 1), [totalPages]);
 
   const [rangeStart, rangeEnd] = useMemo(() => {
     const start = Math.min(pageSize * (page - 1) + 1, totalItems);
     const end = Math.min(page * pageSize, totalItems);
     return [start, end];
   }, [page, pageSize, totalItems]);
-
-  const backButtonDisabled = page === 1;
-  const forwardButtonDisabled = page === totalPages;
-
-  const [isVisible, setIsVisible] = useState(false);
-  const selectedPageNumber = useMemo(() => page.toString(), [page]);
-  const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
-
-  const pageNumberInputRef = useRef<HTMLInputElement>(null);
-
-  const parsePageNumber = (pageSelected: string): number => {
-    if (pageSelected === '') {
-      return page;
-    }
-    const pageSelectedNumber = Number.parseInt(pageSelected, 10);
-    if (Number.isNaN(pageSelectedNumber) || pageSelectedNumber < 1) {
-      return 1;
-    }
-    if (pageSelectedNumber > totalPages) {
-      return totalPages;
-    }
-    return pageSelectedNumber;
-  };
-
-  const handlePageInputHover = (activePage?: string) => {
-    if (activePage) {
-      setActivePageNumber(activePage);
-    }
-  };
-
-  const handleClosePageNumberDropMenu = (pageNumber: string) => {
-    handlePageInputHover(pageNumber);
-    setIsVisible(false);
-  };
-
-  const handlePageInputChange = (pageSelected: string) => {
-    const page = parsePageNumber(pageSelected);
-    onChange({
-      page,
-      pageSize,
-    });
-    handleClosePageNumberDropMenu(page.toString());
-  };
-
-  const pageIncrement = useCallback(() => {
-    const newPage = page + 1;
-    setActivePageNumber(newPage.toString());
-    onChange({ page: newPage, pageSize });
-  }, [page, pageSize]);
-
-  const pageDecrement = useCallback(() => {
-    const newPage = page - 1;
-    setActivePageNumber(newPage.toString());
-    onChange({ page: newPage, pageSize });
-  }, [page, pageSize]);
-
-  const dropMenuProps = passDropdownDataAttributes(props);
-
-  const handleClickOutside = () => {
-    handleClosePageNumberDropMenu(selectedPageNumber);
-  };
-
-  const handleMenuButtonClick = () => {
-    if (isVisible) {
-      handleClosePageNumberDropMenu(selectedPageNumber);
-    } else {
-      setIsVisible(true);
-    }
-  };
-
-  const handleMenuCycle = () => {
-    pageNumberInputRef.current?.focus();
-    return false;
-  };
 
   const renderSideButtons = () => {
     return (
@@ -268,10 +181,10 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         localeForwardText={locale?.forwardText}
         leftButtonPropsConfig={leftButtonPropsConfig}
         rightButtonPropsConfig={rightButtonPropsConfig}
-        pageDecrement={pageDecrement}
-        pageIncrement={pageIncrement}
-        backButtonDisabled={backButtonDisabled}
-        forwardButtonDisabled={forwardButtonDisabled}
+        page={page}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        onChange={onChange}
       />
     );
   };
@@ -300,52 +213,21 @@ export const PaginationOne: FC<PaginationOneProps> = ({
         </Part>
         <Part>
           <Divider />
-          <MenuButton
+          <PageSelect
             dimension={dimension}
-            options={pages}
-            selected={selectedPageNumber}
-            onSelectItem={handlePageInputChange}
-            active={activePageNumber}
-            onActivateItem={handlePageInputHover}
-            disabled={pageSelectDisabled}
-            aria-label={pageSelectLabel(page, totalPages)}
-            menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
-            dropContainerCssMixin={
-              pageNumberDropContainerStyle?.dropContainerCssMixin ||
-              extendMixin(dropContainerCssMixin, showPageNumberInput)
-            }
-            dropContainerClassName={pageNumberDropContainerStyle?.dropContainerClassName}
-            dropContainerStyle={pageNumberDropContainerStyle?.dropContainerStyle}
-            menuWidth={pageNumberDropContainerStyle?.menuWidth || menuWidth}
-            dropMenuDataAttributes={dropMenuProps}
-            className="current-page-number-with-dropdown"
-            isVisible={isVisible}
-            onVisibilityChange={setIsVisible}
-            onClickOutside={handleClickOutside}
-            onClick={handleMenuButtonClick}
-            onForwardCycleApprove={handleMenuCycle}
-            onBackwardCycleApprove={handleMenuCycle}
-            renderTopPanel={
-              showPageNumberInput
-                ? ({ dimension = 's' }) => {
-                    return (
-                      <PageNumberInput
-                        dimension={dimension}
-                        page={page}
-                        pageSize={pageSize}
-                        totalPages={totalPages}
-                        activePageNumber={activePageNumber}
-                        setActivePageNumber={setActivePageNumber}
-                        setMenuVisible={setIsVisible}
-                        onChange={onChange}
-                      />
-                    );
-                  }
-                : undefined
-            }
-          >
-            {page}
-          </MenuButton>
+            page={page}
+            pageSize={pageSize}
+            pageSelectDisabled={pageSelectDisabled}
+            totalPages={totalPages}
+            pageNumberDropContainerStyle={pageNumberDropContainerStyle}
+            dropContainerCssMixin={dropContainerCssMixin}
+            dropMaxHeight={dropMaxHeight}
+            menuWidth={menuWidth}
+            showPageNumberInput={showPageNumberInput}
+            localeLabel={locale?.pageSelectLabel}
+            onChange={onChange}
+            {...props}
+          />
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
           {renderSideButtons()}
         </Part>

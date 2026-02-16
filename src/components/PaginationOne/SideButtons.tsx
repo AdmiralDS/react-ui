@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 import { Button } from '#src/components/Button';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -25,10 +25,10 @@ type ButtonsProps = {
   localeForwardText: string | undefined;
   leftButtonPropsConfig: PaginationOneProps['leftButtonPropsConfig'] | undefined;
   rightButtonPropsConfig: PaginationOneProps['rightButtonPropsConfig'] | undefined;
-  pageDecrement: () => void;
-  pageIncrement: () => void;
-  backButtonDisabled: boolean;
-  forwardButtonDisabled: boolean;
+  onChange: PaginationOneProps['onChange'];
+  page: PaginationOneProps['page'];
+  pageSize: PaginationOneProps['pageSize'];
+  totalPages: number;
 };
 
 export const SideButtons = memo(
@@ -38,10 +38,10 @@ export const SideButtons = memo(
     localeForwardText,
     leftButtonPropsConfig = nothing,
     rightButtonPropsConfig = nothing,
-    pageDecrement,
-    pageIncrement,
-    backButtonDisabled,
-    forwardButtonDisabled,
+    onChange,
+    page,
+    pageSize,
+    totalPages,
   }: ButtonsProps) => {
     const theme = useTheme() || LIGHT_THEME;
 
@@ -50,6 +50,18 @@ export const SideButtons = memo(
 
     const backwardText = localeBackwardText || theme_backwardText;
     const forwardText = localeForwardText || theme_forwardText;
+    const backButtonDisabled = page === 1;
+    const forwardButtonDisabled = page === totalPages;
+
+    const pageIncrement = useCallback(() => {
+      const newPage = page + 1;
+      onChange({ page: newPage, pageSize });
+    }, [page, pageSize, onChange]);
+
+    const pageDecrement = useCallback(() => {
+      const newPage = page - 1;
+      onChange({ page: newPage, pageSize });
+    }, [page, pageSize, onChange]);
 
     const leftButtonProps = {
       appearance: 'tertiary',

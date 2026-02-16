@@ -36,7 +36,7 @@ export const PaginationOnePlaygroundTemplate = ({
         pageNumberDropContainerStyle={{ dropContainerClassName: 'pageNumberDropContainerClass' }}
         leftButtonPropsConfig={() => leftButtonProps}
         rightButtonPropsConfig={() => rightButtonProps}
-        // showPageNumberInput
+        showPageNumberInput
       />
     </ThemeProvider>
   );
