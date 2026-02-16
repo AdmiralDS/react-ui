@@ -105,7 +105,7 @@ export const MultiInputPlaygroundTemplate = ({
           <StyledChip
             {...item}
             key={index}
-            onClose={props.disableCopying ? undefined : handleDeleteChip}
+            onClose={props.readOnly || props.disableCopying ? undefined : handleDeleteChip}
             tabIndex={-1}
             dimension="s"
             appearance="filled"

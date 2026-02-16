@@ -8,7 +8,7 @@ const listDataIconTooltip = [
   { id: '1', label: 'Ограниченное пространство' },
   {
     id: '2',
-    label: 'Кастомый Tooltip',
+    label: 'Кастомый Tooltip с переполнением',
     renderContentTooltip: () => (
       <T font="Body/Body 2 Long" color={'Success/Success 40'} as="div">
         Здесь отображается кастомный Tooltip
