@@ -20,8 +20,6 @@ import { refSetter } from '#src/components/common/utils/refSetter';
 export type ChipDimension = 's' | 'm';
 export type ChipAppearance = 'filled' | 'outlined';
 
-const defaultRenderContent = () => '';
-
 export interface ChipsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ChipDimension;
@@ -60,6 +58,17 @@ export interface ChipsProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /** Только для чтения */
   readOnly?: boolean;
+
+  /**
+   * Отключение Tooltip.
+   * При true:
+   * - не навешиваются hover/focus-слушатели для показа/скрытия Tooltip,
+   * - не выполняются проверки переполнения (overflow) контента для тултипа.
+   * При false:
+   * - если передан renderContentTooltip, будет показан кастомный контент тултипа,
+   * - иначе при примитивных children (string | number) будет показано их значение,
+   */
+  disabledTooltip?: boolean;
 }
 
 export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
@@ -71,13 +80,14 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
       selected,
       onClose,
       children,
-      renderContentTooltip = defaultRenderContent,
+      renderContentTooltip,
       iconBefore,
       iconAfter,
       iconStart,
       iconEnd,
       badge,
       readOnly,
+      disabledTooltip,
       ...props
     },
     ref,
@@ -87,6 +97,8 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const withCloseIcon = !!onClose;
     const withBadge = !!badge;
+    const childrenIsPrimitive = typeof children === 'string' || typeof children === 'number';
+
     const badgeAppearance: BadgeAppearance = useMemo(() => {
       if (selected && !disabled) return 'whiteBlue';
       if (disabled) {
@@ -101,12 +113,16 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
     const refItems = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
+      if (disabledTooltip) return;
+
       if (refItems.current && checkOverflow(refItems.current) !== overflow) {
         setOverflow(checkOverflow(refItems.current));
       }
-    }, [tooltipVisible, setOverflow]);
+    }, [tooltipVisible, overflow, setOverflow, disabledTooltip]);
 
     useLayoutEffect(() => {
+      if (disabledTooltip) return;
+
       function show() {
         setTooltipVisible(true);
       }
@@ -126,7 +142,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
           chip.removeEventListener('blur', hide);
         };
       }
-    }, [setTooltipVisible]);
+    }, [setTooltipVisible, disabledTooltip]);
 
     const handleClickCloseIcon = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -147,6 +163,12 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
       }
     };
 
+    const hasTooltipContent = renderContentTooltip || (childrenIsPrimitive && children);
+
+    const shouldRenderTooltip = !disabledTooltip && tooltipVisible && overflow && hasTooltipContent;
+
+    const tooltipRenderContent = renderContentTooltip || (() => children);
+
     return (
       <>
         <ChipComponentStyled
@@ -158,6 +180,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
           $selected={selected}
           $defaultChip={defaultChip}
           $withCloseIcon={withCloseIcon}
+          $readOnly={readOnly}
           $withTooltip={overflow}
           $withBadge={withBadge}
           onKeyDown={handleKeyDown}
@@ -169,12 +192,11 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
             $disabled={disabled}
             $appearance={appearance}
             $selected={selected}
-            //
             $withCloseIcon={readOnly || withCloseIcon}
           >
             {(iconStart || iconBefore) && (
               <IconStartWrapperStyled>
-                <IconWrapperStyled $dimension={dimension} $withCloseIcon={readOnly || withCloseIcon}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={!readOnly && withCloseIcon}>
                   {iconStart ? iconStart : iconBefore}
                 </IconWrapperStyled>
               </IconStartWrapperStyled>
@@ -187,12 +209,12 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
             )}
             {!withCloseIcon && (iconEnd || iconAfter) && (
               <IconEndWrapperStyled $dimension={dimension}>
-                <IconWrapperStyled $dimension={dimension} $withCloseIcon={readOnly || withCloseIcon}>
+                <IconWrapperStyled $dimension={dimension} $withCloseIcon={!readOnly && withCloseIcon}>
                   {iconEnd ? iconEnd : iconAfter}
                 </IconWrapperStyled>
               </IconEndWrapperStyled>
             )}
-            {withCloseIcon && (
+            {!readOnly && withCloseIcon && (
               <CloseIconButton
                 dimension={dimension === 'm' ? 'mBig' : 's'}
                 highlightFocus={false}
@@ -204,7 +226,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
             )}
           </ChipContentWrapperStyled>
         </ChipComponentStyled>
-        {tooltipVisible && overflow && <Tooltip targetElement={chipRef.current} renderContent={renderContentTooltip} />}
+        {shouldRenderTooltip && <Tooltip targetElement={chipRef.current} renderContent={tooltipRenderContent} />}
       </>
     );
   },
