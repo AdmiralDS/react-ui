@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, memo, forwardRef } from 'react';
+import { useState, useRef, useEffect, useCallback, forwardRef, memo } from 'react';
 
 import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
 import { TextInput } from '#src/components/input';
@@ -73,30 +73,33 @@ export const PageNumberInput = memo(
         [parsePageNumber],
       );
 
-      const handleInputKeyDown = (e: React.KeyboardEvent) => {
-        const code = keyboardKey.getCode(e);
+      const handleInputKeyDown = useCallback(
+        (e: React.KeyboardEvent) => {
+          const code = keyboardKey.getCode(e);
 
-        if (code === keyboardKey.Enter) {
-          setMenuVisible(false);
-          const page = parsePageNumber(inputPageNumber);
-          onChange({ page, pageSize });
-          setActivePageNumber(page.toString());
-        } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
-          pageNumberInputRef.current?.blur();
-        } else if (code === keyboardKey.Escape) {
-          setMenuVisible(false);
-          setActivePageNumber(page.toString());
-        }
-      };
+          if (code === keyboardKey.Enter) {
+            setMenuVisible(false);
+            const page = parsePageNumber(inputPageNumber);
+            onChange({ page, pageSize });
+            setActivePageNumber(page.toString());
+          } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
+            pageNumberInputRef.current?.blur();
+          } else if (code === keyboardKey.Escape) {
+            setMenuVisible(false);
+            setActivePageNumber(page.toString());
+          }
+        },
+        [inputPageNumber, onChange, page, pageSize],
+      );
 
       return (
         <MenuActionsPanel dimension={dimension}>
           <TextInput
+            ref={refSetter(ref, pageNumberInputRef)}
             dimension="s"
             value={inputPageNumber}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
-            ref={refSetter(ref, pageNumberInputRef)}
           />
         </MenuActionsPanel>
       );

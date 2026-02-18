@@ -188,46 +188,53 @@ export const PaginationOne: FC<PaginationOneProps> = ({
       />
     );
   };
+  const renderPageSelect = () => (
+    <PageSelect
+      dimension={dimension}
+      page={page}
+      pageSize={pageSize}
+      pageSelectDisabled={pageSelectDisabled}
+      totalPages={totalPages}
+      pageNumberDropContainerStyle={pageNumberDropContainerStyle}
+      dropContainerCssMixin={dropContainerCssMixin}
+      dropMaxHeight={dropMaxHeight}
+      menuWidth={menuWidth}
+      showPageNumberInput={showPageNumberInput}
+      localeLabel={locale?.pageSelectLabel}
+      onChange={onChange}
+      {...props}
+    />
+  );
+
+  const renderPageSizeSelect = () => (
+    <PageSizeSelect
+      dimension={dimension}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      pageSizeSelectDisabled={pageSizeSelectDisabled}
+      pageSizeDropContainerStyle={pageSizeDropContainerStyle}
+      dropContainerCssMixin={dropContainerCssMixin}
+      totalItems={totalItems}
+      dropMaxHeight={dropMaxHeight}
+      menuWidth={menuWidth}
+      localeLabel={locale?.pageSizeSelectLabel}
+      onChange={onChange}
+      {...props}
+    />
+  );
 
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
         <Part>
           {itemsPerPageText}
-          <PageSizeSelect
-            dimension={dimension}
-            pageSize={pageSize}
-            pageSizes={pageSizes}
-            pageSizeSelectDisabled={pageSizeSelectDisabled}
-            pageSizeDropContainerStyle={pageSizeDropContainerStyle}
-            dropContainerCssMixin={dropContainerCssMixin}
-            totalItems={totalItems}
-            dropMaxHeight={dropMaxHeight}
-            menuWidth={menuWidth}
-            localeLabel={locale?.pageSizeSelectLabel}
-            onChange={onChange}
-            {...props}
-          />
+          {renderPageSizeSelect()}
           <Divider />
           <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
         </Part>
         <Part>
           <Divider />
-          <PageSelect
-            dimension={dimension}
-            page={page}
-            pageSize={pageSize}
-            pageSelectDisabled={pageSelectDisabled}
-            totalPages={totalPages}
-            pageNumberDropContainerStyle={pageNumberDropContainerStyle}
-            dropContainerCssMixin={dropContainerCssMixin}
-            dropMaxHeight={dropMaxHeight}
-            menuWidth={menuWidth}
-            showPageNumberInput={showPageNumberInput}
-            localeLabel={locale?.pageSelectLabel}
-            onChange={onChange}
-            {...props}
-          />
+          {renderPageSelect()}
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
           {renderSideButtons()}
         </Part>

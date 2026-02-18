@@ -4,9 +4,6 @@ import { Menu, MenuItem, mediumGroupBorderRadius, T } from '@admiral-ds/react-ui
 import type { MenuProps, RenderOptionProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextInput } from '#src/components/input';
-
 type StoryItem = {
   id: string;
   label: string;
@@ -15,46 +12,44 @@ type StoryItem = {
   readOnly?: boolean;
 };
 
-// const STORY_ITEMS: Array<StoryItem> = [
-//   {
-//     id: '1',
-//     label: 'Option one',
-//     value: 1,
-//   },
-//   {
-//     id: '2',
-//     label: 'Option two',
-//     value: 2,
-//     disabled: true,
-//   },
-//   {
-//     id: '3',
-//     label: 'Option three',
-//     value: 3,
-//   },
-//   {
-//     id: '4',
-//     label: 'Option four',
-//     value: 4,
-//   },
-//   {
-//     id: '5',
-//     label: 'Option five',
-//     value: 5,
-//   },
-//   {
-//     id: '6',
-//     label: 'Option six',
-//     value: 7,
-//   },
-//   {
-//     id: '7',
-//     label: 'Option seven',
-//     value: 6,
-//   },
-// ];
-
-const STORY_ITEMS = Array.from({ length: 994025 }, (_, k) => ({ id: `${k + 1}`, label: `Option ${k}`, value: k + 1 }));
+const STORY_ITEMS: Array<StoryItem> = [
+  {
+    id: '1',
+    label: 'Option one',
+    value: 1,
+  },
+  {
+    id: '2',
+    label: 'Option two',
+    value: 2,
+    disabled: true,
+  },
+  {
+    id: '3',
+    label: 'Option three',
+    value: 3,
+  },
+  {
+    id: '4',
+    label: 'Option four',
+    value: 4,
+  },
+  {
+    id: '5',
+    label: 'Option five',
+    value: 5,
+  },
+  {
+    id: '6',
+    label: 'Option six',
+    value: 7,
+  },
+  {
+    id: '7',
+    label: 'Option seven',
+    value: 6,
+  },
+];
 
 const parseShadow = (token: string) => token.replace('box-shadow: ', '').replace(';', '');
 
@@ -76,8 +71,6 @@ export const MenuSimpleTemplate = ({
   CSSCustomProps,
   ...props
 }: MenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  // const [active, setActive] = React.useState('');
-  // const [input, setInput] = React.useState('');
   const model = React.useMemo(() => {
     return STORY_ITEMS.map((item) => ({
       id: item.id,
@@ -97,35 +90,11 @@ export const MenuSimpleTemplate = ({
       </T>
       <Container>
         <Wrapper style={{ width: 'fit-content' }}>
-          <Menu
-            {...props}
-            defaultIsActive={false}
-            model={model}
-            // active={active}
-            // onActivateItem={(item) => {
-            //   setActive(item);
-            //   setInput(item);
-            // }}
-            virtualScroll={{ itemHeight: 'auto' }}
-            // renderTopPanel={({ dimension = 's' }) => {
-            //   return (
-            //     <MenuActionsPanel dimension={dimension}>
-            //       <TextInput
-            //         dimension="s"
-            //         value={input}
-            //         onChange={(e) => {
-            //           setInput(e.target.value);
-            //           setActive(e.target.value);
-            //         }}
-            //       />
-            //     </MenuActionsPanel>
-            //   );
-            // }}
-          />
-        </Wrapper>
-        {/* <Wrapper style={{ width: 'fit-content' }}>
           <Menu {...props} defaultIsActive={false} model={model} />
-        </Wrapper> */}
+        </Wrapper>
+        <Wrapper style={{ width: 'fit-content' }}>
+          <Menu {...props} defaultIsActive={false} model={model} />
+        </Wrapper>
       </Container>
     </ThemeProvider>
   );

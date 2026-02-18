@@ -1,5 +1,5 @@
 import { useTheme, css } from 'styled-components';
-import { memo, useState, useMemo, useRef, useEffect } from 'react';
+import { memo, useState, useMemo, useRef, useEffect, useCallback } from 'react';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { PaginationOneProps } from '#src/components/PaginationOne';
@@ -62,40 +62,42 @@ export const PageSelect = memo(
       setActivePageNumber(page.toString());
     }, [page]);
 
-    const handlePageHover = (activePage?: string) => {
+    const handlePageHover = useCallback((activePage?: string) => {
       if (activePage) {
         setActivePageNumber(activePage);
       }
-    };
+    }, []);
 
-    const handlePageChange = (pageSelected: string) => {
-      const page = Number.parseInt(pageSelected, 10);
-      onChange({
-        page,
-        pageSize,
-      });
-      setIsVisible(false);
-    };
+    const handlePageChange = useCallback(
+      (pageSelected: string) => {
+        const page = Number.parseInt(pageSelected, 10);
+        onChange({
+          page,
+          pageSize,
+        });
+        setIsVisible(false);
+      },
+      [onChange, pageSize],
+    );
 
-    const handleClickOutside = () => {
+    const handleClickOutside = useCallback(() => {
       setActivePageNumber(selectedPageNumber);
-
       setIsVisible(false);
-    };
+    }, [selectedPageNumber]);
 
-    const handleMenuButtonClick = () => {
+    const handleMenuButtonClick = useCallback(() => {
       if (isVisible) {
         setActivePageNumber(selectedPageNumber);
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-    };
+    }, [isVisible, selectedPageNumber]);
 
-    const handleMenuCycle = () => {
+    const handleMenuCycle = useCallback(() => {
       pageNumberInputRef.current?.focus();
       return false;
-    };
+    }, []);
 
     return (
       <MenuButton
