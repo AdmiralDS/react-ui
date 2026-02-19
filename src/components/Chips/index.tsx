@@ -145,7 +145,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
     }, [setTooltipVisible, disabledTooltip]);
 
     const handleClickCloseIcon = (e: React.MouseEvent) => {
-      e.preventDefault();
+      e.stopPropagation();
       onClose?.(props.id);
     };
 
@@ -218,7 +218,7 @@ export const Chips = forwardRef<HTMLDivElement, ChipsProps>(
               <CloseIconButton
                 dimension={dimension === 'm' ? 'mBig' : 's'}
                 highlightFocus={false}
-                onMouseDown={handleClickCloseIcon}
+                onClick={handleClickCloseIcon}
                 disabled={disabled}
                 tabIndex={-1}
                 appearance={appearance === 'outlined' ? 'primary' : 'secondary'}
