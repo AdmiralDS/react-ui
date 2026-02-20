@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { PaginationOne, Field } from '@admiral-ds/react-ui';
 import type { PaginationOneProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import styled, { ThemeProvider } from 'styled-components';
@@ -12,10 +12,10 @@ const Separator = styled.div`
 export const PaginationOneTypesTemplate = (
   props: PaginationOneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean },
 ) => {
-  const [pageSize1, setPageSize1] = React.useState(8);
-  const [page1, setPage1] = React.useState(1);
-  const [pageSize2, setPageSize2] = React.useState(8);
-  const [page2, setPage2] = React.useState(1);
+  const [pageSize1, setPageSize1] = useState(8);
+  const [page1, setPage1] = useState(1);
+  const [pageSize2, setPageSize2] = useState(8);
+  const [page2, setPage2] = useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = 100;
 

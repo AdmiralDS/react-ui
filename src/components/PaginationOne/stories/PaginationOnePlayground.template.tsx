@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { PaginationOne, useId } from '@admiral-ds/react-ui';
 import type { PaginationOneProps, BorderRadiusType } from '@admiral-ds/react-ui';
 import { ThemeProvider } from 'styled-components';
@@ -9,8 +9,8 @@ export const PaginationOnePlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: PaginationOneProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [pageSize, setPageSize] = React.useState(8);
-  const [page, setPage] = React.useState(1);
+  const [pageSize, setPageSize] = useState(8);
+  const [page, setPage] = useState(1);
   const pageSizes = [8, 20, 50, 100, 200];
   const totalElements = props.totalItems || 100;
 

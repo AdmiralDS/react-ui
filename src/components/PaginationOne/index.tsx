@@ -1,22 +1,16 @@
-import type { ChangeEvent, FC, HTMLAttributes, KeyboardEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import type { DataAttributes } from 'styled-components';
-import styled, { css, useTheme } from 'styled-components';
+import type { FC, HTMLAttributes } from 'react';
+import { useMemo } from 'react';
+import type { DataAttributes, css } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import { typography } from '#src/components/Typography';
-import { ReactComponent as ChevronLeft } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
-import { ReactComponent as ChevronRight } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
-
-import { MenuButton } from './Menu';
-import { passDropdownDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { MenuActionsPanel } from '#src/components/Menu/MenuActionsPanel';
-import { TextInput } from '#src/components/input';
-import { keyboardKey } from '#src/components/common/keyboardKey.js';
-import { Button } from '#src/components/Button';
+import type { Button } from '#src/components/Button';
 import type { DropMenuStyleProps } from '#src/components/DropMenu';
 
-export type PaginationOneDimension = 'm' | 's';
+import { SideButtons } from './SideButtons';
+import { PageSizeSelect } from './PageSizeSelect';
+import { PageSelect } from './PageSelect';
 
 const ComplexWrapper = styled.div`
   display: flex;
@@ -56,23 +50,7 @@ const PageSizeAdditional = styled.div`
   }
 `;
 
-const ButtonsWrapper = styled.div`
-  display: flex;
-  & > button {
-    margin-left: 8px;
-  }
-  [data-simple='true'] & {
-    margin-left: 20px;
-  }
-`;
-
-const extendMixin = (mixin?: ReturnType<typeof css>, showPageNumberInput?: boolean) => css`
-  width: auto;
-  min-width: ${showPageNumberInput ? 80 : 68}px;
-
-  ${mixin};
-`;
-const nothing = () => {};
+export type PaginationOneDimension = 'm' | 's';
 export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   /** Размер компонента */
   dimension?: PaginationOneDimension;
@@ -171,8 +149,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
-  leftButtonPropsConfig = nothing,
-  rightButtonPropsConfig = nothing,
+  leftButtonPropsConfig,
+  rightButtonPropsConfig,
   ...props
 }) => {
   const theme = useTheme() || LIGHT_THEME;
@@ -180,237 +158,85 @@ export const PaginationOne: FC<PaginationOneProps> = ({
     itemsPerPageText: theme_itemsPerPageText,
     itemRangeText: theme_itemRangeText,
     pageRangeText: theme_pageRangeText,
-    pageSelectLabel: theme_pageSelectLabel,
-    pageSizeSelectLabel: theme_pageSizeSelectLabel,
-    backwardText: theme_backwardText,
-    forwardText: theme_forwardText,
   } = theme.locales[theme.currentLocale].paginationOne;
 
   const itemsPerPageText = locale?.itemsPerPageText || theme_itemsPerPageText;
   const itemRangeText = locale?.itemRangeText || theme_itemRangeText;
   const pageRangeText = locale?.pageRangeText || theme_pageRangeText;
-  const pageSelectLabel = locale?.pageSelectLabel || theme_pageSelectLabel;
-  const pageSizeSelectLabel = locale?.pageSizeSelectLabel || theme_pageSizeSelectLabel;
-  const backwardText = locale?.backwardText || theme_backwardText;
-  const forwardText = locale?.forwardText || theme_forwardText;
 
-  const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
-  const pages = Array.from({ length: totalPages }, (_, k) => k + 1);
-  const backButtonDisabled = page === 1;
-  const forwardButtonDisabled = page === totalPages;
+  const safePageSize = pageSize > 0 ? pageSize : 1;
+  const totalPages = useMemo(() => Math.max(Math.ceil(totalItems / safePageSize), 1), [totalItems, safePageSize]);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedPageNumber, setSelectedPageNumber] = useState(page.toString());
-  const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
-  const [inputPageNumber, setInputPageNumber] = useState(page.toString());
+  const [rangeStart, rangeEnd] = useMemo(() => {
+    const start = Math.min(pageSize * (page - 1) + 1, totalItems);
+    const end = Math.min(page * pageSize, totalItems);
+    return [start, end];
+  }, [page, pageSize, totalItems]);
 
-  const pageNumberInputRef = useRef<HTMLInputElement>(null);
-
-  const parsePageNumber = (pageSelected: string) => {
-    if (pageSelected === '') {
-      return Number.parseInt(selectedPageNumber, 10);
-    }
-    const page = Number.parseInt(pageSelected, 10);
-    if (Number.isNaN(page) || page < 1) {
-      return 1;
-    }
-    if (page > totalPages) {
-      return totalPages;
-    }
-    return page;
+  const renderSideButtons = () => {
+    return (
+      <SideButtons
+        dimension={dimension}
+        localeBackwardText={locale?.backwardText}
+        localeForwardText={locale?.forwardText}
+        leftButtonPropsConfig={leftButtonPropsConfig}
+        rightButtonPropsConfig={rightButtonPropsConfig}
+        page={page}
+        pageSize={pageSize}
+        totalPages={totalPages}
+        onChange={onChange}
+      />
+    );
   };
+  const renderPageSelect = () => (
+    <PageSelect
+      dimension={dimension}
+      page={page}
+      pageSize={pageSize}
+      pageSelectDisabled={pageSelectDisabled}
+      totalPages={totalPages}
+      pageNumberDropContainerStyle={pageNumberDropContainerStyle}
+      dropContainerCssMixin={dropContainerCssMixin}
+      dropMaxHeight={dropMaxHeight}
+      menuWidth={menuWidth}
+      showPageNumberInput={showPageNumberInput}
+      localeLabel={locale?.pageSelectLabel}
+      onChange={onChange}
+      {...props}
+    />
+  );
 
-  const handlePageInputHover = (activePage?: string) => {
-    if (activePage) {
-      setActivePageNumber(activePage);
-      setInputPageNumber(activePage);
-    }
-  };
-
-  const handleClosePageNumberDropMenu = (pageNumber: string) => {
-    handlePageInputHover(pageNumber);
-    setIsVisible(false);
-  };
-
-  const handleSizeChange = (pageSizeSelected: string) => {
-    const pageSize = Number.parseInt(pageSizeSelected, 10);
-    onChange({ page: 1, pageSize: pageSize });
-  };
-
-  const handlePageInputChange = (pageSelected: string) => {
-    const page = parsePageNumber(pageSelected);
-    setSelectedPageNumber(page.toString());
-    onChange({
-      page,
-      pageSize,
-    });
-    handleClosePageNumberDropMenu(page.toString());
-  };
-
-  const pageIncrement = () => {
-    const newPage = page + 1;
-    setSelectedPageNumber(newPage.toString());
-    setActivePageNumber(newPage.toString());
-    onChange({ page: newPage, pageSize });
-  };
-  const pageDecrement = () => {
-    const newPage = page - 1;
-    setSelectedPageNumber(newPage.toString());
-    setActivePageNumber(newPage.toString());
-    onChange({ page: newPage, pageSize });
-  };
-
-  const dropMenuProps = passDropdownDataAttributes(props);
-
-  const handleClickOutside = () => {
-    handleClosePageNumberDropMenu(selectedPageNumber);
-  };
-
-  const handleMenuButtonClick = () => {
-    if (isVisible) {
-      handleClosePageNumberDropMenu(selectedPageNumber);
-    } else {
-      setIsVisible(true);
-    }
-  };
-
-  useEffect(() => {
-    if (isVisible && pageNumberInputRef) {
-      pageNumberInputRef.current?.select();
-      pageNumberInputRef.current?.focus();
-    }
-  }, [isVisible]);
-
-  const handleInputPageNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
-    inputValue = inputValue.replace(/\D/g, '');
-    setInputPageNumber(inputValue);
-    setActivePageNumber(parsePageNumber(inputValue).toString());
-  };
-
-  const handleInputPageNumberKeyDown = (e: KeyboardEvent) => {
-    const code = keyboardKey.getCode(e);
-
-    if (code === keyboardKey.Enter) {
-      handlePageInputChange(inputPageNumber);
-      setIsVisible(false);
-    } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
-      pageNumberInputRef.current?.blur();
-    } else if (code === keyboardKey.Escape) {
-      handleClosePageNumberDropMenu(selectedPageNumber);
-    }
-  };
-
-  const handleMenuCycle = () => {
-    pageNumberInputRef.current?.focus();
-    return false;
-  };
-
-  const leftButtonProps = {
-    appearance: 'tertiary',
-    dimension,
-    iconStart: <ChevronLeft />,
-    displayAsSquare: true,
-    'aria-label': backwardText,
-    disabled: backButtonDisabled,
-    onClick: pageDecrement,
-  } satisfies React.ComponentProps<typeof Button>;
-
-  const rightButtonProps = {
-    appearance: 'tertiary',
-    dimension,
-    iconStart: <ChevronRight />,
-    displayAsSquare: true,
-    'aria-label': forwardText,
-    disabled: forwardButtonDisabled,
-    onClick: pageIncrement,
-  } satisfies React.ComponentProps<typeof Button>;
+  const renderPageSizeSelect = () => (
+    <PageSizeSelect
+      dimension={dimension}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      pageSizeSelectDisabled={pageSizeSelectDisabled}
+      pageSizeDropContainerStyle={pageSizeDropContainerStyle}
+      dropContainerCssMixin={dropContainerCssMixin}
+      totalItems={totalItems}
+      dropMaxHeight={dropMaxHeight}
+      menuWidth={menuWidth}
+      localeLabel={locale?.pageSizeSelectLabel}
+      onChange={onChange}
+      {...props}
+    />
+  );
 
   const renderComplex = () => {
     return (
       <ComplexWrapper data-simple={simple} {...props}>
         <Part>
           {itemsPerPageText}
-          <MenuButton
-            dimension={dimension}
-            options={pageSizes}
-            selected={pageSize.toString()}
-            onSelectItem={handleSizeChange}
-            disabled={pageSizeSelectDisabled}
-            aria-label={pageSizeSelectLabel(pageSize, totalItems)}
-            menuMaxHeight={pageSizeDropContainerStyle?.menuMaxHeight || dropMaxHeight}
-            dropContainerCssMixin={
-              pageSizeDropContainerStyle?.dropContainerCssMixin || extendMixin(dropContainerCssMixin)
-            }
-            dropContainerClassName={pageSizeDropContainerStyle?.dropContainerClassName}
-            dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
-            menuWidth={pageSizeDropContainerStyle?.menuWidth || menuWidth}
-            dropMenuDataAttributes={dropMenuProps}
-            className="records-per-page-with-dropdown"
-          >
-            {pageSize}
-          </MenuButton>
+          {renderPageSizeSelect()}
           <Divider />
-          <PageSizeAdditional>
-            {itemRangeText(
-              Math.min(pageSize * (page - 1) + 1, totalItems),
-              Math.min(page * pageSize, totalItems),
-              totalItems,
-            )}
-          </PageSizeAdditional>
+          <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
         </Part>
         <Part>
           <Divider />
-          <MenuButton
-            dimension={dimension}
-            options={pages}
-            selected={selectedPageNumber}
-            onSelectItem={handlePageInputChange}
-            active={activePageNumber}
-            onActivateItem={handlePageInputHover}
-            disabled={pageSelectDisabled}
-            aria-label={pageSelectLabel(page, totalPages)}
-            menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
-            dropContainerCssMixin={
-              pageNumberDropContainerStyle?.dropContainerCssMixin ||
-              extendMixin(dropContainerCssMixin, showPageNumberInput)
-            }
-            dropContainerClassName={pageNumberDropContainerStyle?.dropContainerClassName}
-            dropContainerStyle={pageNumberDropContainerStyle?.dropContainerStyle}
-            menuWidth={pageNumberDropContainerStyle?.menuWidth || menuWidth}
-            dropMenuDataAttributes={dropMenuProps}
-            className="current-page-number-with-dropdown"
-            isVisible={isVisible}
-            onVisibilityChange={setIsVisible}
-            onClickOutside={handleClickOutside}
-            onClick={handleMenuButtonClick}
-            onForwardCycleApprove={handleMenuCycle}
-            onBackwardCycleApprove={handleMenuCycle}
-            renderTopPanel={
-              showPageNumberInput
-                ? ({ dimension = 's' }) => {
-                    return (
-                      <MenuActionsPanel dimension={dimension}>
-                        <TextInput
-                          dimension="s"
-                          value={inputPageNumber}
-                          onChange={handleInputPageNumberChange}
-                          onKeyDown={handleInputPageNumberKeyDown}
-                          ref={pageNumberInputRef}
-                        />
-                      </MenuActionsPanel>
-                    );
-                  }
-                : undefined
-            }
-          >
-            {page}
-          </MenuButton>
+          {renderPageSelect()}
           <PageAdditional>{pageRangeText(totalPages)}</PageAdditional>
-          <ButtonsWrapper>
-            <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
-            <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
-          </ButtonsWrapper>
+          {renderSideButtons()}
         </Part>
       </ComplexWrapper>
     );
@@ -419,17 +245,8 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   const renderSimple = () => {
     return (
       <SimpleWrapper data-simple={simple} {...props}>
-        <PageSizeAdditional>
-          {itemRangeText(
-            Math.min(pageSize * (page - 1) + 1, totalItems),
-            Math.min(page * pageSize, totalItems),
-            totalItems,
-          )}
-        </PageSizeAdditional>
-        <ButtonsWrapper>
-          <Button {...leftButtonProps} {...leftButtonPropsConfig(leftButtonProps)} />
-          <Button {...rightButtonProps} {...rightButtonPropsConfig(rightButtonProps)} />
-        </ButtonsWrapper>
+        <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
+        {renderSideButtons()}
       </SimpleWrapper>
     );
   };
