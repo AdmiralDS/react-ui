@@ -46,7 +46,7 @@ export default defineConfig([
           ignoreRestSiblings: true,
         },
       ],
-      ...SOFT_MIGRATION_RULES
+      ...SOFT_MIGRATION_RULES,
     },
     plugins: {},
     settings: {
