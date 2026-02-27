@@ -31,6 +31,8 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
     id = uid(),
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
 
@@ -46,6 +48,8 @@ export const SliderRangeField: React.FC<SliderRangeFieldProps> = (props) => {
     disabled,
     maxLength,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

@@ -25,6 +25,8 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     id = uid(),
     disabled,
     displayCharacterCounter,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -39,6 +41,8 @@ export const EditModeField = React.forwardRef<HTMLInputElement, EditModeFieldPro
     maxLength,
     inputRef,
     displayCharacterCounter,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

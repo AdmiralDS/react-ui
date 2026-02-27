@@ -31,6 +31,8 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     id = uid(),
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -46,6 +48,8 @@ export const SliderInputField = React.forwardRef<HTMLInputElement, SliderInputFi
     maxLength,
     inputRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

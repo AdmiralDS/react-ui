@@ -29,6 +29,8 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     characterCounterVisibilityThreshold,
     maxLength,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -47,6 +49,8 @@ export const SuggestField = React.forwardRef<HTMLInputElement, SuggestFieldProps
     ref: fieldRef,
     inputRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

@@ -28,6 +28,8 @@ export const EditModeAreaField = forwardRef<HTMLTextAreaElement, EditModeAreaFie
     id = uid(),
     disabled,
     displayCharacterCounter,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -42,6 +44,8 @@ export const EditModeAreaField = forwardRef<HTMLTextAreaElement, EditModeAreaFie
     maxLength,
     inputRef,
     displayCharacterCounter,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
