@@ -32,6 +32,8 @@ export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>
     id = useId(),
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -45,6 +47,8 @@ export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>
     displayInline,
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

@@ -24,6 +24,8 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     name,
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
 
@@ -36,6 +38,8 @@ export const DateField = React.forwardRef<HTMLInputElement, DateFieldProps>((pro
     additionalLabel,
     id,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': name,
     displayInline,

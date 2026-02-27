@@ -26,6 +26,8 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     displayCharacterCounter,
     characterCounterVisibilityThreshold,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -42,6 +44,8 @@ export const TimeField = React.forwardRef<HTMLInputElement, TimeFieldProps>((pro
     characterCounterVisibilityThreshold,
     ref: fieldRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;
