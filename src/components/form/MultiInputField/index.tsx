@@ -28,6 +28,8 @@ export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFiel
     id = uid(),
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
 
@@ -43,6 +45,8 @@ export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFiel
     disabled,
     inputRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

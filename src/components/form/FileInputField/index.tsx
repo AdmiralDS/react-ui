@@ -36,6 +36,8 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     disabled,
     displayCharacterCounter,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -52,6 +54,8 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     inputRef,
     displayCharacterCounter,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as const;
