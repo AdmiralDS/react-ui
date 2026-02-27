@@ -11,7 +11,8 @@ import {
 } from '#src/components/common/utils/splitDataAttributes';
 
 export interface MultiInputFieldProps
-  extends MultiInputProps,
+  extends
+    MultiInputProps,
     Omit<FieldOwnProps, 'inputRef' | 'maxLength' | 'displayCharacterCounter' | 'characterCounterVisibilityThreshold'> {}
 
 export const MultiInputField = React.forwardRef<HTMLInputElement, MultiInputFieldProps>((props, ref) => {

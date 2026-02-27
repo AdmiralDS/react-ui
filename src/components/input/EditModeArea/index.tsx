@@ -18,7 +18,8 @@ import type { EditModeComponentProps } from '#src/components/input/EditMode/type
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeAreaProps
-  extends EditModeComponentProps,
+  extends
+    EditModeComponentProps,
     Omit<
       TextAreaProps,
       'dimension' | 'displayClearIcon' | 'displayCopyIcon' | 'clearIconPropsConfig' | 'copyIconPropsConfig' | 'value'

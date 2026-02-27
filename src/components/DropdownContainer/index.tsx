@@ -69,7 +69,8 @@ export interface DropContainerProps {
 }
 
 export interface DropdownContainerProps
-  extends HTMLAttributes<HTMLDivElement>,
+  extends
+    HTMLAttributes<HTMLDivElement>,
     DropContainerProps,
     Omit<DropContainerStyles, 'dropContainerClassName' | 'dropContainerStyle'> {
   /** Элемент, относительно которого позиционируется выпадающее меню */

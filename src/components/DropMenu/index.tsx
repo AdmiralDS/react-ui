@@ -43,7 +43,8 @@ export interface DropMenuStyleProps extends DropContainerStyles {
 }
 
 export interface DropMenuComponentProps
-  extends Pick<
+  extends
+    Pick<
       DropMenuProps,
       | 'isVisible'
       | 'onVisibilityChange'
@@ -60,7 +61,8 @@ export interface DropMenuComponentProps
     DropContainerProps {}
 
 export interface DropMenuProps
-  extends Pick<
+  extends
+    Pick<
       MenuProps,
       | 'active'
       | 'onActivateItem'
