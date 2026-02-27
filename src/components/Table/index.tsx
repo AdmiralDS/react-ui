@@ -626,6 +626,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
           <HeaderCellsWrapper
             $expansionColumn={displayRowExpansionColumn}
             $selectionColumn={displayRowSelectionColumn}
+            $dragColumn={rowsDraggable}
             $overflowMenuColumn={showRowsActions}
             $dimension={dimension}
           >
