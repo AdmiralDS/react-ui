@@ -12,8 +12,7 @@ import {
 } from '#src/components/common/utils/splitDataAttributes';
 
 export interface EditModeAreaFieldProps
-  extends EditModeAreaProps,
-    Omit<FieldOwnProps, 'inputRef' | 'additionalLabel'> {}
+  extends EditModeAreaProps, Omit<FieldOwnProps, 'inputRef' | 'additionalLabel'> {}
 
 export const EditModeAreaField = forwardRef<HTMLTextAreaElement, EditModeAreaFieldProps>((props, ref) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);

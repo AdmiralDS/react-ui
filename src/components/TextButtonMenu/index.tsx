@@ -33,7 +33,8 @@ const StyledTextButton = styled(TextButton)<{ $menuOpened?: boolean; appearance?
 `;
 
 export interface TextButtonMenuProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+  extends
+    Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement'>,
     DropMenuStyleProps {
   /** Внешний вид кнопки */

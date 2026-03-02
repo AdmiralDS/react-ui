@@ -7,8 +7,10 @@ import { ReactComponent as StepError } from './svg/StepError.svg';
 import { StepContentWrapper, StepIcon, StepRail, StepTrack, StepWrapper } from './style';
 import { StepperContext } from './StepperContext';
 
-export interface StepProps
-  extends Omit<HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>, 'onClick'> {
+export interface StepProps extends Omit<
+  HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>,
+  'onClick'
+> {
   disabled?: boolean;
   error?: boolean;
   warning?: boolean;

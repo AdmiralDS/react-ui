@@ -47,7 +47,8 @@ function preventUseUnsupportedCharacters(e: React.InputEvent<HTMLInputElement>) 
 }
 
 export interface DateInputProps
-  extends Omit<TextInputProps, 'iconsBefore'>,
+  extends
+    Omit<TextInputProps, 'iconsBefore'>,
     Omit<CalendarPropType, 'onChange' | 'range'>,
     Pick<DropMenuComponentProps, 'isVisible' | 'onVisibilityChange'>,
     DropContainerStyles {

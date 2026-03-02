@@ -65,7 +65,8 @@ const Icon = styled.div`
 `;
 
 export interface MenuButtonProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+  extends
+    Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement' | 'disableSelectedOptionHighlight'>,
     Omit<DropMenuStyleProps, 'alignSelf'> {
   /** Размер компонента */

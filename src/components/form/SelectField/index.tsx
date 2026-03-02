@@ -17,8 +17,7 @@ const Select = styled(BaseSelect)`
 `;
 
 export interface SearchSelectFieldProps
-  extends SelectProps,
-    Omit<FieldOwnProps, 'inputRef' | 'onChange' | 'displayCharacterCounter' | 'maxLength'> {}
+  extends SelectProps, Omit<FieldOwnProps, 'inputRef' | 'onChange' | 'displayCharacterCounter' | 'maxLength'> {}
 
 export const SelectField = forwardRef<HTMLSelectElement, SearchSelectFieldProps>((props, ref) => {
   const {

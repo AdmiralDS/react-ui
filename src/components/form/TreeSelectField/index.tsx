@@ -11,7 +11,8 @@ import {
 } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TreeSelectFieldProps
-  extends TreeSelectProps,
+  extends
+    TreeSelectProps,
     Omit<FieldOwnProps, 'inputRef' | 'maxLength' | 'displayCharacterCounter' | 'characterCounterVisibilityThreshold'> {}
 
 export const TreeSelectField = React.forwardRef<HTMLInputElement, TreeSelectFieldProps>((props, ref) => {
