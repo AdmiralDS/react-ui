@@ -5,6 +5,8 @@ import { Tooltip, TOOLTIP_DELAY } from '#src/components/Tooltip';
 import type { ITooltipProps, TooltipDimension } from '#src/components/Tooltip';
 import { fixedForwardRef } from '../common/fixedForwardRef';
 
+import { useTouchDevice } from '../common/hooks/useTouchDevice';
+
 export interface TooltipHocProps {
   /** Функция, которая возвращает реакт-компонент с контентом тултипа. Если этому компоненту нужны props, используйте замыкание */
   renderContent: () => React.ReactNode;
@@ -38,7 +40,11 @@ export function TooltipHoc<T>(Component: React.ComponentType<T>) {
     const [node, setNode] = useState<HTMLElement | null>(null);
     const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
 
+    const isTouchDevice = useTouchDevice();
+
     useEffect(() => {
+      if (!node || isTouchDevice) return;
+
       function show() {
         setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
       }
@@ -46,25 +52,25 @@ export function TooltipHoc<T>(Component: React.ComponentType<T>) {
         clearTimeout(timer);
         setVisible(false);
       }
-      if (node) {
-        node.addEventListener('mouseenter', show);
-        node.addEventListener('focus', show);
-        node.addEventListener('mouseleave', hide);
-        node.addEventListener('blur', hide);
-        return () => {
-          if (timer) clearTimeout(timer);
-          node.removeEventListener('mouseenter', show);
-          node.removeEventListener('focus', show);
-          node.removeEventListener('mouseleave', hide);
-          node.removeEventListener('blur', hide);
-        };
-      }
-    }, [node, setTimer, setVisible, timer]);
+
+      node.addEventListener('mouseenter', show);
+      node.addEventListener('focus', show);
+      node.addEventListener('mouseleave', hide);
+      node.addEventListener('blur', hide);
+
+      return () => {
+        if (timer) clearTimeout(timer);
+        node.removeEventListener('mouseenter', show);
+        node.removeEventListener('focus', show);
+        node.removeEventListener('mouseleave', hide);
+        node.removeEventListener('blur', hide);
+      };
+    }, [node, setTimer, setVisible, timer, isTouchDevice]);
 
     return (
       <>
         <Component {...(wrappedCompProps as T & object)} ref={refSetter(ref, anchorElementRef, setNode)} />
-        {visible && !emptyContent && (
+        {visible && !emptyContent && !isTouchDevice && (
           <Tooltip
             targetElement={anchorElementRef.current}
             renderContent={renderContent}
