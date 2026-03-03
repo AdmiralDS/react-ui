@@ -7,9 +7,9 @@ services:
       context: .
       dockerfile: docker/Dockerfile.storybook
     ports:
-      - "6006:6006"  
+      - '6006:6006'
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:6006"]
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:6006']
       interval: 5s
       timeout: 10s
       retries: 20

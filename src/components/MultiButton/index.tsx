@@ -98,7 +98,8 @@ interface SeparatorProps {
 }
 
 export interface MultiButtonProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
+  extends
+    Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement'>,
     Omit<DropMenuStyleProps, 'menuWidth'> {
   /** Опции выпадающего списка */

@@ -18,8 +18,7 @@ const Field = styled(FieldComponent)`
 `;
 
 export interface FileInputFieldProps
-  extends Omit<FileInputProps, 'extraText' | 'status'>,
-    Omit<FieldOwnProps, 'inputRef'> {}
+  extends Omit<FileInputProps, 'extraText' | 'status'>, Omit<FieldOwnProps, 'inputRef'> {}
 
 export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldProps>((props, ref) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -36,6 +35,8 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     disabled,
     displayCharacterCounter,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -52,6 +53,8 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     inputRef,
     displayCharacterCounter,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as const;

@@ -11,10 +11,10 @@ export const SliderRangePlaygroundTemplate = ({
   CSSCustomProps,
   ...props
 }: SliderRangeProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  // eslint-disable-next-line no-console
   const handleChange = (
     value: [{ str: string; num: number }, { str: string; num: number }],
     event: React.ChangeEvent<HTMLInputElement>,
+    // eslint-disable-next-line no-console
   ) => console.log(value, event);
 
   return (

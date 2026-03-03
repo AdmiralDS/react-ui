@@ -70,7 +70,8 @@ const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disab
 const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();
 
 export interface SelectProps
-  extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
+  extends
+    Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
     DropContainerStyles,
     Pick<DropMenuComponentProps, 'targetElement' | 'renderTopPanel' | 'renderBottomPanel'> {
   value?: string | string[];

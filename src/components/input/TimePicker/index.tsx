@@ -87,7 +87,8 @@ const IconPanelAfter = styled(IconPanel)`
 `;
 
 export interface TimePickerProps
-  extends Omit<
+  extends
+    Omit<
       TextInputProps,
       | 'value'
       | 'iconsBefore'

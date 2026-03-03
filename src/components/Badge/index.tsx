@@ -155,8 +155,7 @@ export const ButtonBadge = ({ appearance = 'primary', disabled = false, ...props
 };
 
 interface SegmentedControlBadgeProps
-  extends Omit<BadgeProps, 'appearance' | 'dimension'>,
-    Pick<SegmentedControlProps, 'appearance'> {
+  extends Omit<BadgeProps, 'appearance' | 'dimension'>, Pick<SegmentedControlProps, 'appearance'> {
   disabled?: boolean;
 }
 

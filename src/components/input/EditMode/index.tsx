@@ -19,8 +19,7 @@ import type { EditModeComponentProps } from '#src/components/input/EditMode/type
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeProps
-  extends EditModeComponentProps,
-    Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
+  extends EditModeComponentProps, Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
   /** Колбек на изменение значения компонента */
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   /**

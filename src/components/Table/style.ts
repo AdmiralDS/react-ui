@@ -428,9 +428,11 @@ const getTechColumnsWidth = (p: {
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
   $overflowMenuColumn?: boolean;
+  $dragColumn?: boolean;
 }): number =>
   (p.$selectionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
   (p.$expansionColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 44 : 56) : 0) +
+  (p.$dragColumn ? (p.$dimension === 's' || p.$dimension === 'm' ? 36 : 48) : 0) +
   (p.$overflowMenuColumn ? getActionSize(p.$dimension) : 0);
 
 export const HeaderCellsWrapper = styled.div<{
@@ -438,6 +440,7 @@ export const HeaderCellsWrapper = styled.div<{
   $selectionColumn?: boolean;
   $expansionColumn?: boolean;
   $overflowMenuColumn?: boolean;
+  $dragColumn?: boolean;
 }>`
   display: flex;
   flex: 0 0 auto;

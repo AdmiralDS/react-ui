@@ -13,7 +13,8 @@ import { refSetter } from '../common/utils/refSetter';
 export type OverflowMenuDimension = 'l' | 'm' | 's';
 
 export interface OverflowMenuProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+  extends
+    Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement'>,
     DropMenuStyleProps {
   /** Выбранная опция */

@@ -33,7 +33,8 @@ export interface SuggestItem {
 }
 
 export interface SuggestInputProps
-  extends Omit<TextInputProps, 'value' | 'iconsBefore'>,
+  extends
+    Omit<TextInputProps, 'value' | 'iconsBefore'>,
     Omit<DropMenuStyleProps, 'menuWidth'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
   value?: string;

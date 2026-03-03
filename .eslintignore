@@ -1,6 +1,0 @@
-.eslintrc.cjs
-scripts/**
-*.svg
-dist/**
-docs/**
-node_modules/**
