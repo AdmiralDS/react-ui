@@ -10,18 +10,18 @@ export const Chevron = styled(ChevronDownOutline)`
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
-  [data-icon='left'] & {
+  .accordion[data-icon='left'] & {
     margin: 0 8px 0 0;
   }
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
-  [data-disabled='true'] & {
+  .accordion-item[data-disabled] & {
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
-  [data-dimension='m'] & {
+  .accordion[data-dimension='m'] & {
     width: 20px;
     height: 20px;
   }
@@ -34,11 +34,11 @@ export const ItemTitleContent = styled.span`
   display: flex;
   align-items: flex-start;
   padding: 16px;
-  [data-dimension='m'] && {
+  .accordion[data-dimension='m'] && {
     padding: 10px 16px;
   }
 
-  [data-icon='left'] & {
+  .accordion[data-icon='left'] & {
     flex-direction: row-reverse;
   }
 `;
@@ -86,17 +86,14 @@ export const ItemTitle = styled.div`
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   ${typography['Subtitle/Subtitle 2']}
+  ${eventsMixin}
 
-  [data-disabled='false'] & {
-    ${eventsMixin}
-  }
-
-  [data-disabled='true'] & {
+  .accordion-item[data-disabled] & {
     cursor: not-allowed;
     user-select: none;
   }
 
-  [data-dimension='m'] & {
+  .accordion[data-dimension='m'] & {
     ${typography['Subtitle/Subtitle 3']}
   }
 `;
@@ -122,7 +119,7 @@ export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`
   max-height: ${(p) => p.$contentMaxHeight};
   padding: 0 16px 16px 16px;
   ${typography['Body/Body 1 Long']}
-  [data-dimension='m'] & {
+  .accordion[data-dimension='m'] & {
     padding: 0 16px 10px 16px;
     ${typography['Body/Body 2 Long']}
   }
