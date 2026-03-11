@@ -3,8 +3,10 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { ScrollContainer } from '@admiral-ds/react-ui';
 
 import { ScrollbarTemplate } from './Scrollbar.template';
+import { ScrollbarInModalTemplate } from './ScrollbarInModal.template';
 
 import ScrollbarTemplateRaw from './Scrollbar.template?raw';
+import ScrollbarInModalTemplateRaw from './ScrollbarInModal.template?raw';
 
 export default {
   title: 'Admiral-2.1/ScrollContainer',
@@ -47,3 +49,23 @@ export const CarouselPlayground = {
 
   name: 'ScrollContainer',
 };
+
+//#region "Scrollbars in modal"
+const SrcollbarsInModalStory: StoryFn<typeof ScrollContainer> = (props) => {
+  return <ScrollbarInModalTemplate {...props} />;
+};
+
+export const SrcollbarsInModalPlayground = {
+  render: SrcollbarsInModalStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ScrollbarInModalTemplateRaw,
+      },
+    },
+  },
+
+  name: 'Scrollbar in modal',
+};
+//#endregion;
