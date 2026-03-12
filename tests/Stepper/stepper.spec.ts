@@ -70,7 +70,7 @@ test.describe('Stepper Component', () => {
     await expect(stepper).toBeVisible();
 
     const steps = frame.locator('[role="listitem"]');
-    await expect(steps).toHaveCount(6);
+    await expect(steps).toHaveCount(7);
 
     // Проверяем шаг с предупреждением через data-warning
     const warningStep = frame.locator('[data-warning="true"]');
@@ -87,6 +87,11 @@ test.describe('Stepper Component', () => {
     await expect(errorStep).toBeVisible();
     await expect(errorStep).toHaveText('Шаг с ошибкой');
 
+    // Проверяем шаг повторного редактирования через data-redo
+    const warningStep2 = frame.locator('[data-redo="true"]');
+    await expect(warningStep2).toBeVisible();
+    await expect(warningStep2).toHaveText('Шаг Redo повторное редактирование');
+
     // Проверяем завершенный шаг через data-completed
     const completedStep = frame.locator('[data-completed="true"]');
     await expect(completedStep).toBeVisible();
@@ -99,7 +104,7 @@ test.describe('Stepper Component', () => {
     await expect(activeStep).toHaveAttribute('aria-current', 'step');
 
     // Проверяем неактивный шаг
-    const inactiveStep = steps.nth(5);
+    const inactiveStep = steps.nth(6);
     await expect(inactiveStep).toBeVisible();
     await expect(inactiveStep).toHaveText('Неактивный шаг');
   });

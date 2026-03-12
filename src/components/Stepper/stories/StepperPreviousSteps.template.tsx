@@ -1,13 +1,20 @@
 import * as React from 'react';
 import { Stepper, Step, StepContent, T } from '@admiral-ds/react-ui';
 
+type StepType = {
+  key: number;
+  content: string;
+  completed?: boolean;
+  redo?: boolean;
+};
+
 const initialSteps = [
   {
     key: 0,
     content: '1. Пройденный шаг',
     completed: true,
   },
-  { key: 1, content: '2. Ранее пройденный шаг, на котрый мы вернулись с 4го шага' },
+  { key: 1, content: '2. Ранее пройденный шаг, на котрый мы вернулись с 4го шага', redo: true },
   { key: 2, content: '3. Пройденный шаг', completed: true },
   { key: 3, content: '4. Отсюда мы вернулись на 2 шаг.', completed: true },
   { key: 4, content: '5. Неактивный шаг, еще не пройденный' },
@@ -15,9 +22,11 @@ const initialSteps = [
 
 export const StepperPreviousStepsTemplate = () => {
   const [activeStep, setActiveStep] = React.useState(1);
-  const [steps, setSteps] = React.useState(initialSteps);
-  const handleStepClick = ({ index }: { index: number; active: boolean; completed: boolean; disabled?: boolean }) => {
-    const newSteps = [...steps].map((step, i) => (i < 4 ? { ...step, completed: i !== index } : step));
+  const [steps, setSteps] = React.useState<StepType[]>(initialSteps);
+  const handleStepClick = ({ index }: { index: number }) => {
+    const newSteps: StepType[] = steps.map((step, i) =>
+      i < 4 ? { ...step, completed: i !== index, redo: i === index } : step,
+    );
     setSteps(newSteps);
     setActiveStep(index);
   };
