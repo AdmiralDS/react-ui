@@ -16,7 +16,8 @@ export interface TagOptionProps extends HTMLAttributes<HTMLButtonElement>, TagVi
 }
 
 export interface TagMenuProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'>,
+  extends
+    Omit<HTMLAttributes<HTMLButtonElement>, 'children'>,
     TagSizeProps,
     Omit<DropMenuComponentProps, 'targetElement'>,
     DropMenuStyleProps {

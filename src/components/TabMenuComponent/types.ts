@@ -54,8 +54,7 @@ interface TabMenuBaseProps extends HTMLAttributes<HTMLDivElement> {
   tabIsDisabled: (tabId: string) => boolean;
 }
 interface TabMenuWithOverflowProps
-  extends Omit<DropMenuComponentProps, 'onSelectItem' | 'targetElement'>,
-    DropMenuStyleProps {
+  extends Omit<DropMenuComponentProps, 'onSelectItem' | 'targetElement'>, DropMenuStyleProps {
   /** Размер компонента */
   dimension?: TabDimension;
   /** Рендер-функция для отрисовки элемента выпадающего списка */
@@ -76,18 +75,14 @@ export interface HorizontalTabsProps extends TabMenuBaseProps {
 }
 
 export interface TabMenuHorizontalWithOverflowMenuProps
-  extends TabMenuBaseProps,
-    TabMenuWithOverflowProps,
-    TabMenuWithAddTabButtonProps {
+  extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Внешний вид активной вкладки */
   appearance?: TabAppearance;
   showActiveTabSelector?: boolean;
 }
 
 export interface TabMenuHorizontalProps
-  extends TabMenuBaseProps,
-    TabMenuWithOverflowProps,
-    TabMenuWithAddTabButtonProps {
+  extends TabMenuBaseProps, TabMenuWithOverflowProps, TabMenuWithAddTabButtonProps {
   /** Внешний вид активной вкладки */
   appearance?: TabAppearance;
   adaptive?: TabAdaptive;

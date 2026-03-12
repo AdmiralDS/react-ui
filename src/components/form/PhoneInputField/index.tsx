@@ -26,6 +26,8 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     displayCharacterCounter,
     characterCounterVisibilityThreshold,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
   const fieldContainerProps = {
@@ -42,6 +44,8 @@ export const PhoneInputField = React.forwardRef<HTMLInputElement, PhoneInputFiel
     characterCounterVisibilityThreshold,
     ref: inputRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

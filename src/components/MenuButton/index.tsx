@@ -14,7 +14,8 @@ export type MenuButtonDimension = 'xl' | 'l' | 'm' | 's';
 export type MenuButtonAppearance = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'white';
 
 export interface MenuButtonProps
-  extends Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
+  extends
+    Omit<HTMLAttributes<HTMLButtonElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement'>,
     DropMenuStyleProps,
     Omit<ButtonProps, 'onChange' | 'displayAsSquare'> {

@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.61.0](https://github.com/AdmiralDS/react-ui/compare/v8.60.0...v8.61.0) (2026-02-27)
+
+
+### Features
+
+* **Chips:** add permanent enabled Tooltip and fix state readonly ([b5c0d03](https://github.com/AdmiralDS/react-ui/commit/b5c0d035188601757fd17a55289c606cd8b8f4e6))
+
+
+### Bug Fixes
+
+* **Chips:** [#2025](https://github.com/AdmiralDS/react-ui/issues/2025) исправлена работа колбека onClose, теперь он срабатывает отдельно от основного клика по компоненту ([d149227](https://github.com/AdmiralDS/react-ui/commit/d149227b692bf011665405b4336da071c4b388cf))
+* **Fields:** Добвлена обработка свойств labelCssMixins, visibleLabelTooltips в комопненты ([79c8257](https://github.com/AdmiralDS/react-ui/commit/79c82574ef91a0b6c1f0f9045eaba122546b25e5))
+* **PaginationOne:** [#1986](https://github.com/AdmiralDS/react-ui/issues/1986) исправлен баг с большим количеством страниц и некорректной работой скролла в выпадающем меню ([2f1aff3](https://github.com/AdmiralDS/react-ui/commit/2f1aff3a7221990772e6e97c863e0c0d4655551d))
+* **Table:** [#2017](https://github.com/AdmiralDS/react-ui/issues/2017) исправлен размер иконки drag drop в строках ([0d4ba84](https://github.com/AdmiralDS/react-ui/commit/0d4ba84e12eb0a95e8fe0b9394065c62c219a9b0))
+* **Table:** [#2030](https://github.com/AdmiralDS/react-ui/issues/2030) исправлен баг с иконками drag drop и распределением ширины таблицы в процентах ([242ad6f](https://github.com/AdmiralDS/react-ui/commit/242ad6f14347419ef8f1cf143ea9697ac7361ea1))
+
 ## [8.60.0](https://github.com/AdmiralDS/react-ui/compare/v8.59.3...v8.60.0) (2026-02-04)
 
 

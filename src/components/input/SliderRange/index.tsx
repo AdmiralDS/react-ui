@@ -37,8 +37,10 @@ const InputsWrapper = styled.div`
 
 type Dimension = 'xl' | 'm' | 's';
 
-export interface SliderRangeProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'placeholder' | 'prefix' | 'onChange'> {
+export interface SliderRangeProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'placeholder' | 'prefix' | 'onChange'
+> {
   /** Значение компонента - массив из двух строк (значений первого и второго инпутов) */
   value?: [string, string];
   /** Дефолтное значение компонента - массив из двух строк (значений первого и второго инпутов) */

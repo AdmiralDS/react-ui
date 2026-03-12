@@ -103,8 +103,10 @@ export interface ImageViewerToolbarProps extends React.HTMLAttributes<HTMLDivEle
   };
 }
 
-export interface ImagePreviewProps
-  extends Omit<ImageViewerToolbarProps, 'transform' | 'actions' | 'actionsDisabled' | 'minScale' | 'maxScale'> {
+export interface ImagePreviewProps extends Omit<
+  ImageViewerToolbarProps,
+  'transform' | 'actions' | 'actionsDisabled' | 'minScale' | 'maxScale'
+> {
   /** Элемент для просмотра */
   item: string | ImageProps;
   /** Контейнер, в котором происходит размещение модального окна (BODY по умолчанию) */
@@ -126,8 +128,7 @@ export interface ImagePreviewProps
 }
 
 export interface ImageViewerProps
-  extends Pick<ImageMiniatureProps, 'dimension'>,
-    Omit<ImagePreviewProps, 'item' | 'totalImg' | 'activeImg'> {
+  extends Pick<ImageMiniatureProps, 'dimension'>, Omit<ImagePreviewProps, 'item' | 'totalImg' | 'activeImg'> {
   /** Массив элементов для просмотра */
   items: string[] | ImageProps[];
   /** Индекс элемента для просмотра по умолчанию, также используется для выбора элемента при appearance=single */

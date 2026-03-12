@@ -11,7 +11,8 @@ import {
 } from '#src/components/common/utils/splitDataAttributes';
 
 export interface TreeSelectFieldProps
-  extends TreeSelectProps,
+  extends
+    TreeSelectProps,
     Omit<FieldOwnProps, 'inputRef' | 'maxLength' | 'displayCharacterCounter' | 'characterCounterVisibilityThreshold'> {}
 
 export const TreeSelectField = React.forwardRef<HTMLInputElement, TreeSelectFieldProps>((props, ref) => {
@@ -28,6 +29,8 @@ export const TreeSelectField = React.forwardRef<HTMLInputElement, TreeSelectFiel
     id = uid(),
     disabled,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     ...restProps
   } = props;
 
@@ -43,6 +46,8 @@ export const TreeSelectField = React.forwardRef<HTMLInputElement, TreeSelectFiel
     disabled,
     inputRef,
     skeleton,
+    labelCssMixins,
+    visibleLabelTooltips,
     'data-field-id': id,
     'data-field-name': restProps.name,
   } as Record<string, any>;

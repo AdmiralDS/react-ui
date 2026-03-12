@@ -199,8 +199,7 @@ const SubmitButton = styled.div`
 `;
 
 export interface GlobalSearchProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
-    Pick<DropMenuComponentProps, 'targetElement'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>, Pick<DropMenuComponentProps, 'targetElement'> {
   /** Вызывается при изменении значения в поле ввода */
   onChange: (newValue: string) => void;
 
