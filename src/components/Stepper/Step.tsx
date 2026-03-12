@@ -16,6 +16,7 @@ export interface StepProps extends Omit<
   warning?: boolean;
   active?: boolean;
   completed?: boolean;
+  redo?: boolean;
   link?: string;
   index?: number;
   hideLine?: boolean;
@@ -30,6 +31,7 @@ export const Step: FC<StepProps> = ({
   disabled: propDisabled,
   completed: propCompleted,
   active: propActive,
+  redo,
   hideLine,
   onClick,
   children,
@@ -67,6 +69,7 @@ export const Step: FC<StepProps> = ({
       data-active={active}
       $active={active}
       data-disabled={propDisabled}
+      data-redo={redo}
       $stepWidth={stepWidth}
       $stepsAmount={stepsAmount}
       $mobile={mobile}
@@ -77,7 +80,7 @@ export const Step: FC<StepProps> = ({
       <StepContentWrapper tabIndex={-1}>
         <StepTrack aria-hidden>
           <StepIcon as={icon} width={20} height={20} />
-          {!hideLine && <StepRail />}
+          {!hideLine && <StepRail $redo={redo} />}
         </StepTrack>
         {children}
       </StepContentWrapper>
