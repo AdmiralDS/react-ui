@@ -1,20 +1,3 @@
-import { useEffect, useState } from 'react';
+import { useMediaQuery } from './useMediaQuery';
 
-export const useTouchDevice = () => {
-  const [isTouch, setTouch] = useState(false);
-
-  useEffect(() => {
-    const hoverQuery = window.matchMedia('(hover: none)');
-
-    if (isTouch !== hoverQuery.matches) {
-      setTouch(hoverQuery.matches);
-    }
-
-    const updateDeviceInfo = () => setTouch(hoverQuery.matches);
-
-    hoverQuery.addEventListener('change', updateDeviceInfo);
-    return () => hoverQuery.removeEventListener('change', updateDeviceInfo);
-  }, []);
-
-  return isTouch;
-};
+export const useTouchDevice = () => useMediaQuery('(hover: none)');
