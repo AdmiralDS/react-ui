@@ -275,7 +275,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               <InputWrapper
                 $dimension={dimension}
                 disabled={disabled}
-                data-isdragover={isDragOver}
+                data-isdragover={isDragOver ? '' : undefined}
                 onDragEnter={disabled ? undefined : handleDragEnter}
                 onDragLeave={disabled ? undefined : handleDragLeave}
                 onDrop={disabled ? undefined : handleDragLeave}

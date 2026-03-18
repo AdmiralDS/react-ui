@@ -13,7 +13,7 @@ export const Chevron = styled(SmallArrowRightOutline)`
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
-  [data-disabled='true'] & {
+  [data-disabled] & {
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }

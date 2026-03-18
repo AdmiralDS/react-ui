@@ -100,7 +100,7 @@ const MyItem = styled.div<{
       ? `var(--admiral-color-Opacity_Focus, ${theme.color['Opacity/Focus']})`
       : `var(--admiral-color-Special_ElevatedBG, ${theme.color['Special/Elevated BG']})`};
 
-  &&[data-disabled='true'] {
+  &&[data-disabled] {
     cursor: not-allowed;
     background-color: ${({ theme, selected }) =>
       selected
@@ -109,7 +109,7 @@ const MyItem = styled.div<{
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 
-  &&[data-hovered='true'] {
+  &&[data-hovered] {
     background-color: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
     color: ${({ theme, $success }) =>
       $success
@@ -147,8 +147,8 @@ const MyMenuItem = ({
   return (
     <MyItem
       selected={selected}
-      data-disabled={disabled}
-      data-hovered={hovered}
+      data-disabled={disabled ? '' : undefined}
+      data-hovered={hovered ? '' : undefined}
       $success={success}
       $dimension={dimension}
       onMouseMove={handleMouseMove}

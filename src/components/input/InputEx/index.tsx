@@ -246,8 +246,7 @@ export interface RenderProps {
 }
 
 export interface InputExProps
-  extends
-    Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix' | 'containerPropsConfig'>,
+  extends Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix' | 'containerPropsConfig'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.
@@ -481,12 +480,12 @@ export const InputEx = forwardRef<HTMLInputElement, InputExProps>(
     const containerProps = {
       className,
       style,
-      'data-disabled': props.disabled ? true : undefined,
+      'data-disabled': props.disabled ? '' : undefined,
       $dimension: dimension,
       ref: refSetter(innerContainerRef, containerRef),
-      'data-read-only': props.readOnly ? true : undefined,
+      'data-read-only': props.readOnly ? '' : undefined,
       'data-status': status,
-      'data-disable-copying': props.disableCopying ? true : undefined,
+      'data-disable-copying': props.disableCopying ? '' : undefined,
       onMouseDown: props.disableCopying ? preventDefault : undefined,
       $skeleton: skeleton,
       $status: status,

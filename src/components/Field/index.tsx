@@ -290,7 +290,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
         data-focus-within={hasFocus ? '' : undefined}
         data-required-within={required ? '' : undefined}
         data-disabled={disabled ? '' : undefined}
-        data-read-only={props.readOnly ? true : undefined}
+        data-read-only={props.readOnly ? '' : undefined}
         ref={refSetter(containerRef, ref)}
       >
         {(label || additionalLabel) && (

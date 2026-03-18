@@ -256,7 +256,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
           type="checkbox"
           $indeterminate={indeterminate}
           onKeyDown={handleKeyDown}
-          data-hovered={hovered}
+          data-hovered={hovered ? '' : undefined}
           $hovered={hovered}
         />
         <Background $error={error}>

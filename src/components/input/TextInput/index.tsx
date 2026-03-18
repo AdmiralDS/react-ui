@@ -545,12 +545,12 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       readOnly: props.readOnly,
       $isLoading: isLoading,
       $status: status,
-      'data-disabled': props.disabled ? true : undefined,
-      'data-read-only': props.readOnly ? true : undefined,
-      'data-loading': isLoading ? true : undefined,
+      'data-disabled': props.disabled ? '' : undefined,
+      'data-read-only': props.readOnly ? '' : undefined,
+      'data-loading': isLoading ? '' : undefined,
       'data-status': status,
       $skeleton: skeleton,
-      'data-disable-copying': disableCopying ? true : undefined,
+      'data-disable-copying': disableCopying ? '' : undefined,
     };
     return (
       <>

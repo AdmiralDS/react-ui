@@ -36,7 +36,7 @@ export const disabledStyles = css`
 `;
 
 export const hoverStyles = css`
-  &[data-isdragover='true'],
+  &[data-isdragover],
   &:hover {
     cursor: pointer;
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});

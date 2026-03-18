@@ -18,8 +18,7 @@ import type { EditModeComponentProps } from '#src/components/input/EditMode/type
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeAreaProps
-  extends
-    EditModeComponentProps,
+  extends EditModeComponentProps,
     Omit<
       TextAreaProps,
       'dimension' | 'displayClearIcon' | 'displayCopyIcon' | 'clearIconPropsConfig' | 'copyIconPropsConfig' | 'value'
@@ -98,10 +97,10 @@ export const EditModeArea = forwardRef<HTMLTextAreaElement, EditModeAreaProps>(
     return (
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
-        data-disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         $cssMixin={containerCssMixin}
         ref={wrapperRef}
-        data-disable-copying={props.disableCopying ? true : undefined}
+        data-disable-copying={props.disableCopying ? '' : undefined}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

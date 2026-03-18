@@ -7,10 +7,8 @@ import { ReactComponent as StepError } from './svg/StepError.svg';
 import { StepContentWrapper, StepIcon, StepRail, StepTrack, StepWrapper } from './style';
 import { StepperContext } from './StepperContext';
 
-export interface StepProps extends Omit<
-  HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>,
-  'onClick'
-> {
+export interface StepProps
+  extends Omit<HTMLAttributes<HTMLLIElement | HTMLButtonElement | HTMLAnchorElement>, 'onClick'> {
   disabled?: boolean;
   error?: boolean;
   warning?: boolean;
@@ -59,14 +57,14 @@ export const Step: FC<StepProps> = ({
       ref={stepRef}
       data-orientation={orientation}
       $orientation={orientation}
-      data-error={error}
+      data-error={error ? '' : undefined}
       $error={error}
-      data-warning={warning}
+      data-warning={warning ? '' : undefined}
       $warning={warning}
-      data-completed={completed}
-      data-active={active}
+      data-completed={completed ? '' : undefined}
+      data-active={active ? '' : undefined}
       $active={active}
-      data-disabled={propDisabled}
+      data-disabled={propDisabled ? '' : undefined}
       $stepWidth={stepWidth}
       $stepsAmount={stepsAmount}
       $mobile={mobile}

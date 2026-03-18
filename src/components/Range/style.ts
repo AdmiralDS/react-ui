@@ -24,7 +24,7 @@ export const TrackWrapper = styled.div<{ $dimension: RangeProps['dimension']; $s
   display: flex;
   align-items: center;
   height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
-  [data-disabled='true'] && {
+  [data-disabled] && {
     pointer-events: none;
   }
 
@@ -34,7 +34,7 @@ export const TrackWrapper = styled.div<{ $dimension: RangeProps['dimension']; $s
 export const Track = styled.div`
   height: 2px;
   background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-  [data-disabled='true'] && {
+  [data-disabled] && {
     background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
   width: 100%;
@@ -47,7 +47,7 @@ export const DefaultTrack = styled.div`
 
 export const FilledTrack = styled.div<{ $animation?: boolean }>`
   display: block;
-  [data-disabled='true'] && {
+  [data-disabled] && {
     background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   position: absolute;
@@ -95,7 +95,7 @@ export const ThumbCircle = styled.div<{ $dimension: RangeProps['dimension']; $ac
   ${({ $active, theme }) =>
     $active && `background: var(--admiral-color-Primary_Primary70, ${theme.color['Primary/Primary 70']});`}
 
-  [data-disabled='true'] && {
+  [data-disabled] && {
     background: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     pointer-events: none;
   }

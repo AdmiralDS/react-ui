@@ -28,7 +28,7 @@ export const InputBoxSkeletonTemplate = ({
       <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '40px' }}>
         Поле ввода с параметром skeleton
       </T>
-      <InputBox data-skeleton={skeleton}>
+      <InputBox data-skeleton={skeleton ? '' : undefined}>
         <InputLine
           {...props}
           placeholder={placeholder}

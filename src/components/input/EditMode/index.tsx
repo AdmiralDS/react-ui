@@ -19,7 +19,8 @@ import type { EditModeComponentProps } from '#src/components/input/EditMode/type
 const stopEvent = (e: React.MouseEvent) => e.preventDefault();
 
 export interface EditModeProps
-  extends EditModeComponentProps, Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
+  extends EditModeComponentProps,
+    Omit<TextInputProps, 'dimension' | 'displayClearIcon' | 'value' | 'isLoading'> {
   /** Колбек на изменение значения компонента */
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   /**
@@ -143,10 +144,10 @@ export const EditMode = forwardRef<HTMLInputElement, EditModeProps>(
     return (
       <Wrapper
         data-dimension={`${dimension}${bold && editDimension !== 'xl' ? '-bold' : ''}`}
-        data-disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         $cssMixin={containerCssMixin}
         ref={wrapperRef}
-        data-disable-copying={props.disableCopying ? true : undefined}
+        data-disable-copying={props.disableCopying ? '' : undefined}
         {...(props.disableCopying && {
           onMouseDown: stopEvent,
         })}

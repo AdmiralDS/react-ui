@@ -25,22 +25,22 @@ export const StepIcon = styled(StepSvg)`
   [data-orientation='vertical'] & {
     margin: 0 0 4px 0;
   }
-  [data-active='true'] & {
+  [data-active] & {
     path {
       fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }
-  [data-error='true'] & {
+  [data-error] & {
     path {
       fill: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
     }
   }
-  [data-warning='true'] & {
+  [data-warning] & {
     path {
       fill: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
     }
   }
-  [data-disabled='true'] & {
+  [data-disabled] & {
     path {
       fill: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
     }
@@ -56,16 +56,16 @@ export const StepRail = styled.div`
     width: 2px;
   }
   background-color: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
-  [data-completed='true'] & {
+  [data-completed] & {
     background-color: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
   }
-  [data-error='true'] & {
+  [data-error] & {
     background-color: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
   }
-  [data-warning='true'] & {
+  [data-warning] & {
     background-color: var(--admiral-color-Warning_Warning50Main, ${(p) => p.theme.color['Warning/Warning 50 Main']});
   }
-  [data-disabled='true'] & {
+  [data-disabled] & {
     background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   }
   border-radius: 1px;
@@ -180,7 +180,7 @@ export const Content = styled.div<{ $lineClamp: 1 | 2 | 3 }>`
   }};
   overflow: hidden;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
-  [data-disabled='true'] & {
+  [data-disabled] & {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
   ${typography['Body/Body 2 Long']}

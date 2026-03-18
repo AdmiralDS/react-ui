@@ -139,11 +139,11 @@ export const SuffixSelect = <T extends ReactNode>({
       <Container
         ref={containerRef}
         disabled={disabled}
-        data-read-only={props.readOnly ? true : undefined}
+        data-read-only={props.readOnly ? '' : undefined}
         onMouseDown={props.readOnly || disabled ? preventDefault : handleContainerClick}
       >
         {renderValue ? renderValue({ value }) : <ValueContainer>{String(value)}</ValueContainer>}
-        {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled} />}
+        {!props.readOnly && <OpenStatusButton $isOpen={isOpen} aria-hidden data-disabled={disabled ? '' : undefined} />}
       </Container>
       {isOpen && (
         <StyledDropdownContainer

@@ -45,7 +45,7 @@ const PageAdditional = styled.span`
 const PageSizeAdditional = styled.div`
   min-width: 172px;
   margin: 0 12px;
-  [data-simple='true'] & {
+  [data-simple] & {
     margin: 0;
   }
 `;
@@ -225,7 +225,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const renderComplex = () => {
     return (
-      <ComplexWrapper data-simple={simple} {...props}>
+      <ComplexWrapper data-simple={simple ? '' : undefined} {...props}>
         <Part>
           {itemsPerPageText}
           {renderPageSizeSelect()}
@@ -244,7 +244,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
 
   const renderSimple = () => {
     return (
-      <SimpleWrapper data-simple={simple} {...props}>
+      <SimpleWrapper data-simple={simple ? '' : undefined} {...props}>
         <PageSizeAdditional>{itemRangeText(rangeStart, rangeEnd, totalItems)}</PageSizeAdditional>
         {renderSideButtons()}
       </SimpleWrapper>

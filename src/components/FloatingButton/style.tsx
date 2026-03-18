@@ -169,14 +169,14 @@ export const GroupWrapper = styled.div<{
   width: ${(p) => (p.$dimension == 'm' ? 40 : 56)}px;
   height: auto;
 
-  & > div[data-visible='false'] {
+  & > div:not([data-visible]) {
     margin-bottom: ${(p) => (p.$dimension == 'm' ? -20 : -28)}px;
     opacity: 0;
     transition:
       margin-bottom ${closeTransitionMixin},
       opacity ${closeTransitionMixin};
   }
-  & > div[data-visible='true'] {
+  & > div[data-visible] {
     margin-bottom: ${(p) => (p.$dimension == 'm' ? 12 : 16)}px;
     opacity: 1;
     transition:

@@ -149,7 +149,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps<React.ReactNode>>(
       );
 
     useEffect(() => {
-      const hoveredItem = menuRef.current?.querySelector('[data-hovered="true"]');
+      const hoveredItem = menuRef.current?.querySelector('[data-hovered]');
 
       hoveredItem?.scrollIntoView({
         behavior: 'smooth',

@@ -98,8 +98,7 @@ interface SeparatorProps {
 }
 
 export interface MultiButtonProps
-  extends
-    Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>,
     Omit<DropMenuComponentProps, 'targetElement'>,
     Omit<DropMenuStyleProps, 'menuWidth'> {
   /** Опции выпадающего списка */
@@ -181,10 +180,10 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
     const menuWidth = dimension === 's' ? '240px' : '280px';
 
     const handleWrapperFocus = () => {
-      wrapperRef.current?.setAttribute('data-focused', 'true');
+      wrapperRef.current?.setAttribute('data-focused', '');
     };
     const handleWrapperBlur = () => {
-      wrapperRef.current?.setAttribute('data-focused', 'false');
+      wrapperRef.current?.removeAttribute('data-focused');
     };
 
     const dropMenuProps = {
@@ -220,13 +219,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
         disabled={disabled}
         renderContentProp={({ buttonRef, handleKeyDown, handleClick, statusIcon, menuState }) => {
           return (
-            <Wrapper
-              ref={wrapperRef}
-              data-focused="false"
-              onFocus={handleWrapperFocus}
-              onBlur={handleWrapperBlur}
-              {...props}
-            >
+            <Wrapper ref={wrapperRef} onFocus={handleWrapperFocus} onBlur={handleWrapperBlur} {...props}>
               <MainButton
                 ref={ref}
                 skeleton={skeleton}

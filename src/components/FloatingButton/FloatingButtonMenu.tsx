@@ -96,7 +96,7 @@ export const FloatingButtonMenu = ({
         <MenuWrapper
           className="floating_button_menu"
           data-dimension={dimension}
-          data-visible={isOpen && hasTransitionedIn}
+          data-visible={isOpen && hasTransitionedIn ? '' : undefined}
         >
           {children}
         </MenuWrapper>

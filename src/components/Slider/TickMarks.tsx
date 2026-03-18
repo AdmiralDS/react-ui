@@ -35,7 +35,7 @@ export const Content = styled.div`
   &:active {
     color: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
   }
-  [data-disabled='true'] && {
+  [data-disabled] && {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;

@@ -27,7 +27,7 @@ export const InputBoxDisabledTemplate = ({
       <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '40px' }}>
         Поле ввода с параметром disabled
       </T>
-      <InputBox disabled={disabled} data-disabled={disabled}>
+      <InputBox disabled={disabled} data-disabled={disabled ? '' : undefined}>
         <InputLine
           {...props}
           disabled={disabled}

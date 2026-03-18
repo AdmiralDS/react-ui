@@ -70,8 +70,7 @@ const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disab
 const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();
 
 export interface SelectProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
+  extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'>,
     DropContainerStyles,
     Pick<DropMenuComponentProps, 'targetElement' | 'renderTopPanel' | 'renderBottomPanel'> {
   value?: string | string[];
@@ -854,7 +853,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         $focused={isFocused}
         $multiple={multiple}
         disabled={disabled}
-        data-disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         $readonly={readOnly}
         $isLoading={isLoading}
         $dimension={dimension}
@@ -961,8 +960,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {icons}
           {!readOnly && (
             <OpenStatusButton
-              data-disabled={disabled ? true : undefined}
-              data-loading={isLoading ? true : undefined}
+              data-disabled={disabled ? '' : undefined}
+              data-loading={isLoading ? '' : undefined}
               {...openButtonProps}
               {...openButtonPropsConfig(openButtonProps)}
             />

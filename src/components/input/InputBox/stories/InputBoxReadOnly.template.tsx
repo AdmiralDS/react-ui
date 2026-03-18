@@ -28,7 +28,7 @@ export const InputBoxReadOnlyTemplate = ({
       <T font="Body/Body 1 Long" as="div" style={{ marginBottom: '40px' }}>
         Поле ввода с параметром readOnly
       </T>
-      <InputBox readOnly={readOnly} data-read-only={readOnly}>
+      <InputBox readOnly={readOnly} data-read-only={readOnly ? '' : undefined}>
         <InputLine
           {...props}
           readOnly={readOnly}

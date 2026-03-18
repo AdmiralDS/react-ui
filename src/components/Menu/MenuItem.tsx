@@ -111,10 +111,10 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
         $preselected={preselected}
         $selected={selected}
         $hovered={hovered}
-        data-preselected={preselected}
-        data-hovered={hovered}
-        data-disabled={disabled}
-        data-readonly={readOnly}
+        data-preselected={preselected ? '' : undefined}
+        data-hovered={hovered ? '' : undefined}
+        data-disabled={disabled ? '' : undefined}
+        data-readonly={readOnly ? '' : undefined}
         data-dimension={dimension}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -157,7 +157,7 @@ const Item = styled.div<{
   ${colorTextMixin}
   ${backgroundColor}
 
-  &&[data-disabled='true'] {
+  &&[data-disabled] {
     cursor: not-allowed;
     background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
@@ -169,7 +169,7 @@ const Item = styled.div<{
     }
   }
 
-  &&[data-readonly='true'] {
+  &&[data-readonly] {
     cursor: default;
   }
 `;

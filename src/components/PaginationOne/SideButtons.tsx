@@ -12,7 +12,7 @@ const ButtonsWrapper = styled.div`
   & > button {
     margin-left: 8px;
   }
-  [data-simple='true'] & {
+  [data-simple] & {
     margin-left: 20px;
   }
 `;

@@ -49,7 +49,7 @@ const Item = styled.li<{
     ${hoverStyle}
   }
 
-  &&[data-disabled='true'] {
+  &&[data-disabled] {
     cursor: not-allowed;
     background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
@@ -69,7 +69,7 @@ export const DropDownItem = React.forwardRef<HTMLLIElement, DropDownItemProps>(
         selected={selected}
         $hovered={hovered}
         id={id}
-        data-disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         {...props}
       >
         {children}

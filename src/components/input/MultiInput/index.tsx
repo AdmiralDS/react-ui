@@ -142,10 +142,10 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       readOnly: props.readOnly,
       $dimension: dimension,
       tabIndex: -1,
-      'data-disabled': props.disabled ? true : undefined,
-      'data-read-only': props.readOnly ? true : undefined,
+      'data-disabled': props.disabled ? '' : undefined,
+      'data-read-only': props.readOnly ? '' : undefined,
       'data-status': status,
-      'data-disable-copying': disableCopying ? true : undefined,
+      'data-disable-copying': disableCopying ? '' : undefined,
       onMouseDown: disableCopying ? preventDefault : undefined,
       onFocus: handleContainerFocus,
     } satisfies Partial<React.ComponentProps<typeof Container> & DataAttributes>;

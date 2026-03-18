@@ -65,7 +65,7 @@ const Overlay = styled.div<{
   background-color: transparent;
   transition: background-color ${transitionMixin};
 
-  &[data-visible='true'] {
+  &[data-visible] {
     ${({ theme, $backdrop }) =>
       $backdrop && `background-color: var(--admiral-color-Opacity_Modal, ${theme.color['Opacity/Modal']});`}
     ${({ $backdrop }) => $backdrop && `pointer-events: auto;`}
@@ -193,9 +193,9 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     useEffect(() => {
       if (overlayRef.current) {
         if (isOpen) {
-          overlayRef.current.dataset.visible = 'true';
+          overlayRef.current.setAttribute('data-visible', '');
         } else {
-          overlayRef.current.dataset.visible = 'false';
+          overlayRef.current.removeAttribute('data-visible');
         }
       }
     }, [isOpen]);
@@ -285,7 +285,6 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         className={overlayClassName}
         style={overlayStyle}
         $backdrop={backdrop}
-        data-visible={false}
         $position={position}
       >
         <DrawerComponent

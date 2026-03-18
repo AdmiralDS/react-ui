@@ -91,13 +91,13 @@ export const EditIcon = styled(EditSolid)<{ $multiline: boolean }>`
   }
   cursor: pointer;
 
-  [data-disabled='true'] & {
+  [data-disabled] & {
     cursor: not-allowed;
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
-  [data-disabled='false'] & {
+  :not([data-disabled]) > & {
     &:hover {
       & *[fill^='#'] {
         fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});
@@ -197,12 +197,12 @@ export const Text = styled.div<{ $multiline?: boolean }>`
   ${TypographyMixin};
   ${(p) => (p.$multiline ? MultilineMixin : SinglelineMixin)}
 
-  [data-disabled='true'] & {
+  [data-disabled] & {
     cursor: default;
     pointer-events: none;
   }
 
-  [data-disabled='false'] & {
+  :not([data-disabled]) > & {
     &:hover {
       & + ${EditIcon} *[fill^='#'] {
         fill: var(--admiral-color-Primary_Primary70, ${(p) => p.theme.color['Primary/Primary 70']});

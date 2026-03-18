@@ -87,8 +87,7 @@ const IconPanelAfter = styled(IconPanel)`
 `;
 
 export interface TimePickerProps
-  extends
-    Omit<
+  extends Omit<
       TextInputProps,
       | 'value'
       | 'iconsBefore'
@@ -593,12 +592,12 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       $isLoading: isLoading,
       $skeleton: skeleton,
       $iconsAfterCount: iconArray.length,
-      'data-disabled': disabled ? true : undefined,
-      'data-read-only': props.readOnly ? true : undefined,
-      'data-loading': isLoading ? true : undefined,
-      'data-skeleton': skeleton ? true : undefined,
+      'data-disabled': disabled ? '' : undefined,
+      'data-read-only': props.readOnly ? '' : undefined,
+      'data-loading': isLoading ? '' : undefined,
+      'data-skeleton': skeleton ? '' : undefined,
       'data-status': computedStatus,
-      'data-disable-copying': disableCopying ? true : undefined,
+      'data-disable-copying': disableCopying ? '' : undefined,
       className: 'time-picker-container',
       ref: inputContainerRef,
       onMouseDown: handleContainerMouseDown,

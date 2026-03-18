@@ -494,12 +494,12 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         let itemToScroll;
 
         if ((active && previousActive.current !== active) || previousActiveState.current !== activeState) {
-          itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered]');
         } else if (
           (preselected && previousPreselected.current !== preselected) ||
           previousPreselectedState.current !== preselectedState
         ) {
-          itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
+          itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected]');
         }
 
         if (itemToScroll) {

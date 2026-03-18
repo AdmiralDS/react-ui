@@ -17,8 +17,7 @@ import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 
 export interface TreeSelectProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
     Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'>,
     Pick<DropDownTreeProps, 'dropdownConfig'> {
   value?: string[];
@@ -168,8 +167,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     if (!readOnly)
       iconsAfter.push(
         <OpenStatusButton
-          data-disabled={disabled ? true : undefined}
-          data-loading={isLoading ? true : undefined}
+          data-disabled={disabled ? '' : undefined}
+          data-loading={isLoading ? '' : undefined}
           {...openButtonProps}
           {...openButtonPropsConfig?.(openButtonProps)}
         />,

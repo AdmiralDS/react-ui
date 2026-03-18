@@ -89,7 +89,7 @@ export const ValueWrapper = styled.div<{
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
 
   ${rowHeightStyle}
-  [data-disabled='true'] &&& {
+  [data-disabled] &&& {
     color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   }
 `;
@@ -182,7 +182,7 @@ export const IconPanel = styled.div<{ $multiple?: boolean; $dimension?: Componen
     height: ${({ $dimension }) => ($dimension === 's' ? 20 : 24)}px;
   }
 
-  [data-disabled='true'] &&& {
+  [data-disabled] &&& {
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
