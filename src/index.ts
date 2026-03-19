@@ -111,4 +111,6 @@ export * from './components/Scrollbar';
 export * from './components/Anchor';
 export * from './components/Divider';
 
+export * from './components/SideMenu';
+
 export * from './components/Pulse';
