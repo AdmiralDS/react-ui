@@ -47,12 +47,12 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
         if (entries[0].isIntersecting && !visible) {
           setVisible(true);
 
-          entries[0].target.setAttribute('data-visible', 'true');
+          entries[0].target.setAttribute('data-visible', '');
           const prev = entries[0].target.previousElementSibling;
           const next = entries[0].target.nextElementSibling;
 
           if (prev) prev.removeAttribute('data-show-count');
-          if (next && !next.getAttribute('data-visible')) entries[0].target.setAttribute('data-show-count', '');
+          if (next && !next.hasAttribute('data-visible')) entries[0].target.setAttribute('data-show-count', '');
           return;
         }
 
@@ -62,7 +62,7 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
           entries[0].target.removeAttribute('data-show-count');
 
           const prev = entries[0].target.previousElementSibling;
-          if (prev && prev.getAttribute('data-visible')) prev.setAttribute('data-show-count', 'true');
+          if (prev && prev.hasAttribute('data-visible')) prev.setAttribute('data-show-count', '');
         }
       }
 

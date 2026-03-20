@@ -52,7 +52,7 @@ test.describe('Stepper Advanced Features', () => {
     await expect(stepper).toBeVisible();
 
     // Ищем шаги с пропом link
-    const stepsWithLink = frame.locator('[data-testid="stepper"] [data-completed="true"]');
+    const stepsWithLink = frame.locator('[data-testid="stepper"] [data-completed]');
     await expect(stepsWithLink).toHaveCount(2);
 
     // Проверяем, что завершенные шаги имеют ссылки
@@ -87,11 +87,11 @@ test.describe('Stepper Advanced Features', () => {
     await expect(steps).toHaveCount(5);
 
     // Проверяем, что есть завершенные шаги через data-completed
-    const completedSteps = frame.locator('[data-completed="true"]');
+    const completedSteps = frame.locator('[data-completed]');
     await expect(completedSteps).toHaveCount(3);
 
     // Проверяем, что есть активный шаг
-    const activeStep = frame.locator('[data-active="true"]');
+    const activeStep = frame.locator('[data-active]');
     await expect(activeStep).toBeVisible();
   });
 
@@ -266,8 +266,8 @@ test.describe('Stepper Advanced Features', () => {
     await page.goto('/?path=/story/admiral-2-1-stepper--step-kinds-example');
     const frame = getStorybookFrameLocator(page);
 
-    // Ищем шаг с data-error="true"
-    const errorStep = frame.locator('[data-error="true"]');
+    // Ищем шаг с data-error
+    const errorStep = frame.locator('[data-error]');
     await expect(errorStep).toBeVisible();
 
     // Проверяем, что у шага с ошибкой есть соответствующие стили
@@ -284,8 +284,8 @@ test.describe('Stepper Advanced Features', () => {
       await page.waitForTimeout(TIMEOUTS.WAIT_LONG);
     }
 
-    // Ищем шаг с data-warning="true"
-    const warningStep = frame.locator('[data-warning="true"]');
+    // Ищем шаг с data-warning
+    const warningStep = frame.locator('[data-warning]');
     await expect(warningStep).toBeVisible({
       timeout: browserName === 'webkit' ? TIMEOUTS.EXPECT_LOADING_WEBKIT : TIMEOUTS.EXPECT_LOADING_LONG,
     });
@@ -299,8 +299,8 @@ test.describe('Stepper Advanced Features', () => {
     await page.goto('/?path=/story/admiral-2-1-stepper--step-kinds-example');
     const frame = getStorybookFrameLocator(page);
 
-    // Ищем шаг с data-completed="true"
-    const completedStep = frame.locator('[data-completed="true"]');
+    // Ищем шаг с data-completed
+    const completedStep = frame.locator('[data-completed]');
     await expect(completedStep).toBeVisible();
 
     // Проверяем, что у завершенного шага есть соответствующие стили

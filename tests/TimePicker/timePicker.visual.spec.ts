@@ -25,7 +25,7 @@ test.describe('TimePicker - visual states and props', () => {
     const frame = getStorybookFrameLocator(page);
 
     const container = frame.locator('.time-picker-container');
-    await expect(container).not.toHaveAttribute('data-loading', 'true');
+    await expect(container).not.toHaveAttribute('data-loading');
   });
 
   test('applies error status visually', async ({ page }) => {
@@ -107,7 +107,7 @@ test.describe('TimePicker - visual states and props', () => {
     await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-skeleton');
     const frame = getStorybookFrameLocator(page);
 
-    const container = frame.locator('.time-picker-container[data-skeleton="true"]');
+    const container = frame.locator('.time-picker-container[data-skeleton]');
     await expect(container).toBeVisible();
 
     const input = frame.locator('.time-picker-native-input');
@@ -119,7 +119,7 @@ test.describe('TimePicker - visual states and props', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
-    const container = frame.locator('.time-picker-container[data-disabled="true"]');
+    const container = frame.locator('.time-picker-container[data-disabled]');
 
     await expect(container).toBeVisible();
     await expect(input).toBeDisabled();
@@ -141,7 +141,7 @@ test.describe('TimePicker - visual states and props', () => {
     const frame = getStorybookFrameLocator(page);
 
     const input = frame.locator('.time-picker-native-input');
-    const container = frame.locator('.time-picker-container[data-read-only="true"]');
+    const container = frame.locator('.time-picker-container[data-read-only]');
 
     await expect(container).toBeVisible();
     await expect(input).toHaveAttribute('readonly', '');

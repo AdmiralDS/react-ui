@@ -73,22 +73,22 @@ test.describe('Stepper Component', () => {
     await expect(steps).toHaveCount(6);
 
     // Проверяем шаг с предупреждением через data-warning
-    const warningStep = frame.locator('[data-warning="true"]');
+    const warningStep = frame.locator('[data-warning]');
     await expect(warningStep).toBeVisible();
     await expect(warningStep).toHaveText('Шаг с предупреждением');
 
     // Проверяем отключенный шаг через data-disabled
-    const disabledStep = frame.locator('[data-disabled="true"]');
+    const disabledStep = frame.locator('[data-disabled]');
     await expect(disabledStep).toBeVisible();
     await expect(disabledStep).toHaveText('Disabled шаг');
 
     // Проверяем шаг с ошибкой через data-error
-    const errorStep = frame.locator('[data-error="true"]');
+    const errorStep = frame.locator('[data-error]');
     await expect(errorStep).toBeVisible();
     await expect(errorStep).toHaveText('Шаг с ошибкой');
 
     // Проверяем завершенный шаг через data-completed
-    const completedStep = frame.locator('[data-completed="true"]');
+    const completedStep = frame.locator('[data-completed]');
     await expect(completedStep).toBeVisible();
     await expect(completedStep).toHaveText('Завершенный шаг');
 

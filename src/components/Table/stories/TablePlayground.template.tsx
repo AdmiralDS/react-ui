@@ -11,7 +11,7 @@ const AmountCell = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
 
-  &[data-disabled='true'] {
+  &[data-disabled] {
     & > * {
       color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }

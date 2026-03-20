@@ -267,7 +267,8 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
       if (filler) {
         const resizeObserver = new ResizeObserver(() => {
-          filler.dataset.empty = String(filler.getBoundingClientRect().width == 0);
+          if (filler.getBoundingClientRect().width == 0) filler.setAttribute('data-empty', '');
+          else filler.removeAttribute('data-empty');
         });
         resizeObserver.observe(filler);
         return () => {
@@ -287,9 +288,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       function handleIntersection([entry]: IntersectionObserverEntry[]) {
         if (table) {
           if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
-            table.setAttribute('data-shadow-left', 'false');
+            table.removeAttribute('data-shadow-left');
           } else {
-            table.setAttribute('data-shadow-left', 'true');
+            table.setAttribute('data-shadow-left', '');
           }
         }
       }
@@ -313,9 +314,9 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       function handleIntersection([entry]: IntersectionObserverEntry[]) {
         if (table) {
           if (entry.isIntersecting && entry.intersectionRatio > 0.99) {
-            table.setAttribute('data-shadow-right', 'false');
+            table.removeAttribute('data-shadow-right');
           } else {
-            table.setAttribute('data-shadow-right', 'true');
+            table.setAttribute('data-shadow-right', '');
           }
         }
       }
@@ -641,10 +642,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
     return (
       <TableContainer
         ref={refSetter(ref, tableRef)}
-        data-shadow-left={false}
-        data-shadow-right={false}
-        data-borders={showBorders}
-        data-dragging={false}
+        data-borders={showBorders ? '' : undefined}
         {...props}
         className={`table ${props.className || ''}`}
       >
@@ -655,18 +653,10 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
               <>
                 <Edge ref={leftEdgeRef} />
                 <StickyWrapper ref={stickyColumnsWrapperRef} $greyHeader={greyHeader}>
-                  {rowsDraggable && <DragCell $dimension={dimension} data-draggable={false} data-droppable={false} />}
-                  {displayRowExpansionColumn && (
-                    <ExpandCell $dimension={dimension} data-draggable={false} data-droppable={false} />
-                  )}
+                  {rowsDraggable && <DragCell $dimension={dimension} />}
+                  {displayRowExpansionColumn && <ExpandCell $dimension={dimension} />}
                   {displayRowSelectionColumn && (
-                    <CheckboxCell
-                      $dimension={dimension}
-                      className="th_checkbox"
-                      data-th-column="checkbox"
-                      data-draggable={false}
-                      data-droppable={false}
-                    >
+                    <CheckboxCell $dimension={dimension} className="th_checkbox" data-th-column="checkbox">
                       <CheckboxField
                         dimension={checkboxDimension}
                         checked={allRowsChecked || someRowsChecked || headerCheckboxChecked}

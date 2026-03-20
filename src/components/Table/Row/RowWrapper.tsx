@@ -80,7 +80,7 @@ export const RowWrapper = ({
       $rowWidth={rowWidth}
       $hover={!!row.hover}
       data-row={row.id}
-      data-group={isGroup}
+      data-group={isGroup ? '' : undefined}
       data-ingroup={groupId}
       data-first-row-in-group={row?.groupRows?.[0] ?? null}
     >

@@ -17,9 +17,9 @@ test.describe('TimePicker - data attributes and states', () => {
     const dropdown = frame.locator('.dropContainerClass');
     await expect(dropdown).toBeVisible();
 
-    const disabledItem = dropdown.locator('[data-disabled="true"]').filter({ hasText: '12:30' }).first();
+    const disabledItem = dropdown.locator('[data-disabled]').filter({ hasText: '12:30' }).first();
     await expect(disabledItem).toBeVisible({ timeout: TIMEOUTS.EXPECT_FAST });
-    await expect(disabledItem).toHaveAttribute('data-disabled', 'true');
+    await expect(disabledItem).toHaveAttribute('data-disabled', '');
 
     await disabledItem.click();
     await expect(input).not.toHaveValue('12:30');
@@ -29,7 +29,7 @@ test.describe('TimePicker - data attributes and states', () => {
     await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-icon-custom');
     const frame = getStorybookFrameLocator(page);
 
-    const container = frame.locator('.time-picker-container[data-read-only="true"]');
+    const container = frame.locator('.time-picker-container[data-read-only]');
     await expect(container).toBeVisible();
   });
 

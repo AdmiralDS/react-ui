@@ -17,7 +17,7 @@ export const CounterChip = ({ count, disabled, onClick }: React.PropsWithChildre
     <CounterChipWrap onClick={onClick} ref={ref} className={'counter'}>
       <StyledCounterChip
         ref={counterRef}
-        data-visible={true}
+        data-visible={''}
         tabIndex={-1}
         dimension="s"
         appearance="filled"

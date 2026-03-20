@@ -129,7 +129,7 @@ export function dragObserver(
     start(grabbed);
 
     if (_item) {
-      _item.dataset.dragover = 'true';
+      _item.setAttribute('data-dragover', '');
       renderMirrorImage();
       handleDrag(e);
     }
@@ -213,8 +213,8 @@ export function dragObserver(
   function cleanup() {
     ungrab();
     removeMirrorImage();
-    delete _item?.dataset?.dragover;
-    delete _currentTarget?.dataset?.groupover;
+    _item?.removeAttribute('data-dragover');
+    _item?.removeAttribute('data-groupover');
     drake.dragging = false;
     onDragEnd?.(_item);
     _source = _item = _initialSibling = _currentSibling = _lastDropTarget = _currentTarget = null;
@@ -265,8 +265,8 @@ export function dragObserver(
     if (o.updateDragItem) {
       const updatedItem = o.updateDragItem?.(_itemId);
       if (updatedItem) {
-        delete _item?.dataset?.dragover;
-        updatedItem.dataset.dragover = 'true';
+        _item?.removeAttribute('data-dragover');
+        updatedItem.setAttribute('data-dragover', '');
         _item = updatedItem;
       }
     }
@@ -323,10 +323,10 @@ export function dragObserver(
 
   function updateCurrentTarget(immediate: HTMLElement | null) {
     if (o.direction === 'vertical') {
-      delete _currentTarget?.dataset.groupover;
+      _currentTarget?.removeAttribute('data-groupover');
 
-      if (immediate?.dataset?.group == 'true') {
-        immediate.dataset.groupover = 'true';
+      if (immediate?.hasAttribute('data-group')) {
+        immediate.setAttribute('data-groupover', '');
       }
     }
     _currentTarget = immediate;

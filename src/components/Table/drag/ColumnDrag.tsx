@@ -48,7 +48,9 @@ export const ColumnDrag = ({
 
   useEffect(() => {
     if (tableRef.current) {
-      tableRef.current.dataset.dragging = String(columnDragging);
+      if (columnDragging) {
+        tableRef.current.setAttribute('data-dragging', '');
+      } else tableRef.current.removeAttribute('data-dragging');
     }
   }, [columnDragging]);
 
@@ -133,13 +135,13 @@ export const ColumnDrag = ({
           dimension,
           direction: 'horizontal',
           invalid: (el: HTMLElement) => {
-            return el.dataset.draggable == 'false';
+            return !el.hasAttribute('data-draggable');
           },
           accepts: (_, target: HTMLElement | null, source: HTMLElement | null, sibling: HTMLElement | null) => {
             // column can be dragged only inside parent container
             if (target !== source) return false;
             // can not place column before CheckboxCell or ExpandCell
-            if (sibling?.dataset.droppable == 'false') return false;
+            if (!sibling?.hasAttribute('data-droppable')) return false;
             return true;
           },
         },

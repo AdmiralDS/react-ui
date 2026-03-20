@@ -74,7 +74,7 @@ export const HeaderCellComponent = React.memo(
       $resizer: withResizer,
       style: { width: colWidth, minWidth: colWidth },
       className: 'th',
-      'data-draggable': draggable,
+      'data-draggable': draggable ? '' : undefined,
       'data-th-column': name,
       ...(hidden ? { 'data-index': index } : {}),
     } satisfies React.ComponentProps<typeof HeaderCell> & DataAttributes;

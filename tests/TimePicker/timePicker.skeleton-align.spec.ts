@@ -6,7 +6,7 @@ test.describe('TimePicker - skeleton and dropdown alignment', () => {
     await page.goto('/?path=/story/admiral-2-1-input-timepicker--time-picker-skeleton');
     const frame = getStorybookFrameLocator(page);
 
-    const skeletonContainer = frame.locator('.time-picker-container[data-skeleton="true"]');
+    const skeletonContainer = frame.locator('.time-picker-container[data-skeleton]');
     await expect(skeletonContainer).toBeVisible();
   });
 

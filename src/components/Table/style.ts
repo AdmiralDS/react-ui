@@ -34,11 +34,11 @@ export const TableContainer = styled.div`
   background: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
   overflow: auto;
 
-  &[data-dragging='true'] ${ResizerWrapper} {
+  &[data-dragging] ${ResizerWrapper} {
     pointer-events: none;
   }
 
-  &[data-borders='true'] {
+  &[data-borders] {
     border: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
   }
 `;
@@ -53,7 +53,7 @@ export const StickyWrapper = styled.div<{ $greyHeader?: boolean }>`
       ? `var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`
       : `var(--admiral-color-Neutral_Neutral00, ${theme.color['Neutral/Neutral 00']})`};
   transition: box-shadow 0.3s;
-  ${TableContainer}[data-shadow-left='true'] & {
+  ${TableContainer}[data-shadow-left] & {
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.12);
   }
 `;
@@ -69,7 +69,7 @@ export const StickyWrapper = styled.div<{ $greyHeader?: boolean }>`
  */
 export const NormalWrapper = styled.div`
   display: flex;
-  &:has(+ div[data-empty='true']) {
+  &:has(+ div[data-empty]) {
     overflow-x: hidden;
   }
 `;
@@ -255,7 +255,7 @@ export const HeaderCell = styled.div<{ $dimension: TableProps['dimension']; $res
   ${cellStyle}
   ${borderStyle}
   cursor: default;
-  &[data-draggable='true'] {
+  &[data-draggable] {
     cursor: pointer;
   }
   align-items: flex-start;
@@ -340,7 +340,7 @@ const rowHoverMixin = css`
 `;
 
 const groupRowHoverMixin = css`
-  &[data-groupover='true'] > .tr-simple > * {
+  &[data-groupover] > .tr-simple > * {
     background: var(--admiral-color-Opacity_Hover, ${(p) => p.theme.color['Opacity/Hover']});
   }
 `;
@@ -366,7 +366,7 @@ export const Row = styled.div<{
     ${({ $hover, disabled }) => $hover && !disabled && rowHoverMixin}
   }
 
-  &[data-dragover='true'] > * {
+  &[data-dragover] > * {
     opacity: 0.4;
   }
   transition: opacity 0.3s ease;
@@ -397,7 +397,7 @@ export const SimpleRow = styled.div<{
           visibility: visible;
         }
       }
-      & div[data-overflowmenu][data-opened='true'] {
+      & div[data-overflowmenu][data-opened] {
         visibility: visible;
       }
     `}
@@ -531,7 +531,7 @@ export const ActionMock = styled.div<{ $dimension: TableProps['dimension'] }>`
   position: sticky;
   right: 0;
   z-index: 5;
-  .table[data-shadow-right='true'] & {
+  .table[data-shadow-right] & {
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
   }
 

@@ -21,7 +21,7 @@ const OverflowMenuWrapper = styled.div<{ $showRowsActions?: boolean }>`
   right: 0;
   z-index: 5;
 
-  .table[data-shadow-right='true'] & {
+  .table[data-shadow-right] & {
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
   }
 
@@ -83,9 +83,9 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
   const handleVisibilityChange = (isVisible: boolean) => {
     if (!showRowsActions) {
       if (isVisible) {
-        if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'true';
+        if (oveflowMenuRef.current) oveflowMenuRef.current.setAttribute('data-opened', '');
       } else {
-        if (oveflowMenuRef.current) oveflowMenuRef.current.dataset.opened = 'false';
+        if (oveflowMenuRef.current) oveflowMenuRef.current.removeAttribute('data-opened');
       }
     }
   };
@@ -118,7 +118,7 @@ export const OverflowMenu: React.FC<OverflowMenuProps> = ({
     <OverflowMenuWrapper
       ref={oveflowMenuRef}
       data-overflowmenu
-      data-opened={showRowsActions}
+      data-opened={showRowsActions ? '' : undefined}
       $showRowsActions={showRowsActions}
       {...props}
     >
