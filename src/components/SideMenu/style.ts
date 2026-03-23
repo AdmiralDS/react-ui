@@ -49,18 +49,10 @@ export const StyledScrollContainer = styled(ScrollContainer)<{
 
 export const TopPanelContent = styled.div<{
   $dimension: SideMenuDimension;
-  $gap: number;
 }>`
   padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 16px 0 16px' : '12px 12px 0 12px')};
-
-  ${SideMenuItem} {
-    margin-bottom: ${({ $gap }) => $gap}px;
-  }
 `;
 
-export const BottomPanelContent = styled.div<{ $dimension: SideMenuDimension; $gap: number }>`
+export const BottomPanelContent = styled.div<{ $dimension: SideMenuDimension }>`
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px 16px 16px' : '0 12px 12px 12px')};
-  ${SideMenuItem} {
-    margin-top: ${({ $gap }) => $gap}px;
-  }
 `;

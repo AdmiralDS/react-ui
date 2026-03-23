@@ -21,7 +21,7 @@ export const SideMenuWithMediaQueryTemplate = ({
       <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
         <MenuOutline />
       </IconButton>
-      <SideMenu {...props} isOpen={open} closeMediaQuery="700px" onToggle={handleToggle}>
+      <SideMenu {...props} isOpen={open} closeMediaQuery="700px" onClose={() => setOpen(false)}>
         {example}
       </SideMenu>
     </ThemeProvider>

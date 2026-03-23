@@ -1,5 +1,4 @@
-import { forwardRef, useEffect, useMemo } from 'react';
-import { IconButton } from '../IconButton';
+import { forwardRef, useEffect } from 'react';
 import { useMediaQuery } from '../common/hooks/useMediaQuery';
 import { BottomPanelContent, SideMenuItem, StyledDrawer, StyledScrollContainer, TopPanelContent } from './style';
 
@@ -19,17 +18,15 @@ export interface SideMenuProps {
   /** Параметр максимального размера окна при достижении которого будет вызвана функция onToggle */
   closeMediaQuery?: string;
   /** Функция которая будет выполняться при достижении closeMediaQuery */
-  onToggle?: () => void;
+  onClose?: () => void;
   /** Наличие затемненного фона, блокирующего контент страницы */
   backdrop?: boolean;
   /** Размер компонента */
   dimension?: SideMenuDimension;
-  //todo добавить описание потом
-  /**  */
-  bottomPanelContent?: string[];
-  //todo добавить описание потом
-  /**  */
-  topPanelContent?: string[];
+  /** Позволяет добавить панель внизу */
+  renderBottomPanel?: () => React.ReactNode;
+  /** Позволяет добавить панель вверху */
+  renderTopPanel?: () => React.ReactNode;
   /** Рассотояние между пунктами контента */
   gap?: number;
 }
@@ -38,29 +35,29 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   (
     {
       visibleBorder = false,
-      onToggle,
+      onClose,
       isOpen,
       appearance = 'primary',
       backdrop = false,
       children,
       dimension = 'm',
       closeMediaQuery,
-      bottomPanelContent,
-      topPanelContent,
+      renderBottomPanel,
+      renderTopPanel,
       gap = 4,
       ...props
     },
     ref,
   ) => {
-    const isTopPanelContent = !!topPanelContent;
-    const isBottomPanelContent = !!bottomPanelContent;
+    const isRenderTopPanel = !!renderTopPanel;
+    const isRenderBottomPanel = !!renderBottomPanel;
 
     const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
 
     useEffect(() => {
-      if (!maxWidth || !isOpen || !closeMediaQuery || !onToggle) return;
-
-      onToggle();
+      if (maxWidth && isOpen && closeMediaQuery && onClose) {
+        onClose();
+      }
     }, [maxWidth]);
 
     return (
@@ -74,18 +71,10 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         $appearance={appearance}
         {...props}
       >
-        {isTopPanelContent && (
-          <TopPanelContent $gap={gap} $dimension={dimension}>
-            {topPanelContent.map((item, id) => (
-              <SideMenuItem key={id} $dimension={dimension}>
-                {item}
-              </SideMenuItem>
-            ))}
-          </TopPanelContent>
-        )}
+        {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
         <StyledScrollContainer
-          $isTopPanelContent={isTopPanelContent}
-          $isBottomPanelContent={isBottomPanelContent}
+          $isTopPanelContent={isRenderTopPanel}
+          $isBottomPanelContent={isRenderBottomPanel}
           $dimension={dimension}
           $gap={gap}
         >
@@ -96,15 +85,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
               </SideMenuItem>
             ))}
         </StyledScrollContainer>
-        {isBottomPanelContent && (
-          <BottomPanelContent $gap={gap} $dimension={dimension}>
-            {bottomPanelContent.map((item, id) => (
-              <SideMenuItem key={id} $dimension={dimension}>
-                {item}
-              </SideMenuItem>
-            ))}
-          </BottomPanelContent>
-        )}
+        {isRenderBottomPanel && <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>}
       </StyledDrawer>
     );
   },
