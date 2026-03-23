@@ -1,45 +1,48 @@
-import { forwardRef, useEffect } from 'react';
+import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
+import { TextInput } from '#src/components/input';
+import { Divider } from '#src/components/Divider';
 import { useMediaQuery } from '../common/hooks/useMediaQuery';
-import { BottomPanelContent, SideMenuItem, StyledDrawer, StyledScrollContainer, TopPanelContent } from './style';
 
-export type SideMenuAppearance = 'primary' | 'secondary';
-export type SideMenuDimension = 'm' | 'l';
+import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
+import { BottomPanelContent, StyledDrawer, StyledScrollContainer, TopPanelContent } from './styles';
+import type { SideMenuProps, SideMenuNode } from './types';
+import { filterMenuTree } from './utils/filterTree';
+import { SideMenuItem } from './MenuItem';
+import { SideMenuGroup } from './MenuGroup';
 
-export interface SideMenuProps {
-  /** Состояние компонента: открыт/закрыт */
-  isOpen: boolean;
-  /** Состояние видимости border-right */
-  visibleBorder?: boolean;
-  /** Внешний вид компонента */
-  appearance?: SideMenuAppearance;
-  //todo добавить описание потом
-  /**  */
-  children?: React.ReactNode;
-  /** Параметр максимального размера окна при достижении которого будет вызвана функция onToggle */
-  closeMediaQuery?: string;
-  /** Функция которая будет выполняться при достижении closeMediaQuery */
-  onClose?: () => void;
-  /** Наличие затемненного фона, блокирующего контент страницы */
-  backdrop?: boolean;
-  /** Размер компонента */
-  dimension?: SideMenuDimension;
-  /** Позволяет добавить панель внизу */
-  renderBottomPanel?: () => React.ReactNode;
-  /** Позволяет добавить панель вверху */
-  renderTopPanel?: () => React.ReactNode;
-  /** Рассотояние между пунктами контента */
-  gap?: number;
+function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
+  const { value, defaultValue } = opts;
+  const isControlled = value !== undefined;
+  const [inner, setInner] = useState<T>(defaultValue);
+
+  return {
+    state: (isControlled ? value : inner) as T,
+    setState: (next: T) => {
+      if (!isControlled) setInner(next);
+    },
+  };
 }
 
+export type { SideMenuProps } from './types';
 export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   (
     {
+      items,
+      selectedItem,
+      defaultSelectedItem = null,
+      openMenus,
+      defaultOpenMenus = [],
+      onSelectItem,
+      onOpenMenusChange,
+      search = false,
+      indentPx = 24,
+
+      //container
       visibleBorder = false,
       onClose,
       isOpen,
       appearance = 'primary',
       backdrop = false,
-      children,
       dimension = 'm',
       closeMediaQuery,
       renderBottomPanel,
@@ -51,6 +54,64 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   ) => {
     const isRenderTopPanel = !!renderTopPanel;
     const isRenderBottomPanel = !!renderBottomPanel;
+
+    const selectedState = useControlledState<string | null>({
+      value: selectedItem,
+      defaultValue: defaultSelectedItem,
+    });
+    const openState = useControlledState<string[]>({
+      value: openMenus,
+      defaultValue: defaultOpenMenus,
+    });
+
+    const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
+
+    const [searchQuery, setSearchQuery] = useState('');
+    const filterActive = search && searchQuery.trim().length > 0;
+    const filteredTree = useMemo(() => filterMenuTree(items, searchQuery).nodes, [items, searchQuery]);
+
+    const handleSelectItem = useCallback(
+      (id: string) => {
+        selectedState.setState(id);
+        onSelectItem?.(id);
+      },
+      [onSelectItem, selectedState],
+    );
+
+    const handleToggleGroup = useCallback(
+      (groupId: string) => {
+        const isOpen = openGroupIds.has(groupId);
+        const next = isOpen ? [...openGroupIds].filter((id) => id !== groupId) : [...openGroupIds, groupId];
+
+        openState.setState(next);
+        onOpenMenusChange?.(next);
+      },
+      [openGroupIds, openState, onOpenMenusChange],
+    );
+
+    const ctxValue: SideMenuContextValue = useMemo(
+      () => ({
+        selectedItemId: selectedState.state,
+        openGroupIds,
+        indentPx,
+        onSelectItem: handleSelectItem,
+        onToggleGroup: handleToggleGroup,
+        filterActive,
+      }),
+      [selectedState.state, openGroupIds, indentPx, handleSelectItem, handleToggleGroup, filterActive],
+    );
+
+    const getItem = (node: SideMenuNode) => {
+      if (node.type === 'divider') {
+        return <Divider dimension="s" orientation="horizontal" />;
+      }
+
+      if (node.type === 'group') {
+        return <SideMenuGroup {...node} />;
+      }
+
+      return <SideMenuItem {...node} />;
+    };
 
     const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
 
@@ -71,22 +132,30 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         $appearance={appearance}
         {...props}
       >
-        {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
-        <StyledScrollContainer
-          $isTopPanelContent={isRenderTopPanel}
-          $isBottomPanelContent={isRenderBottomPanel}
-          $dimension={dimension}
-          $gap={gap}
-        >
-          {children &&
-            (children as string[]).map((item, id) => (
-              <SideMenuItem key={id} $dimension={dimension}>
-                {item}
-              </SideMenuItem>
-            ))}
-        </StyledScrollContainer>
-        {isRenderBottomPanel && <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>}
+        {search && (
+          <TextInput value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." />
+        )}
+
+        <SideMenuContext.Provider value={ctxValue}>
+          <PathContext.Provider value={[]}>
+            {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
+            <StyledScrollContainer
+              $isTopPanelContent={isRenderTopPanel}
+              $isBottomPanelContent={isRenderBottomPanel}
+              $dimension={dimension}
+              $gap={gap}
+            >
+              {filteredTree.map((node, index) => (
+                <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
+              ))}
+            </StyledScrollContainer>
+            {isRenderBottomPanel && (
+              <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>
+            )}
+          </PathContext.Provider>
+        </SideMenuContext.Provider>
       </StyledDrawer>
     );
   },
 );
+SideMenu.displayName = 'SideMenu';
