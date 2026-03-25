@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useMediaQuery = (query: string) => {
-  const [state, setState] = useState(window.matchMedia(query).matches);
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
@@ -14,7 +14,7 @@ export const useMediaQuery = (query: string) => {
 
     mediaQuery.addEventListener('change', updateMediaQuery);
     return () => mediaQuery.removeEventListener('change', updateMediaQuery);
-  }, [query]);
+  }, [query, state]);
 
   return state;
 };

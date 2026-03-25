@@ -6,7 +6,8 @@ import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
-const PanelContainer = styled.div<{ $dimension: React.ComponentProps<typeof SideMenu>['dimension'] }>`
+// TODO: подумать над использованием MenuActionsPanel или созданием подобного компонента
+const PanelContainer = styled.div<{ $dimension: SideMenuProps['dimension'] }>`
   ${({ $dimension }) =>
     $dimension === 'l'
       ? `padding: 12px 16px; height: 48px; ${typography['Body/Body 1 Long']}`

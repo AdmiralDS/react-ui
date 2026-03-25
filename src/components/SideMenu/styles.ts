@@ -93,9 +93,11 @@ export const LabelText = styled.span`
 export const StyledDrawer = styled(Drawer)<{
   $visibleBorder?: boolean;
   $appearance: SideMenuAppearance;
+  $dimension: SideMenuDimension;
 }>`
   justify-content: space-between;
   box-shadow: unset;
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
   ${({ theme, $visibleBorder }) =>
     $visibleBorder &&
     `border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
@@ -107,27 +109,19 @@ export const StyledDrawer = styled(Drawer)<{
 
 export const StyledScrollContainer = styled(ScrollContainer)<{
   $dimension: SideMenuDimension;
-  $isTopPanelContent: boolean;
-  $isBottomPanelContent: boolean;
   //todo определить между какими элементами должен быть отступ
   $gap: number;
 }>`
   flex-grow: 1;
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
-  margin: ${({ $dimension, $isTopPanelContent, $isBottomPanelContent }) => {
-    if ($isTopPanelContent && $isBottomPanelContent) return '0';
-    else if ($isTopPanelContent) return $dimension === 'l' ? '0 0 16px 0' : '0 0 12px 0';
-    else if ($isBottomPanelContent) return $dimension === 'l' ? '16px 0 0 0' : '12px 0 0 0';
-    else return $dimension === 'l' ? '16px 0' : '12px 0';
-  }};
 `;
 
 export const TopPanelContent = styled.div<{
   $dimension: SideMenuDimension;
 }>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 16px 0 16px' : '12px 12px 0 12px')};
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;
 
 export const BottomPanelContent = styled.div<{ $dimension: SideMenuDimension }>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px 16px 16px' : '0 12px 12px 12px')};
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;

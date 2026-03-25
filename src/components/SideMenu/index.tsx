@@ -130,6 +130,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         backdrop={backdrop}
         displayCloseIcon={false}
         $appearance={appearance}
+        $dimension={dimension}
         {...props}
       >
         {search && (
@@ -139,12 +140,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
             {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
-            <StyledScrollContainer
-              $isTopPanelContent={isRenderTopPanel}
-              $isBottomPanelContent={isRenderBottomPanel}
-              $dimension={dimension}
-              $gap={gap}
-            >
+            <StyledScrollContainer $dimension={dimension} $gap={gap}>
               {filteredTree.map((node, index) => (
                 <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
               ))}
