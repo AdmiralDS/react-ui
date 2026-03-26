@@ -42,6 +42,7 @@ export const WrapperOptions = styled.div`
   gap: 4px;
   margin-right: 4px;
   flex-grow: 1;
+  min-width: 0;
 `;
 
 const IconPanel = styled.div<{ $disabled?: boolean; $dimension?: ComponentDimension }>`

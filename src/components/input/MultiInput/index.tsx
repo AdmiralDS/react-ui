@@ -118,6 +118,7 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       const clearButtonProps = {
         icon: CloseOutlineSvg,
         id: 'searchSelectClearIcon',
+        onMouseDown: preventDefault,
         onClick: onClearOptions,
         'aria-hidden': true,
         key: 'close',
