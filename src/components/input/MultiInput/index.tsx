@@ -118,7 +118,7 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       const clearButtonProps = {
         icon: CloseOutlineSvg,
         id: 'searchSelectClearIcon',
-        onMouseDown: preventDefault,
+        onPointerDown: preventDefault,
         onClick: onClearOptions,
         'aria-hidden': true,
       } satisfies React.ComponentProps<typeof InputIconButton>;
