@@ -2,16 +2,18 @@ import styled from 'styled-components';
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 
-import { SideMenu } from '@admiral-ds/react-ui';
+import { ALL_BORDER_RADIUS_VALUES, SideMenu } from '@admiral-ds/react-ui';
 
 import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
 import { SideMenuWithMediaQueryTemplate } from './SideMenuWithMediaQuery.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
+import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
 import SideMenuWithMediaQueryTemplateRaw from './SideMenuWithMediaQuery.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
+import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -48,8 +50,9 @@ export default {
       options: ['m', 'l'],
       control: { type: 'radio' },
     },
-    theme: {
-      control: false,
+    themeBorderKind: {
+      options: ALL_BORDER_RADIUS_VALUES,
+      control: { type: 'radio' },
     },
     ref: {
       control: false,
@@ -119,6 +122,28 @@ export const SideMenuTopBottomPanel = {
   },
 
   name: 'SideMenu. TopBottomPanelContent',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu. Состояния items">
+const SideMenuItemStateStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuItemStateTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuItemStatePanel = {
+  render: SideMenuItemStateStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuItemStateTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Состояния items',
 };
 
 //</editor-fold>

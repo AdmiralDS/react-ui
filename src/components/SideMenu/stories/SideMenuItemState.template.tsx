@@ -1,16 +1,31 @@
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu } from '@admiral-ds/react-ui';
+import { Badge, IconButton, SideMenu, Tag } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
 const items: SideMenuProps['items'] = [
-  { type: 'item', id: '1', label: 'Option1' },
-  { type: 'item', id: '2', label: 'Option2' },
-  { type: 'item', id: '3', label: 'Option3', icon: <EmailSolid /> },
+  {
+    type: 'item',
+    id: '1',
+    label: 'Option1',
+    tag: (
+      <Tag as="span" statusViaBackground kind="success">
+        New
+      </Tag>
+    ),
+  },
+  { type: 'item', id: '2', label: 'Option2', badge: <Badge>4</Badge> },
+  {
+    type: 'item',
+    id: '3',
+    label: 'Option3',
+    icon: <EmailSolid />,
+  },
   { type: 'divider' },
   {
     type: 'group',
@@ -30,9 +45,36 @@ const items: SideMenuProps['items'] = [
       },
     ],
   },
+  {
+    type: 'item',
+    id: '5',
+    label: 'Option5',
+    disabled: true,
+    icon: (
+      <div>
+        <EmailSolid />
+      </div>
+    ),
+  },
+  {
+    type: 'item',
+    id: '6',
+    label: 'Option6',
+    icon: (
+      <div>
+        <EmailSolid />
+      </div>
+    ),
+    tag: (
+      <Tag as="span" statusViaBackground kind="success">
+        New
+      </Tag>
+    ),
+    badge: <Badge>4</Badge>,
+  },
 ];
 
-export const SideMenuWithMediaQueryTemplate = ({
+export const SideMenuItemStateTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -46,7 +88,7 @@ export const SideMenuWithMediaQueryTemplate = ({
       <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
         <MenuOutline />
       </IconButton>
-      <SideMenu {...props} isOpen={open} items={items} closeMediaQuery="700px" onClose={() => setOpen(false)} />
+      <SideMenu style={{ width: '300px' }} {...props} isOpen={open} items={items} />
     </ThemeProvider>
   );
 };

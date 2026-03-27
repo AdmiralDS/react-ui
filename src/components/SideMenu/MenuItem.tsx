@@ -2,13 +2,13 @@ import { memo } from 'react';
 
 import type { SideMenuItemNode } from './types';
 import { useKeyPath, useSideMenuContext } from './contexts';
-import { ItemButton, LeftCluster, RightCluster, LabelText } from './styles';
+import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon } from './styles';
 
 export const SideMenuItem = memo(
-  ({ id, renderItem, disabled: propDisabled, label, badge, icon, tag }: SideMenuItemNode) => {
+  ({ id, renderItem, disabled: propDisabled, label, badge, icon, tag, dimension = 'm' }: SideMenuItemNode) => {
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
-    const level = ancestorGroupIds.length + 1;
+    const level = ancestorGroupIds.length;
 
     const selected = ctx.selectedItemId === id;
     const disabled = !!propDisabled;
@@ -31,8 +31,8 @@ export const SideMenuItem = memo(
       })
     ) : (
       <>
-        <LeftCluster>
-          {icon}
+        <LeftCluster $dimension={dimension}>
+          <WrapperIcon $dimension={dimension}>{icon}</WrapperIcon>
           <LabelText>{label}</LabelText>
         </LeftCluster>
         <RightCluster>
@@ -46,10 +46,10 @@ export const SideMenuItem = memo(
       <ItemButton
         type="button"
         $selected={selected}
-        $disabled={disabled}
-        style={{ paddingLeft: level * ctx.indentPx }}
         onClick={handleClick}
         disabled={disabled}
+        $dimension={dimension}
+        $indent={level * ctx.indentPx}
       >
         {content}
       </ItemButton>

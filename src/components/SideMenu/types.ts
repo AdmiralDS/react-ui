@@ -18,6 +18,7 @@ export interface SideMenuItemRenderProps {
   tag?: ReactNode;
   disabled?: boolean;
   selected?: boolean;
+  dimension?: SideMenuDimension;
   /**
    * Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.).
    * Используется для вычисления отступа слева и для кастомного рендера.
@@ -35,6 +36,7 @@ export interface SideMenuItemNode {
   badge?: ReactNode;
   tag?: ReactNode;
   disabled?: boolean;
+  dimension?: SideMenuDimension;
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
@@ -54,7 +56,7 @@ export interface SideMenuDividerNode {
   type: 'divider';
 }
 
-export interface SideMenuProps {
+export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Дерево элементов меню */
   items: SideMenuNode[];
   /** Id выбранного пункта (controlled) */

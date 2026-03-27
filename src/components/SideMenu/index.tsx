@@ -35,7 +35,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       onSelectItem,
       onOpenMenusChange,
       search = false,
-      indentPx = 24,
+      indentPx = 20,
 
       //container
       visibleBorder = false,
@@ -110,7 +110,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         return <SideMenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} />;
+      return <SideMenuItem {...node} dimension={dimension} />;
     };
 
     const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
