@@ -30,6 +30,11 @@ export const StepIcon = styled(StepSvg)`
       fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
     }
   }
+  [data-redo='true'] & {
+    path {
+      fill: var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+    }
+  }
   [data-error='true'] & {
     path {
       fill: var(--admiral-color-Error_Error60Main, ${(p) => p.theme.color['Error/Error 60 Main']});
@@ -46,6 +51,17 @@ export const StepIcon = styled(StepSvg)`
     }
   }
   flex-shrink: 0;
+`;
+
+const RedoRailCss = css`
+  background-color: transparent;
+  border-bottom: 2px dashed
+    var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+`;
+
+const RedoRailVerticalCss = css`
+  border-bottom: none;
+  border-left: 2px dashed var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
 `;
 
 export const StepRail = styled.div`
@@ -69,6 +85,12 @@ export const StepRail = styled.div`
     background-color: var(--admiral-color-Primary_Primary30, ${(p) => p.theme.color['Primary/Primary 30']});
   }
   border-radius: 1px;
+  [data-redo='true'] & {
+    ${RedoRailCss}
+  }
+  [data-redo='true'][data-orientation='vertical'] & {
+    ${RedoRailVerticalCss}
+  }
 `;
 
 export const StepContentWrapper = styled.span`

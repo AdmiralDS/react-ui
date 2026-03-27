@@ -40,6 +40,22 @@ describe('Stepper', () => {
       </Stepper>
     </ThemeProvider>
   );
+
+  it('should render component with redo step', () => {
+    const wrapper = render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <Stepper activeStep={0}>
+          <Step key={0} redo>
+            <StepContent>Шаг Redo (повторное редактирование)</StepContent>
+          </Step>
+          <Step key={1} completed>
+            <StepContent>Первый шаг</StepContent>
+          </Step>
+        </Stepper>
+      </ThemeProvider>,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
   it('should render default component', () => {
     const wrapper = render(<Comp />);
     expect(wrapper).toMatchSnapshot();
