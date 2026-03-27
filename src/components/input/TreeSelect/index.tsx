@@ -55,6 +55,11 @@ export interface TreeSelectProps
   clearButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
+  /** Конфиг функция пропсов для внутреннего input. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  inputPropsConfig?: (
+    props: React.ComponentProps<typeof StyledMultiInput>,
+  ) => Partial<React.ComponentProps<typeof StyledMultiInput> & DataAttributes>;
 
   /** Срабатывает при изменении значения */
   onChange?: (value: string[]) => void;
@@ -85,12 +90,14 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       renderBottomPanel,
       openButtonPropsConfig,
       clearButtonPropsConfig,
+      inputPropsConfig,
       dropdownConfig,
       onOpenChange,
       onSelect,
       onDeselect,
       onChange,
       onClearIconClick,
+      ...props
     },
     ref,
   ) => {
@@ -285,22 +292,25 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       e.stopPropagation();
     };
 
+    const inputProps = {
+      ...props,
+      ref: refSetter(ref, inputRef),
+      placeholder,
+      containerPropsConfig: getInputContainerProps,
+      displayClearIcon: displayClearIcon && selectedChips.length > 0,
+      iconsAfter,
+      clearButtonPropsConfig,
+      onClearOptions: handleClearOptions,
+      dimension,
+      $hidden: selectedChips.length > 0,
+      onKeyDown: handleKeyDown,
+      onPaste: handlePaste,
+      onDrop: handleDrop,
+    } satisfies React.ComponentProps<typeof StyledMultiInput>;
+
     return (
       <>
-        <StyledMultiInput
-          ref={refSetter(ref, inputRef)}
-          placeholder={placeholder}
-          containerPropsConfig={getInputContainerProps}
-          displayClearIcon={displayClearIcon && selectedChips.length > 0}
-          iconsAfter={iconsAfter}
-          clearButtonPropsConfig={clearButtonPropsConfig}
-          onClearOptions={handleClearOptions}
-          dimension={dimension}
-          $hidden={selectedChips.length > 0}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
-          onDrop={handleDrop}
-        >
+        <StyledMultiInput {...inputProps} {...inputPropsConfig?.(inputProps)}>
           {renderSelectedChips()}
         </StyledMultiInput>
         {open && (
