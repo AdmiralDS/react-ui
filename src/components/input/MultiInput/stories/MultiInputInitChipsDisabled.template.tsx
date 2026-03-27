@@ -35,15 +35,11 @@ export const StyledChip = styled(Chips)`
   ${typography['Caption/Caption 1']};
 `;
 
-const initListValue = [
-  {
-    id: uid(),
-    children: 'chipsOne',
-    disabled: true,
-  },
-  { id: uid(), children: 'chipsTwo' },
-  { id: uid(), children: 'chipsThree' },
-];
+const initListValue = Array.from({ length: 30 }, (_, index) => ({
+  id: uid(),
+  children: `chips${index + 1}`,
+  disabled: index === 0,
+}));
 
 export const MultiInputInitChipsDisabledTemplate = ({
   themeBorderKind,
@@ -88,27 +84,38 @@ export const MultiInputInitChipsDisabledTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <MultiInput
-        {...props}
-        value={value}
-        onInputComplete={handleKeyDown}
-        onClearOptions={handleClearListValue}
-        onChange={handleChange}
-        displayClearIcon={displayClearIcon && listValue.length !== 0}
-      >
-        {listValue.map((item, index) => (
-          <StyledChip
-            {...item}
-            key={index}
-            onClose={item.onClose || props.readOnly || props.disableCopying ? undefined : handleDeleteChip}
-            tabIndex={-1}
-            dimension="s"
-            appearance="filled"
-            readOnly={props.readOnly}
-            disabled={item.disabled || props.disabled}
-          />
-        ))}
-      </MultiInput>
+      <div data-testid="multi-input-init-wrapper">
+        <MultiInput
+          {...props}
+          data-testid="multi-input-init-input"
+          value={value}
+          onInputComplete={handleKeyDown}
+          onClearOptions={handleClearListValue}
+          onChange={handleChange}
+          displayClearIcon={displayClearIcon && listValue.length !== 0}
+          containerPropsConfig={(containerProps) => ({
+            ...containerProps,
+            'data-testid': 'multi-input-init-container',
+          })}
+          clearButtonPropsConfig={(buttonProps) => ({
+            ...buttonProps,
+            'data-testid': 'multi-input-init-clear-button',
+          })}
+        >
+          {listValue.map((item, index) => (
+            <StyledChip
+              {...item}
+              key={index}
+              onClose={item.onClose || props.readOnly || props.disableCopying ? undefined : handleDeleteChip}
+              tabIndex={-1}
+              dimension="s"
+              appearance="filled"
+              readOnly={props.readOnly}
+              disabled={item.disabled || props.disabled}
+            />
+          ))}
+        </MultiInput>
+      </div>
     </ThemeProvider>
   );
 };
