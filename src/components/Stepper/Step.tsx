@@ -80,7 +80,7 @@ export const Step: FC<StepProps> = ({
       <StepContentWrapper tabIndex={-1}>
         <StepTrack aria-hidden>
           <StepIcon as={icon} width={20} height={20} />
-          {!hideLine && <StepRail $redo={redo} />}
+          {!hideLine && <StepRail />}
         </StepTrack>
         {children}
       </StepContentWrapper>

@@ -62,7 +62,7 @@ test.describe('Stepper Component', () => {
     }
   });
 
-  test('step states (completed, error, warning, disabled)', async ({ page }) => {
+  test('step states (completed, error, warning, disabled, redo, current)', async ({ page }) => {
     await page.goto('/?path=/story/admiral-2-1-stepper--step-kinds-example');
     const frame = getStorybookFrameLocator(page);
 

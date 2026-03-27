@@ -25,7 +25,7 @@ export const StepperPreviousStepsTemplate = () => {
   const [steps, setSteps] = React.useState<StepType[]>(initialSteps);
   const handleStepClick = ({ index }: { index: number }) => {
     const newSteps: StepType[] = steps.map((step, i) =>
-      i < 4 ? { ...step, completed: i !== index, redo: i === index } : step,
+      i < 3 ? { ...step, completed: i !== index, redo: i === index } : step,
     );
     setSteps(newSteps);
     setActiveStep(index);
