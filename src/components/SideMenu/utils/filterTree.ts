@@ -1,26 +1,26 @@
-import type { SideMenuGroupNode, SideMenuItemNode, SideMenuNode } from '../types';
-import { matchesByFirstLetters } from './filterByFirstLetters';
+import type { SideMenuNode, SearchFormat } from '../types';
 
-export interface FilterTreeResult {
+function isItem(node: SideMenuNode): boolean {
+  return node.type !== 'group' && node.type !== 'divider';
+}
+
+interface FilterTreeResult {
   nodes: SideMenuNode[];
   hasAnyVisible: boolean;
 }
 
-function isItem(node: SideMenuNode): node is SideMenuItemNode {
-  return node.type !== 'group' && node.type !== 'divider';
-}
-
-function isGroup(node: SideMenuNode): node is SideMenuGroupNode {
-  return node.type === 'group';
-}
-
-export function filterMenuTree(nodes: SideMenuNode[], query: string): FilterTreeResult {
+export function filterMenuTree(
+  nodes: SideMenuNode[],
+  query: string,
+  onFilterItem: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean,
+  searchFormat: SearchFormat,
+): FilterTreeResult {
   const q = query.trim();
   if (!q) {
     return { nodes, hasAnyVisible: nodes.length > 0 };
   }
 
-  const out: SideMenuNode[] = [];
+  const filteredNodes: SideMenuNode[] = [];
   let hasAnyVisible = false;
 
   for (const node of nodes) {
@@ -29,22 +29,23 @@ export function filterMenuTree(nodes: SideMenuNode[], query: string): FilterTree
     }
 
     if (isItem(node)) {
-      const matched = matchesByFirstLetters(node.label, q);
+      const matched = onFilterItem(node.label, query, searchFormat);
+
       if (matched) {
-        out.push(node);
+        filteredNodes.push(node);
         hasAnyVisible = true;
       }
       continue;
     }
 
-    if (isGroup(node)) {
-      const groupMatched = matchesByFirstLetters(node.title, q);
-      const childResult = filterMenuTree(node.children, q);
+    if (node.type === 'group') {
+      const groupMatched = onFilterItem(node.label, query, searchFormat);
+      const childResult = filterMenuTree(node.children, query, onFilterItem, searchFormat);
 
-      // Включаем группу, если совпал заголовок ИЛИ среди детей есть совпадения.
+      // Включаем группу, если совпал заголовок или среди детей есть совпадения
       if (groupMatched || childResult.hasAnyVisible) {
         hasAnyVisible = true;
-        out.push({
+        filteredNodes.push({
           ...node,
           // Показываем только отфильтрованные дочерние элементы
           children: childResult.nodes,
@@ -54,5 +55,5 @@ export function filterMenuTree(nodes: SideMenuNode[], query: string): FilterTree
     }
   }
 
-  return { nodes: out, hasAnyVisible };
+  return { nodes: filteredNodes, hasAnyVisible };
 }

@@ -13,23 +13,25 @@ export function useKeyPath(): KeyPath {
   return useContext(PathContext);
 }
 
+export type SearchFormat = 'word' | 'wholly';
 export interface SideMenuContextValue {
   selectedItemId: string | null;
-  /**
-   * Множество открытых groups (by id).
-   */
+  /** Множество открытых groups (by id) */
   openGroupIds: Set<string>;
 
   indentPx: number;
 
   onSelectItem: (id: string) => void;
   onToggleGroup: (groupId: string) => void;
+  onOpenGroups: (groupIds: string[]) => void;
 
   /**
    * Включена ли фильтрация и применяется ли активный фильтр.
    * В режиме фильтрации группы отображаются раскрытыми, чтобы показать найденные descendants.
    */
   filterActive: boolean;
+  searchQuery: string;
+  searchFormat: SearchFormat;
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 
