@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as ChevronDownOutline } from '@admiral-ds/icons/build/system/ChevronDownOutline.svg';
 import { typography } from '#src/components/Typography';
 import { DefaultFontColorName } from '#src/components/themes/common';
+import type { AccordionProps } from '#src/components/Accordion';
 
 export const Chevron = styled(ChevronDownOutline)`
   transition: all 0.3s;
@@ -9,18 +10,18 @@ export const Chevron = styled(ChevronDownOutline)`
   width: 24px;
   height: 24px;
   margin: 0 0 0 8px;
-  [data-icon='left'] & {
+  .accordion[data-icon='left'] & {
     margin: 0 8px 0 0;
   }
   & *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
   }
-  [data-disabled='true'] & {
+  .accordion-item[data-disabled] & {
     & *[fill^='#'] {
       fill: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
     }
   }
-  [data-dimension='m'] & {
+  .accordion[data-dimension='m'] & {
     width: 20px;
     height: 20px;
   }
@@ -32,13 +33,12 @@ export const ItemTitleContent = styled.span`
   height: 100%;
   display: flex;
   align-items: flex-start;
-
-  padding: 16px 16px 15px 16px;
-  [data-dimension='m'] && {
-    padding: 10px 16px 9px 16px;
+  padding: 16px;
+  .accordion[data-dimension='m'] && {
+    padding: 10px 16px;
   }
 
-  [data-icon='left'] & {
+  .accordion[data-icon='left'] & {
     flex-direction: row-reverse;
   }
 `;
@@ -75,7 +75,6 @@ export const ItemTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 54px;
   width: 100%;
   background: transparent;
   -webkit-tap-highlight-color: transparent;
@@ -87,24 +86,28 @@ export const ItemTitle = styled.div`
   overflow: visible;
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   ${typography['Subtitle/Subtitle 2']}
+  ${eventsMixin}
 
-  [data-disabled='false'] & {
-    ${eventsMixin}
-  }
-
-  [data-disabled='true'] & {
+  .accordion-item[data-disabled] & {
     cursor: not-allowed;
     user-select: none;
   }
 
-  [data-dimension='m'] & {
-    min-height: 38px;
+  .accordion[data-dimension='m'] & {
     ${typography['Subtitle/Subtitle 3']}
   }
 `;
 
 export const ItemWrapper = styled.div<{ $opened?: boolean }>`
-  border-bottom: 1px solid var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+  position: relative;
+  &:after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--admiral-color-Neutral_Neutral20, ${(p) => p.theme.color['Neutral/Neutral 20']});
+  }
   & > ${ItemTitle} ${Chevron} {
     transform: ${(p) => (p.$opened ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
@@ -114,38 +117,40 @@ export const ItemContent = styled.div<{ $contentMaxHeight: number | string }>`
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color[DefaultFontColorName]});
   overflow-y: auto;
   max-height: ${(p) => p.$contentMaxHeight};
-  padding: 4px 16px 16px 16px;
+  padding: 0 16px 16px 16px;
   ${typography['Body/Body 1 Long']}
-  [data-dimension='m'] & {
-    padding: 4px 16px 10px 16px;
+  .accordion[data-dimension='m'] & {
+    padding: 0 16px 10px 16px;
     ${typography['Body/Body 2 Long']}
   }
 `;
 
-type Dimension = 'l' | 'm';
-
 export const AccordionWrapper = styled.div<{
   $hideTopDivider: boolean;
   $hideBottomDivider: boolean;
-  $dimension?: Dimension;
+  $dimension?: AccordionProps['dimension'];
 }>`
   position: relative;
 
   & > ${ItemWrapper}:first-child {
-    & ${ItemTitleContent} {
-      padding: ${({ $dimension }) => ($dimension === 'l' ? '15px 16px' : '9px 16px')};
-    }
-    border-top: 1px solid
-      ${({ theme, $hideTopDivider }) =>
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      width: 100%;
+      height: 1px;
+      background: ${({ theme, $hideTopDivider }) =>
         $hideTopDivider
           ? 'transparent'
           : `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
+    }
   }
   & > ${ItemWrapper}:last-child {
-    border-bottom: 1px solid
-      ${({ theme, $hideBottomDivider }) =>
+    &:after {
+      background: ${({ theme, $hideBottomDivider }) =>
         $hideBottomDivider
           ? 'transparent'
           : `var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
+    }
   }
 `;

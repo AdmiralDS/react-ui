@@ -5,16 +5,16 @@ import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 import { Divider } from '#src/components/Divider';
 import { SideMenuItem } from '#src/components/SideMenu/MenuItem';
 
-export const SideMenuGroup = memo(({ id, disabled: propDisabled, title, children }: SideMenuGroupNode) => {
+import { HighlightedLabel } from './HighlightedLabel';
+
+export const SideMenuGroup = memo(({ id, label, children }: SideMenuGroupNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
   const level = ancestorGroupIds.length + 1;
 
   const isExpanded = ctx.filterActive ? true : ctx.openGroupIds.has(id);
-  const disabled = !!propDisabled;
 
   const handleToggle = () => {
-    if (disabled) return;
     ctx.onToggleGroup(id);
   };
 
@@ -22,14 +22,15 @@ export const SideMenuGroup = memo(({ id, disabled: propDisabled, title, children
 
   return (
     <>
-      <GroupButton
-        type="button"
-        disabled={disabled}
-        style={{ paddingLeft: level * ctx.indentPx }}
-        onClick={handleToggle}
-      >
+      <GroupButton type="button" style={{ paddingLeft: level * ctx.indentPx }} onClick={handleToggle}>
+        <LabelText>
+          {ctx.filterActive ? (
+            <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+          ) : (
+            label
+          )}
+        </LabelText>
         <Chevron $open={isExpanded}>›</Chevron>
-        <LabelText>{title}</LabelText>
       </GroupButton>
 
       {isExpanded && (
