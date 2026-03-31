@@ -6,7 +6,7 @@ import { LIGHT_THEME } from '#src/components/themes';
 import type { AccordionProps } from '.';
 import { Accordion, AccordionItem } from '.';
 
-describe('Spinner', () => {
+describe('Accordion', () => {
   const Comp = (props: AccordionProps) => (
     <ThemeProvider theme={LIGHT_THEME}>
       <Accordion {...props}>

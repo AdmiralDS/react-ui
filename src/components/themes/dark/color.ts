@@ -28,7 +28,7 @@ export const COLOR: Color = {
 
   //<editor-fold desc="Special">
   'Special/Static White': '#FFFFFF',
-  'Special/Elevated BG': '#1B1C1D',
+  'Special/Elevated BG': '#202122',
   'Special/Dark Static Neutral 00': '#131314',
   'Special/Dark Static Neutral 05': '#1B1C1D',
   'Special/Dark Static Neutral 10': '#252627',

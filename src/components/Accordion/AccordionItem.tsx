@@ -59,7 +59,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     props.onKeyDown?.(e);
   };
   return (
-    <ItemWrapper $opened={collapseOpened} data-disabled={disabled}>
+    <ItemWrapper className="accordion-item" $opened={collapseOpened} data-disabled={disabled ? '' : undefined}>
       <ItemTitle
         ref={titleRef}
         onClick={disabled ? undefined : handleClick}

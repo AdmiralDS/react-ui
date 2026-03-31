@@ -2,85 +2,87 @@ import type { ReactNode } from 'react';
 
 export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
+export type SearchFormat = 'word' | 'wholly';
 
 /**
  * - MenuItem: выбираемый пункт
- * - MenuGroup: разворачиваемая группа (по id)
+ * - MenuGroup: разворачиваемая группа пунктов
  * - MenuDivider: разделитель
  */
 export type SideMenuNode = SideMenuItemNode | SideMenuGroupNode | SideMenuDividerNode;
 
 export interface SideMenuItemRenderProps {
+  /** Уникальный идентификатор пункта меню  */
   id: string;
+  /** Текстовая подпись пункта */
   label: string;
+  /** Состояние disabled  */
+  disabled?: boolean;
+  /** Состояние selected - признак того, что данный пункт выбран  */
+  selected?: boolean;
+  /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
+  level: number;
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
-  selected?: boolean;
   dimension?: SideMenuDimension;
-  /**
-   * Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.).
-   * Используется для вычисления отступа слева и для кастомного рендера.
-   */
-  level: number;
 }
 
 export interface SideMenuItemNode {
   type?: 'item';
-  /** Уникальный id пункта меню  */
+  /** Уникальный идентификатор пункта меню  */
   id: string;
   /** Текстовая подпись пункта */
   label: string;
+  /** Колбэк для кастомизации рендера пункта меню */
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
   dimension?: SideMenuDimension;
   /** Выделение label жирным шрифтом */
   header?: boolean;
-  /** Колбэк кастомизации рендера контента пункта */
-  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
 export interface SideMenuGroupNode {
   type: 'group';
-  /** Уникальный id группы. Используется для openMenus/defaultOpenMenus */
+  /** Уникальный идентификатор группы пунктов меню */
   id: string;
-  /** Заголовок группы (отображается рядом с шевроном и участвует в фильтрации) */
-  title: string;
-  disabled?: boolean;
+  /** Текстовая подпись группы */
+  label: string;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
+  /** Колбэк для кастомизации рендера заголовка группы */
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
 export interface SideMenuDividerNode {
   type: 'divider';
+  /** Опциональная текстовая подпись */
+  label?: string;
 }
 
 export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Дерево элементов меню */
+  /** Массив с описанием дерева элементов меню */
   items: SideMenuNode[];
-  /** Id выбранного пункта (controlled) */
+  /** id выбранного пункта (controlled mode) */
   selectedItem?: string;
-  /** Id пункта, который будет выбран по умолчанию (uncontrolled) */
+  /** id пункта, который будет выбран по умолчанию (uncontrolled mode) */
   defaultSelectedItem?: string;
   /** Колбек при изменении выбранного пункта */
   onSelectItem?: (id: string) => void;
-  /**
-   * Массив id открытых групп (controlled).
-   */
+  /** Массив id открытых групп (controlled mode) */
   openMenus?: string[];
-  /**
-   * Массив id открытых групп по умолчанию (uncontrolled).
-   */
+  /** Массив id открытых групп по умолчанию (uncontrolled mode) */
   defaultOpenMenus?: string[];
-
-  /**
-   * callback при изменении openMenus (открытие/закрытие групп).
-   * Вызывается и в controlled, и в uncontrolled режиме.
-   */
+  /** Колбек при изменении openMenus (открытие/закрытие групп) */
   onOpenMenusChange?: (openIds: string[]) => void;
   /** Включает опцию фильтрации */
   search?: boolean;
+  /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
+  searchFormat?: SearchFormat;
+  /** Позволяет фильтровать отображаемые пункты */
+  onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
   /** Состояние компонента: открыт/закрыт */
   isOpen: boolean;
   /** Состояние видимости border-right */

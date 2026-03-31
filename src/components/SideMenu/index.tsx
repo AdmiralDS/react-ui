@@ -1,11 +1,14 @@
 import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
-import { TextInput } from '#src/components/input';
+import { TextInput, defaultFilterItem } from '#src/components/input';
 import { Divider } from '#src/components/Divider';
+import { InputIconButton } from '#src/components/InputIconButton';
+import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
+
 import { useMediaQuery } from '../common/hooks/useMediaQuery';
 
 import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
+import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
 import { BottomPanelContent, StyledDrawer, StyledScrollContainer, TopPanelContent } from './styles';
-import type { SideMenuProps, SideMenuNode } from './types';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
@@ -35,6 +38,8 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       onSelectItem,
       onOpenMenusChange,
       search = false,
+      searchFormat = 'wholly' as SearchFormat,
+      onFilterItem = defaultFilterItem,
 
       //container
       visibleBorder = false,
@@ -66,15 +71,30 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
     const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
 
     const [searchQuery, setSearchQuery] = useState('');
-    const filterActive = search && searchQuery.trim().length > 0;
-    const filteredTree = useMemo(() => filterMenuTree(items, searchQuery).nodes, [items, searchQuery]);
+    const [isSearching, setSearching] = useState(false);
+
+    const filterActive = search && searchQuery.trim().length > 0 && isSearching;
+    const filteredItems = useMemo(() => {
+      const result = filterMenuTree(items, searchQuery, onFilterItem, searchFormat).nodes;
+
+      // добавляем Divider между результатами поиска
+      return result.reduce((nodes: SideMenuNode[], node: SideMenuNode, index: number) => {
+        if (index > 0) {
+          nodes.push({ type: 'divider' });
+        }
+        nodes.push(node);
+        return nodes;
+      }, []);
+    }, [items, searchQuery, onFilterItem, searchFormat]);
 
     const handleSelectItem = useCallback(
       (id: string) => {
         selectedState.setState(id);
         onSelectItem?.(id);
+
+        setSearching(false);
       },
-      [onSelectItem, selectedState],
+      [onSelectItem, selectedState.setState],
     );
 
     const handleToggleGroup = useCallback(
@@ -88,15 +108,43 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       [openGroupIds, openState, onOpenMenusChange],
     );
 
+    const handleOpenGroups = useCallback(
+      (openIds: string[]) => {
+        const next = [...new Set([...openGroupIds, ...openIds])];
+        openState.setState(next);
+        onOpenMenusChange?.(next);
+      },
+      [openGroupIds, openState.setState, onOpenMenusChange],
+    );
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchQuery(e.target.value);
+    };
+    const handleInputFocus = () => {
+      setSearching(true);
+    };
+
     const ctxValue: SideMenuContextValue = useMemo(
       () => ({
         selectedItemId: selectedState.state,
         openGroupIds,
+        filterActive,
+        searchQuery,
+        searchFormat,
         onSelectItem: handleSelectItem,
         onToggleGroup: handleToggleGroup,
-        filterActive,
+        onOpenGroups: handleOpenGroups,
       }),
-      [selectedState.state, openGroupIds, handleSelectItem, handleToggleGroup, filterActive],
+      [
+        selectedState.state,
+        openGroupIds,
+        filterActive,
+        searchQuery,
+        searchFormat,
+        handleSelectItem,
+        handleToggleGroup,
+        handleOpenGroups,
+      ],
     );
 
     const getItem = (node: SideMenuNode) => {
@@ -132,14 +180,24 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         {...props}
       >
         {search && (
-          <TextInput value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." />
+          <TopPanelContent $dimension={dimension}>
+            <TextInput
+              value={searchQuery}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              dimension={dimension === 'l' ? 'm' : 's'}
+              placeholder="Search..."
+              iconsAfter={<InputIconButton aria-hidden icon={SearchOutlineSVG} />}
+              displayClearIcon
+            />
+          </TopPanelContent>
         )}
 
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
             {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
             <StyledScrollContainer $dimension={dimension} $gap={gap}>
-              {filteredTree.map((node, index) => (
+              {(filterActive ? filteredItems : items).map((node, index) => (
                 <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
               ))}
             </StyledScrollContainer>
