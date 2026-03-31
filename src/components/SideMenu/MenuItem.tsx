@@ -13,7 +13,7 @@ function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   return elementsNotInFirst;
 }
 
-export const SideMenuItem = memo(({ id, render, label, badge, icon, tag }: SideMenuItemNode) => {
+export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: SideMenuItemNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
   const level = ancestorGroupIds.length + 1;
@@ -31,8 +31,8 @@ export const SideMenuItem = memo(({ id, render, label, badge, icon, tag }: SideM
     ctx.onSelectItem(id);
   };
 
-  const content = render ? (
-    render({
+  const content = renderItem ? (
+    renderItem({
       id,
       label: label,
       icon: icon,

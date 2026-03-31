@@ -30,7 +30,7 @@ export interface SideMenuItemNode {
   /** Текстовая подпись пункта */
   label: string;
   /** Колбэк для кастомизации рендера пункта меню */
-  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
@@ -45,7 +45,7 @@ export interface SideMenuGroupNode {
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
   /** Колбэк для кастомизации рендера заголовка группы */
-  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
 export interface SideMenuDividerNode {
