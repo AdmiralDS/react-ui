@@ -5,6 +5,8 @@ import { Drawer } from '../Drawer';
 import { typography } from '../Typography';
 import { mediumGroupBorderRadius } from '../themes';
 
+const INDENT = 20;
+
 const selectedItemMixin = css<{ $selected?: boolean }>`
   background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
   color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
@@ -18,16 +20,12 @@ const selectedItemMixin = css<{ $selected?: boolean }>`
   }
 `;
 
-const disabledItemMixin = css<{ $selected?: boolean }>`
-  background-color: transparent;
-  color: var(--admiral-color-Neutral_Neutral30, ${({ theme }) => theme.color['Neutral/Neutral 30']});
-
-  & *[fill^='#'] {
-    fill: var(--admiral-color-Neutral_Neutral30, ${({ theme }) => theme.color['Neutral/Neutral 30']});
-  }
-`;
-
-export const ItemButton = styled.button<{ $selected?: boolean; $dimension: SideMenuDimension; $indent: number }>`
+export const ItemButton = styled.button<{
+  $selected?: boolean;
+  $dimension: SideMenuDimension;
+  $indentLevel: number;
+  $header?: boolean;
+}>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -36,34 +34,30 @@ export const ItemButton = styled.button<{ $selected?: boolean; $dimension: SideM
   border: 0;
   background-color: transparent;
   color: inherit;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
   text-align: left;
   border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
 
-  &:hover:not(:disabled) {
+  &:hover {
     background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
   }
 
-  &:focus-visible:not(:disabled) {
+  &:focus-visible {
     outline: 2px solid
       var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
     outline-offset: -2px;
   }
 
-  &:active:not(:disabled) {
+  &:active {
     background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
   }
 
-  &:disabled {
-    ${disabledItemMixin}
-  }
-
-  ${({ $dimension, $indent }) =>
+  padding: ${({ $dimension, $indentLevel }) =>
     $dimension === 'l'
-      ? `padding: 12px 16px 12px ${16 + $indent}px; ${typography['Body/Body 1 Long']}`
-      : `padding: 10px 12px 10px ${12 + $indent}px; ${typography['Body/Body 2 Long']}`};
+      ? `12px 16px 12px ${16 + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + $indentLevel * INDENT}px`};
 
-  ${({ $selected, disabled }) => $selected && !disabled && selectedItemMixin};
+  ${({ $selected }) => $selected && selectedItemMixin};
 `;
 
 export const GroupButton = styled.button<{ $disabled?: boolean }>`
@@ -116,10 +110,19 @@ export const RightCluster = styled.span`
   flex: 0 0 auto;
 `;
 
-export const LabelText = styled.span`
+export const LabelText = styled.span<{ $dimension?: SideMenuDimension; $header?: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  ${({ $dimension, $header }) =>
+    $dimension === 'l'
+      ? $header
+        ? typography['Subtitle/Subtitle 2']
+        : typography['Body/Body 1 Long']
+      : $header
+        ? typography['Subtitle/Subtitle 3']
+        : typography['Body/Body 2 Long']};
 `;
 
 export const StyledDrawer = styled(Drawer)<{

@@ -22,12 +22,7 @@ export const SideMenuGroup = memo(({ id, disabled: propDisabled, title, children
 
   return (
     <>
-      <GroupButton
-        type="button"
-        disabled={disabled}
-        style={{ paddingLeft: level * ctx.indentPx }}
-        onClick={handleToggle}
-      >
+      <GroupButton type="button" disabled={disabled} onClick={handleToggle}>
         <Chevron $open={isExpanded}>›</Chevron>
         <LabelText>{title}</LabelText>
       </GroupButton>

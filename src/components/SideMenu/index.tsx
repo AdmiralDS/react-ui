@@ -35,7 +35,6 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       onSelectItem,
       onOpenMenusChange,
       search = false,
-      indentPx = 20,
 
       //container
       visibleBorder = false,
@@ -93,12 +92,11 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       () => ({
         selectedItemId: selectedState.state,
         openGroupIds,
-        indentPx,
         onSelectItem: handleSelectItem,
         onToggleGroup: handleToggleGroup,
         filterActive,
       }),
-      [selectedState.state, openGroupIds, indentPx, handleSelectItem, handleToggleGroup, filterActive],
+      [selectedState.state, openGroupIds, handleSelectItem, handleToggleGroup, filterActive],
     );
 
     const getItem = (node: SideMenuNode) => {

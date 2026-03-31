@@ -16,7 +16,6 @@ export interface SideMenuItemRenderProps {
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
-  disabled?: boolean;
   selected?: boolean;
   dimension?: SideMenuDimension;
   /**
@@ -35,8 +34,9 @@ export interface SideMenuItemNode {
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
-  disabled?: boolean;
   dimension?: SideMenuDimension;
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
@@ -81,11 +81,6 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   onOpenMenusChange?: (openIds: string[]) => void;
   /** Включает опцию фильтрации */
   search?: boolean;
-  /** Отступ слева между уровнями вложенности в пикселях
-   * TODO: переместить внутрь компонента
-   */
-  indentPx?: number;
-
   /** Состояние компонента: открыт/закрыт */
   isOpen: boolean;
   /** Состояние видимости border-right */

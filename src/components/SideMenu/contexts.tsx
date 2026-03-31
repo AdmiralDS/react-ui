@@ -20,8 +20,6 @@ export interface SideMenuContextValue {
    */
   openGroupIds: Set<string>;
 
-  indentPx: number;
-
   onSelectItem: (id: string) => void;
   onToggleGroup: (groupId: string) => void;
 

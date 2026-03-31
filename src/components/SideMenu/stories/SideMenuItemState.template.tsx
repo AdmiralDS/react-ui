@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Badge, IconButton, SideMenu, Tag } from '@admiral-ds/react-ui';
+import { Badge, IconButton, SideMenu, T, Tag } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -18,6 +18,7 @@ const items: SideMenuProps['items'] = [
         New
       </Tag>
     ),
+    header: true,
   },
   { type: 'item', id: '2', label: 'Option2', badge: <Badge>4</Badge> },
   {
@@ -49,7 +50,6 @@ const items: SideMenuProps['items'] = [
     type: 'item',
     id: '5',
     label: 'Option5',
-    disabled: true,
     icon: (
       <div>
         <EmailSolid />
@@ -85,6 +85,10 @@ export const SideMenuItemStateTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T as="div" font="Body/Body 1 Long">
+        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
+        помощью функции renderItem.
+      </T>
       <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
         <MenuOutline />
       </IconButton>
