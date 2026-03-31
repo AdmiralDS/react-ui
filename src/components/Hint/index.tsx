@@ -95,7 +95,7 @@ export const Hint: React.FC<HintProps> = ({
   const [recalculation, startRecalculation] = React.useState<Record<string, never> | null>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
-  const [isMobile, setMobile] = React.useState(window.innerWidth < 640);
+  const [isMobile, setMobile] = React.useState(false);
 
   const showHint = () => onVisibilityChange?.(true);
   const hideHint = () => onVisibilityChange?.(false);
@@ -103,6 +103,10 @@ export const Hint: React.FC<HintProps> = ({
   // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile
   // (адаптируется по ширине к экрану и может располагаться только снизу или сверху от target-элемента)
   React.useLayoutEffect(() => {
+    if (window.innerWidth < 640) {
+      setMobile(true);
+    }
+
     const listener = () => {
       if (window.innerWidth < 640) {
         setMobile(true);

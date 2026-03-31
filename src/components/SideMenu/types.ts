@@ -1,5 +1,8 @@
 import type { ReactNode } from 'react';
 
+export type SideMenuAppearance = 'primary' | 'secondary';
+export type SideMenuDimension = 'm' | 'l';
+
 /**
  * - MenuItem: выбираемый пункт
  * - MenuGroup: разворачиваемая группа пунктов
@@ -80,4 +83,25 @@ export interface SideMenuProps {
    * TODO: переместить внутрь компонента
    */
   indentPx?: number;
+
+  /** Состояние компонента: открыт/закрыт */
+  isOpen: boolean;
+  /** Состояние видимости border-right */
+  visibleBorder?: boolean;
+  /** Внешний вид компонента */
+  appearance?: SideMenuAppearance;
+  /** Параметр максимального размера окна при достижении которого будет вызвана функция onToggle */
+  closeMediaQuery?: string;
+  /** Функция которая будет выполняться при достижении closeMediaQuery */
+  onClose?: () => void;
+  /** Наличие затемненного фона, блокирующего контент страницы */
+  backdrop?: boolean;
+  /** Размер компонента */
+  dimension?: SideMenuDimension;
+  /** Позволяет добавить панель внизу */
+  renderBottomPanel?: () => React.ReactNode;
+  /** Позволяет добавить панель вверху */
+  renderTopPanel?: () => React.ReactNode;
+  /** Рассотояние между пунктами контента */
+  gap?: number;
 }

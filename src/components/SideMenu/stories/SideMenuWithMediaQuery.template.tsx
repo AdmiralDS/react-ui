@@ -31,7 +31,7 @@ const items: SideMenuProps['items'] = [
   },
 ];
 
-export const SideMenuPlaygroundTemplate = ({
+export const SideMenuWithMediaQueryTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -45,7 +45,7 @@ export const SideMenuPlaygroundTemplate = ({
       <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
         <MenuOutline />
       </IconButton>
-      <SideMenu {...props} isOpen={open} items={items} />
+      <SideMenu {...props} isOpen={open} items={items} closeMediaQuery="700px" onClose={() => setOpen(false)} />
     </ThemeProvider>
   );
 };

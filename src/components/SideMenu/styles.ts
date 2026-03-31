@@ -1,15 +1,7 @@
 import styled from 'styled-components';
-
-export const Wrapper = styled.nav`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const MenuList = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import type { SideMenuAppearance, SideMenuDimension } from './types';
+import { ScrollContainer } from '../Scrollbar';
+import { Drawer } from '../Drawer';
 
 export const ItemButton = styled.button<{ $selected?: boolean; $disabled?: boolean }>`
   width: 100%;
@@ -96,4 +88,40 @@ export const LabelText = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const StyledDrawer = styled(Drawer)<{
+  $visibleBorder?: boolean;
+  $appearance: SideMenuAppearance;
+  $dimension: SideMenuDimension;
+}>`
+  justify-content: space-between;
+  box-shadow: unset;
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
+  ${({ theme, $visibleBorder }) =>
+    $visibleBorder &&
+    `border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
+
+  ${({ theme, $appearance }) =>
+    $appearance === 'secondary' &&
+    `background-color: var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`};
+`;
+
+export const StyledScrollContainer = styled(ScrollContainer)<{
+  $dimension: SideMenuDimension;
+  //todo определить между какими элементами должен быть отступ
+  $gap: number;
+}>`
+  flex-grow: 1;
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+`;
+
+export const TopPanelContent = styled.div<{
+  $dimension: SideMenuDimension;
+}>`
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+`;
+
+export const BottomPanelContent = styled.div<{ $dimension: SideMenuDimension }>`
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;
