@@ -22,7 +22,7 @@ export const SideMenuGroup = memo(({ id, label, children }: SideMenuGroupNode) =
 
   return (
     <>
-      <GroupButton type="button" style={{ paddingLeft: level * ctx.indentPx }} onClick={handleToggle}>
+      <GroupButton type="button" onClick={handleToggle}>
         <LabelText>
           {ctx.filterActive ? (
             <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />

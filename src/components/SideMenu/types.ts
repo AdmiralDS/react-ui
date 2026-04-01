@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
+export type SearchFormat = 'word' | 'wholly';
 
 /**
  * - MenuItem: выбираемый пункт
@@ -15,8 +16,6 @@ export interface SideMenuItemRenderProps {
   id: string;
   /** Текстовая подпись пункта */
   label: string;
-  /** Состояние disabled  */
-  disabled?: boolean;
   /** Состояние selected - признак того, что данный пункт выбран  */
   selected?: boolean;
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
@@ -24,6 +23,10 @@ export interface SideMenuItemRenderProps {
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
+  /** Размер компонента */
+  dimension?: SideMenuDimension;
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
 }
 
 export interface SideMenuItemNode {
@@ -37,6 +40,9 @@ export interface SideMenuItemNode {
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
+  dimension?: SideMenuDimension;
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
 }
 
 export interface SideMenuGroupNode {
@@ -47,6 +53,8 @@ export interface SideMenuGroupNode {
   label: string;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
   /** Колбэк для кастомизации рендера заголовка группы */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
@@ -57,8 +65,7 @@ export interface SideMenuDividerNode {
   label?: string;
 }
 
-export type SearchFormat = 'word' | 'wholly';
-export interface SideMenuProps {
+export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Массив с описанием дерева элементов меню */
   items: SideMenuNode[];
   /** id выбранного пункта (controlled mode) */
@@ -79,11 +86,6 @@ export interface SideMenuProps {
   searchFormat?: SearchFormat;
   /** Позволяет фильтровать отображаемые пункты */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
-  /** Отступ слева между уровнями вложенности в пикселях
-   * TODO: переместить внутрь компонента
-   */
-  indentPx?: number;
-
   /** Состояние компонента: открыт/закрыт */
   isOpen: boolean;
   /** Состояние видимости border-right */

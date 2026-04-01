@@ -38,7 +38,6 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       onSelectItem,
       onOpenMenusChange,
       search = false,
-      indentPx = 24,
       searchFormat = 'wholly' as SearchFormat,
       onFilterItem = defaultFilterItem,
 
@@ -129,7 +128,6 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       () => ({
         selectedItemId: selectedState.state,
         openGroupIds,
-        indentPx,
         filterActive,
         searchQuery,
         searchFormat,
@@ -140,7 +138,6 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       [
         selectedState.state,
         openGroupIds,
-        indentPx,
         filterActive,
         searchQuery,
         searchFormat,
@@ -159,7 +156,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         return <SideMenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} />;
+      return <SideMenuItem {...node} dimension={dimension} />;
     };
 
     const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
