@@ -36,11 +36,13 @@ export const SideMenuItem = memo(
       renderItem({
         id,
         label,
+        selected,
+        level,
         icon,
         badge,
         tag,
-        selected,
-        level,
+        dimension,
+        header,
       })
     ) : (
       <>

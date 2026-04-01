@@ -16,8 +16,6 @@ export interface SideMenuItemRenderProps {
   id: string;
   /** Текстовая подпись пункта */
   label: string;
-  /** Состояние disabled  */
-  disabled?: boolean;
   /** Состояние selected - признак того, что данный пункт выбран  */
   selected?: boolean;
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
@@ -25,7 +23,10 @@ export interface SideMenuItemRenderProps {
   icon?: ReactNode;
   badge?: ReactNode;
   tag?: ReactNode;
+  /** Размер компонента */
   dimension?: SideMenuDimension;
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
 }
 
 export interface SideMenuItemNode {
@@ -52,6 +53,8 @@ export interface SideMenuGroupNode {
   label: string;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
+  /** Выделение label жирным шрифтом */
+  header?: boolean;
   /** Колбэк для кастомизации рендера заголовка группы */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
