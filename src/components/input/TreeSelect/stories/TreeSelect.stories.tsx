@@ -126,3 +126,21 @@ export const TextInputWithIcon = {
   name: 'Кастомные панели в списке',
 };
 //</editor-fold>
+
+const RowCountStory: StoryFn<typeof TreeSelect> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <PlaygroundTemplate
+      {...props}
+      CSSCustomProps={CSSCustomProps}
+      defaultValue={['1.1', '1.2.1', '1.2.2', '1.2.3', '1.3', '2', '3']}
+      minRowCount={2}
+      maxRowCount={3}
+    />
+  );
+};
+
+export const RowCountLimits = {
+  render: RowCountStory,
+  name: 'min/maxRowCount',
+};

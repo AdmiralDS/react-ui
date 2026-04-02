@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -45,6 +45,12 @@ export interface TreeSelectProps
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
 
+  /** Минимальное количество строк поля */
+  minRowCount?: number | 'none';
+
+  /** Максимальное количество строк поля */
+  maxRowCount?: number | 'none';
+
   /** Конфиг функция пропсов для кнопки выпадающего списка. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   openButtonPropsConfig?: (
@@ -86,6 +92,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       readOnly,
       placeholder,
       dimension = 'm',
+      minRowCount = 'none',
+      maxRowCount = 'none',
       renderTopPanel,
       renderBottomPanel,
       openButtonPropsConfig,
@@ -103,10 +111,12 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
+    const optionsWrapperRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>([...items]);
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
+    const [visibleChipCount, setVisibleChipCount] = useState<number | null>(null);
 
     useEffect(() => {
       const array = value ?? defaultValue ?? [];
@@ -122,6 +132,59 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
       setSelectedChips(selected);
     }, [defaultValue, value]);
+
+    const maxRowCountValue = maxRowCount !== 'none' ? maxRowCount : undefined;
+    const minRowCountValue = minRowCount !== 'none' ? minRowCount : undefined;
+
+    const isCollapsed = !open && !!maxRowCountValue;
+
+    useLayoutEffect(() => {
+      if (!isCollapsed) {
+        setVisibleChipCount(null);
+        return;
+      }
+
+      const wrapper = optionsWrapperRef.current;
+      if (!wrapper) return;
+
+      let raf1 = 0;
+      let raf2 = 0;
+
+      const recompute = () => {
+        const chipEls = Array.from(wrapper.querySelectorAll<HTMLElement>('[data-tree-select-chip="true"]'));
+        if (chipEls.length === 0) {
+          setVisibleChipCount(null);
+          return;
+        }
+
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const eps = 1;
+        let count = 0;
+
+        for (const el of chipEls) {
+          const r = el.getBoundingClientRect();
+          const fullyVisible =
+            r.top >= wrapperRect.top - eps &&
+            r.left >= wrapperRect.left - eps &&
+            r.bottom <= wrapperRect.bottom + eps &&
+            r.right <= wrapperRect.right + eps;
+          if (!fullyVisible) break;
+          count += 1;
+        }
+
+        const next = count >= chipEls.length ? null : Math.max(1, count);
+        setVisibleChipCount((prev) => (prev === next ? prev : next));
+      };
+
+      raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(recompute);
+      });
+
+      return () => {
+        cancelAnimationFrame(raf1);
+        cancelAnimationFrame(raf2);
+      };
+    }, [isCollapsed, selectedChips.length, maxRowCountValue]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -258,23 +321,46 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const renderSelectedChips = () => {
-      return selectedChips.map((item) => {
-        return (
-          <StyledChip
-            id={item.id}
-            key={item.id}
-            onClick={(e) => e.stopPropagation()}
-            onClose={readOnly ? undefined : handleDeleteChip}
-            tabIndex={-1}
-            dimension="s"
-            appearance="filled"
-            readOnly={readOnly}
-            disabled={item.disabled || disabled}
-          >
-            {item.label}
-          </StyledChip>
-        );
-      });
+      const chipsToRender =
+        isCollapsed && visibleChipCount !== null ? selectedChips.slice(0, visibleChipCount) : selectedChips;
+      const hiddenCount = isCollapsed && visibleChipCount !== null ? selectedChips.length - chipsToRender.length : 0;
+
+      return (
+        <>
+          {chipsToRender.map((item) => {
+            return (
+              <StyledChip
+                id={item.id}
+                key={item.id}
+                data-tree-select-chip="true"
+                onClick={(e) => e.stopPropagation()}
+                onClose={readOnly ? undefined : handleDeleteChip}
+                tabIndex={-1}
+                dimension="s"
+                appearance="filled"
+                readOnly={readOnly}
+                disabled={item.disabled || disabled}
+              >
+                {item.label}
+              </StyledChip>
+            );
+          })}
+          {hiddenCount > 0 && (
+            <StyledChip
+              key="tree-select-overflow-chip"
+              data-testid="tree-select-overflow-chip"
+              onClick={(e) => e.stopPropagation()}
+              tabIndex={-1}
+              dimension="s"
+              appearance="filled"
+              readOnly
+              disabled={disabled}
+            >
+              {`+${hiddenCount}`}
+            </StyledChip>
+          )}
+        </>
+      );
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -302,6 +388,10 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       clearButtonPropsConfig,
       onClearOptions: handleClearOptions,
       dimension,
+      optionsWrapperRef,
+      $opened: open,
+      $minRowCount: minRowCountValue,
+      $maxRowCount: maxRowCountValue,
       $hidden: selectedChips.length > 0,
       onKeyDown: handleKeyDown,
       onPaste: handlePaste,
