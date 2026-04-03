@@ -4,34 +4,39 @@ import type { Badge } from '../Badge';
 
 export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
+export type SearchFormat = 'word' | 'wholly';
+export type TypeLabel = 'header' | 'line';
 type SideMenuTag = Omit<React.ComponentProps<typeof Tag>, 'dimension' | 'as'>;
 type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 
 /**
  * - MenuItem: выбираемый пункт
- * - MenuGroup: разворачиваемая группа (по id)
+ * - MenuGroup: разворачиваемая группа пунктов
  * - MenuDivider: разделитель
  */
 export type SideMenuNode = SideMenuItemNode | SideMenuGroupNode | SideMenuDividerNode;
 
 export interface SideMenuItemRenderProps {
+  /** Уникальный идентификатор пункта меню  */
   id: string;
+  /** Текстовая подпись пункта */
   label: string;
+  /** Состояние selected - признак того, что данный пункт выбран  */
+  selected?: boolean;
+  /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
+  level: number;
   icon?: ReactNode;
   badge?: SideMenuBadge;
   tag?: SideMenuTag;
-  selected?: boolean;
+  /** Размер компонента */
   dimension?: SideMenuDimension;
-  /**
-   * Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.).
-   * Используется для вычисления отступа слева и для кастомного рендера.
-   */
-  level: number;
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
 }
 
 export interface SideMenuItemNode {
   type?: 'item';
-  /** Уникальный id пункта меню  */
+  /** Уникальный идентификатор пункта меню  */
   id: string;
   /** Текстовая подпись пункта */
   label: string;
@@ -40,56 +45,54 @@ export interface SideMenuItemNode {
   tag?: SideMenuTag;
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
 }
 
 export interface SideMenuGroupNode {
   type: 'group';
-  /** Уникальный id группы. Используется для openMenus/defaultOpenMenus */
+  /** Уникальный идентификатор группы пунктов меню */
   id: string;
-  /** Заголовок группы (отображается рядом с шевроном и участвует в фильтрации) */
-  label: string;
-  /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
-  children: SideMenuNode[];
   icon?: ReactNode;
   badge?: SideMenuBadge;
   tag?: SideMenuTag;
+  /** Текстовая подпись группы */
+  label: string;
+  /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
+  children: SideMenuNode[];
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
+  /** Колбэк кастомизации рендера контента пункта */
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
 export interface SideMenuDividerNode {
   type: 'divider';
+  /** Опциональная текстовая подпись */
   label?: string;
 }
 
 export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Дерево элементов меню */
+  /** Массив с описанием дерева элементов меню */
   items: SideMenuNode[];
-  /** Id выбранного пункта (controlled) */
+  /** id выбранного пункта (controlled mode) */
   selectedItem?: string;
-  /** Id пункта, который будет выбран по умолчанию (uncontrolled) */
+  /** id пункта, который будет выбран по умолчанию (uncontrolled mode) */
   defaultSelectedItem?: string;
   /** Колбек при изменении выбранного пункта */
   onSelectItem?: (id: string) => void;
-  /**
-   * Массив id открытых групп (controlled).
-   */
+  /** Массив id открытых групп (controlled mode) */
   openMenus?: string[];
-  /**
-   * Массив id открытых групп по умолчанию (uncontrolled).
-   */
+  /** Массив id открытых групп по умолчанию (uncontrolled mode) */
   defaultOpenMenus?: string[];
-
-  /**
-   * callback при изменении openMenus (открытие/закрытие групп).
-   * Вызывается и в controlled, и в uncontrolled режиме.
-   */
+  /** Колбек при изменении openMenus (открытие/закрытие групп) */
   onOpenMenusChange?: (openIds: string[]) => void;
   /** Включает опцию фильтрации */
   search?: boolean;
-  /** Отступ слева между уровнями вложенности в пикселях
-   * TODO: переместить внутрь компонента
-   */
-  indentPx?: number;
-
+  /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
+  searchFormat?: SearchFormat;
+  /** Позволяет фильтровать отображаемые пункты */
+  onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
   /** Состояние компонента: открыт/закрыт */
   isOpen: boolean;
   /** Состояние видимости border-right */

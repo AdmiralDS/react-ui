@@ -5,6 +5,8 @@ import { Drawer } from '../Drawer';
 import { typography } from '../Typography';
 import { mediumGroupBorderRadius } from '../themes';
 
+const INDENT = 20;
+
 export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
   align-items: center;
@@ -26,7 +28,12 @@ const selectedItemMixin = css<{ $selected?: boolean }>`
   }
 `;
 
-export const ItemButton = styled.button<{ $selected?: boolean; $dimension: SideMenuDimension; $indent: number }>`
+export const ItemButton = styled.button<{
+  $selected?: boolean;
+  $dimension: SideMenuDimension;
+  $indentLevel: number;
+  $header?: boolean;
+}>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -41,24 +48,26 @@ export const ItemButton = styled.button<{ $selected?: boolean; $dimension: SideM
   &:hover {
     background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
   }
+
   &:focus-visible {
     outline: 2px solid
       var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
     outline-offset: -2px;
   }
+
   &:active {
     background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
   }
 
-  ${({ $dimension, $indent }) =>
+  padding: ${({ $dimension, $indentLevel }) =>
     $dimension === 'l'
-      ? `padding: 12px 16px 12px ${16 + $indent}px; ${typography['Body/Body 1 Long']}`
-      : `padding: 10px 12px 10px ${12 + $indent}px; ${typography['Body/Body 2 Long']}`};
+      ? `12px 16px 12px ${16 + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + $indentLevel * INDENT}px`};
 
   ${({ $selected }) => $selected && selectedItemMixin};
 `;
 
-export const GroupButton = styled.button<{ $indent: number; $dimension: SideMenuDimension; $selected?: boolean }>`
+export const GroupButton = styled.button<{ $indentLevel: number; $dimension: SideMenuDimension; $selected?: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -83,10 +92,10 @@ export const GroupButton = styled.button<{ $indent: number; $dimension: SideMenu
 
   ${({ $selected }) => $selected && selectedItemMixin};
 
-  ${({ $dimension, $indent }) =>
+  padding: ${({ $dimension, $indentLevel }) =>
     $dimension === 'l'
-      ? `padding: 12px 16px 12px ${16 + $indent}px; ${typography['Body/Body 1 Long']}`
-      : `padding: 10px 12px 10px ${12 + $indent}px; ${typography['Body/Body 2 Long']}`};
+      ? `12px 16px 12px ${16 + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + $indentLevel * INDENT}px`};
 `;
 
 export const RightCluster = styled.span`
@@ -96,10 +105,19 @@ export const RightCluster = styled.span`
   flex: 0 0 auto;
 `;
 
-export const LabelText = styled.span`
+export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean }>`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  ${({ $dimension, $header }) =>
+    $dimension === 'l'
+      ? $header
+        ? typography['Subtitle/Subtitle 2']
+        : typography['Body/Body 1 Long']
+      : $header
+        ? typography['Subtitle/Subtitle 3']
+        : typography['Body/Body 2 Long']};
 `;
 
 export const StyledDrawer = styled(Drawer)<{
@@ -164,6 +182,4 @@ export const WrapperDivider = styled.div<{ $dimension: SideMenuDimension; $simpl
       : $simple
         ? '6px 12px 5px 12px'
         : '6px 12px 3px 12px'};
-
-  ${({ $dimension }) => ($dimension === 'l' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
 `;

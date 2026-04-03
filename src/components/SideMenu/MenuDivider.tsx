@@ -15,7 +15,7 @@ export const SideMenuDivider = memo(({ label }: SideMenuDividerNode) => {
   return (
     <WrapperDivider $dimension={ctx.dimension} $simple={simple}>
       <Divider dimension="s" orientation="horizontal" />
-      {label && <LabelDivider>{label}</LabelDivider>}
+      {label && <LabelDivider $dimension={ctx.dimension}>{label}</LabelDivider>}
     </WrapperDivider>
   );
 });

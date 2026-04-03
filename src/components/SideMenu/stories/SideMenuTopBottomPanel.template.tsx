@@ -5,7 +5,6 @@ import { IconButton, SideMenu, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
 // TODO: подумать над использованием MenuActionsPanel или созданием подобного компонента
 const PanelContainer = styled.div<{ $dimension: SideMenuProps['dimension'] }>`
@@ -35,7 +34,7 @@ export const SideMenuTopBottomPanelTemplate = ({
   const items: SideMenuProps['items'] = [
     { type: 'item', id: '1', label: 'Option1' },
     { type: 'item', id: '2', label: 'Option2' },
-    { type: 'item', id: '3', label: 'Option3', icon: <EmailSolid /> },
+    { type: 'item', id: '3', label: 'Option3' },
     { type: 'divider' },
     {
       type: 'group',

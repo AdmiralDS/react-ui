@@ -30,6 +30,7 @@ export const Accordion: FC<AccordionProps> = ({
   iconPosition = 'right',
   hideTopDivider = false,
   hideBottomDivider = false,
+  className,
   onKeyDown,
   ...props
 }) => {
@@ -63,6 +64,7 @@ export const Accordion: FC<AccordionProps> = ({
   return (
     <AccordionWrapper
       ref={accordionRef}
+      className={'accordion ' + className}
       data-dimension={dimension}
       data-icon={iconPosition}
       $hideTopDivider={hideTopDivider}

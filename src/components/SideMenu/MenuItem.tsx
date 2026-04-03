@@ -1,14 +1,22 @@
 import { memo } from 'react';
 
+import { useKeyPath, useSideMenuContext } from './contexts';
+import { HighlightedLabel } from './HighlightedLabel';
 import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon } from './styles';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
 
-import { useKeyPath, useSideMenuContext } from './contexts';
-
 import type { SideMenuItemNode } from './types';
 
-export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: SideMenuItemNode) => {
+function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
+  const firstArraySet = currentOpenIds;
+  const elementsNotInFirst = nextOpenIds.filter((item) => {
+    return !firstArraySet.has(item);
+  });
+  return elementsNotInFirst;
+}
+
+export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typeLabel }: SideMenuItemNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
   const level = ancestorGroupIds.length;
@@ -16,6 +24,13 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: S
   const selected = ctx.selectedItemId === id;
 
   const handleClick = () => {
+    if (ctx.filterActive) {
+      // если в ходе фильтрации выбрана опция, то следует раскрыть все группы, в которые она входит
+      const needToOpenIds = findUniqueIds(ctx.openGroupIds, ancestorGroupIds);
+      if (needToOpenIds) {
+        ctx.onOpenGroups(needToOpenIds);
+      }
+    }
     ctx.onSelectItem(id);
   };
 
@@ -23,17 +38,25 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: S
     renderItem({
       id,
       label,
+      selected,
+      level,
       icon,
       badge,
       tag,
-      selected,
-      level,
+      dimension: ctx.dimension,
+      typeLabel,
     })
   ) : (
     <>
       <LeftCluster $dimension={ctx.dimension}>
-        {ctx.hasIcons && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-        <LabelText>{label}</LabelText>
+        {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+        <LabelText $dimension={ctx.dimension} $header={typeLabel === 'header' && level < 1}>
+          {ctx.filterActive ? (
+            <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+          ) : (
+            label
+          )}
+        </LabelText>
       </LeftCluster>
       <RightCluster>
         {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'}></Badge>}
@@ -48,7 +71,8 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: S
       $selected={selected}
       onClick={handleClick}
       $dimension={ctx.dimension}
-      $indent={level * ctx.indentPx}
+      $indentLevel={level}
+      $header={typeLabel === 'header' && level < 1}
     >
       {content}
     </ItemButton>

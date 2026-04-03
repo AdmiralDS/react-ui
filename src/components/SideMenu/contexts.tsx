@@ -14,17 +14,15 @@ export function useKeyPath(): KeyPath {
   return useContext(PathContext);
 }
 
+export type SearchFormat = 'word' | 'wholly';
 export interface SideMenuContextValue {
   selectedItemId: string | null;
-  /**
-   * Множество открытых groups (by id).
-   */
+  /** Множество открытых groups (by id) */
   openGroupIds: Set<string>;
-
-  indentPx: number;
 
   onSelectItem: (id: string) => void;
   onToggleGroup: (groupId: string) => void;
+  onOpenGroups: (groupIds: string[]) => void;
 
   /**
    * Включена ли фильтрация и применяется ли активный фильтр.
@@ -34,6 +32,8 @@ export interface SideMenuContextValue {
   dimension: SideMenuDimension;
   //Есть ли в массиве items иконки в 1 уровне вложенности
   hasIcons: boolean;
+  searchQuery: string;
+  searchFormat: SearchFormat;
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 

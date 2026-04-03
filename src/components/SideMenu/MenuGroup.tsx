@@ -13,12 +13,13 @@ import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/s
 import { SideMenuDivider } from './MenuDivider';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
+import { HighlightedLabel } from './HighlightedLabel';
 
 import type { SideMenuGroupNode } from '#src/components/SideMenu/types';
 
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 
-export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon }: SideMenuGroupNode) => {
+export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon, typeLabel }: SideMenuGroupNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
 
@@ -35,7 +36,7 @@ export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon }: Si
 
   const selected = findSelectedItem(children) && !isExpanded;
 
-  const handleClick = () => {
+  const handleToggle = () => {
     ctx.onToggleGroup(id);
   };
 
@@ -45,14 +46,20 @@ export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon }: Si
     <>
       <GroupButton
         type="button"
-        onClick={handleClick}
-        $indent={level * ctx.indentPx}
+        onClick={handleToggle}
+        $indentLevel={level}
         $dimension={ctx.dimension}
         $selected={selected}
       >
         <LeftCluster $dimension={ctx.dimension}>
-          {ctx.hasIcons && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-          <LabelText>{label}</LabelText>
+          {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+          <LabelText $dimension={ctx.dimension} $header={typeLabel === 'header' && level < 1}>
+            {ctx.filterActive ? (
+              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+            ) : (
+              label
+            )}
+          </LabelText>
         </LeftCluster>
         <RightCluster>
           {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'}></Badge>}
