@@ -1,14 +1,16 @@
 import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
-import { TextInput } from '#src/components/input';
-import { Divider } from '#src/components/Divider';
 import { useMediaQuery } from '../common/hooks/useMediaQuery';
 
-import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
+import { TextInput } from '#src/components/input';
 import { BottomPanelContent, StyledDrawer, StyledScrollContainer, TopPanelContent } from './styles';
-import type { SideMenuProps, SideMenuNode } from './types';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
+import { SideMenuDivider } from './MenuDivider';
+
+import type { SideMenuProps, SideMenuNode } from './types';
+
+import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
 
 function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
   const { value, defaultValue } = opts;
@@ -64,6 +66,8 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       defaultValue: defaultOpenMenus,
     });
 
+    const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
+
     const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -97,20 +101,22 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         onSelectItem: handleSelectItem,
         onToggleGroup: handleToggleGroup,
         filterActive,
+        dimension,
+        hasIcons,
       }),
       [selectedState.state, openGroupIds, indentPx, handleSelectItem, handleToggleGroup, filterActive],
     );
 
     const getItem = (node: SideMenuNode) => {
       if (node.type === 'divider') {
-        return <Divider dimension="s" orientation="horizontal" />;
+        return <SideMenuDivider {...node} />;
       }
 
       if (node.type === 'group') {
         return <SideMenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} dimension={dimension} />;
+      return <SideMenuItem {...node} />;
     };
 
     const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;

@@ -1,58 +1,56 @@
 import { memo } from 'react';
 
-import type { SideMenuItemNode } from './types';
-import { useKeyPath, useSideMenuContext } from './contexts';
 import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon } from './styles';
+import { Tag } from '../Tag';
+import { Badge } from '../Badge';
 
-export const SideMenuItem = memo(
-  ({ id, renderItem, disabled: propDisabled, label, badge, icon, tag, dimension = 'm' }: SideMenuItemNode) => {
-    const ctx = useSideMenuContext();
-    const ancestorGroupIds = useKeyPath();
-    const level = ancestorGroupIds.length;
+import { useKeyPath, useSideMenuContext } from './contexts';
 
-    const selected = ctx.selectedItemId === id;
-    const disabled = !!propDisabled;
+import type { SideMenuItemNode } from './types';
 
-    const handleClick = () => {
-      if (disabled) return;
-      ctx.onSelectItem(id);
-    };
+export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag }: SideMenuItemNode) => {
+  const ctx = useSideMenuContext();
+  const ancestorGroupIds = useKeyPath();
+  const level = ancestorGroupIds.length;
 
-    const content = renderItem ? (
-      renderItem({
-        id,
-        label: label,
-        icon: icon,
-        badge: badge,
-        tag: tag,
-        disabled,
-        selected,
-        level,
-      })
-    ) : (
-      <>
-        <LeftCluster $dimension={dimension}>
-          <WrapperIcon $dimension={dimension}>{icon}</WrapperIcon>
-          <LabelText>{label}</LabelText>
-        </LeftCluster>
-        <RightCluster>
-          {tag}
-          {badge}
-        </RightCluster>
-      </>
-    );
+  const selected = ctx.selectedItemId === id;
 
-    return (
-      <ItemButton
-        type="button"
-        $selected={selected}
-        onClick={handleClick}
-        disabled={disabled}
-        $dimension={dimension}
-        $indent={level * ctx.indentPx}
-      >
-        {content}
-      </ItemButton>
-    );
-  },
-);
+  const handleClick = () => {
+    ctx.onSelectItem(id);
+  };
+
+  const content = renderItem ? (
+    renderItem({
+      id,
+      label,
+      icon,
+      badge,
+      tag,
+      selected,
+      level,
+    })
+  ) : (
+    <>
+      <LeftCluster $dimension={ctx.dimension}>
+        {ctx.hasIcons && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+        <LabelText>{label}</LabelText>
+      </LeftCluster>
+      <RightCluster>
+        {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'}></Badge>}
+        {tag && <Tag {...tag} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'}></Tag>}
+      </RightCluster>
+    </>
+  );
+
+  return (
+    <ItemButton
+      type="button"
+      $selected={selected}
+      onClick={handleClick}
+      $dimension={ctx.dimension}
+      $indent={level * ctx.indentPx}
+    >
+      {content}
+    </ItemButton>
+  );
+});

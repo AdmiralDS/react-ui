@@ -1,7 +1,11 @@
 import type { ReactNode } from 'react';
+import type { Tag } from '../Tag';
+import type { Badge } from '../Badge';
 
 export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
+type SideMenuTag = Omit<React.ComponentProps<typeof Tag>, 'dimension' | 'as'>;
+type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 
 /**
  * - MenuItem: выбираемый пункт
@@ -14,9 +18,8 @@ export interface SideMenuItemRenderProps {
   id: string;
   label: string;
   icon?: ReactNode;
-  badge?: ReactNode;
-  tag?: ReactNode;
-  disabled?: boolean;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
   selected?: boolean;
   dimension?: SideMenuDimension;
   /**
@@ -33,10 +36,8 @@ export interface SideMenuItemNode {
   /** Текстовая подпись пункта */
   label: string;
   icon?: ReactNode;
-  badge?: ReactNode;
-  tag?: ReactNode;
-  disabled?: boolean;
-  dimension?: SideMenuDimension;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
@@ -46,14 +47,17 @@ export interface SideMenuGroupNode {
   /** Уникальный id группы. Используется для openMenus/defaultOpenMenus */
   id: string;
   /** Заголовок группы (отображается рядом с шевроном и участвует в фильтрации) */
-  title: string;
-  disabled?: boolean;
+  label: string;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
+  icon?: ReactNode;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
 }
 
 export interface SideMenuDividerNode {
   type: 'divider';
+  label?: string;
 }
 
 export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {

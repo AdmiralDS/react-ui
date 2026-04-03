@@ -13,31 +13,31 @@ const items: SideMenuProps['items'] = [
     type: 'item',
     id: '1',
     label: 'Option1',
-    tag: (
-      <Tag as="span" statusViaBackground kind="success">
-        New
-      </Tag>
-    ),
+    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
   },
-  { type: 'item', id: '2', label: 'Option2', badge: <Badge>4</Badge> },
+  { type: 'divider' },
+  { type: 'item', id: '2', label: 'Option2', badge: { children: '4' } },
   {
     type: 'item',
     id: '3',
     label: 'Option3',
     icon: <EmailSolid />,
   },
-  { type: 'divider' },
+  { type: 'divider', label: 'Menu group' },
   {
     type: 'group',
     id: '4',
-    title: 'Option4',
+    label: 'Option4',
+    icon: <EmailSolid />,
+    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
+    badge: { children: '4' },
     children: [
       { type: 'item', id: '4.1', label: 'Option4.1' },
       { type: 'item', id: '4.2', label: 'Option4.2' },
       {
         type: 'group',
         id: '4.3',
-        title: 'Option4.3',
+        label: 'Option4.3',
         children: [
           { type: 'item', id: '4.3.1', label: 'Option4.3.1' },
           { type: 'item', id: '4.3.2', label: 'Option4.3.2' },
@@ -49,28 +49,15 @@ const items: SideMenuProps['items'] = [
     type: 'item',
     id: '5',
     label: 'Option5',
-    disabled: true,
-    icon: (
-      <div>
-        <EmailSolid />
-      </div>
-    ),
+    icon: <EmailSolid />,
   },
   {
     type: 'item',
     id: '6',
-    label: 'Option6',
-    icon: (
-      <div>
-        <EmailSolid />
-      </div>
-    ),
-    tag: (
-      <Tag as="span" statusViaBackground kind="success">
-        New
-      </Tag>
-    ),
-    badge: <Badge>4</Badge>,
+    label: 'Option6asdsadasdaasdasdasdas',
+    icon: <EmailSolid />,
+    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
+    badge: { children: '4' },
   },
 ];
 
@@ -88,7 +75,7 @@ export const SideMenuItemStateTemplate = ({
       <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
         <MenuOutline />
       </IconButton>
-      <SideMenu style={{ width: '300px' }} {...props} isOpen={open} items={items} />
+      <SideMenu style={{ maxWidth: '300px' }} {...props} isOpen={open} items={items} />
     </ThemeProvider>
   );
 };
