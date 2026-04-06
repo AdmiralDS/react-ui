@@ -1,12 +1,11 @@
-import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
-import { useMediaQuery } from '../common/hooks/useMediaQuery';
+import { useState, useMemo, useCallback, Fragment, forwardRef } from 'react';
 
 import { TextInput, defaultFilterItem } from '#src/components/input';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
 import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
-import { BottomPanelContent, StyledDrawer, StyledScrollContainer, TopPanelContent } from './styles';
+import { BottomPanelContent, StyledScrollContainer, TopPanelContent, SideMenuWrapper } from './styles';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
@@ -42,15 +41,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       search = false,
       searchFormat = 'wholly' as SearchFormat,
       onFilterItem = defaultFilterItem,
-
-      //container
-      visibleBorder = false,
-      onClose,
-      isOpen,
-      appearance = 'primary',
-      backdrop = false,
       dimension = 'm',
-      closeMediaQuery,
       renderBottomPanel,
       renderTopPanel,
       gap = 4,
@@ -165,26 +156,8 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       return <SideMenuItem {...node} />;
     };
 
-    const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
-
-    useEffect(() => {
-      if (maxWidth && isOpen && closeMediaQuery && onClose) {
-        onClose();
-      }
-    }, [maxWidth]);
-
     return (
-      <StyledDrawer
-        ref={ref}
-        $visibleBorder={visibleBorder}
-        position="left"
-        isOpen={isOpen}
-        backdrop={backdrop}
-        displayCloseIcon={false}
-        $appearance={appearance}
-        $dimension={dimension}
-        {...props}
-      >
+      <SideMenuWrapper ref={ref} {...props}>
         {search && (
           <TopPanelContent $dimension={dimension}>
             <TextInput
@@ -212,7 +185,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
             )}
           </PathContext.Provider>
         </SideMenuContext.Provider>
-      </StyledDrawer>
+      </SideMenuWrapper>
     );
   },
 );

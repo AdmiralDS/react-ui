@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import type { Tag } from '../Tag';
 import type { Badge } from '../Badge';
 
-export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
 export type SearchFormat = 'word' | 'wholly';
 export type TypeLabel = 'header' | 'line';
@@ -93,18 +92,6 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   searchFormat?: SearchFormat;
   /** Позволяет фильтровать отображаемые пункты */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
-  /** Состояние компонента: открыт/закрыт */
-  isOpen: boolean;
-  /** Состояние видимости border-right */
-  visibleBorder?: boolean;
-  /** Внешний вид компонента */
-  appearance?: SideMenuAppearance;
-  /** Параметр максимального размера окна при достижении которого будет вызвана функция onToggle */
-  closeMediaQuery?: string;
-  /** Функция которая будет выполняться при достижении closeMediaQuery */
-  onClose?: () => void;
-  /** Наличие затемненного фона, блокирующего контент страницы */
-  backdrop?: boolean;
   /** Размер компонента */
   dimension?: SideMenuDimension;
   /** Позволяет добавить панель внизу */
