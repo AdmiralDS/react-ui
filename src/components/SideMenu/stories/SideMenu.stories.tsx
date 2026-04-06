@@ -6,14 +6,12 @@ import { ALL_BORDER_RADIUS_VALUES, SideMenu } from '@admiral-ds/react-ui';
 
 import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
 import { SideMenuAppearTemplate } from './SideMenuAppear.template';
-import { SideMenuWithMediaQueryTemplate } from './SideMenuWithMediaQuery.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
 import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
 import SideMenuAppearTemplateRaw from './SideMenuAppear.template?raw';
-import SideMenuWithMediaQueryTemplateRaw from './SideMenuWithMediaQuery.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
 import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
 
@@ -102,28 +100,6 @@ export const AppearExample = {
   },
 
   name: 'SideMenu. Сценарии появления',
-};
-
-//</editor-fold>
-
-//<editor-fold desc="SideMenu. WithMediaQuery">
-const SideMenuWithMediaQueryStory: StoryFn<typeof SideMenu> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <SideMenuWithMediaQueryTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const SideMenuWithMediaQuery = {
-  render: SideMenuWithMediaQueryStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: SideMenuWithMediaQueryTemplateRaw,
-      },
-    },
-  },
-
-  name: 'SideMenu. с closeMediaQuery',
 };
 
 //</editor-fold>

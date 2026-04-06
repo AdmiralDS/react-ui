@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import type { SideMenuDimension } from './types';
 
 /**
  * Путь keys групп от корня до текущего уровня.
@@ -28,6 +29,9 @@ export interface SideMenuContextValue {
    * В режиме фильтрации группы отображаются раскрытыми, чтобы показать найденные descendants.
    */
   filterActive: boolean;
+  dimension: SideMenuDimension;
+  //Есть ли в массиве items иконки в 1 уровне вложенности
+  hasIcons: boolean;
   searchQuery: string;
   searchFormat: SearchFormat;
 }

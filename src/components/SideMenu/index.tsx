@@ -1,17 +1,17 @@
-import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
+import { useState, useMemo, useCallback, Fragment, forwardRef } from 'react';
+
 import { TextInput, defaultFilterItem } from '#src/components/input';
-import { Divider } from '#src/components/Divider';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
-import { useMediaQuery } from '../common/hooks/useMediaQuery';
-
-import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
 import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
-import { BottomPanelContent, StyledDrawer, StyledScrollContainer, TopPanelContent } from './styles';
+import { BottomPanelContent, StyledScrollContainer, TopPanelContent, SideMenuWrapper } from './styles';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
+import { SideMenuDivider } from './MenuDivider';
+
+import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
 
 function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
   const { value, defaultValue } = opts;
@@ -41,15 +41,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       search = false,
       searchFormat = 'wholly' as SearchFormat,
       onFilterItem = defaultFilterItem,
-
-      //container
-      visibleBorder = false,
-      onClose,
-      isOpen,
-      appearance = 'primary',
-      backdrop = false,
       dimension = 'm',
-      closeMediaQuery,
       renderBottomPanel,
       renderTopPanel,
       gap = 4,
@@ -68,6 +60,8 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       value: openMenus,
       defaultValue: defaultOpenMenus,
     });
+
+    const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
 
     const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
 
@@ -134,6 +128,8 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         searchFormat,
         onSelectItem: handleSelectItem,
         onToggleGroup: handleToggleGroup,
+        dimension,
+        hasIcons,
         onOpenGroups: handleOpenGroups,
       }),
       [
@@ -150,36 +146,18 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
     const getItem = (node: SideMenuNode) => {
       if (node.type === 'divider') {
-        return <Divider dimension="s" orientation="horizontal" />;
+        return <SideMenuDivider {...node} />;
       }
 
       if (node.type === 'group') {
         return <SideMenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} dimension={dimension} />;
+      return <SideMenuItem {...node} />;
     };
 
-    const maxWidth = closeMediaQuery ? useMediaQuery(`(max-width: ${closeMediaQuery})`) : null;
-
-    useEffect(() => {
-      if (maxWidth && isOpen && closeMediaQuery && onClose) {
-        onClose();
-      }
-    }, [maxWidth]);
-
     return (
-      <StyledDrawer
-        ref={ref}
-        $visibleBorder={visibleBorder}
-        position="left"
-        isOpen={isOpen}
-        backdrop={backdrop}
-        displayCloseIcon={false}
-        $appearance={appearance}
-        $dimension={dimension}
-        {...props}
-      >
+      <SideMenuWrapper ref={ref} {...props}>
         {search && (
           <TopPanelContent $dimension={dimension}>
             <TextInput
@@ -207,7 +185,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
             )}
           </PathContext.Provider>
         </SideMenuContext.Provider>
-      </StyledDrawer>
+      </SideMenuWrapper>
     );
   },
 );

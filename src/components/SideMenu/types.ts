@@ -1,8 +1,12 @@
 import type { ReactNode } from 'react';
+import type { Tag } from '../Tag';
+import type { Badge } from '../Badge';
 
-export type SideMenuAppearance = 'primary' | 'secondary';
 export type SideMenuDimension = 'm' | 'l';
 export type SearchFormat = 'word' | 'wholly';
+export type TypeLabel = 'header' | 'line';
+type SideMenuTag = Omit<React.ComponentProps<typeof Tag>, 'dimension' | 'as'>;
+type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 
 /**
  * - MenuItem: выбираемый пункт
@@ -21,12 +25,12 @@ export interface SideMenuItemRenderProps {
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
   level: number;
   icon?: ReactNode;
-  badge?: ReactNode;
-  tag?: ReactNode;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
   /** Размер компонента */
   dimension?: SideMenuDimension;
-  /** Выделение label жирным шрифтом */
-  header?: boolean;
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
 }
 
 export interface SideMenuItemNode {
@@ -35,27 +39,29 @@ export interface SideMenuItemNode {
   id: string;
   /** Текстовая подпись пункта */
   label: string;
-  /** Колбэк для кастомизации рендера пункта меню */
-  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
   icon?: ReactNode;
-  badge?: ReactNode;
-  tag?: ReactNode;
-  dimension?: SideMenuDimension;
-  /** Выделение label жирным шрифтом */
-  header?: boolean;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
+  /** Колбэк кастомизации рендера контента пункта */
+  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
 }
 
 export interface SideMenuGroupNode {
   type: 'group';
   /** Уникальный идентификатор группы пунктов меню */
   id: string;
+  icon?: ReactNode;
+  badge?: SideMenuBadge;
+  tag?: SideMenuTag;
   /** Текстовая подпись группы */
   label: string;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
-  /** Выделение label жирным шрифтом */
-  header?: boolean;
-  /** Колбэк для кастомизации рендера заголовка группы */
+  /** Формат label, по умолчанию line */
+  typeLabel?: TypeLabel;
+  /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
@@ -86,18 +92,6 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   searchFormat?: SearchFormat;
   /** Позволяет фильтровать отображаемые пункты */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
-  /** Состояние компонента: открыт/закрыт */
-  isOpen: boolean;
-  /** Состояние видимости border-right */
-  visibleBorder?: boolean;
-  /** Внешний вид компонента */
-  appearance?: SideMenuAppearance;
-  /** Параметр максимального размера окна при достижении которого будет вызвана функция onToggle */
-  closeMediaQuery?: string;
-  /** Функция которая будет выполняться при достижении closeMediaQuery */
-  onClose?: () => void;
-  /** Наличие затемненного фона, блокирующего контент страницы */
-  backdrop?: boolean;
   /** Размер компонента */
   dimension?: SideMenuDimension;
   /** Позволяет добавить панель внизу */

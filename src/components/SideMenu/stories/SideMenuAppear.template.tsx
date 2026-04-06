@@ -58,7 +58,7 @@ export const SideMenuAppearTemplate = ({
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const isMobile = useMediaQuery('(max-width: 700px)');
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [openSider, setOpenSider] = useState(!isMobile);
+  const [openSider, setOpenSider] = useState(true);
 
   const handleToggle = () => {
     isMobile ? setOpenDrawer(!openDrawer) : setOpenSider(!openSider);
@@ -86,11 +86,11 @@ export const SideMenuAppearTemplate = ({
             closeOnBackdropClick
             closeOnEscapeKeyDown
           >
-            <SideMenu {...props} isOpen={openDrawer} items={items} />
+            <SideMenu {...props} items={items} />
           </Drawer>
         )}
         <Sider isOpen={openSider} width={200}>
-          <SideMenu {...props} isOpen={openSider} items={items} />
+          <SideMenu {...props} items={items} />
         </Sider>
 
         <Main />

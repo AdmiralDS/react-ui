@@ -1,15 +1,32 @@
 import { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
+
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+  height: 40px;
+  width: 100%;
+  background-color: ${(p) => p.theme.color['Opacity/Neutral 8']};
+`;
+const Layout = styled.div`
+  display: flex;
+`;
+
+const Main = styled.main`
+  min-width: calc(100% - 240px);
+  min-height: 200px;
+  flex: 1 1 auto;
+  background-color: ${(p) => p.theme.color['Success/Success 10']};
+`;
 
 const items: SideMenuProps['items'] = [
   { type: 'item', id: '1', label: 'Option1' },
-  { type: 'item', id: '2', label: 'Option2', icon: <EmailSolid /> },
+  { type: 'item', id: '2', label: 'Option2' },
   { type: 'item', id: '3', label: 'Option3' },
   { type: 'divider' },
   {
@@ -43,10 +60,17 @@ export const SideMenuPlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <IconButton dimension="m" style={{ borderRadius: '50%' }} onClick={handleToggle}>
-        <MenuOutline />
-      </IconButton>
-      <SideMenu {...props} isOpen={open} items={items} />
+      <Header>
+        <IconButton dimension="m" onClick={handleToggle}>
+          <MenuOutline />
+        </IconButton>
+      </Header>
+      <Layout>
+        <Sider isOpen={open}>
+          <SideMenu {...props} items={items} />
+        </Sider>
+        <Main />
+      </Layout>
     </ThemeProvider>
   );
 };
