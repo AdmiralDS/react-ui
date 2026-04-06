@@ -26,6 +26,7 @@ function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
   };
 }
 
+export * from './Sider';
 export type { SideMenuProps } from './types';
 export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   (

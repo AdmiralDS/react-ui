@@ -5,12 +5,14 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, SideMenu } from '@admiral-ds/react-ui';
 
 import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
+import { SideMenuAppearTemplate } from './SideMenuAppear.template';
 import { SideMenuWithMediaQueryTemplate } from './SideMenuWithMediaQuery.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
 import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
+import SideMenuAppearTemplateRaw from './SideMenuAppear.template?raw';
 import SideMenuWithMediaQueryTemplateRaw from './SideMenuWithMediaQuery.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
 import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
@@ -78,6 +80,28 @@ export const PlaygroundExample = {
   },
 
   name: 'SideMenu. Playground',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="Appear">
+const AppearStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuAppearTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const AppearExample = {
+  render: AppearStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuAppearTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Сценарии появления',
 };
 
 //</editor-fold>
