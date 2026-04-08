@@ -21,7 +21,7 @@ const Layout = styled.div`
 
 const Main = styled.main`
   min-width: calc(100% - 200px);
-  min-height: 200px;
+  min-height: 250px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
@@ -58,13 +58,17 @@ export const SideMenuAppearTemplate = ({
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const isMobile = useMediaQuery('(max-width: 700px)');
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [openSider, setOpenSider] = useState(true);
+  const [openSider, setOpenSider] = useState(!isMobile);
+
+  const [selectedItem, setSelectedItem] = useState<string | undefined>(undefined);
+  const [openMenus, setOpenMenus] = useState<Array<string>>([]);
 
   const handleToggle = () => {
     isMobile ? setOpenDrawer(!openDrawer) : setOpenSider(!openSider);
   };
 
   useEffect(() => {
+    console.log(isMobile);
     if (isMobile) setOpenSider(false);
     if (!isMobile) setOpenSider(true);
   }, [isMobile]);
@@ -86,11 +90,25 @@ export const SideMenuAppearTemplate = ({
             closeOnBackdropClick
             closeOnEscapeKeyDown
           >
-            <SideMenu {...props} items={items} />
+            <SideMenu
+              {...props}
+              items={items}
+              selectedItem={selectedItem}
+              onSelectItem={(id: string) => setSelectedItem(id)}
+              openMenus={openMenus}
+              onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
+            />
           </Drawer>
         )}
         <Sider isOpen={openSider} width={200}>
-          <SideMenu {...props} items={items} />
+          <SideMenu
+            {...props}
+            items={items}
+            selectedItem={selectedItem}
+            onSelectItem={(id: string) => setSelectedItem(id)}
+            openMenus={openMenus}
+            onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
+          />
         </Sider>
 
         <Main />

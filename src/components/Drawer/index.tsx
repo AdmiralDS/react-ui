@@ -177,6 +177,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       children,
       locale,
       closeButtonPropsConfig = nothing,
+      className,
       ...props
     },
     ref,
@@ -295,6 +296,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           aria-modal
           $position={position}
           $mobile={mobile}
+          className={`drawer ${className || ''}`}
           {...props}
         >
           <DrawerContext.Provider value={{ mobile, displayCloseIcon }}>{children}</DrawerContext.Provider>

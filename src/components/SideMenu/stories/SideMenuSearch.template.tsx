@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
 const Header = styled.header`
   position: sticky;
@@ -19,38 +18,21 @@ const Layout = styled.div`
 `;
 
 const Main = styled.main`
-  min-width: calc(100% - 300px);
-  min-height: 250px;
+  min-width: calc(100% - 240px);
+  min-height: 400px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
 
 const items: SideMenuProps['items'] = [
-  {
-    type: 'item',
-    id: '1',
-    label: 'Option1',
-    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-
-    typeLabel: 'header',
-  },
+  { type: 'item', id: '1', label: 'Option1' },
+  { type: 'item', id: '2', label: 'Option2' },
+  { type: 'item', id: '3', label: 'Option3' },
   { type: 'divider' },
-  { type: 'item', id: '2', label: 'Option2', badge: { children: '4' } },
-  {
-    type: 'item',
-    id: '3',
-    label: 'Option3',
-    icon: <EmailSolid />,
-  },
-  { type: 'divider', label: 'Menu group' },
   {
     type: 'group',
     id: '4',
     label: 'Option4',
-    icon: <EmailSolid />,
-    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-    badge: { children: '4' },
-    typeLabel: 'header',
     children: [
       { type: 'item', id: '4.1', label: 'Option4.1' },
       { type: 'item', id: '4.2', label: 'Option4.2' },
@@ -65,23 +47,9 @@ const items: SideMenuProps['items'] = [
       },
     ],
   },
-  {
-    type: 'item',
-    id: '5',
-    label: 'Option5',
-    icon: <EmailSolid />,
-  },
-  {
-    type: 'item',
-    id: '6',
-    label: 'Option6 more more more label',
-    icon: <EmailSolid />,
-    tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-    badge: { children: '4' },
-  },
 ];
 
-export const SideMenuItemStateTemplate = ({
+export const SideMenuSearchTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -92,18 +60,14 @@ export const SideMenuItemStateTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <T as="div" font="Body/Body 1 Long">
-        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции renderItem.
-      </T>
       <Header>
         <IconButton dimension="m" onClick={handleToggle}>
           <MenuOutline />
         </IconButton>
       </Header>
       <Layout>
-        <Sider isOpen={open} width={300}>
-          <SideMenu {...props} items={items} />
+        <Sider isOpen={open}>
+          <SideMenu {...props} items={items} search />
         </Sider>
         <Main />
       </Layout>

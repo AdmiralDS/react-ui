@@ -5,7 +5,8 @@ import type { RefCallback, RefObject } from '#src/components/common/utils/handle
 import { handleRef } from '#src/components/common/utils/handleRef';
 import { getScrollableParents } from '#src/components/common/utils/getScrollableParents';
 import { uid } from '#src/components/common/uid';
-import { keyboardKey } from '../common/keyboardKey';
+import { useMediaQuery } from '#src/components/common/hooks/useMediaQuery';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 import type { Dimension } from './style';
 import { AnchorWrapper, FakeTarget, Portal } from './style';
@@ -95,31 +96,15 @@ export const Hint: React.FC<HintProps> = ({
   const [recalculation, startRecalculation] = React.useState<Record<string, never> | null>(null);
   const [portalFlexDirection, setPortalFlexDirection] = React.useState('');
   const [portalFullWidth, setPortalFullWidth] = React.useState(false);
-  const [isMobile, setMobile] = React.useState(false);
+
+  /**
+   * Если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile
+   * (адаптируется по ширине к экрану и может располагаться только снизу или сверху от target-элемента)
+   **/
+  const isMobile = useMediaQuery('(max-width: 640px)');
 
   const showHint = () => onVisibilityChange?.(true);
   const hideHint = () => onVisibilityChange?.(false);
-
-  // если ширина экрана меньше 640 пикселей, хинт переходит в состояние mobile
-  // (адаптируется по ширине к экрану и может располагаться только снизу или сверху от target-элемента)
-  React.useLayoutEffect(() => {
-    if (window.innerWidth < 640) {
-      setMobile(true);
-    }
-
-    const listener = () => {
-      if (window.innerWidth < 640) {
-        setMobile(true);
-      } else {
-        setMobile(false);
-      }
-    };
-    addEventListener('resize', listener);
-
-    return () => {
-      removeEventListener('resize', listener);
-    };
-  }, []);
 
   React.useLayoutEffect(() => {
     const hint = hintElementRef.current;

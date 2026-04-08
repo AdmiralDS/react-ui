@@ -8,12 +8,14 @@ import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
 import { SideMenuAppearTemplate } from './SideMenuAppear.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
 import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
+import { SideMenuSearchTemplate } from './SideMenuSearch.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
 import SideMenuAppearTemplateRaw from './SideMenuAppear.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
 import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
+import SideMenuSearchTemplateRaw from './SideMenuSearch.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -144,6 +146,26 @@ export const SideMenuItemStatePanel = {
   },
 
   name: 'SideMenu. Состояния items',
+};
+
+//<editor-fold desc="Search">
+const SearchStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuSearchTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SearchExample = {
+  render: SearchStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuSearchTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Фильтрация',
 };
 
 //</editor-fold>
