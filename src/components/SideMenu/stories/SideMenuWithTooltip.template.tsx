@@ -7,20 +7,27 @@ import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/M
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
+const Section = styled.div`
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 40px;
+`;
+
 const Header = styled.header`
-  position: sticky;
-  top: 0;
   height: 40px;
   width: 100%;
   background-color: ${(p) => p.theme.color['Opacity/Neutral 8']};
 `;
+
 const Layout = styled.div`
   display: flex;
+  height: 250px;
 `;
 
 const Main = styled.main`
+  min-height: 100%;
   min-width: calc(100% - 300px);
-  min-height: 200px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
@@ -98,36 +105,39 @@ export const SideMenuWithTooltipTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <T as="div" style={{ marginBottom: '20px' }} font="Body/Body 1 Long">
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
         По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
         пункта. Опционально это можно отключить с помощью параметра showTooltip={'{false}'}
       </T>
-      <Header>
-        <IconButton dimension="m" onClick={handleToggle}>
-          <MenuOutline />
-        </IconButton>
-      </Header>
-      <Layout>
-        <Sider isOpen={open} width={300}>
-          <SideMenu {...props} items={items} />
-        </Sider>
-        <Main />
-      </Layout>
-
-      <T as="div" font="Body/Body 1 Long" style={{ marginTop: '40px', marginBottom: '20px' }}>
+      <Section>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open} width={300}>
+            <SideMenu {...props} items={items} />
+          </Sider>
+          <Main />
+        </Layout>
+      </Section>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
         При использовании миксина для кастомизации пунктов меню, кастом применяется для всех Tooltip.
       </T>
-      <Header>
-        <IconButton dimension="m" onClick={handleToggle2}>
-          <MenuOutline />
-        </IconButton>
-      </Header>
-      <Layout>
-        <Sider isOpen={open2} width={300}>
-          <SideMenu {...props} items={items} tooltipCssMixin={tooltipCssMixin} />
-        </Sider>
-        <Main />
-      </Layout>
+      <Section>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle2}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open2} width={300}>
+            <SideMenu {...props} items={items} tooltipCssMixin={tooltipCssMixin} />
+          </Sider>
+          <Main />
+        </Layout>
+      </Section>
     </ThemeProvider>
   );
 };

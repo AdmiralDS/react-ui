@@ -1,25 +1,31 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-
 import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
+
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
+const Wrapper = styled.div`
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
 const Header = styled.header`
-  position: sticky;
-  top: 0;
   height: 40px;
   width: 100%;
   background-color: ${(p) => p.theme.color['Opacity/Neutral 8']};
 `;
+
 const Layout = styled.div`
   display: flex;
+  height: 300px;
 `;
 
 const Main = styled.main`
+  min-height: 100%;
   min-width: calc(100% - 240px);
-  min-height: 400px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
@@ -60,17 +66,19 @@ export const SideMenuPlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Header>
-        <IconButton dimension="m" onClick={handleToggle}>
-          <MenuOutline />
-        </IconButton>
-      </Header>
-      <Layout>
-        <Sider isOpen={open}>
-          <SideMenu {...props} items={items} />
-        </Sider>
-        <Main />
-      </Layout>
+      <Wrapper>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open}>
+            <SideMenu {...props} items={items} />
+          </Sider>
+          <Main />
+        </Layout>
+      </Wrapper>
     </ThemeProvider>
   );
 };
