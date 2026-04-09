@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-
-import { IconButton, SideMenu, Drawer, Sider } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Drawer, Sider, useMediaQuery } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
-import { useMediaQuery } from '#src/components/common/hooks/useMediaQuery';
+
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+
+const Wrapper = styled.div`
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-radius: 4px;
+  overflow: hidden;
+`;
 
 const Header = styled.header`
-  position: sticky;
-  top: 0;
   height: 40px;
   width: 100%;
   background-color: ${(p) => p.theme.color['Opacity/Neutral 8']};
 `;
+
 const Layout = styled.div`
   display: flex;
+  /** Добавляю transform и overflow для того, чтобы Drawer 
+  позиционировался относительно Layout и не был виден за его пределами */
+  transform: translate3d(0, 0, 0);
+  overflow: hidden;
 `;
 
 const Main = styled.main`
@@ -51,44 +59,53 @@ const items: SideMenuProps['items'] = [
   },
 ];
 
-export const SideMenuAppearTemplate = ({
+export const SideMenuDrawerTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const isMobile = useMediaQuery('(max-width: 700px)');
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [openSider, setOpenSider] = useState(!isMobile);
+  const layoutRef = useRef<HTMLDivElement>(null);
 
+  const [openSider, setOpenSider] = useState(!isMobile);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  /** Использую controlled state, чтобы синхронизировать меню в Sider и в Drawer */
   const [selectedItem, setSelectedItem] = useState<string | undefined>(undefined);
   const [openMenus, setOpenMenus] = useState<Array<string>>([]);
 
   const handleToggle = () => {
-    isMobile ? setOpenDrawer(!openDrawer) : setOpenSider(!openSider);
+    setOpenSider((open) => !open);
+    setOpenDrawer((open) => !open);
   };
 
   useEffect(() => {
-    console.log(isMobile);
-    if (isMobile) setOpenSider(false);
-    if (!isMobile) setOpenSider(true);
+    if (isMobile) {
+      setOpenSider(false);
+    }
+    if (!isMobile) {
+      setOpenSider(true);
+      setOpenDrawer(false);
+    }
   }, [isMobile]);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <Header>
-        <IconButton dimension="m" onClick={handleToggle}>
-          <MenuOutline />
-        </IconButton>
-      </Header>
-      <Layout>
-        {isMobile && (
+      <Wrapper>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout ref={layoutRef}>
           <Drawer
-            isOpen={openDrawer}
+            isOpen={openDrawer && isMobile}
             onClose={() => setOpenDrawer(false)}
             position="left"
             displayCloseIcon={false}
             closeOnBackdropClick
             closeOnEscapeKeyDown
+            container={layoutRef?.current as HTMLElement}
           >
             <SideMenu
               {...props}
@@ -99,20 +116,19 @@ export const SideMenuAppearTemplate = ({
               onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
             />
           </Drawer>
-        )}
-        <Sider isOpen={openSider} width={200}>
-          <SideMenu
-            {...props}
-            items={items}
-            selectedItem={selectedItem}
-            onSelectItem={(id: string) => setSelectedItem(id)}
-            openMenus={openMenus}
-            onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
-          />
-        </Sider>
-
-        <Main />
-      </Layout>
+          <Sider isOpen={openSider && !isMobile} width={200}>
+            <SideMenu
+              {...props}
+              items={items}
+              selectedItem={selectedItem}
+              onSelectItem={(id: string) => setSelectedItem(id)}
+              openMenus={openMenus}
+              onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
+            />
+          </Sider>
+          <Main />
+        </Layout>
+      </Wrapper>
     </ThemeProvider>
   );
 };

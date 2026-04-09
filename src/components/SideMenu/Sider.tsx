@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import type { css } from 'styled-components';
 
 const transitionTimingFunc = 'cubic-bezier(0, 0, 0.2, 1)';
 const transitionDuration = '0.3s';
@@ -6,7 +7,26 @@ const transitionMixin = `
   ${transitionDuration} ${transitionTimingFunc} 0ms
 `;
 
-const Aside = styled.aside<{ $width: number | string }>`
+const ChildrenWrapper = styled.div<{ $width: number | string }>`
+  display: flex;
+  height: 100%;
+  width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
+  overflow: hidden;
+  box-sizing: border-box;
+
+  transform: translateX(-100%);
+  opacity: 0;
+  transition:
+    opacity ${transitionMixin},
+    transform ${transitionMixin};
+`;
+
+const Aside = styled.aside<{
+  $width: number | string;
+  $appearance: SiderAppearance;
+  $border: boolean;
+  $cssMixin?: ReturnType<typeof css>;
+}>`
   position: relative;
   width: 0;
   min-width: 0;
@@ -17,43 +37,28 @@ const Aside = styled.aside<{ $width: number | string }>`
     min-width ${transitionMixin},
     max-width ${transitionMixin},
     flex-basis ${transitionMixin};
+  box-sizing: border-box;
   overflow: hidden;
+
+  background-color: ${(p) =>
+    p.$appearance === 'primary'
+      ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`
+      : `var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']})`};
+  ${({ theme, $border }) =>
+    $border &&
+    `box-shadow: inset -1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
+  ${(p) => p.$cssMixin};
 
   &[data-visible] {
     width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
     min-width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
     max-width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
     flex: 0 0 ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
-    > div {
+    ${ChildrenWrapper} {
       transform: translateX(0%);
       opacity: 1;
     }
   }
-`;
-
-const ChildrenWrapper = styled.div<{ $width: number | string; $border: boolean; $appearance: SiderAppearance }>`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  ${({ theme, $border }) =>
-    $border && `border-right: 1px solid var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
-
-  ${({ theme, $appearance }) =>
-    $appearance === 'secondary' &&
-    `background-color: var(--admiral-color-Neutral_Neutral05, ${theme.color['Neutral/Neutral 05']})`};
-
-  transform: translateX(-100%);
-  opacity: 0;
-  transition:
-    opacity ${transitionMixin},
-    transform ${transitionMixin};
 `;
 
 export type SiderAppearance = 'primary' | 'secondary';
@@ -63,25 +68,33 @@ export interface SiderProps extends React.HTMLAttributes<HTMLElement> {
   isOpen?: boolean;
   /** Ширина, дискретное значение для корректной анимации */
   width?: number | string;
-  /** Состояние видимости border-right */
-  visibleBorder?: boolean;
+  /** Отображение border по правой стороне компонента */
+  withBorder?: boolean;
   /** Внешний вид компонента */
   appearance?: SiderAppearance;
+  /** Позволяет добавлять  миксин созданный с помощью styled css  */
+  cssMixin?: ReturnType<typeof css>;
 }
 
 export const Sider = ({
   children,
   isOpen = false,
   width = 240,
-  visibleBorder = true,
+  withBorder = false,
   appearance = 'primary',
+  cssMixin,
   ...props
 }: SiderProps) => {
   return (
-    <Aside $width={width} data-visible={isOpen ? '' : undefined} {...props}>
-      <ChildrenWrapper $width={width} $border={visibleBorder} $appearance={appearance}>
-        {children}
-      </ChildrenWrapper>
+    <Aside
+      data-visible={isOpen ? '' : undefined}
+      $width={width}
+      $appearance={appearance}
+      $border={withBorder}
+      $cssMixin={cssMixin}
+      {...props}
+    >
+      <ChildrenWrapper $width={width}>{children}</ChildrenWrapper>
     </Aside>
   );
 };

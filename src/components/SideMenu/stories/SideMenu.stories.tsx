@@ -5,14 +5,16 @@ import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, SideMenu } from '@admiral-ds/react-ui';
 
 import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
-import { SideMenuAppearTemplate } from './SideMenuAppear.template';
+import { SideMenuSiderTemplate } from './SideMenuSider.template';
+import { SideMenuDrawerTemplate } from './SideMenuDrawer.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
 import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 import { SideMenuSearchTemplate } from './SideMenuSearch.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
-import SideMenuAppearTemplateRaw from './SideMenuAppear.template?raw';
+import SideMenuSiderTemplateRaw from './SideMenuSider.template?raw';
+import SideMenuDrawerTemplateRaw from './SideMenuDrawer.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
 import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
 import SideMenuSearchTemplateRaw from './SideMenuSearch.template?raw';
@@ -84,24 +86,46 @@ export const PlaygroundExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="Appear">
-const AppearStory: StoryFn<typeof SideMenu> = (props) => {
+//<editor-fold desc="SideMenu and Sider">
+const SiderStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <SideMenuAppearTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <SideMenuSiderTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const AppearExample = {
-  render: AppearStory,
+export const SiderExample = {
+  render: SiderStory,
 
   parameters: {
     docs: {
       source: {
-        code: SideMenuAppearTemplateRaw,
+        code: SideMenuSiderTemplateRaw,
       },
     },
   },
 
-  name: 'SideMenu. Сценарии появления',
+  name: 'SideMenu. Использование вместе с Sider',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu and Drawer">
+const DrawerStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuDrawerTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const DrawerExample = {
+  render: DrawerStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuDrawerTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Использование вместе с Sider и Drawer',
 };
 
 //</editor-fold>
