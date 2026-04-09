@@ -176,7 +176,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
     }, []);
 
     return (
-      <SideMenuWrapper ref={ref} {...props}>
+      <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
         {search && (
           <TopPanelContent $dimension={dimension}>
             <TextInput

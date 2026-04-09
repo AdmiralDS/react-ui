@@ -136,12 +136,23 @@ export const StyledDrawer = styled(Drawer)<{
   padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
 `;
 
-export const SideMenuWrapper = styled.div`
+export const SideMenuWrapper = styled.div<{
+  $dimension: SideMenuDimension;
+  $gap: number;
+}>`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  gap: ${(p) => p.$gap + 'px'};
   overflow: hidden;
   width: 100%;
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
+  box-sizing: border-box;
+
+  /** Если SideMenu внутри Drawer, то обнуляем паддинги у Drawer */
+  .drawer[role='dialog']:has(&) {
+    padding: 0;
+  }
 `;
 
 export const StyledScrollContainer = styled(ScrollContainer)<{
@@ -151,6 +162,11 @@ export const StyledScrollContainer = styled(ScrollContainer)<{
 }>`
   flex-grow: 1;
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+  & > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: ${(p) => p.$gap + 'px'};
+  }
 `;
 
 export const TopPanelContent = styled.div<{

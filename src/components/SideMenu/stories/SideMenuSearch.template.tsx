@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu, Drawer, Sider } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
-import { useMediaQuery } from '#src/components/common/hooks/useMediaQuery';
 
 const Header = styled.header`
   position: sticky;
@@ -20,15 +18,15 @@ const Layout = styled.div`
 `;
 
 const Main = styled.main`
-  min-width: calc(100% - 200px);
-  min-height: 200px;
+  min-width: calc(100% - 240px);
+  min-height: 400px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
 
 const items: SideMenuProps['items'] = [
   { type: 'item', id: '1', label: 'Option1' },
-  { type: 'item', id: '2', label: 'Option2', icon: <EmailSolid /> },
+  { type: 'item', id: '2', label: 'Option2' },
   { type: 'item', id: '3', label: 'Option3' },
   { type: 'divider' },
   {
@@ -51,23 +49,14 @@ const items: SideMenuProps['items'] = [
   },
 ];
 
-export const SideMenuAppearTemplate = ({
+export const SideMenuSearchTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const isMobile = useMediaQuery('(max-width: 700px)');
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [openSider, setOpenSider] = useState(true);
+  const [open, setOpen] = useState(false);
 
-  const handleToggle = () => {
-    isMobile ? setOpenDrawer(!openDrawer) : setOpenSider(!openSider);
-  };
-
-  useEffect(() => {
-    if (isMobile) setOpenSider(false);
-    if (!isMobile) setOpenSider(true);
-  }, [isMobile]);
+  const handleToggle = () => setOpen(!open);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -77,22 +66,9 @@ export const SideMenuAppearTemplate = ({
         </IconButton>
       </Header>
       <Layout>
-        {isMobile && (
-          <Drawer
-            isOpen={openDrawer}
-            onClose={() => setOpenDrawer(false)}
-            position="left"
-            displayCloseIcon={false}
-            closeOnBackdropClick
-            closeOnEscapeKeyDown
-          >
-            <SideMenu {...props} items={items} />
-          </Drawer>
-        )}
-        <Sider isOpen={openSider} width={200}>
-          <SideMenu {...props} items={items} />
+        <Sider isOpen={open}>
+          <SideMenu {...props} items={items} search />
         </Sider>
-
         <Main />
       </Layout>
     </ThemeProvider>

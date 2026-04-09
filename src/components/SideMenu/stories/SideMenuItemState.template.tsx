@@ -20,7 +20,7 @@ const Layout = styled.div`
 
 const Main = styled.main`
   min-width: calc(100% - 300px);
-  min-height: 200px;
+  min-height: 250px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
