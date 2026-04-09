@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { SideMenuDimension } from './types';
+import type { css } from 'styled-components';
 
 /**
  * Путь keys групп от корня до текущего уровня.
@@ -34,6 +35,12 @@ export interface SideMenuContextValue {
   hasIcons: boolean;
   searchQuery: string;
   searchFormat: SearchFormat;
+  /** Позволяет добавлять миксин для тултипа, созданный с помощью styled css  */
+  tooltipCssMixin?: ReturnType<typeof css>;
+  /** Позволяет пунктам меню при переполнении переходить на следующую строку,
+   * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
+  multiline?: boolean;
+  showTooltip?: boolean;
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 

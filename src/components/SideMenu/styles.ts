@@ -9,7 +9,6 @@ const INDENT = 20;
 
 export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
-  align-items: center;
   gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
   flex: 1 1 auto;
   min-width: 0;
@@ -33,16 +32,14 @@ export const ItemButton = styled.button<{
   $dimension: SideMenuDimension;
   $indentLevel: number;
   $header?: boolean;
+  $hasIcons?: boolean;
 }>`
   width: 100%;
   display: flex;
-  align-items: center;
-  gap: 8px;
   border: 0;
   background-color: transparent;
   color: inherit;
   cursor: pointer;
-  text-align: left;
   border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
 
   &:hover {
@@ -59,23 +56,29 @@ export const ItemButton = styled.button<{
     background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
   }
 
-  padding: ${({ $dimension, $indentLevel }) =>
-    $dimension === 'l'
-      ? `12px 16px 12px ${16 + $indentLevel * INDENT}px`
-      : `10px 12px 10px ${12 + $indentLevel * INDENT}px`};
+  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
+    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
+
+    return $dimension === 'l'
+      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
+  }};
 
   ${({ $selected }) => $selected && selectedItemMixin};
 `;
 
-export const GroupButton = styled.button<{ $indentLevel: number; $dimension: SideMenuDimension; $selected?: boolean }>`
+export const GroupButton = styled.button<{
+  $indentLevel: number;
+  $dimension: SideMenuDimension;
+  $selected?: boolean;
+  $hasIcons?: boolean;
+}>`
   width: 100%;
   display: flex;
-  align-items: center;
   border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  text-align: left;
   border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
 
   &:hover {
@@ -92,23 +95,28 @@ export const GroupButton = styled.button<{ $indentLevel: number; $dimension: Sid
 
   ${({ $selected }) => $selected && selectedItemMixin};
 
-  padding: ${({ $dimension, $indentLevel }) =>
-    $dimension === 'l'
-      ? `12px 16px 12px ${16 + $indentLevel * INDENT}px`
-      : `10px 12px 10px ${12 + $indentLevel * INDENT}px`};
+  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
+    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
+
+    return $dimension === 'l'
+      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
+  }};
 `;
 
-export const RightCluster = styled.span`
+export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
   align-items: center;
   gap: 8px;
   flex: 0 0 auto;
+  ${({ $dimension }) => ($dimension === 'l' ? 'height: 24px' : 'height: 20px')};
+  margin-left: 8px;
 `;
 
-export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean }>`
-  white-space: nowrap;
+export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
   overflow: hidden;
-  text-overflow: ellipsis;
+
+  ${({ $multiline }) => ($multiline ? 'overflow-wrap: normal;' : 'white-space: nowrap; text-overflow: ellipsis;')};
 
   ${({ $dimension, $header }) =>
     $dimension === 'l'
@@ -197,4 +205,8 @@ export const WrapperDivider = styled.div<{ $dimension: SideMenuDimension; $simpl
       : $simple
         ? '6px 12px 5px 12px'
         : '6px 12px 3px 12px'};
+`;
+
+export const WrapperLabelTooltip = styled.div<{ $tooltipCssMixin?: ReturnType<typeof css> }>`
+  ${(p) => p.$tooltipCssMixin};
 `;

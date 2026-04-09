@@ -10,6 +10,8 @@ import { SideMenuDrawerTemplate } from './SideMenuDrawer.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
 import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 import { SideMenuSearchTemplate } from './SideMenuSearch.template';
+import { SideMenuWithTooltipTemplate } from './SideMenuWithTooltip.template';
+import { SideMenuWithMultilineTemplate } from './SideMenuWithMultiline.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
@@ -18,6 +20,8 @@ import SideMenuDrawerTemplateRaw from './SideMenuDrawer.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
 import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
 import SideMenuSearchTemplateRaw from './SideMenuSearch.template?raw';
+import SideMenuWithTooltipTemplateRaw from './SideMenuWithTooltip.template?raw';
+import SideMenuWithMultilineTemplateRaw from './SideMenuWithMultiline.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -190,6 +194,50 @@ export const SearchExample = {
   },
 
   name: 'SideMenu. Фильтрация',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu. с Tooltip">
+const SideMenuWithTooltipStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuWithTooltipTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuWithTooltipPanel = {
+  render: SideMenuWithTooltipStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuWithTooltipTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. С Tooltip',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu. с многострочностью">
+const SideMenuWithMultilineStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuWithMultilineTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuWithMultilinePanel = {
+  render: SideMenuWithMultilineStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuWithMultilineTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. С многострочностью',
 };
 
 //</editor-fold>

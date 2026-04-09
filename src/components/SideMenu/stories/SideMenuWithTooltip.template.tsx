@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
+import styled, { css, ThemeProvider } from 'styled-components';
+
+import { IconButton, SideMenu, Sider, T, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-
-const Wrapper = styled.div`
+const Section = styled.div`
   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
   border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 40px;
 `;
 
 const Header = styled.header`
@@ -21,7 +22,7 @@ const Header = styled.header`
 
 const Layout = styled.div`
   display: flex;
-  height: 300px;
+  height: 250px;
 `;
 
 const Main = styled.main`
@@ -31,13 +32,17 @@ const Main = styled.main`
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
 
+const tooltipCssMixin = css`
+  ${typography['Body/Body 1 Long']}
+  color: var(--admiral-color-Success_Success40, ${(p) => p.theme.color['Success/Success 40']});
+`;
+
 const items: SideMenuProps['items'] = [
   {
     type: 'item',
     id: '1',
     label: 'Option1',
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-
     typeLabel: 'header',
   },
   { type: 'divider' },
@@ -52,7 +57,7 @@ const items: SideMenuProps['items'] = [
   {
     type: 'group',
     id: '4',
-    label: 'Option4',
+    label: 'Option4 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
@@ -80,29 +85,31 @@ const items: SideMenuProps['items'] = [
   {
     type: 'item',
     id: '6',
-    label: 'Option6',
+    label: 'Option6 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
   },
 ];
 
-export const SideMenuItemStateTemplate = ({
+export const SideMenuWithTooltipTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   const handleToggle = () => setOpen(!open);
+  const handleToggle2 = () => setOpen2(!open2);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции renderItem.
+        По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
+        пункта. Опционально это можно отключить с помощью параметра showTooltip={'{false}'}
       </T>
-      <Wrapper>
+      <Section>
         <Header>
           <IconButton dimension="m" onClick={handleToggle}>
             <MenuOutline />
@@ -114,7 +121,23 @@ export const SideMenuItemStateTemplate = ({
           </Sider>
           <Main />
         </Layout>
-      </Wrapper>
+      </Section>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        При использовании миксина для кастомизации пунктов меню, кастом применяется для всех Tooltip.
+      </T>
+      <Section>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle2}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open2} width={300}>
+            <SideMenu {...props} items={items} tooltipCssMixin={tooltipCssMixin} />
+          </Sider>
+          <Main />
+        </Layout>
+      </Section>
     </ThemeProvider>
   );
 };

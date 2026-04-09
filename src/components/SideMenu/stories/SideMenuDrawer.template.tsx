@@ -21,6 +21,7 @@ const Header = styled.header`
 
 const Layout = styled.div`
   display: flex;
+  height: 300px;
   /** Добавляю transform и overflow для того, чтобы Drawer 
   позиционировался относительно Layout и не был виден за его пределами */
   transform: translate3d(0, 0, 0);
@@ -28,8 +29,8 @@ const Layout = styled.div`
 `;
 
 const Main = styled.main`
+  min-height: 100%;
   min-width: calc(100% - 200px);
-  min-height: 250px;
   flex: 1 1 auto;
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, Fragment, forwardRef } from 'react';
+import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
 
 import { TextInput, defaultFilterItem } from '#src/components/input';
 import { InputIconButton } from '#src/components/InputIconButton';
@@ -45,6 +45,9 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       renderBottomPanel,
       renderTopPanel,
       gap = 4,
+      tooltipCssMixin,
+      multiline = false,
+      showTooltip = true,
       ...props
     },
     ref,
@@ -131,6 +134,9 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         dimension,
         hasIcons,
         onOpenGroups: handleOpenGroups,
+        tooltipCssMixin,
+        multiline,
+        showTooltip,
       }),
       [
         selectedState.state,
@@ -141,6 +147,11 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         handleSelectItem,
         handleToggleGroup,
         handleOpenGroups,
+        tooltipCssMixin,
+        dimension,
+        hasIcons,
+        multiline,
+        showTooltip,
       ],
     );
 
@@ -155,6 +166,14 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
       return <SideMenuItem {...node} />;
     };
+
+    useEffect(() => {
+      if (!selectedState.state) return;
+
+      const element = document.getElementById(selectedState.state);
+
+      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+    }, []);
 
     return (
       <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
