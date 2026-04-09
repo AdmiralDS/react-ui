@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Tag } from '../Tag';
 import type { Badge } from '../Badge';
+import type { css } from 'styled-components';
 
 export type SideMenuDimension = 'm' | 'l';
 export type SearchFormat = 'word' | 'wholly';
@@ -100,4 +101,11 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   renderTopPanel?: () => React.ReactNode;
   /** Рассотояние между пунктами контента */
   gap?: number;
+  /** Позволяет отключить/включить отображение Tooltip при переполнении текста, по умолчанию true  */
+  showTooltip?: boolean;
+  /** Позволяет добавлять миксин для тултипа, созданный с помощью styled css  */
+  tooltipCssMixin?: ReturnType<typeof css>;
+  /** Позволяет пунктам меню при переполнении переходить на следующую строку,
+   * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
+  multiline?: boolean;
 }

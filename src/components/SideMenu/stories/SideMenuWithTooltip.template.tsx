@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider, T, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -25,13 +25,17 @@ const Main = styled.main`
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
 
+const tooltipCssMixin = css`
+  ${typography['Body/Body 1 Long']}
+  color: var(--admiral-color-Success_Success40, ${(p) => p.theme.color['Success/Success 40']});
+`;
+
 const items: SideMenuProps['items'] = [
   {
     type: 'item',
     id: '1',
     label: 'Option1',
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-
     typeLabel: 'header',
   },
   { type: 'divider' },
@@ -46,7 +50,7 @@ const items: SideMenuProps['items'] = [
   {
     type: 'group',
     id: '4',
-    label: 'Option4',
+    label: 'Option4 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
@@ -74,27 +78,29 @@ const items: SideMenuProps['items'] = [
   {
     type: 'item',
     id: '6',
-    label: 'Option6',
+    label: 'Option6 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
   },
 ];
 
-export const SideMenuItemStateTemplate = ({
+export const SideMenuWithTooltipTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   const handleToggle = () => setOpen(!open);
+  const handleToggle2 = () => setOpen2(!open2);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <T as="div" font="Body/Body 1 Long">
-        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции renderItem.
+      <T as="div" style={{ marginBottom: '20px' }} font="Body/Body 1 Long">
+        По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
+        пункта. Опционально это можно отключить с помощью параметра showTooltip={'{false}'}
       </T>
       <Header>
         <IconButton dimension="m" onClick={handleToggle}>
@@ -104,6 +110,21 @@ export const SideMenuItemStateTemplate = ({
       <Layout>
         <Sider isOpen={open} width={300}>
           <SideMenu {...props} items={items} />
+        </Sider>
+        <Main />
+      </Layout>
+
+      <T as="div" font="Body/Body 1 Long" style={{ marginTop: '40px', marginBottom: '20px' }}>
+        При использовании миксина для кастомизации пунктов меню, кастом применяется для всех Tooltip.
+      </T>
+      <Header>
+        <IconButton dimension="m" onClick={handleToggle2}>
+          <MenuOutline />
+        </IconButton>
+      </Header>
+      <Layout>
+        <Sider isOpen={open2} width={300}>
+          <SideMenu {...props} items={items} tooltipCssMixin={tooltipCssMixin} />
         </Sider>
         <Main />
       </Layout>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider, T, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -31,7 +31,6 @@ const items: SideMenuProps['items'] = [
     id: '1',
     label: 'Option1',
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
-
     typeLabel: 'header',
   },
   { type: 'divider' },
@@ -46,7 +45,7 @@ const items: SideMenuProps['items'] = [
   {
     type: 'group',
     id: '4',
-    label: 'Option4',
+    label: 'Option4 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
@@ -74,14 +73,14 @@ const items: SideMenuProps['items'] = [
   {
     type: 'item',
     id: '6',
-    label: 'Option6',
+    label: 'Option6 more more more label',
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
   },
 ];
 
-export const SideMenuItemStateTemplate = ({
+export const SideMenuWithMultilineTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -92,9 +91,10 @@ export const SideMenuItemStateTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <T as="div" font="Body/Body 1 Long">
-        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции renderItem.
+      <T as="div" style={{ marginBottom: '20px' }} font="Body/Body 1 Long">
+        По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
+        пункта.
+        <br />С помощью опции multiline при переполнении пункта label будет переноситься на новую строку.
       </T>
       <Header>
         <IconButton dimension="m" onClick={handleToggle}>
@@ -103,7 +103,7 @@ export const SideMenuItemStateTemplate = ({
       </Header>
       <Layout>
         <Sider isOpen={open} width={300}>
-          <SideMenu {...props} items={items} />
+          <SideMenu {...props} items={items} multiline />
         </Sider>
         <Main />
       </Layout>
