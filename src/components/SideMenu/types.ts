@@ -17,6 +17,7 @@ type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 export type SideMenuNode = SideMenuItemNode | SideMenuGroupNode | SideMenuDividerNode;
 
 export interface SideMenuItemRenderProps {
+  type: 'item' | 'group';
   /** Уникальный идентификатор пункта меню  */
   id: string;
   /** Текстовая подпись пункта */
@@ -32,6 +33,7 @@ export interface SideMenuItemRenderProps {
   dimension?: SideMenuDimension;
   /** Формат label, по умолчанию line */
   labelType?: LabelType;
+  onClick: () => void;
 }
 
 export interface SideMenuItemNode {
@@ -44,7 +46,7 @@ export interface SideMenuItemNode {
   badge?: SideMenuBadge;
   tag?: SideMenuTag;
   /** Колбэк кастомизации рендера контента пункта */
-  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
   /** Формат label, по умолчанию line */
   labelType?: LabelType;
 }
@@ -63,7 +65,7 @@ export interface SideMenuGroupNode {
   /** Формат label, по умолчанию line */
   labelType?: LabelType;
   /** Колбэк кастомизации рендера контента пункта */
-  renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
+  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
 
 export interface SideMenuDividerNode {
@@ -102,7 +104,7 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Рассотояние между пунктами контента */
   gap?: number;
   /** Позволяет отключить/включить отображение Tooltip при переполнении текста, по умолчанию true  */
-  showTooltip?: boolean;
+  visibleTooltip?: boolean;
   /** Позволяет добавлять миксин для тултипа, созданный с помощью styled css  */
   tooltipCssMixin?: ReturnType<typeof css>;
   /** Позволяет пунктам меню при переполнении переходить на следующую строку,

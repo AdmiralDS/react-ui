@@ -107,7 +107,7 @@ export const SideMenuWithTooltipTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
         По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
-        пункта. Опционально это можно отключить с помощью параметра showTooltip={'{false}'}
+        пункта. Опционально это можно отключить с помощью параметра visibleTooltip={'{false}'}
       </T>
       <Section>
         <Header>

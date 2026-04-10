@@ -100,7 +100,7 @@ export const SideMenuItemStateTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
         Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции renderItem.
+        помощью функции render.
       </T>
       <Wrapper>
         <Header>

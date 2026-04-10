@@ -40,7 +40,7 @@ export interface SideMenuContextValue {
   /** Позволяет пунктам меню при переполнении переходить на следующую строку,
    * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
   multiline?: boolean;
-  showTooltip?: boolean;
+  visibleTooltip?: boolean;
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 

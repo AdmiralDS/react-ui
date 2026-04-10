@@ -28,7 +28,9 @@ function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
 }
 
 export * from './Sider';
-export type { SideMenuProps } from './types';
+export * from './MenuItem';
+export * from './MenuGroup';
+export * from './types';
 export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   (
     {
@@ -48,7 +50,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       gap = 4,
       tooltipCssMixin,
       multiline = false,
-      showTooltip = true,
+      visibleTooltip = true,
       ...props
     },
     ref,
@@ -150,7 +152,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         onOpenGroups: handleOpenGroups,
         tooltipCssMixin,
         multiline,
-        showTooltip,
+        visibleTooltip,
       }),
       [
         selectedState.state,
@@ -165,7 +167,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         dimension,
         hasIcons,
         multiline,
-        showTooltip,
+        visibleTooltip,
       ],
     );
 
@@ -178,7 +180,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         return <SideMenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} />;
+      return <SideMenuItem {...node} type="item" />;
     };
 
     return (
