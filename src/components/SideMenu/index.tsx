@@ -184,7 +184,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
     return (
       <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
         {search && (
-          <TopPanelContent>
+          <TopPanelContent $dimension={dimension}>
             <TextInput
               value={searchQuery}
               onChange={handleInputChange}
@@ -199,9 +199,9 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
-            {isRenderTopPanel && <TopPanelContent>{renderTopPanel()}</TopPanelContent>}
+            {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
             <ScrollWrapper>
-              <ScrollableContent ref={(node) => setScrollableNode(node)} $gap={gap}>
+              <ScrollableContent ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
                 {(filterActive ? filteredItems : items).map((node, index) => (
                   <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
                 ))}
@@ -209,7 +209,9 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
               <Scrollbars contentNode={scrollableNode} />
             </ScrollWrapper>
 
-            {isRenderBottomPanel && <BottomPanelContent>{renderBottomPanel()}</BottomPanelContent>}
+            {isRenderBottomPanel && (
+              <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>
+            )}
           </PathContext.Provider>
         </SideMenuContext.Provider>
       </SideMenuWrapper>

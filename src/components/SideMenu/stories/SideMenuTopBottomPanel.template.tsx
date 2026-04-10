@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { IconButton, SideMenu, Sider, typography } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider, MenuActionsPanel, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 
@@ -30,20 +30,11 @@ const Main = styled.main`
   background-color: ${(p) => p.theme.color['Success/Success 10']};
 `;
 
-// TODO: подумать над использованием MenuActionsPanel или созданием подобного компонента
-const PanelContainer = styled.div<{ $dimension: SideMenuProps['dimension'] }>`
-  ${({ $dimension }) =>
-    $dimension === 'l'
-      ? `padding: 12px 16px; height: 48px; ${typography['Body/Body 1 Long']}`
-      : `padding: 10px 12px; height: 40px; ${typography['Body/Body 2 Long']}`};
-
-  box-sizing: border-box;
-`;
-
-const Content = styled.div`
-  width: 100px;
-  height: 100%;
-  background-color: #c3f4d3;
+const Content = styled.div<{ $dimension: SideMenuProps['dimension'] }>`
+  width: 100%;
+  height: ${(p) => (p.$dimension === 'l' ? 24 : 20)}px;
+  ${(p) => (p.$dimension === 'l' ? typography['Body/Body 1 Long'] : typography['Body/Body 2 Long'])}
+  background-color: ${(p) => p.theme.color['Success/Success 20']};
 `;
 
 export const SideMenuTopBottomPanelTemplate = ({
@@ -99,9 +90,9 @@ export const SideMenuTopBottomPanelTemplate = ({
   ];
 
   const renderPanelContent = () => (
-    <PanelContainer $dimension={props.dimension}>
-      <Content />
-    </PanelContainer>
+    <MenuActionsPanel dimension={props.dimension == 'l' ? 'm' : 's'}>
+      <Content $dimension={props.dimension} />
+    </MenuActionsPanel>
   );
 
   return (

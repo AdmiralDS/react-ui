@@ -149,7 +149,7 @@ export const SideMenuWrapper = styled.div<{
   overflow: hidden;
   width: 100%;
   height: 100%;
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
   box-sizing: border-box;
 
   /** Если SideMenu внутри Drawer, то обнуляем паддинги у Drawer */
@@ -161,27 +161,30 @@ export const SideMenuWrapper = styled.div<{
 export const ScrollWrapper = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
 `;
 
-export const ScrollableContent = styled.div<{
-  //todo определить отступ
-  $gap: number;
-}>`
+export const ScrollableContent = styled.div<{ $gap: number; $dimension: SideMenuDimension }>`
   ${hideNativeScrollbarsCss}
 
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  & > div:first-child {
-    display: flex;
-    flex-direction: column;
-    gap: ${(p) => p.$gap + 'px'};
-  }
+  gap: ${(p) => p.$gap + 'px'};
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;
 
-export const TopPanelContent = styled.div``;
+export const TopPanelContent = styled.div<{
+  $dimension: SideMenuDimension;
+}>`
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : ' 0 12px')};
+`;
 
-export const BottomPanelContent = styled.div``;
+export const BottomPanelContent = styled.div<{
+  $dimension: SideMenuDimension;
+}>`
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+`;
 
 export const WrapperIcon = styled.span<{ $dimension: SideMenuDimension }>`
   ${({ $dimension }) => ($dimension === 'l' ? 'width: 24px; height: 24px' : 'width: 20px; height: 20px')};
