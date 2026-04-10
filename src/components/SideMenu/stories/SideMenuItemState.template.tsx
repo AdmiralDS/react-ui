@@ -38,7 +38,7 @@ const items: SideMenuProps['items'] = [
     label: 'Option1',
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
 
-    typeLabel: 'header',
+    labelType: 'header',
   },
   { type: 'divider' },
   { type: 'item', id: '2', label: 'Option2', badge: { children: '4' } },
@@ -56,7 +56,7 @@ const items: SideMenuProps['items'] = [
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
-    typeLabel: 'header',
+    labelType: 'header',
     children: [
       { type: 'item', id: '4.1', label: 'Option4.1' },
       { type: 'item', id: '4.2', label: 'Option4.2' },

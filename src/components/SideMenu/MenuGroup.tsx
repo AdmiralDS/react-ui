@@ -22,7 +22,7 @@ import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 import { checkTooltipVisible } from './utils/checkTooltipVisible';
 import { Tooltip } from '../Tooltip';
 
-export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon, typeLabel }: SideMenuGroupNode) => {
+export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon, labelType }: SideMenuGroupNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
 
@@ -68,7 +68,7 @@ export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon, type
           <LabelText
             ref={textRef}
             $dimension={ctx.dimension}
-            $header={typeLabel === 'header' && level < 1}
+            $header={labelType === 'header' && level < 1}
             $multiline={ctx.multiline}
           >
             {ctx.filterActive ? (

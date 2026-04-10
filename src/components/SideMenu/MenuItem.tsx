@@ -18,7 +18,7 @@ function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   return elementsNotInFirst;
 }
 
-export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typeLabel }: SideMenuItemNode) => {
+export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, labelType }: SideMenuItemNode) => {
   const ctx = useSideMenuContext();
   const ancestorGroupIds = useKeyPath();
 
@@ -53,7 +53,7 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typ
       badge,
       tag,
       dimension: ctx.dimension,
-      typeLabel,
+      labelType,
     })
   ) : (
     <>
@@ -62,7 +62,7 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typ
         <LabelText
           ref={textRef}
           $dimension={ctx.dimension}
-          $header={typeLabel === 'header' && level < 1}
+          $header={labelType === 'header' && level < 1}
           $multiline={ctx.multiline}
         >
           {ctx.filterActive ? (
@@ -91,7 +91,7 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typ
         onClick={handleClick}
         $dimension={ctx.dimension}
         $indentLevel={level}
-        $header={typeLabel === 'header' && level < 1}
+        $header={labelType === 'header' && level < 1}
         $hasIcons={ctx.hasIcons}
       >
         {content}

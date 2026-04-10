@@ -5,7 +5,7 @@ import type { css } from 'styled-components';
 
 export type SideMenuDimension = 'm' | 'l';
 export type SearchFormat = 'word' | 'wholly';
-export type TypeLabel = 'header' | 'line';
+export type LabelType = 'header' | 'line';
 type SideMenuTag = Omit<React.ComponentProps<typeof Tag>, 'dimension' | 'as'>;
 type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 
@@ -31,7 +31,7 @@ export interface SideMenuItemRenderProps {
   /** Размер компонента */
   dimension?: SideMenuDimension;
   /** Формат label, по умолчанию line */
-  typeLabel?: TypeLabel;
+  labelType?: LabelType;
 }
 
 export interface SideMenuItemNode {
@@ -46,7 +46,7 @@ export interface SideMenuItemNode {
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
   /** Формат label, по умолчанию line */
-  typeLabel?: TypeLabel;
+  labelType?: LabelType;
 }
 
 export interface SideMenuGroupNode {
@@ -61,7 +61,7 @@ export interface SideMenuGroupNode {
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
   /** Формат label, по умолчанию line */
-  typeLabel?: TypeLabel;
+  labelType?: LabelType;
   /** Колбэк кастомизации рендера контента пункта */
   renderItem?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
