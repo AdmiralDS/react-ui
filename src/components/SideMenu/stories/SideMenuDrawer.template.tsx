@@ -107,6 +107,9 @@ export const SideMenuDrawerTemplate = ({
             closeOnBackdropClick
             closeOnEscapeKeyDown
             container={layoutRef?.current as HTMLElement}
+            /** Ширину нужно определить, чтобы при открытии групп
+             * в меню не было скачков в размерах компонента */
+            style={{ width: '200px' }}
           >
             <SideMenu
               {...props}

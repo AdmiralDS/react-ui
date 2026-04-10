@@ -56,7 +56,7 @@ export const SideMenuGroup = memo(({ id, label, children, tag, badge, icon, type
       <GroupButton
         ref={containerRef}
         type="button"
-        id={id}
+        data-item={id}
         onClick={handleToggle}
         $indentLevel={level}
         $dimension={ctx.dimension}

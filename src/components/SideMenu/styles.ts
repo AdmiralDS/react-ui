@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
+import { hideNativeScrollbarsCss } from '#src/components/Scrollbar';
+import { Drawer } from '#src/components/Drawer';
+import { typography } from '#src/components/Typography';
+import { mediumGroupBorderRadius } from '#src/components/themes';
+
 import type { SideMenuDimension } from './types';
-import { ScrollContainer } from '../Scrollbar';
-import { Drawer } from '../Drawer';
-import { typography } from '../Typography';
-import { mediumGroupBorderRadius } from '../themes';
 
 const INDENT = 20;
 
@@ -114,6 +115,7 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
 `;
 
 export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
+  text-align: left;
   overflow: hidden;
 
   ${({ $multiline }) => ($multiline ? 'overflow-wrap: normal;' : 'white-space: nowrap; text-overflow: ellipsis;')};
@@ -146,7 +148,8 @@ export const SideMenuWrapper = styled.div<{
   gap: ${(p) => p.$gap + 'px'};
   overflow: hidden;
   width: 100%;
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
+  height: 100%;
+  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
   box-sizing: border-box;
 
   /** Если SideMenu внутри Drawer, то обнуляем паддинги у Drawer */
@@ -155,13 +158,20 @@ export const SideMenuWrapper = styled.div<{
   }
 `;
 
-export const StyledScrollContainer = styled(ScrollContainer)<{
-  $dimension: SideMenuDimension;
+export const ScrollWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+export const ScrollableContent = styled.div<{
   //todo определить отступ
   $gap: number;
 }>`
+  ${hideNativeScrollbarsCss}
+
   flex-grow: 1;
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
   & > div:first-child {
     display: flex;
     flex-direction: column;
@@ -169,15 +179,9 @@ export const StyledScrollContainer = styled(ScrollContainer)<{
   }
 `;
 
-export const TopPanelContent = styled.div<{
-  $dimension: SideMenuDimension;
-}>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
-`;
+export const TopPanelContent = styled.div``;
 
-export const BottomPanelContent = styled.div<{ $dimension: SideMenuDimension }>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
-`;
+export const BottomPanelContent = styled.div``;
 
 export const WrapperIcon = styled.span<{ $dimension: SideMenuDimension }>`
   ${({ $dimension }) => ($dimension === 'l' ? 'width: 24px; height: 24px' : 'width: 20px; height: 20px')};

@@ -86,7 +86,7 @@ export const SideMenuItem = memo(({ id, renderItem, label, badge, icon, tag, typ
       <ItemButton
         ref={containerRef}
         type="button"
-        id={id}
+        data-item={id}
         $selected={selected}
         onClick={handleClick}
         $dimension={ctx.dimension}

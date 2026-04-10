@@ -2,10 +2,11 @@ import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 
 
 import { TextInput, defaultFilterItem } from '#src/components/input';
 import { InputIconButton } from '#src/components/InputIconButton';
+import { Scrollbars } from '#src/components/Scrollbar';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
 import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
-import { BottomPanelContent, StyledScrollContainer, TopPanelContent, SideMenuWrapper } from './styles';
+import { BottomPanelContent, TopPanelContent, SideMenuWrapper, ScrollableContent, ScrollWrapper } from './styles';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
@@ -70,6 +71,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setSearching] = useState(false);
+    const [scrollableNode, setScrollableNode] = useState<HTMLDivElement | null>(null);
 
     const filterActive = search && searchQuery.trim().length > 0 && isSearching;
     const filteredItems = useMemo(() => {
@@ -84,6 +86,18 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         return nodes;
       }, []);
     }, [items, searchQuery, onFilterItem, searchFormat]);
+
+    /** Автодоскролл до выбранной опции */
+    useEffect(() => {
+      if (!selectedState.state) {
+        return;
+      }
+
+      if (scrollableNode) {
+        const element = scrollableNode.querySelector(`[data-item="${selectedState.state}"]`);
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+      }
+    }, [selectedState.state, scrollableNode]);
 
     const handleSelectItem = useCallback(
       (id: string) => {
@@ -167,18 +181,10 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       return <SideMenuItem {...node} />;
     };
 
-    useEffect(() => {
-      if (!selectedState.state) return;
-
-      const element = document.getElementById(selectedState.state);
-
-      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-    }, []);
-
     return (
       <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
         {search && (
-          <TopPanelContent $dimension={dimension}>
+          <TopPanelContent>
             <TextInput
               value={searchQuery}
               onChange={handleInputChange}
@@ -193,15 +199,17 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
-            {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
-            <StyledScrollContainer $dimension={dimension} $gap={gap}>
-              {(filterActive ? filteredItems : items).map((node, index) => (
-                <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
-              ))}
-            </StyledScrollContainer>
-            {isRenderBottomPanel && (
-              <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>
-            )}
+            {isRenderTopPanel && <TopPanelContent>{renderTopPanel()}</TopPanelContent>}
+            <ScrollWrapper>
+              <ScrollableContent ref={(node) => setScrollableNode(node)} $gap={gap}>
+                {(filterActive ? filteredItems : items).map((node, index) => (
+                  <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
+                ))}
+              </ScrollableContent>
+              <Scrollbars contentNode={scrollableNode} />
+            </ScrollWrapper>
+
+            {isRenderBottomPanel && <BottomPanelContent>{renderBottomPanel()}</BottomPanelContent>}
           </PathContext.Provider>
         </SideMenuContext.Provider>
       </SideMenuWrapper>
