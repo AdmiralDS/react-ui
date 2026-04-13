@@ -1,11 +1,10 @@
 import { memo, useRef } from 'react';
+import { Tag } from '#src/components/Tag';
+import { Badge } from '#src/components/Badge';
 
 import { useKeyPath, useSideMenuContext } from './contexts';
 import { Label } from './Label';
-import { ItemButton, LeftCluster, RightCluster, WrapperIcon } from './styles';
-import { Tag } from '../Tag';
-import { Badge } from '../Badge';
-
+import { Item, LeftCluster, RightCluster, WrapperIcon } from './styles';
 import type { SideMenuItemNode } from './types';
 
 function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
@@ -39,8 +38,31 @@ export const SideMenuItem = memo(
       ctx.onSelectItem(id);
     };
 
-    const content = (
-      <>
+    return render ? (
+      render({
+        id,
+        label,
+        selected,
+        level,
+        icon,
+        badge,
+        tag,
+        dimension: ctx.dimension,
+        labelType,
+        type,
+        onClick: handleClick,
+      })
+    ) : (
+      <Item
+        ref={containerRef}
+        role="menuitem"
+        data-item={id}
+        $selected={selected}
+        $dimension={ctx.dimension}
+        $indentLevel={level}
+        $hasIcons={ctx.hasIcons}
+        onClick={handleClick}
+      >
         <LeftCluster $dimension={ctx.dimension}>
           {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
           <Label
@@ -63,39 +85,7 @@ export const SideMenuItem = memo(
             {tag && <Tag {...tag} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} />}
           </RightCluster>
         )}
-      </>
-    );
-
-    return render ? (
-      render({
-        id,
-        label,
-        selected,
-        level,
-        icon,
-        badge,
-        tag,
-        dimension: ctx.dimension,
-        labelType,
-        type,
-        onClick: handleClick,
-      })
-    ) : (
-      <>
-        <ItemButton
-          ref={containerRef}
-          type="button"
-          data-item={id}
-          $selected={selected}
-          onClick={handleClick}
-          $dimension={ctx.dimension}
-          $indentLevel={level}
-          $header={labelType === 'header' && level < 1}
-          $hasIcons={ctx.hasIcons}
-        >
-          {content}
-        </ItemButton>
-      </>
+      </Item>
     );
   },
 );

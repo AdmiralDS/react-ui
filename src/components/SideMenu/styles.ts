@@ -13,48 +13,34 @@ export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
   min-width: 0;
 `;
 
-const selectedItemMixin = css<{ $selected?: boolean }>`
+const unselectedItemMixin = css`
+  &:hover {
+    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
+  }
+  &:active {
+    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
+  }
+  ${LeftCluster} *[fill^='#'] {
+    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
+  }
+`;
+
+const selectedItemMixin = css`
   background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
   color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-
-  ${LeftCluster} [fill^='#'] {
+  ${LeftCluster} *[fill^='#'] {
     fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
   }
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
-  }
 `;
 
-export const ItemButton = styled.button<{
+export const Item = styled.li<{
   $selected?: boolean;
   $dimension: SideMenuDimension;
   $indentLevel: number;
-  $header?: boolean;
   $hasIcons?: boolean;
 }>`
-  width: 100%;
   display: flex;
-  border: 0;
-  background-color: transparent;
-  color: inherit;
-  cursor: pointer;
-  border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
-  }
-
-  &:focus-visible {
-    outline: 2px solid
-      var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-    outline-offset: -2px;
-  }
-
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
-  }
-
+  width: 100%;
   padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
     const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
 
@@ -62,45 +48,11 @@ export const ItemButton = styled.button<{
       ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
       : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
   }};
-
-  ${({ $selected }) => $selected && selectedItemMixin};
-`;
-
-export const GroupButton = styled.button<{
-  $indentLevel: number;
-  $dimension: SideMenuDimension;
-  $selected?: boolean;
-  $hasIcons?: boolean;
-}>`
-  width: 100%;
-  display: flex;
-  border: 0;
-  background: transparent;
-  color: inherit;
+  box-sizing: border-box;
   cursor: pointer;
+  color: var(--admiral-color-Neutral_Neutral90, ${({ theme }) => theme.color['Neutral/Neutral 90']});
   border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
-  }
-  &:focus-visible {
-    outline: 2px solid
-      var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-    outline-offset: -2px;
-  }
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
-  }
-
-  ${({ $selected }) => $selected && selectedItemMixin};
-
-  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
-    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
-
-    return $dimension === 'l'
-      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
-      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
-  }};
+  ${({ $selected }) => ($selected ? selectedItemMixin : unselectedItemMixin)};
 `;
 
 export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
@@ -112,7 +64,7 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   margin-left: 8px;
 `;
 
-export const SideMenuWrapper = styled.div<{
+export const SideMenuWrapper = styled.nav<{
   $dimension: SideMenuDimension;
   $gap: number;
 }>`
@@ -138,7 +90,7 @@ export const ScrollWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const ScrollableContent = styled.div<{ $gap: number; $dimension: SideMenuDimension }>`
+export const ScrollableContent = styled.ul<{ $gap: number; $dimension: SideMenuDimension }>`
   ${hideNativeScrollbarsCss}
 
   display: flex;
@@ -146,6 +98,7 @@ export const ScrollableContent = styled.div<{ $gap: number; $dimension: SideMenu
   flex-grow: 1;
   gap: ${(p) => p.$gap + 'px'};
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+  margin: 0;
 `;
 
 export const TopPanelContent = styled.div<{

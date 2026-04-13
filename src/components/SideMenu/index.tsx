@@ -31,7 +31,7 @@ export * from './Sider';
 export * from './MenuItem';
 export * from './MenuGroup';
 export * from './types';
-export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
+export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
   (
     {
       items,
@@ -73,7 +73,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setSearching] = useState(false);
-    const [scrollableNode, setScrollableNode] = useState<HTMLDivElement | null>(null);
+    const [scrollableNode, setScrollableNode] = useState<HTMLUListElement | null>(null);
 
     const filterActive = search && searchQuery.trim().length > 0 && isSearching;
     const filteredItems = useMemo(() => {
@@ -184,7 +184,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
     };
 
     return (
-      <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
+      <SideMenuWrapper role="navigation" ref={ref} $dimension={dimension} $gap={gap} {...props}>
         {search && (
           <TopPanelContent $dimension={dimension}>
             <TextInput
@@ -203,7 +203,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
           <PathContext.Provider value={[]}>
             {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
             <ScrollWrapper>
-              <ScrollableContent ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
+              <ScrollableContent role="menu" ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
                 {(filterActive ? filteredItems : items).map((node, index) => (
                   <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
                 ))}
