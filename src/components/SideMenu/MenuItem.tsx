@@ -1,14 +1,12 @@
 import { memo, useRef } from 'react';
 
 import { useKeyPath, useSideMenuContext } from './contexts';
-import { HighlightedLabel } from './HighlightedLabel';
-import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon, WrapperLabelTooltip } from './styles';
+import { Label } from './Label';
+import { ItemButton, LeftCluster, RightCluster, WrapperIcon } from './styles';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
 
 import type { SideMenuItemNode } from './types';
-import { Tooltip } from '../Tooltip';
-import { checkTooltipVisible } from './utils/checkTooltipVisible';
 
 function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   const firstArraySet = currentOpenIds;
@@ -23,15 +21,12 @@ export const SideMenuItem = memo(
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
-    const textRef = useRef(null);
     const containerRef = useRef(null);
 
     const level = ancestorGroupIds.length;
     const selected = ctx.selectedItemId === id;
 
     const visibleRightCluster = Boolean(tag || badge);
-    const tooltipVisible =
-      ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
 
     const handleClick = () => {
       if (ctx.filterActive) {
@@ -48,18 +43,19 @@ export const SideMenuItem = memo(
       <>
         <LeftCluster $dimension={ctx.dimension}>
           {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-          <LabelText
-            ref={textRef}
-            $dimension={ctx.dimension}
-            $header={labelType === 'header' && level < 1}
-            $multiline={ctx.multiline}
-          >
-            {ctx.filterActive ? (
-              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-            ) : (
-              label
-            )}
-          </LabelText>
+          <Label
+            dimension={ctx.dimension}
+            label={label}
+            labelType={labelType}
+            level={level}
+            multiline={ctx.multiline}
+            visibleTooltip={ctx.visibleTooltip}
+            tooltipCssMixin={ctx.tooltipCssMixin}
+            filterActive={ctx.filterActive}
+            searchQuery={ctx.searchQuery}
+            searchFormat={ctx.searchFormat}
+            container={containerRef.current}
+          />
         </LeftCluster>
         {visibleRightCluster && (
           <RightCluster $dimension={ctx.dimension}>
@@ -99,14 +95,6 @@ export const SideMenuItem = memo(
         >
           {content}
         </ItemButton>
-        {tooltipVisible && (
-          <Tooltip
-            targetElement={containerRef.current}
-            renderContent={() => (
-              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-            )}
-          />
-        )}
       </>
     );
   },

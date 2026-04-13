@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
 import { hideNativeScrollbarsCss } from '#src/components/Scrollbar';
-import { Drawer } from '#src/components/Drawer';
-import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes';
 
 import type { SideMenuDimension } from './types';
@@ -114,30 +112,6 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   margin-left: 8px;
 `;
 
-export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
-  text-align: left;
-  overflow: hidden;
-
-  ${({ $multiline }) => ($multiline ? 'overflow-wrap: normal;' : 'white-space: nowrap; text-overflow: ellipsis;')};
-
-  ${({ $dimension, $header }) =>
-    $dimension === 'l'
-      ? $header
-        ? typography['Subtitle/Subtitle 2']
-        : typography['Body/Body 1 Long']
-      : $header
-        ? typography['Subtitle/Subtitle 3']
-        : typography['Body/Body 2 Long']};
-`;
-
-export const StyledDrawer = styled(Drawer)<{
-  $dimension: SideMenuDimension;
-}>`
-  justify-content: space-between;
-  box-shadow: unset;
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
-`;
-
 export const SideMenuWrapper = styled.div<{
   $dimension: SideMenuDimension;
   $gap: number;
@@ -194,26 +168,4 @@ export const WrapperIcon = styled.span<{ $dimension: SideMenuDimension }>`
 export const Chevron = styled(WrapperIcon)<{ $open?: boolean }>`
   transform: rotate(${({ $open }) => ($open ? 90 : 0)}deg);
   transition: transform 0.3s ease;
-`;
-
-export const LabelDivider = styled(LabelText)`
-  margin-top: 10px;
-  color: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
-`;
-
-export const WrapperDivider = styled.div<{ $dimension: SideMenuDimension; $simple: boolean }>`
-  display: flex;
-  flex-direction: column;
-  padding: ${({ $dimension, $simple }) =>
-    $dimension === 'l'
-      ? $simple
-        ? '8px 16px 7px 16px'
-        : '8px 16px 5px 16px'
-      : $simple
-        ? '6px 12px 5px 12px'
-        : '6px 12px 3px 12px'};
-`;
-
-export const WrapperLabelTooltip = styled.div<{ $tooltipCssMixin?: ReturnType<typeof css> }>`
-  ${(p) => p.$tooltipCssMixin};
 `;

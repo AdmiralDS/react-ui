@@ -1,40 +1,26 @@
 import { memo, useMemo, useRef } from 'react';
 
-import {
-  Chevron,
-  GroupButton,
-  LabelText,
-  LeftCluster,
-  RightCluster,
-  WrapperIcon,
-  WrapperLabelTooltip,
-} from '#src/components/SideMenu/styles';
+import { Chevron, GroupButton, LeftCluster, RightCluster, WrapperIcon } from '#src/components/SideMenu/styles';
 import { SideMenuItem } from '#src/components/SideMenu/MenuItem';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { SideMenuDivider } from './MenuDivider';
+import { Label } from './Label';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
-import { HighlightedLabel } from './HighlightedLabel';
 
 import type { SideMenuGroupNode } from '#src/components/SideMenu/types';
 
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
-import { checkTooltipVisible } from './utils/checkTooltipVisible';
-import { Tooltip } from '../Tooltip';
 
 export const SideMenuGroup = memo(
   ({ id, render, label, children, tag, badge, icon, labelType, type }: SideMenuGroupNode) => {
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
-    const textRef = useRef(null);
     const containerRef = useRef(null);
 
     const level = ancestorGroupIds.length;
     const isExpanded = ctx.filterActive ? true : ctx.openGroupIds.has(id);
-
-    const tooltipVisible =
-      ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
 
     const findSelectedItem = (groupNode: SideMenuGroupNode['children']) => {
       return groupNode.some((item): boolean => {
@@ -82,18 +68,19 @@ export const SideMenuGroup = memo(
             >
               <LeftCluster $dimension={ctx.dimension}>
                 {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-                <LabelText
-                  ref={textRef}
-                  $dimension={ctx.dimension}
-                  $header={labelType === 'header' && level < 1}
-                  $multiline={ctx.multiline}
-                >
-                  {ctx.filterActive ? (
-                    <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-                  ) : (
-                    label
-                  )}
-                </LabelText>
+                <Label
+                  dimension={ctx.dimension}
+                  label={label}
+                  labelType={labelType}
+                  level={level}
+                  multiline={ctx.multiline}
+                  visibleTooltip={ctx.visibleTooltip}
+                  tooltipCssMixin={ctx.tooltipCssMixin}
+                  filterActive={ctx.filterActive}
+                  searchQuery={ctx.searchQuery}
+                  searchFormat={ctx.searchFormat}
+                  container={containerRef.current}
+                />
               </LeftCluster>
               <RightCluster $dimension={ctx.dimension}>
                 {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'}></Badge>}
@@ -103,14 +90,6 @@ export const SideMenuGroup = memo(
                 </Chevron>
               </RightCluster>
             </GroupButton>
-            {tooltipVisible && (
-              <Tooltip
-                targetElement={containerRef.current}
-                renderContent={() => (
-                  <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-                )}
-              />
-            )}
           </>
         )}
 
