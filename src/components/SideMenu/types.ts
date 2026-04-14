@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import type { Tag } from '../Tag';
 import type { Badge } from '../Badge';
-import type { css } from 'styled-components';
+import type { css, DataAttributes } from 'styled-components';
+import type { TextInput } from '#src/components/input';
 
 export type SideMenuDimension = 'm' | 'l';
 export type SearchFormat = 'word' | 'wholly';
@@ -101,8 +102,8 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   renderBottomPanel?: () => React.ReactNode;
   /** Позволяет добавить панель вверху */
   renderTopPanel?: () => React.ReactNode;
-  /** Рассотояние между пунктами контента */
-  gap?: number;
+  /** Расстояние между пунктами списка. По умолчанию 4px */
+  gap?: React.CSSProperties['gap'];
   /** Позволяет отключить/включить отображение Tooltip при переполнении текста, по умолчанию true  */
   visibleTooltip?: boolean;
   /** Позволяет добавлять миксин для тултипа, созданный с помощью styled css  */
@@ -110,4 +111,9 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Позволяет пунктам меню при переполнении переходить на следующую строку,
    * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
   multiline?: boolean;
+  /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  inputPropsConfig?: (
+    props: React.ComponentProps<typeof TextInput>,
+  ) => Partial<React.ComponentProps<typeof TextInput> & DataAttributes>;
 }

@@ -1,6 +1,6 @@
 import { memo, useMemo, useRef } from 'react';
 
-import { Chevron, Item, LeftCluster, RightCluster, WrapperIcon } from '#src/components/SideMenu/styles';
+import { Chevron, Item, LeftCluster, RightCluster, WrapperIcon, Group } from '#src/components/SideMenu/styles';
 import { SideMenuItem } from '#src/components/SideMenu/MenuItem';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { SideMenuDivider } from './MenuDivider';
@@ -96,7 +96,7 @@ export const SideMenuGroup = memo(
 
         {isExpanded && (
           <PathContext.Provider value={nextPath}>
-            <ul role="menu" style={{ padding: 0, margin: 0 }}>
+            <Group role="menu" $gap={ctx.gap}>
               {children.map((child, idx) => {
                 if (child.type === 'divider') {
                   return <SideMenuDivider key={`divider_${idx}`} {...child} />;
@@ -108,7 +108,7 @@ export const SideMenuGroup = memo(
 
                 return <SideMenuItem key={child.id} {...child} />;
               })}
-            </ul>
+            </Group>
           </PathContext.Provider>
         )}
       </>

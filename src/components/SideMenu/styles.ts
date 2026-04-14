@@ -1,17 +1,11 @@
 import styled, { css } from 'styled-components';
 import { hideNativeScrollbarsCss } from '#src/components/Scrollbar';
 import { mediumGroupBorderRadius } from '#src/components/themes';
+import { TextInput, type TextInputProps } from '#src/components/input';
 
 import type { SideMenuDimension } from './types';
 
 const INDENT = 20;
-
-export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
-  display: inline-flex;
-  gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
-  flex: 1 1 auto;
-  min-width: 0;
-`;
 
 const unselectedItemMixin = css`
   &:hover {
@@ -20,7 +14,7 @@ const unselectedItemMixin = css`
   &:active {
     background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
   }
-  ${LeftCluster} *[fill^='#'] {
+  *[fill^='#'] {
     fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
   }
 `;
@@ -28,7 +22,7 @@ const unselectedItemMixin = css`
 const selectedItemMixin = css`
   background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
   color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-  ${LeftCluster} *[fill^='#'] {
+  *[fill^='#'] {
     fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
   }
 `;
@@ -55,6 +49,22 @@ export const Item = styled.li<{
   ${({ $selected }) => ($selected ? selectedItemMixin : unselectedItemMixin)};
 `;
 
+export const Group = styled.ul<{ $gap: React.CSSProperties['gap'] }>`
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
+  padding: 0;
+  margin: 0;
+`;
+
+export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
+  display: inline-flex;
+  gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
+  flex: 1 1 auto;
+  min-width: 0;
+`;
+
 export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
   align-items: center;
@@ -66,12 +76,12 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
 
 export const SideMenuWrapper = styled.nav<{
   $dimension: SideMenuDimension;
-  $gap: number;
+  $gap: React.CSSProperties['gap'];
 }>`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  gap: ${(p) => p.$gap + 'px'};
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -90,26 +100,18 @@ export const ScrollWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const ScrollableContent = styled.ul<{ $gap: number; $dimension: SideMenuDimension }>`
+export const ScrollableContent = styled.ul<{ $gap: React.CSSProperties['gap']; $dimension: SideMenuDimension }>`
   ${hideNativeScrollbarsCss}
 
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: ${(p) => p.$gap + 'px'};
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
   margin: 0;
 `;
 
-export const TopPanelContent = styled.div<{
-  $dimension: SideMenuDimension;
-}>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : ' 0 12px')};
-`;
-
-export const BottomPanelContent = styled.div<{
-  $dimension: SideMenuDimension;
-}>`
+export const FixedPanel = styled.div<{ $dimension: SideMenuDimension }>`
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;
 
@@ -121,4 +123,8 @@ export const WrapperIcon = styled.span<{ $dimension: SideMenuDimension }>`
 export const Chevron = styled(WrapperIcon)<{ $open?: boolean }>`
   transform: rotate(${({ $open }) => ($open ? 90 : 0)}deg);
   transition: transform 0.3s ease;
+`;
+
+export const SearchInput = styled(TextInput)<{ dimension: TextInputProps['dimension'] }>`
+  margin: ${({ dimension }) => (dimension === 'm' ? '12px 16px' : '10px 12px')};
 `;
