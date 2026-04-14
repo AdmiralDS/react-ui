@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import type { Tag } from '../Tag';
 import type { Badge } from '../Badge';
 import type { css } from 'styled-components';
@@ -27,13 +27,14 @@ export interface SideMenuItemRenderProps {
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
   level: number;
   icon?: ReactNode;
-  badge?: SideMenuBadge;
-  tag?: SideMenuTag;
+  badge?: ReactElement;
+  tag?: ReactElement;
   /** Размер компонента */
   dimension?: SideMenuDimension;
   /** Формат label, по умолчанию line */
   labelType?: LabelType;
-  onClick: () => void;
+  onClick?: () => void;
+  expanded?: boolean;
 }
 
 export interface SideMenuItemNode {
@@ -49,6 +50,7 @@ export interface SideMenuItemNode {
   render?: (props: SideMenuItemRenderProps) => React.ReactNode;
   /** Формат label, по умолчанию line */
   labelType?: LabelType;
+  onClick?: () => void;
 }
 
 export interface SideMenuGroupNode {

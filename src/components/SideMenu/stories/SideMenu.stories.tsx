@@ -12,6 +12,7 @@ import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
 import { SideMenuSearchTemplate } from './SideMenuSearch.template';
 import { SideMenuWithTooltipTemplate } from './SideMenuWithTooltip.template';
 import { SideMenuWithMultilineTemplate } from './SideMenuWithMultiline.template';
+import { SideMenuRenderItemTemplate } from './SideMenuRenderItem.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
@@ -22,6 +23,7 @@ import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
 import SideMenuSearchTemplateRaw from './SideMenuSearch.template?raw';
 import SideMenuWithTooltipTemplateRaw from './SideMenuWithTooltip.template?raw';
 import SideMenuWithMultilineTemplateRaw from './SideMenuWithMultiline.template?raw';
+import SideMenuRenderItemTemplateRaw from './SideMenuRenderItem.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -238,6 +240,28 @@ export const SideMenuWithMultilinePanel = {
   },
 
   name: 'SideMenu. С многострочностью',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu. Пример renderItem">
+const SideMenuRenderItemStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuRenderItemTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuRenderItemPanel = {
+  render: SideMenuRenderItemStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuRenderItemTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Пример renderItem',
 };
 
 //</editor-fold>

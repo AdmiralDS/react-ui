@@ -16,25 +16,108 @@ import { Tag } from '../Tag';
 import { Badge } from '../Badge';
 import { HighlightedLabel } from './HighlightedLabel';
 
-import type { SideMenuGroupNode } from '#src/components/SideMenu/types';
+import type { SideMenuGroupNode, SideMenuItemRenderProps } from '#src/components/SideMenu/types';
 
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 import { checkTooltipVisible } from './utils/checkTooltipVisible';
 import { Tooltip } from '../Tooltip';
 
-export const SideMenuGroup = memo(
-  ({ id, render, label, children, tag, badge, icon, labelType, type }: SideMenuGroupNode) => {
-    const ctx = useSideMenuContext();
-    const ancestorGroupIds = useKeyPath();
-
+export const Group = memo(
+  ({
+    label,
+    id,
+    onClick,
+    level,
+    selected,
+    badge,
+    tag,
+    icon,
+    expanded,
+    labelType,
+  }: Omit<SideMenuItemRenderProps, 'dimension' | 'type'>) => {
     const textRef = useRef(null);
     const containerRef = useRef(null);
 
-    const level = ancestorGroupIds.length;
-    const isExpanded = ctx.filterActive ? true : ctx.openGroupIds.has(id);
+    const ctx = useSideMenuContext();
 
     const tooltipVisible =
       ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
+
+    const handleToggle = () => {
+      ctx.onToggleGroup(id);
+
+      if (onClick) onClick();
+    };
+
+    return (
+      <>
+        <GroupButton
+          ref={containerRef}
+          type="button"
+          data-item={id}
+          onClick={handleToggle}
+          $indentLevel={level}
+          $dimension={ctx.dimension}
+          $selected={selected}
+          $hasIcons={ctx.hasIcons}
+        >
+          <LeftCluster $dimension={ctx.dimension}>
+            {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+            <LabelText
+              ref={textRef}
+              $dimension={ctx.dimension}
+              $header={labelType === 'header' && level < 1}
+              $multiline={ctx.multiline}
+            >
+              {ctx.filterActive ? (
+                <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+              ) : (
+                label
+              )}
+            </LabelText>
+          </LeftCluster>
+          <RightCluster $dimension={ctx.dimension}>
+            {badge}
+            {tag}
+            <Chevron $dimension={ctx.dimension} $open={expanded}>
+              <ChevronRightOutline />
+            </Chevron>
+          </RightCluster>
+        </GroupButton>
+
+        {tooltipVisible && (
+          <Tooltip
+            targetElement={containerRef.current}
+            renderContent={() => (
+              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
+            )}
+          />
+        )}
+      </>
+    );
+  },
+);
+
+export const SideMenuGroup = memo(
+  ({
+    id,
+    render,
+    label,
+    children,
+    tag: tagProps,
+    badge: badgeProps,
+    icon,
+    labelType,
+    type = 'group',
+  }: SideMenuGroupNode) => {
+    const ctx = useSideMenuContext();
+    const ancestorGroupIds = useKeyPath();
+
+    const level = ancestorGroupIds.length;
+    const expanded = ctx.filterActive ? true : ctx.openGroupIds.has(id);
+
+    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
+    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
 
     const findSelectedItem = (groupNode: SideMenuGroupNode['children']) => {
       return groupNode.some((item): boolean => {
@@ -44,7 +127,7 @@ export const SideMenuGroup = memo(
       });
     };
 
-    const selected = findSelectedItem(children) && !isExpanded;
+    const selected = findSelectedItem(children) && !expanded;
 
     const handleToggle = () => {
       ctx.onToggleGroup(id);
@@ -67,54 +150,23 @@ export const SideMenuGroup = memo(
             labelType,
             type,
             onClick: handleToggle,
+            expanded,
           })
         ) : (
-          <>
-            <GroupButton
-              ref={containerRef}
-              type="button"
-              data-item={id}
-              onClick={handleToggle}
-              $indentLevel={level}
-              $dimension={ctx.dimension}
-              $selected={selected}
-              $hasIcons={ctx.hasIcons}
-            >
-              <LeftCluster $dimension={ctx.dimension}>
-                {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-                <LabelText
-                  ref={textRef}
-                  $dimension={ctx.dimension}
-                  $header={labelType === 'header' && level < 1}
-                  $multiline={ctx.multiline}
-                >
-                  {ctx.filterActive ? (
-                    <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-                  ) : (
-                    label
-                  )}
-                </LabelText>
-              </LeftCluster>
-              <RightCluster $dimension={ctx.dimension}>
-                {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'}></Badge>}
-                {tag && <Tag {...tag} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'}></Tag>}
-                <Chevron $dimension={ctx.dimension} $open={isExpanded}>
-                  <ChevronRightOutline />
-                </Chevron>
-              </RightCluster>
-            </GroupButton>
-            {tooltipVisible && (
-              <Tooltip
-                targetElement={containerRef.current}
-                renderContent={() => (
-                  <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-                )}
-              />
-            )}
-          </>
+          <Group
+            label={label}
+            id={id}
+            level={level}
+            selected={selected}
+            badge={badge}
+            tag={tag}
+            icon={icon}
+            expanded={expanded}
+            labelType={labelType}
+          />
         )}
 
-        {isExpanded && (
+        {expanded && (
           <PathContext.Provider value={nextPath}>
             <div>
               {children.map((child, idx) => {

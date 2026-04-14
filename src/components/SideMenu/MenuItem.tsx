@@ -6,7 +6,7 @@ import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon, WrapperL
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
 
-import type { SideMenuItemNode } from './types';
+import type { SideMenuItemNode, SideMenuItemRenderProps } from './types';
 import { Tooltip } from '../Tooltip';
 import { checkTooltipVisible } from './utils/checkTooltipVisible';
 
@@ -18,18 +18,25 @@ function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   return elementsNotInFirst;
 }
 
-export const SideMenuItem = memo(
-  ({ id, render, label, badge, icon, tag, labelType, type = 'item' }: SideMenuItemNode) => {
-    const ctx = useSideMenuContext();
-    const ancestorGroupIds = useKeyPath();
-
+export const Item = memo(
+  ({
+    id,
+    label,
+    selected,
+    onClick,
+    level,
+    labelType,
+    icon,
+    badge,
+    tag,
+  }: Omit<SideMenuItemRenderProps, 'dimension' | 'type' | 'expanded'>) => {
     const textRef = useRef(null);
     const containerRef = useRef(null);
 
-    const level = ancestorGroupIds.length;
-    const selected = ctx.selectedItemId === id;
+    const ctx = useSideMenuContext();
+    const ancestorGroupIds = useKeyPath();
 
-    const visibleRightCluster = Boolean(tag || badge);
+    const visibleRightCluster = Boolean(badge || tag);
     const tooltipVisible =
       ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
 
@@ -42,33 +49,79 @@ export const SideMenuItem = memo(
         }
       }
       ctx.onSelectItem(id);
+
+      if (onClick) onClick();
     };
 
-    const content = (
+    return (
       <>
-        <LeftCluster $dimension={ctx.dimension}>
-          {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-          <LabelText
-            ref={textRef}
-            $dimension={ctx.dimension}
-            $header={labelType === 'header' && level < 1}
-            $multiline={ctx.multiline}
-          >
-            {ctx.filterActive ? (
-              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-            ) : (
-              label
+        <ItemButton
+          ref={containerRef}
+          type="button"
+          data-item={id}
+          $selected={selected}
+          onClick={handleClick}
+          $dimension={ctx.dimension}
+          $indentLevel={level}
+          $header={labelType === 'header' && level < 1}
+          $hasIcons={ctx.hasIcons}
+        >
+          <LeftCluster $dimension={ctx.dimension}>
+            {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+            <LabelText
+              ref={textRef}
+              $dimension={ctx.dimension}
+              $header={labelType === 'header' && level < 1}
+              $multiline={ctx.multiline}
+            >
+              {ctx.filterActive ? (
+                <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+              ) : (
+                label
+              )}
+            </LabelText>
+          </LeftCluster>
+          {visibleRightCluster && (
+            <RightCluster $dimension={ctx.dimension}>
+              {badge}
+              {tag}
+            </RightCluster>
+          )}
+        </ItemButton>
+        {tooltipVisible && (
+          <Tooltip
+            targetElement={containerRef.current}
+            renderContent={() => (
+              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
             )}
-          </LabelText>
-        </LeftCluster>
-        {visibleRightCluster && (
-          <RightCluster $dimension={ctx.dimension}>
-            {badge && <Badge {...badge} dimension={ctx.dimension === 'l' ? 'm' : 's'} />}
-            {tag && <Tag {...tag} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} />}
-          </RightCluster>
+          />
         )}
       </>
     );
+  },
+);
+
+export const SideMenuItem = memo(
+  ({ id, render, label, badge: badgeProps, icon, tag: tagProps, labelType, type = 'item' }: SideMenuItemNode) => {
+    const ctx = useSideMenuContext();
+    const ancestorGroupIds = useKeyPath();
+
+    const level = ancestorGroupIds.length;
+    const selected = ctx.selectedItemId === id;
+
+    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
+    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
+
+    const handleClick = () => {
+      if (ctx.filterActive) {
+        // если в ходе фильтрации выбрана опция, то следует раскрыть все группы, в которые она входит
+        const needToOpenIds = findUniqueIds(ctx.openGroupIds, ancestorGroupIds);
+        if (needToOpenIds) {
+          ctx.onOpenGroups(needToOpenIds);
+        }
+      }
+      ctx.onSelectItem(id);
+    };
 
     return render ? (
       render({
@@ -85,29 +138,16 @@ export const SideMenuItem = memo(
         onClick: handleClick,
       })
     ) : (
-      <>
-        <ItemButton
-          ref={containerRef}
-          type="button"
-          data-item={id}
-          $selected={selected}
-          onClick={handleClick}
-          $dimension={ctx.dimension}
-          $indentLevel={level}
-          $header={labelType === 'header' && level < 1}
-          $hasIcons={ctx.hasIcons}
-        >
-          {content}
-        </ItemButton>
-        {tooltipVisible && (
-          <Tooltip
-            targetElement={containerRef.current}
-            renderContent={() => (
-              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-            )}
-          />
-        )}
-      </>
+      <Item
+        label={label}
+        id={id}
+        level={level}
+        selected={selected}
+        badge={badge}
+        tag={tag}
+        icon={icon}
+        labelType={labelType}
+      />
     );
   },
 );
