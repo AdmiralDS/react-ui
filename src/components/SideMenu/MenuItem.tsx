@@ -1,14 +1,12 @@
 import { memo, useRef } from 'react';
-
-import { useKeyPath, useSideMenuContext } from './contexts';
-import { HighlightedLabel } from './HighlightedLabel';
-import { ItemButton, LeftCluster, RightCluster, LabelText, WrapperIcon, WrapperLabelTooltip } from './styles';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
 
+import { useKeyPath, useSideMenuContext } from './contexts';
+
 import type { SideMenuItemNode, SideMenuItemRenderProps } from './types';
-import { Tooltip } from '../Tooltip';
-import { checkTooltipVisible } from './utils/checkTooltipVisible';
+import { Item as StyledItem, LeftCluster, RightCluster, WrapperIcon } from './styles';
+import { Label } from './Label';
 
 function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   const firstArraySet = currentOpenIds;
@@ -30,15 +28,12 @@ export const Item = memo(
     badge,
     tag,
   }: Omit<SideMenuItemRenderProps, 'dimension' | 'type' | 'expanded'>) => {
-    const textRef = useRef(null);
     const containerRef = useRef(null);
 
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
-    const visibleRightCluster = Boolean(badge || tag);
-    const tooltipVisible =
-      ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
+    const visibleRightCluster = Boolean(tag || badge);
 
     const handleClick = () => {
       if (ctx.filterActive) {
@@ -54,49 +49,39 @@ export const Item = memo(
     };
 
     return (
-      <>
-        <ItemButton
-          ref={containerRef}
-          type="button"
-          data-item={id}
-          $selected={selected}
-          onClick={handleClick}
-          $dimension={ctx.dimension}
-          $indentLevel={level}
-          $header={labelType === 'header' && level < 1}
-          $hasIcons={ctx.hasIcons}
-        >
-          <LeftCluster $dimension={ctx.dimension}>
-            {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-            <LabelText
-              ref={textRef}
-              $dimension={ctx.dimension}
-              $header={labelType === 'header' && level < 1}
-              $multiline={ctx.multiline}
-            >
-              {ctx.filterActive ? (
-                <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-              ) : (
-                label
-              )}
-            </LabelText>
-          </LeftCluster>
-          {visibleRightCluster && (
-            <RightCluster $dimension={ctx.dimension}>
-              {badge}
-              {tag}
-            </RightCluster>
-          )}
-        </ItemButton>
-        {tooltipVisible && (
-          <Tooltip
-            targetElement={containerRef.current}
-            renderContent={() => (
-              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-            )}
+      <StyledItem
+        ref={containerRef}
+        role="menuitem"
+        data-item={id}
+        $selected={selected}
+        $dimension={ctx.dimension}
+        $indentLevel={level}
+        $hasIcons={ctx.hasIcons}
+        onClick={handleClick}
+      >
+        <LeftCluster $dimension={ctx.dimension}>
+          {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+          <Label
+            dimension={ctx.dimension}
+            label={label}
+            labelType={labelType}
+            level={level}
+            multiline={ctx.multiline}
+            visibleTooltip={ctx.visibleTooltip}
+            tooltipCssMixin={ctx.tooltipCssMixin}
+            filterActive={ctx.filterActive}
+            searchQuery={ctx.searchQuery}
+            searchFormat={ctx.searchFormat}
+            container={containerRef.current}
           />
+        </LeftCluster>
+        {visibleRightCluster && (
+          <RightCluster $dimension={ctx.dimension}>
+            {badge}
+            {tag}
+          </RightCluster>
         )}
-      </>
+      </StyledItem>
     );
   },
 );

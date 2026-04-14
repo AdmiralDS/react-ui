@@ -49,7 +49,7 @@ const Aside = styled.aside<{
     `box-shadow: inset -1px 0 0 0 var(--admiral-color-Neutral_Neutral20, ${theme.color['Neutral/Neutral 20']})`};
   ${(p) => p.$cssMixin};
 
-  &[data-visible] {
+  &[data-open] {
     width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
     min-width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
     max-width: ${(p) => (typeof p.$width === 'number' ? `${p.$width}px` : p.$width)};
@@ -87,7 +87,7 @@ export const Sider = ({
 }: SiderProps) => {
   return (
     <Aside
-      data-visible={isOpen ? '' : undefined}
+      data-open={isOpen ? '' : undefined}
       $width={width}
       $appearance={appearance}
       $border={withBorder}

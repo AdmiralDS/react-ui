@@ -1,12 +1,12 @@
 import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
 
-import { TextInput, defaultFilterItem } from '#src/components/input';
+import { defaultFilterItem, type TextInput } from '#src/components/input';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Scrollbars } from '#src/components/Scrollbar';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
 import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
-import { BottomPanelContent, TopPanelContent, SideMenuWrapper, ScrollableContent, ScrollWrapper } from './styles';
+import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './styles';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
 import { SideMenuGroup } from './MenuGroup';
@@ -27,11 +27,13 @@ function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
   };
 }
 
+const nothing = () => ({});
+
 export * from './Sider';
 export * from './MenuItem';
 export * from './MenuGroup';
 export * from './types';
-export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
+export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
   (
     {
       items,
@@ -51,6 +53,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       tooltipCssMixin,
       multiline = false,
       visibleTooltip = true,
+      inputPropsConfig = nothing,
       ...props
     },
     ref,
@@ -73,7 +76,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setSearching] = useState(false);
-    const [scrollableNode, setScrollableNode] = useState<HTMLDivElement | null>(null);
+    const [scrollableNode, setScrollableNode] = useState<HTMLUListElement | null>(null);
 
     const filterActive = search && searchQuery.trim().length > 0 && isSearching;
     const filteredItems = useMemo(() => {
@@ -97,7 +100,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
       if (scrollableNode) {
         const element = scrollableNode.querySelector(`[data-item="${selectedState.state}"]`);
-        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       }
     }, [selectedState.state, scrollableNode]);
 
@@ -153,6 +156,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         tooltipCssMixin,
         multiline,
         visibleTooltip,
+        gap,
       }),
       [
         selectedState.state,
@@ -168,6 +172,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         hasIcons,
         multiline,
         visibleTooltip,
+        gap,
       ],
     );
 
@@ -183,27 +188,28 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
       return <SideMenuItem {...node} type="item" />;
     };
 
-    return (
-      <SideMenuWrapper ref={ref} $dimension={dimension} $gap={gap} {...props}>
-        {search && (
-          <TopPanelContent $dimension={dimension}>
-            <TextInput
-              value={searchQuery}
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-              dimension={dimension === 'l' ? 'm' : 's'}
-              placeholder="Search..."
-              iconsAfter={<InputIconButton aria-hidden icon={SearchOutlineSVG} />}
-              displayClearIcon
-            />
-          </TopPanelContent>
-        )}
+    const searchInputProps = {
+      value: searchQuery,
+      onChange: handleInputChange,
+      onFocus: handleInputFocus,
+      dimension: dimension === 'l' ? 'm' : 's',
+      placeholder: 'Search...',
+      iconsAfter: <InputIconButton aria-hidden icon={SearchOutlineSVG} />,
+      displayClearIcon: true,
+    } satisfies React.ComponentProps<typeof TextInput>;
 
+    return (
+      <SideMenuWrapper role="navigation" ref={ref} $dimension={dimension} $gap={gap} {...props}>
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
-            {isRenderTopPanel && <TopPanelContent $dimension={dimension}>{renderTopPanel()}</TopPanelContent>}
+            {isRenderTopPanel && <FixedPanel $dimension={dimension}>{renderTopPanel()}</FixedPanel>}
+            {search && (
+              <FixedPanel $dimension={dimension}>
+                <SearchInput {...searchInputProps} {...inputPropsConfig(searchInputProps)} />
+              </FixedPanel>
+            )}
             <ScrollWrapper>
-              <ScrollableContent ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
+              <ScrollableContent role="menu" ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
                 {(filterActive ? filteredItems : items).map((node, index) => (
                   <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
                 ))}
@@ -211,9 +217,7 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
               <Scrollbars contentNode={scrollableNode} />
             </ScrollWrapper>
 
-            {isRenderBottomPanel && (
-              <BottomPanelContent $dimension={dimension}>{renderBottomPanel()}</BottomPanelContent>
-            )}
+            {isRenderBottomPanel && <FixedPanel $dimension={dimension}>{renderBottomPanel()}</FixedPanel>}
           </PathContext.Provider>
         </SideMenuContext.Provider>
       </SideMenuWrapper>

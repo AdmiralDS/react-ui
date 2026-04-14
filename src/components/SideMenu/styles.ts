@@ -1,108 +1,29 @@
 import styled, { css } from 'styled-components';
 import { hideNativeScrollbarsCss } from '#src/components/Scrollbar';
-import { Drawer } from '#src/components/Drawer';
-import { typography } from '#src/components/Typography';
 import { mediumGroupBorderRadius } from '#src/components/themes';
+import { TextInput, type TextInputProps } from '#src/components/input';
 
 import type { SideMenuDimension } from './types';
 
 const INDENT = 20;
+
+const unselectedItemMixin = css`
+  &:hover {
+    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
+  }
+  &:active {
+    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
+  }
+  *[fill^='#'] {
+    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
+  }
+`;
 
 export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
   gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
   flex: 1 1 auto;
   min-width: 0;
-`;
-
-const selectedItemMixin = css<{ $selected?: boolean }>`
-  background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
-  color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-
-  ${LeftCluster} [fill^='#'] {
-    fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-  }
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
-  }
-`;
-
-export const ItemButton = styled.button<{
-  $selected?: boolean;
-  $dimension: SideMenuDimension;
-  $indentLevel: number;
-  $header?: boolean;
-  $hasIcons?: boolean;
-}>`
-  width: 100%;
-  display: flex;
-  border: 0;
-  background-color: transparent;
-  color: inherit;
-  cursor: pointer;
-  border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
-  }
-
-  &:focus-visible {
-    outline: 2px solid
-      var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-    outline-offset: -2px;
-  }
-
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
-  }
-
-  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
-    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
-
-    return $dimension === 'l'
-      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
-      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
-  }};
-
-  ${({ $selected }) => $selected && selectedItemMixin};
-`;
-
-export const GroupButton = styled.button<{
-  $indentLevel: number;
-  $dimension: SideMenuDimension;
-  $selected?: boolean;
-  $hasIcons?: boolean;
-}>`
-  width: 100%;
-  display: flex;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
-
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
-  }
-  &:focus-visible {
-    outline: 2px solid
-      var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-    outline-offset: -2px;
-  }
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
-  }
-
-  ${({ $selected }) => $selected && selectedItemMixin};
-
-  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
-    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
-
-    return $dimension === 'l'
-      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
-      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
-  }};
 `;
 
 export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
@@ -114,38 +35,54 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   margin-left: 8px;
 `;
 
-export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
-  text-align: left;
-  overflow: hidden;
+const selectedItemMixin = css`
+  background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
+  color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
 
-  ${({ $multiline }) => ($multiline ? 'overflow-wrap: normal;' : 'white-space: nowrap; text-overflow: ellipsis;')};
-
-  ${({ $dimension, $header }) =>
-    $dimension === 'l'
-      ? $header
-        ? typography['Subtitle/Subtitle 2']
-        : typography['Body/Body 1 Long']
-      : $header
-        ? typography['Subtitle/Subtitle 3']
-        : typography['Body/Body 2 Long']};
+  ${LeftCluster} *[fill^='#'] {
+    fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
+  }
 `;
 
-export const StyledDrawer = styled(Drawer)<{
+export const Item = styled.li<{
+  $selected?: boolean;
   $dimension: SideMenuDimension;
+  $indentLevel: number;
+  $hasIcons?: boolean;
 }>`
-  justify-content: space-between;
-  box-shadow: unset;
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '16px 0' : '12px 0')};
+  display: flex;
+  width: 100%;
+  padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
+    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
+
+    return $dimension === 'l'
+      ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`
+      : `10px 12px 10px ${12 + indentIcon + $indentLevel * INDENT}px`;
+  }};
+  box-sizing: border-box;
+  cursor: pointer;
+  color: var(--admiral-color-Neutral_Neutral90, ${({ theme }) => theme.color['Neutral/Neutral 90']});
+  border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
+  ${({ $selected }) => ($selected ? selectedItemMixin : unselectedItemMixin)};
 `;
 
-export const SideMenuWrapper = styled.div<{
+export const Group = styled.ul<{ $gap: React.CSSProperties['gap'] }>`
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
+  padding: 0;
+  margin: 0;
+`;
+
+export const SideMenuWrapper = styled.nav<{
   $dimension: SideMenuDimension;
-  $gap: number;
+  $gap: React.CSSProperties['gap'];
 }>`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  gap: ${(p) => p.$gap + 'px'};
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -164,25 +101,18 @@ export const ScrollWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const ScrollableContent = styled.div<{ $gap: number; $dimension: SideMenuDimension }>`
+export const ScrollableContent = styled.ul<{ $gap: React.CSSProperties['gap']; $dimension: SideMenuDimension }>`
   ${hideNativeScrollbarsCss}
 
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: ${(p) => p.$gap + 'px'};
+  gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
+  margin: 0;
 `;
 
-export const TopPanelContent = styled.div<{
-  $dimension: SideMenuDimension;
-}>`
-  padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : ' 0 12px')};
-`;
-
-export const BottomPanelContent = styled.div<{
-  $dimension: SideMenuDimension;
-}>`
+export const FixedPanel = styled.div<{ $dimension: SideMenuDimension }>`
   padding: ${({ $dimension }) => ($dimension === 'l' ? '0 16px' : '0 12px')};
 `;
 
@@ -196,24 +126,6 @@ export const Chevron = styled(WrapperIcon)<{ $open?: boolean }>`
   transition: transform 0.3s ease;
 `;
 
-export const LabelDivider = styled(LabelText)`
-  margin-top: 10px;
-  color: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
-`;
-
-export const WrapperDivider = styled.div<{ $dimension: SideMenuDimension; $simple: boolean }>`
-  display: flex;
-  flex-direction: column;
-  padding: ${({ $dimension, $simple }) =>
-    $dimension === 'l'
-      ? $simple
-        ? '8px 16px 7px 16px'
-        : '8px 16px 5px 16px'
-      : $simple
-        ? '6px 12px 5px 12px'
-        : '6px 12px 3px 12px'};
-`;
-
-export const WrapperLabelTooltip = styled.div<{ $tooltipCssMixin?: ReturnType<typeof css> }>`
-  ${(p) => p.$tooltipCssMixin};
+export const SearchInput = styled(TextInput)<{ dimension: TextInputProps['dimension'] }>`
+  margin: ${({ dimension }) => (dimension === 'm' ? '12px 16px' : '10px 12px')};
 `;

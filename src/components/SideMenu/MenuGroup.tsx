@@ -2,25 +2,22 @@ import { memo, useMemo, useRef } from 'react';
 
 import {
   Chevron,
-  GroupButton,
-  LabelText,
+  Item,
   LeftCluster,
   RightCluster,
   WrapperIcon,
-  WrapperLabelTooltip,
+  Group as StyledGroup,
 } from '#src/components/SideMenu/styles';
 import { SideMenuItem } from '#src/components/SideMenu/MenuItem';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { SideMenuDivider } from './MenuDivider';
+import { Label } from './Label';
 import { Tag } from '../Tag';
 import { Badge } from '../Badge';
-import { HighlightedLabel } from './HighlightedLabel';
 
 import type { SideMenuGroupNode, SideMenuItemRenderProps } from '#src/components/SideMenu/types';
 
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
-import { checkTooltipVisible } from './utils/checkTooltipVisible';
-import { Tooltip } from '../Tooltip';
 
 export const Group = memo(
   ({
@@ -35,13 +32,9 @@ export const Group = memo(
     expanded,
     labelType,
   }: Omit<SideMenuItemRenderProps, 'dimension' | 'type'>) => {
-    const textRef = useRef(null);
     const containerRef = useRef(null);
 
     const ctx = useSideMenuContext();
-
-    const tooltipVisible =
-      ctx.visibleTooltip && !ctx.multiline ? checkTooltipVisible(containerRef.current, textRef.current) : false;
 
     const handleToggle = () => {
       ctx.onToggleGroup(id);
@@ -50,50 +43,41 @@ export const Group = memo(
     };
 
     return (
-      <>
-        <GroupButton
-          ref={containerRef}
-          type="button"
-          data-item={id}
-          onClick={handleToggle}
-          $indentLevel={level}
-          $dimension={ctx.dimension}
-          $selected={selected}
-          $hasIcons={ctx.hasIcons}
-        >
-          <LeftCluster $dimension={ctx.dimension}>
-            {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
-            <LabelText
-              ref={textRef}
-              $dimension={ctx.dimension}
-              $header={labelType === 'header' && level < 1}
-              $multiline={ctx.multiline}
-            >
-              {ctx.filterActive ? (
-                <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
-              ) : (
-                label
-              )}
-            </LabelText>
-          </LeftCluster>
-          <RightCluster $dimension={ctx.dimension}>
-            {badge}
-            {tag}
-            <Chevron $dimension={ctx.dimension} $open={expanded}>
-              <ChevronRightOutline />
-            </Chevron>
-          </RightCluster>
-        </GroupButton>
-
-        {tooltipVisible && (
-          <Tooltip
-            targetElement={containerRef.current}
-            renderContent={() => (
-              <WrapperLabelTooltip $tooltipCssMixin={ctx.tooltipCssMixin}>{label}</WrapperLabelTooltip>
-            )}
+      <Item
+        ref={containerRef}
+        role="none"
+        aria-expanded={expanded}
+        data-item={id}
+        onClick={handleToggle}
+        $indentLevel={level}
+        $dimension={ctx.dimension}
+        $selected={selected}
+        $hasIcons={ctx.hasIcons}
+      >
+        <LeftCluster $dimension={ctx.dimension}>
+          {ctx.hasIcons && level < 1 && <WrapperIcon $dimension={ctx.dimension}>{icon}</WrapperIcon>}
+          <Label
+            dimension={ctx.dimension}
+            label={label}
+            labelType={labelType}
+            level={level}
+            multiline={ctx.multiline}
+            visibleTooltip={ctx.visibleTooltip}
+            tooltipCssMixin={ctx.tooltipCssMixin}
+            filterActive={ctx.filterActive}
+            searchQuery={ctx.searchQuery}
+            searchFormat={ctx.searchFormat}
+            container={containerRef.current}
           />
-        )}
-      </>
+        </LeftCluster>
+        <RightCluster $dimension={ctx.dimension}>
+          {badge}
+          {tag}
+          <Chevron $dimension={ctx.dimension} $open={expanded}>
+            <ChevronRightOutline />
+          </Chevron>
+        </RightCluster>
+      </Item>
     );
   },
 );
@@ -168,7 +152,7 @@ export const SideMenuGroup = memo(
 
         {expanded && (
           <PathContext.Provider value={nextPath}>
-            <div>
+            <StyledGroup role="menu" $gap={ctx.gap}>
               {children.map((child, idx) => {
                 if (child.type === 'divider') {
                   return <SideMenuDivider key={`divider_${idx}`} {...child} />;
@@ -180,7 +164,7 @@ export const SideMenuGroup = memo(
 
                 return <SideMenuItem key={child.id} {...child} />;
               })}
-            </div>
+            </StyledGroup>
           </PathContext.Provider>
         )}
       </>

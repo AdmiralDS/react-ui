@@ -41,6 +41,7 @@ export interface SideMenuContextValue {
    * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
   multiline?: boolean;
   visibleTooltip?: boolean;
+  gap: React.CSSProperties['gap'];
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 
