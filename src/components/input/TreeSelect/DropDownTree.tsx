@@ -42,6 +42,10 @@ export const DropDownTree = ({
       mapItem.node.checked = value;
     }
 
+    if (mapItem?.node.children?.length) {
+      mapItem.node.children.forEach((child) => setChecked(child.id, value));
+    }
+
     if (mapItem?.dependencies?.length) {
       mapItem?.dependencies?.forEach((depId: string) => setChecked(depId, value));
     }
@@ -50,16 +54,17 @@ export const DropDownTree = ({
   const toggleCheck = (id: string) => {
     //
     const item = map.get(id);
-    const hasChildren = !!item?.node.children;
+    const hasChildren = !!item?.node.children?.length;
 
     const indeterminate =
-      item?.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
-      item?.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
+      !!item?.dependencies?.length &&
+      item.dependencies.some((depId: string) => map.get(depId)?.node.checked) &&
+      item.dependencies.some((depId: string) => !map.get(depId)?.node.checked);
 
     const checked = hasChildren
       ? indeterminate
         ? true
-        : item?.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
+        : !!item?.dependencies?.length && item.dependencies.every((depId: string) => map.get(depId)?.node.checked)
       : item?.node.checked;
 
     setChecked(id, !checked);
@@ -80,12 +85,13 @@ export const DropDownTree = ({
     // TODO: переписать на reduce
     map.forEach((item) => {
       const node = item.node;
-      const hasChildren = !!node.children;
+      const hasChildren = !!node.children?.length;
       const indeterminate =
-        item.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
-        item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);
+        !!item.dependencies?.length &&
+        item.dependencies.some((depId: string) => map.get(depId)?.node.checked) &&
+        item.dependencies.some((depId: string) => !map.get(depId)?.node.checked);
       const checked = hasChildren
-        ? item.dependencies?.every((depId: string) => map.get(depId)?.node.checked)
+        ? !!item.dependencies?.length && item.dependencies.every((depId: string) => map.get(depId)?.node.checked)
         : !!node.checked;
       menuModel.push({
         id: node.id,

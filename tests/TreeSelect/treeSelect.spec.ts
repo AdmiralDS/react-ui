@@ -63,6 +63,38 @@ test.describe('TreeSelect Component', () => {
     await expect(chip).not.toBeVisible();
   });
 
+  test('should delete all children chips when deleting a parent chip', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const wrapper = frame.locator('.wrapper-options');
+
+    const parentLabel = 'Опция 1';
+    const childLabel1 = 'Опция 1.1';
+    const childLabel2 = 'Опция 1.2.1';
+
+    const parentCheckbox = frame.locator(`role=checkbox[name="${parentLabel}"]`);
+
+    await input.click();
+    await parentCheckbox.click();
+
+    const parentChip = wrapper.getByText(parentLabel, { exact: true });
+    const childChip1 = wrapper.getByText(childLabel1, { exact: true });
+    const childChip2 = wrapper.getByText(childLabel2, { exact: true });
+
+    await expect(parentChip).toBeVisible();
+    await expect(childChip1).toBeVisible();
+    await expect(childChip2).toBeVisible();
+
+    const parentChipCloseButton = parentChip.locator('~ .close-button');
+    await parentChipCloseButton.click();
+
+    await expect(parentChip).not.toBeVisible();
+    await expect(childChip1).not.toBeVisible();
+    await expect(childChip2).not.toBeVisible();
+  });
+
   test('should clear all selections on clear icon click', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
     const frame = getStorybookFrameLocator(page);
