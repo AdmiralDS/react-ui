@@ -1,0 +1,16 @@
+Component: Stepper
+Features:
+✅ Stepper. Playground. (v8.61.0)
+✅ Stepper. Виды шагов. (v8.61.0)
+✅ Stepper. Адаптив. (v8.61.0)
+✅ Stepper. Кастомный StepContent. (v8.61.0)
+✅ Stepper. Шаги в виде ссылок. (v8.61.0)
+✅ Stepper. Кликабельные шаги. (v8.61.0)
+✅ Stepper. Возврат к предыдущим шагам. (v8.61.0)
+✅ Stepper. Мобильная версия. (v8.61.0)
+✅ ProgressStepper. (v8.61.0)
+✅ ProgressStepper. Проценты. (v8.61.0)
+✅ ProgressStepper. Отключение следующего шага. (v8.61.0)
+✅ ProgressStepper. Ограничение количества строк. (v8.61.0)
+✅ ProgressStepper. Мобильная версия. (v8.61.0)
+✅ ProgressStepper. Кастомное отображение проресса (v8.61.0)

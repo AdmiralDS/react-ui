@@ -46,7 +46,8 @@
     "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
     "preview-storybook": "npx http-server ./docs/current",
     "docker:playwright": "docker-compose up --abort-on-container-exit playwright",
-    "release": "standard-version"
+    "release": "standard-version",
+    "sync:create": "node sync-pixso/generate-ui-pixso-xlsx.js && node sync-pixso/generate-ui-pixso-md.js"
   },
   "peerDependencies": {
     "@admiral-ds/fonts": "^2.0.0",
