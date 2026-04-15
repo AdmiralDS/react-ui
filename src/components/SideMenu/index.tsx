@@ -100,7 +100,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
 
       if (scrollableNode) {
         const element = scrollableNode.querySelector(`[data-item="${selectedState.state}"]`);
-        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       }
     }, [selectedState.state, scrollableNode]);
 

@@ -19,10 +19,27 @@ const unselectedItemMixin = css`
   }
 `;
 
+export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
+  display: inline-flex;
+  gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
+  flex: 1 1 auto;
+  min-width: 0;
+`;
+
+export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  ${({ $dimension }) => ($dimension === 'l' ? 'height: 24px' : 'height: 20px')};
+  margin-left: 8px;
+`;
+
 const selectedItemMixin = css`
   background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
   color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
-  *[fill^='#'] {
+
+  ${LeftCluster} *[fill^='#'] {
     fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
   }
 `;
@@ -56,22 +73,6 @@ export const Group = styled.ul<{ $gap: React.CSSProperties['gap'] }>`
   gap: ${(p) => (typeof p.$gap === 'number' ? `${p.$gap}px` : p.$gap)};
   padding: 0;
   margin: 0;
-`;
-
-export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
-  display: inline-flex;
-  gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
-  flex: 1 1 auto;
-  min-width: 0;
-`;
-
-export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex: 0 0 auto;
-  ${({ $dimension }) => ($dimension === 'l' ? 'height: 24px' : 'height: 20px')};
-  margin-left: 8px;
 `;
 
 export const SideMenuWrapper = styled.nav<{
