@@ -77,6 +77,11 @@ export interface SideMenuDividerNode {
   label?: string;
 }
 
+export interface SideMenuPanelProps {
+  /** Размер компонента */
+  dimension: SideMenuDimension;
+}
+
 export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Массив с описанием дерева элементов меню */
   items: SideMenuNode[];
@@ -100,10 +105,10 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
   /** Размер компонента */
   dimension?: SideMenuDimension;
-  /** Позволяет добавить панель внизу */
-  renderBottomPanel?: () => React.ReactNode;
-  /** Позволяет добавить панель вверху */
-  renderTopPanel?: () => React.ReactNode;
+  /** Позволяет добавить панель сверху над списком опций */
+  renderTopPanel?: (props: SideMenuPanelProps) => ReactNode;
+  /** Позволяет добавить панель внизу под списком опций */
+  renderBottomPanel?: (props: SideMenuPanelProps) => ReactNode;
   /** Расстояние между пунктами списка. По умолчанию 4px */
   gap?: React.CSSProperties['gap'];
   /** Позволяет отключить/включить отображение Tooltip при переполнении текста, по умолчанию true  */

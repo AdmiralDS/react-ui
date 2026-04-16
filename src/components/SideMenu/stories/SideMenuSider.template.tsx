@@ -78,14 +78,14 @@ export const SideMenuSiderTemplate = ({
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [open, setOpened] = useState(true);
-  const [open2, setOpened2] = useState(true);
+  const [open, setOpen] = useState(true);
+  const [open2, setOpen2] = useState(true);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <Section>
         <Header>
-          <IconButton dimension="m" onClick={() => setOpened((open) => !open)}>
+          <IconButton dimension="m" onClick={() => setOpen((open) => !open)}>
             <MenuOutline />
           </IconButton>
         </Header>
@@ -98,7 +98,7 @@ export const SideMenuSiderTemplate = ({
       </Section>
       <Section>
         <Header>
-          <IconButton dimension="m" onClick={() => setOpened2((open) => !open)}>
+          <IconButton dimension="m" onClick={() => setOpen2((open) => !open)}>
             <MenuOutline />
           </IconButton>
         </Header>

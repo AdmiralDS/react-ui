@@ -114,3 +114,4 @@ export * from './components/Divider';
 
 export * from './components/Pulse';
 export * from './components/SideMenu';
+export * from './components/SideMenu/SideMenuActionsPanel';

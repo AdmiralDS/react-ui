@@ -193,21 +193,20 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       onChange: handleInputChange,
       onFocus: handleInputFocus,
       dimension: dimension === 'l' ? 'm' : 's',
-      placeholder: 'Search...',
       iconsAfter: <InputIconButton aria-hidden icon={SearchOutlineSVG} />,
       displayClearIcon: true,
     } satisfies React.ComponentProps<typeof TextInput>;
 
     return (
       <SideMenuWrapper role="navigation" ref={ref} $dimension={dimension} $gap={gap} {...props}>
+        {isRenderTopPanel && <FixedPanel $dimension={dimension}>{renderTopPanel({ dimension })}</FixedPanel>}
+        {search && (
+          <FixedPanel $dimension={dimension}>
+            <SearchInput {...searchInputProps} {...inputPropsConfig(searchInputProps)} />
+          </FixedPanel>
+        )}
         <SideMenuContext.Provider value={ctxValue}>
           <PathContext.Provider value={[]}>
-            {isRenderTopPanel && <FixedPanel $dimension={dimension}>{renderTopPanel()}</FixedPanel>}
-            {search && (
-              <FixedPanel $dimension={dimension}>
-                <SearchInput {...searchInputProps} {...inputPropsConfig(searchInputProps)} />
-              </FixedPanel>
-            )}
             <ScrollWrapper>
               <ScrollableContent role="menu" ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
                 {(filterActive ? filteredItems : items).map((node, index) => (
@@ -216,10 +215,9 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
               </ScrollableContent>
               <Scrollbars contentNode={scrollableNode} />
             </ScrollWrapper>
-
-            {isRenderBottomPanel && <FixedPanel $dimension={dimension}>{renderBottomPanel()}</FixedPanel>}
           </PathContext.Provider>
         </SideMenuContext.Provider>
+        {isRenderBottomPanel && <FixedPanel $dimension={dimension}>{renderBottomPanel({ dimension })}</FixedPanel>}
       </SideMenuWrapper>
     );
   },

@@ -153,7 +153,7 @@ export const SideMenuTopBottomPanel = {
     },
   },
 
-  name: 'SideMenu. TopBottomPanelContent',
+  name: 'SideMenu. Кастомный контент сверху и снизу меню',
 };
 
 //</editor-fold>

@@ -74,7 +74,12 @@ export const SideMenuSearchTemplate = ({
         </Header>
         <Layout>
           <Sider isOpen={open}>
-            <SideMenu {...props} items={items} search />
+            <SideMenu
+              {...props}
+              items={items}
+              search
+              inputPropsConfig={(props) => ({ ...props, placeholder: 'Search ...' })}
+            />
           </Sider>
           <Main />
         </Layout>
