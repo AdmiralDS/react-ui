@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
-
 import { IconButton, SideMenu, Sider, T, typography } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
+
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Section = styled.div`
   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
@@ -106,8 +106,8 @@ export const SideMenuWithTooltipTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
-        пункта. Опционально это можно отключить с помощью параметра visibleTooltip={'{false}'}
+        По умолчанию при переполнении пунктов меню текст уходит в многоточие и появляется Tooltip с названием пункта.
+        Опционально можно отключить показ тултипа с помощью параметра visibleTooltip={'{false}'}
       </T>
       <Section>
         <Header>
@@ -123,7 +123,7 @@ export const SideMenuWithTooltipTemplate = ({
         </Layout>
       </Section>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        При использовании миксина для кастомизации пунктов меню, кастом применяется для всех Tooltip.
+        С помощью параметра tooltipCssMixin можно настроить кастомное отображение тултипов в рамках всего SideMenu.
       </T>
       <Section>
         <Header>

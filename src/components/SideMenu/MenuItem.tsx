@@ -1,12 +1,12 @@
 import { memo, useRef } from 'react';
-import { Tag } from '../Tag';
-import { Badge } from '../Badge';
+import { Tag } from '#src/components/Tag';
+import { Badge } from '#src/components/Badge';
 
 import { useKeyPath, useSideMenuContext } from './contexts';
-
 import type { SideMenuItemNode, SideMenuItemRenderProps } from './types';
 import { Item as StyledItem, LeftCluster, RightCluster, WrapperIcon } from './styles';
 import { Label } from './Label';
+import { HighlightedLabel } from './HighlightedLabel';
 
 function findUniqueIds(currentOpenIds: Set<string>, nextOpenIds: string[]) {
   const firstArraySet = currentOpenIds;
@@ -64,16 +64,18 @@ export const Item = memo(
           <Label
             dimension={ctx.dimension}
             label={label}
-            labelType={labelType}
-            level={level}
+            isHeader={labelType === 'header' && level < 1}
             multiline={ctx.multiline}
             visibleTooltip={ctx.visibleTooltip}
             tooltipCssMixin={ctx.tooltipCssMixin}
-            filterActive={ctx.filterActive}
-            searchQuery={ctx.searchQuery}
-            searchFormat={ctx.searchFormat}
             container={containerRef.current}
-          />
+          >
+            {ctx.filterActive ? (
+              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+            ) : (
+              label
+            )}
+          </Label>
         </LeftCluster>
         {visibleRightCluster && (
           <RightCluster $dimension={ctx.dimension}>

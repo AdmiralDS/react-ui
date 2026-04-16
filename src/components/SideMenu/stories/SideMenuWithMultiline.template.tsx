@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-
 import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
-import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
+
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
 const Wrapper = styled.div`
   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
@@ -98,9 +98,9 @@ export const SideMenuWithMultilineTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        По умолчанию при переполнения пунктов меню, таких как item или group, появляется Tooltip с подписью названия
-        пункта.
-        <br />С помощью опции multiline при переполнении пункта label будет переноситься на новую строку.
+        По умолчанию при переполнении пунктов меню текст уходит в многоточие и появляется Tooltip с названием пункта.
+        <br />С помощью параметра multiline пользователь может настроить альтернативное поведение, когда текстовые
+        подписи пунктов меню будут отображаться в несколько строк.
       </T>
       <Wrapper>
         <Header>

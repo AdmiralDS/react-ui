@@ -1,22 +1,14 @@
 import { memo, useMemo, useRef } from 'react';
-
-import {
-  Chevron,
-  Item,
-  LeftCluster,
-  RightCluster,
-  WrapperIcon,
-  Group as StyledGroup,
-} from '#src/components/SideMenu/styles';
-import { SideMenuItem } from '#src/components/SideMenu/MenuItem';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+import { Tag } from '#src/components/Tag';
+import { Badge } from '#src/components/Badge';
+
+import { Chevron, Item, LeftCluster, RightCluster, WrapperIcon, Group as StyledGroup } from './styles';
+import { SideMenuItem } from './MenuItem';
 import { SideMenuDivider } from './MenuDivider';
 import { Label } from './Label';
-import { Tag } from '../Tag';
-import { Badge } from '../Badge';
-
-import type { SideMenuGroupNode, SideMenuItemRenderProps } from '#src/components/SideMenu/types';
-
+import { HighlightedLabel } from './HighlightedLabel';
+import type { SideMenuGroupNode, SideMenuItemRenderProps } from './types';
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 
 export const Group = memo(
@@ -59,16 +51,18 @@ export const Group = memo(
           <Label
             dimension={ctx.dimension}
             label={label}
-            labelType={labelType}
-            level={level}
+            isHeader={labelType === 'header' && level < 1}
             multiline={ctx.multiline}
             visibleTooltip={ctx.visibleTooltip}
             tooltipCssMixin={ctx.tooltipCssMixin}
-            filterActive={ctx.filterActive}
-            searchQuery={ctx.searchQuery}
-            searchFormat={ctx.searchFormat}
             container={containerRef.current}
-          />
+          >
+            {ctx.filterActive ? (
+              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+            ) : (
+              label
+            )}
+          </Label>
         </LeftCluster>
         <RightCluster $dimension={ctx.dimension}>
           {badge}

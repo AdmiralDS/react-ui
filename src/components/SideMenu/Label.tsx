@@ -2,11 +2,9 @@ import { useRef, useLayoutEffect, useState, memo } from 'react';
 import styled, { type css } from 'styled-components';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { Tooltip } from '#src/components/Tooltip';
-import { typography } from '#src/components//Typography';
+import { typography } from '#src/components/Typography';
 
-import { HighlightedLabel } from './HighlightedLabel';
 import type { SideMenuProps, SideMenuDimension, SideMenuItemRenderProps } from './types';
-import type { SideMenuContextValue } from './contexts';
 
 export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
   text-align: left;
@@ -61,49 +59,34 @@ const useTooltipVisible = (container: HTMLElement | null, element: HTMLElement |
 type LabelProps = {
   dimension: SideMenuDimension;
   label: SideMenuItemRenderProps['label'];
-  labelType: SideMenuItemRenderProps['labelType'];
-  level: SideMenuItemRenderProps['level'];
-  multiline: SideMenuProps['multiline'];
-  visibleTooltip: SideMenuProps['visibleTooltip'];
-  tooltipCssMixin: SideMenuProps['tooltipCssMixin'];
-  filterActive: SideMenuContextValue['filterActive'];
-  searchQuery: SideMenuContextValue['searchQuery'];
-  searchFormat: SideMenuContextValue['searchFormat'];
   container: HTMLElement | null;
+  isHeader?: boolean;
+  multiline?: SideMenuProps['multiline'];
+  visibleTooltip?: SideMenuProps['visibleTooltip'];
+  tooltipCssMixin?: SideMenuProps['tooltipCssMixin'];
+  children?: React.ReactNode;
 };
 
 export const Label = memo(
   ({
     dimension,
     label,
-    labelType,
-    level,
+    isHeader = false,
     multiline,
     visibleTooltip,
     tooltipCssMixin,
     container,
-    filterActive,
-    searchQuery,
-    searchFormat,
+    children,
   }: LabelProps) => {
     const textRef = useRef(null);
 
     const tooltipVisible = visibleTooltip && !multiline ? useTooltipVisible(container, textRef.current) : false;
     return (
       <>
-        <LabelText
-          ref={textRef}
-          $dimension={dimension}
-          $header={labelType === 'header' && level < 1}
-          $multiline={multiline}
-        >
-          {filterActive ? (
-            <HighlightedLabel text={label} searchText={searchQuery} highlightFormat={searchFormat} />
-          ) : (
-            label
-          )}
+        <LabelText ref={textRef} $dimension={dimension} $header={isHeader} $multiline={multiline}>
+          {children || label}
         </LabelText>
-        {tooltipVisible && (
+        {tooltipVisible && !multiline && (
           <Tooltip
             targetElement={container}
             renderContent={() => <LabelTooltip $tooltipCssMixin={tooltipCssMixin}>{label}</LabelTooltip>}

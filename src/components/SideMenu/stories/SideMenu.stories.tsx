@@ -200,7 +200,7 @@ export const SearchExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="SideMenu. с Tooltip">
+//<editor-fold desc="SideMenu. Tooltip">
 const SideMenuWithTooltipStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <SideMenuWithTooltipTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -217,12 +217,12 @@ export const SideMenuWithTooltipPanel = {
     },
   },
 
-  name: 'SideMenu. С Tooltip',
+  name: 'SideMenu. Отображение пунктов с Tooltip',
 };
 
 //</editor-fold>
 
-//<editor-fold desc="SideMenu. с многострочностью">
+//<editor-fold desc="SideMenu. Multiline">
 const SideMenuWithMultilineStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
   return <SideMenuWithMultilineTemplate {...props} CSSCustomProps={CSSCustomProps} />;
@@ -239,7 +239,7 @@ export const SideMenuWithMultilinePanel = {
     },
   },
 
-  name: 'SideMenu. С многострочностью',
+  name: 'SideMenu. Написание пунктов в несколько строк',
 };
 
 //</editor-fold>
