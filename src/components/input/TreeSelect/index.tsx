@@ -191,6 +191,18 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const flatMap = useMemo<FlatMapItems>(() => checkboxTreeToMap(stateItems), [stateItems]);
 
+    const parentByChildId = useMemo(() => {
+      const m = new Map<string, string | undefined>();
+      const walk = (nodes: TreeSelectItemProps[], parentId?: string) => {
+        for (const n of nodes) {
+          m.set(n.id, parentId);
+          if (n.children?.length) walk(n.children, n.id);
+        }
+      };
+      walk(stateItems);
+      return m;
+    }, [stateItems]);
+
     const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
       if (!node) return [];
       const ids: string[] = [node.id];
@@ -198,6 +210,29 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         node.children.forEach((child) => ids.push(...collectSubtreeIds(child)));
       }
       return ids;
+    };
+
+    const hasCheckedDescendantExcept = (rootId: string, rootNode: CheckboxGroupItemProps) => {
+      const ids = collectSubtreeIds(rootNode);
+      return ids.some((sid) => sid !== rootId && flatMap.get(sid)?.node.checked);
+    };
+
+    const bubbleUncheckParentsAfterLeafDeselect = (
+      leafId: string,
+      chips: Array<CheckboxGroupItemProps>,
+    ): Array<CheckboxGroupItemProps> => {
+      let nextChips = chips;
+      let parentId = parentByChildId.get(leafId);
+      while (parentId) {
+        const parentEntry = flatMap.get(parentId);
+        if (!parentEntry) break;
+        if (!hasCheckedDescendantExcept(parentId, parentEntry.node)) {
+          parentEntry.node.checked = false;
+          nextChips = nextChips.filter((c) => c.id !== parentId);
+        }
+        parentId = parentByChildId.get(parentId);
+      }
+      return nextChips;
     };
 
     const handleDeleteChip = (id?: string) => {
@@ -254,12 +289,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
           setSelectedChips(selectedChips.filter((chip) => !idsToRemove.includes(chip.id)));
         } else {
           item.node.checked = false;
-          const index = selectedChips.findIndex((chip) => chip.id === item.node.id);
-          if (index > -1) {
-            const newSelectedChips = [...selectedChips];
-            newSelectedChips.splice(index, 1);
-            setSelectedChips(newSelectedChips);
-          }
+          let newSelectedChips = selectedChips.filter((chip) => chip.id !== item.node.id);
+          newSelectedChips = bubbleUncheckParentsAfterLeafDeselect(id, newSelectedChips);
+          setSelectedChips(newSelectedChips);
         }
 
         onDeselect?.(id);

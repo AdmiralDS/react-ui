@@ -95,6 +95,33 @@ test.describe('TreeSelect Component', () => {
     await expect(childChip2).not.toBeVisible();
   });
 
+  test('should remove parent chip when the last descendant chip is removed', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const wrapper = frame.locator('.wrapper-options');
+    const parentLabel = 'Опция 1';
+    const parentCheckbox = frame.locator(`role=checkbox[name="${parentLabel}"]`);
+
+    await input.click();
+    await parentCheckbox.click();
+
+    const parentChip = wrapper.getByText(parentLabel, { exact: true });
+    await expect(parentChip).toBeVisible();
+
+    const closeChip = (label: string) => wrapper.getByText(label, { exact: true }).locator('~ .close-button').click();
+
+    await closeChip('Опция 1.1');
+    await closeChip('Опция 1.2.1');
+    await closeChip('Опция 1.2.2');
+    await closeChip('Опция 1.2.3');
+    await expect(wrapper.getByText('Опция 1.2', { exact: true })).not.toBeVisible();
+    await closeChip('Опция 1.3');
+
+    await expect(parentChip).not.toBeVisible();
+  });
+
   test('should clear all selections on clear icon click', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
     const frame = getStorybookFrameLocator(page);
