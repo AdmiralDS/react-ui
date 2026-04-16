@@ -122,6 +122,36 @@ test.describe('TreeSelect Component', () => {
     await expect(parentChip).not.toBeVisible();
   });
 
+  test('should render only child chips in SHOW_CHILD strategy', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--show-child-strategy`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const wrapper = frame.locator('.wrapper-options');
+    const parentCheckbox = frame.locator('role=checkbox[name="Опция 1"]');
+
+    await input.click();
+    await parentCheckbox.click();
+
+    await expect(wrapper.getByText('Опция 1', { exact: true })).not.toBeVisible();
+    await expect(wrapper.getByText('Опция 1.1', { exact: true })).toBeVisible();
+    await expect(wrapper.getByText('Опция 1.2.1', { exact: true })).toBeVisible();
+  });
+
+  test('should collapse fully selected branches to parent chip in SHOW_PARENT strategy', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--show-parent-strategy`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const wrapper = frame.locator('.wrapper-options');
+
+    await input.click();
+    await frame.locator('role=checkbox[name="Опция 1.2.1"]').click();
+    await frame.locator('role=checkbox[name="Опция 1.2.2"]').click();
+
+    await expect(wrapper.getByText('Опция 1.2', { exact: true })).toBeVisible();
+    await expect(wrapper.getByText('Опция 1.2.1', { exact: true })).not.toBeVisible();
+    await expect(wrapper.getByText('Опция 1.2.2', { exact: true })).not.toBeVisible();
+  });
+
   test('should clear all selections on clear icon click', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
     const frame = getStorybookFrameLocator(page);
