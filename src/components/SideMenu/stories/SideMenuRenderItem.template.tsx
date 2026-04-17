@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { IconButton, SideMenu, Group, Sider, T, typography, Item } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Group, Sider, T, typography, Item, Badge, Tag } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuNodeRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
@@ -102,16 +102,18 @@ const render = ({
   label,
   dimension,
   icon,
-  badge,
+  badge: badgeProps,
   labelType,
   level,
   selected,
   onClick,
-  tag,
+  tag: tagProps,
   expanded,
   type,
   id,
 }: SideMenuNodeRenderProps) => {
+  const badge = badgeProps ? <Badge {...badgeProps} dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
+  const tag = tagProps ? <Tag {...tagProps} as="span" dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
   return (
     <Wrapper
       as={type === 'group' ? 'div' : undefined}

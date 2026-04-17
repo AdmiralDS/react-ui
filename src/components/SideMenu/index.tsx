@@ -5,7 +5,7 @@ import { InputIconButton } from '#src/components/InputIconButton';
 import { Scrollbars } from '#src/components/Scrollbar';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
-import type { SideMenuProps, SideMenuNode, SearchFormat } from './types';
+import type { SideMenuProps, SideMenuNode } from './types';
 import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './styles';
 import { filterMenuTree } from './utils/filterTree';
 import { SideMenuItem } from './MenuItem';
@@ -44,7 +44,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       onSelectItem,
       onOpenGroupsChange,
       search = false,
-      searchFormat = 'wholly' as SearchFormat,
+      searchFormat = 'wholly',
       onFilterItem = defaultFilterItem,
       dimension = 'm',
       renderBottomPanel,

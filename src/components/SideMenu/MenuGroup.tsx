@@ -18,8 +18,8 @@ export const Group = memo(
     onClick,
     level,
     selected,
-    badge,
-    tag,
+    badge: badgeProps,
+    tag: tagProps,
     icon,
     expanded,
     labelType,
@@ -33,6 +33,9 @@ export const Group = memo(
 
       if (onClick) onClick();
     };
+
+    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
+    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
 
     return (
       <Item
@@ -82,25 +85,12 @@ export const Group = memo(
 );
 
 export const SideMenuGroup = memo(
-  ({
-    id,
-    render,
-    label,
-    children,
-    tag: tagProps,
-    badge: badgeProps,
-    icon,
-    labelType,
-    type = 'group',
-  }: SideMenuGroupNode) => {
+  ({ id, render, label, children, tag, badge, icon, labelType, type = 'group' }: SideMenuGroupNode) => {
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
     const level = ancestorGroupIds.length;
     const expanded = ctx.searchActive ? true : ctx.openGroupIds.has(id);
-
-    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
-    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
 
     const findSelectedItem = (groupNode: SideMenuGroupNode['children']) => {
       return groupNode.some((item): boolean => {
