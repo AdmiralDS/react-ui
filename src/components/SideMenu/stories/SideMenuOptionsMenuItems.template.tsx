@@ -87,7 +87,7 @@ const items: SideMenuProps['items'] = [
   },
 ];
 
-export const SideMenuItemStateTemplate = ({
+export const SideMenuOptionsMenuItemsTemplate = ({
   themeBorderKind,
   CSSCustomProps,
   ...props
@@ -99,8 +99,13 @@ export const SideMenuItemStateTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        Иконки и параметр header могут быть только на первом уровне вложенности. Такое поведение можно кастомизировать с
-        помощью функции render.
+        Пункты меню имеют такие опции, как icons, badge, tag и labelType.
+        <br />
+        Разделитель(type="divider") может быть как с текстом, так и без него. При переполнении текста он уходит в
+        троеточие и при наведении на него появляется Tooltip.
+        <br />
+        Иконки и параметр lableType могут быть только на первом уровне вложенности. Такое поведение можно
+        кастомизировать с помощью функции render.
       </T>
       <Wrapper>
         <Header>
