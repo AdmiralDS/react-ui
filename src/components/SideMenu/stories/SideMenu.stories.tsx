@@ -8,22 +8,24 @@ import { SideMenuPlaygroundTemplate } from './SideMenuPlayground.template';
 import { SideMenuSiderTemplate } from './SideMenuSider.template';
 import { SideMenuDrawerTemplate } from './SideMenuDrawer.template';
 import { SideMenuTopBottomPanelTemplate } from './SideMenuTopBottomPanel.template';
-import { SideMenuItemStateTemplate } from './SideMenuItemState.template';
+import { SideMenuOptionsMenuItemsTemplate } from './SideMenuOptionsMenuItems.template';
 import { SideMenuSearchTemplate } from './SideMenuSearch.template';
 import { SideMenuWithTooltipTemplate } from './SideMenuWithTooltip.template';
 import { SideMenuWithMultilineTemplate } from './SideMenuWithMultiline.template';
 import { SideMenuRenderItemTemplate } from './SideMenuRenderItem.template';
+import { SideMenuControlledUncontrolledTemplate } from './SideMenuControlledUncontrolled.template';
 
 // Imports of text sources
 import SideMenuPlaygroundTemplateRaw from './SideMenuPlayground.template?raw';
 import SideMenuSiderTemplateRaw from './SideMenuSider.template?raw';
 import SideMenuDrawerTemplateRaw from './SideMenuDrawer.template?raw';
 import SideMenuTopBottomPanelTemplateRaw from './SideMenuTopBottomPanel.template?raw';
-import SideMenuItemStateTemplateRaw from './SideMenuItemState.template?raw';
+import SideMenuOptionsMenuItemsTemplateRaw from './SideMenuOptionsMenuItems.template?raw';
 import SideMenuSearchTemplateRaw from './SideMenuSearch.template?raw';
 import SideMenuWithTooltipTemplateRaw from './SideMenuWithTooltip.template?raw';
 import SideMenuWithMultilineTemplateRaw from './SideMenuWithMultiline.template?raw';
 import SideMenuRenderItemTemplateRaw from './SideMenuRenderItem.template?raw';
+import SideMenuControlledUncontrolledRaw from './SideMenuControlledUncontrolled.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -83,6 +85,28 @@ export const PlaygroundExample = {
   },
 
   name: 'SideMenu. Playground',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="SideMenu. Контролируемое/неконтролируемое состояние">
+const SideMenuControlledUncontrolledStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuControlledUncontrolledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuControlledUncontrolledPanel = {
+  render: SideMenuControlledUncontrolledStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuControlledUncontrolledRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Контролируемое/неконтролируемое состояние',
 };
 
 //</editor-fold>
@@ -153,24 +177,24 @@ export const SideMenuTopBottomPanel = {
 
 //</editor-fold>
 
-//<editor-fold desc="SideMenu. Состояния items">
-const SideMenuItemStateStory: StoryFn<typeof SideMenu> = (props) => {
+//<editor-fold desc="SideMenu. Опции пунктов меню">
+const SideMenuOptionsMenuItemsStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <SideMenuItemStateTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <SideMenuOptionsMenuItemsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const SideMenuItemStatePanel = {
-  render: SideMenuItemStateStory,
+export const SideMenuOptionsMenuItemsPanel = {
+  render: SideMenuOptionsMenuItemsStory,
 
   parameters: {
     docs: {
       source: {
-        code: SideMenuItemStateTemplateRaw,
+        code: SideMenuOptionsMenuItemsTemplateRaw,
       },
     },
   },
 
-  name: 'SideMenu. Состояния items',
+  name: 'SideMenu. Опции пунктов меню',
 };
 
 //<editor-fold desc="Search">
