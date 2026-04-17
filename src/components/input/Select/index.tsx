@@ -338,17 +338,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [multiple, constantOptions, selectedValue],
     );
 
+    const optionsMap = useMemo(() => {
+      return new Map(constantOptions.map((opt) => [opt.value, opt]));
+    }, [constantOptions]);
+
     const selectedOptions = useMemo(() => {
       if (multiple && Array.isArray(selectedValue)) {
         return selectedValue.reduce((acc: Array<IConstantOption>, item: string) => {
-          const option = constantOptions.find((option) => option.value === item);
+          const option = optionsMap.get(item);
+
           if (option) acc.push(option);
           return acc;
         }, []);
-      } else {
-        return [];
       }
-    }, [constantOptions, selectedValue, multiple]);
+      return [];
+    }, [optionsMap, selectedValue, multiple]);
 
     const prevIsSearchPanelOpen = usePrevious<boolean>(isSearchPanelOpen);
     const [itemsOnTop, setItemsOnTop] = useState<Array<SelectItemProps>>([]);
@@ -786,13 +790,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
-    const memorisedChildren = useMemo(
-      () =>
-        Children.map(children, (child) =>
-          isValidElement(child) ? cloneElement(child, { key: uid(), ...child.props }) : null,
-        ),
-      [children],
-    );
+    const memorisedChildren = useMemo(() => {
+      if (!children) return null;
+
+      return Children.map(children, (child, index) => {
+        if (isValidElement(child)) {
+          // Используем существующий key или value как стабильный идентификатор
+          const stableKey = child.key ?? child.props?.value ?? index;
+          return cloneElement(child, { key: stableKey });
+        }
+        return null;
+      });
+    }, [children]);
 
     const memorisedDropDownOptions = useMemo(
       () => (
