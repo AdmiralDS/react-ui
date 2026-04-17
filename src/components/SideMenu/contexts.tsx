@@ -39,7 +39,7 @@ export interface SideMenuContextValue {
   tooltipCssMixin?: ReturnType<typeof css>;
   /** Позволяет пунктам меню при переполнении переходить на следующую строку,
    * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
-  multiline?: boolean;
+  multilineView?: boolean;
   visibleTooltip?: boolean;
   gap: React.CSSProperties['gap'];
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 
@@ -66,6 +66,12 @@ export const SideMenuPlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        Компонент SideMenu (боковое меню) используется в интерфейсах приложений или веб-сайтов для обеспечения удобной
+        навигации. Компонент может сворачиваться по клику на кнопку или при адаптиве. SideMenu следует располагать сбоку
+        (слева), для этого нужно использовать вспомогательные компоненты: Sider и Drawer. Подробнее об этом в следующих
+        примерах.
+      </T>
       <Wrapper>
         <Header>
           <IconButton dimension="m" onClick={handleToggle}>

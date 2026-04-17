@@ -6,10 +6,10 @@ import { typography } from '#src/components/Typography';
 
 import type { SideMenuProps, SideMenuDimension, SideMenuItemRenderProps } from './types';
 
-export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multiline?: boolean }>`
+export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multilineView?: boolean }>`
   text-align: left;
   overflow: hidden;
-  ${({ $multiline }) => !$multiline && 'white-space: nowrap; text-overflow: ellipsis;'};
+  ${({ $multilineView }) => !$multilineView && 'white-space: nowrap; text-overflow: ellipsis;'};
 
   ${({ $dimension, $header }) =>
     $dimension === 'l'
@@ -61,7 +61,7 @@ type LabelProps = {
   label: SideMenuItemRenderProps['label'];
   container: HTMLElement | null;
   isHeader?: boolean;
-  multiline?: SideMenuProps['multiline'];
+  multilineView?: SideMenuProps['multilineView'];
   visibleTooltip?: SideMenuProps['visibleTooltip'];
   tooltipCssMixin?: SideMenuProps['tooltipCssMixin'];
   children?: React.ReactNode;
@@ -72,7 +72,7 @@ export const Label = memo(
     dimension,
     label,
     isHeader = false,
-    multiline,
+    multilineView,
     visibleTooltip,
     tooltipCssMixin,
     container,
@@ -80,13 +80,13 @@ export const Label = memo(
   }: LabelProps) => {
     const textRef = useRef(null);
 
-    const tooltipVisible = visibleTooltip && !multiline ? useTooltipVisible(container, textRef.current) : false;
+    const tooltipVisible = visibleTooltip && !multilineView ? useTooltipVisible(container, textRef.current) : false;
     return (
       <>
-        <LabelText ref={textRef} $dimension={dimension} $header={isHeader} $multiline={multiline}>
+        <LabelText ref={textRef} $dimension={dimension} $header={isHeader} $multilineView={multilineView}>
           {children || label}
         </LabelText>
-        {tooltipVisible && !multiline && (
+        {tooltipVisible && !multilineView && (
           <Tooltip
             targetElement={container}
             renderContent={() => <LabelTooltip $tooltipCssMixin={tooltipCssMixin}>{label}</LabelTooltip>}

@@ -82,9 +82,11 @@ export interface SideMenuPanelProps {
   dimension: SideMenuDimension;
 }
 
-export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Массив с описанием дерева элементов меню */
+export interface SideMenuProps extends React.HTMLAttributes<HTMLElement> {
+  /** Массив с описанием дерева пунктов меню */
   items: SideMenuNode[];
+  /** Размер компонента */
+  dimension?: SideMenuDimension;
   /** id выбранного пункта (controlled mode) */
   selectedItem?: string;
   /** id пункта, который будет выбран по умолчанию (uncontrolled mode) */
@@ -92,35 +94,32 @@ export interface SideMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Колбек при изменении выбранного пункта */
   onSelectItem?: (id: string) => void;
   /** Массив id открытых групп (controlled mode) */
-  openMenus?: string[];
+  openGroups?: string[];
   /** Массив id открытых групп по умолчанию (uncontrolled mode) */
-  defaultOpenMenus?: string[];
-  /** Колбек при изменении openMenus (открытие/закрытие групп) */
-  onOpenMenusChange?: (openIds: string[]) => void;
-  /** Включает опцию фильтрации */
+  defaultOpenGroups?: string[];
+  /** Колбек при изменении openGroups (открытие/закрытие групп) */
+  onOpenGroupsChange?: (openGroupsIds: string[]) => void;
+  /** Включение поиска по пунктам меню */
   search?: boolean;
-  /** Данная опция позволяет при фильтрации искать по строке целиком или по отдельным словам */
+  /** Формат поиска. Данная опция позволяет искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
-  /** Позволяет фильтровать отображаемые пункты */
+  /** Функция, которая фильтрует пункты по результатам поиска. Использовать для реализации кастомной фильтрации */
   onFilterItem?: (value: string, searchValue: string, searchFormat: SearchFormat) => boolean;
-  /** Размер компонента */
-  dimension?: SideMenuDimension;
-  /** Позволяет добавить панель сверху над списком опций */
-  renderTopPanel?: (props: SideMenuPanelProps) => ReactNode;
-  /** Позволяет добавить панель внизу под списком опций */
-  renderBottomPanel?: (props: SideMenuPanelProps) => ReactNode;
-  /** Расстояние между пунктами списка. По умолчанию 4px */
-  gap?: React.CSSProperties['gap'];
-  /** Позволяет отключить/включить отображение Tooltip при переполнении текста в пунктах меню, по умолчанию true  */
-  visibleTooltip?: boolean;
-  /** Позволяет добавлять миксин для Tooltip, созданный с помощью styled css  */
-  tooltipCssMixin?: ReturnType<typeof css>;
-  /** Позволяет пунктам меню при переполнении переходить на следующую строку.
-   * По умолчанию переполнение уходит в многоточие и при наведении отображается Tooltip */
-  multiline?: boolean;
-  /** Конфиг функция пропсов для левой кнопки. На вход получает начальный набор пропсов, на
+  /** Конфиг функция пропсов для инпута. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
   inputPropsConfig?: (
     props: React.ComponentProps<typeof TextInput>,
   ) => Partial<React.ComponentProps<typeof TextInput> & DataAttributes>;
+  /** Позволяет добавить панель сверху над списком пунктов меню */
+  renderTopPanel?: (props: SideMenuPanelProps) => ReactNode;
+  /** Позволяет добавить панель внизу под списком пунктов меню */
+  renderBottomPanel?: (props: SideMenuPanelProps) => ReactNode;
+  /** Расстояние между пунктами меню. По умолчанию 4px */
+  gap?: React.CSSProperties['gap'];
+  /** Отображение Tooltip для лейблов при переполнении текста, по умолчанию true */
+  visibleTooltip?: boolean;
+  /** CSS миксин, созданный с помощью styled css, для переопределения стилей Tooltip  */
+  tooltipCssMixin?: ReturnType<typeof css>;
+  /** Многострочное отображение лейблов при переполнении текста, по умолчанию false */
+  multilineView?: boolean;
 }

@@ -39,10 +39,10 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       items,
       selectedItem,
       defaultSelectedItem = null,
-      openMenus,
-      defaultOpenMenus = [],
+      openGroups,
+      defaultOpenGroups = [],
       onSelectItem,
-      onOpenMenusChange,
+      onOpenGroupsChange,
       search = false,
       searchFormat = 'wholly' as SearchFormat,
       onFilterItem = defaultFilterItem,
@@ -51,7 +51,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       renderTopPanel,
       gap = 4,
       tooltipCssMixin,
-      multiline = false,
+      multilineView = false,
       visibleTooltip = true,
       inputPropsConfig = nothing,
       ...props
@@ -66,8 +66,8 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       defaultValue: defaultSelectedItem,
     });
     const openState = useControlledState<string[]>({
-      value: openMenus,
-      defaultValue: defaultOpenMenus,
+      value: openGroups,
+      defaultValue: defaultOpenGroups,
     });
 
     const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
@@ -120,18 +120,18 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
         const next = isOpen ? [...openGroupIds].filter((id) => id !== groupId) : [...openGroupIds, groupId];
 
         openState.setState(next);
-        onOpenMenusChange?.(next);
+        onOpenGroupsChange?.(next);
       },
-      [openGroupIds, openState, onOpenMenusChange],
+      [openGroupIds, openState, onOpenGroupsChange],
     );
 
     const handleOpenGroups = useCallback(
       (openIds: string[]) => {
         const next = [...new Set([...openGroupIds, ...openIds])];
         openState.setState(next);
-        onOpenMenusChange?.(next);
+        onOpenGroupsChange?.(next);
       },
-      [openGroupIds, openState.setState, onOpenMenusChange],
+      [openGroupIds, openState.setState, onOpenGroupsChange],
     );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,7 +154,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
         hasIcons,
         onOpenGroups: handleOpenGroups,
         tooltipCssMixin,
-        multiline,
+        multilineView,
         visibleTooltip,
         gap,
       }),
@@ -170,7 +170,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
         tooltipCssMixin,
         dimension,
         hasIcons,
-        multiline,
+        multilineView,
         visibleTooltip,
         gap,
       ],

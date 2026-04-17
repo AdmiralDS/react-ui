@@ -65,7 +65,7 @@ export const Item = memo(
             dimension={ctx.dimension}
             label={label}
             isHeader={labelType === 'header' && level < 1}
-            multiline={ctx.multiline}
+            multilineView={ctx.multilineView}
             visibleTooltip={ctx.visibleTooltip}
             tooltipCssMixin={ctx.tooltipCssMixin}
             container={containerRef.current}

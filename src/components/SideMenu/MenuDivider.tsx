@@ -35,7 +35,7 @@ export const SideMenuDivider = memo(({ label }: SideMenuDividerNode) => {
           dimension={dimension}
           label={label}
           container={containerRef.current}
-          multiline={false}
+          multilineView={false}
           visibleTooltip={visibleTooltip}
           tooltipCssMixin={tooltipCssMixin}
         />

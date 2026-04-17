@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { IconButton, SideMenu, Drawer, Sider, useMediaQuery } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Drawer, Sider, useMediaQuery, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
@@ -71,9 +71,9 @@ export const SideMenuDrawerTemplate = ({
   const [openSider, setOpenSider] = useState(!isMobile);
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  /** Использую controlled state, чтобы синхронизировать меню в Sider и в Drawer */
+  /** Используйте controlled state, чтобы синхронизировать меню в Sider и в Drawer */
   const [selectedItem, setSelectedItem] = useState<string | undefined>(undefined);
-  const [openMenus, setOpenMenus] = useState<Array<string>>([]);
+  const [openGroups, setOpenGroups] = useState<Array<string>>([]);
 
   const handleToggle = () => {
     setOpenSider((open) => !open);
@@ -92,6 +92,20 @@ export const SideMenuDrawerTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        Существует несколько сценариев использования компонента SideMenu. Например, меню может сворачиваться, когда
+        размер рабочей области страницы становится меньше заданного значения. На экране при этом должна находиться
+        кнопка меню, которая при нажатии будет выводить меню оверлеем над контентом страницы. Как правило, такая кнопка
+        находится в шапке сайта.
+        <br />
+        Для реализации вышеописанного сценария следует использовать комбинацию из двух вспомогательных компонентов Sider
+        и Drawer. Компонент Sider следует использовать при большом размере экрана, когда можно позволить боковому меню
+        забирать на себя часть рабочей области. При переходе к ограниченному размеру экрана для отображения бокового
+        меню через оверлей следует использовать компонент Drawer.
+        <br />
+        Для работы с медиа-запросами (в том числе для определения размеров экрана) библиотека предоставляет специальный
+        хук useMediaQuery.
+      </T>
       <Wrapper>
         <Header>
           <IconButton dimension="m" onClick={handleToggle}>
@@ -116,8 +130,8 @@ export const SideMenuDrawerTemplate = ({
               items={items}
               selectedItem={selectedItem}
               onSelectItem={(id: string) => setSelectedItem(id)}
-              openMenus={openMenus}
-              onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
+              openGroups={openGroups}
+              onOpenGroupsChange={(groups: Array<string>) => setOpenGroups(groups)}
             />
           </Drawer>
           <Sider isOpen={openSider && !isMobile} width={200}>
@@ -126,8 +140,8 @@ export const SideMenuDrawerTemplate = ({
               items={items}
               selectedItem={selectedItem}
               onSelectItem={(id: string) => setSelectedItem(id)}
-              openMenus={openMenus}
-              onOpenMenusChange={(menus: Array<string>) => setOpenMenus(menus)}
+              openGroups={openGroups}
+              onOpenGroupsChange={(groups: Array<string>) => setOpenGroups(groups)}
             />
           </Sider>
           <Main />

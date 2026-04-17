@@ -31,7 +31,12 @@ const Desc = styled.div`
   line-height: 24px;
 `;
 
-const Description = () => <Desc>SideMenu</Desc>;
+const Description = () => (
+  <Desc>
+    Компонент SideMenu (боковое меню) используется в интерфейсах приложений или веб-сайтов для обеспечения удобной
+    навигации.
+  </Desc>
+);
 
 export default {
   title: 'Admiral-2.1/SideMenu',
@@ -44,16 +49,6 @@ export default {
       },
     },
     componentSubtitle: <Description />,
-    design: [
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18581',
-      },
-      {
-        type: 'figma',
-        url: 'https://www.figma.com/file/EGEGZsx8WhdxpmFKu8J41G/Admiral-2.1-UI-Kit?node-id=37%3A18684',
-      },
-    ],
   },
   argTypes: {
     dimension: {

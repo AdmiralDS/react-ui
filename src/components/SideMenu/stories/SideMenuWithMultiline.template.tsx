@@ -99,7 +99,7 @@ export const SideMenuWithMultilineTemplate = ({
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
         По умолчанию при переполнении пунктов меню текст уходит в многоточие и появляется Tooltip с названием пункта.
-        <br />С помощью параметра multiline пользователь может настроить альтернативное поведение, когда текстовые
+        <br />С помощью параметра multilineView пользователь может настроить альтернативное поведение, когда текстовые
         подписи пунктов меню будут отображаться в несколько строк.
       </T>
       <Wrapper>
@@ -110,7 +110,7 @@ export const SideMenuWithMultilineTemplate = ({
         </Header>
         <Layout>
           <Sider isOpen={open} width={300}>
-            <SideMenu {...props} items={items} multiline />
+            <SideMenu {...props} items={items} multilineView />
           </Sider>
           <Main />
         </Layout>

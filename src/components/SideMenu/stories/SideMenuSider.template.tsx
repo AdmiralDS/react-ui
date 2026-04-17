@@ -1,6 +1,6 @@
 import { useState, Fragment } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
-import { IconButton, SideMenu, Sider } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 
@@ -83,6 +83,18 @@ export const SideMenuSiderTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        Существует несколько сценариев использования компонента SideMenu. Один из вариантов, когда в развернутом
+        состоянии боковое меню занимает часть экрана, но может сворачиваться-разворачиваться при нажатии на заданную
+        кнопку. Такой сценарий может использоваться, когда нужно больше места на странице, например, нужно место для
+        отображения больших таблиц, и таблицы занимают освободившееся место, отображая больше информации.
+        <br />
+        Для отображения бокового меню с левой стороны от рабочей области и реализации его плавного открытия/закрытия
+        следует использовать вспомогательный компонент Sider. Данный компонент отображается по левой стороне рабочей
+        области и при смене параметра isOpen плавно изменяет свою ширину от заданного значения width (по умолчанию
+        240px) до 0. С помощью параметров appearance, withBorder и cssMixin пользователь может настраивать внешний вид
+        компонента Sider.
+      </T>
       <Section>
         <Header>
           <IconButton dimension="m" onClick={() => setOpen((open) => !open)}>
@@ -96,6 +108,12 @@ export const SideMenuSiderTemplate = ({
           <Main />
         </Layout>
       </Section>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        Важно отметить, что компонент Sider не имеет четко заданных высоты и позиционирования. Пользователь может сам
+        настроить необходимые стили или поместить компонент Sider в подготовленный родительский контейнер с нужными
+        размером и позиционированием. Так, в примере выше компонент Sider подстраивается под родительский контейнер, а в
+        примере ниже показано, как сделать компонент Sider фиксированным по левой стороне родительского контейнера.
+      </T>
       <Section>
         <Header>
           <IconButton dimension="m" onClick={() => setOpen2((open) => !open)}>
