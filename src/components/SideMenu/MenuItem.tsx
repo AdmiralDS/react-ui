@@ -3,7 +3,7 @@ import { Tag } from '#src/components/Tag';
 import { Badge } from '#src/components/Badge';
 
 import { useKeyPath, useSideMenuContext } from './contexts';
-import type { SideMenuItemNode, SideMenuItemRenderProps } from './types';
+import type { SideMenuItemNode, SideMenuNodeRenderProps } from './types';
 import { Item as StyledItem, LeftCluster, RightCluster, WrapperIcon } from './styles';
 import { Label } from './Label';
 import { HighlightedLabel } from './HighlightedLabel';
@@ -25,18 +25,20 @@ export const Item = memo(
     level,
     labelType,
     icon,
-    badge,
-    tag,
-  }: Omit<SideMenuItemRenderProps, 'dimension' | 'type' | 'expanded'>) => {
+    badge: badgeProps,
+    tag: tagProps,
+  }: Omit<SideMenuNodeRenderProps, 'dimension' | 'type' | 'expanded'>) => {
     const containerRef = useRef(null);
 
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
+    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
+    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
     const visibleRightCluster = Boolean(tag || badge);
 
     const handleClick = () => {
-      if (ctx.filterActive) {
+      if (ctx.searchActive) {
         // если в ходе фильтрации выбрана опция, то следует раскрыть все группы, в которые она входит
         const needToOpenIds = findUniqueIds(ctx.openGroupIds, ancestorGroupIds);
         if (needToOpenIds) {
@@ -70,8 +72,13 @@ export const Item = memo(
             tooltipCssMixin={ctx.tooltipCssMixin}
             container={containerRef.current}
           >
-            {ctx.filterActive ? (
-              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+            {ctx.searchActive ? (
+              <HighlightedLabel
+                text={label}
+                searchText={ctx.searchQuery}
+                highlightFormat={ctx.searchFormat}
+                multilineView={ctx.multilineView}
+              />
             ) : (
               label
             )}
@@ -89,18 +96,15 @@ export const Item = memo(
 );
 
 export const SideMenuItem = memo(
-  ({ id, render, label, badge: badgeProps, icon, tag: tagProps, labelType, type = 'item' }: SideMenuItemNode) => {
+  ({ id, render, label, badge, icon, tag, labelType, type = 'item' }: SideMenuItemNode) => {
     const ctx = useSideMenuContext();
     const ancestorGroupIds = useKeyPath();
 
     const level = ancestorGroupIds.length;
     const selected = ctx.selectedItemId === id;
 
-    const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
-    const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
-
     const handleClick = () => {
-      if (ctx.filterActive) {
+      if (ctx.searchActive) {
         // если в ходе фильтрации выбрана опция, то следует раскрыть все группы, в которые она входит
         const needToOpenIds = findUniqueIds(ctx.openGroupIds, ancestorGroupIds);
         if (needToOpenIds) {

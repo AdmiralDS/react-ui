@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { IconButton, SideMenu, Group, Sider, T, typography, Item } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, SideMenuItemRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, SideMenuNodeRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 import { ReactComponent as CloudSolid } from '@admiral-ds/icons/build/system/CloudSolid.svg';
@@ -111,7 +111,7 @@ const render = ({
   expanded,
   type,
   id,
-}: SideMenuItemRenderProps) => {
+}: SideMenuNodeRenderProps) => {
   return (
     <Wrapper
       as={type === 'group' ? 'div' : undefined}
@@ -216,7 +216,7 @@ const renderSimpleItem = ({
   expanded,
   type,
   id,
-}: SideMenuItemRenderProps) => {
+}: SideMenuNodeRenderProps) => {
   return type === 'item' ? (
     <Item
       label={label}

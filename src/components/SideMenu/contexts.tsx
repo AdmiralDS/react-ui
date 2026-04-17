@@ -29,7 +29,7 @@ export interface SideMenuContextValue {
    * Включена ли фильтрация и применяется ли активный фильтр.
    * В режиме фильтрации группы отображаются раскрытыми, чтобы показать найденные descendants.
    */
-  filterActive: boolean;
+  searchActive: boolean;
   dimension: SideMenuDimension;
   //Есть ли в массиве items иконки в 1 уровне вложенности
   hasIcons: boolean;

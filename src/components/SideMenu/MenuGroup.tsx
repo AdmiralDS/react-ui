@@ -8,7 +8,7 @@ import { SideMenuItem } from './MenuItem';
 import { SideMenuDivider } from './MenuDivider';
 import { Label } from './Label';
 import { HighlightedLabel } from './HighlightedLabel';
-import type { SideMenuGroupNode, SideMenuItemRenderProps } from './types';
+import type { SideMenuGroupNode, SideMenuNodeRenderProps } from './types';
 import { PathContext, useKeyPath, useSideMenuContext } from './contexts';
 
 export const Group = memo(
@@ -23,7 +23,7 @@ export const Group = memo(
     icon,
     expanded,
     labelType,
-  }: Omit<SideMenuItemRenderProps, 'dimension' | 'type'>) => {
+  }: Omit<SideMenuNodeRenderProps, 'dimension' | 'type'>) => {
     const containerRef = useRef(null);
 
     const ctx = useSideMenuContext();
@@ -57,8 +57,13 @@ export const Group = memo(
             tooltipCssMixin={ctx.tooltipCssMixin}
             container={containerRef.current}
           >
-            {ctx.filterActive ? (
-              <HighlightedLabel text={label} searchText={ctx.searchQuery} highlightFormat={ctx.searchFormat} />
+            {ctx.searchActive ? (
+              <HighlightedLabel
+                text={label}
+                searchText={ctx.searchQuery}
+                highlightFormat={ctx.searchFormat}
+                multilineView={ctx.multilineView}
+              />
             ) : (
               label
             )}
@@ -92,7 +97,7 @@ export const SideMenuGroup = memo(
     const ancestorGroupIds = useKeyPath();
 
     const level = ancestorGroupIds.length;
-    const expanded = ctx.filterActive ? true : ctx.openGroupIds.has(id);
+    const expanded = ctx.searchActive ? true : ctx.openGroupIds.has(id);
 
     const badge = badgeProps ? <Badge {...badgeProps} dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;
     const tag = tagProps ? <Tag {...tagProps} as="span" dimension={ctx.dimension === 'l' ? 'm' : 's'} /> : undefined;

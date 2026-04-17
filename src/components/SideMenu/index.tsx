@@ -78,7 +78,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
     const [isSearching, setSearching] = useState(false);
     const [scrollableNode, setScrollableNode] = useState<HTMLUListElement | null>(null);
 
-    const filterActive = search && searchQuery.trim().length > 0 && isSearching;
+    const searchActive = search && searchQuery.trim().length > 0 && isSearching;
     const filteredItems = useMemo(() => {
       const result = filterMenuTree(items, searchQuery, onFilterItem, searchFormat).nodes;
 
@@ -145,7 +145,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       () => ({
         selectedItemId: selectedState.state,
         openGroupIds,
-        filterActive,
+        searchActive,
         searchQuery,
         searchFormat,
         onSelectItem: handleSelectItem,
@@ -161,7 +161,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       [
         selectedState.state,
         openGroupIds,
-        filterActive,
+        searchActive,
         searchQuery,
         searchFormat,
         handleSelectItem,
@@ -209,7 +209,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
           <PathContext.Provider value={[]}>
             <ScrollWrapper>
               <ScrollableContent role="menu" ref={(node) => setScrollableNode(node)} $gap={gap} $dimension={dimension}>
-                {(filterActive ? filteredItems : items).map((node, index) => (
+                {(searchActive ? filteredItems : items).map((node, index) => (
                   <Fragment key={node.type === 'divider' ? `divider_${index}` : node.id}>{getItem(node)}</Fragment>
                 ))}
               </ScrollableContent>
