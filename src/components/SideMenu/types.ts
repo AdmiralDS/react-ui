@@ -70,8 +70,6 @@ interface SideMenuBaseRenderProps {
   visibleTooltip?: boolean;
   /** CSS миксин, созданный с помощью styled css, для переопределения стилей Tooltip  */
   tooltipCssMixin?: ReturnType<typeof css>;
-  /** Многострочное отображение лейблов при переполнении текста, по умолчанию false */
-  multilineView?: boolean;
 }
 
 export interface SideMenuDividerRenderProps extends SideMenuBaseRenderProps {
@@ -96,16 +94,18 @@ export interface SideMenuNodeRenderProps extends SideMenuBaseRenderProps {
   badge?: SideMenuBadge;
   /** Параметры для отображения компонента Tag в пункте меню */
   tag?: SideMenuTag;
-  /** Обработчик, срабатывающий по клику на пункт меню */
-  onClick?: () => void;
   /** Состояние expanded - признак того, что данный группа пунктов развернута */
   expanded?: boolean;
   /** Показатель того, отображает ли сейчас меню результаты поиска */
-  seacrhActive?: boolean;
+  searchActive?: boolean;
   /** Строка поиска. Значение введеное в инпут, по которому происходит поиск */
-  seacrhQuery?: string;
+  searchQuery?: string;
   /** Формат поиска. Данная опция позволяет искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
+  /** Многострочное отображение лейблов при переполнении текста, по умолчанию false */
+  multilineView?: boolean;
+  /** Есть ли в массиве items иконки на первом уровне вложенности (влияет на отступы в пунктах меню) */
+  hasIcons?: boolean;
 }
 
 export interface SideMenuPanelProps {

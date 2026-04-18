@@ -7,18 +7,6 @@ import type { SideMenuDimension } from './types';
 
 const INDENT = 20;
 
-const unselectedItemMixin = css`
-  &:hover {
-    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
-  }
-  &:active {
-    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
-  }
-  *[fill^='#'] {
-    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
-  }
-`;
-
 export const LeftCluster = styled.span<{ $dimension: SideMenuDimension }>`
   display: inline-flex;
   gap: ${({ $dimension }) => ($dimension === 'l' ? '16px' : '12px')};
@@ -35,6 +23,18 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   margin-left: 8px;
 `;
 
+const unselectedItemMixin = css`
+  &:hover {
+    background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
+  }
+  &:active {
+    background-color: var(--admiral-color-Opacity_Press, ${({ theme }) => theme.color['Opacity/Press']});
+  }
+  *[fill^='#'] {
+    fill: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
+  }
+`;
+
 const selectedItemMixin = css`
   background-color: var(--admiral-color-Opacity_Neutral8, ${({ theme }) => theme.color['Opacity/Neutral 8']});
   color: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
@@ -44,11 +44,17 @@ const selectedItemMixin = css`
   }
 `;
 
-export const Item = styled.li<{
+export const ItemWrapper = styled.li`
+  list-style: none;
+  text-decoration: none;
+`;
+
+export const Item = styled.div<{
   $selected?: boolean;
   $dimension: SideMenuDimension;
   $indentLevel: number;
   $hasIcons?: boolean;
+  $itemCssMixin?: ReturnType<typeof css>;
 }>`
   display: flex;
   width: 100%;
@@ -64,6 +70,8 @@ export const Item = styled.li<{
   color: var(--admiral-color-Neutral_Neutral90, ${({ theme }) => theme.color['Neutral/Neutral 90']});
   border-radius: var(--admiral-border-radius-Medium, ${({ theme }) => mediumGroupBorderRadius(theme.shape)});
   ${({ $selected }) => ($selected ? selectedItemMixin : unselectedItemMixin)};
+
+  ${(p) => p.$itemCssMixin}
 `;
 
 export const Group = styled.ul<{ $gap: React.CSSProperties['gap'] }>`

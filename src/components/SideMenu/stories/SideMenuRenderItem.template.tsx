@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, css } from 'styled-components';
 
-import { IconButton, SideMenu, Group, Sider, T, typography, Item, Badge, Tag } from '@admiral-ds/react-ui';
+import { IconButton, SideMenu, SideMenuItem, Sider, T, typography, Badge, Tag } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuNodeRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
@@ -9,6 +9,8 @@ import { ReactComponent as CloudSolid } from '@admiral-ds/icons/build/system/Clo
 import { ReactComponent as PersonAddSolid } from '@admiral-ds/icons/build/system/PersonAddSolid.svg';
 import { ReactComponent as StarSolid } from '@admiral-ds/icons/build/system/StarSolid.svg';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
+
+import { Link as RouterLink, MemoryRouter as Router } from 'react-router-dom';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -54,7 +56,7 @@ const Wrapper = styled.a<{ $dimension: SideMenuProps['dimension']; $indentLevel:
     $selected &&
     `
       background-color: var(--admiral-color-Success_Success20, ${theme.color['Success/Success 20']});
-      [fill^='#'] {
+      ${LeftCluster} *[fill^='#'] {
         fill: var(--admiral-color-Success_Success50Main, ${theme.color['Success/Success 50 Main']});
       }
   `};
@@ -106,7 +108,6 @@ const render = ({
   labelType,
   level,
   selected,
-  onClick,
   tag: tagProps,
   expanded,
   type,
@@ -122,7 +123,6 @@ const render = ({
       $dimension={dimension}
       $indentLevel={level}
       $selected={selected}
-      onClick={onClick}
     >
       <LeftCluster>
         <WrapperIcon $dimension={dimension}>{icon}</WrapperIcon>
@@ -205,46 +205,18 @@ const items: SideMenuProps['items'] = [
   },
 ];
 
-//2 пример
-const renderSimpleItem = ({
-  label,
-  icon,
-  badge,
-  labelType,
-  level,
-  selected,
-  onClick,
-  tag,
-  expanded,
-  type,
-  id,
-}: SideMenuNodeRenderProps) => {
-  return type === 'item' ? (
-    <Item
-      label={label}
-      id={id}
-      onClick={onClick}
-      level={level}
-      selected={selected}
-      badge={badge}
-      tag={tag}
-      icon={icon}
-      labelType={labelType}
-    />
-  ) : (
-    <Group
-      label={label}
-      id={id}
-      onClick={onClick}
-      level={level}
-      selected={selected}
-      badge={badge}
-      tag={tag}
-      icon={icon}
-      expanded={expanded}
-      labelType={labelType}
-    />
-  );
+const anchorItemMixin = css<{ $selected?: boolean }>`
+  text-decoration: none;
+  ${(p) =>
+    p.$selected &&
+    `background-color: var(--admiral-color-Purple_Purple20, ${p.theme.color['Purple/Purple 20']});     
+     && *[fill^='#'] {
+        fill: var(--admiral-color-Neutral_Neutral50, ${p.theme.color['Neutral/Neutral 50']});
+      }
+    `};
+`;
+const renderAnchorItem = ({ id, ...props }: SideMenuNodeRenderProps) => {
+  return <SideMenuItem as={RouterLink} to={`/page${id}`} itemCssMixin={anchorItemMixin} {...props} />;
 };
 
 const items2: SideMenuProps['items'] = [
@@ -254,17 +226,17 @@ const items2: SideMenuProps['items'] = [
     label: 'Option1',
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     labelType: 'header',
-    render: renderSimpleItem,
+    render: renderAnchorItem,
   },
   { type: 'divider' },
-  { type: 'item', id: '22', label: 'Option2', badge: { children: '4' }, render: renderSimpleItem },
+  { type: 'item', id: '22', label: 'Option2', badge: { children: '4' }, render: renderAnchorItem },
   {
     type: 'item',
     id: '32',
     label: 'Option3',
     icon: <EmailSolid />,
     badge: { children: '4' },
-    render: renderSimpleItem,
+    render: renderAnchorItem,
     labelType: 'header',
   },
   { type: 'divider', label: 'Menu group' },
@@ -276,19 +248,19 @@ const items2: SideMenuProps['items'] = [
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
     labelType: 'header',
-    render: renderSimpleItem,
+    render: renderAnchorItem,
     children: [
-      { type: 'item', id: '4.12', label: 'Option4.1', render: renderSimpleItem, labelType: 'header' },
-      { type: 'item', id: '4.22', label: 'Option4.2', icon: <PersonAddSolid />, render: renderSimpleItem },
+      { type: 'item', id: '4.12', label: 'Option4.1', render: renderAnchorItem, labelType: 'header' },
+      { type: 'item', id: '4.22', label: 'Option4.2', icon: <PersonAddSolid />, render: renderAnchorItem },
       {
         type: 'group',
         id: '4.32',
         label: 'Option4.3',
-        render: renderSimpleItem,
+        render: renderAnchorItem,
         icon: <StarSolid />,
         children: [
-          { type: 'item', id: '4.3.12', label: 'Option4.3.1', render: renderSimpleItem, labelType: 'header' },
-          { type: 'item', id: '4.3.22', label: 'Option4.3.2', render: renderSimpleItem, icon: <EmailSolid /> },
+          { type: 'item', id: '4.3.12', label: 'Option4.3.1', render: renderAnchorItem, labelType: 'header' },
+          { type: 'item', id: '4.3.22', label: 'Option4.3.2', render: renderAnchorItem, icon: <EmailSolid /> },
         ],
       },
     ],
@@ -298,7 +270,7 @@ const items2: SideMenuProps['items'] = [
     id: '52',
     label: 'Option5',
     icon: <EmailSolid />,
-    render: renderSimpleItem,
+    render: renderAnchorItem,
   },
   {
     type: 'item',
@@ -307,7 +279,7 @@ const items2: SideMenuProps['items'] = [
     icon: <EmailSolid />,
     tag: { children: 'New', statusViaBackground: true, kind: 'success' },
     badge: { children: '4' },
-    render: renderSimpleItem,
+    render: renderAnchorItem,
   },
 ];
 
@@ -320,7 +292,7 @@ export const SideMenuRenderItemTemplate = ({
   const [open2, setOpen2] = useState(false);
 
   const handleToggle = () => setOpen(!open);
-  const handleToggle2 = () => setOpen2(!open);
+  const handleToggle2 = () => setOpen2(!open2);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
@@ -349,7 +321,9 @@ export const SideMenuRenderItemTemplate = ({
       </Header>
       <Layout>
         <Sider isOpen={open2} width={300}>
-          <SideMenu {...props} items={items2} />
+          <Router>
+            <SideMenu {...props} items={items2} />
+          </Router>
         </Sider>
         <Main />
       </Layout>

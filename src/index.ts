@@ -113,5 +113,9 @@ export * from './components/Anchor';
 export * from './components/Divider';
 
 export * from './components/Pulse';
+
 export * from './components/SideMenu';
+export * from './components/SideMenu/Sider';
+export * from './components/SideMenu/SideMenuItem';
+export * from './components/SideMenu/SideMenuDivider';
 export * from './components/SideMenu/SideMenuActionsPanel';

@@ -8,9 +8,9 @@ import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/syst
 import type { SideMenuProps, SideMenuNode } from './types';
 import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './styles';
 import { filterMenuTree } from './utils/filterTree';
-import { SideMenuItem } from './MenuItem';
-import { SideMenuGroup } from './MenuGroup';
-import { SideMenuDivider } from './MenuDivider';
+import { MenuItem } from './MenuItem';
+import { MenuGroup } from './MenuGroup';
+import { MenuDivider } from './MenuDivider';
 
 import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
 
@@ -27,11 +27,12 @@ function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
   };
 }
 
+function areSetsEqual<T>(a: Set<T>, b: Set<T>): boolean {
+  return a.size === b.size && [...a].every((value) => b.has(value));
+}
+
 const nothing = () => ({});
 
-export * from './Sider';
-export * from './MenuItem';
-export * from './MenuGroup';
 export * from './types';
 export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
   (
@@ -69,6 +70,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       value: openGroups,
       defaultValue: defaultOpenGroups,
     });
+    const [selectedItemPath, setSelectedItemPath] = useState<Array<string>>([]);
 
     const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
 
@@ -105,8 +107,9 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
     }, [selectedState.state, scrollableNode]);
 
     const handleSelectItem = useCallback(
-      (id: string) => {
+      (id: string, path: Array<string>) => {
         selectedState.setState(id);
+        setSelectedItemPath(path);
         onSelectItem?.(id);
 
         setSearching(false);
@@ -127,9 +130,11 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
 
     const handleOpenGroups = useCallback(
       (openIds: string[]) => {
-        const next = [...new Set([...openGroupIds, ...openIds])];
-        openState.setState(next);
-        onOpenGroupsChange?.(next);
+        const next = new Set([...openGroupIds, ...openIds]);
+        if (!areSetsEqual(next, openGroupIds)) {
+          openState.setState([...next]);
+          onOpenGroupsChange?.([...next]);
+        }
       },
       [openGroupIds, openState.setState, onOpenGroupsChange],
     );
@@ -144,6 +149,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
     const ctxValue: SideMenuContextValue = useMemo(
       () => ({
         selectedItemId: selectedState.state,
+        selectedItemPath,
         openGroupIds,
         searchActive,
         searchQuery,
@@ -160,6 +166,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       }),
       [
         selectedState.state,
+        selectedItemPath,
         openGroupIds,
         searchActive,
         searchQuery,
@@ -178,14 +185,14 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
 
     const getItem = (node: SideMenuNode) => {
       if (node.type === 'divider') {
-        return <SideMenuDivider {...node} />;
+        return <MenuDivider {...node} />;
       }
 
       if (node.type === 'group') {
-        return <SideMenuGroup {...node} />;
+        return <MenuGroup {...node} />;
       }
 
-      return <SideMenuItem {...node} type="item" />;
+      return <MenuItem {...node} type="item" />;
     };
 
     const searchInputProps = {

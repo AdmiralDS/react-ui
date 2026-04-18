@@ -1,4 +1,5 @@
-import type { SideMenuNode, SearchFormat } from '../types';
+import type { SideMenuNode } from '../types';
+import type { SearchFormat } from '#src/components/input';
 
 function isItem(node: SideMenuNode): boolean {
   return node.type !== 'group' && node.type !== 'divider';

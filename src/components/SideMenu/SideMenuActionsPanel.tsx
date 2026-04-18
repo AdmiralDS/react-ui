@@ -10,7 +10,9 @@ const ActionsPanelDiv = styled.div<{
 `;
 
 export interface SideMenuActionsPanelProps {
+  /** Размер компонента */
   dimension: SideMenuDimension;
+  /** CSS миксин, созданный с помощью styled css, для переопределения стилей компонента */
   menuActionsPanelCssMixin?: ReturnType<typeof css>;
   children: React.ReactNode;
 }
@@ -18,3 +20,4 @@ export interface SideMenuActionsPanelProps {
 export const SideMenuActionsPanel = ({ dimension, menuActionsPanelCssMixin, ...props }: SideMenuActionsPanelProps) => {
   return <ActionsPanelDiv {...props} $dimension={dimension} $menuActionsPanelCssMixin={menuActionsPanelCssMixin} />;
 };
+SideMenuActionsPanel.displayName = 'SideMenuActionsPanel';

@@ -1,45 +1,25 @@
-import { memo, useRef } from 'react';
-import styled from 'styled-components';
-import { Divider } from '#src/components/Divider';
+import { memo } from 'react';
 
-import { Label } from './Label';
 import { useSideMenuContext } from './contexts';
-import type { SideMenuDividerNode, SideMenuDimension } from './types';
+import type { SideMenuDividerNode } from './types';
+import { ItemWrapper } from './styles';
+import { SideMenuDivider } from './SideMenuDivider';
 
-const Wrapper = styled.li<{ $dimension: SideMenuDimension; $hasLabel: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: ${({ $dimension, $hasLabel }) =>
-    $dimension === 'l'
-      ? $hasLabel
-        ? '8px 16px 5px 16px'
-        : '8px 16px 7px 16px'
-      : $hasLabel
-        ? '6px 12px 3px 12px'
-        : '6px 12px 5px 12px'};
-  color: var(--admiral-color-Neutral_Neutral50, ${({ theme }) => theme.color['Neutral/Neutral 50']});
-`;
-
-export const SideMenuDivider = memo(({ label }: SideMenuDividerNode) => {
+export const MenuDivider = memo(({ label, render }: SideMenuDividerNode) => {
   const { dimension, visibleTooltip, tooltipCssMixin } = useSideMenuContext();
-  const containerRef = useRef<HTMLLIElement | null>(null);
-
-  const hasLabel = Boolean(label);
 
   return (
-    <Wrapper ref={containerRef} role="separator" $dimension={dimension} $hasLabel={hasLabel}>
-      <Divider dimension="s" orientation="horizontal" />
-      {label && (
-        <Label
-          dimension={dimension}
+    <ItemWrapper role="separator">
+      {render ? (
+        render({ type: 'divider', label, dimension, visibleTooltip, tooltipCssMixin })
+      ) : (
+        <SideMenuDivider
           label={label}
-          container={containerRef.current}
-          multilineView={false}
+          dimension={dimension}
           visibleTooltip={visibleTooltip}
           tooltipCssMixin={tooltipCssMixin}
         />
       )}
-    </Wrapper>
+    </ItemWrapper>
   );
 });

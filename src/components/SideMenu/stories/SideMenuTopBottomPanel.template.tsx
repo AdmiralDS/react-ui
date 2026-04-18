@@ -6,7 +6,6 @@ import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/M
 import { ReactComponent as ChevronLeftOutline } from '@admiral-ds/icons/build/system/ChevronLeftOutline.svg';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
-import { version } from '../../../../package.json';
 
 const Section = styled.div`
   border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
@@ -113,7 +112,7 @@ export const SideMenuTopBottomPanelTemplate = ({
   const renderTopPanel = useCallback(
     ({ dimension }: SideMenuPanelProps) => (
       <SideMenuActionsPanel dimension={dimension}>
-        <TopPanel $dimension={dimension}>Admiral v{version}</TopPanel>
+        <TopPanel $dimension={dimension}>Admiral vx.x.x</TopPanel>
       </SideMenuActionsPanel>
     ),
     [],

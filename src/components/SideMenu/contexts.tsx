@@ -1,47 +1,54 @@
 import { createContext, useContext } from 'react';
-import type { SideMenuDimension } from './types';
 import type { css } from 'styled-components';
+import type { SearchFormat } from '#src/components/input';
+
+import type { SideMenuDimension } from './types';
 
 /**
- * Путь keys групп от корня до текущего уровня.
- * Используется для вычисления уровня вложенности (level).
- *
- * Важно: мы храним keys именно групп, чтобы для root-пункта MenuItem level был 1.
+ * Путь ids групп от корня до текущего уровня.
+ * Используется для вычисления уровня вложенности (level)
  */
-export type KeyPath = string[];
-export const PathContext = createContext<KeyPath>([]);
-
-export function useKeyPath(): KeyPath {
-  return useContext(PathContext);
+export type IdPath = string[];
+export const PathContext = createContext<IdPath>([]);
+export function useIdPath(): IdPath {
+  const value = useContext(PathContext);
+  if (!value) {
+    throw new Error('PathContext is missing. Wrap components with <SideMenu />');
+  }
+  return value;
 }
 
-export type SearchFormat = 'word' | 'wholly';
 export interface SideMenuContextValue {
+  /** id выбранного пункта */
   selectedItemId: string | null;
-  /** Множество открытых groups (by id) */
+  /** Путь ids групп от корня до выбранного пункта  */
+  selectedItemPath: Array<string>;
+  /** Массив id открытых групп */
   openGroupIds: Set<string>;
-
-  onSelectItem: (id: string) => void;
+  /** Колбек при изменении выбранного пункта */
+  onSelectItem: (id: string, path: Array<string>) => void;
+  /** Колбек при изменении состояния группы (открыта/закрыта) */
   onToggleGroup: (groupId: string) => void;
+  /** Колбек при открытии нескольких групп */
   onOpenGroups: (groupIds: string[]) => void;
-
-  /**
-   * Включена ли фильтрация и применяется ли активный фильтр.
-   * В режиме фильтрации группы отображаются раскрытыми, чтобы показать найденные descendants.
-   */
-  searchActive: boolean;
+  /** Размер компонента */
   dimension: SideMenuDimension;
-  //Есть ли в массиве items иконки в 1 уровне вложенности
-  hasIcons: boolean;
+  /** Показатель того, отображает ли сейчас меню результаты поиска (фильтрации) */
+  searchActive: boolean;
+  /** Строка поиска. Значение введеное в инпут, по которому происходит поиск */
   searchQuery: string;
+  /** Формат поиска. Данная опция позволяет искать по строке целиком или по отдельным словам */
   searchFormat: SearchFormat;
-  /** Позволяет добавлять миксин для тултипа, созданный с помощью styled css  */
-  tooltipCssMixin?: ReturnType<typeof css>;
-  /** Позволяет пунктам меню при переполнении переходить на следующую строку,
-   * по умолчанию переполнение уходит в троеточие и при наведении отображается Tooltip */
-  multilineView?: boolean;
-  visibleTooltip?: boolean;
+  /** Расстояние между пунктами меню. По умолчанию 4px */
   gap: React.CSSProperties['gap'];
+  /** Есть ли в массиве items иконки на первом уровне вложенности */
+  hasIcons: boolean;
+  /** Отображение Tooltip для лейблов при переполнении текста, по умолчанию true */
+  visibleTooltip: boolean;
+  /** CSS миксин, созданный с помощью styled css, для переопределения стилей Tooltip  */
+  tooltipCssMixin?: ReturnType<typeof css>;
+  /** Многострочное отображение лейблов при переполнении текста, по умолчанию false */
+  multilineView?: boolean;
 }
 export const SideMenuContext = createContext<SideMenuContextValue | null>(null);
 
