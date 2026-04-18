@@ -7,12 +7,13 @@ import type { PolymorphicComponentPropsWithRef } from '#src/components/common/po
 import { fixedForwardRef } from '#src/components/common/fixedForwardRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
-import type { SideMenuNodeRenderProps } from './types';
-import { Item, LeftCluster, RightCluster, WrapperIcon, Chevron } from './styles';
+import type { SideMenuItemRenderProps } from '../types';
+import { Item, LeftCluster, RightCluster, WrapperIcon, Chevron } from '../style';
+
 import { Label } from './Label';
 import { HighlightedLabel } from './HighlightedLabel';
 
-export interface SideMenuItemProps extends Omit<SideMenuNodeRenderProps, 'id'> {
+export interface SideMenuItemProps extends Omit<SideMenuItemRenderProps, 'id'> {
   /** CSS миксин, созданный с помощью styled css, для переопределения стилей компонента */
   itemCssMixin?: ReturnType<typeof css>;
 }

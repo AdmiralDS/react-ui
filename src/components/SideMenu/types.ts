@@ -4,7 +4,7 @@ import type { Badge } from '#src/components/Badge';
 import type { TextInput, SearchFormat } from '#src/components/input';
 
 export type SideMenuDimension = 'm' | 'l';
-export type LabelType = 'header' | 'line';
+export type SideMenuLabelType = 'header' | 'line';
 export type SideMenuTag = Omit<React.ComponentProps<typeof Tag>, 'dimension' | 'as'>;
 export type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'>;
 
@@ -15,44 +15,34 @@ export type SideMenuBadge = Omit<React.ComponentProps<typeof Badge>, 'dimension'
  */
 export type SideMenuNode = SideMenuItemNode | SideMenuGroupNode | SideMenuDividerNode;
 
-export interface SideMenuItemNode {
-  type?: 'item';
+interface SideMenuNodeBase {
   /** Уникальный идентификатор пункта меню  */
   id: string;
   /** Текстовая подпись пункта */
   label: string;
   /** Формат label (стиль начертания), по умолчанию line */
-  labelType?: LabelType;
+  labelType?: SideMenuLabelType;
   /** Иконка, отображаемая в пункте меню */
   icon?: React.ReactNode;
   /** Параметры для отображения компонента Badge в пункте меню */
   badge?: SideMenuBadge;
   /** Параметры для отображения компонента Tag в пункте меню */
   tag?: SideMenuTag;
-  /** Рендер функция для кастомизации пункта меню */
-  render?: (props: SideMenuNodeRenderProps) => React.ReactNode;
 }
 
-export interface SideMenuGroupNode {
+export interface SideMenuItemNode extends SideMenuNodeBase {
+  type?: 'item';
+  /** Рендер функция для кастомизации пункта меню */
+  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
+}
+
+export interface SideMenuGroupNode extends SideMenuNodeBase {
   type: 'group';
-  /** Уникальный идентификатор группы пунктов меню */
-  id: string;
-  /** Текстовая подпись группы */
-  label: string;
-  /** Формат label (стиль начертания), по умолчанию line */
-  labelType?: LabelType;
-  /** Иконка, отображаемая в пункте меню */
-  icon?: React.ReactNode;
-  /** Параметры для отображения компонента Badge в пункте меню */
-  badge?: SideMenuBadge;
-  /** Параметры для отображения компонента Tag в пункте меню */
-  tag?: SideMenuTag;
   /** Вложенные пункты (MenuItem/MenuGroup/Divider) */
   children: SideMenuNode[];
   /** Рендер функция для кастомизации пункта меню */
-  render?: (props: SideMenuNodeRenderProps) => React.ReactNode;
+  render?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
-
 export interface SideMenuDividerNode {
   type: 'divider';
   /** Опциональная текстовая подпись */
@@ -62,8 +52,6 @@ export interface SideMenuDividerNode {
 }
 
 interface SideMenuBaseRenderProps {
-  /** Тип пункта меню */
-  type: 'item' | 'group' | 'divider';
   /** Размер компонента */
   dimension: SideMenuDimension;
   /** Отображение Tooltip для лейблов при переполнении текста, по умолчанию true */
@@ -73,17 +61,20 @@ interface SideMenuBaseRenderProps {
 }
 
 export interface SideMenuDividerRenderProps extends SideMenuBaseRenderProps {
+  type: 'divider';
   /** Опциональная текстовая подпись */
   label?: string;
 }
 
-export interface SideMenuNodeRenderProps extends SideMenuBaseRenderProps {
+export interface SideMenuItemRenderProps extends SideMenuBaseRenderProps {
+  /** Тип пункта меню */
+  type: 'item' | 'group';
   /** Уникальный идентификатор пункта меню  */
   id: string;
   /** Текстовая подпись пункта */
   label: string;
   /** Формат label (стиль начертания), по умолчанию line */
-  labelType?: LabelType;
+  labelType?: SideMenuLabelType;
   /** Состояние selected - признак того, что данный пункт выбран  */
   selected?: boolean;
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
@@ -94,8 +85,6 @@ export interface SideMenuNodeRenderProps extends SideMenuBaseRenderProps {
   badge?: SideMenuBadge;
   /** Параметры для отображения компонента Tag в пункте меню */
   tag?: SideMenuTag;
-  /** Состояние expanded - признак того, что данный группа пунктов развернута */
-  expanded?: boolean;
   /** Показатель того, отображает ли сейчас меню результаты поиска */
   searchActive?: boolean;
   /** Строка поиска. Значение введеное в инпут, по которому происходит поиск */
@@ -106,6 +95,8 @@ export interface SideMenuNodeRenderProps extends SideMenuBaseRenderProps {
   multilineView?: boolean;
   /** Есть ли в массиве items иконки на первом уровне вложенности (влияет на отступы в пунктах меню) */
   hasIcons?: boolean;
+  /** Состояние expanded - признак того, что данная группа пунктов развернута (если type='group') */
+  expanded?: boolean;
 }
 
 export interface SideMenuPanelProps {

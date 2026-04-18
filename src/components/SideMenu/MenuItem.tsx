@@ -2,8 +2,8 @@ import { memo, useCallback } from 'react';
 
 import { useIdPath, useSideMenuContext } from './contexts';
 import type { SideMenuItemNode } from './types';
-import { SideMenuItem, type SideMenuItemProps } from './SideMenuItem';
-import { ItemWrapper } from './styles';
+import { SideMenuItem, type SideMenuItemProps } from './components';
+import { ItemWrapper } from './style';
 
 export const MenuItem = memo(({ id, type = 'item', render, ...props }: SideMenuItemNode) => {
   const ctx = useSideMenuContext();

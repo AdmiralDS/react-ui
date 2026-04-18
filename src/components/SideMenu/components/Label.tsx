@@ -4,7 +4,7 @@ import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { Tooltip } from '#src/components/Tooltip';
 import { typography } from '#src/components/Typography';
 
-import type { SideMenuProps, SideMenuDimension, SideMenuNodeRenderProps } from './types';
+import type { SideMenuProps, SideMenuDimension, SideMenuItemRenderProps } from '../types';
 
 export const LabelText = styled.span<{ $dimension: SideMenuDimension; $header?: boolean; $multilineView?: boolean }>`
   text-align: left;
@@ -58,7 +58,7 @@ const useTooltipVisible = (container: HTMLElement | null, element: HTMLElement |
 
 type LabelProps = {
   dimension: SideMenuDimension;
-  label: SideMenuNodeRenderProps['label'];
+  label: SideMenuItemRenderProps['label'];
   container: HTMLElement | null;
   isHeader?: boolean;
   multilineView?: SideMenuProps['multilineView'];

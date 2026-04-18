@@ -5,8 +5,8 @@ import type { PolymorphicComponentPropsWithRef } from '#src/components/common/po
 import { fixedForwardRef } from '#src/components/common/fixedForwardRef';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
+import type { SideMenuDimension, SideMenuDividerRenderProps } from '../types';
 import { Label } from './Label';
-import type { SideMenuDimension, SideMenuDividerRenderProps } from './types';
 
 const DividerWrapper = styled.div<{
   $dimension: SideMenuDimension;

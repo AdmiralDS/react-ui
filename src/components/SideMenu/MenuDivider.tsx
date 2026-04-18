@@ -2,8 +2,8 @@ import { memo } from 'react';
 
 import { useSideMenuContext } from './contexts';
 import type { SideMenuDividerNode } from './types';
-import { ItemWrapper } from './styles';
-import { SideMenuDivider } from './SideMenuDivider';
+import { ItemWrapper } from './style';
+import { SideMenuDivider } from './components';
 
 export const MenuDivider = memo(({ label, render }: SideMenuDividerNode) => {
   const { dimension, visibleTooltip, tooltipCssMixin } = useSideMenuContext();

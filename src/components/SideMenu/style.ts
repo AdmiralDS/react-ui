@@ -23,6 +23,11 @@ export const RightCluster = styled.span<{ $dimension: SideMenuDimension }>`
   margin-left: 8px;
 `;
 
+export const ItemWrapper = styled.li`
+  list-style: none;
+  text-decoration: none;
+`;
+
 const unselectedItemMixin = css`
   &:hover {
     background-color: var(--admiral-color-Opacity_Hover, ${({ theme }) => theme.color['Opacity/Hover']});
@@ -42,11 +47,6 @@ const selectedItemMixin = css`
   ${LeftCluster} *[fill^='#'] {
     fill: var(--admiral-color-Primary_Primary60Main, ${({ theme }) => theme.color['Primary/Primary 60 Main']});
   }
-`;
-
-export const ItemWrapper = styled.li`
-  list-style: none;
-  text-decoration: none;
 `;
 
 export const Item = styled.div<{

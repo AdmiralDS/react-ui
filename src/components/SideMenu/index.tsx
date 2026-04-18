@@ -6,7 +6,7 @@ import { Scrollbars } from '#src/components/Scrollbar';
 import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/system/SearchOutline.svg';
 
 import type { SideMenuProps, SideMenuNode } from './types';
-import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './styles';
+import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './style';
 import { filterMenuTree } from './utils/filterTree';
 import { MenuItem } from './MenuItem';
 import { MenuGroup } from './MenuGroup';

@@ -1,5 +1,5 @@
 import styled, { type css } from 'styled-components';
-import type { SideMenuDimension } from './types';
+import type { SideMenuDimension } from '../types';
 
 const ActionsPanelDiv = styled.div<{
   $dimension: SideMenuDimension;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 
 import { IconButton, SideMenu, SideMenuItem, Sider, T, typography, Badge, Tag } from '@admiral-ds/react-ui';
-import type { BorderRadiusType, SideMenuNodeRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, SideMenuItemRenderProps, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
 import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 import { ReactComponent as CloudSolid } from '@admiral-ds/icons/build/system/CloudSolid.svg';
@@ -112,7 +112,7 @@ const render = ({
   expanded,
   type,
   id,
-}: SideMenuNodeRenderProps) => {
+}: SideMenuItemRenderProps) => {
   const badge = badgeProps ? <Badge {...badgeProps} dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
   const tag = tagProps ? <Tag {...tagProps} as="span" dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
   return (
@@ -215,7 +215,7 @@ const anchorItemMixin = css<{ $selected?: boolean }>`
       }
     `};
 `;
-const renderAnchorItem = ({ id, ...props }: SideMenuNodeRenderProps) => {
+const renderAnchorItem = ({ id, ...props }: SideMenuItemRenderProps) => {
   return <SideMenuItem as={RouterLink} to={`/page${id}`} itemCssMixin={anchorItemMixin} {...props} />;
 };
 

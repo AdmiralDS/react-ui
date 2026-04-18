@@ -1,9 +1,9 @@
 import { memo, useMemo, useCallback } from 'react';
 
-import { Group, ItemWrapper } from './styles';
+import { Group, ItemWrapper } from './style';
 import { MenuItem } from './MenuItem';
 import { MenuDivider } from './MenuDivider';
-import { SideMenuItem, type SideMenuItemProps } from './SideMenuItem';
+import { SideMenuItem, type SideMenuItemProps } from './components';
 import type { SideMenuGroupNode } from './types';
 import { PathContext, useIdPath, useSideMenuContext } from './contexts';
 
