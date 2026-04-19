@@ -89,28 +89,6 @@ export const PlaygroundExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="SideMenu. Контролируемое/неконтролируемое состояние">
-const SideMenuControlledUncontrolledStory: StoryFn<typeof SideMenu> = (props) => {
-  const [{ CSSCustomProps }] = useGlobals();
-  return <SideMenuControlledUncontrolledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
-};
-
-export const SideMenuControlledUncontrolledPanel = {
-  render: SideMenuControlledUncontrolledStory,
-
-  parameters: {
-    docs: {
-      source: {
-        code: SideMenuControlledUncontrolledRaw,
-      },
-    },
-  },
-
-  name: 'SideMenu. Контролируемое/неконтролируемое состояние',
-};
-
-//</editor-fold>
-
 //<editor-fold desc="SideMenu and Sider">
 const SiderStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
@@ -155,24 +133,24 @@ export const DrawerExample = {
 
 //</editor-fold>
 
-//<editor-fold desc="SideMenu. TopBottomPanel">
-const SideMenuTopBottomPanelStory: StoryFn<typeof SideMenu> = (props) => {
+//<editor-fold desc="SideMenu. Контролируемое/неконтролируемое состояние">
+const SideMenuControlledUncontrolledStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return <SideMenuTopBottomPanelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+  return <SideMenuControlledUncontrolledTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
-export const SideMenuTopBottomPanel = {
-  render: SideMenuTopBottomPanelStory,
+export const SideMenuControlledUncontrolledPanel = {
+  render: SideMenuControlledUncontrolledStory,
 
   parameters: {
     docs: {
       source: {
-        code: SideMenuTopBottomPanelTemplateRaw,
+        code: SideMenuControlledUncontrolledRaw,
       },
     },
   },
 
-  name: 'SideMenu. Кастомный контент сверху и снизу меню',
+  name: 'SideMenu. Контролируемое/неконтролируемое состояние',
 };
 
 //</editor-fold>
@@ -214,7 +192,7 @@ export const SearchExample = {
     },
   },
 
-  name: 'SideMenu. Фильтрация',
+  name: 'SideMenu. Поиск по пунктам меню',
 };
 
 //</editor-fold>
@@ -263,6 +241,28 @@ export const SideMenuWithMultilinePanel = {
 
 //</editor-fold>
 
+//<editor-fold desc="SideMenu. TopBottomPanel">
+const SideMenuTopBottomPanelStory: StoryFn<typeof SideMenu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <SideMenuTopBottomPanelTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const SideMenuTopBottomPanel = {
+  render: SideMenuTopBottomPanelStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SideMenuTopBottomPanelTemplateRaw,
+      },
+    },
+  },
+
+  name: 'SideMenu. Кастомный контент сверху и снизу меню',
+};
+
+//</editor-fold>
+
 //<editor-fold desc="SideMenu. Пример renderItem">
 const SideMenuRenderItemStory: StoryFn<typeof SideMenu> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
@@ -280,7 +280,7 @@ export const SideMenuRenderItemPanel = {
     },
   },
 
-  name: 'SideMenu. Пример renderItem',
+  name: 'SideMenu. Кастомизация пунктов меню',
 };
 
 //</editor-fold>

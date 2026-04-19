@@ -1,5 +1,4 @@
-import { useState, useMemo, useCallback, Fragment, forwardRef, useEffect } from 'react';
-
+import { useState, useMemo, useEffect, useCallback, Fragment, forwardRef } from 'react';
 import { defaultFilterItem, type TextInput } from '#src/components/input';
 import { InputIconButton } from '#src/components/InputIconButton';
 import { Scrollbars } from '#src/components/Scrollbar';
@@ -7,29 +6,11 @@ import { ReactComponent as SearchOutlineSVG } from '@admiral-ds/icons/build/syst
 
 import type { SideMenuProps, SideMenuNode } from './types';
 import { FixedPanel, SideMenuWrapper, ScrollableContent, ScrollWrapper, SearchInput } from './style';
-import { filterMenuTree } from './utils/filterTree';
+import { useControlledState, filterMenuTree, areSetsEqual } from './utils';
 import { MenuItem } from './MenuItem';
 import { MenuGroup } from './MenuGroup';
 import { MenuDivider } from './MenuDivider';
-
 import { PathContext, SideMenuContext, type SideMenuContextValue } from './contexts';
-
-function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
-  const { value, defaultValue } = opts;
-  const isControlled = value !== undefined;
-  const [inner, setInner] = useState<T>(defaultValue);
-
-  return {
-    state: (isControlled ? value : inner) as T,
-    setState: (next: T) => {
-      if (!isControlled) setInner(next);
-    },
-  };
-}
-
-function areSetsEqual<T>(a: Set<T>, b: Set<T>): boolean {
-  return a.size === b.size && [...a].every((value) => b.has(value));
-}
 
 const nothing = () => ({});
 
@@ -59,9 +40,6 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
     },
     ref,
   ) => {
-    const isRenderTopPanel = !!renderTopPanel;
-    const isRenderBottomPanel = !!renderBottomPanel;
-
     const selectedState = useControlledState<string | null>({
       value: selectedItem,
       defaultValue: defaultSelectedItem,
@@ -70,15 +48,17 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       value: openGroups,
       defaultValue: defaultOpenGroups,
     });
+    /** Путь ids групп от корня до выбранного пункта  */
     const [selectedItemPath, setSelectedItemPath] = useState<Array<string>>([]);
-
-    const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
-
-    const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
-
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setSearching] = useState(false);
     const [scrollableNode, setScrollableNode] = useState<HTMLUListElement | null>(null);
+
+    const isRenderTopPanel = !!renderTopPanel;
+    const isRenderBottomPanel = !!renderBottomPanel;
+
+    const hasIcons = items.some((elem) => elem.type !== 'divider' && elem.icon);
+    const openGroupIds = useMemo(() => new Set(openState.state ?? []), [openState.state]);
 
     const searchActive = search && searchQuery.trim().length > 0 && isSearching;
     const filteredItems = useMemo(() => {
@@ -125,7 +105,7 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
         openState.setState(next);
         onOpenGroupsChange?.(next);
       },
-      [openGroupIds, openState, onOpenGroupsChange],
+      [openGroupIds, openState.setState, onOpenGroupsChange],
     );
 
     const handleOpenGroups = useCallback(
@@ -139,49 +119,13 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
       [openGroupIds, openState.setState, onOpenGroupsChange],
     );
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchQuery(e.target.value);
-    };
-    const handleInputFocus = () => {
-      setSearching(true);
-    };
+    }, []);
 
-    const ctxValue: SideMenuContextValue = useMemo(
-      () => ({
-        selectedItemId: selectedState.state,
-        selectedItemPath,
-        openGroupIds,
-        searchActive,
-        searchQuery,
-        searchFormat,
-        onSelectItem: handleSelectItem,
-        onToggleGroup: handleToggleGroup,
-        dimension,
-        hasIcons,
-        onOpenGroups: handleOpenGroups,
-        tooltipCssMixin,
-        multilineView,
-        visibleTooltip,
-        gap,
-      }),
-      [
-        selectedState.state,
-        selectedItemPath,
-        openGroupIds,
-        searchActive,
-        searchQuery,
-        searchFormat,
-        handleSelectItem,
-        handleToggleGroup,
-        handleOpenGroups,
-        tooltipCssMixin,
-        dimension,
-        hasIcons,
-        multilineView,
-        visibleTooltip,
-        gap,
-      ],
-    );
+    const handleInputFocus = useCallback(() => {
+      setSearching(true);
+    }, []);
 
     const getItem = (node: SideMenuNode) => {
       if (node.type === 'divider') {
@@ -194,6 +138,43 @@ export const SideMenu = forwardRef<HTMLElement, SideMenuProps>(
 
       return <MenuItem {...node} type="item" />;
     };
+
+    const ctxValue: SideMenuContextValue = useMemo(
+      () => ({
+        selectedItemId: selectedState.state,
+        selectedItemPath,
+        openGroupIds,
+        searchActive,
+        searchQuery,
+        searchFormat,
+        dimension,
+        hasIcons,
+        tooltipCssMixin,
+        multilineView,
+        visibleTooltip,
+        gap,
+        onSelectItem: handleSelectItem,
+        onToggleGroup: handleToggleGroup,
+        onOpenGroups: handleOpenGroups,
+      }),
+      [
+        selectedState.state,
+        selectedItemPath,
+        openGroupIds,
+        searchActive,
+        searchQuery,
+        searchFormat,
+        dimension,
+        hasIcons,
+        tooltipCssMixin,
+        multilineView,
+        visibleTooltip,
+        gap,
+        handleSelectItem,
+        handleToggleGroup,
+        handleOpenGroups,
+      ],
+    );
 
     const searchInputProps = {
       value: searchQuery,

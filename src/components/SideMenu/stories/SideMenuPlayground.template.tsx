@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
 import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
+import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
 
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
 
@@ -31,24 +32,28 @@ const Main = styled.main`
 `;
 
 const items: SideMenuProps['items'] = [
-  { type: 'item', id: '1', label: 'Option1' },
-  { type: 'item', id: '2', label: 'Option2' },
-  { type: 'item', id: '3', label: 'Option3' },
-  { type: 'divider' },
+  { type: 'item', id: '1', label: 'Menu text', labelType: 'header', icon: <EmailSolid /> },
   {
     type: 'group',
-    id: '4',
-    label: 'Option4',
+    id: '3',
+    label: 'Menu text',
+    labelType: 'header',
+    badge: { children: '3' },
+    icon: <EmailSolid />,
     children: [
-      { type: 'item', id: '4.1', label: 'Option4.1' },
-      { type: 'item', id: '4.2', label: 'Option4.2' },
+      { type: 'item', id: '3.1', label: 'Menu text' },
       {
         type: 'group',
-        id: '4.3',
-        label: 'Option4.3',
+        id: '3.2',
+        label: 'Menu text',
         children: [
-          { type: 'item', id: '4.3.1', label: 'Option4.3.1' },
-          { type: 'item', id: '4.3.2', label: 'Option4.3.2' },
+          {
+            type: 'item',
+            id: '3.2.1',
+            label: 'Menu text',
+            tag: { children: 'New', statusViaBackground: true, kind: 'success' },
+          },
+          { type: 'item', id: '3.2.2', label: 'Menu text' },
         ],
       },
     ],

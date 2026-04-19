@@ -59,7 +59,7 @@ export const Item = styled.div<{
   display: flex;
   width: 100%;
   padding: ${({ $dimension, $indentLevel, $hasIcons }) => {
-    const indentIcon = $hasIcons && $indentLevel > 0 ? 12 : 0;
+    const indentIcon = $hasIcons && $indentLevel > 0 ? ($dimension === 'l' ? 20 : 12) : 0;
 
     return $dimension === 'l'
       ? `12px 16px 12px ${16 + indentIcon + $indentLevel * INDENT}px`

@@ -1,15 +1,29 @@
-import type { SideMenuNode } from '../types';
 import type { SearchFormat } from '#src/components/input';
+import { useState } from 'react';
 
-function isItem(node: SideMenuNode): boolean {
-  return node.type !== 'group' && node.type !== 'divider';
+import type { SideMenuNode } from './types';
+
+export function useControlledState<T>(opts: { value?: T; defaultValue: T }) {
+  const { value, defaultValue } = opts;
+  const isControlled = value !== undefined;
+  const [inner, setInner] = useState<T>(defaultValue);
+
+  return {
+    state: (isControlled ? value : inner) as T,
+    setState: (next: T) => {
+      if (!isControlled) setInner(next);
+    },
+  };
+}
+
+export function areSetsEqual<T>(a: Set<T>, b: Set<T>): boolean {
+  return a.size === b.size && [...a].every((value) => b.has(value));
 }
 
 interface FilterTreeResult {
   nodes: SideMenuNode[];
   hasAnyVisible: boolean;
 }
-
 export function filterMenuTree(
   nodes: SideMenuNode[],
   query: string,
@@ -29,7 +43,7 @@ export function filterMenuTree(
       continue;
     }
 
-    if (isItem(node)) {
+    if (node.type !== 'group') {
       const matched = onFilterItem(node.label, query, searchFormat);
 
       if (matched) {

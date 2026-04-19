@@ -115,22 +115,6 @@ export const SideMenuControlledUncontrolledTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
-        Неконтролируемое состояние.
-      </T>
-      <Wrapper>
-        <Header>
-          <IconButton dimension="m" onClick={handleToggle}>
-            <MenuOutline />
-          </IconButton>
-        </Header>
-        <Layout>
-          <Sider isOpen={open} width={300}>
-            <SideMenu {...props} defaultSelectedItem="4.1" defaultOpenGroups={['4.3']} items={items} />
-          </Sider>
-          <Main />
-        </Layout>
-      </Wrapper>
-      <T as="div" font="Body/Body 1 Long" style={{ marginTop: '40px', marginBottom: '20px' }}>
         Контролируемое состояние.
       </T>
       <Wrapper>
@@ -149,6 +133,22 @@ export const SideMenuControlledUncontrolledTemplate = ({
               onOpenGroupsChange={onOpenGroupsChange}
               items={items}
             />
+          </Sider>
+          <Main />
+        </Layout>
+      </Wrapper>
+      <T as="div" font="Body/Body 1 Long" style={{ margin: '40px 0 20px 0' }}>
+        Неконтролируемое состояние.
+      </T>
+      <Wrapper>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open} width={300}>
+            <SideMenu {...props} defaultSelectedItem="4.1" defaultOpenGroups={['4.3']} items={items} />
           </Sider>
           <Main />
         </Layout>
