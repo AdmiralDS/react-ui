@@ -231,7 +231,7 @@ export const SideMenuRenderItemTemplate = ({
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
       <T as="div" style={{ marginBottom: '20px' }} font="Body/Body 1 Long">
-        При определении массива пунктов меню, для каждого их них можно задать функцию render - специалный колбек для
+        При определении массива пунктов меню, для каждого их них можно задать функцию render - специальный колбек для
         кастомизации пункта меню. Например, с помощью этой функции можно снять ограничение на использование icon и
         labelType="header" только на первом уровне вложенности, как в примере ниже.
       </T>
