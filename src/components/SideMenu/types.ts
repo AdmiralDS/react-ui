@@ -43,54 +43,32 @@ export interface SideMenuGroupNode extends SideMenuNodeBase {
   /** Рендер функция для кастомизации пункта меню */
   render?: (props: SideMenuItemRenderProps) => React.ReactNode;
 }
+
 export interface SideMenuDividerNode {
   type: 'divider';
   /** Опциональная текстовая подпись */
   label?: string;
-  /** Рендер функция для кастомизации пункта меню */
-  render?: (props: SideMenuDividerRenderProps) => React.ReactNode;
 }
 
-interface SideMenuBaseRenderProps {
-  /** Размер компонента */
-  dimension: SideMenuDimension;
-  /** Отображение Tooltip для лейблов при переполнении текста, по умолчанию true */
-  visibleTooltip?: boolean;
-  /** CSS миксин, созданный с помощью styled css, для переопределения стилей Tooltip  */
-  tooltipCssMixin?: ReturnType<typeof css>;
-}
-
-export interface SideMenuDividerRenderProps extends SideMenuBaseRenderProps {
-  type: 'divider';
-  /** Опциональная текстовая подпись */
-  label?: string;
-}
-
-export interface SideMenuItemRenderProps extends SideMenuBaseRenderProps {
+export interface SideMenuItemRenderProps extends SideMenuNodeBase {
   /** Тип пункта меню */
   type: 'item' | 'group';
-  /** Уникальный идентификатор пункта меню  */
-  id: string;
-  /** Текстовая подпись пункта */
-  label: string;
-  /** Формат label (стиль начертания), по умолчанию line */
-  labelType?: SideMenuLabelType;
+  /** Размер компонента */
+  dimension: SideMenuDimension;
   /** Состояние selected - признак того, что данный пункт выбран  */
   selected?: boolean;
   /** Уровень вложенности (1 для корневых пунктов, 2 — внутри первой группы и т.д.) */
   level: number;
-  /** Иконка, отображаемая в пункте меню */
-  icon?: React.ReactNode;
-  /** Параметры для отображения компонента Badge в пункте меню */
-  badge?: SideMenuBadge;
-  /** Параметры для отображения компонента Tag в пункте меню */
-  tag?: SideMenuTag;
   /** Показатель того, отображает ли сейчас меню результаты поиска */
   searchActive?: boolean;
   /** Строка поиска. Значение введеное в инпут, по которому происходит поиск */
   searchQuery?: string;
   /** Формат поиска. Данная опция позволяет искать по строке целиком или по отдельным словам */
   searchFormat?: SearchFormat;
+  /** Отображение Tooltip для лейблов при переполнении текста, по умолчанию true */
+  visibleTooltip?: boolean;
+  /** CSS миксин, созданный с помощью styled css, для переопределения стилей Tooltip  */
+  tooltipCssMixin?: ReturnType<typeof css>;
   /** Многострочное отображение лейблов при переполнении текста, по умолчанию false */
   multilineView?: boolean;
   /** Есть ли в массиве items иконки на первом уровне вложенности (влияет на отступы в пунктах меню) */
