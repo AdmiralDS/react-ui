@@ -124,7 +124,8 @@
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "5.4.2",
     "typescript-eslint": "^8.56.1",
-    "typescript-plugin-styled-components": "^3.0.0"
+    "typescript-plugin-styled-components": "^3.0.0",
+    "xlsx": "^0.18.5"
   },
   "repository": "https://github.com/AdmiralDS/react-ui",
   "bugs": {
