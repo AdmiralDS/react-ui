@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, type ForwardedRef } from 'react';
 import type { css } from 'styled-components';
 import { ReactComponent as ChevronRightOutline } from '@admiral-ds/icons/build/system/ChevronRightOutline.svg';
 import { Tag } from '#src/components/Tag';
@@ -53,14 +53,14 @@ export const SideMenuItem: SideMenuItemComponentType = fixedForwardRef(
     },
     ref,
   ) => {
-    const containerRef = useRef<any>(null);
+    const containerRef = useRef(null);
     const badge = badgeProps ? <Badge {...badgeProps} dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
     const tag = tagProps ? <Tag {...tagProps} as="span" dimension={dimension === 'l' ? 'm' : 's'} /> : undefined;
     const visibleRightCluster = Boolean(tag || badge);
 
     return (
       <Item
-        ref={refSetter(containerRef, ref)}
+        ref={refSetter(containerRef, ref as ForwardedRef<HTMLElement>)}
         $selected={selected}
         $dimension={dimension}
         $indentLevel={level}

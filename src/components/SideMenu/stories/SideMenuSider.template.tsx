@@ -78,8 +78,8 @@ export const SideMenuSiderTemplate = ({
   CSSCustomProps,
   ...props
 }: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
-  const [open, setOpen] = useState(true);
-  const [open2, setOpen2] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
