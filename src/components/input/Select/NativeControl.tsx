@@ -20,6 +20,7 @@ const NativeSelect = styled.select`
   opacity: 0;
   border: none;
   pointer-events: none;
+  display: none;
 `;
 
 export const NativeControl = forwardRef<HTMLSelectElement, NativeSelectProps>(

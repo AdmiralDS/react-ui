@@ -3,14 +3,17 @@ import * as React from 'react';
 import { Option, Select, T } from '@admiral-ds/react-ui';
 import type { SelectProps } from '@admiral-ds/react-ui';
 
-import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
+// import { OPTIONS_SIMPLE } from '#src/components/input/Select/stories/data';
 import { Separator } from '#src/components/input/Select/stories/styled';
+import { createClearOptions } from '#src/components/input/Select/stories/utils';
+
+const OPTIONS = createClearOptions(15000);
 
 export const SearchSelectWithFilterTemplate = ({ placeholder = 'Placeholder', ...props }: SelectProps) => {
   const renderOptions = () => {
-    return OPTIONS_SIMPLE.map((option, ind) => (
-      <Option key={option} value={option} disabled={ind === 4}>
-        {option}
+    return OPTIONS.map((option, ind) => (
+      <Option key={option.value} value={option.value} disabled={ind === 4}>
+        {`город ${option.text}`}
       </Option>
     ));
   };
