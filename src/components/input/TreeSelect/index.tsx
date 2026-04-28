@@ -191,8 +191,26 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       const wrapper = optionsWrapperRef.current;
       if (!wrapper) return;
 
-      let raf1 = 0;
-      let raf2 = 0;
+      let raf = 0;
+      let postRaf = 0;
+      let ro: ResizeObserver | null = null;
+
+      const eps = 1;
+
+      const isFullyVisible = (el: HTMLElement, containerRect: DOMRect) => {
+        const r = el.getBoundingClientRect();
+        return (
+          r.top >= containerRect.top - eps &&
+          r.left >= containerRect.left - eps &&
+          r.bottom <= containerRect.bottom + eps &&
+          r.right <= containerRect.right + eps
+        );
+      };
+
+      const schedule = () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(recompute);
+      };
 
       const recompute = () => {
         const chipEls = Array.from(wrapper.querySelectorAll<HTMLElement>('[data-tree-select-chip="true"]'));
@@ -202,31 +220,49 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         }
 
         const wrapperRect = wrapper.getBoundingClientRect();
-        const eps = 1;
         let count = 0;
-
         for (const el of chipEls) {
-          const r = el.getBoundingClientRect();
-          const fullyVisible =
-            r.top >= wrapperRect.top - eps &&
-            r.left >= wrapperRect.left - eps &&
-            r.bottom <= wrapperRect.bottom + eps &&
-            r.right <= wrapperRect.right + eps;
-          if (!fullyVisible) break;
+          if (!isFullyVisible(el, wrapperRect)) break;
           count += 1;
         }
 
-        const next = count >= chipEls.length ? null : Math.max(1, count);
+        const hasOverflow =
+          wrapper.scrollWidth > wrapper.clientWidth + eps || wrapper.scrollHeight > wrapper.clientHeight + eps;
+
+        // Если контент переполнен, но мы "видим" все отрисованные чипы,
+        // значит нужно принудительно показать +N (освободив под него место).
+        const next = hasOverflow
+          ? Math.max(0, Math.min(count, chipEls.length - 1))
+          : count >= chipEls.length
+            ? null
+            : count;
         setVisibleChipCount((prev) => (prev === next ? prev : next));
+
+        // Второй проход: если +N отрисован, но не помещается — уменьшаем кол-во видимых чипов.
+        cancelAnimationFrame(postRaf);
+        postRaf = requestAnimationFrame(() => {
+          const overflowEl = wrapper.querySelector<HTMLElement>('[data-testid="tree-select-overflow-chip"]');
+          if (!overflowEl) return;
+          const wr = wrapper.getBoundingClientRect();
+          if (isFullyVisible(overflowEl, wr)) return;
+          setVisibleChipCount((prev) => {
+            if (prev === null) return prev;
+            const decreased = Math.max(0, prev - 1);
+            return prev === decreased ? prev : decreased;
+          });
+        });
       };
 
-      raf1 = requestAnimationFrame(() => {
-        raf2 = requestAnimationFrame(recompute);
-      });
+      // первичный расчёт + подписка на resize контейнера
+      schedule();
+      ro = new ResizeObserver(schedule);
+      ro.observe(wrapper);
 
       return () => {
-        cancelAnimationFrame(raf1);
-        cancelAnimationFrame(raf2);
+        cancelAnimationFrame(raf);
+        cancelAnimationFrame(postRaf);
+        ro?.disconnect();
+        ro = null;
       };
     }, [isCollapsed, selectedChips.length, maxRowCountValue]);
 
