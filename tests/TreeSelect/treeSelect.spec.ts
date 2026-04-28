@@ -9,6 +9,17 @@ test.describe('TreeSelect Component', () => {
     await expect(frame.locator('input[placeholder="Выберите элементы..."]')).toBeVisible(); // Используйте ваш placeholder
   });
 
+  test('should have no checked options on first mount', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+
+    await input.click();
+
+    await expect(frame.locator(`role=checkbox[name="Опция 1.1"]`)).not.toBeChecked();
+    await expect(frame.locator(`role=checkbox[name="Опция 1.2"]`)).not.toBeChecked();
+  });
+
   test('should open and close dropdown on click', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
     const frame = getStorybookFrameLocator(page);

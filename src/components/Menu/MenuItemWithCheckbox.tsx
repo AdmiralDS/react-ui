@@ -37,16 +37,19 @@ export const checkboxTreeToMap = (
     const currentNode: CheckboxNodesMapItem = { level, node: item };
     acc.set(key, currentNode);
 
-    if (dependencies && !item.children) {
+    const children = item.children;
+    const hasChildren = Array.isArray(children) && children.length > 0;
+
+    if (dependencies && !hasChildren) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
-    if (item.children) {
+    if (hasChildren) {
       const allDependencies = dependencies ? [...dependencies] : [];
       const itemDependencies: Array<string> = [];
       currentNode.dependencies = itemDependencies;
       acc.set(key, currentNode);
       allDependencies.push(itemDependencies);
-      const map = checkboxTreeToMap(item.children, level + 1, allDependencies);
+      const map = checkboxTreeToMap(children, level + 1, allDependencies);
       return new Map([...acc, ...map]);
     }
 

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -113,25 +113,69 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const inputContainerRef = useRef<HTMLDivElement>(null);
     const optionsWrapperRef = useRef<HTMLDivElement>(null);
 
+    const cloneItems = (src: Array<TreeSelectItemProps>): Array<TreeSelectItemProps> => {
+      return src.map((item) => ({
+        ...item,
+        children: item.children ? cloneItems(item.children) : undefined,
+      }));
+    };
+
     const [open, setOpen] = useState<boolean>(false);
-    const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>([...items]);
+    const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneItems(items));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
     const [visibleChipCount, setVisibleChipCount] = useState<number | null>(null);
 
-    useEffect(() => {
+    const normalizeGroupChecked = (map: FlatMapItems) => {
+      map.forEach((mapItem) => {
+        if (mapItem.dependencies?.length) {
+          mapItem.node.checked = mapItem.dependencies.every((depId) => !!map.get(depId)?.node.checked);
+        }
+      });
+    };
+
+    const getSelectedChipsFromTree = (tree: Array<TreeSelectItemProps>): CheckboxGroupItemProps[] => {
+      const res: CheckboxGroupItemProps[] = [];
+
+      const walk = (nodes: Array<TreeSelectItemProps>) => {
+        nodes.forEach((node) => {
+          if (node.checked) {
+            res.push(node as unknown as CheckboxGroupItemProps);
+          }
+
+          const children = node.children;
+          if (Array.isArray(children) && children.length > 0) {
+            walk(children);
+          }
+        });
+      };
+
+      walk(tree);
+      return res;
+    };
+
+    useLayoutEffect(() => {
       const array = value ?? defaultValue ?? [];
-      const selected: CheckboxGroupItemProps[] = [];
+      const nextItems = cloneItems(items);
+      const map = checkboxTreeToMap(nextItems as unknown as Array<CheckboxGroupItemProps>);
 
-      flatMap.forEach((value, key) => {
-        if (array.includes(key)) {
-          value.node.checked = true;
-
-          selected.push(value.node);
-        } else value.node.checked = false;
+      map.forEach((mapItem) => {
+        mapItem.node.checked = false;
       });
 
-      setSelectedChips(selected);
-    }, [defaultValue, value]);
+      array.forEach((id) => {
+        const item = map.get(id);
+        if (!item) return;
+        item.node.checked = true;
+        item.dependencies?.forEach((depId) => {
+          const dep = map.get(depId);
+          if (dep) dep.node.checked = true;
+        });
+      });
+
+      normalizeGroupChecked(map);
+      setStateItems(nextItems);
+      setSelectedChips(getSelectedChipsFromTree(nextItems));
+    }, [items, defaultValue, value]);
 
     const maxRowCountValue = maxRowCount !== 'none' ? maxRowCount : undefined;
     const minRowCountValue = minRowCount !== 'none' ? minRowCount : undefined;
@@ -255,32 +299,19 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     };
 
-    const selectItem = (items: Array<CheckboxGroupItemProps>, item: CheckboxNodesMapItem) => {
-      item.node.checked = true;
-      if (item.dependencies && item.dependencies.length > 0) {
-        item.dependencies?.forEach((depId) => {
-          const depItem = flatMap.get(depId);
-          if (depItem) {
-            selectItem(items, depItem);
-          }
-        });
-      } else {
-        const index = selectedChips.findIndex((chip) => chip.id === item.node.id);
-        if (index === -1) {
-          items.push(item.node);
-        }
-      }
-    };
-
     const handleSelectItem = (id: string) => {
       const item = flatMap.get(id);
       if (item) {
-        const newSelectedChips = [...selectedChips];
+        item.node.checked = true;
+        item.dependencies?.forEach((depId) => {
+          const depItem = flatMap.get(depId);
+          if (depItem) depItem.node.checked = true;
+        });
 
-        selectItem(newSelectedChips, item);
-
-        setSelectedChips(newSelectedChips);
-        setStateItems([...stateItems]);
+        normalizeGroupChecked(flatMap);
+        const nextStateItems = [...stateItems];
+        setStateItems(nextStateItems);
+        setSelectedChips(getSelectedChipsFromTree(nextStateItems));
         onSelect?.(id);
       }
     };
@@ -290,22 +321,18 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       if (item) {
         item.node.checked = false;
 
-        if (item.dependencies && item.dependencies.length > 0) {
-          const newSelectedChips = selectedChips.filter((chip) => !item.dependencies?.includes(chip.id));
-          setSelectedChips(newSelectedChips);
-        } else {
-          const index = selectedChips.findIndex((chip) => chip.id === item.node.id);
-          if (index > -1) {
-            const newSelectedChips = [...selectedChips];
-            newSelectedChips.splice(index, 1);
-            setSelectedChips(newSelectedChips);
-          }
-        }
+        item.dependencies?.forEach((depId) => {
+          const depItem = flatMap.get(depId);
+          if (depItem) depItem.node.checked = false;
+        });
 
+        normalizeGroupChecked(flatMap);
         onDeselect?.(id);
       }
 
-      setStateItems([...stateItems]);
+      const nextStateItems = [...stateItems];
+      setStateItems(nextStateItems);
+      setSelectedChips(getSelectedChipsFromTree(nextStateItems));
     };
 
     const handleClearOptions = () => {

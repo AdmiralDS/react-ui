@@ -50,7 +50,7 @@ export const DropDownTree = ({
   const toggleCheck = (id: string) => {
     //
     const item = map.get(id);
-    const hasChildren = !!item?.node.children;
+    const hasChildren = Array.isArray(item?.node.children) && item.node.children.length > 0;
 
     const indeterminate =
       item?.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
@@ -80,7 +80,7 @@ export const DropDownTree = ({
     // TODO: переписать на reduce
     map.forEach((item) => {
       const node = item.node;
-      const hasChildren = !!node.children;
+      const hasChildren = Array.isArray(node.children) && node.children.length > 0;
       const indeterminate =
         item.dependencies?.some((depId: string) => map.get(depId)?.node.checked) &&
         item.dependencies?.some((depId: string) => !map.get(depId)?.node.checked);

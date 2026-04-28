@@ -10,10 +10,12 @@ import {
 
 import { PlaygroundTemplate } from './Playground.template';
 import { PanesRenderTemplate } from './PanesRender.template';
+import { RowCountLimitsTemplate } from './RowCountLimits.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
 import PanesRenderRaw from './PanesRender.template?raw';
+import RowCountLimitsRaw from './RowCountLimits.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
@@ -129,18 +131,17 @@ export const TextInputWithIcon = {
 
 const RowCountStory: StoryFn<typeof TreeSelect> = (props) => {
   const [{ CSSCustomProps }] = useGlobals();
-  return (
-    <PlaygroundTemplate
-      {...props}
-      CSSCustomProps={CSSCustomProps}
-      defaultValue={['1.1', '1.2.1', '1.2.2', '1.2.3', '1.3', '2', '3']}
-      minRowCount={2}
-      maxRowCount={3}
-    />
-  );
+  return <RowCountLimitsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
 };
 
 export const RowCountLimits = {
   render: RowCountStory,
   name: 'min/maxRowCount',
+  parameters: {
+    docs: {
+      source: {
+        code: RowCountLimitsRaw,
+      },
+    },
+  },
 };
