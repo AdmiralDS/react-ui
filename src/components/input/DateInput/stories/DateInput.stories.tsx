@@ -13,6 +13,8 @@ import { DateInputAlternativeIconTemplate } from './DateInputAlternativeIcon.tem
 import { DateInputSpecialDatesTemplate } from './DateInputSpecialDates.template';
 import { DateInputWithButtonTodayTemplate } from './DateInputWithButtonToday.template';
 import { DateInputRangeTemplate } from './DateInputRange.template';
+import { DateInputFocusCalendarTemplate } from './DateInputFocusCalendar.template';
+import { DateInputWithMaskTemplate } from './DateInputWithMask.template';
 
 // Imports of text sources
 import DateInputPlaygroundRaw from './DateInputPlayground.template?raw';
@@ -21,6 +23,8 @@ import DateInputAlternativeIconRaw from './DateInputAlternativeIcon.template?raw
 import DateInputSpecialDatesRaw from './DateInputSpecialDates.template?raw';
 import DateInputWithButtonTodayRaw from './DateInputWithButtonToday.template?raw';
 import DateInputRangeRaw from './DateInputRange.template?raw';
+import DateInputWithMaskRaw from './DateInputWithMask.template?raw';
+import DateInputFocusCalendarRaw from './DateInputFocusCalendar.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/DateInput',
@@ -292,6 +296,50 @@ export const DateInputRange = {
   },
 
   name: 'DateInput. Выбор диапазона',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="DateInput. Открытие календаря при фокусе">
+const DateInputFocusCalendarStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputFocusCalendarTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const DateInputFocusCalendar = {
+  render: DateInputFocusCalendarStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputFocusCalendarRaw,
+      },
+    },
+  },
+
+  name: 'DateInput. Открытие календаря при фокусе',
+};
+
+//</editor-fold>
+
+//<editor-fold desc="DateInput. С маской Maskito">
+const DateInputWithMaskStory: StoryFn<typeof DateInput> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <DateInputWithMaskTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const DateInputWithMask = {
+  render: DateInputWithMaskStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: DateInputWithMaskRaw,
+      },
+    },
+  },
+
+  name: 'DateInput. С маской Maskito',
 };
 
 //</editor-fold>
