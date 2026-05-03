@@ -17,8 +17,7 @@ import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 
 export interface TreeSelectProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
     Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'>,
     Pick<DropDownTreeProps, 'dropdownConfig'> {
   value?: string[];
@@ -105,14 +104,15 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const inputContainerRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
-    const cloneTree = useCallback((src: Array<TreeSelectItemProps>, selected: Set<string>) => {
-      const cloneNode = (n: TreeSelectItemProps): TreeSelectItemProps => ({
-        ...n,
-        checked: selected.has(n.id),
-        children: n.children?.length ? n.children.map(cloneNode) : undefined,
+    const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
+      const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
+        ...node,
+        checked: selected.has(node.id),
+        children: node.children?.length ? node.children.map(cloneNode) : undefined,
       });
+
       return src.map(cloneNode);
-    }, []);
+    };
 
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
@@ -123,12 +123,12 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       const nextItems = cloneTree(items, selectedSet);
       const map = checkboxTreeToMap(nextItems);
       const selected: CheckboxGroupItemProps[] = [];
-      map.forEach((v) => {
-        if (v.node.checked) selected.push(v.node);
+      map.forEach((item) => {
+        if (item.node.checked) selected.push(item.node);
       });
       setStateItems(nextItems);
       setSelectedChips(selected);
-    }, [cloneTree, items, defaultValue, value]);
+    }, [items, defaultValue, value]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -191,16 +191,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const flatMap = useMemo<FlatMapItems>(() => checkboxTreeToMap(stateItems), [stateItems]);
 
-    const parentByChildId = useMemo(() => {
-      const m = new Map<string, string | undefined>();
-      const walk = (nodes: TreeSelectItemProps[], parentId?: string) => {
-        for (const n of nodes) {
-          m.set(n.id, parentId);
-          if (n.children?.length) walk(n.children, n.id);
-        }
+    const childToParentMap = useMemo(() => {
+      const map = new Map<string, string>();
+
+      const processNode = (node: TreeSelectItemProps, parentId?: string) => {
+        if (parentId) map.set(node.id, parentId);
+        node.children?.forEach((child) => processNode(child, node.id));
       };
-      walk(stateItems);
-      return m;
+
+      stateItems.forEach((node) => processNode(node));
+      return map;
     }, [stateItems]);
 
     const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
@@ -222,7 +222,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       chips: Array<CheckboxGroupItemProps>,
     ): Array<CheckboxGroupItemProps> => {
       let nextChips = chips;
-      let parentId = parentByChildId.get(leafId);
+      let parentId = childToParentMap.get(leafId);
       while (parentId) {
         const parentEntry = flatMap.get(parentId);
         if (!parentEntry) break;
@@ -230,7 +230,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
           parentEntry.node.checked = false;
           nextChips = nextChips.filter((c) => c.id !== parentId);
         }
-        parentId = parentByChildId.get(parentId);
+        parentId = childToParentMap.get(parentId);
       }
       return nextChips;
     };
