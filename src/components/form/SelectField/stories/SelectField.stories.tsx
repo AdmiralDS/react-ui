@@ -67,10 +67,6 @@ export default {
       control: { type: 'boolean' },
     },
 
-    disableCopying: {
-      control: { type: 'boolean' },
-    },
-
     placeholder: {
       control: { type: 'text' },
     },
