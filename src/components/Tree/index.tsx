@@ -29,6 +29,8 @@ export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   onCheckedChange?: (ids: Array<string>) => void;
   /** Обработчик открытия/закрытия узла дерева */
   onExpandedChange?: (ids: Array<string>) => void;
+  /** Параметр убирает связь между родительскими и дочерними элементами */
+  checkStrictly?: boolean;
 }
 
 const Wrapper = styled.div`
@@ -96,6 +98,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       onMouseLeave,
       onCheckedChange,
       onExpandedChange,
+      checkStrictly = false,
       ...props
     },
     ref,
@@ -146,7 +149,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
       if (map[id].node.disabled) return;
       map[id].node.checked = value;
 
-      if (map[id].dependencies?.length) {
+      if (!checkStrictly && map[id].dependencies?.length) {
         map[id].dependencies?.forEach((depId: number | string) => setChecked(depId, value));
       }
     };
@@ -160,7 +163,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
     };
 
     const toggleCheck = (id: string | number) => {
-      const hasChildren = itemHasChildren(map[id].node);
+      const hasChildren = !checkStrictly && itemHasChildren(map[id].node);
 
       // При расчете indeterminate учитывается только не disabled опции, это связано с тем, что при переключении
       // родительского узла невозможно сбросить состояние checked
@@ -176,7 +179,7 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
 
       setChecked(id, !checked);
 
-      calculateParentNodeState(map[id]);
+      if (!checkStrictly) calculateParentNodeState(map[id]);
 
       if (onCheckedChange) {
         const checkedItems = Object.entries(map)
@@ -198,11 +201,13 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>(
         const node = map[item.id];
         const hasChildren = itemHasChildren(item);
         const indeterminate =
+          !checkStrictly &&
           node.dependencies?.some((depId: number | string) => map[depId].node.checked) &&
           node.dependencies?.some((depId: number | string) => !map[depId].node.checked);
-        const checked = hasChildren
-          ? node.dependencies && node.dependencies?.every((depId: number | string) => map[depId].node.checked)
-          : !!item.checked;
+        const checked =
+          !checkStrictly && hasChildren
+            ? node.dependencies && node.dependencies?.every((depId: number | string) => map[depId].node.checked)
+            : !!item.checked;
 
         return (
           <Fragment key={item.id}>
