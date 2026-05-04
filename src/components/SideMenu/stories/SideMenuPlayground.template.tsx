@@ -1,0 +1,95 @@
+import { useState } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+import { IconButton, SideMenu, Sider, T } from '@admiral-ds/react-ui';
+import type { BorderRadiusType, SideMenuProps } from '@admiral-ds/react-ui';
+import { ReactComponent as MenuOutline } from '@admiral-ds/icons/build/service/MenuOutline.svg';
+import { ReactComponent as EmailSolid } from '@admiral-ds/icons/build/system/EmailSolid.svg';
+
+import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
+
+const Wrapper = styled.div`
+  border: 1px solid ${(p) => p.theme.color['Neutral/Neutral 20']};
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
+const Header = styled.header`
+  height: 40px;
+  width: 100%;
+  background-color: ${(p) => p.theme.color['Opacity/Neutral 8']};
+`;
+
+const Layout = styled.div`
+  display: flex;
+  height: 300px;
+`;
+
+const Main = styled.main`
+  min-height: 100%;
+  min-width: calc(100% - 240px);
+  flex: 1 1 auto;
+  background-color: ${(p) => p.theme.color['Success/Success 10']};
+`;
+
+const items: SideMenuProps['items'] = [
+  { type: 'item', id: '1', label: 'Menu text', labelType: 'header', icon: <EmailSolid /> },
+  {
+    type: 'group',
+    id: '3',
+    label: 'Menu text',
+    labelType: 'header',
+    badge: { children: '3' },
+    icon: <EmailSolid />,
+    children: [
+      { type: 'item', id: '3.1', label: 'Menu text' },
+      {
+        type: 'group',
+        id: '3.2',
+        label: 'Menu text',
+        children: [
+          {
+            type: 'item',
+            id: '3.2.1',
+            label: 'Menu text',
+            tag: { children: 'New', statusViaBackground: true, kind: 'success' },
+          },
+          { type: 'item', id: '3.2.2', label: 'Menu text' },
+        ],
+      },
+    ],
+  },
+];
+
+export const SideMenuPlaygroundTemplate = ({
+  themeBorderKind,
+  CSSCustomProps,
+  ...props
+}: SideMenuProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => setOpen(!open);
+
+  return (
+    <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
+      <T as="div" font="Body/Body 1 Long" style={{ marginBottom: '20px' }}>
+        Компонент SideMenu (боковое меню) используется в интерфейсах приложений или веб-сайтов для обеспечения удобной
+        навигации. Компонент может сворачиваться по клику на кнопку или при адаптиве. SideMenu следует располагать сбоку
+        (слева), для этого нужно использовать вспомогательные компоненты: Sider и Drawer. Подробнее об этом в следующих
+        примерах.
+      </T>
+      <Wrapper>
+        <Header>
+          <IconButton dimension="m" onClick={handleToggle}>
+            <MenuOutline />
+          </IconButton>
+        </Header>
+        <Layout>
+          <Sider isOpen={open}>
+            <SideMenu {...props} items={items} />
+          </Sider>
+          <Main />
+        </Layout>
+      </Wrapper>
+    </ThemeProvider>
+  );
+};
