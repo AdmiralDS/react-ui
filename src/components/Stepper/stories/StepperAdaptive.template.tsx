@@ -10,9 +10,9 @@ const Separator = styled.div<{ $height?: number }>`
 const steps = [
   {
     key: 0,
-    content: 'Завершенный шаг, текст занимает максимум три строки, далее идет сокращение',
+    content: 'Redo шаг, текст занимает максимум три строки, далее идет сокращение',
     link: '#',
-    completed: true,
+    redo: true,
   },
   {
     key: 1,

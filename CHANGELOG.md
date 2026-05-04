@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.62.0](https://github.com/AdmiralDS/react-ui/compare/v8.61.0...v8.62.0) (2026-03-27)
+
+
+### Features
+
+* **Stepper:** add Redo step and pw tests ([5545e03](https://github.com/AdmiralDS/react-ui/commit/5545e0351ab05bf718f7af7659cc5abc8081e530))
+* **TooltipHOC:** disable tooltip on touch device ([edf8930](https://github.com/AdmiralDS/react-ui/commit/edf893050c6292bb11786e9a2a23303b393050f4))
+* **TreeSelect:** add inputPropsConfig ([8ac9980](https://github.com/AdmiralDS/react-ui/commit/8ac998008089ad3fa5f8ae1a9e9c1be6a9ede020))
+
+
+### Bug Fixes
+
+* **Accordion:** [#2001](https://github.com/AdmiralDS/react-ui/issues/2001) исправлена ошибка с окрашиванием подписей полей ([629fc25](https://github.com/AdmiralDS/react-ui/commit/629fc25dab9c9688ee3a6ca12bd3db5865a1eca4))
+* **Accordion:** обнаружены и исправлены расхождения с дизайн-макетами в части вертикальных отступов ([cd770cf](https://github.com/AdmiralDS/react-ui/commit/cd770cfa4982dc614355c44fa019307b2e194850))
+* **colors:** изменено значение цветового токена Special Elevated BG в темной теме ([1682172](https://github.com/AdmiralDS/react-ui/commit/1682172678413a42992a58e8670143ce3798698f))
+* **Fields:** Добвлена обработка свойств labelCssMixins, visibleLabelTooltips в комопненты ([edcb444](https://github.com/AdmiralDS/react-ui/commit/edcb44440a339666cc5f06a16a17dd22ff7e3994))
+* **MultiInput:** prevent clear icon clicks from focusing input ([0e5103e](https://github.com/AdmiralDS/react-ui/commit/0e5103e816d9c0a9a2a3ec47f95d3cfdced10a7e))
+* **MultiInput:** remove clear button key from spread ([f8dd5a4](https://github.com/AdmiralDS/react-ui/commit/f8dd5a4d6b5c801b13148e9982b625c95b0e3eb2))
+* **Table:** [#2030](https://github.com/AdmiralDS/react-ui/issues/2030) исправлен баг с иконками drag drop и распределением ширины таблицы в процентах ([154ed8f](https://github.com/AdmiralDS/react-ui/commit/154ed8fcf502ae3858e55458de6e440597fbc32a))
+
 ## [8.61.0](https://github.com/AdmiralDS/react-ui/compare/v8.60.0...v8.61.0) (2026-02-27)
 
 

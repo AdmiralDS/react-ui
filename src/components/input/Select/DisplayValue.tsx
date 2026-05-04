@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Tooltip } from '#src/components/Tooltip';
 import { StringValueWrapper } from './styled';
 import { checkOverflow } from '#src/components/common/utils/checkOverflow';
+import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface DisplayValueProps {
   forceHideOverflowTooltip: boolean;
@@ -10,46 +11,43 @@ export interface DisplayValueProps {
   targetRef: React.RefObject<HTMLElement>;
 }
 
-export const DisplayValue = ({
-  visibleValue,
-  isSearchPanelOpen,
-  targetRef,
-  forceHideOverflowTooltip,
-}: DisplayValueProps) => {
-  const valueRef = React.useRef<HTMLDivElement>(null);
-  const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
-  const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
+export const DisplayValue = React.forwardRef<HTMLDivElement, DisplayValueProps>(
+  ({ visibleValue, isSearchPanelOpen, targetRef, forceHideOverflowTooltip }, ref) => {
+    const valueRef = React.useRef<HTMLDivElement>(null);
+    const [overflowActive, setOverflowActive] = React.useState<boolean>(false);
+    const [tooltipVisible, setTooltipVisible] = React.useState<boolean>(false);
 
-  React.useEffect(() => {
-    if (valueRef.current && checkOverflow(valueRef.current) !== overflowActive) {
-      setOverflowActive(checkOverflow(valueRef.current));
-    }
-  }, [tooltipVisible, setOverflowActive]);
+    React.useEffect(() => {
+      if (valueRef.current && checkOverflow(valueRef.current) !== overflowActive) {
+        setOverflowActive(checkOverflow(valueRef.current));
+      }
+    }, [tooltipVisible, setOverflowActive]);
 
-  React.useEffect(() => {
-    function show() {
-      setTooltipVisible(true);
-    }
-    function hide() {
-      setTooltipVisible(false);
-    }
-    const value = valueRef.current;
-    if (value) {
-      value.addEventListener('mouseenter', show);
-      value.addEventListener('mouseleave', hide);
-      return () => {
-        value.removeEventListener('mouseenter', show);
-        value.removeEventListener('mouseleave', hide);
-      };
-    }
-  }, [setTooltipVisible]);
+    React.useEffect(() => {
+      function show() {
+        setTooltipVisible(true);
+      }
+      function hide() {
+        setTooltipVisible(false);
+      }
+      const value = valueRef.current;
+      if (value) {
+        value.addEventListener('mouseenter', show);
+        value.addEventListener('mouseleave', hide);
+        return () => {
+          value.removeEventListener('mouseenter', show);
+          value.removeEventListener('mouseleave', hide);
+        };
+      }
+    }, [setTooltipVisible]);
 
-  const showTooltip = !forceHideOverflowTooltip && !isSearchPanelOpen && tooltipVisible && overflowActive;
+    const showTooltip = !forceHideOverflowTooltip && !isSearchPanelOpen && tooltipVisible && overflowActive;
 
-  return (
-    <>
-      <StringValueWrapper ref={valueRef}>{visibleValue}</StringValueWrapper>
-      {showTooltip && <Tooltip renderContent={() => visibleValue} targetElement={targetRef.current} />}
-    </>
-  );
-};
+    return (
+      <>
+        <StringValueWrapper ref={refSetter(ref, valueRef)}>{visibleValue}</StringValueWrapper>
+        {showTooltip && <Tooltip renderContent={() => visibleValue} targetElement={targetRef.current} />}
+      </>
+    );
+  },
+);

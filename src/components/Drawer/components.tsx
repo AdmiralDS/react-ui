@@ -30,7 +30,7 @@ const Content = styled.div<{ $mobile: boolean }>`
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
   display: flex;
   flex-direction: ${({ $mobile }) => ($mobile ? 'column-reverse' : 'row-reverse')};
-  padding: ${({ $mobile }) => ($mobile ? '16px 16px 0' : '16px 24px 0')};
+  padding: ${({ $mobile }) => ($mobile ? '16px 16px 4px' : '16px 24px 4px')};
 
   & > button {
     margin: ${({ $mobile }) => ($mobile ? '0 0 16px 0' : '0 16px 0 0')};

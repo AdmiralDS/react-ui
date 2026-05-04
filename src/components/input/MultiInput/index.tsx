@@ -118,12 +118,14 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       const clearButtonProps = {
         icon: CloseOutlineSvg,
         id: 'searchSelectClearIcon',
+        onPointerDown: preventDefault,
         onClick: onClearOptions,
         'aria-hidden': true,
-        key: 'close',
       } satisfies React.ComponentProps<typeof InputIconButton>;
 
-      iconAfterArray.unshift(<InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />);
+      iconAfterArray.unshift(
+        <InputIconButton key="close" {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />,
+      );
     }
 
     const handleContainerFocus: React.FocusEventHandler<HTMLDivElement> = (e) => {

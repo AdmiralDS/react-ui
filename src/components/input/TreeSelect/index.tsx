@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
@@ -55,6 +55,11 @@ export interface TreeSelectProps
   clearButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
+  /** Конфиг функция пропсов для внутреннего input. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  inputPropsConfig?: (
+    props: React.ComponentProps<typeof StyledMultiInput>,
+  ) => Partial<React.ComponentProps<typeof StyledMultiInput> & DataAttributes>;
 
   /** Срабатывает при изменении значения */
   onChange?: (value: string[]) => void;
@@ -85,12 +90,14 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       renderBottomPanel,
       openButtonPropsConfig,
       clearButtonPropsConfig,
+      inputPropsConfig,
       dropdownConfig,
       onOpenChange,
       onSelect,
       onDeselect,
       onChange,
       onClearIconClick,
+      ...props
     },
     ref,
   ) => {
@@ -98,23 +105,31 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const inputContainerRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
-    const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>([...items]);
+    const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
+      const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
+        ...node,
+        checked: selected.has(node.id),
+        children: node.children?.length ? node.children.map(cloneNode) : undefined,
+      });
+
+      return src.map(cloneNode);
+    };
+
+    const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
 
     useEffect(() => {
-      const array = value ?? defaultValue ?? [];
+      const ids = value ?? defaultValue ?? [];
+      const selectedSet = new Set(ids);
+      const nextItems = cloneTree(items, selectedSet);
+      const map = checkboxTreeToMap(nextItems);
       const selected: CheckboxGroupItemProps[] = [];
-
-      flatMap.forEach((value, key) => {
-        if (array.includes(key)) {
-          value.node.checked = true;
-
-          selected.push(value.node);
-        } else value.node.checked = false;
+      map.forEach((item) => {
+        if (item.node.checked) selected.push(item.node);
       });
-
+      setStateItems(nextItems);
       setSelectedChips(selected);
-    }, [defaultValue, value]);
+    }, [items, defaultValue, value]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -177,29 +192,69 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const flatMap = useMemo<FlatMapItems>(() => checkboxTreeToMap(stateItems), [stateItems]);
 
+    const childToParentMap = useMemo(() => {
+      const map = new Map<string, string>();
+
+      const processNode = (node: TreeSelectItemProps, parentId?: string) => {
+        if (parentId) map.set(node.id, parentId);
+        node.children?.forEach((child) => processNode(child, node.id));
+      };
+
+      stateItems.forEach((node) => processNode(node));
+      return map;
+    }, [stateItems]);
+
+    const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
+      if (!node) return [];
+      const ids: string[] = [node.id];
+      if (node.children?.length) {
+        node.children.forEach((child) => ids.push(...collectSubtreeIds(child)));
+      }
+      return ids;
+    };
+
+    const hasCheckedDescendantExcept = (rootId: string, rootNode: CheckboxGroupItemProps) => {
+      const ids = collectSubtreeIds(rootNode);
+      return ids.some((sid) => sid !== rootId && flatMap.get(sid)?.node.checked);
+    };
+
+    const bubbleUncheckParentsAfterLeafDeselect = (
+      leafId: string,
+      chips: Array<CheckboxGroupItemProps>,
+    ): Array<CheckboxGroupItemProps> => {
+      let nextChips = chips;
+      let parentId = childToParentMap.get(leafId);
+      while (parentId) {
+        const parentEntry = flatMap.get(parentId);
+        if (!parentEntry) break;
+        if (!hasCheckedDescendantExcept(parentId, parentEntry.node)) {
+          parentEntry.node.checked = false;
+          nextChips = nextChips.filter((c) => c.id !== parentId);
+        }
+        parentId = childToParentMap.get(parentId);
+      }
+      return nextChips;
+    };
+
     const handleDeleteChip = (id?: string) => {
       if (id) {
         handleDeselectItem(id);
-        const newValue = selectedChips.filter((chip) => !!chip.checked).map((chip) => chip.id);
+        const newValue = [...flatMap.values()].filter((item) => !!item.node.checked).map((item) => item.node.id);
         onChange?.(newValue);
       }
     };
 
     const selectItem = (items: Array<CheckboxGroupItemProps>, item: CheckboxNodesMapItem) => {
-      item.node.checked = true;
-      if (item.dependencies && item.dependencies.length > 0) {
-        item.dependencies?.forEach((depId) => {
-          const depItem = flatMap.get(depId);
-          if (depItem) {
-            selectItem(items, depItem);
-          }
-        });
-      } else {
-        const index = selectedChips.findIndex((chip) => chip.id === item.node.id);
-        if (index === -1) {
-          items.push(item.node);
+      const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
+
+      idsToSelect.forEach((nextId) => {
+        const nextItem = flatMap.get(nextId);
+        if (!nextItem) return;
+        nextItem.node.checked = true;
+        if (!items.some((chip) => chip.id === nextItem.node.id)) {
+          items.push(nextItem.node);
         }
-      }
+      });
     };
 
     const handleSelectItem = (id: string) => {
@@ -218,18 +273,26 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const handleDeselectItem = (id: string) => {
       const item = flatMap.get(id);
       if (item) {
-        item.node.checked = false;
-
-        if (item.dependencies && item.dependencies.length > 0) {
-          const newSelectedChips = selectedChips.filter((chip) => !item.dependencies?.includes(chip.id));
-          setSelectedChips(newSelectedChips);
+        if (item.node.children?.length) {
+          const subtreeIds = collectSubtreeIds(item.node);
+          subtreeIds.forEach((subtreeId) => {
+            const subtreeItem = flatMap.get(subtreeId);
+            if (subtreeItem) subtreeItem.node.checked = false;
+          });
+          setSelectedChips(selectedChips.filter((chip) => !subtreeIds.includes(chip.id)));
+        } else if (item.dependencies && item.dependencies.length > 0) {
+          item.node.checked = false;
+          item.dependencies.forEach((depId) => {
+            const depItem = flatMap.get(depId);
+            if (depItem) depItem.node.checked = false;
+          });
+          const idsToRemove = [item.node.id, ...item.dependencies];
+          setSelectedChips(selectedChips.filter((chip) => !idsToRemove.includes(chip.id)));
         } else {
-          const index = selectedChips.findIndex((chip) => chip.id === item.node.id);
-          if (index > -1) {
-            const newSelectedChips = [...selectedChips];
-            newSelectedChips.splice(index, 1);
-            setSelectedChips(newSelectedChips);
-          }
+          item.node.checked = false;
+          let newSelectedChips = selectedChips.filter((chip) => chip.id !== item.node.id);
+          newSelectedChips = bubbleUncheckParentsAfterLeafDeselect(id, newSelectedChips);
+          setSelectedChips(newSelectedChips);
         }
 
         onDeselect?.(id);
@@ -285,22 +348,25 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       e.stopPropagation();
     };
 
+    const inputProps = {
+      ...props,
+      ref: refSetter(ref, inputRef),
+      placeholder,
+      containerPropsConfig: getInputContainerProps,
+      displayClearIcon: displayClearIcon && selectedChips.length > 0,
+      iconsAfter,
+      clearButtonPropsConfig,
+      onClearOptions: handleClearOptions,
+      dimension,
+      $hidden: selectedChips.length > 0,
+      onKeyDown: handleKeyDown,
+      onPaste: handlePaste,
+      onDrop: handleDrop,
+    } satisfies React.ComponentProps<typeof StyledMultiInput>;
+
     return (
       <>
-        <StyledMultiInput
-          ref={refSetter(ref, inputRef)}
-          placeholder={placeholder}
-          containerPropsConfig={getInputContainerProps}
-          displayClearIcon={displayClearIcon && selectedChips.length > 0}
-          iconsAfter={iconsAfter}
-          clearButtonPropsConfig={clearButtonPropsConfig}
-          onClearOptions={handleClearOptions}
-          dimension={dimension}
-          $hidden={selectedChips.length > 0}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
-          onDrop={handleDrop}
-        >
+        <StyledMultiInput {...inputProps} {...inputPropsConfig?.(inputProps)}>
           {renderSelectedChips()}
         </StyledMultiInput>
         {open && (

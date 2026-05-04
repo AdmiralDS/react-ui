@@ -51,14 +51,21 @@ test.describe('Stepper Advanced Features', () => {
     const stepper = frame.locator('[data-testid="stepper"]');
     await expect(stepper).toBeVisible();
 
-    // Ищем шаги с пропом link
-    const stepsWithLink = frame.locator('[data-testid="stepper"] [data-completed="true"]');
-    await expect(stepsWithLink).toHaveCount(2);
+    const steps = stepper.locator('[role="listitem"]');
 
-    // Проверяем, что завершенные шаги имеют ссылки
-    const firstLinkStep = stepsWithLink.first();
-    await expect(firstLinkStep).toBeVisible();
-    await expect(firstLinkStep).toHaveAttribute('href', '#');
+    const completedSteps = stepper.locator('[data-completed="true"]');
+    await expect(completedSteps).toHaveCount(2);
+
+    const firstCompleted = completedSteps.nth(0);
+    const secondCompleted = completedSteps.nth(1);
+    await expect(firstCompleted).toHaveAttribute('href', '#');
+    await expect(secondCompleted).toHaveAttribute('href', '#');
+
+    const activeStep = steps.nth(2);
+    const inactiveStep = steps.nth(3);
+
+    await expect(activeStep).not.toHaveAttribute('href', '#');
+    await expect(inactiveStep).not.toHaveAttribute('href', '#');
   });
 
   test('custom step content', async ({ page }) => {
@@ -93,6 +100,80 @@ test.describe('Stepper Advanced Features', () => {
     // Проверяем, что есть активный шаг
     const activeStep = frame.locator('[data-active="true"]');
     await expect(activeStep).toBeVisible();
+  });
+
+  test('previous steps - redo state after click', async ({ page }) => {
+    await page.goto('/?path=/story/admiral-2-1-stepper--previous-steps-example');
+    const frame = getStorybookFrameLocator(page);
+
+    const steps = frame.locator('[role="listitem"]');
+    const firstStep = steps.first();
+    const secondStep = steps.nth(1);
+
+    const activeStep = frame.locator('[data-active="true"]');
+    await expect(activeStep).toBeVisible();
+
+    const activeRedoLine = activeStep.locator('svg + div');
+    await expect(activeRedoLine).toBeVisible();
+    const initialActiveBorderStyle = await activeRedoLine.evaluate(
+      (node) => getComputedStyle(node as HTMLElement).borderBottomStyle,
+    );
+    expect(initialActiveBorderStyle).toBe('dashed');
+
+    const firstLineInitial = firstStep.locator('svg + div');
+    await expect(firstLineInitial).toBeVisible();
+    const initialFirstBorderStyle = await firstLineInitial.evaluate(
+      (node) => getComputedStyle(node as HTMLElement).borderBottomStyle,
+    );
+    expect(initialFirstBorderStyle).not.toBe('dashed');
+    await expect(firstStep).toHaveAttribute('data-completed', 'true');
+
+    await expect(firstStep).toBeVisible();
+    await clickAndWait(firstStep, page);
+
+    const firstLineAfter = firstStep.locator('svg + div');
+    await expect(firstLineAfter).toBeVisible();
+    const firstBorderAfter = await firstLineAfter.evaluate(
+      (node) => getComputedStyle(node as HTMLElement).borderBottomStyle,
+    );
+    expect(firstBorderAfter).toBe('dashed');
+
+    const secondLineAfter = secondStep.locator('svg + div');
+    await expect(secondLineAfter).toBeVisible();
+    const secondBorderAfter = await secondLineAfter.evaluate(
+      (node) => getComputedStyle(node as HTMLElement).borderBottomStyle,
+    );
+    expect(secondBorderAfter).not.toBe('dashed');
+    await expect(secondStep).toHaveAttribute('data-completed', 'true');
+  });
+
+  test('previous steps - clicking future step does not change active', async ({ page }) => {
+    await page.goto('/?path=/story/admiral-2-1-stepper--previous-steps-example');
+    const frame = getStorybookFrameLocator(page);
+
+    const steps = frame.locator('[role="listitem"]');
+    await expect(steps).toHaveCount(5);
+
+    const activeBefore = frame.locator('[data-active="true"]');
+    await expect(activeBefore).toBeVisible();
+    const activeTextBefore = await activeBefore.textContent();
+
+    const futureStep = steps.nth(4);
+    await expect(futureStep).toBeVisible();
+
+    await clickAndWait(futureStep, page);
+
+    const activeAfter = frame.locator('[data-active="true"]');
+    await expect(activeAfter).toBeVisible();
+    await expect(activeAfter).toHaveText(activeTextBefore || '');
+
+    const futureLine = futureStep.locator('svg + div');
+    await expect(futureLine).toBeVisible();
+    const futureBorderStyle = await futureLine.evaluate(
+      (node) => getComputedStyle(node as HTMLElement).borderBottomStyle,
+    );
+    expect(futureBorderStyle).not.toBe('dashed');
+    await expect(futureStep).not.toHaveAttribute('data-completed', 'true');
   });
 
   test('progress mode - lineClamp property', async ({ page }) => {
@@ -306,5 +387,21 @@ test.describe('Stepper Advanced Features', () => {
     // Проверяем, что у завершенного шага есть соответствующие стили
     const completedIcon = completedStep.locator('svg');
     await expect(completedIcon).toBeVisible();
+  });
+
+  test('redo state visual feedback', async ({ page }) => {
+    await page.goto('/?path=/story/admiral-2-1-stepper--step-kinds-example');
+    const frame = getStorybookFrameLocator(page);
+
+    const redoStep = frame.locator('[role="listitem"]', {
+      hasText: 'Шаг Redo повторное редактирование',
+    });
+    await expect(redoStep).toBeVisible();
+
+    const redoLine = redoStep.locator('svg + div');
+    await expect(redoLine).toBeVisible();
+
+    const borderStyle = await redoLine.evaluate((node) => getComputedStyle(node as HTMLElement).borderBottomStyle);
+    expect(borderStyle).toBe('dashed');
   });
 });

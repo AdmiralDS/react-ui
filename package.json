@@ -1,6 +1,6 @@
 {
   "name": "@admiral-ds/react-ui",
-  "version": "8.61.0",
+  "version": "8.62.0",
   "description": "React component library for Admiral design system 2.1",
   "keywords": [
     "AdmiralDS",
@@ -42,6 +42,8 @@
     "test:e2e-ui": "playwright test --ui",
     "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --disable-telemetry --output-dir docs/current",
     "preview-storybook": "npx http-server ./docs/current",
