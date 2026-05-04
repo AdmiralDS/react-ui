@@ -80,7 +80,6 @@ export const ValueWrapper = styled.div<{
 
   ${({ $multiple, $isEmpty }) => $multiple && !$isEmpty && chipsShiftStyle}
 
-  gap: 4px;
   flex-wrap: ${({ $multiple }) => ($multiple ? 'wrap' : 'unset')};
   align-items: center;
   align-content: flex-start;
@@ -98,6 +97,7 @@ export const StringValueWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-right: 4px;
 `;
 
 const ieFixes = css`

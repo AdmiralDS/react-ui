@@ -111,14 +111,15 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const inputContainerRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
-    const cloneTree = useCallback((src: Array<TreeSelectItemProps>, selected: Set<string>) => {
-      const cloneNode = (n: TreeSelectItemProps): TreeSelectItemProps => ({
-        ...n,
-        checked: selected.has(n.id),
-        children: n.children?.length ? n.children.map(cloneNode) : undefined,
+    const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
+      const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
+        ...node,
+        checked: selected.has(node.id),
+        children: node.children?.length ? node.children.map(cloneNode) : undefined,
       });
+
       return src.map(cloneNode);
-    }, []);
+    };
 
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
@@ -128,8 +129,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         if (showCheckedStrategy === 'SHOW_ALL') {
           const map = checkboxTreeToMap(nextItems);
           const chips: CheckboxGroupItemProps[] = [];
-          map.forEach((v) => {
-            if (v.node.checked) chips.push(v.node);
+          map.forEach((item) => {
+            if (item.node.checked) chips.push(item.node);
           });
           return chips;
         }
@@ -137,8 +138,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         if (showCheckedStrategy === 'SHOW_CHILD') {
           const map = checkboxTreeToMap(nextItems);
           const chips: CheckboxGroupItemProps[] = [];
-          map.forEach((v) => {
-            if (v.node.checked && !v.node.children?.length) chips.push(v.node);
+          map.forEach((item) => {
+            if (item.node.checked && !item.node.children?.length) chips.push(item.node);
           });
           return chips;
         }
@@ -176,7 +177,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       const nextItems = cloneTree(items, selectedSet);
       setStateItems(nextItems);
       setSelectedChips(buildSelectedChips(nextItems));
-    }, [buildSelectedChips, cloneTree, items, defaultValue, value]);
+    }, [buildSelectedChips, items, defaultValue, value]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -239,16 +240,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const flatMap = useMemo<FlatMapItems>(() => checkboxTreeToMap(stateItems), [stateItems]);
 
-    const parentByChildId = useMemo(() => {
-      const m = new Map<string, string | undefined>();
-      const walk = (nodes: TreeSelectItemProps[], parentId?: string) => {
-        for (const n of nodes) {
-          m.set(n.id, parentId);
-          if (n.children?.length) walk(n.children, n.id);
-        }
+    const childToParentMap = useMemo(() => {
+      const map = new Map<string, string>();
+
+      const processNode = (node: TreeSelectItemProps, parentId?: string) => {
+        if (parentId) map.set(node.id, parentId);
+        node.children?.forEach((child) => processNode(child, node.id));
       };
-      walk(stateItems);
-      return m;
+
+      stateItems.forEach((node) => processNode(node));
+      return map;
     }, [stateItems]);
 
     const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
@@ -266,14 +267,14 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const bubbleUncheckParentsAfterLeafDeselect = (leafId: string) => {
-      let parentId = parentByChildId.get(leafId);
+      let parentId = childToParentMap.get(leafId);
       while (parentId) {
         const parentEntry = flatMap.get(parentId);
         if (!parentEntry) break;
         if (!hasCheckedDescendantExcept(parentId, parentEntry.node)) {
           parentEntry.node.checked = false;
         }
-        parentId = parentByChildId.get(parentId);
+        parentId = childToParentMap.get(parentId);
       }
     };
 
