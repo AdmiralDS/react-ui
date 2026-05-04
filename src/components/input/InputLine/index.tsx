@@ -57,6 +57,7 @@ export const StyledInputLine = styled.input<{ $isTmpValue?: boolean }>`
 const PlaceholderValue = styled.span`
   color: var(--admiral-color-Neutral_Neutral30, ${(p) => p.theme.color['Neutral/Neutral 30']});
   transition: color 0.3s ease-in-out;
+  white-space: pre;
 `;
 
 const AdditionalText = styled(PlaceholderValue)`
@@ -67,6 +68,7 @@ const AdditionalText = styled(PlaceholderValue)`
 
 const InvisibleInputValue = styled.span`
   visibility: hidden;
+  white-space: pre;
 `;
 
 const InputLineContainer = styled.div`
