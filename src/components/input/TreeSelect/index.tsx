@@ -16,6 +16,8 @@ import {
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 
+export type ShowCheckedStrategyProps = 'SHOW_ALL' | 'SHOW_CHILD' | 'SHOW_PARENT';
+
 export interface TreeSelectProps
   extends
     Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
@@ -72,6 +74,9 @@ export interface TreeSelectProps
 
   /** Срабатывает при открытии/закрытии DropDownMenu */
   onOpenChange?: (open: boolean) => void;
+
+  /** Стратегия отображения выбранных чипсов */
+  showCheckedStrategy?: ShowCheckedStrategyProps;
 }
 
 export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
@@ -80,6 +85,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       value,
       defaultValue,
       items,
+      showCheckedStrategy = 'SHOW_ALL',
       displayClearIcon,
       disabled,
       isLoading,
@@ -118,18 +124,60 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
 
+    const buildSelectedChips = useCallback(
+      (nextItems: Array<TreeSelectItemProps>): Array<CheckboxGroupItemProps> => {
+        if (showCheckedStrategy === 'SHOW_ALL') {
+          const map = checkboxTreeToMap(nextItems);
+          const chips: CheckboxGroupItemProps[] = [];
+          map.forEach((item) => {
+            if (item.node.checked) chips.push(item.node);
+          });
+          return chips;
+        }
+
+        if (showCheckedStrategy === 'SHOW_CHILD') {
+          const map = checkboxTreeToMap(nextItems);
+          const chips: CheckboxGroupItemProps[] = [];
+          map.forEach((item) => {
+            if (item.node.checked && !item.node.children?.length) chips.push(item.node);
+          });
+          return chips;
+        }
+
+        const collect = (nodes: Array<TreeSelectItemProps>): [CheckboxGroupItemProps[], boolean] => {
+          const chips: CheckboxGroupItemProps[] = [];
+          let allChecked = true;
+
+          nodes.forEach((node) => {
+            if (node.children?.length) {
+              const [childChips, childrenAllChecked] = collect(node.children);
+              if (childrenAllChecked) {
+                chips.push(node);
+              } else {
+                chips.push(...childChips);
+              }
+              allChecked = allChecked && childrenAllChecked;
+            } else {
+              if (node.checked) chips.push(node);
+              allChecked = allChecked && !!node.checked;
+            }
+          });
+
+          return [chips, allChecked];
+        };
+
+        return collect(nextItems)[0];
+      },
+      [showCheckedStrategy],
+    );
+
     useEffect(() => {
       const ids = value ?? defaultValue ?? [];
       const selectedSet = new Set(ids);
       const nextItems = cloneTree(items, selectedSet);
-      const map = checkboxTreeToMap(nextItems);
-      const selected: CheckboxGroupItemProps[] = [];
-      map.forEach((item) => {
-        if (item.node.checked) selected.push(item.node);
-      });
       setStateItems(nextItems);
-      setSelectedChips(selected);
-    }, [items, defaultValue, value]);
+      setSelectedChips(buildSelectedChips(nextItems));
+    }, [buildSelectedChips, items, defaultValue, value]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -218,22 +266,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       return ids.some((sid) => sid !== rootId && flatMap.get(sid)?.node.checked);
     };
 
-    const bubbleUncheckParentsAfterLeafDeselect = (
-      leafId: string,
-      chips: Array<CheckboxGroupItemProps>,
-    ): Array<CheckboxGroupItemProps> => {
-      let nextChips = chips;
+    const bubbleUncheckParentsAfterLeafDeselect = (leafId: string) => {
       let parentId = childToParentMap.get(leafId);
       while (parentId) {
         const parentEntry = flatMap.get(parentId);
         if (!parentEntry) break;
         if (!hasCheckedDescendantExcept(parentId, parentEntry.node)) {
           parentEntry.node.checked = false;
-          nextChips = nextChips.filter((c) => c.id !== parentId);
         }
         parentId = childToParentMap.get(parentId);
       }
-      return nextChips;
     };
 
     const handleDeleteChip = (id?: string) => {
@@ -244,27 +286,21 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     };
 
-    const selectItem = (items: Array<CheckboxGroupItemProps>, item: CheckboxNodesMapItem) => {
+    const selectItem = (item: CheckboxNodesMapItem) => {
       const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
 
       idsToSelect.forEach((nextId) => {
         const nextItem = flatMap.get(nextId);
         if (!nextItem) return;
         nextItem.node.checked = true;
-        if (!items.some((chip) => chip.id === nextItem.node.id)) {
-          items.push(nextItem.node);
-        }
       });
     };
 
     const handleSelectItem = (id: string) => {
       const item = flatMap.get(id);
       if (item) {
-        const newSelectedChips = [...selectedChips];
-
-        selectItem(newSelectedChips, item);
-
-        setSelectedChips(newSelectedChips);
+        selectItem(item);
+        setSelectedChips(buildSelectedChips(stateItems));
         setStateItems([...stateItems]);
         onSelect?.(id);
       }
@@ -279,22 +315,18 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             const subtreeItem = flatMap.get(subtreeId);
             if (subtreeItem) subtreeItem.node.checked = false;
           });
-          setSelectedChips(selectedChips.filter((chip) => !subtreeIds.includes(chip.id)));
         } else if (item.dependencies && item.dependencies.length > 0) {
           item.node.checked = false;
           item.dependencies.forEach((depId) => {
             const depItem = flatMap.get(depId);
             if (depItem) depItem.node.checked = false;
           });
-          const idsToRemove = [item.node.id, ...item.dependencies];
-          setSelectedChips(selectedChips.filter((chip) => !idsToRemove.includes(chip.id)));
         } else {
           item.node.checked = false;
-          let newSelectedChips = selectedChips.filter((chip) => chip.id !== item.node.id);
-          newSelectedChips = bubbleUncheckParentsAfterLeafDeselect(id, newSelectedChips);
-          setSelectedChips(newSelectedChips);
+          bubbleUncheckParentsAfterLeafDeselect(id);
         }
 
+        setSelectedChips(buildSelectedChips(stateItems));
         onDeselect?.(id);
       }
 
