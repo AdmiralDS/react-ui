@@ -154,6 +154,7 @@ export interface TimePickerProps
   timeInputIconButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+  preselected?: string;
 }
 
 export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
@@ -187,6 +188,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       handleInput: handleInputProp,
       value: valueProp,
       defaultValue: defaultValueProp,
+      preselected,
       ...props
     },
     ref,
@@ -313,7 +315,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
           if (availableSlots.find((slot) => slot.value === inputTimeValue)) {
             setActiveOption(inputTimeValue);
           } else {
-            setActiveOption(availableSlots[0].value);
+            // setActiveOption(availableSlots[0].value);
           }
         } else {
           setActiveOption('');
@@ -643,13 +645,15 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
           >
             <StyledMenu
               selected={innerValue}
-              active={activeOption}
+              active={activeOption || preselected}
               model={model}
               dimension={menuDimension}
               data-dimension={dimension}
               onSelectItem={handleSelectOption}
               onActivateItem={setActiveOption}
               preventFocusSteal
+              preselected={preselected}
+              preselectedModeActive={!!preselected}
             />
           </StyledDropdownContainer>
         )}
