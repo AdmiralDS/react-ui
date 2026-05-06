@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.63.0](https://github.com/AdmiralDS/react-ui/compare/v8.62.0...v8.63.0) (2026-05-06)
+
+
+### Features
+
+* **Drawer:** [#2066](https://github.com/AdmiralDS/react-ui/issues/2066) добавлен параметр appearance для настройки внешнего вида компонента (цвета фона) ([f7e8a0e](https://github.com/AdmiralDS/react-ui/commit/f7e8a0ed39dd25808b650e35358cfae78187f2dd))
+* **SideMenu:** в библиотеку добавлен компонент SideMenu ([a5b81e8](https://github.com/AdmiralDS/react-ui/commit/a5b81e83523e373150dbff7fcc820bd9fa89e091))
+* **Tree:** add checkStrictly mode ([01cda9a](https://github.com/AdmiralDS/react-ui/commit/01cda9a17985933672ec62d320e577cbf53a3d46))
+* **TreeSelect:** добавление статегий отображения выбираемых опций ([331d36f](https://github.com/AdmiralDS/react-ui/commit/331d36f2c02cfa8ede6faedc60910763eb1e33e9))
+
+
+### Bug Fixes
+
+* **Drawer, Modal:** [#2066](https://github.com/AdmiralDS/react-ui/issues/2066) скорректированы вертикальные паддинги в компонентах согласно дизайн макетам ([99126c8](https://github.com/AdmiralDS/react-ui/commit/99126c8ae958cbef799608e9c68862ae18b3868a))
+* **InputLine:** space in value fixed ([8ff31a5](https://github.com/AdmiralDS/react-ui/commit/8ff31a5cffe7bfa9a1f7c158ce89bd8e38e512f5))
+* **Select:** fix copying value ([d6e863b](https://github.com/AdmiralDS/react-ui/commit/d6e863bcaf73957c559b7f9d195a6177d76bcdb8))
+* **TreeSelect:** исправлено поведение при закрытии последнего ChildChips ([f7ef7bc](https://github.com/AdmiralDS/react-ui/commit/f7ef7bca36f135459261f2cf3a027bfc923e88bc))
+* **TreeSelect:** исправлено поведение при закрытии parentChips ([fa293aa](https://github.com/AdmiralDS/react-ui/commit/fa293aaa65c006737c2a7984295152c3b9978a39))
+
 ## [8.62.0](https://github.com/AdmiralDS/react-ui/compare/v8.61.0...v8.62.0) (2026-03-27)
 
 
