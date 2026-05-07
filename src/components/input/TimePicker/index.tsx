@@ -315,7 +315,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
           if (availableSlots.find((slot) => slot.value === inputTimeValue)) {
             setActiveOption(inputTimeValue);
           } else {
-            // setActiveOption(availableSlots[0].value);
+            setActiveOption(preselected ? '' : availableSlots[0].value);
           }
         } else {
           setActiveOption('');
@@ -645,7 +645,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
           >
             <StyledMenu
               selected={innerValue}
-              active={activeOption || preselected}
+              active={activeOption}
               model={model}
               dimension={menuDimension}
               data-dimension={dimension}
