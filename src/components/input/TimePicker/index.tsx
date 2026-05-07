@@ -154,6 +154,7 @@ export interface TimePickerProps
   timeInputIconButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+  /** Секция в состоянии preselected, для подсветки предлагаемого значения  */
   preselected?: string;
 }
 
