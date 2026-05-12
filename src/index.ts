@@ -83,6 +83,7 @@ export * from './components/common/hooks/useInterval';
 export * from './components/common/hooks/useOnScreen';
 export * from './components/common/hooks/useTimeout';
 export * from './components/common/hooks/useId';
+export * from './components/common/hooks/useMediaQuery';
 export * from './components/TagMenu';
 export * from './components/Range';
 export * from './components/Pill';
@@ -112,3 +113,6 @@ export * from './components/Anchor';
 export * from './components/Divider';
 
 export * from './components/Pulse';
+
+export * from './components/SideMenu';
+export * from './components/SideMenu/components';

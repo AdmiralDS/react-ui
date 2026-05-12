@@ -74,7 +74,7 @@ const Title = styled.h5<{ $mobile: boolean; $displayCloseIcon: boolean }>`
 const ButtonPanel = styled.div<{ $mobile: boolean }>`
   display: flex;
   flex-direction: ${({ $mobile }) => ($mobile ? 'column-reverse' : 'row-reverse')};
-  padding: ${({ $mobile }) => ($mobile ? '16px 16px 0' : '16px 24px 0')};
+  padding: ${({ $mobile }) => ($mobile ? '16px 16px 4px' : '16px 24px 4px')};
 
   & > button {
     margin: ${({ $mobile }) => ($mobile ? '0 0 16px 0' : '0 16px 0 0')};
@@ -136,7 +136,7 @@ const ModalComponent = styled.div<{ $dimension: Dimension; $mobile?: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 20px 0 24px;
+  padding: 20px 0;
   ${width};
   max-height: ${({ $mobile }) => ($mobile ? '84vh' : '90vh')};
   background-color: var(--admiral-color-Special_ElevatedBG, ${(p) => p.theme.color['Special/Elevated BG']});

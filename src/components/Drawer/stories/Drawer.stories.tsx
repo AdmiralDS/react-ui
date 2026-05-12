@@ -84,6 +84,10 @@ export default {
     backdrop: {
       control: { type: 'boolean' },
     },
+    appearance: {
+      options: ['primary', 'secondary'],
+      control: { type: 'radio' },
+    },
     mobile: {
       control: { type: 'boolean' },
     },

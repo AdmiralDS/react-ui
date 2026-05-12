@@ -8,6 +8,7 @@ import { TreeSimpleTemplate } from './TreeSimple.template';
 import { TreeUncontrolledTemplate } from './TreeUncontrolled.template';
 import { TreeWithControlCheckCountTemplate } from './TreeWithControlCheckCount.template';
 import { TreeWithOnChangeHandlerTemplate } from './TreeWithOnChangeHandler.template';
+import { TreeWithCheckStrictlyTemplate } from './TreeWithCheckStrictly.template';
 
 // Imports of text sources
 import TreeWithCheckboxesRaw from './TreeWithCheckboxes.template?raw';
@@ -15,6 +16,7 @@ import TreeSimpleRaw from './TreeSimple.template?raw';
 import TreeUncontrolledRaw from './TreeUncontrolled.template?raw';
 import TreeWithControlCheckCountRaw from './TreeWithControlCheckCount.template?raw';
 import TreeWithOnChangeHandlerRaw from './TreeWithOnChangeHandler.template?raw';
+import TreeWithCheckStrictlyRaw from './TreeWithCheckStrictly.template?raw';
 
 const Desc = styled.div`
   font-family: 'VTB Group UI';
@@ -156,4 +158,20 @@ export const TreeWithOnChangeHandlerExample = {
   },
 
   name: 'Обработка событий onExpandChange и onCheckedChange',
+};
+
+const TreeWithCheckStrictlyStory: StoryFn<typeof Tree> = (props) => <TreeWithCheckStrictlyTemplate {...props} />;
+
+export const TreeWithCheckStrictlyExample = {
+  render: TreeWithCheckStrictlyStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: TreeWithCheckStrictlyRaw,
+      },
+    },
+  },
+
+  name: 'Пример с checkStrictly',
 };

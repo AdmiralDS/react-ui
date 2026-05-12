@@ -40,7 +40,7 @@ export const checkboxTreeToMap = (
     if (dependencies && !item.children) {
       dependencies.forEach((dependency) => dependency.push(key));
     }
-    if (item.children) {
+    if (item.children?.length) {
       const allDependencies = dependencies ? [...dependencies] : [];
       const itemDependencies: Array<string> = [];
       currentNode.dependencies = itemDependencies;

@@ -26,6 +26,7 @@ import { TableRenderGroupTitleTemplate } from './TableRenderGroupTitle.template'
 import { TableColumnDragDropTemplate } from './TableColumnDragDrop.template';
 import { TableRowDragDropTemplate } from './TableRowDragDrop.template';
 import { TableBaseHtmlTemplate } from './TableBaseHtml.template';
+import { TableWithIconTemplate } from './TableWithIcon.template';
 // Imports of text sources
 import TablePlaygroundRaw from './TablePlayground.template?raw';
 import TableColumnWidthRaw from './TableColumnWidth.template?raw';
@@ -51,6 +52,7 @@ import TableRenderGroupTitleRaw from './TableRenderGroupTitle.template?raw';
 import TableColumnDragDropRaw from './TableColumnDragDrop.template?raw';
 import TableRowDragDropRaw from './TableRowDragDrop.template?raw';
 import TableBaseHtmlRaw from './TableBaseHtml.template?raw';
+import TableWithIconRaw from './TableWithIcon.template?raw';
 
 const Separator = styled.div`
   height: 20px;
@@ -462,6 +464,21 @@ export const RenderCellExample = {
     },
   },
   name: 'Пример кастомизации компонента ячейки (renderCell).',
+};
+//</editor-fold>
+
+//<editor-fold desc="Пример кастомизации ячейки с иконками">
+const WithIconStory: StoryFn<typeof Table> = (props) => <TableWithIconTemplate {...props} />;
+export const WithIconExample = {
+  render: WithIconStory,
+  parameters: {
+    docs: {
+      source: {
+        code: TableWithIconRaw,
+      },
+    },
+  },
+  name: 'Пример кастомизации компонента ячейки с иконками.',
 };
 //</editor-fold>
 
