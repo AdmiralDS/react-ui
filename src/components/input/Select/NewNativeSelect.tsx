@@ -35,8 +35,6 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
           (o) => o.value === (active || selectedValues[selectedValues.length - 1]),
         );
 
-        console.log(lastSelectedIndex, active);
-
         // Добавляем ±5 опций вокруг последней выбранной
         for (
           let i = Math.max(0, lastSelectedIndex - 5);
@@ -60,8 +58,6 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
 
     // При изменении выбора в нативном select - синхронизируем с реальными данными
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      console.log('handleChange');
-
       const newValue = multiple ? Array.from(e.target.selectedOptions).map((opt) => opt.value) : e.target.value;
 
       // Находим полные данные опции
@@ -81,8 +77,6 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
 
       onChange?.(syntheticEvent as any);
     };
-
-    console.log(value);
 
     return (
       <select

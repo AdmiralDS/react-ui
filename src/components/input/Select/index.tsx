@@ -809,9 +809,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const memorisedChildren = useMemo(() => {
       if (!children) return null;
-      console.log(`start memorise ${Date.now()}`);
 
-      const array = Children.map(children, (child, index) => {
+      return Children.map(children, (child, index) => {
         if (isValidElement(child)) {
           // Используем существующий key или value как стабильный идентификатор
           const stableKey = child.key ?? child.props?.value ?? index;
@@ -819,9 +818,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         }
         return null;
       });
-
-      console.log(`finish memorise ${Date.now()}`);
-      return array;
     }, [children]);
 
     const memorisedDropDownOptions = useMemo(
@@ -876,8 +872,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         e.preventDefault();
       }
     };
-
-    console.log('render');
 
     const menuVirtualScroll = virtualScroll ?? (dropDownModel.length > 1000 ? { itemHeight: 'auto' } : undefined);
 
