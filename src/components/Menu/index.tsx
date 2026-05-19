@@ -493,11 +493,14 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       setTimeout(() => {
         let itemToScroll;
 
-        if ((active && previousActive.current !== active) || previousActiveState.current !== activeState) {
+        if (
+          (!!active && previousActive.current !== active) ||
+          (active === undefined && previousActiveState.current !== activeState)
+        ) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (
-          (preselected && previousPreselected.current !== preselected) ||
-          previousPreselectedState.current !== preselectedState
+          (!!preselected && previousPreselected.current !== preselected) ||
+          (preselected === undefined && previousPreselectedState.current !== preselectedState)
         ) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
         }

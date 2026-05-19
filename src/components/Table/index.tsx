@@ -360,8 +360,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
       const idsMap = rowList.reduce((ids: IdSelectionStatusMap, row) => {
         if (groupInfo) {
           const rowInCurrentGroup = groupInfo.rows.includes(row.id.toString());
-
-          if (row.id === id || rowInCurrentGroup) {
+          if (row.id === id || (rowInCurrentGroup && !row.checkboxDisabled && !row.disabled)) {
             ids[row.id] = !(groupCheckStatus?.indeterminate || groupCheckStatus?.checked);
           } else {
             ids[row.id] = row.id === id ? !row.selected : !!row.selected;
@@ -393,7 +392,7 @@ export const Table = React.forwardRef<HTMLDivElement, TableProps>(
 
     function handleHeaderCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
       const toRemove = rowList.reduce((ids: IdSelectionStatusMap, row) => {
-        ids[row.id] = row.checkboxDisabled ? !!row.selected : !someRowsChecked;
+        ids[row.id] = row.checkboxDisabled || row.disabled ? !!row.selected : !someRowsChecked;
         return ids;
       }, {});
       onRowSelectionChange?.(toRemove);
