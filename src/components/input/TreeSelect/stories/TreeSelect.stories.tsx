@@ -10,11 +10,15 @@ import {
 
 import { PlaygroundTemplate } from './Playground.template';
 import { PanesRenderTemplate } from './PanesRender.template';
+import { ShowChildStrategyTemplate } from './ShowChildStrategy.template';
+import { ShowParentStrategyTemplate } from './ShowParentStrategy.template';
 import { RowCountLimitsTemplate } from './RowCountLimits.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
 import PanesRenderRaw from './PanesRender.template?raw';
+import ShowChildStrategyRaw from './ShowChildStrategy.template?raw';
+import ShowParentStrategyRaw from './ShowParentStrategy.template?raw';
 import RowCountLimitsRaw from './RowCountLimits.template?raw';
 
 export default {
@@ -105,6 +109,44 @@ export const TextInputPlayground = {
   },
 
   name: 'Базовый пример компонент',
+};
+//</editor-fold>
+
+//<editor-fold desc="Стратегия SHOW_CHILD">
+const ShowChildStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ShowChildStrategyTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const ShowChildStrategy = {
+  render: ShowChildStrategyStory,
+  parameters: {
+    docs: {
+      source: {
+        code: ShowChildStrategyRaw,
+      },
+    },
+  },
+  name: 'showCheckedStrategy: SHOW_CHILD',
+};
+//</editor-fold>
+
+//<editor-fold desc="Стратегия SHOW_PARENT">
+const ShowParentStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ShowParentStrategyTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const ShowParentStrategy = {
+  render: ShowParentStrategyStory,
+  parameters: {
+    docs: {
+      source: {
+        code: ShowParentStrategyRaw,
+      },
+    },
+  },
+  name: 'showCheckedStrategy: SHOW_PARENT',
 };
 //</editor-fold>
 

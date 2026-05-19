@@ -79,7 +79,7 @@ const Overlay = styled.div<{
   }
 `;
 
-const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
+const DrawerComponent = styled.div<{ $position: Position; $appearance: DrawerAppearance; $mobile?: boolean }>`
   position: absolute;
   box-sizing: border-box;
   top: 0;
@@ -89,10 +89,13 @@ const DrawerComponent = styled.div<{ $position: Position; $mobile?: boolean }>`
   flex: 1 0 auto;
   flex-direction: column;
   overflow: hidden;
-  padding: 20px 0 24px;
+  padding: 20px 0;
   ${({ $mobile }) => $mobile && 'min-width: calc(100% - 16px);'}
   max-width: calc(100% - 16px);
-  background-color: var(--admiral-color-Neutral_Neutral00, ${(p) => p.theme.color['Neutral/Neutral 00']});
+  background-color: ${(p) =>
+    p.$appearance === 'primary'
+      ? `var(--admiral-color-Neutral_Neutral00, ${p.theme.color['Neutral/Neutral 00']})`
+      : `var(--admiral-color-Neutral_Neutral05, ${p.theme.color['Neutral/Neutral 05']})`};
   color: var(--admiral-color-Neutral_Neutral90, ${(p) => p.theme.color['Neutral/Neutral 90']});
   box-shadow: var(--admiral-box-shadow-Shadow16, ${(p) => parseShadow(p.theme.shadow['Shadow 16'])});
   outline: none;
@@ -111,6 +114,7 @@ const CloseButton = styled(CloseIconPlacementButton)<{ $mobile?: boolean }>`
 `;
 
 const nothing = () => {};
+export type DrawerAppearance = 'primary' | 'secondary';
 export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
   /** Состояние компонента: открыт/закрыт */
   isOpen?: boolean;
@@ -122,6 +126,8 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
   container?: Element;
   /** Мобильная версия компонента */
   mobile?: boolean;
+  /** Внешний вид компонента (влияет на цвет фона) */
+  appearance?: DrawerAppearance;
   /** Закрытие на нажатие клавиши Escape. Происходит только при условии, что фокус находится внутри drawerа.
    * По умолчанию при открытии компонента фокус проставляется внутри него.
    * Однако при backdrop = false, пользователь может взаимодействовать с остальной страницей и вывести фокус из drawerа,
@@ -170,6 +176,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       overlayStyle,
       container,
       mobile = false,
+      appearance = 'primary',
       onClose,
       closeOnEscapeKeyDown = false,
       closeOnBackdropClick = false,
@@ -294,6 +301,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           role="dialog"
           aria-modal
           $position={position}
+          $appearance={appearance}
           $mobile={mobile}
           {...props}
         >

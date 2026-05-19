@@ -545,8 +545,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const visibleValueIsString = typeof visibleValue === 'string';
 
+    const valueRef = useRef(null);
+
     const wrappedVisibleValue = visibleValueIsString ? (
       <DisplayValue
+        ref={valueRef}
         visibleValue={visibleValue}
         isSearchPanelOpen={isSearchPanelOpen}
         targetRef={containerRef}
@@ -842,7 +845,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     } satisfies React.ComponentProps<typeof OpenStatusButton>;
 
     const handleWrapperMouseDown = (e: React.MouseEvent) => {
-      if (isFocused && e.target !== inputRef.current) {
+      if (isFocused && e.target !== inputRef.current && e.target !== valueRef.current) {
         e.preventDefault();
       }
     };

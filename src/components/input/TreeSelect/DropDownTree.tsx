@@ -47,6 +47,14 @@ export const DropDownTree = ({
     }
   };
 
+  const syncGroupChecked = () => {
+    map.forEach((item) => {
+      if (item.dependencies?.length) {
+        item.node.checked = item.dependencies.every((depId: string) => !!map.get(depId)?.node.checked);
+      }
+    });
+  };
+
   const toggleCheck = (id: string) => {
     //
     const item = map.get(id);
@@ -63,6 +71,7 @@ export const DropDownTree = ({
       : item?.node.checked;
 
     setChecked(id, !checked);
+    syncGroupChecked();
 
     onChangeSelected?.([...map.values()].filter((item) => !!item.node.checked).map((item) => item.node.id));
 
