@@ -202,6 +202,87 @@ test.describe('PaginationOne', () => {
     });
   });
 
+  // test.describe('page select menu', () => {
+  //   test('navigates options with arrow keys when showPageNumberInput is enabled', async ({ page }) => {
+  //     await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true`);
+  //     const frame = getStorybookFrameLocator(page);
+
+  //     const pageButton = frame.locator('.current-page-number-with-dropdown');
+  //     await clickAndWait(pageButton, page);
+
+  //     const listbox = frame.getByRole('listbox').last();
+  //     const input = listbox.getByRole('textbox');
+
+  //     await expect(input).toBeFocused();
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('1');
+
+  //     await input.press('ArrowDown');
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('2');
+  //     await expect(input).toHaveValue('2');
+
+  //     await input.press('ArrowDown');
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('3');
+  //     await expect(input).toHaveValue('3');
+
+  //     await input.press('ArrowUp');
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('2');
+  //     await expect(input).toHaveValue('2');
+
+  //     await input.press('Enter');
+
+  //     await expect(pageButton).toHaveText('2');
+  //     await expect(frame.getByText('9–16 записей из 100')).toBeVisible();
+  //   });
+
+  //   test('auto-scrolls to selected page on open when page is greater than 12', async ({ page }) => {
+  //     await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true`);
+  //     const frame = getStorybookFrameLocator(page);
+
+  //     const pageButton = frame.locator('.current-page-number-with-dropdown');
+
+  //     await clickAndWait(pageButton, page);
+  //     const input = frame.getByRole('listbox').last().getByRole('textbox');
+  //     await input.fill('13');
+  //     await input.press('Enter');
+
+  //     await expect(pageButton).toHaveText('13');
+  //     await expect(frame.getByText('97–100 записей из 100')).toBeVisible();
+
+  //     await clickAndWait(pageButton, page);
+
+  //     const listbox = frame.getByRole('listbox').last();
+  //     const selectedOption = listbox.getByText('13', { exact: true });
+
+  //     await expect(selectedOption).toBeVisible();
+  //     await expect(selectedOption).toBeInViewport();
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('13');
+  //   });
+
+  //   test('auto-scrolls to selected page on open with many pages (virtual scroll)', async ({ page }) => {
+  //     await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true;totalItems:250`);
+  //     const frame = getStorybookFrameLocator(page);
+
+  //     const pageButton = frame.locator('.current-page-number-with-dropdown');
+
+  //     await clickAndWait(pageButton, page);
+  //     const input = frame.getByRole('listbox').last().getByRole('textbox');
+  //     await input.fill('20');
+  //     await input.press('Enter');
+
+  //     await expect(pageButton).toHaveText('20');
+  //     await expect(frame.getByText('153–160 записей из 250')).toBeVisible();
+
+  //     await clickAndWait(pageButton, page);
+
+  //     const listbox = frame.getByRole('listbox').last();
+  //     const selectedOption = listbox.getByText('20', { exact: true });
+
+  //     await expect(selectedOption).toBeVisible();
+  //     await expect(selectedOption).toBeInViewport();
+  //     await expect(listbox.locator('[data-hovered="true"]')).toHaveText('20');
+  //   });
+  // });
+
   test.describe('showPageNumberInput', () => {
     test('changes page via number input on Enter', async ({ page }) => {
       await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true`);

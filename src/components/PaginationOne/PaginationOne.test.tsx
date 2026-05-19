@@ -379,6 +379,31 @@ describe('PaginationOne', () => {
   });
 
   describe('showPageNumberInput', () => {
+    // it('navigates options with arrow keys when input is focused', async () => {
+    //   render(<PaginationOneWrapper showPageNumberInput />);
+
+    //   await act(async () => {
+    //     fireEvent.click(screen.getByRole('button', { name: 'Page 1 of 13' }));
+    //   });
+
+    //   const input = await screen.findByRole('textbox');
+
+    //   await act(async () => {
+    //     fireEvent.keyDown(input, { key: 'ArrowDown', code: 'ArrowDown' });
+    //   });
+    //   expect(input).toHaveValue('2');
+
+    //   await act(async () => {
+    //     fireEvent.keyDown(input, { key: 'ArrowDown', code: 'ArrowDown' });
+    //   });
+    //   expect(input).toHaveValue('3');
+
+    //   await act(async () => {
+    //     fireEvent.keyDown(input, { key: 'ArrowUp', code: 'ArrowUp' });
+    //   });
+    //   expect(input).toHaveValue('2');
+    // });
+
     it('changes page after entering number and pressing Enter', async () => {
       const handleChange = jest.fn();
       const user = userEvent.setup();
