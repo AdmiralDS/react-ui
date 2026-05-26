@@ -32,6 +32,11 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
             label: 'Опция 1.2.2',
             checked: false,
           },
+          {
+            id: '1.2.3',
+            label: 'Опция 1.2.3',
+            checked: false,
+          },
         ],
       },
       {
@@ -46,6 +51,11 @@ const STORY_ITEMS: Array<TreeSelectItemProps> = [
     label: 'Опция 2',
     checked: false,
   },
+  {
+    id: '3',
+    label: 'Опция 3',
+    checked: false,
+  },
 ];
 
 export const ShowParentStrategyTemplate = ({
@@ -57,7 +67,7 @@ export const ShowParentStrategyTemplate = ({
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
   const dropdownProps = { 'data-testid': 'dropdown-tree' };
-  const [value, setValue] = useState<Array<string>>();
+  const [value, setValue] = useState<Array<string>>(['1', '1.1', '1.2', '1.2.1', '1.2.2', '1.2.3', '1.3', '2', '3']);
 
   const onChange = (newValue: string[]) => {
     setValue(newValue);

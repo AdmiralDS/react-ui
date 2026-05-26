@@ -24,4 +24,8 @@ export interface TreeSelectItemProps {
   children?: Array<TreeSelectItemProps>;
 }
 
+export const SHOW_CHECKED_STRATEGY_VALUES = ['SHOW_ALL', 'SHOW_CHILD', 'SHOW_PARENT'] as const;
+/** Стратегия отображения выбранных чипсов */
+export type ShowCheckedStrategyProps = (typeof SHOW_CHECKED_STRATEGY_VALUES)[number];
+
 export type DropdownContainerProps = React.ComponentProps<typeof DropdownContainer>;
