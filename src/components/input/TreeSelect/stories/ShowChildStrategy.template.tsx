@@ -94,7 +94,6 @@ export const ShowChildStrategyTemplate = ({
           clearButtonPropsConfig={() => clearButtonProps}
           openButtonPropsConfig={() => openButtonProps}
           dropdownConfig={() => dropdownProps}
-          displayClearIcon
         />
       </ThemeProvider>
     </>

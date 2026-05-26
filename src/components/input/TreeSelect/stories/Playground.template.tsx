@@ -108,7 +108,6 @@ export const PlaygroundTemplate = ({
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
         dropdownConfig={() => dropdownProps}
-        displayClearIcon
       />
     </ThemeProvider>
   );

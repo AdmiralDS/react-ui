@@ -139,6 +139,9 @@ const ShowChildStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
 export const ShowChildStrategy = {
   render: ShowChildStrategyStory,
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: ShowChildStrategyRaw,
@@ -158,6 +161,9 @@ const ShowParentStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
 export const ShowParentStrategy = {
   render: ShowParentStrategyStory,
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: ShowParentStrategyRaw,
