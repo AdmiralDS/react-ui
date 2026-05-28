@@ -30,7 +30,7 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
       });
 
       // 2. Добавляем опции, ближайшие к выбранным (для навигации)
-      if (options.length > 0 && selectedValues.length > 0) {
+      if ((options.length > 0 && selectedValues.length > 0) || !!active) {
         const lastSelectedIndex = options.findIndex(
           (o) => o.value === (active || selectedValues[selectedValues.length - 1]),
         );
@@ -72,6 +72,7 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
           ...e.target,
           options: fullOptions,
           value: newValue,
+          selectedOptions: e.target.selectedOptions,
         },
       };
 
@@ -85,12 +86,14 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
         multiple={multiple}
         disabled={disabled}
         onChange={handleChange}
+        className={'native-select'}
         style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }} // Скрываем, но оставляем в DOM
         {...props}
       >
-        {syncedOptions.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.children}
+        <option value="" />
+        {syncedOptions.map((option) => (
+          <option key={option.value} value={option.value} disabled={option.disabled}>
+            {option.children}
           </option>
         ))}
       </select>

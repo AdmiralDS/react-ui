@@ -47,19 +47,9 @@ import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/compone
 import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
-import { VirtualizedNativeSelect } from '#src/components/input/Select/NewNativeSelect';
+import { VirtualizedNativeSelect } from '#src/components/input/Select/VirtualizedNativeSelect';
 
 export * from './types';
-
-/**
- * Осталось сделать:
- * Активное состояние у крестика на чипсах по стрелкам
- * Проверить Перфоманс
- * Тултип и длинного текста в selectValue
- * Возможность, если используется renderValue, задать значение, которое будет появляться при вводе поиска и для опций
- * Разбить компонент на хуки для большей читаемости и императивности (useHeight, useInput, ...)
- * Разбить тесты по пропсам и функционалу. Например, тесты проверящие placeholder И т.д.
- */
 
 export const DropDownText = styled(OptionWrapper)`
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
@@ -307,10 +297,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const [constantOptions, setConstantOptions] = useState<IConstantOption[]>([]);
     const [dropDownItems, setDropItems] = useState<Array<SelectItemProps>>([]);
-    const nativeOptionsArray = useRef<Array<IConstantOption>>([]);
-
-    type MapRecord = Record<string, IConstantOption>;
-    const nativeOptionsMap = useRef<MapRecord>({});
 
     const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(forcedOpen);
     const [isFocused, setIsFocused] = useState(false);
@@ -339,25 +325,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [value]);
 
     const selectedOption = useMemo(
-      () => (multiple || !selectedValue ? null : nativeOptionsMap.current[selectedValue as string]),
-      [multiple, selectedValue],
+      () => (multiple || !selectedValue ? null : constantOptions.find((option) => option.value === selectedValue)),
+      [multiple, constantOptions, selectedValue],
     );
-
-    // const optionsMap = useMemo(() => {
-    //   return new Map(constantOptions.map((opt) => [opt.value, opt]));
-    // }, [constantOptions]);
 
     const selectedOptions = useMemo(() => {
       if (multiple && Array.isArray(selectedValue)) {
         return selectedValue.reduce((acc: Array<IConstantOption>, item: string) => {
-          const option = nativeOptionsMap.current[item];
-
+          const option = constantOptions.find((option) => option.value === item);
           if (option) acc.push(option);
           return acc;
         }, []);
+      } else {
+        return [];
       }
-      return [];
-    }, [selectedValue, multiple]);
+    }, [constantOptions, selectedValue, multiple]);
 
     const prevIsSearchPanelOpen = usePrevious<boolean>(isSearchPanelOpen);
     const [itemsOnTop, setItemsOnTop] = useState<Array<SelectItemProps>>([]);
@@ -409,15 +391,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ];
     }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
-    // useEffect(() => {
-    //   console.log('setActiveItem(undefined)');
-    //   if (activeItem) {
-    //     const item = dropDownModel.find((item) => item.id === activeItem);
-    //     if (!item) {
-    //       setActiveItem(undefined);
-    //     }
-    //   }
-    // }, [dropDownModel, activeItem]);
+    useEffect(() => {
+      if (activeItem) {
+        const item = dropDownModel.find((item) => item.id === activeItem);
+        if (!item) {
+          setActiveItem(undefined);
+        }
+      }
+    }, [dropDownModel, activeItem]);
 
     const inputRef = inputTargetRef ?? useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
@@ -430,12 +411,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     });
 
     const onConstantOptionMount = (option: IConstantOption) => {
-      // console.log('onConstantOptionMount');
-
-      nativeOptionsArray.current.push(option);
-      nativeOptionsMap.current[option.value] = option;
-
-      // setConstantOptions((prev) => [...prev, option]);
+      setConstantOptions((prev) => [...prev, option]);
       if (unmountedSelectedOptions.current.includes(option.value)) {
         unmountedSelectedOptions.current = unmountedSelectedOptions.current.filter(
           (unmountedOption) => unmountedOption !== option.value,
@@ -444,11 +420,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const onConstantOptionUnMount = (option: IConstantOption) => {
-      // console.log('onConstantOptionUnMount');
-      // if (selectedArray.current.includes(option.value)) {
-      //   unmountedSelectedOptions.current = [...unmountedSelectedOptions.current, option.value];
-      // }
-      // setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value));
+      if (selectedArray.current.includes(option.value)) {
+        unmountedSelectedOptions.current = [...unmountedSelectedOptions.current, option.value];
+      }
+      setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value));
     };
 
     const handleDropDownOptionMount = useCallback((option: SelectItemProps) => {
@@ -709,8 +684,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const handleNativeControlChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-      console.log('handleNativeControlChange');
-
       if (isKeyboardEvent.current && modeIsSelect) {
         setPreseleceted(evt.target.value);
         return;
@@ -764,7 +737,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     useEffect(() => {
       if (isSearchPanelOpen) {
-        modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+        if (modeIsSelect) selectRef.current?.focus();
+        else inputRef.current?.focus();
+
         setPreseleceted('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
@@ -875,10 +850,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const menuVirtualScroll = virtualScroll ?? (dropDownModel.length > 1000 ? { itemHeight: 'auto' } : undefined);
 
-    const handleScrollMenu = (e: React.UIEvent<HTMLDivElement>) => {
-      console.log(e);
-    };
-
     return (
       <SelectWrapper
         className={className}
@@ -906,7 +877,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedValue}
           multiple={multiple}
           disabled={disabled}
-          options={nativeOptionsArray.current}
+          options={constantOptions}
           active={activeItem}
           {...props}
           onChange={handleNativeControlChange}
@@ -970,7 +941,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               renderTopPanel={renderDropDownTopPanel || renderTopPanel}
               renderBottomPanel={renderDropDownBottomPanel || renderBottomPanel}
               containerRef={dropDownRef}
-              // virtualScroll={virtualScroll}
               virtualScroll={menuVirtualScroll}
               preventFocusSteal
               preselectedModeActive={modeIsSelect}
@@ -978,7 +948,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               onPreselectItem={setPreseleceted}
               onMenuKeyDown={handleMenuKeyDown}
               disableSelectionOnSpace={mode === 'searchSelect'}
-              onScroll={handleScrollMenu}
               {...menuProps}
             />
           </DropdownContainer>
