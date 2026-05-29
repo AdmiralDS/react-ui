@@ -37,6 +37,8 @@ const Separator = styled.div`
 
 const Description = () => (
   <Desc>
+    Deprecated используйте TimePicker.
+    <Separator />
     Компонент для ввода-выбора времени. Поддерживается как ручной ввод, так и выбор через выпадающий список с
     фиксированным шагом в полчаса.
     <Separator />
