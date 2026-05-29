@@ -5,12 +5,12 @@ import type { SelectProps } from '@admiral-ds/react-ui';
 
 import { createClearOptions } from '#src/components/input/Select/stories/utils';
 
-const OPTIONS = createClearOptions(20);
+const OPTIONS = createClearOptions(15000);
 export const SearchSelectVirtualScrollTemplate = (props: SelectProps) => {
   const renderOptions = React.useMemo(() => {
     return OPTIONS.map((item, index) => (
       <Option value={item.value} key={`${index}`}>
-        {item.text}
+        {`город ${item.text}`}
       </Option>
     ));
   }, []);
