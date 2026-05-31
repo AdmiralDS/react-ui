@@ -34,6 +34,7 @@ jobs:
           echo "Detected Playwright version: $VERSION"
 
   tests-e2e:
+    needs: setup
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
