@@ -39,15 +39,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm ci
-      - name: Check lint and format
-        run: npm run lint
-      - name: Run Playwright tests
-        uses: docker://mcr.microsoft.com/playwright:v${{ needs.setup.outputs.version }}-noble
-        with:
-          options: --tty
-          args: npx playwright test
+      - name: Get Playwright version and run tests
+        run: |
+          # Извлекаем версию из package.json
+          PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' package.json | sed 's/^[~^]//')
+          echo "Detected Playwright version: $PLAYWRIGHT_VERSION"
+
+          # Запускаем Docker с правильной версией
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            -w /workspace \
+            mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble \
+            sh -c "npm ci && npm run lint && npx playwright test"
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
