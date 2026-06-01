@@ -98,6 +98,7 @@ export const CardTabMenuHorizontalWithoutBorderTemplate = ({
   CSSCustomProps,
   ...props
 }: CardTabMenuHorizontalProps & {
+  hideBorder?: boolean;
   themeBorderKind?: BorderRadiusType;
   CSSCustomProps?: boolean;
 }) => {

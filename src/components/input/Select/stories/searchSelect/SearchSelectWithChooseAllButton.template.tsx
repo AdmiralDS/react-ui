@@ -8,13 +8,40 @@ import { Separator } from '#src/components/input/Select/stories/styled';
 
 import { OPTIONS_CITIES } from '#src/components/input/Select/stories/data';
 
+type SearchSelectWithChooseAllButtonTemplateProps = SelectProps &
+  Pick<
+    FieldProps,
+    | 'label'
+    | 'extraText'
+    | 'status'
+    | 'required'
+    | 'disabled'
+    | 'readOnly'
+    | 'additionalLabel'
+    | 'visibleLabelTooltips'
+    | 'labelCssMixins'
+    | 'displayInline'
+  > & {
+    restrictions?: number[];
+    options?: string[];
+  };
+
 export const SearchSelectWithChooseAllButtonTemplate = ({
   placeholder = 'Города',
   label = 'Выберите города',
   options = OPTIONS_CITIES,
   restrictions = [2],
+  extraText,
+  status,
+  required,
+  disabled,
+  readOnly,
+  additionalLabel,
+  visibleLabelTooltips,
+  labelCssMixins,
+  displayInline,
   ...props
-}: SelectProps & FieldProps & { restrictions?: number[]; options?: string[] }) => {
+}: SearchSelectWithChooseAllButtonTemplateProps) => {
   const [selectValues, setSelectValues] = React.useState<string[]>([]);
   const [_searchValue, setSearchValue] = React.useState<string>('');
   const [optionsWithoutDisabled, _setOptionsWithoutDisabled] = React.useState<string[]>([
@@ -49,10 +76,26 @@ export const SearchSelectWithChooseAllButtonTemplate = ({
         После выбора всех доступных вариантов кнопка "Выбрать все" становится неактивна
       </T>
       <Separator />
-      <Field {...props} label={label} id="propsId">
+      <Field
+        label={label}
+        id="propsId"
+        extraText={extraText}
+        status={status}
+        required={required}
+        disabled={disabled}
+        readOnly={readOnly}
+        additionalLabel={additionalLabel}
+        visibleLabelTooltips={visibleLabelTooltips}
+        labelCssMixins={labelCssMixins}
+        displayInline={displayInline}
+      >
         <Select
           {...props}
           id="propsId"
+          status={status}
+          required={required}
+          disabled={disabled}
+          readOnly={readOnly}
           placeholder={placeholder}
           value={selectValues}
           onSelectedChange={handleSelectedChange}
