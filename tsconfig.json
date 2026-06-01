@@ -13,13 +13,14 @@
     "emitDeclarationOnly": true,
     "sourceMap": true,
     "outDir": "dist",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "resolvePackageJsonImports": false,
     "allowSyntheticDefaultImports": true,
     "target": "ESNext",
-    "baseUrl": "./src",
     "paths": {
-      "#src/*": ["./*"],
-      "@admiral-ds/react-ui": ["./index"]
+      "#src/*": ["./src/*"],
+      "@admiral-ds/flags": ["./node_modules/@admiral-ds/flags/dist/index.d.ts"],
+      "@admiral-ds/react-ui": ["./src/index"]
     },
     "plugins": [
       {
