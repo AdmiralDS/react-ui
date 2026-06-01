@@ -52,9 +52,8 @@ jobs:
       #  run: sudo apt-get clean && sudo apt-get update
       #- name: Install Playwright Browsers
       #  run: npx playwright install --with-deps
-      - name: Run Playwright tests with unbuffered output
-        run: |
-          node -e "process.stdout._handle.setBlocking(true)" && npx playwright test
+      - name: Run Playwright tests
+        run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
