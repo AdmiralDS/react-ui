@@ -21,36 +21,30 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/current
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.pw.outputs.version }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: pw
-        run: |
-          VERSION=$(jq -r '.devDependencies."@playwright/test"' package.json | sed 's/^[~^]//')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected Playwright version: $VERSION"
-
   tests-e2e:
-    needs: setup
-    timeout-minutes: 60
+    timeout-minutes: 90
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Get Playwright version and run tests
-        run: |
-          # Извлекаем версию из package.json
-          PLAYWRIGHT_VERSION=$(jq -r '.devDependencies."@playwright/test"' package.json | sed 's/^[~^]//')
-          echo "Detected Playwright version: $PLAYWRIGHT_VERSION"
-
-          # Запускаем Docker с правильной версией
-          docker run --rm \
-            -v ${{ github.workspace }}:/workspace \
-            -w /workspace \
-            mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble \
-            sh -c "npm ci && npm run lint && npx playwright test"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+      - name: Install dependencies
+        run: npm ci
+      - name: Check lint and format
+        run: npm run lint
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Run Playwright tests
+        run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

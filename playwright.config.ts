@@ -70,7 +70,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run storybook',
+    command: 'npm run storybook -- --ci --no-open',
     url: 'http://localhost:6006',
     reuseExistingServer: !process.env.CI,
   },
