@@ -21,7 +21,7 @@ export const SearchSelectMultipleWithAddOptionTemplate = (props: SelectProps) =>
 
   const renderedOptions = React.useMemo(() => {
     return options.map((option, ind) => (
-      <Option key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
+      <Option data-testid="option" key={option.value} value={option.value} disabled={[2, 4].includes(ind)}>
         {option.text}
       </Option>
     ));

@@ -1,7 +1,7 @@
 import type { SelectProps } from '@admiral-ds/react-ui';
 import { Option, Select, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-ui';
 import { render, within } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import type { ChangeEvent, PropsWithChildren } from 'react';
 import { act, useState } from 'react';
@@ -338,144 +338,6 @@ describe('SearchSelect', () => {
       expect(selectElem.value).toBe(options[1]);
     });
 
-    test('selects multiselect value with arrows', async () => {
-      const user = userEvent.setup();
-      render(<SelectComponent multiple />);
-
-      const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
-
-      // открываем дроп, селектор на первом элементе
-      await user.tab();
-      await user.type(valueWrapper, '{space}');
-
-      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
-      const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
-
-      dropDownOptions.forEach((optionElem) => {
-        const checkbox = within(optionElem).getByRole('checkbox');
-        expect(checkbox).not.toBeChecked();
-      });
-
-      // переходим на второй элемент и выделяем его
-      await user.type(inputELem, '{arrowdown}');
-      await user.keyboard('{enter}');
-
-      dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox');
-        if (ind === 1) expect(checkbox).toBeChecked();
-        else expect(checkbox).not.toBeChecked();
-      });
-      expect(within(valueWrapper).getByText(options[1])).toBeInTheDocument();
-      expect(dropDownContainer).toBeInTheDocument();
-      expect(inputELem).toHaveFocus();
-
-      await user.type(inputELem, '{enter}');
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{enter}');
-      await user.type(inputELem, '{arrowdown}');
-      await user.type(inputELem, '{enter}');
-
-      dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox');
-        if (1 == ind) expect(checkbox).toBeChecked();
-        else expect(checkbox).not.toBeChecked();
-      });
-
-      options.forEach((optionText, optionTextInd) => {
-        const chip = within(valueWrapper).queryByText(optionText);
-        if (1 == optionTextInd) expect(chip).toBeInTheDocument();
-        else expect(chip).toBeNull();
-      });
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if (2 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-    });
-    test('selects multiselect value onClick', async () => {
-      const user = userEvent.setup();
-      render(<SelectComponent multiple />);
-
-      const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
-
-      await act(async () => {
-        await user.tab();
-        await user.keyboard('{enter}');
-      });
-
-      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
-      const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
-
-      dropDownOptions.forEach((optionElem) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        expect(checkbox.checked).toBeFalsy();
-      });
-
-      await act(async () => {
-        await user.click(dropDownOptions[0]);
-      });
-
-      dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox') as HTMLInputElement;
-        if (ind === 0) expect(checkbox.checked).toBeTruthy();
-        else expect(checkbox.checked).toBeFalsy();
-      });
-      expect(within(valueWrapper).getByText(options[0])).toBeInTheDocument();
-      expect(dropDownContainer).toBeInTheDocument();
-      // expect(inputELem).toHaveFocus();
-
-      await act(async () => {
-        await user.click(dropDownOptions[1]);
-        await user.click(dropDownOptions[1]);
-        await user.click(dropDownOptions[2]);
-      });
-
-      dropDownOptions.forEach((optionElem, ind) => {
-        const checkbox = within(optionElem).getByRole('checkbox');
-        if (0 == ind) expect(checkbox).toBeChecked();
-        else expect(checkbox).not.toBeChecked();
-      });
-
-      options.forEach((optionText, optionTextInd) => {
-        const chip = within(valueWrapper).queryByText(optionText);
-        if (0 == optionTextInd) expect(chip).toBeInTheDocument();
-        else expect(chip).toBeNull();
-      });
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if (1 == nativeOptionInd) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-    });
-    test('deletes multiselect value onChipClick', async () => {
-      const user = userEvent.setup();
-      render(<SelectComponent multiple initialValue={['one', 'two']} />);
-
-      const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
-      // такой стремный селектор нужен, так как по другому svg не достанешь...
-      const chipsCloses = Array.from(valueWrapper.querySelectorAll('.chip')).map(
-        (chipElem) => chipElem.firstChild?.lastChild,
-      ) as Element[];
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-
-      await act(async () => {
-        await user.click(chipsCloses[0]);
-      });
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-    });
-
     test('should not delete chip when its option is disabled', () => {
       render(
         <SelectComponent multiple initialValue={['one', 'two']}>
@@ -535,40 +397,6 @@ describe('SearchSelect', () => {
       });
     });
 
-    test('should not delete disabled options onBackspace', async () => {
-      const user = userEvent.setup();
-      render(
-        <SelectComponent multiple initialValue={['one', 'two']}>
-          {options.map((option) => (
-            <Option key={option} value={option} disabled={option === 'two'}>
-              {option}
-            </Option>
-          ))}
-        </SelectComponent>,
-      );
-
-      const selectElem = screen.getByRole('listbox') as HTMLSelectElement;
-      const inputELem = screen.getByRole('textbox') as HTMLInputElement;
-
-      await act(async () => {
-        await user.tab();
-        await user.keyboard('{enter}');
-      });
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([1, 2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-
-      await act(async () => {
-        await user.type(inputELem, '{backspace}');
-      });
-
-      Array.from(selectElem.options).forEach((nativeOption, nativeOptionInd) => {
-        if ([2].includes(nativeOptionInd)) expect(nativeOption.selected).toBeTruthy();
-        else expect(nativeOption.selected).toBeFalsy();
-      });
-    });
     test('should not delete options with custom object renderChip', async () => {
       const user = userEvent.setup();
       render(

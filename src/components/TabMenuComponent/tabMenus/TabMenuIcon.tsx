@@ -21,6 +21,19 @@ const StyledSlideArrow = styled(SlideArrowButton)<{ $direction: 'left' | 'right'
   ${(p) => (p.$direction === 'left' ? 'left: 0' : 'right: 0')};
 `;
 
+/**
+ * @deprecated
+ * Компонент устарел и будет удален в версии 3.0.0.
+ *
+ * **Причина**: Компонент используется менее чем в 1% проектов и дублирует
+ * функциональность компонента TabMenu.
+ *
+ * **Альтернатива**: Используйте стандартный компонент HorizontalTabs.
+ *
+ * **Срок миграции**: До выхода версии 3.0.0.
+ *
+ * @see {@link HorizontalTabs} для создания вкладок с иконками
+ */
 export const TabMenuIcon = ({
   showUnderline,
   selectedTabId,
