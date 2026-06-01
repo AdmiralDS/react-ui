@@ -37,18 +37,24 @@ jobs:
     needs: setup
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v${{ needs.setup.outputs.version }}-noble
     steps:
       - uses: actions/checkout@v4
-      - name: Run Playwright tests
-        uses: docker://mcr.microsoft.com/playwright:v${{ needs.setup.outputs.version }}-noble
-        with:
-          options: --tty
-          args: |
-            sh -c "
-              npm ci &&
-              npm run lint &&
-              npx playwright test
-            "
+      #- uses: actions/setup-node@v4
+      #  with:
+      #    node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Check lint and format
+        run: npm run lint
+      #- name: Clear and update apt mirrors
+      #  run: sudo apt-get clean && sudo apt-get update
+      #- name: Install Playwright Browsers
+      #  run: npx playwright install --with-deps
+      - name: Run Playwright tests with unbuffered output
+        run: |
+          node -e "process.stdout._handle.setBlocking(true)" && npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
