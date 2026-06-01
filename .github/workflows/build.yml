@@ -33,8 +33,6 @@ jobs:
         run: npm ci
       - name: Check lint and format
         run: npm run lint
-      - name: Clear and update apt mirrors
-        run: sudo apt-get clean && sudo apt-get update
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
