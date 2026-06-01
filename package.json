@@ -33,10 +33,10 @@
     "#src/*": "./src/*"
   },
   "scripts": {
+    "check:full": "npm run format:check && npm run typecheck && npm run build:check && npm run test && npm run storybook:build && npm run test:e2e",
     "format:check": "npm run prettier && npm run lint",
     "format:fix": "npm run prettier:fix && npm run lint:fix",
     "storybook": "storybook dev -p 6006",
-    "check:full": "npm run format:check && npm run typecheck && npm run build:check && npm run test && npm run storybook:build && npm run test:e2e",
     "test": "jest --detectOpenHandles",
     "test:update": "jest -u",
     "test:watch": "jest --watch",
@@ -50,7 +50,7 @@
     "storybook:preview": "npx http-server ./docs/current",
     "docker:playwright": "docker-compose up --abort-on-container-exit playwright",
     "typecheck": "tsc -b tsconfig.json",
-    "build": "rollup -c --strictDeprecations",
+    "build": "rm -rf dist && rollup -c --strictDeprecations",
     "build:check": "npm run build && test -f dist/index.d.ts && test -f dist/index.es.js && test -f dist/index.cjs.js && test ! -d dist/src",
     "prepare": "npm run build",
     "release": "standard-version"
