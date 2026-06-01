@@ -16,7 +16,7 @@ import { ReactComponent as PhoneOutline } from '@admiral-ds/icons/build/communic
 import { ReactComponent as SIMCardOutline } from '@admiral-ds/icons/build/communication/SIMCardOutline.svg';
 import { ReactComponent as HeadsetOutline } from '@admiral-ds/icons/build/communication/HeadsetOutline.svg';
 import { ReactComponent as SignalOutline } from '@admiral-ds/icons/build/communication/SignalOutline.svg';
-import { ReactComponent as TelegrammOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
+import { ReactComponent as TelegramSolid } from '@admiral-ds/icons/build/communication/TelegramSolid.svg';
 
 interface TabContentProps extends HorizontalTabProps {
   text: string;
@@ -64,7 +64,7 @@ const tabs = [
   { text: 'Viber', tabId: '9', badge: 7 },
   { text: 'Headset', tabId: '4', icon: <HeadsetOutline /> },
   { text: 'Network signal', tabId: '5', icon: <SignalOutline /> },
-  { text: 'TelegrammOutline', tabId: '6', icon: <TelegrammOutline /> },
+  { text: 'Telegram', tabId: '6', icon: <TelegramSolid /> },
   { text: 'WhatsApp is very very very very long', tabId: '7' },
   { text: 'ICQ', tabId: '8', icon: <MinusCircleOutline />, disabled: true },
 ];
