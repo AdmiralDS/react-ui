@@ -180,7 +180,8 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * 3) при клике извне и closeOnOutsideClick равным true
    */
   onClose?: () => void;
-
+  /** Закрытие компонента не приводит к восстановлению фокуса на элементе, вызвавшем открытие модального окна */
+  preventFocusRestore?: boolean;
   /**
    * Позволяет добавлять стили для подложки модального окна через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
@@ -221,6 +222,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
       children,
       locale,
       closeButtonPropsConfig = nothing,
+      preventFocusRestore = false,
       ...props
     },
     ref,
@@ -245,13 +247,15 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
         manager.mount(modal);
 
         return () => {
-          // return focus on close/unmount of modal
-          (previousFocusedElement.current as HTMLElement).focus();
+          if (!preventFocusRestore) {
+            // return focus on close/unmount of modal
+            (previousFocusedElement.current as HTMLElement).focus();
+          }
 
           manager.remove(modal);
         };
       }
-    }, [container]);
+    }, [container, preventFocusRestore]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
