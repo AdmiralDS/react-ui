@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 const TOUCH_MEDIA_QUERIES = [
   '(hover: none)',
@@ -6,6 +6,8 @@ const TOUCH_MEDIA_QUERIES = [
   '(pointer: coarse)',
   '(any-pointer: coarse)',
 ] as const;
+
+const THROTTLE_TIMEOUT = 50;
 
 /** Определяет touch-устройство (телефон, планшет). Samsung Galaxy часто игнорирует (hover: none), но отвечает на (pointer: coarse). */
 export function detectTouchDevice(): boolean {
@@ -27,22 +29,41 @@ export function detectTouchDevice(): boolean {
   return hasHoverNone || hasAnyHoverNone || hasCoarsePointer || hasAnyCoarsePointer;
 }
 
+const useTouchDeviceDetector = () => {
+  const [isTouch, setTouch] = useState(() => detectTouchDevice());
+  const previousValueRef = useRef(isTouch);
+
+  const updateDeviceInfo = useCallback(() => {
+    const newValue = detectTouchDevice();
+
+    if (previousValueRef.current !== newValue) {
+      previousValueRef.current = newValue;
+      setTouch(newValue);
+    }
+  }, []);
+
+  return { isTouch, updateDeviceInfo };
+};
+
 export const useTouchDevice = () => {
-  const [isTouch, setTouch] = useState(false);
+  const { isTouch, updateDeviceInfo } = useTouchDeviceDetector();
 
   useEffect(() => {
-    const updateDeviceInfo = () => setTouch(detectTouchDevice());
-
-    updateDeviceInfo();
-
     const mediaQueryLists = TOUCH_MEDIA_QUERIES.map((query) => window.matchMedia(query));
 
-    mediaQueryLists.forEach((mql) => mql.addEventListener('change', updateDeviceInfo));
+    let timeoutId: NodeJS.Timeout;
+    const throttledUpdate = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateDeviceInfo, THROTTLE_TIMEOUT);
+    };
+
+    mediaQueryLists.forEach((mql) => mql.addEventListener('change', throttledUpdate));
 
     return () => {
-      mediaQueryLists.forEach((mql) => mql.removeEventListener('change', updateDeviceInfo));
+      clearTimeout(timeoutId);
+      mediaQueryLists.forEach((mql) => mql.removeEventListener('change', throttledUpdate));
     };
-  }, []);
+  }, [updateDeviceInfo]);
 
   return isTouch;
 };
