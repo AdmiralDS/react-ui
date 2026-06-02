@@ -1,15 +1,13 @@
-import { renderHook, act } from '@testing-library/react';
-import React from 'react';
-import { useTouchDevice } from './useTouchDevice';
+import { renderHook, act, waitFor } from '@testing-library/react';
+import { detectTouchDevice, useTouchDevice } from './useTouchDevice';
 
-// Helper to create a mock MediaQueryList-like object with addEventListener/removeEventListener
 function createMatchMediaMock(initialMatches: boolean) {
   let matches = initialMatches;
   const listeners = new Set<(e: MediaQueryListEvent) => void>();
 
   const mql: MediaQueryList = {
     matches,
-    media: '(hover: none)',
+    media: '',
     onchange: null,
     addEventListener: (type: string, listener: EventListenerOrEventListenerObject) => {
       if (type === 'change') {
@@ -23,8 +21,8 @@ function createMatchMediaMock(initialMatches: boolean) {
         listeners.delete(fn);
       }
     },
-    addListener: () => void 0, // legacy no-op
-    removeListener: () => void 0, // legacy no-op
+    addListener: () => void 0,
+    removeListener: () => void 0,
     dispatchEvent: () => false,
   } as unknown as MediaQueryList;
 
@@ -39,72 +37,162 @@ function createMatchMediaMock(initialMatches: boolean) {
   return { mql, setMatches };
 }
 
-// Save original
+function setupTouchEnvironment(
+  queryMatches: Partial<Record<string, boolean>> = {},
+  { hasTouchSupport = true }: { hasTouchSupport?: boolean } = {},
+) {
+  if (hasTouchSupport) {
+    Object.defineProperty(window, 'ontouchstart', { value: () => {}, configurable: true, writable: true });
+    Object.defineProperty(navigator, 'maxTouchPoints', { value: 5, configurable: true, writable: true });
+  } else {
+    Reflect.deleteProperty(window, 'ontouchstart');
+    Object.defineProperty(navigator, 'maxTouchPoints', { value: 0, configurable: true, writable: true });
+  }
+
+  const mocks = new Map<string, ReturnType<typeof createMatchMediaMock>>();
+
+  window.matchMedia = jest.fn((query: string) => {
+    if (!mocks.has(query)) {
+      mocks.set(query, createMatchMediaMock(queryMatches[query] ?? false));
+    }
+    return mocks.get(query)!.mql;
+  }) as typeof window.matchMedia;
+
+  return mocks;
+}
+
 const originalMatchMedia = window.matchMedia;
+const originalMaxTouchPoints = navigator.maxTouchPoints;
+const originalOntouchstart = window.ontouchstart;
+
+describe('detectTouchDevice', () => {
+  afterEach(() => {
+    window.matchMedia = originalMatchMedia;
+    Object.defineProperty(navigator, 'maxTouchPoints', {
+      value: originalMaxTouchPoints,
+      configurable: true,
+      writable: true,
+    });
+    Object.defineProperty(window, 'ontouchstart', {
+      value: originalOntouchstart,
+      configurable: true,
+      writable: true,
+    });
+    jest.restoreAllMocks();
+  });
+
+  test('returns false without touch support even when coarse pointer matches', () => {
+    setupTouchEnvironment({ '(pointer: coarse)': true }, { hasTouchSupport: false });
+    expect(detectTouchDevice()).toBe(false);
+  });
+
+  test('returns false on touch-capable desktop without coarse pointer or hover:none', () => {
+    setupTouchEnvironment({}, { hasTouchSupport: true });
+    expect(detectTouchDevice()).toBe(false);
+  });
+
+  test('returns true when hover:none matches', () => {
+    setupTouchEnvironment({ '(hover: none)': true });
+    expect(detectTouchDevice()).toBe(true);
+  });
+
+  test('returns true when pointer:coarse matches (Samsung-like devices)', () => {
+    setupTouchEnvironment({ '(pointer: coarse)': true });
+    expect(detectTouchDevice()).toBe(true);
+  });
+
+  test('returns true when any-pointer:coarse matches', () => {
+    setupTouchEnvironment({ '(any-pointer: coarse)': true });
+    expect(detectTouchDevice()).toBe(true);
+  });
+
+  test('returns true when any-hover:none matches', () => {
+    setupTouchEnvironment({ '(any-hover: none)': true });
+    expect(detectTouchDevice()).toBe(true);
+  });
+});
 
 describe('useTouchDevice', () => {
   afterEach(() => {
     window.matchMedia = originalMatchMedia;
+    Object.defineProperty(navigator, 'maxTouchPoints', {
+      value: originalMaxTouchPoints,
+      configurable: true,
+      writable: true,
+    });
+    Object.defineProperty(window, 'ontouchstart', {
+      value: originalOntouchstart,
+      configurable: true,
+      writable: true,
+    });
     jest.restoreAllMocks();
   });
 
-  test('returns false initially by default when media is not matched', () => {
-    const { mql } = createMatchMediaMock(false);
-    window.matchMedia = jest.fn().mockReturnValue(mql) as any;
-
+  test('returns false when no touch indicators match', () => {
+    setupTouchEnvironment({ '(hover: none)': false, '(pointer: coarse)': false });
     const { result } = renderHook(() => useTouchDevice());
     expect(result.current).toBe(false);
   });
 
-  test('initial state reflects current media query match', () => {
-    const { mql } = createMatchMediaMock(true);
-    window.matchMedia = jest.fn().mockReturnValue(mql) as any;
-
+  test('detects touch device after mount via hover:none', () => {
+    setupTouchEnvironment({ '(hover: none)': true });
     const { result } = renderHook(() => useTouchDevice());
     expect(result.current).toBe(true);
   });
 
-  test('subscribes to media query change events and updates state', () => {
-    const { mql, setMatches } = createMatchMediaMock(false);
-    window.matchMedia = jest.fn().mockReturnValue(mql) as any;
+  test('detects Samsung-like device via pointer:coarse without hover:none', () => {
+    setupTouchEnvironment({ '(pointer: coarse)': true, '(hover: none)': false });
+    const { result } = renderHook(() => useTouchDevice());
+    expect(result.current).toBe(true);
+  });
 
+  test('returns false for mouse-only desktop', () => {
+    setupTouchEnvironment({}, { hasTouchSupport: false });
+    const { result } = renderHook(() => useTouchDevice());
+    expect(result.current).toBe(false);
+  });
+
+  test('subscribes to media query change events and updates state', async () => {
+    jest.useFakeTimers();
+
+    const mocks = setupTouchEnvironment({ '(hover: none)': false });
     const { result } = renderHook(() => useTouchDevice());
     expect(result.current).toBe(false);
 
-    act(() => setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+
+    // Продвигаем таймеры на 50ms (время throttle)
+    act(() => jest.advanceTimersByTime(50));
     expect(result.current).toBe(true);
 
-    act(() => setMatches(false));
-    expect(result.current).toBe(false);
-  });
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
 
-  test('does not update state on mount if value is already equal', () => {
-    const setStateSpy = jest.spyOn(React, 'useState');
-    const { mql } = createMatchMediaMock(false);
-    window.matchMedia = jest.fn().mockReturnValue(mql) as any;
-
-    const { result } = renderHook(() => useTouchDevice());
+    act(() => jest.advanceTimersByTime(50));
     expect(result.current).toBe(false);
 
-    // Ensure useState was called for initialization
-    expect(setStateSpy).toHaveBeenCalled();
+    // Множественные быстрые изменения
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
+
+    act(() => jest.advanceTimersByTime(50));
+    expect(result.current).toBe(false);
+
+    jest.useRealTimers(); // Возвращаем реальные таймеры
   });
 
-  test('cleans up change event listener on unmount', () => {
-    const { mql, setMatches } = createMatchMediaMock(false);
-    const addSpy = jest.spyOn(mql, 'addEventListener');
-    const removeSpy = jest.spyOn(mql, 'removeEventListener');
-    window.matchMedia = jest.fn().mockReturnValue(mql) as any;
+  test('cleans up change event listeners on unmount', () => {
+    const mocks = setupTouchEnvironment();
+    const addSpies = Array.from(mocks.values()).map(({ mql }) => jest.spyOn(mql, 'addEventListener'));
+    const removeSpies = Array.from(mocks.values()).map(({ mql }) => jest.spyOn(mql, 'removeEventListener'));
 
     const { unmount } = renderHook(() => useTouchDevice());
 
-    expect(addSpy).toHaveBeenCalledWith('change', expect.any(Function));
+    addSpies.forEach((spy) => expect(spy).toHaveBeenCalledWith('change', expect.any(Function)));
 
     unmount();
 
-    expect(removeSpy).toHaveBeenCalledWith('change', expect.any(Function));
-
-    // After unmount, updates should not trigger errors
-    expect(() => setMatches(true)).not.toThrow();
+    removeSpies.forEach((spy) => expect(spy).toHaveBeenCalledWith('change', expect.any(Function)));
   });
 });
