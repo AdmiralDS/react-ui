@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import { detectTouchDevice, useTouchDevice } from './useTouchDevice';
 
 function createMatchMediaMock(initialMatches: boolean) {
@@ -152,16 +152,34 @@ describe('useTouchDevice', () => {
     expect(result.current).toBe(false);
   });
 
-  test('subscribes to media query change events and updates state', () => {
+  test('subscribes to media query change events and updates state', async () => {
+    jest.useFakeTimers();
+
     const mocks = setupTouchEnvironment({ '(hover: none)': false });
     const { result } = renderHook(() => useTouchDevice());
     expect(result.current).toBe(false);
 
-    act(() => mocks.get('(hover: none)')!.setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+
+    // Продвигаем таймеры на 50ms (время throttle)
+    act(() => jest.advanceTimersByTime(50));
     expect(result.current).toBe(true);
 
-    act(() => mocks.get('(hover: none)')!.setMatches(false));
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
+
+    act(() => jest.advanceTimersByTime(50));
     expect(result.current).toBe(false);
+
+    // Множественные быстрые изменения
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
+    act(() => mocks.get('(hover: none)')?.setMatches(true));
+    act(() => mocks.get('(hover: none)')?.setMatches(false));
+
+    act(() => jest.advanceTimersByTime(50));
+    expect(result.current).toBe(false);
+
+    jest.useRealTimers(); // Возвращаем реальные таймеры
   });
 
   test('cleans up change event listeners on unmount', () => {
