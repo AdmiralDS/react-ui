@@ -14,6 +14,8 @@ type PageNumberInputProps = {
   dimension: MenuDimensions;
   activePageNumber: string | undefined;
   setActivePageNumber: (value: string) => void;
+  preselectedPageNumber: string | undefined;
+  setPreselectedPageNumber: (value: string) => void;
   setMenuVisible: (isVisible: boolean) => void;
   onChange: PaginationOneProps['onChange'];
 };
@@ -21,7 +23,18 @@ type PageNumberInputProps = {
 export const PageNumberInput = memo(
   forwardRef<HTMLInputElement, PageNumberInputProps>(
     (
-      { dimension, page, pageSize, totalPages, activePageNumber, setActivePageNumber, setMenuVisible, onChange },
+      {
+        dimension,
+        page,
+        pageSize,
+        totalPages,
+        activePageNumber,
+        setActivePageNumber,
+        preselectedPageNumber,
+        setPreselectedPageNumber,
+        setMenuVisible,
+        onChange,
+      },
       ref,
     ) => {
       /**
@@ -38,13 +51,12 @@ export const PageNumberInput = memo(
       }, []);
 
       useEffect(() => {
-        /** Если activePageNumber обновилось независимо от инпута,
-         * например, при срабатывании onActivateItem,
-         * нужно синхронизировать inputPageNumber с новым значением активной опции */
-        if (activePageNumber && inputPageNumber !== activePageNumber) {
-          setInputPageNumber(activePageNumber);
+        /** Если preselectedPageNumber обновилось независимо от инпута,
+         * нужно синхронизировать inputPageNumber с новым значением preselected опции */
+        if (preselectedPageNumber && inputPageNumber !== preselectedPageNumber) {
+          setInputPageNumber(preselectedPageNumber);
         }
-      }, [activePageNumber]);
+      }, [preselectedPageNumber]);
 
       const parsePageNumber = useCallback(
         (pageSelected: string): number => {
@@ -68,9 +80,11 @@ export const PageNumberInput = memo(
           let inputValue = e.target.value;
           inputValue = inputValue.replace(/\D/g, '');
           setInputPageNumber(inputValue);
-          setActivePageNumber(parsePageNumber(inputValue).toString());
+          const parsedPage = parsePageNumber(inputValue).toString();
+          setActivePageNumber(parsedPage);
+          setPreselectedPageNumber(parsedPage);
         },
-        [parsePageNumber],
+        [parsePageNumber, setActivePageNumber, setPreselectedPageNumber],
       );
 
       const handleInputKeyDown = useCallback(
@@ -82,14 +96,44 @@ export const PageNumberInput = memo(
             const page = parsePageNumber(inputPageNumber);
             onChange({ page, pageSize });
             setActivePageNumber(page.toString());
+            setPreselectedPageNumber(page.toString());
           } else if (code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) {
-            pageNumberInputRef.current?.blur();
+            // Управляем подсветкой опции и значением инпута вручную
+            // и добавляем зацикливание: с последней страницы вниз попадаем на первую,
+            // с первой страницы вверх — на последнюю.
+            e.preventDefault();
+            e.stopPropagation();
+
+            const currentPage = parsePageNumber(inputPageNumber);
+            const nextPage =
+              code === keyboardKey.ArrowDown
+                ? currentPage === totalPages
+                  ? 1
+                  : currentPage + 1
+                : currentPage === 1
+                  ? totalPages
+                  : currentPage - 1;
+
+            const nextPageString = nextPage.toString();
+            setInputPageNumber(nextPageString);
+            setActivePageNumber(nextPageString);
+            setPreselectedPageNumber(nextPageString);
           } else if (code === keyboardKey.Escape) {
             setMenuVisible(false);
             setActivePageNumber(page.toString());
+            setPreselectedPageNumber(page.toString());
           }
         },
-        [inputPageNumber, onChange, page, pageSize],
+        [
+          inputPageNumber,
+          onChange,
+          page,
+          pageSize,
+          parsePageNumber,
+          setActivePageNumber,
+          setPreselectedPageNumber,
+          totalPages,
+        ],
       );
 
       return (

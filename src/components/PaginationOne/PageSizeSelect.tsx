@@ -1,5 +1,5 @@
 import { useTheme, css } from 'styled-components';
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { PaginationOneProps } from '#src/components/PaginationOne';
@@ -49,17 +49,56 @@ export const PageSizeSelect = memo(
 
     const dropMenuProps = passDropdownDataAttributes(props);
 
+    const [isVisible, setIsVisible] = useState(false);
+    const [activePageSizeNumber, setActivePageSizeNumber] = useState<string | undefined>(pageSize.toString());
+    const [preselectedPageSizeNumber, setPreselectedPageSizeNumber] = useState<string | undefined>(pageSize.toString());
+    const selectedPageSizeNumber = useMemo(() => pageSize.toString(), [pageSize]);
+
+    useEffect(() => {
+      setActivePageSizeNumber(selectedPageSizeNumber);
+      setPreselectedPageSizeNumber(selectedPageSizeNumber);
+    }, [selectedPageSizeNumber]);
+
+    const handlePageSizeHover = useCallback((activePageSize?: string) => {
+      if (activePageSize) {
+        setActivePageSizeNumber(activePageSize);
+      }
+    }, []);
+
+    const handleClickOutside = useCallback(() => {
+      setActivePageSizeNumber(selectedPageSizeNumber);
+      setPreselectedPageSizeNumber(selectedPageSizeNumber);
+      setIsVisible(false);
+    }, [selectedPageSizeNumber]);
+
+    const handleMenuButtonClick = useCallback(() => {
+      if (isVisible) {
+        setActivePageSizeNumber(selectedPageSizeNumber);
+        setPreselectedPageSizeNumber(selectedPageSizeNumber);
+        setIsVisible(false);
+      } else {
+        setPreselectedPageSizeNumber(selectedPageSizeNumber);
+        setIsVisible(true);
+      }
+    }, [isVisible, selectedPageSizeNumber]);
+
     const handleSizeChange = (pageSizeSelected: string) => {
       const pageSize = Number.parseInt(pageSizeSelected, 10);
       onChange({ page: 1, pageSize: pageSize });
+      setIsVisible(false);
     };
 
     return (
       <MenuButton
         dimension={dimension}
         options={pageSizes}
-        selected={pageSize.toString()}
+        selected={selectedPageSizeNumber}
         onSelectItem={handleSizeChange}
+        active={activePageSizeNumber}
+        preselected={preselectedPageSizeNumber}
+        onActivateItem={handlePageSizeHover}
+        onPreselectItem={setPreselectedPageSizeNumber}
+        preselectedModeActive
         disabled={pageSizeSelectDisabled}
         aria-label={pageSizeSelectLabel(pageSize, totalItems)}
         menuMaxHeight={pageSizeDropContainerStyle?.menuMaxHeight || dropMaxHeight}
@@ -69,6 +108,10 @@ export const PageSizeSelect = memo(
         dropContainerStyle={pageSizeDropContainerStyle?.dropContainerStyle}
         dropMenuDataAttributes={dropMenuProps}
         className="records-per-page-with-dropdown"
+        isVisible={isVisible}
+        onVisibilityChange={setIsVisible}
+        onClickOutside={handleClickOutside}
+        onClick={handleMenuButtonClick}
       >
         {pageSize}
       </MenuButton>

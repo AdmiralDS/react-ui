@@ -52,6 +52,7 @@ export const PageSelect = memo(
 
     const [isVisible, setIsVisible] = useState(false);
     const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
+    const [preselectedPageNumber, setPreselectedPageNumber] = useState<string | undefined>(page.toString());
     const pageNumberInputRef = useRef<HTMLInputElement>(null);
 
     const dropMenuProps = passDropdownDataAttributes(props);
@@ -60,6 +61,7 @@ export const PageSelect = memo(
 
     useEffect(() => {
       setActivePageNumber(page.toString());
+      setPreselectedPageNumber(page.toString());
     }, [page]);
 
     const handlePageHover = useCallback((activePage?: string) => {
@@ -82,14 +84,17 @@ export const PageSelect = memo(
 
     const handleClickOutside = useCallback(() => {
       setActivePageNumber(selectedPageNumber);
+      setPreselectedPageNumber(selectedPageNumber);
       setIsVisible(false);
     }, [selectedPageNumber]);
 
     const handleMenuButtonClick = useCallback(() => {
       if (isVisible) {
         setActivePageNumber(selectedPageNumber);
+        setPreselectedPageNumber(selectedPageNumber);
         setIsVisible(false);
       } else {
+        setPreselectedPageNumber(selectedPageNumber);
         setIsVisible(true);
       }
     }, [isVisible, selectedPageNumber]);
@@ -106,7 +111,10 @@ export const PageSelect = memo(
         selected={selectedPageNumber}
         onSelectItem={handlePageChange}
         active={activePageNumber}
+        preselected={preselectedPageNumber}
         onActivateItem={handlePageHover}
+        onPreselectItem={setPreselectedPageNumber}
+        preselectedModeActive
         disabled={pageSelectDisabled}
         aria-label={pageSelectLabel(page, totalPages)}
         menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
@@ -136,6 +144,8 @@ export const PageSelect = memo(
                     totalPages={totalPages}
                     activePageNumber={activePageNumber}
                     setActivePageNumber={setActivePageNumber}
+                    preselectedPageNumber={preselectedPageNumber}
+                    setPreselectedPageNumber={setPreselectedPageNumber}
                     setMenuVisible={setIsVisible}
                     onChange={onChange}
                   />
