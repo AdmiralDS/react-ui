@@ -253,7 +253,7 @@ test.describe('Stepper Component', () => {
     await page.waitForTimeout(TIMEOUTS.WAIT_SHORT);
 
     const resizedBox = await stepper.boundingBox();
-    if (initialBox !== undefined && initialBox?.width !== undefined) {
+    if (initialBox?.width !== undefined && resizedBox?.width !== undefined) {
       expect(resizedBox?.width).toBeLessThan(initialBox.width);
     }
 
