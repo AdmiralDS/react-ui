@@ -143,7 +143,8 @@ export interface DrawerProps extends HTMLAttributes<HTMLDivElement> {
    * 3) при клике по затемненному фону и closeOnBackdropClick равным true
    */
   onClose?: () => void;
-
+  /** Закрытие компонента не приводит к восстановлению фокуса на элементе, вызвавшем открытие drawerа */
+  preventFocusRestore?: boolean;
   /**
    * Возможность изменять стили для подложки drawerа через миксин, созданный с помощью styled css.
    * Например цвет фона в зависимости от темы:
@@ -184,6 +185,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       children,
       locale,
       closeButtonPropsConfig = nothing,
+      preventFocusRestore = false,
       ...props
     },
     ref,
@@ -235,11 +237,13 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         drawerRef.current?.focus();
 
         return () => {
-          // return focus on close of drawer
-          previousFocusedElement.current?.focus();
+          if (!preventFocusRestore) {
+            // return focus on close of drawer
+            previousFocusedElement.current?.focus();
+          }
         };
       }
-    }, [isOpen]);
+    }, [isOpen, preventFocusRestore]);
 
     const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === 'Escape' && closeOnEscapeKeyDown) {
