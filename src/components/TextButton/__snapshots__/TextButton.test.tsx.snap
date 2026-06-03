@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TextButton should apply correct dimension styles for dimension="s" vs "m" (snapshot) 1`] = `
 .c2 {
