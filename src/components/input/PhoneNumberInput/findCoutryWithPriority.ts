@@ -1,8 +1,8 @@
-import type { PhoneCountryAlpha3Code } from '#src/components/input/PhoneNumberInput/constants';
+import type { CountryAlpha3Code } from '@admiral-ds/flags';
 
 export interface CountryPhoneCode {
   code: string;
-  iso3: PhoneCountryAlpha3Code;
+  iso3: CountryAlpha3Code;
 }
 
 export type findCountryFunction = (inputValue: string) => CountryPhoneCode | null;

@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import path from 'node:path';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -37,15 +36,10 @@ const config: StorybookConfig = {
 
   webpackFinal: async (config) => {
     config.resolve ??= {};
-    config.resolve.alias = {
-      ...(Array.isArray(config.resolve.alias) ? {} : config.resolve.alias),
-      '@admiral-ds/flags$': path.resolve(__dirname, '../node_modules/@admiral-ds/flags/dist/index.es.js'),
-    };
     config.resolve.plugins ??= [];
 
     config.resolve.plugins.push(
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, './tsconfig.paths.json'),
         extensions: config.resolve.extensions,
       }),
     );

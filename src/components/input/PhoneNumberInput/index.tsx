@@ -6,7 +6,6 @@ import type { TextInputProps } from '#src/components/input/TextInput';
 import { TextInput } from '#src/components/input/TextInput';
 import { ReactComponent as SmallArrowDownOutline } from '@admiral-ds/icons/build/system/SmallArrowDownOutline.svg';
 import { CountryCodes } from '#src/components/input/PhoneNumberInput/constants';
-import type { PhoneCountryAlpha3Code } from '#src/components/input/PhoneNumberInput/constants';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
 import type { Dimension } from '#src/components/input/PhoneNumberInput/utils';
 import {
@@ -21,6 +20,7 @@ import type {
   findCountryFunction,
 } from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
 import getFindCountryFunction from '#src/components/input/PhoneNumberInput/findCoutryWithPriority';
+import type { ComponentName, CountryAlpha3Code } from '@admiral-ds/flags';
 import { ComponentsNames, CountriesRusNames, FlagsPack } from '@admiral-ds/flags';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { StyledDropdownContainer } from '#src/components/DropdownContainer';
@@ -105,9 +105,9 @@ export interface PhoneNumberInputProps
   extends Omit<TextInputProps, 'value' | 'displayClearIcon'>, Omit<DropContainerStyles, 'alignSelf'> {
   value?: string;
   /** Код ISO A3 страны для определения префикса номера по умолчанию */
-  defaultCountry?: PhoneCountryAlpha3Code;
+  defaultCountry?: CountryAlpha3Code;
   /** Список стран для выпадающего списка. Отмечается кодом ISO A3 страны */
-  onlyCountries?: Array<PhoneCountryAlpha3Code>;
+  onlyCountries?: Array<CountryAlpha3Code>;
 
   /** Конфиг функция пропсов для контейнера, в котором находится инпут. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
@@ -122,7 +122,7 @@ export interface PhoneNumberInputProps
   ) => Partial<React.ComponentProps<typeof PhoneContainer>> & DataAttributes;
 }
 
-const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames) as Array<PhoneCountryAlpha3Code>;
+const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames) as Array<CountryAlpha3Code>;
 
 export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputProps>(
   (
@@ -297,7 +297,7 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
     const IconComponent = useMemo<JSX.Element | null>(() => {
       const SvgComponent =
         selectedIndex > -1
-          ? (FlagsPack as Record<string, React.ElementType>)[countryList[selectedIndex].name]
+          ? (FlagsPack as { [key: ComponentName]: React.ElementType })[countryList[selectedIndex].name]
           : GlobeOutline;
       return <Flag dimension={menuDimension} Component={SvgComponent} />;
     }, [selectedIndex]);

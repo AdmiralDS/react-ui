@@ -19,7 +19,6 @@
     "target": "ESNext",
     "paths": {
       "#src/*": ["./src/*"],
-      "@admiral-ds/flags": ["./node_modules/@admiral-ds/flags/dist/index.d.ts"],
       "@admiral-ds/react-ui": ["./src/index"]
     },
     "plugins": [
