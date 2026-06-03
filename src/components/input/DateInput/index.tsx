@@ -1,4 +1,4 @@
-import { Children, forwardRef, useRef, useState, type KeyboardEvent } from 'react';
+import { Children, forwardRef, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as CalendarOutlineSVG } from '@admiral-ds/icons/build/system/CalendarOutline.svg';
@@ -194,7 +194,7 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
 
     const handleButtonClick = () => {
       const calValue = parser(inputRef.current?.value, isDateRange);
-      setCalendarValue(calValue);
+
       if (!isCalendarOpen) {
         inputRef.current?.focus();
       }
@@ -248,6 +248,13 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
       }
       onKeyDown?.(event);
     };
+
+    useEffect(() => {
+      if (!isCalendarOpen) return;
+
+      const calValue = parser(inputRef.current?.value, isDateRange);
+      setCalendarValue(calValue);
+    }, [isCalendarOpen]);
 
     return (
       <Input
