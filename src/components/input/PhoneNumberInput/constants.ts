@@ -1,6 +1,4 @@
-import type { CountryAlpha3Code } from '@admiral-ds/flags';
-
-export const CountryCodes: { [key in CountryAlpha3Code]: Array<string> } = {
+export const CountryCodes = {
   AFG: ['+93'],
   ALA: ['+358'],
   ALB: ['+355'],
@@ -253,7 +251,10 @@ export const CountryCodes: { [key in CountryAlpha3Code]: Array<string> } = {
   ABH: ['+840'],
 };
 
-export const PhoneCodes: { [key: string]: Array<CountryAlpha3Code> } = {
+/** ISO Alpha-3 country codes supported by PhoneNumberInput phone-code mapping. */
+export type PhoneCountryAlpha3Code = keyof typeof CountryCodes;
+
+export const PhoneCodes: { [key: string]: Array<PhoneCountryAlpha3Code> } = {
   '1': ['CAN', 'USA', 'UMI'],
   '7': ['KAZ', 'RUS'],
   '20': ['EGY'],

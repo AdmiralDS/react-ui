@@ -1,7 +1,6 @@
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Flag } from '#src/components/input/PhoneNumberInput/Flag';
-import type { ComponentName } from '@admiral-ds/flags';
 import { FlagsPack } from '@admiral-ds/flags';
 import type { MenuItemProps } from '#src/components/Menu/MenuItem';
 import { MenuItem } from '#src/components/Menu/MenuItem';
@@ -10,7 +9,7 @@ import { checkOverflow } from '#src/components/common/utils/checkOverflow';
 import { refSetter } from '#src/components/common/utils/refSetter';
 
 export interface CountryBlockProps extends MenuItemProps {
-  name: ComponentName;
+  name: string;
   value: string;
   code: string;
 }
@@ -75,7 +74,7 @@ export const CountryBlock = forwardRef<HTMLDivElement, CountryBlockProps>((props
     }
   }, [setTooltipVisible]);
 
-  const SvgFlag = (FlagsPack as { [key: ComponentName]: React.ElementType })[name];
+  const SvgFlag = (FlagsPack as Record<string, React.ElementType>)[name];
 
   return (
     <>

@@ -1,8 +1,7 @@
 import type { CustomInputHandler, InputData } from '#src/components/common/dom/changeInputData';
-import type { CountryAlpha3Code } from '@admiral-ds/flags';
 
 type ParsedData = {
-  mask: CountryAlpha3Code;
+  mask: string;
   cityCode: string;
   middleCode: string;
   lastNum: string;
@@ -10,7 +9,7 @@ type ParsedData = {
 
 export const defaultPhoneNumberInputHandler = clojureHandler(null);
 
-export function clojureHandler(mask: CountryAlpha3Code | null): CustomInputHandler {
+export function clojureHandler(mask: string | null): CustomInputHandler {
   const countryCode = mask?.replace(/\D/g, '');
 
   function needFormat(value: string): boolean {
