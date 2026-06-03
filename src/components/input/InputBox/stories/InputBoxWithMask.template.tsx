@@ -11,7 +11,7 @@ import { createBorderRadiusSwapper } from '../../../../../.storybook/createBorde
 const options = maskitoNumberOptionsGenerator({
   decimalSeparator: ',',
   thousandSeparator: ' ',
-  precision: 2,
+  maximumFractionDigits: 2,
 });
 
 export const InputBoxWithMaskTemplate = ({
