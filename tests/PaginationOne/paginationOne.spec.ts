@@ -3,6 +3,7 @@ import { clickAndWait, getStorybookFrameLocator } from '../utils';
 
 const PLAYGROUND_STORY = '/?path=/story/admiral-2-1-data-table-paginationone--playground';
 const TYPES_STORY = '/?path=/story/admiral-2-1-data-table-paginationone--pagination-types-example';
+const PRESELECT_STORY = '/?path=/story/admiral-2-1-data-table-paginationone--preselect-mode-example';
 
 test.describe('PaginationOne', () => {
   test.describe('render', () => {
@@ -204,7 +205,7 @@ test.describe('PaginationOne', () => {
 
   test.describe('page select menu', () => {
     test('navigates options with arrow keys when showPageNumberInput is enabled', async ({ page }) => {
-      await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true`);
+      await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true;preselectedModeActive:!true`);
       const frame = getStorybookFrameLocator(page);
 
       const pageButton = frame.locator('.current-page-number-with-dropdown');
@@ -233,53 +234,53 @@ test.describe('PaginationOne', () => {
       await expect(pageButton).toHaveText('2');
       await expect(frame.getByText('9–16 записей из 100')).toBeVisible();
     });
+  });
 
-    test('auto-scrolls to selected page on open when page is greater than 12', async ({ page }) => {
-      await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true`);
+  test.describe('preselect mode', () => {
+    test('renders preselect story with enabled mode', async ({ page }) => {
+      await page.goto(PRESELECT_STORY);
       const frame = getStorybookFrameLocator(page);
 
-      const pageButton = frame.locator('.current-page-number-with-dropdown');
-
-      await clickAndWait(pageButton, page);
-      const input = frame.getByRole('listbox').last().getByRole('textbox');
-      await input.fill('13');
-      await input.press('Enter');
-
-      await expect(pageButton).toHaveText('13');
-      await expect(frame.getByText('97–100 записей из 100')).toBeVisible();
-
-      await clickAndWait(pageButton, page);
-
-      const listbox = frame.getByRole('listbox').last();
-      const selectedOption = listbox.getByText('13', { exact: true });
-
-      await expect(selectedOption).toBeVisible();
-      await expect(selectedOption).toBeInViewport();
-      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('13');
+      await expect(frame.locator('.pagination-preselect-story')).toBeVisible();
+      await expect(frame.getByText(/preselectedModeActive/)).toBeVisible();
     });
 
-    test('auto-scrolls to selected page on open with many pages (virtual scroll)', async ({ page }) => {
-      await page.goto(`${PLAYGROUND_STORY}&args=showPageNumberInput:!true;totalItems:250`);
+    test('keeps active and preselected separate during keyboard navigation', async ({ page }) => {
+      await page.goto(PRESELECT_STORY);
       const frame = getStorybookFrameLocator(page);
 
       const pageButton = frame.locator('.current-page-number-with-dropdown');
-
-      await clickAndWait(pageButton, page);
-      const input = frame.getByRole('listbox').last().getByRole('textbox');
-      await input.fill('20');
-      await input.press('Enter');
-
-      await expect(pageButton).toHaveText('20');
-      await expect(frame.getByText('153–160 записей из 250')).toBeVisible();
-
       await clickAndWait(pageButton, page);
 
       const listbox = frame.getByRole('listbox').last();
-      const selectedOption = listbox.getByText('20', { exact: true });
+      const input = listbox.getByRole('textbox');
 
-      await expect(selectedOption).toBeVisible();
-      await expect(selectedOption).toBeInViewport();
-      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('20');
+      await expect(listbox.locator('[data-hovered="true"]')).toHaveText('1');
+      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('1');
+
+      await input.press('ArrowDown');
+
+      await expect(listbox.locator('[data-hovered="true"]')).toHaveText('1');
+      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('2');
+      await expect(input).toHaveValue('2');
+    });
+
+    test('cycles to last page and renders surrounding options in virtual scroll', async ({ page }) => {
+      await page.goto(PRESELECT_STORY);
+      const frame = getStorybookFrameLocator(page);
+
+      const pageButton = frame.locator('.current-page-number-with-dropdown');
+      await clickAndWait(pageButton, page);
+
+      const listbox = frame.getByRole('listbox').last();
+      const input = listbox.getByRole('textbox');
+
+      await input.press('ArrowUp');
+
+      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('32');
+      await expect(input).toHaveValue('32');
+      await expect(listbox.getByText('29', { exact: true })).toBeVisible();
+      await expect(listbox.getByText('32', { exact: true })).toBeVisible();
     });
   });
 
