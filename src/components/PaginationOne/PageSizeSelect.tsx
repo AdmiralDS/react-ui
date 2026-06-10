@@ -26,6 +26,7 @@ interface PageSizeSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   menuWidth: string | undefined;
   pageSizeDropContainerStyle: PaginationOneProps['pageSizeDropContainerStyle'];
   dropContainerCssMixin: PaginationOneProps['dropContainerCssMixin'];
+  preselectedModeActive: boolean;
 }
 
 export const PageSizeSelect = memo(
@@ -41,6 +42,7 @@ export const PageSizeSelect = memo(
     menuWidth,
     pageSizeDropContainerStyle,
     dropContainerCssMixin,
+    preselectedModeActive,
     ...props
   }: PageSizeSelectProps) => {
     const theme = useTheme() || LIGHT_THEME;
@@ -95,10 +97,10 @@ export const PageSizeSelect = memo(
         selected={selectedPageSizeNumber}
         onSelectItem={handleSizeChange}
         active={activePageSizeNumber}
-        preselected={preselectedPageSizeNumber}
+        preselected={preselectedModeActive ? preselectedPageSizeNumber : undefined}
         onActivateItem={handlePageSizeHover}
-        onPreselectItem={setPreselectedPageSizeNumber}
-        preselectedModeActive
+        onPreselectItem={preselectedModeActive ? setPreselectedPageSizeNumber : undefined}
+        preselectedModeActive={preselectedModeActive}
         disabled={pageSizeSelectDisabled}
         aria-label={pageSizeSelectLabel(pageSize, totalItems)}
         menuMaxHeight={pageSizeDropContainerStyle?.menuMaxHeight || dropMaxHeight}

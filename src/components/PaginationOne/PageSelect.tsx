@@ -28,6 +28,7 @@ interface PageSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
   pageNumberDropContainerStyle: PaginationOneProps['pageNumberDropContainerStyle'];
   dropContainerCssMixin: PaginationOneProps['dropContainerCssMixin'];
   showPageNumberInput: boolean;
+  preselectedModeActive: boolean;
 }
 
 export const PageSelect = memo(
@@ -44,6 +45,7 @@ export const PageSelect = memo(
     pageNumberDropContainerStyle,
     dropContainerCssMixin,
     showPageNumberInput,
+    preselectedModeActive,
     ...props
   }: PageSelectProps) => {
     const theme = useTheme() || LIGHT_THEME;
@@ -111,10 +113,10 @@ export const PageSelect = memo(
         selected={selectedPageNumber}
         onSelectItem={handlePageChange}
         active={activePageNumber}
-        preselected={preselectedPageNumber}
+        preselected={preselectedModeActive ? preselectedPageNumber : undefined}
         onActivateItem={handlePageHover}
-        onPreselectItem={setPreselectedPageNumber}
-        preselectedModeActive
+        onPreselectItem={preselectedModeActive ? setPreselectedPageNumber : undefined}
+        preselectedModeActive={preselectedModeActive}
         disabled={pageSelectDisabled}
         aria-label={pageSelectLabel(page, totalPages)}
         menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
@@ -146,6 +148,7 @@ export const PageSelect = memo(
                     setActivePageNumber={setActivePageNumber}
                     preselectedPageNumber={preselectedPageNumber}
                     setPreselectedPageNumber={setPreselectedPageNumber}
+                    preselectedModeActive={preselectedModeActive}
                     setMenuVisible={setIsVisible}
                     onChange={onChange}
                   />
