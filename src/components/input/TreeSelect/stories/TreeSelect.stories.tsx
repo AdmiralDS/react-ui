@@ -78,13 +78,6 @@ export default {
         type: { summary: 'ReactNode' },
       },
     },
-    containerRef: {
-      control: false,
-      description: 'Ref контейнера компонента',
-      table: {
-        type: { summary: 'RefObject<HTMLDivElement>' },
-      },
-    },
     theme: {
       control: false,
     },
