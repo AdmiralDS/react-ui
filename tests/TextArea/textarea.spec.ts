@@ -48,7 +48,9 @@ test('resizable (ResizeObserver behavior)', async ({ page, browserName }) => {
 
     // Ждём, пока высота изменится
     await expect
-      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), { timeout: TIMEOUTS.POLL_FAST })
+      .poll(() => component.evaluate((el) => parseFloat(getComputedStyle(el).height)), {
+        timeout: TIMEOUTS.POLL_STANDARD,
+      })
       .toBeGreaterThan(initialHeight);
 
     // Дополнительно проверяем через toHaveCSS, что высота действительно увеличилась

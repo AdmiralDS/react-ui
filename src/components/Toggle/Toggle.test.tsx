@@ -48,7 +48,7 @@ describe('Toggle', () => {
     const wrapper = render(<Component />);
     fireEvent.click(wrapper.getByLabelText('text'));
     const { onChange } = requiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should focus input if user press Tab key', async () => {
@@ -66,6 +66,6 @@ describe('Toggle', () => {
     await user.tab();
     await user.type(input, '{Space}');
     const { onChange } = requiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

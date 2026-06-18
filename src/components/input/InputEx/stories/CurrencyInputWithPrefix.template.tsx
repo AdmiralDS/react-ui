@@ -12,7 +12,7 @@ const SUFFIX_OPTIONS = ['₽', '$', '€', '¥', '£'];
 const options = maskitoNumberOptionsGenerator({
   decimalSeparator: ',',
   thousandSeparator: ' ',
-  precision: 2,
+  maximumFractionDigits: 2,
 });
 
 /**

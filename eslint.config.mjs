@@ -3,6 +3,9 @@ import { defineConfig } from 'eslint/config';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import importPlugin from 'eslint-plugin-import';
 
+// TODO: Revisit ESLint 10 upgrade when eslint-plugin-import supports eslint@^10.
+// eslint-plugin-import@2.32.0 currently supports eslint only up to ^9.
+
 // Временный блок для мягкого перехода.
 // Для новых проектов: все правила из этого блока должны быть выставлены в `error`.
 const SOFT_MIGRATION_RULES = {

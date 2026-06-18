@@ -31,13 +31,13 @@ describe('Tags', () => {
     const wrapper = render(<Component />);
     fireEvent.click(wrapper.getByTestId('1'));
     const { onClickMain } = clickProps;
-    expect(onClickMain).toBeCalledTimes(1);
+    expect(onClickMain).toHaveBeenCalledTimes(1);
   });
 
   it('should call onClickred when user clicks on second tag', () => {
     const wrapper = render(<Component />);
     fireEvent.click(wrapper.getByTestId('2'));
     const { onClickRed } = clickProps;
-    expect(onClickRed).toBeCalledTimes(1);
+    expect(onClickRed).toHaveBeenCalledTimes(1);
   });
 });

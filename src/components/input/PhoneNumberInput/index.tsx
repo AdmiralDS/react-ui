@@ -122,7 +122,7 @@ export interface PhoneNumberInputProps
   ) => Partial<React.ComponentProps<typeof PhoneContainer>> & DataAttributes;
 }
 
-const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames);
+const AVAILABLE_ALPHA3_CODES = Object.keys(ComponentsNames) as Array<CountryAlpha3Code>;
 
 export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputProps>(
   (

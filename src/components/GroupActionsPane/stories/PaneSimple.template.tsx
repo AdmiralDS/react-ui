@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { GroupActionsPane, PaneSeparator, typography, TextButton, Button, T } from '@admiral-ds/react-ui';
 import type { GroupActionsPaneProps, PaneColumn, BorderRadiusType, PaneMenuProps } from '@admiral-ds/react-ui';
 import { ReactComponent as GovernmentOutline } from '@admiral-ds/icons/build/category/GovernmentOutline.svg';
-import { ReactComponent as TelegramOutline } from '@admiral-ds/icons/build/communication/TelegrammOutline.svg';
+import { ReactComponent as TelegramSolid } from '@admiral-ds/icons/build/communication/TelegramSolid.svg';
 import { ReactComponent as AlertOutline } from '@admiral-ds/icons/build/category/AlertOutline.svg';
 import { ReactComponent as CardSolid } from '@admiral-ds/icons/build/finance/CardSolid.svg';
 import { createBorderRadiusSwapper } from '../../../../.storybook/createBorderRadiusSwapper';
@@ -108,7 +108,7 @@ export const PaneSimpleTemplate = ({
           renderSettingsMenu={renderSettingsMenu}
         >
           <TextButton text={'Action 1'} dimension={dimension} iconStart={<GovernmentOutline />} />
-          <TextButton text={'Action 2'} dimension={dimension} iconStart={<TelegramOutline />} />
+          <TextButton text={'Action 2'} dimension={dimension} iconStart={<TelegramSolid />} />
           <TextButton text={'Action 3'} dimension={dimension} iconStart={<AlertOutline />} disabled />
           <PaneSeparator dimension={dimension} />
           <TextButton text={'Action 4'} dimension={dimension} iconStart={<CardSolid />} />
