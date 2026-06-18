@@ -1,14 +1,33 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
 import { ALL_BORDER_RADIUS_VALUES, TabMenuIcon } from '@admiral-ds/react-ui';
+import styled from 'styled-components';
 
 import { IconTabMenuTemplate } from './IconTabMenuTemplate';
 
 // Imports of text sources
 import IconTabMenuRaw from './IconTabMenuTemplate?raw';
 
+const Desc = styled.div`
+  font-family: 'VTB Group UI';
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+const Separator = styled.div`
+  height: 20px;
+`;
+
+const Description = () => (
+  <Desc>
+    Deprecated как редкоиспользуемый.
+    <Separator />
+    Из версии Admiral 2.1 TabMenuIcon не удалится, но в 3 версии Адмирала его уже не будет.
+  </Desc>
+);
+
 export default {
-  title: 'Admiral-2.1/Tabs/TabMenuIcon',
+  title: 'Deprecated/TabMenuIcon (Deprecated как редкоиспользуемый)',
   decorators: undefined,
   component: TabMenuIcon,
   parameters: {
@@ -17,6 +36,7 @@ export default {
         code: null,
       },
     },
+    componentSubtitle: <Description />,
   },
   argTypes: {
     showUnderline: {

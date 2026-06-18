@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Button should render component 1`] = `
 .c2 {
@@ -19,7 +19,7 @@ exports[`Button should render component 1`] = `
   white-space: nowrap;
 }
 
-.c2 >.sc-hvigdm {
+.c2 >.sc-gtcBCx {
   flex: 0 0 auto;
 }
 
@@ -549,7 +549,7 @@ exports[`Button should render component with text 1`] = `
   white-space: nowrap;
 }
 
-.c2 >.sc-hvigdm {
+.c2 >.sc-gtcBCx {
   flex: 0 0 auto;
 }
 

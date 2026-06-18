@@ -478,6 +478,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           model={model}
           rowCount={rowCount}
           activeId={activeId}
+          preselectedId={preselectedId}
           selected={innerSelected}
           onRenderItem={renderItem}
         />
@@ -489,19 +490,31 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     const previousPreselected = useRef<string | undefined>();
     const previousPreselectedState = useRef<string | undefined>();
 
+    const hasActiveChanged = () => {
+      const isControlled = !!active;
+      const previousValue = isControlled ? previousActive.current : previousActiveState.current;
+      const currentValue = isControlled ? active : activeState;
+
+      return previousValue !== currentValue;
+    };
+
+    const hasPreselectedChanged = () => {
+      const isControlled = !!preselected;
+      const previousValue = isControlled ? previousPreselected.current : previousPreselectedState.current;
+      const currentValue = isControlled ? preselected : preselectedState;
+
+      return previousValue !== currentValue;
+    };
+
     useLayoutEffect(() => {
       setTimeout(() => {
         let itemToScroll;
+        const isActiveChanged = hasActiveChanged();
+        const isPreselectdChanged = hasPreselectedChanged();
 
-        if (
-          (!!active && previousActive.current !== active) ||
-          (active === undefined && previousActiveState.current !== activeState)
-        ) {
+        if (isActiveChanged) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
-        } else if (
-          (!!preselected && previousPreselected.current !== preselected) ||
-          (preselected === undefined && previousPreselectedState.current !== preselectedState)
-        ) {
+        } else if (isPreselectdChanged) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
         }
 

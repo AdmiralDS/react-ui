@@ -1,8 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import { useGlobals } from '@storybook/preview-api';
-import type { TreeSelect } from '@admiral-ds/react-ui';
 import {
-  TextInput,
+  TreeSelect,
   INPUT_DIMENSIONS_VALUES,
   INPUT_STATUS_VALUES,
   ALL_BORDER_RADIUS_VALUES,
@@ -23,7 +22,7 @@ import RowCountLimitsRaw from './RowCountLimits.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
-  component: TextInput,
+  component: TreeSelect,
   decorators: undefined,
   parameters: {
     docs: {
@@ -36,11 +35,16 @@ export default {
   argTypes: {
     dimension: {
       options: INPUT_DIMENSIONS_VALUES,
+      description: 'Делает высоту компонента больше или меньше обычной. \n\nПо умолчанию "m"',
       control: { type: 'radio' },
     },
     status: {
       control: { type: 'radio' },
+      description: 'Статус поля',
       options: INPUT_STATUS_VALUES,
+      table: {
+        type: { summary: '"success" | "error"' },
+      },
     },
     disabled: {
       control: { type: 'boolean' },
@@ -50,12 +54,18 @@ export default {
     },
     isLoading: {
       control: { type: 'boolean' },
+      description: 'Отображать статус загрузки данных',
     },
     disableCopying: {
       control: { type: 'boolean' },
+      description: 'Наличие этого атрибута отключает возможность выделения и копирования значения поля',
+      table: {
+        type: { summary: 'boolean' },
+      },
     },
     displayClearIcon: {
       control: { type: 'boolean' },
+      description: 'Отображать иконку очистки поля',
     },
     placeholder: {
       control: { type: 'text' },
@@ -63,14 +73,19 @@ export default {
     onChange: {
       action: 'onChange',
     },
-    icons: {
+    iconsBefore: {
       control: false,
+      description: 'Иконки для отображения в начале поля',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     containerRef: {
       control: false,
-    },
-    handleInput: {
-      control: false,
+      description: 'Ref контейнера компонента',
+      table: {
+        type: { summary: 'RefObject<HTMLDivElement>' },
+      },
     },
     theme: {
       control: false,
@@ -84,6 +99,11 @@ export default {
     },
     skeleton: {
       control: { type: 'boolean' },
+      description: 'Состояние skeleton',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
   },
 } as Meta<typeof TreeSelect>;
@@ -121,6 +141,9 @@ const ShowChildStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
 export const ShowChildStrategy = {
   render: ShowChildStrategyStory,
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: ShowChildStrategyRaw,
@@ -140,6 +163,9 @@ const ShowParentStrategyStory: StoryFn<typeof TreeSelect> = (props) => {
 export const ShowParentStrategy = {
   render: ShowParentStrategyStory,
   parameters: {
+    args: {
+      displayClearIcon: true,
+    },
     docs: {
       source: {
         code: ShowParentStrategyRaw,

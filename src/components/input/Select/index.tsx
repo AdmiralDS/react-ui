@@ -47,18 +47,9 @@ import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/compone
 import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
+import { VirtualizedNativeSelect } from '#src/components/input/Select/VirtualizedNativeSelect';
 
 export * from './types';
-
-/**
- * Осталось сделать:
- * Активное состояние у крестика на чипсах по стрелкам
- * Проверить Перфоманс
- * Тултип и длинного текста в selectValue
- * Возможность, если используется renderValue, задать значение, которое будет появляться при вводе поиска и для опций
- * Разбить компонент на хуки для большей читаемости и императивности (useHeight, useInput, ...)
- * Разбить тесты по пропсам и функционалу. Например, тесты проверящие placeholder И т.д.
- */
 
 export const DropDownText = styled(OptionWrapper)`
   color: var(--admiral-color-Neutral_Neutral50, ${(p) => p.theme.color['Neutral/Neutral 50']});
@@ -334,7 +325,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [value]);
 
     const selectedOption = useMemo(
-      () => (multiple ? null : constantOptions.find((option) => option.value === selectedValue)),
+      () => (multiple || !selectedValue ? null : constantOptions.find((option) => option.value === selectedValue)),
       [multiple, constantOptions, selectedValue],
     );
 
@@ -746,7 +737,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     useEffect(() => {
       if (isSearchPanelOpen) {
-        modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
+        if (modeIsSelect) selectRef.current?.focus();
+        else inputRef.current?.focus();
+
         setPreseleceted('');
       }
     }, [isSearchPanelOpen, modeIsSelect]);
@@ -789,13 +782,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const needShowClearIcon = shouldRenderSelectValue && (multiple ? !!selectedValue?.length : !!selectedValue);
 
-    const memorisedChildren = useMemo(
-      () =>
-        Children.map(children, (child) =>
-          isValidElement(child) ? cloneElement(child, { key: uid(), ...child.props }) : null,
-        ),
-      [children],
-    );
+    const memorisedChildren = useMemo(() => {
+      if (!children) return null;
+
+      return Children.map(children, (child, index) => {
+        if (isValidElement(child)) {
+          // Используем существующий key или value как стабильный идентификатор
+          const stableKey = child.key ?? child.props?.value ?? index;
+          return cloneElement(child, { key: stableKey });
+        }
+        return null;
+      });
+    }, [children]);
 
     const memorisedDropDownOptions = useMemo(
       () => (
@@ -850,6 +848,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
+    const menuVirtualScroll = virtualScroll ?? (dropDownModel.length > 1000 ? { itemHeight: 'auto' } : undefined);
+
     return (
       <SelectWrapper
         className={className}
@@ -872,12 +872,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       >
         {memorisedConstantOptions}
         {memorisedDropDownOptions}
-        <NativeControl
+        <VirtualizedNativeSelect
           ref={refSetter(ref, selectRef)}
           value={selectedValue}
           multiple={multiple}
           disabled={disabled}
           options={constantOptions}
+          active={activeItem}
           {...props}
           onChange={handleNativeControlChange}
         />
@@ -940,7 +941,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               renderTopPanel={renderDropDownTopPanel || renderTopPanel}
               renderBottomPanel={renderDropDownBottomPanel || renderBottomPanel}
               containerRef={dropDownRef}
-              virtualScroll={virtualScroll}
+              virtualScroll={menuVirtualScroll}
               preventFocusSteal
               preselectedModeActive={modeIsSelect}
               preselected={preselected}

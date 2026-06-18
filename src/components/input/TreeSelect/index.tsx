@@ -6,7 +6,7 @@ import { StyledMultiInput, StyledChip } from './styled';
 import type { ContainerProps } from '#src/components/input/MultiInput';
 import type { InputIconButton } from '#src/components/InputIconButton';
 import type { DataAttributes } from 'styled-components';
-import type { DropdownContainerProps, TreeSelectItemProps } from './types';
+import type { DropdownContainerProps, TreeSelectItemProps, ShowCheckedStrategyProps } from './types';
 import {
   checkboxTreeToMap,
   type FlatMapItems,
@@ -15,8 +15,6 @@ import {
 } from '#src/components/Menu/MenuItemWithCheckbox';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
-
-export type ShowCheckedStrategyProps = 'SHOW_ALL' | 'SHOW_CHILD' | 'SHOW_PARENT';
 
 export interface TreeSelectProps
   extends

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const Spacer = styled.div`
   display: flex;
@@ -21,6 +21,8 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   model: Array<MenuModelItemProps>;
   /** Id активного элемента */
   activeId?: string | null;
+  /** Id активного элемента */
+  preselectedId?: string | null;
   /** Id выбранных элементов */
   selected: Array<string>;
   /** render-метод для отрисовки пункта меню */
@@ -29,6 +31,7 @@ interface VirtualBodyProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface PreviousValues {
   activeId?: string | null;
+  preselectedId?: string | null;
 }
 
 interface Partition {
@@ -38,10 +41,6 @@ interface Partition {
   bottomPadding: string;
 }
 
-interface PartitionExt extends Partition {
-  needAddListener: boolean;
-}
-
 export const VirtualBody = ({
   scrollContainerRef,
   itemHeight,
@@ -49,27 +48,44 @@ export const VirtualBody = ({
   aheadItemsCount = 3,
   model,
   activeId,
+  preselectedId,
   selected,
   onRenderItem,
 }: VirtualBodyProps) => {
   const [scrollTop, setScrollTop] = useState(0);
-  const [partition, setPartition] = useState<PartitionExt>({
+  const [partition, setPartition] = useState<Partition>({
     startIndex: 0,
     endIndex: rowCount,
     topPadding: '',
     bottomPadding: '',
-    needAddListener: false,
   });
-  const prevValue = usePrevious<PreviousValues>({ activeId });
+  const prevValue = usePrevious<PreviousValues>({ activeId, preselectedId });
 
-  const handleScroll = useCallback(
-    (e: Event) => {
-      requestAnimationFrame(() => {
-        if (e.target) setScrollTop((e.target as HTMLDivElement).scrollTop);
-      });
-    },
-    [scrollContainerRef],
-  );
+  // Флаг для предотвращения множественных обновлений
+  const isScrollingRef = useRef(false);
+  const rafIdRef = useRef<number>();
+
+  const handleScroll = useCallback((e: Event) => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+    }
+
+    rafIdRef.current = requestAnimationFrame(() => {
+      if (e.target) {
+        setScrollTop((e.target as HTMLDivElement).scrollTop);
+        isScrollingRef.current = false;
+      }
+    });
+  }, []);
+
+  // Очистка raf при размонтировании
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -77,62 +93,92 @@ export const VirtualBody = ({
 
     scrollContainer?.addEventListener('scroll', handleScroll);
     return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
-
-  useEffect(() => {
-    if (partition.needAddListener) {
-      setTimeout(() => scrollContainerRef?.current?.addEventListener('scroll', handleScroll));
-      setPartition({ ...partition, needAddListener: false });
-    }
-  }, [partition, scrollContainerRef]);
+  }, [handleScroll, scrollContainerRef]);
 
   const calcPartition = useCallback(
     (start: number) => {
       const itemCount = model.length;
-
       const startIndex = Math.max(0, start);
-
       let visibleNodeCount = rowCount + 2 * aheadItemsCount;
       visibleNodeCount = Math.min(itemCount - startIndex, visibleNodeCount);
       const endIndex = startIndex + visibleNodeCount;
-
       const topPadding = `${startIndex * itemHeight}px`;
       const bottomPadding = `${(itemCount - startIndex - visibleNodeCount) * itemHeight}px`;
 
       return { startIndex, endIndex, topPadding, bottomPadding };
     },
-    [itemHeight, aheadItemsCount, model, rowCount],
+    [itemHeight, aheadItemsCount, model.length, rowCount],
   );
 
+  // Эффект для scrollTop
   useEffect(() => {
+    if (isScrollingRef.current) return;
+
     const start = Math.floor(scrollTop / itemHeight - aheadItemsCount);
-    const partition: PartitionExt = { ...calcPartition(start), needAddListener: false };
-    setPartition(partition);
-  }, [scrollTop, calcPartition]);
+    const newPartition = calcPartition(start);
 
+    setPartition((prev) => {
+      // Обновляем только если действительно изменилось
+      if (prev.startIndex === newPartition.startIndex && prev.endIndex === newPartition.endIndex) {
+        return prev;
+      }
+      return { ...newPartition };
+    });
+  }, [scrollTop, calcPartition, itemHeight, aheadItemsCount]);
+
+  // Эффект для активного элемента
   useEffect(() => {
-    if (!activeId || !prevValue) return;
-    const prevActiveId = prevValue.activeId;
+    if (!activeId && !preselectedId) return;
 
-    if (prevActiveId === activeId) return;
+    const prevActiveId = prevValue?.activeId;
+    const prevPreselectedId = prevValue?.preselectedId;
+    const activeChanged = prevActiveId !== activeId;
+    const preselectedChanged = prevPreselectedId !== preselectedId;
 
-    const index = model.findIndex((item) => item.id === activeId);
+    if (!activeChanged && !preselectedChanged) return;
+
+    const index = activeChanged
+      ? model.findIndex((item) => item.id === activeId)
+      : model.findIndex((item) => item.id === preselectedId);
 
     if (index === -1) return;
 
     if (index < partition.startIndex || index > partition.endIndex) {
-      scrollContainerRef?.current?.removeEventListener('scroll', handleScroll);
-      setPartition({ ...calcPartition(index), needAddListener: true });
+      // Временно отключаем скролл
+      const scrollContainer = scrollContainerRef.current;
+      scrollContainer?.removeEventListener('scroll', handleScroll);
+
+      const newPartition = calcPartition(index);
+
+      // Устанавливаем новую позицию скролла
+      if (scrollContainer) {
+        scrollContainer.scrollTop = index * itemHeight;
+      }
+
+      setPartition({ ...newPartition });
+
+      // Восстанавливаем слушатель в следующем тике
+      setTimeout(() => {
+        scrollContainer?.addEventListener('scroll', handleScroll);
+      }, 0);
     }
-  }, [activeId, partition, calcPartition, scrollContainerRef]);
+  }, [
+    activeId,
+    preselectedId,
+    partition.startIndex,
+    partition.endIndex,
+    calcPartition,
+    scrollContainerRef,
+    model,
+    itemHeight,
+    prevValue,
+  ]);
 
+  // Мемоизация видимых детей
   const visibleChildren = useMemo(() => {
-    const visibleItems = [...model].slice(partition.startIndex, partition.endIndex);
-
-    return visibleItems.map((item, index) => {
-      return onRenderItem?.(item, index);
-    });
-  }, [model, activeId, selected, partition]);
+    const visibleItems = model.slice(partition.startIndex, partition.endIndex);
+    return visibleItems.map((item, idx) => onRenderItem?.(item, partition.startIndex + idx));
+  }, [model, partition.startIndex, partition.endIndex, onRenderItem, activeId, preselectedId, selected]);
 
   return (
     <>

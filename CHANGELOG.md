@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.64.0](https://github.com/AdmiralDS/react-ui/compare/v8.63.0...v8.64.0) (2026-06-03)
+
+
+### Features
+
+* **Drawer, Modal:** [#2097](https://github.com/AdmiralDS/react-ui/issues/2097) добавлен параметр preventFocusRestore для блокировки восстановления фокуса при закрытии компонента ([6f1086f](https://github.com/AdmiralDS/react-ui/commit/6f1086f651fcf3d9d329f320f856c2c01599baee))
+* **TimePicker:** Добавлено состояние preselected ([eff0a7c](https://github.com/AdmiralDS/react-ui/commit/eff0a7cf4addec5fd211f83155e6634567e451d9))
+* **TooltipHOC:** не открывать тултип на touch-устройстве ([eedd35b](https://github.com/AdmiralDS/react-ui/commit/eedd35b884731e4b1c87a66b59b2c3dc1794b0e8))
+
+
+### Bug Fixes
+
+* **Menu:** Исправлена логика прокрутки к элементу active/preselected в контроллируемом и неконтроллируемом режимах ([72a95b5](https://github.com/AdmiralDS/react-ui/commit/72a95b5166c4611c1a1727444f67e9b7008998c4))
+* **Select:** add optimizftion selected options and children ([41cd622](https://github.com/AdmiralDS/react-ui/commit/41cd622ad602f4dae19b5e6a59aa47e4fcd32926))
+* **Table:** [#2089](https://github.com/AdmiralDS/react-ui/issues/2089) исправлен баг с выбором задизейбленного элемента из группы строк ([1dd169d](https://github.com/AdmiralDS/react-ui/commit/1dd169d95a6ceeaad9df6a1b31804071f48ad4ab))
+* **TabMenuIcon:** перенесен в Deprecated как редкоиспользуемый ([f86b344](https://github.com/AdmiralDS/react-ui/commit/f86b3446f1bc46693eeef454f407c2b38457424c))
+
 ## [8.63.0](https://github.com/AdmiralDS/react-ui/compare/v8.62.0...v8.63.0) (2026-05-06)
 
 

@@ -38,6 +38,6 @@ describe('Tag', () => {
     );
     fireEvent.click(wrapper.getByText('text'));
     const { onClick } = clickProps;
-    expect(onClick).toBeCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
