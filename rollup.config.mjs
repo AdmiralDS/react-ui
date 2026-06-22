@@ -40,6 +40,10 @@ export default [
       resolve(),
       commonjs(),
       typescript({
+        tsconfig: './tsconfig.build.json',
+        compilerOptions: {
+          emitDeclarationOnly: false,
+        },
         exclude: [
           '*/**/*.stories.*',
           'src/**/stories/**',
@@ -48,11 +52,9 @@ export default [
           'src/colors/**',
           'src/icons/**',
         ],
-        transformers: [
-          () => ({
-            before: [styledComponentsTransformer],
-          }),
-        ],
+        transformers: {
+          before: [styledComponentsTransformer],
+        },
       }),
       tscAlias(),
       terser({ ecma: '2021', mangle: false }),

@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 import { defineConfig, devices } from '@playwright/test';
 import 'dotenv/config';
 
@@ -21,7 +23,7 @@ export default defineConfig({
     baseURL: 'http://localhost:6006/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
   timeout: 120000,
   expect: {

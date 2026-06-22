@@ -142,7 +142,7 @@ describe('TabMenu', () => {
     const mobileOnChange = jest.fn();
     const wrapper = render(<Component activeTab="1" onChange={mobileOnChange} tabs={tabs} mobile />);
     fireEvent.click(wrapper.getAllByRole('tab')[0]);
-    expect(mobileOnChange).toBeCalledTimes(1);
+    expect(mobileOnChange).toHaveBeenCalledTimes(1);
   });
 
   // test #3
@@ -150,6 +150,6 @@ describe('TabMenu', () => {
     const onChange = jest.fn();
     const wrapper = render(<Component activeTab="1" onChange={onChange} tabs={tabs} />);
     fireEvent.click(wrapper.getByTestId('1'));
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

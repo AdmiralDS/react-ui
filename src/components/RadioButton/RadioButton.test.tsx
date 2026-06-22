@@ -55,7 +55,7 @@ describe('RadioButton', () => {
     );
     fireEvent.click(wrapper.getByLabelText('text'));
     const { onChange } = radiobuttonRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should focus input if user press Tab key', async () => {
@@ -81,6 +81,6 @@ describe('RadioButton', () => {
     await user.tab();
     await user.type(radio, '{space}');
     const { onChange } = radiobuttonRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });
