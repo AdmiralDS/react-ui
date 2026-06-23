@@ -5,7 +5,6 @@ import { TextInput } from '#src/components/input';
 import { keyboardKey } from '#src/components/common/keyboardKey.js';
 import type { PaginationOneProps } from '#src/components/PaginationOne';
 import type { MenuDimensions } from '#src/components/Menu';
-import { nextItem } from '../Accordion/utils';
 
 type PageNumberInputProps = {
   page: PaginationOneProps['page'];
