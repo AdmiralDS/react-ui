@@ -265,7 +265,7 @@ test.describe('PaginationOne', () => {
       await expect(input).toHaveValue('2');
     });
 
-    test('cycles to last page and renders surrounding options in virtual scroll', async ({ page }) => {
+    test('cycles to last page with page number input and renders surrounding options', async ({ page }) => {
       await page.goto(PRESELECT_STORY);
       const frame = getStorybookFrameLocator(page);
 
@@ -279,6 +279,22 @@ test.describe('PaginationOne', () => {
 
       await expect(listbox.locator('[data-preselected="true"]')).toHaveText('32');
       await expect(input).toHaveValue('32');
+      await expect(listbox.getByText('29', { exact: true })).toBeVisible();
+      await expect(listbox.getByText('32', { exact: true })).toBeVisible();
+    });
+
+    test('cycles to last page without page number input', async ({ page }) => {
+      await page.goto(`${PLAYGROUND_STORY}&args=preselectedModeActive:!true;totalItems:250`);
+      const frame = getStorybookFrameLocator(page);
+
+      const pageButton = frame.locator('.current-page-number-with-dropdown');
+      await clickAndWait(pageButton, page);
+
+      const listbox = frame.getByRole('listbox').last();
+
+      await page.keyboard.press('ArrowUp');
+
+      await expect(listbox.locator('[data-preselected="true"]')).toHaveText('32');
       await expect(listbox.getByText('29', { exact: true })).toBeVisible();
       await expect(listbox.getByText('32', { exact: true })).toBeVisible();
     });

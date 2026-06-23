@@ -79,7 +79,6 @@ export const PageSizeSelect = memo(
         setPreselectedPageSizeNumber(selectedPageSizeNumber);
         setIsVisible(false);
       } else {
-        setPreselectedPageSizeNumber(selectedPageSizeNumber);
         setIsVisible(true);
       }
     }, [isVisible, selectedPageSizeNumber]);

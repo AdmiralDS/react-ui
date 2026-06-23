@@ -1,5 +1,5 @@
 import { useTheme, css } from 'styled-components';
-import { memo, useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import { memo, useState, useMemo, useEffect, useCallback } from 'react';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { PaginationOneProps } from '#src/components/PaginationOne';
@@ -55,7 +55,6 @@ export const PageSelect = memo(
     const [isVisible, setIsVisible] = useState(false);
     const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
     const [preselectedPageNumber, setPreselectedPageNumber] = useState<string | undefined>(page.toString());
-    const pageNumberInputRef = useRef<HTMLInputElement>(null);
 
     const dropMenuProps = passDropdownDataAttributes(props);
     const pages = useMemo(() => Array.from({ length: totalPages }, (_, k) => k + 1), [totalPages]);
@@ -96,15 +95,9 @@ export const PageSelect = memo(
         setPreselectedPageNumber(selectedPageNumber);
         setIsVisible(false);
       } else {
-        setPreselectedPageNumber(selectedPageNumber);
         setIsVisible(true);
       }
     }, [isVisible, selectedPageNumber]);
-
-    const handleMenuCycle = useCallback(() => {
-      pageNumberInputRef.current?.focus();
-      return false;
-    }, []);
 
     return (
       <MenuButton
@@ -132,14 +125,11 @@ export const PageSelect = memo(
         onVisibilityChange={setIsVisible}
         onClickOutside={handleClickOutside}
         onClick={handleMenuButtonClick}
-        onForwardCycleApprove={handleMenuCycle}
-        onBackwardCycleApprove={handleMenuCycle}
         renderTopPanel={
           showPageNumberInput
             ? ({ dimension = 's' }) => {
                 return (
                   <PageNumberInput
-                    ref={pageNumberInputRef}
                     dimension={dimension}
                     page={page}
                     pageSize={pageSize}
