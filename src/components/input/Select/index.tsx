@@ -312,7 +312,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [maxRowCount, idleHeight]);
 
     const fixedHeight = calcRowCount !== 'none';
-    // const maxRowCount = calcRowCount !== 'none' ? calcRowCount ;
 
     const externalValue = value ?? defaultValue;
     const selectedArray = useRef<Array<string>>(Array.isArray(externalValue) ? externalValue : []);

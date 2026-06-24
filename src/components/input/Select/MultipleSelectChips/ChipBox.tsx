@@ -18,7 +18,7 @@ export interface CommonChipProps {
 
 interface ChipBoxProps extends CommonChipProps, React.HTMLAttributes<HTMLDivElement> {
   option: IConstantOption;
-  childrenOptions: Array<IConstantOption>;
+  hiddenChipsCount: number;
 }
 
 export const Wrapper = styled.div`
@@ -29,7 +29,7 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
   (
     {
       option,
-      childrenOptions,
+      hiddenChipsCount,
       containerRef,
       shouldShowCount,
       disabled,
@@ -78,7 +78,12 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
     }, [visible]);
 
     return (
-      <Wrapper ref={refSetter(ref, wrapperRef)} key={option.value} onMouseDown={(e) => e.preventDefault()}>
+      <Wrapper
+        ref={refSetter(ref, wrapperRef)}
+        key={option.value}
+        onMouseDown={(e) => e.preventDefault()}
+        className="wrapper"
+      >
         <InfoChip
           className="chip"
           option={option}
@@ -87,20 +92,7 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
           onClick={onChipClick}
           onChipRemove={onChipRemove}
         />
-        {shouldShowCount && childrenOptions.length > 0 && (
-          <CounterChip count={childrenOptions.length} disabled={disabled}>
-            {childrenOptions.map((innerOption) => (
-              <InfoChip
-                key={innerOption.value}
-                option={innerOption}
-                disabled={disabled}
-                readOnly={readOnly}
-                onClick={onChipClick}
-                onChipRemove={onChipRemove}
-              />
-            ))}
-          </CounterChip>
-        )}
+        {shouldShowCount && hiddenChipsCount > 0 && <CounterChip count={hiddenChipsCount} disabled={disabled} />}
         {!shouldShowCount && <ShadowCounterChip />}
       </Wrapper>
     );

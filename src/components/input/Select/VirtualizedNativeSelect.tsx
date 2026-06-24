@@ -1,6 +1,18 @@
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { IConstantOption } from '#src/components/input/Select/types';
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+
+const NativeSelect = styled.select`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  pointer-events: none;
+`;
 
 interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<IConstantOption>;
@@ -80,14 +92,13 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
     };
 
     return (
-      <select
+      <NativeSelect
         ref={refSetter(ref, selectRef)}
         value={value}
         multiple={multiple}
         disabled={disabled}
         onChange={handleChange}
         className={'native-select'}
-        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }} // Скрываем, но оставляем в DOM
         {...props}
       >
         <option value="" />
@@ -96,7 +107,7 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
             {option.children}
           </option>
         ))}
-      </select>
+      </NativeSelect>
     );
   },
 );
