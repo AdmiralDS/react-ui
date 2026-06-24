@@ -52,7 +52,7 @@ describe('Checkbox', () => {
     );
     fireEvent.click(wrapper.getByTestId('element'));
     const { onChange } = checkboxRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should focus input if user press Tab key', async () => {
@@ -78,7 +78,7 @@ describe('Checkbox', () => {
     await user.tab();
     await user.type(checkbox, '{Space}');
     const { onChange } = checkboxRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('base react checkbox', async () => {
@@ -89,6 +89,6 @@ describe('Checkbox', () => {
     expect(checkbox).toHaveFocus();
     await user.type(checkbox, '{Space}');
     const { onChange } = checkboxRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

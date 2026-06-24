@@ -65,6 +65,10 @@ const chipsShiftStyle = css`
   padding-left: ${`${COUNTER_WIDTH + CHIP_OFFSET}px`};
 `;
 
+const chipsGap = css`
+  gap: 4px;
+`;
+
 export const ValueWrapper = styled.div<{
   $dimension?: ComponentDimension;
   $multiple?: boolean;
@@ -74,6 +78,8 @@ export const ValueWrapper = styled.div<{
   $isEmpty?: boolean;
   $opened?: boolean;
 }>`
+  ${(props) => props.$multiple && chipsGap};
+
   flex: 1 1 auto;
   display: flex;
   overflow: hidden;

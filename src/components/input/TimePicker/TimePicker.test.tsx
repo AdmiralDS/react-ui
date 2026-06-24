@@ -274,8 +274,7 @@ describe('TimePicker Component', () => {
       const container = screen.getByPlaceholderText('чч:мм').closest('.time-picker-container');
       const iconPanel = container?.querySelector('.time-picker-icon-panel');
       expect(iconPanel).toBeInTheDocument();
-      const iconButtons = iconPanel?.querySelectorAll('> *');
-      expect(iconButtons?.length).toBeGreaterThan(0);
+      expect(iconPanel?.children.length).toBeGreaterThan(0);
     });
 
     test('does not show clear icon when value is empty', () => {

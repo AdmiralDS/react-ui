@@ -41,7 +41,7 @@ describe('Chips', () => {
       </ThemeProvider>,
     );
     fireEvent.click(wrapper.getByText('test'));
-    expect(onClick).toBeCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('should focus on component when user on press key tab', async () => {
