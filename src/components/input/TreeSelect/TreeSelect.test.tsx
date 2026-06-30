@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { TreeSelect } from '#src/components/input/TreeSelect';
 import { LIGHT_THEME } from '#src/components/themes';
@@ -109,5 +109,140 @@ describe('TreeSelect props forwarding', () => {
     });
 
     expect(screen.queryByTestId('treeSelectOpenButton')).toBeNull();
+  });
+});
+
+describe('TreeSelect interaction states', () => {
+  const openDropdown = () => {
+    fireEvent.click(screen.getByPlaceholderText('Выберите элементы...'));
+  };
+
+  test('readOnly prevents opening dropdown on input click', () => {
+    renderTreeSelect({ readOnly: true, defaultValue: ['1.1'] });
+
+    openDropdown();
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1.1' })).not.toBeInTheDocument();
+  });
+
+  test('disabled prevents opening dropdown on input click', () => {
+    renderTreeSelect({ disabled: true });
+
+    openDropdown();
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1.1' })).not.toBeInTheDocument();
+  });
+
+  test('isLoading prevents opening dropdown on input click', () => {
+    renderTreeSelect({ isLoading: true });
+
+    openDropdown();
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1.1' })).not.toBeInTheDocument();
+  });
+
+  test('isLoading shows spinner', () => {
+    renderTreeSelect({ isLoading: true });
+
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+  });
+
+  test('readOnly hides clear icon when chips are selected', () => {
+    renderTreeSelect({
+      readOnly: true,
+      displayClearIcon: true,
+      defaultValue: ['1.1'],
+      clearButtonPropsConfig: () => ({ 'data-testid': 'treeSelectClearButton' }),
+    });
+
+    expect(screen.queryByTestId('treeSelectClearButton')).toBeNull();
+  });
+
+  test('disabled shows clear icon when chips are selected', () => {
+    renderTreeSelect({
+      disabled: true,
+      displayClearIcon: true,
+      defaultValue: ['1.1'],
+      clearButtonPropsConfig: () => ({ 'data-testid': 'treeSelectClearButton' }),
+    });
+
+    expect(screen.getByTestId('treeSelectClearButton')).toBeInTheDocument();
+    expect(screen.getByTestId('treeSelectClearButton')).toHaveAttribute('disabled');
+  });
+
+  test('isLoading shows clear icon alongside spinner when chips are selected', () => {
+    renderTreeSelect({
+      isLoading: true,
+      displayClearIcon: true,
+      defaultValue: ['1.1'],
+      clearButtonPropsConfig: () => ({ 'data-testid': 'treeSelectClearButton' }),
+    });
+
+    expect(screen.getByTestId('treeSelectClearButton')).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+  });
+
+  test('disabled keeps chip close buttons visible', () => {
+    renderTreeSelect({
+      disabled: true,
+      defaultValue: ['1.1'],
+    });
+
+    expect(document.querySelector('.close-button')).toBeInTheDocument();
+  });
+
+  test('isLoading keeps chip close buttons visible', () => {
+    renderTreeSelect({
+      isLoading: true,
+      defaultValue: ['1.1'],
+    });
+
+    expect(document.querySelector('.close-button')).toBeInTheDocument();
+  });
+
+  test('disabled chip close button does not remove chip', () => {
+    renderTreeSelect({
+      disabled: true,
+      defaultValue: ['1.1'],
+    });
+
+    const closeButton = document.querySelector('.close-button');
+    expect(closeButton).toBeInTheDocument();
+    fireEvent.click(closeButton?.parentElement as HTMLElement);
+
+    expect(screen.getByText('Опция 1.1')).toBeInTheDocument();
+  });
+
+  test('disabled clear button does not clear selections', () => {
+    renderTreeSelect({
+      disabled: true,
+      displayClearIcon: true,
+      defaultValue: ['1.1'],
+      clearButtonPropsConfig: () => ({ 'data-testid': 'treeSelectClearButton' }),
+    });
+
+    fireEvent.click(screen.getByTestId('treeSelectClearButton'));
+
+    expect(screen.getByText('Опция 1.1')).toBeInTheDocument();
+  });
+
+  test('isLoading chip close button removes chip', () => {
+    renderTreeSelect({
+      isLoading: true,
+      defaultValue: ['1.1'],
+    });
+
+    fireEvent.click(document.querySelector('.close-button') as HTMLElement);
+
+    expect(screen.queryByText('Опция 1.1')).not.toBeInTheDocument();
+  });
+
+  test('isLoading marks open button as disabled', () => {
+    renderTreeSelect({
+      isLoading: true,
+      openButtonPropsConfig: () => ({ 'data-testid': 'treeSelectOpenButton' }),
+    });
+
+    expect(screen.getByTestId('treeSelectOpenButton')).toHaveAttribute('data-disabled', 'true');
   });
 });

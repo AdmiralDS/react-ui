@@ -19,8 +19,9 @@ export const StyledMenu = styled(Menu)`
   ${ShadowContainerMixin}
 `;
 
-export const StyledMultiInput = styled(MultiInput)<{ $hidden?: boolean }>`
-  cursor: pointer;
+export const StyledMultiInput = styled(MultiInput)<{ $hidden?: boolean; $isLoading?: boolean }>`
+  cursor: ${({ disabled, readOnly, $isLoading }) =>
+    disabled ? 'not-allowed' : readOnly || $isLoading ? 'default' : 'pointer'};
   & .wrapper-options input {
     ${(props) => props.$hidden && `display: none`};
   }

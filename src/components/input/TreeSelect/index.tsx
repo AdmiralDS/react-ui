@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'r
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
+import { Spinner } from '#src/components/Spinner';
 import { StyledMultiInput, StyledChip } from './styled';
 import type { ContainerProps } from '#src/components/input/MultiInput';
 import type { InputIconButton } from '#src/components/InputIconButton';
@@ -109,6 +110,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const inputContainerRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
+    const isDropdownDisabled = !!(disabled || readOnly || isLoading);
     const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
       const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
         ...node,
@@ -186,12 +188,21 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const toggleOpen = () => {
+      if (isDropdownDisabled) return;
+
       setOpen((prevState) => {
         const newValue = !prevState;
         onOpenChange?.(newValue);
         return newValue;
       });
     };
+
+    useEffect(() => {
+      if (isDropdownDisabled && open) {
+        setOpen(false);
+        onOpenChange?.(false);
+      }
+    }, [isDropdownDisabled, open, onOpenChange]);
 
     const getDropdownConfig = (config: DropdownContainerProps) => {
       return {
@@ -203,6 +214,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+      if (isDropdownDisabled) return;
+
       const element = (e.target as HTMLElement).closest('[data-role]');
       if (
         element instanceof HTMLElement &&
@@ -216,7 +229,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const getInputContainerProps = (props: ContainerProps) => ({
       ...props,
       ref: inputContainerRef,
-      onClick: handleClick,
+      onClick: isDropdownDisabled ? undefined : handleClick,
     });
 
     const openButtonProps = {
@@ -226,15 +239,20 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     } satisfies React.ComponentProps<typeof OpenStatusButton>;
 
     const iconsAfter = [];
-    if (!readOnly)
+    if (isLoading) {
+      iconsAfter.push(<Spinner key="spinner" dimension={dimension === 's' ? 'ms' : 'm'} />);
+    }
+    if (!readOnly) {
       iconsAfter.push(
         <OpenStatusButton
-          data-disabled={disabled ? true : undefined}
+          key="open-button"
+          data-disabled={disabled || isLoading ? true : undefined}
           data-loading={isLoading ? true : undefined}
           {...openButtonProps}
           {...openButtonPropsConfig?.(openButtonProps)}
         />,
       );
+    }
 
     const flatMap = useMemo<FlatMapItems>(() => checkboxTreeToMap(stateItems), [stateItems]);
 
@@ -277,6 +295,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const handleDeleteChip = (id?: string) => {
+      if (disabled || readOnly) return;
+
       if (id) {
         handleDeselectItem(id);
         const newValue = [...flatMap.values()].filter((item) => !!item.node.checked).map((item) => item.node.id);
@@ -332,6 +352,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const handleClearOptions = () => {
+      if (disabled || readOnly) return;
+
       setSelectedChips([]);
       flatMap.forEach((item) => (item.node.checked = false));
       setStateItems([...stateItems]);
@@ -378,17 +400,25 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       e.stopPropagation();
     };
 
+    const getClearButtonPropsConfig = (buttonProps: React.ComponentProps<typeof InputIconButton>) => ({
+      ...clearButtonPropsConfig?.(buttonProps),
+      ...(disabled ? { disabled: true } : {}),
+    });
+
     const inputProps = {
       ...props,
       ref: refSetter(ref, inputRef),
       placeholder,
+      disabled,
+      readOnly,
       containerPropsConfig: getInputContainerProps,
-      displayClearIcon: displayClearIcon && selectedChips.length > 0,
+      displayClearIcon: displayClearIcon && selectedChips.length > 0 && !readOnly,
       iconsAfter,
-      clearButtonPropsConfig,
+      clearButtonPropsConfig: getClearButtonPropsConfig,
       onClearOptions: handleClearOptions,
       dimension,
       $hidden: selectedChips.length > 0,
+      $isLoading: isLoading,
       onKeyDown: handleKeyDown,
       onPaste: handlePaste,
       onDrop: handleDrop,
@@ -399,7 +429,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         <StyledMultiInput {...inputProps} {...inputPropsConfig?.(inputProps)}>
           {renderSelectedChips()}
         </StyledMultiInput>
-        {open && (
+        {open && !isDropdownDisabled && (
           <DropDownTree
             dropdownConfig={getDropdownConfig}
             items={flatMap}
