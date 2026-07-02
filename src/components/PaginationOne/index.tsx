@@ -100,6 +100,11 @@ export interface PaginationOneProps extends Omit<HTMLAttributes<HTMLDivElement>,
 
   /** Включает окно ввода номера страницы в выпадающем списке */
   showPageNumberInput?: boolean;
+  /**
+   * Включает режим preselected в выпадающих меню выбора страницы и размера страницы.
+   * При навигации клавиатурой подсвечивается preselected, при наведении мыши — active.
+   */
+  preselectedModeActive?: boolean;
   /** Объект локализации - позволяет перезадать текстовые константы используемые в компоненте,
    * по умолчанию значения констант берутся из темы в соответствии с параметром currentLocale, заданном в теме
    **/
@@ -149,6 +154,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
   pageNumberDropContainerStyle,
   locale,
   showPageNumberInput = false,
+  preselectedModeActive = false,
   leftButtonPropsConfig,
   rightButtonPropsConfig,
   ...props
@@ -200,6 +206,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
       dropMaxHeight={dropMaxHeight}
       menuWidth={menuWidth}
       showPageNumberInput={showPageNumberInput}
+      preselectedModeActive={preselectedModeActive}
       localeLabel={locale?.pageSelectLabel}
       onChange={onChange}
       {...props}
@@ -217,6 +224,7 @@ export const PaginationOne: FC<PaginationOneProps> = ({
       totalItems={totalItems}
       dropMaxHeight={dropMaxHeight}
       menuWidth={menuWidth}
+      preselectedModeActive={preselectedModeActive}
       localeLabel={locale?.pageSizeSelectLabel}
       onChange={onChange}
       {...props}

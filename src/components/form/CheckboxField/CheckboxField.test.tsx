@@ -55,7 +55,7 @@ describe('CheckboxField', () => {
     );
     fireEvent.click(wrapper.getByTestId('element'));
     const { onChange } = CheckboxFieldRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it('should focus input if user press Tab key', async () => {
@@ -81,6 +81,6 @@ describe('CheckboxField', () => {
     await user.tab();
     await user.type(CheckboxFieldHTMLElement, '{Space}');
     const { onChange } = CheckboxFieldRequiredProps;
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

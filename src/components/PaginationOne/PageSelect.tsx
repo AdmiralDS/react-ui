@@ -1,5 +1,5 @@
 import { useTheme, css } from 'styled-components';
-import { memo, useState, useMemo, useRef, useEffect, useCallback } from 'react';
+import { memo, useState, useMemo, useEffect, useCallback } from 'react';
 
 import { LIGHT_THEME } from '#src/components/themes';
 import type { PaginationOneProps } from '#src/components/PaginationOne';
@@ -28,6 +28,7 @@ interface PageSelectProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'on
   pageNumberDropContainerStyle: PaginationOneProps['pageNumberDropContainerStyle'];
   dropContainerCssMixin: PaginationOneProps['dropContainerCssMixin'];
   showPageNumberInput: boolean;
+  preselectedModeActive: boolean;
 }
 
 export const PageSelect = memo(
@@ -44,6 +45,7 @@ export const PageSelect = memo(
     pageNumberDropContainerStyle,
     dropContainerCssMixin,
     showPageNumberInput,
+    preselectedModeActive,
     ...props
   }: PageSelectProps) => {
     const theme = useTheme() || LIGHT_THEME;
@@ -52,7 +54,7 @@ export const PageSelect = memo(
 
     const [isVisible, setIsVisible] = useState(false);
     const [activePageNumber, setActivePageNumber] = useState<string | undefined>(page.toString());
-    const pageNumberInputRef = useRef<HTMLInputElement>(null);
+    const [preselectedPageNumber, setPreselectedPageNumber] = useState<string | undefined>(page.toString());
 
     const dropMenuProps = passDropdownDataAttributes(props);
     const pages = useMemo(() => Array.from({ length: totalPages }, (_, k) => k + 1), [totalPages]);
@@ -60,6 +62,7 @@ export const PageSelect = memo(
 
     useEffect(() => {
       setActivePageNumber(page.toString());
+      setPreselectedPageNumber(page.toString());
     }, [page]);
 
     const handlePageHover = useCallback((activePage?: string) => {
@@ -82,22 +85,19 @@ export const PageSelect = memo(
 
     const handleClickOutside = useCallback(() => {
       setActivePageNumber(selectedPageNumber);
+      setPreselectedPageNumber(selectedPageNumber);
       setIsVisible(false);
     }, [selectedPageNumber]);
 
     const handleMenuButtonClick = useCallback(() => {
       if (isVisible) {
         setActivePageNumber(selectedPageNumber);
+        setPreselectedPageNumber(selectedPageNumber);
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
     }, [isVisible, selectedPageNumber]);
-
-    const handleMenuCycle = useCallback(() => {
-      pageNumberInputRef.current?.focus();
-      return false;
-    }, []);
 
     return (
       <MenuButton
@@ -106,7 +106,10 @@ export const PageSelect = memo(
         selected={selectedPageNumber}
         onSelectItem={handlePageChange}
         active={activePageNumber}
+        preselected={preselectedModeActive ? preselectedPageNumber : undefined}
         onActivateItem={handlePageHover}
+        onPreselectItem={preselectedModeActive ? setPreselectedPageNumber : undefined}
+        preselectedModeActive={preselectedModeActive}
         disabled={pageSelectDisabled}
         aria-label={pageSelectLabel(page, totalPages)}
         menuMaxHeight={pageNumberDropContainerStyle?.menuMaxHeight || dropMaxHeight}
@@ -122,20 +125,20 @@ export const PageSelect = memo(
         onVisibilityChange={setIsVisible}
         onClickOutside={handleClickOutside}
         onClick={handleMenuButtonClick}
-        onForwardCycleApprove={handleMenuCycle}
-        onBackwardCycleApprove={handleMenuCycle}
         renderTopPanel={
           showPageNumberInput
             ? ({ dimension = 's' }) => {
                 return (
                   <PageNumberInput
-                    ref={pageNumberInputRef}
                     dimension={dimension}
                     page={page}
                     pageSize={pageSize}
                     totalPages={totalPages}
                     activePageNumber={activePageNumber}
                     setActivePageNumber={setActivePageNumber}
+                    preselectedPageNumber={preselectedPageNumber}
+                    setPreselectedPageNumber={setPreselectedPageNumber}
+                    preselectedModeActive={preselectedModeActive}
                     setMenuVisible={setIsVisible}
                     onChange={onChange}
                   />

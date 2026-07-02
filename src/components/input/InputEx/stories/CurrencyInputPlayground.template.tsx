@@ -16,7 +16,7 @@ const Separator = styled.div`
 const options = maskitoNumberOptionsGenerator({
   decimalSeparator: ',',
   thousandSeparator: ' ',
-  precision: 2,
+  maximumFractionDigits: 2,
 });
 
 /**

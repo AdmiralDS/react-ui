@@ -701,6 +701,6 @@ describe('SearchSelect', () => {
       await user.tab();
     });
 
-    expect(onBlur).toBeCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 });

@@ -47,7 +47,7 @@ export const FocusBox = styled.div`
 const options = maskitoNumberOptionsGenerator({
   decimalSeparator: ',',
   thousandSeparator: ' ',
-  precision: 2,
+  maximumFractionDigits: 2,
 });
 
 export const InputLineWithMaskTemplate = ({

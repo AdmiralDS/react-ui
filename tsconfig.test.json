@@ -8,13 +8,13 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "noEmit": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
+    "resolvePackageJsonImports": false,
     "allowSyntheticDefaultImports": true,
     "target": "ESNext",
-    "baseUrl": "./src",
     "paths": {
-      "#src/*": ["./*"],
-      "@admiral-ds/react-ui": ["./index"]
+      "#src/*": ["./src/*"],
+      "@admiral-ds/react-ui": ["./src/index"]
     },
 
     "plugins": [
@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["src/**/*", ".jest/**/*", "node_modules/@admiral-ds/flags/**/*"],
+  "include": ["src/**/*", ".jest/**/*"],
   "exclude": ["dist", "**/__snapshots__/*"]
 }

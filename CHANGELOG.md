@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.65.0](https://github.com/AdmiralDS/react-ui/compare/v8.64.0...v8.65.0) (2026-06-24)
+
+
+### Features
+
+* **Drawer, Modal:** [#2097](https://github.com/AdmiralDS/react-ui/issues/2097) добавлен параметр preventFocusRestore для блокировки восстановления фокуса при закрытии компонента ([2ceaf7e](https://github.com/AdmiralDS/react-ui/commit/2ceaf7ec6826f5ecde2e63b0be00b5d75769be1b))
+* **TooltipHOC:** не открывать тултип на touch-устройстве ([db8fe76](https://github.com/AdmiralDS/react-ui/commit/db8fe76cddcd488483e6ef5d83aa12dbc481660b))
+
+
+### Bug Fixes
+
+* avoid flags type dependency in phone input ([9b02bf2](https://github.com/AdmiralDS/react-ui/commit/9b02bf2de27cb4739a6b8f13cb95e7f465c11c58))
+* **Select:** add gap between chips in multiple select mode ([fbb978a](https://github.com/AdmiralDS/react-ui/commit/fbb978a53d0212e5d9c6277052690f7a794c1ffc))
+
 ## [8.64.0](https://github.com/AdmiralDS/react-ui/compare/v8.63.0...v8.64.0) (2026-06-03)
 
 

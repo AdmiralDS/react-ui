@@ -143,21 +143,23 @@ export const VirtualBody = ({
 
     if (index === -1) return;
 
-    if (index < partition.startIndex || index > partition.endIndex) {
-      // Временно отключаем скролл
+    const isOutsidePartition = index < partition.startIndex || index >= partition.endIndex;
+
+    if (isOutsidePartition) {
       const scrollContainer = scrollContainerRef.current;
       scrollContainer?.removeEventListener('scroll', handleScroll);
 
-      const newPartition = calcPartition(index);
+      const partitionStart = Math.max(0, index - aheadItemsCount);
+      const newPartition = calcPartition(partitionStart);
+      const nextScrollTop = partitionStart * itemHeight;
 
-      // Устанавливаем новую позицию скролла
       if (scrollContainer) {
-        scrollContainer.scrollTop = index * itemHeight;
+        scrollContainer.scrollTop = nextScrollTop;
+        setScrollTop(nextScrollTop);
       }
 
       setPartition({ ...newPartition });
 
-      // Восстанавливаем слушатель в следующем тике
       setTimeout(() => {
         scrollContainer?.addEventListener('scroll', handleScroll);
       }, 0);
