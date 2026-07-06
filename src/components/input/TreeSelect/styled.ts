@@ -62,6 +62,10 @@ export const StyledMultiInput = styled(MultiInput)<{
     ${(props) => props.$hidden && `display: none`};
   }
 
+  & .wrapper-options {
+    padding-left: 39px;
+  }
+
   /* Чтобы на "+N" не мигал курсор от контейнера (pointer) */
   & [data-testid='tree-select-overflow-chip'] {
     cursor: default;
@@ -83,4 +87,10 @@ const hoverChipStyle = css`
 
 export const StyledChip = styled(Chips)<{ readOnly?: boolean }>`
   ${({ disabled, readOnly }) => (disabled ? disabledChipStyle : readOnly ? null : hoverChipStyle)}
+  margin-right: 4px;
+`;
+
+export const ChipWrapper = styled.div`
+  display: flex;
+  margin-left: -39px;
 `;

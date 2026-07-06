@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useLayoutEffect, useMemo, useRef, useState } f
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
-import { StyledMultiInput, StyledChip } from './styled';
+import { StyledMultiInput } from './styled';
 import type { ContainerProps } from '#src/components/input/MultiInput';
 import type { InputIconButton } from '#src/components/InputIconButton';
 import type { DataAttributes } from 'styled-components';
@@ -10,11 +10,11 @@ import type { DropdownContainerProps, TreeSelectItemProps, ShowCheckedStrategyPr
 import {
   checkboxTreeToMap,
   type FlatMapItems,
-  type CheckboxNodesMapItem,
   type CheckboxGroupItemProps,
 } from '#src/components/Menu/MenuItemWithCheckbox';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
+import { ChipBox } from '#src/components/input/TreeSelect/ChipBox';
 
 export interface TreeSelectProps
   extends
@@ -129,11 +129,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
-    const [visibleChipCount, setVisibleChipCount] = useState<number | null>(null);
 
     const maxRowCountValue = maxRowCount !== 'none' ? maxRowCount : undefined;
     const minRowCountValue = minRowCount !== 'none' ? minRowCount : undefined;
-    const isCollapsed = !open && !!maxRowCountValue;
 
     const normalizeGroupChecked = (map: FlatMapItems) => {
       map.forEach((mapItem) => {
@@ -219,86 +217,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       setStateItems(nextItems);
       setSelectedChips(buildSelectedChips(nextItems));
     }, [buildSelectedChips, items, defaultValue, value]);
-
-    useLayoutEffect(() => {
-      if (!isCollapsed) {
-        setVisibleChipCount(null);
-        return;
-      }
-
-      const wrapper = optionsWrapperRef.current;
-      if (!wrapper) return;
-
-      let raf = 0;
-      let postRaf = 0;
-      let ro: ResizeObserver | null = null;
-
-      const eps = 1;
-
-      const isFullyVisible = (el: HTMLElement, containerRect: DOMRect) => {
-        const r = el.getBoundingClientRect();
-        return (
-          r.top >= containerRect.top - eps &&
-          r.left >= containerRect.left - eps &&
-          r.bottom <= containerRect.bottom + eps &&
-          r.right <= containerRect.right + eps
-        );
-      };
-
-      const schedule = () => {
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(recompute);
-      };
-
-      const recompute = () => {
-        const chipEls = Array.from(wrapper.querySelectorAll<HTMLElement>('[data-tree-select-chip="true"]'));
-        if (chipEls.length === 0) {
-          setVisibleChipCount(null);
-          return;
-        }
-
-        const wrapperRect = wrapper.getBoundingClientRect();
-        let count = 0;
-        for (const el of chipEls) {
-          if (!isFullyVisible(el, wrapperRect)) break;
-          count += 1;
-        }
-
-        const hasOverflow =
-          wrapper.scrollWidth > wrapper.clientWidth + eps || wrapper.scrollHeight > wrapper.clientHeight + eps;
-
-        const next = hasOverflow
-          ? Math.max(0, Math.min(count, chipEls.length - 1))
-          : count >= chipEls.length
-            ? null
-            : count;
-        setVisibleChipCount((prev) => (prev === next ? prev : next));
-
-        cancelAnimationFrame(postRaf);
-        postRaf = requestAnimationFrame(() => {
-          const overflowEl = wrapper.querySelector<HTMLElement>('[data-testid="tree-select-overflow-chip"]');
-          if (!overflowEl) return;
-          const wr = wrapper.getBoundingClientRect();
-          if (isFullyVisible(overflowEl, wr)) return;
-          setVisibleChipCount((prev) => {
-            if (prev === null) return prev;
-            const decreased = Math.max(0, prev - 1);
-            return prev === decreased ? prev : decreased;
-          });
-        });
-      };
-
-      schedule();
-      ro = new ResizeObserver(schedule);
-      ro.observe(wrapper);
-
-      return () => {
-        cancelAnimationFrame(raf);
-        cancelAnimationFrame(postRaf);
-        ro?.disconnect();
-        ro = null;
-      };
-    }, [isCollapsed, selectedChips.length, maxRowCountValue]);
 
     const handleClickOutside = (e: Event) => {
       if (e.target && inputContainerRef.current?.contains(e.target as Node)) {
@@ -457,46 +375,18 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const renderSelectedChips = () => {
-      const chipsToRender =
-        isCollapsed && visibleChipCount !== null ? selectedChips.slice(0, visibleChipCount) : selectedChips;
-      const hiddenCount = isCollapsed && visibleChipCount !== null ? selectedChips.length - chipsToRender.length : 0;
-
-      return (
-        <>
-          {chipsToRender.map((item) => {
-            return (
-              <StyledChip
-                id={item.id}
-                key={item.id}
-                data-tree-select-chip="true"
-                onClick={(e) => e.stopPropagation()}
-                onClose={readOnly ? undefined : handleDeleteChip}
-                tabIndex={-1}
-                dimension="s"
-                appearance="filled"
-                readOnly={readOnly}
-                disabled={item.disabled || disabled}
-              >
-                {item.label}
-              </StyledChip>
-            );
-          })}
-          {hiddenCount > 0 && (
-            <StyledChip
-              key="tree-select-overflow-chip"
-              data-testid="tree-select-overflow-chip"
-              onClick={(e) => e.stopPropagation()}
-              tabIndex={-1}
-              dimension="s"
-              appearance="filled"
-              readOnly
-              disabled={disabled}
-            >
-              {`+${hiddenCount}`}
-            </StyledChip>
-          )}
-        </>
-      );
+      return selectedChips.map((item, index) => {
+        return (
+          <ChipBox
+            key={item.id}
+            option={item}
+            hiddenChipsCount={selectedChips.length - index - 1}
+            containerRef={inputContainerRef}
+            shouldShowCount={true}
+            onChipRemove={handleDeleteChip}
+          />
+        );
+      });
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
