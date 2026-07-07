@@ -1,6 +1,18 @@
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { IConstantOption } from '#src/components/input/Select/types';
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+
+const NativeSelect = styled.select`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: none;
+  pointer-events: none;
+`;
 
 interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<IConstantOption>;
@@ -9,7 +21,7 @@ interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement
 
 // Создаем отдельный компонент для нативного select с виртуализацией
 export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
-  ({ value, multiple, options, active, onChange, disabled, ...props }: NativeSelectProps, ref) => {
+  ({ value, multiple, options, active, disabled, ...props }: NativeSelectProps, ref) => {
     const selectRef = useRef<HTMLSelectElement>(null);
     const [syncedOptions, setSyncedOptions] = useState<IConstantOption[]>([]);
 
@@ -56,38 +68,13 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
       setSyncedOptions(Array.from(optionsToRender.values()));
     }, [value, active, options]);
 
-    // При изменении выбора в нативном select - синхронизируем с реальными данными
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const newValue = multiple ? Array.from(e.target.selectedOptions).map((opt) => opt.value) : e.target.value;
-
-      // Находим полные данные опции
-      const fullOptions = multiple
-        ? (newValue as string[]).map((v) => options.find((o) => o.value === v)).filter(Boolean)
-        : options.find((o) => o.value === (newValue as string));
-
-      // Создаем синтетическое событие с полными данными
-      const syntheticEvent = {
-        ...e,
-        target: {
-          ...e.target,
-          options: fullOptions,
-          value: newValue,
-          selectedOptions: e.target.selectedOptions,
-        },
-      };
-
-      onChange?.(syntheticEvent as any);
-    };
-
     return (
-      <select
+      <NativeSelect
         ref={refSetter(ref, selectRef)}
         value={value}
         multiple={multiple}
         disabled={disabled}
-        onChange={handleChange}
         className={'native-select'}
-        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }} // Скрываем, но оставляем в DOM
         {...props}
       >
         <option value="" />
@@ -96,7 +83,7 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
             {option.children}
           </option>
         ))}
-      </select>
+      </NativeSelect>
     );
   },
 );

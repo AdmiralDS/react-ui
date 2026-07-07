@@ -1,5 +1,4 @@
-import { useRef, useLayoutEffect, forwardRef, useState, Children } from 'react';
-import type { ReactNode } from 'react';
+import { useRef, useLayoutEffect, forwardRef, useState, Children, type ForwardedRef, type ReactNode } from 'react';
 
 import { Container, WrapperOptions, Input, IconPanelBefore, IconPanelAfter } from './styled';
 import { InputBorderedDiv } from '../TextInput';
@@ -45,6 +44,9 @@ export interface MultiInputProps extends React.InputHTMLAttributes<HTMLInputElem
 
   /** Ref контейнера компонента */
   containerRef?: React.RefObject<HTMLDivElement>;
+
+  /** Ref контейнера с опциями/чипсами (`.wrapper-options`) */
+  optionsWrapperRef?: ForwardedRef<HTMLDivElement>;
 
   /**  Наличие этого атрибута отключает возможность выделения и копирования значения поля */
   disableCopying?: boolean;
@@ -93,6 +95,7 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
       skeleton = false,
       displayClearIcon,
       containerRef,
+      optionsWrapperRef,
       disableCopying,
       dimension = 'm',
       createActivateButtonList = ['Enter'],
@@ -185,7 +188,10 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
           </IconPanelBefore>
         )}
 
-        <WrapperOptions className="wrapper-options" ref={(elem) => setRefWrapperOptions(elem)}>
+        <WrapperOptions
+          className="wrapper-options"
+          ref={refSetter(optionsWrapperRef, (elem) => setRefWrapperOptions(elem))}
+        >
           {children} <Input $dimension={dimension} {...props} ref={refSetter(ref, inputRef)} />
         </WrapperOptions>
         <InputBorderedDiv $status={status} disabled={props.disabled || props.readOnly} />

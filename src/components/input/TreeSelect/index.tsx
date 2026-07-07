@@ -1,9 +1,9 @@
-import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef, useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { DropDownTree, type DropDownTreeProps } from './DropDownTree';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import { OpenStatusButton } from '#src/components/OpenStatusButton';
 import { Spinner } from '#src/components/Spinner';
-import { StyledMultiInput, StyledChip } from './styled';
+import { StyledMultiInput } from './styled';
 import type { ContainerProps } from '#src/components/input/MultiInput';
 import type { InputIconButton } from '#src/components/InputIconButton';
 import type { DataAttributes } from 'styled-components';
@@ -11,11 +11,11 @@ import type { DropdownContainerProps, TreeSelectItemProps, ShowCheckedStrategyPr
 import {
   checkboxTreeToMap,
   type FlatMapItems,
-  type CheckboxNodesMapItem,
   type CheckboxGroupItemProps,
 } from '#src/components/Menu/MenuItemWithCheckbox';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
+import { ChipBox } from '#src/components/input/TreeSelect/ChipBox';
 
 export interface TreeSelectProps
   extends
@@ -45,6 +45,12 @@ export interface TreeSelectProps
 
   /** Делает высоту компонента больше или меньше обычной */
   dimension?: ComponentDimension;
+
+  /** Минимальное количество строк поля */
+  minRowCount?: number | 'none';
+
+  /** Максимальное количество строк поля */
+  maxRowCount?: number | 'none';
 
   /** Конфиг функция пропсов для кнопки выпадающего списка. На вход получает начальный набор пропсов, на
    * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
@@ -91,6 +97,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       readOnly,
       placeholder,
       dimension = 'm',
+      minRowCount = 'none',
+      maxRowCount = 'none',
       renderTopPanel,
       renderBottomPanel,
       openButtonPropsConfig,
@@ -108,6 +116,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const inputContainerRef = useRef<HTMLDivElement>(null);
+    const optionsWrapperRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
     const isDropdownDisabled = !!(disabled || readOnly || isLoading);
@@ -117,17 +126,37 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         checked: selected.has(node.id),
         children: node.children?.length ? node.children.map(cloneNode) : undefined,
       });
-
       return src.map(cloneNode);
     };
 
     const [stateItems, setStateItems] = useState<Array<TreeSelectItemProps>>(() => cloneTree(items, new Set()));
     const [selectedChips, setSelectedChips] = useState<Array<CheckboxGroupItemProps>>([]);
 
+    const maxRowCountValue = maxRowCount !== 'none' ? maxRowCount : undefined;
+    const minRowCountValue = minRowCount !== 'none' ? minRowCount : undefined;
+
+    const normalizeGroupChecked = (map: FlatMapItems) => {
+      map.forEach((mapItem) => {
+        if (mapItem.dependencies?.length) {
+          mapItem.node.checked = mapItem.dependencies.every((depId) => !!map.get(depId)?.node.checked);
+        }
+      });
+    };
+
+    const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
+      if (!node) return [];
+      const ids: string[] = [node.id];
+      if (node.children?.length) {
+        node.children.forEach((child) => ids.push(...collectSubtreeIds(child)));
+      }
+      return ids;
+    };
+
     const buildSelectedChips = useCallback(
       (nextItems: Array<TreeSelectItemProps>): Array<CheckboxGroupItemProps> => {
+        const map = checkboxTreeToMap(nextItems);
+
         if (showCheckedStrategy === 'SHOW_ALL') {
-          const map = checkboxTreeToMap(nextItems);
           const chips: CheckboxGroupItemProps[] = [];
           map.forEach((item) => {
             if (item.node.checked) chips.push(item.node);
@@ -136,7 +165,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         }
 
         if (showCheckedStrategy === 'SHOW_CHILD') {
-          const map = checkboxTreeToMap(nextItems);
           const chips: CheckboxGroupItemProps[] = [];
           map.forEach((item) => {
             if (item.node.checked && !item.node.children?.length) chips.push(item.node);
@@ -152,13 +180,13 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             if (node.children?.length) {
               const [childChips, childrenAllChecked] = collect(node.children);
               if (childrenAllChecked) {
-                chips.push(node);
+                chips.push(node as unknown as CheckboxGroupItemProps);
               } else {
                 chips.push(...childChips);
               }
               allChecked = allChecked && childrenAllChecked;
             } else {
-              if (node.checked) chips.push(node);
+              if (node.checked) chips.push(node as unknown as CheckboxGroupItemProps);
               allChecked = allChecked && !!node.checked;
             }
           });
@@ -171,10 +199,23 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       [showCheckedStrategy],
     );
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const ids = value ?? defaultValue ?? [];
       const selectedSet = new Set(ids);
       const nextItems = cloneTree(items, selectedSet);
+
+      const map = checkboxTreeToMap(nextItems);
+      ids.forEach((id) => {
+        const item = map.get(id);
+        if (!item) return;
+        const subtree = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
+        subtree.forEach((sid) => {
+          const entry = map.get(sid);
+          if (entry) entry.node.checked = true;
+        });
+      });
+      normalizeGroupChecked(map);
+
       setStateItems(nextItems);
       setSelectedChips(buildSelectedChips(nextItems));
     }, [buildSelectedChips, items, defaultValue, value]);
@@ -268,15 +309,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       return map;
     }, [stateItems]);
 
-    const collectSubtreeIds = (node?: CheckboxGroupItemProps): string[] => {
-      if (!node) return [];
-      const ids: string[] = [node.id];
-      if (node.children?.length) {
-        node.children.forEach((child) => ids.push(...collectSubtreeIds(child)));
-      }
-      return ids;
-    };
-
     const hasCheckedDescendantExcept = (rootId: string, rootNode: CheckboxGroupItemProps) => {
       const ids = collectSubtreeIds(rootNode);
       return ids.some((sid) => sid !== rootId && flatMap.get(sid)?.node.checked);
@@ -304,22 +336,20 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     };
 
-    const selectItem = (item: CheckboxNodesMapItem) => {
-      const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
-
-      idsToSelect.forEach((nextId) => {
-        const nextItem = flatMap.get(nextId);
-        if (!nextItem) return;
-        nextItem.node.checked = true;
-      });
-    };
-
     const handleSelectItem = (id: string) => {
       const item = flatMap.get(id);
       if (item) {
-        selectItem(item);
-        setSelectedChips(buildSelectedChips(stateItems));
-        setStateItems([...stateItems]);
+        const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
+        idsToSelect.forEach((nextId) => {
+          const nextItem = flatMap.get(nextId);
+          if (!nextItem) return;
+          nextItem.node.checked = true;
+        });
+
+        normalizeGroupChecked(flatMap);
+        const nextStateItems = [...stateItems];
+        setStateItems(nextStateItems);
+        setSelectedChips(buildSelectedChips(nextStateItems));
         onSelect?.(id);
       }
     };
@@ -343,12 +373,13 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
           item.node.checked = false;
           bubbleUncheckParentsAfterLeafDeselect(id);
         }
-
-        setSelectedChips(buildSelectedChips(stateItems));
+        normalizeGroupChecked(flatMap);
         onDeselect?.(id);
       }
 
-      setStateItems([...stateItems]);
+      const nextStateItems = [...stateItems];
+      setStateItems(nextStateItems);
+      setSelectedChips(buildSelectedChips(nextStateItems));
     };
 
     const handleClearOptions = () => {
@@ -366,21 +397,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const renderSelectedChips = () => {
-      return selectedChips.map((item) => {
+      return selectedChips.map((item, index) => {
         return (
-          <StyledChip
-            id={item.id}
+          <ChipBox
             key={item.id}
-            onClick={(e) => e.stopPropagation()}
-            onClose={readOnly ? undefined : handleDeleteChip}
-            tabIndex={-1}
-            dimension="s"
-            appearance="filled"
-            readOnly={readOnly}
-            disabled={item.disabled || disabled}
-          >
-            {item.label}
-          </StyledChip>
+            option={item}
+            hiddenChipsCount={selectedChips.length - index - 1}
+            containerRef={inputContainerRef}
+            shouldShowCount={true}
+            onChipRemove={handleDeleteChip}
+          />
         );
       });
     };
@@ -417,6 +443,10 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       clearButtonPropsConfig: getClearButtonPropsConfig,
       onClearOptions: handleClearOptions,
       dimension,
+      optionsWrapperRef,
+      $opened: open,
+      $minRowCount: minRowCountValue,
+      $maxRowCount: maxRowCountValue,
       $hidden: selectedChips.length > 0,
       $isLoading: isLoading,
       onKeyDown: handleKeyDown,

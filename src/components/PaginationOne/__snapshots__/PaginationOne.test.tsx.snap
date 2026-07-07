@@ -1,0 +1,2261 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PaginationOne render matches snapshot in complex mode 1`] = `
+.c10 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: calc(100% - 0px);
+  height: 24px;
+}
+
+.c10 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c10 >.{
+  flex: 0 0 auto;
+}
+
+.c10>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c10.c10,
+.button-group[data-dimension='l'] .c10.c10,
+.button-group[data-dimension='xl'] .c10.c10 {
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c10.c10>svg,
+.button-group[data-dimension='l'] .c10.c10>svg,
+.button-group[data-dimension='xl'] .c10.c10>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='s'] .c10.c10,
+[data-dimension='s'] .c10 {
+  height: 20px;
+}
+
+.button-group[data-dimension='s'] .c10.c10>svg,
+[data-dimension='s'] .c10>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c9 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  appearance: none;
+  vertical-align: middle;
+  cursor: not-allowed;
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):disabled.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):disabled.c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button).c9[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):hover.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):hover.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):disabled.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):disabled.c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button).c9[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):hover.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):hover.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):active.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):active.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):disabled.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):disabled.c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button).c9[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid transparent;
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):disabled.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):disabled.c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button).c9[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):hover {
+  background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):hover.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):hover.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):active {
+  background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):active.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):active.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):disabled {
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):disabled.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):disabled.c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button).c9[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button) {
+  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Error_Error70, #BA1717);
+  border-color: var(--admiral-color-Error_Error70, #BA1717);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Error_Error80, #981111);
+  border-color: var(--admiral-color-Error_Error80, #981111);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):disabled.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):disabled.c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button).c9[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button) {
+  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Success_Success60, #128238);
+  border-color: var(--admiral-color-Success_Success60, #128238);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Success_Success70, #0B682A);
+  border-color: var(--admiral-color-Success_Success70, #0B682A);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):disabled.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):disabled.c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button).c9[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):disabled.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):disabled.c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button).c9:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):hover.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):hover.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):disabled.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):disabled.c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button).c9:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):hover.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):hover.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):active.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):active.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):disabled.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):disabled.c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button).c9:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c9:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.button-group[data-dimension='xl'] .c9.c9,
+.c9[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.button-group[data-dimension='l'] .c9.c9,
+.c9[data-dimension='l'] {
+  height: 48px;
+  width: 48px;
+}
+
+.button-group[data-dimension='m'] .c9.c9,
+.c9[data-dimension='m'] {
+  height: 40px;
+  width: 40px;
+}
+
+.button-group[data-dimension='s'] .c9.c9,
+.c9[data-dimension='s'] {
+  height: 32px;
+  width: 32px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c11 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  appearance: none;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):disabled.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):disabled.c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button).c11[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):hover.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):hover.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):disabled.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):disabled.c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button).c11[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):hover.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):hover.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):active.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):active.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):disabled.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):disabled.c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button).c11[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid transparent;
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):disabled.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):disabled.c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button).c11[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):hover {
+  background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):hover.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):hover.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):active {
+  background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):active.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):active.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):disabled {
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):disabled.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):disabled.c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button).c11[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button) {
+  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Error_Error70, #BA1717);
+  border-color: var(--admiral-color-Error_Error70, #BA1717);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Error_Error80, #981111);
+  border-color: var(--admiral-color-Error_Error80, #981111);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):disabled.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):disabled.c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button).c11[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button) {
+  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Success_Success60, #128238);
+  border-color: var(--admiral-color-Success_Success60, #128238);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Success_Success70, #0B682A);
+  border-color: var(--admiral-color-Success_Success70, #0B682A);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):disabled.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):disabled.c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button).c11[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):disabled.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):disabled.c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button).c11:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):hover.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):hover.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):disabled.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):disabled.c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button).c11:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):hover.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):hover.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):active.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):active.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):disabled.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):disabled.c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button).c11:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c11:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.button-group[data-dimension='xl'] .c11.c11,
+.c11[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.button-group[data-dimension='l'] .c11.c11,
+.c11[data-dimension='l'] {
+  height: 48px;
+  width: 48px;
+}
+
+.button-group[data-dimension='m'] .c11.c11,
+.c11[data-dimension='m'] {
+  height: 40px;
+  width: 40px;
+}
+
+.button-group[data-dimension='s'] .c11.c11,
+.c11[data-dimension='s'] {
+  height: 32px;
+  width: 32px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c8 {
+  display: flex;
+}
+
+.c8>button {
+  margin-left: 8px;
+}
+
+[data-simple='true'] .c8 {
+  margin-left: 20px;
+}
+
+.c4 {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0deg);
+}
+
+.c4 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4:hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4[data-loading] {
+  pointer-events: none;
+}
+
+.c4[data-disabled] {
+  pointer-events: none;
+}
+
+.c4[data-disabled] *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 10px 12px;
+  border: 2px solid transparent;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c2 *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c2>span {
+  min-width: 20px;
+}
+
+.c2:hover {
+  cursor: pointer;
+}
+
+.c2:hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c2:active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c2:focus-visible {
+  outline: none;
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c2:disabled {
+  cursor: not-allowed;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c2:disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c3 {
+  width: 20px;
+  height: 20px;
+}
+
+.c0 {
+  display: flex;
+  align-items: center;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  white-space: nowrap;
+  user-select: none;
+  min-width: 696px;
+  justify-content: space-between;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c1 {
+  display: flex;
+  align-items: center;
+}
+
+.c5 {
+  width: 1px;
+  height: 24px;
+  background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+}
+
+.c7 {
+  margin: 0 4px;
+  min-width: 112px;
+}
+
+.c6 {
+  min-width: 172px;
+  margin: 0 12px;
+}
+
+[data-simple='true'] .c6 {
+  margin: 0;
+}
+
+<div>
+  <div
+    class="c0"
+    data-simple="false"
+  >
+    <div
+      class="c1"
+    >
+      Items per page:
+      <button
+        aria-expanded="false"
+        aria-label="8 of 100 records"
+        class="c2 records-per-page-with-dropdown"
+        type="button"
+      >
+        <span>
+          8
+        </span>
+        <div
+          class="c3"
+        >
+          <div
+            aria-hidden="true"
+            class="c4"
+          />
+        </div>
+      </button>
+      <div
+        class="c5"
+      />
+      <div
+        class="c6"
+      >
+        1-8 of 100
+      </div>
+    </div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c5"
+      />
+      <button
+        aria-expanded="false"
+        aria-label="Page 1 of 13"
+        class="c2 current-page-number-with-dropdown"
+        type="button"
+      >
+        <span>
+          1
+        </span>
+        <div
+          class="c3"
+        >
+          <div
+            aria-hidden="true"
+            class="c4"
+          />
+        </div>
+      </button>
+      <span
+        class="c7"
+      >
+        of 13 pages
+      </span>
+      <div
+        class="c8"
+      >
+        <button
+          aria-label="Previous page"
+          class="c9"
+          data-appearance="tertiary"
+          data-dimension="m"
+          disabled=""
+          type="button"
+        >
+          <div
+            class="c10"
+          >
+            <div
+              class=""
+            >
+              <div />
+            </div>
+          </div>
+        </button>
+        <button
+          aria-label="Next page"
+          class="c11"
+          data-appearance="tertiary"
+          data-dimension="m"
+          type="button"
+        >
+          <div
+            class="c10"
+          >
+            <div
+              class=""
+            >
+              <div />
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PaginationOne render matches snapshot in simple mode 1`] = `
+.c5 {
+  vertical-align: top;
+  display: inline-flex;
+  gap: 8px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: calc(100% - 0px);
+  height: 24px;
+}
+
+.c5 >* {
+  display: inline-block;
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.c5 >.{
+  flex: 0 0 auto;
+}
+
+.c5>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c5.c5,
+.button-group[data-dimension='l'] .c5.c5,
+.button-group[data-dimension='xl'] .c5.c5 {
+  height: 24px;
+}
+
+.button-group[data-dimension='m'] .c5.c5>svg,
+.button-group[data-dimension='l'] .c5.c5>svg,
+.button-group[data-dimension='xl'] .c5.c5>svg {
+  width: 24px;
+  height: 24px;
+}
+
+.button-group[data-dimension='s'] .c5.c5,
+[data-dimension='s'] .c5 {
+  height: 20px;
+}
+
+.button-group[data-dimension='s'] .c5.c5>svg,
+[data-dimension='s'] .c5>svg {
+  width: 20px;
+  height: 20px;
+}
+
+.c4 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  appearance: none;
+  vertical-align: middle;
+  cursor: not-allowed;
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):disabled.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):disabled.c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button).c4[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):hover.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):hover.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):disabled.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):disabled.c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button).c4[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):hover.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):hover.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):active.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):active.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):disabled.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):disabled.c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button).c4[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid transparent;
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):disabled.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):disabled.c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button).c4[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):hover {
+  background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):hover.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):hover.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):active {
+  background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):active.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):active.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):disabled {
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):disabled.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):disabled.c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button).c4[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button) {
+  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Error_Error70, #BA1717);
+  border-color: var(--admiral-color-Error_Error70, #BA1717);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Error_Error80, #981111);
+  border-color: var(--admiral-color-Error_Error80, #981111);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):disabled.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):disabled.c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button).c4[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button) {
+  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Success_Success60, #128238);
+  border-color: var(--admiral-color-Success_Success60, #128238);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Success_Success70, #0B682A);
+  border-color: var(--admiral-color-Success_Success70, #0B682A);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):disabled.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):disabled.c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button).c4[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):disabled.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):disabled.c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button).c4:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):hover.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):hover.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):disabled.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):disabled.c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button).c4:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):hover.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):hover.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):active.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):active.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):disabled.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):disabled.c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button).c4:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c4:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.button-group[data-dimension='xl'] .c4.c4,
+.c4[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.button-group[data-dimension='l'] .c4.c4,
+.c4[data-dimension='l'] {
+  height: 48px;
+  width: 48px;
+}
+
+.button-group[data-dimension='m'] .c4.c4,
+.c4[data-dimension='m'] {
+  height: 40px;
+  width: 40px;
+}
+
+.button-group[data-dimension='s'] .c4.c4,
+.c4[data-dimension='s'] {
+  height: 32px;
+  width: 32px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c6 {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--admiral-border-radius-Medium, 4px);
+  appearance: none;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):disabled.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):disabled.c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button).c6[data-appearance~='primary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):hover.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):hover.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled']:not(.button-group > button),
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):disabled.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):disabled.c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button).c6[data-appearance~='secondary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):hover.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):hover.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):active.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):active.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):disabled.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):disabled.c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button).c6[data-appearance~='tertiary']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid transparent;
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):disabled.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):disabled.c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button).c6[data-appearance~='ghost']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):hover {
+  background-color: var(       --admiral-color-Opacity_DarkStaticHover,       #FFFFFF0F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):hover.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):hover.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):active {
+  background-color: var(       --admiral-color-Opacity_DarkStaticPress,       #FFFFFF1F     );
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border-color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):active.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):active.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):disabled {
+  border-color: var(       --admiral-color-Special_DarkStaticNeutral30,       #515357     );
+  color: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):disabled.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):disabled.c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button).c6[data-appearance~='white']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Special_DarkStaticNeutral30, #515357);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button) {
+  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Error_Error60Main, #D92020);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Error_Error70, #BA1717);
+  border-color: var(--admiral-color-Error_Error70, #BA1717);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Error_Error80, #981111);
+  border-color: var(--admiral-color-Error_Error80, #981111);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):disabled.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):disabled.c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button).c6[data-appearance~='danger']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button) {
+  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Success_Success50Main, #1BA049);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):hover {
+  background-color: var(--admiral-color-Success_Success60, #128238);
+  border-color: var(--admiral-color-Success_Success60, #128238);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):active {
+  background-color: var(--admiral-color-Success_Success70, #0B682A);
+  border-color: var(--admiral-color-Success_Success70, #0B682A);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'],
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'].c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):disabled.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):disabled.c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button).c6[data-appearance~='success']:not(.button-group > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button) {
+  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  color: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Special_StaticWhite, #FFFFFF);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):hover {
+  background-color: var(--admiral-color-Primary_Primary70, #0046E2);
+  border-color: var(--admiral-color-Primary_Primary70, #0046E2);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):active {
+  background-color: var(--admiral-color-Primary_Primary80, #0132B0);
+  border-color: var(--admiral-color-Primary_Primary80, #0132B0);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'],
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):disabled {
+  background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+}
+
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):disabled.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):disabled.c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button).c6:is(.button-group[data-appearance='primary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button) {
+  background-color: transparent;
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border: 1px solid var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Hover, #0000000D);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):hover.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):hover.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Press, #0000001F);
+  color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  border-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Primary_Primary60Main, #0062FF);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'],
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):disabled {
+  background-color: transparent;
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled']:not(.button-group > button),
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):disabled:not(.button-group > button) {
+  border-color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):disabled.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):disabled.c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button).c6:is(.button-group[data-appearance='secondary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button) {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border: 1px solid transparent;
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button) *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):hover {
+  background-color: var(--admiral-color-Opacity_Neutral12, #0000001F);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):hover.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):hover.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):hover *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):active {
+  background-color: var(--admiral-color-Opacity_Neutral16, #00000029);
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+  border-color: transparent;
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):active.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):active.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):active *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral50, #74767B);
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'],
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):disabled {
+  background-color: var(--admiral-color-Opacity_Neutral8, #00000014);
+  color: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+  border-color: transparent;
+}
+
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'].c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button)[data-appearance~='disabled'] *[fill^='#'],
+.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):disabled.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):disabled.c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button).c6:is(.button-group[data-appearance='tertiary'] > button):disabled *[fill^='#'] {
+  fill: var(--admiral-color-Neutral_Neutral30, #B2B5B8);
+}
+
+.c6:focus-visible {
+  outline-offset: 2px;
+  outline: var(--admiral-color-Primary_Primary60Main, #0062FF) solid 2px;
+}
+
+.button-group[data-dimension='xl'] .c6.c6,
+.c6[data-dimension='xl'] {
+  padding: 0;
+  height: 56px;
+  width: 56px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button1, 500);
+  font-size: var(--admiral-font-size-Button_Button1, 16px);
+  line-height: var(--admiral-line-height-Button_Button1, 24px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.button-group[data-dimension='l'] .c6.c6,
+.c6[data-dimension='l'] {
+  height: 48px;
+  width: 48px;
+}
+
+.button-group[data-dimension='m'] .c6.c6,
+.c6[data-dimension='m'] {
+  height: 40px;
+  width: 40px;
+}
+
+.button-group[data-dimension='s'] .c6.c6,
+.c6[data-dimension='s'] {
+  height: 32px;
+  width: 32px;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Button_Button2, 500);
+  font-size: var(--admiral-font-size-Button_Button2, 14px);
+  line-height: var(--admiral-line-height-Button_Button2, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+}
+
+.c3 {
+  display: flex;
+}
+
+.c3>button {
+  margin-left: 8px;
+}
+
+[data-simple='true'] .c3 {
+  margin-left: 20px;
+}
+
+.c0 {
+  display: flex;
+  align-items: center;
+  font-family: var(--admiral-font-family, 'VTB Group UI', sans-serif);
+  font-style: normal;
+  font-weight: var(--admiral-font-weight-Body_Body2Long, 400);
+  font-size: var(--admiral-font-size-Body_Body2Long, 14px);
+  line-height: var(--admiral-line-height-Body_Body2Long, 20px);
+  font-feature-settings: 'tnum' on,'lnum' on;
+  text-rendering: geometricPrecision;
+  white-space: nowrap;
+  user-select: none;
+  min-width: 696px;
+  justify-content: space-between;
+  color: var(--admiral-color-Neutral_Neutral90, #252629);
+}
+
+.c1 {
+  min-width: auto;
+}
+
+.c2 {
+  min-width: 172px;
+  margin: 0 12px;
+}
+
+[data-simple='true'] .c2 {
+  margin: 0;
+}
+
+<div>
+  <div
+    class="c0 c1"
+    data-simple="true"
+  >
+    <div
+      class="c2"
+    >
+      1-8 of 100
+    </div>
+    <div
+      class="c3"
+    >
+      <button
+        aria-label="Previous page"
+        class="c4"
+        data-appearance="tertiary"
+        data-dimension="m"
+        disabled=""
+        type="button"
+      >
+        <div
+          class="c5"
+        >
+          <div
+            class=""
+          >
+            <div />
+          </div>
+        </div>
+      </button>
+      <button
+        aria-label="Next page"
+        class="c6"
+        data-appearance="tertiary"
+        data-dimension="m"
+        type="button"
+      >
+        <div
+          class="c5"
+        >
+          <div
+            class=""
+          >
+            <div />
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+`;

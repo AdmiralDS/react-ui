@@ -6,10 +6,12 @@ import { PaginationOne, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { PaginationOnePlaygroundTemplate } from './PaginationOnePlayground.template';
 import { PaginationOneTypesTemplate } from './PaginationOneTypes.template';
+import { PaginationOnePreselectTemplate } from './PaginationOnePreselect.template';
 
 // Imports of text sources
 import PaginationOnePlaygroundRaw from './PaginationOnePlayground.template?raw';
 import PaginationOneTypesRaw from './PaginationOneTypes.template?raw';
+import PaginationOnePreselectRaw from './PaginationOnePreselect.template?raw';
 
 export default {
   title: 'Admiral-2.1/Data Table/PaginationOne',
@@ -66,6 +68,9 @@ export default {
       control: { type: 'text' },
     },
     showPageNumberInput: {
+      control: { type: 'boolean' },
+    },
+    preselectedModeActive: {
       control: { type: 'boolean' },
     },
     themeBorderKind: {
@@ -159,4 +164,41 @@ export const PaginationTypesExample = {
   },
 
   name: 'PaginationOne: Complex and Simple',
+};
+
+//<editor-fold desc="Preselect mode">
+const PaginationPreselectStory: StoryFn<typeof PaginationOne> = ({
+  page,
+  pageSize,
+  pageSizes,
+  totalItems,
+  onChange,
+  ...props
+}) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return (
+    <PaginationOnePreselectTemplate
+      page={page}
+      pageSize={pageSize}
+      pageSizes={pageSizes}
+      totalItems={totalItems}
+      onChange={onChange}
+      CSSCustomProps={CSSCustomProps}
+      {...props}
+    />
+  );
+};
+
+export const PreselectModeExample = {
+  render: PaginationPreselectStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: PaginationOnePreselectRaw,
+      },
+    },
+  },
+
+  name: 'PaginationOne: Preselect mode',
 };

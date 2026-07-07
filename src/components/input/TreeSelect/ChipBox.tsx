@@ -1,23 +1,25 @@
-import { InfoChip } from './InfoChip';
-import { CounterChip } from './CounterChip';
-import { ShadowCounterChip } from './styled';
+import { InfoChip } from '#src/components/input/Select/MultipleSelectChips/InfoChip';
+import { CounterChip } from '#src/components/input/Select/MultipleSelectChips/CounterChip';
+import { ShadowCounterChip, StyledChip } from '#src/components/input/Select/MultipleSelectChips/styled';
 
 import type { IConstantOption } from '#src/components/input/Select/types';
 import styled from 'styled-components';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
+import { ChipWrapper } from '#src/components/input/TreeSelect/styled';
+import type { CheckboxGroupItemProps } from '#src/components/Menu/MenuItemWithCheckbox';
 
 export interface CommonChipProps {
   containerRef: React.RefObject<HTMLDivElement>;
   shouldShowCount: boolean;
   disabled?: boolean;
   readOnly?: boolean;
-  onChipRemove: (value: string) => void;
+  onChipRemove: (id?: string) => void;
   onChipClick?: (evt: React.MouseEvent) => void;
 }
 
 interface ChipBoxProps extends CommonChipProps, React.HTMLAttributes<HTMLDivElement> {
-  option: IConstantOption;
+  option: CheckboxGroupItemProps;
   hiddenChipsCount: number;
 }
 
@@ -34,7 +36,7 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
       shouldShowCount,
       disabled,
       readOnly,
-      onChipClick,
+      // onChipClick,
       onChipRemove,
     }: ChipBoxProps,
     ref,
@@ -78,23 +80,29 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
     }, [visible]);
 
     return (
-      <Wrapper
+      <ChipWrapper
         ref={refSetter(ref, wrapperRef)}
-        key={option.value}
+        key={option.id}
         onMouseDown={(e) => e.preventDefault()}
         className="wrapper"
       >
-        <InfoChip
-          className="chip"
-          option={option}
-          disabled={disabled}
+        <StyledChip
+          id={option.id}
+          key={option.id}
+          // data-tree-select-chip="true"
+          onClick={(e) => e.stopPropagation()}
+          onClose={onChipRemove}
+          tabIndex={-1}
+          dimension="s"
+          appearance="filled"
           readOnly={readOnly}
-          onClick={onChipClick}
-          onChipRemove={onChipRemove}
-        />
-        {shouldShowCount && hiddenChipsCount > 0 && <CounterChip count={hiddenChipsCount} disabled={disabled} />}
+          disabled={option.disabled || disabled}
+        >
+          {option.label}
+        </StyledChip>
+        <CounterChip count={hiddenChipsCount} disabled={disabled}></CounterChip>
         {!shouldShowCount && <ShadowCounterChip />}
-      </Wrapper>
+      </ChipWrapper>
     );
   },
 );

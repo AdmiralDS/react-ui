@@ -51,7 +51,7 @@ export const MultipleSelectChips = ({
       {options.map((option, index) => (
         <ChipBox
           option={option}
-          childrenOptions={index < options.length - 1 ? options.slice(index + 1) : []}
+          hiddenChipsCount={options.length - index - 1}
           key={option.value}
           containerRef={containerRef}
           {...commonProps}

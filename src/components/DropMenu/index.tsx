@@ -49,11 +49,15 @@ export interface DropMenuComponentProps
       | 'isVisible'
       | 'onVisibilityChange'
       | 'active'
+      | 'preselected'
       | 'onActivateItem'
+      | 'onPreselectItem'
       | 'onSelectItem'
+      | 'preselectedModeActive'
       | 'disableSelectedOptionHighlight'
       | 'renderTopPanel'
       | 'renderBottomPanel'
+      | 'onMenuKeyDown'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
       | 'targetElement'
@@ -65,12 +69,16 @@ export interface DropMenuProps
     Pick<
       MenuProps,
       | 'active'
+      | 'preselected'
       | 'onActivateItem'
+      | 'onPreselectItem'
       | 'onSelectItem'
       | 'multiSelection'
+      | 'preselectedModeActive'
       | 'disableSelectedOptionHighlight'
       | 'renderTopPanel'
       | 'renderBottomPanel'
+      | 'onMenuKeyDown'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
       | 'virtualScroll'
@@ -139,8 +147,10 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
       items,
       selected,
       active,
+      preselected,
       onSelectItem,
       onActivateItem,
+      onPreselectItem,
       onChange, // TODO: убрать после удаления в DropMenuProps
       onClick,
       onKeyDown,
@@ -152,12 +162,14 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
       dropContainerClassName,
       dropContainerStyle,
       multiSelection = false, // TODO: убрать после удаления в Menu
+      preselectedModeActive = false,
       disableSelectedOptionHighlight = false,
       isVisible,
       onVisibilityChange = () => undefined,
       onClickOutside,
       renderTopPanel,
       renderBottomPanel,
+      onMenuKeyDown,
       onForwardCycleApprove,
       onBackwardCycleApprove,
       virtualScroll,
@@ -261,11 +273,15 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
               onSelectItem={handleSelectItem}
               dimension={dimension}
               active={active}
+              preselected={preselected}
               onActivateItem={onActivateItem}
+              onPreselectItem={onPreselectItem}
               multiSelection={multiSelection}
+              preselectedModeActive={preselectedModeActive}
               disableSelectedOptionHighlight={disableSelectedOptionHighlight}
               renderTopPanel={renderTopPanel}
               renderBottomPanel={renderBottomPanel}
+              onMenuKeyDown={onMenuKeyDown}
               onForwardCycleApprove={onForwardCycleApprove}
               onBackwardCycleApprove={onBackwardCycleApprove}
             />

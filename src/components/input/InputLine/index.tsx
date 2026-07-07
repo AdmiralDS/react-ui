@@ -157,6 +157,7 @@ export const InputLine = forwardRef<HTMLInputElement, InputLineProps>(
       }
 
       if (typeof dataPlaceholder === 'string' && inputNode && placeholderNode) {
+        oninput.call(inputNode);
         inputNode.addEventListener('input', oninput);
 
         return () => inputNode.removeEventListener('input', oninput);
