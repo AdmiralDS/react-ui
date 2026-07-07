@@ -1,20 +1,19 @@
 import { useRef } from 'react';
 import { CounterChipWrap, ShadowCounterChip, StyledCounterChip } from './styled';
 
-export interface CounterChipsProps {
+export interface CounterChipsProps extends React.HTMLAttributes<HTMLDivElement> {
   count: number;
   disabled?: boolean;
-  onClick?: (evt: React.MouseEvent) => void;
 }
 
-export const CounterChip = ({ count, disabled, onClick }: React.PropsWithChildren<CounterChipsProps>) => {
+export const CounterChip = ({ count, disabled, ...restProps }: React.PropsWithChildren<CounterChipsProps>) => {
   const ref = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
 
   if (!count) return <ShadowCounterChip />;
 
   return (
-    <CounterChipWrap onClick={onClick} ref={ref} className={'counter'}>
+    <CounterChipWrap {...restProps} ref={ref} className={'counter'}>
       <StyledCounterChip
         ref={counterRef}
         data-visible={true}

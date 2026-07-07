@@ -11,12 +11,14 @@ import { PlaygroundTemplate } from './Playground.template';
 import { PanesRenderTemplate } from './PanesRender.template';
 import { ShowChildStrategyTemplate } from './ShowChildStrategy.template';
 import { ShowParentStrategyTemplate } from './ShowParentStrategy.template';
+import { RowCountLimitsTemplate } from './RowCountLimits.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
 import PanesRenderRaw from './PanesRender.template?raw';
 import ShowChildStrategyRaw from './ShowChildStrategy.template?raw';
 import ShowParentStrategyRaw from './ShowParentStrategy.template?raw';
+import RowCountLimitsRaw from './RowCountLimits.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
@@ -194,3 +196,20 @@ export const TextInputWithIcon = {
   name: 'Кастомные панели в списке',
 };
 //</editor-fold>
+
+const RowCountStory: StoryFn<typeof TreeSelect> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <RowCountLimitsTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const RowCountLimits = {
+  render: RowCountStory,
+  name: 'min/maxRowCount',
+  parameters: {
+    docs: {
+      source: {
+        code: RowCountLimitsRaw,
+      },
+    },
+  },
+};

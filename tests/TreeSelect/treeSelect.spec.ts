@@ -9,6 +9,17 @@ test.describe('TreeSelect Component', () => {
     await expect(frame.locator('input[placeholder="Выберите элементы..."]')).toBeVisible();
   });
 
+  test('should have no checked options on first mount', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+
+    await input.click();
+
+    await expect(frame.locator(`role=checkbox[name="Опция 1.1"]`)).not.toBeChecked();
+    await expect(frame.locator(`role=checkbox[name="Опция 1.2"]`)).not.toBeChecked();
+  });
+
   test('should open and close dropdown on click', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
     const frame = getStorybookFrameLocator(page);
@@ -187,6 +198,35 @@ test.describe('TreeSelect Component', () => {
     await expect(chip1).not.toBeVisible();
     await expect(chip2).not.toBeVisible();
   });
+
+  test('should apply minRowCount/maxRowCount to chips container', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--row-count-limits`);
+    const frame = getStorybookFrameLocator(page);
+    const wrapper = frame.locator('.wrapper-options');
+
+    const { minHeight, maxHeight } = await wrapper.evaluate((el) => {
+      const style = window.getComputedStyle(el);
+      return { minHeight: style.minHeight, maxHeight: style.maxHeight };
+    });
+
+    // ROW_HEIGHT=24, gap=4 → min(2)=24*2+4=52, max(3)=24*3+8=80
+    expect(minHeight).toBe('52px');
+    expect(maxHeight).toBe('80px');
+  });
+
+  // test('should show +N chip when closed and hide it when opened', async ({ page }) => {
+  //   await page.goto(`/?path=/story/admiral-2-1-input-treeselect--row-count-limits`);
+  //   const frame = getStorybookFrameLocator(page);
+
+  //   // В закрытом состоянии при maxRowCount должен появляться "+N"
+  //   const overflowChip = frame.locator('[data-testid="tree-select-overflow-chip"]');
+  //   await expect(overflowChip).toBeAttached();
+  //   await expect(overflowChip).toBeVisible();
+
+  //   // В открытом состоянии показываем все чипсы и "+N" исчезает
+  //   await frame.locator('[data-testid="selectOpenButton"]').click();
+  //   await expect(overflowChip).not.toBeVisible();
+  // });
 
   test.skip('should render top and bottom panel', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-with-icon`);
