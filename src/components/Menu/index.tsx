@@ -267,16 +267,34 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const lastScrollEvent = useRef<number | undefined>();
 
+    const isActiveControlled = typeof onActivateItem === 'function';
+
+    useLayoutEffect(() => {
+      if (isActiveControlled && disableSelectedOptionHighlight) {
+        onActivateItem?.(uncontrolledActiveValue);
+      }
+    }, []);
+
     useEffect(() => {
-      setActiveState(uncontrolledActiveValue);
-    }, [model]);
+      if (!isActiveControlled || !disableSelectedOptionHighlight) {
+        setActiveState(uncontrolledActiveValue);
+      }
+    }, [model, isActiveControlled, disableSelectedOptionHighlight]);
 
     const innerSelected = disableSelectedOptionHighlight
       ? []
       : selected === undefined
         ? selectedState
         : valueToArray(selected);
-    const activeId = active === undefined ? activeState : active;
+    const activeId = isActiveControlled
+      ? active != null
+        ? active
+        : disableSelectedOptionHighlight
+          ? undefined
+          : activeState
+      : active === undefined
+        ? activeState
+        : active;
 
     const preselectedId = preselectedModeActive
       ? preselected === undefined
@@ -491,9 +509,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     const previousPreselectedState = useRef<string | undefined>();
 
     const hasActiveChanged = () => {
-      const isControlled = !!active;
-      const previousValue = isControlled ? previousActive.current : previousActiveState.current;
-      const currentValue = isControlled ? active : activeState;
+      const previousValue = isActiveControlled ? previousActive.current : previousActiveState.current;
+      const currentValue = isActiveControlled ? activeId : activeState;
 
       return previousValue !== currentValue;
     };
@@ -512,7 +529,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         const isActiveChanged = hasActiveChanged();
         const isPreselectdChanged = hasPreselectedChanged();
 
-        if (isActiveChanged) {
+        if (isActiveChanged && activeId) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (isPreselectdChanged) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');
@@ -528,7 +545,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           });
 
           lastScrollEvent.current = scrollEventTime;
-          previousActive.current = active;
+          previousActive.current = isActiveControlled ? activeId : active;
           previousActiveState.current = activeState;
           previousPreselected.current = preselected;
           previousPreselectedState.current = preselectedState;
