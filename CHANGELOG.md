@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.66.0](https://github.com/AdmiralDS/react-ui/compare/v8.65.0...v8.66.0) (2026-07-07)
+
+
+### Features
+
+* **PaginationOne:** добавлен режим preselectedModeActive ([1188cf3](https://github.com/AdmiralDS/react-ui/commit/1188cf36b6251f494898ccbc0aa814cf808c8bca))
+* **TreeSelect:** добавлена обработка переполнения chip  с использованием IntersectionObserver ([b61959a](https://github.com/AdmiralDS/react-ui/commit/b61959a7de9c194de2a9feb14ac46439d7841b38))
+* **TreeSelect:** add min/maxRowCount and chips +N ([df014fc](https://github.com/AdmiralDS/react-ui/commit/df014fc8a6d66651cfac8031c136d5084a6e90d2))
+
+
+### Bug Fixes
+
+* **InputLine:** fix oninput func ([834d580](https://github.com/AdmiralDS/react-ui/commit/834d580cf8394a7e721fd1e7fd6a0a29f5b074d9))
+* **Menu:** remove autoscroll by mouseLeave and add focus to the first elem ([cf2e34a](https://github.com/AdmiralDS/react-ui/commit/cf2e34a18105d5708728d2ee15a533e181a3c1d7))
+* **PaginationOne:** увеличение партии рендеринга соседних опции при резком прыжке в конец меню ([5e22df8](https://github.com/AdmiralDS/react-ui/commit/5e22df8a477b8af325da4f0f1bdeeb456c84c3e2))
+* **PaginationOne:** add autoscroll and preselect ([a9e7586](https://github.com/AdmiralDS/react-ui/commit/a9e758644f02e8de16778a8566ad7912b37599a0))
+* **TreeSelect:** edit ux/ui for disabled/readOnly/isLoading ([e8bfc32](https://github.com/AdmiralDS/react-ui/commit/e8bfc32ed547621578439b50a0ed5e33535b6388))
+
 ## [8.65.0](https://github.com/AdmiralDS/react-ui/compare/v8.64.0...v8.65.0) (2026-06-24)
 
 
