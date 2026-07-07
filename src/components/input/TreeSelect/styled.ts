@@ -51,11 +51,13 @@ const rowHeightStyle = css<{
 
 export const StyledMultiInput = styled(MultiInput)<{
   $hidden?: boolean;
+  $isLoading?: boolean;
   $opened?: boolean;
   $minRowCount?: number;
   $maxRowCount?: number;
 }>`
-  cursor: pointer;
+  cursor: ${({ disabled, readOnly, $isLoading }) =>
+    disabled ? 'not-allowed' : readOnly || $isLoading ? 'default' : 'pointer'};
   ${rowHeightStyle}
 
   & .wrapper-options input {
