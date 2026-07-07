@@ -50,7 +50,7 @@ const rowHeightStyle = css<{
 `;
 
 export const StyledMultiInput = styled(MultiInput)<{
-  $hidden?: boolean; 
+  $hidden?: boolean;
   $isLoading?: boolean;
   $opened?: boolean;
   $minRowCount?: number;

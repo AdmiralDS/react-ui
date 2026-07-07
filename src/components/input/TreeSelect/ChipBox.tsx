@@ -1,8 +1,6 @@
-import { InfoChip } from '#src/components/input/Select/MultipleSelectChips/InfoChip';
 import { CounterChip } from '#src/components/input/Select/MultipleSelectChips/CounterChip';
 import { ShadowCounterChip, StyledChip } from '#src/components/input/Select/MultipleSelectChips/styled';
 
-import type { IConstantOption } from '#src/components/input/Select/types';
 import styled from 'styled-components';
 import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
 import { refSetter } from '#src/components/common/utils/refSetter';
@@ -29,16 +27,7 @@ export const Wrapper = styled.div`
 
 export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
   (
-    {
-      option,
-      hiddenChipsCount,
-      containerRef,
-      shouldShowCount,
-      disabled,
-      readOnly,
-      // onChipClick,
-      onChipRemove,
-    }: ChipBoxProps,
+    { option, hiddenChipsCount, containerRef, shouldShowCount, disabled, readOnly, onChipRemove }: ChipBoxProps,
     ref,
   ) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -89,7 +78,6 @@ export const ChipBox = forwardRef<HTMLDivElement, ChipBoxProps>(
         <StyledChip
           id={option.id}
           key={option.id}
-          // data-tree-select-chip="true"
           onClick={(e) => e.stopPropagation()}
           onClose={onChipRemove}
           tabIndex={-1}
