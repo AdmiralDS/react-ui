@@ -11,7 +11,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 16px;
   inline-size: 16px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {
@@ -37,7 +38,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c1:before {
@@ -63,7 +65,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 8px;
   inline-size: 8px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c2:before {
@@ -102,7 +105,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 16px;
   inline-size: 16px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {
@@ -128,7 +132,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c1:before {
@@ -154,7 +159,8 @@ exports[`Pulse should render component with different dimensions 1`] = `
   block-size: 8px;
   inline-size: 8px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c2:before {
@@ -248,7 +254,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {
@@ -274,7 +281,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  --pulse-color: var(--admiral-color-Error_Error60Main, #D92020);
+  background-color: var(--pulse-color);
 }
 
 .c1:before {
@@ -300,7 +308,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  --pulse-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  background-color: var(--pulse-color);
 }
 
 .c2:before {
@@ -326,7 +335,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  --pulse-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  background-color: var(--pulse-color);
 }
 
 .c3:before {
@@ -352,7 +362,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: #8A3FFC;
+  --pulse-color: #8A3FFC;
+  background-color: var(--pulse-color);
 }
 
 .c4:before {
@@ -397,7 +408,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {
@@ -423,7 +435,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Error_Error60Main, #D92020);
+  --pulse-color: var(--admiral-color-Error_Error60Main, #D92020);
+  background-color: var(--pulse-color);
 }
 
 .c1:before {
@@ -449,7 +462,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  --pulse-color: var(--admiral-color-Success_Success50Main, #1BA049);
+  background-color: var(--pulse-color);
 }
 
 .c2:before {
@@ -475,7 +489,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  --pulse-color: var(--admiral-color-Warning_Warning50Main, #FF5C22);
+  background-color: var(--pulse-color);
 }
 
 .c3:before {
@@ -501,7 +516,8 @@ exports[`Pulse should render component with different statuses 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: #8A3FFC;
+  --pulse-color: #8A3FFC;
+  background-color: var(--pulse-color);
 }
 
 .c4:before {
@@ -601,7 +617,8 @@ exports[`Pulse should render default component 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {
@@ -634,7 +651,8 @@ exports[`Pulse should render default component 1`] = `
   block-size: 12px;
   inline-size: 12px;
   border-radius: 50%;
-  background-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  --pulse-color: var(--admiral-color-Primary_Primary60Main, #0062FF);
+  background-color: var(--pulse-color);
 }
 
 .c0:before {

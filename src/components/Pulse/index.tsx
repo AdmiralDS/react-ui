@@ -58,7 +58,8 @@ const PulseElement = styled.div<{
   block-size: ${(p) => (p.$dimension == 'l' ? 16 : p.$dimension == 'm' ? 12 : 8)}px;
   inline-size: ${(p) => (p.$dimension == 'l' ? 16 : p.$dimension == 'm' ? 12 : 8)}px;
   border-radius: 50%;
-  background-color: ${getPulseColor};
+  --pulse-color: ${getPulseColor};
+  background-color: var(--pulse-color);
 
   &:before {
     content: '';
@@ -80,13 +81,13 @@ const PulseElement = styled.div<{
     0% {
       opacity: 100%;
       filter: blur(0.2px);
-      box-shadow: inset 0 0 0 1px ${getPulseColor};
+      box-shadow: inset 0 0 0 1px var(--pulse-color);
     }
 
     80% {
       transform: scale(3.3);
       opacity: 0%;
-      box-shadow: inset 0 0 0 0.4px ${getPulseColor};
+      box-shadow: inset 0 0 0 0.4px var(--pulse-color);
       filter: blur(0.2px);
     }
 
@@ -98,15 +99,13 @@ const PulseElement = styled.div<{
   @keyframes animation-m {
     0% {
       opacity: 100%;
-      box-shadow: inset 0 0 0 1px
-        var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      box-shadow: inset 0 0 0 1px var(--pulse-color);
       filter: blur(0.33px);
     }
     80% {
       transform: scale(2.8);
       opacity: 0%;
-      box-shadow: inset 0 0 0 0.7px
-        var(--admiral-color-Primary_Primary60Main, ${(p) => p.theme.color['Primary/Primary 60 Main']});
+      box-shadow: inset 0 0 0 0.7px var(--pulse-color);
       filter: blur(0.33px);
     }
     100% {
@@ -118,13 +117,13 @@ const PulseElement = styled.div<{
     0% {
       opacity: 100%;
       filter: blur(0.33px);
-      box-shadow: inset 0 0 0 1px ${getPulseColor};
+      box-shadow: inset 0 0 0 1px var(--pulse-color);
     }
     80% {
       transform: scale(2.5);
       opacity: 0%;
       filter: blur(0.33px);
-      box-shadow: inset 0 0 0 1.2px ${getPulseColor};
+      box-shadow: inset 0 0 0 1.2px var(--pulse-color);
     }
     100% {
       opacity: 0%;
