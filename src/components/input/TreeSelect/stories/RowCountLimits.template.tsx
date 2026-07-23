@@ -91,6 +91,7 @@ export const RowCountLimitsTemplate = ({
         openButtonPropsConfig={() => openButtonProps}
         dropdownConfig={() => dropdownProps}
         displayClearIcon
+        style={{ width: '350px' }}
       />
     </ThemeProvider>
   );

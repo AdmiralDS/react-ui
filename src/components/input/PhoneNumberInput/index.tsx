@@ -297,7 +297,7 @@ export const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputPro
     const IconComponent = useMemo<JSX.Element | null>(() => {
       const SvgComponent =
         selectedIndex > -1
-          ? (FlagsPack as { [key: ComponentName]: React.ElementType })[countryList[selectedIndex].name]
+          ? (FlagsPack as Record<ComponentName, React.ElementType>)[countryList[selectedIndex].name]
           : GlobeOutline;
       return <Flag dimension={menuDimension} Component={SvgComponent} />;
     }, [selectedIndex]);

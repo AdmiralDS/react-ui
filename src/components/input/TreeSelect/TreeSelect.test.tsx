@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from 'styled-components';
 import { TreeSelect } from '#src/components/input/TreeSelect';
+import { DropdownProvider } from '#src/components/DropdownProvider';
 import { LIGHT_THEME } from '#src/components/themes';
 import type { TreeSelectItemProps } from '#src/components/input/TreeSelect/types';
 
@@ -25,12 +27,16 @@ const items: TreeSelectItemProps[] = [
   { id: '2', label: 'Опция 2', checked: false },
 ];
 
-const renderTreeSelect = (props: Omit<React.ComponentProps<typeof TreeSelect>, 'items'>) =>
+const renderTreeSelect = (props: Omit<React.ComponentProps<typeof TreeSelect>, 'items'> = {}) =>
   render(
     <ThemeProvider theme={LIGHT_THEME}>
-      <TreeSelect items={items} placeholder="Выберите элементы..." {...props} />
+      <DropdownProvider>
+        <TreeSelect items={items} placeholder="Выберите элементы..." {...props} />
+      </DropdownProvider>
     </ThemeProvider>,
   );
+
+const getHoveredOption = (label: string) => screen.getByText(label).closest('[data-hovered]') as HTMLElement | null;
 
 describe('TreeSelect showCheckedStrategy', () => {
   test('SHOW_ALL (default) displays parent and child chips', () => {
@@ -244,5 +250,79 @@ describe('TreeSelect interaction states', () => {
     });
 
     expect(screen.getByTestId('treeSelectOpenButton')).toHaveAttribute('data-disabled', 'true');
+  });
+});
+
+describe('TreeSelect keyboard navigation', () => {
+  test('opens dropdown on Space when focused', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+  });
+
+  test('opens dropdown on ArrowDown when focused', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[ArrowDown]');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+  });
+
+  test('closes dropdown on Escape', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+
+    await user.keyboard('[Escape]');
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
+  });
+
+  test('navigates options with ArrowDown', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowDown', code: 'ArrowDown' });
+    });
+
+    expect(getHoveredOption('Опция 1.1')).toHaveAttribute('data-hovered', 'true');
+  });
+
+  test('navigates options with ArrowUp', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowUp', code: 'ArrowUp' });
+    });
+
+    expect(getHoveredOption('Опция 2')).toHaveAttribute('data-hovered', 'true');
+  });
+
+  test('disabled prevents keyboard open', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ disabled: true });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
   });
 });
