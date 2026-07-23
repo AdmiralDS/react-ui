@@ -16,6 +16,7 @@ import {
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 import { ChipBox } from '#src/components/input/TreeSelect/ChipBox';
+import { keyboardKey } from '#src/components/common/keyboardKey';
 
 export interface TreeSelectProps
   extends
@@ -119,6 +120,8 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const optionsWrapperRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
+    const openRef = useRef(open);
+    openRef.current = open;
     const isDropdownDisabled = !!(disabled || readOnly || isLoading);
     const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
       const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
@@ -245,6 +248,61 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     }, [isDropdownDisabled, open, onOpenChange]);
 
+    const closeDropdown = useCallback(() => {
+      setOpen(false);
+      onOpenChange?.(false);
+      inputRef.current?.focus();
+    }, [onOpenChange]);
+
+    const handleMenuKeyDown = useCallback(
+      (e: KeyboardEvent) => {
+        const code = keyboardKey.getCode(e);
+        if (code !== keyboardKey.Escape || !openRef.current) return;
+
+        closeDropdown();
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      [closeDropdown],
+    );
+
+    const handleContainerKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (isDropdownDisabled) return;
+
+      const code = keyboardKey.getCode(e);
+
+      if (code === keyboardKey[' ']) {
+        if (!open) {
+          e.preventDefault();
+          setOpen(true);
+          onOpenChange?.(true);
+          e.stopPropagation();
+        }
+        return;
+      }
+
+      if (code === keyboardKey.Enter && !open) {
+        e.preventDefault();
+        setOpen(true);
+        onOpenChange?.(true);
+        e.stopPropagation();
+        return;
+      }
+
+      if ((code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) && !open) {
+        setOpen(true);
+        onOpenChange?.(true);
+        e.stopPropagation();
+        return;
+      }
+
+      if (code === keyboardKey.Escape && open) {
+        closeDropdown();
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
     const getDropdownConfig = (config: DropdownContainerProps) => {
       return {
         ...config,
@@ -271,6 +329,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       ...props,
       ref: inputContainerRef,
       onClick: isDropdownDisabled ? undefined : handleClick,
+      onKeyDown: handleContainerKeyDown,
     });
 
     const openButtonProps = {
@@ -412,8 +471,32 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      e.stopPropagation();
+      const code = keyboardKey.getCode(e);
+
+      if (code === keyboardKey.Escape && open) {
+        closeDropdown();
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      const allowedKeys = [
+        keyboardKey[' '],
+        keyboardKey.Enter,
+        keyboardKey.ArrowDown,
+        keyboardKey.ArrowUp,
+        keyboardKey.ArrowLeft,
+        keyboardKey.ArrowRight,
+        keyboardKey.Escape,
+        keyboardKey.Home,
+        keyboardKey.End,
+        keyboardKey.Tab,
+      ];
+
+      if (!allowedKeys.includes(code as any)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     };
 
     const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
@@ -466,6 +549,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             onSelectImem={handleSelectItem}
             onDeselectItem={handleDeselectItem}
             onChangeSelected={handleSelectedChange}
+            onMenuKeyDown={handleMenuKeyDown}
             dimension={dimension === 'xl' ? 'l' : dimension}
             renderTopPanel={renderTopPanel}
             renderBottomPanel={renderBottomPanel}

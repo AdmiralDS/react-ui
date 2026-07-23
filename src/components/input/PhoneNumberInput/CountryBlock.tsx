@@ -75,7 +75,7 @@ export const CountryBlock = forwardRef<HTMLDivElement, CountryBlockProps>((props
     }
   }, [setTooltipVisible]);
 
-  const SvgFlag = (FlagsPack as { [key: ComponentName]: React.ElementType })[name];
+  const SvgFlag = (FlagsPack as Record<ComponentName, React.ElementType>)[name];
 
   return (
     <>

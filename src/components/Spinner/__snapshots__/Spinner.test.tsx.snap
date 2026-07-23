@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spinner should render component with inverse color 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -18,16 +18,6 @@ exports[`Spinner should render component with inverse color 1`] = `
   container-type: inline-size;
   width: 24px;
   height: 24px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <body>
@@ -44,7 +34,7 @@ exports[`Spinner should render component with inverse color 1`] = `
     </div>
   </body>,
   "container": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -58,16 +48,6 @@ exports[`Spinner should render component with inverse color 1`] = `
   container-type: inline-size;
   width: 24px;
   height: 24px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <div>
@@ -139,7 +119,7 @@ exports[`Spinner should render component with small dimension 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -153,16 +133,6 @@ exports[`Spinner should render component with small dimension 1`] = `
   container-type: inline-size;
   width: 16px;
   height: 16px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <body>
@@ -179,7 +149,7 @@ exports[`Spinner should render component with small dimension 1`] = `
     </div>
   </body>,
   "container": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -193,16 +163,6 @@ exports[`Spinner should render component with small dimension 1`] = `
   container-type: inline-size;
   width: 16px;
   height: 16px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <div>
@@ -274,7 +234,7 @@ exports[`Spinner should render default component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -288,16 +248,6 @@ exports[`Spinner should render default component 1`] = `
   container-type: inline-size;
   width: 24px;
   height: 24px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <body>
@@ -314,7 +264,7 @@ exports[`Spinner should render default component 1`] = `
     </div>
   </body>,
   "container": .c1 {
-  animation: k0 1s linear infinite;
+  animation: cilQsd 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -328,16 +278,6 @@ exports[`Spinner should render default component 1`] = `
   container-type: inline-size;
   width: 24px;
   height: 24px;
-}
-
-@keyframes k0 {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 <div>

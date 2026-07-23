@@ -21,6 +21,8 @@ export interface DropDownTreeProps extends Omit<MenuProps, 'model' | 'onSelectIt
   onDeselectItem?: (id: string) => void;
   /** Размер Меню */
   dimension?: MenuDimensions;
+
+  onMenuKeyDown?: (e: KeyboardEvent) => void;
 }
 
 export const DropDownTree = ({
@@ -29,6 +31,7 @@ export const DropDownTree = ({
   onChangeSelected,
   onSelectImem,
   onDeselectItem,
+  onMenuKeyDown,
   dimension = 'l',
   ...props
 }: DropDownTreeProps) => {
@@ -132,12 +135,12 @@ export const DropDownTree = ({
         {...props}
         active={active ?? null}
         onActivateItem={setActive}
-        defaultIsActive={false}
         preselectedModeActive={false}
         model={model}
         onSelectItem={handleSelectItem}
         disableSelectedOptionHighlight={true}
         dimension={dimension}
+        onMenuKeyDown={onMenuKeyDown}
       />
     </DropdownContainer>
   );

@@ -1,6 +1,7 @@
 // TreeSelect.spec.ts
 import { test, expect } from '@playwright/test';
 import { getStorybookFrameLocator, clickAndWait } from '../utils';
+import { TIMEOUTS } from '../constants';
 
 test.describe('TreeSelect Component', () => {
   test('should render with default props', async ({ page }) => {
@@ -214,19 +215,61 @@ test.describe('TreeSelect Component', () => {
     expect(maxHeight).toBe('80px');
   });
 
-  // test('should show +N chip when closed and hide it when opened', async ({ page }) => {
-  //   await page.goto(`/?path=/story/admiral-2-1-input-treeselect--row-count-limits`);
-  //   const frame = getStorybookFrameLocator(page);
+  test('should open dropdown on Space and navigate with arrows', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const dropdown = frame.locator('[data-testid="dropdown-tree"]');
 
-  //   // В закрытом состоянии при maxRowCount должен появляться "+N"
-  //   const overflowChip = frame.locator('[data-testid="tree-select-overflow-chip"]');
-  //   await expect(overflowChip).toBeAttached();
-  //   await expect(overflowChip).toBeVisible();
+    await input.press('Space');
+    await expect(dropdown).toBeVisible();
 
-  //   // В открытом состоянии показываем все чипсы и "+N" исчезает
-  //   await frame.locator('[data-testid="selectOpenButton"]').click();
-  //   await expect(overflowChip).not.toBeVisible();
-  // });
+    const option1 = frame.locator('text=Опция 1').first();
+    await expect(option1.locator('xpath=ancestor::*[@data-hovered="true"]')).toHaveCount(1);
+
+    await input.press('ArrowDown');
+    const option11 = frame.locator('text=Опция 1.1').first();
+    await expect(option11.locator('xpath=ancestor::*[@data-hovered="true"]')).toHaveCount(1);
+  });
+
+  test('should close dropdown on Escape', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-playground`);
+    const frame = getStorybookFrameLocator(page);
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    const dropdown = frame.locator('[data-testid="dropdown-tree"]');
+
+    await input.press('Space');
+    await expect(dropdown).toBeVisible();
+
+    await input.press('Escape');
+    await expect(dropdown).not.toBeVisible();
+  });
+
+  test('should show +N chip when closed and hide it when opened', async ({ page }) => {
+    await page.goto(`/?path=/story/admiral-2-1-input-treeselect--row-count-limits`);
+    const frame = getStorybookFrameLocator(page);
+
+    const input = frame.locator('input[placeholder="Выберите элементы..."]');
+    // Программно меняем размер TreeSelect
+    await input.evaluate((el) => {
+      (el as HTMLElement).style.width = '310px';
+    });
+    // Дождёмся, пока ResizeObserver обновит ширину wrapper
+    await expect.poll(() => input.evaluate((el) => parseFloat(getComputedStyle(el).width)), {
+      timeout: TIMEOUTS.POLL_STANDARD,
+    });
+    await page.waitForTimeout(TIMEOUTS.WAIT_DEFAULT);
+
+    const wrapper = frame.locator('.wrapper-options');
+    const overflowChip = wrapper.getByText('+3');
+    // В закрытом состоянии при maxRowCount должен появляться "+N"
+    await expect(overflowChip).toBeAttached();
+    await expect(overflowChip).toBeVisible();
+
+    // В открытом состоянии показываем все чипсы и "+N" исчезает
+    await frame.locator('[data-testid="selectOpenButton"]').click();
+    await expect(overflowChip).not.toBeVisible();
+  });
 
   test.skip('should render top and bottom panel', async ({ page }) => {
     await page.goto(`/?path=/story/admiral-2-1-input-treeselect--text-input-with-icon`);
