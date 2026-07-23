@@ -19,6 +19,7 @@ import {
   titleXL,
 } from '#src/components/input/FileInput/style';
 import type { InputStatus } from '#src/components/input/types';
+import { skeletonMixin } from '#src/components/input/Container';
 import { ExtraTextContainer } from '#src/components/Field';
 import { Label } from '#src/components/Label';
 import { acceptFile } from './utils';
@@ -102,17 +103,19 @@ const CustomInput = styled.input`
   opacity: 0;
 `;
 
-const InputWrapper = styled.div<{ disabled?: boolean; $dimension: FileInputDimension }>`
+const InputWrapper = styled.div<{ disabled?: boolean; $dimension: FileInputDimension; $skeleton?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
   border: 1px dashed var(--admiral-color-Neutral_Neutral40, ${(p) => p.theme.color['Neutral/Neutral 40']});
-  border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-  pointer-events: all;
+  border-radius: ${(p) =>
+    p.$skeleton ? 0 : `var(--admiral-border-radius-Medium, ${mediumGroupBorderRadius(p.theme.shape)})`};
+  pointer-events: ${(p) => (p.$skeleton ? 'none' : 'all')};
   ${(p) => (p.disabled ? disabledStyles : hoverStyles)};
   ${(p) => (p.$dimension === 'm' ? dimensionMStyles : dimensionXLStyles)};
   box-sizing: border-box;
   overflow: visible;
+  ${({ $skeleton }) => $skeleton && skeletonMixin};
 `;
 
 const Wrapper = styled.div<{ $dimension: FileInputDimension; $width?: string | number }>`
@@ -169,6 +172,8 @@ export interface FileInputProps extends Omit<InputHTMLAttributes<HTMLInputElemen
    * Установка статуса поля
    **/
   status?: InputStatus;
+  /** Состояние skeleton */
+  skeleton?: boolean;
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
@@ -185,6 +190,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       files,
       extraText,
       status,
+      skeleton = false,
       ...props
     },
     ref,
@@ -264,7 +270,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                 ref={refSetter(ref, inputRef)}
                 type="file"
                 multiple={multiple}
-                disabled={disabled}
+                disabled={disabled || skeleton}
                 tabIndex={-1}
               />
               <FocusBorder className="focus-block" />
@@ -275,10 +281,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               <InputWrapper
                 $dimension={dimension}
                 disabled={disabled}
+                $skeleton={skeleton}
+                data-skeleton={skeleton ? true : undefined}
                 data-isdragover={isDragOver}
-                onDragEnter={disabled ? undefined : handleDragEnter}
-                onDragLeave={disabled ? undefined : handleDragLeave}
-                onDrop={disabled ? undefined : handleDragLeave}
+                onDragEnter={disabled || skeleton ? undefined : handleDragEnter}
+                onDragLeave={disabled || skeleton ? undefined : handleDragLeave}
+                onDrop={disabled || skeleton ? undefined : handleDragLeave}
               >
                 <Icon $dimension={dimension} />
                 {titleWithoutDescription && renderTitleText()}
@@ -287,7 +295,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                   {...props}
                   ref={refSetter(ref, inputRef)}
                   type="file"
-                  disabled={disabled}
+                  disabled={disabled || skeleton}
                   multiple={multiple}
                 />
                 <FocusBorder className="focus-block" />

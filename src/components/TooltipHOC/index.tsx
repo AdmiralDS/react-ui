@@ -38,7 +38,7 @@ export function TooltipHoc<T>(Component: React.ComponentType<T>) {
     const anchorElementRef = useRef<HTMLElement | null>(null);
     const [visible, setVisible] = useState(false);
     const [node, setNode] = useState<HTMLElement | null>(null);
-    const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
+    const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
     const isTouchDevice = useTouchDevice();
 
@@ -46,10 +46,10 @@ export function TooltipHoc<T>(Component: React.ComponentType<T>) {
       if (!node || isTouchDevice) return;
 
       function show() {
-        setTimer(setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0));
+        timerRef.current = setTimeout(() => setVisible(true), withDelay ? TOOLTIP_DELAY : 0);
       }
       function hide() {
-        clearTimeout(timer);
+        clearTimeout(timerRef.current);
         setVisible(false);
       }
 
@@ -59,13 +59,13 @@ export function TooltipHoc<T>(Component: React.ComponentType<T>) {
       node.addEventListener('blur', hide);
 
       return () => {
-        if (timer) clearTimeout(timer);
+        if (timerRef.current) clearTimeout(timerRef.current);
         node.removeEventListener('mouseenter', show);
         node.removeEventListener('focus', show);
         node.removeEventListener('mouseleave', hide);
         node.removeEventListener('blur', hide);
       };
-    }, [node, setTimer, setVisible, timer, isTouchDevice]);
+    }, [node, setVisible, isTouchDevice]);
 
     return (
       <>

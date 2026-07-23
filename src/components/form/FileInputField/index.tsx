@@ -2,8 +2,8 @@ import { uid } from '#src/components/common/uid';
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { FieldOwnProps } from '#src/components/Field';
 import { Field as FieldComponent, ExtraTextContainer } from '#src/components/Field';
-import type { FileInputProps } from '#src/components/input';
-import { FileInput } from '#src/components/input';
+import type { FileInputProps } from '#src/components/input/FileInput';
+import { FileInput } from '#src/components/input/FileInput';
 import * as React from 'react';
 import {
   passFormFieldContainerDataAttributes,
@@ -34,6 +34,7 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     id = uid(),
     disabled,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     labelCssMixins,
     visibleLabelTooltips,
@@ -52,6 +53,7 @@ export const FileInputField = React.forwardRef<HTMLInputElement, FileInputFieldP
     maxLength,
     inputRef,
     displayCharacterCounter,
+    characterCounterVisibilityThreshold,
     skeleton,
     labelCssMixins,
     visibleLabelTooltips,
