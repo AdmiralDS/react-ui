@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`MenuButton should render component 1`] = `
 {
@@ -1214,7 +1214,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c2 {
-  animation: cilQsd 1s linear infinite;
+  animation: k0 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -1752,6 +1752,16 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0 .c4 {
   visibility: hidden;
+}
+
+@keyframes k0 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 <body>
@@ -1818,7 +1828,7 @@ exports[`MenuButton should render component with loading state 1`] = `
 }
 
 .c2 {
-  animation: cilQsd 1s linear infinite;
+  animation: k0 1s linear infinite;
   width: 100%;
   height: 100%;
 }
@@ -2356,6 +2366,16 @@ exports[`MenuButton should render component with loading state 1`] = `
 
 .c0 .c4 {
   visibility: hidden;
+}
+
+@keyframes k0 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 <div>
@@ -2553,7 +2573,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: gTXsAI 2s ease infinite;
+  animation: k0 2s ease infinite;
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button) {
@@ -2989,6 +3009,23 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0 .c2 {
   visibility: hidden;
+}
+
+@keyframes k0 {
+  0% {
+    background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+    border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  }
+
+  50% {
+    background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+    border-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  }
+
+  100% {
+    background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+    border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  }
 }
 
 <body>
@@ -3125,7 +3162,7 @@ exports[`MenuButton should render component with skeleton state 1`] = `
   line-height: var(--admiral-line-height-Button_Button1, 24px);
   font-feature-settings: 'tnum' on,'lnum' on;
   text-rendering: geometricPrecision;
-  animation: gTXsAI 2s ease infinite;
+  animation: k0 2s ease infinite;
 }
 
 .c0[data-appearance~='primary']:not(.button-group > button) {
@@ -3561,6 +3598,23 @@ exports[`MenuButton should render component with skeleton state 1`] = `
 
 .c0 .c2 {
   visibility: hidden;
+}
+
+@keyframes k0 {
+  0% {
+    background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+    border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  }
+
+  50% {
+    background-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+    border-color: var(--admiral-color-Neutral_Neutral20, #D7D8DA);
+  }
+
+  100% {
+    background-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+    border-color: var(--admiral-color-Neutral_Neutral10, #EAEBEC);
+  }
 }
 
 <div>
