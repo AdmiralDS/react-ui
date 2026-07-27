@@ -1,9 +1,26 @@
-import type { Locator, Page } from '@playwright/test';
+import type { FrameLocator, Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 import { TIMEOUTS } from './constants';
 
 export function getStorybookFrameLocator(page: Page) {
   return page.frameLocator('#storybook-preview-iframe');
+}
+
+/** Перехватывает navigator.clipboard.writeText в iframe Storybook */
+export async function stubClipboardWriteInFrame(frame: FrameLocator) {
+  await frame.locator('body').evaluate(() => {
+    (window as unknown as { __copiedText?: string | null }).__copiedText = null;
+    navigator.clipboard.writeText = async (text: string) => {
+      (window as unknown as { __copiedText?: string | null }).__copiedText = text;
+    };
+  });
+}
+
+/** Возвращает текст, записанный через stubClipboardWriteInFrame. */
+export async function getStubbedClipboardText(frame: FrameLocator) {
+  return frame.locator('body').evaluate(() => {
+    return (window as unknown as { __copiedText?: string | null }).__copiedText ?? null;
+  });
 }
 
 /**
