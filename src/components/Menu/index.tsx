@@ -384,7 +384,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             e.preventDefault();
             break;
           }
-          case keyboardKey.ArrowRight: {
+          case keyboardKey.ArrowRight:
+          case keyboardKey.End: {
             const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
             const item = model.find((item) => item.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
@@ -396,10 +397,15 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             }
             break;
           }
-          case keyboardKey.ArrowLeft: {
+          case keyboardKey.ArrowLeft:
+          case keyboardKey.Home: {
             if (parentMenuRef && parentMenuRef.current) {
               onCloseQuery?.();
             }
+            break;
+          }
+          case keyboardKey.Escape: {
+            onMenuKeyDown?.(e);
             break;
           }
 
@@ -422,6 +428,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       preselectedId,
       disableSelectionOnSpace,
       disableSelectionOnEnter,
+      onMenuKeyDown,
     ]);
 
     useEffect(() => {
