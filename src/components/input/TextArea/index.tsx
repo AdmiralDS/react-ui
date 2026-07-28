@@ -259,13 +259,15 @@ const StyledContainer = styled(Container)<{
   ${(p) => (p.disabled ? 'cursor: not-allowed;' : '')}
 `;
 
-const CopyIconButton = forwardRef<HTMLDivElement, AnyIconProps>((props, ref) => {
-  return (
-    <div ref={ref}>
-      <InputIconButton {...props} />
-    </div>
-  );
-});
+const CopyIconButton = forwardRef<HTMLDivElement, AnyIconProps & { 'data-testid'?: string }>(
+  ({ 'data-testid': testId, ...props }, ref) => {
+    return (
+      <div ref={ref} data-testid={testId}>
+        <InputIconButton {...props} />
+      </div>
+    );
+  },
+);
 const TooltipedInputIconButton = TooltipHoc(CopyIconButton);
 
 export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -404,6 +406,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     const handleCopyIconClick = () => {
+      if (props.disabled) {
+        return;
+      }
       if (!document.hasFocus()) {
         window.focus();
       }
@@ -453,14 +458,19 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       const array = Children.toArray(iconsAfter || icons);
       const hasValue = currentValue.length > 0;
 
-      if (!props.readOnly && hasValue) {
-        if (displayClearIcon) {
+      if (hasValue) {
+        if (displayClearIcon && !props.readOnly && !props.disabled) {
           array.unshift(
             <InputIconButton key="clear-icon" {...clearIconProps} {...clearIconPropsConfig(clearIconProps)} />,
           );
         } else if (displayCopyIcon) {
           array.unshift(
-            <TooltipedInputIconButton key="copy-icon" {...copyIconProps} {...copyIconPropsConfig(copyIconProps)} />,
+            <TooltipedInputIconButton
+              key="copy-icon"
+              {...copyIconProps}
+              {...copyIconPropsConfig(copyIconProps)}
+              data-testid="copy-icon"
+            />,
           );
         }
       }

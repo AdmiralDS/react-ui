@@ -41,9 +41,9 @@ describe('TextArea Component', () => {
 
   // Тест на отображение иконки копирования
   test('shows copy icon when text is present', () => {
-    const copyIconProps = { 'data-testid': 'copyIconTest' };
+    const copyIconProps = { 'data-testid': 'copy-icon' };
     render(<TextAreaCoponent defaultValue="test" displayCopyIcon copyIconPropsConfig={() => copyIconProps} />);
-    const copyIcon = screen.getByTestId('copyIconTest');
+    const copyIcon = screen.getByTestId('copy-icon');
     expect(copyIcon).toBeInTheDocument();
   });
 

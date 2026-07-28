@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStorybookFrameLocator } from '../utils';
+import { getStorybookFrameLocator, clickAndWait, stubClipboardWriteInFrame, getStubbedClipboardText } from '../utils';
 import { UNDO_SHORTCUT, TIMEOUTS } from '../constants';
 
 test('basic render', async ({ page }) => {
@@ -159,4 +159,28 @@ test('native undo works', async ({ page, browserName }) => {
   } else {
     await expect(textarea).not.toHaveValue(valueBeforeUndo);
   }
+});
+
+test('displaycopyicon visible and work correctly when textarea is readonly', async ({ page }) => {
+  await page.goto(
+    '/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=displayCopyIcon:!true;readOnly:!true',
+  );
+  const frame = getStorybookFrameLocator(page);
+  await stubClipboardWriteInFrame(frame);
+  const copyIcon = frame.getByTestId('copy-icon');
+  await expect(copyIcon).toBeVisible();
+  await clickAndWait(copyIcon, page);
+  expect(await getStubbedClipboardText(frame)).toEqual('Привет!');
+});
+
+test('displaycopyicon does not work and visible when textarea is disabled', async ({ page }) => {
+  await page.goto(
+    '/?path=/story/admiral-2-1-input-textarea--text-area-playground&args=displayCopyIcon:!true;displayClearIcon:!false;disabled:!true',
+  );
+  const frame = getStorybookFrameLocator(page);
+  await stubClipboardWriteInFrame(frame);
+  const copyIcon = frame.getByTestId('copy-icon');
+  await expect(copyIcon).toBeVisible();
+  await clickAndWait(copyIcon, page);
+  expect(await getStubbedClipboardText(frame)).toBeNull();
 });
