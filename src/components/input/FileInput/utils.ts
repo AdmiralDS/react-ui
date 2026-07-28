@@ -57,43 +57,142 @@ export function acceptFile(file: File, acceptedFiles?: string): boolean {
 }
 
 /**
+ * Словарь соответствий MIME-типов человекочитаемым расширениям.
+ * Разбит на логические группы для удобства поддержки.
+ *
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#important_mime_types_for_web_developers
  * https://www.iana.org/assignments/media-types/media-types.xhtml
  * @param type {string}
  */
-export const formatFileType = (type: string) => {
-  switch (type) {
-    case 'image/jpeg':
-      return 'JPEG';
-    case 'image/png':
-    case 'image/apng':
-      return 'PNG';
-    case 'image/tiff':
-      return 'TIFF';
-    case 'image/svg+xml':
-      return 'SVG';
-    case 'image/gif':
-      return 'GIF';
-    case 'image/webp':
-      return 'WEBP';
-    case 'application/pdf':
-      return 'PDF';
-    case 'application/vnd.ms-powerpoint':
-    case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-      return 'PPT';
-    case 'application/vnd.ms-excel':
-    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-      return 'XLS';
-    case 'application/msword':
-    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-      return 'Word';
-    case 'application/zip':
-      return 'ZIP';
-    case 'text/csv':
-      return 'CSV';
-    default:
-      return 'Docs';
+const MIME_MAP: Record<string, string> = {
+  // ==================== ИЗОБРАЖЕНИЯ ====================
+  'image/jpeg': 'JPG',
+  'image/png': 'PNG',
+  'image/apng': 'PNG',
+  'image/gif': 'GIF',
+  'image/webp': 'WEBP',
+  'image/svg+xml': 'SVG',
+  'image/tiff': 'TIFF',
+  'image/heic': 'HEIC',
+  'image/heif': 'HEIC',
+  'image/avif': 'AVIF',
+  'image/bmp': 'BMP',
+  'image/x-icon': 'ICO',
+  'image/vnd.microsoft.icon': 'ICO',
+
+  // ==================== PDF ====================
+  'application/pdf': 'PDF',
+
+  // ==================== ТЕКСТ И ДАННЫЕ ====================
+  'text/plain': 'TXT',
+  'text/csv': 'CSV',
+  'text/calendar': 'ICS',
+  'text/html': 'HTML',
+  'application/json': 'JSON',
+  'application/xml': 'XML',
+  'text/xml': 'XML',
+  'application/rtf': 'RTF',
+
+  // ==================== WORD (DOC) ====================
+  'application/msword': 'DOC',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'DOCX',
+  'application/vnd.ms-word.document.macroEnabled.12': 'DOCM',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.template': 'DOTX',
+  'application/vnd.ms-word.template.macroEnabled.12': 'DOTM',
+
+  // ==================== EXCEL (XLS) ====================
+  'application/vnd.ms-excel': 'XLS',
+  'application/x-ms-excel': 'XLS',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'XLSX',
+  'application/vnd.ms-excel.sheet.macroEnabled.12': 'XLSM',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.template': 'XLTX',
+  'application/vnd.ms-excel.template.macroEnabled.12': 'XLTM',
+
+  // ==================== POWERPOINT (PPT) ====================
+  'application/vnd.ms-powerpoint': 'PPT',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PPTX',
+  'application/vnd.ms-powerpoint.presentation.macroEnabled.12': 'PPTM',
+  'application/vnd.openxmlformats-officedocument.presentationml.template': 'POTX',
+  'application/vnd.ms-powerpoint.template.macroEnabled.12': 'POTM',
+
+  // ==================== VISIO ====================
+  'application/visio': 'VSD',
+  'application/x-visio': 'VSD',
+  'application/vnd.visio': 'VSD',
+  'application/vnd.ms-visio': 'VSD',
+  'application/visio.drawing': 'VSD',
+  'application/vsd': 'VSD',
+  'application/x-vsd': 'VSD',
+  'image/x-vsd': 'VSD',
+  'zz-application/zz-winassoc-vsd': 'VSD',
+
+  // ==================== PROJECT / PUBLISHER ====================
+  'application/vnd.ms-project': 'MPP',
+  'application/x-mspublisher': 'PUB',
+  'application/vnd.ms-publisher': 'PUB',
+
+  // ==================== АРХИВЫ ====================
+  'application/zip': 'ZIP',
+  'application/x-rar-compressed': 'RAR',
+  'application/vnd.rar': 'RAR',
+  'application/x-7z-compressed': '7Z',
+  'application/x-tar': 'TAR',
+  'application/gzip': 'GZ',
+  'application/x-gzip': 'GZ',
+
+  // ==================== АУДИО ====================
+  'audio/mpeg': 'MP3',
+  'audio/wav': 'WAV',
+  'audio/ogg': 'OGG',
+  'audio/aac': 'AAC',
+  'audio/flac': 'FLAC',
+  'audio/webm': 'WEBM-A',
+
+  // ==================== ВИДЕО ====================
+  'video/mp4': 'MP4',
+  'video/webm': 'WEBM',
+  'video/quicktime': 'MOV',
+  'video/x-msvideo': 'AVI',
+  'video/x-matroska': 'MKV',
+};
+
+/**
+ * Определяет человекочитаемое расширение файла по его MIME-типу.
+ *
+ * @param type - MIME-тип файла (например, из file.type или заголовка Content-Type)
+ * @returns Строка с расширением в верхнем регистре (JPG, PDF, DOCX и т.д.)
+ *
+ * @example
+ * formatFileType('application/pdf'); // 'PDF'
+ * formatFileType('text/csv; charset=utf-8'); // 'CSV'
+ * formatFileType('image/jpeg'); // 'JPG'
+ * formatFileType('unknown/type'); // 'FILE'
+ */
+export const formatFileType = (type?: string | null): string => {
+  // 1. Защита от пустых/битых значений
+  if (!type) return 'FILE';
+
+  // 2. Очистка MIME-типа: убираем параметры (; charset=...) и приводим к нижнему регистру
+  const cleanType = type.split(';')[0].trim().toLowerCase();
+
+  // 3. Прямое совпадение в словаре — O(1), самый частый кейс
+  if (MIME_MAP[cleanType]) {
+    return MIME_MAP[cleanType];
   }
+
+  // 4. Умные фоллбэки по префиксу (если точного MIME нет в словаре)
+  if (cleanType.startsWith('image/')) return 'IMAGE';
+  if (cleanType.startsWith('video/')) return 'VIDEO';
+  if (cleanType.startsWith('audio/')) return 'AUDIO';
+  if (cleanType.startsWith('text/')) return 'TXT';
+
+  // 5. Попытка угадать архивы по подстрокам
+  if (cleanType.includes('zip') || cleanType.includes('compressed') || cleanType.includes('archive')) {
+    return 'ARCHIVE';
+  }
+
+  // 6. Финальный дефолт
+  return 'FILE';
 };
 
 /**
