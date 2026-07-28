@@ -134,6 +134,7 @@ const IconWrapper = styled.div<{ $status?: Status; $showHover: boolean }>`
   position: relative;
   margin-right: 8px;
   border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+  flex-shrink: 0;
   width: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
   height: ${FILE_ITEM_PREVIEW_ICON_SIZE_XL};
 
