@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.66.1](https://github.com/AdmiralDS/react-ui/compare/v8.66.0...v8.66.1) (2026-07-29)
+
+
+### Bug Fixes
+
+* **FileInputField, FileInput:** fix skeleton handling without reaching the native DOM ([9349281](https://github.com/AdmiralDS/react-ui/commit/9349281630834e42726d323125faa102aef16650))
+* **Pulse:** поправил цвет мигающей обводки status ([324ad4e](https://github.com/AdmiralDS/react-ui/commit/324ad4edcff537d92c307eaac407feace4adc91e))
+* **TextArea:** fix displayCopyIcon when TextArea readOnly ([e7fc11f](https://github.com/AdmiralDS/react-ui/commit/e7fc11fe3c7b29682be378fd7b2edbe81d0d3576))
+* **TooltipHOC:** prevent tooltip from persisting after mouseleave by using ref instead of state for timer ([5c9058d](https://github.com/AdmiralDS/react-ui/commit/5c9058d645c511cff32d42910a088278dff281a5))
+* **TreeSelect:** add basic key navigation and tests ([beec01c](https://github.com/AdmiralDS/react-ui/commit/beec01cde5bf16ad1f5ef5285a1cf2f11e71bd68))
+
 ## [8.66.0](https://github.com/AdmiralDS/react-ui/compare/v8.65.0...v8.66.0) (2026-07-07)
 
 
