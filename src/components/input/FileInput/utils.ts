@@ -134,8 +134,10 @@ const MIME_MAP: Record<string, string> = {
   // ==================== АРХИВЫ ====================
   'application/zip': 'ZIP',
   'application/x-rar-compressed': 'RAR',
+  'application/x-rar': 'RAR',
   'application/vnd.rar': 'RAR',
   'application/x-7z-compressed': '7Z',
+  'application/x-7z': '7Z',
   'application/x-tar': 'TAR',
   'application/gzip': 'GZ',
   'application/x-gzip': 'GZ',
