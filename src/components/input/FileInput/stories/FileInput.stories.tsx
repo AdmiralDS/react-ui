@@ -9,12 +9,14 @@ import { FileInputBaseTemplate } from './FileInputBase.template';
 import { FileInputWithStatusTemplate } from './FileInputWithStatus.template';
 import { FileInputCustomTemplate } from './FileInputCustom.template';
 import { FileInputCustomFileTypeTemplate } from './FileInputCustomFileType.template';
+import { FileInputFileTypeIconsTemplate } from './FileInputFileTypeIcons.template';
 
 // Imports of text sources
 import FileInputBaseRaw from './FileInputBase.template?raw';
 import FileInputWithStatusRaw from './FileInputWithStatus.template?raw';
 import FileInputCustomRaw from './FileInputCustom.template?raw';
 import FileInputCustomFileTypeRaw from './FileInputCustomFileType.template?raw';
+import FileInputFileTypeIconsRaw from './FileInputFileTypeIcons.template?raw';
 
 const Separator = styled.div`
   height: 40px;
@@ -152,6 +154,26 @@ export const FileInputWithStatus = {
     docs: {
       source: {
         code: FileInputWithStatusRaw,
+      },
+    },
+  },
+};
+
+//</editor-fold>
+
+//<editor-fold desc="FileInput. Иконки типов файлов">
+const FileInputFileTypeIconsStory: StoryFn<typeof FileInput> = ({ width = '480px', dimension = 'xl', ...props }) => (
+  <FileInputFileTypeIconsTemplate {...props} width={width} dimension={dimension} />
+);
+
+export const FileInputFileTypeIcons = {
+  render: FileInputFileTypeIconsStory,
+  name: 'FileInput. Иконки типов файлов',
+
+  parameters: {
+    docs: {
+      source: {
+        code: FileInputFileTypeIconsRaw,
       },
     },
   },
