@@ -4,7 +4,7 @@ import { ReactComponent as PDFSolid } from '@admiral-ds/icons/build/documents/PD
 import { ReactComponent as PPTSolid } from '@admiral-ds/icons/build/documents/PPTSolid.svg';
 import { ReactComponent as FileWordSolid } from '@admiral-ds/icons/build/documents/FileWordSolid.svg';
 import { ReactComponent as XLSSolid } from '@admiral-ds/icons/build/documents/XLSSolid.svg';
-import { ReactComponent as DocsSolid } from '@admiral-ds/icons/build/documents/DocsSolid.svg';
+import { ReactComponent as DocOkSolid } from '@admiral-ds/icons/build/documents/DocOkSolid.svg';
 import { ReactComponent as JpgSolid } from '@admiral-ds/icons/build/documents/JpgSolid.svg';
 import { ReactComponent as ZIPSolid } from '@admiral-ds/icons/build/documents/ZIPSolid.svg';
 import { ReactComponent as FileCSVSolid } from '@admiral-ds/icons/build/documents/FileCSVSolid.svg';
@@ -229,6 +229,6 @@ export const getFileTypeIcon = (type: string) => {
     case 'text/csv':
       return FileCSVSolid;
     default:
-      return DocsSolid;
+      return DocOkSolid;
   }
 };
