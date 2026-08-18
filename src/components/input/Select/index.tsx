@@ -324,7 +324,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [value]);
 
     const selectedOption = useMemo(
-      () => (multiple || !selectedValue ? null : constantOptions.find((option) => option.value === selectedValue)),
+      () =>
+        multiple || selectedValue === undefined
+          ? null
+          : constantOptions.find((option) => option.value === selectedValue),
       [multiple, constantOptions, selectedValue],
     );
 

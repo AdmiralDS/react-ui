@@ -1,7 +1,7 @@
 import type { SelectProps } from '@admiral-ds/react-ui';
 import { Option, Select, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-ui';
 import { render, within } from '@testing-library/react';
-import { screen, waitFor } from '@testing-library/dom';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import type { ChangeEvent, PropsWithChildren } from 'react';
 import { act, useState } from 'react';
@@ -83,6 +83,20 @@ describe('SearchSelect', () => {
 
       expect(visibleText).toBeInTheDocument();
       expect(selectElem.value).toBe(options[1]);
+    });
+    test('Renders option label when selected value is an empty string', () => {
+      render(
+        <SelectComponent initialValue="">
+          <Option value="">Не задано</Option>
+          <Option value="one">one</Option>
+        </SelectComponent>,
+      );
+
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+
+      expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
+      expect(selectElem.value).toBe('');
     });
     test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
