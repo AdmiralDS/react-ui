@@ -30,18 +30,18 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
 
       // Ключевая идея: храним в нативном select ТОЛЬКО выбранные опции
       // и несколько "якорных" для правильной работы нативного поведения
-      const optionsToRender = new Map<string, IConstantOption>();
+      const optionIndexesToRender = new Map<string, number>();
 
       // 1. Всегда добавляем выбранные опции
       selectedValues.forEach((val) => {
-        const opt = options.find((o) => o.value === val);
-        if (opt) optionsToRender.set(val, opt);
+        const optionIndex = options.findIndex((option) => option.value === val);
+        if (optionIndex !== -1) optionIndexesToRender.set(val, optionIndex);
       });
 
       // 2. Добавляем опции, ближайшие к выбранным (для навигации)
-      if ((options.length > 0 && selectedValues.length > 0) || !!active) {
+      if ((options.length > 0 && selectedValues.length > 0) || active !== undefined) {
         const lastSelectedIndex = options.findIndex(
-          (o) => o.value === (active || selectedValues[selectedValues.length - 1]),
+          (o) => o.value === (active ?? selectedValues[selectedValues.length - 1]),
         );
 
         // Добавляем ±5 опций вокруг последней выбранной
@@ -51,18 +51,22 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
           i++
         ) {
           const opt = options[i];
-          if (opt && !optionsToRender.has(opt.value)) {
-            optionsToRender.set(opt.value, opt);
+          if (opt && !optionIndexesToRender.has(opt.value)) {
+            optionIndexesToRender.set(opt.value, i);
           }
         }
       }
 
       // 3. Добавляем первую опцию как fallback (если нет выбранных)
-      if (optionsToRender.size === 0 && options.length > 0) {
-        optionsToRender.set(options[0].value, options[0]);
+      if (optionIndexesToRender.size === 0 && options.length > 0) {
+        optionIndexesToRender.set(options[0].value, 0);
       }
 
-      return optionsToRender;
+      return new Map(
+        Array.from(optionIndexesToRender.entries())
+          .sort(([, leftIndex], [, rightIndex]) => leftIndex - rightIndex)
+          .map(([optionValue, optionIndex]) => [optionValue, options[optionIndex]]),
+      );
     }, [value, active, options]);
 
     return (
