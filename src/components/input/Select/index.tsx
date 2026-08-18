@@ -527,7 +527,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ],
     );
 
-    const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
+    const isEmptyValue = multiple ? !selectedValue?.length : !selectedOption;
     const isEmpty = isEmptyValue && !!placeholder && !searchValue;
 
     const renderedSelectValue = renderSelectValue?.(selectedValue, searchValue);

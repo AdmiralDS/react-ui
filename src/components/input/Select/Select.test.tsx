@@ -86,7 +86,7 @@ describe('SearchSelect', () => {
     });
     test('Renders option label when selected value is an empty string', () => {
       render(
-        <SelectComponent initialValue="">
+        <SelectComponent initialValue="" placeholder="Выберите значение">
           <Option value="">Не задано</Option>
           <Option value="one">one</Option>
         </SelectComponent>,
@@ -96,6 +96,7 @@ describe('SearchSelect', () => {
       const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
 
       expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
+      expect(within(valueWrapper).queryByPlaceholderText('Выберите значение')).not.toBeInTheDocument();
       expect(selectElem.value).toBe('');
     });
     test('SingleSelect empty when no value is provided', () => {
