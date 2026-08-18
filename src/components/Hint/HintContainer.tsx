@@ -165,11 +165,12 @@ export const HintContainer = React.forwardRef<HTMLDivElement, HintContainerProps
     const handleHintMouseLeave =
       visibilityTrigger === 'hover'
         ? (e: React.MouseEvent) => {
-            const relatedTarget = e.relatedTarget as Node;
+            const relatedTarget = e.relatedTarget;
+            const relatedNode = relatedTarget instanceof Node ? relatedTarget : null;
             // Если мышь всё ещё над Hint — ничего не делаем
-            if (hintRef.current && relatedTarget && hintRef.current.contains(relatedTarget)) return;
+            if (hintRef.current?.contains(relatedNode)) return;
             // Если мышь ушла на anchor — не закрываем
-            if (anchorElementRef?.current && relatedTarget && anchorElementRef.current.contains(relatedTarget)) return;
+            if (anchorElementRef.current?.contains(relatedNode)) return;
             // Иначе курсор ушёл с области Hint и anchor — закрываем
             hideHint();
           }
