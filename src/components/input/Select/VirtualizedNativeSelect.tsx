@@ -1,6 +1,6 @@
 import { refSetter } from '#src/components/common/utils/refSetter';
 import type { IConstantOption } from '#src/components/input/Select/types';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 
 const NativeSelect = styled.select`
@@ -23,12 +23,9 @@ interface NativeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement
 export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   ({ value, multiple, options, active, disabled, ...props }: NativeSelectProps, ref) => {
     const selectRef = useRef<HTMLSelectElement>(null);
-    const [syncedOptions, setSyncedOptions] = useState<IConstantOption[]>([]);
 
     // Синхронизируем только ВЫБРАННЫЕ опции + несколько ближайших
-    useEffect(() => {
-      if (!selectRef.current) return;
-
+    const syncedOptions = useMemo(() => {
       const selectedValues = Array.isArray(value) ? value : [value];
 
       // Ключевая идея: храним в нативном select ТОЛЬКО выбранные опции
@@ -65,7 +62,7 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
         optionsToRender.set(options[0].value, options[0]);
       }
 
-      setSyncedOptions(Array.from(optionsToRender.values()));
+      return optionsToRender;
     }, [value, active, options]);
 
     return (
@@ -77,8 +74,8 @@ export const VirtualizedNativeSelect = forwardRef<HTMLSelectElement, NativeSelec
         className={'native-select'}
         {...props}
       >
-        <option value="" />
-        {syncedOptions.map((option) => (
+        {!syncedOptions.has('') && <option value="" />}
+        {Array.from(syncedOptions.values()).map((option) => (
           <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.children}
           </option>

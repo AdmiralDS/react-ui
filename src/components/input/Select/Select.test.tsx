@@ -1,7 +1,7 @@
 import type { SelectProps } from '@admiral-ds/react-ui';
 import { Option, Select, LIGHT_THEME, DropdownProvider } from '@admiral-ds/react-ui';
 import { render, within } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import type { ChangeEvent, PropsWithChildren } from 'react';
 import { act, useState } from 'react';
@@ -98,6 +98,7 @@ describe('SearchSelect', () => {
       expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
       expect(within(valueWrapper).queryByPlaceholderText('Выберите значение')).not.toBeInTheDocument();
       expect(selectElem.value).toBe('');
+      expect(Array.from(selectElem.options).filter((option) => option.value === '')).toHaveLength(1);
     });
     test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
@@ -150,6 +151,35 @@ describe('SearchSelect', () => {
 
       const { selectedOptions } = screen.getByRole('listbox') as HTMLSelectElement;
       expect(selectedOptions.length).toBe(2);
+    });
+    test('Updates native options when children change', async () => {
+      const { rerender } = render(
+        <SelectComponent initialValue="two">
+          <Option value="one">one</Option>
+          <Option value="two">two</Option>
+        </SelectComponent>,
+      );
+
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+
+      await waitFor(() => {
+        const nativeValues = Array.from(selectElem.options).map((option) => option.value);
+        expect(nativeValues).toHaveLength(3);
+        expect(nativeValues).toEqual(expect.arrayContaining(['', 'one', 'two']));
+      });
+
+      rerender(
+        <SelectComponent initialValue="two">
+          <Option value="two">two</Option>
+          <Option value="three">three</Option>
+        </SelectComponent>,
+      );
+
+      await waitFor(() => {
+        const nativeValues = Array.from(selectElem.options).map((option) => option.value);
+        expect(nativeValues).toHaveLength(3);
+        expect(nativeValues).toEqual(expect.arrayContaining(['', 'two', 'three']));
+      });
     });
     test('Cheked value is active', () => void 0);
     test('Cheked multiselect value is active', () => void 0);
