@@ -33,11 +33,11 @@ export const DropDownTree = ({
   onDeselectItem,
   onMenuKeyDown,
   dimension = 'l',
-  ...props
+  preselectedModeActive = false,
+  ...menuProps
 }: DropDownTreeProps) => {
   const [active, setActive] = useState<string>();
   const map = useMemo(() => new Map(items), [items]);
-
   const setChecked = (id: string, value: boolean) => {
     const mapItem = map.get(id);
     if (mapItem?.node.disabled) return;
@@ -132,15 +132,17 @@ export const DropDownTree = ({
   return (
     <DropdownContainer {...dropdownProps} {...dropdownConfig?.(dropdownProps)}>
       <StyledMenu
-        {...props}
+        {...menuProps}
         active={active ?? null}
         onActivateItem={setActive}
-        preselectedModeActive={false}
+        preselectedModeActive={preselectedModeActive}
         model={model}
         onSelectItem={handleSelectItem}
         disableSelectedOptionHighlight={true}
         dimension={dimension}
         onMenuKeyDown={onMenuKeyDown}
+        preventFocusSteal
+        homeEndKeysNavigateList
       />
     </DropdownContainer>
   );

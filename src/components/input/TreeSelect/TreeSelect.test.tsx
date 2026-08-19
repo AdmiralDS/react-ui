@@ -325,4 +325,154 @@ describe('TreeSelect keyboard navigation', () => {
 
     expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
   });
+
+  test('deletes last chip on Backspace when dropdown is closed', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ defaultValue: ['1.1', '2'] });
+
+    expect(document.getElementById('1.1')).toBeInTheDocument();
+    expect(document.getElementById('2')).toBeInTheDocument();
+
+    await user.tab();
+    await user.keyboard('{Backspace}');
+
+    expect(document.getElementById('2')).not.toBeInTheDocument();
+    expect(document.getElementById('1.1')).toBeInTheDocument();
+  });
+
+  test('deletes last chip on Backspace when dropdown is open', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ defaultValue: ['1.1', '2'] });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeChecked();
+
+    await user.keyboard('{Backspace}');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).not.toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Опция 1.1' })).toBeChecked();
+  });
+
+  test('deletes last chip on Backspace when dropdown is open and focus is on menu', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ defaultValue: ['1.1', '2'] });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    const option2Checkbox = screen.getByRole('checkbox', { name: 'Опция 2' }) as HTMLElement;
+    expect(option2Checkbox).toBeChecked();
+    option2Checkbox.focus();
+    expect(option2Checkbox).toHaveFocus();
+
+    await user.keyboard('{Backspace}');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).not.toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Опция 1.1' })).toBeChecked();
+  });
+
+  test('deletes last chip on Backspace after selecting option in uncontrolled mode', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'End', code: 'End' });
+    });
+    await act(async () => {
+      fireEvent.keyDown(document, { key: ' ', code: 'Space' });
+    });
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeChecked();
+
+    await user.keyboard('{Backspace}');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).not.toBeChecked();
+  });
+
+  test('navigates with preselectedModeActive using data-preselected', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ preselectedModeActive: true });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    const getPreselectedOption = (label: string) =>
+      screen.getByText(label).closest('[data-preselected="true"]') as HTMLElement | null;
+
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowDown', code: 'ArrowDown' });
+    });
+
+    expect(getPreselectedOption('Опция 1.1')).toBeInTheDocument();
+  });
+
+  test('navigates to first and last options with Home and End', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'End', code: 'End' });
+    });
+    expect(getHoveredOption('Опция 2')).toHaveAttribute('data-hovered', 'true');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'Home', code: 'Home' });
+    });
+    expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
+  });
+
+  test('navigates to first and last options with ArrowLeft and ArrowRight', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowRight', code: 'ArrowRight' });
+    });
+    expect(getHoveredOption('Опция 2')).toHaveAttribute('data-hovered', 'true');
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowLeft', code: 'ArrowLeft' });
+    });
+    expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
+  });
+
+  test('keeps input focus after selecting values and closing dropdown', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    const input = screen.getByPlaceholderText('Выберите элементы...') as HTMLInputElement;
+
+    await user.tab();
+    expect(input).toHaveFocus();
+
+    await user.keyboard('[Space]');
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'End', code: 'End' });
+    });
+    await act(async () => {
+      fireEvent.keyDown(document, { key: ' ', code: 'Space' });
+    });
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeChecked();
+
+    await user.keyboard('[Escape]');
+    expect(screen.queryByRole('checkbox', { name: 'Опция 2' })).not.toBeInTheDocument();
+    expect(input).toHaveFocus();
+
+    await user.keyboard('[Space]');
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeInTheDocument();
+  });
 });
