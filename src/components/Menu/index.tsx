@@ -217,6 +217,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     ref,
   ) => {
     const findNextId = (currentId?: string | null) => {
+      // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
       const currentIndex = currentId != null ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
       let finishCycle = false;
@@ -236,6 +237,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const findPreviousId = (currentId?: string | null) => {
+      // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
       const currentIndex = currentId != null ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
       let finishCycle = false;
@@ -346,6 +348,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       function handleKeyDown(e: KeyboardEvent) {
         if (currentActiveMenu?.current !== wrapperRef.current) return;
 
+        // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
         const code = keyboardKey.getCode(e);
         switch (code) {
           case keyboardKey[' ']: {
@@ -538,6 +541,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         const isActiveChanged = hasActiveChanged();
         const isPreselectdChanged = hasPreselectedChanged();
 
+        // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
         if (isActiveChanged && activeId != null) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (isPreselectdChanged) {

@@ -921,6 +921,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             disableAutoFocus
             {...dropContainerProps}
           >
+            {/* Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''. */}
             <StyledMenu
               dimension={dimension === 'xl' ? 'l' : dimension}
               active={modeIsSelect && preselected != null ? null : activeItem}

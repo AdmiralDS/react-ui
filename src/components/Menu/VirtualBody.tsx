@@ -128,6 +128,7 @@ export const VirtualBody = ({
 
   // Эффект для активного элемента
   useEffect(() => {
+    // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
     if (activeId == null && preselectedId == null) return;
 
     const prevActiveId = prevValue?.activeId;
