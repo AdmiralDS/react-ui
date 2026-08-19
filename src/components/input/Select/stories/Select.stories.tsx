@@ -233,7 +233,7 @@ export const SelectEmptyValueKeyboard = {
     },
   },
 
-  name: 'Select с пустым значением и клавиатурной навигацией',
+  name: 'Select с пустым значением и клавиатурной навигацией (active/preselected)',
 };
 
 //</editor-fold>

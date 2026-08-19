@@ -559,7 +559,7 @@ export const SearchSelectEmptyValueKeyboard = {
     },
   },
 
-  name: 'SearchSelect с пустым значением и клавиатурной навигацией',
+  name: 'SearchSelect с пустым значением и клавиатурной навигацией (active/preselected)',
 };
 
 //</editor-fold>
