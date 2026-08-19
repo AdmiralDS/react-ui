@@ -40,10 +40,15 @@ test('date-range calendar respects controlled viewDate', async ({ page }) => {
   const dateRangeInput = frame.locator('.text-input-native-input');
   const calendarIcon = frame.locator('svg').first();
   const panel = frame.locator('.ui-kit-calendar-panel-component');
+  const today = new Date();
+  const expectedMonth = RU_MONTHS[today.getMonth()];
+  const expectedYear = String(today.getFullYear());
 
   await calendarIcon.click();
   await expect(panel).toBeVisible();
-  await frame.locator('text=Сегодня').click();
+  await frame.getByRole('button', { name: 'Сегодня' }).dispatchEvent('mousedown');
+  await expect(panel.locator('h6').first()).toHaveText(expectedMonth);
+  await expect(panel.locator('h6').nth(1)).toHaveText(expectedYear);
   await frame.locator('body').click({ position: { x: 1, y: 1 } });
   await expect(panel).toBeHidden();
   await calendarIcon.click();
@@ -52,10 +57,6 @@ test('date-range calendar respects controlled viewDate', async ({ page }) => {
   await frame.locator('body').click({ position: { x: 1, y: 1 } });
   await expect(panel).toBeHidden();
   await calendarIcon.click();
-
-  const today = new Date();
-  const expectedMonth = RU_MONTHS[today.getMonth()];
-  const expectedYear = String(today.getFullYear());
 
   await expect(panel).toBeVisible();
   const { month, year } = await getCalendarPanelDate(panel);

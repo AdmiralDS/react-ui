@@ -84,6 +84,22 @@ describe('SearchSelect', () => {
       expect(visibleText).toBeInTheDocument();
       expect(selectElem.value).toBe(options[1]);
     });
+    test('Renders option label when selected value is an empty string', () => {
+      render(
+        <SelectComponent initialValue="" placeholder="Выберите значение">
+          <Option value="">Не задано</Option>
+          <Option value="one">one</Option>
+        </SelectComponent>,
+      );
+
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+
+      expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
+      expect(within(valueWrapper).queryByPlaceholderText('Выберите значение')).not.toBeInTheDocument();
+      expect(selectElem.value).toBe('');
+      expect(Array.from(selectElem.options).filter((option) => option.value === '')).toHaveLength(1);
+    });
     test('SingleSelect empty when no value is provided', () => {
       render(<SelectComponent placeholder="placeholder" />);
 
@@ -135,6 +151,35 @@ describe('SearchSelect', () => {
 
       const { selectedOptions } = screen.getByRole('listbox') as HTMLSelectElement;
       expect(selectedOptions.length).toBe(2);
+    });
+    test('Updates native options when children change', async () => {
+      const { rerender } = render(
+        <SelectComponent initialValue="two">
+          <Option value="one">one</Option>
+          <Option value="two">two</Option>
+        </SelectComponent>,
+      );
+
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+
+      await waitFor(() => {
+        const nativeValues = Array.from(selectElem.options).map((option) => option.value);
+        expect(nativeValues).toHaveLength(3);
+        expect(nativeValues).toEqual(expect.arrayContaining(['', 'one', 'two']));
+      });
+
+      rerender(
+        <SelectComponent initialValue="two">
+          <Option value="two">two</Option>
+          <Option value="three">three</Option>
+        </SelectComponent>,
+      );
+
+      await waitFor(() => {
+        const nativeValues = Array.from(selectElem.options).map((option) => option.value);
+        expect(nativeValues).toHaveLength(3);
+        expect(nativeValues).toEqual(expect.arrayContaining(['', 'two', 'three']));
+      });
     });
     test('Cheked value is active', () => void 0);
     test('Cheked multiselect value is active', () => void 0);
@@ -433,6 +478,116 @@ describe('SearchSelect', () => {
   });
 
   describe('hover onOption', () => {
+    test('moves keyboard activity from an option with empty string value', async () => {
+      const user = userEvent.setup();
+      render(
+        <SelectComponent initialValue="">
+          <Option data-testid="option" value="">
+            Не задано
+          </Option>
+          <Option data-testid="option" value="one">
+            one
+          </Option>
+          <Option data-testid="option" value="two">
+            two
+          </Option>
+        </SelectComponent>,
+      );
+
+      const inputElem = screen.getByRole('textbox') as HTMLInputElement;
+      await act(async () => {
+        await user.tab();
+        await user.type(inputElem, '{space}');
+      });
+      await act(async () => {
+        await user.type(inputElem, '{arrowdown}');
+      });
+
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
+      const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
+
+      dropDownOptions.forEach((option, index) => {
+        expect(option).toHaveAttribute('data-hovered', index === 1 ? 'true' : 'false');
+      });
+    });
+
+    test('selects an option with empty string value using keyboard', async () => {
+      const user = userEvent.setup();
+      render(
+        <SelectComponent initialValue="" mode="select">
+          <Option data-testid="option" value="">
+            Не задано
+          </Option>
+          <Option data-testid="option" value="one">
+            one
+          </Option>
+          <Option data-testid="option" value="two">
+            two
+          </Option>
+        </SelectComponent>,
+      );
+
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+      await act(async () => {
+        await user.tab();
+        await user.keyboard(' ');
+      });
+      const dropDownContainer = document.getElementsByClassName('dropdown-container')[0] as HTMLElement;
+      const dropDownOptions = within(dropDownContainer).getAllByTestId('option');
+      await act(async () => {
+        await user.click(dropDownOptions[1]);
+      });
+      await act(async () => {
+        selectElem.focus();
+        await user.keyboard(' ');
+      });
+      await act(async () => {
+        await user.keyboard('{arrowup}');
+      });
+      await act(async () => {
+        await user.keyboard('{enter}');
+      });
+
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
+
+      expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
+      expect(selectElem.value).toBe('');
+    });
+
+    test('selects an option with empty string value using keyboard in searchSelect mode', async () => {
+      const user = userEvent.setup();
+      render(
+        <SelectComponent initialValue="one">
+          <Option data-testid="option" value="">
+            Не задано
+          </Option>
+          <Option data-testid="option" value="one">
+            one
+          </Option>
+          <Option data-testid="option" value="two">
+            two
+          </Option>
+        </SelectComponent>,
+      );
+
+      await act(async () => {
+        await user.tab();
+        await user.keyboard(' ');
+      });
+      await act(async () => {
+        await user.keyboard('{arrowup}');
+      });
+      await act(async () => {
+        await user.keyboard('{enter}');
+      });
+
+      const valueWrapper = document.getElementsByClassName('selectValueWrapper')[0] as HTMLElement;
+      const selectElem = screen.getByRole('combobox') as HTMLSelectElement;
+
+      expect(within(valueWrapper).getByText('Не задано')).toBeInTheDocument();
+      expect(selectElem.value).toBe('');
+    });
+
     test('basic hoveres with keyboard', async () => {
       const user = userEvent.setup();
       render(<SelectComponent value={options[1]} />);

@@ -264,13 +264,14 @@ export const Hint: React.FC<HintProps> = ({
   const handleAnchorMouseLeave =
     visibilityTrigger === 'hover'
       ? (e: React.MouseEvent) => {
-          const relatedTarget = e.relatedTarget as Node;
+          const relatedTarget = e.relatedTarget;
+          const relatedNode = relatedTarget instanceof Node ? relatedTarget : null;
           // Если курсор перешёл на Hint, не закрываем
-          if (hintElementRef.current && relatedTarget && hintElementRef.current.contains(relatedTarget)) {
+          if (hintElementRef.current?.contains(relatedNode)) {
             return;
           }
           // Если курсор перешёл на anchor (вернулся обратно), не закрываем
-          if (anchorElementRef.current && relatedTarget && anchorElementRef.current.contains(relatedTarget)) {
+          if (anchorElementRef.current?.contains(relatedNode)) {
             return;
           }
           // Проверяем, не заблокировано ли закрытие (например, при клике)
@@ -303,13 +304,14 @@ export const Hint: React.FC<HintProps> = ({
   const handleAnchorBlur =
     visibilityTrigger === 'hover'
       ? (e: React.FocusEvent) => {
-          const relatedTarget = e.relatedTarget as Node;
+          const relatedTarget = e.relatedTarget;
+          const relatedNode = relatedTarget instanceof Node ? relatedTarget : null;
           // Если фокус перешёл на Hint, не закрываем
-          if (hintElementRef.current && relatedTarget && hintElementRef.current.contains(relatedTarget)) {
+          if (hintElementRef.current?.contains(relatedNode)) {
             return;
           }
           // Если фокус перешёл на anchor, не закрываем
-          if (anchorElementRef.current && relatedTarget && anchorElementRef.current.contains(relatedTarget)) {
+          if (anchorElementRef.current?.contains(relatedNode)) {
             return;
           }
           // Проверяем, не заблокировано ли закрытие

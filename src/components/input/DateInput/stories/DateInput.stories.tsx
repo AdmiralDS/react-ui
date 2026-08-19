@@ -267,6 +267,10 @@ export const DateInputWithButtonToday = {
 
   parameters: {
     docs: {
+      description: {
+        story:
+          'В нижнюю панель календаря можно добавлять пользовательские кнопки. В данном примере кнопка «Сегодня» показывает в календаре текущий месяц и не выбирает дату.',
+      },
       source: {
         code: DateInputWithButtonTodayRaw,
       },

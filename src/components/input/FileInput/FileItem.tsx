@@ -81,25 +81,31 @@ const sizeMixin = css`
 `;
 
 const hoveredFileTypeIconCss = css`
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    background-color: var(
+      --admiral-color-Special_DarkStaticNeutral00,
+      ${(p) => p.theme.color['Special/Dark Static Neutral 00']}
+    );
+  }
+
   &:hover {
     &:not(:disabled) {
       &::before {
-        content: '';
-        position: absolute;
-        border-radius: var(--admiral-border-radius-Medium, ${(p) => mediumGroupBorderRadius(p.theme.shape)});
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
         opacity: 0.6;
-        background-color: var(
-          --admiral-color-Special_DarkStaticNeutral00,
-          ${(p) => p.theme.color['Special/Dark Static Neutral 00']}
-        );
       }
       & svg {
-        visibility: visible;
+        opacity: 1;
       }
       cursor: pointer;
     }
@@ -157,7 +163,8 @@ const StyledEyeOutline = styled(EyeOutline)`
   transform: translate(-50%, -50%);
   width: ${FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL};
   height: ${FILE_ITEM_FUNCTIONAL_ICON_SIZE_XL};
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 
   & *[fill^='#'] {
     fill: var(--admiral-color-Special_StaticWhite, ${(p) => p.theme.color['Special/Static White']});

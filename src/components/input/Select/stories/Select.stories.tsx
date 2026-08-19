@@ -7,6 +7,7 @@ import { SelectCustomRenderMultipleValuesTemplate } from '#src/components/input/
 import { SelectWithTitleTemplate } from '#src/components/input/Select/stories/select/SelectWithTitle.template';
 import { SelectSimpleTemplate } from '#src/components/input/Select/stories/select/SelectSimple.template';
 import { SelectMultiTemplate } from '#src/components/input/Select/stories/select/SelectMulti.template';
+import { SelectEmptyValueKeyboardTemplate } from '#src/components/input/Select/stories/select/SelectEmptyValueKeyboard.template';
 
 // Imports of text sources
 import SelectCustomRenderValueRaw from '#src/components/input/Select/stories/select/SelectCustomRenderValue.template?raw';
@@ -14,6 +15,7 @@ import SelectCustomRenderMultipleValuesRaw from '#src/components/input/Select/st
 import SelectWithTitleRaw from '#src/components/input/Select/stories/select/SelectWithTitle.template?raw';
 import SelectSimpleRaw from '#src/components/input/Select/stories/select/SelectSimple.template?raw';
 import SelectMultiRaw from '#src/components/input/Select/stories/select/SelectMulti.template?raw';
+import SelectEmptyValueKeyboardRaw from '#src/components/input/Select/stories/select/SelectEmptyValueKeyboard.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/Select/режим "select"',
@@ -212,3 +214,26 @@ export const MultiSelect = {
 
   name: 'Select. Простой MultiSelect',
 };
+
+//</editor-fold>
+
+//<editor-fold desc="Select с пустым значением и клавиатурной навигацией">
+const SelectEmptyValueKeyboardStory: StoryFn<typeof Select> = (props) => (
+  <SelectEmptyValueKeyboardTemplate {...props} />
+);
+
+export const SelectEmptyValueKeyboard = {
+  render: SelectEmptyValueKeyboardStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectEmptyValueKeyboardRaw,
+      },
+    },
+  },
+
+  name: 'Select с пустым значением и клавиатурной навигацией (active/preselected)',
+};
+
+//</editor-fold>

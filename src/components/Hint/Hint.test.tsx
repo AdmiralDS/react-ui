@@ -84,6 +84,42 @@ describe('Hint', () => {
     window.requestAnimationFrame = originalRAF;
   });
 
+  it('should hide hint when mouse leaves anchor for a non-Node target', () => {
+    render(<WrappedComponentWithTooltip renderContent={() => 'hintText'} />);
+    act(() => {
+      fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
+    });
+
+    expect(() => {
+      fireEvent.mouseLeave(screen.getByTestId('wrapped-component'), { relatedTarget: window });
+    }).not.toThrow();
+    expect(screen.queryByText('hintText')).not.toBeInTheDocument();
+  });
+
+  it('should hide hint when anchor loses focus for a non-Node target', () => {
+    render(<WrappedComponentWithTooltip renderContent={() => 'hintText'} />);
+    act(() => {
+      fireEvent.focus(screen.getByTestId('wrapped-component'));
+    });
+
+    expect(() => {
+      fireEvent.blur(screen.getByTestId('wrapped-component'), { relatedTarget: window });
+    }).not.toThrow();
+    expect(screen.queryByText('hintText')).not.toBeInTheDocument();
+  });
+
+  it('should hide hint when mouse leaves hint for a non-Node target', () => {
+    render(<WrappedComponentWithTooltip renderContent={() => 'hintText'} />);
+    act(() => {
+      fireEvent.mouseEnter(screen.getByTestId('wrapped-component'));
+    });
+
+    expect(() => {
+      fireEvent.mouseLeave(screen.getByRole('tooltip'), { relatedTarget: window });
+    }).not.toThrow();
+    expect(screen.queryByText('hintText')).not.toBeInTheDocument();
+  });
+
   it('should show hint when user clicks component', () => {
     render(<WrappedComponentWithTooltip renderContent={() => 'hintText'} visibilityTrigger="click" />);
     act(() => {
