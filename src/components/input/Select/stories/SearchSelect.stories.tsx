@@ -23,6 +23,7 @@ import { SearchSelectWithOnChangeHandlerTemplate } from './searchSelect/SearchSe
 import { SearchSelectWithSelectedOnTopTemplate } from './searchSelect/SearchSelectWithSelectedOnTop.template';
 import { SearchSelectWithClearInputTemplate } from './searchSelect/SearchSelectWithClearInput.template';
 import { SearchSelectWithChooseAllButtonTemplate } from './searchSelect/SearchSelectWithChooseAllButton.template';
+import { SelectEmptyValueKeyboardTemplate } from './select/SelectEmptyValueKeyboard.template';
 
 // Imports of text sources
 import SearchSelectRenderPropsRaw from './searchSelect/SearchSelectRenderProps.template?raw';
@@ -45,6 +46,7 @@ import SearchSelectVirtualScrollRaw from './searchSelect/SearchSelectVirtualScro
 import SearchSelectWithOnClickHandlerTemplateRaw from './searchSelect/SearchSelectWithOnChangeHandler.template?raw';
 import SearchSelectWithSelectedOnTopTemplateRaw from './searchSelect/SearchSelectWithSelectedOnTop.template?raw';
 import SearchSelectWithClearInputTemplateRaw from './searchSelect/SearchSelectWithClearInput.template?raw';
+import SelectEmptyValueKeyboardRaw from './select/SelectEmptyValueKeyboard.template?raw';
 
 const queryClient = new QueryClient();
 
@@ -539,4 +541,25 @@ export const WithClearInput = {
 
   name: 'Multiple с опцией очистки введенного значения',
 };
+//</editor-fold>
+
+//<editor-fold desc="SearchSelect с пустым значением и клавиатурной навигацией">
+const SearchSelectEmptyValueKeyboardStory: StoryFn<typeof Select> = (props) => (
+  <SelectEmptyValueKeyboardTemplate {...props} mode="searchSelect" />
+);
+
+export const SearchSelectEmptyValueKeyboard = {
+  render: SearchSelectEmptyValueKeyboardStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: SelectEmptyValueKeyboardRaw,
+      },
+    },
+  },
+
+  name: 'SearchSelect с пустым значением и клавиатурной навигацией (active/preselected)',
+};
+
 //</editor-fold>

@@ -94,10 +94,13 @@ export interface RenderPanelProps {
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
   dimension?: MenuDimensions;
-  /** Активная секция Menu */
+  /** Активная секция Menu, например при наведении курсора. `undefined` использует внутреннее состояние,
+   * `null` означает отсутствие активной секции, пустая строка (`''`) является допустимым идентификатором секции. */
   active?: string | null;
-  /** Секция в состоянии preselected  */
-  preselected?: string;
+  /** Временно подсвеченная секция при клавиатурной навигации до подтверждения выбора. `undefined` использует
+   * внутреннее состояние, `null` означает отсутствие preselected-секции, пустая строка (`''`) является допустимым
+   * идентификатором секции. */
+  preselected?: string | null;
   /** выбранная секция Menu */
   selected?: string | Array<string>;
   /** выбранная по умолчанию секция Menu */
@@ -215,7 +218,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     ref,
   ) => {
     const findNextId = (currentId?: string | null) => {
-      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
+      // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
+      const currentIndex = currentId != null ? model.findIndex((item) => item.id === currentId) : -1;
       let nextIndex = currentIndex < model.length - 1 ? currentIndex + 1 : 0;
       let finishCycle = false;
 
@@ -234,7 +238,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const findPreviousId = (currentId?: string | null) => {
-      const currentIndex = currentId ? model.findIndex((item) => item.id === currentId) : -1;
+      // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
+      const currentIndex = currentId != null ? model.findIndex((item) => item.id === currentId) : -1;
       let prevIndex = currentIndex > 0 ? currentIndex - 1 : model.length - 1;
       let finishCycle = false;
 
@@ -287,8 +292,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         ? selectedState
         : valueToArray(selected);
     const activeId = isActiveControlled
-      ? active != null
-        ? active
+      ? active !== undefined
+        ? (active ?? undefined)
         : disableSelectedOptionHighlight
           ? undefined
           : activeState
@@ -344,28 +349,29 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       function handleKeyDown(e: KeyboardEvent) {
         if (currentActiveMenu?.current !== wrapperRef.current) return;
 
+        // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
         const code = keyboardKey.getCode(e);
         switch (code) {
           case keyboardKey[' ']: {
             if (disableSelectionOnSpace) break;
-            if (preselectedModeActive && !!preselectedId) {
+            if (preselectedModeActive && preselectedId != null) {
               handleClickItem(preselectedId);
-            } else if (activeId) handleClickItem(activeId);
+            } else if (activeId != null) handleClickItem(activeId);
 
             e.preventDefault();
             break;
           }
           case keyboardKey.Enter: {
             if (disableSelectionOnEnter) break;
-            if (preselectedModeActive && !!preselectedId) {
+            if (preselectedModeActive && preselectedId != null) {
               handleClickItem(preselectedId);
-            } else if (activeId) handleClickItem(activeId);
+            } else if (activeId != null) handleClickItem(activeId);
 
             e.preventDefault();
             break;
           }
           case keyboardKey.ArrowDown: {
-            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
 
             const nextId = findNextId(currentId);
             if (preselectedModeActive) preselectItem(nextId);
@@ -375,7 +381,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.ArrowUp: {
-            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
 
             const previousId = findPreviousId(currentId);
             if (preselectedModeActive) preselectItem(previousId);
@@ -386,7 +392,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           }
           case keyboardKey.ArrowRight:
           case keyboardKey.End: {
-            const currentId = preselectedModeActive ? preselectedId || activeId : activeId;
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
             const item = model.find((item) => item.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
               setSubmenuVisible(true);
@@ -512,7 +518,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
     const previousActive = useRef<string | undefined | null>();
     const previousActiveState = useRef<string | undefined>();
-    const previousPreselected = useRef<string | undefined>();
+    const previousPreselected = useRef<string | null | undefined>();
     const previousPreselectedState = useRef<string | undefined>();
 
     const hasActiveChanged = () => {
@@ -523,7 +529,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const hasPreselectedChanged = () => {
-      const isControlled = !!preselected;
+      const isControlled = preselected !== undefined;
       const previousValue = isControlled ? previousPreselected.current : previousPreselectedState.current;
       const currentValue = isControlled ? preselected : preselectedState;
 
@@ -536,7 +542,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         const isActiveChanged = hasActiveChanged();
         const isPreselectdChanged = hasPreselectedChanged();
 
-        if (isActiveChanged && activeId) {
+        // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
+        if (isActiveChanged && activeId != null) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-hovered="true"]');
         } else if (isPreselectdChanged) {
           itemToScroll = scrollContainerRef.current?.querySelector('[data-preselected="true"]');

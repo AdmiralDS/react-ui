@@ -38,13 +38,11 @@ import { DisplayValue } from './DisplayValue';
 import type { DropContainerStyles } from '#src/components/DropdownContainer';
 import { DropdownContainer } from '#src/components/DropdownContainer';
 import type { RenderPanelProps } from '#src/components/Menu';
-import { NativeControl } from '#src/components/input/Select/NativeControl';
 import { DropDownProvider } from '#src/components/input/Select/DropDownContext';
 import type { MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { IConstantOption, SearchFormat, SelectItemProps } from '#src/components/input/Select/types';
 import { defaultFilterItem } from '#src/components/input/Select/utils';
 import { passDropdownDataAttributes, passMenuDataAttributes } from '#src/components/common/utils/splitDataAttributes';
-import { uid } from '#src/components/common/uid';
 import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import { usePrevious } from '#src/components/common/hooks/usePrevious';
 import { VirtualizedNativeSelect } from '#src/components/input/Select/VirtualizedNativeSelect';
@@ -300,7 +298,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(forcedOpen);
     const [isFocused, setIsFocused] = useState(false);
-    const [preselected, setPreseleceted] = useState<string | undefined>(undefined);
+    const [preselected, setPreseleceted] = useState<string | null>(null);
 
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
@@ -324,7 +322,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [value]);
 
     const selectedOption = useMemo(
-      () => (multiple || !selectedValue ? null : constantOptions.find((option) => option.value === selectedValue)),
+      () =>
+        multiple || selectedValue === undefined
+          ? null
+          : constantOptions.find((option) => option.value === selectedValue),
       [multiple, constantOptions, selectedValue],
     );
 
@@ -391,7 +392,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     }, [isLoading, dropDownItems, dimension, searchValue, itemsOnTop]);
 
     useEffect(() => {
-      if (activeItem) {
+      if (activeItem !== undefined) {
         const item = dropDownModel.find((item) => item.id === activeItem);
         if (!item) {
           setActiveItem(undefined);
@@ -524,7 +525,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ],
     );
 
-    const isEmptyValue = multiple ? !selectedValue?.length : !selectedValue;
+    const isEmptyValue = multiple ? !selectedValue?.length : !selectedOption;
     const isEmpty = isEmptyValue && !!placeholder && !searchValue;
 
     const renderedSelectValue = renderSelectValue?.(selectedValue, searchValue);
@@ -739,21 +740,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         if (modeIsSelect) selectRef.current?.focus();
         else inputRef.current?.focus();
 
-        setPreseleceted('');
+        setPreseleceted(null);
       }
     }, [isSearchPanelOpen, modeIsSelect]);
 
     useEffect(() => {
-      if (preselected) setActiveItem('');
-    }, [preselected]);
-
-    useEffect(() => {
-      if (activeItem) setPreseleceted('');
-    }, [activeItem]);
-
-    useEffect(() => {
       if (isSearchPanelOpen) {
-        const activeValue = selectedValue && !Array.isArray(selectedValue) ? selectedValue : undefined;
+        const activeValue = selectedValue !== undefined && !Array.isArray(selectedValue) ? selectedValue : undefined;
         setActiveItem(activeValue);
       }
     }, [isSearchPanelOpen]);
@@ -928,11 +921,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             disableAutoFocus
             {...dropContainerProps}
           >
+            {/* Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''. */}
             <StyledMenu
               dimension={dimension === 'xl' ? 'l' : dimension}
-              active={activeItem}
+              active={modeIsSelect && preselected != null ? null : activeItem}
               selected={selectedValue}
-              onActivateItem={(id) => setActiveItem(id)}
+              onActivateItem={(id) => {
+                setActiveItem(id);
+                setPreseleceted(null);
+              }}
               onSelectItem={handleOptionSelect}
               onDeselectItem={handleOptionSelect}
               multiSelection={multiple}
@@ -944,7 +941,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               preventFocusSteal
               preselectedModeActive={modeIsSelect}
               preselected={preselected}
-              onPreselectItem={setPreseleceted}
+              onPreselectItem={(id) => setPreseleceted(id ?? null)}
               onMenuKeyDown={handleMenuKeyDown}
               disableSelectionOnSpace={mode === 'searchSelect'}
               {...menuProps}
