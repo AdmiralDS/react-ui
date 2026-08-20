@@ -449,7 +449,7 @@ describe('TreeSelect keyboard navigation', () => {
     expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
   });
 
-  test('keeps input focus after selecting values and closing dropdown', async () => {
+  test('keeps input focus after selecting values and closing dropdown via Escape', async () => {
     const user = userEvent.setup();
     renderTreeSelect();
 
@@ -474,5 +474,29 @@ describe('TreeSelect keyboard navigation', () => {
 
     await user.keyboard('[Space]');
     expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeInTheDocument();
+  });
+
+  test('does not steal focus when dropdown closes by click outside', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <DropdownProvider>
+          <input data-testid="other-field" />
+          <TreeSelect items={items} placeholder="Выберите элементы..." />
+        </DropdownProvider>
+      </ThemeProvider>,
+    );
+
+    const treeSelectInput = screen.getByPlaceholderText('Выберите элементы...') as HTMLInputElement;
+    const otherField = screen.getByTestId('other-field');
+
+    await user.click(treeSelectInput);
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+
+    await user.click(otherField);
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
+    expect(otherField).toHaveFocus();
+    expect(treeSelectInput).not.toHaveFocus();
   });
 });

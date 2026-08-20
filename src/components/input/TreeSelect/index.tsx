@@ -231,7 +231,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
       setOpen(false);
       onOpenChange?.(false);
-      inputRef.current?.focus();
     };
 
     const toggleOpen = () => {
