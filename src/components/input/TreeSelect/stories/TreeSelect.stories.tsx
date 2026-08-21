@@ -12,6 +12,7 @@ import { PanesRenderTemplate } from './PanesRender.template';
 import { ShowChildStrategyTemplate } from './ShowChildStrategy.template';
 import { ShowParentStrategyTemplate } from './ShowParentStrategy.template';
 import { RowCountLimitsTemplate } from './RowCountLimits.template';
+import { KeyboardNavigationAndFocusTemplate } from './KeyboardNavigationAndFocus.template';
 
 // Imports of text sources
 import PlaygroundRaw from './Playground.template?raw';
@@ -19,6 +20,7 @@ import PanesRenderRaw from './PanesRender.template?raw';
 import ShowChildStrategyRaw from './ShowChildStrategy.template?raw';
 import ShowParentStrategyRaw from './ShowParentStrategy.template?raw';
 import RowCountLimitsRaw from './RowCountLimits.template?raw';
+import KeyboardNavigationAndFocusRaw from './KeyboardNavigationAndFocus.template?raw';
 
 export default {
   title: 'Admiral-2.1/Input/TreeSelect',
@@ -202,6 +204,20 @@ export const RowCountLimits = {
     docs: {
       source: {
         code: RowCountLimitsRaw,
+      },
+    },
+  },
+};
+
+const KeyboardNavigationAndFocusStory: StoryFn<typeof TreeSelect> = () => <KeyboardNavigationAndFocusTemplate />;
+
+export const KeyboardNavigationAndFocus = {
+  render: KeyboardNavigationAndFocusStory,
+  name: 'Клавиатурная навигация и управление фокусом',
+  parameters: {
+    docs: {
+      source: {
+        code: KeyboardNavigationAndFocusRaw,
       },
     },
   },
