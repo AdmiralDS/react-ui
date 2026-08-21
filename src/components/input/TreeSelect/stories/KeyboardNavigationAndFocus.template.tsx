@@ -16,8 +16,7 @@ const Layout = styled.div`
   max-width: 480px;
 `;
 
-export const FocusOutsideRegressionTemplate = () => {
-  const [focusedField, setFocusedField] = useState('нет');
+export const KeyboardNavigationAndFocusTemplate = () => {
   const [panelValue, setPanelValue] = useState('тест');
 
   return (
@@ -33,31 +32,24 @@ export const FocusOutsideRegressionTemplate = () => {
       </T>
 
       <T font="Body/Body 1 Long">
-        В TreeSelect клавиши Home, End и стрелки должны перемещать курсор, а Backspace — удалять символы текста.
-        Backspace не должен удалять чипы TreeSelect: их можно удалить только через меню или по крестику на чипе.
+        В дополнительном поле над списком опций Home, End и стрелки должны перемещать курсор, а Backspace — удалять
+        символы текста. Backspace не должен удалять чипы TreeSelect: их можно удалить только через меню или по крестику
+        на чипе.
       </T>
 
-      <T font="Body/Body 1 Long">Текущий фокус: {focusedField}</T>
-
-      <TextInput
-        aria-label="Внешнее поле"
-        placeholder="Кликните сюда, чтобы закрыть TreeSelect"
-        onFocus={() => setFocusedField('внешнее поле')}
-      />
+      <TextInput aria-label="Внешнее поле" placeholder="Кликните сюда, чтобы закрыть TreeSelect" />
 
       <TreeSelect
         items={ITEMS}
         defaultValue={['1']}
         placeholder="Откройте список"
-        onFocus={() => setFocusedField('TreeSelect')}
         renderTopPanel={({ dimension }) => (
           <MenuActionsPanel dimension={dimension}>
             <TextInput
               aria-label="Поле верхней панели"
-              dimension={dimension}
+              dimension={dimension === 'l' ? 'xl' : dimension}
               value={panelValue}
               onChange={(e) => setPanelValue(e.currentTarget.value)}
-              onFocus={() => setFocusedField('поле верхней панели')}
             />
           </MenuActionsPanel>
         )}
