@@ -75,7 +75,11 @@ export const StyledMultiInput = styled(MultiInput)<{
   }
 
   & .wrapper-options {
-    padding-left: 39px;
+    ${(props) =>
+      props.$hidden &&
+      css`
+        padding-left: 39px;
+      `};
   }
 
   /* Чтобы на "+N" не мигал курсор от контейнера (pointer) */

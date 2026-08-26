@@ -392,36 +392,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     };
 
-    const deleteLastEnabledChip = useCallback(() => {
-      if (disabled || readOnly) return;
-
-      const lastEnabledChip = [...selectedChips].reverse().find((chip) => !chip.disabled);
-      if (lastEnabledChip) {
-        handleDeleteChip(lastEnabledChip.id);
-      }
-    }, [disabled, readOnly, selectedChips, handleDeleteChip]);
-
     const handleMenuKeyDown = useCallback(
       (e: KeyboardEvent) => {
         const code = keyboardKey.getCode(e);
-
-        if (code === keyboardKey.Backspace) {
-          // Фокус на input обрабатывается через `MultiInput.onBackspaceKeyDown`.
-          if (e.target === inputRef.current) return;
-
-          deleteLastEnabledChip();
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
         if (code !== keyboardKey.Escape || !open) return;
 
         closeDropdown();
         e.preventDefault();
         e.stopPropagation();
       },
-      [closeDropdown, deleteLastEnabledChip, open],
+      [closeDropdown, open],
     );
 
     const handleSelectItem = (id: string) => {
@@ -482,8 +462,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         keyboardKey.Enter,
         keyboardKey.ArrowDown,
         keyboardKey.ArrowUp,
-        keyboardKey.ArrowLeft,
-        keyboardKey.ArrowRight,
         keyboardKey.Escape,
         keyboardKey.Home,
         keyboardKey.End,
@@ -533,7 +511,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       onKeyDown: handleKeyDown,
       onPaste: handlePaste,
       onDrop: handleDrop,
-      onBackspaceKeyDown: deleteLastEnabledChip,
+      onBackspaceKeyDown: () => undefined,
     } satisfies React.ComponentProps<typeof StyledMultiInput>;
 
     return (

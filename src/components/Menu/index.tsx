@@ -170,7 +170,7 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Клик по меню не приводит к перемещению фокуса */
   preventFocusSteal?: boolean;
 
-  /** Home/ArrowLeft и End/ArrowRight перемещают к первому/последнему пункту списка */
+  /** Home и End перемещают к первому/последнему пункту списка */
   homeEndKeysNavigateList?: boolean;
 
   /** Признак включения режима с использованием состояния preselected */
@@ -408,7 +408,6 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             e.preventDefault();
             break;
           }
-          case keyboardKey.ArrowRight:
           case keyboardKey.End: {
             if (homeEndKeysNavigateList) {
               const lastId = findLastId();
@@ -417,19 +416,27 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
               e.preventDefault();
               break;
             }
+          }
 
+          case keyboardKey.ArrowRight: {
             const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
-            const item = model.find((item) => item.id === currentId);
+            const item = model.find((menuItem) => menuItem.id === currentId);
             if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
+              // При навигации с клавиатуры activeItemElement может ещё не быть задан (он ставится в onHover)
+              if (!activeItemElement) {
+                const hoveredEl = wrapperRef.current?.querySelector(
+                  '[data-hovered="true"], [data-preselected="true"]',
+                ) as HTMLElement | null;
+                if (hoveredEl) setActiveItemElement(hoveredEl);
+              }
               setSubmenuVisible(true);
             }
 
-            if (subMenuRef && subMenuRef.current) {
+            if (subMenuRef?.current) {
               activateMenu?.(subMenuRef);
             }
             break;
           }
-          case keyboardKey.ArrowLeft:
           case keyboardKey.Home: {
             if (homeEndKeysNavigateList) {
               const firstId = findFirstId();
@@ -438,7 +445,9 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
               e.preventDefault();
               break;
             }
+          }
 
+          case keyboardKey.ArrowLeft: {
             if (parentMenuRef && parentMenuRef.current) {
               onCloseQuery?.();
             }
@@ -464,12 +473,18 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       active,
       activeId,
       activeState,
+      activeItemElement,
       currentActiveMenu,
       preselectedId,
       disableSelectionOnSpace,
       disableSelectionOnEnter,
       onMenuKeyDown,
       homeEndKeysNavigateList,
+      model,
+      submenuVisible,
+      parentMenuRef,
+      onCloseQuery,
+      activateMenu,
     ]);
 
     useEffect(() => {
