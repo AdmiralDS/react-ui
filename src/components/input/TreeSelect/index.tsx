@@ -466,7 +466,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
         keyboardKey.Home,
         keyboardKey.End,
         keyboardKey.Tab,
-        keyboardKey.Backspace,
       ];
 
       if (!allowedKeys.includes(code as any)) {
@@ -511,7 +510,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       onKeyDown: handleKeyDown,
       onPaste: handlePaste,
       onDrop: handleDrop,
-      onBackspaceKeyDown: () => undefined,
     } satisfies React.ComponentProps<typeof StyledMultiInput>;
 
     return (

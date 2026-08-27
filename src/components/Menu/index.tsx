@@ -369,6 +369,34 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
         // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
         const code = keyboardKey.getCode(e);
+
+        // Не перехватываем клавиши из input/textarea внутри панелей меню (renderTopPanel/renderBottomPanel).
+        const isEditableTarget = (target: EventTarget | null) =>
+          target instanceof HTMLTextAreaElement ||
+          target instanceof HTMLSelectElement ||
+          (target instanceof HTMLElement && target.isContentEditable) ||
+          (target instanceof HTMLInputElement &&
+            !['checkbox', 'radio', 'button', 'submit', 'reset', 'file', 'image', 'hidden'].includes(target.type));
+
+        const targetInsideMenu = e.target instanceof Node && !!wrapperRef.current?.contains(e.target);
+
+        const editableTextEditingKeys = [
+          keyboardKey.Home,
+          keyboardKey.End,
+          keyboardKey.ArrowLeft,
+          keyboardKey.ArrowRight,
+          keyboardKey.Backspace,
+          keyboardKey[' '],
+        ];
+
+        if (
+          targetInsideMenu &&
+          isEditableTarget(e.target) &&
+          editableTextEditingKeys.includes(code as (typeof editableTextEditingKeys)[number])
+        ) {
+          return;
+        }
+
         switch (code) {
           case keyboardKey[' ']: {
             if (disableSelectionOnSpace) break;
