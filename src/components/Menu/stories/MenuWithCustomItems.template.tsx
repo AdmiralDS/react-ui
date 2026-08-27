@@ -133,7 +133,7 @@ const MyMenuItem = ({
   success = false,
   dimension,
   onLeave,
-  hasSubmenu,
+  hasSubMenu,
   ...props
 }: MyMenuItemProps) => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

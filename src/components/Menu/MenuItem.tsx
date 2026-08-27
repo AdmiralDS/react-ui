@@ -28,7 +28,7 @@ export interface RenderOptionProps {
   /** ссылка на контейнер, в котором находится Menu*/
   containerRef?: React.RefObject<HTMLElement>;
   expandIcon?: React.ReactNode;
-  hasSubmenu?: boolean;
+  hasSubMenu?: boolean;
   /**
    * @deprecated Помечено как deprecated в версии 8.17.0, будет удалено в 10.x.x версии.
    *
@@ -60,7 +60,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
     {
       children,
       expandIcon = <Chevron />,
-      hasSubmenu,
+      hasSubMenu,
       onHover,
       disabled,
       readOnly,
@@ -126,7 +126,7 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
         {Children.toArray(children).map((child, index) =>
           typeof child === 'string' ? <TextWrapper key={child + index}>{child}</TextWrapper> : child,
         )}
-        {hasSubmenu && expandIcon}
+        {hasSubMenu && expandIcon}
       </Item>
     );
   },

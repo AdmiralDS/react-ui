@@ -23,7 +23,7 @@ export const CategoryMenuItem = forwardRef<HTMLDivElement, CategoryMenuItemProps
         dimension={dimension}
         hovered={false}
         selected={false}
-        hasSubmenu={false}
+        hasSubMenu={false}
         $dimension={dimension}
       >
         {children}

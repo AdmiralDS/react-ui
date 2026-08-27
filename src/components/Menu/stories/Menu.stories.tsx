@@ -10,6 +10,7 @@ import { MenuVirtualScrollTemplate } from './MenuVirtualScroll.template';
 import { MenuCardGroupsTemplate } from './MenuCardGroups.template';
 import { MenuSimpleTemplate } from './MenuSimple.template';
 import { MenuMultiLevelTemplate } from './MenuMultiLevel.template';
+import { MenuSubmenuTriggerTemplate } from './MenuSubmenuTrigger.template';
 import { MenuIconsAndAdditionalTextTemplate } from './MenuIconsAndAdditionalText.template';
 import { MenuCheckboxTemplate } from './MenuCheckbox.template';
 import { MenuRadioButtonTemplate } from './MenuRadioButton.template';
@@ -29,6 +30,7 @@ import MenuVirtualScrollRaw from './MenuVirtualScroll.template?raw';
 import MenuCardGroupsRaw from './MenuCardGroups.template?raw';
 import MenuSimpleRaw from './MenuSimple.template?raw';
 import MenuMultiLevelRaw from './MenuMultiLevel.template?raw';
+import MenuSubmenuTriggerRaw from './MenuSubmenuTrigger.template?raw';
 import MenuIconsAndAdditionalTextRaw from './MenuIconsAndAdditionalText.template?raw';
 import MenuCheckboxRaw from './MenuCheckbox.template?raw';
 import MenuRadioButtonRaw from './MenuRadioButton.template?raw';
@@ -370,6 +372,24 @@ export const MultiLevelExample = {
     },
   },
   name: 'Многоуровневое меню',
+};
+//</editor-fold>
+
+//<editor-fold desc="Многоуровневое меню с открытием по клику">
+const MenuSubmenuTriggerStory: StoryFn<typeof Menu> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <MenuSubmenuTriggerTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+export const MultiLevelClickExample = {
+  render: MenuSubmenuTriggerStory,
+  parameters: {
+    docs: {
+      source: {
+        code: MenuSubmenuTriggerRaw,
+      },
+    },
+  },
+  name: 'Многоуровневое меню с открытием по клику',
 };
 //</editor-fold>
 

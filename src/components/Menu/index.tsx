@@ -91,6 +91,8 @@ export interface RenderPanelProps {
   menuActionsPanelCssMixin?: ReturnType<typeof css>;
 }
 
+export type SubMenuTrigger = 'hover' | 'click';
+
 export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Размер Меню */
   dimension?: MenuDimensions;
@@ -181,6 +183,12 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Обработчик нажатия клавиши на активном меню */
   onMenuKeyDown?: (e: KeyboardEvent) => void;
+
+  /**
+   * Событие, по которому открывается подменю.
+   * @default 'hover'
+   */
+  subMenuTrigger?: SubMenuTrigger;
 }
 
 export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
@@ -216,6 +224,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       onMenuKeyDown,
       disableSelectionOnSpace,
       disableSelectionOnEnter,
+      subMenuTrigger = 'hover',
 
       ...props
     },
@@ -286,7 +295,9 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     const subMenuRef = useRef<HTMLDivElement | null>(null);
     const [activeItemElement, setActiveItemElement] = useState<HTMLElement | null>(null);
 
-    const [submenuVisible, setSubmenuVisible] = useState<boolean>(false);
+    // Объединённое состояние: null = подменю закрыто, string = ID элемента с открытым подменю
+    const [subMenuState, setSubMenuState] = useState<string | null>(null);
+    const subMenuVisible = subMenuState !== null;
 
     const lastScrollEvent = useRef<number | undefined>();
 
@@ -361,6 +372,16 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       }
     };
 
+    // Утилита для поиска и установки активного элемента меню по его ID
+    const setMenuItemElement = (itemId: string) => {
+      const itemElement = scrollContainerRef.current?.querySelector(
+        `[data-menu-item-id="${itemId}"]`,
+      ) as HTMLElement | null;
+      if (itemElement) {
+        setActiveItemElement(itemElement);
+      }
+    };
+
     const { currentActiveMenu, activateMenu, deactivateMenu } = useDropdown(wrapperRef);
 
     useEffect(() => {
@@ -400,18 +421,32 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         switch (code) {
           case keyboardKey[' ']: {
             if (disableSelectionOnSpace) break;
-            if (preselectedModeActive && preselectedId != null) {
-              handleClickItem(preselectedId);
-            } else if (activeId != null) handleClickItem(activeId);
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
+            if (currentId != null) {
+              const currentItem = model.find((m) => m.id === currentId);
+              if (subMenuTrigger === 'click' && currentItem?.subItems && currentItem.subItems.length > 0) {
+                setSubMenuState(currentId);
+                setMenuItemElement(currentId);
+              } else {
+                handleClickItem(currentId);
+              }
+            }
 
             e.preventDefault();
             break;
           }
           case keyboardKey.Enter: {
             if (disableSelectionOnEnter) break;
-            if (preselectedModeActive && preselectedId != null) {
-              handleClickItem(preselectedId);
-            } else if (activeId != null) handleClickItem(activeId);
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
+            if (currentId != null) {
+              const currentItem = model.find((m) => m.id === currentId);
+              if (subMenuTrigger === 'click' && currentItem?.subItems && currentItem.subItems.length > 0) {
+                setSubMenuState(currentId);
+                setMenuItemElement(currentId);
+              } else {
+                handleClickItem(currentId);
+              }
+            }
 
             e.preventDefault();
             break;
@@ -448,16 +483,19 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
           case keyboardKey.ArrowRight: {
             const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
-            const item = model.find((menuItem) => menuItem.id === currentId);
-            if (item && !item.disabled && !item.readOnly && item.subItems && !submenuVisible) {
-              // При навигации с клавиатуры activeItemElement может ещё не быть задан (он ставится в onHover)
-              if (!activeItemElement) {
-                const hoveredEl = wrapperRef.current?.querySelector(
-                  '[data-hovered="true"], [data-preselected="true"]',
-                ) as HTMLElement | null;
-                if (hoveredEl) setActiveItemElement(hoveredEl);
+            if (currentId != null) {
+              const item = model.find((item) => item.id === currentId);
+              if (item && !item.disabled && !item.readOnly && item.subItems && !subMenuVisible) {
+                // При навигации с клавиатуры activeItemElement может ещё не быть задан (он ставится в onHover)
+                if (!activeItemElement) {
+                  const hoveredEl = wrapperRef.current?.querySelector(
+                    '[data-hovered="true"], [data-preselected="true"]',
+                  ) as HTMLElement | null;
+                  if (hoveredEl) setActiveItemElement(hoveredEl);
+                }
+                setSubMenuState(currentId);
+                setMenuItemElement(currentId);
               }
-              setSubmenuVisible(true);
             }
 
             if (subMenuRef?.current) {
@@ -507,9 +545,10 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       disableSelectionOnSpace,
       disableSelectionOnEnter,
       onMenuKeyDown,
+      subMenuTrigger,
+      subMenuVisible,
       homeEndKeysNavigateList,
       model,
-      submenuVisible,
       parentMenuRef,
       onCloseQuery,
       activateMenu,
@@ -524,13 +563,13 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     }, [defaultIsActive]);
 
     const handleSubMenuClose = () => {
-      setSubmenuVisible(false);
+      setSubMenuState(null);
       activateMenu?.(wrapperRef);
     };
 
     const renderItem = (item: MenuModelItemProps, index: number) => {
       const { id, subItems, render, ...itemProps } = item;
-      const hasSubmenu = !!subItems && subItems.length > 0;
+      const hasSubMenu = !!subItems && subItems.length > 0;
       const hovered = activeId === id;
       const selected = innerSelected.includes(id) || hasSelectedChildren(item, innerSelected);
       const preselected = preselectedId !== undefined ? preselectedId === id : undefined;
@@ -538,25 +577,38 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
         hovered,
         preselected,
         selected,
+        'data-menu-item-id': id,
         onLeave: (e: MouseEvent<HTMLDivElement>) => {
-          const relTarget = e.relatedTarget;
-          if (
-            relTarget &&
-            Object.hasOwn(relTarget, 'nodeName') && // необходимо чтобы проверить действительно ли это Node
-            !subMenuRef.current?.contains(relTarget as Node) &&
-            !verticalScrollAriaRef.current?.contains(relTarget as Node)
-          ) {
-            setSubmenuVisible(false);
+          if (subMenuTrigger === 'hover') {
+            const relTarget = e.relatedTarget;
+            if (
+              relTarget &&
+              Object.hasOwn(relTarget, 'nodeName') &&
+              !subMenuRef.current?.contains(relTarget as Node) &&
+              !verticalScrollAriaRef.current?.contains(relTarget as Node)
+            ) {
+              setSubMenuState(null);
+            }
           }
         },
         onHover: (e: MouseEvent<HTMLDivElement>) => {
           activateItem(id);
-          setSubmenuVisible(hasSubmenu);
-          setActiveItemElement(e.currentTarget as HTMLDivElement);
+          if (subMenuTrigger === 'hover') {
+            setSubMenuState(hasSubMenu ? id : null);
+            setActiveItemElement(e.currentTarget as HTMLDivElement);
+          }
         },
         onMouseDown: preventFocusSteal ? (e: MouseEvent<HTMLElement>) => e.preventDefault() : undefined,
-        onClick: () => handleClickItem(id),
-        hasSubmenu,
+        onClick: (e: MouseEvent<HTMLDivElement>) => {
+          if (subMenuTrigger === 'click' && hasSubMenu) {
+            setActiveItemElement(e.currentTarget as HTMLDivElement);
+            setSubMenuState((prev) => (prev === id ? null : id));
+            activateItem(id);
+          } else {
+            handleClickItem(id);
+          }
+        },
+        hasSubMenu,
         disabled: itemProps.disabled,
         ...itemProps,
       } as const;
@@ -646,7 +698,8 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     }, [active, activeState, preselected, preselectedState, model]);
 
     const renderSubMenu = () => {
-      const activeItem = model.find((item) => item.id === activeId);
+      const targetItemId = subMenuTrigger === 'click' ? subMenuState : activeId;
+      const activeItem = model.find((item) => item.id === targetItemId);
 
       return (
         activeItem &&
@@ -665,6 +718,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             rowCount={rowCount}
             maxHeight={maxHeight}
             preventFocusSteal
+            subMenuTrigger={subMenuTrigger}
           />
         )
       );
@@ -681,7 +735,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     };
 
     const handleClickOutside = () => {
-      setSubmenuVisible(false);
+      setSubMenuState(null);
     };
 
     const handleFocus = (e: FocusEvent<HTMLDivElement>) => {
@@ -697,7 +751,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
     const menuProps = passMenuDataAttributes(props);
 
     // при скролле меню возникают ситуации когда активная опция выходит из видимой области
-    // и открытое субменю может странным образом позиционироваться "оторванным" от породившего меню
+    // и открытое subMenu может странным образом позиционироваться "оторванным" от породившего меню
     useEffect(() => {
       if (!activeItemElement || !scrollContainerRef.current) return;
 
@@ -709,7 +763,9 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
       const intersectionCallback: IntersectionObserverCallback = (entries) => {
         entries.forEach((entry) => {
-          setSubmenuVisible(!(entry.intersectionRatio < options.threshold));
+          if (entry.intersectionRatio < options.threshold) {
+            setSubMenuState(null);
+          }
         });
       };
 
@@ -745,7 +801,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           {virtualScroll ? renderVirtualChildren() : renderChildren()}
         </StyledScrollContainer>
 
-        {submenuVisible && activeItemElement && (
+        {subMenuVisible && activeItemElement && (
           <SubMenuContainer
             targetElement={activeItemElement}
             defaultRenderDirection={subMenuRenderDirection}
