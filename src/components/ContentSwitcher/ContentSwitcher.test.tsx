@@ -11,6 +11,25 @@ const BUTTON_CLICK_TEXT = 'Button Click';
 const BUTTON_DISABLED_TEXT = 'Button Disabled';
 
 describe('ContentSwitcher', () => {
+  it.each([
+    ['l', 48],
+    ['m', 40],
+    ['s', 32],
+  ] as const)('should have the expected height for dimension="%s"', (dimension, height) => {
+    render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <ContentSwitcher data-testid="content-switcher" dimension={dimension}>
+          <ContentSwitcherItem>{BUTTON_TEXT}</ContentSwitcherItem>
+        </ContentSwitcher>
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('content-switcher')).toHaveStyle({
+      boxSizing: 'border-box',
+      height: `${height}px`,
+    });
+  });
+
   it('should render component with Button', () => {
     const { container } = render(
       <ThemeProvider theme={LIGHT_THEME}>

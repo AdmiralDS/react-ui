@@ -6,9 +6,9 @@ export type Dimension = 'l' | 'm' | 's';
 export type Adaptive = 'fill';
 
 export const SIZE = {
-  l: 40,
-  m: 32,
-  s: 24,
+  l: 48,
+  m: 40,
+  s: 32,
 };
 
 type ContentSwitcherComponentProps = HTMLAttributes<HTMLDivElement> & {
@@ -35,12 +35,13 @@ const adaptiveMixin = css`
 `;
 
 export const ContentSwitcherComponent = styled.div<ContentSwitcherComponentProps>`
+  display: inline-flex;
+  box-sizing: border-box;
+  height: ${({ $dimension }) => SIZE[$dimension]}px;
+  padding: 2px;
   background: var(--admiral-color-Opacity_Neutral8, ${(p) => p.theme.color['Opacity/Neutral 8']});
   border: 2px solid transparent;
   border-radius: ${({ $dimension }) => BORDER_RADIUS[$dimension]}px;
-  display: inline-flex;
-  height: ${({ $dimension }) => SIZE[$dimension]}px;
-  padding: 2px;
 
   ${({ $adaptive }) => ($adaptive === 'fill' ? adaptiveMixin : '')}
 
