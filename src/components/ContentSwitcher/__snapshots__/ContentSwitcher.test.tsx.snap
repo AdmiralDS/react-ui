@@ -54,12 +54,13 @@ exports[`ContentSwitcher should render component with Button 1`] = `
 }
 
 .c0 {
+  display: inline-flex;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 2px;
   background: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: 2px solid transparent;
   border-radius: 20px;
-  display: inline-flex;
-  height: 32px;
-  padding: 2px;
 }
 
 .c0[data-appearance~='primary'] {
@@ -148,12 +149,13 @@ exports[`ContentSwitcher should render component with Buttons 1`] = `
 }
 
 .c0 {
+  display: inline-flex;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 2px;
   background: var(--admiral-color-Opacity_Neutral8, #00000014);
   border: 2px solid transparent;
   border-radius: 20px;
-  display: inline-flex;
-  height: 32px;
-  padding: 2px;
 }
 
 .c0[data-appearance~='primary'] {
