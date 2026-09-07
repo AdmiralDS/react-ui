@@ -100,19 +100,27 @@ const VerticalThumb = styled.div`
   height: var(${verticalThumbHeghtCSSPropName}, 20px);
 `;
 
-export type ScrollContainerProps<T extends React.ElementType = 'div'> = React.ComponentPropsWithoutRef<T> &
-  ScrollbarProps & {
-    /** Props для контейнера контента */
-    contentBlockProps?: React.ComponentPropsWithRef<typeof HiddenNativeScroll>;
-  };
+// Используем Omit для исключения enableTransformSync из ScrollContainerProps
+export type ScrollContainerProps<T extends React.ElementType = 'div'> = Omit<
+  React.ComponentPropsWithoutRef<T> & ScrollbarProps,
+  'enableTransformSync'
+> & {
+  contentBlockProps?: React.ComponentPropsWithRef<typeof HiddenNativeScroll>;
+};
 
 export type ScrollbarProps = {
-  /** Props для контейнера, содержащего вертикальный скролбар */
   verticalScrollProps?: React.ComponentPropsWithRef<typeof VerticalContainer>;
-  /** Props для контейнера, содержащего горизонтальный скролбар */
   horizontalScrollProps?: React.ComponentPropsWithRef<typeof HorizontalContainer>;
-  /** Минимально допустимая длина скролбара в пикселях */
   minThumbSize?: number;
+  /**
+   * Включает синхронизацию положения контейнеров скроллбаров с прокруткой контента
+   * через CSS transform. По умолчанию отключено (false).
+   *
+   * ВНИМАНИЕ: включение этой опции может приводить к визуальным артефактам
+   * (например, выходу нативного скроллбара вложенных элементов за свои границы)
+   * из-за создания нового stacking context.
+   */
+  enableTransformSync?: boolean;
 };
 
 export const ScrollContainer = fixedForwardRef<HTMLDivElement, ScrollContainerProps>(
@@ -126,9 +134,8 @@ export const ScrollContainer = fixedForwardRef<HTMLDivElement, ScrollContainerPr
       [contentBlockProps.id],
     );
 
-    const [contentNode, setContenetNode] = useState<HTMLElement | null>(null);
-
-    const composedContentRef = useComposedRefs(contentBlockProps.ref, (node) => setContenetNode(node));
+    const [contentNode, setContentNode] = useState<HTMLElement | null>(null);
+    const composedContentRef = useComposedRefs(contentBlockProps.ref, (node) => setContentNode(node));
 
     return (
       <Container ref={ref} {...props}>
@@ -136,12 +143,10 @@ export const ScrollContainer = fixedForwardRef<HTMLDivElement, ScrollContainerPr
           {children}
         </HiddenNativeScroll>
         <Scrollbars
-          {...{
-            contentNode,
-            verticalScrollProps,
-            horizontalScrollProps,
-            minThumbSize,
-          }}
+          contentNode={contentNode}
+          verticalScrollProps={verticalScrollProps}
+          horizontalScrollProps={horizontalScrollProps}
+          minThumbSize={minThumbSize}
         />
       </Container>
     );
@@ -153,6 +158,7 @@ export const Scrollbars = ({
   horizontalScrollProps = {},
   contentNode,
   minThumbSize = 20,
+  enableTransformSync = false,
 }: ScrollbarProps & { contentNode?: HTMLElement | null }) => {
   const scrollAriaId = useMemo(
     () => (contentNode?.id ? contentNode?.id : `scroll-aria-${Math.random().toString(36).substring(2, 12)}`),
@@ -208,6 +214,22 @@ export const Scrollbars = ({
     return scrollWidth - clientWidth >= 1;
   }
 
+  // Отдельный эффект для установки/удаления CSS-переменных при изменении enableTransformSync
+  useLayoutEffect(() => {
+    if (contentNode) {
+      if (enableTransformSync) {
+        // При включении сразу устанавливаем начальные значения
+        const { scrollTop, scrollLeft } = contentNode;
+        contentNode.style.setProperty(verticalContentScrollCSSPropName, `${scrollTop}px`);
+        contentNode.style.setProperty(horizontalContentScrollCSSPropName, `${scrollLeft}px`);
+      } else {
+        // При выключении удаляем переменные
+        contentNode.style.removeProperty(verticalContentScrollCSSPropName);
+        contentNode.style.removeProperty(horizontalContentScrollCSSPropName);
+      }
+    }
+  }, [contentNode, enableTransformSync]);
+
   useLayoutEffect(() => {
     if (
       contentNode &&
@@ -225,8 +247,11 @@ export const Scrollbars = ({
           const verticalScroll = Math.min(Math.max(0, rect.scrollTop), rect.scrollHeight - rect.height);
           const horizontalSroll = Math.min(Math.max(0, rect.scrollLeft), rect.scrollWidth - rect.width);
 
-          contentNode.style.setProperty(verticalContentScrollCSSPropName, `${verticalScroll}px`);
-          contentNode.style.setProperty(horizontalContentScrollCSSPropName, `${horizontalSroll}px`);
+          // Обновляем CSS-переменные только если включена синхронизация
+          if (enableTransformSync) {
+            contentNode.style.setProperty(verticalContentScrollCSSPropName, `${verticalScroll}px`);
+            contentNode.style.setProperty(horizontalContentScrollCSSPropName, `${horizontalSroll}px`);
+          }
 
           verticalScrollAreaNode.style.setProperty('display', isYOverflow ? null : 'none');
           verticalScrollAreaNode.style.setProperty('bottom', isXOverflow ? '10px' : null);
@@ -263,6 +288,7 @@ export const Scrollbars = ({
     horizontalScrollAreaNode,
     verticalScrollThumbZoneNode,
     horizontalScrollThumbZoneNode,
+    enableTransformSync,
   ]);
 
   function handleVerticalThumbMousedown(e: React.MouseEvent<HTMLDivElement>) {
@@ -285,12 +311,8 @@ export const Scrollbars = ({
     function handleThumbMouseup(e: MouseEvent) {
       e.preventDefault();
       e.stopPropagation();
-      if (isVerticalDragging) {
-        setIsVerticalDragging(false);
-      }
-      if (isHorizontalDragging) {
-        setIsHorizontalDragging(false);
-      }
+      if (isVerticalDragging) setIsVerticalDragging(false);
+      if (isHorizontalDragging) setIsHorizontalDragging(false);
     }
     function handleThumbMousemove(e: MouseEvent) {
       if (contentNode) {
@@ -352,10 +374,7 @@ export const Scrollbars = ({
     if (contentNode) {
       const { scrollHeight, clientHeight } = contentNode;
       const top = Math.round(scrollYNedded * scrollHeight - clientHeight / 2);
-      contentNode.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
+      contentNode.scrollTo({ top, behavior: 'smooth' });
     }
   }, [scrollYNedded]);
 
@@ -363,10 +382,7 @@ export const Scrollbars = ({
     if (contentNode) {
       const { scrollWidth, clientWidth } = contentNode;
       const left = Math.round(scrollXNedded * scrollWidth - clientWidth / 2);
-      contentNode.scrollTo({
-        left,
-        behavior: 'smooth',
-      });
+      contentNode.scrollTo({ left, behavior: 'smooth' });
     }
   }, [scrollXNedded]);
 
@@ -374,11 +390,18 @@ export const Scrollbars = ({
     document.body.style.setProperty('cursor', isVerticalDragging || isHorizontalDragging ? 'grabbing' : null);
   }, [isVerticalDragging, isHorizontalDragging]);
 
+  const transformStyle = enableTransformSync
+    ? {
+        transform: `translate(var(${horizontalContentScrollCSSPropName}, 0), var(${verticalContentScrollCSSPropName}, 0))`,
+      }
+    : undefined;
+
   return (
     <>
       <VerticalContainer
         {...verticalScrollProps}
         ref={composedVerticalScrollAreaRef}
+        style={{ ...verticalScrollProps.style, ...transformStyle }}
         role="scrollbar"
         aria-controls={scrollAriaId}
       >
@@ -396,6 +419,7 @@ export const Scrollbars = ({
       <HorizontalContainer
         {...horizontalScrollProps}
         ref={composedHorizontalScrollAreaRef}
+        style={{ ...horizontalScrollProps.style, ...transformStyle }}
         role="scrollbar"
         aria-controls={scrollAriaId}
       >
