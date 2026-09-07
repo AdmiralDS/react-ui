@@ -172,9 +172,6 @@ export interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   /** Клик по меню не приводит к перемещению фокуса */
   preventFocusSteal?: boolean;
 
-  /** Home и End перемещают к первому/последнему пункту списка */
-  homeEndKeysNavigateList?: boolean;
-
   /** Признак включения режима с использованием состояния preselected */
   preselectedModeActive?: boolean;
 
@@ -218,7 +215,6 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       defaultIsActive = true,
       subMenuRenderDirection,
       preventFocusSteal,
-      homeEndKeysNavigateList,
       maxHeight,
       preselectedModeActive = false,
       onMenuKeyDown,
@@ -410,11 +406,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
           keyboardKey[' '],
         ];
 
-        if (
-          targetInsideMenu &&
-          isEditableTarget(e.target) &&
-          editableTextEditingKeys.includes(code as (typeof editableTextEditingKeys)[number])
-        ) {
+        if (code && targetInsideMenu && isEditableTarget(e.target) && editableTextEditingKeys.includes(code)) {
           return;
         }
 
@@ -472,13 +464,11 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.End: {
-            if (homeEndKeysNavigateList) {
-              const lastId = findLastId();
-              if (preselectedModeActive) preselectItem(lastId);
-              else activateItem(lastId);
-              e.preventDefault();
-              break;
-            }
+            const lastId = findLastId();
+            if (preselectedModeActive) preselectItem(lastId);
+            else activateItem(lastId);
+            e.preventDefault();
+            break;
           }
 
           case keyboardKey.ArrowRight: {
@@ -504,13 +494,11 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             break;
           }
           case keyboardKey.Home: {
-            if (homeEndKeysNavigateList) {
-              const firstId = findFirstId();
-              if (preselectedModeActive) preselectItem(firstId);
-              else activateItem(firstId);
-              e.preventDefault();
-              break;
-            }
+            const firstId = findFirstId();
+            if (preselectedModeActive) preselectItem(firstId);
+            else activateItem(firstId);
+            e.preventDefault();
+            break;
           }
 
           case keyboardKey.ArrowLeft: {
@@ -547,7 +535,6 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       onMenuKeyDown,
       subMenuTrigger,
       subMenuVisible,
-      homeEndKeysNavigateList,
       model,
       parentMenuRef,
       onCloseQuery,

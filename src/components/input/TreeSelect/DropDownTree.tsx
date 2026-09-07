@@ -142,7 +142,6 @@ export const DropDownTree = ({
         dimension={dimension}
         onMenuKeyDown={onMenuKeyDown}
         preventFocusSteal
-        homeEndKeysNavigateList
       />
     </DropdownContainer>
   );
