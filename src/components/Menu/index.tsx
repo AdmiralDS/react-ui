@@ -266,6 +266,20 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       return disabled ? undefined : model[prevIndex].id;
     };
 
+    const findFirstId = () => {
+      for (let i = 0; i < model.length; i++) {
+        if (!model[i].disabled && !model[i].readOnly) return model[i].id;
+      }
+      return undefined;
+    };
+
+    const findLastId = () => {
+      for (let i = model.length - 1; i >= 0; i--) {
+        if (!model[i].disabled && !model[i].readOnly) return model[i].id;
+      }
+      return undefined;
+    };
+
     const uncontrolledActiveValue = model.length > 0 ? findNextId() : undefined;
     const [selectedState, setSelectedState] = useState<Array<string>>(
       defaultSelected ? valueToArray(defaultSelected) : [],
@@ -372,6 +386,30 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
 
         // Нестрогое сравнение с null проверяет одновременно null и undefined, но не исключает валидный id ''.
         const code = keyboardKey.getCode(e);
+
+        // Не перехватываем клавиши из input/textarea внутри панелей меню (renderTopPanel/renderBottomPanel).
+        const isEditableTarget = (target: EventTarget | null) =>
+          target instanceof HTMLTextAreaElement ||
+          target instanceof HTMLSelectElement ||
+          (target instanceof HTMLElement && target.isContentEditable) ||
+          (target instanceof HTMLInputElement &&
+            !['checkbox', 'radio', 'button', 'submit', 'reset', 'file', 'image', 'hidden'].includes(target.type));
+
+        const targetInsideMenu = e.target instanceof Node && !!wrapperRef.current?.contains(e.target);
+
+        const editableTextEditingKeys = [
+          keyboardKey.Home,
+          keyboardKey.End,
+          keyboardKey.ArrowLeft,
+          keyboardKey.ArrowRight,
+          keyboardKey.Backspace,
+          keyboardKey[' '],
+        ];
+
+        if (code && targetInsideMenu && isEditableTarget(e.target) && editableTextEditingKeys.includes(code)) {
+          return;
+        }
+
         switch (code) {
           case keyboardKey[' ']: {
             if (disableSelectionOnSpace) break;
@@ -425,25 +463,45 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
             e.preventDefault();
             break;
           }
-          case keyboardKey.ArrowRight:
           case keyboardKey.End: {
-            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
+            const lastId = findLastId();
+            if (preselectedModeActive) preselectItem(lastId);
+            else activateItem(lastId);
+            e.preventDefault();
+            break;
+          }
 
+          case keyboardKey.ArrowRight: {
+            const currentId = preselectedModeActive ? (preselectedId ?? activeId) : activeId;
             if (currentId != null) {
               const item = model.find((item) => item.id === currentId);
               if (item && !item.disabled && !item.readOnly && item.subItems && !subMenuVisible) {
+                // При навигации с клавиатуры activeItemElement может ещё не быть задан (он ставится в onHover)
+                if (!activeItemElement) {
+                  const hoveredEl = wrapperRef.current?.querySelector(
+                    '[data-hovered="true"], [data-preselected="true"]',
+                  ) as HTMLElement | null;
+                  if (hoveredEl) setActiveItemElement(hoveredEl);
+                }
                 setSubMenuState(currentId);
                 setMenuItemElement(currentId);
               }
             }
 
-            if (subMenuRef && subMenuRef.current) {
+            if (subMenuRef?.current) {
               activateMenu?.(subMenuRef);
             }
             break;
           }
-          case keyboardKey.ArrowLeft:
           case keyboardKey.Home: {
+            const firstId = findFirstId();
+            if (preselectedModeActive) preselectItem(firstId);
+            else activateItem(firstId);
+            e.preventDefault();
+            break;
+          }
+
+          case keyboardKey.ArrowLeft: {
             if (parentMenuRef && parentMenuRef.current) {
               onCloseQuery?.();
             }
@@ -469,6 +527,7 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       active,
       activeId,
       activeState,
+      activeItemElement,
       currentActiveMenu,
       preselectedId,
       disableSelectionOnSpace,
@@ -476,6 +535,10 @@ export const Menu = forwardRef<HTMLDivElement | null, MenuProps>(
       onMenuKeyDown,
       subMenuTrigger,
       subMenuVisible,
+      model,
+      parentMenuRef,
+      onCloseQuery,
+      activateMenu,
     ]);
 
     useEffect(() => {

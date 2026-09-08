@@ -325,4 +325,160 @@ describe('TreeSelect keyboard navigation', () => {
 
     expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
   });
+
+  test('navigates with preselectedModeActive using data-preselected', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({ preselectedModeActive: true });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    const getPreselectedOption = (label: string) =>
+      screen.getByText(label).closest('[data-preselected="true"]') as HTMLElement | null;
+
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.keyDown(document, { key: 'ArrowDown', code: 'ArrowDown' });
+    });
+
+    expect(getPreselectedOption('Опция 1.1')).toBeInTheDocument();
+  });
+
+  test('navigates to first and last options with Home and End', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    const input = screen.getByPlaceholderText('Выберите элементы...') as HTMLInputElement;
+
+    await user.tab();
+    expect(input).toHaveFocus();
+
+    await user.keyboard('[Space]');
+    expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
+
+    await user.keyboard('{End}');
+    expect(getHoveredOption('Опция 2')).toHaveAttribute('data-hovered', 'true');
+
+    await user.keyboard('{Home}');
+    expect(getHoveredOption('Опция 1')).toHaveAttribute('data-hovered', 'true');
+  });
+
+  test('does not intercept text-editing keys from input inside renderTopPanel', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect({
+      preselectedModeActive: true,
+      renderTopPanel: () => <input data-testid="panel-search" placeholder="Поиск в панели" />,
+    });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    const getPreselectedOption = (label: string) =>
+      screen.getByText(label).closest('[data-preselected="true"]') as HTMLElement | null;
+
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    const panelInput = screen.getByTestId('panel-search') as HTMLInputElement;
+    await user.click(panelInput);
+    expect(panelInput).toHaveFocus();
+
+    await user.keyboard('abcd');
+    expect(panelInput).toHaveValue('abcd');
+
+    await user.keyboard('{Backspace}');
+    expect(panelInput).toHaveValue('abc');
+
+    await user.keyboard('{Home}');
+    expect(panelInput.selectionStart).toBe(0);
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    await user.keyboard('{End}');
+    expect(panelInput.selectionStart).toBe(3);
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    await user.keyboard('{ArrowLeft}');
+    expect(panelInput.selectionStart).toBe(2);
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    await user.keyboard('{ArrowRight}');
+    expect(panelInput.selectionStart).toBe(3);
+    expect(getPreselectedOption('Опция 1')).toBeInTheDocument();
+
+    // ArrowDown при фокусе в панели двигает preselected, фокус остаётся в input
+    await user.keyboard('{ArrowDown}');
+    expect(panelInput).toHaveFocus();
+    expect(getPreselectedOption('Опция 1.1')).toBeInTheDocument();
+  });
+
+  test('selects preselected option from panel input on Enter', async () => {
+    const user = userEvent.setup();
+    const handleChange = jest.fn();
+    renderTreeSelect({
+      preselectedModeActive: true,
+      onChange: handleChange,
+      renderTopPanel: () => <input data-testid="panel-search" defaultValue="Опция 1" />,
+    });
+
+    await user.tab();
+    await user.keyboard('[Space]');
+
+    const panelInput = screen.getByTestId('panel-search') as HTMLInputElement;
+    await user.click(panelInput);
+    expect(panelInput).toHaveFocus();
+
+    await user.keyboard('{ArrowDown}');
+    await user.keyboard('{Enter}');
+
+    expect(panelInput).toHaveFocus();
+    expect(handleChange).toHaveBeenCalled();
+    expect(screen.getByRole('checkbox', { name: 'Опция 1.1' })).toBeChecked();
+  });
+
+  test('keeps input focus after selecting values and closing dropdown via Escape', async () => {
+    const user = userEvent.setup();
+    renderTreeSelect();
+
+    const input = screen.getByPlaceholderText('Выберите элементы...') as HTMLInputElement;
+
+    await user.tab();
+    expect(input).toHaveFocus();
+
+    await user.keyboard('[Space]');
+    await user.keyboard('{End}');
+    await user.keyboard('[Space]');
+
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeChecked();
+
+    await user.keyboard('[Escape]');
+    expect(screen.queryByRole('checkbox', { name: 'Опция 2' })).not.toBeInTheDocument();
+    expect(input).toHaveFocus();
+
+    await user.keyboard('[Space]');
+    expect(screen.getByRole('checkbox', { name: 'Опция 2' })).toBeInTheDocument();
+  });
+
+  test('does not steal focus when dropdown closes by click outside', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <DropdownProvider>
+          <input data-testid="other-field" />
+          <TreeSelect items={items} placeholder="Выберите элементы..." />
+        </DropdownProvider>
+      </ThemeProvider>,
+    );
+
+    const treeSelectInput = screen.getByPlaceholderText('Выберите элементы...') as HTMLInputElement;
+    const otherField = screen.getByTestId('other-field');
+
+    await user.click(treeSelectInput);
+    expect(screen.getByRole('checkbox', { name: 'Опция 1' })).toBeInTheDocument();
+
+    await user.click(otherField);
+
+    expect(screen.queryByRole('checkbox', { name: 'Опция 1' })).not.toBeInTheDocument();
+    expect(otherField).toHaveFocus();
+    expect(treeSelectInput).not.toHaveFocus();
+  });
 });

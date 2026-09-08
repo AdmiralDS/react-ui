@@ -61,11 +61,25 @@ export const StyledMultiInput = styled(MultiInput)<{
   ${rowHeightStyle}
 
   & .wrapper-options input {
-    ${(props) => props.$hidden && `display: none`};
+    ${(props) =>
+      props.$hidden &&
+      css`
+        flex: 0 0 1px;
+        width: 1px;
+        min-width: 0;
+        height: 1px;
+        padding: 0;
+        opacity: 0;
+        overflow: hidden;
+      `};
   }
 
   & .wrapper-options {
-    padding-left: 39px;
+    ${(props) =>
+      props.$hidden &&
+      css`
+        padding-left: 39px;
+      `};
   }
 
   /* Чтобы на "+N" не мигал курсор от контейнера (pointer) */

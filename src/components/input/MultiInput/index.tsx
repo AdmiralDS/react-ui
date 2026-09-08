@@ -175,7 +175,17 @@ export const MultiInput = forwardRef<HTMLInputElement, MultiInputProps>(
           };
         }
       }
-    }, [props.disabled, props.readOnly, disableCopying, refWrapperOptions, onInputComplete, inputRef]);
+    }, [
+      props.disabled,
+      props.readOnly,
+      disableCopying,
+      refWrapperOptions,
+      onInputComplete,
+      inputRef,
+      onLastChipDelete,
+      lastChipCloseButtonSelector,
+      createActivateButtonList,
+    ]);
 
     const iconsBeforeCount = iconBeforeArray.length;
     const iconsAfterCount = iconAfterArray.length;

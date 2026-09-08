@@ -17,12 +17,13 @@ import type { DropMenuComponentProps } from '#src/components/DropMenu';
 import type { ComponentDimension } from '#src/components/input/types';
 import { ChipBox } from '#src/components/input/TreeSelect/ChipBox';
 import { keyboardKey } from '#src/components/common/keyboardKey';
+import { useDropdownTriggerKeyboard } from '#src/components/common/hooks/useDropdownTriggerKeyboard';
 
 export interface TreeSelectProps
   extends
     Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'onSelect'>,
     Pick<DropMenuComponentProps, 'renderTopPanel' | 'renderBottomPanel'>,
-    Pick<DropDownTreeProps, 'dropdownConfig'> {
+    Pick<DropDownTreeProps, 'dropdownConfig' | 'preselectedModeActive' | 'preselected' | 'onPreselectItem'> {
   value?: string[];
   /** Отображать статус загрузки данных */
   isLoading?: boolean;
@@ -111,6 +112,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       onDeselect,
       onChange,
       onClearIconClick,
+      preselectedModeActive = false,
+      preselected,
+      onPreselectItem,
       ...props
     },
     ref,
@@ -120,8 +124,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     const optionsWrapperRef = useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = useState<boolean>(false);
-    const openRef = useRef(open);
-    openRef.current = open;
     const isDropdownDisabled = !!(disabled || readOnly || isLoading);
     const cloneTree = (src: Array<TreeSelectItemProps>, selected: Set<string>) => {
       const cloneNode = (node: TreeSelectItemProps): TreeSelectItemProps => ({
@@ -254,53 +256,20 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       inputRef.current?.focus();
     }, [onOpenChange]);
 
-    const handleMenuKeyDown = useCallback(
-      (e: KeyboardEvent) => {
-        const code = keyboardKey.getCode(e);
-        if (code !== keyboardKey.Escape || !openRef.current) return;
+    const openDropdown = useCallback(() => {
+      setOpen(true);
+      onOpenChange?.(true);
+    }, [onOpenChange]);
 
-        closeDropdown();
-        e.preventDefault();
-        e.stopPropagation();
-      },
-      [closeDropdown],
-    );
+    const handleTriggerKeyDown = useDropdownTriggerKeyboard({
+      isOpen: open,
+      disabled: isDropdownDisabled,
+      onOpen: openDropdown,
+      onClose: closeDropdown,
+    });
 
     const handleContainerKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (isDropdownDisabled) return;
-
-      const code = keyboardKey.getCode(e);
-
-      if (code === keyboardKey[' ']) {
-        if (!open) {
-          e.preventDefault();
-          setOpen(true);
-          onOpenChange?.(true);
-          e.stopPropagation();
-        }
-        return;
-      }
-
-      if (code === keyboardKey.Enter && !open) {
-        e.preventDefault();
-        setOpen(true);
-        onOpenChange?.(true);
-        e.stopPropagation();
-        return;
-      }
-
-      if ((code === keyboardKey.ArrowDown || code === keyboardKey.ArrowUp) && !open) {
-        setOpen(true);
-        onOpenChange?.(true);
-        e.stopPropagation();
-        return;
-      }
-
-      if (code === keyboardKey.Escape && open) {
-        closeDropdown();
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      handleTriggerKeyDown(e);
     };
 
     const getDropdownConfig = (config: DropdownContainerProps) => {
@@ -385,34 +354,6 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       }
     };
 
-    const handleDeleteChip = (id?: string) => {
-      if (disabled || readOnly) return;
-
-      if (id) {
-        handleDeselectItem(id);
-        const newValue = [...flatMap.values()].filter((item) => !!item.node.checked).map((item) => item.node.id);
-        onChange?.(newValue);
-      }
-    };
-
-    const handleSelectItem = (id: string) => {
-      const item = flatMap.get(id);
-      if (item) {
-        const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
-        idsToSelect.forEach((nextId) => {
-          const nextItem = flatMap.get(nextId);
-          if (!nextItem) return;
-          nextItem.node.checked = true;
-        });
-
-        normalizeGroupChecked(flatMap);
-        const nextStateItems = [...stateItems];
-        setStateItems(nextStateItems);
-        setSelectedChips(buildSelectedChips(nextStateItems));
-        onSelect?.(id);
-      }
-    };
-
     const handleDeselectItem = (id: string) => {
       const item = flatMap.get(id);
       if (item) {
@@ -439,6 +380,46 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       const nextStateItems = [...stateItems];
       setStateItems(nextStateItems);
       setSelectedChips(buildSelectedChips(nextStateItems));
+    };
+
+    const handleDeleteChip = (id?: string) => {
+      if (disabled || readOnly) return;
+
+      if (id) {
+        handleDeselectItem(id);
+        const newValue = [...flatMap.values()].filter((item) => !!item.node.checked).map((item) => item.node.id);
+        onChange?.(newValue);
+      }
+    };
+
+    const handleMenuKeyDown = useCallback(
+      (e: KeyboardEvent) => {
+        const code = keyboardKey.getCode(e);
+        if (code !== keyboardKey.Escape || !open) return;
+
+        closeDropdown();
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      [closeDropdown, open],
+    );
+
+    const handleSelectItem = (id: string) => {
+      const item = flatMap.get(id);
+      if (item) {
+        const idsToSelect = item.node.children?.length ? collectSubtreeIds(item.node) : [item.node.id];
+        idsToSelect.forEach((nextId) => {
+          const nextItem = flatMap.get(nextId);
+          if (!nextItem) return;
+          nextItem.node.checked = true;
+        });
+
+        normalizeGroupChecked(flatMap);
+        const nextStateItems = [...stateItems];
+        setStateItems(nextStateItems);
+        setSelectedChips(buildSelectedChips(nextStateItems));
+        onSelect?.(id);
+      }
     };
 
     const handleClearOptions = () => {
@@ -471,22 +452,16 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const code = keyboardKey.getCode(e);
+      handleTriggerKeyDown(e);
+      if (e.defaultPrevented) return;
 
-      if (code === keyboardKey.Escape && open) {
-        closeDropdown();
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-      }
+      const code = keyboardKey.getCode(e);
 
       const allowedKeys = [
         keyboardKey[' '],
         keyboardKey.Enter,
         keyboardKey.ArrowDown,
         keyboardKey.ArrowUp,
-        keyboardKey.ArrowLeft,
-        keyboardKey.ArrowRight,
         keyboardKey.Escape,
         keyboardKey.Home,
         keyboardKey.End,
@@ -550,6 +525,9 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
             onDeselectItem={handleDeselectItem}
             onChangeSelected={handleSelectedChange}
             onMenuKeyDown={handleMenuKeyDown}
+            preselectedModeActive={preselectedModeActive}
+            preselected={preselected}
+            onPreselectItem={onPreselectItem}
             dimension={dimension === 'xl' ? 'l' : dimension}
             renderTopPanel={renderTopPanel}
             renderBottomPanel={renderBottomPanel}
