@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.67.0](https://github.com/AdmiralDS/react-ui/compare/v8.66.1...v8.67.0) (2026-09-08)
+
+
+### Features
+
+* **FileItem:** add hover overlay animation ([4166fda](https://github.com/AdmiralDS/react-ui/commit/4166fda8094cd21bbb921cd2f71faa7b949f638f))
+* **FileItem:** update fallback icon for rare file types ([0b3feff](https://github.com/AdmiralDS/react-ui/commit/0b3feff0c1437e72794b5918075009d9f57d76f0))
+* **Menu:** add click trigger option for multi-level menu submenu opening ([4af3156](https://github.com/AdmiralDS/react-ui/commit/4af3156409d80bde76ab6d4fb6f53b116e48ffd3))
+* **Menu:** add click-based multi-level menu navigation support and rename `hasSubmenu` prop to `hasSubMenu` for consistency ([7244a5c](https://github.com/AdmiralDS/react-ui/commit/7244a5c07db5693a53eee00e8ecee2e4ca789131))
+* **Scrollbar:** add enableTransformSync prop to control transform-based scroll synchronization ([d7c967c](https://github.com/AdmiralDS/react-ui/commit/d7c967cc06c441e8c4d77690dfc1067c225f7086))
+* **TreeSelect:** expand key navigation by Backspace, Home/End and fix focus, preselectedMode ([de95d43](https://github.com/AdmiralDS/react-ui/commit/de95d43ef4ff93c61fc53733d34c137247d1d1dd))
+
+
+### Bug Fixes
+
+* **ContentSwitcher:** [#2180](https://github.com/AdmiralDS/react-ui/issues/2180) исправлен баг с некорректной размерностью и box-sizing значением ([d539e8e](https://github.com/AdmiralDS/react-ui/commit/d539e8e332b82e8da8f253aa6a52d8e1fff5249b))
+* **Hint:** handle non-node related targets ([03f4ad8](https://github.com/AdmiralDS/react-ui/commit/03f4ad8ea4019077f09a3b65f1757ec661cc863e))
+* **Select:** avoid duplicate empty native option ([608bbeb](https://github.com/AdmiralDS/react-ui/commit/608bbeb9cb3bd413eb9eb7b74f77790b90958cbd))
+* **Select:** hide placeholder for empty string option ([48ef92e](https://github.com/AdmiralDS/react-ui/commit/48ef92e35905e5536426cba6fcfca3433ac46b1b))
+* **Select:** render option with empty string value ([429fb93](https://github.com/AdmiralDS/react-ui/commit/429fb937027c594855abfa812e4d8cd38a42aeee))
+* **Select:** support empty value in keyboard navigation ([3730890](https://github.com/AdmiralDS/react-ui/commit/3730890266e2b8019b7f8e94f3ebdb01109a5af9))
+* **TreeSelect:** remove Backspace key navigation and fix ArrowLeft, ArrowRight, padding styles ([c524675](https://github.com/AdmiralDS/react-ui/commit/c5246750d0d35e4fd1c7272b7eff9971c726dbdb))
+
 ### [8.66.1](https://github.com/AdmiralDS/react-ui/compare/v8.66.0...v8.66.1) (2026-07-29)
 
 
