@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import { LIGHT_THEME } from '#src/components/themes';
@@ -151,5 +151,47 @@ describe('TabMenu', () => {
     const wrapper = render(<Component activeTab="1" onChange={onChange} tabs={tabs} />);
     fireEvent.click(wrapper.getByTestId('1'));
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+  // test #4
+  it('should not re-create observers when tabs visibility has not changed', () => {
+    const observe = jest.fn();
+    let notify: ((entries: unknown[]) => void) | undefined;
+    const originalIntersectionObserver = window.IntersectionObserver;
+
+    Object.defineProperty(window, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: class {
+        constructor(callback: (entries: unknown[]) => void) {
+          notify = callback;
+        }
+        observe = observe;
+        disconnect = jest.fn();
+        unobserve = jest.fn();
+      },
+    });
+
+    try {
+      render(<Component activeTab="1" onChange={jest.fn()} tabs={tabs} />);
+
+      const entries = tabs.map((_, index) => {
+        const target = document.createElement('button');
+        target.dataset.number = String(index);
+
+        return { target, isIntersecting: true, intersectionRatio: 1 };
+      });
+
+      act(() => notify?.(entries));
+      const observeCallsCount = observe.mock.calls.length;
+      act(() => notify?.(entries));
+
+      expect(observe.mock.calls.length).toBe(observeCallsCount);
+    } finally {
+      Object.defineProperty(window, 'IntersectionObserver', {
+        writable: true,
+        configurable: true,
+        value: originalIntersectionObserver,
+      });
+    }
   });
 });
