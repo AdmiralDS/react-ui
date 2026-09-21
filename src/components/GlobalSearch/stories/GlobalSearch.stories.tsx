@@ -5,9 +5,12 @@ import styled from 'styled-components';
 import { GlobalSearch } from '@admiral-ds/react-ui';
 
 import { BasicExampleTemplate } from './BasicExample.template';
+import { ReactNodePrefixTemplate } from './ReactNodePrefix.template';
+import type { ReactNodePrefixTemplateProps } from './ReactNodePrefix.template';
 
 // Imports of text sources
 import BasicExampleRaw from './BasicExample.template?raw';
+import ReactNodePrefixRaw from './ReactNodePrefix.template?raw';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Desc = styled.div`
@@ -86,6 +89,29 @@ export const PaneSimpleExample = {
         console.log('Button cliked or Enter key was pressed. Run your function.');
       },
     },
+    displayClearIcon: true,
+  },
+};
+
+const ReactNodePrefixStory: StoryFn<ReactNodePrefixTemplateProps> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <ReactNodePrefixTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const ReactNodePrefix = {
+  render: ReactNodePrefixStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: ReactNodePrefixRaw,
+      },
+    },
+  },
+
+  name: 'Prefix as ReactNode',
+  args: {
+    placeholder: 'Искать ...',
     displayClearIcon: true,
   },
 };
