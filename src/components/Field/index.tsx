@@ -52,8 +52,15 @@ const textSkeletonMixin = css`
   color: transparent;
 `;
 
-const StyledLabel = styled(Label)<{ $skeleton?: boolean }>`
+const StyledLabel = styled(Label)<{
+  $skeleton?: boolean;
+  $cssMixin?: ReturnType<typeof css>;
+}>`
   ${(p) => p.$skeleton && textSkeletonMixin};
+
+  &&& {
+    ${(p) => p.$cssMixin && p.$cssMixin}
+  }
 `;
 
 const containerSkeletonMixin = css`
@@ -133,6 +140,8 @@ export interface FieldOwnProps {
 
   /** CSS миксины для переопределения стилей лейблов */
   labelCssMixins?: {
+    /** CSS миксин для переопределения стилей обертки лейблов (Label) */
+    labelWrapper?: ReturnType<typeof css>;
     /** CSS миксин для переопределения стилей основного лейбла (MainLabel) */
     label?: ReturnType<typeof css>;
     /** CSS миксин для переопределения стилей дополнительного лейбла (AdditionalLabel) */
@@ -296,7 +305,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
         {(label || additionalLabel) && (
           <LabelContainer>
             {skeleton && <SkeletonLabel />}
-            <StyledLabel $skeleton={skeleton} {...labelProps}>
+            <StyledLabel $skeleton={skeleton} $cssMixin={labelCssMixins?.labelWrapper} {...labelProps}>
               {label && (
                 <LabelWithTooltip
                   disableTooltip={!visibleLabelTooltips.label}

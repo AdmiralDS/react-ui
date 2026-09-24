@@ -4,9 +4,11 @@ import { useGlobals } from '@storybook/preview-api';
 import { Field, ALL_BORDER_RADIUS_VALUES } from '@admiral-ds/react-ui';
 
 import { FieldWithTextInputTemplate } from './FieldWithTextInput.template';
+import { FieldWithClickableLabelTextTemplate } from './FieldWithClickableLabelText.template';
 
 // Imports of text sources
 import FieldWithTextInputRaw from './FieldWithTextInput.template?raw';
+import FieldWithClickableLabelTextRaw from './FieldWithClickableLabelText.template?raw';
 
 export default {
   title: 'Admiral-2.1/Atoms/Field',
@@ -75,4 +77,24 @@ export const FieldWithTextInput = {
   },
 
   name: 'Пример обертывания компонента TextInput',
+};
+
+//</editor-fold desc="Пример ограничения кликабельной области только текстом лейбла">
+const FieldWithClickableLabelTextStory: StoryFn<typeof Field> = (props) => {
+  const [{ CSSCustomProps }] = useGlobals();
+  return <FieldWithClickableLabelTextTemplate {...props} CSSCustomProps={CSSCustomProps} />;
+};
+
+export const FieldWithClickableLabelText = {
+  render: FieldWithClickableLabelTextStory,
+
+  parameters: {
+    docs: {
+      source: {
+        code: FieldWithClickableLabelTextRaw,
+      },
+    },
+  },
+
+  name: 'Пример ограничения кликабельной области только текстом лейбла',
 };
