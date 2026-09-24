@@ -261,10 +261,11 @@ export const TabMenu: FC<TabMenuProps> = ({
         }
       });
 
-      setVisibilityMap((prev: { [index: number | string]: boolean }) => ({
-        ...prev,
-        ...updatedEntries,
-      }));
+      setVisibilityMap((prev: { [index: number | string]: boolean }) => {
+        const hasChanges = Object.keys(updatedEntries).some((key) => prev[key] !== updatedEntries[key]);
+
+        return hasChanges ? { ...prev, ...updatedEntries } : prev;
+      });
     };
     const observer = new IntersectionObserver(handleIntersection, {
       root: tablistRef.current,
