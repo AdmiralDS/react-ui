@@ -63,6 +63,30 @@ test.describe('Field with clickable label text', () => {
     await expect(firstInput).not.toBeFocused();
   });
 
+  test('custom styles focus the input after clicking main label text', async ({ page }) => {
+    await page.goto(storyPath);
+    const frame = getStorybookFrameLocator(page);
+    const field = frame.locator('[data-container-id="custom-label-field-one"]');
+    const firstInput = frame.locator('#custom-label-input-one');
+
+    await frame.locator('#custom-label-input-two').focus();
+    await field.getByText('Label text', { exact: true }).click();
+
+    await expect(firstInput).toBeFocused();
+  });
+
+  test('custom styles focus the input after clicking additional label text', async ({ page }) => {
+    await page.goto(storyPath);
+    const frame = getStorybookFrameLocator(page);
+    const field = frame.locator('[data-container-id="custom-label-field-one"]');
+    const firstInput = frame.locator('#custom-label-input-one');
+
+    await frame.locator('#custom-label-input-two').focus();
+    await field.getByText('Additional label text', { exact: true }).click();
+
+    await expect(firstInput).toBeFocused();
+  });
+
   test('custom additional label has the same layout as the default additional label', async ({ page }) => {
     await page.goto(storyPath);
     const frame = getStorybookFrameLocator(page);
