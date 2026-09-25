@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.68.0](https://github.com/AdmiralDS/react-ui/compare/v8.67.0...v8.68.0) (2026-09-25)
+
+
+### Features
+
+* **Field:** expand labelCssMixins by labelWrapper ([c1a4d98](https://github.com/AdmiralDS/react-ui/commit/c1a4d9860ce26ff984171f04c052f7d55a2923ae))
+
+
+### Bug Fixes
+
+* **GlobalSearch:** add defaultRenderPrefixValue and defaultRenderPrefixOption with pw and jest tests ([3fb4131](https://github.com/AdmiralDS/react-ui/commit/3fb4131a88ecc7a57c50e3b504e1422708d1968f))
+* **TabMenu:** не пересоздавать наблюдатели при неизменной видимости вкладок ([b79d193](https://github.com/AdmiralDS/react-ui/commit/b79d1939c6973b44d0b424cab73384a5793ff676))
+
 ## [8.67.0](https://github.com/AdmiralDS/react-ui/compare/v8.66.1...v8.67.0) (2026-09-08)
 
 
