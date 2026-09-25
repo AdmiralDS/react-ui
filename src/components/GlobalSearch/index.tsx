@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import type { ChangeEvent, FC, HTMLAttributes, InputHTMLAttributes, ReactNode, RefObject } from 'react';
 import { useEffect, useRef, useState, Children } from 'react';
 
+import { MenuItem } from '#src/components/Menu/MenuItem';
 import type { MenuItemProps, MenuModelItemProps } from '#src/components/Menu/MenuItem';
 import type { ComponentDimension, ExtraProps } from '#src/components/input/types';
 import { mediumGroupBorderRadius } from '#src/components/themes/borderRadius';
@@ -198,6 +199,14 @@ const SubmitButton = styled.div`
   }
 `;
 
+const defaultRenderPrefixValue = ({ value }: RenderProps) => value;
+
+const defaultRenderPrefixOption = ({ value, key, ...props }: RenderPropsType<ReactNode> & MenuItemProps) => (
+  <MenuItem key={key} {...props}>
+    {value}
+  </MenuItem>
+);
+
 export interface GlobalSearchProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>, Pick<DropMenuComponentProps, 'targetElement'> {
   /** Вызывается при изменении значения в поле ввода */
@@ -265,10 +274,10 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   model,
 
   prefixValue,
-  renderPrefixValue = ({ value }) => (!value ? value : String(value)),
+  renderPrefixValue = defaultRenderPrefixValue,
   prefixValueList,
   onPrefixValueChange,
-  renderPrefixOption,
+  renderPrefixOption = defaultRenderPrefixOption,
   prefixDropContainerStyle,
   ...props
 }) => {
