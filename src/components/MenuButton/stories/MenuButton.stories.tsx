@@ -143,6 +143,10 @@ export default {
       options: [undefined, 'auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
       control: { type: 'select' },
     },
+    subMenuTrigger: {
+      options: ['hover', 'click'],
+      control: { type: 'radio' },
+    },
     items: {
       control: false,
     },

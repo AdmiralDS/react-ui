@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import type { MenuButtonProps } from '../MenuButton';
 import { MenuButton } from '../MenuButton';
+import type { MenuModelItemProps } from '../Menu/MenuItem';
 import { LIGHT_THEME } from '../themes';
 
 describe('MenuButton', () => {
@@ -81,5 +82,30 @@ describe('MenuButton', () => {
     expect(menu).toHaveLength(1);
     fireEvent.keyDown(btn, { key: 'Escape', code: 'Escape' });
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  });
+
+  it('should open submenu by click when subMenuTrigger is click', () => {
+    const items: Array<MenuModelItemProps> = [
+      {
+        id: 'parent',
+        render: 'Parent',
+        subItems: [{ id: 'child', render: 'Child' }],
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <MenuButton items={items} subMenuTrigger="click" data-testid="submenu-button">
+          test
+        </MenuButton>
+      </ThemeProvider>,
+    );
+
+    fireEvent.click(screen.getByTestId('submenu-button'));
+    fireEvent.mouseEnter(screen.getByText('Parent'));
+    expect(screen.queryByText('Child')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Parent'));
+    expect(screen.getByText('Child')).toBeInTheDocument();
   });
 });

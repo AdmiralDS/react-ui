@@ -77,6 +77,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       dropContainerStyle,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
       renderTopPanel,
       renderBottomPanel,
       ...props
@@ -107,6 +108,7 @@ export const OverflowMenu = React.forwardRef<HTMLButtonElement, OverflowMenuProp
       alignSelf,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
     };
 
     const iconPlacementDimension = (dimension?: OverflowMenuDimension): IconPlacementDimension => {

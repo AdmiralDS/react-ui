@@ -15,6 +15,14 @@ const CHECKBOX_ITEMS = Array.from({ length: 7 }, (_, index) => ({
   checked: false,
 }));
 
+const SUBMENU_ITEMS: Array<MenuModelItemProps> = [
+  {
+    id: 'parent',
+    render: 'Parent',
+    subItems: [{ id: 'child', render: 'Child' }],
+  },
+];
+
 const ControlledCheckboxDropMenu = () => {
   const [active, setActive] = React.useState<string | undefined>(CHECKBOX_ITEMS[0].id);
   const [isVisible, setIsVisible] = React.useState(false);
@@ -127,5 +135,30 @@ describe('DropMenu', () => {
 
     expect(scrollIntoViewMock).not.toHaveBeenCalled();
     expect(screen.queryByText('Option 1')?.closest('[data-hovered="true"]')).not.toBeInTheDocument();
+  });
+
+  it('should pass click submenu trigger to Menu', () => {
+    render(
+      <ThemeProvider theme={LIGHT_THEME}>
+        <DropdownProvider>
+          <DropMenu
+            items={SUBMENU_ITEMS}
+            subMenuTrigger="click"
+            renderContentProp={({ buttonRef, handleClick }) => (
+              <Button ref={buttonRef as React.Ref<HTMLButtonElement>} onClick={handleClick}>
+                Open submenu
+              </Button>
+            )}
+          />
+        </DropdownProvider>
+      </ThemeProvider>,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open submenu' }));
+    fireEvent.mouseEnter(screen.getByText('Parent'));
+    expect(screen.queryByText('Child')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Parent'));
+    expect(screen.getByText('Child')).toBeInTheDocument();
   });
 });

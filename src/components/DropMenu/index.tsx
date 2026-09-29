@@ -60,6 +60,7 @@ export interface DropMenuComponentProps
       | 'onMenuKeyDown'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
+      | 'subMenuTrigger'
       | 'targetElement'
     >,
     DropContainerProps {}
@@ -81,6 +82,7 @@ export interface DropMenuProps
       | 'onMenuKeyDown'
       | 'onForwardCycleApprove'
       | 'onBackwardCycleApprove'
+      | 'subMenuTrigger'
       | 'virtualScroll'
     >,
     DropContainerProps,
@@ -172,6 +174,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
       onMenuKeyDown,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
       virtualScroll,
       ...props
     },
@@ -284,6 +287,7 @@ export const DropMenu = forwardRef<HTMLDivElement, DropMenuProps>(
               onMenuKeyDown={onMenuKeyDown}
               onForwardCycleApprove={onForwardCycleApprove}
               onBackwardCycleApprove={onBackwardCycleApprove}
+              subMenuTrigger={subMenuTrigger}
             />
           </DropMenuContainer>
         )}
