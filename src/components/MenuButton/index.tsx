@@ -88,6 +88,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
       ...props
     },
     ref,
@@ -145,6 +146,7 @@ export const MenuButton = React.forwardRef<HTMLButtonElement, MenuButtonProps>(
       alignSelf,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
       renderContentProp,
     };
 

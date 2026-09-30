@@ -171,6 +171,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       renderBottomPanel,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
       children,
       ...props
     },
@@ -211,6 +212,7 @@ export const MultiButton = React.forwardRef<HTMLButtonElement, MultiButtonProps>
       alignSelf,
       onForwardCycleApprove,
       onBackwardCycleApprove,
+      subMenuTrigger,
     };
 
     return (
