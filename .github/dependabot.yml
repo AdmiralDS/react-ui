@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    cooldown:
+      exclude:
+        - '@admiral-ds/icons'
+    versioning-strategy: 'increase'
+    allow:
+      - dependency-name: '@admiral-ds/icons'
