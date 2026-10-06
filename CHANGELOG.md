@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.69.0](https://github.com/AdmiralDS/react-ui/compare/v8.68.0...v8.69.0) (2026-10-06)
+
+
+### Features
+
+* add subMenuTrigger prop to MenuButton and related components ([59b0cfd](https://github.com/AdmiralDS/react-ui/commit/59b0cfdb80f097ac0dd3e6fd5b004483b06abe77))
+* **Select,TextInput,TimePicker,TreeSelect:** add spinnerPropsConfig ([bc5e794](https://github.com/AdmiralDS/react-ui/commit/bc5e794cc9d00fc3d0066ec5ef947fd977c88602))
+
 ## [8.68.0](https://github.com/AdmiralDS/react-ui/compare/v8.67.0...v8.68.0) (2026-09-25)
 
 
