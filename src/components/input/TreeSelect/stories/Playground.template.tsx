@@ -65,6 +65,7 @@ export const PlaygroundTemplate = ({
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
+  const spinnerProps = { 'data-test-id': 'selectSpinner' };
   const dropdownProps = { 'data-testid': 'dropdown-tree' };
   const [value, setValue] = useState<Array<string>>();
 
@@ -107,6 +108,7 @@ export const PlaygroundTemplate = ({
         {...treeProps}
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
+        spinnerPropsConfig={() => spinnerProps}
         dropdownConfig={() => dropdownProps}
       />
     </ThemeProvider>

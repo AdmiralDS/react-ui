@@ -42,6 +42,7 @@ export const DateInputPlaygroundTemplate = ({
         placeholder={placeholderValue}
         style={{ maxWidth: 300 }}
         dropContainerClassName="dropContainerClass"
+        spinnerPropsConfig={() => ({ 'data-test-id': 'dateInputSpinner' })}
       />
     </ThemeProvider>
   );

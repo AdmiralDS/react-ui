@@ -71,7 +71,7 @@ export const SuggestInputPlaygroundTemplate = ({
         onChange={handleChange}
         onOptionSelect={handleSelectOption}
         options={options}
-        isLoading={isLoading}
+        isLoading={props.isLoading ?? isLoading}
         onSearchButtonClick={() => {
           // eslint-disable-next-line no-console
           console.log('search button click');
@@ -79,6 +79,7 @@ export const SuggestInputPlaygroundTemplate = ({
         displayClearIcon
         dropContainerClassName="dropContainerClass"
         placeholder={placeholder}
+        spinnerPropsConfig={() => ({ 'data-test-id': 'suggestInputSpinner' })}
       />
     </ThemeProvider>
   );

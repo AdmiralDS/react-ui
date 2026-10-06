@@ -66,6 +66,7 @@ export const DateFieldBaseTemplate = ({
           dropContainerClassName="dropContainerClass"
           label={label}
           additionalLabel={additionalLabel}
+          spinnerPropsConfig={() => ({ 'data-test-id': 'dateFieldSpinner' })}
         />
         <DateField
           data-container-id="dateFieldIdTwo"

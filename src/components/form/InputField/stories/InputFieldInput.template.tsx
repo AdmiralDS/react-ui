@@ -133,6 +133,7 @@ export const InputFieldInputTemplate = ({
           placeholder="идет поиск ..."
           label="Поле с иконкой загрузки"
           isLoading
+          spinnerPropsConfig={() => ({ 'data-test-id': 'inputFieldSpinner' })}
         />
         <InputField
           data-container-id="inputFieldIdEight"
