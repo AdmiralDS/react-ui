@@ -52,6 +52,7 @@ export interface SliderInputProps extends Omit<
   TextInputProps,
   | 'onChange'
   | 'isLoading'
+  | 'spinnerPropsConfig'
   | 'containerPropsConfig'
   | 'clearInputIconButtonPropsConfig'
   | 'visiblePasswordInputIconButtonPropsConfig'

@@ -116,7 +116,7 @@ const Wrapper = styled(HeightLimitedContainer)<{
   }
 `;
 
-export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore' | 'isLoading'> {
+export interface NumberInputProps extends Omit<TextInputProps, 'iconsBefore' | 'isLoading' | 'spinnerPropsConfig'> {
   /** точность (количество знаков после точки). Если precision равно 0, то точку ввести нельзя, только целые числа */
   precision?: number;
   /** префикс (строка, которая выводится перед числовым значением) */

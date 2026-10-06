@@ -247,7 +247,7 @@ export interface RenderProps {
 
 export interface InputExProps
   extends
-    Omit<TextInputProps, 'isLoading' | 'handleInput' | 'prefix' | 'containerPropsConfig'>,
+    Omit<TextInputProps, 'isLoading' | 'spinnerPropsConfig' | 'handleInput' | 'prefix' | 'containerPropsConfig'>,
     Pick<DropMenuComponentProps, 'targetElement'> {
   /**
    * @deprecated Помечено как deprecated в версии 8.10.0, будет удалено в версии 10.х.х.

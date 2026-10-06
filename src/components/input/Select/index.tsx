@@ -216,6 +216,12 @@ export interface SelectProps
   clearButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton> & DataAttributes>;
+
+  /** Конфиг функция пропсов для спиннера загрузки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  spinnerPropsConfig?: (
+    props: React.ComponentProps<typeof Spinner>,
+  ) => Partial<React.ComponentProps<typeof Spinner>> & DataAttributes;
 }
 
 const nothing = () => {};
@@ -278,6 +284,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       clearInputValueAfterSelect = true,
       openButtonPropsConfig = nothing,
       clearButtonPropsConfig = nothing,
+      spinnerPropsConfig = nothing,
       ...props
     },
     ref,
@@ -821,6 +828,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isKeyboardEvent.current = true;
     };
 
+    const spinnerProps = {
+      dimension: dimension === 's' ? 'ms' : 'm',
+    } satisfies React.ComponentProps<typeof Spinner>;
+
     const clearButtonProps = {
       icon: CloseOutlineSvg,
       id: 'searchSelectClearIcon',
@@ -954,7 +965,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           onClick={stopPropagation}
           onMouseDown={(e) => e.preventDefault()}
         >
-          {isLoading && <Spinner dimension={dimension === 's' ? 'ms' : 'm'} />}
+          {isLoading && <Spinner {...spinnerProps} {...spinnerPropsConfig(spinnerProps)} />}
           {displayClearIcon && !readOnly && needShowClearIcon && (
             <InputIconButton {...clearButtonProps} {...clearButtonPropsConfig(clearButtonProps)} />
           )}

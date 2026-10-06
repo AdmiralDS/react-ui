@@ -73,9 +73,9 @@ export interface SliderRangeProps extends Omit<
   /** плейсхолдеры инпутов */
   placeholder?: [string, string];
   /** Опции, которые можно передать в первый инпут */
-  input1?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
+  input1?: Omit<TextInputProps, 'onChange' | 'readOnly' | 'isLoading' | 'spinnerPropsConfig'>;
   /** Опции, которые можно передать во второй инпут */
-  input2?: Omit<TextInputProps, 'onChange' | 'readOnly'>;
+  input2?: Omit<TextInputProps, 'onChange' | 'readOnly' | 'isLoading' | 'spinnerPropsConfig'>;
   /** Отключение компонента */
   disabled?: boolean;
   /** Состояние skeleton */

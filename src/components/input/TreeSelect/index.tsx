@@ -70,6 +70,12 @@ export interface TreeSelectProps
     props: React.ComponentProps<typeof StyledMultiInput>,
   ) => Partial<React.ComponentProps<typeof StyledMultiInput> & DataAttributes>;
 
+  /** Конфиг функция пропсов для спиннера загрузки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  spinnerPropsConfig?: (
+    props: React.ComponentProps<typeof Spinner>,
+  ) => Partial<React.ComponentProps<typeof Spinner>> & DataAttributes;
+
   /** Срабатывает при изменении значения */
   onChange?: (value: string[]) => void;
 
@@ -106,6 +112,7 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
       openButtonPropsConfig,
       clearButtonPropsConfig,
       inputPropsConfig,
+      spinnerPropsConfig,
       dropdownConfig,
       onOpenChange,
       onSelect,
@@ -309,7 +316,10 @@ export const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(
 
     const iconsAfter = [];
     if (isLoading) {
-      iconsAfter.push(<Spinner key="spinner" dimension={dimension === 's' ? 'ms' : 'm'} />);
+      const spinnerProps = {
+        dimension: dimension === 's' ? 'ms' : 'm',
+      } satisfies React.ComponentProps<typeof Spinner>;
+      iconsAfter.push(<Spinner key="spinner" {...spinnerProps} {...spinnerPropsConfig?.(spinnerProps)} />);
     }
     if (!readOnly) {
       iconsAfter.push(
