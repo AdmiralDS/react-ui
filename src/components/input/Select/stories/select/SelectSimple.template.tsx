@@ -14,6 +14,7 @@ export const SelectSimpleTemplate = ({
 }: SelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
+  const spinnerProps = { 'data-test-id': 'selectSpinner' };
   const [selectValue, setSelectValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => setSelectValue(e.target.value);
@@ -34,6 +35,7 @@ export const SelectSimpleTemplate = ({
         dropContainerClassName="dropContainerClass"
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
+        spinnerPropsConfig={() => spinnerProps}
       >
         <Option value="Анигиляторная пушка">Анигиляторная пушка</Option>
         <Option value="Похо Торо Моронго">Похо Торо Моронго</Option>

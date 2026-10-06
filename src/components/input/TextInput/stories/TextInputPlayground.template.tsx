@@ -23,7 +23,13 @@ export const TextInputPlaygroundTemplate = ({
 
   return (
     <ThemeProvider theme={createBorderRadiusSwapper(themeBorderKind, CSSCustomProps)}>
-      <TextInput {...props} value={localValue} placeholder={placeholder} onChange={handleChange} />
+      <TextInput
+        {...props}
+        value={localValue}
+        placeholder={placeholder}
+        onChange={handleChange}
+        spinnerPropsConfig={() => ({ 'data-test-id': 'textInputSpinner' })}
+      />
     </ThemeProvider>
   );
 };

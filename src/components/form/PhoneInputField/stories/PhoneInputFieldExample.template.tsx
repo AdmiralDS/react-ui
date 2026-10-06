@@ -47,6 +47,7 @@ export const PhoneInputFieldExampleTemplate = ({
         dropContainerClassName="dropContainerClass"
         label={label}
         additionalLabel={additionalLabel}
+        spinnerPropsConfig={() => ({ 'data-test-id': 'phoneInputFieldSpinner' })}
       />
     </ThemeProvider>
   );

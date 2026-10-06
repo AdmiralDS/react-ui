@@ -84,10 +84,11 @@ export const SuggestFieldExampleTemplate = ({
           onChange={handleChange}
           onOptionSelect={handleOptionSelect}
           options={options}
-          isLoading={isLoading}
+          isLoading={props.isLoading ?? isLoading}
           placeholder={placeholder}
           label={label}
           additionalLabel={additionalLabel}
+          spinnerPropsConfig={() => ({ 'data-test-id': 'suggestFieldSpinner' })}
         />
       </DisplayContainer>
     </ThemeProvider>

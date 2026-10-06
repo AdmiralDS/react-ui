@@ -69,6 +69,7 @@ export const PanesRenderTemplate = ({
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
+  const spinnerProps = { 'data-test-id': 'selectSpinner' };
   const [value, setValue] = useState(['1.2.1', '1.2.2']);
 
   const onChange = (newValue: string[]) => {
@@ -147,6 +148,7 @@ export const PanesRenderTemplate = ({
         {...treeProps}
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
+        spinnerPropsConfig={() => spinnerProps}
         renderTopPanel={topPanelContent}
         renderBottomPanel={bottomPanelContent}
       />

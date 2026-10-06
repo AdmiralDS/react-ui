@@ -28,6 +28,7 @@ export const PhoneNumberInputMTemplate = (props: PhoneNumberInputProps) => {
         onlyCountries={['RUS', 'BLR', 'TJK', 'UZB']}
         style={{ maxWidth: '320px' }}
         onChange={handleChange}
+        spinnerPropsConfig={() => ({ 'data-test-id': 'phoneNumberInputSpinner' })}
       />
     </>
   );

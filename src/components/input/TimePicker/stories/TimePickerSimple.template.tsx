@@ -33,6 +33,7 @@ export const TimePickerSimpleTemplate = ({
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
         containerPropsConfig={() => ({ 'data-testid': 'testidTimePickerContainer' })}
+        spinnerPropsConfig={() => ({ 'data-test-id': 'testidTimePickerSpinner' })}
       />
     </ThemeProvider>
   );

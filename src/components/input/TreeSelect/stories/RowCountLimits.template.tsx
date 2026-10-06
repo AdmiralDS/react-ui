@@ -65,6 +65,7 @@ export const RowCountLimitsTemplate = ({
 }: TreeSelectProps & { themeBorderKind?: BorderRadiusType; CSSCustomProps?: boolean }) => {
   const clearButtonProps = { 'data-testid': 'selectClearButton' };
   const openButtonProps = { 'data-testid': 'selectOpenButton' };
+  const spinnerProps = { 'data-test-id': 'selectSpinner' };
   const dropdownProps = { 'data-testid': 'dropdown-tree' };
 
   const [value, setValue] = useState<Array<string>>(['1.1', '1.2', '1.3', '2', '3']);
@@ -89,6 +90,7 @@ export const RowCountLimitsTemplate = ({
         {...treeProps}
         clearButtonPropsConfig={() => clearButtonProps}
         openButtonPropsConfig={() => openButtonProps}
+        spinnerPropsConfig={() => spinnerProps}
         dropdownConfig={() => dropdownProps}
         displayClearIcon
         style={{ width: '350px' }}

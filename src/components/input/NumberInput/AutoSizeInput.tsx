@@ -180,7 +180,7 @@ const HiddenContent = styled.div<{ $dimension?: ComponentDimension; $iconCount?:
   right: ${(props) => horizontalPaddingValue(props) + (iconSizeValue(props) + 8) * (props.$iconCount ?? 0)}px;
 `;
 
-export interface InputProps extends TextInputProps {
+export interface InputProps extends Omit<TextInputProps, 'isLoading' | 'spinnerPropsConfig'> {
   /** префикс (строка, которая выводится перед числовым значением) */
   prefix?: string;
   /** суффикс (строка, которая выводится после числового значения) */

@@ -186,6 +186,7 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
       inputLinePropsConfig = () => ({}),
       clearInputIconButtonPropsConfig = () => ({}),
       timeInputIconButtonPropsConfig = () => ({}),
+      spinnerPropsConfig = () => ({}),
       handleInput: handleInputProp,
       value: valueProp,
       defaultValue: defaultValueProp,
@@ -414,7 +415,10 @@ export const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
     }
 
     if (isLoading) {
-      iconArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
+      const spinnerProps = {
+        dimension: dimension === 's' ? 'ms' : 'm',
+      } satisfies React.ComponentProps<typeof Spinner>;
+      iconArray.unshift(<Spinner key="loading-icon" {...spinnerProps} {...spinnerPropsConfig(spinnerProps)} />);
     }
 
     const disableSlots = (defaultArray: SlotProps[], disabledArr: string[]) => {

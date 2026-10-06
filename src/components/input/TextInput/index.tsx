@@ -326,6 +326,12 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   visiblePasswordInputIconButtonPropsConfig?: (
     props: React.ComponentProps<typeof InputIconButton>,
   ) => Partial<React.ComponentProps<typeof InputIconButton>> & DataAttributes;
+
+  /** Конфиг функция пропсов для спиннера загрузки. На вход получает начальный набор пропсов, на
+   * выход должна отдавать объект с пропсами, которые будут внедряться после оригинальных пропсов. */
+  spinnerPropsConfig?: (
+    props: React.ComponentProps<typeof Spinner>,
+  ) => Partial<React.ComponentProps<typeof Spinner>> & DataAttributes;
 }
 
 const nothing = () => {};
@@ -384,6 +390,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       containerPropsConfig = nothing,
       clearInputIconButtonPropsConfig = nothing,
       visiblePasswordInputIconButtonPropsConfig = nothing,
+      spinnerPropsConfig = nothing,
       ...props
     },
     ref,
@@ -478,7 +485,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     }
 
     if (isLoading) {
-      iconAfterArray.unshift(<Spinner key="loading-icon" dimension={dimension === 's' ? 'ms' : 'm'} />);
+      const spinnerProps = {
+        dimension: dimension === 's' ? 'ms' : 'm',
+      } satisfies React.ComponentProps<typeof Spinner>;
+      iconAfterArray.unshift(<Spinner key="loading-icon" {...spinnerProps} {...spinnerPropsConfig(spinnerProps)} />);
     }
 
     const iconsBeforeCount = iconBeforeArray.length;

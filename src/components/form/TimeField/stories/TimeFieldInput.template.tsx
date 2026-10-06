@@ -48,6 +48,7 @@ export const TimeFieldInputTemplate = ({
           placeholder={placeholder}
           label={label}
           additionalLabel={additionalLabel}
+          spinnerPropsConfig={() => ({ 'data-test-id': 'timeFieldSpinner' })}
         />
       </DisplayContainer>
     </ThemeProvider>

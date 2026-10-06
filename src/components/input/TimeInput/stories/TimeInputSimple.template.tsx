@@ -32,6 +32,7 @@ export const TimeInputSimpleTemplate = ({
         value={localValue}
         onChange={handleChange}
         dropContainerClassName="dropContainerClass"
+        spinnerPropsConfig={() => ({ 'data-test-id': 'timeInputSpinner' })}
       />
     </ThemeProvider>
   );
